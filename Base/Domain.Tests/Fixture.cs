@@ -29,8 +29,7 @@ namespace Allors
     using Allors.Workspaces.Memory.IntegerId;
 
     using NUnit.Framework;
-
-
+    
     [SetUpFixture]
     public class Fixture
     {

@@ -45,13 +45,13 @@ namespace Allors.Domain
             this.contactRelationship = new OrganisationContactRelationshipBuilder(this.DatabaseSession)
                 .WithOrganisation(this.partner)
                 .WithContact(this.contact)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.partnership = new PartnershipBuilder(this.DatabaseSession)
                 .WithPartner(this.partner)
                 .WithInternalOrganisation(this.internalOrganisation)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -100,14 +100,14 @@ namespace Allors.Domain
             Assert.AreEqual(1, this.partnership.Partner.PartnerContactUserGroup.Members.Count);
             Assert.IsTrue(this.partnership.Partner.PartnerContactUserGroup.Members.Contains(this.contact));
 
-            this.partnership.FromDate = DateTime.Now.AddDays(+1);
+            this.partnership.FromDate = DateTime.UtcNow.AddDays(+1);
             this.partnership.RemoveThroughDate();
 
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(0, this.partnership.Partner.PartnerContactUserGroup.Members.Count);
 
-            this.partnership.FromDate = DateTime.Now;
+            this.partnership.FromDate = DateTime.UtcNow;
             this.partnership.RemoveThroughDate();
 
             this.DatabaseSession.Derive(true);
@@ -115,8 +115,8 @@ namespace Allors.Domain
             Assert.AreEqual(1, this.partnership.Partner.PartnerContactUserGroup.Members.Count);
             Assert.IsTrue(this.partnership.Partner.PartnerContactUserGroup.Members.Contains(this.contact));
 
-            this.partnership.FromDate = DateTime.Now.AddDays(-2);
-            this.partnership.ThroughDate = DateTime.Now.AddDays(-1);
+            this.partnership.FromDate = DateTime.UtcNow.AddDays(-2);
+            this.partnership.ThroughDate = DateTime.UtcNow.AddDays(-1);
 
             this.DatabaseSession.Derive(true);
 
@@ -132,7 +132,7 @@ namespace Allors.Domain
             var contactRelationship2 = new OrganisationContactRelationshipBuilder(this.DatabaseSession)
                 .WithOrganisation(this.partner)
                 .WithContact(contact2)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -140,7 +140,7 @@ namespace Allors.Domain
             Assert.AreEqual(2, this.partnership.Partner.PartnerContactUserGroup.Members.Count);
             Assert.IsTrue(this.partnership.Partner.PartnerContactUserGroup.Members.Contains(this.contact));
 
-            contactRelationship2.ThroughDate = DateTime.Now.AddDays(-1);
+            contactRelationship2.ThroughDate = DateTime.UtcNow.AddDays(-1);
 
             this.DatabaseSession.Derive(true);
 

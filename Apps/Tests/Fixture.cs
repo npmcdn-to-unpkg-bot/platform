@@ -189,17 +189,17 @@ namespace Allors
                 var orderProcessor =
                     new PersonBuilder(session).WithLastName("orderProcessor").WithUserName("orderProcessor").Build();
 
-                new CustomerRelationshipBuilder(session).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).WithFromDate(DateTime.Now).Build();
+                new CustomerRelationshipBuilder(session).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).WithFromDate(DateTime.UtcNow).Build();
 
-                new SupplierRelationshipBuilder(session).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).WithFromDate(DateTime.Now).Build();
+                new SupplierRelationshipBuilder(session).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).WithFromDate(DateTime.UtcNow).Build();
 
-                new EmploymentBuilder(session).WithFromDate(DateTime.Now).WithEmployee(purchaser).WithEmployer(internalOrganisation).Build();
+                new EmploymentBuilder(session).WithFromDate(DateTime.UtcNow).WithEmployee(purchaser).WithEmployer(internalOrganisation).Build();
 
-                new EmploymentBuilder(session).WithFromDate(DateTime.Now).WithEmployee(salesrep).WithEmployer(internalOrganisation).Build();
+                new EmploymentBuilder(session).WithFromDate(DateTime.UtcNow).WithEmployee(salesrep).WithEmployer(internalOrganisation).Build();
 
-                new EmploymentBuilder(session).WithFromDate(DateTime.Now).WithEmployee(orderProcessor).WithEmployer(internalOrganisation).Build();
+                new EmploymentBuilder(session).WithFromDate(DateTime.UtcNow).WithEmployee(orderProcessor).WithEmployer(internalOrganisation).Build();
 
-                new SalesRepRelationshipBuilder(session).WithFromDate(DateTime.Now).WithCustomer(customer).WithSalesRepresentative(salesrep).Build();
+                new SalesRepRelationshipBuilder(session).WithFromDate(DateTime.UtcNow).WithCustomer(customer).WithSalesRepresentative(salesrep).Build();
 
                 session.Derive(true);
 

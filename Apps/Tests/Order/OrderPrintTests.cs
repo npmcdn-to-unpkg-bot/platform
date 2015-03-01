@@ -38,7 +38,7 @@ namespace Allors.Domain
             var euroToPoundStirling = new UnitOfMeasureConversionBuilder(this.DatabaseSession)
                 .WithConversionFactor(0.8553M)
                 .WithToUnitOfMeasure(poundSterling)
-                .WithStartDate(DateTime.Now)
+                .WithStartDate(DateTime.UtcNow)
                 .Build();
 
             euro.AddUnitOfMeasureConversion(euroToPoundStirling);
@@ -124,12 +124,12 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(internalOrganisation)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -138,7 +138,7 @@ namespace Allors.Domain
                 .WithProduct(good)
                 .WithSupplier(supplier)
                 .WithProductPurchasePrice(goodPurchasePrice)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)

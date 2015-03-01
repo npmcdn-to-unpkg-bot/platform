@@ -125,9 +125,9 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var date1 = new DateTime(DateTime.Now.AddYears(-1).Year, 1, 1);
-            var date2 = new DateTime(DateTime.Now.Year, 1, 1);
-            var date3 = new DateTime(DateTime.Now.Year, 2, 1);
+            var date1 = new DateTime(DateTime.UtcNow.AddYears(-1).Year, 1, 1);
+            var date2 = new DateTime(DateTime.UtcNow.Year, 1, 1);
+            var date3 = new DateTime(DateTime.UtcNow.Year, 2, 1);
 
             new SalesInvoiceBuilder(this.DatabaseSession)
                 .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)

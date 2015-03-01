@@ -52,7 +52,7 @@ namespace Allors.Domain
             var orderProcessorUserGroup = usergroups.First;
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(orderProcessor2)
                 .WithEmployer(internalOrganisation)
                 .Build();
@@ -149,7 +149,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
@@ -172,14 +172,14 @@ namespace Allors.Domain
 
             var good1PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
 
             var good2PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -301,7 +301,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
@@ -324,14 +324,14 @@ namespace Allors.Domain
 
             var good1PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
 
             var good2PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -427,7 +427,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
@@ -450,14 +450,14 @@ namespace Allors.Domain
 
             var good1PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
 
             var good2PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -538,7 +538,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var good1 = new GoodBuilder(this.DatabaseSession)
@@ -559,14 +559,14 @@ namespace Allors.Domain
 
             var good1PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
 
             var good2PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -672,7 +672,7 @@ namespace Allors.Domain
             var orderProcessorUserGroup = usergroups.First;
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(orderProcessor2)
                 .WithEmployer(internalOrganisation)
                 .Build();

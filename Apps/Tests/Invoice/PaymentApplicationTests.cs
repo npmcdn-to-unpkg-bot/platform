@@ -92,7 +92,7 @@ namespace Allors.Domain
 
             var receipt = new ReceiptBuilder(this.DatabaseSession)
                 .WithAmount(100)
-                .WithEffectiveDate(DateTime.Now)
+                .WithEffectiveDate(DateTime.UtcNow)
                 .Build();
 
             var paymentApplication = new PaymentApplicationBuilder(this.DatabaseSession)

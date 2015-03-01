@@ -72,13 +72,13 @@ namespace Allors.Domain
             var salesrep2 = new PersonBuilder(this.DatabaseSession).WithLastName("salesRep2").WithUserName("salesRep2").Build();
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(salesrep2)
                 .WithEmployer(internalOrganisation)
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithCustomer(customer)
                 .WithSalesRepresentative(salesrep2)
                 .Build();
@@ -102,14 +102,14 @@ namespace Allors.Domain
             Assert.AreEqual(1, salesRepUserGroup.Members.Count);
             Assert.Contains(salesRep, salesRepUserGroup.Members);
 
-            salesRep.EmploymentsWhereEmployee.First.FromDate = DateTime.Now.AddDays(+1);
+            salesRep.EmploymentsWhereEmployee.First.FromDate = DateTime.UtcNow.AddDays(+1);
             salesRep.EmploymentsWhereEmployee.First.RemoveThroughDate();
 
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(0, salesRepUserGroup.Members.Count);
 
-            salesRep.EmploymentsWhereEmployee.First.FromDate = DateTime.Now;
+            salesRep.EmploymentsWhereEmployee.First.FromDate = DateTime.UtcNow;
             salesRep.EmploymentsWhereEmployee.First.RemoveThroughDate();
             
             this.DatabaseSession.Derive(true);
@@ -117,8 +117,8 @@ namespace Allors.Domain
             Assert.AreEqual(1, salesRepUserGroup.Members.Count);
             Assert.Contains(salesRep, salesRepUserGroup.Members);
 
-            salesRep.EmploymentsWhereEmployee.First.FromDate = DateTime.Now.AddDays(-2);
-            salesRep.EmploymentsWhereEmployee.First.ThroughDate = DateTime.Now.AddDays(-1);
+            salesRep.EmploymentsWhereEmployee.First.FromDate = DateTime.UtcNow.AddDays(-2);
+            salesRep.EmploymentsWhereEmployee.First.ThroughDate = DateTime.UtcNow.AddDays(-1);
             
             this.DatabaseSession.Derive(true);
             

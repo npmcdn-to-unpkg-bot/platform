@@ -79,7 +79,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
@@ -111,7 +111,7 @@ namespace Allors.Domain
             var basePrice = new BasePriceBuilder(this.DatabaseSession)
                 .WithPrice(10)
                 .WithProduct(virtualGood)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -137,7 +137,7 @@ namespace Allors.Domain
             new BasePriceBuilder(this.DatabaseSession)
                 .WithPrice(10)
                 .WithProduct(physicalGood)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             Assert.IsFalse(physicalGood.ExistVirtualProductPriceComponents);
@@ -181,7 +181,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
@@ -225,7 +225,7 @@ namespace Allors.Domain
             var discount = new DiscountComponentBuilder(this.DatabaseSession)
                 .WithPrice(10)
                 .WithProduct(virtualService)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -247,7 +247,7 @@ namespace Allors.Domain
             new DiscountComponentBuilder(this.DatabaseSession)
                 .WithPrice(10)
                 .WithProduct(physicalService)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             Assert.IsFalse(physicalService.ExistVirtualProductPriceComponents);
@@ -291,7 +291,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
@@ -333,7 +333,7 @@ namespace Allors.Domain
             var surcharge = new SurchargeComponentBuilder(this.DatabaseSession)
                 .WithPrice(10)
                 .WithProduct(virtualService)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -355,7 +355,7 @@ namespace Allors.Domain
             new SurchargeComponentBuilder(this.DatabaseSession)
                 .WithPrice(10)
                 .WithProduct(physicalService)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             Assert.IsFalse(physicalService.ExistVirtualProductPriceComponents);

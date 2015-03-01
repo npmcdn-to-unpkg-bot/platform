@@ -55,7 +55,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
 
-            var date = DateTime.Now.AddYears(-1).AddMonths(-1);
+            var date = DateTime.UtcNow.AddYears(-1).AddMonths(-1);
             decimal revenuePastTwelveMonths = 0;
             for (var i = 1; i <= 13; i++)
             {
@@ -106,13 +106,13 @@ namespace Allors.Domain
             var cat1 = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("cat for good1").WithParent(catMain).Build();
             var cat2 = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("cat for good2").WithParent(catMain).Build();
 
-            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.Now).WithCustomer(customer1).WithProductCategory(cat1).WithSalesRepresentative(salesRep1).Build();
-            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.Now).WithCustomer(customer1).WithProductCategory(cat2).WithSalesRepresentative(salesRep2).Build();
+            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.UtcNow).WithCustomer(customer1).WithProductCategory(cat1).WithSalesRepresentative(salesRep1).Build();
+            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.UtcNow).WithCustomer(customer1).WithProductCategory(cat2).WithSalesRepresentative(salesRep2).Build();
 
             this.DatabaseSession.Derive(true);
 
-            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.Now).WithCustomer(customer2).WithProductCategory(cat1).WithSalesRepresentative(salesRep1).Build();
-            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.Now).WithCustomer(customer2).WithProductCategory(cat2).WithSalesRepresentative(salesRep2).Build();
+            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.UtcNow).WithCustomer(customer2).WithProductCategory(cat1).WithSalesRepresentative(salesRep1).Build();
+            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.UtcNow).WithCustomer(customer2).WithProductCategory(cat2).WithSalesRepresentative(salesRep2).Build();
 
             this.DatabaseSession.Derive(true);
 
@@ -144,7 +144,7 @@ namespace Allors.Domain
             new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer2).WithInternalOrganisation(internalOrganisation).Build();
 
             var invoice1 = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceDate(DateTime.Now.AddMonths(-1))
+                .WithInvoiceDate(DateTime.UtcNow.AddMonths(-1))
                 .WithInvoiceNumber("1")
                 .WithBillToCustomer(customer1)
                 .WithBillToContactMechanism(contactMechanism)
@@ -163,7 +163,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var invoice2 = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceDate(DateTime.Now)
+                .WithInvoiceDate(DateTime.UtcNow)
                 .WithInvoiceNumber("1")
                 .WithBillToCustomer(customer1)
                 .WithBillToContactMechanism(contactMechanism)
@@ -187,7 +187,7 @@ namespace Allors.Domain
             Assert.AreEqual(280, customer1RevenueHistory.Revenue);
 
             var invoice3 = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceDate(DateTime.Now)
+                .WithInvoiceDate(DateTime.UtcNow)
                 .WithInvoiceNumber("1")
                 .WithBillToCustomer(customer2)
                 .WithBillToContactMechanism(contactMechanism)

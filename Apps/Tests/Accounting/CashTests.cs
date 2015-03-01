@@ -76,7 +76,7 @@ namespace Allors.Domain
             var supplierRelationship = new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(internalOrganisation)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
@@ -128,7 +128,7 @@ namespace Allors.Domain
             var supplierRelationship = new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(internalOrganisation)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)

@@ -287,7 +287,7 @@ namespace Allors.Domain
 
             organisation.StartNewFiscalYear();
 
-            var fromDate = new DateTime(DateTime.Now.Year, 01, 01).Date;
+            var fromDate = new DateTime(DateTime.UtcNow.Year, 01, 01).Date;
             var month = organisation.ActualAccountingPeriod;
 
             Assert.AreEqual(1, month.PeriodNumber);
@@ -336,7 +336,7 @@ namespace Allors.Domain
 
             organisation.StartNewFiscalYear();
 
-            var fromDate = new DateTime(DateTime.Now.Year, 05, 15).Date;
+            var fromDate = new DateTime(DateTime.UtcNow.Year, 05, 15).Date;
             var month = organisation.ActualAccountingPeriod;
 
             Assert.AreEqual(1, month.PeriodNumber);

@@ -65,7 +65,7 @@ namespace Allors.Domain
                 .WithOwner(owner)
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
-                .WithActualStart(DateTime.Now)
+                .WithActualStart(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -95,7 +95,7 @@ namespace Allors.Domain
                 .WithDescription("Budget")
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
-                .WithActualStart(DateTime.Now)
+                .WithActualStart(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -119,7 +119,7 @@ namespace Allors.Domain
                 .WithOwner(owner)
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
-                .WithActualStart(DateTime.Now)
+                .WithActualStart(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -148,7 +148,7 @@ namespace Allors.Domain
                 .WithOwner(owner)
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
-                .WithActualStart(DateTime.Now)
+                .WithActualStart(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);

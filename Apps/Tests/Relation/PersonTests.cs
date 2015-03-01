@@ -56,7 +56,7 @@ namespace Allors.Domain
             var employment = new EmploymentBuilder(this.DatabaseSession)
                 .WithEmployee(salesRep)
                 .WithEmployer(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -96,7 +96,7 @@ namespace Allors.Domain
             var organisation = new OrganisationBuilder(this.DatabaseSession).WithName("organisation").Build();
             var customer = new PersonBuilder(this.DatabaseSession).WithLastName("Customer").WithUserName("customer").Build();
 
-            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(customer).WithOrganisation(organisation).WithFromDate(DateTime.Now).Build();
+            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(customer).WithOrganisation(organisation).WithFromDate(DateTime.UtcNow).Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
@@ -118,7 +118,7 @@ namespace Allors.Domain
         {
             var customer = new PersonBuilder(this.DatabaseSession).WithLastName("Customer").WithUserName("customer").Build();
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithFromDate(DateTime.Now).Build();
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithFromDate(DateTime.UtcNow).Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
@@ -150,17 +150,17 @@ namespace Allors.Domain
             var organisationContactRelationship = new OrganisationContactRelationshipBuilder(this.DatabaseSession)
                 .WithContact(contact)
                 .WithOrganisation(organisation)
-                .WithFromDate(DateTime.Now.Date)
+                .WithFromDate(DateTime.UtcNow.Date)
                 .Build();
 
-            Assert.IsTrue(contact.IsActiveContact(DateTime.Now.Date));
-            Assert.IsTrue(contact.IsActiveContact(DateTime.Now.Date.AddDays(1)));
-            Assert.IsFalse(contact.IsActiveContact(DateTime.Now.Date.AddDays(-1)));
+            Assert.IsTrue(contact.IsActiveContact(DateTime.UtcNow.Date));
+            Assert.IsTrue(contact.IsActiveContact(DateTime.UtcNow.Date.AddDays(1)));
+            Assert.IsFalse(contact.IsActiveContact(DateTime.UtcNow.Date.AddDays(-1)));
 
             organisationContactRelationship.FromDate = new DateTime(2010, 01, 01);
             organisationContactRelationship.ThroughDate = new DateTime(2011, 01, 01);
 
-            Assert.IsFalse(contact.IsActiveContact(DateTime.Now.Date));
+            Assert.IsFalse(contact.IsActiveContact(DateTime.UtcNow.Date));
             Assert.IsTrue(contact.IsActiveContact(new DateTime(2010, 01, 01)));
             Assert.IsTrue(contact.IsActiveContact(new DateTime(2010, 06, 01)));
             Assert.IsTrue(contact.IsActiveContact(new DateTime(2011, 01, 01)));

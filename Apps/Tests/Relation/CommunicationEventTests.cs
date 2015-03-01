@@ -34,7 +34,7 @@ namespace Allors.Domain
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
                 .WithDescription("Hello")
-                .WithActualStart(DateTime.Now)
+                .WithActualStart(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -49,8 +49,8 @@ namespace Allors.Domain
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
                 .WithDescription("Hello")
-                .WithActualStart(DateTime.Now.AddHours(-2))
-                .WithActualEnd(DateTime.Now.AddHours(-1))
+                .WithActualStart(DateTime.UtcNow.AddHours(-2))
+                .WithActualEnd(DateTime.UtcNow.AddHours(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -65,8 +65,8 @@ namespace Allors.Domain
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
                 .WithDescription("Hello")
-                .WithActualStart(DateTime.Now.AddHours(+1))
-                .WithActualEnd(DateTime.Now.AddHours(+2))
+                .WithActualStart(DateTime.UtcNow.AddHours(+1))
+                .WithActualEnd(DateTime.UtcNow.AddHours(+2))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -81,7 +81,7 @@ namespace Allors.Domain
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
                 .WithDescription("Hello")
-                .WithActualStart(DateTime.Now)
+                .WithActualStart(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);

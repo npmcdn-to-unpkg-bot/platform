@@ -65,29 +65,29 @@ namespace Allors.Domain
             var supplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithPart(this.finishedGood)
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now.AddYears(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
                 .Build();
 
             var previousPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .WithPrice(8)
                 .Build();
 
             this.currentPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .WithPrice(10)
                 .Build();
 
             var futurePurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .WithPrice(8)
                 .Build();
 
@@ -95,7 +95,7 @@ namespace Allors.Domain
             supplierOffering.AddProductPurchasePrice(this.currentPurchasePrice);
             supplierOffering.AddProductPurchasePrice(futurePurchasePrice);
 
-            this.order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(this.supplier).WithBillToContactMechanism(takenViaContactMechanism).WithDeliveryDate(DateTime.Now).Build();
+            this.order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(this.supplier).WithBillToContactMechanism(takenViaContactMechanism).WithDeliveryDate(DateTime.UtcNow).Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
@@ -224,29 +224,29 @@ namespace Allors.Domain
             var supplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(good)
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now.AddYears(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
                 .Build();
 
             var previousPurchasePriceGood = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .WithPrice(8)
                 .Build();
 
             var currentPurchasePriceGood = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .WithPrice(10)
                 .Build();
 
             var futurePurchasePriceGood = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .WithPrice(8)
                 .Build();
 
@@ -698,7 +698,7 @@ namespace Allors.Domain
             var item = new PurchaseOrderItemBuilder(this.DatabaseSession)
                 .WithProduct(good)
                 .WithQuantityOrdered(1)
-                .WithAssignedDeliveryDate(DateTime.Now.AddMonths(1))
+                .WithAssignedDeliveryDate(DateTime.UtcNow.AddMonths(1))
                 .Build();
 
             this.order.AddPurchaseOrderItem(item);

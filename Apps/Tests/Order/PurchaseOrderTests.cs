@@ -41,8 +41,8 @@ namespace Allors.Domain
             var order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(supplier).Build();
 
             Assert.AreEqual(new PurchaseOrderObjectStates(this.DatabaseSession).Provisional, order.CurrentObjectState);
-            Assert.AreEqual(DateTime.Now.Date, order.OrderDate.Date);
-            Assert.AreEqual(DateTime.Now.Date, order.EntryDate.Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, order.OrderDate.Date);
+            Assert.AreEqual(DateTime.UtcNow.Date, order.EntryDate.Date);
             Assert.AreEqual(order.PreviousTakenViaSupplier, order.TakenViaSupplier);
             Assert.AreEqual(internalOrganisation, order.ShipToBuyer);
             Assert.AreEqual(internalOrganisation, order.BillToPurchaser);
@@ -269,10 +269,10 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
-            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact).WithOrganisation(supplier).WithFromDate(DateTime.Now).Build();
+            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact).WithOrganisation(supplier).WithFromDate(DateTime.UtcNow).Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
@@ -317,10 +317,10 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
-            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact).WithOrganisation(supplier).WithFromDate(DateTime.Now).Build();
+            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact).WithOrganisation(supplier).WithFromDate(DateTime.UtcNow).Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
@@ -345,7 +345,7 @@ namespace Allors.Domain
             var purchaser2 = new PersonBuilder(this.DatabaseSession).WithLastName("purchaser2").WithUserName("purchaser2").Build();
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(purchaser2)
                 .WithEmployer(internalOrganisation)
                 .Build();
@@ -388,17 +388,17 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier2)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
-            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact).WithOrganisation(supplier).WithFromDate(DateTime.Now).Build();
-            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact2).WithOrganisation(supplier2).WithFromDate(DateTime.Now).Build();
+            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact).WithOrganisation(supplier).WithFromDate(DateTime.UtcNow).Build();
+            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(supplierContact2).WithOrganisation(supplier2).WithFromDate(DateTime.UtcNow).Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
@@ -625,7 +625,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(purchaser2)
                 .WithEmployer(internalOrganisation)
                 .Build();

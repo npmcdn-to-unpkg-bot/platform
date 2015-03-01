@@ -45,7 +45,7 @@ namespace Allors.Domain
             this.employment = new EmploymentBuilder(this.DatabaseSession)
                 .WithEmployee(this.employee)
                 .WithEmployer(this.internalOrganisation)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -86,14 +86,14 @@ namespace Allors.Domain
             var secondEmployment = new EmploymentBuilder(this.DatabaseSession)
                 .WithEmployee(this.employee)
                 .WithEmployer(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            this.employment.ThroughDate = DateTime.Now;
+            this.employment.ThroughDate = DateTime.UtcNow;
         
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }

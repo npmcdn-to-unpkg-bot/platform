@@ -41,7 +41,7 @@ namespace Allors.Domain
             var euroToPoundStirling = new UnitOfMeasureConversionBuilder(this.DatabaseSession)
                 .WithConversionFactor(0.8553M)
                 .WithToUnitOfMeasure(poundSterling)
-                .WithStartDate(DateTime.Now)
+                .WithStartDate(DateTime.UtcNow)
                 .Build();
 
             euro.AddUnitOfMeasureConversion(euroToPoundStirling);

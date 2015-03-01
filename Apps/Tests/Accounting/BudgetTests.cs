@@ -33,8 +33,8 @@ namespace Allors.Domain
         {
             var budget = new OperatingBudgetBuilder(this.DatabaseSession)
                 .WithDescription("Budget")
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -49,8 +49,8 @@ namespace Allors.Domain
         {
             var budget = new OperatingBudgetBuilder(this.DatabaseSession)
                 .WithDescription("Budget")
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -83,14 +83,14 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             budget = builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithThroughDate(DateTime.Now.AddYears(1));
+            builder.WithThroughDate(DateTime.UtcNow.AddYears(1));
             budget = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);

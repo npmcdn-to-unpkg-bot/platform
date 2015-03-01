@@ -259,7 +259,7 @@ namespace Allors.Domain
             var orderProcessorUserGroup = usergroups.First;
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(orderProcessor2)
                 .WithEmployer(internalOrganisation)
                 .Build();
@@ -307,15 +307,15 @@ namespace Allors.Domain
             new CustomerRelationshipBuilder(this.DatabaseSession)
                 .WithCustomer(customer)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
-            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(customerContact).WithOrganisation(customer).WithFromDate(DateTime.Now).Build();
+            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(customerContact).WithOrganisation(customer).WithFromDate(DateTime.UtcNow).Build();
 
             new EmploymentBuilder(this.DatabaseSession)
                 .WithEmployee(employee)
                 .WithEmployer(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1200,7 +1200,7 @@ namespace Allors.Domain
                 .Build();
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(orderProcessor2)
                 .WithEmployer(internalOrganisation)
                 .Build();
@@ -1547,7 +1547,7 @@ namespace Allors.Domain
             var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
 
             new ShippingAndHandlingComponentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithGeographicBoundary(mechelen)
                 .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
                 .WithShipmentValue(new ShipmentValueBuilder(this.DatabaseSession).WithThroughAmount(300M).Build())
@@ -1555,14 +1555,14 @@ namespace Allors.Domain
                 .Build();
 
             new ShippingAndHandlingComponentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithShipmentValue(new ShipmentValueBuilder(this.DatabaseSession).WithThroughAmount(300M).Build())
                 .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
                 .WithCost(20M)
                 .Build();
 
             new ShippingAndHandlingComponentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithShipmentValue(new ShipmentValueBuilder(this.DatabaseSession).WithThroughAmount(300M).Build())
                 .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).FirstClassAir)
                 .WithCost(50M)

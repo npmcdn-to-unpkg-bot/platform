@@ -96,7 +96,7 @@ namespace Allors.Domain
             new CustomerRelationshipBuilder(this.DatabaseSession)
                 .WithCustomer(customer)
                 .WithInternalOrganisation(internalOrganisation)
-                .WithFromDate(DateTime.Now.AddDays(1))
+                .WithFromDate(DateTime.UtcNow.AddDays(1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -113,8 +113,8 @@ namespace Allors.Domain
             new CustomerRelationshipBuilder(this.DatabaseSession)
                 .WithCustomer(customer)
                 .WithInternalOrganisation(internalOrganisation)
-                .WithFromDate(DateTime.Now.AddDays(-10))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddDays(-10))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -177,7 +177,7 @@ namespace Allors.Domain
             var customerRelationship2 = new CustomerRelationshipBuilder(this.DatabaseSession)
                 .WithCustomer(customer2)
                 .WithInternalOrganisation(internalOrganisation2)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             customerRelationship2.SubAccountNumber = 19;
@@ -273,7 +273,7 @@ namespace Allors.Domain
                 .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
                 .WithBillToCustomer(customer)
                 .WithBillToContactMechanism(billToContactMechanism)
-                .WithInvoiceDate(DateTime.Now.AddDays(-30))
+                .WithInvoiceDate(DateTime.UtcNow.AddDays(-30))
                 .WithSalesInvoiceItem(new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantity(1).WithActualUnitPrice(100M).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).Build())
                 .Build();
 
@@ -283,7 +283,7 @@ namespace Allors.Domain
                 .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
                 .WithBillToCustomer(customer)
                 .WithBillToContactMechanism(billToContactMechanism)
-                .WithInvoiceDate(DateTime.Now.AddDays(-5))
+                .WithInvoiceDate(DateTime.UtcNow.AddDays(-5))
                 .WithSalesInvoiceItem(new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantity(1).WithActualUnitPrice(200M).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).Build())
                 .Build();
 
@@ -300,7 +300,7 @@ namespace Allors.Domain
 
             Assert.AreEqual(80, customerRelationship.AmountOverDue);
 
-            invoice2.InvoiceDate = DateTime.Now.AddDays(-10);
+            invoice2.InvoiceDate = DateTime.UtcNow.AddDays(-10);
 
             this.DatabaseSession.Derive(true);
 

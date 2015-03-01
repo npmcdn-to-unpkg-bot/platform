@@ -172,7 +172,7 @@ namespace Allors.Domain
 
             this.goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -180,13 +180,13 @@ namespace Allors.Domain
             this.goodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(this.good)
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithProductPurchasePrice(this.goodPurchasePrice)
                 .Build();
 
             this.virtualGoodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(8)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -194,7 +194,7 @@ namespace Allors.Domain
             this.virtualgoodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(this.virtualGood)
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithProductPurchasePrice(this.virtualGoodPurchasePrice)
                 .Build();
 
@@ -219,7 +219,7 @@ namespace Allors.Domain
                 .WithGeographicBoundary(mechelen)
                 .WithProduct(this.good)
                 .WithPrice(8)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             // previous basePrice for good
@@ -227,8 +227,8 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProduct(this.good)
                 .WithPrice(8)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for good
@@ -236,7 +236,7 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProduct(this.good)
                 .WithPrice(11)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.currentGoodBasePrice = new BasePriceBuilder(this.DatabaseSession)
@@ -244,8 +244,8 @@ namespace Allors.Domain
                 .WithDescription("current good")
                 .WithProduct(this.good)
                 .WithPrice(10)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             // previous basePrice for feature1
@@ -253,8 +253,8 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProductFeature(this.feature1)
                 .WithPrice(0.5M)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for feature1
@@ -262,7 +262,7 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProductFeature(this.feature1)
                 .WithPrice(2.5M)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -270,8 +270,8 @@ namespace Allors.Domain
                 .WithDescription("current feature1")
                 .WithProductFeature(this.feature1)
                 .WithPrice(2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             // previous basePrice for feature2
@@ -279,8 +279,8 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProductFeature(this.feature2)
                 .WithPrice(2)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for feature2
@@ -289,7 +289,7 @@ namespace Allors.Domain
                 .WithDescription("future feature2")
                 .WithProductFeature(this.feature2)
                 .WithPrice(4)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.currentFeature2BasePrice = new BasePriceBuilder(this.DatabaseSession)
@@ -297,8 +297,8 @@ namespace Allors.Domain
                 .WithDescription("current feature2")
                 .WithProductFeature(this.feature2)
                 .WithPrice(3)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             // previous basePrice for good with feature1
@@ -307,8 +307,8 @@ namespace Allors.Domain
                 .WithProduct(this.good)
                 .WithProductFeature(this.feature1)
                 .WithPrice(4)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for good with feature1
@@ -318,7 +318,7 @@ namespace Allors.Domain
                 .WithProduct(this.good)
                 .WithProductFeature(this.feature1)
                 .WithPrice(6)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.currentGood1Feature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
@@ -327,8 +327,8 @@ namespace Allors.Domain
                 .WithProduct(this.good)
                 .WithProductFeature(this.feature1)
                 .WithPrice(5)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.currentVirtualGoodBasePrice = new BasePriceBuilder(this.DatabaseSession)
@@ -336,7 +336,7 @@ namespace Allors.Domain
                 .WithDescription("current virtual good")
                 .WithProduct(this.virtualGood)
                 .WithPrice(10)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -344,7 +344,7 @@ namespace Allors.Domain
                 .WithDescription("current variant good2")
                 .WithProduct(this.variantGood2)
                 .WithPrice(11)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.order = new SalesOrderBuilder(this.DatabaseSession)
@@ -373,8 +373,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -383,8 +383,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Commit();
@@ -429,8 +429,8 @@ namespace Allors.Domain
             //    .WithRevenueValueBreak(break1)
             //    .WithProductCategory(this.productCategory)
             //    .WithPrice(amount1)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .WithFromDate(DateTime.UtcNow)
+            //    .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
             //    .Build();
 
             //new BasePriceBuilder(this.DatabaseSession)
@@ -439,8 +439,8 @@ namespace Allors.Domain
             //    .WithRevenueValueBreak(break2)
             //    .WithProductCategory(this.productCategory)
             //    .WithPrice(amount2)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .WithFromDate(DateTime.UtcNow)
+            //    .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
             //    .Build();
 
             //this.DatabaseSession.Commit();
@@ -484,8 +484,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -494,8 +494,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -562,8 +562,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(valueBreak1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -572,8 +572,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(valueBreak2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -582,8 +582,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(quantityBreak1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -592,8 +592,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(quantityBreak2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -665,8 +665,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(valueBreak1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(valueDiscount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -675,8 +675,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(valueBreak2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(valueDiscount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -685,8 +685,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(quantityBreak1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(quantityDiscount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -695,8 +695,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(quantityBreak2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(quantityDiscount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -768,8 +768,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(valueBreak1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(valueDiscount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -778,8 +778,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(valueBreak2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(valueDiscount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -788,8 +788,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(quantityBreak1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(quantityDiscount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -798,8 +798,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(quantityBreak2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(quantityDiscount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -866,8 +866,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProductCategory(this.ancestorProductCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -876,8 +876,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProductCategory(this.ancestorProductCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -941,8 +941,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProductCategory(this.parentProductCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -951,8 +951,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProductCategory(this.parentProductCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1016,8 +1016,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -1026,8 +1026,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1091,8 +1091,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProduct(this.good)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -1101,8 +1101,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProduct(this.good)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1166,8 +1166,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -1176,8 +1176,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1241,8 +1241,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -1251,8 +1251,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1316,8 +1316,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -1326,8 +1326,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1391,8 +1391,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break1)
                 .WithProduct(this.good)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -1401,8 +1401,8 @@ namespace Allors.Domain
                 .WithRevenueValueBreak(break2)
                 .WithProduct(this.good)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1468,8 +1468,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -1478,8 +1478,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Commit();
@@ -1523,8 +1523,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break1)
                 .WithProductCategory(this.ancestorProductCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -1533,8 +1533,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break2)
                 .WithProductCategory(this.ancestorProductCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1598,8 +1598,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break1)
                 .WithProductCategory(this.parentProductCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -1608,8 +1608,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break2)
                 .WithProductCategory(this.parentProductCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1673,8 +1673,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -1683,8 +1683,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1748,8 +1748,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -1758,8 +1758,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1823,8 +1823,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -1833,8 +1833,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1898,8 +1898,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break1)
                 .WithProductCategory(this.productCategory)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -1908,8 +1908,8 @@ namespace Allors.Domain
                 .WithRevenueQuantityBreak(break2)
                 .WithProductCategory(this.productCategory)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -1973,8 +1973,8 @@ namespace Allors.Domain
                 .WithPackageQuantityBreak(break1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -1983,8 +1983,8 @@ namespace Allors.Domain
                 .WithPackageQuantityBreak(break2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new PartyPackageRevenueHistoryBuilder(this.DatabaseSession)
@@ -2054,8 +2054,8 @@ namespace Allors.Domain
                 .WithPackageQuantityBreak(break1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -2064,8 +2064,8 @@ namespace Allors.Domain
                 .WithPackageQuantityBreak(break2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new PartyPackageRevenueHistoryBuilder(this.DatabaseSession)
@@ -2155,8 +2155,8 @@ namespace Allors.Domain
                 .WithPackageQuantityBreak(break1)
                 .WithProduct(this.good)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -2165,8 +2165,8 @@ namespace Allors.Domain
                 .WithPackageQuantityBreak(break2)
                 .WithProduct(this.good)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new PartyPackageRevenueHistoryBuilder(this.DatabaseSession)
@@ -2575,8 +2575,8 @@ namespace Allors.Domain
                 .WithGeographicBoundary(this.kiev)
                 .WithProduct(this.good)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2614,8 +2614,8 @@ namespace Allors.Domain
                 .WithGeographicBoundary(this.kiev)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2654,8 +2654,8 @@ namespace Allors.Domain
                 .WithDescription("discount good for geo boundary")
                 .WithGeographicBoundary(this.kiev)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2699,8 +2699,8 @@ namespace Allors.Domain
                 .WithGeographicBoundary(this.kiev)
                 .WithProduct(this.good)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2737,8 +2737,8 @@ namespace Allors.Domain
                 .WithGeographicBoundary(this.kiev)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2777,8 +2777,8 @@ namespace Allors.Domain
                 .WithPartyClassification(classification)
                 .WithProduct(this.good)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2823,8 +2823,8 @@ namespace Allors.Domain
                 .WithPartyClassification(classification)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2870,8 +2870,8 @@ namespace Allors.Domain
                 .WithPartyClassification(classification)
                 .WithProduct(this.good)
                 .WithPrice(expected)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2915,8 +2915,8 @@ namespace Allors.Domain
                 .WithPartyClassification(classification)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2960,8 +2960,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.ancestorProductCategory)
                 .WithProduct(this.good)
                 .WithPrice(expected)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -2999,8 +2999,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.ancestorProductCategory)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3039,8 +3039,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.parentProductCategory)
                 .WithProduct(this.good)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3078,8 +3078,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.parentProductCategory)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3118,8 +3118,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.productCategory)
                 .WithProduct(this.good)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3157,8 +3157,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.productCategory)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3197,8 +3197,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.productCategory)
                 .WithProduct(this.good)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3235,8 +3235,8 @@ namespace Allors.Domain
                 .WithProductCategory(this.productCategory)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3280,8 +3280,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -3290,8 +3290,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3399,8 +3399,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break1)
                 .WithProduct(this.good)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -3409,8 +3409,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break2)
                 .WithProduct(this.good)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3490,8 +3490,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -3500,8 +3500,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3609,8 +3609,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break1)
                 .WithProduct(this.good)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -3619,8 +3619,8 @@ namespace Allors.Domain
                 .WithOrderQuantityBreak(break2)
                 .WithProduct(this.good)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3700,8 +3700,8 @@ namespace Allors.Domain
                 .WithOrderValue(value1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -3710,8 +3710,8 @@ namespace Allors.Domain
                 .WithOrderValue(value2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3819,8 +3819,8 @@ namespace Allors.Domain
                 .WithOrderValue(value1)
                 .WithProduct(this.good)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -3829,8 +3829,8 @@ namespace Allors.Domain
                 .WithOrderValue(value2)
                 .WithProduct(this.good)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -3910,8 +3910,8 @@ namespace Allors.Domain
                 .WithOrderValue(value1)
                 .WithProduct(this.good)
                 .WithPrice(amount1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -3920,8 +3920,8 @@ namespace Allors.Domain
                 .WithOrderValue(value2)
                 .WithProduct(this.good)
                 .WithPrice(amount2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4029,8 +4029,8 @@ namespace Allors.Domain
                 .WithOrderValue(value1)
                 .WithProduct(this.good)
                 .WithPercentage(percentage1)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new SurchargeComponentBuilder(this.DatabaseSession)
@@ -4039,8 +4039,8 @@ namespace Allors.Domain
                 .WithOrderValue(value2)
                 .WithProduct(this.good)
                 .WithPercentage(percentage2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4115,8 +4115,8 @@ namespace Allors.Domain
                 .WithSalesChannel(email)
                 .WithProduct(this.good)
                 .WithPrice(expected)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4158,8 +4158,8 @@ namespace Allors.Domain
                 .WithSalesChannel(email)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4208,8 +4208,8 @@ namespace Allors.Domain
                 .WithSalesChannel(email)
                 .WithProduct(this.good)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4249,8 +4249,8 @@ namespace Allors.Domain
                 .WithSalesChannel(email)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4294,8 +4294,8 @@ namespace Allors.Domain
                 .WithSalesChannel(email)
                 .WithProduct(this.good)
                 .WithPercentage(percentage)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4340,7 +4340,7 @@ namespace Allors.Domain
             var euroToPoundStirling = new UnitOfMeasureConversionBuilder(this.DatabaseSession)
                 .WithConversionFactor(conversionfactor)
                 .WithToUnitOfMeasure(poundSterling)
-                .WithStartDate(DateTime.Now)
+                .WithStartDate(DateTime.UtcNow)
                 .Build();
 
             var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
@@ -4417,8 +4417,8 @@ namespace Allors.Domain
                 .WithDescription("discount good for geo boundary")
                 .WithGeographicBoundary(this.kiev)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -4461,8 +4461,8 @@ namespace Allors.Domain
                 .WithDescription("discount good for geo boundary")
                 .WithGeographicBoundary(this.kiev)
                 .WithPrice(amount)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             this.DatabaseSession.Derive(true);

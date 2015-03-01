@@ -199,7 +199,7 @@ namespace Allors.Domain
             var order1 = new SalesOrderBuilder(this.DatabaseSession)
                 .WithBillToCustomer(customer)
                 .WithShipToCustomer(customer)
-                .WithDeliveryDate(DateTime.Now)
+                .WithDeliveryDate(DateTime.UtcNow)
                 .Build();
 
             var salesItem = new SalesOrderItemBuilder(this.DatabaseSession).WithDescription("item1").WithProduct(good).WithQuantityOrdered(30).WithActualUnitPrice(15).Build();

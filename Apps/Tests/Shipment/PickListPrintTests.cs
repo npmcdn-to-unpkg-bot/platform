@@ -51,7 +51,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var good1 = new GoodBuilder(this.DatabaseSession)
@@ -72,7 +72,7 @@ namespace Allors.Domain
 
             var good1PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -85,7 +85,7 @@ namespace Allors.Domain
 
             var good2PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -149,7 +149,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var good1 = new GoodBuilder(this.DatabaseSession)
@@ -162,7 +162,7 @@ namespace Allors.Domain
 
             var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();

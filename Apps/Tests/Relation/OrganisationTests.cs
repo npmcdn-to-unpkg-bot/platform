@@ -55,8 +55,8 @@ namespace Allors.Domain
             var organisation = new OrganisationBuilder(this.DatabaseSession).WithName("organisation").Build();
             var customer = new PersonBuilder(this.DatabaseSession).WithLastName("Customer").WithUserName("customer").Build();
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(organisation).WithInternalOrganisation(internalOrganisation).WithFromDate(DateTime.Now).Build();
-            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(customer).WithOrganisation(organisation).WithFromDate(DateTime.Now).Build();
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(organisation).WithInternalOrganisation(internalOrganisation).WithFromDate(DateTime.UtcNow).Build();
+            new OrganisationContactRelationshipBuilder(this.DatabaseSession).WithContact(customer).WithOrganisation(organisation).WithFromDate(DateTime.UtcNow).Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();

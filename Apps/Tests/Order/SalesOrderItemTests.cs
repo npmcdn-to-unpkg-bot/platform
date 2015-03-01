@@ -118,7 +118,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(this.internalOrganisation)
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new CustomerRelationshipBuilder(this.DatabaseSession)
@@ -192,7 +192,7 @@ namespace Allors.Domain
 
             this.goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -200,13 +200,13 @@ namespace Allors.Domain
             this.goodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(this.good)
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithProductPurchasePrice(this.goodPurchasePrice)
                 .Build();
 
             this.virtualGoodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(8)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -214,7 +214,7 @@ namespace Allors.Domain
             this.virtualgoodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(this.virtualGood)
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithProductPurchasePrice(this.virtualGoodPurchasePrice)
                 .Build();
 
@@ -239,7 +239,7 @@ namespace Allors.Domain
                 .WithGeographicBoundary(mechelen)
                 .WithProduct(this.good)
                 .WithPrice(8)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             // previous basePrice for good
@@ -247,8 +247,8 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProduct(this.good)
                 .WithPrice(8)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for good
@@ -256,7 +256,7 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProduct(this.good)
                 .WithPrice(11)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.currentGoodBasePrice = new BasePriceBuilder(this.DatabaseSession)
@@ -264,8 +264,8 @@ namespace Allors.Domain
                 .WithDescription("current good")
                 .WithProduct(this.good)
                 .WithPrice(10)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             // previous basePrice for feature1
@@ -273,8 +273,8 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProductFeature(this.feature1)
                 .WithPrice(0.5M)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for feature1
@@ -282,7 +282,7 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProductFeature(this.feature1)
                 .WithPrice(2.5M)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -290,8 +290,8 @@ namespace Allors.Domain
                 .WithDescription("current feature1")
                 .WithProductFeature(this.feature1)
                 .WithPrice(2)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             // previous basePrice for feature2
@@ -299,8 +299,8 @@ namespace Allors.Domain
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithProductFeature(this.feature2)
                 .WithPrice(2)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for feature2
@@ -309,7 +309,7 @@ namespace Allors.Domain
                 .WithDescription("future feature2")
                 .WithProductFeature(this.feature2)
                 .WithPrice(4)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.currentFeature2BasePrice = new BasePriceBuilder(this.DatabaseSession)
@@ -317,8 +317,8 @@ namespace Allors.Domain
                 .WithDescription("current feature2")
                 .WithProductFeature(this.feature2)
                 .WithPrice(3)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             // previous basePrice for good with feature1
@@ -327,8 +327,8 @@ namespace Allors.Domain
                 .WithProduct(this.good)
                 .WithProductFeature(this.feature1)
                 .WithPrice(4)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .WithFromDate(DateTime.UtcNow.AddYears(-1))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
                 .Build();
 
             // future basePrice for good with feature1
@@ -338,7 +338,7 @@ namespace Allors.Domain
                 .WithProduct(this.good)
                 .WithProductFeature(this.feature1)
                 .WithPrice(6)
-                .WithFromDate(DateTime.Now.AddYears(1))
+                .WithFromDate(DateTime.UtcNow.AddYears(1))
                 .Build();
 
             this.currentGood1Feature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
@@ -347,8 +347,8 @@ namespace Allors.Domain
                 .WithProduct(this.good)
                 .WithProductFeature(this.feature1)
                 .WithPrice(5)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -356,7 +356,7 @@ namespace Allors.Domain
                 .WithDescription("current variant good2")
                 .WithProduct(this.variantGood2)
                 .WithPrice(11)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.order = new SalesOrderBuilder(this.DatabaseSession)
@@ -452,7 +452,7 @@ namespace Allors.Domain
             var orderItem = new SalesOrderItemBuilder(this.DatabaseSession)
                 .WithProduct(this.good)
                 .WithQuantityOrdered(1)
-                .WithAssignedDeliveryDate(DateTime.Now.AddMonths(1))
+                .WithAssignedDeliveryDate(DateTime.UtcNow.AddMonths(1))
                 .Build();
 
             salesOrder.AddSalesOrderItem(orderItem);
@@ -473,7 +473,7 @@ namespace Allors.Domain
                 .WithBillToCustomer(this.billToCustomer)
                 .WithShipToAddress(this.shipToContactMechanismMechelen)
                 .WithVatRegime(new VatRegimes(this.DatabaseSession).Export)
-                .WithDeliveryDate(DateTime.Now.AddMonths(1))
+                .WithDeliveryDate(DateTime.UtcNow.AddMonths(1))
                 .Build();
 
             var orderItem = new SalesOrderItemBuilder(this.DatabaseSession)
@@ -609,7 +609,7 @@ namespace Allors.Domain
 
             var good2PurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithPrice(7)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
@@ -625,7 +625,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
                 .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new SupplierOfferingBuilder(this.DatabaseSession)

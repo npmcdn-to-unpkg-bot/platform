@@ -147,7 +147,7 @@ namespace Allors.Domain
             var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(orderProcessor2)
                 .WithEmployer(internalOrganisation)
                 .Build();
@@ -210,7 +210,7 @@ namespace Allors.Domain
             var orderProcessorUserGroup = usergroups.First;
 
             new EmploymentBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithEmployee(orderProcessor2)
                 .WithEmployer(internalOrganisation)
                 .Build();

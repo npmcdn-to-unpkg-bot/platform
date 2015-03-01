@@ -51,7 +51,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             purchasePrice = builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);

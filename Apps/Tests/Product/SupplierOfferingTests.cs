@@ -42,7 +42,7 @@ namespace Allors.Domain
                 .Build();
 
             var purchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
                 .WithPrice(1)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
@@ -99,11 +99,11 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var purchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
                 .WithPrice(1)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
@@ -140,7 +140,7 @@ namespace Allors.Domain
             new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var finishedGood = new FinishedGoodBuilder(this.DatabaseSession)
@@ -148,7 +148,7 @@ namespace Allors.Domain
                 .Build();
 
             var purchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
                 .WithPrice(1)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)

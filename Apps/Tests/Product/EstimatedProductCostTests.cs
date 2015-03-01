@@ -51,7 +51,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             laborCost = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
@@ -81,7 +81,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             materialCost = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
@@ -111,7 +111,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTime.Now);
+            builder.WithFromDate(DateTime.UtcNow);
             otherCost = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);

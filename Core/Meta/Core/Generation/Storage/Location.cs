@@ -70,7 +70,7 @@ namespace Allors.Development.Repository.Storage
                 try
                 {
                     File.WriteAllText(fileInfo.FullName, fileContents);
-                    fileInfo.CreationTime = DateTime.Now;
+                    fileInfo.CreationTime = DateTime.UtcNow;
                     return;
                 }
                 catch

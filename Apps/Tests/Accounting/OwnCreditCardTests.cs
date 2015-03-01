@@ -123,8 +123,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
             Assert.IsTrue(paymentMethod.IsActive);
 
-            creditCard.ExpirationYear = DateTime.Now.Year;
-            creditCard.ExpirationMonth = DateTime.Now.Month;
+            creditCard.ExpirationYear = DateTime.UtcNow.Year;
+            creditCard.ExpirationMonth = DateTime.UtcNow.Month;
 
             this.DatabaseSession.Derive(true);
             Assert.IsFalse(paymentMethod.IsActive);
@@ -143,7 +143,7 @@ namespace Allors.Domain
             var supplierRelationship = new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(internalOrganisation)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
@@ -203,7 +203,7 @@ namespace Allors.Domain
             var supplierRelationship = new SupplierRelationshipBuilder(this.DatabaseSession)
                 .WithSupplier(supplier)
                 .WithInternalOrganisation(internalOrganisation)
-                .WithFromDate(DateTime.Now)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
