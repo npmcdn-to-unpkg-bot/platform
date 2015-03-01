@@ -49,7 +49,7 @@ namespace Allors.Domain
             ////After deriving this.Organisation
             if (this.ExistContact)
             {
-                this.Contact.Derive().WithDerivation(derivation).Execute();
+                this.Contact.Derive(x=>x.WithDerivation(derivation));
             }
         }
 

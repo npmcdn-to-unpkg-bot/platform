@@ -68,7 +68,7 @@ namespace Allors.Domain
             }
 
             var internalOrganisationRevenue = InternalOrganisationRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-            internalOrganisationRevenue.Derive().WithDerivation(derivation).Execute();
+            internalOrganisationRevenue.Derive(x => x.WithDerivation(derivation));
         }
     }
 }

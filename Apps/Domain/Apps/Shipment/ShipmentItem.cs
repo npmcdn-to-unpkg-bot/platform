@@ -28,7 +28,7 @@ namespace Allors.Domain
             {
                 foreach (ItemIssuance itemIssuance in this.ItemIssuancesWhereShipmentItem)
                 {
-                    itemIssuance.Delete().Execute();
+                    itemIssuance.Delete();
                 }
             }
         }

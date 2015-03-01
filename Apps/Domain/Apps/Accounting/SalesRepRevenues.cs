@@ -140,7 +140,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(salesRepRevenue.Id))
                 {
-                    salesRepRevenue.Delete().Execute();
+                    salesRepRevenue.Delete();
                 }
             }
         }

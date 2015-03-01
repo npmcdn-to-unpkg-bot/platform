@@ -340,7 +340,7 @@ namespace Allors.Domain
                 foreach (var keyValuePair in invoiceByOrder)
                 {
                     // TODO: put this in prepare
-                    // keyValuePair.Value.Derive().WithDerivation(derivation).Execute();
+                    // keyValuePair.Value.Derive(x=>x.WithDerivation(derivation));
                 }
             }
         }
@@ -421,11 +421,11 @@ namespace Allors.Domain
                     {
                         foreach (ItemIssuance itemIssuance in pickListItem.ItemIssuancesWherePickListItem)
                         {
-                            itemIssuance.Delete().Execute();
+                            itemIssuance.Delete();
                         }
    
                         pendingPickList.RemovePickListItem(pickListItem);
-                        pickListItem.Delete().Execute();
+                        pickListItem.Delete();
                     }
                 }
 
@@ -487,7 +487,7 @@ namespace Allors.Domain
 
                 if (pendingPickList != null)
                 {
-                    pendingPickList.Derive().WithDerivation(derivation).Execute();
+                    pendingPickList.Derive(x=>x.WithDerivation(derivation));
                 }
             }
         }
@@ -605,11 +605,11 @@ namespace Allors.Domain
                         {
                             if (!itemIssuance.PickListItem.PickListWherePickListItem.ExistPicker)
                             {
-                                itemIssuance.Delete().Execute();
+                                itemIssuance.Delete();
                             }
                         }
 
-                        orderShipment.Delete().Execute();
+                        orderShipment.Delete();
                     }
                 }
             }
@@ -622,7 +622,7 @@ namespace Allors.Domain
 
             if (shipmentItem.Quantity == 0)
             {
-                shipmentItem.Delete().Execute();
+                shipmentItem.Delete();
             }
 
             if (!this.ExistShipmentItems)

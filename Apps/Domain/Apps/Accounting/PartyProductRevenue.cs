@@ -83,13 +83,13 @@ namespace Allors.Domain
             if (this.ExistParty)
             {
                 var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                partyRevenue.Derive().WithDerivation(derivation).Execute();
+                partyRevenue.Derive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistProduct)
             {
                 var productRevenue = ProductRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                productRevenue.Derive().WithDerivation(derivation).Execute();
+                productRevenue.Derive(x => x.WithDerivation(derivation));
 
                 foreach (ProductCategory productCategory in this.Product.ProductCategories)
                 {
@@ -108,7 +108,7 @@ namespace Allors.Domain
                                                                 .WithCurrency(this.Currency)
                                                                 .WithRevenue(0M)
                                                                 .Build();
-                    partyProductCategoryRevenue.Derive().WithDerivation(derivation).Execute();
+                    partyProductCategoryRevenue.Derive(x => x.WithDerivation(derivation));
                 }
             }
         }

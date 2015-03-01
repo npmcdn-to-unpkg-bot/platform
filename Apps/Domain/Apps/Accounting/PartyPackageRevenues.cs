@@ -120,7 +120,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(partyPackageRevenue.Id))
                 {
-                    partyPackageRevenue.Delete().Execute();
+                    partyPackageRevenue.Delete();
                 }
             }
         }

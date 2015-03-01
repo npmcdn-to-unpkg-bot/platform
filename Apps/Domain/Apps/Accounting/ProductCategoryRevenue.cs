@@ -81,7 +81,7 @@ namespace Allors.Domain
                                                                                     .WithCurrency(this.Currency)
                                                                                     .WithRevenue(0M)
                                                                                     .Build();
-                productCategoryRevenue.Derive().WithDerivation(derivation).Execute();
+                productCategoryRevenue.Derive(x => x.WithDerivation(derivation));
             }
         }
     }

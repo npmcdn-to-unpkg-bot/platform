@@ -360,7 +360,7 @@ namespace Allors.Domain
                 {
                     if (inventoryItem != null)
                     {
-                        inventoryItem.Derive().WithDerivation(derivation).Execute();
+                        inventoryItem.Derive(x => x.WithDerivation(derivation));
                     }
                 }
             }
@@ -370,7 +370,7 @@ namespace Allors.Domain
             {
                 if (inventoryItem != null)
                 {
-                    inventoryItem.Derive().WithDerivation(derivation).Execute();
+                    inventoryItem.Derive(x => x.WithDerivation(derivation));
                 }
             }
         }

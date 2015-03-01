@@ -103,7 +103,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(packageRevenue.Id))
                 {
-                    packageRevenue.Delete().Execute();
+                    packageRevenue.Delete();
                 }
             }
         }

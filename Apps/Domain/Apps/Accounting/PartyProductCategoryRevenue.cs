@@ -85,7 +85,7 @@ namespace Allors.Domain
                                                                 .WithRevenue(0M)
                                                                 .Build();
 
-                    partyProductCategoryRevenue.Derive().WithDerivation(derivation).Execute();
+                    partyProductCategoryRevenue.Derive(x => x.WithDerivation(derivation));
                 }
             }
 
@@ -108,19 +108,19 @@ namespace Allors.Domain
             if (this.ExistProductCategory)
             {
                 var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                productCategoryRevenue.Derive().WithDerivation(derivation).Execute();
+                productCategoryRevenue.Derive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistProductCategory)
             {
                 var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                productCategoryRevenue.Derive().WithDerivation(derivation).Execute();
+                productCategoryRevenue.Derive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistProductCategory && this.ProductCategory.ExistPackage)
             {
                 var partyPackageRevenue = PartyPackageRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                partyPackageRevenue.Derive().WithDerivation(derivation).Execute();
+                partyPackageRevenue.Derive(x => x.WithDerivation(derivation));
             }
         }
     }

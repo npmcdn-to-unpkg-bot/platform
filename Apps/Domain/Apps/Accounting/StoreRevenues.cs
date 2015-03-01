@@ -137,7 +137,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(storeRevenue.Id))
                 {
-                    storeRevenue.Delete().Execute();
+                    storeRevenue.Delete();
                 }
             }
         }

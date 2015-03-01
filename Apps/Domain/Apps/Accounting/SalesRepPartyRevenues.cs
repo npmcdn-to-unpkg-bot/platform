@@ -196,7 +196,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(salesRepPartyRevenue.Id))
                 {
-                    salesRepPartyRevenue.Delete().Execute();
+                    salesRepPartyRevenue.Delete();
                 }
             }
         }

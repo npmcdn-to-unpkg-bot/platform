@@ -78,10 +78,10 @@ namespace Allors.Domain
             if (this.ExistParty && this.ExistProductCategory)
             {
                 var salesRepProductCategoryRevenue = SalesRepProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                salesRepProductCategoryRevenue.Derive().WithDerivation(derivation).Execute();
+                salesRepProductCategoryRevenue.Derive(x => x.WithDerivation(derivation));
 
                 var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                salesRepPartyRevenue.Derive().WithDerivation(derivation).Execute();
+                salesRepPartyRevenue.Derive(x => x.WithDerivation(derivation));
             }
         }
     }

@@ -250,7 +250,7 @@ namespace Allors.Domain
                     extra -= diff;
 
                     salesOrderItem.DeriveAddToShipping(derivation, diff);
-                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive().WithDerivation(derivation).Execute();
+                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive(x=>x.WithDerivation(derivation));
                 }
             }
         }
@@ -282,7 +282,7 @@ namespace Allors.Domain
                     subtract -= diff;
 
                     salesOrderItem.DeriveSubtractFromShipping(derivation, diff);
-                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive().WithDerivation(derivation).Execute();
+                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive(x=>x.WithDerivation(derivation));
                 }
             }
         }

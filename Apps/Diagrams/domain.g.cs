@@ -1302,7 +1302,7 @@ namespace Allors.Domain
 
 					Salutation Salutation {set;}
 
-					global::System.Decimal YTDCommission {set;}
+					global::System.Decimal? YTDCommission {set;}
 
 					PersonClassification PersonClassifications {set;}
 
@@ -1310,7 +1310,7 @@ namespace Allors.Domain
 
 					Employment CurrentEmployment {set;}
 
-					global::System.Decimal LastYearsCommission {set;}
+					global::System.Decimal? LastYearsCommission {set;}
 
 					global::System.String GivenName {set;}
 

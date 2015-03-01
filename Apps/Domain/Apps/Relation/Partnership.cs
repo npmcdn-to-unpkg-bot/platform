@@ -47,7 +47,7 @@ namespace Allors.Domain
                 var partner = this.Partner;
                 foreach (OrganisationContactRelationship contactRelationship in partner.OrganisationContactRelationshipsWhereOrganisation)
                 {
-                    contactRelationship.Contact.Derive().WithDerivation(derivation).Execute();                    
+                    contactRelationship.Contact.Derive(x=>x.WithDerivation(derivation));                    
                 }
             }
         }

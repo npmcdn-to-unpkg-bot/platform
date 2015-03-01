@@ -159,7 +159,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(salesRepPartyProductCategoryRevenue.Id))
                 {
-                    salesRepPartyProductCategoryRevenue.Delete().Execute();
+                    salesRepPartyProductCategoryRevenue.Delete();
                 }
             }
         }

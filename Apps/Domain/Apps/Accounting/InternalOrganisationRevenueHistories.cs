@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Security.Cryptography.X509Certificates;
 
     public partial class InternalOrganisationRevenueHistories
     {
@@ -92,7 +92,7 @@ namespace Allors.Domain
                     internalOrganisationRevenueHistory.Revenue += internalOrganisationRevenue.Revenue;
                 }
 
-                internalOrganisationRevenueHistory.Derive().WithDerivation(derivation).Execute();
+                internalOrganisationRevenueHistory.Derive(x=>x.WithDerivation(derivation));
             }
         }
 

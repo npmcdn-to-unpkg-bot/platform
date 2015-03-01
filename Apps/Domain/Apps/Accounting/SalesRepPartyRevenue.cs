@@ -73,7 +73,7 @@ namespace Allors.Domain
             if (this.ExistSalesRep)
             {
                 var salesRepRevenue = SalesRepRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                salesRepRevenue.Derive().WithDerivation(derivation).Execute();
+                salesRepRevenue.Derive(x => x.WithDerivation(derivation));
             }
         }
     }

@@ -564,17 +564,17 @@ namespace Allors.Domain
         {
             foreach (Employment employment in this.EmploymentsWhereEmployee)
             {
-                employment.Delete().Execute();
+                employment.Delete();
             }
 
             if (this.ExistOwnerSecurityToken)
             {
                 foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
                 {
-                    acl.Delete().Execute();
+                    acl.Delete();
                 }
 
-                this.OwnerSecurityToken.Delete().Execute();
+                this.OwnerSecurityToken.Delete();
             }
         }
 

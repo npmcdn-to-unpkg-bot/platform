@@ -52,19 +52,19 @@ namespace Allors.Domain
 
             if (this.ExistEmployee)
             {
-                this.Employee.Derive().WithDerivation(derivation).Execute();
+                this.Employee.Derive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistEmployer)
             {
-                this.Employer.Derive().WithDerivation(derivation).Execute();
+                this.Employer.Derive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistEmployee && this.Employee.ExistSalesRepRelationshipsWhereSalesRepresentative)
             {
                 foreach (SalesRepRelationship salesRepRelationship in this.Employee.SalesRepRelationshipsWhereSalesRepresentative)
                 {
-                    salesRepRelationship.Derive().WithDerivation(derivation).Execute();
+                    salesRepRelationship.Derive(x=>x.WithDerivation(derivation));
                 }
             }
         }

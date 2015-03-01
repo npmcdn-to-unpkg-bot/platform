@@ -113,7 +113,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(internalOrganisationRevenue.Id))
                 {
-                    internalOrganisationRevenue.Delete().Execute();
+                    internalOrganisationRevenue.Delete();
                 }
             }
         }

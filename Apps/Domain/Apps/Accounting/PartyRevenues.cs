@@ -151,7 +151,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(partyRevenue.Id))
                 {
-                    partyRevenue.Delete().Execute();
+                    partyRevenue.Delete();
                 }
             }
         }

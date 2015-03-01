@@ -65,7 +65,7 @@ namespace Allors.Domain
                     catch (Exception e)
                     {
                         Console.Write(fileInfo.FullName + @" " + e.Message);
-                        good.Photo.Delete().Execute();
+                        good.Photo.Delete();
                     }
                 }
             }

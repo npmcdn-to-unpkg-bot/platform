@@ -49,7 +49,7 @@ namespace Allors.Domain
             if (this.ExistCustomer && this.ExistSalesRepresentative)
             {
                 this.Customer.DeriveCurrentSalesReps(derivation);
-                this.SalesRepresentative.Derive().WithDerivation(derivation).Execute();
+                this.SalesRepresentative.Derive(x=>x.WithDerivation(derivation));
             }
         }
 
