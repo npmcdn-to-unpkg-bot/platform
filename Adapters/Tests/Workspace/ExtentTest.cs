@@ -89,7 +89,11 @@ namespace Allors.Workspaces
         public override void Shared()
         {
         }
-        
+
+        public override void CombinationWithMultipleOperations()
+        {
+        }
+
         protected override Extent LocalExtent(IComposite objectType)
         {
             var workspaceSession = (IWorkspaceSession)this.Session;

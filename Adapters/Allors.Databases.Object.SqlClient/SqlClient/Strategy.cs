@@ -59,7 +59,15 @@ namespace Allors.Databases.Object.SqlClient
 
         public IClass ObjectType
         {
-            get { return this.reference.ObjectType; }
+            get
+            {
+                if (!this.reference.Exists)
+                {
+                    throw new Exception("Object that had  " + this.reference.ObjectType.Name + " with id " + this.ObjectId + " does not exist");
+                }
+
+                return this.reference.ObjectType;
+            }
         }
 
         public ObjectId ObjectId
