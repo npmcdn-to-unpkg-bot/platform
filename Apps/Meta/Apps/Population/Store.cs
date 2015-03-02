@@ -1,12 +1,9 @@
 namespace Allors.Meta
 {
-	public partial class StoreClass
-	{
-	    internal override void AppsExtend()
+    public partial class StoreClass
+    {
+        internal override void AppsExtend()
         {
-			this.Roles.SalesOrderCounter.IsRequired = true;
-			// this.Roles.SalesInvoiceCounter.IsRequired = true;
-
             this.Roles.Name.IsRequired = true;
             this.Roles.PaymentNetDays.IsRequired = true;
             this.Roles.PaymentGracePeriod.IsRequired = true;
@@ -18,6 +15,6 @@ namespace Allors.Meta
             this.Roles.DefaultPaymentMethod.IsRequired = true;
             this.Roles.DefaultShipmentMethod.IsRequired = true;
             this.Roles.DefaultCarrier.IsRequired = true;
-		}
-	}
+        }
+    }
 }

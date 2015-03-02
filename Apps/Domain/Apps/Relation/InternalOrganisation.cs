@@ -40,25 +40,25 @@ namespace Allors.Domain
 
         public int DeriveNextSubAccountNumber()
         {
-            var next = this.SubAccountCounter.NextValue();
+            var next = Counters.NextValue(this.strategy.Session, Counters.SubAccountCounterId);
             return next;
         }
 
         public string DeriveNextPurchaseInvoiceNumber()
         {
-            var purchaseInvoiceNumber = this.PurchaseInvoiceCounter.NextValue();
+            var purchaseInvoiceNumber = Counters.NextValue(this.strategy.Session, Counters.PurchaseInvoiceCounterId);
             return string.Format(this.PurchaseInvoiceNumberPrefix, purchaseInvoiceNumber);
         }
 
         public string DeriveNextShipmentNumber()
         {
-            var shipmentNumber = this.IncomingShipmentCounter.NextValue();
+            var shipmentNumber = Counters.NextValue(this.strategy.Session, Counters.IncomingShipmentCounterId);
             return string.Format(this.IncomingShipmentNumberPrefix, shipmentNumber);
         }
 
         public string DeriveNextPurchaseOrderNumber()
         {
-            var purchaseOrderNumber = this.PurchaseInvoiceCounter.NextValue();
+            var purchaseOrderNumber = Counters.NextValue(this.strategy.Session, Counters.PurchaseInvoiceCounterId);
             return string.Format(this.PurchaseOrderNumberPrefix, purchaseOrderNumber);
         }
 

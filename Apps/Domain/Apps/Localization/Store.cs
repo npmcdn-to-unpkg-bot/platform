@@ -31,7 +31,7 @@ namespace Allors.Domain
             int salesInvoiceNumber;
             if (this.Owner.InvoiceSequence.Equals(new InvoiceSequences(this.Strategy.Session).EnforcedSequence))
             {
-                salesInvoiceNumber = this.SalesInvoiceCounter.NextValue();
+                salesInvoiceNumber = Counters.NextValue(this.strategy.Session, Counters.SalesInvoiceCounterId);
             }
             else
             {
@@ -70,13 +70,13 @@ namespace Allors.Domain
 
         public string DeriveNextShipmentNumber()
         {
-            var shipmentNumber = this.OutgoingShipmentCounter.NextValue();
+            var shipmentNumber = Counters.NextValue(this.strategy.Session, Counters.OutgoingShipmentCounterId);
             return string.Format(this.OutgoingShipmentNumberPrefix, shipmentNumber);
         }
 
         public string DeriveNextSalesOrderNumber()
         {
-            var salesOrderNumber = this.SalesOrderCounter.NextValue();
+            var salesOrderNumber = Counters.NextValue(this.strategy.Session, Counters.SalesOrderCounterId);
             return string.Format(this.SalesOrderNumberPrefix, salesOrderNumber);
         }
 
