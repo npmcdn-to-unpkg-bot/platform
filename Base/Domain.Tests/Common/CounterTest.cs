@@ -26,6 +26,7 @@ namespace Allors.Domain
     using System;
     using System.Data;
 
+    using Allors.Domain;
     using Allors.Workspaces.Memory.IntegerId;
 
     using NUnit.Framework;

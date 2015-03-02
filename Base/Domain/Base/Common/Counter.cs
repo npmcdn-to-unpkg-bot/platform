@@ -29,5 +29,10 @@ namespace Allors.Domain
                 this.Value = 0;
             }
         }
+
+        public int NextValue()
+        {
+            return Counters.NextValue(this.Strategy.Session, this.UniqueId);
+        }
     }
 }

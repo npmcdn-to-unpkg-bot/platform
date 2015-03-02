@@ -499,7 +499,6 @@
     <Compile Include="Apps\Accounting\VatRateUsages.cs" />
     <Compile Include="Apps\Accounting\VatRegimes.cs" />
     <Compile Include="Apps\Accounting\VatTariffs.cs" />
-    <Compile Include="Apps\Common\Counters.cs" />
     <Compile Include="Apps\Common\Singleton.cs" />
     <Compile Include="Apps\Common\Singleton.v.cs" />
     <Compile Include="Apps\Constants.cs" />
