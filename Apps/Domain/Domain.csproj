@@ -118,9 +118,6 @@
     <Compile Include="..\..\Base\Domain\Base\Common\ObjectState.cs">
       <Link>Base\Common\ObjectState.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Common\Retry.cs">
-      <Link>Base\Common\Retry.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\Singleton.cs">
       <Link>Base\Common\Singleton.cs</Link>
     </Compile>

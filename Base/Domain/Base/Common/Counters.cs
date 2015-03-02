@@ -39,92 +39,26 @@ namespace Allors.Domain
             }
         }
 
-        public static int NextValue(ISession session, Guid counterId, Retry snapshotRetryCount = null)
+        public static int NextValue(ISession session, Guid counterId)
         {
-            if (snapshotRetryCount == null)
+            if (Config.Serializable != null)
             {
-                snapshotRetryCount = Retry.Default;
+                using (var counterSession = Config.Default.CreateSession())
+                {
+                    var serializableCounter = new Counters(counterSession).CounterById[counterId];
+                    var newValue = serializableCounter.Value + 1;
+                    serializableCounter.Value = newValue;
+
+                    counterSession.Commit();
+
+                    return newValue;
+                }
             }
 
-            var database = session.Population as IDatabase;
-            if (database == null)
-            {
-                var workspace = (IWorkspace)session.Population;
-                database = workspace.Database;
-            }
-
-            if (!database.IsShared)
-            {
-                return NextValueNonShared(session, counterId);
-            }
-
-            database = Config.Serializable;
-           
-            if (database != null)
-            {
-                return NextValueSerializable(database, counterId);
-            }
-
-            database = Config.Default;
-
-            return NextValueSnapshot(database, counterId, snapshotRetryCount);
-        }
-
-        private static int NextValueNonShared(ISession session, Guid counterId)
-        {
             var counter = new Counters(session).CounterById[counterId];
             counter.Value = counter.Value + 1;
 
             return counter.Value;
-        }
-
-        private static int NextValueSerializable(IDatabase database, Guid counterId)
-        {
-            using (var counterSession = database.CreateSession())
-            {
-                var counter = new Counters(counterSession).CounterById[counterId];
-                var newValue = counter.Value + 1;
-                counter.Value = newValue;
-
-                counterSession.Commit();
-
-                return newValue;
-            }
-        }
-
-        private static int NextValueSnapshot(IDatabase database, Guid counterId, Retry snapshotRetryCount)
-        {
-            Exception lastException = null;
-            for (var i = 0; i < snapshotRetryCount.Count; i++)
-            {
-                try
-                {
-                    using (var counterSession = database.CreateSession())
-                    {
-                        var counter = new Counters(counterSession).CounterById[counterId];
-                        var newValue = counter.Value + 1;
-                        counter.Value = newValue;
-
-                        counterSession.Commit();
-
-                        return newValue;
-                    }
-                }
-                catch (Exception e)
-                {
-                    lastException = e;
-                }
-
-                var sleepTime = Random.Next(snapshotRetryCount.MinSleep, snapshotRetryCount.MaxSleep);
-                Thread.Sleep(sleepTime);
-            }
-
-            if (lastException != null)
-            {
-                throw lastException;
-            }
-
-            throw new Exception("Could not get next value from counter with id " + counterId);
         }
     }
 }
