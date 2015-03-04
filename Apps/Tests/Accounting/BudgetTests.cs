@@ -86,13 +86,6 @@ namespace Allors.Domain
             builder.WithFromDate(DateTime.UtcNow);
             budget = builder.Build();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
-            builder.WithThroughDate(DateTime.UtcNow.AddYears(1));
-            budget = builder.Build();
-
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
             Assert.AreEqual(budget.CurrentBudgetStatus.BudgetObjectState, new BudgetObjectStates(this.DatabaseSession).Opened);

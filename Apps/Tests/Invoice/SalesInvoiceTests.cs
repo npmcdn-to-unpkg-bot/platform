@@ -1292,6 +1292,7 @@ namespace Allors.Domain
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Sales)
                 .WithDefaultPaymentMethod(ownBankAccount)
+                .WithPreferredCurrency(euro)
                 .Build();
 
             var facility = new WarehouseBuilder(this.DatabaseSession).WithName("facility").WithOwner(internalOrganisation2).Build();

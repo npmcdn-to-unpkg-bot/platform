@@ -172,6 +172,7 @@ namespace Allors.Domain
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(ownBankAccount)
+                .WithPreferredCurrency(euro)
                 .Build();
 
             var customerRelationship2 = new CustomerRelationshipBuilder(this.DatabaseSession)

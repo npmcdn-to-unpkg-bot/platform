@@ -89,7 +89,7 @@ namespace Allors.Domain
             Assert.AreEqual(1, communication.CommunicationEventStatuses.Count);
             Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).InProgress, communication.CurrentCommunicationEventStatus.CommunicationEventObjectState);
 
-            communication.Close().Execute();
+            communication.Close();
             
             this.DatabaseSession.Derive(true);
 

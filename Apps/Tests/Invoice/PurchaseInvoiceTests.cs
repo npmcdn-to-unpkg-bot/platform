@@ -94,6 +94,7 @@ namespace Allors.Domain
                 .WithName("org")
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithDefaultPaymentMethod(ownBankAccount)
+                .WithPreferredCurrency(euro)
                 .Build();
 
             var invoice1 = new PurchaseInvoiceBuilder(this.DatabaseSession)
