@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Model.cs" company="Allors bvba">
+// <copyright file="Select.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,7 +20,12 @@
 
 namespace Allors.Web.Mvc
 {
-    public abstract partial class Model
+    using System.Web.Mvc;
+
+    public partial class Select
     {
+        public string Id;
+
+        public SelectListItem[] List;
     }
 }

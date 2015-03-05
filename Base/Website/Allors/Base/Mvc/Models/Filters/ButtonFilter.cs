@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Model.cs" company="Allors bvba">
+// <copyright file="ButtonFilter.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,9 +18,24 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc
+namespace Allors.Web.Mvc.Models
 {
-    public abstract partial class Model
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+
+    using Allors.Meta;
+
+    public partial class ButtonFilter : IModelMetadataFilter 
     {
+        public void Transform(Composite composite, ModelMetadata metadata, IEnumerable<Attribute> attributes)
+        {
+            var propertyName = metadata.PropertyName;
+            if (!string.IsNullOrWhiteSpace(propertyName) &&
+                propertyName.ToLowerInvariant().EndsWith("button"))
+            {
+                metadata.ShowForEdit = false;
+            }
+        }
     }
 }

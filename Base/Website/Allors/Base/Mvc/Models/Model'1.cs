@@ -20,7 +20,10 @@
 
 namespace Allors.Web.Mvc
 {
-    public abstract partial class Model
+    using Allors.Meta;
+
+    public abstract partial class Model<T> : Model
+          where T : Composite
     {
     }
 }

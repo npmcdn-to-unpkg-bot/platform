@@ -43,7 +43,7 @@ namespace Allors.Web.Mvc.Models
                 return this.metadataFilters;
             }
         }
-
+        
         protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributeEnumerable, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
         {
             var attributes = attributeEnumerable.ToArray();
