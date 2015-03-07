@@ -63,13 +63,6 @@ namespace Allors.Web.Mvc
 
         public virtual void Dispose()
         {
-            try
-            {
-                if (!disposed)
-                {
-
-                }
-            }
         }
 
         protected virtual void Dispose(bool disposing)
