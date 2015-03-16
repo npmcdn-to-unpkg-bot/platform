@@ -144,7 +144,7 @@ namespace Allors.Domain
             new CustomerRelationshipBuilder(this.DatabaseSession)
                 .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
                 .WithCustomer(organisation)
-                .WithFromDate(new DateTime(2010, 01, 01))
+                .WithFromDate(DateTimeFactory.Create(2010, 01, 01))
                 .Build();
 
             var organisationContactRelationship = new OrganisationContactRelationshipBuilder(this.DatabaseSession)
@@ -157,14 +157,14 @@ namespace Allors.Domain
             Assert.IsTrue(contact.IsActiveContact(DateTime.UtcNow.Date.AddDays(1)));
             Assert.IsFalse(contact.IsActiveContact(DateTime.UtcNow.Date.AddDays(-1)));
 
-            organisationContactRelationship.FromDate = new DateTime(2010, 01, 01);
-            organisationContactRelationship.ThroughDate = new DateTime(2011, 01, 01);
+            organisationContactRelationship.FromDate = DateTimeFactory.Create(2010, 01, 01);
+            organisationContactRelationship.ThroughDate = DateTimeFactory.Create(2011, 01, 01);
 
             Assert.IsFalse(contact.IsActiveContact(DateTime.UtcNow.Date));
-            Assert.IsTrue(contact.IsActiveContact(new DateTime(2010, 01, 01)));
-            Assert.IsTrue(contact.IsActiveContact(new DateTime(2010, 06, 01)));
-            Assert.IsTrue(contact.IsActiveContact(new DateTime(2011, 01, 01)));
-            Assert.IsFalse(contact.IsActiveContact(new DateTime(2011, 01, 02)));
+            Assert.IsTrue(contact.IsActiveContact(DateTimeFactory.Create(2010, 01, 01)));
+            Assert.IsTrue(contact.IsActiveContact(DateTimeFactory.Create(2010, 06, 01)));
+            Assert.IsTrue(contact.IsActiveContact(DateTimeFactory.Create(2011, 01, 01)));
+            Assert.IsFalse(contact.IsActiveContact(DateTimeFactory.Create(2011, 01, 02)));
         }
     }
 }

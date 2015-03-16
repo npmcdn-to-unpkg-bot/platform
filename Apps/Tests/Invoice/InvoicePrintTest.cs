@@ -120,7 +120,7 @@ namespace Allors.Domain
                 .WithDescription("good baseprice")
                 .WithProduct(good)
                 .WithPrice(10234.3M)
-                .WithFromDate(new DateTime(2011, 2, 22))
+                .WithFromDate(DateTimeFactory.Create(2011, 2, 22))
                 .Build();
 
             new BasePriceBuilder(this.DatabaseSession)
@@ -128,7 +128,7 @@ namespace Allors.Domain
                 .WithDescription("productfeature baseprice")
                 .WithProductFeature(feature1)
                 .WithPrice(2.5M)
-                .WithFromDate(new DateTime(2011, 2, 22))
+                .WithFromDate(DateTimeFactory.Create(2011, 2, 22))
                 .Build();
 
             new DiscountComponentBuilder(this.DatabaseSession)
@@ -137,7 +137,7 @@ namespace Allors.Domain
                 .WithProductCategory(category)
                 .WithProduct(good)
                 .WithPercentage(5)
-                .WithFromDate(new DateTime(2011, 2, 22))
+                .WithFromDate(DateTimeFactory.Create(2011, 2, 22))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -196,7 +196,7 @@ namespace Allors.Domain
                 .WithBillToCustomer(customer)
                 .WithBilledFromInternalOrganisation(internalOrganisation)
                 .WithShippingAndHandlingCharge(shippingAndHandling)
-                .WithInvoiceDate(new DateTime(2011, 2, 22))
+                .WithInvoiceDate(DateTimeFactory.Create(2011, 2, 22))
                 .WithMessage("Thanks for your order.")
                 .Build();
 

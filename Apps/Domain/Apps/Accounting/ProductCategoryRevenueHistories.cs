@@ -38,7 +38,7 @@ namespace Allors.Domain
                 var months = ((DateTime.UtcNow.Year - productCategoryRevenue.Year) * 12) + DateTime.UtcNow.Month - productCategoryRevenue.Month;
                 if (months <= 12)
                 {
-                    var date = new DateTime(productCategoryRevenue.Year, productCategoryRevenue.Month, 01);
+                    var date = DateTimeFactory.Create(productCategoryRevenue.Year, productCategoryRevenue.Month, 01);
 
                     Dictionary<ProductCategory, Dictionary<DateTime, ProductCategoryRevenue>> productCategoryRevenuesByPeriodByProductCategory;
                     if (!productCategoryRevenuesByPeriodByProductCategoryByInternalOrganisation.TryGetValue(productCategoryRevenue.InternalOrganisation, out productCategoryRevenuesByPeriodByProductCategory))

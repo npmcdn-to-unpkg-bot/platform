@@ -406,7 +406,7 @@ namespace Allors.Domain
                 year = this.ActualAccountingPeriod.FromDate.Date.Year + 1;
             }
 
-            var fromDate = new DateTime(year, this.FiscalYearStartMonth, this.FiscalYearStartDay).Date;
+            var fromDate = DateTimeFactory.Create(year, this.FiscalYearStartMonth, this.FiscalYearStartDay).Date;
 
             var yearPeriod = new AccountingPeriodBuilder(this.Strategy.Session)
                 .WithPeriodNumber(1)

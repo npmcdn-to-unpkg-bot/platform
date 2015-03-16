@@ -42,12 +42,12 @@ namespace Allors.Domain
         {
             this.Revenue = 0;
 
-            var lastDayOfMonth = new DateTime(this.Year, this.Month, 01).AddMonths(1).AddSeconds(-1).Day;
+            var lastDayOfMonth = DateTimeFactory.Create(this.Year, this.Month, 01).AddMonths(1).AddSeconds(-1).Day;
 
             var invoices = this.Party.SalesInvoicesWhereBillToCustomer;
             invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
             invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).WrittenOff);
-            invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(this.Year, this.Month, 01), new DateTime(this.Year, this.Month, lastDayOfMonth));
+            invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, DateTimeFactory.Create(this.Year, this.Month, 01), DateTimeFactory.Create(this.Year, this.Month, lastDayOfMonth));
 
             foreach (SalesInvoice salesInvoice in invoices)
             {

@@ -51,14 +51,14 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(new DateTime(2010, 12, 31));
+            builder.WithFromDate(DateTimeFactory.Create(2010, 12, 31));
             builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithThroughDate(new DateTime(2011, 12, 31));
+            builder.WithThroughDate(DateTimeFactory.Create(2011, 12, 31));
             builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);

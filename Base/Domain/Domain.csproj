@@ -50,6 +50,7 @@
     <Compile Include="Base\ObjectOnBuild.cs" />
     <Compile Include="Base\ObjectOnPostBuild.cs" />
     <Compile Include="Base\ObjectExtensions.cs" />
+    <Compile Include="Base\Unit\DateTimeFactory.cs" />
     <Compile Include="Generated\Base\AccessControl.g.cs" />
     <Compile Include="Generated\Base\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Base\Address.g.cs" />

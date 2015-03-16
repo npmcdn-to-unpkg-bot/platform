@@ -127,7 +127,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                                         }
                                         else
                                         {
-                                            unit = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond, DateTimeKind.Utc);
+                                            unit = DateTimeFactory.Create(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond, DateTimeKind.Utc);
                                         }
 
                                         break;

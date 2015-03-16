@@ -364,6 +364,9 @@
     <Compile Include="..\..\Base\Domain\Base\Setup.cs">
       <Link>Base\Setup.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Unit\DateTimeFactory.cs">
+      <Link>Base\Unit\DateTimeFactory.cs</Link>
+    </Compile>
     <Compile Include="Apps\Accounting\AccountingPeriod.cs" />
     <Compile Include="Apps\Accounting\AccountingPeriod.v.cs" />
     <Compile Include="Apps\Accounting\AccountingPeriods.cs" />
