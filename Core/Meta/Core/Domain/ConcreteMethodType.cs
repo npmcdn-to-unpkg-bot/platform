@@ -72,47 +72,28 @@ namespace Allors.Meta
         {
             this.actions = new List<Action<object, object>>();
 
+            // TODO: respect the hierarchy dependency
             foreach (var domain in sortedDomains)
             {
                 var methodName = domain.Name + this.methodType.Name;
 
-                {
-                    var methodInfo = this.Class.ClrType.GetMethod(methodName);
-                    if (methodInfo != null)
-                    {
-                        var o = Expression.Parameter(typeof(object));
-                        var castO = Expression.Convert(o, this.Class.ClrType);
-
-                        var p = Expression.Parameter(typeof(object));
-                        var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
-
-                        Expression call = Expression.Call(castO, methodInfo, new Expression[] { castP });
-
-                        var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
-
-                        this.actions.Add(action);
-                    }
-                }
-
-                // MethodType is on an interface, make sure that interface
-                // gets called last. (the opposite of a class)
-                // TODO: respect the hierarchy dependency
                 var interfaces = new List<Interface>(this.Class.Supertypes);
                 var methodInterface = this.methodType.ObjectType as Interface;
                 if (methodInterface != null)
                 {
                     interfaces.Sort(
                         (a, b) =>
+                        {
+                            if (a.Equals(methodInterface))
                             {
-                                if (a.Equals(methodInterface))
-                                {
-                                    return 1;
-                                }
+                                return 1;
+                            }
 
-                                return -1;
-                            });
+                            return -1;
+                        });
                 }
 
+                // Interface
                 foreach (var @interface in interfaces)
                 {
                     var extensionMethodInfos = GetExtensionMethods(extensionMethods, @interface.ClrType, methodName);
@@ -146,6 +127,25 @@ namespace Allors.Meta
                             action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
                             actionByMethodInfo[methodInfo] = action;
                         }
+
+                        this.actions.Add(action);
+                    }
+                }
+
+                // Class
+                {
+                    var methodInfo = this.Class.ClrType.GetMethod(methodName);
+                    if (methodInfo != null)
+                    {
+                        var o = Expression.Parameter(typeof(object));
+                        var castO = Expression.Convert(o, this.Class.ClrType);
+
+                        var p = Expression.Parameter(typeof(object));
+                        var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
+
+                        Expression call = Expression.Call(castO, methodInfo, new Expression[] { castP });
+
+                        var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
 
                         this.actions.Add(action);
                     }
