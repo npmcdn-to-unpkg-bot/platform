@@ -1146,6 +1146,10 @@ namespace Allors.Domain
 
 					InventoryItem InventoryItemsProduced {set;}
 
+					WorkEffortPurpose WorkEffortPurposes {set;}
+
+					global::System.String Name {set;}
+
 					Requirement RequirementFulfillments {set;}
 
 					global::System.String SpecialTerms {set;}
@@ -5188,5 +5192,8 @@ namespace Allors.Domain
 
 					Party Prospect {set;}
 
+	}
+	public interface WorkEffortPurpose  : Object, Enumeration 
+	{
 	}
 }
