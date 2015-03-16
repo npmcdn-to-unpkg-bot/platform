@@ -1646,6 +1646,7 @@
     <Compile Include="Generated\Base\WorkEffortObjectState.g.cs" />
     <Compile Include="Generated\Base\WorkEffortPartStandard.g.cs" />
     <Compile Include="Generated\Base\WorkEffortPartyAssignment.g.cs" />
+    <Compile Include="Generated\Base\WorkEffortPurpose.g.cs" />
     <Compile Include="Generated\Base\WorkEffortReopen.g.cs" />
     <Compile Include="Generated\Base\WorkEffortSkillStandard.g.cs" />
     <Compile Include="Generated\Base\WorkEffortStatus.g.cs" />
