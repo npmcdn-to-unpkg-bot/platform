@@ -1308,9 +1308,9 @@
     <Compile Include="Generated\Base\NonSerializedInventoryItemStatus.g.cs" />
     <Compile Include="Generated\Base\Note.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
-    <Compile Include="Generated\Base\ObjectApplySecurityOnDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectApplySecurityOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectDerive.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnDerived.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectPrepareDerivation.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />

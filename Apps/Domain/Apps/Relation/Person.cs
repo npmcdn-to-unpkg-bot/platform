@@ -257,7 +257,7 @@ namespace Allors.Domain
             return false;
         }
 
-        public void AppsApplySecurityOnDerive(ObjectApplySecurityOnDerive method)
+        public void AppsOnDerived(ObjectOnDerived method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(this.OwnerSecurityToken);

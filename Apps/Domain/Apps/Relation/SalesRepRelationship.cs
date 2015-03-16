@@ -62,7 +62,7 @@ namespace Allors.Domain
                 {
                     foreach (OrganisationContactRelationship contactRelationship in customer.OrganisationContactRelationshipsWhereOrganisation)
                     {
-                        contactRelationship.Contact.ApplySecurityOnDerive();
+                        contactRelationship.Contact.OnDerived();
 
                         foreach (CustomerRelationship customerRelationship in contactRelationship.Organisation.CustomerRelationshipsWhereCustomer)
                         {

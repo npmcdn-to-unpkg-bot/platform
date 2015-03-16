@@ -33,7 +33,7 @@ namespace Allors.Meta
             new MethodType(BaseDomain.Instance, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D"))
             {
                 ObjectType = Instance,
-                Name = "ApplySecurityOnDerive"
+                Name = "OnDerived"
             };
         }
     }

@@ -49,7 +49,7 @@ namespace Allors.Domain
 
             var interfaceMethod = c1.InterfaceMethod();
 
-            Assert.AreEqual("C1TestI1TestC1BaseI1BaseC1CoreI1Core", interfaceMethod.Value);
+            Assert.AreEqual("I1TestI1BaseI1CoreC1TestC1BaseC1Core", interfaceMethod.Value);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace Allors.Domain
 
             var interfaceMethod = c1.SuperinterfaceMethod();
 
-            Assert.AreEqual("C1TestI1TestS1TestC1BaseI1BaseS1BaseC1CoreI1CoreS1Core", interfaceMethod.Value);
+            Assert.AreEqual("S1TestS1BaseS1CoreI1TestI1BaseI1CoreC1TestC1BaseC1Core", interfaceMethod.Value);
         }
 
         [Test]

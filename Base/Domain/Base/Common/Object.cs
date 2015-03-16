@@ -43,7 +43,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void BaseDerive(this Object @this, ObjectDerive method)
+        public static void BaseOnDerived(this Object @this, ObjectOnDerived method)
         {
             var derivation = method.Derivation;
             var @class = (Class)@this.Strategy.ObjectType;
@@ -100,8 +100,14 @@ namespace Allors.Domain
         }
     }
 
-    public abstract partial class ObjectApplySecurityOnDerive
+    public abstract partial class ObjectOnDerived
     {
-        public Derivation Derivation { get; set; }
+        public IDerivation Derivation { get; set; }
+
+        public ObjectOnDerived WithDerivation(IDerivation derivation)
+        {
+            this.Derivation = derivation;
+            return this;
+        }
     }
 }

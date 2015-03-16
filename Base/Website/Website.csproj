@@ -42,6 +42,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Humanizer">
+      <HintPath>..\packages\Humanizer.1.34.0\lib\portable-win+net40+sl50+wp8+wpa81\Humanizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc2Futures.2.0.50217.0\lib\Microsoft.Web.Mvc.dll</HintPath>
@@ -164,12 +167,6 @@
     <Compile Include="Allors\Base\Account\BaseAccountController.cs" />
     <Compile Include="Allors\Base\Data\BaseDataController.cs" />
     <Compile Include="Allors\Base\Manage\BaseManageController.cs" />
-    <Compile Include="Allors\Base\Mvc\ViewContextExtensions.cs" />
-    <Compile Include="Allors\Base\Mvc\MenuForUser.cs" />
-    <Compile Include="Allors\Base\Mvc\MenuItemForUser.cs" />
-    <Compile Include="Allors\Base\Mvc\Menus.cs" />
-    <Compile Include="Allors\Base\Mvc\Menu.cs" />
-    <Compile Include="Allors\Base\Mvc\Controller.cs" />
     <Compile Include="Allors\Base\Identity\EmailService.cs" />
     <Compile Include="Allors\Base\Identity\IdentitySignInManager.cs" />
     <Compile Include="Allors\Base\Identity\IdentityUser.cs" />
@@ -178,7 +175,23 @@
     <Compile Include="Allors\Base\Identity\SmsService.cs" />
     <Compile Include="Allors\Base\Identity\UserStore.cs" />
     <Compile Include="Allors\Base\Identity\UserStore.v.cs" />
-    <Compile Include="Allors\Base\Mvc\MenuItem.cs" />
+    <Compile Include="Allors\Base\Mvc\AllorsContext.cs" />
+    <Compile Include="Allors\Base\Mvc\Components\Menu.cs" />
+    <Compile Include="Allors\Base\Mvc\Components\MenuForUser.cs" />
+    <Compile Include="Allors\Base\Mvc\Components\MenuItem.cs" />
+    <Compile Include="Allors\Base\Mvc\Components\MenuItemForUser.cs" />
+    <Compile Include="Allors\Base\Mvc\Components\Menus.cs" />
+    <Compile Include="Allors\Base\Mvc\Controllers\Controller.cs" />
+    <Compile Include="Allors\Base\Mvc\DependencyResolver.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\AllorsModelMetadataProvider.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Filters\ButtonFilter.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Filters\IdFilter.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Filters\LabelFilter.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\IModelMetadataFilter.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Model%271.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Model.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Select.cs" />
+    <Compile Include="Allors\Base\Mvc\Views\ViewContextExtensions.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

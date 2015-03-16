@@ -62,6 +62,7 @@ namespace Allors.Meta
             {
                 return this.actions;
             }
+
             set
             {
                 this.actions = value;
@@ -72,30 +73,31 @@ namespace Allors.Meta
         {
             this.actions = new List<Action<object, object>>();
 
-            // TODO: respect the hierarchy dependency
-            foreach (var domain in sortedDomains)
+            var interfaces = new List<Interface>(this.Class.Supertypes);
+            var methodInterface = this.methodType.ObjectType as Interface;
+            interfaces.Sort(
+                (a, b) =>
+                {
+                    // The defined interface is always first
+                    if (methodInterface != null && a.Equals(methodInterface))
+                    {
+                        return -1;
+                    }
+
+                    if (a.Supertypes.Contains(b))
+                    {
+                        return 1;
+                    }
+
+                    return -1;
+                });
+
+            // Interface
+            foreach (var @interface in interfaces)
             {
-                var methodName = domain.Name + this.methodType.Name;
-
-                var interfaces = new List<Interface>(this.Class.Supertypes);
-                var methodInterface = this.methodType.ObjectType as Interface;
-                if (methodInterface != null)
+                foreach (var domain in sortedDomains)
                 {
-                    interfaces.Sort(
-                        (a, b) =>
-                        {
-                            if (a.Equals(methodInterface))
-                            {
-                                return 1;
-                            }
-
-                            return -1;
-                        });
-                }
-
-                // Interface
-                foreach (var @interface in interfaces)
-                {
+                    var methodName = domain.Name + this.methodType.Name;
                     var extensionMethodInfos = GetExtensionMethods(extensionMethods, @interface.ClrType, methodName);
                     if (extensionMethodInfos.Length > 1)
                     {
@@ -131,9 +133,14 @@ namespace Allors.Meta
                         this.actions.Add(action);
                     }
                 }
+            }
 
-                // Class
+            // Class
+            {
+                foreach (var domain in sortedDomains)
                 {
+                    var methodName = domain.Name + this.methodType.Name;
+
                     var methodInfo = this.Class.ClrType.GetMethod(methodName);
                     if (methodInfo != null)
                     {
@@ -143,7 +150,7 @@ namespace Allors.Meta
                         var p = Expression.Parameter(typeof(object));
                         var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
 
-                        Expression call = Expression.Call(castO, methodInfo, new Expression[] { castP });
+                        Expression call = Expression.Call(castO, methodInfo, castP);
 
                         var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
 

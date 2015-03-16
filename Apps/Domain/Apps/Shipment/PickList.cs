@@ -132,7 +132,7 @@ namespace Allors.Domain
             //this.AppsDeriveTemplate(derivation);
         }
 
-        public void AppsApplySecurityOnDerive(ObjectApplySecurityOnDerive method)
+        public void AppsOnDerived(ObjectOnDerived method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Allors.Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
