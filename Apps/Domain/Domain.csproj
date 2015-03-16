@@ -1027,6 +1027,7 @@
     <Compile Include="Apps\WorkEffort\Activities.cs" />
     <Compile Include="Apps\WorkEffort\Activity.cs" />
     <Compile Include="Apps\WorkEffort\AssetAssignmentStatuses.cs" />
+    <Compile Include="Apps\WorkEffort\WorkEffortPurposes.cs" />
     <Compile Include="Apps\WorkEffort\Deliverables.cs" />
     <Compile Include="Apps\WorkEffort\DeliverableTurnover.cs" />
     <Compile Include="Apps\WorkEffort\DeliverableTurnovers.cs" />
