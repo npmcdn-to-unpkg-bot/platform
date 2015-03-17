@@ -54,7 +54,14 @@ namespace Allors.Meta
                 // TODO: Add test for deletion
                 if (!method.Object.Strategy.IsDeleted)
                 {
-                    action(method.Object, method);
+                    try
+                    {
+                        action(method.Object, method);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
                 }
             }
         }

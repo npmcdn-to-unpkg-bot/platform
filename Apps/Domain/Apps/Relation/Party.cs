@@ -88,7 +88,7 @@ namespace Allors.Domain
             return null;
         }
 
-        public static void AppsOnBuild(this Party party, IObjectBuilder objectBuilder)
+        public static void AppsOnBuild(this Party party, ObjectOnBuild method)
         {
             if (!party.ExistLocale && Singleton.Instance(party.Strategy.Session).ExistDefaultInternalOrganisation)
             {

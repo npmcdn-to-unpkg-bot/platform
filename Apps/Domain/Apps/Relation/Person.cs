@@ -257,42 +257,6 @@ namespace Allors.Domain
             return false;
         }
 
-        public void AppsOnDerived(ObjectOnDerived method)
-        {
-            this.RemoveSecurityTokens();
-            this.AddSecurityToken(this.OwnerSecurityToken);
-            this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
-
-            foreach (Organisation organisation in this.OrganisationsWhereCurrentContact)
-            {
-                this.AddSecurityToken(organisation.OwnerSecurityToken);
-            }
-
-            if (this.ExistCurrentEmployment)
-            {
-                this.AddSecurityToken(this.CurrentEmployment.Employer.OwnerSecurityToken);
-            }
-
-            if (this.ExistOrganisationContactRelationshipsWhereContact)
-            {
-                foreach (OrganisationContactRelationship organisationContactRelationship in OrganisationContactRelationshipsWhereContact)
-                {
-                    if (organisationContactRelationship.ExistOrganisation)
-                    {
-                        foreach (CustomerRelationship customerRelationship in organisationContactRelationship.Organisation.CustomerRelationshipsWhereCustomer)
-                        {
-                            this.AddSecurityToken(customerRelationship.InternalOrganisation.OwnerSecurityToken);
-                        }
-                    }
-                }
-            }
-
-            foreach (CustomerRelationship customerRelationship in this.CustomerRelationshipsWhereCustomer)
-            {
-                this.AddSecurityToken(customerRelationship.InternalOrganisation.OwnerSecurityToken);
-            }
-        }
-
         public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
@@ -477,6 +441,42 @@ namespace Allors.Domain
             this.DeriveCurrentEmployment(derivation);
 
             this.DeriveCommission();
+        }
+
+        public void AppsOnDerived(ObjectOnDerived method)
+        {
+            this.RemoveSecurityTokens();
+            this.AddSecurityToken(this.OwnerSecurityToken);
+            this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
+
+            foreach (Organisation organisation in this.OrganisationsWhereCurrentContact)
+            {
+                this.AddSecurityToken(organisation.OwnerSecurityToken);
+            }
+
+            if (this.ExistCurrentEmployment)
+            {
+                this.AddSecurityToken(this.CurrentEmployment.Employer.OwnerSecurityToken);
+            }
+
+            if (this.ExistOrganisationContactRelationshipsWhereContact)
+            {
+                foreach (OrganisationContactRelationship organisationContactRelationship in OrganisationContactRelationshipsWhereContact)
+                {
+                    if (organisationContactRelationship.ExistOrganisation)
+                    {
+                        foreach (CustomerRelationship customerRelationship in organisationContactRelationship.Organisation.CustomerRelationshipsWhereCustomer)
+                        {
+                            this.AddSecurityToken(customerRelationship.InternalOrganisation.OwnerSecurityToken);
+                        }
+                    }
+                }
+            }
+
+            foreach (CustomerRelationship customerRelationship in this.CustomerRelationshipsWhereCustomer)
+            {
+                this.AddSecurityToken(customerRelationship.InternalOrganisation.OwnerSecurityToken);
+            }
         }
 
         private void AppsDeriveCommission()
