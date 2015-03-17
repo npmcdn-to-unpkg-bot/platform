@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class TestingRequirement
     {
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistCurrentObjectState)
             {

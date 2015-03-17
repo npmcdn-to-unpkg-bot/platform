@@ -43,7 +43,7 @@ namespace Allors.Domain
             this.PrintContent = "not implemented";
         }
 
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistCurrentObjectState)
             {

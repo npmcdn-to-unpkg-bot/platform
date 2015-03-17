@@ -40,7 +40,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             
 

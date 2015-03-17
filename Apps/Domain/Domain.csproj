@@ -271,14 +271,14 @@
     <Compile Include="..\..\Base\Domain\Base\ObjectBuilder.cs">
       <Link>Base\ObjectBuilder.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\ObjectBuilder`1.cs">
+      <Link>Base\ObjectBuilder`1.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectExtensions.cs">
       <Link>Base\ObjectExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectOnBuild.cs">
       <Link>Base\ObjectOnBuild.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\ObjectOnPostBuild.cs">
-      <Link>Base\ObjectOnPostBuild.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectsBase.cs">
       <Link>Base\ObjectsBase.cs</Link>
@@ -1312,8 +1312,8 @@
     <Compile Include="Generated\Base\NonSerializedInventoryItemStatus.g.cs" />
     <Compile Include="Generated\Base\Note.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
-    <Compile Include="Generated\Base\ObjectApplySecurityOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectDerive.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectOnDerived.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectPrepareDerivation.g.cs" />

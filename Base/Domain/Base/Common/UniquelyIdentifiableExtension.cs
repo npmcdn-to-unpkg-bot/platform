@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public static partial class UniquelyIdentifiableExtension
     {
-        public static void BaseOnPostBuild(this UniquelyIdentifiable @this, ObjectOnPostBuild method)
+        public static void BaseOnBuild(this UniquelyIdentifiable @this, ObjectOnBuild method)
         {
             if (!@this.ExistUniqueId)
             {

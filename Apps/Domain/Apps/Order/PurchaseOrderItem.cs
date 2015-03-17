@@ -134,7 +134,7 @@ namespace Allors.Domain
             this.CurrentObjectState = new PurchaseOrderItemObjectStates(this.Strategy.Session).Finished;
         }
 
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             
 

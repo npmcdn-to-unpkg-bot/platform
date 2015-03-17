@@ -54,7 +54,7 @@ namespace Allors.Domain
             return false;
         }
 
-        public void BaseOnPostBuild(ObjectOnPostBuild method)
+        public void BaseOnBuild(ObjectOnBuild method)
         {
             var builder = method.Builder;
 

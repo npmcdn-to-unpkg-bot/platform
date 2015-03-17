@@ -25,7 +25,7 @@ namespace Allors.Domain
 
     public partial class Employment
     {
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             
 

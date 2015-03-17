@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class SubAssembly
     {
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             this.InventoryItemKind = new InventoryItemKinds(this.Strategy.Session).NonSerialized;
 

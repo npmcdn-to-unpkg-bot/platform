@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class Partnership
     {
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistFromDate)
             {

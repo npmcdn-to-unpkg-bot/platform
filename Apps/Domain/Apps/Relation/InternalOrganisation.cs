@@ -62,7 +62,7 @@ namespace Allors.Domain
             return string.Format(this.PurchaseOrderNumberPrefix, purchaseOrderNumber);
         }
 
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistPurchaseInvoiceCounter)
             {

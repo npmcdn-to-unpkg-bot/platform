@@ -321,7 +321,7 @@ namespace Allors.Domain
             this.DiscountAdjustment.RemoveAmount();
         }
 
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             
             

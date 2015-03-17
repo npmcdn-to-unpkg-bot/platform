@@ -49,7 +49,6 @@
     <Compile Include="Base\Object.cs" />
     <Compile Include="Base\ObjectBuilder`1.cs" />
     <Compile Include="Base\ObjectOnBuild.cs" />
-    <Compile Include="Base\ObjectOnPostBuild.cs" />
     <Compile Include="Base\ObjectExtensions.cs" />
     <Compile Include="Base\Unit\DateTimeFactory.cs" />
     <Compile Include="Generated\Base\AccessControl.g.cs" />
@@ -95,8 +94,8 @@
     <Compile Include="Generated\Base\MediaType.g.cs" />
     <Compile Include="Generated\Base\Meta.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
-    <Compile Include="Generated\Base\ObjectApplySecurityOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectDerive.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectOnDerived.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectPrepareDerivation.g.cs" />

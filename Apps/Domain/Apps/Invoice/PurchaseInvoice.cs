@@ -163,7 +163,7 @@ namespace Allors.Domain
             get { return this.InvoiceDate.ToShortDateString(); }
         }
 
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             
 

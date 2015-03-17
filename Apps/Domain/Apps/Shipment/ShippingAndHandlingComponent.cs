@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class ShippingAndHandlingComponent
     {
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistSpecifiedFor)
             {

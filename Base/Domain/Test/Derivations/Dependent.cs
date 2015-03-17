@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Dependent
     {
-        public void OnPostBuild(ObjectOnPostBuild method)
+        public void OnBuild(ObjectOnBuild method)
         {
             if (!this.ExistCounter)
             {

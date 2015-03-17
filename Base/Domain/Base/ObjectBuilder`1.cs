@@ -80,6 +80,9 @@ namespace Allors
                 var instance = this.session.Create<T>();
                 this.OnBuild(instance);
 
+                this.OnBuild(instance);
+                instance.OnBuild(x => x.WithBuilder(this));
+
                 this.OnPostBuild(instance);
 
                 this.built = true;
@@ -101,7 +104,6 @@ namespace Allors
         
         protected virtual void OnPostBuild(T instance)
         {
-            instance.OnPostBuild(x => x.WithBuilder(this));
         }
     }
 }

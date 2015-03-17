@@ -30,7 +30,7 @@ namespace Allors.Domain
             this.ProductFeature.RemoveFromBasePrices(this);
         }
         
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistSpecifiedFor)
             {

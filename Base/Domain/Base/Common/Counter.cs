@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Counter
     {
-        public void BaseOnPostBuild(ObjectOnPostBuild method)
+        public void BaseOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistValue)
             {

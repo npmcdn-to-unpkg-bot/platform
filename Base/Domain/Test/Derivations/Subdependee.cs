@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Subdependee
     {
-        public void TestsOnPostBuild(ObjectOnPostBuild method)
+        public void TestsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistSubcounter)
             {

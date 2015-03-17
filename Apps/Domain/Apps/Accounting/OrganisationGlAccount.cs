@@ -86,7 +86,7 @@ namespace Allors.Domain
             return false;
         }
 
-        public void AppsOnPostBuild(ObjectOnPostBuild method)
+        public void AppsOnBuild(ObjectOnBuild method)
         {
             this.HasBankStatementTransactions = false;
         }
