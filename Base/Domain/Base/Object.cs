@@ -22,6 +22,5 @@ namespace Allors.Domain
 {
     public partial interface Object
     {
-        void OnBuild(IObjectBuilder objectBuilder);
     }
 }

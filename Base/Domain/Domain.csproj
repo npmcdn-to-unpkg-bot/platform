@@ -47,6 +47,7 @@
     <Compile Include="Base\Common\UniquelyIdentifiableExtension.cs" />
     <Compile Include="Base\IObjectBase.cs" />
     <Compile Include="Base\Object.cs" />
+    <Compile Include="Base\ObjectBuilder`1.cs" />
     <Compile Include="Base\ObjectOnBuild.cs" />
     <Compile Include="Base\ObjectOnPostBuild.cs" />
     <Compile Include="Base\ObjectExtensions.cs" />

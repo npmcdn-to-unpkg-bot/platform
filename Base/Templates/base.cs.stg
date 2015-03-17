@@ -211,13 +211,6 @@ namespace Allors.Domain
 			return ($class.name$) allorsSession.Instantiate(allorsObjectId);		
 		}
 
-		public void OnBuild(IObjectBuilder objectBuilder)
-		{
-			var builder = ($class.name$Builder)objectBuilder;
-$class.UnitRoleTypes:{roleType|$classUnitRoleTypes_Class_OnBuild()$}$
-$class.CompositeRoleTypes:{roleType|$classCompsiteRoleTypes_Class_OnBuild()$}$
-		}
-
 		public override bool Equals(object obj)
         {
             var typedObj = obj as IObject;
@@ -256,6 +249,13 @@ $class.MethodTypes:{methodType|$objectTypeMethodType_Meta()$
 	    {
 	    }
 
+		protected override void OnBuild($class.name$ instance)
+		{
+$class.UnitRoleTypes:{roleType|$classUnitRoleTypes_Class_OnBuild()$}$
+$class.CompositeRoleTypes:{roleType|$classCompsiteRoleTypes_Class_OnBuild()$}$
+		}
+
+
 $class.RoleTypes:{roleType|
 $if(!roleType.RelationType.IsDerived)$
 	$if(roleType.objectType.IsUnit)$
@@ -276,12 +276,12 @@ classUnitRoleTypes_Class_OnBuild() ::= <<
 $if(!roleType.RelationType.IsDerived)$
 $if((roleType.ObjectType.IsString || roleType.ObjectType.IsBinary))$
 			
-			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
+			instance.$roleType.PropertyName$ = this.$roleType.PropertyName$;
 $else$			
 			
-			if(builder.$roleType.PropertyName$.HasValue)
+			if(this.$roleType.PropertyName$.HasValue)
 			{
-				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.Value;
+				instance.$roleType.PropertyName$ = this.$roleType.PropertyName$.Value;
 			}			
 $endif$		
 $endif$		
@@ -291,12 +291,12 @@ classCompsiteRoleTypes_Class_OnBuild() ::= <<
 $if(!roleType.RelationType.IsDerived)$
 $if(roleType.IsOne)$
 
-			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
+			instance.$roleType.PropertyName$ = this.$roleType.PropertyName$;
 		
 $else$
-			if(builder.$roleType.PropertyName$!=null)
+			if(this.$roleType.PropertyName$!=null)
 			{
-				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.ToArray();
+				instance.$roleType.PropertyName$ = this.$roleType.PropertyName$.ToArray();
 			}
 $endif$
 $endif$		
