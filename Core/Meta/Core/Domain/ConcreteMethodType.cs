@@ -78,11 +78,11 @@ namespace Allors.Meta
             interfaces.Sort(
                 (a, b) =>
                 {
-                    // The defined interface is always first
-                    if (methodInterface != null && a.Equals(methodInterface))
-                    {
-                        return -1;
-                    }
+                    //// The defined interface is always first
+                    //if (methodInterface != null && a.Equals(methodInterface))
+                    //{
+                    //    return -1;
+                    //}
 
                     if (a.Supertypes.Contains(b))
                     {
