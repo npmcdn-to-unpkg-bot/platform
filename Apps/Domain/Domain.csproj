@@ -280,6 +280,9 @@
     <Compile Include="..\..\Base\Domain\Base\ObjectOnBuild.cs">
       <Link>Base\ObjectOnBuild.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\ObjectOnPostBuild.cs">
+      <Link>Base\ObjectOnPostBuild.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectsBase.cs">
       <Link>Base\ObjectsBase.cs</Link>
     </Compile>
