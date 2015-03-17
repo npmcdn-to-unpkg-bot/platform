@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public static class PartyExtensions
     {
-        public static NumberFormatInfo AppsPartyGetCurrencyFormat(this Party party)
+        public static NumberFormatInfo AppsGetCurrencyFormat(this Party party)
         {
             var cultureInfo = new CultureInfo(party.Locale.Name, false);
             var currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
@@ -34,7 +34,7 @@ namespace Allors.Domain
             return currencyFormat;
         }
 
-        public static List<SalesOrder> AppsPartyGetPreOrders(this Party party)
+        public static List<SalesOrder> AppsGetPreOrders(this Party party)
         {
             var preOrders = new List<SalesOrder>();
             foreach (SalesOrder salesOrder in party.SalesOrdersWhereBillToCustomer)
@@ -48,7 +48,7 @@ namespace Allors.Domain
             return preOrders;
         }
 
-        public static IEnumerable<CustomerShipment> AppsPartyGetPendingCustomerShipments(this Party party)
+        public static IEnumerable<CustomerShipment> AppsGetPendingCustomerShipments(this Party party)
         {
             var shipments = party.ShipmentsWhereShipToParty;
 
@@ -67,7 +67,7 @@ namespace Allors.Domain
             return pending;
         }
 
-        public static CustomerShipment AppsPartyGetPendingCustomerShipmentForStore(this Party party, PostalAddress address, Store store, ShipmentMethod shipmentMethod)
+        public static CustomerShipment AppsGetPendingCustomerShipmentForStore(this Party party, PostalAddress address, Store store, ShipmentMethod shipmentMethod)
         {
             var shipments = party.ShipmentsWhereShipToParty;
             shipments.Filter.AddEquals(Shipments.Meta.ShipToAddress, address);
@@ -88,7 +88,7 @@ namespace Allors.Domain
             return null;
         }
 
-        public static void AppsPartyOnBuild(this Party party, IObjectBuilder objectBuilder)
+        public static void AppsOnBuild(this Party party, IObjectBuilder objectBuilder)
         {
             if (!party.ExistLocale && Singleton.Instance(party.Strategy.Session).ExistDefaultInternalOrganisation)
             {
@@ -101,14 +101,14 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsPartyDerive(this Party party, IDerivation derivation)
+        public static void AppsDerive(this Party party, IDerivation derivation)
         {
             party.DeriveCurrentSalesReps(derivation);
             party.DeriveOpenOrderAmount();
             party.DeriveRevenue();
         }
 
-        public static void AppsPartyDeriveCurrentSalesReps(this Party party, IDerivation derivation)
+        public static void AppsDeriveCurrentSalesReps(this Party party, IDerivation derivation)
         {
             party.RemoveCurrentSalesReps();
 
@@ -122,7 +122,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsPartyDeriveOpenOrderAmount(this Party party)
+        public static void AppsDeriveOpenOrderAmount(this Party party)
         {
             party.OpenOrderAmount = 0;
             foreach (SalesOrder salesOrder in party.SalesOrdersWhereBillToCustomer)
@@ -135,7 +135,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsPartyDeriveRevenue(this Party party)
+        public static void AppsDeriveRevenue(this Party party)
         {
             party.YTDRevenue = 0;
             party.LastYearsRevenue = 0;

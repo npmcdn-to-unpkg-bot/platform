@@ -61,6 +61,13 @@ namespace Allors.Domain
             builder.WithThroughDate(DateTimeFactory.Create(2011, 12, 31));
             builder.Build();
 
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithDescription("description");
+            builder.Build();
+
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 

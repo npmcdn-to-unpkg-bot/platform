@@ -28,7 +28,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.AppsCommunicationEventGetStart();
+                return this.AppsGetStart();
             }
         }
     }

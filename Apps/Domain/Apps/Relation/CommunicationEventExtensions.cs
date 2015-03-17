@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public static partial class CommunicationEventExtensions
     {
-        public static DateTime? AppsCommunicationEventGetStart(this CommunicationEvent communicationEvent)
+        public static DateTime? AppsGetStart(this CommunicationEvent communicationEvent)
         {
             if (communicationEvent.ExistActualStart)
             {

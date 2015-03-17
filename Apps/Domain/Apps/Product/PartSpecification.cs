@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static partial class PartSpecificationExtensions
     {
-        public static void AppsPartSpecificationDerive(this PartSpecification partSpecification, IDerivation derivation)
+        public static void AppsDerive(this PartSpecification partSpecification, IDerivation derivation)
         {
             if (partSpecification.ExistCurrentObjectState && !partSpecification.CurrentObjectState.Equals(partSpecification.PreviousObjectState))
             {
@@ -37,7 +37,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsPartSpecificationApprove(this PartSpecification partSpecification)
+        public static void AppsApprove(this PartSpecification partSpecification)
         {
             partSpecification.CurrentObjectState = new PartSpecificationObjectStates(partSpecification.Strategy.Session).Approved;
         }

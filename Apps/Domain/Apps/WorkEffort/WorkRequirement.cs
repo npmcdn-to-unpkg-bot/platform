@@ -34,7 +34,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.AppsRequirementDerive(derivation);
+            this.AppsDerive(derivation);
 
             this.PreviousObjectState = this.CurrentObjectState;
         }

@@ -29,7 +29,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.AppsPartyGetCurrencyFormat();
+                return this.AppsGetCurrencyFormat();
             }
         }
 
@@ -37,7 +37,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.AppsPartyGetPreOrders();
+                return this.AppsGetPreOrders();
             }
         }
 
@@ -45,28 +45,28 @@ namespace Allors.Domain
         {
             get
             {
-                return this.AppsPartyGetPendingCustomerShipments();
+                return this.AppsGetPendingCustomerShipments();
             }
         }
 
         public void DeriveCurrentSalesReps(IDerivation derivation)
         {
-            this.AppsPartyDeriveCurrentSalesReps(derivation);
+            this.AppsDeriveCurrentSalesReps(derivation);
         }
 
         public void DeriveOpenOrderAmount()
         {
-            this.AppsPartyDeriveOpenOrderAmount();
+            this.AppsDeriveOpenOrderAmount();
         }
 
         public void DeriveRevenue()
         {
-            this.AppsPartyDeriveRevenue();
+            this.AppsDeriveRevenue();
         }
 
         public CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod)
         {
-            return this.AppsPartyGetPendingCustomerShipmentForStore(address, store, shipmentMethod);
+            return this.AppsGetPendingCustomerShipmentForStore(address, store, shipmentMethod);
         }
 
         public void StartNewFiscalYear()

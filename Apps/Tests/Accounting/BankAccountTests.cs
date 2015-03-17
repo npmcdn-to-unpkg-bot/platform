@@ -84,7 +84,7 @@ namespace Allors.Domain
             builder.WithNameOnAccount("name");
             bankAccount = builder.Build();
 
-            new OwnBankAccountBuilder(this.DatabaseSession).WithBankAccount(bankAccount).Build();
+            new OwnBankAccountBuilder(this.DatabaseSession).WithBankAccount(bankAccount).WithDescription("description").Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }

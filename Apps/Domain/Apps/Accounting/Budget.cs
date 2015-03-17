@@ -37,12 +37,12 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsBudgetClose(this Budget @this, BudgetClose method)
+        public static void AppsClose(this Budget @this, BudgetClose method)
         {
             @this.CurrentObjectState = new BudgetObjectStates(@this.Strategy.Session).Closed;
         }
 
-        public static void AppsBudgetReopen(this Budget @this, BudgetReopen method)
+        public static void AppsReopen(this Budget @this, BudgetReopen method)
         {
             @this.CurrentObjectState = new BudgetObjectStates(@this.Strategy.Session).Opened;
         }

@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void Approve()
         {
-            this.AppsPartSpecificationApprove();
+            this.AppsApprove();
         }
     }
 }

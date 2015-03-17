@@ -344,7 +344,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.AppsPartyDerive(derivation);
+            this.AppsDerive(derivation);
 
             this.BillingAddress = null;
             this.BillingInquiriesFax = null;

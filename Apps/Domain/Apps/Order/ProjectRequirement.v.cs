@@ -24,17 +24,17 @@ namespace Allors.Domain
     {
         public void Cancel()
         {
-            this.AppsRequirementCancel();
+            this.AppsCancel();
         }
 
         public void Hold()
         {
-            this.AppsRequirementHold();
+            this.AppsHold();
         }
 
         public void Close()
         {
-            this.AppsRequirementClose();
+            this.AppsClose();
         }
     }
 }

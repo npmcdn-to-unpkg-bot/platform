@@ -276,10 +276,10 @@ $if(party.ExistShippingAddress)$
     $party.ShippingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Phone number: $party.GeneralPhoneNumber.AreaCode $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Phone number: $party.GeneralPhoneNumber.AreaCode$ $party.GeneralPhoneNumber.ContactNumber$;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax number: $party.GeneralFaxNumber.AreaCode $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax number: $party.GeneralFaxNumber.AreaCode$ $party.GeneralFaxNumber.ContactNumber$;format=""xml-encode""$<br />
 $endif$
 >>
 
@@ -612,10 +612,10 @@ $if(party.ExistShippingAddress)$
     $party.ShippingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Telefoon: $party.GeneralPhoneNumber.AreaCode $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Telefoon: $party.GeneralPhoneNumber.AreaCode$ $party.GeneralPhoneNumber.ContactNumber$;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax: $party.GeneralFaxNumber.AreaCode $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax: $party.GeneralFaxNumber.AreaCode$ $party.GeneralFaxNumber.ContactNumber$;format=""xml-encode""$<br />
 $endif$
 >>
 

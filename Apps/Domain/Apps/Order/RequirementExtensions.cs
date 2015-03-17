@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static class RequirementExtensions
     {
-        public static void AppsRequirementDerive(this Requirement requirement, IDerivation derivation)
+        public static void AppsDerive(this Requirement requirement, IDerivation derivation)
         {
             if (requirement.ExistCurrentObjectState && !requirement.CurrentObjectState.Equals(requirement.PreviousObjectState))
             {
@@ -37,17 +37,17 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsRequirementCancel(this Requirement requirement)
+        public static void AppsCancel(this Requirement requirement)
         {
             requirement.CurrentObjectState = new RequirementObjectStates(requirement.Strategy.Session).Cancelled;
         }
 
-        public static void AppsRequirementClose(this Requirement requirement)
+        public static void AppsClose(this Requirement requirement)
         {
             requirement.CurrentObjectState = new RequirementObjectStates(requirement.Strategy.Session).Closed;
         }
 
-        public static void AppsRequirementHold(this Requirement requirement)
+        public static void AppsHold(this Requirement requirement)
         {
             requirement.CurrentObjectState = new RequirementObjectStates(requirement.Strategy.Session).OnHold;
         }
