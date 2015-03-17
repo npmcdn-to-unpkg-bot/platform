@@ -74,16 +74,15 @@ namespace Allors.Meta
             this.actions = new List<Action<object, object>>();
 
             var interfaces = new List<Interface>(this.Class.Supertypes);
-            var methodInterface = this.methodType.ObjectType as Interface;
+
+            if (interfaces.Contains(null))
+            {
+                throw new Exception(this.Class + " has null in interfaces");
+            }
+
             interfaces.Sort(
                 (a, b) =>
                 {
-                    //// The defined interface is always first
-                    //if (methodInterface != null && a.Equals(methodInterface))
-                    //{
-                    //    return -1;
-                    //}
-
                     if (a.Supertypes.Contains(b))
                     {
                         return 1;
