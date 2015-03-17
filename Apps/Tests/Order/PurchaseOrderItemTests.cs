@@ -25,9 +25,6 @@ namespace Allors.Domain
     using System.Security.Principal;
     using System.Threading;
 
-    
-    
-
     using NUnit.Framework;
 
     [TestFixture]

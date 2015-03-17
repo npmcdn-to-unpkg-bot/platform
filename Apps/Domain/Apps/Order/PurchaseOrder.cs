@@ -595,7 +595,14 @@ namespace Allors.Domain
 
             if (template != null)
             {
-                this.PrintContent = template.Apply(new Dictionary<string, object> { { "this", this } });
+                try
+                {
+                    this.PrintContent = template.Apply(new Dictionary<string, object> { { "this", this } });
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
         }
 
