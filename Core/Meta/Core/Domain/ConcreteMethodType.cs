@@ -74,22 +74,8 @@ namespace Allors.Meta
             this.actions = new List<Action<object, object>>();
 
             var interfaces = new List<Interface>(this.Class.Supertypes);
-
-            if (interfaces.Contains(null))
-            {
-                throw new Exception(this.Class + " has null in interfaces");
-            }
-
-            interfaces.Sort(
-                (a, b) =>
-                {
-                    if (a.Supertypes.Contains(b))
-                    {
-                        return 1;
-                    }
-
-                    return -1;
-                });
+            
+            interfaces.Sort((a, b) => a.Supertypes.Contains(b) ? 1 : string.Compare(a.Name, b.Name, StringComparison.Ordinal));
 
             // Interface
             foreach (var @interface in interfaces)
