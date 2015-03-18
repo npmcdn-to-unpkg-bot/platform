@@ -95,11 +95,11 @@
     <Compile Include="Generated\Base\MediaType.g.cs" />
     <Compile Include="Generated\Base\Meta.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
-    <Compile Include="Generated\Base\ObjectDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectOnBuild.g.cs" />
-    <Compile Include="Generated\Base\ObjectOnDerived.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
-    <Compile Include="Generated\Base\ObjectPrepareDerivation.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnPostDerive.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnPreDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\One.g.cs" />
     <Compile Include="Generated\Base\Organisation.g.cs" />

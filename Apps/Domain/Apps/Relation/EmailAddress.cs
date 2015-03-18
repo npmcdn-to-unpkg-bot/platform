@@ -45,7 +45,7 @@ namespace Allors.Domain
             return isStrictMatch;
         }
 
-        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 

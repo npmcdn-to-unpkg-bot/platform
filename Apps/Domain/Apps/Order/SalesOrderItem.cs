@@ -264,7 +264,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -274,13 +274,13 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
             foreach (SalesOrderItem featureItem in this.OrderedWithFeatures)
             {
-                featureItem.Derive(x=>x.WithDerivation(derivation));
+                featureItem.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistPreviousProduct && !this.PreviousProduct.Equals(this.Product))
@@ -523,7 +523,7 @@ namespace Allors.Domain
                             this.DecreasePendingShipmentQuantity(derivation, 0 - shipmentCorrection);
                         }
 
-                        this.ReservedFromInventoryItem.Derive(x=>x.WithDerivation(derivation));
+                        this.ReservedFromInventoryItem.OnDerive(x => x.WithDerivation(derivation));
                     }
                 }
 
@@ -539,7 +539,7 @@ namespace Allors.Domain
                     this.DecreasePendingShipmentQuantity(derivation, this.QuantityPendingShipment);
                 }
 
-                this.ReservedFromInventoryItem.Derive(x=>x.WithDerivation(derivation));
+                this.ReservedFromInventoryItem.OnDerive(x => x.WithDerivation(derivation));
             }
         }
 
@@ -554,7 +554,7 @@ namespace Allors.Domain
             {
                 if (this.ExistPreviousReservedFromInventoryItem && !this.ReservedFromInventoryItem.Equals(this.PreviousReservedFromInventoryItem))
                 {
-                    this.PreviousReservedFromInventoryItem.Derive(x=>x.WithDerivation(derivation));
+                    this.PreviousReservedFromInventoryItem.OnDerive(x => x.WithDerivation(derivation));
 
                     this.SetQuantitiesWithInventoryFirstTime(derivation);
                 }
@@ -605,7 +605,7 @@ namespace Allors.Domain
                             }
                         }
 
-                        this.ReservedFromInventoryItem.Derive(x=>x.WithDerivation(derivation));
+                        this.ReservedFromInventoryItem.OnDerive(x => x.WithDerivation(derivation));
                     }
 
                     //// When first Confirmed.
@@ -627,7 +627,7 @@ namespace Allors.Domain
                     this.DecreasePendingShipmentQuantity(derivation, this.QuantityPendingShipment);
                 }
 
-                this.ReservedFromInventoryItem.Derive(x=>x.WithDerivation(derivation));
+                this.ReservedFromInventoryItem.OnDerive(x => x.WithDerivation(derivation));
             }
         }
 
@@ -648,7 +648,7 @@ namespace Allors.Domain
             this.QuantityReserved = this.QuantityOrdered;
             this.QuantityShortFalled = this.QuantityOrdered - this.QuantityRequestsShipping;
 
-            this.ReservedFromInventoryItem.Derive(x=>x.WithDerivation(derivation));
+            this.ReservedFromInventoryItem.OnDerive(x => x.WithDerivation(derivation));
         }
 
         private void DecreasePendingShipmentQuantity(IDerivation derivation, decimal diff)

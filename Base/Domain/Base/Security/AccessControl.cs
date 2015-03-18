@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class AccessControl
     {
-        public void BaseDerive(ObjectDerive method)
+        public void BaseDerive(ObjectOnDerive method)
         {
             method.Derivation.Log.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
         }

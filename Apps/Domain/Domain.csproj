@@ -1315,11 +1315,11 @@
     <Compile Include="Generated\Base\NonSerializedInventoryItemStatus.g.cs" />
     <Compile Include="Generated\Base\Note.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
-    <Compile Include="Generated\Base\ObjectDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectOnBuild.g.cs" />
-    <Compile Include="Generated\Base\ObjectOnDerived.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
-    <Compile Include="Generated\Base\ObjectPrepareDerivation.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnPostDerive.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnPreDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\Obligation.g.cs" />
     <Compile Include="Generated\Base\Office.g.cs" />

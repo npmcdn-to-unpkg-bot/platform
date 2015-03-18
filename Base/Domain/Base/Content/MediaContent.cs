@@ -27,7 +27,7 @@ namespace Allors.Domain
     {
         // TODO: Value should be write-once
 
-        public void BaseDerive(ObjectDerive method)
+        public void BaseDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

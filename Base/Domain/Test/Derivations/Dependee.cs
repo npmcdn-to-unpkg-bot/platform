@@ -40,7 +40,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestsPrepareDerivation(ObjectPrepareDerivation method)
+        public void TestsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
             if (this.ExistDependentWhereDependee)
@@ -49,7 +49,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestsDerive(ObjectDerive method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
             this.Counter = this.Counter + 1;
 

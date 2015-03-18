@@ -182,7 +182,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -210,7 +210,7 @@ namespace Allors.Domain
             }                
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -245,7 +245,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        public void AppsOnDerived(ObjectOnDerived method)
+        public void AppsOnDerived(ObjectOnPostDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
@@ -487,7 +487,7 @@ namespace Allors.Domain
 
                 if (pendingPickList != null)
                 {
-                    pendingPickList.Derive(x=>x.WithDerivation(derivation));
+                    pendingPickList.OnDerive(x=>x.WithDerivation(derivation));
                 }
             }
         }

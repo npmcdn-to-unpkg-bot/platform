@@ -26,7 +26,7 @@ namespace Allors.Domain
     /// </summary>
     public partial class Place
     {
-        public void TestsDerive(ObjectDerive method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

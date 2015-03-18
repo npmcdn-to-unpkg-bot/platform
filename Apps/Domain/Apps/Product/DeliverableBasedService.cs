@@ -40,7 +40,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             if (this.ProductCategories.Count == 1 && !this.ExistPrimaryProductCategory)
             {

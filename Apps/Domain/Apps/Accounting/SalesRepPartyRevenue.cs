@@ -29,7 +29,7 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -39,7 +39,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             
@@ -73,7 +73,7 @@ namespace Allors.Domain
             if (this.ExistSalesRep)
             {
                 var salesRepRevenue = SalesRepRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                salesRepRevenue.Derive(x => x.WithDerivation(derivation));
+                salesRepRevenue.OnDerive(x => x.WithDerivation(derivation));
             }
         }
     }

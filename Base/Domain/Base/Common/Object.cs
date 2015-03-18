@@ -30,7 +30,7 @@ namespace Allors.Domain
         private static readonly Dictionary<string, RoleType[]> RequiredRoleTypesByClassName = new Dictionary<string, RoleType[]>();
         private static readonly Dictionary<string, RoleType[]> UniqueRoleTypesByClassName = new Dictionary<string, RoleType[]>(); 
 
-        public static void BasePrepareDerivation(this Object @this, ObjectPrepareDerivation method)
+        public static void BasePrepareDerivation(this Object @this, ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
             var changeSet = derivation.ChangeSet;
@@ -43,7 +43,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void BaseOnDerived(this Object @this, ObjectOnDerived method)
+        public static void BaseOnDerived(this Object @this, ObjectOnPostDerive method)
         {
             var derivation = method.Derivation;
             var @class = (Class)@this.Strategy.ObjectType;
@@ -84,27 +84,33 @@ namespace Allors.Domain
         }
     }
 
-    public abstract partial class ObjectPrepareDerivation
-    {
-        public Derivation Derivation { get; set; }
-    }
-
-    public abstract partial class ObjectDerive
+    public abstract partial class ObjectOnPreDerive
     {
         public IDerivation Derivation { get; set; }
 
-        public ObjectDerive WithDerivation(IDerivation derivation)
+        public ObjectOnPreDerive WithDerivation(IDerivation derivation)
         {
             this.Derivation = derivation;
             return this;
         }
     }
 
-    public abstract partial class ObjectOnDerived
+    public abstract partial class ObjectOnDerive
     {
         public IDerivation Derivation { get; set; }
 
-        public ObjectOnDerived WithDerivation(IDerivation derivation)
+        public ObjectOnDerive WithDerivation(IDerivation derivation)
+        {
+            this.Derivation = derivation;
+            return this;
+        }
+    }
+
+    public abstract partial class ObjectOnPostDerive
+    {
+        public IDerivation Derivation { get; set; }
+
+        public ObjectOnPostDerive WithDerivation(IDerivation derivation)
         {
             this.Derivation = derivation;
             return this;

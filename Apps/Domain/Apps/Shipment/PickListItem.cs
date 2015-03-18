@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class PickListItem
     {
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

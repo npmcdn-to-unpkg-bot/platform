@@ -30,7 +30,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             if (!this.ExistBillToContactMechanism && this.ExistBillToParty)
             {

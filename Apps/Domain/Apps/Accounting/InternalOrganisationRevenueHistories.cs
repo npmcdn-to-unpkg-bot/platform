@@ -92,7 +92,7 @@ namespace Allors.Domain
                     internalOrganisationRevenueHistory.Revenue += internalOrganisationRevenue.Revenue;
                 }
 
-                internalOrganisationRevenueHistory.Derive(x=>x.WithDerivation(derivation));
+                internalOrganisationRevenueHistory.OnDerive(x => x.WithDerivation(derivation));
             }
         }
 

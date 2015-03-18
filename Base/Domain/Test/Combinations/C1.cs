@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class C1
     {
-        public void TestsPrepareDerivation(ObjectPrepareDerivation method)
+        public void TestsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
             foreach (Object dependency in this.Dependencies)
@@ -35,7 +35,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestsDerive(ObjectDerive method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             var sequence = (IList<IObject>)derivation["sequence"];

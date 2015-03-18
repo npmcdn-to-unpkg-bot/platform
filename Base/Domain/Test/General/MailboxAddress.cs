@@ -28,7 +28,7 @@ namespace Allors.Domain
     /// </summary>
     public partial class MailboxAddress
     {
-        public void TestsDerive(ObjectDerive method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

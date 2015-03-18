@@ -257,7 +257,7 @@ namespace Allors.Domain
             return false;
         }
 
-        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -304,7 +304,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -443,7 +443,7 @@ namespace Allors.Domain
             this.DeriveCommission();
         }
 
-        public void AppsOnDerived(ObjectOnDerived method)
+        public void AppsOnDerived(ObjectOnPostDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(this.OwnerSecurityToken);

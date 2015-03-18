@@ -39,7 +39,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -49,7 +49,7 @@ namespace Allors.Domain
             if (this.ExistCustomer && this.ExistSalesRepresentative)
             {
                 this.Customer.DeriveCurrentSalesReps(derivation);
-                this.SalesRepresentative.Derive(x=>x.WithDerivation(derivation));
+                this.SalesRepresentative.OnDerive(x => x.WithDerivation(derivation));
             }
         }
 
@@ -62,7 +62,7 @@ namespace Allors.Domain
                 {
                     foreach (OrganisationContactRelationship contactRelationship in customer.OrganisationContactRelationshipsWhereOrganisation)
                     {
-                        contactRelationship.Contact.OnDerived();
+                        contactRelationship.Contact.OnPostDerive();
 
                         foreach (CustomerRelationship customerRelationship in contactRelationship.Organisation.CustomerRelationshipsWhereCustomer)
                         {

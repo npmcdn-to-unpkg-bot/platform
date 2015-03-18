@@ -76,7 +76,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -250,7 +250,7 @@ namespace Allors.Domain
                     extra -= diff;
 
                     salesOrderItem.DeriveAddToShipping(derivation, diff);
-                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive(x=>x.WithDerivation(derivation));
+                    salesOrderItem.SalesOrderWhereSalesOrderItem.OnDerive(x => x.WithDerivation(derivation));
                 }
             }
         }
@@ -282,7 +282,7 @@ namespace Allors.Domain
                     subtract -= diff;
 
                     salesOrderItem.DeriveSubtractFromShipping(derivation, diff);
-                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive(x=>x.WithDerivation(derivation));
+                    salesOrderItem.SalesOrderWhereSalesOrderItem.OnDerive(x => x.WithDerivation(derivation));
                 }
             }
         }

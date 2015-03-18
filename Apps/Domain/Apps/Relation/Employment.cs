@@ -35,7 +35,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -52,19 +52,19 @@ namespace Allors.Domain
 
             if (this.ExistEmployee)
             {
-                this.Employee.Derive(x => x.WithDerivation(derivation));
+                this.Employee.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistEmployer)
             {
-                this.Employer.Derive(x => x.WithDerivation(derivation));
+                this.Employer.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistEmployee && this.Employee.ExistSalesRepRelationshipsWhereSalesRepresentative)
             {
                 foreach (SalesRepRelationship salesRepRelationship in this.Employee.SalesRepRelationshipsWhereSalesRepresentative)
                 {
-                    salesRepRelationship.Derive(x=>x.WithDerivation(derivation));
+                    salesRepRelationship.OnDerive(x => x.WithDerivation(derivation));
                 }
             }
         }

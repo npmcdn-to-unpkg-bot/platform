@@ -35,7 +35,7 @@ namespace Allors.Domain
             return false;
         }
 
-        protected void BasePrepareDerivation(ObjectDerive method)
+        protected void BasePrepareDerivation(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             
@@ -45,7 +45,7 @@ namespace Allors.Domain
             }
         }
 
-        public void BaseDerive(ObjectDerive method)
+        public void BaseDerive(ObjectOnDerive method)
         {
             if (this.ExistParent)
             {

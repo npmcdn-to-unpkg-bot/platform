@@ -50,7 +50,7 @@ namespace Allors.Domain
             return base.ToString();
         }
 
-        public void TestsDerive(ObjectDerive method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

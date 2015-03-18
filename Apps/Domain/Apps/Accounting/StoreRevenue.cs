@@ -29,7 +29,7 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             
@@ -68,7 +68,7 @@ namespace Allors.Domain
             }
 
             var internalOrganisationRevenue = InternalOrganisationRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-            internalOrganisationRevenue.Derive(x => x.WithDerivation(derivation));
+            internalOrganisationRevenue.OnDerive(x => x.WithDerivation(derivation));
         }
     }
 }

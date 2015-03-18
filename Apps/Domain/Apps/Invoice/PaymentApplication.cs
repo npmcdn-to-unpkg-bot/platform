@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class PaymentApplication
     {
-        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -49,7 +49,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -77,22 +77,22 @@ namespace Allors.Domain
 
             if (salesInvoice != null)
             {
-                salesInvoice.Derive(x => x.WithDerivation(derivation));
+                salesInvoice.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (purchaseInvoice != null)
             {
-                purchaseInvoice.Derive(x => x.WithDerivation(derivation));
+                purchaseInvoice.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (salesInvoiceItem != null)
             {
-                salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.Derive(x => x.WithDerivation(derivation));
+                salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (purchaseInvoiceItem != null)
             {
-                purchaseInvoiceItem.PurchaseInvoiceItemType.Derive(x => x.WithDerivation(derivation));
+                purchaseInvoiceItem.PurchaseInvoiceItemType.OnDerive(x => x.WithDerivation(derivation));
             }
         }
     }

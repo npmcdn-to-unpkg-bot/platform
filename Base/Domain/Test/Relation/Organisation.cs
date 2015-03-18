@@ -25,7 +25,7 @@ namespace Allors.Domain
 
     public partial class Organisation
     {
-        public void TestsDerive(ObjectDerive method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

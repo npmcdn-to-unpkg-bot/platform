@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class MaterialsUsage
     {
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

@@ -32,7 +32,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -49,7 +49,7 @@ namespace Allors.Domain
             ////After deriving this.Organisation
             if (this.ExistContact)
             {
-                this.Contact.Derive(x=>x.WithDerivation(derivation));
+                this.Contact.OnDerive(x => x.WithDerivation(derivation));
             }
         }
 

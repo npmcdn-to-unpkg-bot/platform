@@ -29,7 +29,7 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -85,7 +85,7 @@ namespace Allors.Domain
                                                                 .WithRevenue(0M)
                                                                 .Build();
 
-                    partyProductCategoryRevenue.Derive(x => x.WithDerivation(derivation));
+                    partyProductCategoryRevenue.OnDerive(x => x.WithDerivation(derivation));
                 }
             }
 
@@ -108,19 +108,19 @@ namespace Allors.Domain
             if (this.ExistProductCategory)
             {
                 var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                productCategoryRevenue.Derive(x => x.WithDerivation(derivation));
+                productCategoryRevenue.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistProductCategory)
             {
                 var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                productCategoryRevenue.Derive(x => x.WithDerivation(derivation));
+                productCategoryRevenue.OnDerive(x => x.WithDerivation(derivation));
             }
 
             if (this.ExistProductCategory && this.ProductCategory.ExistPackage)
             {
                 var partyPackageRevenue = PartyPackageRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                partyPackageRevenue.Derive(x => x.WithDerivation(derivation));
+                partyPackageRevenue.OnDerive(x => x.WithDerivation(derivation));
             }
         }
     }

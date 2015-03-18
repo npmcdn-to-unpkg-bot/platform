@@ -66,13 +66,13 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
             derivation.AddDependency(this.Party, this);
         }
 
-        public void AppsDerive(ObjectDerive method)
+        public void AppsDerive(ObjectOnDerive method)
         {
             this.AppsDeriveRevenue();
         }

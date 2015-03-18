@@ -27,7 +27,7 @@ namespace Allors.Domain
     public partial class C2
     {
 
-        public void TestsPrepareDerivation(ObjectPrepareDerivation method)
+        public void TestsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -37,7 +37,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestsDerive(ObjectDerive method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

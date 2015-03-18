@@ -297,7 +297,7 @@ namespace Allors.Domain
                             this.Preparing(derivable);
                         }
 
-                        derivable.PrepareDerivation(x=>x.Derivation = this);
+                        derivable.OnPreDerive(x => x.WithDerivation(this));
 
                         this.preparedObjects.Add(derivable);
                     }
@@ -323,7 +323,7 @@ namespace Allors.Domain
                             this.Preparing(dependencyObject);
                         }
 
-                        dependencyObject.PrepareDerivation(x => x.Derivation = this);
+                        dependencyObject.OnPreDerive(x => x.WithDerivation(this));
                         
                         this.preparedObjects.Add(dependencyObject);
                     }

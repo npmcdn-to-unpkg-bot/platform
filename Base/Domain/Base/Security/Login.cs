@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Login
     {
-        public void BaseDerive(ObjectDerive method)
+        public void BaseDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

@@ -116,7 +116,7 @@ namespace Allors.Domain
                         salesChannelRevenueHistory.Revenue += partyRevenue.Revenue;
                     }
 
-                    salesChannelRevenueHistory.Derive(x => x.WithDerivation(derivation));
+                    salesChannelRevenueHistory.OnDerive(x => x.WithDerivation(derivation));
                 }
             }
         }
