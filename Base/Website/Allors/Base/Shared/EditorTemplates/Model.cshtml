@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-﻿@model dynamic
-
-@foreach (var prop in ViewData.ModelMetadata.Properties
-    .Where(p => p.ShowForEdit))
-{
-    if (prop.TemplateHint == "HiddenInput")
-    {
-        @Html.Hidden(prop.PropertyName)
-    }
-    else
-    {
-        <div class="form-group">
-            @Html.Label(prop.PropertyName, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.Editor(prop.PropertyName)
-                @Html.ValidationMessage(prop.PropertyName)
-            </div>
-        </div>
-    }
-=======
 ﻿@model dynamic
 
 @foreach (var prop in ViewData.ModelMetadata.Properties.Where(p => p.ShowForEdit))
@@ -37,5 +16,4 @@
             </div>
         </div>
     }
->>>>>>> origin/master
 }

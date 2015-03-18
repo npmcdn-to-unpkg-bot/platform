@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Model`1.cs" company="Allors bvba">
+// <copyright file="LabelFilter.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,12 +18,25 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc
+namespace Allors.Web.Mvc.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+
     using Allors.Meta;
 
-    public abstract partial class Model<T> : Model
-          where T : Composite
+    using Humanizer;
+
+    public partial class WatermarkFilter : IModelMetadataFilter 
     {
+        public void Transform(Composite composite, ModelMetadata metadata, IEnumerable<Attribute> attributes)
+        {
+            if (!string.IsNullOrWhiteSpace(metadata.PropertyName) &&
+                string.IsNullOrWhiteSpace(metadata.Watermark))
+            {
+                metadata.Watermark = metadata.PropertyName.Humanize();
+            }
+        }
     }
 }

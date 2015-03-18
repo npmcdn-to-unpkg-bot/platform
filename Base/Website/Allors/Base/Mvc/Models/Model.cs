@@ -20,7 +20,7 @@
 
 namespace Allors.Web.Mvc
 {
-    public abstract partial class Model
+    public abstract partial class Model : IModel
     {
     }
 }
