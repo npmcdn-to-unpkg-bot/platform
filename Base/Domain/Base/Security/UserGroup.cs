@@ -45,7 +45,7 @@ namespace Allors.Domain
             }
         }
 
-        public void BaseDerive(ObjectOnDerive method)
+        public void BaseOnDerive(ObjectOnDerive method)
         {
             if (this.ExistParent)
             {

@@ -30,7 +30,7 @@ namespace Allors.Domain
 
     public partial class StringTemplate
     {
-        public void BaseDerive(ObjectOnDerive method)
+        public void BaseOnDerive(ObjectOnDerive method)
         {
             this.Strategy.Session[this.Id.Key] = null;
         }

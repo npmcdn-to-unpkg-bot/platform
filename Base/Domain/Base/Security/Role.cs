@@ -23,7 +23,7 @@ namespace Allors.Domain
 {
     public partial class Role
     {
-        public void BaseDerive(ObjectOnDerive method)
+        public void BaseOnDerive(ObjectOnDerive method)
         {
             SecurityCache.Invalidate();
         }
