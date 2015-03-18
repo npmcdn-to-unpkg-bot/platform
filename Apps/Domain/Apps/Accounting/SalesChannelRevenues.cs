@@ -48,7 +48,7 @@ namespace Allors.Domain
             return salesChannelRevenue;
         }
 
-        public static void AppsDeriveRevenues(ISession session)
+        public static void AppsOnDeriveRevenues(ISession session)
         {
             var salesChannelRevenuesByPeriodBySalesChannelByInternalOrganisation = new Dictionary<InternalOrganisation, Dictionary<SalesChannel, Dictionary<DateTime, SalesChannelRevenue>>>();
 

@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class PartyProductRevenueHistories
     {
-        public static void AppsDeriveHistory(ISession session)
+        public static void AppsOnDeriveHistory(ISession session)
         {
             var partyProductRevenuesByPeriodByProductByPartyByInternalOrganisation =
                 new Dictionary<InternalOrganisation, Dictionary<Party, Dictionary<Product, Dictionary<DateTime, PartyProductRevenue>>>>();

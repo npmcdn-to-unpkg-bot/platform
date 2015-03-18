@@ -76,17 +76,17 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, NonSerializedInventoryItems.Meta.Good, NonSerializedInventoryItems.Meta.Part);
             derivation.Log.AssertExistsAtMostOne(this, NonSerializedInventoryItems.Meta.Good, NonSerializedInventoryItems.Meta.Part);
 
-            this.AppsDeriveQuantityOnHand(derivation);
-            this.AppsDeriveQuantityCommittedOut(derivation);
-            this.AppsDeriveQuantityExpectedIn(derivation);
-            this.AppsDeriveQuantityAvailableToPromise(derivation);
+            this.AppsOnDeriveQuantityOnHand(derivation);
+            this.AppsOnDeriveQuantityCommittedOut(derivation);
+            this.AppsOnDeriveQuantityExpectedIn(derivation);
+            this.AppsOnDeriveQuantityAvailableToPromise(derivation);
 
             if (this.ExistPreviousQuantityOnHand && this.QuantityOnHand > this.PreviousQuantityOnHand)
             {
@@ -100,9 +100,9 @@ namespace Allors.Domain
             
             this.DeriveCurrentObjectState(derivation);
 
-            this.AppsDeriveSku(derivation);
-            this.AppsDeriveName(derivation);
-            this.AppsDeriveUnitOfMeasure(derivation);
+            this.AppsOnDeriveSku(derivation);
+            this.AppsOnDeriveName(derivation);
+            this.AppsOnDeriveUnitOfMeasure(derivation);
 
             if (this.ExistGood)
             {
@@ -113,7 +113,7 @@ namespace Allors.Domain
             this.PreviousQuantityOnHand = this.QuantityOnHand;
         }
 
-        private void AppsDeriveQuantityOnHand(IDerivation derivation)
+        private void AppsOnDeriveQuantityOnHand(IDerivation derivation)
         {
             this.QuantityOnHand = 0M;
 
@@ -139,7 +139,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveQuantityCommittedOut(IDerivation derivation)
+        private void AppsOnDeriveQuantityCommittedOut(IDerivation derivation)
         {
             this.QuantityCommittedOut = 0M;
 
@@ -160,7 +160,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveQuantityExpectedIn(IDerivation derivation)
+        private void AppsOnDeriveQuantityExpectedIn(IDerivation derivation)
         {
             this.QuantityExpectedIn = 0M;
 
@@ -189,7 +189,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveQuantityAvailableToPromise(IDerivation derivation)
+        private void AppsOnDeriveQuantityAvailableToPromise(IDerivation derivation)
         {
             this.AvailableToPromise = this.QuantityOnHand - this.QuantityCommittedOut;
 
@@ -199,7 +199,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCurrentObjectState(IDerivation derivation)
+        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             
 
@@ -215,7 +215,7 @@ namespace Allors.Domain
                 this.CurrentObjectState.Process(this);
             }
 
-            this.AppsDeriveProductCategories(derivation);
+            this.AppsOnDeriveProductCategories(derivation);
         }
 
         private void AppsReplenishSalesOrders(IDerivation derivation)
@@ -287,7 +287,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveProductCategories(IDerivation derivation)
+        private void AppsOnDeriveProductCategories(IDerivation derivation)
         {
             this.RemoveDerivedProductCategories();
 
@@ -313,12 +313,12 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveSku(IDerivation derivation)
+        private void AppsOnDeriveSku(IDerivation derivation)
         {
             this.Sku = this.ExistGood ? this.Good.Sku : string.Empty;
         }
 
-        private void AppsDeriveName(IDerivation derivation)
+        private void AppsOnDeriveName(IDerivation derivation)
         {
             if (this.ExistGood)
             {
@@ -331,7 +331,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveUnitOfMeasure(IDerivation derivation)
+        private void AppsOnDeriveUnitOfMeasure(IDerivation derivation)
         {
             if (this.ExistGood)
             {

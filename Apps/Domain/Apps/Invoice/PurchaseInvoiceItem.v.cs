@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void DerivePrices()
         {
-            this.AppsDerivePrices();
+            this.AppsOnDerivePrices();
         }
     }
 }

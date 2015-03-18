@@ -29,12 +29,12 @@ namespace Allors.Domain
 
         public void DeriveMembership()
         {
-            this.AppsDeriveMembership();
+            this.AppsOnDeriveMembership();
         }
 
         public void DeriveCommission()
         {
-            this.AppsDeriveCommission();
+            this.AppsOnDeriveCommission();
         }
     }
 }

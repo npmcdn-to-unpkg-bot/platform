@@ -48,7 +48,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             this.DeriveCurrentObjectState();
 

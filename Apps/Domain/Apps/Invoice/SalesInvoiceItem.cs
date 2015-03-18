@@ -254,7 +254,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -272,11 +272,11 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            this.AppsDeriveAmountPaid(derivation);
+            this.AppsOnDeriveAmountPaid(derivation);
 
             derivation.Log.AssertAtLeastOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntries);
             derivation.Log.AssertExistsAtMostOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntries);
@@ -330,7 +330,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCurrentPaymentStatus(IDerivation derivation)
+        private void AppsOnDeriveCurrentPaymentStatus(IDerivation derivation)
         {
             if (!this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).Cancelled) &&
                 !this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).WrittenOff))
@@ -355,7 +355,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCurrentObjectState(IDerivation derivation)
+        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             if (this.ExistSalesInvoiceWhereSalesInvoiceItem)
             {
@@ -386,7 +386,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveAmountPaid(IDerivation derivation)
+        private void AppsOnDeriveAmountPaid(IDerivation derivation)
         {
             this.AmountPaid = 0;
             foreach (PaymentApplication paymentApplication in this.PaymentApplicationsWhereInvoiceItem)
@@ -395,14 +395,14 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveVatRegime(IDerivation derivation)
+        private void AppsOnDeriveVatRegime(IDerivation derivation)
         {
             this.VatRegime = this.ExistAssignedVatRegime ? this.AssignedVatRegime : this.SalesInvoiceWhereSalesInvoiceItem.VatRegime;
             
             this.DeriveVatRate(derivation);
         }
 
-        private void AppsDeriveVatRate(IDerivation derivation)
+        private void AppsOnDeriveVatRate(IDerivation derivation)
         {
             if (this.ExistProduct || this.ExistProductFeature)
             {
@@ -415,7 +415,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDerivePrices(IDerivation derivation, decimal quantityInvoiced, decimal totalBasePrice)
+        private void AppsOnDerivePrices(IDerivation derivation, decimal quantityInvoiced, decimal totalBasePrice)
         {
             this.UnitBasePrice = 0;
             this.UnitDiscount = 0;
@@ -739,7 +739,7 @@ namespace Allors.Domain
             return priceComponents;
         }
 
-        private void AppsDeriveMarkupAndProfitMargin(IDerivation derivation)
+        private void AppsOnDeriveMarkupAndProfitMargin(IDerivation derivation)
         {
             this.UnitPurchasePrice = 0;
             this.InitialMarkupPercentage = 0;
@@ -798,7 +798,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveSalesRep(IDerivation derivation)
+        private void AppsOnDeriveSalesRep(IDerivation derivation)
         {
             if (this.SalesOrderItem != null)
             {

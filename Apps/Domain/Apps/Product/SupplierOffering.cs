@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class SupplierOffering
     {
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -32,7 +32,7 @@ namespace Allors.Domain
             this.DeriveInventoryItem(derivation);
         }
 
-        private void AppsDeriveInventoryItem(IDerivation derivation)
+        private void AppsOnDeriveInventoryItem(IDerivation derivation)
         {
             Good good = null;
             if (this.ExistProduct)

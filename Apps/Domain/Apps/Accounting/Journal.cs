@@ -44,7 +44,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -52,7 +52,7 @@ namespace Allors.Domain
             this.DerivePreviousJournalType(derivation);
         }
 
-        private void AppsDeriveContraAccount(IDerivation derivation)
+        private void AppsOnDeriveContraAccount(IDerivation derivation)
         {
             if (this.ExistPreviousContraAccount)
             {
@@ -95,7 +95,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDerivePreviousJournalType(IDerivation derivation)
+        private void AppsOnDerivePreviousJournalType(IDerivation derivation)
         {
             if (this.ExistPreviousJournalType)
             {

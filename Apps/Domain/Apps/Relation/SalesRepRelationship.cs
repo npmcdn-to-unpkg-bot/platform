@@ -39,7 +39,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -73,7 +73,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveMembership()
+        private void AppsOnDeriveMembership()
         {
             var usergroups = this.InternalOrganisation.UserGroupsWhereParty;
             usergroups.Filter.AddEquals(UserGroups.Meta.Parent, new Roles(this.Strategy.Session).Sales.UserGroupWhereRole);
@@ -106,7 +106,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCommission()
+        private void AppsOnDeriveCommission()
         {
             this.YTDCommission = 0;
             this.LastYearsCommission = 0;

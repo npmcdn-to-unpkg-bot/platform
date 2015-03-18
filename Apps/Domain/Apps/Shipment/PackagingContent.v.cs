@@ -26,7 +26,7 @@ namespace Allors.Domain
     {
         //public void DeriveShipmentItemPackedState(IDerivation derivation)
         //{
-        //    this.AppsDeriveShipmentItemPackedState(derivation);
+        //    this.AppsOnDeriveShipmentItemPackedState(derivation);
         //}
     }
 }

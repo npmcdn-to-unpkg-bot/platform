@@ -29,14 +29,14 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            this.AppsDeriveRevenue(derivation);
+            this.AppsOnDeriveRevenue(derivation);
         }
 
-        private void AppsDeriveRevenue(IDerivation derivation)
+        private void AppsOnDeriveRevenue(IDerivation derivation)
         {
             this.Revenue = 0;
 
@@ -67,7 +67,7 @@ namespace Allors.Domain
                                                      .WithRevenue(0)
                                                      .Build();
 
-                history.AppsDeriveHistory();
+                history.AppsOnDeriveHistory();
             }
 
             if (this.ExistPackage)

@@ -24,37 +24,37 @@ namespace Allors.Domain
     {
         public void DeriveCurrentObjectState(IDerivation derivation)
         {
-            this.AppsDeriveCurrentObjectState(derivation);
+            this.AppsOnDeriveCurrentObjectState(derivation);
         }
 
         public void DeriveCurrentOrderStatus(IDerivation derivation)
         {
-            this.AppsDeriveCurrentOrderStatus(derivation);
+            this.AppsOnDeriveCurrentOrderStatus(derivation);
         }
 
         public void DeriveQuantities(IDerivation derivation)
         {
-            this.AppsDeriveQuantities(derivation);
+            this.AppsOnDeriveQuantities(derivation);
         }
 
         public void DerivePrices()
         {
-            this.AppsDerivePrices();
+            this.AppsOnDerivePrices();
         }
 
         public void DeriveIsValidOrderItem(IDerivation derivation)
         {
-            this.AppsDeriveIsValidOrderItem(derivation);
+            this.AppsOnDeriveIsValidOrderItem(derivation);
         }
 
         public void DeriveDeliveryDate(IDerivation derivation)
         {
-            this.AppsDeriveDeliveryDate(derivation);
+            this.AppsOnDeriveDeliveryDate(derivation);
         }
 
         public void DeriveCurrentShipmentStatus(IDerivation derivation)
         {
-            this.AppsDeriveCurrentShipmentStatus(derivation);
+            this.AppsOnDeriveCurrentShipmentStatus(derivation);
         }
     }
 }

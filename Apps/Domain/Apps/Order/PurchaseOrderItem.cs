@@ -144,7 +144,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -158,7 +158,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             
@@ -170,7 +170,7 @@ namespace Allors.Domain
             this.DeriveCurrentObjectState(derivation);
         }
 
-        private void AppsDeriveIsValidOrderItem(IDerivation derivation)
+        private void AppsOnDeriveIsValidOrderItem(IDerivation derivation)
         {
             if (this.ExistPurchaseOrderWherePurchaseOrderItem)
             {
@@ -184,7 +184,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCurrentObjectState(IDerivation derivation)
+        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             if (this.ExistOrderWhereValidOrderItem)
             {
@@ -241,7 +241,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCurrentOrderStatus(IDerivation derivation)
+        private void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
         {
             if (this.ExistCurrentShipmentStatus && this.CurrentShipmentStatus.PurchaseOrderItemObjectState.Equals(new PurchaseOrderItemObjectStates(this.Strategy.Session).PartiallyReceived))
             {
@@ -256,7 +256,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveDeliveryDate(IDerivation derivation)
+        private void AppsOnDeriveDeliveryDate(IDerivation derivation)
         {
             if (this.AssignedDeliveryDate.HasValue)
             {
@@ -268,7 +268,7 @@ namespace Allors.Domain
             }            
         }
 
-        private void AppsDerivePrices()
+        private void AppsOnDerivePrices()
         {
             this.UnitBasePrice = 0;
             this.UnitDiscount = 0;
@@ -296,7 +296,7 @@ namespace Allors.Domain
             this.TotalIncVat = this.TotalExVat + this.TotalVat;
         }
 
-        private void AppsDeriveCurrentShipmentStatus(IDerivation derivation)
+        private void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
         {
             var quantityReceived = 0M;
             foreach (ShipmentReceipt shipmentReceipt in this.ShipmentReceiptsWhereOrderItem)
@@ -332,7 +332,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveQuantities(IDerivation derivation)
+        private void AppsOnDeriveQuantities(IDerivation derivation)
         {
             NonSerializedInventoryItem inventoryItem = null;
 

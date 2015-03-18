@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class TimeEntry
     {
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 

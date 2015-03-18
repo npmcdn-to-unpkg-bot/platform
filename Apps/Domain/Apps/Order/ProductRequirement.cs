@@ -46,11 +46,11 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            this.AppsDerive(derivation);
+            this.AppsOnDerive(derivation);
            
             this.PreviousObjectState = this.CurrentObjectState;
         }

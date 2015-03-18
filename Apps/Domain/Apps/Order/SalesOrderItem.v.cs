@@ -34,77 +34,77 @@ namespace Allors.Domain
 
         public void DerivePrices(IDerivation derivation, decimal quantityOrdered = 0, decimal totalBasePrice = 0)
         {
-            this.AppsDerivePrices(derivation, quantityOrdered, totalBasePrice);
+            this.AppsOnDerivePrices(derivation, quantityOrdered, totalBasePrice);
         }
 
         public void DeriveShipTo(IDerivation derivation)
         {
-            this.AppsDeriveShipTo(derivation);
+            this.AppsOnDeriveShipTo(derivation);
         }
 
         public void DeriveDeliveryDate(IDerivation derivation)
         {
-            this.AppsDeriveDeliveryDate(derivation);
+            this.AppsOnDeriveDeliveryDate(derivation);
         }
 
         public void DeriveReservedFromInventoryItem(IDerivation derivation)
         {
-            this.AppsDeriveReservedFromInventoryItem(derivation);
+            this.AppsOnDeriveReservedFromInventoryItem(derivation);
         }
 
         public void DeriveQuantities(IDerivation derivation)
         {
-            this.AppsDeriveQuantities(derivation);
+            this.AppsOnDeriveQuantities(derivation);
         }
 
         public void DeriveCurrentObjectState(IDerivation derivation)
         {
-            this.AppsDeriveCurrentObjectState(derivation);
+            this.AppsOnDeriveCurrentObjectState(derivation);
         }
 
         public void DeriveCurrentOrderStatus(IDerivation derivation)
         {
-            this.AppsDeriveCurrentOrderStatus(derivation);
+            this.AppsOnDeriveCurrentOrderStatus(derivation);
         }
 
         public void DeriveCurrentShipmentStatus(IDerivation derivation)
         {
-            this.AppsDeriveCurrentShipmentStatus(derivation);
+            this.AppsOnDeriveCurrentShipmentStatus(derivation);
         }
 
         public void DeriveMarkupAndProfitMargin(IDerivation derivation)
         {
-            this.AppsDeriveMarkupAndProfitMargin(derivation);
+            this.AppsOnDeriveMarkupAndProfitMargin(derivation);
         }
 
         public void DeriveOnShip(IDerivation derivation)
         {
-            this.AppsDeriveOnShip(derivation);
+            this.AppsOnDeriveOnShip(derivation);
         }
 
         public void DeriveOnShipped(IDerivation derivation, decimal quantity)
         {
-            this.AppsDeriveOnShipped(derivation, quantity);
+            this.AppsOnDeriveOnShipped(derivation, quantity);
         }
 
         public void DeriveOnPicked(IDerivation derivation, decimal quantity)
         {
-            this.AppsDeriveOnPicked(derivation, quantity);
+            this.AppsOnDeriveOnPicked(derivation, quantity);
         }
 
         public void DeriveAddToShipping(IDerivation derivation, decimal quantity)
         {
-            this.AppsDeriveAddToShipping(derivation, quantity);
+            this.AppsOnDeriveAddToShipping(derivation, quantity);
         }
 
         public void DeriveSubtractFromShipping(IDerivation derivation, decimal quantity)
         {
-            this.AppsDeriveSubtractFromShipping(derivation, quantity);
+            this.AppsOnDeriveSubtractFromShipping(derivation, quantity);
         }
 
         public void DeriveSalesRep(IDerivation derivation)
         {
-            this.AppsDeriveSalesRep(derivation);
+            this.AppsOnDeriveSalesRep(derivation);
         }
 
         public void ShipManually(decimal quantity)
@@ -114,22 +114,22 @@ namespace Allors.Domain
 
         public void DeriveIsValidOrderItem(IDerivation derivation)
         {
-            this.AppsDeriveIsValidOrderItem(derivation);
+            this.AppsOnDeriveIsValidOrderItem(derivation);
         }
 
         public void DeriveVatRate(IDerivation derivation)
         {
-            this.AppsDeriveVatRate(derivation);
+            this.AppsOnDeriveVatRate(derivation);
         }
 
         public void DeriveVatRegime(IDerivation derivation)
         {
-            this.AppsDeriveVatRegime(derivation);
+            this.AppsOnDeriveVatRegime(derivation);
         }
 
         public void DeriveCurrentPaymentStatus(IDerivation derivation)
         {
-            this.AppsDeriveCurrentPaymentStatus(derivation);
+            this.AppsOnDeriveCurrentPaymentStatus(derivation);
         }
     }
 }

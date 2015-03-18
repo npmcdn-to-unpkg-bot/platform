@@ -26,7 +26,7 @@ namespace Allors.Domain
     {
         public static void DeriveRevenues(ISession session)
         {
-            AppsDeriveRevenues(session);
+            AppsOnDeriveRevenues(session);
         }
     }
 }

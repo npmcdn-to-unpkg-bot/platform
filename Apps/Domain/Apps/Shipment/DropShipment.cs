@@ -51,7 +51,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -71,7 +71,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        private void AppsDeriveCurrentObjectState(IDerivation derivation)
+        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             
 

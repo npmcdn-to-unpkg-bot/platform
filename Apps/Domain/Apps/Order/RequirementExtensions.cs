@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static class RequirementExtensions
     {
-        public static void AppsDerive(this Requirement requirement, IDerivation derivation)
+        public static void AppsOnDerive(this Requirement requirement, IDerivation derivation)
         {
             if (requirement.ExistCurrentObjectState && !requirement.CurrentObjectState.Equals(requirement.PreviousObjectState))
             {

@@ -42,7 +42,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             if (this.ProductCategories.Count == 1 && !this.ExistPrimaryProductCategory)
             {
@@ -58,7 +58,7 @@ namespace Allors.Domain
             this.DeriveProductCategoryExpanded();
         }
 
-        private void AppsDeriveVirtualProductPriceComponent()
+        private void AppsOnDeriveVirtualProductPriceComponent()
         {
             if (!this.ExistProductWhereVariant)
             {
@@ -87,7 +87,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveProductCategoryExpanded()
+        private void AppsOnDeriveProductCategoryExpanded()
         {
             this.RemoveProductCategoriesExpanded();
 

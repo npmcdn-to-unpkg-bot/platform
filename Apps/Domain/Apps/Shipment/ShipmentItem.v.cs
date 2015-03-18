@@ -24,12 +24,12 @@ namespace Allors.Domain
     {
         public void DeriveCustomerShipmentItem(IDerivation derivation)
         {
-            this.AppsDeriveCustomerShipmentItem(derivation);
+            this.AppsOnDeriveCustomerShipmentItem(derivation);
         }
 
         public void DerivePurchaseShipmentItem(IDerivation derivation)
         {
-            this.AppsDerivePurchaseShipmentItem(derivation);
+            this.AppsOnDerivePurchaseShipmentItem(derivation);
         }
     }
 }

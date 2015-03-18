@@ -29,42 +29,42 @@ namespace Allors.Domain
 
         public void DeriveLocale(IDerivation derivation)
         {
-            this.AppsDeriveLocale(derivation);
+            this.AppsOnDeriveLocale(derivation);
         }
 
         public void DeriveInvoiceTotals(IDerivation derivation)
         {
-            this.AppsDeriveInvoiceTotals(derivation);
+            this.AppsOnDeriveInvoiceTotals(derivation);
         }
 
         public void DeriveTemplate(IDerivation derivation)
         {
-            this.AppsDeriveTemplate(derivation);
+            this.AppsOnDeriveTemplate(derivation);
         }
 
         public void DeriveSalesOrderPaymentStatus(IDerivation derivation)
         {
-            this.AppsDeriveSalesOrderPaymentStatus(derivation);
+            this.AppsOnDeriveSalesOrderPaymentStatus(derivation);
         }
 
         public void DeriveCustomers(IDerivation derivation)
         {
-            this.AppsDeriveCustomers(derivation);
+            this.AppsOnDeriveCustomers(derivation);
         }
 
         public void DeriveMarkupAndProfitMargin(IDerivation derivation)
         {
-            this.AppsDeriveMarkupAndProfitMargin(derivation);
+            this.AppsOnDeriveMarkupAndProfitMargin(derivation);
         }
 
         public void DeriveSalesReps(IDerivation derivation)
         {
-            this.AppsDeriveSalesReps(derivation);
+            this.AppsOnDeriveSalesReps(derivation);
         }
 
         public void DeriveInvoiceItems(IDerivation derivation)
         {
-            this.AppsDeriveInvoiceItems(derivation);
+            this.AppsOnDeriveInvoiceItems(derivation);
         }
     }
 }

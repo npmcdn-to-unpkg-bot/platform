@@ -24,12 +24,12 @@ namespace Allors.Domain
     {
         public void DeriveContraAccount(IDerivation derivation)
         {
-            this.AppsDeriveContraAccount(derivation);
+            this.AppsOnDeriveContraAccount(derivation);
         }
 
         public void DerivePreviousJournalType(IDerivation derivation)
         {
-            this.AppsDerivePreviousJournalType(derivation);
+            this.AppsOnDerivePreviousJournalType(derivation);
         }
     }
 }

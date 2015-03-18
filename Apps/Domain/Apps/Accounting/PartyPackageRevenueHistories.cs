@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class PartyPackageRevenueHistories
     {
-        public static void AppsDeriveHistory(ISession session)
+        public static void AppsOnDeriveHistory(ISession session)
         {
             var partyPackageRevenuesByPeriodByPackageByPartyByInternalOrganisation =
                 new Dictionary<InternalOrganisation, Dictionary<Party, Dictionary<Package, Dictionary<DateTime, PartyPackageRevenue>>>>();
@@ -139,7 +139,7 @@ namespace Allors.Domain
                             partyPackageRevenueHistory.Revenue += partyPackageRevenue.Revenue;
                         }
 
-                        partyPackageRevenueHistory.AppsDeriveHistory();
+                        partyPackageRevenueHistory.AppsOnDeriveHistory();
                     }
                 }
             }

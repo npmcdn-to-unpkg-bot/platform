@@ -32,7 +32,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var stringBuilder = new StringBuilder();
             if (this.ExistFromDate)

@@ -58,7 +58,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -69,7 +69,7 @@ namespace Allors.Domain
 
             foreach (ProductCategory productCategory in this.ProductCategoriesWhereAncestor)
             {
-                productCategory.AppsDeriveAncestors(derivation);
+                productCategory.AppsOnDeriveAncestors(derivation);
             }
 
             foreach (Product product in this.ProductsWhereProductCategoryExpanded)
@@ -77,11 +77,11 @@ namespace Allors.Domain
                 product.DeriveProductCategoryExpanded();
             }
 
-            this.AppsDeriveAncestors(derivation);
-            this.AppsDeriveChildren(derivation);
+            this.AppsOnDeriveAncestors(derivation);
+            this.AppsOnDeriveChildren(derivation);
         }
 
-        private void AppsDeriveAncestors(IDerivation derivation)
+        private void AppsOnDeriveAncestors(IDerivation derivation)
         {
             this.RemoveAncestors();
 
@@ -92,11 +92,11 @@ namespace Allors.Domain
 
             foreach (ProductCategory productCategory in this.ProductCategoriesWhereAncestor)
             {
-                productCategory.AppsDeriveAncestors(derivation);
+                productCategory.AppsOnDeriveAncestors(derivation);
             }
         }
 
-        private void AppsDeriveChildren(IDerivation derivation)
+        private void AppsOnDeriveChildren(IDerivation derivation)
         {
             this.RemoveChildren();
 
@@ -107,7 +107,7 @@ namespace Allors.Domain
 
             foreach (ProductCategory parent in this.Parents)
             {
-                parent.AppsDeriveChildren(derivation);
+                parent.AppsOnDeriveChildren(derivation);
             }
         }
     }

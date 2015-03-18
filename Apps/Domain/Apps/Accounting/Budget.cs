@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static partial class BudgetExtensions
     {
-        public static void AppsDerive(this Budget @this, ObjectOnDerive method)
+        public static void AppsOnDerive(this Budget @this, ObjectOnDerive method)
         {
             if (@this.ExistCurrentObjectState && !@this.CurrentObjectState.Equals(@this.PreviousObjectState))
             {

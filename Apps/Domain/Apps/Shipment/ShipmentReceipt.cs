@@ -44,7 +44,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -69,10 +69,10 @@ namespace Allors.Domain
                 }
             }
 
-            this.AppsDeriveInventoryItem(derivation);
+            this.AppsOnDeriveInventoryItem(derivation);
         }
 
-        private void AppsDeriveInventoryItem(IDerivation derivation)
+        private void AppsOnDeriveInventoryItem(IDerivation derivation)
         {
             if (this.ExistShipmentItem && this.ShipmentItem.ExistOrderShipmentsWhereShipmentItem)
             {

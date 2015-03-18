@@ -268,7 +268,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -300,7 +300,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -328,7 +328,7 @@ namespace Allors.Domain
             this.DeriveInvoiceTotals();
         }
 
-        private void AppsDeriveInvoiceTotals()
+        private void AppsOnDeriveInvoiceTotals()
         {
             if (this.ExistPurchaseInvoiceItems)
             {
@@ -366,7 +366,7 @@ namespace Allors.Domain
             this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).Cancelled;
         }
 
-        private void AppsDeriveInvoiceItems(IDerivation derivation)
+        private void AppsOnDeriveInvoiceItems(IDerivation derivation)
         {
             foreach (PurchaseInvoiceItem purchaseInvoiceItem in this.PurchaseInvoiceItems)
             {

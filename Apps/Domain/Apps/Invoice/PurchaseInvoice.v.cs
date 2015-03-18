@@ -39,12 +39,12 @@ namespace Allors.Domain
 
         public void DeriveInvoiceTotals()
         {
-            this.AppsDeriveInvoiceTotals();
+            this.AppsOnDeriveInvoiceTotals();
         }
 
         public void DeriveInvoiceItems(IDerivation derivation)
         {
-            this.AppsDeriveInvoiceItems(derivation);
+            this.AppsOnDeriveInvoiceItems(derivation);
         }
     }
 }

@@ -24,13 +24,13 @@ namespace Allors.Domain
     {
         public void DeriveRevenues()
         {
-            this.AppsDeriveRevenues();
+            this.AppsOnDeriveRevenues();
             this.DeriveHistories();
         }
 
         public void DeriveHistories()
         {
-            this.AppsDeriveHistories();
+            this.AppsOnDeriveHistories();
         }
     }
 }

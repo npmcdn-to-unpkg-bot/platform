@@ -44,7 +44,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -59,7 +59,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -84,7 +84,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveInternalOrganisationSupplier(IDerivation derivation)
+        private void AppsOnDeriveInternalOrganisationSupplier(IDerivation derivation)
         {
             if (this.ExistSupplier && this.ExistInternalOrganisation)
             {
@@ -106,7 +106,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveMembership(IDerivation derivation)
+        private void AppsOnDeriveMembership(IDerivation derivation)
         {
             if (this.ExistSupplier && this.ExistInternalOrganisation)
             {

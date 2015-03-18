@@ -60,7 +60,7 @@ namespace Allors.Domain
             return partyRevenue;
         }
 
-        public static void AppsDeriveRevenues(ISession session)
+        public static void AppsOnDeriveRevenues(ISession session)
         {
             var partyRevenuesByPeriodByPartyByInternalOrganisation = new Dictionary<InternalOrganisation, Dictionary<Party, Dictionary<DateTime, PartyRevenue>>>();
 

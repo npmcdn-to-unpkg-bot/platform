@@ -41,7 +41,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -52,7 +52,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -61,7 +61,7 @@ namespace Allors.Domain
             this.DerivePurchaseShipmentItem(derivation);
         }
 
-        private void AppsDerivePurchaseShipmentItem(IDerivation derivation)
+        private void AppsOnDerivePurchaseShipmentItem(IDerivation derivation)
         {
             if (this.ShipmentWhereShipmentItem is PurchaseShipment)
             {
@@ -71,7 +71,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCustomerShipmentItem(IDerivation derivation)
+        private void AppsOnDeriveCustomerShipmentItem(IDerivation derivation)
         {
             if (this.ShipmentWhereShipmentItem is CustomerShipment)
             {

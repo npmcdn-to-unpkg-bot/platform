@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class CreditCard
     {
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 

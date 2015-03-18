@@ -32,15 +32,15 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            this.AppsDeriveMembership();
-            this.AppsDerivePartnerContacts(derivation);
+            this.AppsOnDeriveMembership();
+            this.AppsOnDerivePartnerContacts(derivation);
         }
 
-        private void AppsDerivePartnerContacts(IDerivation derivation)
+        private void AppsOnDerivePartnerContacts(IDerivation derivation)
         {
             if (this.ExistPartner)
             {
@@ -52,7 +52,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveMembership()
+        private void AppsOnDeriveMembership()
         {
             if (this.ExistPartner && this.ExistInternalOrganisation)
             {

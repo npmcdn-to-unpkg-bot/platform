@@ -34,22 +34,22 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             this.PreviousObjectState = this.CurrentObjectState;
 
-            this.AppsDeriveFromParties();
-            this.AppsDeriveToParties();
-            this.AppsDeriveInvolvedParties();
+            this.AppsOnDeriveFromParties();
+            this.AppsOnDeriveToParties();
+            this.AppsOnDeriveInvolvedParties();
         }
 
-        private void AppsDeriveFromParties()
+        private void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
             this.AddFromParty(this.Originator.PartyWherePersonalEmailAddress);
         }
 
-        private void AppsDeriveToParties()
+        private void AppsOnDeriveToParties()
         {
             this.RemoveToParties();
 
@@ -85,7 +85,7 @@ namespace Allors.Domain
 
         }
 
-        private void AppsDeriveInvolvedParties()
+        private void AppsOnDeriveInvolvedParties()
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);

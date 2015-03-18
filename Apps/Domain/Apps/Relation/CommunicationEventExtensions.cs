@@ -39,7 +39,7 @@ namespace Allors.Domain
             return null;
         }
         
-        public static void AppsDerive(this CommunicationEvent @this, ObjectOnDerive method)
+        public static void AppsOnDerive(this CommunicationEvent @this, ObjectOnDerive method)
         {
             if (!@this.ExistOwner)
             {

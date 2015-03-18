@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class PickListItem
     {
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -35,10 +35,10 @@ namespace Allors.Domain
                 derivation.Log.AddError(this, PickListItems.Meta.ActualQuantity, ErrorMessages.PickListItemQuantityMoreThanAllowed);
             }
 
-            this.AppsDeriveOrderItemAdjustment(derivation);
+            this.AppsOnDeriveOrderItemAdjustment(derivation);
         }
 
-        private void AppsDeriveOrderItemAdjustment(IDerivation derivation)
+        private void AppsOnDeriveOrderItemAdjustment(IDerivation derivation)
         {
             if (this.ActualQuantity.HasValue && this.ExistPickListWherePickListItem && this.PickListWherePickListItem.CurrentObjectState.UniqueId.Equals(PickListObjectStates.PickedId))
             {

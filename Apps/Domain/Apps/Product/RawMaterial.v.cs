@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void DeriveInventoryItem(IDerivation derivation)
         {
-            this.AppsDeriveInventoryItem(derivation);
+            this.AppsOnDeriveInventoryItem(derivation);
         }
     }
 }

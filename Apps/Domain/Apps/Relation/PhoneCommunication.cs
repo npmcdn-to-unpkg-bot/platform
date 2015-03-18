@@ -39,18 +39,18 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             
             this.PreviousObjectState = this.CurrentObjectState;
 
-            this.AppsDeriveFromParties();
-            this.AppsDeriveToParties();
-            this.AppsDeriveInvolvedParties(derivation);
+            this.AppsOnDeriveFromParties();
+            this.AppsOnDeriveToParties();
+            this.AppsOnDeriveInvolvedParties(derivation);
         }
 
-        private void AppsDeriveFromParties()
+        private void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
             this.AddFromParty(this.Caller);
@@ -65,7 +65,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveToParties()
+        private void AppsOnDeriveToParties()
         {
             this.RemoveToParties();
             this.ToParties = (Extent)this.Receivers;
@@ -159,7 +159,7 @@ namespace Allors.Domain
             return null;
         }
 
-        private void AppsDeriveInvolvedParties(IDerivation derivation)
+        private void AppsOnDeriveInvolvedParties(IDerivation derivation)
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);

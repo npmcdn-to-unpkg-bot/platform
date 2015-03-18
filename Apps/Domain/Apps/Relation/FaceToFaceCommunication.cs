@@ -48,7 +48,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -56,10 +56,10 @@ namespace Allors.Domain
 
             this.FromParties = this.Participants;
             this.ToParties = this.Participants;
-            this.AppsDeriveInvolvedParties(derivation);
+            this.AppsOnDeriveInvolvedParties(derivation);
         }
 
-        private void AppsDeriveInvolvedParties(IDerivation derivation)
+        private void AppsOnDeriveInvolvedParties(IDerivation derivation)
         {
             this.InvolvedParties = this.Participants;
             this.AddInvolvedParty(this.Owner);
@@ -140,7 +140,7 @@ namespace Allors.Domain
             return null;
         }
 
-        public void AppsOnDerived(ObjectOnPostDerive method)
+        public void AppsOnPostDerive(ObjectOnPostDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);

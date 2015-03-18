@@ -35,7 +35,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -52,14 +52,14 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
             this.DeriveInventoryItem(derivation);
         }
 
-        private void AppsDeriveInventoryItem(IDerivation derivation)
+        private void AppsOnDeriveInventoryItem(IDerivation derivation)
         {
             if (this.ExistInventoryItemKind && this.InventoryItemKind.Equals(new InventoryItemKinds(this.Strategy.Session).NonSerialized))
             {

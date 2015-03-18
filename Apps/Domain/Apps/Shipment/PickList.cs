@@ -90,7 +90,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -115,7 +115,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -123,16 +123,16 @@ namespace Allors.Domain
 
             if (this.ExistPickListItems)
             {
-                this.AppsDeriveTemplate(derivation);
+                this.AppsOnDeriveTemplate(derivation);
             }
 
             this.PreviousObjectState = this.CurrentObjectState;
 
             // TODO: waarom?
-            //this.AppsDeriveTemplate(derivation);
+            //this.AppsOnDeriveTemplate(derivation);
         }
 
-        public void AppsOnDerived(ObjectOnPostDerive method)
+        public void AppsOnPostDerive(ObjectOnPostDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Allors.Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
@@ -196,7 +196,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveTemplate(IDerivation derivation)
+        private void AppsOnDeriveTemplate(IDerivation derivation)
         {
             var internalOrganisation = this.PickListItems[0].InventoryItem.Facility.Owner;
             Allors.Domain.StringTemplate template = null;

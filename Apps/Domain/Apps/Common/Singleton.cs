@@ -28,18 +28,18 @@ namespace Allors.Domain
     /// </summary>
     public partial class Singleton
     {
-        private void AppsDeriveRevenues()
+        private void AppsOnDeriveRevenues()
         {
-            PartyPackageRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            PartyPackageRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            PartyProductCategoryRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            PartyProductCategoryRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            PartyProductRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            PartyProductRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            PartyRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            PartyRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
             var derivation = new Derivation(this.Strategy.Session);
@@ -72,31 +72,31 @@ namespace Allors.Domain
 
             this.Strategy.Session.Commit();
 
-            CustomerRelationships.AppsDeriveRevenues(this.Strategy.Session);
+            CustomerRelationships.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
             Parties.DeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            InternalOrganisationRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            InternalOrganisationRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            PackageRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            PackageRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            ProductCategoryRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            ProductCategoryRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            ProductRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            ProductRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            SalesRepPartyProductCategoryRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            SalesRepPartyProductCategoryRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            SalesRepPartyRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            SalesRepPartyRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            SalesRepProductCategoryRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            SalesRepProductCategoryRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            SalesRepRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            SalesRepRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            StoreRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            StoreRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            SalesChannelRevenues.AppsDeriveRevenues(this.Strategy.Session);
+            SalesChannelRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
             foreach (InternalOrganisationRevenue revenue in this.Strategy.Session.Extent<InternalOrganisationRevenue>())
@@ -171,24 +171,24 @@ namespace Allors.Domain
 
             SalesRepRelationships.DeriveCommissions(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            Persons.AppsDeriveCommissions(this.Strategy.Session);
+            Persons.AppsOnDeriveCommissions(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            this.AppsDeriveHistories();
+            this.AppsOnDeriveHistories();
         }
 
-        private void AppsDeriveHistories()
+        private void AppsOnDeriveHistories()
         {
-            PartyPackageRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            PartyPackageRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            PartyProductCategoryRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            PartyProductCategoryRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            PartyProductRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            PartyProductRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
-            PartyRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            PartyRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
             var derivation = new Derivation(this.Strategy.Session);
@@ -222,19 +222,19 @@ namespace Allors.Domain
 
             this.Strategy.Session.Commit();
 
-            InternalOrganisationRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            InternalOrganisationRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            PackageRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            PackageRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            ProductCategoryRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            ProductCategoryRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            ProductRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            ProductRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            SalesChannelRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            SalesChannelRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            SalesRepRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            SalesRepRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
-            StoreRevenueHistories.AppsDeriveHistory(this.Strategy.Session);
+            StoreRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();
 
             foreach (InternalOrganisationRevenueHistory revenueHistory in this.Strategy.Session.Extent<InternalOrganisationRevenueHistory>())

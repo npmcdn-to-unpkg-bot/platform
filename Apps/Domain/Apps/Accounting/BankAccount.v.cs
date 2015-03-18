@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void DeriveIban(IDerivation derivation)
         {
-            this.AppsDeriveIban(derivation);
+            this.AppsOnDeriveIban(derivation);
         }
     }
 }

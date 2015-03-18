@@ -268,7 +268,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -315,7 +315,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -357,7 +357,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        public void AppsOnDerived(ObjectOnPostDerive method)
+        public void AppsOnPostDerive(ObjectOnPostDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
@@ -453,7 +453,7 @@ namespace Allors.Domain
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).Finished;
         }
 
-        private void AppsDeriveCurrentPaymentStatus(IDerivation derivation)
+        private void AppsOnDeriveCurrentPaymentStatus(IDerivation derivation)
         {
             var itemsPaid = false;
             var itemsPartiallyPaid = false;
@@ -493,7 +493,7 @@ namespace Allors.Domain
             this.DeriveCurrentOrderStatus(derivation);
         }
 
-        private void AppsDeriveCurrentShipmentStatus(IDerivation derivation)
+        private void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
         {
             var itemsShipped = false;
             var itemsPartiallyShipped = false;
@@ -533,7 +533,7 @@ namespace Allors.Domain
             this.DeriveCurrentOrderStatus(derivation);
         }
 
-        private void AppsDeriveCurrentOrderStatus(IDerivation derivation)
+        private void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
         {
             if (this.ExistCurrentShipmentStatus && this.CurrentShipmentStatus.PurchaseOrderObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.Session).Received))
             {
@@ -546,14 +546,14 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveLocale(IDerivation derivation)
+        private void AppsOnDeriveLocale(IDerivation derivation)
         {
             this.Locale = this.ExistShipToBuyer && this.ShipToBuyer.ExistLocale
                               ? this.ShipToBuyer.Locale
                               : Singleton.Instance(this.Strategy.Session).DefaultLocale;
         }
 
-        private void AppsDeriveOrderTotals(IDerivation derivation)
+        private void AppsOnDeriveOrderTotals(IDerivation derivation)
         {
             if (this.ExistValidOrderItems)
             {
@@ -576,7 +576,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveTemplate(IDerivation derivation)
+        private void AppsOnDeriveTemplate(IDerivation derivation)
         {
             StringTemplate template = null;
             var templates = this.ShipToBuyer.PurchaseOrderTemplates;
@@ -606,7 +606,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveOrderItems(IDerivation derivation)
+        private void AppsOnDeriveOrderItems(IDerivation derivation)
         {
             var quantityOrderedByProduct = new Dictionary<Product, decimal>();
             var totalBasePriceByProduct = new Dictionary<Product, decimal>();

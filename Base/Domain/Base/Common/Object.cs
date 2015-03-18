@@ -30,7 +30,7 @@ namespace Allors.Domain
         private static readonly Dictionary<string, RoleType[]> RequiredRoleTypesByClassName = new Dictionary<string, RoleType[]>();
         private static readonly Dictionary<string, RoleType[]> UniqueRoleTypesByClassName = new Dictionary<string, RoleType[]>(); 
 
-        public static void BasePrepareDerivation(this Object @this, ObjectOnPreDerive method)
+        public static void BaseOnPreDerive(this Object @this, ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
             var changeSet = derivation.ChangeSet;
@@ -43,7 +43,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void BaseOnDerived(this Object @this, ObjectOnPostDerive method)
+        public static void BaseOnPostDerive(this Object @this, ObjectOnPostDerive method)
         {
             var derivation = method.Derivation;
             var @class = (Class)@this.Strategy.ObjectType;

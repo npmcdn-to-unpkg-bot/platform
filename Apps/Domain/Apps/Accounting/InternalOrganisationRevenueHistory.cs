@@ -32,7 +32,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDeriveMovingAverage()
+        public void AppsOnDeriveMovingAverage()
         {
             this.Revenue = 0;
 

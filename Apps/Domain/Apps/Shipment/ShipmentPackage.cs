@@ -50,11 +50,11 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            this.AppsDeriveSequenceNumber(derivation);
+            this.AppsOnDeriveSequenceNumber(derivation);
 
             foreach (Document document in this.Documents)
             {
@@ -70,10 +70,10 @@ namespace Allors.Domain
                 this.AddDocument(new PackagingSlipBuilder(this.Strategy.Session).WithName(name).Build());
             }
 
-            this.AppsDeriveTemplate(derivation);
+            this.AppsOnDeriveTemplate(derivation);
         }
 
-        private void AppsDeriveSequenceNumber(IDerivation derivation)
+        private void AppsOnDeriveSequenceNumber(IDerivation derivation)
         {
             var highestNumber = 0;
             if (this.ExistShipmentWhereShipmentPackage)
@@ -93,7 +93,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveTemplate(IDerivation derivation)
+        private void AppsOnDeriveTemplate(IDerivation derivation)
         {
             Domain.StringTemplate template = null;
 

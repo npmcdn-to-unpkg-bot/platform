@@ -32,14 +32,14 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            this.AppsDeriveMovingAverage();
+            this.AppsOnDeriveMovingAverage();
         }
 
-        private void AppsDeriveMovingAverage()
+        private void AppsOnDeriveMovingAverage()
         {
             this.Revenue = 0;
 

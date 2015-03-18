@@ -24,12 +24,12 @@ namespace Allors.Domain
     {
         public void DeriveVirtualProductPriceComponent()
         {
-            this.AppsDeriveVirtualProductPriceComponent();
+            this.AppsOnDeriveVirtualProductPriceComponent();
         }
 
         public void DeriveProductCategoryExpanded()
         {
-            this.AppsDeriveProductCategoryExpanded();
+            this.AppsOnDeriveProductCategoryExpanded();
         }
     }
 }

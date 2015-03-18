@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void DeriveCurrentObjectState(IDerivation derivation)
         {
-            this.AppsDeriveCurrentObjectState(derivation);
+            this.AppsOnDeriveCurrentObjectState(derivation);
         }
     }
 }

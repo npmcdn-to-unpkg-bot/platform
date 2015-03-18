@@ -36,7 +36,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsOnDerived(ObjectOnPostDerive method)
+        public void AppsOnPostDerive(ObjectOnPostDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(this.OwnerSecurityToken);
@@ -48,13 +48,13 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
             this.PartyName = this.Name;
 
-            this.AppsDerive(derivation);
+            this.AppsOnDerive(derivation);
 
             if (!this.ExistOwnerSecurityToken)
             {
@@ -375,7 +375,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private void AppsDeriveUserGroups(IDerivation derivation)
+        private void AppsOnDeriveUserGroups(IDerivation derivation)
         {
             if (this.Strategy.Session.Population is IDatabase)
             {
@@ -440,7 +440,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCurrentContacts(IDerivation derivation)
+        private void AppsOnDeriveCurrentContacts(IDerivation derivation)
         {
             this.RemoveCurrentContacts();
 

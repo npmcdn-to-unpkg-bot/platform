@@ -22,12 +22,12 @@ namespace Allors.Domain
 {
     public partial class CustomerRelationships
     {
-        public static void AppsDeriveRevenues(ISession session)
+        public static void AppsOnDeriveRevenues(ISession session)
         {
             var derivation = new Derivation(session);
             foreach (CustomerRelationship customerRelationship in session.Extent<CustomerRelationship>())
             {
-                customerRelationship.AppsDeriveRevenue(derivation);
+                customerRelationship.AppsOnDeriveRevenue(derivation);
             }
         }
 

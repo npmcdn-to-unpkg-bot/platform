@@ -24,12 +24,12 @@ namespace Allors.Domain
     {
         public void DeriveCurrentObjectState(IDerivation derivation)
         {
-            this.AppsDeriveCurrentObjectState(derivation);
+            this.AppsOnDeriveCurrentObjectState(derivation);
         }
 
         public void DeriveProductCategories(IDerivation derivation)
         {
-            this.AppsDeriveProductCategories(derivation);
+            this.AppsOnDeriveProductCategories(derivation);
         }
     }
 }

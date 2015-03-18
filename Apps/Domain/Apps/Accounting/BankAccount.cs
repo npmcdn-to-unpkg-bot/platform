@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class BankAccount
     {
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -40,7 +40,7 @@ namespace Allors.Domain
             this.DeriveIban(derivation);
         }
 
-        private void AppsDeriveIban(IDerivation derivation)
+        private void AppsOnDeriveIban(IDerivation derivation)
         {
             if (this.ExistIban)
             {

@@ -35,7 +35,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -45,7 +45,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -53,9 +53,9 @@ namespace Allors.Domain
             derivation.Log.AssertExistsAtMostOne(this, PostalAddresses.Meta.GeographicBoundaries, PostalAddresses.Meta.PostalBoundary);
 
             this.DeriveFormattedfullAddress();
-            this.AppsDerivePostalCode();
-            this.AppsDeriveCity();
-            this.AppsDeriveCountry();
+            this.AppsOnDerivePostalCode();
+            this.AppsOnDeriveCity();
+            this.AppsOnDeriveCountry();
         }
 
         private static void AppendNextLine(StringBuilder fullAddress)
@@ -66,7 +66,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDerivePostalCode()
+        private void AppsOnDerivePostalCode()
         {
             foreach (GeographicBoundary geographicBoundary in this.GeographicBoundaries)
             {
@@ -78,7 +78,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCity()
+        private void AppsOnDeriveCity()
         {
             foreach (GeographicBoundary geographicBoundary in this.GeographicBoundaries)
             {
@@ -90,7 +90,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCountry()
+        private void AppsOnDeriveCountry()
         {
             foreach (GeographicBoundary geographicBoundary in this.GeographicBoundaries)
             {

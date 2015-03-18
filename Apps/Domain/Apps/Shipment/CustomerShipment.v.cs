@@ -24,22 +24,22 @@ namespace Allors.Domain
     {
         public void DeriveInvoices(IDerivation derivation)
         {
-            this.AppsDeriveInvoices(derivation);
+            this.AppsOnDeriveInvoices(derivation);
         }
 
         public void DeriveQuantityDecreased(IDerivation derivation, ShipmentItem shipmentItem, SalesOrderItem orderItem, decimal quantity)
         {
-            this.AppsDeriveQuantityDecreased(derivation, shipmentItem, orderItem, quantity);
+            this.AppsOnDeriveQuantityDecreased(derivation, shipmentItem, orderItem, quantity);
         }
 
         public decimal DeriveShippingAndHandlingCharges(IDerivation derivation)
         {
-            return this.AppsDeriveShippingAndHandlingCharges(derivation);
+            return this.AppsOnDeriveShippingAndHandlingCharges(derivation);
         }
 
         private void DeriveCurrentObjectState(IDerivation derivation)
         {
-            this.AppsDeriveCurrentObjectState(derivation);
+            this.AppsOnDeriveCurrentObjectState(derivation);
         }
     }
 }

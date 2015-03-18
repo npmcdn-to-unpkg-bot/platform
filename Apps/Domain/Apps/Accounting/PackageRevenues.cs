@@ -44,7 +44,7 @@ namespace Allors.Domain
             return packageRevenue;
         }
 
-        public static void AppsDeriveRevenues(ISession session)
+        public static void AppsOnDeriveRevenues(ISession session)
         {
             var packageRevenuesByPeriodByPackageByInternalOrganisation = new Dictionary<InternalOrganisation, Dictionary<Package, Dictionary<DateTime, PackageRevenue>>>();
 

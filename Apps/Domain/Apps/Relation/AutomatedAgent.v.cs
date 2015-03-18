@@ -48,17 +48,17 @@ namespace Allors.Domain
 
         public void DeriveCurrentSalesReps(IDerivation derivation)
         {
-            this.AppsDeriveCurrentSalesReps(derivation);
+            this.AppsOnDeriveCurrentSalesReps(derivation);
         }
 
         public void DeriveOpenOrderAmount()
         {
-            this.AppsDeriveOpenOrderAmount();
+            this.AppsOnDeriveOpenOrderAmount();
         }
 
         public void DeriveRevenue()
         {
-            this.AppsDeriveRevenue();
+            this.AppsOnDeriveRevenue();
         }
 
         public CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod)

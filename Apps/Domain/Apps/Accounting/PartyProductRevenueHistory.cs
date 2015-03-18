@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class PartyProductRevenueHistory
     {
-        internal void AppsDeriveHistory()
+        internal void AppsOnDeriveHistory()
         {
             this.Revenue = 0;
 

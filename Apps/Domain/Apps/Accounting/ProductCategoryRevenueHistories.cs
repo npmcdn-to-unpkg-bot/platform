@@ -25,7 +25,7 @@ namespace Allors.Domain
 
     public partial class ProductCategoryRevenueHistories
     {
-        public static void AppsDeriveHistory(ISession session)
+        public static void AppsOnDeriveHistory(ISession session)
         {
             var derivation = new Derivation(session);
 

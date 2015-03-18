@@ -149,11 +149,11 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
-            this.AppsDerive(derivation);
+            this.AppsOnDerive(derivation);
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
@@ -203,7 +203,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -365,7 +365,7 @@ namespace Allors.Domain
             this.DeriveEmployeeUserGroups(derivation);
         }
 
-        private void AppsDeriveEmployeeUserGroups(IDerivation derivation)
+        private void AppsOnDeriveEmployeeUserGroups(IDerivation derivation)
         {
             if (this.Strategy.Session.Population is IDatabase)
             {

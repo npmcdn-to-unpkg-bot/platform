@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class Parties
     {
-        private static void AppsDeriveRevenues(ISession session)
+        private static void AppsOnDeriveRevenues(ISession session)
         {
             foreach (Party party in session.Extent<Party>())
             {

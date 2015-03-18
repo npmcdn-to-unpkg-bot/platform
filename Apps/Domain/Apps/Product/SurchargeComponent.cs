@@ -32,7 +32,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -52,7 +52,7 @@ namespace Allors.Domain
             this.DeriveVirtualProductPriceComponent();
         }
 
-        private void AppsDeriveVirtualProductPriceComponent()
+        private void AppsOnDeriveVirtualProductPriceComponent()
         {
             if (this.ExistProduct)
             {

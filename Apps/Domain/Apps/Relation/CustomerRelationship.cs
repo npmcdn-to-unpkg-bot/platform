@@ -50,7 +50,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDeriveRevenue(IDerivation derivation)
+        public void AppsOnDeriveRevenue(IDerivation derivation)
         {
             if (this.ExistCustomer)
             {
@@ -105,7 +105,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -124,7 +124,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -153,7 +153,7 @@ namespace Allors.Domain
             this.DeriveRevenue(derivation);
         }
 
-        private void AppsDeriveInternalOrganisationCustomer(IDerivation derivation)
+        private void AppsOnDeriveInternalOrganisationCustomer(IDerivation derivation)
         {
             if (this.ExistCustomer && this.ExistInternalOrganisation)
             {
@@ -175,7 +175,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveMembership(IDerivation derivation)
+        private void AppsOnDeriveMembership(IDerivation derivation)
         {
             if (this.ExistCustomer && this.ExistInternalOrganisation)
             {
@@ -198,7 +198,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveAmountDue(IDerivation derivation)
+        private void AppsOnDeriveAmountDue(IDerivation derivation)
         {
             this.AmountDue = 0;
 
@@ -231,7 +231,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveAmountOverDue(IDerivation derivation)
+        private void AppsOnDeriveAmountOverDue(IDerivation derivation)
         {
             this.AmountOverDue = 0;
 

@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void DeriveVirtualProductPriceComponent()
         {
-            this.AppsDeriveVirtualProductPriceComponent();
+            this.AppsOnDeriveVirtualProductPriceComponent();
         }
     }
 }

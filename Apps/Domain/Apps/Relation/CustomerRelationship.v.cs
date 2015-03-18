@@ -24,27 +24,27 @@ namespace Allors.Domain
     {
         public void DeriveMembership(IDerivation derivation)
         {
-            this.AppsDeriveMembership(derivation);
+            this.AppsOnDeriveMembership(derivation);
         }
 
         public void DeriveInternalOrganisationCustomer(IDerivation derivation)
         {
-            this.AppsDeriveInternalOrganisationCustomer(derivation);
+            this.AppsOnDeriveInternalOrganisationCustomer(derivation);
         }
 
         public void DeriveAmountDue(IDerivation derivation)
         {
-            this.AppsDeriveAmountDue(derivation);
+            this.AppsOnDeriveAmountDue(derivation);
         }
 
         public void DeriveAmountOverDue(IDerivation derivation)
         {
-            this.AppsDeriveAmountOverDue(derivation);
+            this.AppsOnDeriveAmountOverDue(derivation);
         }
 
         public void DeriveRevenue(IDerivation derivation)
         {
-            this.AppsDeriveRevenue(derivation);
+            this.AppsOnDeriveRevenue(derivation);
         }
 
     }

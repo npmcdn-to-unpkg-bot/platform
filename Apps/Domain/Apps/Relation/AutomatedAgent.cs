@@ -37,11 +37,11 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             this.PartyName = this.Name;
-            this.AppsDerive(derivation);
+            this.AppsOnDerive(derivation);
         }
     }
 }

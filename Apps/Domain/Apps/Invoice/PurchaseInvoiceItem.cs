@@ -79,7 +79,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -94,7 +94,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDerivePrices()
+        private void AppsOnDerivePrices()
         {
             this.UnitBasePrice = 0;
             this.UnitDiscount = 0;

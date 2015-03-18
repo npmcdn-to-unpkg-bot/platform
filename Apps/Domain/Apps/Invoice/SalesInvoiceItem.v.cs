@@ -39,42 +39,42 @@ namespace Allors.Domain
 
         public void DeriveCurrentPaymentStatus(IDerivation derivation)
         {
-            this.AppsDeriveCurrentPaymentStatus(derivation);
+            this.AppsOnDeriveCurrentPaymentStatus(derivation);
         }
 
         public void DeriveAmountPaid(IDerivation derivation)
         {
-            this.AppsDeriveAmountPaid(derivation);
+            this.AppsOnDeriveAmountPaid(derivation);
         }
 
         public void DeriveCurrentObjectState(IDerivation derivation)
         {
-            this.AppsDeriveCurrentObjectState(derivation);
+            this.AppsOnDeriveCurrentObjectState(derivation);
         }
 
         public void DerivePrices(IDerivation derivation, decimal quantityInvoiced = 0, decimal totalBasePrice = 0)
         {
-            this.AppsDerivePrices(derivation, quantityInvoiced, totalBasePrice);
+            this.AppsOnDerivePrices(derivation, quantityInvoiced, totalBasePrice);
         }
 
         public void DeriveVatRate(IDerivation derivation)
         {
-            this.AppsDeriveVatRate(derivation);
+            this.AppsOnDeriveVatRate(derivation);
         }
 
         public void DeriveVatRegime(IDerivation derivation)
         {
-            this.AppsDeriveVatRegime(derivation);
+            this.AppsOnDeriveVatRegime(derivation);
         }
 
         public void DeriveMarkupAndProfitMargin(IDerivation derivation)
         {
-            this.AppsDeriveMarkupAndProfitMargin(derivation);
+            this.AppsOnDeriveMarkupAndProfitMargin(derivation);
         }
 
         public void DeriveSalesRep(IDerivation derivation)
         {
-            this.AppsDeriveSalesRep(derivation);
+            this.AppsOnDeriveSalesRep(derivation);
         }
     }
 }

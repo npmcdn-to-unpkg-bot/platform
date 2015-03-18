@@ -106,7 +106,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(ObjectOnPreDerive method)
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
@@ -123,7 +123,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
@@ -142,7 +142,7 @@ namespace Allors.Domain
                 !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
 
-                this.AppsDeriveOrderItemQuantityReceived(derivation);
+                this.AppsOnDeriveOrderItemQuantityReceived(derivation);
             }
 
             this.DeriveCurrentObjectState(derivation);
@@ -156,7 +156,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        public void AppsOnDerived(ObjectOnPostDerive method)
+        public void AppsOnPostDerive(ObjectOnPostDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
@@ -167,7 +167,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveCurrentObjectState(IDerivation derivation)
+        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             
 
@@ -189,7 +189,7 @@ namespace Allors.Domain
             this.CurrentObjectState = new PurchaseShipmentObjectStates(this.Strategy.Session).Completed;
         }
 
-        private void AppsDeriveOrderItemQuantityReceived(IDerivation derivation)
+        private void AppsOnDeriveOrderItemQuantityReceived(IDerivation derivation)
         {
             foreach (ShipmentItem shipmentItem in this.ShipmentItems)
             {

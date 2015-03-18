@@ -24,17 +24,17 @@ namespace Allors.Domain
     {
         public void DeriveCustomerContactMemberShip(IDerivation derivation)
         {
-            this.AppsDeriveCustomerContactMemberShip(derivation);
+            this.AppsOnDeriveCustomerContactMemberShip(derivation);
         }
 
         public void DeriveSupplierContactMemberShip(IDerivation derivation)
         {
-            this.AppsDeriveSupplierContactMemberShip(derivation);
+            this.AppsOnDeriveSupplierContactMemberShip(derivation);
         }
 
         public void DerivePartnerContactMemberShip(IDerivation derivation)
         {
-            this.AppsDerivePartnerContactMemberShip(derivation);
+            this.AppsOnDerivePartnerContactMemberShip(derivation);
         }
     }
 }

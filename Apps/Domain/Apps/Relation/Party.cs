@@ -101,14 +101,14 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsDerive(this Party party, IDerivation derivation)
+        public static void AppsOnDerive(this Party party, IDerivation derivation)
         {
             party.DeriveCurrentSalesReps(derivation);
             party.DeriveOpenOrderAmount();
             party.DeriveRevenue();
         }
 
-        public static void AppsDeriveCurrentSalesReps(this Party party, IDerivation derivation)
+        public static void AppsOnDeriveCurrentSalesReps(this Party party, IDerivation derivation)
         {
             party.RemoveCurrentSalesReps();
 
@@ -122,7 +122,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsDeriveOpenOrderAmount(this Party party)
+        public static void AppsOnDeriveOpenOrderAmount(this Party party)
         {
             party.OpenOrderAmount = 0;
             foreach (SalesOrder salesOrder in party.SalesOrdersWhereBillToCustomer)
@@ -135,7 +135,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsDeriveRevenue(this Party party)
+        public static void AppsOnDeriveRevenue(this Party party)
         {
             party.YTDRevenue = 0;
             party.LastYearsRevenue = 0;

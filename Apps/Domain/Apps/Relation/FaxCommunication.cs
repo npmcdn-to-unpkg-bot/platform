@@ -46,24 +46,24 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(ObjectOnDerive method)
+        public void AppsOnDerive(ObjectOnDerive method)
         {
             this.PreviousObjectState = this.CurrentObjectState;
         }
 
-        private void AppsDeriveFromParties()
+        private void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
             this.AddFromParty(this.Originator);
         }
 
-        private void AppsDeriveToParties()
+        private void AppsOnDeriveToParties()
         {
             this.RemoveToParties();
             this.AddToParty(this.Receiver);
         }
 
-        private void AppsDeriveInvolvedParties()
+        private void AppsOnDeriveInvolvedParties()
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);
