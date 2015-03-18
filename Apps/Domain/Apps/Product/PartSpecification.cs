@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static partial class PartSpecificationExtensions
     {
-        public static void AppsOnDerive(this PartSpecification partSpecification, IDerivation derivation)
+        public static void AppsOnDerive(this PartSpecification partSpecification, ObjectOnDerive method)
         {
             if (partSpecification.ExistCurrentObjectState && !partSpecification.CurrentObjectState.Equals(partSpecification.PreviousObjectState))
             {

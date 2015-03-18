@@ -101,8 +101,10 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsOnDerive(this Party party, IDerivation derivation)
+        public static void AppsOnDerive(this Party party, ObjectOnDerive method)
         {
+            var derivation = method.Derivation;
+
             party.DeriveCurrentSalesReps(derivation);
             party.DeriveOpenOrderAmount();
             party.DeriveRevenue();

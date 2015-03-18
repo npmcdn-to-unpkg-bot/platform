@@ -104,6 +104,7 @@ namespace Allors.Domain
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
 
             ProductFeature feature1 = new ColourBuilder(this.DatabaseSession)
+                .WithName("white")
                 .WithVatRate(vatRate21)
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession).WithText("White").WithLocale(englishLocale).Build())
                 .Build();

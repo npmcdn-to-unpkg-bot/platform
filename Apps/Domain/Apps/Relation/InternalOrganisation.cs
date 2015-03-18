@@ -153,8 +153,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.AppsOnDerive(derivation);
-
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
             {

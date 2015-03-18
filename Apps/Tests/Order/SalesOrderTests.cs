@@ -3138,7 +3138,7 @@ namespace Allors.Domain
                 .Build();
 
             var colorBlack = new ColourBuilder(this.DatabaseSession)
-                .WithDescription("white")
+                .WithName("white")
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
                                             .WithText("White")
                                             .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
@@ -3146,7 +3146,7 @@ namespace Allors.Domain
                 .Build();
 
             var extraLarge = new SizeBuilder(this.DatabaseSession)
-                .WithDescription("Extra large")
+                .WithName("Extra large")
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
                                             .WithText("White")
                                             .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)

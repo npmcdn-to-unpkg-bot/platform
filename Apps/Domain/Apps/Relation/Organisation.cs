@@ -54,8 +54,6 @@ namespace Allors.Domain
 
             this.PartyName = this.Name;
 
-            this.AppsOnDerive(derivation);
-
             if (!this.ExistOwnerSecurityToken)
             {
                 var securityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();

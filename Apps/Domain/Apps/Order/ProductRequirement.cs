@@ -48,10 +48,6 @@ namespace Allors.Domain
 
         public void AppsOnDerive(ObjectOnDerive method)
         {
-            var derivation = method.Derivation;
-
-            this.AppsOnDerive(derivation);
-           
             this.PreviousObjectState = this.CurrentObjectState;
         }
     }

@@ -208,7 +208,8 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var colorBlack = new ColourBuilder(this.DatabaseSession)
+            var colorWhite = new ColourBuilder(this.DatabaseSession)
+                .WithName("white")
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
                             .WithText("white")
                             .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
@@ -216,6 +217,7 @@ namespace Allors.Domain
 
                 .Build();
             var extraLarge = new SizeBuilder(this.DatabaseSession)
+                .WithName("extra large")
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
                             .WithText("Extra large")
                             .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
@@ -228,7 +230,7 @@ namespace Allors.Domain
                 .Build();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProductFeature(colorBlack).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProductFeature(colorWhite).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
             var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProductFeature(extraLarge).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
             item1.AddOrderedWithFeature(item2);
             item1.AddOrderedWithFeature(item3);

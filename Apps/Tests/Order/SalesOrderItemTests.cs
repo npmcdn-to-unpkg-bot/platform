@@ -182,6 +182,7 @@ namespace Allors.Domain
                 .Build();
 
             this.virtualGood = new GoodBuilder(this.DatabaseSession)
+                .WithSku("v10103")
                 .WithVatRate(this.vatRate21)
                 .WithName("virtual good")
                 .WithVariant(this.variantGood)
@@ -219,6 +220,7 @@ namespace Allors.Domain
                 .Build();
 
             this.feature1 = new ColourBuilder(this.DatabaseSession)
+                .WithName("white")
                 .WithVatRate(this.vatRate21)
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
                                             .WithText("white")
@@ -227,6 +229,7 @@ namespace Allors.Domain
                 .Build();
 
             this.feature2 = new ColourBuilder(this.DatabaseSession)
+                .WithName("black")
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
                                             .WithText("black")
                                             .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)

@@ -41,7 +41,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             this.PartyName = this.Name;
-            this.AppsOnDerive(derivation);
         }
     }
 }

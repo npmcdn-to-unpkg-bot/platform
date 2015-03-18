@@ -308,8 +308,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.AppsOnDerive(derivation);
-
             this.BillingAddress = null;
             this.BillingInquiriesFax = null;
             this.BillingInquiriesPhone = null;
