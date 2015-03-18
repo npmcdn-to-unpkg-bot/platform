@@ -31,7 +31,7 @@ namespace Allors.Web.Mvc.Models
         public void Transform(Composite composite, ModelMetadata metadata, IEnumerable<Attribute> attributes)
         {
             var propertyName = metadata.PropertyName;
-            if (propertyName != null && "id".Equals(propertyName.ToLowerInvariant()))
+            if (propertyName != null && propertyName.EndsWith("Id"))
             {
                 metadata.TemplateHint = @"HiddenInput";
             }
