@@ -33,12 +33,21 @@ namespace Allors.Domain
             var builder = new CountryBuilder(this.DatabaseSession);
             builder.Build();
 
-            var log = this.DatabaseSession.Derive();
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            Assert.IsTrue(log.HasErrors);
-            Assert.AreEqual(5, log.Errors.Count());
+            this.DatabaseSession.Rollback();
 
-            
+            builder.WithName("name");
+            builder.Build();
+
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithIsoCode("nm");
+            builder.Build();
+
+            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
     }
 }

@@ -276,10 +276,10 @@ $if(party.ExistShippingAddress)$
     $party.ShippingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Phone number: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""<br />
+    Phone number: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax number: $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""<br />
+    Fax number: $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
 $endif$
 >>
 
