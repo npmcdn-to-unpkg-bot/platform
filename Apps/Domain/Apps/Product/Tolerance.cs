@@ -32,7 +32,6 @@ namespace Allors.Domain
 
         public void AppsOnDerive(ObjectOnDerive method)
         {
-            var derivation = method.Derivation;
             this.PreviousObjectState = this.CurrentObjectState;
         }
 
