@@ -24,8 +24,8 @@ namespace Allors.Web.Mvc
 
     public partial class Select
     {
-        public string Id;
+        public string Id { get; set; }
 
-        public SelectListItem[] List;
+        public SelectListItem[] List { get; set; }
     }
 }
