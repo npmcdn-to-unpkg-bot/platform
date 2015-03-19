@@ -4,7 +4,6 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.Percentage.IsRequired = true;
         }
 	}
 }

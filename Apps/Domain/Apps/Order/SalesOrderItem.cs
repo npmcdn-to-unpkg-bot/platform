@@ -312,7 +312,10 @@ namespace Allors.Domain
             derivation.Log.AssertExistsAtMostOne(this, SalesOrderItems.Meta.ActualUnitPrice, SalesOrderItems.Meta.DiscountAdjustment, SalesOrderItems.Meta.SurchargeAdjustment);
             derivation.Log.AssertExistsAtMostOne(this, SalesOrderItems.Meta.RequiredMarkupPercentage, SalesOrderItems.Meta.RequiredProfitMargin, SalesOrderItems.Meta.DiscountAdjustment, SalesOrderItems.Meta.SurchargeAdjustment);
 
-            this.AppsOnDeriveIsValidOrderItem(derivation);
+            this.DerivePrices(derivation, 0 , 0);
+            this.DeriveDeliveryDate(derivation);
+            this.DeriveVatRegime(derivation);
+            this.DeriveIsValidOrderItem(derivation);
 
             this.DeriveCurrentObjectState(derivation);
         }
