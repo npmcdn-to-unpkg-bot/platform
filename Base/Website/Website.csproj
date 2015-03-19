@@ -187,6 +187,7 @@
     <Compile Include="Allors\Base\Mvc\Models\Filters\ButtonFilter.cs" />
     <Compile Include="Allors\Base\Mvc\Models\Filters\IdFilter.cs" />
     <Compile Include="Allors\Base\Mvc\Models\Filters\LabelFilter.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\IModel.cs" />
     <Compile Include="Allors\Base\Mvc\Models\IModelMetadataFilter.cs" />
     <Compile Include="Allors\Base\Mvc\Models\Model%271.cs" />
     <Compile Include="Allors\Base\Mvc\Models\Model.cs" />
