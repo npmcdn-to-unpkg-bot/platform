@@ -109,13 +109,16 @@ namespace Allors.Domain
 
                 if (discountAdjustment != null)
                 {
-                    if (discountAdjustment.ExistPercentage)
+                    if (discountAdjustment.Percentage.HasValue)
                     {
-                        this.UnitDiscount += decimal.Round(((this.UnitBasePrice * discountAdjustment.Percentage) / 100), 2);
+                        this.UnitDiscount += decimal.Round(((this.UnitBasePrice * discountAdjustment.Percentage.Value) / 100), 2);
                     }
                     else
                     {
-                        this.UnitDiscount += discountAdjustment.Amount;
+                        if (discountAdjustment.Amount.HasValue)
+                        {
+                            this.UnitDiscount += discountAdjustment.Amount.Value;
+                        }
                     }
                 }
 
@@ -123,13 +126,16 @@ namespace Allors.Domain
 
                 if (surchargeAdjustment != null)
                 {
-                    if (surchargeAdjustment.ExistPercentage)
+                    if (surchargeAdjustment.Percentage.HasValue)
                     {
-                        this.UnitSurcharge += decimal.Round(((this.UnitBasePrice * surchargeAdjustment.Percentage) / 100), 2);
+                        this.UnitSurcharge += decimal.Round(((this.UnitBasePrice * surchargeAdjustment.Percentage.Value) / 100), 2);
                     }
                     else
                     {
-                        this.UnitSurcharge += surchargeAdjustment.Amount;
+                        if (surchargeAdjustment.Amount.HasValue)
+                        {
+                            this.UnitSurcharge += surchargeAdjustment.Amount.Value;
+                        }
                     }
                 }
 

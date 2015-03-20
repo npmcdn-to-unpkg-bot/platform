@@ -254,13 +254,13 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.ExistDiscountAdjustment && this.DiscountAdjustment.ExistPercentage)
+                if (this.ExistDiscountAdjustment && this.DiscountAdjustment.Percentage.HasValue)
                 {
                     var percentage = this.DiscountAdjustment.Percentage;
 
                     if (this.ExistLocale)
                     {
-                        return percentage.ToString(this.Locale.CultureInfo);
+                        return percentage.Value.ToString(this.Locale.CultureInfo);
                     }
 
                     return percentage.ToString();
@@ -820,7 +820,7 @@ namespace Allors.Domain
         {
             if (this.DiscountAdjustment != null)
             {
-                decimal discount = this.DiscountAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat * this.DiscountAdjustment.Percentage) / 100, 2) : this.DiscountAdjustment.Amount;
+                decimal discount = this.DiscountAdjustment.Percentage.HasValue ? decimal.Round((this.TotalExVat * this.DiscountAdjustment.Percentage.Value) / 100, 2) : this.DiscountAdjustment.Amount.HasValue ? this.DiscountAdjustment.Amount.Value : 0;
 
                 this.TotalDiscount += discount;
                 this.TotalExVat -= discount;
@@ -838,7 +838,7 @@ namespace Allors.Domain
         {
             if (this.ExistSurchargeAdjustment)
             {
-                decimal surcharge = this.SurchargeAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat * this.SurchargeAdjustment.Percentage) / 100, 2) : this.SurchargeAdjustment.Amount;
+                decimal surcharge = this.SurchargeAdjustment.Percentage.HasValue ? decimal.Round((this.TotalExVat * this.SurchargeAdjustment.Percentage.Value) / 100, 2) : this.SurchargeAdjustment.Amount.HasValue ? this.SurchargeAdjustment.Amount.Value : 0;
 
                 this.TotalSurcharge += surcharge;
                 this.TotalExVat += surcharge;
@@ -856,7 +856,7 @@ namespace Allors.Domain
         {
             if (this.ExistFee)
             {
-                decimal fee = this.Fee.ExistPercentage ? decimal.Round((this.TotalExVat * this.Fee.Percentage) / 100, 2) : this.Fee.Amount;
+                decimal fee = this.Fee.Percentage.HasValue ? decimal.Round((this.TotalExVat * this.Fee.Percentage.Value) / 100, 2) : this.Fee.Amount.HasValue ? this.Fee.Amount.Value : 0;
 
                 this.TotalFee += fee;
                 this.TotalExVat += fee;
@@ -874,8 +874,8 @@ namespace Allors.Domain
         {
             if (this.ExistShippingAndHandlingCharge)
             {
-                decimal shipping = this.ShippingAndHandlingCharge.ExistPercentage ? 
-                    decimal.Round((this.TotalExVat * this.ShippingAndHandlingCharge.Percentage) / 100, 2) : this.ShippingAndHandlingCharge.Amount;
+                decimal shipping = this.ShippingAndHandlingCharge.Percentage.HasValue ? 
+                    decimal.Round((this.TotalExVat * this.ShippingAndHandlingCharge.Percentage.Value) / 100, 2) : this.ShippingAndHandlingCharge.Amount.HasValue ? this.ShippingAndHandlingCharge.Amount.Value : 0;
 
                 this.TotalShippingAndHandling += shipping;
                 this.TotalExVat += shipping;

@@ -104,9 +104,9 @@ namespace Allors.Domain
                             var discountComponent = (DiscountComponent)priceComponent;
                             decimal discount;
 
-                            if (discountComponent.ExistPrice)
+                            if (discountComponent.Price.HasValue)
                             {
-                                discount = discountComponent.Price;
+                                discount = discountComponent.Price.Value;
                                 productDiscount += discount;
                             }
                             else
@@ -143,9 +143,9 @@ namespace Allors.Domain
                             var surchargeComponent = (SurchargeComponent)priceComponent;
                             decimal surcharge;
 
-                            if (surchargeComponent.ExistPrice)
+                            if (surchargeComponent.Price.HasValue)
                             {
-                                surcharge = surchargeComponent.Price;
+                                surcharge = surchargeComponent.Price.Value;
                                 productSurcharge += surcharge;
                             }
                             else

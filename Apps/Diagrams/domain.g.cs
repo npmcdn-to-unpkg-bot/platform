@@ -608,11 +608,11 @@ namespace Allors.Domain
 	}
 	public interface OrderAdjustment  : Object, AccessControlledObject 
 	{
-					global::System.Decimal Amount {set;}
+					global::System.Decimal? Amount {set;}
 
 					VatRate VatRate {set;}
 
-					global::System.Decimal Percentage {set;}
+					global::System.Decimal? Percentage {set;}
 
 	}
 	public interface OrderItem  : Object, AccessControlledObject, Commentable, Transitional 
@@ -910,7 +910,7 @@ namespace Allors.Domain
 
 					OrderValue OrderValue {set;}
 
-					global::System.Decimal Price {set;}
+					global::System.Decimal? Price {set;}
 
 					ProductCategory ProductCategory {set;}
 

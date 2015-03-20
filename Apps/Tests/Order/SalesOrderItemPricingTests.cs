@@ -4183,7 +4183,8 @@ namespace Allors.Domain
 
             var discount = decimal.Round((this.currentGoodBasePrice.Price * percentage) / 100, 2);
             var discountedprice = this.currentGoodBasePrice.Price - discount;
-            discount += decimal.Round((discountedprice * discountAdjustment.Percentage) / 100, 2);
+            var adjustmentPercentage = discountAdjustment.Percentage.HasValue ? discountAdjustment.Percentage.Value : 0;
+            discount += decimal.Round((discountedprice * adjustmentPercentage) / 100, 2);
 
             Assert.AreEqual(this.currentGoodBasePrice.Price, item1.UnitBasePrice);
             Assert.AreEqual(discount, item1.UnitDiscount);
@@ -4319,7 +4320,8 @@ namespace Allors.Domain
 
             var surcharge = decimal.Round((this.currentGoodBasePrice.Price * percentage) / 100, 2);
             var surchargedPrice = this.currentGoodBasePrice.Price + surcharge;
-            surcharge += decimal.Round((surchargedPrice * surchargeAdjustment.Percentage) / 100, 2);
+            var adjustmentPercentage = surchargeAdjustment.Percentage.HasValue ? surchargeAdjustment.Percentage.Value : 0;
+            surcharge += decimal.Round((surchargedPrice * adjustmentPercentage) / 100, 2);
 
             Assert.AreEqual(this.currentGoodBasePrice.Price, item1.UnitBasePrice);
             Assert.AreEqual(0, item1.UnitDiscount);
