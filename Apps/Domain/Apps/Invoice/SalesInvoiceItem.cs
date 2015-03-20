@@ -518,7 +518,8 @@ namespace Allors.Domain
                                 }
                                 else
                                 {
-                                    discount = decimal.Round((this.UnitBasePrice * discountComponent.Percentage) / 100, 2);
+                                    var percentage = discountComponent.Percentage.HasValue ? discountComponent.Percentage.Value : 0;
+                                    discount = decimal.Round((this.UnitBasePrice * percentage) / 100, 2);
                                     this.UnitDiscount += discount;
                                 }
 
@@ -556,7 +557,8 @@ namespace Allors.Domain
                                 }
                                 else
                                 {
-                                    surcharge = decimal.Round((this.UnitBasePrice * surchargeComponent.Percentage) / 100, 2);
+                                    var percentage = surchargeComponent.Percentage.HasValue ? surchargeComponent.Percentage.Value : 0;
+                                    surcharge = decimal.Round((this.UnitBasePrice * percentage) / 100, 2);
                                     this.UnitSurcharge += surcharge;
                                 }
 

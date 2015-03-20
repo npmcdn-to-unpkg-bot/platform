@@ -1987,7 +1987,7 @@ namespace Allors.Domain
 	}
 	public interface DiscountComponent  : Object, PriceComponent 
 	{
-					global::System.Decimal Percentage {set;}
+					global::System.Decimal? Percentage {set;}
 
 	}
 	public interface DistributionChannelRelationship  : Object, PartyRelationship 
@@ -4829,7 +4829,7 @@ namespace Allors.Domain
 	}
 	public interface SurchargeComponent  : Object, PriceComponent 
 	{
-					global::System.Decimal Percentage {set;}
+					global::System.Decimal? Percentage {set;}
 
 	}
 	public interface Task  : Object, WorkEffort 
