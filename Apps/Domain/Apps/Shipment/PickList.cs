@@ -68,7 +68,7 @@ namespace Allors.Domain
 
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
+
 
             if (!this.ExistCreationDate)
             {
@@ -128,8 +128,7 @@ namespace Allors.Domain
 
             this.PreviousObjectState = this.CurrentObjectState;
 
-            // TODO: waarom?
-            //this.AppsOnDeriveTemplate(derivation);
+            this.AppsOnDeriveTemplate(derivation);
         }
 
         public void AppsOnPostDerive(ObjectOnPostDerive method)
@@ -198,8 +197,14 @@ namespace Allors.Domain
 
         private void AppsOnDeriveTemplate(IDerivation derivation)
         {
-            var internalOrganisation = this.PickListItems[0].InventoryItem.Facility.Owner;
-            Allors.Domain.StringTemplate template = null;
+            var internalOrganisation = Singleton.Instance(this.strategy.Session).DefaultInternalOrganisation;
+            
+            if (this.ExistPickListItems)
+            {
+                internalOrganisation = this.PickListItems[0].InventoryItem.Facility.Owner;
+            }
+
+            StringTemplate template = null;
 
             if (internalOrganisation.ExistLocale)
             {
@@ -211,7 +216,8 @@ namespace Allors.Domain
             if (template == null)
             {
                 var templates = internalOrganisation.PickListTemplates;
-                // TODO:
+                templates.Filter.AddEquals(StringTemplates.Meta.Locale,
+                    Singleton.Instance(this.Strategy.Session).DefaultLocale);
                 template = templates.First;
             }
 

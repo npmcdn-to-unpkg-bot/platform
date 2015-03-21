@@ -38,13 +38,6 @@ namespace Allors.Domain
             var builder = new PersonBuilder(this.DatabaseSession);
             builder.Build();
                 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
-            builder.WithLastName("person");
-            builder.Build();
-
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 

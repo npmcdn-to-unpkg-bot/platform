@@ -365,28 +365,25 @@ namespace Allors.Domain
 
         private void AppsOnDeriveEmployeeUserGroups(IDerivation derivation)
         {
-            if (this.Strategy.Session.Population is IDatabase)
+            var employeeUserGroupsByName = new Dictionary<string, UserGroup>();
+            foreach (UserGroup userGroup in this.UserGroupsWhereParty)
             {
-                var employeeUserGroupsByName = new Dictionary<string, UserGroup>();
-                foreach (UserGroup userGroup in this.UserGroupsWhereParty)
+                employeeUserGroupsByName.Add(userGroup.Name, userGroup);
+            }
+
+            foreach (Role role in this.EmployeeRoles)
+            {
+                var userGroupName = string.Format("{0} for {1})", role.Name, this.Name);
+
+                if (!employeeUserGroupsByName.ContainsKey(userGroupName))
                 {
-                    employeeUserGroupsByName.Add(userGroup.Name, userGroup);
-                }
+                    var userGroup = new UserGroupBuilder(this.Strategy.DatabaseSession)
+                        .WithName(userGroupName)
+                        .WithParty(this)
+                        .WithParent(role.UserGroupWhereRole)
+                        .Build();
 
-                foreach (Role role in this.EmployeeRoles)
-                {
-                    var userGroupName = string.Format("{0} for {1})", role.Name, this.Name);
-
-                    if (!employeeUserGroupsByName.ContainsKey(userGroupName))
-                    {
-                        var userGroup = new UserGroupBuilder(this.Strategy.DatabaseSession)
-                            .WithName(userGroupName)
-                            .WithParty(this)
-                            .WithParent(role.UserGroupWhereRole)
-                            .Build();
-
-                        new AccessControlBuilder(this.Strategy.DatabaseSession).WithRole(role).WithSubjectGroup(userGroup).WithObject(this.OwnerSecurityToken).Build();
-                    }
+                    new AccessControlBuilder(this.Strategy.DatabaseSession).WithRole(role).WithSubjectGroup(userGroup).WithObject(this.OwnerSecurityToken).Build();
                 }
             }
         }

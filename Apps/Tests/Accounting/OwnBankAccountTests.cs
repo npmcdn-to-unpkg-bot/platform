@@ -48,6 +48,13 @@ namespace Allors.Domain
             builder.WithBankAccount(bankAccount);
             builder.Build();
 
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithDescription("description");
+            builder.Build();
+
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 

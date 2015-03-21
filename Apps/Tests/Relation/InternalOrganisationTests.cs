@@ -199,7 +199,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.Name);
+            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator.Name, internalOrganisation.Name);
 
             Assert.IsNotNull(new UserGroups(this.DatabaseSession).FindBy(UserGroups.Meta.Name, name));
         }
@@ -219,7 +219,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.Name);
+            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator.Name, internalOrganisation.Name);
             var userGroup = new UserGroups(this.DatabaseSession).FindBy(UserGroups.Meta.Name, name);
             Assert.IsNotNull(userGroup);
         }
@@ -239,7 +239,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.Name);
+            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator.Name, internalOrganisation.Name);
             var userGroup = new UserGroups(this.DatabaseSession).FindBy(UserGroups.Meta.Name, name);
             Assert.IsNotNull(userGroup);
 
@@ -434,7 +434,7 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenInternalOrganisationWithSinglePaymentMethod_WhenPaymentMethodIsRemoved_ThenDefaultPaymentMethodIsRemoved()
+        public void GivenInternalOrganisationWithSinglePaymentMethod_WhenPaymentMethodIsRemoved_ThenDefaultPaymentMethodIsAdded()
         {
             this.InstantiateObjects(this.DatabaseSession);
 

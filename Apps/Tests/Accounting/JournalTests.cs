@@ -19,6 +19,8 @@
 // <summary>Defines the MediaTests type.</summary>
 //-------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Allors.Domain
 {
     using NUnit.Framework;
@@ -41,6 +43,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(glAccount)
                 .Build();
@@ -76,6 +79,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(glAccount)
                 .Build();
@@ -109,6 +113,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(glAccount)
                 .Build();
@@ -154,6 +159,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(glAccount)
                 .Build();
@@ -212,6 +218,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(generalLedgerAccount1)
                 .Build();
@@ -226,6 +233,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(generalLedgerAccount2)
                 .Build();
@@ -262,6 +270,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(generalLedgerAccount1)
                 .Build();
@@ -276,6 +285,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(generalLedgerAccount2)
                 .Build();
@@ -318,6 +328,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(generalLedgerAccount1)
                 .Build();
@@ -354,6 +365,7 @@ namespace Allors.Domain
                 .Build();
 
             var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow)
                 .WithInternalOrganisation(internalOrganisation)
                 .WithGeneralLedgerAccount(generalLedgerAccount1)
                 .Build();
