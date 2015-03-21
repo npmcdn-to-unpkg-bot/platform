@@ -93,7 +93,7 @@ namespace Allors.Domain
 
             var fortis = new BankBuilder(this.DatabaseSession).WithName("Fortis België").WithBic("GEBABEBB").WithCountry(belgie).Build();
             var bankaccount = new BankAccountBuilder(this.DatabaseSession).WithBank(fortis).WithIban("BE23 3300 6167 6391").WithCurrency(euro).WithNameOnAccount("Koen").Build();
-            var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession).WithBankAccount(bankaccount).Build();
+            var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession).WithDescription("own account").WithBankAccount(bankaccount).Build();
 
             var internalOrganisation = new InternalOrganisationBuilder(this.DatabaseSession)
                 .WithName("Allors bvba")

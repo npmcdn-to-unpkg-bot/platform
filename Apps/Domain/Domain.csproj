@@ -1004,6 +1004,7 @@
     <Compile Include="Apps\Shipment\PurchaseShipment.v.cs" />
     <Compile Include="Apps\Shipment\PurchaseShipmentObjectStates.cs" />
     <Compile Include="Apps\Shipment\PurchaseShipments.cs" />
+    <Compile Include="Apps\Shipment\CustomerShipments.v.cs" />
     <Compile Include="Apps\Shipment\PurchaseShipments.v.cs" />
     <Compile Include="Apps\Shipment\PurchaseShipmentStatus.cs" />
     <Compile Include="Apps\Shipment\PurchaseShipmentStatuses.cs" />

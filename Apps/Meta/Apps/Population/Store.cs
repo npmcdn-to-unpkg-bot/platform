@@ -5,7 +5,8 @@ namespace Allors.Meta
 	    internal override void AppsExtend()
         {
 			this.Roles.SalesOrderCounter.IsRequired = true;
-			// this.Roles.SalesInvoiceCounter.IsRequired = true;
+			this.Roles.SalesInvoiceCounter.IsRequired = true;
+            this.Roles.OutgoingShipmentCounter.IsRequired = true;
 
             this.Roles.Name.IsRequired = true;
             this.Roles.PaymentNetDays.IsRequired = true;

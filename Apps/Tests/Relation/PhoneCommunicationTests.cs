@@ -63,7 +63,7 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new PhoneCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Hello world!")
+                .WithSubject("Hello world!")
                 .WithOwner(owner)
                 .WithCaller(caller)
                 .WithReceiver(receiver)

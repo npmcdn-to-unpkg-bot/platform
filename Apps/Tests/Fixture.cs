@@ -184,6 +184,8 @@ namespace Allors
                     .WithSalesInvoiceTemplate(new StringTemplates(session).FindBy(UniquelyIdentifiables.Meta.UniqueId, SalesInvoices.SalesInvoiceTemplateNlId))
                     .WithSalesOrderTemplate(new StringTemplates(session).FindBy(UniquelyIdentifiables.Meta.UniqueId, SalesOrders.SalesOrderTemplateEnId))
                     .WithSalesOrderTemplate(new StringTemplates(session).FindBy(UniquelyIdentifiables.Meta.UniqueId, SalesOrders.SalesOrderTemplateNlId))
+                    .WithCustomerShipmentTemplate(new StringTemplates(session).FindBy(UniquelyIdentifiables.Meta.UniqueId, CustomerShipments.CustomerShipmentTemplateEnId))
+                    .WithCustomerShipmentTemplate(new StringTemplates(session).FindBy(UniquelyIdentifiables.Meta.UniqueId, CustomerShipments.CustomerShipmentTemplateNlId))
                     .WithCreditLimit(500)
                     .WithPaymentGracePeriod(10)
                     .Build();

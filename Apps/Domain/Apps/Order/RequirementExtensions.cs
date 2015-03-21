@@ -18,22 +18,27 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Allors.Domain
 {
     public static class RequirementExtensions
     {
-        public static void AppsOnDerive(this Requirement requirement, ObjectOnDerive method)
+        public static void AppsOnDerive(this Requirement @this, ObjectOnDerive method)
         {
-            if (requirement.ExistCurrentObjectState && !requirement.CurrentObjectState.Equals(requirement.PreviousObjectState))
+            if (@this.ExistCurrentObjectState && !@this.CurrentObjectState.Equals(@this.PreviousObjectState))
             {
-                var currentStatus = new RequirementStatusBuilder(requirement.Strategy.Session).Build();
-                requirement.AddRequirementStatus(currentStatus);
-                requirement.CurrentRequirementStatus = currentStatus;
+                var currentStatus = new RequirementStatusBuilder(@this.Strategy.Session)
+                    .WithRequirementObjectState(@this.CurrentObjectState)
+                    .WithStartDateTime(DateTime.UtcNow)
+                    .Build();
+                @this.AddRequirementStatus(currentStatus);
+                @this.CurrentRequirementStatus = currentStatus;
             }
 
-            if (requirement.ExistCurrentObjectState)
+            if (@this.ExistCurrentObjectState)
             {
-                requirement.CurrentObjectState.Process(requirement);
+                @this.CurrentObjectState.Process(@this);
             }
         }
 

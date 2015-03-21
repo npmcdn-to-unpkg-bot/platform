@@ -120,6 +120,11 @@ namespace Allors.Domain
             }
         }
 
+        public string DateString
+        {
+            get { return this.EstimatedArrivalDate.ToShortDateString(); }
+        }
+
         public void DeriveTemplate(IDerivation derivation)
         {
             if (this.ExistStore && this.Store.CustomerShipmentTemplates.Count > 0)

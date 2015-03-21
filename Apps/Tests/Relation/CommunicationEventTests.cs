@@ -33,7 +33,7 @@ namespace Allors.Domain
         {
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
-                .WithDescription("Hello")
+                .WithSubject("Hello")
                 .WithActualStart(DateTime.UtcNow)
                 .Build();
 
@@ -48,7 +48,7 @@ namespace Allors.Domain
         {
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
-                .WithDescription("Hello")
+                .WithSubject("Hello")
                 .WithActualStart(DateTime.UtcNow.AddHours(-2))
                 .WithActualEnd(DateTime.UtcNow.AddHours(-1))
                 .Build();
@@ -64,7 +64,7 @@ namespace Allors.Domain
         {
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
-                .WithDescription("Hello")
+                .WithSubject("Hello")
                 .WithActualStart(DateTime.UtcNow.AddHours(+1))
                 .WithActualEnd(DateTime.UtcNow.AddHours(+2))
                 .Build();
@@ -80,7 +80,7 @@ namespace Allors.Domain
         {
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
-                .WithDescription("Hello")
+                .WithSubject("Hello")
                 .WithActualStart(DateTime.UtcNow)
                 .Build();
 
