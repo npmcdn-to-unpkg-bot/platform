@@ -37,14 +37,6 @@ namespace Allors.Domain
                 return this.CurrentObjectState;
             }
         }
-        
-        public void AppsOnBuild(ObjectOnBuild method)
-        {
-            if (!this.ExistCurrentObjectState)
-            {
-                this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Scheduled;
-            }
-        }
 
         public void AppsOnDerive(ObjectOnDerive method)
         {

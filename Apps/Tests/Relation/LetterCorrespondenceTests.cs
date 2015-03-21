@@ -36,13 +36,13 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithDescription("Letter correspondence");
+            builder.WithSubject("Letter");
             communication = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
-            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
-            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
+            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
+            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
             Assert.AreEqual(communication.CurrentObjectState, communication.PreviousObjectState);
         }
 
@@ -57,7 +57,7 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new LetterCorrespondenceBuilder(this.DatabaseSession)
-                .WithDescription("Hello world!")
+                .WithSubject("Hello world!")
                 .WithOwner(owner)
                 .WithOriginator(originator)
                 .WithReceiver(receiver)

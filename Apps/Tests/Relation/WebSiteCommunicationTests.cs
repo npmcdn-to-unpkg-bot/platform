@@ -34,15 +34,15 @@ namespace Allors.Domain
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithDescription("WebSiteCommunication");
+            builder.WithSubject("Website communication");
             communication = builder.Build();
 
             this.DatabaseSession.Derive(true);
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
-            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
-            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
+            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
+            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
             Assert.AreEqual(communication.CurrentObjectState, communication.PreviousObjectState);
         }
 
@@ -57,7 +57,7 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new WebSiteCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Hello world!")
+                .WithSubject("Hello world!")
                 .WithOwner(owner)
                 .WithOriginator(originator)
                 .WithReceiver(receiver)

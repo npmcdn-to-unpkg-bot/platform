@@ -40,13 +40,20 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithDescription("Budget");
+            builder.WithSubject("subject");
+            communication = builder.Build();
+
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant1").Build());
             communication = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
-            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
-            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
+            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
+            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
             Assert.AreEqual(communication.CurrentObjectState, communication.PreviousObjectState);
         }
 
@@ -61,8 +68,8 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Budget")
                 .WithOwner(owner)
+                .WithSubject("subject")
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
                 .WithActualStart(DateTime.UtcNow)
@@ -92,7 +99,7 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Budget")
+                .WithSubject("subject")
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
                 .WithActualStart(DateTime.UtcNow)
@@ -115,8 +122,8 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Budget")
                 .WithOwner(owner)
+                .WithSubject("subject")
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
                 .WithActualStart(DateTime.UtcNow)
@@ -144,8 +151,8 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Budget")
                 .WithOwner(owner)
+                .WithSubject("subject")
                 .WithParticipant(participant1)
                 .WithParticipant(participant2)
                 .WithActualStart(DateTime.UtcNow)

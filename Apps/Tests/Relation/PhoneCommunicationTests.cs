@@ -34,15 +34,21 @@ namespace Allors.Domain
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithDescription("Phonecommunication");
+            builder.WithSubject("Phonecall");
             communication = builder.Build();
 
-            this.DatabaseSession.Derive(true);
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithReceiver(new PersonBuilder(this.DatabaseSession).WithLastName("receiver").Build());
+            builder.WithCaller(new PersonBuilder(this.DatabaseSession).WithLastName("caller").Build());
+            communication = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
-            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
-            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
+            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
+            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
             Assert.AreEqual(communication.CurrentObjectState, communication.PreviousObjectState);
         }
 

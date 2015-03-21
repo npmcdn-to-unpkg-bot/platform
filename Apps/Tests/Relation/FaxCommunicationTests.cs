@@ -36,13 +36,21 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithDescription("Fax communication");
+            builder.WithSubject("Fax communication");
+            communication = builder.Build();
+
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithReceiver(new PersonBuilder(this.DatabaseSession).WithLastName("receiver").Build());
+            builder.WithOriginator(new PersonBuilder(this.DatabaseSession).WithLastName("originator").Build());
             communication = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
-            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
-            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).InProgress);
+            Assert.AreEqual(communication.CurrentCommunicationEventStatus.CommunicationEventObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
+            Assert.AreEqual(communication.CurrentObjectState, new CommunicationEventObjectStates(this.DatabaseSession).Scheduled);
             Assert.AreEqual(communication.CurrentObjectState, communication.PreviousObjectState);
         }
 
@@ -57,7 +65,7 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var communication = new FaxCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Hello world!")
+                .WithSubject("subject")
                 .WithOwner(owner)
                 .WithOriginator(originator)
                 .WithReceiver(receiver)

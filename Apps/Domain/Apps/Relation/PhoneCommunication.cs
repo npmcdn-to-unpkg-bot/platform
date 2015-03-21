@@ -24,21 +24,6 @@ namespace Allors.Domain
 {
     public partial class PhoneCommunication
     {
-        public void AppsOnBuild(ObjectOnBuild method)
-        {
-            if (!this.ExistCurrentObjectState)
-            {
-                this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Scheduled;
-
-                if (!this.ExistCurrentCommunicationEventStatus)
-                {
-                    var currentStatus = new CommunicationEventStatusBuilder(this.Strategy.DatabaseSession).WithCommunicationEventObjectState(this.CurrentObjectState).Build();
-                    this.AddCommunicationEventStatus(currentStatus);
-                    this.CurrentCommunicationEventStatus = currentStatus;
-                }
-            }
-        }
-
         public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
@@ -47,7 +32,7 @@ namespace Allors.Domain
 
             this.AppsOnDeriveFromParties();
             this.AppsOnDeriveToParties();
-            this.AppsOnDeriveInvolvedParties(derivation);
+            this.AppsOnDeriveInvolvedParties();
         }
 
         private void AppsOnDeriveFromParties()
@@ -159,7 +144,7 @@ namespace Allors.Domain
             return null;
         }
 
-        private void AppsOnDeriveInvolvedParties(IDerivation derivation)
+        private void AppsOnDeriveInvolvedParties()
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);

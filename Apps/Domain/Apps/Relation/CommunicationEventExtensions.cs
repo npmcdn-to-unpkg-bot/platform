@@ -46,32 +46,35 @@ namespace Allors.Domain
                 @this.Owner = (Person)new Users(@this.Strategy.Session).GetCurrentAuthenticatedUser();
             }
 
-            if (@this.ExistActualStart && @this.ActualStart > DateTime.UtcNow)
+            if (!@this.ExistCurrentObjectState)
             {
-                @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Scheduled;
-                @this.CurrentCommunicationEventStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session)
-                    .WithCommunicationEventObjectState(@this.CurrentObjectState)
-                    .WithStartDateTime(@this.ActualStart)
-                    .Build();
-            }
+                if (!@this.ExistActualStart || (@this.ExistActualStart && @this.ActualStart > DateTime.UtcNow))
+                {
+                    @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Scheduled;
+                    @this.CurrentCommunicationEventStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session)
+                        .WithCommunicationEventObjectState(@this.CurrentObjectState)
+                        .WithStartDateTime(@this.ActualStart)
+                        .Build();
+                }
 
-            if (@this.ExistActualStart && @this.ActualStart <= DateTime.UtcNow && 
-                (@this.ExistActualEnd && @this.ActualEnd > DateTime.UtcNow || !@this.ExistActualEnd))
-            {
-                @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).InProgress;
-                @this.CurrentCommunicationEventStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session)
-                    .WithCommunicationEventObjectState(@this.CurrentObjectState)
-                    .WithStartDateTime(@this.ActualStart)
-                    .Build();
-            }
+                if (@this.ExistActualStart && @this.ActualStart <= DateTime.UtcNow &&
+                    (@this.ExistActualEnd && @this.ActualEnd > DateTime.UtcNow || !@this.ExistActualEnd))
+                {
+                    @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).InProgress;
+                    @this.CurrentCommunicationEventStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session)
+                        .WithCommunicationEventObjectState(@this.CurrentObjectState)
+                        .WithStartDateTime(@this.ActualStart)
+                        .Build();
+                }
 
-            if (@this.ExistActualEnd && @this.ActualEnd <= DateTime.UtcNow)
-            {
-                @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Completed;
-                @this.CurrentCommunicationEventStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session)
-                    .WithCommunicationEventObjectState(@this.CurrentObjectState)
-                    .WithStartDateTime(@this.ActualEnd)
-                    .Build();
+                if (@this.ExistActualEnd && @this.ActualEnd <= DateTime.UtcNow)
+                {
+                    @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Completed;
+                    @this.CurrentCommunicationEventStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session)
+                        .WithCommunicationEventObjectState(@this.CurrentObjectState)
+                        .WithStartDateTime(@this.ActualEnd)
+                        .Build();
+                }
             }
 
             if (@this.ExistCurrentObjectState && !@this.CurrentObjectState.Equals(@this.PreviousObjectState))
