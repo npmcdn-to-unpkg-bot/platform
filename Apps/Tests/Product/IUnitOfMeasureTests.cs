@@ -30,17 +30,13 @@ namespace Allors.Domain
         public void GivenUnitOfMeasure_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new UnitOfMeasureBuilder(this.DatabaseSession);
-            var unitOfMeasure = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("uom")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build());
-            unitOfMeasure = builder.Build();
+            builder.WithName("uom");
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }

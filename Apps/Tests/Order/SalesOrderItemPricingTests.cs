@@ -389,11 +389,14 @@ namespace Allors.Domain
                 .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
+            this.DatabaseSession.Derive(true);
+
             this.DatabaseSession.Commit();
 
             this.InstantiateObjects(this.DatabaseSession);
 
             this.partyRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -402,12 +405,14 @@ namespace Allors.Domain
             Assert.AreEqual(this.currentGoodBasePrice.Price, item1.UnitBasePrice);
 
             this.partyRevenueHistory.Revenue = 50M;
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(amount1, item1.UnitBasePrice);
 
             this.partyRevenueHistory.Revenue = 110M;
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -506,6 +511,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.partyRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -519,9 +525,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -532,9 +536,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -605,6 +607,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 20M;
             this.productCategoryRevenueHistory.Quantity = 1;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -619,9 +622,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 50M;
             this.productCategoryRevenueHistory.Quantity = 3;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -633,9 +634,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 110M;
             this.productCategoryRevenueHistory.Quantity = 10;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -708,6 +707,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 20M;
             this.productCategoryRevenueHistory.Quantity = 1;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -722,9 +722,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 50M;
             this.productCategoryRevenueHistory.Quantity = 3;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -736,9 +734,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 110M;
             this.productCategoryRevenueHistory.Quantity = 10;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -811,6 +807,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 20M;
             this.productCategoryRevenueHistory.Quantity = 1;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -825,9 +822,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 50M;
             this.productCategoryRevenueHistory.Quantity = 3;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -839,9 +834,7 @@ namespace Allors.Domain
 
             this.productCategoryRevenueHistory.Revenue = 110M;
             this.productCategoryRevenueHistory.Quantity = 10;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -888,6 +881,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.ancestorProductCategoryRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -901,9 +895,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.ancestorProductCategoryRevenueHistory.Revenue = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -914,9 +906,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.ancestorProductCategoryRevenueHistory.Revenue = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -963,6 +953,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.parentProductCategoryRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -976,9 +967,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.parentProductCategoryRevenueHistory.Revenue = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -989,9 +978,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.parentProductCategoryRevenueHistory.Revenue = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1038,6 +1025,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1051,9 +1039,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1064,9 +1050,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1113,6 +1097,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.partyRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1126,8 +1111,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 50M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1139,8 +1123,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 110M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1188,6 +1171,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1201,8 +1185,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 50M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1214,8 +1197,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 110M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1263,6 +1245,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.partyRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1276,9 +1259,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1289,9 +1270,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1338,6 +1317,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1351,9 +1331,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1364,9 +1342,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1415,6 +1391,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.partyRevenueHistory.Revenue = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1428,8 +1405,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 50M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1441,8 +1417,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.partyRevenueHistory.Revenue = 110M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1484,11 +1459,13 @@ namespace Allors.Domain
                 .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
 
+            this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
 
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Quantity = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1497,12 +1474,12 @@ namespace Allors.Domain
             Assert.AreEqual(this.currentGoodBasePrice.Price, item1.UnitBasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 50M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             Assert.AreEqual(amount1, item1.UnitBasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 110M;
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1558,9 +1535,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.ancestorProductCategoryRevenueHistory.Quantity = 5;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1571,9 +1546,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.ancestorProductCategoryRevenueHistory.Quantity = 11M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1633,9 +1606,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.parentProductCategoryRevenueHistory.Quantity = 5;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1646,9 +1617,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.parentProductCategoryRevenueHistory.Quantity = 11;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1695,6 +1664,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Quantity = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1708,9 +1678,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1721,9 +1689,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1770,6 +1736,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Quantity = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1783,8 +1750,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 50M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1796,8 +1762,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 110M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1845,6 +1810,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Quantity = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1858,9 +1824,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 50M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1871,9 +1835,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 110M;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1920,6 +1882,7 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             this.productCategoryRevenueHistory.Quantity = 20M;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -1933,8 +1896,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 50M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -1946,8 +1908,7 @@ namespace Allors.Domain
             Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
             this.productCategoryRevenueHistory.Quantity = 110M;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -2010,6 +1971,7 @@ namespace Allors.Domain
                 .WithRevenue(100M)
                 .Build();
 
+            this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
 
             this.InstantiateObjects(this.DatabaseSession);
@@ -2018,6 +1980,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 0;
             package3RevenueHistory.Revenue = 0;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -2027,6 +1990,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 100M;
             package3RevenueHistory.Revenue = 0;
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -2034,6 +1998,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 100;
             package3RevenueHistory.Revenue = 100;
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -2100,6 +2065,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 0;
             package3RevenueHistory.Revenue = 0;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -2114,9 +2080,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 100;
             package3RevenueHistory.Revenue = 0;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -2128,9 +2092,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 100;
             package3RevenueHistory.Revenue = 100;
-
-            // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -2201,6 +2163,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 0;
             package3RevenueHistory.Revenue = 0;
+            this.order.OnDerive();
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
@@ -2215,8 +2178,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 100;
             package3RevenueHistory.Revenue = 0;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 
@@ -2229,8 +2191,7 @@ namespace Allors.Domain
 
             package2RevenueHistory.Revenue = 100;
             package3RevenueHistory.Revenue = 100;
-
-            this.DatabaseSession.Derive(true);
+            this.order.OnDerive();
 
             this.DatabaseSession.Derive(true);
 

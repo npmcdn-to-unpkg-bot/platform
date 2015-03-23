@@ -92,10 +92,6 @@ namespace Allors.Domain
             builder.WithContraAccount(internalOrganisationGlAccount);
             builder.Build();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 

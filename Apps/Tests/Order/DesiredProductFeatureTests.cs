@@ -31,7 +31,7 @@ namespace Allors.Domain
         {
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
             var softwareFeature = new SoftwareFeatureBuilder(this.DatabaseSession)
-                .WithDescription("Tutorial DVD")
+                .WithName("Tutorial DVD")
                 .WithVatRate(vatRate21)
                 .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession).WithText("Tutorial").WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale).Build())
                 .Build();
@@ -40,21 +40,21 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var builder = new DesiredProductFeatureBuilder(this.DatabaseSession);
-            var desiredProductFeature = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
             
             builder.WithRequired(false);
-            desiredProductFeature = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
             builder.WithProductFeature(softwareFeature);
-            desiredProductFeature = builder.Build();
+            builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }

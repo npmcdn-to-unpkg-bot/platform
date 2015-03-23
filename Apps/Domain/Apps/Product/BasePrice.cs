@@ -74,8 +74,6 @@ namespace Allors.Domain
 
                 derivation.Log.AssertExists(this, BasePrices.Meta.Currency);
             }
-            
-            this.DeriveVirtualProductPriceComponent();
 
             if (this.ExistProduct && !this.ExistProductFeature)
             {
@@ -86,6 +84,8 @@ namespace Allors.Domain
             {
                 this.ProductFeature.AddToBasePrice(this);
             }
+            
+            this.DeriveVirtualProductPriceComponent();
         }
 
         private void AppsOnDeriveVirtualProductPriceComponent()
