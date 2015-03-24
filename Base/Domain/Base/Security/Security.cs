@@ -255,7 +255,11 @@ namespace Allors.Domain
 
                     if (permissionByOperandType != null)
                     {
-                        role.AddPermission(permissionByOperandType[operandType]);
+                        Permission permission;
+                        if (permissionByOperandType.TryGetValue(operandType, out permission))
+                        {
+                            role.AddPermission(permission);
+                        }
                     }
                 }
             }
