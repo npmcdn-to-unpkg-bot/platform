@@ -74,11 +74,11 @@ namespace Allors.Web.Mvc
             {
                 if (this.authenticatedUser == null)
                 {
-                    var userId = this.User.Identity.Name;
+                    var userName = this.User.Identity.Name;
 
-                    if (userId != null)
+                    if (userName != null)
                     {
-                        this.authenticatedUser = (User)this.allorsSession.Instantiate(userId);
+                        this.authenticatedUser = new Users(this.allorsSession).FindBy(Users.Meta.UserName, userName);
                     }
                 }
 
