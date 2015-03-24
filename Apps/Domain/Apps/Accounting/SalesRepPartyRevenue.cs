@@ -48,7 +48,7 @@ namespace Allors.Domain
             this.AppsOnDeriveRevenue(derivation);
         }
 
-        private void AppsOnDeriveRevenue(IDerivation derivation)
+        public void AppsOnDeriveRevenue(IDerivation derivation)
         {
             this.Revenue = 0;
 

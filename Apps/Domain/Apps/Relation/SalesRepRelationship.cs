@@ -53,7 +53,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsCustomerContacts()
+        public void AppsCustomerContacts()
         {
             if (this.ExistSalesRepresentative && this.SalesRepresentative.ExistCurrentEmployment && this.ExistCustomer)
             {
@@ -73,7 +73,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveMembership()
+        public void AppsOnDeriveMembership()
         {
             var usergroups = this.InternalOrganisation.UserGroupsWhereParty;
             usergroups.Filter.AddEquals(UserGroups.Meta.Parent, new Roles(this.Strategy.Session).Sales.UserGroupWhereRole);
@@ -106,7 +106,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCommission()
+        public void AppsOnDeriveCommission()
         {
             this.YTDCommission = 0;
             this.LastYearsCommission = 0;

@@ -413,47 +413,47 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsCancel(OrderCancel method)
+        public void AppsCancel(OrderCancel method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).Cancelled;
         }
 
-        private void AppsConfirm(OrderConfirm method)
+        public void AppsConfirm(OrderConfirm method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).InProcess;
         }
 
-        private void AppsReject(OrderReject method)
+        public void AppsReject(OrderReject method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).Rejected;
         }
 
-        private void AppsHold(OrderHold method)
+        public void AppsHold(OrderHold method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).OnHold;
         }
 
-        private void AppsApprove(OrderApprove method)
+        public void AppsApprove(OrderApprove method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).RequestsApproval;
         }
 
-        private void AppsContinue(OrderContinue method)
+        public void AppsContinue(OrderContinue method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).InProcess;
         }
 
-        private void AppsComplete(OrderComplete method)
+        public void AppsComplete(OrderComplete method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).Completed;
         }
 
-        private void AppsFinish(OrderFinish method)
+        public void AppsFinish(OrderFinish method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(this.Strategy.Session).Finished;
         }
 
-        private void AppsOnDeriveCurrentPaymentStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentPaymentStatus(IDerivation derivation)
         {
             var itemsPaid = false;
             var itemsPartiallyPaid = false;
@@ -493,7 +493,7 @@ namespace Allors.Domain
             this.DeriveCurrentOrderStatus(derivation);
         }
 
-        private void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
         {
             var itemsShipped = false;
             var itemsPartiallyShipped = false;
@@ -533,7 +533,7 @@ namespace Allors.Domain
             this.DeriveCurrentOrderStatus(derivation);
         }
 
-        private void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
         {
             if (this.ExistCurrentShipmentStatus && this.CurrentShipmentStatus.PurchaseOrderObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.Session).Received))
             {
@@ -546,14 +546,14 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveLocale(IDerivation derivation)
+        public void AppsOnDeriveLocale(IDerivation derivation)
         {
             this.Locale = this.ExistShipToBuyer && this.ShipToBuyer.ExistLocale
                               ? this.ShipToBuyer.Locale
                               : Singleton.Instance(this.Strategy.Session).DefaultLocale;
         }
 
-        private void AppsOnDeriveOrderTotals(IDerivation derivation)
+        public void AppsOnDeriveOrderTotals(IDerivation derivation)
         {
             if (this.ExistValidOrderItems)
             {
@@ -576,7 +576,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveTemplate(IDerivation derivation)
+        public void AppsOnDeriveTemplate(IDerivation derivation)
         {
             StringTemplate template = null;
             var templates = this.ShipToBuyer.PurchaseOrderTemplates;
@@ -606,7 +606,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveOrderItems(IDerivation derivation)
+        public void AppsOnDeriveOrderItems(IDerivation derivation)
         {
             var quantityOrderedByProduct = new Dictionary<Product, decimal>();
             var totalBasePriceByProduct = new Dictionary<Product, decimal>();

@@ -143,17 +143,23 @@ namespace Allors.Meta
                     var methodInfo = this.Class.ClrType.GetMethod(methodName);
                     if (methodInfo != null)
                     {
-                        var o = Expression.Parameter(typeof(object));
-                        var castO = Expression.Convert(o, this.Class.ClrType);
+                        try
+                        {
+                            var o = Expression.Parameter(typeof(object));
+                            var castO = Expression.Convert(o, this.Class.ClrType);
 
-                        var p = Expression.Parameter(typeof(object));
-                        var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
+                            var p = Expression.Parameter(typeof(object));
+                            var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
 
-                        Expression call = Expression.Call(castO, methodInfo, castP);
+                            Expression call = Expression.Call(castO, methodInfo, castP);
 
-                        var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
-
-                        this.actions.Add(action);
+                            var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
+                            this.actions.Add(action);
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
                     }
                 }
             }

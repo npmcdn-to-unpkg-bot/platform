@@ -53,7 +53,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCustomerContactMemberShip(IDerivation derivation)
+        public void AppsOnDeriveCustomerContactMemberShip(IDerivation derivation)
         {
             if (this.ExistContact && this.ExistOrganisation && this.Organisation.ExistCustomerContactUserGroup)
             {
@@ -84,7 +84,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveSupplierContactMemberShip(IDerivation derivation)
+        public void AppsOnDeriveSupplierContactMemberShip(IDerivation derivation)
         {
             if (this.ExistContact && this.ExistOrganisation && this.Organisation.ExistSupplierContactUserGroup)
             {
@@ -115,7 +115,7 @@ namespace Allors.Domain
             }                
         }
 
-        private void AppsOnDerivePartnerContactMemberShip(IDerivation derivation)
+        public void AppsOnDerivePartnerContactMemberShip(IDerivation derivation)
         {
             if (this.ExistContact && this.ExistOrganisation && this.Organisation.ExistPartnerContactUserGroup)
             {

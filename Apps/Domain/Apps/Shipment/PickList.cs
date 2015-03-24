@@ -195,7 +195,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveTemplate(IDerivation derivation)
+        public void AppsOnDeriveTemplate(IDerivation derivation)
         {
             var internalOrganisation = Singleton.Instance(this.strategy.Session).DefaultInternalOrganisation;
             

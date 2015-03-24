@@ -28,7 +28,7 @@ namespace Allors.Domain
     /// </summary>
     public partial class Singleton
     {
-        private void AppsOnDeriveRevenues()
+        public void AppsOnDeriveRevenues()
         {
             PartyPackageRevenues.AppsOnDeriveRevenues(this.Strategy.Session);
             this.Strategy.Session.Commit();
@@ -177,7 +177,7 @@ namespace Allors.Domain
             this.AppsOnDeriveHistories();
         }
 
-        private void AppsOnDeriveHistories()
+        public void AppsOnDeriveHistories()
         {
             PartyPackageRevenueHistories.AppsOnDeriveHistory(this.Strategy.Session);
             this.Strategy.Session.Commit();

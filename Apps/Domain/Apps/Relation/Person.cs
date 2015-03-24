@@ -477,7 +477,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCommission()
+        public void AppsOnDeriveCommission()
         {
             this.YTDCommission = 0;
             this.LastYearsCommission = 0;
@@ -531,7 +531,7 @@ namespace Allors.Domain
             return partyName.ToString(); 
         }
 
-        private void AppsBuildOwnerSecurityToken()
+        public void AppsBuildOwnerSecurityToken()
         {
             if (!this.ExistOwnerSecurityToken)
             {
@@ -558,7 +558,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDelete()
+        public void AppsDelete(DeletableDelete method)
         {
             foreach (Employment employment in this.EmploymentsWhereEmployee)
             {
@@ -576,7 +576,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentEmployment(IDerivation derivation)
+        public void AppsOnDeriveCurrentEmployment(IDerivation derivation)
         {
             var usergroupsWhereMember = new List<UserGroup>();
             InternalOrganisation previousEmployer = null;

@@ -66,7 +66,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDerivePostalCode()
+        public void AppsOnDerivePostalCode()
         {
             foreach (GeographicBoundary geographicBoundary in this.GeographicBoundaries)
             {
@@ -78,7 +78,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCity()
+        public void AppsOnDeriveCity()
         {
             foreach (GeographicBoundary geographicBoundary in this.GeographicBoundaries)
             {
@@ -90,7 +90,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCountry()
+        public void AppsOnDeriveCountry()
         {
             foreach (GeographicBoundary geographicBoundary in this.GeographicBoundaries)
             {

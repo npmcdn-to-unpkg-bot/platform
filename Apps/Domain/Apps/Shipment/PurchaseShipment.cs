@@ -167,7 +167,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
+        public void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             
 
@@ -184,12 +184,12 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsComplete()
+        public void AppsComplete()
         {
             this.CurrentObjectState = new PurchaseShipmentObjectStates(this.Strategy.Session).Completed;
         }
 
-        private void AppsOnDeriveOrderItemQuantityReceived(IDerivation derivation)
+        public void AppsOnDeriveOrderItemQuantityReceived(IDerivation derivation)
         {
             foreach (ShipmentItem shipmentItem in this.ShipmentItems)
             {

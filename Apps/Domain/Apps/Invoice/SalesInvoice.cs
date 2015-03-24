@@ -741,7 +741,7 @@ namespace Allors.Domain
             this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).Cancelled;
         }
 
-        private void AppsOnDeriveLocale(IDerivation derivation)
+        public void AppsOnDeriveLocale(IDerivation derivation)
         {
             if (this.ExistBillToCustomer && this.BillToCustomer.ExistLocale)
             {
@@ -753,7 +753,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveSalesReps(IDerivation derivation)
+        public void AppsOnDeriveSalesReps(IDerivation derivation)
         {
             this.RemoveSalesReps();
             foreach (SalesInvoiceItem item in this.SalesInvoiceItems)
@@ -762,7 +762,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveAmountPaid(IDerivation derivation)
+        public void AppsOnDeriveAmountPaid(IDerivation derivation)
         {
             this.AmountPaid = 0;
             foreach (PaymentApplication paymentApplication in this.PaymentApplicationsWhereInvoice)
@@ -780,7 +780,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveInvoiceTotals(IDerivation derivation)
+        public void AppsOnDeriveInvoiceTotals(IDerivation derivation)
         {
             this.TotalBasePrice = 0;
             this.TotalDiscount = 0;
@@ -890,7 +890,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveMarkupAndProfitMargin(IDerivation derivation)
+        public void AppsOnDeriveMarkupAndProfitMargin(IDerivation derivation)
         {
             //// Only take into account items for which there is data at the item level.
             //// Skip negative sales.
@@ -918,7 +918,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveTemplate(IDerivation derivation)
+        public void AppsOnDeriveTemplate(IDerivation derivation)
         {
             StringTemplate template = null;
             if (this.ExistStore && this.ExistBillToCustomer && this.BillToCustomer.ExistLocale)
@@ -948,7 +948,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveSalesOrderPaymentStatus(IDerivation derivation)
+        public void AppsOnDeriveSalesOrderPaymentStatus(IDerivation derivation)
         {
             foreach (SalesInvoiceItem invoiceItem in this.SalesInvoiceItems)
             {
@@ -963,7 +963,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCustomers(IDerivation derivation)
+        public void AppsOnDeriveCustomers(IDerivation derivation)
         {
             this.RemoveCustomers();
             if (this.ExistBillToCustomer && !this.Customers.Contains(this.BillToCustomer))
@@ -977,7 +977,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveInvoiceItems(IDerivation derivation)
+        public void AppsOnDeriveInvoiceItems(IDerivation derivation)
         {
             var quantityInvoicedByProduct = new Dictionary<Product, decimal>();
             var totalBasePriceByProduct = new Dictionary<Product, decimal>();
@@ -1031,7 +1031,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveRevenues(IDerivation derivation)
+        public void AppsOnDeriveRevenues(IDerivation derivation)
         {
             foreach (SalesInvoiceItem salesInvoiceItem in this.SalesInvoiceItems)
             {

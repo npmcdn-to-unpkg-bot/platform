@@ -81,7 +81,7 @@ namespace Allors.Domain
             this.AppsOnDeriveChildren(derivation);
         }
 
-        private void AppsOnDeriveAncestors(IDerivation derivation)
+        public void AppsOnDeriveAncestors(IDerivation derivation)
         {
             this.RemoveAncestors();
 
@@ -96,7 +96,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveChildren(IDerivation derivation)
+        public void AppsOnDeriveChildren(IDerivation derivation)
         {
             this.RemoveChildren();
 

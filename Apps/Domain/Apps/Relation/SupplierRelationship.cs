@@ -84,7 +84,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveInternalOrganisationSupplier(IDerivation derivation)
+        public void AppsOnDeriveInternalOrganisationSupplier(IDerivation derivation)
         {
             if (this.ExistSupplier && this.ExistInternalOrganisation)
             {
@@ -106,7 +106,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveMembership(IDerivation derivation)
+        public void AppsOnDeriveMembership(IDerivation derivation)
         {
             if (this.ExistSupplier && this.ExistInternalOrganisation)
             {

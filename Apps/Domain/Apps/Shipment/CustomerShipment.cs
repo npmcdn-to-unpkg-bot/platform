@@ -285,7 +285,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveInvoices(IDerivation derivation)
+        public void AppsOnDeriveInvoices(IDerivation derivation)
         {
             var invoiceByOrder = new Dictionary<Allors.Domain.SalesOrder, Allors.Domain.SalesInvoice>();
             var costsInvoiced = false;
@@ -382,7 +382,7 @@ namespace Allors.Domain
             this.ProcessOnContinue();
         }
 
-        private void AppsProcessOnContinue(CustomerShipmentProcessOnContinue method)
+        public void AppsProcessOnContinue(CustomerShipmentProcessOnContinue method)
         {
             this.CurrentObjectState = new CustomerShipmentObjectStates(this.Strategy.Session).Created;
 
@@ -395,17 +395,17 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsSetPicked(CustomerShipmentSetPicked method)
+        public void AppsSetPicked(CustomerShipmentSetPicked method)
         {
             this.CurrentObjectState = new CustomerShipmentObjectStates(this.Strategy.Session).Picked;
         }
 
-        private void AppsSetPacked(CustomerShipmentSetPacked method)
+        public void AppsSetPacked(CustomerShipmentSetPacked method)
         {
             this.CurrentObjectState = new CustomerShipmentObjectStates(this.Strategy.Session).Packed;
         }
 
-        private void AppsShip(CustomerShipmentShip method)
+        public void AppsShip(CustomerShipmentShip method)
         {
             if (this.CanShip)
             {
@@ -541,7 +541,7 @@ namespace Allors.Domain
             return charges;
         }
 
-        private void AppsOnDeriveOrderItemQuantityShipped(IDerivation derivation)
+        public void AppsOnDeriveOrderItemQuantityShipped(IDerivation derivation)
         {
             var salesOrders = new List<Allors.Domain.SalesOrder>();
 
@@ -555,7 +555,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveQuantityDecreased(IDerivation derivation, ShipmentItem shipmentItem, Allors.Domain.SalesOrderItem orderItem, decimal correction)
+        public void AppsOnDeriveQuantityDecreased(IDerivation derivation, ShipmentItem shipmentItem, Allors.Domain.SalesOrderItem orderItem, decimal correction)
         {
             var remainingCorrection = correction;
 
@@ -641,7 +641,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveShipmentValue(IDerivation derivation)
+        public void AppsOnDeriveShipmentValue(IDerivation derivation)
         {
             this.ShipmentValue = 0;
             foreach (ShipmentItem shipmentItem in this.ShipmentItems)
@@ -653,7 +653,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentShipmentState(IDerivation derivation)
+        public void AppsOnDeriveCurrentShipmentState(IDerivation derivation)
         {
             if (this.ExistShipToParty && this.ExistShipmentItems)
             {
@@ -737,7 +737,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
+        public void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {

@@ -51,7 +51,7 @@ namespace Allors.Domain
             this.AppsOnDeriveInvolvedParties(derivation);
         }
 
-        private void AppsOnDeriveInvolvedParties(IDerivation derivation)
+        public void AppsOnDeriveInvolvedParties(IDerivation derivation)
         {
             this.InvolvedParties = this.Participants;
             this.AddInvolvedParty(this.Owner);

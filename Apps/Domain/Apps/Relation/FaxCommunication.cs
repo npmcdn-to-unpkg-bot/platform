@@ -48,19 +48,19 @@ namespace Allors.Domain
 
         }
 
-        private void AppsOnDeriveFromParties()
+        public void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
             this.AddFromParty(this.Originator);
         }
 
-        private void AppsOnDeriveToParties()
+        public void AppsOnDeriveToParties()
         {
             this.RemoveToParties();
             this.AddToParty(this.Receiver);
         }
 
-        private void AppsOnDeriveInvolvedParties()
+        public void AppsOnDeriveInvolvedParties()
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);

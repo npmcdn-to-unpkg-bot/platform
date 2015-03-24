@@ -94,7 +94,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDerivePrices()
+        public void AppsOnDerivePrices()
         {
             this.UnitBasePrice = 0;
             this.UnitDiscount = 0;

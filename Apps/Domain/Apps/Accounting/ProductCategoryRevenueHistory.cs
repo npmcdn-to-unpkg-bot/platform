@@ -39,7 +39,7 @@ namespace Allors.Domain
             this.AppsOnDeriveMovingAverage();
         }
 
-        private void AppsOnDeriveMovingAverage()
+        public void AppsOnDeriveMovingAverage()
         {
             this.Revenue = 0;
 

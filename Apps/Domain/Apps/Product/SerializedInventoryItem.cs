@@ -68,7 +68,7 @@ namespace Allors.Domain
             this.PreviousObjectState = this.CurrentObjectState;
         }
 
-        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
+        public void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             
 
@@ -87,7 +87,7 @@ namespace Allors.Domain
             this.DeriveProductCategories(derivation);
         }
 
-        private void AppsOnDeriveProductCategories(IDerivation derivation)
+        public void AppsOnDeriveProductCategories(IDerivation derivation)
         {
             this.RemoveDerivedProductCategories();
 

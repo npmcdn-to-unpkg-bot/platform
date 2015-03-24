@@ -88,7 +88,7 @@ namespace Allors.Domain
             this.DeriveVirtualProductPriceComponent();
         }
 
-        private void AppsOnDeriveVirtualProductPriceComponent()
+        public void AppsOnDeriveVirtualProductPriceComponent()
         {
             if (this.ExistProduct)
             {

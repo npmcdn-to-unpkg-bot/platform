@@ -682,12 +682,12 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsCancelOrder(OrderCancel method)
+        public void AppsCancelOrder(OrderCancel method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).Cancelled;
         }
 
-        private void AppsConfirm(OrderConfirm method)
+        public void AppsConfirm(OrderConfirm method)
         {
             var orderThreshold = this.Store.OrderThreshold;
 
@@ -715,37 +715,37 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsReject(OrderReject method)
+        public void AppsReject(OrderReject method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).Rejected;
         }
 
-        private void AppsHold(OrderHold method)
+        public void AppsHold(OrderHold method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).OnHold;
         }
 
-        private void AppsApprove(OrderApprove method)
+        public void AppsApprove(OrderApprove method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).InProcess;
         }
 
-        private void AppsContinue(OrderContinue method)
+        public void AppsContinue(OrderContinue method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).InProcess;
         }
 
-        private void AppsComplete(OrderComplete method)
+        public void AppsComplete(OrderComplete method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).Completed;
         }
 
-        private void AppsFinish(OrderFinish method)
+        public void AppsFinish(OrderFinish method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).Finished;
         }
 
-        private void AppsOnDeriveCurrentPaymentStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentPaymentStatus(IDerivation derivation)
         {
             var itemsPaid = false;
             var itemsPartiallyPaid = false;
@@ -786,7 +786,7 @@ namespace Allors.Domain
             this.DeriveCurrentOrderStatus(derivation);
         }
 
-        private void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
         {
             var itemsShipped = false;
             var itemsPartiallyShipped = false;
@@ -827,7 +827,7 @@ namespace Allors.Domain
             this.DeriveCurrentOrderStatus(derivation);
         }
 
-        private void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
         {
             if (this.ExistCurrentShipmentStatus && this.CurrentShipmentStatus.SalesOrderObjectState.Equals(new SalesOrderObjectStates(this.Strategy.Session).Shipped))
             {
@@ -840,7 +840,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveSalesReps(IDerivation derivation)
+        public void AppsOnDeriveSalesReps(IDerivation derivation)
         {
             this.RemoveSalesReps();
             foreach (SalesOrderItem item in this.ValidOrderItems)
@@ -849,7 +849,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveOrderTotals(IDerivation derivation)
+        public void AppsOnDeriveOrderTotals(IDerivation derivation)
         {
             if (this.ExistValidOrderItems)
             {
@@ -890,7 +890,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveOrderAdjustments()
+        public void AppsOnDeriveOrderAdjustments()
         {
             if (this.ExistDiscountAdjustment)
             {
@@ -928,7 +928,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveTotalFee()
+        public void AppsOnDeriveTotalFee()
         {
             if (this.ExistFee)
             {
@@ -948,7 +948,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveTotalShippingAndHandling()
+        public void AppsOnDeriveTotalShippingAndHandling()
         {
             if (this.ExistShippingAndHandlingCharge)
             {
@@ -968,7 +968,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveMarkupAndProfitMargin(IDerivation derivation)
+        public void AppsOnDeriveMarkupAndProfitMargin(IDerivation derivation)
         {
             //// Only take into account items for which there is data at the item level.
             //// Skip negative sales.
@@ -996,7 +996,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveLocale(IDerivation derivation)
+        public void AppsOnDeriveLocale(IDerivation derivation)
         {
             if (this.ExistBillToCustomer && this.BillToCustomer.ExistLocale)
             {
@@ -1008,7 +1008,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveTemplate(IDerivation derivation)
+        public void AppsOnDeriveTemplate(IDerivation derivation)
         {
             StringTemplate template = null;
             if (this.ExistStore && this.ExistBillToCustomer && this.BillToCustomer.ExistLocale)
@@ -1038,7 +1038,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCustomers(IDerivation derivation)
+        public void AppsOnDeriveCustomers(IDerivation derivation)
         {
             this.RemoveCustomers();
 
@@ -1047,7 +1047,7 @@ namespace Allors.Domain
             this.AddCustomer(this.PlacingCustomer);
         }
 
-        private void AppsTryShip(IDerivation derivation)
+        public void AppsTryShip(IDerivation derivation)
         {
             if (this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.DatabaseSession).InProcess) && !this.ScheduledManually)
             {
@@ -1190,7 +1190,7 @@ namespace Allors.Domain
             return addresses;
         }
 
-        private void AppsOnDeriveOrderItems(IDerivation derivation)
+        public void AppsOnDeriveOrderItems(IDerivation derivation)
         {
             var quantityOrderedByProduct = new Dictionary<Product, decimal>();
             var totalBasePriceByProduct = new Dictionary<Product, decimal>();

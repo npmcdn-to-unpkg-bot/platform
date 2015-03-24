@@ -72,7 +72,7 @@ namespace Allors.Domain
             this.AppsOnDeriveInventoryItem(derivation);
         }
 
-        private void AppsOnDeriveInventoryItem(IDerivation derivation)
+        public void AppsOnDeriveInventoryItem(IDerivation derivation)
         {
             if (this.ExistShipmentItem && this.ShipmentItem.ExistOrderShipmentsWhereShipmentItem)
             {

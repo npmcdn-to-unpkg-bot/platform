@@ -73,7 +73,7 @@ namespace Allors.Domain
             this.AppsOnDeriveTemplate(derivation);
         }
 
-        private void AppsOnDeriveSequenceNumber(IDerivation derivation)
+        public void AppsOnDeriveSequenceNumber(IDerivation derivation)
         {
             var highestNumber = 0;
             if (this.ExistShipmentWhereShipmentPackage)
@@ -93,7 +93,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveTemplate(IDerivation derivation)
+        public void AppsOnDeriveTemplate(IDerivation derivation)
         {
             Domain.StringTemplate template = null;
 

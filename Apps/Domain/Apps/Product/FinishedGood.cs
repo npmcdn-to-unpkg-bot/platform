@@ -59,7 +59,7 @@ namespace Allors.Domain
             this.DeriveInventoryItem(derivation);
         }
 
-        private void AppsOnDeriveInventoryItem(IDerivation derivation)
+        public void AppsOnDeriveInventoryItem(IDerivation derivation)
         {
             if (this.ExistInventoryItemKind && this.InventoryItemKind.Equals(new InventoryItemKinds(this.Strategy.Session).NonSerialized))
             {

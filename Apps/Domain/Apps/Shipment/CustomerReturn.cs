@@ -76,7 +76,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
+        public void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {

@@ -40,7 +40,7 @@ namespace Allors.Domain
             this.AppsOnDerivePartnerContacts(derivation);
         }
 
-        private void AppsOnDerivePartnerContacts(IDerivation derivation)
+        public void AppsOnDerivePartnerContacts(IDerivation derivation)
         {
             if (this.ExistPartner)
             {
@@ -52,7 +52,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveMembership()
+        public void AppsOnDeriveMembership()
         {
             if (this.ExistPartner && this.ExistInternalOrganisation)
             {

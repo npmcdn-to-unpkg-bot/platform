@@ -70,19 +70,19 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsClose()
+        public void AppsClose()
         {
             var closed = new CaseObjectStates(this.Strategy.Session).Closed;
             this.CurrentObjectState = closed;
         }
 
-        private void AppsComplete()
+        public void AppsComplete()
         {
             var completed = new CaseObjectStates(this.Strategy.Session).Completed;
             this.CurrentObjectState = completed;
         }
 
-        private void AppsReopen()
+        public void AppsReopen()
         {
             var opened = new CaseObjectStates(this.Strategy.Session).Opened;
             this.CurrentObjectState = opened;

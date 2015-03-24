@@ -23,19 +23,19 @@ namespace Allors
     public partial class Setup
     {
 
-        private void AppsOnPrePrepare()
+        public void AppsOnPrePrepare()
         {
         }
 
-        private void AppsOnPostPrepare()
+        public void AppsOnPostPrepare()
         {
         }
 
-        private void AppsOnPreSetup()
+        public void AppsOnPreSetup()
         {
         }
 
-        private void AppsOnPostSetup()
+        public void AppsOnPostSetup()
         {
         }
     }

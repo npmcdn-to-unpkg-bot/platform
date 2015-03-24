@@ -363,7 +363,7 @@ namespace Allors.Domain
             this.DeriveEmployeeUserGroups(derivation);
         }
 
-        private void AppsOnDeriveEmployeeUserGroups(IDerivation derivation)
+        public void AppsOnDeriveEmployeeUserGroups(IDerivation derivation)
         {
             var employeeUserGroupsByName = new Dictionary<string, UserGroup>();
             foreach (UserGroup userGroup in this.UserGroupsWhereParty)
@@ -388,7 +388,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsStartNewFiscalYear()
+        public void AppsStartNewFiscalYear()
         {
             if (this.ExistActualAccountingPeriod && this.ActualAccountingPeriod.Active)
             {

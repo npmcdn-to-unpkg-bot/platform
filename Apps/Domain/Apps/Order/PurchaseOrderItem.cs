@@ -170,7 +170,7 @@ namespace Allors.Domain
             this.DeriveCurrentObjectState(derivation);
         }
 
-        private void AppsOnDeriveIsValidOrderItem(IDerivation derivation)
+        public void AppsOnDeriveIsValidOrderItem(IDerivation derivation)
         {
             if (this.ExistPurchaseOrderWherePurchaseOrderItem)
             {
@@ -184,7 +184,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
+        public void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             if (this.ExistOrderWhereValidOrderItem)
             {
@@ -241,7 +241,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentOrderStatus(IDerivation derivation)
         {
             if (this.ExistCurrentShipmentStatus && this.CurrentShipmentStatus.PurchaseOrderItemObjectState.Equals(new PurchaseOrderItemObjectStates(this.Strategy.Session).PartiallyReceived))
             {
@@ -256,7 +256,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveDeliveryDate(IDerivation derivation)
+        public void AppsOnDeriveDeliveryDate(IDerivation derivation)
         {
             if (this.AssignedDeliveryDate.HasValue)
             {
@@ -268,7 +268,7 @@ namespace Allors.Domain
             }            
         }
 
-        private void AppsOnDerivePrices()
+        public void AppsOnDerivePrices()
         {
             this.UnitBasePrice = 0;
             this.UnitDiscount = 0;
@@ -296,7 +296,7 @@ namespace Allors.Domain
             this.TotalIncVat = this.TotalExVat + this.TotalVat;
         }
 
-        private void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
+        public void AppsOnDeriveCurrentShipmentStatus(IDerivation derivation)
         {
             var quantityReceived = 0M;
             foreach (ShipmentReceipt shipmentReceipt in this.ShipmentReceiptsWhereOrderItem)
@@ -332,7 +332,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveQuantities(IDerivation derivation)
+        public void AppsOnDeriveQuantities(IDerivation derivation)
         {
             NonSerializedInventoryItem inventoryItem = null;
 

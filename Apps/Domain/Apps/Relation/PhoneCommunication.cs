@@ -35,7 +35,7 @@ namespace Allors.Domain
             this.AppsOnDeriveInvolvedParties();
         }
 
-        private void AppsOnDeriveFromParties()
+        public void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
             this.AddFromParty(this.Caller);
@@ -50,7 +50,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveToParties()
+        public void AppsOnDeriveToParties()
         {
             this.RemoveToParties();
             this.ToParties = (Extent)this.Receivers;
@@ -144,7 +144,7 @@ namespace Allors.Domain
             return null;
         }
 
-        private void AppsOnDeriveInvolvedParties()
+        public void AppsOnDeriveInvolvedParties()
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);

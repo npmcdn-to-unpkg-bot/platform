@@ -328,7 +328,7 @@ namespace Allors.Domain
             this.DeriveInvoiceTotals();
         }
 
-        private void AppsOnDeriveInvoiceTotals()
+        public void AppsOnDeriveInvoiceTotals()
         {
             if (this.ExistPurchaseInvoiceItems)
             {
@@ -351,22 +351,22 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsSearchDataApprove(IDerivation derivation)
+        public void AppsSearchDataApprove(IDerivation derivation)
         {
             this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).Approved;
         }
 
-        private void AppsReady(IDerivation derivation)
+        public void AppsReady(IDerivation derivation)
         {
             this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).ReadyForPosting;
         }
 
-        private void AppsCancel(IDerivation derivation)
+        public void AppsCancel(IDerivation derivation)
         {
             this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).Cancelled;
         }
 
-        private void AppsOnDeriveInvoiceItems(IDerivation derivation)
+        public void AppsOnDeriveInvoiceItems(IDerivation derivation)
         {
             foreach (PurchaseInvoiceItem purchaseInvoiceItem in this.PurchaseInvoiceItems)
             {

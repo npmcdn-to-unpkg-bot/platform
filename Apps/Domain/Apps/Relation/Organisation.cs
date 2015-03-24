@@ -373,7 +373,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private void AppsOnDeriveUserGroups(IDerivation derivation)
+        public void AppsOnDeriveUserGroups(IDerivation derivation)
         {
             if (this.Strategy.Session.Population is IDatabase)
             {
@@ -438,7 +438,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentContacts(IDerivation derivation)
+        public void AppsOnDeriveCurrentContacts(IDerivation derivation)
         {
             this.RemoveCurrentContacts();
 

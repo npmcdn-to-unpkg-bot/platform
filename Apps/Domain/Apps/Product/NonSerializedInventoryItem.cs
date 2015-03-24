@@ -113,7 +113,7 @@ namespace Allors.Domain
             this.PreviousQuantityOnHand = this.QuantityOnHand;
         }
 
-        private void AppsOnDeriveQuantityOnHand(IDerivation derivation)
+        public void AppsOnDeriveQuantityOnHand(IDerivation derivation)
         {
             this.QuantityOnHand = 0M;
 
@@ -139,7 +139,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveQuantityCommittedOut(IDerivation derivation)
+        public void AppsOnDeriveQuantityCommittedOut(IDerivation derivation)
         {
             this.QuantityCommittedOut = 0M;
 
@@ -160,7 +160,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveQuantityExpectedIn(IDerivation derivation)
+        public void AppsOnDeriveQuantityExpectedIn(IDerivation derivation)
         {
             this.QuantityExpectedIn = 0M;
 
@@ -189,7 +189,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveQuantityAvailableToPromise(IDerivation derivation)
+        public void AppsOnDeriveQuantityAvailableToPromise(IDerivation derivation)
         {
             this.AvailableToPromise = this.QuantityOnHand - this.QuantityCommittedOut;
 
@@ -199,7 +199,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCurrentObjectState(IDerivation derivation)
+        public void AppsOnDeriveCurrentObjectState(IDerivation derivation)
         {
             
 
@@ -218,7 +218,7 @@ namespace Allors.Domain
             this.AppsOnDeriveProductCategories(derivation);
         }
 
-        private void AppsReplenishSalesOrders(IDerivation derivation)
+        public void AppsReplenishSalesOrders(IDerivation derivation)
         {
             Extent<SalesOrderItem> salesOrderItems = this.Strategy.DatabaseSession.Extent<SalesOrderItem>();
             salesOrderItems.Filter.AddEquals(SalesOrderItems.Meta.CurrentObjectState, new SalesOrderItemObjectStates(this.Strategy.Session).InProcess);
@@ -255,7 +255,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDepleteSalesOrders(IDerivation derivation)
+        public void AppsDepleteSalesOrders(IDerivation derivation)
         {
             Extent<SalesOrderItem> salesOrderItems = this.Strategy.DatabaseSession.Extent<SalesOrderItem>();
             salesOrderItems.Filter.AddEquals(SalesOrderItems.Meta.CurrentObjectState, new SalesOrderItemObjectStates(this.Strategy.Session).InProcess);
@@ -287,7 +287,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveProductCategories(IDerivation derivation)
+        public void AppsOnDeriveProductCategories(IDerivation derivation)
         {
             this.RemoveDerivedProductCategories();
 
@@ -313,12 +313,12 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveSku(IDerivation derivation)
+        public void AppsOnDeriveSku(IDerivation derivation)
         {
             this.Sku = this.ExistGood ? this.Good.Sku : string.Empty;
         }
 
-        private void AppsOnDeriveName(IDerivation derivation)
+        public void AppsOnDeriveName(IDerivation derivation)
         {
             if (this.ExistGood)
             {
@@ -331,7 +331,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveUnitOfMeasure(IDerivation derivation)
+        public void AppsOnDeriveUnitOfMeasure(IDerivation derivation)
         {
             if (this.ExistGood)
             {

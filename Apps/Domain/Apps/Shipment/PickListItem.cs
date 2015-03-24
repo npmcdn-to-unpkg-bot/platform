@@ -38,7 +38,7 @@ namespace Allors.Domain
             this.AppsOnDeriveOrderItemAdjustment(derivation);
         }
 
-        private void AppsOnDeriveOrderItemAdjustment(IDerivation derivation)
+        public void AppsOnDeriveOrderItemAdjustment(IDerivation derivation)
         {
             if (this.ActualQuantity.HasValue && this.ExistPickListWherePickListItem && this.PickListWherePickListItem.CurrentObjectState.UniqueId.Equals(PickListObjectStates.PickedId))
             {

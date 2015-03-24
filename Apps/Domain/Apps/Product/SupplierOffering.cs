@@ -32,7 +32,7 @@ namespace Allors.Domain
             this.DeriveInventoryItem(derivation);
         }
 
-        private void AppsOnDeriveInventoryItem(IDerivation derivation)
+        public void AppsOnDeriveInventoryItem(IDerivation derivation)
         {
             Good good = null;
             if (this.ExistProduct)

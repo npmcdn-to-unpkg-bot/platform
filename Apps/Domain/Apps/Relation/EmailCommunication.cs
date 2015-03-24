@@ -33,13 +33,13 @@ namespace Allors.Domain
             this.AppsOnDeriveInvolvedParties();
         }
 
-        private void AppsOnDeriveFromParties()
+        public void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
             this.AddFromParty(this.Originator.PartyWherePersonalEmailAddress);
         }
 
-        private void AppsOnDeriveToParties()
+        public void AppsOnDeriveToParties()
         {
             this.RemoveToParties();
 
@@ -75,7 +75,7 @@ namespace Allors.Domain
 
         }
 
-        private void AppsOnDeriveInvolvedParties()
+        public void AppsOnDeriveInvolvedParties()
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);

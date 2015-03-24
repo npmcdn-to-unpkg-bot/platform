@@ -61,7 +61,7 @@ namespace Allors.Domain
             this.DerivePurchaseShipmentItem(derivation);
         }
 
-        private void AppsOnDerivePurchaseShipmentItem(IDerivation derivation)
+        public void AppsOnDerivePurchaseShipmentItem(IDerivation derivation)
         {
             if (this.ShipmentWhereShipmentItem is PurchaseShipment)
             {
@@ -71,7 +71,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsOnDeriveCustomerShipmentItem(IDerivation derivation)
+        public void AppsOnDeriveCustomerShipmentItem(IDerivation derivation)
         {
             if (this.ShipmentWhereShipmentItem is CustomerShipment)
             {
