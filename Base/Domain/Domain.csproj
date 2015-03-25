@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Common\Counter.cs" />
-    <Compile Include="Base\Common\Deletable.cs" />
+    <Compile Include="Base\Common\DeletableDelete.cs" />
     <Compile Include="Base\Common\UniquelyIdentifiableExtension.cs" />
     <Compile Include="Base\IObjectBase.cs" />
     <Compile Include="Base\Object.cs" />

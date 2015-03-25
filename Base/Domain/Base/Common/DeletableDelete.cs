@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DeletableExtensions.cs" company="Allors bvba">
+// <copyright file="DeletableDelete.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -20,11 +20,13 @@
 
 namespace Allors.Domain
 {
-    public static partial class DeletableExtensions
+    public partial class DeletableDelete
     {
-        public static void BaseDelete(this Deletable @this, DeletableDelete method)
+        public override void Execute()
         {
-            @this.Strategy.Delete();
+            base.Execute();
+
+            this.Object.Strategy.Delete();
         }
     }
 }

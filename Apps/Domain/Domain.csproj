@@ -55,8 +55,8 @@
     <Compile Include="..\..\Base\Domain\Base\Common\Counters.cs">
       <Link>Base\Common\Counters.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Common\Deletable.cs">
-      <Link>Base\Common\Deletable.cs</Link>
+    <Compile Include="..\..\Base\Domain\Base\Common\DeletableDelete.cs">
+      <Link>Base\Common\DeletableDelete.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\Derivation.cs">
       <Link>Base\Common\Derivation.cs</Link>

@@ -22,8 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial class MethodInvocation<T>
-        where T : IObject
+    public partial class MethodInvocation
     {
         private readonly ConcreteMethodType concreteMethodType;
 
@@ -54,14 +53,7 @@ namespace Allors.Meta
                 // TODO: Add test for deletion
                 if (!method.Object.Strategy.IsDeleted)
                 {
-                    try
-                    {
-                        action(method.Object, method);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
+                    action(method.Object, method);
                 }
             }
         }

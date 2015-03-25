@@ -30,6 +30,8 @@ namespace Allors.Meta
             this.@object = @object;
         }
 
+        public abstract MethodInvocation MethodInvocation { get; }
+
         public IObject Object
         {
             get
@@ -40,6 +42,9 @@ namespace Allors.Meta
 
         public bool Executed { get; set; }
 
-        public abstract void Execute();
+        public virtual void Execute()
+        {
+            this.MethodInvocation.Execute(this);
+        }
     }
 }
