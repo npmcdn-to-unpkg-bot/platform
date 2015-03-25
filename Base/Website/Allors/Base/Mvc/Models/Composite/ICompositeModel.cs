@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Model`1.cs" company="Allors bvba">
+// <copyright file="IModel.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,10 +20,7 @@
 
 namespace Allors.Web.Mvc
 {
-    using Allors.Meta;
-
-    public abstract partial class Model<T> : Model
-          where T : Composite
+    public partial interface ICompositeModel
     {
     }
 }
