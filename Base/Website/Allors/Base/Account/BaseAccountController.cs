@@ -57,7 +57,7 @@ namespace Website.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public virtual ActionResult Login(string returnUrl)
         {
             this.ViewBag.ReturnUrl = returnUrl;
             return this.View();
