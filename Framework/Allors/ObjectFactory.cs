@@ -192,7 +192,9 @@ namespace Allors
         /// <returns>The .Net <see cref="Type"/>.</returns>
         public Type GetTypeForObjectType(IObjectType objectType)
         {
-            return this.typeByObjectType[objectType];
+            Type type;
+            this.typeByObjectType.TryGetValue(objectType, out type);
+            return type;
         }
 
         /// <summary>
@@ -202,7 +204,9 @@ namespace Allors
         /// <returns>The .Net <see cref="Type"/>.</returns>
         public IObjectType GetObjectTypeForType(Guid objectTypeId)
         {
-            return this.objectTypeByObjectTypeId[objectTypeId];
+            IObjectType objectType;
+            this.objectTypeByObjectTypeId.TryGetValue(objectTypeId, out objectType);
+            return objectType;
         }
     }
 }
