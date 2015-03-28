@@ -42,8 +42,6 @@ namespace Allors.Domain
 
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
-
             if (!this.ExistCreationDate)
             {
                 this.CreationDate = DateTime.UtcNow;

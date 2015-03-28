@@ -28,22 +28,6 @@ namespace Allors.Domain
     public class CashTests : DomainTest
     {
         [Test]
-        public void GivenCashPaymentMethod_WhenDeriving_ThenDescriptionMustExist()
-        {
-            var builder = new CashBuilder(this.DatabaseSession);
-            builder.Build();
-
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
-            builder.WithDescription("description");
-            builder.Build();
-
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
         public void GivenCashPaymentMethodForInternalOrganisationThatDoesAccounting_WhenDeriving_ThenCreditorIsRequired()
         {
             var cash = new CashBuilder(this.DatabaseSession)

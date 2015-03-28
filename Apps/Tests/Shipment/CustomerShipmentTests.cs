@@ -476,6 +476,8 @@ namespace Allors.Domain
             customer.PickListsWhereShipToParty.First.SetPicked();
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -834,6 +836,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1026,6 +1030,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1305,6 +1311,8 @@ namespace Allors.Domain
             pickList.SetPicked();
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1376,6 +1384,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1455,6 +1465,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1526,6 +1538,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1620,6 +1634,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());

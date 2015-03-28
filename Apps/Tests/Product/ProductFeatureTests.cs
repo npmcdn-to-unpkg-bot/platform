@@ -30,17 +30,13 @@ namespace Allors.Domain
         public void GivenColor_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new ColourBuilder(this.DatabaseSession);
-            var color = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("color")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build());
-            color = builder.Build();
+            builder.WithName("name").Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
@@ -49,21 +45,18 @@ namespace Allors.Domain
         public void GivenDimension_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new DimensionBuilder(this.DatabaseSession);
-            var dimension = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
             var unitOfMeasure = new UnitOfMeasureBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("uom")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
+                .WithName("uom")
                 .Build();
 
             builder.WithUnitOfMeasure(unitOfMeasure);
-            dimension = builder.Build();
+            builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
@@ -72,17 +65,13 @@ namespace Allors.Domain
         public void GivenModel_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new ModelBuilder(this.DatabaseSession);
-            var model = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("model")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build());
-            model = builder.Build();
+            builder.WithName("name").Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
@@ -91,17 +80,13 @@ namespace Allors.Domain
         public void GivenServiceFeature_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new ServiceFeatureBuilder(this.DatabaseSession);
-            var serviceFeature = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("service feature")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build());
-            serviceFeature = builder.Build();
+            builder.WithName("name").Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
@@ -110,17 +95,13 @@ namespace Allors.Domain
         public void GivenSizeConstant_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new SizeBuilder(this.DatabaseSession);
-            var size = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("size")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build());
-            size = builder.Build();
+            builder.WithName("name").Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
@@ -129,17 +110,13 @@ namespace Allors.Domain
         public void GivenSoftwareFeature_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new SoftwareFeatureBuilder(this.DatabaseSession);
-            var softwareFeature = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("software feature")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build());
-            softwareFeature = builder.Build();
+            builder.WithName("name").Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
@@ -148,17 +125,13 @@ namespace Allors.Domain
         public void GivenProductQualityConstant_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new ProductQualityBuilder(this.DatabaseSession);
-            var productQuality = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("product quality")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build());
-            productQuality = builder.Build();
+            builder.WithName("name").Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
