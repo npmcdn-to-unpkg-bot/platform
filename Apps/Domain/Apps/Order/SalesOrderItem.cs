@@ -1286,7 +1286,7 @@ namespace Allors.Domain
                 this.DerivedVatRate = this.ExistProduct ? this.Product.VatRate : this.ProductFeature.VatRate;
             }
 
-            if (this.ExistVatRegime && this.VatRegime.ExistVatRate)
+            if (!this.ExistDerivedVatRate && this.ExistVatRegime && this.VatRegime.ExistVatRate)
             {
                 this.DerivedVatRate = this.VatRegime.VatRate;
             }

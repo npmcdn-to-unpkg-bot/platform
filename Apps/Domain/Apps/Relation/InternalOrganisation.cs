@@ -140,11 +140,11 @@ namespace Allors.Domain
                     this.AddPackagingSlipTemplate(template);
                 }
 
-                if (!this.ExistPurchaseOrderTemplates)
+                if (!this.ExistPurchaseShipmentTemplates)
                 {
                     var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
                     var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).PurchaseShipment));
-                    this.AddPurchaseOrderTemplate(template);
+                    this.AddPurchaseShipmentTemplate(template);
                 }
             }
         }

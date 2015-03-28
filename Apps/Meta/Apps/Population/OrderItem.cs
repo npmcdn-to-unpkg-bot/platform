@@ -27,7 +27,6 @@ namespace Allors.Meta
 			this.Roles.TotalOrderAdjustmentCustomerCurrency.IsRequired = true;
 			this.Roles.TotalOrderAdjustment.IsRequired = true;
 			this.Roles.TotalSurchargeCustomerCurrency.IsRequired = true;
-			this.Roles.DeliveryDate.IsRequired = true;
 			this.Roles.TotalIncVat.IsRequired = true;
 			this.Roles.TotalSurchargeAsPercentage.IsRequired = true;
 			this.Roles.TotalDiscountCustomerCurrency.IsRequired = true;

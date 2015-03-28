@@ -57,7 +57,10 @@ namespace Allors.Domain
 
             new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
 
-            this.finishedGood = new FinishedGoodBuilder(this.DatabaseSession).WithManufacturerId("10101").WithName("finished good").Build();
+            this.finishedGood = new FinishedGoodBuilder(this.DatabaseSession)
+                .WithManufacturerId("10101")
+                .WithName("finished good")
+                .Build();
 
             var supplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithPart(this.finishedGood)
@@ -92,7 +95,12 @@ namespace Allors.Domain
             supplierOffering.AddProductPurchasePrice(this.currentPurchasePrice);
             supplierOffering.AddProductPurchasePrice(futurePurchasePrice);
 
-            this.order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(this.supplier).WithBillToContactMechanism(takenViaContactMechanism).WithDeliveryDate(DateTime.UtcNow).Build();
+            this.order = new PurchaseOrderBuilder(this.DatabaseSession)
+                .WithTakenViaSupplier(this.supplier)
+                .WithBillToContactMechanism(takenViaContactMechanism)
+                .WithDeliveryDate(DateTime.UtcNow)
+                .WithVatRegime(new VatRegimes(this.DatabaseSession).Exempt)
+                .Build();
 
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();

@@ -27,6 +27,9 @@ namespace Allors.Domain
             base.AppsSetup(setup);
 
             new VatRateBuilder(this.Session).WithRate(0).Build();
+            new VatRateBuilder(this.Session).WithRate(6).Build();
+            new VatRateBuilder(this.Session).WithRate(12).Build();
+            new VatRateBuilder(this.Session).WithRate(21).Build();
         }
 
         protected override void AppsSecure(Security config)

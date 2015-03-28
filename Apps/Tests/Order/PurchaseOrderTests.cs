@@ -452,7 +452,10 @@ namespace Allors.Domain
 
             var part = new RawMaterialBuilder(this.DatabaseSession).WithName("RawMaterial").Build();
 
-            var order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(supplier).Build();
+            var order = new PurchaseOrderBuilder(this.DatabaseSession)
+                .WithTakenViaSupplier(supplier)
+                .WithVatRegime(new VatRegimes(this.DatabaseSession).Exempt)
+                .Build();
 
             var item1 = new PurchaseOrderItemBuilder(this.DatabaseSession).WithPart(part).WithQuantityOrdered(1).Build();
             var item2 = new PurchaseOrderItemBuilder(this.DatabaseSession).WithPart(part).WithQuantityOrdered(2).Build();
@@ -492,7 +495,10 @@ namespace Allors.Domain
 
             var part = new RawMaterialBuilder(this.DatabaseSession).WithName("RawMaterial").Build();
 
-            var order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(supplier).Build();
+            var order = new PurchaseOrderBuilder(this.DatabaseSession)
+                .WithTakenViaSupplier(supplier)
+                .WithVatRegime(new VatRegimes(this.DatabaseSession).Exempt)
+                .Build();
 
             var item1 = new PurchaseOrderItemBuilder(this.DatabaseSession).WithPart(part).WithQuantityOrdered(1).Build();
             var item2 = new PurchaseOrderItemBuilder(this.DatabaseSession).WithPart(part).WithQuantityOrdered(2).Build();
@@ -528,6 +534,7 @@ namespace Allors.Domain
             var order = new PurchaseOrderBuilder(this.DatabaseSession)
                 .WithTakenViaSupplier(supplier)
                 .WithBillToPurchaser(internalOrganisation)
+                .WithVatRegime(new VatRegimes(this.DatabaseSession).Exempt)
                 .Build();
 
             var item1 = new PurchaseOrderItemBuilder(this.DatabaseSession).WithPart(part).WithQuantityOrdered(1).Build();

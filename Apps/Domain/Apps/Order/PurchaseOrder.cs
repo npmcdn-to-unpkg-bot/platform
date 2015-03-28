@@ -619,6 +619,8 @@ namespace Allors.Domain
                 purchaseOrderItem.DeriveDeliveryDate(derivation);
                 purchaseOrderItem.DeriveCurrentShipmentStatus(derivation);
                 purchaseOrderItem.DerivePrices();
+                purchaseOrderItem.AppsDeriveVatRegime(derivation);
+
 
                 if (purchaseOrderItem.ExistProduct)
                 {

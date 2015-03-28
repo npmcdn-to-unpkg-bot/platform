@@ -169,7 +169,24 @@ namespace Allors.Domain
         [Test]
         public void GivenJournal_WhenBuildWithout_ThenBlockUnpaidTransactionsIsFalse()
         {
+            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+
+            var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+                .WithAccountNumber("0001")
+                .WithName("GeneralLedgerAccount")
+                .WithBalanceSheetAccount(true)
+                .Build();
+
+            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithInternalOrganisation(internalOrganisation)
+                .WithGeneralLedgerAccount(generalLedgerAccount)
+                .Build();
+
             var journal = new JournalBuilder(this.DatabaseSession)
+                .WithInternalOrganisation(internalOrganisation)
+                .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
+                .WithContraAccount(internalOrganisationGlAccount)
+                .WithDescription("journal")
                 .Build();
 
             this.DatabaseSession.Derive();
@@ -180,7 +197,24 @@ namespace Allors.Domain
         [Test]
         public void GivenJournal_WhenBuildWithout_ThenCloseWhenInBalanceIsFalse()
         {
+            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+
+            var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+                .WithAccountNumber("0001")
+                .WithName("GeneralLedgerAccount")
+                .WithBalanceSheetAccount(true)
+                .Build();
+
+            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithInternalOrganisation(internalOrganisation)
+                .WithGeneralLedgerAccount(generalLedgerAccount)
+                .Build();
+
             var journal = new JournalBuilder(this.DatabaseSession)
+                .WithInternalOrganisation(internalOrganisation)
+                .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
+                .WithContraAccount(internalOrganisationGlAccount)
+                .WithDescription("journal")
                 .Build();
 
             this.DatabaseSession.Derive();
@@ -191,7 +225,24 @@ namespace Allors.Domain
         [Test]
         public void GivenJournal_WhenBuildWithout_ThenUseAsDefaultIsFalse()
         {
+            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+
+            var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+                .WithAccountNumber("0001")
+                .WithName("GeneralLedgerAccount")
+                .WithBalanceSheetAccount(true)
+                .Build();
+
+            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+                .WithInternalOrganisation(internalOrganisation)
+                .WithGeneralLedgerAccount(generalLedgerAccount)
+                .Build();
+
             var journal = new JournalBuilder(this.DatabaseSession)
+                .WithInternalOrganisation(internalOrganisation)
+                .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
+                .WithContraAccount(internalOrganisationGlAccount)
+                .WithDescription("journal")
                 .Build();
 
             this.DatabaseSession.Derive();

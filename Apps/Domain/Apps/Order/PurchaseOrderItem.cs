@@ -165,10 +165,36 @@ namespace Allors.Domain
             derivation.Log.AssertAtLeastOne(this, PurchaseOrderItems.Meta.Product, PurchaseOrderItems.Meta.Part);
             derivation.Log.AssertExistsAtMostOne(this, PurchaseOrderItems.Meta.Product, PurchaseOrderItems.Meta.Part);
 
+            this.AppsDeriveVatRegime(derivation);
+
             this.DeriveIsValidOrderItem(derivation);
 
             this.DeriveCurrentObjectState(derivation);
         }
+
+        public void AppsDeriveVatRegime(IDerivation derivation)
+        {
+            if (this.ExistPurchaseOrderWherePurchaseOrderItem)
+            {
+                this.VatRegime = this.ExistAssignedVatRegime ? this.AssignedVatRegime : this.PurchaseOrderWherePurchaseOrderItem.VatRegime;
+
+                this.AppsDeriveVatRate(derivation);
+            }
+        }
+
+        public void AppsDeriveVatRate(IDerivation derivation)
+        {
+            if (this.ExistProduct)
+            {
+                this.DerivedVatRate = this.Product.VatRate;
+            }
+
+            if (!this.ExistDerivedVatRate && this.ExistVatRegime && this.VatRegime.ExistVatRate)
+            {
+                this.DerivedVatRate = this.VatRegime.VatRate;
+            }
+        }
+
 
         public void AppsOnDeriveIsValidOrderItem(IDerivation derivation)
         {
