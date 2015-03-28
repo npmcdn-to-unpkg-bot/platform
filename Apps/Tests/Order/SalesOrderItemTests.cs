@@ -633,6 +633,7 @@ namespace Allors.Domain
 
             new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(good2)
+                .WithFromDate(DateTime.UtcNow)
                 .WithSupplier(this.supplier)
                 .WithProductPurchasePrice(good2PurchasePrice)
                 .Build();

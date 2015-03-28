@@ -6,7 +6,6 @@ namespace Allors.Meta
         {
             this.Roles.CurrentBalance.IsRequired = true;
             this.Roles.IsActive.IsRequired = true;
-            this.Roles.Description.IsRequired = true;
         }
     }
 }

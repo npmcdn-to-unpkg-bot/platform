@@ -42,21 +42,27 @@ namespace Allors.Domain
             Wijziging voor zending: $this.CustomerShipmentCorrection.ShipmentNumber$
         </h1>
         $else$
+            $if(this.ExistPickListItems)$
         <h1>
             Verzamellijst in $this.PickListItems.first.InventoryItem.Facility.Name;format=""xml-encode""$
         </h1>
+            $endif$
+            $if(this.ExistShipToParty)$
         <h2>
             Zending nummer(s): $this.ShipToParty.PendingCustomerShipments:{customerShipment|$customerShipment.ShipmentNumber$, }$
         </h2>
+            $endif$
         $endif$
+        $if(this.ExistShipToParty)$
         <div> 
             Zending voor     :$this.ShipToParty.PartyName;format=""xml-encode""$<br />
         </div>
-    $if(this.ExistPicker)$
+        $endif$
+        $if(this.ExistPicker)$
         <h2>
             Picker: $this.Picker.PartyName;format=""xml-encode""$
         </h2>
-    $endif$
+        $endif$
     </div>
     <div> 
         <table width=""100%"">
@@ -121,21 +127,27 @@ picklistitem(item) ::= <<
             Change in shipment: $this.CustomerShipmentCorrection.ShipmentNumber$
         </h1>
         $else$
+            $if(this.ExistPickListItems)$
         <h1>
             Picklist in $this.PickListItems.first.InventoryItem.Facility.Name;format=""xml-encode""$
         </h1>
+            $endif$
+            $if(this.ExistShipToParty)$
         <h2>
             Shipment number(s): $this.ShipToParty.PendingCustomerShipments:{customerShipment|$customerShipment.ShipmentNumber$, }$
         </h2>
+            $endif$
         $endif$
+        $if(this.ExistShipToParty)$
         <div> 
             Ship to           :$this.ShipToParty.PartyName;format=""xml-encode""$<br />
         </div>
-    $if(this.ExistPicker)$
+        $endif$
+        $if(this.ExistPicker)$
         <h2>
             Picker: $this.Picker.PartyName;format=""xml-encode""$
         </h2>
-    $endif$
+        $endif$
     </div>
     <div> 
         <table width=""100%"">

@@ -108,9 +108,12 @@ namespace Allors.Domain
                     }
                 }
 
-                foreach (var customerShipment in this.ShipToParty.PendingCustomerShipments)
+                if (this.ExistShipToParty)
                 {
-                    derivation.AddDependency(customerShipment, this);
+                    foreach (var customerShipment in this.ShipToParty.PendingCustomerShipments)
+                    {
+                        derivation.AddDependency(customerShipment, this);
+                    }
                 }
             }
         }
@@ -182,7 +185,7 @@ namespace Allors.Domain
             this.CurrentObjectState = new PickListObjectStates(this.Strategy.Session).Created;
         }
 
-        public void AppsSetPicked(PickListContinue method)
+        public void AppsSetPicked(PickListSetPicked method)
         {
             this.CurrentObjectState = new PickListObjectStates(this.Strategy.Session).Picked;
 

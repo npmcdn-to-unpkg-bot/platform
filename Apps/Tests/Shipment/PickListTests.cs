@@ -188,12 +188,14 @@ namespace Allors.Domain
                 .WithProduct(good1)
                 .WithProductPurchasePrice(good1PurchasePrice)
                 .WithSupplier(supplier)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(good2)
                 .WithProductPurchasePrice(good2PurchasePrice)
                 .WithSupplier(supplier)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -342,12 +344,14 @@ namespace Allors.Domain
                 .WithProduct(good1)
                 .WithProductPurchasePrice(good1PurchasePrice)
                 .WithSupplier(supplier)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(good2)
                 .WithProductPurchasePrice(good2PurchasePrice)
                 .WithSupplier(supplier)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -468,12 +472,14 @@ namespace Allors.Domain
                 .WithProduct(good1)
                 .WithProductPurchasePrice(good1PurchasePrice)
                 .WithSupplier(supplier)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(good2)
                 .WithProductPurchasePrice(good2PurchasePrice)
                 .WithSupplier(supplier)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -576,6 +582,7 @@ namespace Allors.Domain
             new SupplierOfferingBuilder(this.DatabaseSession)
                 .WithProduct(good1)
                 .WithProductPurchasePrice(good1PurchasePrice)
+                .WithFromDate(DateTime.UtcNow)
                 .WithSupplier(supplier)
                 .Build();
 
@@ -583,6 +590,7 @@ namespace Allors.Domain
                 .WithProduct(good2)
                 .WithProductPurchasePrice(good2PurchasePrice)
                 .WithSupplier(supplier)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true);

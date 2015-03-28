@@ -121,6 +121,7 @@ namespace Allors.Domain
                 .WithProduct(good)
                 .WithSupplier(supplier)
                 .WithProductPurchasePrice(purchasePrice)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true); 
@@ -166,6 +167,7 @@ namespace Allors.Domain
                 .WithProduct(good)
                 .WithSupplier(supplier)
                 .WithProductPurchasePrice(purchasePrice)
+                .WithFromDate(DateTime.UtcNow)
                 .Build();
 
             this.DatabaseSession.Derive(true); 

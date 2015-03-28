@@ -71,7 +71,6 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.IsTrue(paymentMethod.IsActive);
-            Assert.IsTrue(paymentMethod.ExistDescription);
         }
 
         [Test]

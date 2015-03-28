@@ -293,13 +293,13 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount.GeneralLedgerAccount);
 
             journal.ContraAccount = internalOrganisationGlAccount2;
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(generalLedgerAccount2, journal.PreviousContraAccount);
+            Assert.AreEqual(generalLedgerAccount2, journal.PreviousContraAccount.GeneralLedgerAccount);
         }
 
         [Test]
@@ -345,7 +345,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount.GeneralLedgerAccount);
 
             journal.AddJournalEntry(new JournalEntryBuilder(this.DatabaseSession)
                                         .WithJournalEntryDetail(new JournalEntryDetailBuilder(this.DatabaseSession)
@@ -357,7 +357,7 @@ namespace Allors.Domain
 
             journal.ContraAccount = internalOrganisationGlAccount2;
 
-            Assert.AreEqual("description.ContraAccount, description.PreviousContraAccount are not equal", this.DatabaseSession.Derive().Errors[0].Message);
+            Assert.AreEqual("Journal.ContraAccount, Journal.PreviousContraAccount are not equal", this.DatabaseSession.Derive().Errors[0].Message);
         }
 
         [Test]
@@ -388,7 +388,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount.GeneralLedgerAccount);
 
             journal.JournalType = new JournalTypes(this.DatabaseSession).Cash;
 
@@ -425,7 +425,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount.GeneralLedgerAccount);
 
             journal.AddJournalEntry(new JournalEntryBuilder(this.DatabaseSession)
                                         .WithJournalEntryDetail(new JournalEntryDetailBuilder(this.DatabaseSession)
@@ -437,7 +437,7 @@ namespace Allors.Domain
 
             journal.JournalType = new JournalTypes(this.DatabaseSession).Cash;
 
-            Assert.AreEqual("description.JournalType, description.PreviousJournalType are not equal", this.DatabaseSession.Derive().Errors[0].Message);
+            Assert.AreEqual("Journal.JournalType, Journal.PreviousJournalType are not equal", this.DatabaseSession.Derive().Errors[0].Message);
         }
     }
 }
