@@ -135,8 +135,6 @@ namespace Allors.Domain
 
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new CustomerShipmentObjectStates(this.Strategy.Session).Created;
@@ -160,6 +158,16 @@ namespace Allors.Domain
             if (!this.ExistShipFromParty)
             {
                 this.ShipFromParty = Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
+            }
+
+            if (!this.ExistBillFromInternalOrganisation)
+            {
+                this.BillFromInternalOrganisation = Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
+            }
+
+            if (!this.ExistBillFromContactMechanism)
+            {
+                this.BillFromContactMechanism  = Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation.BillingAddress;
             }
 
             if (!this.ExistStore && this.ExistShipFromParty)
@@ -448,7 +456,7 @@ namespace Allors.Domain
 
                         if (pendingPickList == null)
                         {
-                            pendingPickList = new PickListBuilder(this.Strategy.Session).WithStore(this.Store).Build();
+                            pendingPickList = new PickListBuilder(this.Strategy.Session).WithShipToParty(this.ShipToParty).Build();
                         }
 
                         PickListItem pickListItem = null;
@@ -503,6 +511,7 @@ namespace Allors.Domain
             {
                 var pickList = new PickListBuilder(this.Strategy.Session)
                     .WithCustomerShipmentCorrection(shipment)
+                    .WithShipToParty(this.ShipToParty)
                     .WithStore(this.Store)
                     .Build();
 

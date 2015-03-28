@@ -56,21 +56,11 @@ namespace Allors.Domain
 
             this.AppsOnDeriveSequenceNumber(derivation);
 
-            foreach (Document document in this.Documents)
-            {
-                if (document is PackagingSlip)
-                {
-                    document.PrintContent = this.PrintContent;
-                }
-            }
-
             if (!this.ExistDocuments)
             {
                 var name = string.Format("Package {0}", this.ExistSequenceNumber ? this.SequenceNumber.ToString(CultureInfo.InvariantCulture) : string.Empty);
                 this.AddDocument(new PackagingSlipBuilder(this.Strategy.Session).WithName(name).Build());
             }
-
-            this.AppsOnDeriveTemplate(derivation);
         }
 
         public void AppsOnDeriveSequenceNumber(IDerivation derivation)
@@ -90,42 +80,6 @@ namespace Allors.Domain
                 {
                     this.SequenceNumber = highestNumber + 1;
                 }
-            }
-        }
-
-        public void AppsOnDeriveTemplate(IDerivation derivation)
-        {
-            Domain.StringTemplate template = null;
-
-            var shipment = this.ShipmentWhereShipmentPackage;
-
-            if (shipment != null)
-            {
-                if (shipment.ExistBillFromInternalOrganisation && shipment.ExistBillToParty && shipment.BillToParty.ExistLocale)
-                {
-                    var templates = shipment.BillFromInternalOrganisation.PackagingSlipTemplates;
-                    templates.Filter.AddEquals(StringTemplates.Meta.Locale, shipment.BillToParty.Locale);
-                    template = templates.First;
-                }
-
-                if (shipment.ExistBillFromInternalOrganisation && template == null && shipment.BillFromInternalOrganisation.ExistLocale)
-                {
-                    var templates = shipment.BillFromInternalOrganisation.PackagingSlipTemplates;
-                    templates.Filter.AddEquals(StringTemplates.Meta.Locale, shipment.BillFromInternalOrganisation.Locale);
-                    template = templates.First;
-                }
-
-                if (shipment.ExistBillFromInternalOrganisation && template == null)
-                {
-                    var templates = shipment.BillFromInternalOrganisation.PackagingSlipTemplates;
-                    // TODO:
-                    template = templates.First;
-                }
-            }
-
-            if (template != null)
-            {
-                this.PrintContent = template.Apply(new Dictionary<string, object> { { "this", this } });
             }
         }
     }

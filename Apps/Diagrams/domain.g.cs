@@ -4587,7 +4587,7 @@ namespace Allors.Domain
 	public interface ShipmentMethod  : Object, Enumeration 
 	{
 	}
-	public interface ShipmentPackage  : Object, AccessControlledObject, UniquelyIdentifiable, Printable 
+	public interface ShipmentPackage  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					PackagingContent PackagingContents {set;}
 

@@ -971,6 +971,7 @@
     <Compile Include="Apps\Shipment\CustomerShipments.cs" />
     <Compile Include="Apps\Shipment\CustomerShipmentStatus.cs" />
     <Compile Include="Apps\Shipment\CustomerShipmentStatuses.cs" />
+    <Compile Include="Apps\Shipment\PackagingSlip.cs" />
     <Compile Include="Apps\Shipment\DropShipment.cs" />
     <Compile Include="Apps\Shipment\DropShipment.v.cs" />
     <Compile Include="Apps\Shipment\DropShipmentObjectStates.cs" />
@@ -1014,7 +1015,7 @@
     <Compile Include="Apps\Shipment\ShipmentMethods.cs" />
     <Compile Include="Apps\Shipment\ShipmentPackage.cs" />
     <Compile Include="Apps\Shipment\ShipmentPackages.cs" />
-    <Compile Include="Apps\Shipment\ShipmentPackages.v.cs" />
+    <Compile Include="Apps\Shipment\PackagingSlips.v.cs" />
     <Compile Include="Apps\Shipment\ShipmentReceipt.cs" />
     <Compile Include="Apps\Shipment\ShipmentReceipts.cs" />
     <Compile Include="Apps\Shipment\ShipmentRouteSegments.cs" />

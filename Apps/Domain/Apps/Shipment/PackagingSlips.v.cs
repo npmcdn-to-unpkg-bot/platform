@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ShipmentPackages.cs" company="Allors bvba">
+// <copyright file="PackagingSlips.v.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,7 +20,7 @@
 
 namespace Allors.Domain
 {
-    public partial class ShipmentPackages
+    public partial class PackagingSlips
     {
         private const string PackagingSlipTemplateEn =
             @"main(this) ::= <<
@@ -45,26 +45,26 @@ namespace Allors.Domain
         <table width=""100%"">
         <tr>
             <td>
-            $if(this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.ExistLogoImage)$
-                <img src = ""\\media\\i_$this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
+            $if(this.GetShipment.BillFromInternalOrganisation.ExistLogoImage)$
+                <img src = ""\\media\\i_$this.GetShipment.BillFromInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
             $endif$
-            $if(this.ShipmentWhereShipmentPackage.ExistBillFromInternalOrganisation)$
+            $if(this.GetShipment.ExistBillFromInternalOrganisation)$
                 <p>
-                    $this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.Name;format=""xml-encode""$
+                    $this.GetShipment.BillFromInternalOrganisation.Name;format=""xml-encode""$
                 </p>
-                $partyContact(this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation)$
-                $if(this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.ExistTaxNumber)$
-                    Tax number: $this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.TaxNumber$<br />
+                $partyContact(this.GetShipment.BillFromInternalOrganisation)$
+                $if(this.GetShipment.BillFromInternalOrganisation.ExistTaxNumber)$
+                    Tax number: $this.GetShipment.BillFromInternalOrganisation.TaxNumber$<br />
                 $endif$
             $endif$
             </td>
 	        <td>
-            $if(this.ShipmentWhereShipmentPackage.ExistShipToParty)$
+            $if(this.GetShipment.ExistShipToParty)$
                 <span style=""font-weight: bold"">Shipping Address</span>
                 <p>
-                    $this.ShipmentWhereShipmentPackage.ShipToParty.PartyName;format=""xml-encode""$<br />
-                    $if(this.ShipmentWhereShipmentPackage.ExistShipToAddress)$
-                        $this.ShipmentWhereShipmentPackage.ShipToAddress.FormattedFullAddress$
+                    $this.GetShipment.ShipToParty.PartyName;format=""xml-encode""$<br />
+                    $if(this.GetShipment.ExistShipToAddress)$
+                        $this.GetShipment.ShipToAddress.FormattedFullAddress$
                     $endif$
                 </p>
             $endif$
@@ -75,8 +75,8 @@ namespace Allors.Domain
      <br />
      <div> 
         <h4>
-            Shipment number:&#160;$this.ShipmentWhereShipmentPackage.ShipmentNumber$<br />
-            Estimated shipping date:&#160;$this.ShipmentWhereShipmentPackage.ShortShipDateString$<br />
+            Shipment number:&#160;$this.GetShipment.ShipmentNumber$<br />
+            Estimated shipping date:&#160;$this.GetShipment.ShortShipDateString$<br />
         </h4>
     </div>
     <br />
@@ -93,7 +93,7 @@ namespace Allors.Domain
                 Quantity
             </td>
         </tr>
-        $this.PackagingContents:{content|$packagingContent(content)$}$
+        $this.ShipmentPackageWhereDocument.PackagingContents:{content|$packagingContent(content)$}$
         <tr>          
             <td colspan=""3"">
             </td>
@@ -102,7 +102,7 @@ namespace Allors.Domain
             <td colspan=""2"">
             </td>
             <td class=""field"">
-                TOTAL $this.TotalQuantity$
+                TOTAL $this.ShipmentPackageWhereDocument.TotalQuantity$
             </td>
         </tr>
         </table>
@@ -180,26 +180,26 @@ packagingContent(item) ::= <<
         <table width=""100%"">
         <tr>
             <td>
-            $if(this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.ExistLogoImage)$
-                <img src = ""\\media\\i_$this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
+            $if(this.GetShipment.BillFromInternalOrganisation.ExistLogoImage)$
+                <img src = ""\\media\\i_$this.GetShipment.BillFromInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
             $endif$
-            $if(this.ShipmentWhereShipmentPackage.ExistBillFromInternalOrganisation)$
+            $if(this.GetShipment.ExistBillFromInternalOrganisation)$
                 <p>
-                    $this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.Name;format=""xml-encode""$
+                    $this.GetShipment.BillFromInternalOrganisation.Name;format=""xml-encode""$
                 </p>
-                $partyContact(this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation)$
-                $if(this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.ExistTaxNumber)$
-                    Tax number: $this.ShipmentWhereShipmentPackage.BillFromInternalOrganisation.TaxNumber$<br />
+                $partyContact(this.GetShipment.BillFromInternalOrganisation)$
+                $if(this.GetShipment.BillFromInternalOrganisation.ExistTaxNumber)$
+                    Tax number: $this.GetShipment.BillFromInternalOrganisation.TaxNumber$<br />
                 $endif$
             $endif$
             </td>
 	        <td>
-            $if(this.ShipmentWhereShipmentPackage.ExistShipToParty)$
+            $if(this.GetShipment.ExistShipToParty)$
                 <span style=""font-weight: bold"">Afleveradres</span>
                 <p>
-                    $this.ShipmentWhereShipmentPackage.ShipToParty.PartyName;format=""xml-encode""$<br />
-                    $if(this.ShipmentWhereShipmentPackage.ExistShipToAddress)$
-                        $this.ShipmentWhereShipmentPackage.ShipToAddress.FormattedFullAddress$
+                    $this.GetShipment.ShipToParty.PartyName;format=""xml-encode""$<br />
+                    $if(this.GetShipment.ExistShipToAddress)$
+                        $this.GetShipment.ShipToAddress.FormattedFullAddress$
                     $endif$
                 </p>
             $endif$
@@ -210,8 +210,8 @@ packagingContent(item) ::= <<
      <br />
      <div> 
         <h4>
-            Zending nummer:&#160;$this.ShipmentWhereShipmentPackage.ShipmentNumber$<br />
-            Verzend datum:&#160;$this.ShipmentWhereShipmentPackage.ShortShipDateString$<br />
+            Zending nummer:&#160;$this.GetShipment.ShipmentNumber$<br />
+            Verzend datum:&#160;$this.GetShipment.ShortShipDateString$<br />
         </h4>
     </div>
     <br />
@@ -228,7 +228,7 @@ packagingContent(item) ::= <<
                 Aantal
             </td>
         </tr>
-        $this.PackagingContents:{content|$packagingContent(content)$}$
+        $this.ShipmentPackageWhereDocument.PackagingContents:{content|$packagingContent(content)$}$
         <tr>          
             <td colspan=""3"">
             </td>
@@ -237,7 +237,7 @@ packagingContent(item) ::= <<
             <td colspan=""2"">
             </td>
             <td class=""field"">
-                TOTAAL $this.TotalQuantity$
+                TOTAAL $this.ShipmentPackageWhereDocument.TotalQuantity$
             </td>
         </tr>
         </table>
