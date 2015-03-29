@@ -665,7 +665,7 @@ namespace Allors.Domain
 
 					global::System.DateTime? AssignedDeliveryDate {set;}
 
-					global::System.DateTime DeliveryDate {set;}
+					global::System.DateTime? DeliveryDate {set;}
 
 					global::System.Decimal TotalIncVat {set;}
 
@@ -4036,6 +4036,8 @@ namespace Allors.Domain
 	}
 	public interface RevenueQuantityBreak  : Object, AccessControlledObject 
 	{
+					ProductCategory ProductCategory {set;}
+
 					global::System.Decimal? Through {set;}
 
 					global::System.Decimal? From {set;}
@@ -4043,6 +4045,8 @@ namespace Allors.Domain
 	}
 	public interface RevenueValueBreak  : Object, AccessControlledObject 
 	{
+					ProductCategory ProductCategory {set;}
+
 					global::System.Decimal? ThroughAmount {set;}
 
 					global::System.Decimal? FromAmount {set;}

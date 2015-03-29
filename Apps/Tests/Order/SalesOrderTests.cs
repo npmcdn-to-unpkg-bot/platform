@@ -142,6 +142,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -302,6 +304,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -351,6 +355,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -399,6 +405,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -589,7 +597,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            order.Cancel().Execute();
+            order.Cancel();
 
             this.DatabaseSession.Derive(true);
 
@@ -680,7 +688,7 @@ namespace Allors.Domain
             var pickList = shipment.ShipmentItems[0].ItemIssuancesWhereShipmentItem[0].PickListItem.PickListWherePickListItem;
             Assert.AreEqual(30, pickList.PickListItems[0].RequestedQuantity);
 
-            order1.Cancel().Execute();
+            order1.Cancel();
 
             this.DatabaseSession.Derive(true);
 
@@ -688,7 +696,7 @@ namespace Allors.Domain
             Assert.AreEqual(new PickListObjectStates(this.DatabaseSession).Created, pickList.CurrentObjectState);
             Assert.AreEqual(20, pickList.PickListItems[0].RequestedQuantity);
 
-            order2.Cancel().Execute();
+            order2.Cancel();
 
             this.DatabaseSession.Derive(true);
 
@@ -1398,7 +1406,7 @@ namespace Allors.Domain
             Assert.AreEqual(7, item3.ReservedFromInventoryItem.QuantityCommittedOut);
             Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
 
-            order.Cancel().Execute();
+            order.Cancel();
 
             this.DatabaseSession.Derive(true);
 
@@ -2393,7 +2401,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            order.Cancel().Execute();
+            order.Cancel();
 
             this.DatabaseSession.Derive(true);
 

@@ -18,6 +18,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Linq;
+
 namespace Allors.Domain
 {
     using System;
@@ -122,18 +124,16 @@ namespace Allors.Domain
             {
                 if (!this.ExistSalesInvoiceTemplates)
                 {
-                    Extent<StringTemplate> templates;
                     if (this.ExistOwner && this.Owner.ExistLocale)
                     {
-                        templates = this.Owner.Locale.StringTemplatesWhereLocale;
+                        var template = this.Owner.Locale.StringTemplatesWhereLocale.First(x => x.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).SalesInvoice));
+                        this.AddSalesInvoiceTemplate(template);
                     }
                     else
                     {
-                        templates = Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                        var template = Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale.First(x => x.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).SalesInvoice));
+                        this.AddSalesInvoiceTemplate(template);
                     }
-
-                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new TemplatePurposes(this.Strategy.Session).SalesInvoice);
-                    this.AddSalesInvoiceTemplate(templates.First);
                 }
             }
 
@@ -142,18 +142,16 @@ namespace Allors.Domain
             {
                 if (!this.ExistSalesOrderTemplates)
                 {
-                    Extent<Domain.StringTemplate> templates;
                     if (this.ExistOwner && this.Owner.ExistLocale)
                     {
-                        templates = this.Owner.Locale.StringTemplatesWhereLocale;
+                        var template = this.Owner.Locale.StringTemplatesWhereLocale.First(x => x.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).SalesOrder));
+                        this.AddSalesOrderTemplate(template);
                     }
                     else
                     {
-                        templates = Domain.Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                        var template = Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale.First(x => x.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).SalesOrder));
+                        this.AddSalesOrderTemplate(template);
                     }
-
-                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new Domain.TemplatePurposes(this.Strategy.Session).SalesOrder);
-                    this.AddSalesOrderTemplate(templates.First);
                 }
             }
 
@@ -162,18 +160,16 @@ namespace Allors.Domain
             {
                 if (!this.ExistCustomerShipmentTemplates)
                 {
-                    Extent<Domain.StringTemplate> templates;
                     if (this.ExistOwner && this.Owner.ExistLocale)
                     {
-                        templates = this.Owner.Locale.StringTemplatesWhereLocale;
+                        var template = this.Owner.Locale.StringTemplatesWhereLocale.First(x => x.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).CustomerShipment));
+                        this.AddCustomerShipmentTemplate(template);
                     }
                     else
                     {
-                        templates = Domain.Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                        var template = Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale.First(x => x.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).CustomerShipment));
+                        this.AddCustomerShipmentTemplate(template);
                     }
-
-                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new Domain.TemplatePurposes(this.Strategy.Session).CustomerShipment);
-                    this.AddCustomerShipmentTemplate(templates.First);
                 }
             }
         }

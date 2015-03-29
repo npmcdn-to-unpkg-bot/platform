@@ -451,8 +451,8 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive();
 
-            Assert.IsFalse(organisation.ExistDefaultPaymentMethod);
-            Assert.AreEqual(0, organisation.PaymentMethods.Count);
+            Assert.IsTrue(organisation.ExistDefaultPaymentMethod);
+            Assert.AreEqual(1, organisation.PaymentMethods.Count);
         }
         
         private void InstantiateObjects(ISession session)

@@ -421,7 +421,7 @@ namespace Allors.Domain
         {
             this.InstantiateObjects(this.DatabaseSession);
 
-            var vatRate0 = new VatRates(this.DatabaseSession).FindBy(VatRates.Meta.Rate, 0);
+            var expected = new VatRegimes(this.DatabaseSession).Export.VatRate;
 
             var salesOrder = new SalesOrderBuilder(this.DatabaseSession)
                 .WithTakenByInternalOrganisation(this.internalOrganisation)
@@ -436,7 +436,29 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(salesOrder.VatRegime, orderItem.VatRegime);
-            Assert.AreEqual(vatRate0, orderItem.DerivedVatRate);
+            Assert.AreEqual(expected, orderItem.DerivedVatRate);
+        }
+
+        [Test]
+        public void GivenOrderItemWithoutVatRateAndOrderWithoutVatRegime_WhenDeriving_ThenItemDerivedVatRateIsFromOrderedProduct()
+        {
+            this.InstantiateObjects(this.DatabaseSession);
+
+            var expected = this.good.VatRate;
+
+            var salesOrder = new SalesOrderBuilder(this.DatabaseSession)
+                .WithTakenByInternalOrganisation(this.internalOrganisation)
+                .WithBillToCustomer(this.billToCustomer)
+                .WithShipToAddress(this.shipToContactMechanismMechelen)
+                .Build();
+
+            var orderItem = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(1).Build();
+            salesOrder.AddSalesOrderItem(orderItem);
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.AreEqual(salesOrder.VatRegime, orderItem.VatRegime);
+            Assert.AreEqual(expected, orderItem.DerivedVatRate);
         }
 
         [Test]
@@ -497,19 +519,25 @@ namespace Allors.Domain
             this.InstantiateObjects(this.DatabaseSession);
 
             var builder = new SalesOrderItemBuilder(this.DatabaseSession);
-            builder.Build();
+            var orderItem = builder.Build();
+
+            this.order.AddSalesOrderItem(orderItem);
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
             builder.WithProduct(this.good);
-            builder.Build();
+            orderItem = builder.Build();
+
+            this.order.AddSalesOrderItem(orderItem);
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
             builder.WithProductFeature(this.feature1);
-            builder.Build();
+            orderItem = builder.Build();
+
+            this.order.AddSalesOrderItem(orderItem);
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
         }
@@ -893,6 +921,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1022,6 +1052,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1115,6 +1147,8 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
             foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
             {
                 package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
@@ -1367,17 +1401,20 @@ namespace Allors.Domain
                 .WithSalesRepresentative(salesrep1)
                 .WithCustomer(this.order.ShipToCustomer)
                 .WithProductCategory(childProductCategory)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
                 .WithSalesRepresentative(salesrep2)
                 .WithCustomer(this.order.ShipToCustomer)
                 .WithProductCategory(productCategoryParent)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
                 .WithSalesRepresentative(salesrep3)
                 .WithCustomer(this.order.ShipToCustomer)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             this.good.PrimaryProductCategory = childProductCategory;
@@ -1411,11 +1448,13 @@ namespace Allors.Domain
                 .WithSalesRepresentative(salesrep2)
                 .WithCustomer(this.order.ShipToCustomer)
                 .WithProductCategory(roductCategoryParent)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
                 .WithSalesRepresentative(salesrep3)
                 .WithCustomer(this.order.ShipToCustomer)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             this.good.PrimaryProductCategory = childProductCategory;
@@ -1450,17 +1489,20 @@ namespace Allors.Domain
                 .WithSalesRepresentative(salesrep1)
                 .WithCustomer(this.order.ShipToCustomer)
                 .WithProductCategory(childProductCategory)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
                 .WithSalesRepresentative(salesrep2)
                 .WithCustomer(this.order.ShipToCustomer)
                 .WithProductCategory(productCategoryParent)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
                 .WithSalesRepresentative(salesrep3)
                 .WithCustomer(this.order.ShipToCustomer)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .Build();
 
             var orderItem = new SalesOrderItemBuilder(this.DatabaseSession)

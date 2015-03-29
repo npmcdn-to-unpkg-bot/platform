@@ -34,6 +34,8 @@ namespace Allors.Domain
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
+            this.DatabaseSession.Rollback();
+
             builder.WithSubject("Phonecall");
             communication = builder.Build();
 

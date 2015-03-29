@@ -784,25 +784,15 @@ namespace Allors.Domain
             decimal discountAdjustmentAmount = 0;
             decimal surchargeAdjustmentAmount = 0;
 
-            var internalOrganisation = this.SalesOrderWhereSalesOrderItem.TakenByInternalOrganisation;
+            var internalOrganisation = this.ExistSalesOrderWhereSalesOrderItem ? this.SalesOrderWhereSalesOrderItem.TakenByInternalOrganisation : Singleton.Instance(this.strategy.Session).DefaultInternalOrganisation;
             var customer = this.SalesOrderWhereSalesOrderItem.BillToCustomer;
             var salesOrder = this.SalesOrderWhereSalesOrderItem;
 
-            var baseprices = new PriceComponent[0];
-            if (this.ExistProduct && this.Product.ExistBasePrices)
-            {
-                baseprices = Product.BasePrices;
-            }
+            var priceComponents = this.GetPriceComponents(internalOrganisation);
 
-            if (this.ExistProductFeature && this.ProductFeature.ExistBasePrices)
+            foreach (var priceComponent in priceComponents)
             {
-                baseprices = ProductFeature.BasePrices;
-            }
-
-            foreach (BasePrice priceComponent in baseprices)
-            {
-                if (priceComponent.FromDate <= this.SalesOrderWhereSalesOrderItem.OrderDate &&
-                    (!priceComponent.ExistThroughDate || priceComponent.ThroughDate >= this.SalesOrderWhereSalesOrderItem.OrderDate))
+                if (priceComponent.Strategy.ObjectType.Equals(BasePrice.Meta.ObjectType))
                 {
                     if (PriceComponents.IsEligible(new PriceComponents.IsEligibleParams
                     {
@@ -818,7 +808,7 @@ namespace Allors.Domain
                         {
                             if (this.UnitBasePrice == 0 || priceComponent.Price < this.UnitBasePrice)
                             {
-                                this.UnitBasePrice = priceComponent.Price;
+                                this.UnitBasePrice = priceComponent.Price.HasValue ? priceComponent.Price.Value : 0;
 
                                 this.RemoveCurrentPriceComponents();
                                 this.AddCurrentPriceComponent(priceComponent);
@@ -864,7 +854,7 @@ namespace Allors.Domain
                     partyPackageRevenuesHistories.Filter.AddEquals(PartyPackageRevenueHistories.Meta.InternalOrganisation, internalOrganisation);
                 }
 
-                var priceComponents = this.GetPriceComponents(internalOrganisation);
+                //var priceComponents = this.GetPriceComponents(internalOrganisation);
 
                 var revenueBreakDiscount = 0M;
                 var revenueBreakSurcharge = 0M;
@@ -1281,14 +1271,14 @@ namespace Allors.Domain
 
         public void AppsOnDeriveVatRate(IDerivation derivation)
         {
-            if (this.ExistProduct || this.ExistProductFeature)
-            {
-                this.DerivedVatRate = this.ExistProduct ? this.Product.VatRate : this.ProductFeature.VatRate;
-            }
-
             if (!this.ExistDerivedVatRate && this.ExistVatRegime && this.VatRegime.ExistVatRate)
             {
                 this.DerivedVatRate = this.VatRegime.VatRate;
+            }
+
+            if (!this.ExistDerivedVatRate &&  (this.ExistProduct || this.ExistProductFeature))
+            {
+                this.DerivedVatRate = this.ExistProduct ? this.Product.VatRate : this.ProductFeature.VatRate;
             }
         }
 

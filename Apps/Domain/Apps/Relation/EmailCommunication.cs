@@ -36,7 +36,10 @@ namespace Allors.Domain
         public void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
-            this.AddFromParty(this.Originator.PartyWherePersonalEmailAddress);
+            if (this.ExistOriginator)
+            {
+                this.AddFromParty(this.Originator.PartyWherePersonalEmailAddress);
+            }
         }
 
         public void AppsOnDeriveToParties()

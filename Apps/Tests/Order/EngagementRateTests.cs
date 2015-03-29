@@ -19,6 +19,8 @@
 // <summary>Defines the MediaTests type.</summary>
 //-------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Allors.Domain
 {
     using NUnit.Framework;
@@ -30,21 +32,28 @@ namespace Allors.Domain
         public void GivenEngagementRate_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new EngagementRateBuilder(this.DatabaseSession);
-            var engagementRate = builder.Build();
+            builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
             builder.WithRatingType(new RatingTypes(this.DatabaseSession).Poor);
-            engagementRate = builder.Build();
+            builder.Build();
             
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
             builder.WithBillingRate(10M);
-            engagementRate = builder.Build();
+            builder.Build();
+
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithFromDate(DateTime.UtcNow);
+            builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
