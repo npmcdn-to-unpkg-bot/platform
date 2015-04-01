@@ -51,7 +51,7 @@ namespace Allors.Domain
             foreach (InternalOrganisationRevenue internalOrganisationRevenue in internalOrganisationRevenues)
             {
                 internalOrganisationRevenue.Revenue = 0;
-                var date = DateTimeFactory.Create(internalOrganisationRevenue.Year, internalOrganisationRevenue.Month, 01);
+                var date = DateTimeFactory.CreateDate(internalOrganisationRevenue.Year, internalOrganisationRevenue.Month, 01);
 
                 Dictionary<DateTime, InternalOrganisationRevenue> internalOrganisationRevenuesByPeriod;
                 if (!internalOrganisationRevenuesByPeriodByInternalOrganisation.TryGetValue(internalOrganisationRevenue.InternalOrganisation, out internalOrganisationRevenuesByPeriod))
@@ -79,7 +79,7 @@ namespace Allors.Domain
                     year = salesInvoice.InvoiceDate.Year;
                 }
 
-                var date = DateTimeFactory.Create(salesInvoice.InvoiceDate.Year, salesInvoice.InvoiceDate.Month, 01);
+                var date = DateTimeFactory.CreateDate(salesInvoice.InvoiceDate.Year, salesInvoice.InvoiceDate.Month, 01);
 
                 foreach (SalesInvoiceItem salesInvoiceItem in salesInvoice.SalesInvoiceItems)
                 {
