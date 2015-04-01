@@ -73,13 +73,13 @@ namespace Allors.Domain
         public string DeriveNextShipmentNumber()
         {
             var shipmentNumber = this.OutgoingShipmentCounter.NextValue();
-            return string.Format(this.OutgoingShipmentNumberPrefix, shipmentNumber);
+            return string.Concat(this.OutgoingShipmentNumberPrefix, shipmentNumber);
         }
 
         public string DeriveNextSalesOrderNumber()
         {
             var salesOrderNumber = this.SalesOrderCounter.NextValue();
-            return string.Format(this.SalesOrderNumberPrefix, salesOrderNumber);
+            return string.Concat(this.SalesOrderNumberPrefix, salesOrderNumber);
         }
 
         public void AppsOnBuild(ObjectOnBuild method)

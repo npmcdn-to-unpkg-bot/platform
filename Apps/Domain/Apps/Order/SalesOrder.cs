@@ -1098,6 +1098,7 @@ namespace Allors.Domain
             if (pendingShipment == null)
             {
                 pendingShipment = new CustomerShipmentBuilder(this.Strategy.Session)
+                    .WithBillFromInternalOrganisation(this.TakenByInternalOrganisation)
                     .WithShipFromParty(this.TakenByInternalOrganisation)
                     .WithShipFromAddress(this.TakenByInternalOrganisation.ShippingAddress)
                     .WithBillToParty(this.BillToCustomer)

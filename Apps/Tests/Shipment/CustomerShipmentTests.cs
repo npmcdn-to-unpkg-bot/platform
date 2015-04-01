@@ -1056,6 +1056,8 @@ namespace Allors.Domain
                 .WithOwner(Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation)
                 .WithDefaultShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
                 .WithDefaultCarrier(new Carriers(this.DatabaseSession).Fedex)
+                .WithSalesOrderNumberPrefix("")
+                .WithOutgoingShipmentNumberPrefix("")
                 .Build();
 
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
@@ -1172,6 +1174,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var shipment1 = new CustomerShipmentBuilder(this.DatabaseSession)
+                .WithBillFromInternalOrganisation(internalOrganisation)
                 .WithShipToParty(customer)
                 .WithShipToAddress(new PostalAddresses(this.DatabaseSession).Extent().First)
                 .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Boat)
