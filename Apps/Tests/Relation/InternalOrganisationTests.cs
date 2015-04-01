@@ -31,6 +31,7 @@ namespace Allors.Domain
     {
         private OwnBankAccount ownBankAccount;
         private Currency euro;
+        private PartyContactMechanism billingAddress;
 
         [SetUp]
         public override void Init()
@@ -45,6 +46,12 @@ namespace Allors.Domain
             this.ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
                 .WithDescription("BE23 3300 6167 6391")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
+                .Build();
+
+            this.billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(new WebAddressBuilder(this.DatabaseSession).WithElectronicAddressString("billfrom").Build())
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -73,6 +80,13 @@ namespace Allors.Domain
             builder.WithName("Organisation");
             builder.Build();
 
+            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+
+            this.DatabaseSession.Rollback();
+
+            builder.WithPartyContactMechanism(this.billingAddress);
+            builder.Build();
+
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
@@ -87,6 +101,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -105,6 +120,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -123,6 +139,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -141,6 +158,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -159,6 +177,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -177,6 +196,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -195,6 +215,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -215,6 +236,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -235,6 +257,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -260,6 +283,7 @@ namespace Allors.Domain
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithPreferredCurrency(this.euro)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -283,6 +307,7 @@ namespace Allors.Domain
                 .WithName("Internal")
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithPreferredCurrency(this.euro)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             organisation.StartNewFiscalYear();
@@ -332,6 +357,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithFiscalYearStartMonth(05)
                 .WithFiscalYearStartDay(15)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             organisation.StartNewFiscalYear();
@@ -387,6 +413,7 @@ namespace Allors.Domain
                 .WithPreferredCurrency(this.euro)
                 .WithFiscalYearStartMonth(05)
                 .WithFiscalYearStartDay(15)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             organisation.StartNewFiscalYear();
@@ -408,6 +435,7 @@ namespace Allors.Domain
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithPreferredCurrency(this.euro)
                 .WithDefaultPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -426,6 +454,7 @@ namespace Allors.Domain
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithPreferredCurrency(this.euro)
                 .WithPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -443,6 +472,7 @@ namespace Allors.Domain
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithPreferredCurrency(this.euro)
                 .WithPaymentMethod(this.ownBankAccount)
+                .WithPartyContactMechanism(this.billingAddress)
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -459,6 +489,7 @@ namespace Allors.Domain
         {
             this.ownBankAccount = (OwnBankAccount)session.Instantiate(this.ownBankAccount);
             this.euro = (Currency)session.Instantiate(this.euro);
+            this.billingAddress = (PartyContactMechanism)session.Instantiate(this.billingAddress);
         }
     }
 }

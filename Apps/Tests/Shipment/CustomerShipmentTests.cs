@@ -393,19 +393,73 @@ namespace Allors.Domain
         [Test]
         public void GivenCustomerShipment_WhenObjectStateIsShipped_ThenCheckTransitions()
         {
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            var assessable = new VatRegimes(this.DatabaseSession).Assessable;
+            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(0).Build();
+            assessable.VatRate = vatRate21;
 
-            Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("orderProcessor", "Forms"), new string[0]);
-
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-            var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
-                .WithShipToParty(customer)
-                .WithShipToAddress(shipToAddress)
-                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
+            var good1 = new GoodBuilder(this.DatabaseSession)
+                .WithSku("10101")
+                .WithVatRate(vatRate21)
+                .WithName("good1")
+                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
                 .Build();
 
+            var inventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithGood(good1).Build();
+            inventoryItem.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(100).WithReason(new VarianceReasons(this.DatabaseSession).Ruined).Build());
+
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            var mechelenAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+
+            var shipToMechelen = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(mechelenAddress)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).ShippingAddress)
+                .WithUseAsDefault(true)
+                .Build();
+
+            var billToMechelen = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(mechelenAddress)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
+                .Build();
+
+            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").WithPartyContactMechanism(shipToMechelen).WithPartyContactMechanism(billToMechelen).Build();
+            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).Build();
+
+            var order = new SalesOrderBuilder(this.DatabaseSession)
+                .WithBillToCustomer(customer)
+                .WithShipToCustomer(customer)
+                .WithVatRegime(assessable)
+                .Build();
+
+            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            order.AddSalesOrderItem(item1);
+
             this.DatabaseSession.Derive(true);
+
+            order.Confirm();
+
+            this.DatabaseSession.Derive(true);
+
+            var shipment = (CustomerShipment)item1.OrderShipmentsWhereSalesOrderItem[0].ShipmentItem.ShipmentWhereShipmentItem;
+            
+            var pickList = shipment.ShipmentItems[0].ItemIssuancesWhereShipmentItem[0].PickListItem.PickListWherePickListItem;
+            pickList.Picker = new Persons(this.DatabaseSession).FindBy(Persons.Meta.LastName, "orderProcessor");
+
+            pickList.SetPicked();
+
+            var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
+            foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
+            {
+                package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
+            }
+
+            this.DatabaseSession.Derive(true);
+
+            shipment.Ship();
 
             var acl = new AccessControlList(shipment, new Users(this.DatabaseSession).GetCurrentUser());
             Assert.AreEqual(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped, shipment.CurrentObjectState);
