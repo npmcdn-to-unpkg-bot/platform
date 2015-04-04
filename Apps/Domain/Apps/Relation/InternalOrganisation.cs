@@ -47,19 +47,19 @@ namespace Allors.Domain
         public string DeriveNextPurchaseInvoiceNumber()
         {
             var purchaseInvoiceNumber = this.PurchaseInvoiceCounter.NextValue();
-            return string.Format(this.PurchaseInvoiceNumberPrefix, purchaseInvoiceNumber);
+            return string.Concat(this.PurchaseInvoiceNumberPrefix, purchaseInvoiceNumber);
         }
 
         public string DeriveNextShipmentNumber()
         {
             var shipmentNumber = this.IncomingShipmentCounter.NextValue();
-            return string.Format(this.IncomingShipmentNumberPrefix, shipmentNumber);
+            return string.Concat(this.IncomingShipmentNumberPrefix, shipmentNumber);
         }
 
         public string DeriveNextPurchaseOrderNumber()
         {
             var purchaseOrderNumber = this.PurchaseInvoiceCounter.NextValue();
-            return string.Format(this.PurchaseOrderNumberPrefix, purchaseOrderNumber);
+            return string.Concat(this.PurchaseOrderNumberPrefix, purchaseOrderNumber);
         }
 
         public void AppsOnBuild(ObjectOnBuild method)

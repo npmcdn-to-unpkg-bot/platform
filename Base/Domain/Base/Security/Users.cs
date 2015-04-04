@@ -64,7 +64,7 @@ namespace Allors.Domain
             var cached = (CachedUser)this.Session[SessionKey];
             if (cached == null || !userId.ToLower().Equals(cached.UserId))
             {
-                var user = this.FindBy(Meta.UserName, userId.ToLowerInvariant());
+                var user = this.FindBy(Meta.UserName, userId);
 
                 if (user == null)
                 {
@@ -83,7 +83,7 @@ namespace Allors.Domain
             var cached = (CachedUser)this.Session[SessionKey];
             if (cached == null || !userId.ToLower().Equals(cached.UserId))
             {
-                var user = this.FindBy(Meta.UserName, userId.ToLowerInvariant());
+                var user = this.FindBy(Meta.UserName, userId);
 
                 if (user == null)
                 {
