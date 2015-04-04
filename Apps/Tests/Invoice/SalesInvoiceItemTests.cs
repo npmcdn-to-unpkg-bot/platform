@@ -2280,18 +2280,21 @@ namespace Allors.Domain
             var childProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("child").WithParent(parentProductCategory).Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep1)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .WithProductCategory(childProductCategory)
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep2)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .WithProductCategory(parentProductCategory)
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep3)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .Build();
@@ -2326,18 +2329,21 @@ namespace Allors.Domain
             var childProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("child").WithParent(parentProductCategory).Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep1)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .WithProductCategory(childProductCategory)
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep2)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .WithProductCategory(parentProductCategory)
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep3)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .Build();
@@ -2372,18 +2378,21 @@ namespace Allors.Domain
             var childProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("child").WithParent(parentProductCategory).Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep1)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .WithProductCategory(childProductCategory)
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep2)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .WithProductCategory(parentProductCategory)
                 .Build();
 
             new SalesRepRelationshipBuilder(this.DatabaseSession)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithSalesRepresentative(salesrep3)
                 .WithCustomer(this.invoice.BillToCustomer)
                 .Build();

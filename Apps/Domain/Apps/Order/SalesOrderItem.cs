@@ -790,6 +790,22 @@ namespace Allors.Domain
 
             var priceComponents = this.GetPriceComponents(internalOrganisation);
 
+            PartyRevenueHistory partyRevenueHistory = null;
+            Dictionary<ProductCategory, PartyProductCategoryRevenueHistory> partyProductCategoryRevenueHistoryByProductCategory = null;
+            Extent<PartyPackageRevenueHistory> partyPackageRevenuesHistories = null;
+
+            if (customer != null)
+            {
+                var partyRevenueHistories = customer.PartyRevenueHistoriesWhereParty;
+                partyRevenueHistories.Filter.AddEquals(PartyRevenueHistories.Meta.InternalOrganisation, internalOrganisation);
+                partyRevenueHistory = partyRevenueHistories.First;
+
+                partyProductCategoryRevenueHistoryByProductCategory = PartyProductCategoryRevenueHistories.PartyProductCategoryRevenueHistoryByProductCategory(internalOrganisation, customer);
+
+                partyPackageRevenuesHistories = customer.PartyPackageRevenueHistoriesWhereParty;
+                partyPackageRevenuesHistories.Filter.AddEquals(PartyPackageRevenueHistories.Meta.InternalOrganisation, internalOrganisation);
+            }
+
             foreach (var priceComponent in priceComponents)
             {
                 if (priceComponent.Strategy.ObjectType.Equals(BasePrice.Meta.ObjectType))
@@ -801,7 +817,10 @@ namespace Allors.Domain
                         Product = this.Product, 
                         SalesOrder = salesOrder, 
                         QuantityOrdered = quantityOrdered, 
-                        ValueOrdered = totalBasePrice
+                        ValueOrdered = totalBasePrice,
+                        PartyPackageRevenueHistoryList = partyPackageRevenuesHistories, 
+                        PartyProductCategoryRevenueHistoryByProductCategory = partyProductCategoryRevenueHistoryByProductCategory, 
+                        PartyRevenueHistory = partyRevenueHistory
                     }))
                     {
                         if (priceComponent.ExistPrice)
@@ -838,22 +857,6 @@ namespace Allors.Domain
 
             if (!this.ExistActualUnitPrice)
             {
-                PartyRevenueHistory partyRevenueHistory = null;
-                Dictionary<ProductCategory, PartyProductCategoryRevenueHistory> partyProductCategoryRevenueHistoryByProductCategory = null;
-                Extent<PartyPackageRevenueHistory> partyPackageRevenuesHistories = null;
-
-                if (customer != null)
-                {
-                    var partyRevenueHistories = customer.PartyRevenueHistoriesWhereParty;
-                    partyRevenueHistories.Filter.AddEquals(PartyRevenueHistories.Meta.InternalOrganisation, internalOrganisation);
-                    partyRevenueHistory = partyRevenueHistories.First;
-
-                    partyProductCategoryRevenueHistoryByProductCategory = PartyProductCategoryRevenueHistories.PartyProductCategoryRevenueHistoryByProductCategory(internalOrganisation, customer);
-
-                    partyPackageRevenuesHistories = customer.PartyPackageRevenueHistoriesWhereParty;
-                    partyPackageRevenuesHistories.Filter.AddEquals(PartyPackageRevenueHistories.Meta.InternalOrganisation, internalOrganisation);
-                }
-
                 //var priceComponents = this.GetPriceComponents(internalOrganisation);
 
                 var revenueBreakDiscount = 0M;

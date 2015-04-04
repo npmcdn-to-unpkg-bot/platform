@@ -1245,6 +1245,15 @@ namespace Allors.Domain
             var belgium = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];
             var euro = belgium.Currency;
 
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            var mechelenAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+
+            var billToMechelen = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(mechelenAddress)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
+                .Build();
+
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
@@ -1261,6 +1270,7 @@ namespace Allors.Domain
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Operations)
                 .WithPreferredCurrency(euro)
                 .WithDefaultPaymentMethod(ownBankAccount)
+                .WithPartyContactMechanism(billToMechelen)
                 .Build();
 
             new EmploymentBuilder(this.DatabaseSession)
@@ -1268,8 +1278,6 @@ namespace Allors.Domain
                 .WithEmployee(orderProcessor2)
                 .WithEmployer(internalOrganisation)
                 .Build();
-
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
 
             var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
