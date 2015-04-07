@@ -349,7 +349,7 @@ $if(item.ExistMessage || item.ExistAssignedShipToParty || item.ExistAssignedShip
             $item.ItemDifferentShippingParty.PartyName;format=""xml-encode""$ &#xA0;
         $endif$
         $if(item.ItemDifferentShippingAddress)$
-            $item.ItemDifferentShippingAddress.DisplayName;format=""xml-encode""$  
+            $item.ItemDifferentShippingAddress.Name;format=""xml-encode""$  
         $endif$
     $endif$
     </td>
@@ -685,7 +685,7 @@ $if(item.ExistMessage || item.ExistAssignedShipToParty || item.ExistAssignedShip
             $item.ItemDifferentShippingParty.Name;format=""xml-encode""$ &#xA0;
         $endif$
         $if(item.ItemDifferentShippingAddress)$
-            $item.ItemDifferentShippingAddress.DisplayName;format=""xml-encode""$  
+            $item.ItemDifferentShippingAddress.Name;format=""xml-encode""$  
         $endif$
     $endif$
     </td>
