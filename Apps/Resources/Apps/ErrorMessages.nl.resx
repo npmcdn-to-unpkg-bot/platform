@@ -210,4 +210,13 @@
   <data name="SalesOrderItemProductChangeNotAllowed" xml:space="preserve">
     <value>productwissel niet toegestaan, gebruik annuleer orderlijn in de plaats</value>
   </data>
+  <data name="SalesOrderItemQuantityToShipNowNotAvailable" xml:space="preserve">
+    <value>Het aantal dat nu verzonden moet worden is niet beschikbaar</value>
+  </data>
+  <data name="SalesOrderItemQuantityToShipNowIsLargerThanQuantityOrdered" xml:space="preserve">
+    <value>Het aantal dat nu verzonden moet worden is meer dan het orderitem aantal</value>
+  </data>
+  <data name="SalesOrderItemQuantityToShipNowIsLargerThanQuantityRemaining" xml:space="preserve">
+    <value>Het aantal dat nu verzonden moet worden is meer dan het resterende aantal dat nog verzonden moet worden</value>
+  </data>
 </root>

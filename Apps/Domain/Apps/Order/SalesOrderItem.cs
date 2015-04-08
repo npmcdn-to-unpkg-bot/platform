@@ -262,6 +262,11 @@ namespace Allors.Domain
             {
                 this.QuantityShortFalled = 0;
             }
+
+            if (!this.ExistQuantityShipNow)
+            {
+                this.QuantityShipNow = 0;
+            }
         }
 
         public void AppsOnPreDerive(ObjectOnPreDerive method)
@@ -316,6 +321,13 @@ namespace Allors.Domain
             this.DeriveDeliveryDate(derivation);
             this.DeriveVatRegime(derivation);
             this.DeriveIsValidOrderItem(derivation);
+
+            if (this.QuantityShipNow != 0)
+            {
+                this.AppsShipNow(derivation);
+                this.ReservedFromInventoryItem.OnDerive(x => x.WithDerivation(derivation));
+                this.SalesOrderWhereSalesOrderItem.OnDerive(x => x.WithDerivation(derivation));
+            }
 
             this.DeriveCurrentObjectState(derivation);
         }
@@ -1199,39 +1211,39 @@ namespace Allors.Domain
             this.QuantityShortFalled -= quantity;
         }
 
-        public void AppsShipManually(decimal quantity)
-        {
-            // TODO: @(martien) afstemmen met Koen
-            //if (this.SalesOrderWhereSalesOrderItem.ScheduledManually)
-            //{
-            //    if (quantity > this.ReservedFromInventoryItem.AvailableToPromise)
-            //    {
-            //        derivation.DerivationLog.AddError(new DerivationErrorGeneric(new DerivationRole(this, SalesOrderItems.Meta.QuantityRequestsShipping), "Quantity not available."));
-            //    }
-            //    else if (quantity > this.QuantityOrdered)
-            //    {
-            //        derivation.DerivationLog.AddError(new DerivationErrorGeneric(new DerivationRole(this, SalesOrderItems.Meta.QuantityRequestsShipping), "Quantity is more than is ordered."));
-            //    }
-            //    else if (quantity > this.QuantityOrdered - this.QuantityShipped - this.QuantityPendingShipment + this.QuantityReturned)
-            //    {
-            //        derivation.DerivationLog.AddError(new DerivationErrorGeneric(new DerivationRole(this, SalesOrderItems.Meta.QuantityRequestsShipping), "Quantity is more than remaining."));
-            //    }
-            //    else
-            //    {
-            //        if (quantity > 0)
-            //        {
-            //            this.QuantityReserved += quantity;
-            //            this.QuantityRequestsShipping += quantity;
-            //        }
-            //        else
-            //        {
-            //            this.DecreasePendingShipmentQuantity(derivation, 0 - quantity);
-            //        }
+        public void AppsShipNow(IDerivation derivation)
+        {            
+            if (this.SalesOrderWhereSalesOrderItem.ScheduledManually)
+            {
+                var quantity = this.QuantityShipNow.HasValue ? this.QuantityShipNow.Value : 0;
 
-            //        this.ReservedFromInventoryItem.Derive(x=>x.WithDerivation(derivation));
-            //        this.SalesOrderWhereSalesOrderItem.Derive(x=>x.WithDerivation(derivation));
-            //    }
-            //}
+                if (quantity > this.ReservedFromInventoryItem.AvailableToPromise)
+                {
+                    derivation.Log.AddError(this, SalesOrderItems.Meta.QuantityShipNow, ErrorMessages.SalesOrderItemQuantityToShipNowNotAvailable);
+                }
+                else if (quantity > this.QuantityOrdered)
+                {
+                    derivation.Log.AddError(this, SalesOrderItems.Meta.QuantityShipNow, ErrorMessages.SalesOrderItemQuantityToShipNowIsLargerThanQuantityOrdered);
+                }
+                else if (quantity > this.QuantityOrdered - this.QuantityShipped - this.QuantityPendingShipment + this.QuantityReturned)
+                {
+                    derivation.Log.AddError(this, SalesOrderItems.Meta.QuantityShipNow, ErrorMessages.SalesOrderItemQuantityToShipNowIsLargerThanQuantityRemaining);
+                }
+                else
+                {
+                    if (quantity > 0)
+                    {
+                        this.QuantityReserved += quantity;
+                        this.QuantityRequestsShipping += quantity;
+                    }
+                    else
+                    {
+                        this.DecreasePendingShipmentQuantity(derivation, 0 - quantity);
+                    }
+
+                    this.QuantityShipNow = 0;
+                }
+            }
         }
 
         public void AppsOnDeriveSubtractFromShipping(IDerivation derivation, decimal quantity)

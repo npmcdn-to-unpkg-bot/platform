@@ -4316,6 +4316,8 @@ namespace Allors.Domain
 
 					NonSerializedInventoryItem PreviousReservedFromInventoryItem {set;}
 
+					global::System.Decimal? QuantityShipNow {set;}
+
 					global::System.Decimal? RequiredMarkupPercentage {set;}
 
 					global::System.Decimal QuantityShipped {set;}

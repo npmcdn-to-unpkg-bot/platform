@@ -557,6 +557,12 @@ namespace Allors.Domain
         {
             this.InstantiateObjects(this.DatabaseSession);
 
+            var salesOrder = new SalesOrderBuilder(this.DatabaseSession)
+                .WithTakenByInternalOrganisation(this.internalOrganisation)
+                .WithShipToAddress(this.shipToContactMechanismMechelen)
+                .WithBillToCustomer(this.billToCustomer)
+                .Build();
+
             var productOrderItem = new SalesOrderItemBuilder(this.DatabaseSession)
                 .WithProduct(this.good)
                 .WithQuantityOrdered(3)
@@ -570,6 +576,7 @@ namespace Allors.Domain
                 .Build();
 
             productOrderItem.AddOrderedWithFeature(productFeatureOrderItem);
+            salesOrder.AddSalesOrderItem(productOrderItem);
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
@@ -1815,22 +1822,18 @@ namespace Allors.Domain
                 .Build();
 
             order1.AddSalesOrderItem(item1);
-
             this.DatabaseSession.Derive(true); 
             
             order1.Confirm();
-
             this.DatabaseSession.Derive(true);
 
-            item1.ShipManually(5);
-
+            item1.QuantityShipNow = 5;          
             var derivationLog = this.DatabaseSession.Derive();
 
             Assert.IsTrue(derivationLog.HasErrors);
-            Assert.Contains(SalesOrderItems.Meta.QuantityRequestsShipping, derivationLog.Errors[0].RoleTypes);
+            Assert.Contains(SalesOrderItems.Meta.QuantityShipNow, derivationLog.Errors[0].RoleTypes);
 
-            item1.ShipManually(3);
-
+            item1.QuantityShipNow = 3;
             derivationLog = this.DatabaseSession.Derive();
 
             Assert.IsFalse(derivationLog.HasErrors);
@@ -1871,7 +1874,7 @@ namespace Allors.Domain
             
             this.DatabaseSession.Derive(true);
 
-            item.ShipManually(10);
+            item.QuantityShipNow = 10;
 
             this.DatabaseSession.Derive(true);
 
@@ -1882,10 +1885,9 @@ namespace Allors.Domain
             Assert.AreEqual(10, pickList.PickListItems[0].RequestedQuantity);
 
             pickList.Picker = new Persons(this.DatabaseSession).FindBy(Persons.Meta.LastName, "orderProcessor");
-            
-            this.DatabaseSession.Derive(true);
 
-            item.ShipManually(-7);
+            item.QuantityShipNow = -7;
+            this.DatabaseSession.Derive(true);
 
             var negativePickList = order1.ShipToCustomer.PickListsWhereShipToParty[1];
 

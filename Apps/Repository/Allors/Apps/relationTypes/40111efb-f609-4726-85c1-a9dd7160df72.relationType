@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="40111efb-f609-4726-85c1-a9dd7160df72">
+  <associationType id="1f0c1c76-4e49-4c31-9b35-cfa5d842039b">
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <roleType id="4e3983f7-09db-4e06-bf47-a2a4dbcdfa40">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesShipNow</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityShipNow</singularName>
+  </roleType>
+</relationType>
