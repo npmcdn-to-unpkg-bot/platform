@@ -84,6 +84,11 @@ namespace Allors.Web.Mvc
 
                 return this.authenticatedUser;
             }
+
+            set
+            {
+                this.authenticatedUser = value;
+            }
         }
 
         protected override void Initialize(RequestContext requestContext)
