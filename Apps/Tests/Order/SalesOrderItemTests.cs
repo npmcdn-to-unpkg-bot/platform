@@ -577,6 +577,7 @@ namespace Allors.Domain
 
             productOrderItem.AddOrderedWithFeature(productFeatureOrderItem);
             salesOrder.AddSalesOrderItem(productOrderItem);
+            salesOrder.AddSalesOrderItem(productFeatureOrderItem);
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
@@ -1358,39 +1359,65 @@ namespace Allors.Domain
         [Test]
         public void GivenConfirmedOrderItemForGood_WhenQuantityOrderedIsDecreased_ThenQuantityMayNotBeLessThanQuantityShippped()
         {
-            throw new Exception("TODO");
+            this.InstantiateObjects(this.DatabaseSession);
+            
+            var manual = new OrderKindBuilder(this.DatabaseSession).WithDescription("manual").WithScheduleManually(true).Build();
 
-            //this.InstantiateObjects(this.DatabaseSession);
+            var testPart = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            var testgood = new GoodBuilder(this.DatabaseSession)
+                .WithSku("10101")
+                .WithVatRate(this.vatRate21)
+                .WithName("good1")
+                .WithFinishedGood(testPart)
+                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+                .Build();
 
-            //var testPart = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            //var testgood = new GoodBuilder(this.DatabaseSession)
-            //    .WithSku("10101")
-            //    .WithVatRate(this.vatRate21)
-            //    .WithName("good1")
-            //    .WithFinishedGood(testPart)
-            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-            //    .Build();
+            var good1InventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithPart(testPart).Build();
+            good1InventoryItem.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(110).WithReason(new VarianceReasons(this.DatabaseSession).Unknown).Build());
 
-            //var item = new SalesOrderItemBuilder(this.DatabaseSession)
-            //    .WithProduct(testgood)
-            //    .WithQuantityShipped(115)
-            //    .WithQuantityOrdered(120)
-            //    .WithActualUnitPrice(5)
-            //    .Build();
+            var item = new SalesOrderItemBuilder(this.DatabaseSession)
+                .WithProduct(testgood)
+                .WithQuantityOrdered(120)
+                .WithActualUnitPrice(5)
+                .Build();
 
-            //this.order.AddSalesOrderItem(item);
+            this.order.AddSalesOrderItem(item);
+            this.order.OrderKind = manual;
+            this.DatabaseSession.Derive(true);
 
-            //this.DatabaseSession.Derive(true);
+            this.order.Confirm();
+            this.DatabaseSession.Derive(true);
 
-            //this.order.Confirm();
+            item.QuantityShipNow = 100;
+            this.DatabaseSession.Derive(true);
 
-            //this.DatabaseSession.Derive(true);
+            var shipment = (CustomerShipment)this.order.ShipToAddress.ShipmentsWhereShipToAddress[0];
 
-            //item.QuantityOrdered = 110;
+            var pickList = shipment.ShipmentItems[0].ItemIssuancesWhereShipmentItem[0].PickListItem.PickListWherePickListItem;
+            pickList.Picker = new Persons(this.DatabaseSession).FindBy(Persons.Meta.LastName, "orderProcessor");
+            pickList.SetPicked();
 
-            //var derivationLog = this.DatabaseSession.Derive();
+            this.DatabaseSession.Derive(true);
 
-            //Assert.IsTrue(derivationLog.HasErrors);
+            var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
+            shipment.AddShipmentPackage(package);
+
+            foreach (ShipmentItem shipmentItem in shipment.ShipmentItems)
+            {
+                package.AddPackagingContent(new PackagingContentBuilder(this.DatabaseSession).WithShipmentItem(shipmentItem).WithQuantity(shipmentItem.Quantity).Build());
+            }
+
+            this.DatabaseSession.Derive(true);
+
+            shipment.Ship();
+            this.DatabaseSession.Derive(true);
+
+            Assert.AreEqual(100, item.QuantityShipped);
+
+            item.QuantityOrdered = 90;
+            var derivationLog = this.DatabaseSession.Derive();
+
+            Assert.IsTrue(derivationLog.HasErrors);
         }
 
         [Test]

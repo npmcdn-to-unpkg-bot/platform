@@ -682,7 +682,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsCancelOrder(OrderCancel method)
+        public void AppsCancel(OrderCancel method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(this.Strategy.Session).Cancelled;
         }

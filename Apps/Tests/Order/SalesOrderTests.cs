@@ -190,12 +190,21 @@ namespace Allors.Domain
             var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
             var salesRep2 = new PersonBuilder(this.DatabaseSession).WithLastName("SalesRep2").WithUserName("salesRep2").Build();
 
+            var address1 = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+
+            var billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(address1)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
+                .Build();
+
             var employer2 = new InternalOrganisationBuilder(this.DatabaseSession)
                 .WithName("employer2")
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
                 .WithPreferredCurrency(euro)
                 .WithDefaultPaymentMethod(ownBankAccount)
+                .WithPartyContactMechanism(billingAddress)
                 .Build();
 
             new EmploymentBuilder(this.DatabaseSession).WithEmployee(salesRep2).WithEmployer(employer2).WithFromDate(DateTime.UtcNow).Build();
@@ -1931,7 +1940,6 @@ namespace Allors.Domain
                 .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
                 .Build();
 
-            Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("customercontact", "Forms"), new string[0]);
             var acl = new AccessControlList(order, new Users(this.DatabaseSession).GetCurrentUser());
 
             Assert.IsTrue(acl.CanWrite(SalesOrders.Meta.Comment));
@@ -3319,24 +3327,18 @@ namespace Allors.Domain
                 .WithActualUnitPrice(5)
                 .Build();
 
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession)
-                .WithProduct(good2)
-                .WithQuantityOrdered(3)
-                .WithActualUnitPrice(5)
-                .Build();
-
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession)
-                .WithProduct(good3)
-                .WithQuantityOrdered(3)
-                .WithActualUnitPrice(5)
-                .Build();
-
             order.AddSalesOrderItem(item1);
 
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(1, order.SalesReps.Count);
             Assert.Contains(salesrep1, order.SalesReps);
+
+            var item2 = new SalesOrderItemBuilder(this.DatabaseSession)
+                .WithProduct(good2)
+                .WithQuantityOrdered(3)
+                .WithActualUnitPrice(5)
+                .Build();
 
             order.AddSalesOrderItem(item2);
 
@@ -3345,6 +3347,12 @@ namespace Allors.Domain
             Assert.AreEqual(2, order.SalesReps.Count);
             Assert.Contains(salesrep1, order.SalesReps);
             Assert.Contains(salesrep2, order.SalesReps);
+
+            var item3 = new SalesOrderItemBuilder(this.DatabaseSession)
+                .WithProduct(good3)
+                .WithQuantityOrdered(3)
+                .WithActualUnitPrice(5)
+                .Build();
 
             order.AddSalesOrderItem(item3);
 

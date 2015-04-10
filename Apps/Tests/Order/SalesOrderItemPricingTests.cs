@@ -364,8 +364,8 @@ namespace Allors.Domain
         public void GivenOrderItemWithBasePriceForPartyProductCategoryRevenueValueBreak_WhenDeriving_ThenUseBasePriceForProductCategoryRevenueValueBreak()
         {
             const decimal quantityOrdered1 = 3;
-            const decimal amount1 = 1;
-            const decimal amount2 = 3;
+            const decimal priceIs1 = 1;
+            const decimal priceIs3 = 3;
 
             var break1 = new RevenueValueBreakBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).WithProductCategory(this.productCategory).Build();
             var break2 = new RevenueValueBreakBuilder(this.DatabaseSession).WithFromAmount(100).WithProductCategory(this.productCategory).Build();
@@ -375,7 +375,7 @@ namespace Allors.Domain
                 .WithDescription("baseprice good for revenue break 1")
                 .WithRevenueValueBreak(break1)
                 .WithProductCategory(this.productCategory)
-                .WithPrice(amount1)
+                .WithPrice(priceIs1)
                 .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
@@ -385,7 +385,7 @@ namespace Allors.Domain
                 .WithDescription("baseprice good for revenue break 2")
                 .WithRevenueValueBreak(break2)
                 .WithProductCategory(this.productCategory)
-                .WithPrice(amount2)
+                .WithPrice(priceIs3)
                 .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .Build();
@@ -398,21 +398,23 @@ namespace Allors.Domain
 
             var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(this.good).WithQuantityOrdered(quantityOrdered1).Build();
             this.order.AddSalesOrderItem(item1);
-            this.order.OnDerive();
+            this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(this.currentGoodBasePrice.Price, item1.UnitBasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 50M;
 
             this.order.OnDerive();
+            this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(amount1, item1.UnitBasePrice);
+            Assert.AreEqual(priceIs1, item1.UnitBasePrice);
 
             this.productCategoryRevenueHistory.Revenue = 110M;
 
             this.order.OnDerive();
+            this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(amount2, item1.UnitBasePrice);
+            Assert.AreEqual(priceIs3, item1.UnitBasePrice);
         }
 
         [Test]
