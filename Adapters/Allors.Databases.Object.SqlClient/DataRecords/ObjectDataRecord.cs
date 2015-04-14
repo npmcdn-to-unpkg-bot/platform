@@ -39,7 +39,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var objectArrayElement = this.mapping.ObjectTableObject;
+            var objectArrayElement = Mapping.ColumnNameForObject;
             var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
             var sqlDataRecord = new SqlDataRecord(metaData);
 

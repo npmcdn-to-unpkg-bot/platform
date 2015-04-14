@@ -24,7 +24,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    internal class MappingColumn
+    public class MappingColumn
     {
         internal readonly string Name;
         internal readonly DbType DbType;

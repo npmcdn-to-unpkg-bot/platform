@@ -35,6 +35,8 @@ namespace Allors.Databases.Object.SqlClient
     {
         private const string ConnectionStringsKey = "allors";
 
+        private readonly object lockObject = new object();
+
         private readonly IObjectFactory objectFactory;
 
         private readonly Dictionary<IObjectType, object> concreteClassesByIObjectType;
@@ -61,9 +63,18 @@ namespace Allors.Databases.Object.SqlClient
 
         private Dictionary<string, object> properties;
 
+        private string schemaName;
+
+        private bool? isValid;
+
         public Database(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
+            if (!this.objectFactory.MetaPopulation.IsValid)
+            {
+                throw new ArgumentException("Domain is invalid");
+            }
+
             this.concreteClassesByIObjectType = new Dictionary<IObjectType, object>();
 
             this.workspaceFactory = configuration.WorkspaceFactory;
@@ -99,6 +110,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
+            this.schemaName = configuration.SchemaName ?? "allors";
             this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
         }
 
@@ -111,6 +123,14 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.id;
+            }
+        }
+        
+        public string SchemaName
+        {
+            get
+            {
+                return this.schemaName;
             }
         }
 
@@ -151,6 +171,26 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return true;
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                if (!this.isValid.HasValue)
+                {
+                    lock (this.lockObject)
+                    {
+                        if (!this.isValid.HasValue)
+                        {
+                            var validate = this.Validate();
+                            return validate.Success;
+                        }
+                    }
+                }
+
+                return this.isValid.Value;
             }
         }
 
@@ -246,7 +286,6 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (this.mapping == null)
                     {
-
                         if (this.ObjectIds is ObjectIdsInteger)
                         {
                             this.mapping = new IntegerId.IntegerMapping(this);
@@ -313,7 +352,16 @@ namespace Allors.Databases.Object.SqlClient
 
         public void Init()
         {
-            this.Init(true);
+            try
+            {
+                new Initialization(this.Mapping, new Schema(this)).Execute();
+            }
+            finally
+            {
+                this.properties = null;
+                this.ResetSchema();
+                this.Cache.Invalidate();
+            }
         }
 
         public void Load(XmlReader reader)
@@ -364,7 +412,14 @@ namespace Allors.Databases.Object.SqlClient
             return this.workspaceFactory.CreateWorkspace(this);
         }
 
-        IDatabaseSession Allors.IDatabase.CreateSession()
+        public Validation Validate()
+        {
+            var validateResult = new Validation(this);
+            this.isValid = validateResult.Success;
+            return validateResult;
+        }
+
+        IDatabaseSession IDatabase.CreateSession()
         {
             return this.CreateDatabaseSession();
         }
@@ -415,42 +470,6 @@ namespace Allors.Databases.Object.SqlClient
             return new UnitRoleDataRecords(this, roleType, relations);
         }
 
-        internal void Recover()
-        {
-            if (!ObjectFactory.MetaPopulation.IsValid)
-            {
-                throw new ArgumentException("Domain is invalid");
-            }
-
-            var session = this.CreateManagementSession();
-            try
-            {
-                this.DropIndexes(session);
-                this.DropTriggers(session);
-                this.DropProcedures(session);
-                this.DropFunctions(session);
-                this.DropUserDefinedTypes(session);
-
-                this.CreateUserDefinedTypes(session);
-                this.CreateFunctions(session);
-                this.CreateProcedures(session);
-                this.CreateTriggers(session);
-                this.CreateIndexes(session);
-
-                session.Commit();
-            }
-            catch
-            {
-                session.Rollback();
-                throw;
-            }
-            finally
-            {
-                this.ResetSchema();
-                this.Cache.Invalidate();
-            }
-        }
-
         internal Type GetDomainType(IObjectType objectType)
         {
             return this.ObjectFactory.GetTypeForObjectType(objectType);
@@ -471,27 +490,6 @@ namespace Allors.Databases.Object.SqlClient
             return sortedUnitRoles;
         }
 
-        internal DbConnection CreateDbConnection()
-        {
-            return new SqlConnection(this.ConnectionString);
-        }
-
-        internal void DropIndex(ManagementSession session, MappingTable table, MappingColumn column)
-        {
-            var indexName = SqlClient.Mapping.AllorsPrefix + table.Name + "_" + column.Name;
-
-            var sql = new StringBuilder();
-            sql.Append("IF EXISTS (\n");
-            sql.Append("    SELECT *\n");
-            sql.Append("    FROM sysindexes\n");
-            sql.Append("    WHERE   name = '" + indexName + "'\n");
-            sql.Append("            AND OBJECT_NAME(id) = N'" + table.Name + "'\n");
-            sql.Append(")\n");
-
-            sql.Append("    DROP INDEX " + table + "." + indexName);
-            session.ExecuteSql(sql.ToString());
-        }
-
         internal SqlMetaData GetSqlMetaData(string name, MappingColumn column)
         {
             switch (column.DbType)
@@ -506,11 +504,7 @@ namespace Allors.Databases.Object.SqlClient
                 case DbType.Int32:
                     return new SqlMetaData(name, SqlDbType.Int);
                 case DbType.Decimal:
-                    return new SqlMetaData(
-                        name,
-                        SqlDbType.Decimal,
-                        (byte)column.Precision.Value,
-                        (byte)column.Scale.Value);
+                    return new SqlMetaData(name, SqlDbType.Decimal, (byte)column.Precision.Value, (byte)column.Scale.Value);
                 case DbType.Double:
                     return new SqlMetaData(name, SqlDbType.Float);
                 case DbType.Boolean:
@@ -531,449 +525,47 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal string GetSqlType(MappingColumn column)
-        {
-            switch (column.DbType)
-            {
-                case DbType.String:
-                    if (column.Size == -1 || column.Size > 4000)
-                    {
-                        return "NVARCHAR(MAX) ";
-                    }
-
-                    return "NVARCHAR(" + column.Size + ") ";
-                case DbType.Int32:
-                    return "INT ";
-                case DbType.Decimal:
-                    return "DECIMAL(" + column.Precision + "," + column.Scale + ") ";
-                case DbType.Double:
-                    return "FLOAT ";
-                case DbType.Boolean:
-                    return "BIT ";
-                case DbType.DateTime2:
-                    return "DATETIME2 ";
-                case DbType.Guid:
-                    return "UNIQUEIDENTIFIER ";
-                case DbType.Binary:
-                    if (column.Size == -1 || column.Size > 8000)
-                    {
-                        return "VARBINARY(MAX) ";
-                    }
-
-                    return "VARBINARY(" + column.Size + ") ";
-                default:
-                    return "!UNKNOWN VALUE TYPE!";
-            }
-        }
-
-        internal string GetSqlType(DbType type)
-        {
-            switch (type)
-            {
-                case DbType.Int32:
-                    return "INT ";
-                default:
-                    return "!UNKNOWN DBTYPE!";
-            }
-        }
-
         internal ManagementSession CreateSqlClientManagementSession()
         {
             return new ManagementSession(this);
         }
 
-        protected void ResetSchema()
+        private void ResetSchema()
         {
             this.mapping = null;
         }
 
         private IDatabaseSession CreateDatabaseSession()
         {
-            if (this.Mapping.MappingValidationErrors.HasErrors)
+            if (!this.IsValid)
             {
-                var errors = new StringBuilder();
-                foreach (var error in this.Mapping.MappingValidationErrors.Errors)
-                {
-                    errors.Append("\n");
-                    errors.Append(error.Message);
-                }
-
-                throw new MappingValidationException(
-                    this.Mapping.MappingValidationErrors,
-                    "Database schema is not compatible with domain.\nUpgrade manually or use Save & Load.\n" + errors);
+                throw new Exception("Schema is invalid.");
             }
 
-            var session = this.CreateSqlSession();
-            return session;
+
+            //if (this.Mapping.MappingValidationErrors.HasErrors)
+            //{
+            //    var errors = new StringBuilder();
+            //    foreach (var error in this.Mapping.MappingValidationErrors.Errors)
+            //    {
+            //        errors.Append("\n");
+            //        errors.Append(error.Message);
+            //    }
+
+            //    throw new MappingValidationException(
+            //        this.Mapping.MappingValidationErrors,
+            //        "Database schema is not compatible with domain.\nUpgrade manually or use Save & Load.\n" + errors);
+            //}
+
+            return new DatabaseSession(this);
         }
-
-        private void Init(bool allowTruncate)
-        {
-            if (!ObjectFactory.MetaPopulation.IsValid)
-            {
-                throw new ArgumentException("Domain is invalid");
-            }
-
-            var session = this.CreateManagementSession();
-            try
-            {
-                if (allowTruncate && !this.Mapping.MappingValidationErrors.HasErrors)
-                {
-                    this.TruncateTables(session);
-                }
-                else
-                {
-                    this.DropTriggers(session);
-                    this.DropProcedures(session);
-                    this.DropFunctions(session);
-                    this.DropUserDefinedTypes(session);
-                    this.ResetSequence(session);
-                    this.DropTables(session);
-                    this.CreateTables(session);
-                    this.CreateUserDefinedTypes(session);
-                    this.CreateFunctions(session);
-                    this.CreateProcedures(session);
-                    this.CreateTriggers(session);
-                    this.CreateIndexes(session);
-                }
-
-                session.Commit();
-            }
-            catch
-            {
-                session.Rollback();
-                throw;
-            }
-            finally
-            {
-                this.properties = null;
-                this.ResetSchema();
-                this.Cache.Invalidate();
-            }
-        }
-
-        private void TruncateTables(ManagementSession session)
-        {
-            this.ResetSequence(session);
-
-            foreach (MappingTable table in this.Mapping)
-            {
-                switch (table.Kind)
-                {
-                    case MapingTableKind.System:
-                    case MapingTableKind.Object:
-                    case MapingTableKind.Relation:
-                        this.TruncateTables(session, table);
-                        break;
-                }
-            }
-        }
-
-        private void CreateFunctions(ManagementSession session)
-        {
-        }
-
-        private void CreateIndexes(ManagementSession session)
-        {
-            foreach (MappingTable table in this.Mapping)
-            {
-                foreach (MappingColumn column in table)
-                {
-                    if (column.IndexType != MappingIndexType.None)
-                    {
-                        this.CreateIndex(session, table, column);
-                    }
-                }
-            }
-        }
-
-        private void DropIndexes(ManagementSession session)
-        {
-            foreach (MappingTable table in this.Mapping)
-            {
-                foreach (MappingColumn column in table)
-                {
-                    if (column.IndexType != MappingIndexType.None)
-                    {
-                        this.DropIndex(session, table, column);
-                    }
-                }
-            }
-        }
-
-        private void CreateProcedures(ManagementSession session)
-        {
-            foreach (var procedure in this.Mapping.Procedures)
-            {
-                this.CreateProcedure(session, procedure);
-            }
-        }
-
-        private void CreateTables(ManagementSession session)
-        {
-            foreach (MappingTable table in this.Mapping)
-            {
-                this.CreateTable(session, table);
-            }
-        }
-
-        private void CreateTriggers(ManagementSession session)
-        {
-        }
-
-        private void DropFunctions(ManagementSession session)
-        {
-        }
-
-        private void DropTables(ManagementSession session)
-        {
-            foreach (MappingTable table in this.Mapping)
-            {
-                this.DropTable(session, table);
-            }
-        }
-
-        private void DropTriggers(ManagementSession session)
-        {
-        }
-
-        private void ResetSequence(ManagementSession session)
-        {
-        }
-
+       
         private ManagementSession CreateManagementSession()
         {
             return this.CreateSqlClientManagementSession();
         }
 
-        private void CreateUserDefinedTypes(ManagementSession session)
-        {
-            var sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.ObjectTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.ObjectTableObject + " " + this.GetSqlType(this.Mapping.ObjectId) + ")\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.CompositeRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " " + this.GetSqlType(this.Mapping.RoleId) + ")\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.StringRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " NVARCHAR(MAX))\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.IntegerRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " INT)\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.FloatRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " FLOAT)\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.DateTimeRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " DATETIME2)\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.BooleanRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " BIT)\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.UniqueRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " UNIQUEIDENTIFIER)\n");
-            session.ExecuteSql(sql.ToString());
-
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientMapping.BinaryRelationTable + " AS TABLE\n");
-            sql.Append(
-                "(" + this.SqlClientMapping.RelationTableAssociation + " " + this.GetSqlType(this.Mapping.AssociationId)
-                + ",\n");
-            sql.Append(this.SqlClientMapping.RelationTableRole + " VARBINARY(MAX))\n");
-            session.ExecuteSql(sql.ToString());
-
-            foreach (var precisionEntry in this.SqlClientMapping.DecimalRelationTableByScaleByPrecision)
-            {
-                var precision = precisionEntry.Key;
-                foreach (var scaleEntry in precisionEntry.Value)
-                {
-                    var scale = scaleEntry.Key;
-                    var decimalRelationTable = scaleEntry.Value;
-
-                    sql = new StringBuilder();
-                    sql.Append("CREATE TYPE " + decimalRelationTable + " AS TABLE\n");
-                    sql.Append(
-                        "(" + this.SqlClientMapping.RelationTableAssociation + " "
-                        + this.GetSqlType(this.Mapping.AssociationId) + ",\n");
-                    sql.Append(this.SqlClientMapping.RelationTableRole + " DECIMAL(" + precision + "," + scale + ") )\n");
-                    session.ExecuteSql(sql.ToString());
-                }
-            }
-        }
-
-        private IDatabaseSession CreateSqlSession()
-        {
-            return new DatabaseSession(this);
-        }
-
-        private void DropUserDefinedTypes(ManagementSession session)
-        {
-            this.DropUserDefinedType(session, this.SqlClientMapping.ObjectTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.CompositeRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.StringRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.IntegerRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.FloatRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.BooleanRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.DateTimeRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.UniqueRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientMapping.BinaryRelationTable);
-            foreach (var precisionEntry in this.SqlClientMapping.DecimalRelationTableByScaleByPrecision)
-            {
-                foreach (var scaleEntry in precisionEntry.Value)
-                {
-                    var decimalRelationTable = scaleEntry.Value;
-                    this.DropUserDefinedType(session, decimalRelationTable);
-                }
-            }
-        }
-
-        private void DropTable(ManagementSession session, MappingTable mappingTable)
-        {
-            var sql = new StringBuilder();
-            sql.Append("IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'" + mappingTable.Name + "'))\n");
-            sql.Append("DROP TABLE " + mappingTable);
-            session.ExecuteSql(sql.ToString());
-        }
-
-        private void CreateTable(ManagementSession session, MappingTable table)
-        {
-            var sql = new StringBuilder();
-            sql.Append("CREATE TABLE " + table + "\n");
-            sql.Append("(\n");
-
-            foreach (MappingColumn column in table)
-            {
-                sql.Append(column + " ");
-                sql.Append(this.GetSqlType(column));
-
-                if (column.IsIdentity)
-                {
-                    sql.Append(" IDENTITY");
-                }
-
-                sql.Append(",\n");
-            }
-
-            sql.Append("PRIMARY KEY (");
-            var firstKey = true;
-            foreach (MappingColumn field in table)
-            {
-                if (field.IsKey)
-                {
-                    if (firstKey)
-                    {
-                        firstKey = false;
-                    }
-                    else
-                    {
-                        sql.Append(", ");
-                    }
-
-                    sql.Append(field.Name);
-                }
-            }
-
-            sql.Append(")\n");
-            sql.Append(")\n");
-            session.ExecuteSql(sql.ToString());
-        }
-
-        private void DropProcedures(ManagementSession session)
-        {
-            var allorsProcedureNames = new List<string>();
-            lock (this)
-            {
-                using (var command = session.CreateCommand("SELECT ROUTINE_NAME FROM INFORMATION_SCHEMA.ROUTINES"))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var procedureName = reader.GetString(0);
-                            if (procedureName.StartsWith(SqlClient.Mapping.AllorsPrefix))
-                            {
-                                allorsProcedureNames.Add(procedureName);
-                            }
-                        }
-                    }
-                }
-            }
-
-            foreach (var procedureName in allorsProcedureNames)
-            {
-                this.DropProcedure(session, procedureName);
-            }
-        }
-
-        private void CreateProcedure(ManagementSession session, MappingProcedure storedProcedure)
-        {
-            session.ExecuteSql(storedProcedure.Definition);
-        }
-
-        private void CreateIndex(ManagementSession session, MappingTable table, MappingColumn column)
-        {
-            var indexName = SqlClient.Mapping.AllorsPrefix + table.Name + "_" + column.Name;
-
-            if (column.IndexType == MappingIndexType.Single)
-            {
-                var sql = new StringBuilder();
-                sql.Append("CREATE INDEX " + indexName + "\n");
-                sql.Append("ON " + table + " (" + column + ")");
-                session.ExecuteSql(sql.ToString());
-            }
-            else
-            {
-                var sql = new StringBuilder();
-                sql.Append("CREATE INDEX " + indexName + "\n");
-                sql.Append("ON " + table + " (" + column + ", " + table.FirstKeyColumn + ")");
-                session.ExecuteSql(sql.ToString());
-            }
-        }
-
-        private void TruncateTables(ManagementSession session, MappingTable table)
-        {
-            var sql = new StringBuilder();
-            sql.Append("TRUNCATE TABLE " + table.StatementName);
-            session.ExecuteSql(sql.ToString());
-        }
-
-        private Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
+        private Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
         {
             return new Load(this, objectNotLoaded, relationNotLoaded, reader);
         }
@@ -981,24 +573,6 @@ namespace Allors.Databases.Object.SqlClient
         private Save CreateSave(XmlWriter writer)
         {
             return new Save(this, writer);
-        }
-
-        private void DropUserDefinedType(ManagementSession session, string userDefinedType)
-        {
-            var sql = new StringBuilder();
-            sql.Append(
-                "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.DOMAINS WHERE DOMAIN_NAME = N'" + userDefinedType + "')\n");
-            sql.Append("DROP TYPE " + userDefinedType);
-            session.ExecuteSql(sql.ToString());
-        }
-
-        private void DropProcedure(ManagementSession session, string procedureName)
-        {
-            var sql = new StringBuilder();
-            sql.Append(
-                "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = N'" + procedureName + "')\n");
-            sql.Append("DROP PROCEDURE " + procedureName);
-            session.ExecuteSql(sql.ToString());
         }
     }
 }

@@ -96,6 +96,11 @@ namespace Allors.Databases.Relation.SqlClient
                 throw new Exception("Configuration.ObjectFactory is missing");
             }
 
+            if (!this.objectFactory.MetaPopulation.IsValid)
+            {
+                throw new ArgumentException("Domain is invalid");
+            }
+
             this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
             this.roleCache = configuration.RoleCache ?? new RoleCache();
             this.classCache = configuration.ClassCache ?? new ClassCache();

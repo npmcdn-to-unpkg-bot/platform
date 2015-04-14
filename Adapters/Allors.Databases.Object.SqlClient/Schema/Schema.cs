@@ -1,4 +1,4 @@
-namespace Allors.Databases.Relation.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
@@ -278,15 +278,7 @@ WHERE
                 return this.indexByLowercaseIndexNameByLowercaseTableName;
             }
         }
-
-        public Database Database
-        {
-            get
-            {
-                return this.database;
-            }
-        }
-
+        
         public bool Exists
         {
             get

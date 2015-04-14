@@ -149,11 +149,20 @@
     <Compile Include="Mapping\MappingValidationErrors.cs" />
     <Compile Include="Mapping\MappingValidationException.cs" />
     <Compile Include="Mapping\TableMappingValidationError.cs" />
+    <Compile Include="Schema\Index.cs" />
+    <Compile Include="Schema\Procedure.cs" />
+    <Compile Include="Schema\Schema.cs" />
+    <Compile Include="Schema\Table.cs" />
+    <Compile Include="Schema\TableColumn.cs" />
+    <Compile Include="Schema\TableType.cs" />
+    <Compile Include="Schema\View.cs" />
     <Compile Include="SessionCommands.cs" />
     <Compile Include="Strategy.cs" />
     <Compile Include="UnitRelation.cs" />
+    <Compile Include="Validation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Schema\Overview.cd" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>

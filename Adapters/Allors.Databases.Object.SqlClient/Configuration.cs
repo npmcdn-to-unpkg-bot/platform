@@ -36,5 +36,7 @@ namespace Allors.Databases.Object.SqlClient
         public int CommandTimeout { get; set; }
 
         public IsolationLevel IsolationLevel { get; set; }
+
+        public string SchemaName { get; set; }
     }
 }

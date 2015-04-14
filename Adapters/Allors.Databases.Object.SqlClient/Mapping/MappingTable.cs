@@ -25,7 +25,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    internal sealed class MappingTable : IEnumerable<MappingColumn>
+    public sealed class MappingTable : IEnumerable<MappingColumn>
     {
         internal readonly MapingTableKind Kind;
         internal readonly string Name;

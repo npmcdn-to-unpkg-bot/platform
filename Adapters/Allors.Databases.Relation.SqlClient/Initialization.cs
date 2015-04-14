@@ -22,7 +22,6 @@ namespace Allors.Databases.Relation.SqlClient
     using System.Text;
 
     using Allors.Meta;
-    using Allors.Populations;
 
     internal class Initialization 
     {
@@ -41,6 +40,7 @@ namespace Allors.Databases.Relation.SqlClient
         {
             this.EnableSnapshotIsolation();
             this.CreateSchema();
+            this.CreateUserDefinedTypes();
             this.CreateTables();
             this.CreateProcedures();
             this.CreateIndeces();
@@ -102,7 +102,7 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
             }
         }
 
-        private void CreateTables()
+        private void CreateUserDefinedTypes()
         {
             using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
             {
@@ -149,7 +149,21 @@ CREATE TYPE " + this.mapping.Database.SchemaName + "." + tableTypeName + @" AS T
                             tableTypeNames.Add(tableTypeName);
                         }
                     }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
 
+        private void CreateTables()
+        {
+            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
                     // Objects (table)
                     var table = this.schema.GetTable(Mapping.TableNameForObjects);
                     if (table != null)
@@ -656,7 +670,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.P
                             var tableName = this.mapping.GetTableName(relationType);
                             var indexName = tableName + "_index";
 
-                            var index = this.schema.GetIndex(indexName);
+                            var index = this.schema.GetIndex(tableName, indexName);
                             if (index == null)
                             {
                                 var column = Mapping.ColumnNameForRole;

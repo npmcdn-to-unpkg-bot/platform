@@ -55,7 +55,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
             if (!sqlByIRoleType.ContainsKey(roleType))
             {
-                var sql = Mapping.AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName;
+                var sql = "SR_" + objectType.Name + "_" + roleType.SingularFullName;
                 sqlByIRoleType[roleType] = sql;
             }
 

@@ -53,7 +53,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
         {
             if (!this.sqlByIObjectType.ContainsKey(objectType))
             {
-                var sql = Mapping.AllorsPrefix + "GU_" + objectType.Name;
+                var sql = "GU_" + objectType.Name;
                 this.sqlByIObjectType[objectType] = sql;
             }
 
