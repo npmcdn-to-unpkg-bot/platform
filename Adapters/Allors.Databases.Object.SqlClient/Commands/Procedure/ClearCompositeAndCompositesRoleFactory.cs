@@ -53,17 +53,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 string sql;
                 if ((roleType.IsMany && associationType.IsMany) || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "C_" + roleType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "C_" + roleType.SingularFullName;
                 }
                 else
                 {
                     if (roleType.IsOne)
                     {
-                        sql = SqlClient.Schema.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                        sql = SqlClient.Mapping.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                     }
                     else
                     {
-                        sql = SqlClient.Schema.AllorsPrefix + "C_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                        sql = SqlClient.Mapping.AllorsPrefix + "C_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                     }
                 }
 
@@ -87,7 +87,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(IList<ObjectId> associations, IRoleType roleType)
             {
-                var schema = this.factory.Database.SqlClientSchema;
+                var schema = this.factory.Database.SqlClientMapping;
 
                 SqlCommand command;
                 if (!this.commandByIRoleType.TryGetValue(roleType, out command))

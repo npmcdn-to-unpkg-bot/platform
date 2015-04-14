@@ -52,11 +52,11 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (statement.Sorter.Equals(this))
             {
-                statement.Append(" ORDER BY " + statement.Schema.Column(this.roleType));
+                statement.Append(" ORDER BY " + statement.Mapping.Column(this.roleType));
             }
             else
             {
-                statement.Append(" , " + statement.Schema.Column(this.roleType));
+                statement.Append(" , " + statement.Mapping.Column(this.roleType));
             }
 
             statement.Append(this.direction == SortDirection.Ascending ? " ASC " : " DESC ");
@@ -80,11 +80,11 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (statement.Sorter.Equals(this))
             {
-                statement.Append(" ORDER BY " + alias + "." + statement.Schema.Column(this.roleType));
+                statement.Append(" ORDER BY " + alias + "." + statement.Mapping.Column(this.roleType));
             }
             else
             {
-                statement.Append(" , " + alias + "." + statement.Schema.Column(this.roleType));
+                statement.Append(" , " + alias + "." + statement.Mapping.Column(this.roleType));
             }
 
             if (this.direction == SortDirection.Ascending)
@@ -106,7 +106,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void BuildSelect(ExtentStatement statement)
         {
-            statement.Append(" , " + statement.Schema.Column(this.roleType) + " ");
+            statement.Append(" , " + statement.Mapping.Column(this.roleType) + " ");
             if (this.subSorter != null)
             {
                 this.subSorter.BuildSelect(statement);
@@ -115,7 +115,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void BuildSelect(ExtentStatement statement, string alias)
         {
-            statement.Append(" , " + alias + "." + statement.Schema.Column(this.roleType) + " ");
+            statement.Append(" , " + alias + "." + statement.Mapping.Column(this.roleType) + " ");
             if (this.subSorter != null)
             {
                 this.subSorter.BuildSelect(statement, alias);

@@ -49,7 +49,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
-                var schema = this.Database.Schema;
+                var schema = this.Database.Mapping;
 
                 var sql = string.Empty;
 
@@ -89,13 +89,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (!this.commandByIObjectType.TryGetValue(objectType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
-                    this.AddInObject(command, this.Database.Schema.ObjectId.Param, strategy.ObjectId.Value);
+                    this.AddInObject(command, this.Database.Mapping.ObjectId.Param, strategy.ObjectId.Value);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Schema.ObjectId.Param, strategy.ObjectId.Value);
+                    this.SetInObject(command, this.Database.Mapping.ObjectId.Param, strategy.ObjectId.Value);
                 }
                 
                 command.ExecuteNonQuery();

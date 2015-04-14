@@ -28,24 +28,24 @@ namespace Allors.Databases.Object.SqlClient
 
     internal class CompositeRoleDataRecords : IEnumerable<SqlDataRecord>
     {
-        private readonly Schema schema;
+        private readonly Mapping mapping;
         private readonly IEnumerable<CompositeRelation> relations;
  
-        internal CompositeRoleDataRecords(Schema schema, IEnumerable<CompositeRelation> relations)
+        internal CompositeRoleDataRecords(Mapping mapping, IEnumerable<CompositeRelation> relations)
         {
-            this.schema = schema;
+            this.mapping = mapping;
             this.relations = relations;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
             // TODO: See Relation.SqlClient
-            if (this.schema.IsObjectIdInteger)
+            if (this.mapping.IsObjectIdInteger)
             {
                 var metaData = new[]
                                    {
-                                       new SqlMetaData(this.schema.RelationTableAssociation, SqlDbType.Int),
-                                       new SqlMetaData(this.schema.RelationTableRole, SqlDbType.Int)
+                                       new SqlMetaData(this.mapping.RelationTableAssociation, SqlDbType.Int),
+                                       new SqlMetaData(this.mapping.RelationTableRole, SqlDbType.Int)
                                    };
                 var sqlDataRecord = new SqlDataRecord(metaData);
 
@@ -60,8 +60,8 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var metaData = new[]
                 {
-                    new SqlMetaData(this.schema.RelationTableAssociation, SqlDbType.BigInt), 
-                    new SqlMetaData(this.schema.RelationTableRole, SqlDbType.BigInt)
+                    new SqlMetaData(this.mapping.RelationTableAssociation, SqlDbType.BigInt), 
+                    new SqlMetaData(this.mapping.RelationTableRole, SqlDbType.BigInt)
                 };
                 var sqlDataRecord = new SqlDataRecord(metaData);
 

@@ -28,9 +28,6 @@ namespace Allors.Databases.Relation.SqlClient
     {
         public const string ParamPrefix = "@";
 
-        public const string Alias1 = "_x";
-        public const string Alias2 = "_y";
-
         public const string TableNameForObjects = "_o";
         public const string ColumnNameForObject = "o";
         public const string ColumnNameForType = "t";

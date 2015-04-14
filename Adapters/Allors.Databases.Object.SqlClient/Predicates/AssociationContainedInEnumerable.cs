@@ -42,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
-            var schema = statement.Schema;
+            var schema = statement.Mapping;
 
             var inStatement = new StringBuilder("0");
             foreach (var inObject in this.enumerable)

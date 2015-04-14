@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SchemaParameter.cs" company="Allors bvba">
+// <copyright file="MappingParameter.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,7 +23,7 @@ namespace Allors.Databases.Object.SqlClient
     using System;
     using System.Data;
 
-    internal class SchemaParameter
+    internal class MappingParameter
     {
         internal readonly DbType DbType;
         internal readonly string Name;
@@ -51,10 +51,10 @@ namespace Allors.Databases.Object.SqlClient
 
 
 
-        internal SchemaParameter(Schema schema, string name, DbType type)
+        internal MappingParameter(Mapping mapping, string name, DbType type)
         {
-            this.Name = string.Format(schema.ParamFormat, name);
-            this.InvocationName = string.Format(schema.ParamInvocationFormat, name);
+            this.Name = string.Format(mapping.ParamFormat, name);
+            this.InvocationName = string.Format(mapping.ParamInvocationFormat, name);
             this.DbType = type;
         }
 

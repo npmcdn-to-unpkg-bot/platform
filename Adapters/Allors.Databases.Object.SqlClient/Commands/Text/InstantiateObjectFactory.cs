@@ -36,9 +36,9 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         internal InstantiateObjectFactory(Database database)
         {
             this.Database = database;
-            this.Sql = "SELECT " + database.Schema.TypeId + ", " + database.Schema.CacheId + "\n";
-            this.Sql += "FROM " + database.Schema.Objects + "\n";
-            this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
+            this.Sql = "SELECT " + database.Mapping.TypeId + ", " + database.Mapping.CacheId + "\n";
+            this.Sql += "FROM " + database.Mapping.Objects + "\n";
+            this.Sql += "WHERE " + database.Mapping.ObjectId + "=" + database.Mapping.ObjectId.Param + "\n";
         }
 
         internal InstantiateObject Create(DatabaseSession session)
@@ -62,11 +62,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (this.command == null)
                 {
                     this.command = this.Session.CreateSqlCommand(this.factory.Sql);
-                    this.AddInObject(this.command, this.Database.Schema.ObjectId.Param, objectId.Value);
+                    this.AddInObject(this.command, this.Database.Mapping.ObjectId.Param, objectId.Value);
                 }
                 else
                 {
-                    this.SetInObject(this.command, this.Database.Schema.ObjectId.Param, objectId.Value);
+                    this.SetInObject(this.command, this.Database.Mapping.ObjectId.Param, objectId.Value);
                 }
 
                 using (var reader = this.command.ExecuteReader())

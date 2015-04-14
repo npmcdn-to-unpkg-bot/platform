@@ -166,7 +166,7 @@ namespace Allors.Databases.Object.SqlClient
 
                                     if (canLoad)
                                     {
-                                        var objectId = this.database.AllorsObjectIds.Parse(objectIdString);
+                                        var objectId = this.database.ObjectIds.Parse(objectIdString);
                                         objectIds[i] = objectId;
                                         this.objectTypeByObjectId[objectId] = objectType;
                                     }
@@ -331,7 +331,7 @@ namespace Allors.Databases.Object.SqlClient
                                 throw new Exception("Association id is missing");
                             }
 
-                            var associationId = this.database.AllorsObjectIds.Parse(associationIdString);
+                            var associationId = this.database.ObjectIds.Parse(associationIdString);
                             IObjectType associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(associationId, out associationConcreteClass);
 
@@ -454,7 +454,7 @@ namespace Allors.Databases.Object.SqlClient
                                 throw new Exception("Role is missing");
                             }
 
-                            var association = this.database.AllorsObjectIds.Parse(associationIdString);
+                            var association = this.database.ObjectIds.Parse(associationIdString);
                             IObjectType associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(association, out associationConcreteClass);
 
@@ -474,7 +474,7 @@ namespace Allors.Databases.Object.SqlClient
                             {
                                 foreach (var r in rs)
                                 {
-                                    var role = this.database.AllorsObjectIds.Parse(r);
+                                    var role = this.database.ObjectIds.Parse(r);
                                     IObjectType roleConcreteClass;
                                     this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
 
@@ -629,7 +629,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             var sql = new StringBuilder();
 
-            sql.Append("SET IDENTITY_INSERT " + this.database.Schema.Objects.StatementName + " ON");
+            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.Objects.StatementName + " ON");
             lock (this)
             {
                 using (var command = session.CreateCommand(sql.ToString()))
@@ -643,9 +643,9 @@ namespace Allors.Databases.Object.SqlClient
                 if (type.IsClass)
                 {
                     sql = new StringBuilder();
-                    sql.Append("INSERT INTO " + this.database.Schema.Objects + " (" + this.database.Schema.ObjectId + "," + this.database.Schema.TypeId + "," + this.database.Schema.CacheId + ")\n");
-                    sql.Append("SELECT " + this.database.Schema.ObjectId + "," + this.database.Schema.TypeId + ", " + Reference.InitialCacheId + "\n");
-                    sql.Append("FROM " + this.database.Schema.Table(type.ExclusiveLeafClass));
+                    sql.Append("INSERT INTO " + this.database.Mapping.Objects + " (" + this.database.Mapping.ObjectId + "," + this.database.Mapping.TypeId + "," + this.database.Mapping.CacheId + ")\n");
+                    sql.Append("SELECT " + this.database.Mapping.ObjectId + "," + this.database.Mapping.TypeId + ", " + Reference.InitialCacheId + "\n");
+                    sql.Append("FROM " + this.database.Mapping.Table(type.ExclusiveLeafClass));
 
                     lock (this)
                     {
@@ -658,7 +658,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             sql = new StringBuilder();
-            sql.Append("SET IDENTITY_INSERT " + this.database.Schema.Objects.StatementName + " OFF");
+            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.Objects.StatementName + " OFF");
             lock (this)
             {
                 using (var command = session.CreateCommand(sql.ToString()))

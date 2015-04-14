@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ProcedureSchemaValidationError.cs" company="Allors bvba">
+// <copyright file="MappingProcedure.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,38 +20,15 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    internal class ProcedureSchemaValidationError : ISchemaValidationError
+    internal sealed class MappingProcedure
     {
-        private readonly SchemaProcedure schemaProcedure;
-        private readonly SchemaValidationErrorKind kind;
-        private readonly string message;
+        internal string Name;
 
-        internal ProcedureSchemaValidationError(SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
-        {
-            this.schemaProcedure = schemaProcedure;
-            this.kind = kind;
-            this.message = message;
-        }
-
-        public SchemaValidationErrorKind Kind
-        {
-            get
-            {
-                return this.kind;
-            }
-        }
-
-        public string Message
-        {
-            get
-            {
-                return this.message;
-            }
-        }
+        internal string Definition;
 
         public override string ToString()
         {
-            return this.schemaProcedure.ToString();
+            return Name;
         }
     }
 }

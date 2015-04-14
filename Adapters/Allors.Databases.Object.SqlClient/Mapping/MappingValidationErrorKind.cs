@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="SchemaValidationErrorKind.cs" company="Allors bvba">
+// <copyright file="MappingValidationErrorKind.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,14 +16,13 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the SchemaValidationErrorKind type.</summary>
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Databases.Object.SqlClient
 {
     /// <summary>
-    /// The kinds of <see cref="SchemaValidationError"/>s.
+    /// The kinds of <see cref="MappingValidationError"/>s.
     /// </summary>
-    internal enum SchemaValidationErrorKind
+    internal enum MappingValidationErrorKind
     {
         /// <summary>
         /// Indicates that a Sql table or field is missing.

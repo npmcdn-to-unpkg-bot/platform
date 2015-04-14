@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
-            var schema = statement.Schema;
+            var schema = statement.Mapping;
             statement.Append(" (" + alias + "." + schema.Column(this.roleType) + " BETWEEN " + statement.AddParameter(this.first) + " AND " + statement.AddParameter(this.second) + ")");
             return this.Include;
         }

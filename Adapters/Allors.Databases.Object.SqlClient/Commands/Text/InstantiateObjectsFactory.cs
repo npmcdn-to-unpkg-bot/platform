@@ -37,10 +37,10 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         internal InstantiateObjectsFactory(Database database)
         {
             this.Database = database;
-            this.Sql += "SELECT " + database.Schema.ObjectId + "," + database.Schema.TypeId + "," + database.Schema.CacheId + "\n";
-            this.Sql += "FROM " + database.Schema.Objects + "\n";
-            this.Sql += "WHERE " + database.Schema.ObjectId + " IN\n";
-            this.Sql += "( SELECT " + this.Database.SqlClientSchema.ObjectTableObject + " FROM " + this.Database.SqlClientSchema.ObjectTableParam.Name + " )\n";
+            this.Sql += "SELECT " + database.Mapping.ObjectId + "," + database.Mapping.TypeId + "," + database.Mapping.CacheId + "\n";
+            this.Sql += "FROM " + database.Mapping.Objects + "\n";
+            this.Sql += "WHERE " + database.Mapping.ObjectId + " IN\n";
+            this.Sql += "( SELECT " + this.Database.SqlClientMapping.ObjectTableObject + " FROM " + this.Database.SqlClientMapping.ObjectTableParam.Name + " )\n";
         }
 
         internal InstantiateObjects Create(DatabaseSession session)
@@ -66,11 +66,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (this.command == null)
                 {
                     this.command = this.Session.CreateSqlCommand(this.factory.Sql);
-                    this.AddInTable(this.command, this.Database.SqlClientSchema.ObjectTableParam, this.Database.CreateObjectTable(objectids));
+                    this.AddInTable(this.command, this.Database.SqlClientMapping.ObjectTableParam, this.Database.CreateObjectTable(objectids));
                 }
                 else
                 {
-                    this.SetInTable(this.command, this.Database.SqlClientSchema.ObjectTableParam, this.Database.CreateObjectTable(objectids));
+                    this.SetInTable(this.command, this.Database.SqlClientMapping.ObjectTableParam, this.Database.CreateObjectTable(objectids));
                 }
 
                 using (var reader = this.command.ExecuteReader())
@@ -81,7 +81,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                         var classId = this.GetClassId(reader, 1);
                         var cacheId = this.GetCachId(reader, 2);
 
-                        var objectId = this.Database.AllorsObjectIds.Parse(objectIdString);
+                        var objectId = this.Database.ObjectIds.Parse(objectIdString);
                         var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);
                         strategies.Add(this.Session.GetOrCreateAssociationForExistingObject(type, objectId, cacheId));
                     }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SchemaProcedure.cs" company="Allors bvba">
+// <copyright file="IMappingValidationError.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,15 +20,10 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    internal sealed class SchemaProcedure
+    internal interface IMappingValidationError
     {
-        internal string Name;
+        string Message { get; }
 
-        internal string Definition;
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        MappingValidationErrorKind Kind { get; }
     }
 }

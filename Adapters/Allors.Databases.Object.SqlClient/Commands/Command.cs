@@ -29,13 +29,11 @@ namespace Allors.Databases.Object.SqlClient.Commands
 
     using Microsoft.SqlServer.Server;
 
-    using SchemaParameter = SchemaParameter;
-
     internal abstract class Command
     {
-        internal void AddInObject(SqlCommand command, SqlClient.SchemaParameter parameter, object value)
+        internal void AddInObject(SqlCommand command, MappingParameter parameter, object value)
         {
-            var schemaParameter = (SchemaParameter)parameter;
+            var schemaParameter = parameter;
 
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = schemaParameter.SqlDbType;
@@ -45,12 +43,12 @@ namespace Allors.Databases.Object.SqlClient.Commands
             command.Parameters.Add(sqlParameter);
         }
 
-        internal void SetInObject(SqlCommand command, SqlClient.SchemaParameter param, object value)
+        internal void SetInObject(SqlCommand command, MappingParameter param, object value)
         {
             command.Parameters[param.Name].Value = Normalize(value);
         }
 
-        internal void AddInTable(SqlCommand command, SchemaTableParameter parameter, IEnumerable<SqlDataRecord> array)
+        internal void AddInTable(SqlCommand command, MappingTableParameter parameter, IEnumerable<SqlDataRecord> array)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -61,7 +59,7 @@ namespace Allors.Databases.Object.SqlClient.Commands
             command.Parameters.Add(sqlParameter);
         }
 
-        internal void SetInTable(SqlCommand command, SchemaTableParameter param, IEnumerable<SqlDataRecord> array)
+        internal void SetInTable(SqlCommand command, MappingTableParameter param, IEnumerable<SqlDataRecord> array)
         {
             command.Parameters[param.Name].Value = array;
         }

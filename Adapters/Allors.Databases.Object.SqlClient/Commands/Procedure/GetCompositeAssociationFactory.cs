@@ -59,16 +59,16 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     if (roleType.IsOne)
                     {
-                        sql = SqlClient.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                        sql = SqlClient.Mapping.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                     }
                     else
                     {
-                        sql = SqlClient.Schema.AllorsPrefix + "GA_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                        sql = SqlClient.Mapping.AllorsPrefix + "GA_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                     }
                 }
                 else
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "GA_" + roleType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "GA_" + roleType.SingularFullName;
                 }
 
                 this.sqlByIAssociationType[associationType] = sql;
@@ -98,20 +98,20 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(associationType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, this.Database.Schema.RoleId.Param, role.ObjectId.Value);
+                    this.AddInObject(command, this.Database.Mapping.RoleId.Param, role.ObjectId.Value);
 
                     this.commandByIAssociationType[associationType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Schema.RoleId.Param, role.ObjectId.Value);
+                    this.SetInObject(command, this.Database.Mapping.RoleId.Param, role.ObjectId.Value);
                 }
 
                 object result = command.ExecuteScalar();
 
                 if (result != null && result != DBNull.Value)
                 {
-                    ObjectId id = this.Database.AllorsObjectIds.Parse(result.ToString());
+                    ObjectId id = this.Database.ObjectIds.Parse(result.ToString());
 
                     if (associationType.ObjectType.ExistExclusiveLeafClass)
                     {

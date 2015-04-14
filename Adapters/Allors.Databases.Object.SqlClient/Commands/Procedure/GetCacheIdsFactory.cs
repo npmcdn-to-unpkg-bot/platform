@@ -64,11 +64,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal Dictionary<ObjectId, int> Execute(ISet<Reference> strategyReferences)
             {
-                var schema = this.factory.Database.SqlClientSchema;
+                var schema = this.factory.Database.SqlClientMapping;
 
                 if (this.command == null)
                 {
-                    this.command = this.Session.CreateSqlCommand(Schema.AllorsPrefix + "GC");
+                    this.command = this.Session.CreateSqlCommand(Mapping.AllorsPrefix + "GC");
                     this.command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(strategyReferences));
                 }
@@ -83,7 +83,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     while (reader.Read())
                     {
-                        var objectId = this.Database.AllorsObjectIds.Parse(reader[0].ToString());
+                        var objectId = this.Database.ObjectIds.Parse(reader[0].ToString());
                         var cacheId = reader.GetInt32(1);
 
                         cacheIdByObjectId.Add(objectId, cacheId);

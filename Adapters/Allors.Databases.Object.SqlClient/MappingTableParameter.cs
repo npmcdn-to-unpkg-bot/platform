@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ISchemaValidationError.cs" company="Allors bvba">
+// <copyright file="MappingTableParameter.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,10 +20,28 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    internal interface ISchemaValidationError
+    internal class MappingTableParameter
     {
-        string Message { get; }
+        internal readonly string TypeName;
+        internal readonly string Name;
+        internal readonly string InvocationName;
 
-        SchemaValidationErrorKind Kind { get; }
+        internal MappingTableParameter(Mapping mapping, string name, string typeName)
+        {
+            this.Name = string.Format(mapping.ParamFormat, name);
+            this.InvocationName = string.Format(mapping.ParamInvocationFormat, name);
+            this.TypeName = typeName;
+        }
+
+        /// <summary>
+        /// Returns a String which represents the object instance.
+        /// </summary>
+        /// <returns>
+        /// The string which represents the object instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

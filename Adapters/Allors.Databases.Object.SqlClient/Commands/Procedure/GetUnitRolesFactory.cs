@@ -53,7 +53,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
         {
             if (!this.sqlByIObjectType.ContainsKey(objectType))
             {
-                var sql = Schema.AllorsPrefix + "GU_" + objectType.Name;
+                var sql = Mapping.AllorsPrefix + "GU_" + objectType.Name;
                 this.sqlByIObjectType[objectType] = sql;
             }
 
@@ -82,13 +82,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, this.Database.Schema.ObjectId.Param, reference.ObjectId.Value);
+                    this.AddInObject(command, this.Database.Mapping.ObjectId.Param, reference.ObjectId.Value);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Schema.ObjectId.Param, reference.ObjectId.Value);
+                    this.SetInObject(command, this.Database.Mapping.ObjectId.Param, reference.ObjectId.Value);
                 }
 
                 using (DbDataReader reader = command.ExecuteReader())

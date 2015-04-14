@@ -115,9 +115,9 @@ namespace Allors.Databases.Object.SqlClient
             get { throw new NotSupportedException(); }
         }
 
-        internal Schema Schema
+        internal Mapping Mapping
         {
-            get { return this.SqlDatabase.Schema; }
+            get { return this.SqlDatabase.Mapping; }
         }
 
         public virtual IObject Create(IClass objectType)
@@ -164,7 +164,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public virtual IObject Insert(IClass domainType, string objectIdString)
         {
-            var objectId = this.SqlDatabase.AllorsObjectIds.Parse(objectIdString);
+            var objectId = this.SqlDatabase.ObjectIds.Parse(objectIdString);
             var insertedObject = this.Insert(domainType, objectId);
 
             this.changeSet.OnCreated(objectId);
@@ -199,7 +199,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public virtual IObject Instantiate(string objectId)
         {
-            var id = this.SqlDatabase.AllorsObjectIds.Parse(objectId);
+            var id = this.SqlDatabase.ObjectIds.Parse(objectId);
             return this.Instantiate(id);
         }
 
@@ -230,7 +230,7 @@ namespace Allors.Databases.Object.SqlClient
             var objectIds = new ObjectId[objectIdStrings.Length];
             for (var i = 0; i < objectIdStrings.Length; i++)
             {
-                objectIds[i] = this.SqlDatabase.AllorsObjectIds.Parse(objectIdStrings[i]);
+                objectIds[i] = this.SqlDatabase.ObjectIds.Parse(objectIdStrings[i]);
             }
 
             return this.Instantiate(objectIds);

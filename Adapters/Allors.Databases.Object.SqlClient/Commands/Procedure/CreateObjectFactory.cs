@@ -60,12 +60,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             internal Reference Execute(IClass objectType)
             {
                 var exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
-                var schema = this.Database.Schema;
+                var schema = this.Database.Mapping;
 
                 SqlCommand command;
                 if (!this.commandByIObjectType.TryGetValue(exclusiveRootClass, out command))
                 {
-                    command = this.Session.CreateSqlCommand(SqlClient.Schema.AllorsPrefix + "CO_" + exclusiveRootClass.Name);
+                    command = this.Session.CreateSqlCommand(SqlClient.Mapping.AllorsPrefix + "CO_" + exclusiveRootClass.Name);
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, schema.TypeId.Param, objectType.Id);
 
@@ -77,7 +77,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 }
 
                 var result = command.ExecuteScalar();
-                var objectId = this.Database.AllorsObjectIds.Parse(result.ToString());
+                var objectId = this.Database.ObjectIds.Parse(result.ToString());
                 return this.Session.CreateAssociationForNewObject(objectType, objectId);
             }
         }

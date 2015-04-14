@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="SchemaValidationException.cs" company="Allors bvba">
+// <copyright file="MappingValidationException.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,7 +16,6 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the SchemaValidationException type.</summary>
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Databases.Object.SqlClient
 {
@@ -25,30 +24,30 @@ namespace Allors.Databases.Object.SqlClient
     /// <summary>
     /// Thrown when the <see cref="IDatabase"/> encounters a Sql schema that is incompatible with the <see cref="Domain"/>.
     /// </summary>
-    internal class SchemaValidationException : Exception
+    internal class MappingValidationException : Exception
     {
         /// <summary>
         /// The validation errors.
         /// </summary>
-        private readonly SchemaValidationErrors validationErrors;
+        private readonly MappingValidationErrors validationErrors;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchemaValidationException"/> class.
+        /// Initializes a new instance of the <see cref="MappingValidationException"/> class.
         /// </summary>
         /// <param name="validationErrors">The validation errors.</param>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        internal SchemaValidationException(SchemaValidationErrors validationErrors, string message, Exception innerException) : base(message, innerException)
+        internal MappingValidationException(MappingValidationErrors validationErrors, string message, Exception innerException) : base(message, innerException)
         {
             this.validationErrors = validationErrors;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchemaValidationException"/> class.
+        /// Initializes a new instance of the <see cref="MappingValidationException"/> class.
         /// </summary>
         /// <param name="validationErrors">The validation errors.</param>
         /// <param name="message">The message.</param>
-        internal SchemaValidationException(SchemaValidationErrors validationErrors, string message) : base(message)
+        internal MappingValidationException(MappingValidationErrors validationErrors, string message) : base(message)
         {
             this.validationErrors = validationErrors;
         }
@@ -57,7 +56,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the validation errors.
         /// </summary>
         /// <value>The validation errors.</value>
-        internal SchemaValidationErrors ValidationErrors
+        internal MappingValidationErrors ValidationErrors
         {
             get { return this.validationErrors; }
         }

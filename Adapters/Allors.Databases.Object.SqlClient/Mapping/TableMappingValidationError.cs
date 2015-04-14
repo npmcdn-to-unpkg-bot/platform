@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="SchemaValidationError.cs" company="Allors bvba">
+// <copyright file="MappingValidationError.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,7 +16,6 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the SchemaValidationError type.</summary>
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Databases.Object.SqlClient
 {
@@ -24,11 +23,11 @@ namespace Allors.Databases.Object.SqlClient
 
     /// <summary>
     /// <para>Raised during the validation of the <see cref="Domain"/> against the Sql schema.</para>
-    /// <para>The <see cref="TableSchemaValidationError#IObjectType"/>, <see cref="TableSchemaValidationError#IRelationType"/>
-    /// and <see cref="TableSchemaValidationError#IRoleType"/> objects are mutually exclusive.
+    /// <para>The <see cref="TableMappingValidationError#IObjectType"/>, <see cref="TableMappingValidationError#IRelationType"/>
+    /// and <see cref="TableMappingValidationError#IRoleType"/> objects are mutually exclusive.
     /// </para>
     /// </summary>
-    internal class TableSchemaValidationError : ISchemaValidationError
+    internal class TableMappingValidationError : IMappingValidationError
     {
         /// <summary>
         /// The column name.
@@ -38,7 +37,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <summary>
         /// The kind of schema validation error.
         /// </summary>
-        private readonly SchemaValidationErrorKind kind;
+        private readonly MappingValidationErrorKind kind;
 
         /// <summary>
         /// The validation error message.
@@ -66,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient
         private readonly IObjectType objectType;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TableSchemaValidationError"/> class.
+        /// Initializes a new instance of the <see cref="TableMappingValidationError"/> class.
         /// </summary>
         /// <param name="objectType">The invalid object type.</param>
         /// <param name="relationType">The invalid relation type.</param>
@@ -75,7 +74,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <param name="columnName">Name of the column.</param>
         /// <param name="errorKind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        internal TableSchemaValidationError(IObjectType objectType, IRelationType relationType, IRoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
+        internal TableMappingValidationError(IObjectType objectType, IRelationType relationType, IRoleType role, string tableName, string columnName, MappingValidationErrorKind errorKind, string message)
         {
             this.objectType = objectType;
             this.relationType = relationType;
@@ -99,7 +98,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the kind of validation error.
         /// </summary>
         /// <value>The kind of validation error.</value>
-        public SchemaValidationErrorKind Kind
+        public MappingValidationErrorKind Kind
         {
             get { return this.kind; }
         }

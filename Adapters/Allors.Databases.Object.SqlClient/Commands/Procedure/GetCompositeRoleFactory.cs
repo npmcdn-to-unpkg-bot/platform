@@ -57,11 +57,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 string sql;
                 if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "GR_" + roleType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "GR_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "GR_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "GR_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                 }
 
                 this.sqlByIRoleType[roleType] = sql;
@@ -91,13 +91,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, this.Database.Schema.AssociationId.Param, reference.ObjectId.Value);
+                    this.AddInObject(command, this.Database.Mapping.AssociationId.Param, reference.ObjectId.Value);
 
                     this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Schema.AssociationId.Param, reference.ObjectId.Value);
+                    this.SetInObject(command, this.Database.Mapping.AssociationId.Param, reference.ObjectId.Value);
                 }
 
                 object result = command.ExecuteScalar();
@@ -108,7 +108,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 }
                 else
                 {
-                    var objectId = this.Database.AllorsObjectIds.Parse(result.ToString());
+                    var objectId = this.Database.ObjectIds.Parse(result.ToString());
                     roles.CachedObject.SetValue(roleType, objectId);
                 }
             }

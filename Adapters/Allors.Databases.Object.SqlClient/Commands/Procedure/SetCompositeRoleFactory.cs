@@ -54,11 +54,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 string sql;
                 if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                 }
 
                 this.sqlByIRoleType[roleType] = sql;
@@ -81,7 +81,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
             internal void Execute(IList<CompositeRelation> relations, IRoleType roleType)
             {
-                var schema = this.factory.Database.SqlClientSchema;
+                var schema = this.factory.Database.SqlClientMapping;
 
                 SqlCommand command;
                 if (!this.commandByIRoleType.TryGetValue(roleType, out command))

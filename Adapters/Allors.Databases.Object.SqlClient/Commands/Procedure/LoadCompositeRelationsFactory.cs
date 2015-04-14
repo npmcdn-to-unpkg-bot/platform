@@ -44,22 +44,22 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             {
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Schema.AllorsPrefix + "A_" + roleType.SingularFullName;
+                    sql = Mapping.AllorsPrefix + "A_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Schema.AllorsPrefix + "A_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                    sql = Mapping.AllorsPrefix + "A_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                 }
             }
             else
             {
                 if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
+                    sql = Mapping.AllorsPrefix + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                    sql = Mapping.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 var command = this.factory.ManagementSession.CreateSqlCommand(this.sql);
                 command.CommandType = CommandType.StoredProcedure;
-                this.AddInTable(command, database.SqlClientSchema.CompositeRelationTableParam, database.CreateRelationTable(relations));
+                this.AddInTable(command, database.SqlClientMapping.CompositeRelationTableParam, database.CreateRelationTable(relations));
 
                 command.ExecuteNonQuery();
             }

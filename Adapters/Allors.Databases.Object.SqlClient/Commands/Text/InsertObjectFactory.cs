@@ -50,7 +50,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
-                var schema = this.Database.Schema;
+                var schema = this.Database.Mapping;
 
                 // TODO: Make this a single pass Query.
                 var sql = "IF EXISTS (\n";
@@ -100,15 +100,15 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
 
-                    this.AddInObject(command, this.Database.Schema.ObjectId.Param, objectId.Value);
-                    this.AddInObject(command, this.Database.Schema.TypeId.Param, objectType.Id);
+                    this.AddInObject(command, this.Database.Mapping.ObjectId.Param, objectId.Value);
+                    this.AddInObject(command, this.Database.Mapping.TypeId.Param, objectType.Id);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Schema.ObjectId.Param, objectId.Value);
-                    this.SetInObject(command, this.Database.Schema.TypeId.Param, objectType.Id);
+                    this.SetInObject(command, this.Database.Mapping.ObjectId.Param, objectId.Value);
+                    this.SetInObject(command, this.Database.Mapping.TypeId.Param, objectType.Id);
                 }
 
                 var result = command.ExecuteScalar();

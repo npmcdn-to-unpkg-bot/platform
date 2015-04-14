@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Caching\Cache.cs" />
     <Compile Include="Caching\CachedObject.cs" />
@@ -96,9 +97,9 @@
     <Compile Include="DataRecords\CompositesRoleDataRecords.cs" />
     <Compile Include="DataRecords\CompositeRoleDataRecords.cs" />
     <Compile Include="DataRecords\UnitRoleDataRecords.cs" />
-    <Compile Include="Schema\IntegerSchema.cs" />
+    <Compile Include="Mapping\IntegerMapping.cs" />
     <Compile Include="Load.cs" />
-    <Compile Include="Schema\LongSchema.cs" />
+    <Compile Include="Mapping\LongMapping.cs" />
     <Compile Include="ManagementSession.cs" />
     <Compile Include="Predicates\AndPredicate.cs" />
     <Compile Include="Predicates\AssociationContainedInEnumerable.cs" />
@@ -133,21 +134,21 @@
     <Compile Include="RelationTypeOneXmlWriter.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Save.cs" />
-    <Compile Include="SchemaTableParameter.cs" />
-    <Compile Include="Schema\ISchemaValidationError.cs" />
-    <Compile Include="Schema\ProcedureSchemaValidationError.cs" />
-    <Compile Include="Schema\ReservedWords.cs" />
-    <Compile Include="Schema\Schema.cs" />
-    <Compile Include="Schema\SchemaColumn.cs" />
-    <Compile Include="Schema\SchemaIndexType.cs" />
-    <Compile Include="Schema\SchemaParameter.cs" />
-    <Compile Include="Schema\SchemaProcedure.cs" />
-    <Compile Include="Schema\SchemaTable.cs" />
-    <Compile Include="Schema\SchemaTableKind.cs" />
-    <Compile Include="Schema\SchemaValidationErrorKind.cs" />
-    <Compile Include="Schema\SchemaValidationErrors.cs" />
-    <Compile Include="Schema\SchemaValidationException.cs" />
-    <Compile Include="Schema\TableSchemaValidationError.cs" />
+    <Compile Include="MappingTableParameter.cs" />
+    <Compile Include="Mapping\IMappingValidationError.cs" />
+    <Compile Include="Mapping\ProcedureMappingValidationError.cs" />
+    <Compile Include="Mapping\ReservedWords.cs" />
+    <Compile Include="Mapping\Mapping.cs" />
+    <Compile Include="Mapping\MappingColumn.cs" />
+    <Compile Include="Mapping\MappingIndexType.cs" />
+    <Compile Include="Mapping\MappingParameter.cs" />
+    <Compile Include="Mapping\MappingProcedure.cs" />
+    <Compile Include="Mapping\MappingTable.cs" />
+    <Compile Include="Mapping\MapingTableKind.cs" />
+    <Compile Include="Mapping\MappingValidationErrorKind.cs" />
+    <Compile Include="Mapping\MappingValidationErrors.cs" />
+    <Compile Include="Mapping\MappingValidationException.cs" />
+    <Compile Include="Mapping\TableMappingValidationError.cs" />
     <Compile Include="SessionCommands.cs" />
     <Compile Include="Strategy.cs" />
     <Compile Include="UnitRelation.cs" />
@@ -161,9 +162,7 @@
       <Name>Allors</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mapping\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -58,7 +58,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             if (!sqlByIRoleType.ContainsKey(roleType))
             {
-                var sql = SqlClient.Schema.AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName;
+                var sql = SqlClient.Mapping.AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName;
                 sqlByIRoleType[roleType] = sql;
             }
 
@@ -79,7 +79,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(IList<UnitRelation> relation, IObjectType exclusiveRootClass, IRoleType roleType)
             {
-                var schema = this.Database.SqlClientSchema;
+                var schema = this.Database.SqlClientMapping;
 
                 Dictionary<IRoleType, SqlCommand> commandByIRoleType;
                 if (!this.commandByIRoleTypeByIObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))
@@ -88,7 +88,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     this.commandByIRoleTypeByIObjectType.Add(exclusiveRootClass, commandByIRoleType);
                 }
 
-                SchemaTableParameter tableParam;
+                MappingTableParameter tableParam;
 
                 var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
                 switch (unitTypeTag)

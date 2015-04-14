@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SchemaColumn.cs" company="Allors bvba">
+// <copyright file="MappingColumn.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -24,16 +24,16 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    internal class SchemaColumn
+    internal class MappingColumn
     {
         internal readonly string Name;
         internal readonly DbType DbType;
 
         internal readonly bool IsIdentity;
         internal readonly bool IsKey;
-        internal readonly SchemaIndexType IndexType;
+        internal readonly MappingIndexType IndexType;
 
-        internal readonly SchemaParameter Param;
+        internal readonly MappingParameter Param;
         internal readonly string StatementName;
 
         internal readonly int? Precision;
@@ -42,21 +42,21 @@ namespace Allors.Databases.Object.SqlClient
 
         internal readonly IRelationType RelationType;
 
-        internal SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType)
-            : this(schema, name, dbType, isIdentity, isKey, indexType, null, null, null, null)
+        internal MappingColumn(Mapping mapping, string name, DbType dbType, bool isIdentity, bool isKey, MappingIndexType indexType)
+            : this(mapping, name, dbType, isIdentity, isKey, indexType, null, null, null, null)
         {
         }
 
-        internal SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, IRelationType relationType)
-            : this(schema, name, dbType, isIdentity, isKey, indexType, relationType, null, null, null)
+        internal MappingColumn(Mapping mapping, string name, DbType dbType, bool isIdentity, bool isKey, MappingIndexType indexType, IRelationType relationType)
+            : this(mapping, name, dbType, isIdentity, isKey, indexType, relationType, null, null, null)
         {
         }
 
-        internal SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, IRelationType relationType, int? size, int? precision, int? scale)
+        internal MappingColumn(Mapping mapping, string name, DbType dbType, bool isIdentity, bool isKey, MappingIndexType indexType, IRelationType relationType, int? size, int? precision, int? scale)
         {
             this.Name = name.ToLowerInvariant();
-            this.StatementName = schema.EscapeIfReserved(this.Name);
-            this.Param = schema.CreateParameter(name, dbType);
+            this.StatementName = mapping.EscapeIfReserved(this.Name);
+            this.Param = mapping.CreateParameter(name, dbType);
 
             this.IsKey = isKey;
             this.IsIdentity = isIdentity;

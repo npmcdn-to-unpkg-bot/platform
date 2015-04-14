@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Schema.cs" company="Allors bvba">
+// <copyright file="Mapping.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,16 +16,15 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System.Data;
 
-    internal sealed class LongSchema : Schema
+    internal sealed class LongMapping : Mapping
     {
-        internal LongSchema(SqlClient.Database database) : base(database)
+        internal LongMapping(Database database) : base(database)
         {
             this.OnConstructed();
         }

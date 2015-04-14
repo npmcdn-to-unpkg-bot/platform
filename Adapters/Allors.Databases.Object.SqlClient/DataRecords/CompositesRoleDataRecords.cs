@@ -28,21 +28,21 @@ namespace Allors.Databases.Object.SqlClient
 
     internal class CompositesRoleDataRecords : IEnumerable<SqlDataRecord>
     {
-        private readonly Schema schema;
+        private readonly Mapping mapping;
         private readonly IEnumerable<Reference> strategies;
 
-        internal CompositesRoleDataRecords(Schema schema, IEnumerable<Reference> strategies)
+        internal CompositesRoleDataRecords(Mapping mapping, IEnumerable<Reference> strategies)
         {
-            this.schema = schema;
+            this.mapping = mapping;
             this.strategies = strategies;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
             // TODO: See Relation.SqlClient
-            if (this.schema.IsObjectIdInteger)
+            if (this.mapping.IsObjectIdInteger)
             {
-                var objectArrayElement = this.schema.ObjectTableObject;
+                var objectArrayElement = this.mapping.ObjectTableObject;
                 var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
                 var sqlDataRecord = new SqlDataRecord(metaData);
                 foreach (var strategy in this.strategies)
@@ -53,7 +53,7 @@ namespace Allors.Databases.Object.SqlClient
             }
             else
             {
-                var objectArrayElement = this.schema.ObjectTableObject;
+                var objectArrayElement = this.mapping.ObjectTableObject;
                 var metaData = new SqlMetaData(objectArrayElement, SqlDbType.BigInt);
                 var sqlDataRecord = new SqlDataRecord(metaData);
                 foreach (var strategy in this.strategies)

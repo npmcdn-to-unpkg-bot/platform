@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="SchemaValidationErrors.cs" company="Allors bvba">
+// <copyright file="MappingValidationErrors.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,7 +16,6 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the SchemaValidationErrors type.</summary>
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Databases.Object.SqlClient
 {
@@ -25,43 +24,43 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
 
     /// <summary>
-    /// Holds the <see cref="ISchemaValidationError"/>s that occured during the validation
+    /// Holds the <see cref="IMappingValidationError"/>s that occured during the validation
     /// of the <see cref="Domain"/> against the database schema.
     /// </summary>
-    internal class SchemaValidationErrors
+    internal class MappingValidationErrors
     {
         /// <summary>
         /// The errors that occured during validation of the <see cref="Domain"/> against the Sql schema.
         /// </summary>
-        private readonly List<ISchemaValidationError> errors;
+        private readonly List<IMappingValidationError> errors;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchemaValidationErrors"/> class.
+        /// Initializes a new instance of the <see cref="MappingValidationErrors"/> class.
         /// </summary>
-        internal SchemaValidationErrors()
+        internal MappingValidationErrors()
         {
-            this.errors = new List<ISchemaValidationError>();
+            this.errors = new List<IMappingValidationError>();
         }
 
         /// <summary>
         /// Gets the schema validation errors.
         /// </summary>
         /// <value>The errors.</value>
-        internal ISchemaValidationError[] Errors
+        internal IMappingValidationError[] Errors
         {
             get { return this.errors.ToArray(); }
         }
 
-        internal TableSchemaValidationError[] TableErrors
+        internal TableMappingValidationError[] TableErrors
         {
             get
             {
-                var tableErrors = new List<TableSchemaValidationError>();
+                var tableErrors = new List<TableMappingValidationError>();
                 foreach (var error in this.errors)
                 {
-                    if (error is TableSchemaValidationError)
+                    if (error is TableMappingValidationError)
                     {
-                        tableErrors.Add((TableSchemaValidationError)error);
+                        tableErrors.Add((TableMappingValidationError)error);
                     }
                 }
 
@@ -69,16 +68,16 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal ProcedureSchemaValidationError[] ProcedureErrors
+        internal ProcedureMappingValidationError[] ProcedureErrors
         {
             get
             {
-                var procedureErrors = new List<ProcedureSchemaValidationError>();
+                var procedureErrors = new List<ProcedureMappingValidationError>();
                 foreach (var error in this.errors)
                 {
-                    if (error is TableSchemaValidationError)
+                    if (error is TableMappingValidationError)
                     {
-                        procedureErrors.Add((ProcedureSchemaValidationError)error);
+                        procedureErrors.Add((ProcedureMappingValidationError)error);
                     }
                 }
 
@@ -125,14 +124,14 @@ namespace Allors.Databases.Object.SqlClient
         /// <param name="columnName">Name of the column.</param>
         /// <param name="kind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        internal void AddTableError(IObjectType objectType, IRelationType relationType, IRoleType roleType, string tableName, string columnName, SchemaValidationErrorKind kind, string message)
+        internal void AddTableError(IObjectType objectType, IRelationType relationType, IRoleType roleType, string tableName, string columnName, MappingValidationErrorKind kind, string message)
         {
-            this.errors.Add(new TableSchemaValidationError(objectType, relationType, roleType, tableName, columnName, kind, message));
+            this.errors.Add(new TableMappingValidationError(objectType, relationType, roleType, tableName, columnName, kind, message));
         }
 
-        internal void AddProcedureError(SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
+        internal void AddProcedureError(MappingProcedure mappingProcedure, MappingValidationErrorKind kind, string message)
         {
-            this.errors.Add(new ProcedureSchemaValidationError(schemaProcedure, kind, message));
+            this.errors.Add(new ProcedureMappingValidationError(mappingProcedure, kind, message));
         }
     }
 }

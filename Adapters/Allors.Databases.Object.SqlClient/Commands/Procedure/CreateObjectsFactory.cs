@@ -60,22 +60,22 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             internal IList<Reference> Execute(IClass objectType, int count)
             {
                 IObjectType exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
-                SqlClient.Schema schema = this.Database.Schema;
+                SqlClient.Mapping mapping = this.Database.Mapping;
 
                 SqlCommand command;
                 if (!this.commandByIObjectType.TryGetValue(exclusiveRootClass, out command))
                 {
-                    command = this.Session.CreateSqlCommand(SqlClient.Schema.AllorsPrefix + "COS_" + exclusiveRootClass.Name);
+                    command = this.Session.CreateSqlCommand(SqlClient.Mapping.AllorsPrefix + "COS_" + exclusiveRootClass.Name);
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, schema.TypeId.Param, objectType.Id);
-                    this.AddInObject(command, schema.CountParam, count);
+                    this.AddInObject(command, mapping.TypeId.Param, objectType.Id);
+                    this.AddInObject(command, mapping.CountParam, count);
 
                     this.commandByIObjectType[exclusiveRootClass] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, schema.TypeId.Param, objectType.Id);
-                    this.SetInObject(command, schema.CountParam, count);
+                    this.SetInObject(command, mapping.TypeId.Param, objectType.Id);
+                    this.SetInObject(command, mapping.CountParam, count);
                 }
 
                 var objectIds = new List<object>();
@@ -83,7 +83,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     while (reader.Read())
                     {
-                        object id = this.Database.AllorsObjectIds.Parse(reader[0].ToString());
+                        object id = this.Database.ObjectIds.Parse(reader[0].ToString());
                         objectIds.Add(id);
                     }
                 }
@@ -92,7 +92,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 foreach (object id in objectIds)
                 {
-                    ObjectId objectId = this.factory.Database.AllorsObjectIds.Parse(id.ToString());
+                    ObjectId objectId = this.factory.Database.ObjectIds.Parse(id.ToString());
                     var strategySql = this.Session.CreateAssociationForNewObject(objectType, objectId);
                     strategies.Add(strategySql);
                 }

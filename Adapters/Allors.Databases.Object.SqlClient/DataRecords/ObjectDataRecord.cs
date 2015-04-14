@@ -28,22 +28,22 @@ namespace Allors.Databases.Object.SqlClient
 
     internal class ObjectDataRecord : IEnumerable<SqlDataRecord>
     {
-        private readonly Schema schema;
+        private readonly Mapping mapping;
         private readonly IEnumerable<ObjectId> objectIds;
 
-        internal ObjectDataRecord(Schema schema, IEnumerable<ObjectId> objectIds)
+        internal ObjectDataRecord(Mapping mapping, IEnumerable<ObjectId> objectIds)
         {
-            this.schema = schema;
+            this.mapping = mapping;
             this.objectIds = objectIds;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var objectArrayElement = this.schema.ObjectTableObject;
+            var objectArrayElement = this.mapping.ObjectTableObject;
             var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
             var sqlDataRecord = new SqlDataRecord(metaData);
 
-            if (this.schema.IsObjectIdInteger)
+            if (this.mapping.IsObjectIdInteger)
             {
                 foreach (var objectId in this.objectIds)
                 {

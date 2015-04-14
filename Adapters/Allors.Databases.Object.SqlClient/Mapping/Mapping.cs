@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Schema.cs" company="Allors bvba">
+// <copyright file="Mapping.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,7 +16,6 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Databases.Object.SqlClient
@@ -28,7 +27,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    internal abstract class Schema : IEnumerable<SchemaTable>
+    internal abstract class Mapping : IEnumerable<MappingTable>
     {
         /// <summary>
         /// This prefix will be used for
@@ -47,29 +46,27 @@ namespace Allors.Databases.Object.SqlClient
         private readonly string prefix;
         private readonly string postfix;
 
-        private Dictionary<IRelationType, SchemaColumn> columnsByRelationType;
-        private Dictionary<IRelationType, SchemaTable> tablesByRelationType;
-        private Dictionary<IObjectType, SchemaTable> tableByObjectType;
-        private Dictionary<string, SchemaTable> tablesByName;
+        private Dictionary<IRelationType, MappingColumn> columnsByRelationType;
+        private Dictionary<IRelationType, MappingTable> tablesByRelationType;
+        private Dictionary<IObjectType, MappingTable> tableByObjectType;
+        private Dictionary<string, MappingTable> tablesByName;
 
-        private SchemaColumn objectId;
-        private SchemaColumn associationId;
-        private SchemaColumn roleId;
-        private SchemaColumn typeId;
-        private SchemaColumn cacheId;
+        private MappingColumn objectId;
+        private MappingColumn associationId;
+        private MappingColumn roleId;
+        private MappingColumn typeId;
+        private MappingColumn cacheId;
 
-        private SchemaTable objects;
-        private SchemaColumn objectsObjectId;
-        private SchemaColumn objectsTypeId;
-        private SchemaColumn objectsCacheId;
+        private MappingTable objects;
+        private MappingColumn objectsObjectId;
+        private MappingColumn objectsTypeId;
+        private MappingColumn objectsCacheId;
 
-        private SchemaParameter countParam;
-        private SchemaParameter matchRoleParam;
+        private MappingParameter countParam;
+        private MappingParameter matchRoleParam;
 
         private DbType cacheDbType;
         private DbType typeDbType;
-        private DbType singletonDbType;
-        private DbType versionDbType;
 
         /// <summary>
         /// Gets the parameter to pass a count to.
@@ -77,67 +74,59 @@ namespace Allors.Databases.Object.SqlClient
         /// Is used in CreateObjects to denote the amount of objects to create.
         /// </example>
         /// </summary>
-        internal SchemaParameter CountParam
+        internal MappingParameter CountParam
         {
             get { return this.countParam; }
         }
 
-        internal SchemaParameter MatchRoleParam
+        internal MappingParameter MatchRoleParam
         {
             get { return this.matchRoleParam; }
         }
 
-        internal SchemaColumn TypeId
+        internal MappingColumn TypeId
         {
             get { return this.typeId; }
         }
 
-        internal SchemaColumn CacheId
+        internal MappingColumn CacheId
         {
             get { return this.cacheId; }
         }
 
-        internal SchemaColumn AssociationId
+        internal MappingColumn AssociationId
         {
             get { return this.associationId; }
         }
 
-        internal SchemaColumn RoleId
+        internal MappingColumn RoleId
         {
             get { return this.roleId; }
         }
 
-        internal SchemaColumn ObjectId
+        internal MappingColumn ObjectId
         {
             get { return this.objectId; }
         }
 
-        internal SchemaTable Objects
+        internal MappingTable Objects
         {
             get { return this.objects; }
         }
 
-        internal SchemaColumn ObjectsObjectId
+        internal MappingColumn ObjectsObjectId
         {
             get { return this.objectsObjectId; }
         }
 
-        internal SchemaColumn ObjectsTypeId
+        internal MappingColumn ObjectsTypeId
         {
             get { return this.objectsTypeId; }
         }
 
-        internal SchemaColumn ObjectsCacheId
+        internal MappingColumn ObjectsCacheId
         {
             get { return this.objectsCacheId; }
-        }
-
-        internal int SingletonValue
-        {
-            get
-            {
-                return 1;
-            }
         }
 
         public abstract bool IsObjectIdInteger { get; }
@@ -149,27 +138,27 @@ namespace Allors.Databases.Object.SqlClient
         /// </summary>
         protected abstract DbType ObjectDbType { get; }
 
-        protected Databases.Object.SqlClient.Database Database
+        protected Database Database
         {
             get { return this.database; }
         }
 
-        protected Dictionary<IRelationType, SchemaColumn> ColumnsByRelationType
+        protected Dictionary<IRelationType, MappingColumn> ColumnsByRelationType
         {
             get { return this.columnsByRelationType; }
         }
 
-        protected Dictionary<string, SchemaTable> TablesByName
+        protected Dictionary<string, MappingTable> TablesByName
         {
             get { return this.tablesByName; }
         }
 
-        protected Dictionary<IRelationType, SchemaTable> TablesByRelationType
+        protected Dictionary<IRelationType, MappingTable> TablesByRelationType
         {
             get { return this.tablesByRelationType; }
         }
 
-        protected Dictionary<IObjectType, SchemaTable> TableByObjectType
+        protected Dictionary<IObjectType, MappingTable> TableByObjectType
         {
             get { return this.tableByObjectType; }
         }
@@ -184,78 +173,68 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.cacheDbType; }
         }
 
-        private DbType VersionDbType
-        {
-            get { return this.versionDbType; }
-        }
-
-        private DbType SingletonDbType
-        {
-            get { return this.singletonDbType; }
-        }
-
-        internal SchemaTable this[string tableName]
+        internal MappingTable this[string tableName]
         {
             get { return this.tablesByName[tableName.ToLowerInvariant()]; }
         }
 
-        internal static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaTable table, SchemaValidationErrorKind kind)
+        internal static void AddError(MappingValidationErrors mappingValidationErrors, MappingTable table, MappingValidationErrorKind kind)
         {
-            schemaValidationErrors.AddTableError(table.ObjectType, table.RelationType, null, table.ToString(), null, kind, kind + ": " + table);
+            mappingValidationErrors.AddTableError(table.ObjectType, table.RelationType, null, table.ToString(), null, kind, kind + ": " + table);
         }
 
-        internal static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaTable table, SchemaColumn column, SchemaValidationErrorKind kind)
+        internal static void AddError(MappingValidationErrors mappingValidationErrors, MappingTable table, MappingColumn column, MappingValidationErrorKind kind)
         {
             var roleType = column.RelationType == null ? null : column.RelationType.RoleType;
-            schemaValidationErrors.AddTableError(null, null, roleType, table.ToString(), column.ToString(), kind, kind + ": " + table + "." + column);
+            mappingValidationErrors.AddTableError(null, null, roleType, table.ToString(), column.ToString(), kind, kind + ": " + table + "." + column);
         }
 
-        internal static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
+        internal static void AddError(MappingValidationErrors mappingValidationErrors, MappingProcedure mappingProcedure, MappingValidationErrorKind kind, string message)
         {
-            schemaValidationErrors.AddProcedureError(schemaProcedure, kind, message);
+            mappingValidationErrors.AddProcedureError(mappingProcedure, kind, message);
         }
 
         public IEnumerator GetEnumerator()
         {
-            return ((IEnumerable<SchemaTable>)this).GetEnumerator();
+            return ((IEnumerable<MappingTable>)this).GetEnumerator();
         }
 
-        IEnumerator<SchemaTable> IEnumerable<SchemaTable>.GetEnumerator()
+        IEnumerator<MappingTable> IEnumerable<MappingTable>.GetEnumerator()
         {
             return this.tablesByName.Values.GetEnumerator();
         }
 
-        internal SchemaColumn Column(IRelationType relationType)
+        internal MappingColumn Column(IRelationType relationType)
         {
             return this.columnsByRelationType[relationType];
         }
 
-        internal SchemaColumn Column(IAssociationType association)
+        internal MappingColumn Column(IAssociationType association)
         {
             return this.columnsByRelationType[association.RelationType];
         }
 
-        internal SchemaColumn Column(IRoleType role)
+        internal MappingColumn Column(IRoleType role)
         {
             return this.columnsByRelationType[role.RelationType];
         }
 
-        internal SchemaTable Table(IObjectType type)
+        internal MappingTable Table(IObjectType type)
         {
             return this.tableByObjectType[type];
         }
 
-        internal SchemaTable Table(IRelationType relationType)
+        internal MappingTable Table(IRelationType relationType)
         {
             return this.tablesByRelationType[relationType];
         }
 
-        internal SchemaTable Table(IAssociationType association)
+        internal MappingTable Table(IAssociationType association)
         {
             return this.tablesByRelationType[association.RelationType];
         }
 
-        internal SchemaTable Table(IRoleType role)
+        internal MappingTable Table(IRoleType role)
         {
             return this.tablesByRelationType[role.RelationType];
         }
@@ -310,7 +289,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                 {
-                    var column = new SchemaColumn(this, "R", this.ObjectDbType, false, true, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                    var column = new MappingColumn(this, "R", this.ObjectDbType, false, true, relationType.IsIndexed ? MappingIndexType.Combined : MappingIndexType.None, relationType);
                     this.ColumnsByRelationType.Add(relationType, column);
                 }
                 else
@@ -321,29 +300,29 @@ namespace Allors.Databases.Object.SqlClient
                         var precision = roleType.Precision;
                         var scale = roleType.Scale;
 
-                        var index = relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None;
+                        var index = relationType.IsIndexed ? MappingIndexType.Single : MappingIndexType.None;
                         var unit = (IUnit)roleType.ObjectType;
                         if (unit.IsBinary || unit.IsString)
                         {
                             if (roleType.Size == -1 || roleType.Size > 8000)
                             {
-                                index = SchemaIndexType.None;
+                                index = MappingIndexType.None;
                             }
                         }
 
-                        var column = new SchemaColumn(this, roleType.SingularPropertyName, this.GetDbType(roleType), false, false, index, relationType, size, precision, scale);
+                        var column = new MappingColumn(this, roleType.SingularPropertyName, this.GetDbType(roleType), false, false, index, relationType, size, precision, scale);
                         this.ColumnsByRelationType.Add(relationType, column);
                     }
                     else if (relationType.ExistExclusiveLeafClasses)
                     {
                         if (roleType.IsOne)
                         {
-                            var column = new SchemaColumn(this, roleType.SingularPropertyName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                            var column = new MappingColumn(this, roleType.SingularPropertyName, this.ObjectDbType, false, false, relationType.IsIndexed ? MappingIndexType.Combined : MappingIndexType.None, relationType);
                             this.ColumnsByRelationType.Add(relationType, column);
                         }
                         else
                         {
-                            var column = new SchemaColumn(this, associationType.SingularPropertyName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                            var column = new MappingColumn(this, associationType.SingularPropertyName, this.ObjectDbType, false, false, relationType.IsIndexed ? MappingIndexType.Combined : MappingIndexType.None, relationType);
                             this.ColumnsByRelationType.Add(relationType, column);
                         }
                     }
@@ -352,7 +331,7 @@ namespace Allors.Databases.Object.SqlClient
 
             foreach (IClass objectType in this.Database.MetaPopulation.Classes)
             {
-                var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);
+                var schemaTable = new MappingTable(this, objectType.SingularName, MapingTableKind.Object, objectType);
                 this.TablesByName.Add(schemaTable.Name, schemaTable);
                 this.TableByObjectType.Add(objectType, schemaTable);
 
@@ -394,7 +373,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                 {
-                    var schemaTable = new SchemaTable(this, relationType.RoleType.SingularFullName, SchemaTableKind.Relation, relationType);
+                    var schemaTable = new MappingTable(this, relationType.RoleType.SingularFullName, MapingTableKind.Relation, relationType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);
                     this.TablesByRelationType.Add(relationType, schemaTable);
 
@@ -436,44 +415,44 @@ namespace Allors.Databases.Object.SqlClient
 
         internal readonly string ObjectTable = AllorsPrefix + "_O";
         internal readonly string ObjectTableObject = "_o";
-        internal readonly SchemaTableParameter ObjectTableParam;
+        internal readonly MappingTableParameter ObjectTableParam;
 
         internal readonly string RelationTableAssociation = "_a";
         internal readonly string RelationTableRole = "_r";
 
         internal readonly string CompositeRelationTable = AllorsPrefix + "_CompositeR";
-        internal readonly SchemaTableParameter CompositeRelationTableParam;
+        internal readonly MappingTableParameter CompositeRelationTableParam;
 
         internal readonly string StringRelationTable = AllorsPrefix + "_StringR";
-        internal readonly SchemaTableParameter StringRelationTableParam;
+        internal readonly MappingTableParameter StringRelationTableParam;
 
         internal readonly string IntegerRelationTable = AllorsPrefix + "_IntegerR";
-        internal readonly SchemaTableParameter IntegerRelationTableParam;
+        internal readonly MappingTableParameter IntegerRelationTableParam;
         
         internal readonly string FloatRelationTable = AllorsPrefix + "_FloatR";
-        internal readonly SchemaTableParameter FloatRelationTableParam;
+        internal readonly MappingTableParameter FloatRelationTableParam;
         
         internal readonly string BooleanRelationTable = AllorsPrefix + "_BooleanR";
-        internal readonly SchemaTableParameter BooleanRelationTableParam;
+        internal readonly MappingTableParameter BooleanRelationTableParam;
 
         internal readonly string DateTimeRelationTable = AllorsPrefix + "_DateTimeR";
-        internal readonly SchemaTableParameter DateTimeRelationTableParam;
+        internal readonly MappingTableParameter DateTimeRelationTableParam;
 
         internal readonly string UniqueRelationTable = AllorsPrefix + "_UniqueR";
-        internal readonly SchemaTableParameter UniqueRelationTableParam;
+        internal readonly MappingTableParameter UniqueRelationTableParam;
 
         internal readonly string BinaryRelationTable = AllorsPrefix + "_BinaryR";
-        internal readonly SchemaTableParameter BinaryRelationTableParam;
+        internal readonly MappingTableParameter BinaryRelationTableParam;
 
         internal readonly Dictionary<int, Dictionary<int, string>> DecimalRelationTableByScaleByPrecision = new Dictionary<int, Dictionary<int, string>>();
-        internal readonly Dictionary<int, Dictionary<int, SchemaTableParameter>> DecimalRelationTableParameterByScaleByPrecision = new Dictionary<int, Dictionary<int, SchemaTableParameter>>(); 
+        internal readonly Dictionary<int, Dictionary<int, MappingTableParameter>> DecimalRelationTableParameterByScaleByPrecision = new Dictionary<int, Dictionary<int, MappingTableParameter>>(); 
 
         private readonly Database database;
 
-        private SchemaValidationErrors schemaValidationErrors;
-        private Dictionary<string, SchemaProcedure> procedureByName;
+        private MappingValidationErrors mappingValidationErrors;
+        private Dictionary<string, MappingProcedure> procedureByName;
 
-        internal Schema(Database database)
+        internal Mapping(Database database)
         {
             this.database = database;
             this.ParamInvocationFormat = "@{0}";
@@ -482,15 +461,15 @@ namespace Allors.Databases.Object.SqlClient
             this.postfix = "]";
             
             this.database = database;
-            this.ObjectTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_o", this.ObjectTable);
-            this.CompositeRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.CompositeRelationTable);
-            this.StringRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.StringRelationTable);
-            this.IntegerRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.IntegerRelationTable);
-            this.FloatRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.FloatRelationTable);
-            this.BooleanRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.BooleanRelationTable);
-            this.DateTimeRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.DateTimeRelationTable);
-            this.UniqueRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.UniqueRelationTable);
-            this.BinaryRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.BinaryRelationTable);
+            this.ObjectTableParam = new MappingTableParameter(this, AllorsPrefix + "p_o", this.ObjectTable);
+            this.CompositeRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.CompositeRelationTable);
+            this.StringRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.StringRelationTable);
+            this.IntegerRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.IntegerRelationTable);
+            this.FloatRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.FloatRelationTable);
+            this.BooleanRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.BooleanRelationTable);
+            this.DateTimeRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.DateTimeRelationTable);
+            this.UniqueRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.UniqueRelationTable);
+            this.BinaryRelationTableParam = new MappingTableParameter(this, AllorsPrefix + "p_r", this.BinaryRelationTable);
 
             foreach (var relationType in database.MetaPopulation.RelationTypes)
             {
@@ -516,28 +495,28 @@ namespace Allors.Databases.Object.SqlClient
                     }
 
                     // param
-                    Dictionary<int, SchemaTableParameter> schemaTableParameterByScale;
+                    Dictionary<int, MappingTableParameter> schemaTableParameterByScale;
                     if (!this.DecimalRelationTableParameterByScaleByPrecision.TryGetValue(precision.Value, out schemaTableParameterByScale))
                     {
-                        schemaTableParameterByScale = new Dictionary<int, SchemaTableParameter>();
+                        schemaTableParameterByScale = new Dictionary<int, MappingTableParameter>();
                         this.DecimalRelationTableParameterByScaleByPrecision[precision.Value] = schemaTableParameterByScale;
                     }
 
                     if (!schemaTableParameterByScale.ContainsKey(scale.Value))
                     {
-                        schemaTableParameterByScale[scale.Value] = new SchemaTableParameter(this, AllorsPrefix + "p_r", tableName); 
+                        schemaTableParameterByScale[scale.Value] = new MappingTableParameter(this, AllorsPrefix + "p_r", tableName); 
                     }
                 }
             }
         }
 
-        internal SchemaValidationErrors SchemaValidationErrors
+        internal MappingValidationErrors MappingValidationErrors
         {
             get
             {
-                if (this.schemaValidationErrors == null)
+                if (this.mappingValidationErrors == null)
                 {
-                    this.schemaValidationErrors = new SchemaValidationErrors();
+                    this.mappingValidationErrors = new MappingValidationErrors();
 
                     var session = this.database.CreateSqlClientManagementSession();
                     try
@@ -563,7 +542,7 @@ namespace Allors.Databases.Object.SqlClient
                             }
                         }
 
-                        var dataRowViewByExistingColumnsByTable = new Dictionary<SchemaTable, Dictionary<SchemaColumn, SchemaExistingColumn>>();
+                        var dataRowViewByExistingColumnsByTable = new Dictionary<MappingTable, Dictionary<MappingColumn, MappingExistingColumn>>();
                         lock (this.Database)
                         {
                             using (var command = session.CreateCommand(
@@ -591,7 +570,7 @@ FROM information_schema.columns"))
                                             {
                                                 var column = table[columnName];
 
-                                                var existingColumn = new SchemaExistingColumn
+                                                var existingColumn = new MappingExistingColumn
                                                                          {
                                                                              DataType = reader.GetString(2), 
                                                                              CharacterMaximumLength = reader.IsDBNull(3) ? 0 : (int)reader[3],
@@ -604,7 +583,7 @@ FROM information_schema.columns"))
                                                 if (!dataRowViewByExistingColumnsByTable.ContainsKey(table))
                                                 {
                                                     dataRowViewByExistingColumnsByTable.Add(
-                                                        table, new Dictionary<SchemaColumn, SchemaExistingColumn>());
+                                                        table, new Dictionary<MappingColumn, MappingExistingColumn>());
                                                 }
 
                                                 dataRowViewByExistingColumnsByTable[table].Add(column, existingColumn);
@@ -615,14 +594,14 @@ FROM information_schema.columns"))
                             }
                         }
 
-                        foreach (SchemaTable table in this)
+                        foreach (MappingTable table in this)
                         {
                             if (tableNames.Contains(table.Name))
                             {
                                 if (dataRowViewByExistingColumnsByTable.ContainsKey(table))
                                 {
                                     var dataRowViewByExistingColumns = dataRowViewByExistingColumnsByTable[table];
-                                    foreach (SchemaColumn column in table)
+                                    foreach (MappingColumn column in table)
                                     {
                                         if (dataRowViewByExistingColumns.ContainsKey(column))
                                         {
@@ -635,7 +614,7 @@ FROM information_schema.columns"))
                                                 {
                                                     if (!dataType.Equals(SqlDbType.ToString().ToLower()))
                                                     {
-                                                        AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                        AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                     }
                                                 }
                                                 else
@@ -648,7 +627,7 @@ FROM information_schema.columns"))
                                                                 !dataType.Equals(
                                                                     SqlDbType.NVarChar.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
                                                             else
                                                             {
@@ -657,7 +636,7 @@ FROM information_schema.columns"))
                                                                 if (column.RelationType.RoleType.Size > size
                                                                     && size != -1)
                                                                 {
-                                                                    AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                    AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                                 }
                                                             }
 
@@ -666,7 +645,7 @@ FROM information_schema.columns"))
                                                         case UnitTags.AllorsInteger:
                                                             if (!dataType.Equals(SqlDbType.Int.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
 
                                                             break;
@@ -674,7 +653,7 @@ FROM information_schema.columns"))
                                                         case UnitTags.AllorsFloat:
                                                             if (!dataType.Equals(SqlDbType.Float.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
 
                                                             break;
@@ -682,7 +661,7 @@ FROM information_schema.columns"))
                                                         case UnitTags.AllorsDecimal:
                                                             if (!dataType.Equals(SqlDbType.Decimal.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
                                                             else
                                                             {
@@ -692,12 +671,12 @@ FROM information_schema.columns"))
                                                                 var role = column.RelationType.RoleType;
                                                                 if (role.Precision > precision)
                                                                 {
-                                                                    AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                    AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                                 }
 
                                                                 if (role.Scale > scale)
                                                                 {
-                                                                    AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                    AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                                 }
                                                             }
 
@@ -706,7 +685,7 @@ FROM information_schema.columns"))
                                                         case UnitTags.AllorsDateTime:
                                                             if (!dataType.Equals(SqlDbType.DateTime2.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
 
                                                             break;
@@ -714,7 +693,7 @@ FROM information_schema.columns"))
                                                         case UnitTags.AllorsBoolean:
                                                             if (!dataType.Equals(SqlDbType.Bit.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
 
                                                             break;
@@ -724,7 +703,7 @@ FROM information_schema.columns"))
                                                                 !dataType.Equals(
                                                                     SqlDbType.UniqueIdentifier.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
 
                                                             break;
@@ -734,7 +713,7 @@ FROM information_schema.columns"))
                                                                 !dataType.Equals(
                                                                     SqlDbType.VarBinary.ToString().ToLower()))
                                                             {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                             }
                                                             else
                                                             {
@@ -743,7 +722,7 @@ FROM information_schema.columns"))
                                                                 if (column.RelationType.RoleType.Size > size
                                                                     && size != -1)
                                                                 {
-                                                                    AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
+                                                                    AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Incompatible);
                                                                 }
                                                             }
 
@@ -757,18 +736,18 @@ FROM information_schema.columns"))
                                         }
                                         else
                                         {
-                                            AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Missing);
+                                            AddError(this.mappingValidationErrors, table, column, MappingValidationErrorKind.Missing);
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    AddError(this.schemaValidationErrors, table, SchemaValidationErrorKind.Missing);
+                                    AddError(this.mappingValidationErrors, table, MappingValidationErrorKind.Missing);
                                 }
                             }
                             else
                             {
-                                AddError(this.schemaValidationErrors, table, SchemaValidationErrorKind.Missing);
+                                AddError(this.mappingValidationErrors, table, MappingValidationErrorKind.Missing);
                             }
                         }
 
@@ -795,20 +774,20 @@ FROM information_schema.columns"))
                             string existingProcedureDefinition;
                             if (!procedureDefinitionByName.TryGetValue(procedure.Name.ToLowerInvariant(), out existingProcedureDefinition))
                             {
-                                AddError(this.schemaValidationErrors, procedure, SchemaValidationErrorKind.Missing, "Procedure " + procedure.Name + " is missing.");
+                                AddError(this.mappingValidationErrors, procedure, MappingValidationErrorKind.Missing, "Procedure " + procedure.Name + " is missing.");
                             }
                             else
                             {
                                 if (!procedure.Definition.Equals(existingProcedureDefinition))
                                 {
-                                    AddError(this.schemaValidationErrors, procedure, SchemaValidationErrorKind.Incompatible, "Procedure " + procedure.Name + " is incompatible.");
+                                    AddError(this.mappingValidationErrors, procedure, MappingValidationErrorKind.Incompatible, "Procedure " + procedure.Name + " is incompatible.");
                                 }
                             }
                         }
                     }
                     catch
                     {
-                        this.schemaValidationErrors = null;
+                        this.mappingValidationErrors = null;
                         throw;
                     }
                     finally
@@ -817,11 +796,11 @@ FROM information_schema.columns"))
                     }
                 }
 
-                return this.schemaValidationErrors;
+                return this.mappingValidationErrors;
             }
         }
 
-        internal IEnumerable<SchemaProcedure> Procedures
+        internal IEnumerable<MappingProcedure> Procedures
         {
             get
             {
@@ -842,9 +821,9 @@ FROM information_schema.columns"))
             get;
         }
 
-        internal SchemaParameter CreateParameter(string name, DbType dbType)
+        internal MappingParameter CreateParameter(string name, DbType dbType)
         {
-            return new SchemaParameter(this, name, dbType);
+            return new MappingParameter(this, name, dbType);
         }
 
         protected void OnConstructed()
@@ -854,26 +833,24 @@ FROM information_schema.columns"))
 
             this.typeDbType = DbType.Guid;
             this.cacheDbType = DbType.Int32;
-            this.singletonDbType = DbType.Int32;
-            this.versionDbType = DbType.Guid;
 
-            this.tablesByName = new Dictionary<string, SchemaTable>();
+            this.tablesByName = new Dictionary<string, MappingTable>();
 
-            this.tableByObjectType = new Dictionary<IObjectType, SchemaTable>();
-            this.tablesByRelationType = new Dictionary<IRelationType, SchemaTable>();
-            this.columnsByRelationType = new Dictionary<IRelationType, SchemaColumn>();
+            this.tableByObjectType = new Dictionary<IObjectType, MappingTable>();
+            this.tablesByRelationType = new Dictionary<IRelationType, MappingTable>();
+            this.columnsByRelationType = new Dictionary<IRelationType, MappingColumn>();
 
-            this.objectId = new SchemaColumn(this, "O", this.ObjectDbType, false, true, SchemaIndexType.None);
-            this.cacheId = new SchemaColumn(this, "C", this.CacheDbType, false, false, SchemaIndexType.None);
-            this.associationId = new SchemaColumn(this, "A", this.ObjectDbType, false, true, SchemaIndexType.None);
-            this.roleId = new SchemaColumn(this, "R", this.ObjectDbType, false, true, SchemaIndexType.None);
-            this.typeId = new SchemaColumn(this, "T", this.TypeDbType, false, false, SchemaIndexType.None);
+            this.objectId = new MappingColumn(this, "O", this.ObjectDbType, false, true, MappingIndexType.None);
+            this.cacheId = new MappingColumn(this, "C", this.CacheDbType, false, false, MappingIndexType.None);
+            this.associationId = new MappingColumn(this, "A", this.ObjectDbType, false, true, MappingIndexType.None);
+            this.roleId = new MappingColumn(this, "R", this.ObjectDbType, false, true, MappingIndexType.None);
+            this.typeId = new MappingColumn(this, "T", this.TypeDbType, false, false, MappingIndexType.None);
 
             // Objects
-            this.objects = new SchemaTable(this, AllorsPrefix + "O", SchemaTableKind.System);
-            this.objectsObjectId = new SchemaColumn(this, this.ObjectId.Name, this.ObjectDbType, true, true, SchemaIndexType.None);
-            this.objectsCacheId = new SchemaColumn(this, "C", this.CacheDbType, false, false, SchemaIndexType.None);
-            this.objectsTypeId = new SchemaColumn(this, this.TypeId.Name, this.TypeDbType, false, false, SchemaIndexType.None);
+            this.objects = new MappingTable(this, AllorsPrefix + "O", MapingTableKind.System);
+            this.objectsObjectId = new MappingColumn(this, this.ObjectId.Name, this.ObjectDbType, true, true, MappingIndexType.None);
+            this.objectsCacheId = new MappingColumn(this, "C", this.CacheDbType, false, false, MappingIndexType.None);
+            this.objectsTypeId = new MappingColumn(this, this.TypeId.Name, this.TypeDbType, false, false, MappingIndexType.None);
 
             this.Objects.AddColumn(this.ObjectsObjectId);
             this.Objects.AddColumn(this.ObjectsTypeId);
@@ -882,10 +859,10 @@ FROM information_schema.columns"))
 
             this.CreateTablesFromMeta();
 
-            this.procedureByName = new Dictionary<string, SchemaProcedure>();
+            this.procedureByName = new Dictionary<string, MappingProcedure>();
 
             // Get Cache Ids
-            var procedure = new SchemaProcedure { Name = AllorsPrefix + "GC" };
+            var procedure = new MappingProcedure { Name = AllorsPrefix + "GC" };
             procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -897,7 +874,7 @@ AS
             this.procedureByName.Add(procedure.Name, procedure);
 
             // Update Cache Ids
-            procedure = new SchemaProcedure { Name = AllorsPrefix + "UC" };
+            procedure = new MappingProcedure { Name = AllorsPrefix + "UC" };
             procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -910,7 +887,7 @@ AS
             this.procedureByName.Add(procedure.Name, procedure);
 
             // Reset Cache Ids
-            procedure = new SchemaProcedure { Name = AllorsPrefix + "RC" };
+            procedure = new MappingProcedure { Name = AllorsPrefix + "RC" };
             procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -929,7 +906,7 @@ AS
                 if (sortedUnitIRoleTypes.Length > 0)
                 {
                     // Get Unit Roles
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GU_" + @class.Name };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "GU_" + @class.Name };
                     procedure.Definition = @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectId.Param + " AS " + this.database.GetSqlType(this.ObjectId) + @"
 AS 
@@ -963,7 +940,7 @@ AS
                 var table = dictionaryEntry.Value;
 
                 // Load Objects
-                procedure = new SchemaProcedure { Name = AllorsPrefix + "L_" + objectType.Name };
+                procedure = new MappingProcedure { Name = AllorsPrefix + "L_" + objectType.Name };
                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.TypeId.Param + @" " + this.database.GetSqlType(this.TypeId) + @",
@@ -976,7 +953,7 @@ AS
                 this.procedureByName.Add(procedure.Name, procedure);
                 
                 // CreateObject
-                procedure = new SchemaProcedure { Name = AllorsPrefix + "CO_" + objectType.Name };
+                procedure = new MappingProcedure { Name = AllorsPrefix + "CO_" + objectType.Name };
                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
 " + this.TypeId.Param + @" " + this.database.GetSqlType(this.TypeId) + @"
@@ -996,7 +973,7 @@ SELECT " + this.ObjectId.Param + @";";
                 this.procedureByName.Add(procedure.Name, procedure);
 
                 // CreateObjects
-                procedure = new SchemaProcedure { Name = AllorsPrefix + "COS_" + objectType.Name };
+                procedure = new MappingProcedure { Name = AllorsPrefix + "COS_" + objectType.Name };
                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
 " + this.TypeId.Param + @" " + this.database.GetSqlType(this.TypeId) + @",
@@ -1027,7 +1004,7 @@ END";
 
                 this.procedureByName.Add(procedure.Name, procedure);
 
-                foreach (SchemaColumn column in table)
+                foreach (MappingColumn column in table)
                 {
                     var relationType = column.RelationType;
                     if (relationType != null)
@@ -1042,7 +1019,7 @@ END";
                             {
                                 case UnitTags.AllorsString:
                                     // Set String Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.StringRelationTableParam + @" " + this.StringRelationTable + @" READONLY
 AS 
@@ -1058,7 +1035,7 @@ AS
 
                                 case UnitTags.AllorsInteger:
                                     // Set Integer Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.IntegerRelationTableParam + @" " + this.IntegerRelationTable + @" READONLY
 AS 
@@ -1074,7 +1051,7 @@ AS
 
                                 case UnitTags.AllorsFloat:
                                     // Set Double Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.FloatRelationTableParam + @" " + this.FloatRelationTable + @" READONLY
 AS 
@@ -1093,7 +1070,7 @@ AS
                                     var decimalRelationTable = this.DecimalRelationTableByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                                     var decimalRelationParameter = this.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
 
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
 " + decimalRelationParameter + @" " + decimalRelationTable + @" READONLY
 AS 
@@ -1109,7 +1086,7 @@ ON " + this.ObjectId + " = r." + this.RelationTableAssociation + @"
 
                                 case UnitTags.AllorsBoolean:
                                     // Set Boolean Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.BooleanRelationTableParam + @" " + this.BooleanRelationTable + @" READONLY
 AS 
@@ -1125,7 +1102,7 @@ AS
 
                                 case UnitTags.AllorsDateTime:
                                     // Set DateTime Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.DateTimeRelationTableParam + @" " + this.DateTimeRelationTable + @" READONLY
 AS 
@@ -1141,7 +1118,7 @@ AS
 
                                 case UnitTags.AllorsUnique:
                                     // Set Unique Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.UniqueRelationTableParam + @" " + this.UniqueRelationTable + @" READONLY
 AS 
@@ -1156,7 +1133,7 @@ AS
 
                                 case UnitTags.AllorsBinary:
                                     // Set Binary Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.BinaryRelationTableParam + @" " + this.BinaryRelationTable + @" READONLY
 AS 
@@ -1179,7 +1156,7 @@ AS
                             if (roleType.IsOne)
                             {
                                 // Get Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + roleType.SingularFullName };
+                                procedure = new MappingProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + roleType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @"
@@ -1193,7 +1170,7 @@ AS
                                 if (associationType.IsOne)
                                 {
                                     // Get Composite Association (1-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -1207,7 +1184,7 @@ AS
                                 else
                                 {
                                     // Get Composite Association (*-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -1220,7 +1197,7 @@ AS
                                 }
 
                                 // Set Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + objectType.Name + "_" + roleType.SingularFullName };
+                                procedure = new MappingProcedure { Name = AllorsPrefix + "S_" + objectType.Name + "_" + roleType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -1235,7 +1212,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Clear Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + roleType.SingularFullName };
+                                procedure = new MappingProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + roleType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -1251,7 +1228,7 @@ AS
                             else
                             {
                                 // Get Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.SingularFullName };
+                                procedure = new MappingProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @"
@@ -1265,7 +1242,7 @@ AS
                                 if (associationType.IsOne)
                                 {
                                     // Get Composite Association (1-*) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
+                                    procedure = new MappingProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -1278,7 +1255,7 @@ AS
                                 }
 
                                 // Add Composite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.SingularFullName };
+                                procedure = new MappingProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -1292,7 +1269,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Remove Composite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.SingularFullName };
+                                procedure = new MappingProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -1307,7 +1284,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Clear Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.SingularFullName };
+                                procedure = new MappingProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -1335,7 +1312,7 @@ AS
                 if (roleType.IsMany)
                 {
                     // Get Composites Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @",
@@ -1348,7 +1325,7 @@ AS
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Add Composite Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + roleType.SingularFullName };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "A_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -1360,7 +1337,7 @@ AS
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Remove Composite Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + roleType.SingularFullName };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "R_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -1376,7 +1353,7 @@ AS
                 else
                 {
                     // Get Composite Role (1-1 and *-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @"
@@ -1388,7 +1365,7 @@ AS
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Set Composite Role (1-1 and *-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + roleType.SingularFullName };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "S_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -1410,7 +1387,7 @@ AS
                 if (associationType.IsOne)
                 {
                     // Get Composite Association (1-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -1424,7 +1401,7 @@ AS
                 else
                 {
                     // Get Composite Association (*-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
+                    procedure = new MappingProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -1437,7 +1414,7 @@ AS
                 }
 
                 // Clear Composite Role (1-1 and *-1) [relation table]
-                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + roleType.SingularFullName };
+                procedure = new MappingProcedure { Name = AllorsPrefix + "C_" + roleType.SingularFullName };
                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -1450,7 +1427,7 @@ AS
             }
         }
 
-        internal class SchemaExistingColumn
+        internal class MappingExistingColumn
         {
             internal string DataType { get; set; }
 

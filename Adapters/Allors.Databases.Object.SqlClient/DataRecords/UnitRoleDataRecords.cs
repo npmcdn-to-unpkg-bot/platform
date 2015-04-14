@@ -45,16 +45,16 @@ namespace Allors.Databases.Object.SqlClient
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
             // TODO: See Relation.SqlClient
-            if (this.database.Schema.IsObjectIdInteger)
+            if (this.database.Mapping.IsObjectIdInteger)
             {
                 var metaData = new[]
                                    {
                                        new SqlMetaData(
-                                           this.database.SqlClientSchema.RelationTableAssociation,
+                                           this.database.SqlClientMapping.RelationTableAssociation,
                                            SqlDbType.Int),
                                        this.database.GetSqlMetaData(
-                                           this.database.SqlClientSchema.RelationTableRole,
-                                           this.database.SqlClientSchema.Column(this.roleType))
+                                           this.database.SqlClientMapping.RelationTableRole,
+                                           this.database.SqlClientMapping.Column(this.roleType))
                                    };
                 var sqlDataRecord = new SqlDataRecord(metaData);
 
@@ -79,11 +79,11 @@ namespace Allors.Databases.Object.SqlClient
                 var metaData = new[]
                                    {
                                        new SqlMetaData(
-                                           this.database.SqlClientSchema.RelationTableAssociation,
+                                           this.database.SqlClientMapping.RelationTableAssociation,
                                            SqlDbType.BigInt),
                                        this.database.GetSqlMetaData(
-                                           this.database.SqlClientSchema.RelationTableRole,
-                                           this.database.SqlClientSchema.Column(this.roleType))
+                                           this.database.SqlClientMapping.RelationTableRole,
+                                           this.database.SqlClientMapping.Column(this.roleType))
                                    };
                 var sqlDataRecord = new SqlDataRecord(metaData);
 

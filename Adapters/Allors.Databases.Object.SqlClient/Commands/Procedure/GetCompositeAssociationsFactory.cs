@@ -56,11 +56,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 string sql;
                 if (roleType.IsMany || !associationType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "GA_" + roleType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "GA_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = SqlClient.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                    sql = SqlClient.Mapping.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                 }
 
                 this.sqlByIAssociationType[associationType] = sql;
@@ -88,13 +88,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(associationType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, this.Database.Schema.RoleId.Param, role.ObjectId.Value);
+                    this.AddInObject(command, this.Database.Mapping.RoleId.Param, role.ObjectId.Value);
 
                     this.commandByIAssociationType[associationType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Schema.RoleId.Param, role.ObjectId.Value);
+                    this.SetInObject(command, this.Database.Mapping.RoleId.Param, role.ObjectId.Value);
                 }
 
                 var objectIds = new List<ObjectId>();
@@ -102,7 +102,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     while (reader.Read())
                     {
-                        ObjectId id = this.Database.AllorsObjectIds.Parse(reader[0].ToString());
+                        ObjectId id = this.Database.ObjectIds.Parse(reader[0].ToString());
                         objectIds.Add(id);
                     }
                 }

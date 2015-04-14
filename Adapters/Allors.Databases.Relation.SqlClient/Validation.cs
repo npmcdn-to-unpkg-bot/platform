@@ -2,8 +2,6 @@ namespace Allors.Databases.Relation.SqlClient
 {
     using System.Collections.Generic;
 
-    using Allors.Meta;
-
     public class Validation
     {
         public readonly HashSet<string> MissingTableNames;

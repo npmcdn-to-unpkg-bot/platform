@@ -60,7 +60,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
             internal void Execute(Roles roles, IList<IRoleType> sortedIRoleTypes)
             {
-                var schema = this.Database.Schema;
+                var schema = this.Database.Mapping;
 
                 var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveLeafClass;
 

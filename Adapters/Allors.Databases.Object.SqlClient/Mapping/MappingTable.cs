@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SchemaTable.cs" company="Allors bvba">
+// <copyright file="MappingTable.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,40 +25,40 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    internal sealed class SchemaTable : IEnumerable<SchemaColumn>
+    internal sealed class MappingTable : IEnumerable<MappingColumn>
     {
-        internal readonly SchemaTableKind Kind;
+        internal readonly MapingTableKind Kind;
         internal readonly string Name;
         internal readonly IRelationType RelationType;
-        internal readonly Schema Schema;
+        internal readonly Mapping Mapping;
         internal readonly IObjectType ObjectType;
         internal readonly string StatementName;
 
-        private readonly Dictionary<string, SchemaColumn> columnsByName;
+        private readonly Dictionary<string, MappingColumn> columnsByName;
 
-        internal SchemaTable(Schema schema, string name, SchemaTableKind kind, IObjectType objectType) 
-            : this(schema, name, kind)
+        internal MappingTable(Mapping mapping, string name, MapingTableKind kind, IObjectType objectType) 
+            : this(mapping, name, kind)
         {
             this.ObjectType = objectType;
         }
 
-        internal SchemaTable(Schema schema, string name, SchemaTableKind kind, IRelationType relationType)
-            : this(schema, name, kind)
+        internal MappingTable(Mapping mapping, string name, MapingTableKind kind, IRelationType relationType)
+            : this(mapping, name, kind)
         {
             this.RelationType = relationType;
         }
 
-        internal SchemaTable(Schema schema, string name, SchemaTableKind kind)
+        internal MappingTable(Mapping mapping, string name, MapingTableKind kind)
         {
-            this.Schema = schema;
+            this.Mapping = mapping;
             this.Name = name.ToLowerInvariant();
-            this.StatementName = schema.EscapeIfReserved(this.Name);
+            this.StatementName = mapping.EscapeIfReserved(this.Name);
             this.Kind = kind;
 
-            this.columnsByName = new Dictionary<string, SchemaColumn>();
+            this.columnsByName = new Dictionary<string, MappingColumn>();
         }
 
-        internal SchemaColumn FirstKeyColumn
+        internal MappingColumn FirstKeyColumn
         {
             get
             {
@@ -75,17 +75,17 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal SchemaColumn this[string columnName]
+        internal MappingColumn this[string columnName]
         {
             get { return this.columnsByName[columnName.ToLowerInvariant()]; }
         }
 
         public IEnumerator GetEnumerator()
         {
-            return ((IEnumerable<SchemaColumn>)this).GetEnumerator();
+            return ((IEnumerable<MappingColumn>)this).GetEnumerator();
         }
 
-        IEnumerator<SchemaColumn> IEnumerable<SchemaColumn>.GetEnumerator()
+        IEnumerator<MappingColumn> IEnumerable<MappingColumn>.GetEnumerator()
         {
             return this.columnsByName.Values.GetEnumerator();
         }
@@ -99,7 +99,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.StatementName;
         }
 
-        internal void AddColumn(SchemaColumn column)
+        internal void AddColumn(MappingColumn column)
         {
             this.columnsByName[column.Name] = column;
         }

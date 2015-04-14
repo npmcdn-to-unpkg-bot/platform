@@ -1,5 +1,5 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SchemaTableKind.cs" company="Allors bvba">
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="MappingIndexType.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,21 +20,21 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    internal enum SchemaTableKind
+    internal enum MappingIndexType
     {
         /// <summary>
-        /// A system table
+        /// Don't use an index
         /// </summary>
-        System,
+        None,
 
         /// <summary>
-        /// An object table
+        /// Only index this column
         /// </summary>
-        Object,
+        Single,
 
         /// <summary>
-        /// A relation table
+        /// Index this column together with the (first column of the) primary key
         /// </summary>
-        Relation,
+        Combined
     }
 }

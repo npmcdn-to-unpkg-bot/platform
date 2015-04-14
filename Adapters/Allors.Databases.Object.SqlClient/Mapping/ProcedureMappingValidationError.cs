@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SchemaTableParameter.cs" company="Allors bvba">
+// <copyright file="ProcedureMappingValidationError.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,28 +20,38 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    internal class SchemaTableParameter
+    internal class ProcedureMappingValidationError : IMappingValidationError
     {
-        internal readonly string TypeName;
-        internal readonly string Name;
-        internal readonly string InvocationName;
+        private readonly MappingProcedure mappingProcedure;
+        private readonly MappingValidationErrorKind kind;
+        private readonly string message;
 
-        internal SchemaTableParameter(Schema schema, string name, string typeName)
+        internal ProcedureMappingValidationError(MappingProcedure mappingProcedure, MappingValidationErrorKind kind, string message)
         {
-            this.Name = string.Format(schema.ParamFormat, name);
-            this.InvocationName = string.Format(schema.ParamInvocationFormat, name);
-            this.TypeName = typeName;
+            this.mappingProcedure = mappingProcedure;
+            this.kind = kind;
+            this.message = message;
         }
 
-        /// <summary>
-        /// Returns a String which represents the object instance.
-        /// </summary>
-        /// <returns>
-        /// The string which represents the object instance.
-        /// </returns>
+        public MappingValidationErrorKind Kind
+        {
+            get
+            {
+                return this.kind;
+            }
+        }
+
+        public string Message
+        {
+            get
+            {
+                return this.message;
+            }
+        }
+
         public override string ToString()
         {
-            return this.Name;
+            return this.mappingProcedure.ToString();
         }
     }
 }

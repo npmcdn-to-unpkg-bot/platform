@@ -54,7 +54,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
-            var schema = statement.Schema;
+            var schema = statement.Mapping;
             if (this.roleType.ObjectType.IsUnit)
             {
                 statement.Append(" " + alias + "." + schema.Column(this.roleType) + "=" + statement.AddParameter(this.obj));

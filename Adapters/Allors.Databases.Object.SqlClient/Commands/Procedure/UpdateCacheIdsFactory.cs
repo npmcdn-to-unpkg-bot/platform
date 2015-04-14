@@ -64,11 +64,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(Dictionary<Reference, Roles> modifiedRolesByReference)
             {
-                var schema = this.factory.Database.SqlClientSchema;
+                var schema = this.factory.Database.SqlClientMapping;
 
                 if (this.command == null)
                 {
-                    this.command = this.Session.CreateSqlCommand(SqlClient.Schema.AllorsPrefix + "UC");
+                    this.command = this.Session.CreateSqlCommand(SqlClient.Mapping.AllorsPrefix + "UC");
                     this.command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
                 }
