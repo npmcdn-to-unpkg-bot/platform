@@ -329,9 +329,6 @@ namespace Allors.Domain
             var salesInvoiceitem = (SalesInvoiceItem)shipment.ShipmentItems[0].InvoiceItems[0];
             var invoice1 = salesInvoiceitem.SalesInvoiceWhereSalesInvoiceItem;
 
-            invoice1.Send();
-            this.DatabaseSession.Derive(true);
-
             new ReceiptBuilder(this.DatabaseSession)
                 .WithAmount(15)
                 .WithPaymentApplication(new PaymentApplicationBuilder(this.DatabaseSession).WithInvoiceItem(invoice1.SalesInvoiceItems[0]).WithAmountApplied(15).Build())
