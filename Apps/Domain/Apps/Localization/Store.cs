@@ -50,13 +50,14 @@ namespace Allors.Domain
                 if (fiscalYearInvoiceNumber == null)
                 {
                     fiscalYearInvoiceNumber = new FiscalYearInvoiceNumberBuilder(this.Strategy.Session).WithFiscalYear(year).Build();
+                    fiscalYearInvoiceNumber.NextSalesInvoiceNumber = 1;
                     this.AddFiscalYearInvoiceNumber(fiscalYearInvoiceNumber);
                 }
 
                 salesInvoiceNumber = fiscalYearInvoiceNumber.DeriveNextSalesInvoiceNumber();
             }
 
-            return string.Format(this.SalesInvoiceNumberPrefix, salesInvoiceNumber);
+            return string.Concat(this.SalesInvoiceNumberPrefix, salesInvoiceNumber);
         }
 
         // TODO: Cascading delete
@@ -73,13 +74,13 @@ namespace Allors.Domain
         public string DeriveNextShipmentNumber()
         {
             var shipmentNumber = this.OutgoingShipmentCounter.NextValue();
-            return string.Format(this.OutgoingShipmentNumberPrefix, shipmentNumber);
+            return string.Concat(this.OutgoingShipmentNumberPrefix, shipmentNumber);
         }
 
         public string DeriveNextSalesOrderNumber()
         {
             var salesOrderNumber = this.SalesOrderCounter.NextValue();
-            return string.Format(this.SalesOrderNumberPrefix, salesOrderNumber);
+            return string.Concat(this.SalesOrderNumberPrefix, salesOrderNumber);
         }
 
         public void AppsOnBuild(ObjectOnBuild method)
@@ -112,11 +113,6 @@ namespace Allors.Domain
             if (!this.ExistPaymentGracePeriod)
             {
                 this.PaymentGracePeriod = 0;
-            }
-
-            if (!this.ExistSalesInvoiceNumberPrefix)
-            {
-                this.SalesInvoiceNumberPrefix = "{0}";
             }
 
             if (new TemplatePurposes(this.Strategy.Session).SalesInvoice != null &&

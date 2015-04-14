@@ -210,4 +210,13 @@
   <data name="SalesOrderItemProductChangeNotAllowed" xml:space="preserve">
     <value>product change not allowed, user cancel orderitem instead</value>
   </data>
+  <data name="SalesOrderItemQuantityToShipNowNotAvailable" xml:space="preserve">
+    <value>The requested quantity to ship immediately is not available</value>
+  </data>
+  <data name="SalesOrderItemQuantityToShipNowIsLargerThanQuantityOrdered" xml:space="preserve">
+    <value>The requested quantity to ship immediately is larger than the quantity that is ordered</value>
+  </data>
+  <data name="SalesOrderItemQuantityToShipNowIsLargerThanQuantityRemaining" xml:space="preserve">
+    <value>The requested quantity to ship immediately is larger than the quantity remaining to ship</value>
+  </data>
 </root>

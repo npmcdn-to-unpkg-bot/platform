@@ -149,25 +149,5 @@ namespace Allors.Domain
 
             Assert.AreEqual(ownBankAccount, store.DefaultPaymentMethod);
         }
-
-        [Test]
-        public void GivenStoreWithSinglePaymentMethod_WhenPaymentMethodIsRemoved_ThenDefaultPaymentMethodIsRemoved()
-        {
-            var store = new StoreBuilder(this.DatabaseSession)
-                .WithName("Organisation store")
-                .WithDefaultCarrier(new Carriers(this.DatabaseSession).Fedex)
-                .WithDefaultShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            store.Owner.RemovePaymentMethod(store.Owner.PaymentMethods.First);
-            store.RemovePaymentMethod(store.PaymentMethods.First);
-
-            this.DatabaseSession.Derive();
-
-            Assert.IsFalse(store.ExistDefaultPaymentMethod);
-            Assert.AreEqual(0, store.PaymentMethods.Count);
-        }
     }
 }

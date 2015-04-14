@@ -74,7 +74,7 @@ namespace Allors.Domain
                     }
                 }
 
-                if (!this.ExistSequenceNumber)
+                if (!this.ExistSequenceNumber || this.SequenceNumber == 0)
                 {
                     this.SequenceNumber = highestNumber + 1;
                 }

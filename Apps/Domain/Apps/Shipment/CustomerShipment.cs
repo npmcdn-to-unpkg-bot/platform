@@ -167,7 +167,7 @@ namespace Allors.Domain
 
             if (!this.ExistBillFromContactMechanism)
             {
-                this.BillFromContactMechanism  = Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation.BillingAddress;
+                this.BillFromContactMechanism = BillFromInternalOrganisation.BillingAddress;
             }
 
             if (!this.ExistStore && this.ExistShipFromParty)

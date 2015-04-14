@@ -122,26 +122,20 @@ namespace Allors.Domain
             this.DatabaseSession.Commit();
 
             var builder = new PurchaseOrderItemBuilder(this.DatabaseSession);
-            builder.Build();
+            order.AddPurchaseOrderItem(builder.Build());
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
             this.DatabaseSession.Rollback();
 
             builder.WithPart(part);
-            builder.Build();
-
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
-            builder.WithQuantityOrdered(1);
-            builder.Build();
+            order.AddPurchaseOrderItem(builder.Build());
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
             builder.WithProduct(new GoodBuilder(this.DatabaseSession).Build());
             var orderItem = builder.Build();
+            order.AddPurchaseOrderItem(orderItem);
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
@@ -243,7 +237,7 @@ namespace Allors.Domain
             var currentPurchasePriceGood = new ProductPurchasePriceBuilder(this.DatabaseSession)
                 .WithCurrency(euro)
                 .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithFromDate(DateTime.UtcNow)
+                .WithFromDate(DateTime.UtcNow.AddMinutes(-1))
                 .WithThroughDate(DateTime.UtcNow.AddYears(1).AddDays(-1))
                 .WithPrice(10)
                 .Build();

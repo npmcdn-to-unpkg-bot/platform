@@ -90,19 +90,19 @@ namespace Allors.Domain
                     deniablePermissionByOperandTypeId.Add(operandType, permission);
                 }
 
-                Dictionary<Guid, Dictionary<OperandType, Permission>> permissionsByObjectTypeId;
+                Dictionary<Guid, Dictionary<OperandType, Permission>> permissionByOperandTypeByObjectTypeId;
                 switch (permission.Operation)
                 {
                     case Operation.Read:
-                        permissionsByObjectTypeId = this.readPermissionsByObjectTypeId;
+                        permissionByOperandTypeByObjectTypeId = this.readPermissionsByObjectTypeId;
                         break;
 
                     case Operation.Write:
-                        permissionsByObjectTypeId = this.writePermissionsByObjectTypeId;
+                        permissionByOperandTypeByObjectTypeId = this.writePermissionsByObjectTypeId;
                         break;
 
                     case Operation.Execute:
-                        permissionsByObjectTypeId = this.executePermissionsByObjectTypeId;
+                        permissionByOperandTypeByObjectTypeId = this.executePermissionsByObjectTypeId;
                         break;
 
                     default:
@@ -110,13 +110,20 @@ namespace Allors.Domain
                 }
 
                 Dictionary<OperandType, Permission> permissionByOperandType;
-                if (!permissionsByObjectTypeId.TryGetValue(objectId, out permissionByOperandType))
+                if (!permissionByOperandTypeByObjectTypeId.TryGetValue(objectId, out permissionByOperandType))
                 {
                     permissionByOperandType = new Dictionary<OperandType, Permission>();
-                    permissionsByObjectTypeId[objectId] = permissionByOperandType;
+                    permissionByOperandTypeByObjectTypeId[objectId] = permissionByOperandType;
                 }
 
-                permissionByOperandType.Add(permission.OperandType, permission);
+                if (permission.OperandType == null)
+                {
+                    permission.Delete();
+                }
+                else
+                {
+                    permissionByOperandType.Add(permission.OperandType, permission);
+                }
             }
         }
 

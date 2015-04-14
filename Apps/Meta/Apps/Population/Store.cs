@@ -13,7 +13,6 @@ namespace Allors.Meta
             this.Roles.CreditLimit.IsRequired = true;
             this.Roles.ShipmentThreshold.IsRequired = true;
             this.Roles.OrderThreshold.IsRequired = true;
-            this.Roles.SalesInvoiceNumberPrefix.IsRequired = true;
 
             this.Roles.DefaultPaymentMethod.IsRequired = true;
             this.Roles.DefaultShipmentMethod.IsRequired = true;

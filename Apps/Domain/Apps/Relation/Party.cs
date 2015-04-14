@@ -123,7 +123,6 @@ namespace Allors.Domain
                 }
             }
         }
-
         public static void AppsOnDeriveOpenOrderAmount(this Party party)
         {
             party.OpenOrderAmount = 0;

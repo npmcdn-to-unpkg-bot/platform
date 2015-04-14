@@ -40,7 +40,7 @@ namespace Allors.Domain
             var salesRepRelationship1 = new SalesRepRelationshipBuilder(this.DatabaseSession)
                 .WithCustomer(organisation)
                 .WithSalesRepresentative(salesRep1)
-                .WithFromDate(DateTimeFactory.Create(2010, 01, 01))
+                .WithFromDate(DateTimeFactory.CreateDate(2010, 01, 01))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -51,7 +51,7 @@ namespace Allors.Domain
             new SalesRepRelationshipBuilder(this.DatabaseSession)
                 .WithCustomer(organisation)
                 .WithSalesRepresentative(salesRep2)
-                .WithFromDate(DateTimeFactory.Create(2010, 01, 01))
+                .WithFromDate(DateTimeFactory.CreateDate(2010, 01, 01))
                 .Build();
 
             this.DatabaseSession.Derive(true);
@@ -60,7 +60,7 @@ namespace Allors.Domain
             Assert.Contains(salesRep1, organisation.CurrentSalesReps);
             Assert.Contains(salesRep2, organisation.CurrentSalesReps);
 
-            salesRepRelationship1.ThroughDate = DateTimeFactory.Create(2010, 12, 31);
+            salesRepRelationship1.ThroughDate = DateTimeFactory.CreateDate(2010, 12, 31);
             
             this.DatabaseSession.Derive(true);
 
@@ -125,9 +125,9 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var date1 = DateTimeFactory.Create(DateTime.UtcNow.AddYears(-1).Year, 1, 1);
-            var date2 = DateTimeFactory.Create(DateTime.UtcNow.Year, 1, 1);
-            var date3 = DateTimeFactory.Create(DateTime.UtcNow.Year, 2, 1);
+            var date1 = DateTimeFactory.CreateDate(DateTime.UtcNow.AddYears(-1).Year, 1, 1);
+            var date2 = DateTimeFactory.CreateDate(DateTime.UtcNow.Year, 1, 1);
+            var date3 = DateTimeFactory.CreateDate(DateTime.UtcNow.Year, 2, 1);
 
             new SalesInvoiceBuilder(this.DatabaseSession)
                 .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)

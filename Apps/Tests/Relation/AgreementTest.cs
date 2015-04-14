@@ -36,7 +36,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTimeFactory.Create(2010, 12, 31));
+            builder.WithFromDate(DateTimeFactory.CreateDate(2010, 12, 31));
             builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
@@ -59,7 +59,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTimeFactory.Create(2010, 12, 31));
+            builder.WithFromDate(DateTimeFactory.CreateDate(2010, 12, 31));
             builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
@@ -84,7 +84,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTimeFactory.Create(2010, 12, 31));
+            builder.WithFromDate(DateTimeFactory.CreateDate(2010, 12, 31));
             builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
@@ -107,7 +107,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTimeFactory.Create(2010, 12, 31));
+            builder.WithFromDate(DateTimeFactory.CreateDate(2010, 12, 31));
             builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
@@ -130,7 +130,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Rollback();
 
-            builder.WithFromDate(DateTimeFactory.Create(2010, 12, 31));
+            builder.WithFromDate(DateTimeFactory.CreateDate(2010, 12, 31));
             builder.Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);

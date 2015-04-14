@@ -19,6 +19,7 @@ namespace Allors.Meta
 	        this.ConcreteRoles.DefaultPaymentMethod.IsRequiredOverride = true;
             this.ConcreteRoles.Locale.IsRequiredOverride = true;
             this.ConcreteRoles.PreferredCurrency.IsRequiredOverride = true;
+	        this.ConcreteRoles.BillingAddress.IsRequiredOverride = true;
         }
 	}
 }

@@ -1279,6 +1279,15 @@ namespace Allors.Domain
             var belgium = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];
             var euro = belgium.Currency;
 
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            var mechelenAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+
+            var billToMechelen = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(mechelenAddress)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
+                .Build();
+
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
@@ -1293,6 +1302,7 @@ namespace Allors.Domain
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Sales)
                 .WithDefaultPaymentMethod(ownBankAccount)
                 .WithPreferredCurrency(euro)
+                .WithPartyContactMechanism(billToMechelen)
                 .Build();
 
             var facility = new WarehouseBuilder(this.DatabaseSession).WithName("facility").WithOwner(internalOrganisation2).Build();
@@ -2299,7 +2309,7 @@ namespace Allors.Domain
             var customer = new OrganisationBuilder(this.DatabaseSession).WithName("customer").Build();
 
             var invoice1 = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceDate(DateTimeFactory.Create(2010, 01, 01))
+                .WithInvoiceDate(DateTimeFactory.CreateDate(2010, 01, 01))
                 .WithInvoiceNumber("1")
                 .WithBillToCustomer(customer)
                 .WithBillToContactMechanism(contactMechanism)
@@ -2319,7 +2329,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var invoice2 = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceDate(DateTimeFactory.Create(2010, 01, 01))
+                .WithInvoiceDate(DateTimeFactory.CreateDate(2010, 01, 01))
                 .WithInvoiceNumber("2")
                 .WithBillToCustomer(customer)
                 .WithBillToContactMechanism(contactMechanism)

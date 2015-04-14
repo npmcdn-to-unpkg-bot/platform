@@ -184,14 +184,14 @@ namespace Allors.Domain
 
         public void AppsDeriveVatRate(IDerivation derivation)
         {
-            if (this.ExistProduct)
-            {
-                this.DerivedVatRate = this.Product.VatRate;
-            }
-
             if (!this.ExistDerivedVatRate && this.ExistVatRegime && this.VatRegime.ExistVatRate)
             {
                 this.DerivedVatRate = this.VatRegime.VatRate;
+            }
+
+            if (!this.ExistDerivedVatRate && (this.ExistProduct))
+            {
+                this.DerivedVatRate = this.Product.VatRate;
             }
         }
 

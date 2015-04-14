@@ -43,12 +43,12 @@ namespace Allors.Domain
             this.Revenue = 0;
             this.Quantity = 0;
 
-            var lastDayOfMonth = DateTimeFactory.Create(this.Year, this.Month, 01).AddMonths(1).AddSeconds(-1).Day;
+            var toDate = DateTimeFactory.CreateDate(this.Year, this.Month, 01).AddMonths(1);
 
             var invoices = this.Party.SalesInvoicesWhereBillToCustomer;
-            invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
+            invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);https://teamcity.inxin.net/win32/userStatus.html?small=1#
             invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).WrittenOff);
-            invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, DateTimeFactory.Create(this.Year, this.Month, 01), DateTimeFactory.Create(this.Year, this.Month, lastDayOfMonth));
+            invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, DateTimeFactory.CreateDate(this.Year, this.Month, 01), toDate);
 
             foreach (SalesInvoice salesInvoice in invoices)
             {

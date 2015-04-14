@@ -89,9 +89,12 @@ namespace Allors.Domain
             var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
             new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
             
-            var part = new RawMaterialBuilder(this.DatabaseSession).WithName("RawMaterial").Build();
+            var part = new RawMaterialBuilder(this.DatabaseSession)
+                .WithName("RawMaterial")
+                .Build();
 
-            var order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(supplier).Build();
+            var order = new PurchaseOrderBuilder(this.DatabaseSession)
+                .WithTakenViaSupplier(supplier).Build();
 
             var item1 = new PurchaseOrderItemBuilder(this.DatabaseSession).WithPart(part).WithQuantityOrdered(1).Build();
             order.AddPurchaseOrderItem(item1);

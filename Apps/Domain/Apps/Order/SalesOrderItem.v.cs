@@ -107,11 +107,6 @@ namespace Allors.Domain
             this.AppsOnDeriveSalesRep(derivation);
         }
 
-        public void ShipManually(decimal quantity)
-        {
-            this.AppsShipManually(quantity);
-        }
-
         public void DeriveIsValidOrderItem(IDerivation derivation)
         {
             this.AppsOnDeriveIsValidOrderItem(derivation);
