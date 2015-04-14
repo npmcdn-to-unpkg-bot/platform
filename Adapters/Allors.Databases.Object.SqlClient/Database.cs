@@ -55,6 +55,8 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly CommandFactories commandFactories;
 
+        private readonly ObjectIds objectIds;
+
         private Dictionary<string, object> properties;
 
         protected Database(Configuration configuration)
@@ -94,6 +96,8 @@ namespace Allors.Databases.Object.SqlClient
                     }
                 }
             }
+
+            this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
@@ -211,7 +215,10 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal abstract IObjectIds AllorsObjectIds { get; }
+        internal ObjectIds AllorsObjectIds
+        {
+            get { return this.objectIds; }
+        }
 
         internal CommandFactories SqlClientCommandFactories
         {

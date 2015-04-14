@@ -100,7 +100,6 @@
     <Compile Include="IntegerId\RelationTableForCompositeRelations.cs" />
     <Compile Include="IntegerId\RelationTableForUnitRelations.cs" />
     <Compile Include="IntegerId\Schema.cs" />
-    <Compile Include="IObjectIds.cs" />
     <Compile Include="Load.cs" />
     <Compile Include="LongId\Configuration.cs" />
     <Compile Include="LongId\LongDatabase.cs" />
@@ -111,8 +110,6 @@
     <Compile Include="LongId\RelationTableForUnitRelations.cs" />
     <Compile Include="LongId\Schema.cs" />
     <Compile Include="ManagementSession.cs" />
-    <Compile Include="ObjectIntegerIds.cs" />
-    <Compile Include="ObjectLongIds.cs" />
     <Compile Include="Predicates\AndPredicate.cs" />
     <Compile Include="Predicates\AssociationContainedInEnumerable.cs" />
     <Compile Include="Predicates\AssociationContainedInExtent.cs" />

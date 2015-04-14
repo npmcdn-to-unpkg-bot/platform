@@ -64,7 +64,7 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
                                         ConnectionString = this.ConnectionString
                                     };
-            var database = new IntegerId.IntegerDatabase(configuration);
+            var database = new IntegerId.Database(configuration);
 
             if (init)
             {
@@ -87,7 +87,7 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
                 ConnectionString = this.ConnectionString
             };
 
-            var database = new IntegerId.IntegerDatabase(configuration);
+            var database = new IntegerId.Database(configuration);
 
             return database;
         }
