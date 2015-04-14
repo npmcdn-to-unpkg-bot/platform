@@ -92,23 +92,13 @@
     <Compile Include="Extents\SqlExtent.cs" />
     <Compile Include="Flush.cs" />
     <Compile Include="ICommandFactory.cs" />
-    <Compile Include="IntegerId\Configuration.cs" />
-    <Compile Include="IntegerId\IntegerDatabase.cs" />
-    <Compile Include="IntegerId\ObjectTableForObjectIds.cs" />
-    <Compile Include="IntegerId\ObjectTableForRolesByReference.cs" />
-    <Compile Include="IntegerId\ObjectTableForStrategies.cs" />
-    <Compile Include="IntegerId\RelationTableForCompositeRelations.cs" />
-    <Compile Include="IntegerId\RelationTableForUnitRelations.cs" />
-    <Compile Include="IntegerId\Schema.cs" />
+    <Compile Include="DataRecords\ObjectDataRecord.cs" />
+    <Compile Include="DataRecords\CompositesRoleDataRecords.cs" />
+    <Compile Include="DataRecords\CompositeRoleDataRecords.cs" />
+    <Compile Include="DataRecords\UnitRoleDataRecords.cs" />
+    <Compile Include="Schema\IntegerSchema.cs" />
     <Compile Include="Load.cs" />
-    <Compile Include="LongId\Configuration.cs" />
-    <Compile Include="LongId\LongDatabase.cs" />
-    <Compile Include="LongId\ObjectTableForObjectIds.cs" />
-    <Compile Include="LongId\ObjectTableForRolesByReference.cs" />
-    <Compile Include="LongId\ObjectTableForStrategies.cs" />
-    <Compile Include="LongId\RelationTableForCompositeRelations.cs" />
-    <Compile Include="LongId\RelationTableForUnitRelations.cs" />
-    <Compile Include="LongId\Schema.cs" />
+    <Compile Include="Schema\LongSchema.cs" />
     <Compile Include="ManagementSession.cs" />
     <Compile Include="Predicates\AndPredicate.cs" />
     <Compile Include="Predicates\AssociationContainedInEnumerable.cs" />
@@ -171,7 +161,9 @@
       <Name>Allors</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

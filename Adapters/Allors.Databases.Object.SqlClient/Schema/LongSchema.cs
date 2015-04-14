@@ -19,22 +19,38 @@
 // <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.IntegerId
+namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System.Data;
 
-    internal sealed class Schema : SqlClient.Schema
+    internal sealed class LongSchema : Schema
     {
-        internal Schema(SqlClient.Database database) : base(database)
+        internal LongSchema(SqlClient.Database database) : base(database)
         {
             this.OnConstructed();
+        }
+
+        public override bool IsObjectIdInteger
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public override bool IsObjectIdLong
+        {
+            get
+            {
+                return !this.IsObjectIdInteger;
+            }
         }
 
         protected override DbType ObjectDbType
         {
             get
             {
-                return DbType.Int32;
+                return DbType.Int64;
             }
         }
 
@@ -42,7 +58,7 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
         {
             get
             {
-                return SqlDbType.Int;
+                return SqlDbType.BigInt;
             }
         }
     }

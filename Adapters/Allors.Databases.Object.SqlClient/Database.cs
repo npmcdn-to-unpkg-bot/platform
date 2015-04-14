@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using Microsoft.SqlServer.Server;
 
-    public abstract class Database : IDatabase
+    public class Database : IDatabase
     {
         private const string ConnectionStringsKey = "allors";
 
@@ -57,9 +57,11 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly ObjectIds objectIds;
 
+        private Schema schema;
+
         private Dictionary<string, object> properties;
 
-        protected Database(Configuration configuration)
+        public Database(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
             this.concreteClassesByIObjectType = new Dictionary<IObjectType, object>();
@@ -236,7 +238,33 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal abstract Schema SqlClientSchema { get; }
+        internal Schema SqlClientSchema
+        {
+            get
+            {
+                if (this.ObjectFactory.MetaPopulation != null)
+                {
+                    if (this.schema == null)
+                    {
+
+                        if (this.AllorsObjectIds is ObjectIdsInteger)
+                        {
+                            this.schema = new IntegerId.IntegerSchema(this);
+                        }
+                        else if (this.AllorsObjectIds is ObjectIdsLong)
+                        {
+                            this.schema = new LongId.LongSchema(this);
+                        }
+                        else
+                        {
+                            throw new NotSupportedException("ObjectIds of type " + this.AllorsObjectIds.GetType() + " are not supported.");
+                        }   
+                    }
+                }
+
+                return this.schema;
+            }
+        }
 
         internal CommandFactories CommandFactories
         {
@@ -367,15 +395,25 @@ namespace Allors.Databases.Object.SqlClient
             return concreteClasses.Contains(concreteClass);
         }
 
-        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<ObjectId> objectids);
+        internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<ObjectId> objectids)
+        {
+            return new ObjectDataRecord(this.schema, objectids);
+        }
 
-        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<Reference> strategies);
+        internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<Reference> strategies)
+        {
+            return new CompositesRoleDataRecords(this.schema, strategies);
+        }
 
-        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(Dictionary<Reference, Roles> rolesByReference);
+        internal IEnumerable<SqlDataRecord> CreateRelationTable(IEnumerable<CompositeRelation> relations)
+        {
+            return new CompositeRoleDataRecords(this.schema, relations);
+        }
 
-        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IEnumerable<CompositeRelation> compositeRelations);
-
-        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IRoleType roleType, IEnumerable<UnitRelation> unitRelations);
+        internal IEnumerable<SqlDataRecord> CreateRelationTable(IRoleType roleType, IEnumerable<UnitRelation> relations)
+        {
+            return new UnitRoleDataRecords(this, roleType, relations);
+        }
 
         internal void Recover()
         {
@@ -544,7 +582,10 @@ namespace Allors.Databases.Object.SqlClient
             return new ManagementSession(this);
         }
 
-        protected abstract void ResetSchema();
+        protected void ResetSchema()
+        {
+            this.schema = null;
+        }
 
         private IDatabaseSession CreateDatabaseSession()
         {

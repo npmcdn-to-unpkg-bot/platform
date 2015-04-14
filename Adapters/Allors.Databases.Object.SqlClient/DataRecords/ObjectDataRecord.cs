@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RelationTableForCompositeRelations.cs" company="Allors bvba">
+// <copyright file="ObjectTableForObjectIds.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.IntegerId
+namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -26,31 +26,38 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 
     using Microsoft.SqlServer.Server;
 
-    internal class RelationTableForCompositeRelations : IEnumerable<SqlDataRecord>
+    internal class ObjectDataRecord : IEnumerable<SqlDataRecord>
     {
         private readonly Schema schema;
-        private readonly IEnumerable<CompositeRelation> relations;
- 
-        internal RelationTableForCompositeRelations(Schema schema, IEnumerable<CompositeRelation> relations)
+        private readonly IEnumerable<ObjectId> objectIds;
+
+        internal ObjectDataRecord(Schema schema, IEnumerable<ObjectId> objectIds)
         {
             this.schema = schema;
-            this.relations = relations;
+            this.objectIds = objectIds;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var metaData = new[]
-                {
-                    new SqlMetaData(this.schema.RelationTableAssociation, SqlDbType.Int), 
-                    new SqlMetaData(this.schema.RelationTableRole, SqlDbType.Int)
-                };
+            var objectArrayElement = this.schema.ObjectTableObject;
+            var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
             var sqlDataRecord = new SqlDataRecord(metaData);
 
-            foreach (var relation in this.relations)
+            if (this.schema.IsObjectIdInteger)
             {
-                sqlDataRecord.SetInt32(0, (int)relation.Association.Value);
-                sqlDataRecord.SetInt32(1, (int)relation.Role.Value);
-                yield return sqlDataRecord;
+                foreach (var objectId in this.objectIds)
+                {
+                    sqlDataRecord.SetInt32(0, (int)objectId.Value);
+                    yield return sqlDataRecord;
+                }
+            }
+            else
+            {
+                foreach (var objectId in this.objectIds)
+                {
+                    sqlDataRecord.SetInt64(0, (long)objectId.Value);
+                    yield return sqlDataRecord;
+                }
             }
         }
 

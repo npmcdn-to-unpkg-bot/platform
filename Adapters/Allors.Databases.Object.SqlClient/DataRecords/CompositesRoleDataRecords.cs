@@ -18,22 +18,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.IntegerId
+namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.Databases.Object.SqlClient;
-
     using Microsoft.SqlServer.Server;
 
-    internal class ObjectTableForStrategies : IEnumerable<SqlDataRecord>
+    internal class CompositesRoleDataRecords : IEnumerable<SqlDataRecord>
     {
         private readonly Schema schema;
         private readonly IEnumerable<Reference> strategies;
 
-        internal ObjectTableForStrategies(Schema schema, IEnumerable<Reference> strategies)
+        internal CompositesRoleDataRecords(Schema schema, IEnumerable<Reference> strategies)
         {
             this.schema = schema;
             this.strategies = strategies;
@@ -41,13 +39,28 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var objectArrayElement = this.schema.ObjectTableObject;
-            var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
-            var sqlDataRecord = new SqlDataRecord(metaData);
-            foreach (var strategy in this.strategies)
+            // TODO: See Relation.SqlClient
+            if (this.schema.IsObjectIdInteger)
             {
-                sqlDataRecord.SetInt32(0, (int)strategy.ObjectId.Value);
-                yield return sqlDataRecord;
+                var objectArrayElement = this.schema.ObjectTableObject;
+                var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
+                var sqlDataRecord = new SqlDataRecord(metaData);
+                foreach (var strategy in this.strategies)
+                {
+                    sqlDataRecord.SetInt32(0, (int)strategy.ObjectId.Value);
+                    yield return sqlDataRecord;
+                }
+            }
+            else
+            {
+                var objectArrayElement = this.schema.ObjectTableObject;
+                var metaData = new SqlMetaData(objectArrayElement, SqlDbType.BigInt);
+                var sqlDataRecord = new SqlDataRecord(metaData);
+                foreach (var strategy in this.strategies)
+                {
+                    sqlDataRecord.SetInt64(0, (int)strategy.ObjectId.Value);
+                    yield return sqlDataRecord;
+                }
             }
         }
 

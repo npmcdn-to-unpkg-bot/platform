@@ -23,13 +23,13 @@ namespace Website
     {
         public void Configuration(IAppBuilder app)
         {
-            var configuration = new Allors.Databases.Object.SqlClient.IntegerId.Configuration
+            var configuration = new Allors.Databases.Object.SqlClient.Configuration
             {
                 ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                 ObjectFactory = Config.ObjectFactory,
                 WorkspaceFactory = new WorkspaceFactory()
             };
-            Config.Default = new Allors.Databases.Object.SqlClient.IntegerId.Database(configuration);
+            Config.Default = new Allors.Databases.Object.SqlClient.Database(configuration);
 
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new AllorsRazorViewEngine()); 

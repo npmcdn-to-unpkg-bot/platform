@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.LongId
+namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -26,12 +26,12 @@ namespace Allors.Databases.Object.SqlClient.LongId
 
     using Microsoft.SqlServer.Server;
 
-    internal class RelationTableForCompositeRelations : IEnumerable<SqlDataRecord>
+    internal class CompositeRoleDataRecords : IEnumerable<SqlDataRecord>
     {
         private readonly Schema schema;
         private readonly IEnumerable<CompositeRelation> relations;
-
-        internal RelationTableForCompositeRelations(Schema schema, IEnumerable<CompositeRelation> relations)
+ 
+        internal CompositeRoleDataRecords(Schema schema, IEnumerable<CompositeRelation> relations)
         {
             this.schema = schema;
             this.relations = relations;
@@ -39,18 +39,38 @@ namespace Allors.Databases.Object.SqlClient.LongId
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var metaData = new[]
+            // TODO: See Relation.SqlClient
+            if (this.schema.IsObjectIdInteger)
+            {
+                var metaData = new[]
+                                   {
+                                       new SqlMetaData(this.schema.RelationTableAssociation, SqlDbType.Int),
+                                       new SqlMetaData(this.schema.RelationTableRole, SqlDbType.Int)
+                                   };
+                var sqlDataRecord = new SqlDataRecord(metaData);
+
+                foreach (var relation in this.relations)
+                {
+                    sqlDataRecord.SetInt32(0, (int)relation.Association.Value);
+                    sqlDataRecord.SetInt32(1, (int)relation.Role.Value);
+                    yield return sqlDataRecord;
+                }
+            }
+            else
+            {
+                var metaData = new[]
                 {
                     new SqlMetaData(this.schema.RelationTableAssociation, SqlDbType.BigInt), 
                     new SqlMetaData(this.schema.RelationTableRole, SqlDbType.BigInt)
                 };
-            var sqlDataRecord = new SqlDataRecord(metaData);
+                var sqlDataRecord = new SqlDataRecord(metaData);
 
-            foreach (var relation in this.relations)
-            {
-                sqlDataRecord.SetInt64(0, (long)relation.Association.Value);
-                sqlDataRecord.SetInt64(1, (long)relation.Role.Value);
-                yield return sqlDataRecord;
+                foreach (var relation in this.relations)
+                {
+                    sqlDataRecord.SetInt64(0, (int)relation.Association.Value);
+                    sqlDataRecord.SetInt64(1, (int)relation.Role.Value);
+                    yield return sqlDataRecord;
+                }
             }
         }
 

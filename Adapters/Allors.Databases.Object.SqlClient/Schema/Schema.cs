@@ -140,6 +140,10 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
+        public abstract bool IsObjectIdInteger { get; }
+
+        public abstract bool IsObjectIdLong { get; }
+
         /// <summary>
         /// Gets the type used to store object (ids) .
         /// </summary>

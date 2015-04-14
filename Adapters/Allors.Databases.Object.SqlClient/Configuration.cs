@@ -20,9 +20,9 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Databases.Object.SqlClient.Caching;
 
-    public abstract class Configuration : Databases.Configuration
+    public class Configuration : Databases.Configuration
     {
-        protected Configuration()
+        public Configuration()
         {
             this.CacheFactory = new CacheFactory();
             this.CommandTimeout = 30;
