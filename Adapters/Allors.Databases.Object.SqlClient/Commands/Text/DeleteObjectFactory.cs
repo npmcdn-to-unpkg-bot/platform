@@ -55,10 +55,10 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
                 sql += "BEGIN\n";
 
-                sql += "DELETE FROM " + schema.Objects + "\n";
+                sql += "DELETE FROM " + this.Database.SchemaName + "." + schema.Objects + "\n";
                 sql += "WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + ";\n";
 
-                sql += "DELETE FROM " + schema.Table(((IComposite)objectType).ExclusiveLeafClass) + "\n";
+                sql += "DELETE FROM " + this.Database.SchemaName + "." + schema.Table(((IComposite)objectType).ExclusiveLeafClass) + "\n";
                 sql += "WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + ";\n";
 
                 sql += "END;";

@@ -61,7 +61,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 lock (database)
                 {
-                    using (var command = this.factory.ManagementSession.CreateSqlCommand("L_" + exclusiveRootClass.Name))
+                    using (var command = this.factory.ManagementSession.CreateSqlCommand(this.factory.ManagementSession.Database.SchemaName + "." + "L_" + exclusiveRootClass.Name))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         this.AddInObject(command, schema.TypeId.Param, objectType.Id);

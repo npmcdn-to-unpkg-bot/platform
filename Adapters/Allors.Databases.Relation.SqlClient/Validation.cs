@@ -70,50 +70,14 @@ namespace Allors.Databases.Relation.SqlClient
             }
             else
             {
-                var objectColumn = objectsTable.GetColumn(Mapping.ColumnNameForObject);
-                var typeColumn = objectsTable.GetColumn(Mapping.ColumnNameForType);
-                var cacheColumn = objectsTable.GetColumn(Mapping.ColumnNameForCache);
-
                 if (objectsTable.ColumnByLowercaseColumnName.Count != 3)
                 {
                     this.InvalidTables.Add(objectsTable);
                 }
 
-                if (objectColumn == null)
-                {
-                    this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForObject);
-                }
-                else
-                {
-                    if (!objectColumn.DataType.Equals(this.Database.Mapping.SqlTypeForObject))
-                    {
-                        this.InvalidColumns.Add(objectColumn);
-                    }
-                }
-
-                if (typeColumn == null)
-                {
-                    this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForType);
-                }
-                else
-                {
-                    if (!typeColumn.DataType.Equals(Mapping.SqlTypeForType))
-                    {
-                        this.InvalidColumns.Add(typeColumn);
-                    }
-                }
-
-                if (cacheColumn == null)
-                {
-                    this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForCache);
-                }
-                else
-                {
-                    if (!cacheColumn.DataType.Equals(Mapping.SqlTypeForCache))
-                    {
-                        this.InvalidColumns.Add(cacheColumn);
-                    }
-                }
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForType, Mapping.SqlTypeForType);
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForCache, Mapping.SqlTypeForCache);
             }
             
             // Relations
@@ -133,33 +97,25 @@ namespace Allors.Databases.Relation.SqlClient
                         this.InvalidTables.Add(table);
                     }
 
-                    var associationColumn = table.GetColumn(Mapping.ColumnNameForAssociation);
-                    var roleColumn = table.GetColumn(Mapping.ColumnNameForRole);
+                    this.ValidateColumn(objectsTable, Mapping.ColumnNameForAssociation, this.Database.Mapping.SqlTypeForObject);
+                    this.ValidateColumn(objectsTable, Mapping.ColumnNameForRole, mapping.GetSqlType(relationType.RoleType));
+                }
+            }
+        }
 
-                    if (associationColumn == null)
-                    {
-                        this.AddMissingColumnName(table, Mapping.ColumnNameForAssociation);
-                    }
-                    else
-                    {
-                        if (!associationColumn.DataType.Equals(this.Database.Mapping.SqlTypeForObject))
-                        {
-                            this.InvalidColumns.Add(associationColumn);
-                        }
-                    }
+        private void ValidateColumn(Table table, string columnName, string sqlType)
+        {
+            var objectColumn = table.GetColumn(columnName);
 
-                    if (roleColumn == null)
-                    {
-                        this.AddMissingColumnName(table, Mapping.ColumnNameForRole);
-                    }
-                    else
-                    {
-                        var sqlType = mapping.GetSqlType(relationType.RoleType);
-                        if (!roleColumn.SqlType.Equals(sqlType))
-                        {
-                            this.InvalidColumns.Add(roleColumn);
-                        }
-                    }
+            if (objectColumn == null)
+            {
+                this.AddMissingColumnName(table, columnName);
+            }
+            else
+            {
+                if (!objectColumn.DataType.Equals(sqlType))
+                {
+                    this.InvalidColumns.Add(objectColumn);
                 }
             }
         }

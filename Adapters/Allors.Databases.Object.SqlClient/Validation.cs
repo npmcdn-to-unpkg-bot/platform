@@ -2,6 +2,8 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
 
+    using Allors.Meta;
+
     public class Validation
     {
         public readonly HashSet<string> MissingTableNames;
@@ -63,103 +65,123 @@ namespace Allors.Databases.Object.SqlClient
             var mapping = this.Database.Mapping;
 
             // Objects Table
-            var objectsTable = this.Schema.GetTable(Mapping.TableNameForObjects);
+            var objectsTable = this.Schema.GetTable(Mapping.TableNameObjects);
             if (objectsTable == null)
             {
-                this.MissingTableNames.Add(Mapping.TableNameForObjects);
+                this.MissingTableNames.Add(Mapping.TableNameObjects);
             }
             else
             {
-                var objectColumn = objectsTable.GetColumn(Mapping.ColumnNameForObject);
-                var typeColumn = objectsTable.GetColumn(Mapping.ColumnNameForType);
-                var cacheColumn = objectsTable.GetColumn(Mapping.ColumnNameForCache);
-
                 if (objectsTable.ColumnByLowercaseColumnName.Count != 3)
                 {
                     this.InvalidTables.Add(objectsTable);
                 }
 
-                if (objectColumn == null)
-                {
-                    this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForObject);
-                }
-                else
-                {
-                    if (!objectColumn.DataType.Equals(this.Database.Mapping.SqlTypeForObject))
-                    {
-                        this.InvalidColumns.Add(objectColumn);
-                    }
-                }
-
-                if (typeColumn == null)
-                {
-                    this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForType);
-                }
-                else
-                {
-                    if (!typeColumn.DataType.Equals(Mapping.SqlTypeForType))
-                    {
-                        this.InvalidColumns.Add(typeColumn);
-                    }
-                }
-
-                if (cacheColumn == null)
-                {
-                    this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForCache);
-                }
-                else
-                {
-                    if (!cacheColumn.DataType.Equals(Mapping.SqlTypeForCache))
-                    {
-                        this.InvalidColumns.Add(cacheColumn);
-                    }
-                }
+                this.ValidateColumn(objectsTable, Mapping.TableColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
+                this.ValidateColumn(objectsTable, Mapping.TableColumnNameForType, Mapping.SqlTypeForType);
+                this.ValidateColumn(objectsTable, Mapping.TableColumnNameForCache, Mapping.SqlTypeForCache);
             }
             
-            // Relations
-            foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
+            // Object Tables
+            foreach (var objectType in this.Database.MetaPopulation.Classes)
             {
-                var tableName = mapping.GetTableName(relationType);
+                var tableName = mapping.GetTableName(objectType);
                 var table = this.Schema.GetTable(tableName);
 
                 if (table == null)
                 {
-                    this.MissingTableNames.Add(tableName);
+                    this.MissingTableNames.Add(Mapping.TableNameObjects);
                 }
                 else
                 {
-                    if (table.ColumnByLowercaseColumnName.Count != 2)
-                    {
-                        this.InvalidTables.Add(table);
-                    }
+                    this.ValidateColumn(table, Mapping.TableColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
+                    this.ValidateColumn(table, Mapping.TableColumnNameForType, Mapping.SqlTypeForType);
 
-                    var associationColumn = table.GetColumn(Mapping.ColumnNameForAssociation);
-                    var roleColumn = table.GetColumn(Mapping.ColumnNameForRole);
-
-                    if (associationColumn == null)
+                    foreach (var associationType in objectType.AssociationTypes)
                     {
-                        this.AddMissingColumnName(table, Mapping.ColumnNameForAssociation);
-                    }
-                    else
-                    {
-                        if (!associationColumn.DataType.Equals(this.Database.Mapping.SqlTypeForObject))
+                        var relationType = associationType.RelationType;
+                        var roleType = relationType.RoleType;
+                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses
+                            && roleType.IsMany)
                         {
-                            this.InvalidColumns.Add(associationColumn);
+                            this.ValidateColumn(
+                                table,
+                                this.database.Mapping.Column(relationType).Name,
+                                this.Database.Mapping.SqlTypeForObject);
                         }
                     }
 
-                    if (roleColumn == null)
+                    foreach (var roleType in objectType.RoleTypes)
                     {
-                        this.AddMissingColumnName(table, Mapping.ColumnNameForRole);
+                        var relationType = roleType.RelationType;
+                        var associationType = relationType.AssociationType;
+                        if (roleType.ObjectType.IsUnit)
+                        {
+                            this.ValidateColumn(
+                                table,
+                                this.database.Mapping.Column(relationType).Name,
+                                this.Database.Mapping.GetSqlType(relationType.RoleType));
+                        }
+                        else
+                        {
+                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses
+                                && !roleType.IsMany)
+                            {
+                                this.ValidateColumn(
+                                    table,
+                                    this.database.Mapping.Column(relationType).Name,
+                                    this.Database.Mapping.SqlTypeForObject);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Relation Tables
+            foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
+            {
+                var associationType = relationType.AssociationType;
+                var roleType = relationType.RoleType;
+
+                if (!roleType.ObjectType.IsUnit && 
+                    ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                {
+                    var tableName = mapping.GetTableName(relationType);
+                    var table = this.Schema.GetTable(tableName);
+
+                    if (table == null)
+                    {
+                        this.MissingTableNames.Add(tableName);
                     }
                     else
                     {
-                        var sqlType = mapping.GetSqlType(relationType.RoleType);
-                        if (!roleColumn.SqlType.Equals(sqlType))
+                        if (table.ColumnByLowercaseColumnName.Count != 2)
                         {
-                            this.InvalidColumns.Add(roleColumn);
+                            this.InvalidTables.Add(table);
                         }
+
+                        this.ValidateColumn(table, Mapping.TableColumnNameForAssociation, this.Database.Mapping.SqlTypeForObject);
+
+                        var roleSqlType = relationType.RoleType.ObjectType.IsComposite ? this.Database.Mapping.SqlTypeForObject : mapping.GetSqlType(relationType.RoleType);
+                        this.ValidateColumn(table, Mapping.TableColumnNameForRole, roleSqlType);
                     }
+                }
+            }
+        }
+
+        private void ValidateColumn(Table table, string columnName, string sqlType)
+        {
+            var objectColumn = table.GetColumn(columnName);
+
+            if (objectColumn == null)
+            {
+                this.AddMissingColumnName(table, columnName);
+            }
+            else
+            {
+                if (!objectColumn.SqlType.Equals(sqlType))
+                {
+                    this.InvalidColumns.Add(objectColumn);
                 }
             }
         }

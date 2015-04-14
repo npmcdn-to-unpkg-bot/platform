@@ -22,9 +22,10 @@ namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System.Data;
 
-    internal sealed class LongMapping : Mapping
+    internal sealed class MappingLong : Mapping
     {
-        internal LongMapping(Database database) : base(database)
+        internal MappingLong(Database database)
+            : base(database, "bigint", SqlDbType.BigInt)
         {
             this.OnConstructed();
         }

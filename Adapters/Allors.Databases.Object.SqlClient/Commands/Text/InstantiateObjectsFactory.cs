@@ -38,9 +38,9 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         {
             this.Database = database;
             this.Sql += "SELECT " + database.Mapping.ObjectId + "," + database.Mapping.TypeId + "," + database.Mapping.CacheId + "\n";
-            this.Sql += "FROM " + database.Mapping.Objects + "\n";
+            this.Sql += "FROM " + this.Database.SchemaName + "." + database.Mapping.Objects + "\n";
             this.Sql += "WHERE " + database.Mapping.ObjectId + " IN\n";
-            this.Sql += "( SELECT " + Mapping.ColumnNameForObject + " FROM " + this.Database.SqlClientMapping.ObjectTableParam.Name + " )\n";
+            this.Sql += "( SELECT " + Mapping.TableTypeColumnNameForObject + " FROM " + this.Database.SqlClientMapping.ObjectTableParam.Name + " )\n";
         }
 
         internal InstantiateObjects Create(DatabaseSession session)

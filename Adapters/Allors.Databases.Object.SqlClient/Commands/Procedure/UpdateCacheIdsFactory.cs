@@ -68,7 +68,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 if (this.command == null)
                 {
-                    this.command = this.Session.CreateSqlCommand("UC");
+                    this.command = this.Session.CreateSqlCommand(this.Database.SchemaName + "." + "UC");
                     this.command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
                 }

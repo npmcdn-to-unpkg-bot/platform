@@ -97,9 +97,9 @@
     <Compile Include="DataRecords\CompositesRoleDataRecords.cs" />
     <Compile Include="DataRecords\CompositeRoleDataRecords.cs" />
     <Compile Include="DataRecords\UnitRoleDataRecords.cs" />
-    <Compile Include="Mapping\IntegerMapping.cs" />
+    <Compile Include="Mapping\MappingInteger.cs" />
     <Compile Include="Load.cs" />
-    <Compile Include="Mapping\LongMapping.cs" />
+    <Compile Include="Mapping\MappingLong.cs" />
     <Compile Include="ManagementSession.cs" />
     <Compile Include="Predicates\AndPredicate.cs" />
     <Compile Include="Predicates\AssociationContainedInEnumerable.cs" />

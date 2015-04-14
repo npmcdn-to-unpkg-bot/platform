@@ -59,13 +59,13 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (this.dataType.Equals("nvarchar"))
                 {
-                    var length = this.CharacterMaximumLength == -1 ? "MAX" : this.CharacterMaximumLength.ToString();
+                    var length = this.CharacterMaximumLength == -1 ? "max" : this.CharacterMaximumLength.ToString();
                     return "nvarchar(" + length + ")";
                 }
 
                 if (this.dataType.Equals("varbinary"))
                 {
-                    var length = this.CharacterMaximumLength == -1 ? "MAX" : this.CharacterMaximumLength.ToString();
+                    var length = this.CharacterMaximumLength == -1 ? "max" : this.CharacterMaximumLength.ToString();
                     return "varbinary(" + length + ")";
                 }
 

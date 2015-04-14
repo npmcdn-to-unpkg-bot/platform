@@ -22,9 +22,9 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 {
     using System.Data;
 
-    internal sealed class IntegerMapping : Mapping
+    internal sealed class MappingInteger : Mapping
     {
-        internal IntegerMapping(SqlClient.Database database) : base(database)
+        internal MappingInteger(Database database) : base(database, "int", SqlDbType.Int)
         {
             this.OnConstructed();
         }

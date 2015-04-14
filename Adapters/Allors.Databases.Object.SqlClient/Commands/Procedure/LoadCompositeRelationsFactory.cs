@@ -44,22 +44,22 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             {
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = "A_" + roleType.SingularFullName;
+                    sql = this.ManagementSession.Database.SchemaName + "." + "A_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = "A_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                    sql = this.ManagementSession.Database.SchemaName + "." + "A_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                 }
             }
             else
             {
                 if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = "S_" + roleType.SingularFullName;
+                    sql = this.ManagementSession.Database.SchemaName + "." + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                    sql = this.ManagementSession.Database.SchemaName + "." + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                 }
             }
 

@@ -37,7 +37,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         {
             this.Database = database;
             this.Sql = "SELECT " + database.Mapping.TypeId + ", " + database.Mapping.CacheId + "\n";
-            this.Sql += "FROM " + database.Mapping.Objects + "\n";
+            this.Sql += "FROM " + this.Database.SchemaName + "." + database.Mapping.Objects + "\n";
             this.Sql += "WHERE " + database.Mapping.ObjectId + "=" + database.Mapping.ObjectId.Param + "\n";
         }
 

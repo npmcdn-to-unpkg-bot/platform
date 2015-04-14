@@ -288,11 +288,11 @@ namespace Allors.Databases.Object.SqlClient
                     {
                         if (this.ObjectIds is ObjectIdsInteger)
                         {
-                            this.mapping = new IntegerId.IntegerMapping(this);
+                            this.mapping = new IntegerId.MappingInteger(this);
                         }
                         else if (this.ObjectIds is ObjectIdsLong)
                         {
-                            this.mapping = new LongId.LongMapping(this);
+                            this.mapping = new LongId.MappingLong(this);
                         }
                         else
                         {

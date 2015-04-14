@@ -78,7 +78,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                     this.AddInObject(command, schema.ObjectId.Param, roles.Reference.ObjectId.Value);
 
                     var sql = new StringBuilder();
-                    sql.Append("UPDATE " + schema.Table(exclusiveRootClass) + " SET\n");
+                    sql.Append("UPDATE " + this.Database.SchemaName + "." + schema.Table(exclusiveRootClass) + " SET\n");
 
                     var count = 0;
                     foreach (var roleType in sortedIRoleTypes)

@@ -42,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient
             // TODO: See Relation.SqlClient
             if (this.mapping.IsObjectIdInteger)
             {
-                var objectArrayElement = Mapping.ColumnNameForObject;
+                var objectArrayElement = Mapping.TableTypeColumnNameForObject;
                 var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
                 var sqlDataRecord = new SqlDataRecord(metaData);
                 foreach (var strategy in this.strategies)
@@ -53,7 +53,7 @@ namespace Allors.Databases.Object.SqlClient
             }
             else
             {
-                var objectArrayElement = Mapping.ColumnNameForObject;
+                var objectArrayElement = Mapping.TableTypeColumnNameForObject;
                 var metaData = new SqlMetaData(objectArrayElement, SqlDbType.BigInt);
                 var sqlDataRecord = new SqlDataRecord(metaData);
                 foreach (var strategy in this.strategies)

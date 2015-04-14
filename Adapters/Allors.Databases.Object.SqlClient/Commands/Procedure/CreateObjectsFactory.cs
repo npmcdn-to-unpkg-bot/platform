@@ -65,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 SqlCommand command;
                 if (!this.commandByIObjectType.TryGetValue(exclusiveRootClass, out command))
                 {
-                    command = this.Session.CreateSqlCommand("COS_" + exclusiveRootClass.Name);
+                    command = this.Session.CreateSqlCommand(this.Database.SchemaName + "." + "COS_" + exclusiveRootClass.Name);
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, mapping.TypeId.Param, objectType.Id);
                     this.AddInObject(command, mapping.CountParam, count);

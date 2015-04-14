@@ -55,7 +55,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 // TODO: Make this a single pass Query.
                 var sql = "IF EXISTS (\n";
                 sql += "    SELECT " + schema.ObjectId + "\n";
-                sql += "    FROM " + schema.Table(objectType.ExclusiveLeafClass) + "\n";
+                sql += "    FROM " + this.Database.SchemaName + "." + schema.Table(objectType.ExclusiveLeafClass) + "\n";
                 sql += "    WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + "\n";
                 sql += ")\n";
                 sql += "    SELECT 1\n";
@@ -64,12 +64,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
                 sql += "    SET IDENTITY_INSERT " + schema.Objects + " ON\n";
 
-                sql += "    INSERT INTO " + schema.Objects + " (" + schema.ObjectId + "," + schema.TypeId + "," + schema.CacheId + ")\n";
+                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.Objects + " (" + schema.ObjectId + "," + schema.TypeId + "," + schema.CacheId + ")\n";
                 sql += "    VALUES (" + schema.ObjectId.Param + "," + schema.TypeId.Param + ", " + Reference.InitialCacheId + ");\n";
 
                 sql += "    SET IDENTITY_INSERT " + schema.Objects.StatementName + " OFF;\n";
 
-                sql += "    INSERT INTO " + schema.Table(objectType.ExclusiveLeafClass) + " (" + schema.ObjectId + "," + schema.TypeId + ")\n";
+                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.Table(objectType.ExclusiveLeafClass) + " (" + schema.ObjectId + "," + schema.TypeId + ")\n";
                 sql += "    VALUES (" + schema.ObjectId.Param + "," + schema.TypeId.Param + ");\n";
 
                 sql += "    SELECT 0;\n";

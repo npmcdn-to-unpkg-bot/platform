@@ -17,7 +17,6 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System;
-    using System.Data;
     using System.Data.SqlClient;
     using System.Text;
 
@@ -99,14 +98,10 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
                 {
                     {
                         var sql = new StringBuilder();
-                        sql.Append(
-                            "CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects)
-                            + " AS TABLE\n");
-                        sql.Append(
-                            "(" + Mapping.ColumnNameForObject + " " + this.mapping.GetSqlType(this.mapping.ObjectId)
-                            + ")\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForObject) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForObject + " " + this.mapping.GetSqlType(this.mapping.ObjectId) + ")\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForObjects);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForObject);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -118,15 +113,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append(
-                            "CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForCompositeRelation)
-                            + " AS TABLE\n");
-                        sql.Append(
-                            "(" + Mapping.ColumnNameForAssociation + " "
-                            + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " " + this.mapping.GetSqlType(this.mapping.RoleId) + ")\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForCompositeRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " " + this.mapping.GetSqlType(this.mapping.RoleId) + ")\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForCompositeRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForCompositeRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -139,14 +130,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append(
-                            "CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForStringRelation)
-                            + " AS TABLE\n");
-                        sql.Append(
-                            "(" + Mapping.ColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " NVARCHAR(MAX))\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForStringRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " NVARCHAR(MAX))\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForStringRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForStringRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -159,15 +147,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append(
-                            "CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForIntegerRelation)
-                            + " AS TABLE\n");
-                        sql.Append(
-                            "(" + Mapping.ColumnNameForAssociation + " "
-                            + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " INT)\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForIntegerRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " INT)\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForIntegerRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForIntegerRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -180,11 +164,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForFloatRelation) + " AS TABLE\n");
-                        sql.Append("(" + Mapping.ColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " FLOAT)\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForFloatRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " FLOAT)\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForFloatRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForFloatRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -197,11 +181,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForDateTimeRelation) + " AS TABLE\n");
-                        sql.Append("(" + Mapping.ColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " DATETIME2)\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForDateTimeRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " DATETIME2)\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForDateTimeRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForDateTimeRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -214,11 +198,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForBooleanRelation) + " AS TABLE\n");
-                        sql.Append("(" + Mapping.ColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " BIT)\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForBooleanRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " BIT)\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForBooleanRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForBooleanRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -231,11 +215,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForUniqueRelation) + " AS TABLE\n");
-                        sql.Append("(" + Mapping.ColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " UNIQUEIDENTIFIER)\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForUniqueRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " UNIQUEIDENTIFIER)\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForUniqueRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForUniqueRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -247,11 +231,11 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                     {
                         var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableNameForBinaryRelation) + " AS TABLE\n");
-                        sql.Append("(" + Mapping.ColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(Mapping.ColumnNameForRole + " VARBINARY(MAX))\n");
+                        sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForBinaryRelation) + " AS TABLE\n");
+                        sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                        sql.Append(Mapping.TableTypeColumnNameForRole + " VARBINARY(MAX))\n");
 
-                        var tableType = this.schema.GetTableType(Mapping.TableNameForBinaryRelation);
+                        var tableType = this.schema.GetTableType(Mapping.TableTypeNameForBinaryRelation);
                         if (tableType == null)
                         {
                             using (var command = new SqlCommand(sql.ToString(), connection))
@@ -272,8 +256,8 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
 
                             var sql = new StringBuilder();
                             sql.Append("CREATE TYPE " + (this.mapping.Database.SchemaName + "." + decimalRelationTable) + " AS TABLE\n");
-                            sql.Append("(" + Mapping.ColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                            sql.Append(Mapping.ColumnNameForRole + " DECIMAL(" + precision + "," + scale + ") )\n");
+                            sql.Append("(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
+                            sql.Append(Mapping.TableTypeColumnNameForRole + " DECIMAL(" + precision + "," + scale + ") )\n");
 
                             var tableType = this.schema.GetTableType(decimalRelationTable);
                             if (tableType == null)
@@ -383,7 +367,14 @@ TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + table + @";
                         {
                             using (var command = new SqlCommand(procedure.Definition, connection))
                             {
-                                command.ExecuteNonQuery();
+                                try
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine(e.StackTrace);
+                                }
                             }
                         }
                     }
