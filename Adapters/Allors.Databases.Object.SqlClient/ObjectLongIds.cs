@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectIntegerIds.cs" company="Allors bvba">
+// <copyright file="ObjectLongIds.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,11 +20,11 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    internal class ObjectIntegerIds : IObjectIds
+    internal class ObjectLongIds : IObjectIds
     {
         public ObjectId Parse(string idString)
         {
-            return string.IsNullOrWhiteSpace(idString) ? null : new ObjectIdInteger(int.Parse(idString));
+            return string.IsNullOrWhiteSpace(idString) ? null : new ObjectIdLong(long.Parse(idString));
         }
     }
 }
