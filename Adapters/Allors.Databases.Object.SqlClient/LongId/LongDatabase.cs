@@ -27,13 +27,13 @@ namespace Allors.Databases.Object.SqlClient.LongId
 
     using Microsoft.SqlServer.Server;
 
-    public class Database : SqlClient.Database 
+    public class LongDatabase : SqlClient.Database 
     {
         private readonly IObjectIds allorsObjectIds;
        
         private Schema schema;
 
-        internal Database(SqlClient.Configuration configuration)
+        internal LongDatabase(SqlClient.Configuration configuration)
             : base(configuration)
         {
             this.allorsObjectIds = new ObjectLongIds();

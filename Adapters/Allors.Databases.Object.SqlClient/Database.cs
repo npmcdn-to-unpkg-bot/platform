@@ -42,18 +42,71 @@ namespace Allors.Databases.Object.SqlClient
         private readonly string id;
 
         private readonly IWorkspaceFactory workspaceFactory;
+
         private readonly string connectionString;
+
         private readonly int commandTimeout;
+
         private readonly IsolationLevel isolationLevel;
 
         private readonly Dictionary<IObjectType, IRoleType[]> sortedUnitRolesByIObjectType;
+
         private readonly ICache cache;
 
+        private readonly CommandFactories commandFactories;
+
         private Dictionary<string, object> properties;
+
+        protected Database(Configuration configuration)
+        {
+            this.objectFactory = configuration.ObjectFactory;
+            this.concreteClassesByIObjectType = new Dictionary<IObjectType, object>();
+
+            this.workspaceFactory = configuration.WorkspaceFactory;
+            this.connectionString = configuration.ConnectionString;
+            this.commandTimeout = configuration.CommandTimeout;
+            this.isolationLevel = configuration.IsolationLevel;
+
+            this.sortedUnitRolesByIObjectType = new Dictionary<IObjectType, IRoleType[]>();
+
+            this.cache = configuration.CacheFactory.CreateCache(this);
+
+            this.commandFactories = new CommandFactories(this);
+
+            var connectionStringBuilder = new SqlConnectionStringBuilder(this.ConnectionString);
+            var applicationName = connectionStringBuilder.ApplicationName.Trim();
+            if (!string.IsNullOrWhiteSpace(applicationName))
+            {
+                this.id = applicationName;
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(connectionStringBuilder.InitialCatalog))
+                {
+                    this.id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
+                }
+                else
+                {
+                    using (var connection = new SqlConnection(this.ConnectionString))
+                    {
+                        connection.Open();
+                        this.id = connection.Database.ToLowerInvariant();
+                    }
+                }
+            }
+        }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
+
+        public string Id
+        {
+            get
+            {
+                return this.id;
+            }
+        }
 
         public IObjectFactory ObjectFactory
         {
@@ -95,6 +148,96 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
+        internal string AscendingSortAppendix
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        internal string DescendingSortAppendix
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        internal string Except
+        {
+            get
+            {
+                return "EXCEPT";
+            }
+        }
+
+        internal ICache Cache
+        {
+            get
+            {
+                return this.cache;
+            }
+        }
+
+        internal string ConnectionString
+        {
+            get
+            {
+                if (this.connectionString == null)
+                {
+                    return
+                        System.Configuration.ConfigurationManager.ConnectionStrings[ConnectionStringsKey]
+                            .ConnectionString;
+                }
+
+                return this.connectionString;
+            }
+        }
+
+        internal int CommandTimeout
+        {
+            get
+            {
+                return this.commandTimeout;
+            }
+        }
+
+        internal IsolationLevel IsolationLevel
+        {
+            get
+            {
+                return this.isolationLevel;
+            }
+        }
+
+        internal abstract IObjectIds AllorsObjectIds { get; }
+
+        internal CommandFactories SqlClientCommandFactories
+        {
+            get
+            {
+                return this.commandFactories;
+            }
+        }
+
+        internal Schema Schema
+        {
+            get
+            {
+                return this.SqlClientSchema;
+            }
+        }
+
+        internal abstract Schema SqlClientSchema { get; }
+
+        internal CommandFactories CommandFactories
+        {
+            get
+            {
+                return this.commandFactories;
+            }
+        }
 
         public object this[string name]
         {
@@ -128,208 +271,14 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
-        {
-            object concreteClassOrClasses;
-            if (!this.concreteClassesByIObjectType.TryGetValue(objectType, out concreteClassOrClasses))
-            {
-                if (objectType.IsClass)
-                {
-                    concreteClassOrClasses = objectType;
-                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
-                }
-                else
-                {
-                    concreteClassOrClasses = new HashSet<IObjectType>(((IInterface)objectType).Subclasses);
-                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
-                }
-            }
-
-            if (concreteClassOrClasses is IObjectType)
-            {
-                return concreteClass.Equals(concreteClassOrClasses);
-            }
-
-            var concreteClasses = (HashSet<IObjectType>)concreteClassOrClasses;
-            return concreteClasses.Contains(concreteClass);
-        }
-
-        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<ObjectId> objectids);
-
-        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<Reference> strategies);
-
-        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(Dictionary<Reference, Roles> rolesByReference);
-
-        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IEnumerable<CompositeRelation> compositeRelations);
-
-        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IRoleType roleType, IEnumerable<UnitRelation> unitRelations);
-
-        internal virtual string AscendingSortAppendix
-        {
-            get { return null; }
-        }
-
-        internal virtual string DescendingSortAppendix
-        {
-            get { return null; }
-        }
-
-        internal virtual string Except
-        {
-            get { return "EXCEPT"; }
-        }
-
-        internal ICache Cache
-        {
-            get
-            {
-                return this.cache;
-            }
-        }
-
-        internal string ConnectionString
-        {
-            get
-            {
-                if (this.connectionString == null)
-                {
-                    return System.Configuration.ConfigurationManager.ConnectionStrings[ConnectionStringsKey].ConnectionString;
-                }
-
-                return this.connectionString;
-            }
-        }
-
-        internal int CommandTimeout
-        {
-            get
-            {
-                return this.commandTimeout;
-            }
-        }
-
-        internal IsolationLevel IsolationLevel
-        {
-            get
-            {
-                return this.isolationLevel;
-            }
-        }
-
         public ISession CreateSession()
         {
             return this.CreateDatabaseSession();
         }
 
-        internal void Recover()
-        {
-            if (!ObjectFactory.MetaPopulation.IsValid)
-            {
-                throw new ArgumentException("Domain is invalid");
-            }
-
-            var session = this.CreateManagementSession();
-            try
-            {
-                this.DropIndexes(session);
-                this.DropTriggers(session);
-                this.DropProcedures(session);
-                this.DropFunctions(session);
-                this.DropUserDefinedTypes(session);
-
-                this.CreateUserDefinedTypes(session);
-                this.CreateFunctions(session);
-                this.CreateProcedures(session);
-                this.CreateTriggers(session);
-                this.CreateIndexes(session);
-
-                session.Commit();
-            }
-            catch
-            {
-                session.Rollback();
-                throw;
-            }
-            finally
-            {
-                this.ResetSchema();
-                this.Cache.Invalidate();
-            }
-        }
-
-        protected abstract void ResetSchema();
-
-        IDatabaseSession Allors.IDatabase.CreateSession()
-        {
-            return this.CreateDatabaseSession();
-        }
-
-        internal virtual IDatabaseSession CreateDatabaseSession()
-        {
-            if (Schema.SchemaValidationErrors.HasErrors)
-            {
-                var errors = new StringBuilder();
-                foreach (var error in Schema.SchemaValidationErrors.Errors)
-                {
-                    errors.Append("\n");
-                    errors.Append(error.Message);
-                }
-
-                throw new SchemaValidationException(Schema.SchemaValidationErrors, "Database schema is not compatible with domain.\nUpgrade manually or use Save & Load.\n" + errors);
-            }
-
-            var session = this.CreateSqlSession();
-            return session;
-        }
-
         public void Init()
         {
             this.Init(true);
-        }
-
-        private void Init(bool allowTruncate)
-        {
-            if (!ObjectFactory.MetaPopulation.IsValid)
-            {
-                throw new ArgumentException("Domain is invalid");
-            }
-
-            var session = this.CreateManagementSession();
-            try
-            {
-                if (allowTruncate && !this.Schema.SchemaValidationErrors.HasErrors)
-                {
-                    this.TruncateTables(session);
-                }
-                else
-                {
-                    this.DropTriggers(session);
-                    this.DropProcedures(session);
-                    this.DropFunctions(session);
-                    this.DropUserDefinedTypes(session);
-                    this.ResetSequence(session);
-                    this.DropTables(session);
-                    this.CreateTables(session);
-                    this.CreateUserDefinedTypes(session);
-                    this.CreateFunctions(session);
-                    this.CreateProcedures(session);
-                    this.CreateTriggers(session);
-                    this.CreateIndexes(session);
-                }
-
-                session.Commit();
-            }
-            catch
-            {
-                session.Rollback();
-                throw;
-            }
-            finally
-            {
-                this.properties = null;
-                this.ResetSchema();
-                this.Cache.Invalidate();
-            }
         }
 
         public void Load(XmlReader reader)
@@ -380,6 +329,83 @@ namespace Allors.Databases.Object.SqlClient
             return this.workspaceFactory.CreateWorkspace(this);
         }
 
+        IDatabaseSession Allors.IDatabase.CreateSession()
+        {
+            return this.CreateDatabaseSession();
+        }
+
+        internal bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
+        {
+            object concreteClassOrClasses;
+            if (!this.concreteClassesByIObjectType.TryGetValue(objectType, out concreteClassOrClasses))
+            {
+                if (objectType.IsClass)
+                {
+                    concreteClassOrClasses = objectType;
+                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
+                }
+                else
+                {
+                    concreteClassOrClasses = new HashSet<IObjectType>(((IInterface)objectType).Subclasses);
+                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
+                }
+            }
+
+            if (concreteClassOrClasses is IObjectType)
+            {
+                return concreteClass.Equals(concreteClassOrClasses);
+            }
+
+            var concreteClasses = (HashSet<IObjectType>)concreteClassOrClasses;
+            return concreteClasses.Contains(concreteClass);
+        }
+
+        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<ObjectId> objectids);
+
+        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<Reference> strategies);
+
+        internal abstract IEnumerable<SqlDataRecord> CreateObjectTable(Dictionary<Reference, Roles> rolesByReference);
+
+        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IEnumerable<CompositeRelation> compositeRelations);
+
+        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IRoleType roleType, IEnumerable<UnitRelation> unitRelations);
+
+        internal void Recover()
+        {
+            if (!ObjectFactory.MetaPopulation.IsValid)
+            {
+                throw new ArgumentException("Domain is invalid");
+            }
+
+            var session = this.CreateManagementSession();
+            try
+            {
+                this.DropIndexes(session);
+                this.DropTriggers(session);
+                this.DropProcedures(session);
+                this.DropFunctions(session);
+                this.DropUserDefinedTypes(session);
+
+                this.CreateUserDefinedTypes(session);
+                this.CreateFunctions(session);
+                this.CreateProcedures(session);
+                this.CreateTriggers(session);
+                this.CreateIndexes(session);
+
+                session.Commit();
+            }
+            catch
+            {
+                session.Rollback();
+                throw;
+            }
+            finally
+            {
+                this.ResetSchema();
+                this.Cache.Invalidate();
+            }
+        }
+
         internal Type GetDomainType(IObjectType objectType)
         {
             return this.ObjectFactory.GetTypeForObjectType(objectType);
@@ -390,13 +416,192 @@ namespace Allors.Databases.Object.SqlClient
             IRoleType[] sortedUnitRoles;
             if (!this.sortedUnitRolesByIObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
-                var sortedUnitRoleList = new List<IRoleType>(((IComposite)objectType).RoleTypes.Where(r => r.ObjectType.IsUnit));
+                var sortedUnitRoleList =
+                    new List<IRoleType>(((IComposite)objectType).RoleTypes.Where(r => r.ObjectType.IsUnit));
                 sortedUnitRoleList.Sort(MetaObjectComparer.ById);
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
                 this.sortedUnitRolesByIObjectType[objectType] = sortedUnitRoles;
             }
 
             return sortedUnitRoles;
+        }
+
+        internal DbConnection CreateDbConnection()
+        {
+            return new SqlConnection(this.ConnectionString);
+        }
+
+        internal void DropIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
+        {
+            var indexName = SqlClient.Schema.AllorsPrefix + table.Name + "_" + column.Name;
+
+            var sql = new StringBuilder();
+            sql.Append("IF EXISTS (\n");
+            sql.Append("    SELECT *\n");
+            sql.Append("    FROM sysindexes\n");
+            sql.Append("    WHERE   name = '" + indexName + "'\n");
+            sql.Append("            AND OBJECT_NAME(id) = N'" + table.Name + "'\n");
+            sql.Append(")\n");
+
+            sql.Append("    DROP INDEX " + table + "." + indexName);
+            session.ExecuteSql(sql.ToString());
+        }
+
+        internal SqlMetaData GetSqlMetaData(string name, SchemaColumn column)
+        {
+            switch (column.DbType)
+            {
+                case DbType.String:
+                    if (column.Size == -1 || column.Size > 4000)
+                    {
+                        return new SqlMetaData(name, SqlDbType.NVarChar, -1);
+                    }
+
+                    return new SqlMetaData(name, SqlDbType.NVarChar, column.Size.Value);
+                case DbType.Int32:
+                    return new SqlMetaData(name, SqlDbType.Int);
+                case DbType.Decimal:
+                    return new SqlMetaData(
+                        name,
+                        SqlDbType.Decimal,
+                        (byte)column.Precision.Value,
+                        (byte)column.Scale.Value);
+                case DbType.Double:
+                    return new SqlMetaData(name, SqlDbType.Float);
+                case DbType.Boolean:
+                    return new SqlMetaData(name, SqlDbType.Bit);
+                case DbType.DateTime2:
+                    return new SqlMetaData(name, SqlDbType.DateTime2);
+                case DbType.Guid:
+                    return new SqlMetaData(name, SqlDbType.UniqueIdentifier);
+                case DbType.Binary:
+                    if (column.Size == -1 || column.Size > 8000)
+                    {
+                        return new SqlMetaData(name, SqlDbType.VarBinary, -1);
+                    }
+
+                    return new SqlMetaData(name, SqlDbType.VarBinary, (long)column.Size);
+                default:
+                    throw new Exception("!UNKNOWN VALUE TYPE!");
+            }
+        }
+
+        internal string GetSqlType(SchemaColumn column)
+        {
+            switch (column.DbType)
+            {
+                case DbType.String:
+                    if (column.Size == -1 || column.Size > 4000)
+                    {
+                        return "NVARCHAR(MAX) ";
+                    }
+
+                    return "NVARCHAR(" + column.Size + ") ";
+                case DbType.Int32:
+                    return "INT ";
+                case DbType.Decimal:
+                    return "DECIMAL(" + column.Precision + "," + column.Scale + ") ";
+                case DbType.Double:
+                    return "FLOAT ";
+                case DbType.Boolean:
+                    return "BIT ";
+                case DbType.DateTime2:
+                    return "DATETIME2 ";
+                case DbType.Guid:
+                    return "UNIQUEIDENTIFIER ";
+                case DbType.Binary:
+                    if (column.Size == -1 || column.Size > 8000)
+                    {
+                        return "VARBINARY(MAX) ";
+                    }
+
+                    return "VARBINARY(" + column.Size + ") ";
+                default:
+                    return "!UNKNOWN VALUE TYPE!";
+            }
+        }
+
+        internal string GetSqlType(DbType type)
+        {
+            switch (type)
+            {
+                case DbType.Int32:
+                    return "INT ";
+                default:
+                    return "!UNKNOWN DBTYPE!";
+            }
+        }
+
+        internal ManagementSession CreateSqlClientManagementSession()
+        {
+            return new ManagementSession(this);
+        }
+
+        protected abstract void ResetSchema();
+
+        private IDatabaseSession CreateDatabaseSession()
+        {
+            if (Schema.SchemaValidationErrors.HasErrors)
+            {
+                var errors = new StringBuilder();
+                foreach (var error in Schema.SchemaValidationErrors.Errors)
+                {
+                    errors.Append("\n");
+                    errors.Append(error.Message);
+                }
+
+                throw new SchemaValidationException(
+                    Schema.SchemaValidationErrors,
+                    "Database schema is not compatible with domain.\nUpgrade manually or use Save & Load.\n" + errors);
+            }
+
+            var session = this.CreateSqlSession();
+            return session;
+        }
+
+        private void Init(bool allowTruncate)
+        {
+            if (!ObjectFactory.MetaPopulation.IsValid)
+            {
+                throw new ArgumentException("Domain is invalid");
+            }
+
+            var session = this.CreateManagementSession();
+            try
+            {
+                if (allowTruncate && !this.Schema.SchemaValidationErrors.HasErrors)
+                {
+                    this.TruncateTables(session);
+                }
+                else
+                {
+                    this.DropTriggers(session);
+                    this.DropProcedures(session);
+                    this.DropFunctions(session);
+                    this.DropUserDefinedTypes(session);
+                    this.ResetSequence(session);
+                    this.DropTables(session);
+                    this.CreateTables(session);
+                    this.CreateUserDefinedTypes(session);
+                    this.CreateFunctions(session);
+                    this.CreateProcedures(session);
+                    this.CreateTriggers(session);
+                    this.CreateIndexes(session);
+                }
+
+                session.Commit();
+            }
+            catch
+            {
+                session.Rollback();
+                throw;
+            }
+            finally
+            {
+                this.properties = null;
+                this.ResetSchema();
+                this.Cache.Invalidate();
+            }
         }
 
         private void TruncateTables(ManagementSession session)
@@ -488,205 +693,6 @@ namespace Allors.Databases.Object.SqlClient
         {
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private readonly CommandFactories commandFactories;
-
-        protected Database(Configuration configuration)
-        {
-            this.objectFactory = configuration.ObjectFactory;
-            this.concreteClassesByIObjectType = new Dictionary<IObjectType, object>();
-
-            this.workspaceFactory = configuration.WorkspaceFactory;
-            this.connectionString = configuration.ConnectionString;
-            this.commandTimeout = configuration.CommandTimeout;
-            this.isolationLevel = configuration.IsolationLevel;
-
-            this.sortedUnitRolesByIObjectType = new Dictionary<IObjectType, IRoleType[]>();
-
-            this.cache = configuration.CacheFactory.CreateCache(this);
-            
-            this.commandFactories = new CommandFactories(this);
-
-            var connectionStringBuilder = new SqlConnectionStringBuilder(this.ConnectionString);
-            var applicationName = connectionStringBuilder.ApplicationName.Trim();
-            if (!string.IsNullOrWhiteSpace(applicationName))
-            {
-                this.id = applicationName;
-            }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(connectionStringBuilder.InitialCatalog))
-                {
-                    this.id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
-                }
-                else
-                {
-                    using (var connection = new SqlConnection(this.ConnectionString))
-                    {
-                        connection.Open();
-                        this.id = connection.Database.ToLowerInvariant();
-                    }
-                }
-            }
-
-        }
-
-        internal abstract IObjectIds AllorsObjectIds { get; }
-
-        internal CommandFactories SqlClientCommandFactories
-        {
-            get
-            {
-                return this.commandFactories;
-            }
-        }
-
-        internal Schema Schema
-        {
-            get
-            {
-                return this.SqlClientSchema;
-            }
-        }
-
-        internal abstract Schema SqlClientSchema { get; }
-
-        internal CommandFactories CommandFactories
-        {
-            get { return this.commandFactories; }
-        }
-
-        public string Id
-        {
-            get
-            {
-                return this.id;
-            }
-        }
-
-        internal DbConnection CreateDbConnection()
-        {
-            return new SqlConnection(this.ConnectionString);
-        }
-
-        internal void DropIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
-        {
-            var indexName = SqlClient.Schema.AllorsPrefix + table.Name + "_" + column.Name;
-
-            var sql = new StringBuilder();
-            sql.Append("IF EXISTS (\n");
-            sql.Append("    SELECT *\n");
-            sql.Append("    FROM sysindexes\n");
-            sql.Append("    WHERE   name = '" + indexName + "'\n");
-            sql.Append("            AND OBJECT_NAME(id) = N'" + table.Name + "'\n");
-            sql.Append(")\n");
-
-            sql.Append("    DROP INDEX " + table + "." + indexName);
-            session.ExecuteSql(sql.ToString());
-        }
-
-        internal SqlMetaData GetSqlMetaData(string name, SchemaColumn column)
-        {
-            switch (column.DbType)
-            {
-                case DbType.String:
-                    if (column.Size == -1 || column.Size > 4000)
-                    {
-                        return new SqlMetaData(name, SqlDbType.NVarChar, -1);
-                    }
-
-                    return new SqlMetaData(name, SqlDbType.NVarChar, column.Size.Value);
-                case DbType.Int32:
-                    return new SqlMetaData(name, SqlDbType.Int);
-                case DbType.Decimal:
-                    return new SqlMetaData(name, SqlDbType.Decimal, (byte)column.Precision.Value, (byte)column.Scale.Value);
-                case DbType.Double:
-                    return new SqlMetaData(name, SqlDbType.Float);
-                case DbType.Boolean:
-                    return new SqlMetaData(name, SqlDbType.Bit);
-                case DbType.DateTime2:
-                    return new SqlMetaData(name, SqlDbType.DateTime2);
-                case DbType.Guid:
-                    return new SqlMetaData(name, SqlDbType.UniqueIdentifier);
-                case DbType.Binary:
-                    if (column.Size == -1 || column.Size > 8000)
-                    {
-                        return new SqlMetaData(name, SqlDbType.VarBinary, -1);
-                    }
-
-                    return new SqlMetaData(name, SqlDbType.VarBinary, (long)column.Size);
-                default:
-                    throw new Exception("!UNKNOWN VALUE TYPE!");
-            }
-        }
-
-        internal string GetSqlType(SchemaColumn column)
-        {
-            switch (column.DbType)
-            {
-                case DbType.String:
-                    if (column.Size == -1 || column.Size > 4000)
-                    {
-                        return "NVARCHAR(MAX) ";
-                    }
-
-                    return "NVARCHAR(" + column.Size + ") ";
-                case DbType.Int32:
-                    return "INT ";
-                case DbType.Decimal:
-                    return "DECIMAL(" + column.Precision + "," + column.Scale + ") ";
-                case DbType.Double:
-                    return "FLOAT ";
-                case DbType.Boolean:
-                    return "BIT ";
-                case DbType.DateTime2:
-                    return "DATETIME2 ";
-                case DbType.Guid:
-                    return "UNIQUEIDENTIFIER ";
-                case DbType.Binary:
-                    if (column.Size == -1 || column.Size > 8000)
-                    {
-                        return "VARBINARY(MAX) ";
-                    }
-
-                    return "VARBINARY(" + column.Size + ") ";
-                default:
-                    return "!UNKNOWN VALUE TYPE!";
-            }
-        }
-
-        internal string GetSqlType(DbType type)
-        {
-            switch (type)
-            {
-                case DbType.Int32:
-                    return "INT ";
-                default:
-                    return "!UNKNOWN DBTYPE!";
-            }
-        }
-
-        internal ManagementSession CreateSqlClientManagementSession()
-        {
-            return new ManagementSession(this);
-        }
-
         private ManagementSession CreateManagementSession()
         {
             return this.CreateSqlClientManagementSession();
@@ -696,72 +702,91 @@ namespace Allors.Databases.Object.SqlClient
         {
             var sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.ObjectTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.ObjectTableObject + " " + this.GetSqlType(this.Schema.ObjectId) + ")\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.ObjectTableObject + " " + this.GetSqlType(this.Schema.ObjectId) + ")\n");
             session.ExecuteSql(sql.ToString());
 
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.CompositeRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " " + this.GetSqlType(this.Schema.RoleId) + ")\n");
             session.ExecuteSql(sql.ToString());
 
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.StringRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
-            sql.Append(this.SqlClientSchema.RelationTableRole + " NVARCHAR(MAX))\n"); 
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
+            sql.Append(this.SqlClientSchema.RelationTableRole + " NVARCHAR(MAX))\n");
             session.ExecuteSql(sql.ToString());
 
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.IntegerRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " INT)\n");
             session.ExecuteSql(sql.ToString());
-            
+
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.FloatRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " FLOAT)\n");
             session.ExecuteSql(sql.ToString());
 
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.DateTimeRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " DATETIME2)\n");
             session.ExecuteSql(sql.ToString());
 
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.BooleanRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " BIT)\n");
             session.ExecuteSql(sql.ToString());
-            
+
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.UniqueRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " UNIQUEIDENTIFIER)\n");
             session.ExecuteSql(sql.ToString());
 
             sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.BinaryRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+            sql.Append(
+                "(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId)
+                + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " VARBINARY(MAX))\n");
             session.ExecuteSql(sql.ToString());
 
-             foreach (var precisionEntry in this.SqlClientSchema.DecimalRelationTableByScaleByPrecision)
-             {
-                 var precision = precisionEntry.Key;
-                 foreach (var scaleEntry in precisionEntry.Value)
-                 {
-                     var scale = scaleEntry.Key;
-                     var decimalRelationTable = scaleEntry.Value;
+            foreach (var precisionEntry in this.SqlClientSchema.DecimalRelationTableByScaleByPrecision)
+            {
+                var precision = precisionEntry.Key;
+                foreach (var scaleEntry in precisionEntry.Value)
+                {
+                    var scale = scaleEntry.Key;
+                    var decimalRelationTable = scaleEntry.Value;
 
-                     sql = new StringBuilder();
-                     sql.Append("CREATE TYPE " + decimalRelationTable + " AS TABLE\n");
-                     sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
-                     sql.Append(this.SqlClientSchema.RelationTableRole + " DECIMAL(" + precision + "," + scale + ") )\n");
-                     session.ExecuteSql(sql.ToString());
-                 }
-             }
+                    sql = new StringBuilder();
+                    sql.Append("CREATE TYPE " + decimalRelationTable + " AS TABLE\n");
+                    sql.Append(
+                        "(" + this.SqlClientSchema.RelationTableAssociation + " "
+                        + this.GetSqlType(this.Schema.AssociationId) + ",\n");
+                    sql.Append(this.SqlClientSchema.RelationTableRole + " DECIMAL(" + precision + "," + scale + ") )\n");
+                    session.ExecuteSql(sql.ToString());
+                }
+            }
         }
 
         private IDatabaseSession CreateSqlSession()
@@ -913,7 +938,8 @@ namespace Allors.Databases.Object.SqlClient
         private void DropUserDefinedType(ManagementSession session, string userDefinedType)
         {
             var sql = new StringBuilder();
-            sql.Append("IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.DOMAINS WHERE DOMAIN_NAME = N'" + userDefinedType + "')\n");
+            sql.Append(
+                "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.DOMAINS WHERE DOMAIN_NAME = N'" + userDefinedType + "')\n");
             sql.Append("DROP TYPE " + userDefinedType);
             session.ExecuteSql(sql.ToString());
         }
@@ -921,7 +947,8 @@ namespace Allors.Databases.Object.SqlClient
         private void DropProcedure(ManagementSession session, string procedureName)
         {
             var sql = new StringBuilder();
-            sql.Append("IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = N'" + procedureName + "')\n");
+            sql.Append(
+                "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = N'" + procedureName + "')\n");
             sql.Append("DROP PROCEDURE " + procedureName);
             session.ExecuteSql(sql.ToString());
         }

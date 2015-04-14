@@ -27,12 +27,12 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 
     using Microsoft.SqlServer.Server;
 
-    public class Database : SqlClient.Database 
+    public class IntegerDatabase : SqlClient.Database 
     {
         private readonly IObjectIds allorsObjectIds;
         private Schema schema;
 
-        public Database(SqlClient.Configuration configuration)
+        public IntegerDatabase(SqlClient.Configuration configuration)
             : base(configuration)
         {
             this.allorsObjectIds = new ObjectIntegerIds();

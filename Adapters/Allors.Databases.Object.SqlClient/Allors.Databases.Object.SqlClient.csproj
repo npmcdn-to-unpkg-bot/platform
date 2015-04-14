@@ -93,7 +93,7 @@
     <Compile Include="Flush.cs" />
     <Compile Include="ICommandFactory.cs" />
     <Compile Include="IntegerId\Configuration.cs" />
-    <Compile Include="IntegerId\Database.cs" />
+    <Compile Include="IntegerId\IntegerDatabase.cs" />
     <Compile Include="IntegerId\ObjectTableForObjectIds.cs" />
     <Compile Include="IntegerId\ObjectTableForRolesByReference.cs" />
     <Compile Include="IntegerId\ObjectTableForStrategies.cs" />
@@ -103,7 +103,7 @@
     <Compile Include="IObjectIds.cs" />
     <Compile Include="Load.cs" />
     <Compile Include="LongId\Configuration.cs" />
-    <Compile Include="LongId\Database.cs" />
+    <Compile Include="LongId\LongDatabase.cs" />
     <Compile Include="LongId\ObjectTableForObjectIds.cs" />
     <Compile Include="LongId\ObjectTableForRolesByReference.cs" />
     <Compile Include="LongId\ObjectTableForStrategies.cs" />

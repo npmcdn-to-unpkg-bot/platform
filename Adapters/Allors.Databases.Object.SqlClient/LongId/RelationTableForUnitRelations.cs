@@ -31,11 +31,11 @@ namespace Allors.Databases.Object.SqlClient.LongId
 
     internal class RelationTableForUnitRelations : IEnumerable<SqlDataRecord>
     {
-        private readonly Database database;
+        private readonly LongDatabase database;
         private readonly IRoleType roleType;
         private readonly IEnumerable<UnitRelation> relations;
 
-        internal RelationTableForUnitRelations(Database database, IRoleType roleType, IEnumerable<UnitRelation> relations)
+        internal RelationTableForUnitRelations(LongDatabase database, IRoleType roleType, IEnumerable<UnitRelation> relations)
         {
             this.database = database;
             this.roleType = roleType;
