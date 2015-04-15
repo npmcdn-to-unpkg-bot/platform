@@ -31,12 +31,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     internal class LoadUnitRelationsFactory
     {
         internal readonly ManagementSession ManagementSession;
-        private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByIRoleTypeByIObjectType;
+        private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByRoleTypeByObjectType;
 
         internal LoadUnitRelationsFactory(ManagementSession session)
         {
             this.ManagementSession = session;
-            this.sqlByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
+            this.sqlByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
         }
 
         internal LoadUnitRelations Create()
@@ -47,15 +47,15 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         internal string GetSql(IObjectType objectType, IRoleType roleType)
         {
             Dictionary<IRoleType, string> sqlByIRoleType;
-            if (!this.sqlByIRoleTypeByIObjectType.TryGetValue(objectType, out sqlByIRoleType))
+            if (!this.sqlByRoleTypeByObjectType.TryGetValue(objectType, out sqlByIRoleType))
             {
                 sqlByIRoleType = new Dictionary<IRoleType, string>();
-                this.sqlByIRoleTypeByIObjectType.Add(objectType, sqlByIRoleType);
+                this.sqlByRoleTypeByObjectType.Add(objectType, sqlByIRoleType);
             }
 
             if (!sqlByIRoleType.ContainsKey(roleType))
             {
-                var sql = this.ManagementSession.Database.SchemaName + "." + "SR_" + objectType.Name + "_" + roleType.SingularFullName;
+                var sql = this.ManagementSession.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)objectType][roleType.RelationType];
                 sqlByIRoleType[roleType] = sql;
             }
 
@@ -65,12 +65,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         internal class LoadUnitRelations : Commands.Command
         {
             private readonly LoadUnitRelationsFactory factory;
-            private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByIRoleTypeByIObjectType;
+            private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByRoleTypeByObjectType;
 
             internal LoadUnitRelations(LoadUnitRelationsFactory factory)
             {
                 this.factory = factory;
-                this.commandByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>>();
+                this.commandByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>>();
             }
 
             internal void Execute(IList<UnitRelation> relations, IObjectType exclusiveRootClass, IRoleType roleType)
@@ -79,10 +79,10 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 var schema = database.SqlClientMapping;
 
                 Dictionary<IRoleType, SqlCommand> commandByIRoleType;
-                if (!this.commandByIRoleTypeByIObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))
+                if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))
                 {
                     commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
-                    this.commandByIRoleTypeByIObjectType.Add(exclusiveRootClass, commandByIRoleType);
+                    this.commandByRoleTypeByObjectType.Add(exclusiveRootClass, commandByIRoleType);
                 }
 
                 string tableTypeName;

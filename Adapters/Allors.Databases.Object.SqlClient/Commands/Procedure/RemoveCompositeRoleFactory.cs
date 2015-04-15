@@ -55,11 +55,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = this.Database.SchemaName + "." + "R_" + roleType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
                 }
                 else
                 {
-                    sql = this.Database.SchemaName + "." + "R_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
                 }
  
                 this.sqlByIRoleType[roleType] = sql;

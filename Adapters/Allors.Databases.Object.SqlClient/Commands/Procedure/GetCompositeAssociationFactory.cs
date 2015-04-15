@@ -59,16 +59,16 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     if (roleType.IsOne)
                     {
-                        sql = this.Database.SchemaName + "." + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                        sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
                     }
                     else
                     {
-                        sql = this.Database.SchemaName + "." + "GA_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                        sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
                     }
                 }
                 else
                 {
-                    sql = this.Database.SchemaName + "." + "GA_" + roleType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
                 }
 
                 this.sqlByIAssociationType[associationType] = sql;

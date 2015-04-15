@@ -26,7 +26,6 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     internal class LoadObjectsFactory
@@ -61,7 +60,8 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 lock (database)
                 {
-                    using (var command = this.factory.ManagementSession.CreateSqlCommand(this.factory.ManagementSession.Database.SchemaName + "." + "L_" + exclusiveRootClass.Name))
+                    var sql = this.factory.ManagementSession.Database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
+                    using (var command = this.factory.ManagementSession.CreateSqlCommand(sql))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         this.AddInObject(command, schema.TypeId.Param, objectType.Id);

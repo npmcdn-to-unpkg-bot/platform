@@ -23,6 +23,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Runtime.InteropServices;
 
     using Allors.Databases.Object.SqlClient;
 
@@ -68,7 +69,8 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 if (this.command == null)
                 {
-                    this.command = this.Session.CreateSqlCommand(this.Database.SchemaName + "." + "GC");
+                    var sql = this.Database.Mapping.ProcedureNameForGetCache;
+                    this.command = this.Session.CreateSqlCommand(sql);
                     this.command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(this.command, mapping.TableTypeNameForObject, this.Database.CreateObjectTable(strategyReferences));
                 }

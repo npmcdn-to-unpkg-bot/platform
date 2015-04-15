@@ -57,11 +57,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 string sql;
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = this.Database.SchemaName + "." + "GR_" + roleType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
                 }
                 else
                 {
-                    sql = this.Database.SchemaName + "." + "GR_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
                 }
  
                 this.sqlByIRoleType[roleType] = sql;

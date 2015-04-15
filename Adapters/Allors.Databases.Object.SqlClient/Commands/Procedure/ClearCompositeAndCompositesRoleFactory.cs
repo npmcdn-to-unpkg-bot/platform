@@ -53,17 +53,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 string sql;
                 if ((roleType.IsMany && associationType.IsMany) || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = this.Database.SchemaName + "." + "C_" + roleType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
                 }
                 else
                 {
                     if (roleType.IsOne)
                     {
-                        sql = this.Database.SchemaName + "." + "C_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                        sql = this.Database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
                     }
                     else
                     {
-                        sql = this.Database.SchemaName + "." + "C_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                        sql = this.Database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
                     }
                 }
 
@@ -79,7 +79,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
             internal ClearCompositeAndCompositesRole(ClearCompositeAndCompositesRoleFactory factory, DatabaseSession session)
-                : base((DatabaseSession)session)
+                : base(session)
             {
                 this.factory = factory;
                 this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();

@@ -58,7 +58,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             if (!sqlByIRoleType.ContainsKey(roleType))
             {
-                var sql = this.Database.SchemaName + "." + "SR_" + objectType.Name + "_" + roleType.SingularFullName;
+                var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)objectType][roleType.RelationType];
                 sqlByIRoleType[roleType] = sql;
             }
 
@@ -71,7 +71,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByIRoleTypeByIObjectType;
 
             internal SetUnitRole(SetUnitRoleFactory factory, DatabaseSession session)
-                : base((DatabaseSession)session)
+                : base(session)
             {
                 this.factory = factory;
                 this.commandByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>>();

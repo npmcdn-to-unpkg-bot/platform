@@ -381,7 +381,7 @@ END";
                         var roleType = relationType.RoleType;
                         var associationType = relationType.AssociationType;
 
-                        var relationTypeName = associationType.SingularFullName.ToLowerInvariant();
+                        var relationTypeName = roleType.SingularFullName.ToLowerInvariant();
 
                         if (relationType.RoleType.ObjectType.IsUnit)
                         {
@@ -655,7 +655,7 @@ AS
                 var associationType = relationType.AssociationType;
                 var table = dictionaryEntry.Value;
 
-                var relationTypeName = associationType.SingularFullName.ToLowerInvariant();
+                var relationTypeName = roleType.SingularFullName.ToLowerInvariant();
 
                 this.ProcedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + relationTypeName);
                 this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + relationTypeName);

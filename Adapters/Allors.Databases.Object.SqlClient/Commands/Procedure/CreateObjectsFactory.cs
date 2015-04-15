@@ -59,13 +59,14 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal IList<Reference> Execute(IClass objectType, int count)
             {
-                IObjectType exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
-                SqlClient.Mapping mapping = this.Database.Mapping;
+                var exclusiveRootClass = objectType.ExclusiveLeafClass;
+                var mapping = this.Database.Mapping;
 
                 SqlCommand command;
                 if (!this.commandByIObjectType.TryGetValue(exclusiveRootClass, out command))
                 {
-                    command = this.Session.CreateSqlCommand(this.Database.SchemaName + "." + "COS_" + exclusiveRootClass.Name);
+                    var sql = this.Database.Mapping.ProcedureNameForCreateObjectsByClass[exclusiveRootClass];
+                    command = this.Session.CreateSqlCommand(sql);
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, mapping.TypeId.Param, objectType.Id);
                     this.AddInObject(command, mapping.CountParam, count);
