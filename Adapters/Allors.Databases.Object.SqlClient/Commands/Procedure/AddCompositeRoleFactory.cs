@@ -74,7 +74,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
             internal AddCompositeRole(AddCompositeRoleFactory factory, DatabaseSession session)
-                : base((DatabaseSession)session)
+                : base(session)
             {
                 this.factory = factory;
                 this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
@@ -89,13 +89,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, schema.CompositeRelationTableParam, this.Database.CreateRelationTable(relations));
+                    this.AddInTable(command, schema.TableTypeNameForCompositeRelation, this.Database.CreateRelationTable(relations));
 
                     this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {
-                    this.SetInTable(command, schema.CompositeRelationTableParam, this.Database.CreateRelationTable(relations));
+                    this.SetInTable(command, this.Database.CreateRelationTable(relations));
                 }
 
                 command.ExecuteNonQuery();

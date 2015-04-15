@@ -88,57 +88,58 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     this.commandByIRoleTypeByIObjectType.Add(exclusiveRootClass, commandByIRoleType);
                 }
 
-                MappingTableParameter tableParam;
+                string tableTypeName;
 
                 var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
                 switch (unitTypeTag)
                 {
                     case UnitTags.AllorsString:
-                        tableParam = schema.StringRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForStringRelation;
                         break;
 
                     case UnitTags.AllorsInteger:
-                        tableParam = schema.IntegerRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForIntegerRelation;
                         break;
 
                     case UnitTags.AllorsFloat:
-                        tableParam = schema.FloatRelationTableParam;
-                        break;
-
-                    case UnitTags.AllorsDateTime:
-                        tableParam = schema.DateTimeRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForFloatRelation;
                         break;
 
                     case UnitTags.AllorsBoolean:
-                        tableParam = schema.BooleanRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForBooleanRelation;
+                        break;
+
+                    case UnitTags.AllorsDateTime:
+                        tableTypeName = schema.TableTypeNameForDateTimeRelation;
                         break;
 
                     case UnitTags.AllorsUnique:
-                        tableParam = schema.UniqueRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForUniqueRelation;
                         break;
 
                     case UnitTags.AllorsBinary:
-                        tableParam = schema.BinaryRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForBinaryRelation;
                         break;
 
                     case UnitTags.AllorsDecimal:
-                        tableParam = schema.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                        tableTypeName = schema.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                         break;
 
                     default:
                         throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
                 }
 
+
                 SqlCommand command;
                 if (!commandByIRoleType.TryGetValue(roleType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(exclusiveRootClass, roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, tableParam, this.Database.CreateRelationTable(roleType, relation));
+                    this.AddInTable(command, tableTypeName, this.Database.CreateRelationTable(roleType, relation));
                 }
                 else
                 {
-                    this.SetInTable(command, tableParam, this.Database.CreateRelationTable(roleType, relation));
+                    this.SetInTable(command, this.Database.CreateRelationTable(roleType, relation));
                 }
 
                 command.ExecuteNonQuery();

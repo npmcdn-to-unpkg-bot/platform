@@ -49,8 +49,8 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var metaData = new[]
                                    {
-                                       new SqlMetaData(Mapping.TableTypeColumnNameForAssociation, SqlDbType.Int),
-                                       this.database.GetSqlMetaData(Mapping.TableTypeColumnNameForRole, this.database.SqlClientMapping.Column(this.roleType))
+                                       new SqlMetaData(this.database.Mapping.TableTypeColumnNameForAssociation, SqlDbType.Int),
+                                       this.database.GetSqlMetaData(this.database.Mapping.TableTypeColumnNameForRole, this.database.SqlClientMapping.Column(this.roleType))
                                    };
                 var sqlDataRecord = new SqlDataRecord(metaData);
 
@@ -74,8 +74,8 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var metaData = new[]
                                    {
-                                       new SqlMetaData(Mapping.TableTypeColumnNameForAssociation, SqlDbType.BigInt),
-                                       this.database.GetSqlMetaData(Mapping.TableTypeColumnNameForRole, this.database.SqlClientMapping.Column(this.roleType))
+                                       new SqlMetaData(this.database.Mapping.TableTypeColumnNameForAssociation, SqlDbType.BigInt),
+                                       this.database.GetSqlMetaData(this.database.Mapping.TableTypeColumnNameForRole, this.database.SqlClientMapping.Column(this.roleType))
                                    };
                 var sqlDataRecord = new SqlDataRecord(metaData);
 

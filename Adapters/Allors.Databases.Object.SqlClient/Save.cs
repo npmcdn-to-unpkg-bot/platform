@@ -77,7 +77,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 var sql = "SELECT " + this.database.Mapping.ObjectId + "\n";
                 sql += "FROM " + this.database.Mapping.Table(type.ExclusiveLeafClass) + "\n";
-                sql += "WHERE " + this.database.Mapping.TypeId + "=" + this.database.Mapping.TypeId.Param.InvocationName + "\n";
+                sql += "WHERE " + this.database.Mapping.TypeId + "=" + this.database.Mapping.TypeId.Param.Name + "\n";
                 sql += "ORDER BY " + this.database.Mapping.ObjectId;
 
                 using (var command = session.CreateCommand(sql))
@@ -158,7 +158,7 @@ namespace Allors.Databases.Object.SqlClient
                             }
 
                             sql += "SELECT " + this.database.Mapping.ObjectId + " As " + this.database.Mapping.AssociationId + ", " + this.database.Mapping.Column(roleType) + " As " + this.database.Mapping.RoleId + "\n";
-                            sql += "FROM " + this.database.Mapping.Table(exclusiveRootClass) + "\n";
+                            sql += "FROM " + this.database.Mapping.Table((IClass)exclusiveRootClass) + "\n";
                             sql += "WHERE " + this.database.Mapping.Column(roleType) + " IS NOT NULL\n";
                         }
 

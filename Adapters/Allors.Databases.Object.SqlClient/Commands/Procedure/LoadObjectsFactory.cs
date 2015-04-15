@@ -65,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         this.AddInObject(command, schema.TypeId.Param, objectType.Id);
-                        this.AddInTable(command, schema.ObjectTableParam, database.CreateObjectTable(objectIds));
+                        this.AddInTable(command, schema.TableTypeNameForObject, database.CreateObjectTable(objectIds));
                         command.ExecuteNonQuery();
                     }
                 }

@@ -24,12 +24,10 @@ namespace Allors.Databases.Object.SqlClient
     {
         internal readonly string TypeName;
         internal readonly string Name;
-        internal readonly string InvocationName;
 
         internal MappingTableParameter(Mapping mapping, string name, string typeName)
         {
-            this.Name = string.Format(mapping.ParamFormat, name);
-            this.InvocationName = string.Format(mapping.ParamInvocationFormat, name);
+            this.Name = string.Format(Mapping.ParamFormat, name);
             this.TypeName = typeName;
         }
 

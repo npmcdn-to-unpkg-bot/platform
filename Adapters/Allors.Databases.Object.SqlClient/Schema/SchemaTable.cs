@@ -2,20 +2,20 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
 
-    public class Table
+    public class SchemaTable
     {
         private readonly Schema schema;
         private readonly string name;
         private readonly string lowercaseName;
-        private readonly Dictionary<string, TableColumn> columnByLowercaseColumnName;
+        private readonly Dictionary<string, SchemaTableColumn> columnByLowercaseColumnName;
 
-        public Table(Schema schema, string name)
+        public SchemaTable(Schema schema, string name)
         {
             this.schema = schema;
             this.name = name;
             this.lowercaseName = name.ToLowerInvariant();
 
-            this.columnByLowercaseColumnName = new Dictionary<string, TableColumn>();
+            this.columnByLowercaseColumnName = new Dictionary<string, SchemaTableColumn>();
         }
 
         public string Name
@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Dictionary<string, TableColumn> ColumnByLowercaseColumnName
+        public Dictionary<string, SchemaTableColumn> ColumnByLowercaseColumnName
         {
             get
             {
@@ -50,9 +50,9 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public TableColumn GetColumn(string columnName)
+        public SchemaTableColumn GetColumn(string columnName)
         {
-            TableColumn tableColumn;
+            SchemaTableColumn tableColumn;
             this.columnByLowercaseColumnName.TryGetValue(columnName.ToLowerInvariant(), out tableColumn);
             return tableColumn;
         }

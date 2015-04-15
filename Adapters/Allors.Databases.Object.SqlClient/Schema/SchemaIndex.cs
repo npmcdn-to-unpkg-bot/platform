@@ -1,12 +1,12 @@
 namespace Allors.Databases.Object.SqlClient
 {
-    public class Index
+    public class SchemaIndex
     {
         private readonly Schema schema;
         private readonly string name;
         private readonly string lowercaseName;
 
-        public Index(Schema schema, string name)
+        public SchemaIndex(Schema schema, string name)
         {
             this.schema = schema;
             this.name = name;

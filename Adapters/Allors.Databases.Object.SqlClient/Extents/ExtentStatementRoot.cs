@@ -55,7 +55,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (!this.paramNameByParamValue.ContainsKey(obj))
             {
-                var param = string.Format(this.Session.Mapping.ParamInvocationFormat, "p" + (this.parameterIndex++));
+                var param = string.Format(Mapping.ParamFormat, "p" + (this.parameterIndex++));
                 this.paramNameByParamValue[obj] = param;
                 return param;
             }

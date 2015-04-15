@@ -1,8 +1,8 @@
 namespace Allors.Databases.Object.SqlClient
 {
-    public class TableColumn
+    public class SchemaTableColumn
     {
-        private readonly Table table;
+        private readonly SchemaTable table;
         private readonly string name;
         private readonly string lowercaseName;
         private readonly string dataType;
@@ -10,7 +10,7 @@ namespace Allors.Databases.Object.SqlClient
         private readonly int? numericPrecision;
         private readonly int? numericScale;
 
-        public TableColumn(Table table, string name, string dataType, int? characterMaximumLength, int? numericPrecision, int? numericScale)
+        public SchemaTableColumn(SchemaTable table, string name, string dataType, int? characterMaximumLength, int? numericPrecision, int? numericScale)
         {
             this.table = table;
             this.name = name;
@@ -21,7 +21,7 @@ namespace Allors.Databases.Object.SqlClient
             this.numericScale = numericScale;
         }
 
-        public Table Table
+        public SchemaTable Table
         {
             get
             {

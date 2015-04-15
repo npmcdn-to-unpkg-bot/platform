@@ -87,20 +87,20 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(IList<ObjectId> associations, IRoleType roleType)
             {
-                var schema = this.factory.Database.SqlClientMapping;
+                var mapping = this.factory.Database.SqlClientMapping;
 
                 SqlCommand command;
                 if (!this.commandByIRoleType.TryGetValue(roleType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, schema.ObjectTableParam, this.Database.CreateObjectTable(associations));
+                    this.AddInTable(command, mapping.TableTypeNameForObject, this.Database.CreateObjectTable(associations));
 
                     this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {
-                    this.SetInTable(command, schema.ObjectTableParam, this.Database.CreateObjectTable(associations));
+                    this.SetInTable(command, this.Database.CreateObjectTable(associations));
                 }
 
                 command.ExecuteNonQuery();

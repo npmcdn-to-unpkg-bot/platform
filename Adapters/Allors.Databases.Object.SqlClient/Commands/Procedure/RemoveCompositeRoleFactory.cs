@@ -87,13 +87,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, this.Database.SqlClientMapping.CompositeRelationTableParam, this.Database.CreateRelationTable(relations));
+                    this.AddInTable(command, this.Database.SqlClientMapping.TableTypeNameForCompositeRelation, this.Database.CreateRelationTable(relations));
 
                     this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {
-                    this.SetInTable(command, this.Database.SqlClientMapping.CompositeRelationTableParam, this.Database.CreateRelationTable(relations));
+                    this.SetInTable(command, this.Database.CreateRelationTable(relations));
                 }
 
                 command.ExecuteNonQuery();

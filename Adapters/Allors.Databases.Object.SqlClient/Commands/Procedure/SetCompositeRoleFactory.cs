@@ -54,11 +54,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 string sql;
                 if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = this.Database.SchemaName + "." + "S_" + roleType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }
                 else
                 {
-                    sql = this.Database.SchemaName + "." + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
                 }
 
                 this.sqlByIRoleType[roleType] = sql;
@@ -73,7 +73,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
             internal SetCompositeRole(SetCompositeRoleFactory factory, DatabaseSession session)
-                : base((DatabaseSession)session)
+                : base(session)
             {
                 this.factory = factory;
                 this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
@@ -88,12 +88,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, schema.CompositeRelationTableParam, this.Database.CreateRelationTable(relations));
+                    this.AddInTable(command, this.Database.SqlClientMapping.TableTypeNameForCompositeRelation, this.Database.CreateRelationTable(relations));
                     this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {
-                    this.SetInTable(command, schema.CompositeRelationTableParam, this.Database.CreateRelationTable(relations));
+                    this.SetInTable(command, this.Database.CreateRelationTable(relations));
                 }
 
                 command.ExecuteNonQuery();

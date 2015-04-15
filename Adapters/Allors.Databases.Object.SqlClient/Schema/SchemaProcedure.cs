@@ -1,24 +1,16 @@
 namespace Allors.Databases.Object.SqlClient
 {
-    using System.Collections.Generic;
     using System.Linq;
 
-    public class View
+    public class SchemaProcedure
     {
-        private readonly Schema schema;
         private readonly string name;
-        private readonly string lowercaseName;
         private readonly string definition;
-        private readonly HashSet<Table> tables;
 
-        public View(Schema schema, string name, string definition)
+        public SchemaProcedure(Schema schema, string name, string definition)
         {
-            this.schema = schema;
             this.name = name;
             this.definition = definition;
-            this.lowercaseName = name.ToLowerInvariant();
-
-            this.tables = new HashSet<Table>();
         }
 
         public string Name
@@ -26,22 +18,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.name;
-            }
-        }
-
-        public HashSet<Table> Tables
-        {
-            get
-            {
-                return this.tables;
-            }
-        }
-
-        public string LowercaseName
-        {
-            get
-            {
-                return this.lowercaseName;
             }
         }
 
@@ -53,14 +29,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Schema Schema
-        {
-            get
-            {
-                return this.schema;
-            }
-        }
-        
         public override string ToString()
         {
             return this.Name;

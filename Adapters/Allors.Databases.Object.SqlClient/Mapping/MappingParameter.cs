@@ -27,34 +27,10 @@ namespace Allors.Databases.Object.SqlClient
     {
         internal readonly DbType DbType;
         internal readonly string Name;
-        internal readonly string InvocationName;
-
-        /// <summary>
-        /// Returns a String which represents the object instance.
-        /// </summary>
-        /// <returns>
-        /// The string which represents the object instance.
-        /// </returns>
-        public override string ToString()
-        {
-            return this.Name;
-        }
-
-
-
-
-
-
-
-
-
-
-
 
         internal MappingParameter(Mapping mapping, string name, DbType type)
         {
-            this.Name = string.Format(mapping.ParamFormat, name);
-            this.InvocationName = string.Format(mapping.ParamInvocationFormat, name);
+            this.Name = string.Format(Mapping.ParamFormat, name);
             this.DbType = type;
         }
 
@@ -84,6 +60,17 @@ namespace Allors.Databases.Object.SqlClient
                         throw new Exception("!UNKNOWN VALUE TYPE!");
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns a String which represents the object instance.
+        /// </summary>
+        /// <returns>
+        /// The string which represents the object instance.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.Name;
         }
     }
 }

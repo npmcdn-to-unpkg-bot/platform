@@ -30,10 +30,10 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
     internal class LoadUnitRelationsFactory
     {
-        internal readonly SqlClient.ManagementSession ManagementSession;
+        internal readonly ManagementSession ManagementSession;
         private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByIRoleTypeByIObjectType;
 
-        internal LoadUnitRelationsFactory(SqlClient.ManagementSession session)
+        internal LoadUnitRelationsFactory(ManagementSession session)
         {
             this.ManagementSession = session;
             this.sqlByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
@@ -85,41 +85,41 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                     this.commandByIRoleTypeByIObjectType.Add(exclusiveRootClass, commandByIRoleType);
                 }
 
-                MappingTableParameter tableParam;
+                string tableTypeName;
 
                 var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
                 switch (unitTypeTag)
                 {
                     case UnitTags.AllorsString:
-                        tableParam = schema.StringRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForStringRelation;
                         break;
 
                     case UnitTags.AllorsInteger:
-                        tableParam = schema.IntegerRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForIntegerRelation;
                         break;
 
                     case UnitTags.AllorsFloat:
-                        tableParam = schema.FloatRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForFloatRelation;
                         break;
 
                     case UnitTags.AllorsBoolean:
-                        tableParam = schema.BooleanRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForBooleanRelation;
                         break;
 
                     case UnitTags.AllorsDateTime:
-                        tableParam = schema.DateTimeRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForDateTimeRelation;
                         break;
 
                     case UnitTags.AllorsUnique:
-                        tableParam = schema.UniqueRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForUniqueRelation;
                         break;
 
                     case UnitTags.AllorsBinary:
-                        tableParam = schema.BinaryRelationTableParam;
+                        tableTypeName = schema.TableTypeNameForBinaryRelation;
                         break;
 
                     case UnitTags.AllorsDecimal:
-                        tableParam = schema.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                        tableTypeName = schema.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                         break;
 
                     default:
@@ -131,11 +131,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.factory.ManagementSession.CreateSqlCommand(this.factory.GetSql(exclusiveRootClass, roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, tableParam, database.CreateRelationTable(roleType, relations));
+                    this.AddInTable(command, tableTypeName, database.CreateRelationTable(roleType, relations));
                 }
                 else
                 {
-                    this.SetInTable(command, tableParam, database.CreateRelationTable(roleType, relations));
+                    this.SetInTable(command, database.CreateRelationTable(roleType, relations));
                 }
 
                 command.ExecuteNonQuery();

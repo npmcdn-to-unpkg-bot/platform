@@ -23,37 +23,17 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.Meta;
-
     public sealed class MappingTable : IEnumerable<MappingColumn>
     {
-        internal readonly MapingTableKind Kind;
         internal readonly string Name;
-        internal readonly IRelationType RelationType;
-        internal readonly Mapping Mapping;
-        internal readonly IObjectType ObjectType;
         internal readonly string StatementName;
-
+        
         private readonly Dictionary<string, MappingColumn> columnsByName;
 
-        internal MappingTable(Mapping mapping, string name, MapingTableKind kind, IObjectType objectType) 
-            : this(mapping, name, kind)
+        internal MappingTable(Mapping mapping, string name)
         {
-            this.ObjectType = objectType;
-        }
-
-        internal MappingTable(Mapping mapping, string name, MapingTableKind kind, IRelationType relationType)
-            : this(mapping, name, kind)
-        {
-            this.RelationType = relationType;
-        }
-
-        internal MappingTable(Mapping mapping, string name, MapingTableKind kind)
-        {
-            this.Mapping = mapping;
             this.Name = name.ToLowerInvariant();
             this.StatementName = mapping.EscapeIfReserved(this.Name);
-            this.Kind = kind;
 
             this.columnsByName = new Dictionary<string, MappingColumn>();
         }
@@ -73,11 +53,6 @@ namespace Allors.Databases.Object.SqlClient
 
                 return null;
             }
-        }
-
-        internal MappingColumn this[string columnName]
-        {
-            get { return this.columnsByName[columnName.ToLowerInvariant()]; }
         }
 
         public IEnumerator GetEnumerator()
@@ -102,11 +77,6 @@ namespace Allors.Databases.Object.SqlClient
         internal void AddColumn(MappingColumn column)
         {
             this.columnsByName[column.Name] = column;
-        }
-
-        internal bool Contains(string columName)
-        {
-            return this.columnsByName.ContainsKey(columName.ToLowerInvariant());
         }
     }
 }

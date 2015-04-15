@@ -56,7 +56,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.Name = name.ToLowerInvariant();
             this.StatementName = mapping.EscapeIfReserved(this.Name);
-            this.Param = mapping.CreateParameter(name, dbType);
+            this.Param = new MappingParameter(mapping, name, dbType);
 
             this.IsKey = isKey;
             this.IsIdentity = isIdentity;

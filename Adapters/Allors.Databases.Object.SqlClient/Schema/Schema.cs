@@ -7,23 +7,20 @@ namespace Allors.Databases.Object.SqlClient
 
     public class Schema
     {
-        private readonly Database database;
-
         private readonly bool exists;
-        private readonly Dictionary<string, Table> tableByLowercaseTableName;
-        private readonly Dictionary<string, TableType> tableTypeByLowercaseTableTypeName;
-        private readonly Dictionary<string, Procedure> procedureByLowercaseProcedureName;
-        private readonly Dictionary<string, View> viewByLowercaseViewName;
-        private readonly Dictionary<string, Dictionary<string, Index>> indexByLowercaseIndexNameByLowercaseTableName;
+        private readonly Dictionary<string, SchemaTable> tableByLowercaseTableName;
+        private readonly Dictionary<string, SchemaTableType> tableTypeByLowercaseTableTypeName;
+        private readonly Dictionary<string, SchemaProcedure> procedureByFullyQualifiedProcedureName;
+        private readonly Dictionary<string, SchemaView> viewByLowercaseViewName;
+        private readonly Dictionary<string, Dictionary<string, SchemaIndex>> indexByLowercaseIndexNameByLowercaseTableName;
 
         public Schema(Database database)
         {
-            this.database = database;
-            this.tableByLowercaseTableName = new Dictionary<string, Table>();
-            this.tableTypeByLowercaseTableTypeName = new Dictionary<string, TableType>();
-            this.procedureByLowercaseProcedureName = new Dictionary<string, Procedure>();
-            this.viewByLowercaseViewName = new Dictionary<string, View>();
-            this.indexByLowercaseIndexNameByLowercaseTableName = new Dictionary<string, Dictionary<string, Index>>();
+            this.tableByLowercaseTableName = new Dictionary<string, SchemaTable>();
+            this.tableTypeByLowercaseTableTypeName = new Dictionary<string, SchemaTableType>();
+            this.procedureByFullyQualifiedProcedureName = new Dictionary<string, SchemaProcedure>();
+            this.viewByLowercaseViewName = new Dictionary<string, SchemaView>();
+            this.indexByLowercaseIndexNameByLowercaseTableName = new Dictionary<string, Dictionary<string, SchemaIndex>>();
 
             using (var connection = new SqlConnection(database.ConnectionString))
             {
@@ -79,16 +76,16 @@ AND C.table_schema = @tableSchema";
                                 var numericScale = reader.IsDBNull(numericScaleOrdinal) ? (int?)null : Convert.ToInt32(reader.GetValue(numericScaleOrdinal));
 
                                 tableName = tableName.Trim().ToLowerInvariant();
-                                Table table;
+                                SchemaTable table;
                                 if (!this.TableByLowercaseTableName.TryGetValue(tableName, out table))
                                 {
-                                    table = new Table(this, tableName);
+                                    table = new SchemaTable(this, tableName);
                                     this.TableByLowercaseTableName[tableName] = table;
                                 }
 
                                 if (!reader.IsDBNull(columnNameOrdinal))
                                 {
-                                    var column = new TableColumn(table, columnName, dataType, characterMaximumLength, numericPrecision, numericScale);
+                                    var column = new SchemaTableColumn(table, columnName, dataType, characterMaximumLength, numericPrecision, numericScale);
                                     table.ColumnByLowercaseColumnName[column.LowercaseName] = column;
                                 }
                             }
@@ -111,7 +108,8 @@ domain_schema = @domainSchema";
                             {
                                 var tableTypeName = (string)reader["domain_name"];
                                 var lowercaseTableTypeName = tableTypeName.Trim().ToLowerInvariant();
-                                this.TableTypeByLowercaseTableTypeName[lowercaseTableTypeName] = new TableType(this, tableTypeName);
+                                var fullyQualifiedName = database.SchemaName + "." + lowercaseTableTypeName;
+                                this.TableTypeByLowercaseTableTypeName[fullyQualifiedName] = new SchemaTableType(this, tableTypeName);
                             }
                         }
                     }
@@ -132,7 +130,8 @@ WHERE routine_schema = @routineSchema";
                                 var routineName = (string)reader["routine_name"];
                                 var routineDefinition = (string)reader["routine_definition"];
                                 var lowercaseRoutineName = routineName.Trim().ToLowerInvariant();
-                                this.ProcedureByLowercaseProcedureName[lowercaseRoutineName] = new Procedure(this, routineName, routineDefinition);
+                                var fullyQualifiedName = database.SchemaName + "." + lowercaseRoutineName;
+                                this.ProcedureByFullyQualifiedProcedureName[fullyQualifiedName] = new SchemaProcedure(this, routineName, routineDefinition);
                             }
                         }
                     }
@@ -164,10 +163,10 @@ WHERE _v.table_schema = @tableSchema";
                                 var viewDefinition = reader.GetString(viewDefinitionOrdinal);
 
                                 viewName = viewName.Trim().ToLowerInvariant();
-                                View view;
+                                SchemaView view;
                                 if (!this.ViewByLowercaseViewName.TryGetValue(viewName, out view))
                                 {
-                                    view = new View(this, viewName, viewDefinition);
+                                    view = new SchemaView(this, viewName, viewDefinition);
                                     this.ViewByLowercaseViewName[viewName] = view;
                                 }
 
@@ -175,7 +174,7 @@ WHERE _v.table_schema = @tableSchema";
                                 {
                                     var tableName = reader.GetString(tableNameOrdinal);
 
-                                    Table table;
+                                    SchemaTable table;
                                     if (this.TableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table))
                                     {
                                         view.Tables.Add(table);
@@ -215,17 +214,17 @@ WHERE
                                 tableName = tableName.Trim().ToLowerInvariant();
                                 indexName = indexName.Trim().ToLowerInvariant();
 
-                                Dictionary<string, Index> indexByLowercaseIndexName;
+                                Dictionary<string, SchemaIndex> indexByLowercaseIndexName;
                                 if (!this.indexByLowercaseIndexNameByLowercaseTableName.TryGetValue(tableName, out indexByLowercaseIndexName))
                                 {
-                                    indexByLowercaseIndexName = new Dictionary<string, Index>();
+                                    indexByLowercaseIndexName = new Dictionary<string, SchemaIndex>();
                                     this.indexByLowercaseIndexNameByLowercaseTableName[tableName] = indexByLowercaseIndexName;
                                 }
 
-                                Index index;
+                                SchemaIndex index;
                                 if (!indexByLowercaseIndexName.TryGetValue(indexName, out index))
                                 {
-                                    index = new Index(this, indexName);
+                                    index = new SchemaIndex(this, indexName);
                                     indexByLowercaseIndexName[indexName] = index;
                                 }
                             }
@@ -239,7 +238,7 @@ WHERE
             }
         }
 
-        public Dictionary<string, Table> TableByLowercaseTableName
+        public Dictionary<string, SchemaTable> TableByLowercaseTableName
         {
             get
             {
@@ -247,7 +246,7 @@ WHERE
             }
         }
 
-        public Dictionary<string, TableType> TableTypeByLowercaseTableTypeName
+        public Dictionary<string, SchemaTableType> TableTypeByLowercaseTableTypeName
         {
             get
             {
@@ -255,27 +254,19 @@ WHERE
             }
         }
 
-        public Dictionary<string, Procedure> ProcedureByLowercaseProcedureName
+        public Dictionary<string, SchemaProcedure> ProcedureByFullyQualifiedProcedureName
         {
             get
             {
-                return this.procedureByLowercaseProcedureName;
+                return this.procedureByFullyQualifiedProcedureName;
             }
         }
 
-        public Dictionary<string, View> ViewByLowercaseViewName
+        public Dictionary<string, SchemaView> ViewByLowercaseViewName
         {
             get
             {
                 return this.viewByLowercaseViewName;
-            }
-        }
-
-        public Dictionary<string, Dictionary<string, Index>> IndexByLowercaseIndexNameByLowercaseTableName
-        {
-            get
-            {
-                return this.indexByLowercaseIndexNameByLowercaseTableName;
             }
         }
         
@@ -287,40 +278,48 @@ WHERE
             }
         }
 
-        public Table GetTable(string tableName)
+        public Dictionary<string, Dictionary<string, SchemaIndex>> IndexByLowercaseIndexNameByLowercaseTableName
         {
-            Table table;
+            get
+            {
+                return this.indexByLowercaseIndexNameByLowercaseTableName;
+            }
+        }
+
+        public SchemaTable GetTable(string tableName)
+        {
+            SchemaTable table;
             this.tableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table);
             return table;
         }
 
-        public TableType GetTableType(string tableTypeName)
+        public SchemaTableType GetTableType(string tableTypeName)
         {
-            TableType tableType;
-            this.tableTypeByLowercaseTableTypeName.TryGetValue(tableTypeName.ToLowerInvariant(), out tableType);
+            SchemaTableType tableType;
+            this.tableTypeByLowercaseTableTypeName.TryGetValue(tableTypeName, out tableType);
             return tableType;
         }
 
-        public Procedure GetProcedure(string procedureName)
+        public SchemaProcedure GetProcedure(string procedureName)
         {
-            Procedure procedure;
-            this.procedureByLowercaseProcedureName.TryGetValue(procedureName.ToLowerInvariant(), out procedure);
+            SchemaProcedure procedure;
+            this.procedureByFullyQualifiedProcedureName.TryGetValue(procedureName, out procedure);
             return procedure;
         }
 
-        public View GetView(string viewName)
+        public SchemaView GetView(string viewName)
         {
-            View view;
+            SchemaView view;
             this.viewByLowercaseViewName.TryGetValue(viewName.ToLowerInvariant(), out view);
             return view;
         }
 
-        public Index GetIndex(string tableName, string indexName)
+        public SchemaIndex GetIndex(string tableName, string indexName)
         {
-            Dictionary<string, Index> indexByLowercaseIndexName;
+            Dictionary<string, SchemaIndex> indexByLowercaseIndexName;
             if (this.indexByLowercaseIndexNameByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out indexByLowercaseIndexName))
             {
-                Index index;
+                SchemaIndex index;
                 indexByLowercaseIndexName.TryGetValue(indexName.ToLowerInvariant(), out index);
                 return index;
             }

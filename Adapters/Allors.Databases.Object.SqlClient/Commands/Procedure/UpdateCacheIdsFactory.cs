@@ -70,11 +70,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     this.command = this.Session.CreateSqlCommand(this.Database.SchemaName + "." + "UC");
                     this.command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
+                    this.AddInTable(this.command, schema.TableTypeNameForObject, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
                 }
                 else
                 {
-                    this.SetInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
+                    this.SetInTable(this.command, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
                 }
 
                 this.command.ExecuteNonQuery();

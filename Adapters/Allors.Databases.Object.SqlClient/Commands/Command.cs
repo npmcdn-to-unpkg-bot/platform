@@ -48,20 +48,20 @@ namespace Allors.Databases.Object.SqlClient.Commands
             command.Parameters[param.Name].Value = Normalize(value);
         }
 
-        internal void AddInTable(SqlCommand command, MappingTableParameter parameter, IEnumerable<SqlDataRecord> array)
+        internal void AddInTable(SqlCommand command, string parameterType, IEnumerable<SqlDataRecord> array)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
-            sqlParameter.TypeName = parameter.TypeName;
-            sqlParameter.ParameterName = parameter.Name;
+            sqlParameter.TypeName = parameterType;
+            sqlParameter.ParameterName = Mapping.TableTypeParam;
             sqlParameter.Value = array;
 
             command.Parameters.Add(sqlParameter);
         }
 
-        internal void SetInTable(SqlCommand command, MappingTableParameter param, IEnumerable<SqlDataRecord> array)
+        internal void SetInTable(SqlCommand command, IEnumerable<SqlDataRecord> array)
         {
-            command.Parameters[param.Name].Value = array;
+            command.Parameters[Mapping.TableTypeParam].Value = array;
         }
 
         internal int GetCachId(SqlDataReader reader, int i)

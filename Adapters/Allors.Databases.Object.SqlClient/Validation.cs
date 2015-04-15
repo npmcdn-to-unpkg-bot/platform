@@ -7,10 +7,10 @@ namespace Allors.Databases.Object.SqlClient
     public class Validation
     {
         public readonly HashSet<string> MissingTableNames;
-        public readonly Dictionary<Table, HashSet<string>> MissingColumnNamesByTable;
+        public readonly Dictionary<SchemaTable, HashSet<string>> MissingColumnNamesByTable;
 
-        public readonly HashSet<Table> InvalidTables;
-        public readonly HashSet<TableColumn> InvalidColumns; 
+        public readonly HashSet<SchemaTable> InvalidTables;
+        public readonly HashSet<SchemaTableColumn> InvalidColumns; 
 
         private readonly Database database;
         private readonly Schema schema;
@@ -23,10 +23,10 @@ namespace Allors.Databases.Object.SqlClient
             this.schema = new Schema(database);
             
             this.MissingTableNames = new HashSet<string>();
-            this.MissingColumnNamesByTable = new Dictionary<Table, HashSet<string>>();
+            this.MissingColumnNamesByTable = new Dictionary<SchemaTable, HashSet<string>>();
             
-            this.InvalidTables = new HashSet<Table>();
-            this.InvalidColumns = new HashSet<TableColumn>();
+            this.InvalidTables = new HashSet<SchemaTable>();
+            this.InvalidColumns = new HashSet<SchemaTableColumn>();
 
             this.Validate();
 
@@ -167,9 +167,11 @@ namespace Allors.Databases.Object.SqlClient
                     }
                 }
             }
+
+            // TODO: Procedures and Indeces
         }
 
-        private void ValidateColumn(Table table, string columnName, string sqlType)
+        private void ValidateColumn(SchemaTable table, string columnName, string sqlType)
         {
             var objectColumn = table.GetColumn(columnName);
 
@@ -186,7 +188,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        private void AddMissingColumnName(Table table, string columnName)
+        private void AddMissingColumnName(SchemaTable table, string columnName)
         {
             HashSet<string> missingColumnNames;
             if (!this.MissingColumnNamesByTable.TryGetValue(table, out missingColumnNames))

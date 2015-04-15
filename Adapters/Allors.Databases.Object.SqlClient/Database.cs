@@ -59,11 +59,11 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly ObjectIds objectIds;
 
+        private readonly string schemaName;
+
         private Mapping mapping;
 
         private Dictionary<string, object> properties;
-
-        private string schemaName;
 
         private bool? isValid;
 
@@ -110,7 +110,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            this.schemaName = configuration.SchemaName ?? "allors";
+            this.schemaName = (configuration.SchemaName ?? "allors").ToLowerInvariant();
             this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
         }
 
@@ -288,11 +288,11 @@ namespace Allors.Databases.Object.SqlClient
                     {
                         if (this.ObjectIds is ObjectIdsInteger)
                         {
-                            this.mapping = new IntegerId.MappingInteger(this);
+                            this.mapping = new Mapping(this, "int", true, DbType.Int32);
                         }
                         else if (this.ObjectIds is ObjectIdsLong)
                         {
-                            this.mapping = new LongId.MappingLong(this);
+                            this.mapping = new Mapping(this, "bigint", false, DbType.Int64);
                         }
                         else
                         {
