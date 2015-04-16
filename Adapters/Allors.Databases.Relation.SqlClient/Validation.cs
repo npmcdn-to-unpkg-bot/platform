@@ -97,8 +97,8 @@ namespace Allors.Databases.Relation.SqlClient
                         this.InvalidTables.Add(table);
                     }
 
-                    this.ValidateColumn(objectsTable, Mapping.ColumnNameForAssociation, this.Database.Mapping.SqlTypeForObject);
-                    this.ValidateColumn(objectsTable, Mapping.ColumnNameForRole, mapping.GetSqlType(relationType.RoleType));
+                    this.ValidateColumn(table, Mapping.ColumnNameForAssociation, this.Database.Mapping.SqlTypeForObject);
+                    this.ValidateColumn(table, Mapping.ColumnNameForRole, this.Database.Mapping.GetSqlType(relationType.RoleType));
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace Allors.Databases.Relation.SqlClient
             }
             else
             {
-                if (!objectColumn.DataType.Equals(sqlType))
+                if (!objectColumn.SqlType.Equals(sqlType))
                 {
                     this.InvalidColumns.Add(objectColumn);
                 }
