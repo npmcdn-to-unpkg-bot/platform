@@ -55,7 +55,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 // TODO: Make this a single pass Query.
                 var sql = "IF EXISTS (\n";
                 sql += "    SELECT " + Mapping.ColumnNameForObject + "\n";
-                sql += "    FROM " + this.Database.SchemaName + "." + schema.TableNameForObjectByClass[objectType.ExclusiveLeafClass] + "\n";
+                sql += "    FROM " + schema.TableNameForObjectByClass[objectType.ExclusiveLeafClass] + "\n";
                 sql += "    WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
                 sql += ")\n";
                 sql += "    SELECT 1\n";
@@ -64,12 +64,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
                 sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " ON\n";
 
-                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + ")\n";
+                sql += "    INSERT INTO " + schema.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + ")\n";
                 sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ", " + Reference.InitialCacheId + ");\n";
 
                 sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " OFF;\n";
 
-                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.TableNameForObjectByClass[objectType.ExclusiveLeafClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ")\n";
+                sql += "    INSERT INTO " + schema.TableNameForObjectByClass[objectType.ExclusiveLeafClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ")\n";
                 sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ");\n";
 
                 sql += "    SELECT 0;\n";
