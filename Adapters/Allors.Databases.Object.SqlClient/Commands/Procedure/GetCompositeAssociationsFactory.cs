@@ -88,13 +88,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(associationType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, this.Database.Mapping.RoleId.Param, role.ObjectId.Value);
+                    this.AddInObject(command, Mapping.ParamNameForRole, this.factory.Database.Mapping.SqlDbTypeForObject, role.ObjectId.Value);
 
                     this.commandByIAssociationType[associationType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Mapping.RoleId.Param, role.ObjectId.Value);
+                    this.SetInObject(command, Mapping.ParamNameForRole, role.ObjectId.Value);
                 }
 
                 var objectIds = new List<ObjectId>();

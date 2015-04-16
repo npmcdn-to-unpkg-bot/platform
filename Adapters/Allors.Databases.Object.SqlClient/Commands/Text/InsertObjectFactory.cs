@@ -54,23 +54,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
                 // TODO: Make this a single pass Query.
                 var sql = "IF EXISTS (\n";
-                sql += "    SELECT " + schema.ObjectId + "\n";
-                sql += "    FROM " + this.Database.SchemaName + "." + schema.Table(objectType.ExclusiveLeafClass) + "\n";
-                sql += "    WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + "\n";
+                sql += "    SELECT " + Mapping.ColumnNameForObject + "\n";
+                sql += "    FROM " + this.Database.SchemaName + "." + schema.TableNameForObjectByClass[objectType.ExclusiveLeafClass] + "\n";
+                sql += "    WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
                 sql += ")\n";
                 sql += "    SELECT 1\n";
                 sql += "ELSE\n";
                 sql += "    BEGIN\n";
 
-                sql += "    SET IDENTITY_INSERT " + schema.Objects + " ON\n";
+                sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " ON\n";
 
-                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.Objects + " (" + schema.ObjectId + "," + schema.TypeId + "," + schema.CacheId + ")\n";
-                sql += "    VALUES (" + schema.ObjectId.Param + "," + schema.TypeId.Param + ", " + Reference.InitialCacheId + ");\n";
+                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + ")\n";
+                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ", " + Reference.InitialCacheId + ");\n";
 
-                sql += "    SET IDENTITY_INSERT " + schema.Objects.StatementName + " OFF;\n";
+                sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " OFF;\n";
 
-                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.Table(objectType.ExclusiveLeafClass) + " (" + schema.ObjectId + "," + schema.TypeId + ")\n";
-                sql += "    VALUES (" + schema.ObjectId.Param + "," + schema.TypeId.Param + ");\n";
+                sql += "    INSERT INTO " + this.Database.SchemaName + "." + schema.TableNameForObjectByClass[objectType.ExclusiveLeafClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ")\n";
+                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ");\n";
 
                 sql += "    SELECT 0;\n";
                 sql += "    END";
@@ -100,15 +100,15 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
 
-                    this.AddInObject(command, this.Database.Mapping.ObjectId.Param, objectId.Value);
-                    this.AddInObject(command, this.Database.Mapping.TypeId.Param, objectType.Id);
+                    this.AddInObject(command, Mapping.ParamNameForObject, this.Database.Mapping.SqlDbTypeForObject, objectId.Value);
+                    this.AddInObject(command, Mapping.ParamNameForType, Mapping.SqlDbTypeForType, objectType.Id);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Mapping.ObjectId.Param, objectId.Value);
-                    this.SetInObject(command, this.Database.Mapping.TypeId.Param, objectType.Id);
+                    this.SetInObject(command, Mapping.ParamNameForObject, objectId.Value);
+                    this.SetInObject(command, Mapping.ParamNameForType, objectType.Id);
                 }
 
                 var result = command.ExecuteScalar();

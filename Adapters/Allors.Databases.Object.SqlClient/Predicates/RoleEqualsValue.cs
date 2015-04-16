@@ -57,7 +57,7 @@ namespace Allors.Databases.Object.SqlClient
             var schema = statement.Mapping;
             if (this.roleType.ObjectType.IsUnit)
             {
-                statement.Append(" " + alias + "." + schema.Column(this.roleType) + "=" + statement.AddParameter(this.obj));
+                statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.roleType.RelationType] + "=" + statement.AddParameter(this.obj));
             }
             else
             {
@@ -65,13 +65,13 @@ namespace Allors.Databases.Object.SqlClient
 
                 if (this.roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    statement.Append(" (" + alias + "." + schema.Column(this.roleType) + " IS NOT NULL AND ");
-                    statement.Append(" " + alias + "." + schema.Column(this.roleType) + "=" + allorsObject.Strategy.ObjectId + ")");
+                    statement.Append(" (" + alias + "." + schema.ColumnNameByRelationType[this.roleType.RelationType] + " IS NOT NULL AND ");
+                    statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.roleType.RelationType] + "=" + allorsObject.Strategy.ObjectId + ")");
                 }
                 else
                 {
-                    statement.Append(" (" + this.roleType.SingularFullName + "_R." + schema.RoleId + " IS NOT NULL AND ");
-                    statement.Append(" " + this.roleType.SingularFullName + "_R." + schema.RoleId + "=" + allorsObject.Strategy.ObjectId + ")");
+                    statement.Append(" (" + this.roleType.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL AND ");
+                    statement.Append(" " + this.roleType.SingularFullName + "_R." + Mapping.ColumnNameForRole + "=" + allorsObject.Strategy.ObjectId + ")");
                 }
             }
 

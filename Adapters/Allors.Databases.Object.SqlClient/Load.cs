@@ -596,25 +596,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         internal Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
         {
             this.database = database;
@@ -629,7 +610,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             var sql = new StringBuilder();
 
-            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.Objects.StatementName + " ON");
+            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " ON");
             lock (this)
             {
                 using (var command = session.CreateCommand(sql.ToString()))
@@ -643,9 +624,9 @@ namespace Allors.Databases.Object.SqlClient
                 if (type.IsClass)
                 {
                     sql = new StringBuilder();
-                    sql.Append("INSERT INTO " + this.database.Mapping.Objects + " (" + this.database.Mapping.ObjectId + "," + this.database.Mapping.TypeId + "," + this.database.Mapping.CacheId + ")\n");
-                    sql.Append("SELECT " + this.database.Mapping.ObjectId + "," + this.database.Mapping.TypeId + ", " + Reference.InitialCacheId + "\n");
-                    sql.Append("FROM " + this.database.Mapping.Table(type.ExclusiveLeafClass));
+                    sql.Append("INSERT INTO " + this.database.Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForType + ")\n");
+                    sql.Append("SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ", " + Reference.InitialCacheId + "\n");
+                    sql.Append("FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveLeafClass]);
 
                     lock (this)
                     {
@@ -658,7 +639,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             sql = new StringBuilder();
-            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.Objects.StatementName + " OFF");
+            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " OFF");
             lock (this)
             {
                 using (var command = session.CreateCommand(sql.ToString()))

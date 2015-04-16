@@ -46,11 +46,11 @@ namespace Allors.Databases.Object.SqlClient
             var schema = statement.Mapping;
             if (this.role.ObjectType.IsUnit && this.equalsRole.ObjectType.IsUnit)
             {
-                statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
+                statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.role.RelationType] + "=" + alias + "." + schema.ColumnNameByRelationType[this.equalsRole.RelationType]);
             }
             else if (((IComposite)this.role.ObjectType).ExistExclusiveLeafClass && ((IComposite)this.equalsRole.ObjectType).ExistExclusiveLeafClass)
             {
-                statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
+                statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.role.RelationType] + "=" + alias + "." + schema.ColumnNameByRelationType[this.equalsRole.RelationType]);
             }
             else
             {

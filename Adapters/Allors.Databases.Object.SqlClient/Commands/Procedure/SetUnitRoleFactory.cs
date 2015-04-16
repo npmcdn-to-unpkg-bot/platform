@@ -79,7 +79,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(IList<UnitRelation> relation, IObjectType exclusiveRootClass, IRoleType roleType)
             {
-                var schema = this.Database.SqlClientMapping;
+                var schema = this.Database.Mapping;
 
                 Dictionary<IRoleType, SqlCommand> commandByIRoleType;
                 if (!this.commandByIRoleTypeByIObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))

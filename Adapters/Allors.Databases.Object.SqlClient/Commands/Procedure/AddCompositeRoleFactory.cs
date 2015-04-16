@@ -82,7 +82,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(IList<CompositeRelation> relations, IRoleType roleType)
             {
-                var schema = this.factory.Database.SqlClientMapping;
+                var schema = this.factory.Database.Mapping;
 
                 SqlCommand command;
                 if (!this.commandByIRoleType.TryGetValue(roleType, out command))

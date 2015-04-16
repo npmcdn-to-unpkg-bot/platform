@@ -20,9 +20,6 @@
 
 namespace Allors.Databases.Object.SqlClient.ReadCommitted
 {
-    using System;
-
-    using Allors;
     using Allors.Populations;
 
     using NUnit.Framework;

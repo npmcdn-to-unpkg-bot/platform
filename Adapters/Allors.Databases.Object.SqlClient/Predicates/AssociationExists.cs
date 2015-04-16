@@ -39,17 +39,17 @@ namespace Allors.Databases.Object.SqlClient
             var schema = statement.Mapping;
             if ((this.association.IsMany && this.association.RelationType.RoleType.IsMany) || !this.association.RelationType.ExistExclusiveLeafClasses)
             {
-                statement.Append(" " + this.association.SingularFullName + "_A." + schema.AssociationId.StatementName + " IS NOT NULL");
+                statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL");
             }
             else
             {
                 if (this.association.RelationType.RoleType.IsMany)
                 {
-                    statement.Append(" " + alias + "." + schema.Column(this.association) + " IS NOT NULL");
+                    statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.association.RelationType] + " IS NOT NULL");
                 }
                 else
                 {
-                    statement.Append(" " + this.association.SingularFullName + "_A." + schema.ObjectId + " IS NOT NULL");
+                    statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForObject + " IS NOT NULL");
                 }
             }
 

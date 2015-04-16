@@ -31,21 +31,19 @@ namespace Allors.Databases.Object.SqlClient.Commands
 
     internal abstract class Command
     {
-        internal void AddInObject(SqlCommand command, MappingParameter parameter, object value)
+        internal void AddInObject(SqlCommand command, string parameterName, SqlDbType parameterType, object value)
         {
-            var schemaParameter = parameter;
-
             var sqlParameter = command.CreateParameter();
-            sqlParameter.SqlDbType = schemaParameter.SqlDbType;
-            sqlParameter.ParameterName = parameter.Name;
+            sqlParameter.ParameterName = parameterName;
+            sqlParameter.SqlDbType = parameterType;
             sqlParameter.Value = Normalize(value);
             
             command.Parameters.Add(sqlParameter);
         }
 
-        internal void SetInObject(SqlCommand command, MappingParameter param, object value)
+        internal void SetInObject(SqlCommand command, string parameterName, object value)
         {
-            command.Parameters[param.Name].Value = Normalize(value);
+            command.Parameters[parameterName].Value = Normalize(value);
         }
 
         internal void AddInTable(SqlCommand command, string parameterType, IEnumerable<SqlDataRecord> array)
@@ -53,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient.Commands
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
             sqlParameter.TypeName = parameterType;
-            sqlParameter.ParameterName = Mapping.TableTypeParam;
+            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
             sqlParameter.Value = array;
 
             command.Parameters.Add(sqlParameter);
@@ -61,7 +59,7 @@ namespace Allors.Databases.Object.SqlClient.Commands
 
         internal void SetInTable(SqlCommand command, IEnumerable<SqlDataRecord> array)
         {
-            command.Parameters[Mapping.TableTypeParam].Value = array;
+            command.Parameters[Mapping.ParamNameForTableType].Value = array;
         }
 
         internal int GetCachId(SqlDataReader reader, int i)

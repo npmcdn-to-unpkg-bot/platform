@@ -185,7 +185,7 @@ namespace Allors.Databases.Object.SqlClient
                         if (!this.isValid.HasValue)
                         {
                             var validate = this.Validate();
-                            return validate.Success;
+                            return validate.IsValid;
                         }
                     }
                 }
@@ -274,37 +274,29 @@ namespace Allors.Databases.Object.SqlClient
         {
             get
             {
-                return this.SqlClientMapping;
-            }
-        }
-
-        internal Mapping SqlClientMapping
-        {
-            get
-            {
                 if (this.ObjectFactory.MetaPopulation != null)
                 {
                     if (this.mapping == null)
                     {
                         if (this.ObjectIds is ObjectIdsInteger)
                         {
-                            this.mapping = new Mapping(this, "int", true, DbType.Int32);
+                            this.mapping = new Mapping(this, true);
                         }
                         else if (this.ObjectIds is ObjectIdsLong)
                         {
-                            this.mapping = new Mapping(this, "bigint", false, DbType.Int64);
+                            this.mapping = new Mapping(this, false);
                         }
                         else
                         {
                             throw new NotSupportedException("ObjectIds of type " + this.ObjectIds.GetType() + " are not supported.");
-                        }   
+                        }
                     }
                 }
 
                 return this.mapping;
             }
         }
-
+        
         internal CommandFactories CommandFactories
         {
             get
@@ -354,7 +346,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             try
             {
-                new Initialization(this.Mapping, new Schema(this)).Execute();
+                new Initialization(this).Execute();
             }
             finally
             {
@@ -415,7 +407,7 @@ namespace Allors.Databases.Object.SqlClient
         public Validation Validate()
         {
             var validateResult = new Validation(this);
-            this.isValid = validateResult.Success;
+            this.isValid = validateResult.IsValid;
             return validateResult;
         }
 
@@ -490,36 +482,38 @@ namespace Allors.Databases.Object.SqlClient
             return sortedUnitRoles;
         }
 
-        internal SqlMetaData GetSqlMetaData(string name, MappingColumn column)
+        // TODO: inline
+        internal SqlMetaData GetSqlMetaData(string name, IRoleType roleType)
         {
-            switch (column.DbType)
+            var unit = (IUnit)roleType.ObjectType;
+            switch (unit.UnitTag)
             {
-                case DbType.String:
-                    if (column.Size == -1 || column.Size > 4000)
+                case UnitTags.AllorsString:
+                    if (roleType.Size == -1 || roleType.Size > 4000)
                     {
                         return new SqlMetaData(name, SqlDbType.NVarChar, -1);
                     }
 
-                    return new SqlMetaData(name, SqlDbType.NVarChar, column.Size.Value);
-                case DbType.Int32:
+                    return new SqlMetaData(name, SqlDbType.NVarChar, roleType.Size.Value);
+                case UnitTags.AllorsInteger:
                     return new SqlMetaData(name, SqlDbType.Int);
-                case DbType.Decimal:
-                    return new SqlMetaData(name, SqlDbType.Decimal, (byte)column.Precision.Value, (byte)column.Scale.Value);
-                case DbType.Double:
+                case UnitTags.AllorsDecimal:
+                    return new SqlMetaData(name, SqlDbType.Decimal, (byte)roleType.Precision.Value, (byte)roleType.Scale.Value);
+                case UnitTags.AllorsFloat:
                     return new SqlMetaData(name, SqlDbType.Float);
-                case DbType.Boolean:
+                case UnitTags.AllorsBoolean:
                     return new SqlMetaData(name, SqlDbType.Bit);
-                case DbType.DateTime2:
+                case UnitTags.AllorsDateTime:
                     return new SqlMetaData(name, SqlDbType.DateTime2);
-                case DbType.Guid:
+                case UnitTags.AllorsUnique:
                     return new SqlMetaData(name, SqlDbType.UniqueIdentifier);
-                case DbType.Binary:
-                    if (column.Size == -1 || column.Size > 8000)
+                case UnitTags.AllorsBinary:
+                    if (roleType.Size == -1 || roleType.Size > 8000)
                     {
                         return new SqlMetaData(name, SqlDbType.VarBinary, -1);
                     }
 
-                    return new SqlMetaData(name, SqlDbType.VarBinary, (long)column.Size);
+                    return new SqlMetaData(name, SqlDbType.VarBinary, (long)roleType.Size);
                 default:
                     throw new Exception("!UNKNOWN VALUE TYPE!");
             }

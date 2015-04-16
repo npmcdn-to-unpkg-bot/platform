@@ -49,17 +49,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
-                var schema = this.Database.Mapping;
+                var mapping = this.Database.Mapping;
 
                 var sql = string.Empty;
 
                 sql += "BEGIN\n";
 
-                sql += "DELETE FROM " + this.Database.SchemaName + "." + schema.Objects + "\n";
-                sql += "WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + ";\n";
+                sql += "DELETE FROM " + mapping.TableNameForObjects + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
 
-                sql += "DELETE FROM " + this.Database.SchemaName + "." + schema.Table(((IComposite)objectType).ExclusiveLeafClass) + "\n";
-                sql += "WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + ";\n";
+                sql += "DELETE FROM " + mapping.TableNameForObjectByClass[((IComposite)objectType).ExclusiveLeafClass] + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
 
                 sql += "END;";
 
@@ -89,13 +89,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (!this.commandByIObjectType.TryGetValue(objectType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
-                    this.AddInObject(command, this.Database.Mapping.ObjectId.Param, strategy.ObjectId.Value);
+                    this.AddInObject(command, Mapping.ParamNameForObject, this.Database.Mapping.SqlDbTypeForObject, strategy.ObjectId.Value);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, this.Database.Mapping.ObjectId.Param, strategy.ObjectId.Value);
+                    this.SetInObject(command, Mapping.ParamNameForObject, strategy.ObjectId.Value);
                 }
                 
                 command.ExecuteNonQuery();

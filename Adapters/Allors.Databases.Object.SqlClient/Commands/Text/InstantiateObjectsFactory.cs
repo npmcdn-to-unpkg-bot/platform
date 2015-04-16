@@ -37,10 +37,10 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
         internal InstantiateObjectsFactory(Database database)
         {
             this.Database = database;
-            this.Sql += "SELECT " + database.Mapping.ObjectId + "," + database.Mapping.TypeId + "," + database.Mapping.CacheId + "\n";
-            this.Sql += "FROM " + this.Database.SchemaName + "." + database.Mapping.Objects + "\n";
-            this.Sql += "WHERE " + database.Mapping.ObjectId + " IN\n";
-            this.Sql += "( SELECT " + this.Database.Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.TableTypeParam + " )\n";
+            this.Sql += "SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + "\n";
+            this.Sql += "FROM " + database.Mapping.TableNameForObjects + "\n";
+            this.Sql += "WHERE " + Mapping.ColumnNameForObject + " IN\n";
+            this.Sql += "( SELECT " + this.Database.Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParamNameForTableType + " )\n";
         }
 
         internal InstantiateObjects Create(DatabaseSession session)
@@ -66,7 +66,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (this.command == null)
                 {
                     this.command = this.Session.CreateSqlCommand(this.factory.Sql);
-                    this.AddInTable(this.command, this.Database.SqlClientMapping.TableTypeNameForObject, this.Database.CreateObjectTable(objectids));
+                    this.AddInTable(this.command, this.Database.Mapping.TableTypeNameForObject, this.Database.CreateObjectTable(objectids));
                 }
                 else
                 {

@@ -64,7 +64,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(Dictionary<Reference, Roles> modifiedRolesByReference)
             {
-                var schema = this.factory.Database.SqlClientMapping;
+                var schema = this.factory.Database.Mapping;
 
                 if (this.command == null)
                 {

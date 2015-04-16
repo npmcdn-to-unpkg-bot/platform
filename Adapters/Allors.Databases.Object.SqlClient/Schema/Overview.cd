@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Allors.Databases.Object.SqlClient.SchemaIndex">
-    <Position X="8.5" Y="4.25" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <Members>
       <Field Name="lowercaseName" Hidden="true" />
       <Field Name="name" Hidden="true" />
@@ -14,40 +14,24 @@
       <FileName>Schema\SchemaIndex.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Allors.Databases.Object.SqlClient.Procedure">
-    <Position X="8.5" Y="0.5" Width="2" />
-    <Members>
-      <Field Name="definition" Hidden="true" />
-      <Field Name="lowercaseName" Hidden="true" />
-      <Field Name="name" Hidden="true" />
-      <Method Name="RemoveWhitespace" Hidden="true" />
-      <Field Name="schema" Hidden="true" />
-      <Method Name="ToString" Hidden="true" />
-    </Members>
-    <TypeIdentifier>
-      <HashCode>ACAAAAAIAQAACQAEAAEAAAQEAAAEBAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Schema\Procedure.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Allors.Databases.Object.SqlClient.Schema">
-    <Position X="4.5" Y="3" Width="2.25" />
+    <Position X="4.5" Y="3" Width="3.75" />
     <Members>
       <Field Name="exists" Hidden="true" />
       <Field Name="indexByLowercaseIndexNameByLowercaseTableName" Hidden="true" />
-      <Field Name="procedureByLowercaseProcedureName" Hidden="true" />
       <Method Name="Schema" Hidden="true" />
       <Field Name="tableByLowercaseTableName" Hidden="true" />
       <Field Name="tableTypeByLowercaseTableTypeName" Hidden="true" />
       <Field Name="viewByLowercaseViewName" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>gUAAAAUAAAAAAAAQBAAAIAAEAAAAAABAARBRAAEAAEA=</HashCode>
+      <HashCode>gUAAAAEAgAAAAAAQBAAAIAAEAAAAAAAAARBRAAECAEA=</HashCode>
       <FileName>Schema\Schema.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="TableByLowercaseTableName" />
       <Property Name="TableTypeByLowercaseTableTypeName" />
-      <Property Name="ProcedureByLowercaseProcedureName" />
+      <Property Name="ProcedureByFullyQualifiedProcedureName" />
       <Property Name="ViewByLowercaseViewName" />
     </ShowAsCollectionAssociation>
   </Class>
@@ -55,14 +39,13 @@
     <Position X="0.75" Y="3.75" Width="1.5" />
     <Members>
       <Field Name="columnByLowercaseColumnName" Hidden="true" />
-      <Field Name="lowercaseName" Hidden="true" />
       <Field Name="name" Hidden="true" />
       <Field Name="schema" Hidden="true" />
       <Method Name="SchemaTable" Hidden="true" />
       <Method Name="ToString" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAQBAAABAAAQAEAAEAAAQEAAAEBAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAQBAAABAAAAAEAAAAAAQEAAAEBAAAAAAAAAAAAAA=</HashCode>
       <FileName>Schema\SchemaTable.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -88,20 +71,23 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Databases.Object.SqlClient.SchemaTableType">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="8.75" Y="6.5" Width="1.5" />
     <Members>
-      <Field Name="lowercaseName" Hidden="true" />
+      <Field Name="columnByLowercaseColumnName" Hidden="true" />
       <Field Name="name" Hidden="true" />
-      <Field Name="schema" Hidden="true" />
       <Method Name="SchemaTableType" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAEAAAQEAAAEBAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAQBAAABAAAAAEAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Schema\SchemaTableType.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ColumnByLowercaseColumnName" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Allors.Databases.Object.SqlClient.SchemaView">
-    <Position X="3" Y="6.25" Width="2" />
+    <Position X="3" Y="7" Width="2" />
     <Members>
       <Field Name="definition" Hidden="true" />
       <Field Name="lowercaseName" Hidden="true" />
@@ -119,6 +105,33 @@
     <ShowAsCollectionAssociation>
       <Property Name="Tables" />
     </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Allors.Databases.Object.SqlClient.SchemaProcedure">
+    <Position X="10" Y="0.5" Width="2" />
+    <Members>
+      <Field Name="definition" Hidden="true" />
+      <Field Name="name" Hidden="true" />
+      <Method Name="SchemaProcedure" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAIAQAACAAEAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Schema\SchemaProcedure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Allors.Databases.Object.SqlClient.SchemaTableTypeColumn">
+    <Position X="12" Y="4.25" Width="2.25" />
+    <Members>
+      <Field Name="dataType" Hidden="true" />
+      <Field Name="name" Hidden="true" />
+      <Method Name="SchemaTableTypeColumn" Hidden="true" />
+      <Field Name="table" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAIAAABEABIAQAQSAAAEAAAAAAAQAAAAEAE=</HashCode>
+      <FileName>Schema\SchemaTableTypeColumn.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

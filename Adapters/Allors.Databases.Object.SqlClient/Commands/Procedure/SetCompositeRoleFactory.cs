@@ -81,14 +81,14 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
             internal void Execute(IList<CompositeRelation> relations, IRoleType roleType)
             {
-                var schema = this.factory.Database.SqlClientMapping;
+                var schema = this.factory.Database.Mapping;
 
                 SqlCommand command;
                 if (!this.commandByIRoleType.TryGetValue(roleType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, this.Database.SqlClientMapping.TableTypeNameForCompositeRelation, this.Database.CreateRelationTable(relations));
+                    this.AddInTable(command, this.Database.Mapping.TableTypeNameForCompositeRelation, this.Database.CreateRelationTable(relations));
                     this.commandByIRoleType[roleType] = command;
                 }
                 else

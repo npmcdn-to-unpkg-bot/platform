@@ -43,15 +43,15 @@ namespace Allors.Databases.Object.SqlClient
             {
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");
-                statement.Append("SELECT " + alias + "." + schema.ObjectId + "\n");
-                statement.Append("FROM " + schema.Table(this.association) + "\n");
-                statement.Append("WHERE " + schema.AssociationId + "=" + this.allorsObject.Strategy.ObjectId + "\n");
-                statement.Append("AND " + schema.RoleId + "=" + alias + "." + schema.ObjectId + "\n");
+                statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject + "\n");
+                statement.Append("FROM " + schema.TableNameForRelationByRelationType[this.association.RelationType] + "\n");
+                statement.Append("WHERE " + Mapping.ColumnNameForAssociation + "=" + this.allorsObject.Strategy.ObjectId + "\n");
+                statement.Append("AND " + Mapping.ColumnNameForRole + "=" + alias + "." + Mapping.ColumnNameForObject + "\n");
                 statement.Append(")");
             }
             else
             {
-                statement.Append(" " + this.association.SingularFullName + "_A." + schema.ObjectId + " = " + this.allorsObject.Strategy.ObjectId);
+                statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForObject + " = " + this.allorsObject.Strategy.ObjectId);
             }
 
             return this.Include;

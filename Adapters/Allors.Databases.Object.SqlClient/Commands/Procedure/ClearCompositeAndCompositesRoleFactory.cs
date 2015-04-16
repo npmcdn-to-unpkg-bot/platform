@@ -87,7 +87,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal void Execute(IList<ObjectId> associations, IRoleType roleType)
             {
-                var mapping = this.factory.Database.SqlClientMapping;
+                var mapping = this.factory.Database.Mapping;
 
                 SqlCommand command;
                 if (!this.commandByIRoleType.TryGetValue(roleType, out command))

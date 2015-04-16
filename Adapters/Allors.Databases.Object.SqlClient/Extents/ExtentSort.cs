@@ -52,11 +52,11 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (statement.Sorter.Equals(this))
             {
-                statement.Append(" ORDER BY " + statement.Mapping.Column(this.roleType));
+                statement.Append(" ORDER BY " + statement.Mapping.ColumnNameByRelationType[this.roleType.RelationType]);
             }
             else
             {
-                statement.Append(" , " + statement.Mapping.Column(this.roleType));
+                statement.Append(" , " + statement.Mapping.ColumnNameByRelationType[this.roleType.RelationType]);
             }
 
             statement.Append(this.direction == SortDirection.Ascending ? " ASC " : " DESC ");
@@ -80,11 +80,11 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (statement.Sorter.Equals(this))
             {
-                statement.Append(" ORDER BY " + alias + "." + statement.Mapping.Column(this.roleType));
+                statement.Append(" ORDER BY " + alias + "." + statement.Mapping.ColumnNameByRelationType[this.roleType.RelationType]);
             }
             else
             {
-                statement.Append(" , " + alias + "." + statement.Mapping.Column(this.roleType));
+                statement.Append(" , " + alias + "." + statement.Mapping.ColumnNameByRelationType[this.roleType.RelationType]);
             }
 
             if (this.direction == SortDirection.Ascending)
@@ -106,7 +106,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void BuildSelect(ExtentStatement statement)
         {
-            statement.Append(" , " + statement.Mapping.Column(this.roleType) + " ");
+            statement.Append(" , " + statement.Mapping.ColumnNameByRelationType[this.roleType.RelationType] + " ");
             if (this.subSorter != null)
             {
                 this.subSorter.BuildSelect(statement);
@@ -115,7 +115,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void BuildSelect(ExtentStatement statement, string alias)
         {
-            statement.Append(" , " + alias + "." + statement.Mapping.Column(this.roleType) + " ");
+            statement.Append(" , " + alias + "." + statement.Mapping.ColumnNameByRelationType[this.roleType.RelationType] + " ");
             if (this.subSorter != null)
             {
                 this.subSorter.BuildSelect(statement, alias);

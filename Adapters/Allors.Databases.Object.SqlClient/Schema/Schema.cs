@@ -7,11 +7,11 @@ namespace Allors.Databases.Object.SqlClient
 
     public class Schema
     {
-        private readonly bool exists;
+        public readonly bool Exists;
+        
         private readonly Dictionary<string, SchemaTable> tableByLowercaseTableName;
         private readonly Dictionary<string, SchemaTableType> tableTypeByLowercaseTableTypeName;
         private readonly Dictionary<string, SchemaProcedure> procedureByFullyQualifiedProcedureName;
-        private readonly Dictionary<string, SchemaView> viewByLowercaseViewName;
         private readonly Dictionary<string, Dictionary<string, SchemaIndex>> indexByLowercaseIndexNameByLowercaseTableName;
 
         public Schema(Database database)
@@ -19,7 +19,6 @@ namespace Allors.Databases.Object.SqlClient
             this.tableByLowercaseTableName = new Dictionary<string, SchemaTable>();
             this.tableTypeByLowercaseTableTypeName = new Dictionary<string, SchemaTableType>();
             this.procedureByFullyQualifiedProcedureName = new Dictionary<string, SchemaProcedure>();
-            this.viewByLowercaseViewName = new Dictionary<string, SchemaView>();
             this.indexByLowercaseIndexNameByLowercaseTableName = new Dictionary<string, Dictionary<string, SchemaIndex>>();
 
             using (var connection = new SqlConnection(database.ConnectionString))
@@ -36,7 +35,7 @@ WHERE   schema_name = @schemaName";
                     {
                         command.Parameters.Add("@schemaName", SqlDbType.NVarChar).Value = database.SchemaName;
                         var schemaCount = (int)command.ExecuteScalar();
-                        this.exists = schemaCount != 0;
+                        this.Exists = schemaCount != 0;
                     }
 
                     // Tables
@@ -76,11 +75,16 @@ AND C.table_schema = @tableSchema";
                                 var numericScale = reader.IsDBNull(numericScaleOrdinal) ? (int?)null : Convert.ToInt32(reader.GetValue(numericScaleOrdinal));
 
                                 tableName = tableName.Trim().ToLowerInvariant();
+                                tableName = database.Mapping.NormalizeName(tableName);
+                                var fullyQualifiedTableName = database.SchemaName + "." + tableName;
+
+                                columnName = database.Mapping.NormalizeName(columnName);
+
                                 SchemaTable table;
-                                if (!this.TableByLowercaseTableName.TryGetValue(tableName, out table))
+                                if (!this.tableByLowercaseTableName.TryGetValue(fullyQualifiedTableName, out table))
                                 {
-                                    table = new SchemaTable(this, tableName);
-                                    this.TableByLowercaseTableName[tableName] = table;
+                                    table = new SchemaTable(this, fullyQualifiedTableName);
+                                    this.tableByLowercaseTableName[fullyQualifiedTableName] = table;
                                 }
 
                                 if (!reader.IsDBNull(columnNameOrdinal))
@@ -94,22 +98,48 @@ AND C.table_schema = @tableSchema";
 
                     // Table Types
                     cmdText = @"
-SELECT domain_name
-FROM information_schema.domains
-WHERE data_type='table type' AND
-domain_schema = @domainSchema";
+select tt.name as table_name, c.name as column_name, t.name AS data_type, c.max_length, c.precision, c.scale
+from sys.table_types tt
+inner join sys.columns c on c.object_id = tt.type_table_object_id
+INNER JOIN sys.types AS t ON t.user_type_id = c.user_type_id
+where tt.schema_id = SCHEMA_ID(@domainSchema)";
 
                     using (var command = new SqlCommand(cmdText, connection))
                     {
                         command.Parameters.Add("@domainSchema", SqlDbType.NVarChar).Value = database.SchemaName;
                         using (var reader = command.ExecuteReader())
                         {
+                            var tableNameOrdinal = reader.GetOrdinal("table_name");
+                            var columnNameOrdinal = reader.GetOrdinal("column_name");
+                            var dataTypeOrdinal = reader.GetOrdinal("data_type");
+                            var maximumLengthOrdinal = reader.GetOrdinal("max_length");
+                            var precisionOrdinal = reader.GetOrdinal("precision");
+                            var scaleOrdinal = reader.GetOrdinal("scale");
+
                             while (reader.Read())
                             {
-                                var tableTypeName = (string)reader["domain_name"];
-                                var lowercaseTableTypeName = tableTypeName.Trim().ToLowerInvariant();
-                                var fullyQualifiedName = database.SchemaName + "." + lowercaseTableTypeName;
-                                this.TableTypeByLowercaseTableTypeName[fullyQualifiedName] = new SchemaTableType(this, tableTypeName);
+                                var tableName = reader.GetString(tableNameOrdinal);
+                                var columnName = reader.GetString(columnNameOrdinal);
+                                var dataType = reader.GetString(dataTypeOrdinal).Trim().ToLowerInvariant();
+                                var maximumLength = reader.IsDBNull(maximumLengthOrdinal) ? (int?)null : Convert.ToInt32(reader.GetValue(maximumLengthOrdinal));
+                                var precision = reader.IsDBNull(precisionOrdinal) ? (int?)null : Convert.ToInt32(reader.GetValue(precisionOrdinal));
+                                var scale = reader.IsDBNull(scaleOrdinal) ? (int?)null : Convert.ToInt32(reader.GetValue(scaleOrdinal));
+
+                                tableName = tableName.Trim().ToLowerInvariant();
+                                var fullyQualifiedTableName = database.SchemaName + "." + tableName;
+
+                                SchemaTableType tableType;
+                                if (!this.tableTypeByLowercaseTableTypeName.TryGetValue(fullyQualifiedTableName, out tableType))
+                                {
+                                    tableType = new SchemaTableType(this, fullyQualifiedTableName);
+                                    this.tableTypeByLowercaseTableTypeName[fullyQualifiedTableName] = tableType;
+                                }
+
+                                if (!reader.IsDBNull(columnNameOrdinal))
+                                {
+                                    var column = new SchemaTableTypeColumn(tableType, columnName, dataType, maximumLength, precision, scale);
+                                    tableType.ColumnByLowercaseColumnName[column.Name] = column;
+                                }
                             }
                         }
                     }
@@ -131,55 +161,7 @@ WHERE routine_schema = @routineSchema";
                                 var routineDefinition = (string)reader["routine_definition"];
                                 var lowercaseRoutineName = routineName.Trim().ToLowerInvariant();
                                 var fullyQualifiedName = database.SchemaName + "." + lowercaseRoutineName;
-                                this.ProcedureByFullyQualifiedProcedureName[fullyQualifiedName] = new SchemaProcedure(this, routineName, routineDefinition);
-                            }
-                        }
-                    }
-
-                    // Views
-                    cmdText = @"
-SELECT  _v.table_name AS view_name,
-        _v.view_definition,
-        _u.table_name
-FROM information_schema.views AS _v
-LEFT JOIN information_schema.view_table_usage AS _u
-ON _v.table_name = _u.view_name
-AND _v.table_schema = _u.view_schema
-AND _v.table_schema = _u.table_schema
-WHERE _v.table_schema = @tableSchema";
-
-                    using (var command = new SqlCommand(cmdText, connection))
-                    {
-                        command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = database.SchemaName;
-                        using (var reader = command.ExecuteReader())
-                        {
-                            var viewNameOrdinal = reader.GetOrdinal("view_name");
-                            var viewDefinitionOrdinal = reader.GetOrdinal("view_definition");
-                            var tableNameOrdinal = reader.GetOrdinal("table_name");
-
-                            while (reader.Read())
-                            {
-                                var viewName = reader.GetString(viewNameOrdinal);
-                                var viewDefinition = reader.GetString(viewDefinitionOrdinal);
-
-                                viewName = viewName.Trim().ToLowerInvariant();
-                                SchemaView view;
-                                if (!this.ViewByLowercaseViewName.TryGetValue(viewName, out view))
-                                {
-                                    view = new SchemaView(this, viewName, viewDefinition);
-                                    this.ViewByLowercaseViewName[viewName] = view;
-                                }
-
-                                if (!reader.IsDBNull(tableNameOrdinal))
-                                {
-                                    var tableName = reader.GetString(tableNameOrdinal);
-
-                                    SchemaTable table;
-                                    if (this.TableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table))
-                                    {
-                                        view.Tables.Add(table);
-                                    }
-                                }
+                                this.procedureByFullyQualifiedProcedureName[fullyQualifiedName] = new SchemaProcedure(this, routineName, routineDefinition);
                             }
                         }
                     }
@@ -238,54 +220,6 @@ WHERE
             }
         }
 
-        public Dictionary<string, SchemaTable> TableByLowercaseTableName
-        {
-            get
-            {
-                return this.tableByLowercaseTableName;
-            }
-        }
-
-        public Dictionary<string, SchemaTableType> TableTypeByLowercaseTableTypeName
-        {
-            get
-            {
-                return this.tableTypeByLowercaseTableTypeName;
-            }
-        }
-
-        public Dictionary<string, SchemaProcedure> ProcedureByFullyQualifiedProcedureName
-        {
-            get
-            {
-                return this.procedureByFullyQualifiedProcedureName;
-            }
-        }
-
-        public Dictionary<string, SchemaView> ViewByLowercaseViewName
-        {
-            get
-            {
-                return this.viewByLowercaseViewName;
-            }
-        }
-        
-        public bool Exists
-        {
-            get
-            {
-                return this.exists;
-            }
-        }
-
-        public Dictionary<string, Dictionary<string, SchemaIndex>> IndexByLowercaseIndexNameByLowercaseTableName
-        {
-            get
-            {
-                return this.indexByLowercaseIndexNameByLowercaseTableName;
-            }
-        }
-
         public SchemaTable GetTable(string tableName)
         {
             SchemaTable table;
@@ -305,13 +239,6 @@ WHERE
             SchemaProcedure procedure;
             this.procedureByFullyQualifiedProcedureName.TryGetValue(procedureName, out procedure);
             return procedure;
-        }
-
-        public SchemaView GetView(string viewName)
-        {
-            SchemaView view;
-            this.viewByLowercaseViewName.TryGetValue(viewName.ToLowerInvariant(), out view);
-            return view;
         }
 
         public SchemaIndex GetIndex(string tableName, string indexName)

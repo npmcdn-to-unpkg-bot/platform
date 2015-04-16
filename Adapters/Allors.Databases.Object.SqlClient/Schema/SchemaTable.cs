@@ -6,14 +6,12 @@ namespace Allors.Databases.Object.SqlClient
     {
         private readonly Schema schema;
         private readonly string name;
-        private readonly string lowercaseName;
         private readonly Dictionary<string, SchemaTableColumn> columnByLowercaseColumnName;
 
         public SchemaTable(Schema schema, string name)
         {
             this.schema = schema;
             this.name = name;
-            this.lowercaseName = name.ToLowerInvariant();
 
             this.columnByLowercaseColumnName = new Dictionary<string, SchemaTableColumn>();
         }
@@ -34,13 +32,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public string LowercaseName
-        {
-            get
-            {
-                return this.lowercaseName;
-            }
-        }
 
         public Schema Schema
         {

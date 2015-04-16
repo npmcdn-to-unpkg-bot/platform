@@ -65,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             internal Dictionary<ObjectId, int> Execute(ISet<Reference> strategyReferences)
             {
-                var mapping = this.factory.Database.SqlClientMapping;
+                var mapping = this.factory.Database.Mapping;
 
                 if (this.command == null)
                 {

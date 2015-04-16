@@ -41,16 +41,16 @@ namespace Allors.Databases.Object.SqlClient
             var schema = statement.Mapping;
             if (this.instanceClasses.Length == 1)
             {
-                statement.Append(" (" + statement.GetJoinName(this.association) + "." + schema.TypeId + " IS NOT NULL AND ");
-                statement.Append(" " + statement.GetJoinName(this.association) + "." + schema.TypeId + "=" + statement.AddParameter(this.instanceClasses[0].Id) + ") ");
+                statement.Append(" (" + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + " IS NOT NULL AND ");
+                statement.Append(" " + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[0].Id) + ") ");
             }
             else if (this.instanceClasses.Length > 1)
             {
                 statement.Append(" ( ");
                 for (var i = 0; i < this.instanceClasses.Length; i++)
                 {
-                    statement.Append(" (" + statement.GetJoinName(this.association) + "." + schema.TypeId + " IS NOT NULL AND ");
-                    statement.Append(" " + statement.GetJoinName(this.association) + "." + schema.TypeId + "=" + statement.AddParameter(this.instanceClasses[i].Id) + ")");
+                    statement.Append(" (" + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + " IS NOT NULL AND ");
+                    statement.Append(" " + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[i].Id) + ")");
                     if (i < this.instanceClasses.Length - 1)
                     {
                         statement.Append(" OR ");

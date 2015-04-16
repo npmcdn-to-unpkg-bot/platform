@@ -17,6 +17,7 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Text;
 
@@ -24,29 +25,48 @@ namespace Allors.Databases.Object.SqlClient
 
     public class Initialization
     {
+        private readonly Database database;
         private readonly Mapping mapping;
+        
+        private Validation validation;
 
-        private readonly Schema schema;
-
-        internal Initialization(Mapping mapping, Schema schema)
+        internal Initialization(Database database)
         {
-            this.mapping = mapping;
-            this.schema = schema;
+            this.database = database;
+            this.mapping = database.Mapping;
         }
 
         internal void Execute()
         {
-            this.EnableSnapshotIsolation();
-            this.CreateSchema();
-            this.CreateUserDefinedTypes();
-            this.CreateTables();
-            this.CreateProcedures();
-            this.CreateIndeces();
+            this.validation = new Validation(this.database);
+
+            this.AllowSnapshotIsolation();
+
+            if (this.validation.IsValid)
+            {
+                this.ProcessTables();
+            }
+            else
+            {
+                this.CreateSchema();
+
+                this.DropProcedures();
+
+                this.ProcessTables();
+
+                this.DropTableTypes();
+
+                this.CreateTableTypes();
+
+                this.CreateProcedures();
+
+                this.CreateIndeces();
+            }
         }
 
-        private void EnableSnapshotIsolation()
+        private void AllowSnapshotIsolation()
         {
-            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            using (var connection = new SqlConnection(this.database.ConnectionString))
             {
                 connection.Open();
                 try
@@ -68,16 +88,16 @@ set allow_snapshot_isolation on";
 
         private void CreateSchema()
         {
-            if (!this.schema.Exists)
+            if (!this.validation.Schema.Exists)
             {
                 // CREATE SCHEMA must be in its own batch
-                using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+                using (var connection = new SqlConnection(this.database.ConnectionString))
                 {
                     connection.Open();
                     try
                     {
                         var cmdText = @"
-CREATE SCHEMA " + this.mapping.Database.SchemaName;
+CREATE SCHEMA " + this.database.SchemaName;
                         using (var command = new SqlCommand(cmdText, connection))
                         {
                             command.ExecuteNonQuery();
@@ -91,273 +111,9 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
             }
         }
 
-        private void CreateUserDefinedTypes()
+        private void DropProcedures()
         {
-            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
-            {
-                connection.Open();
-                try
-                {
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForObject + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForObject + " " + this.mapping.GetSqlType(this.mapping.ObjectId) + ")\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForObject);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForCompositeRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " " + this.mapping.GetSqlType(this.mapping.RoleId) + ")\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForCompositeRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForStringRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " NVARCHAR(MAX))\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForStringRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForIntegerRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " INT)\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForIntegerRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForFloatRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " FLOAT)\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForFloatRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForDateTimeRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " DATETIME2)\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForDateTimeRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForBooleanRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " BIT)\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForBooleanRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForUniqueRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " UNIQUEIDENTIFIER)\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForUniqueRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-                    }
-
-                    {
-                        var sql = new StringBuilder();
-                        sql.Append("CREATE TYPE " + this.mapping.TableTypeNameForBinaryRelation + " AS TABLE\n");
-                        sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                        sql.Append(this.mapping.TableTypeColumnNameForRole + " VARBINARY(MAX))\n");
-
-                        var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForBinaryRelation);
-                        if (tableType == null)
-                        {
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-
-                    }
-
-                    foreach (var precisionEntry in this.mapping.TableTypeNameForDecimalRelationByScaleByPrecision)
-                    {
-                        var precision = precisionEntry.Key;
-                        foreach (var scaleEntry in precisionEntry.Value)
-                        {
-                            var scale = scaleEntry.Key;
-                            var decimalRelationTable = scaleEntry.Value;
-
-                            var sql = new StringBuilder();
-                            sql.Append("CREATE TYPE " + decimalRelationTable + " AS TABLE\n");
-                            sql.Append("(" + this.mapping.TableTypeColumnNameForAssociation + " " + this.mapping.GetSqlType(this.mapping.AssociationId) + ",\n");
-                            sql.Append(this.mapping.TableTypeColumnNameForRole + " DECIMAL(" + precision + "," + scale + ") )\n");
-
-                            var tableType = this.schema.GetTableType(decimalRelationTable);
-                            if (tableType == null)
-                            {
-                                using (var command = new SqlCommand(sql.ToString(), connection))
-                                {
-                                    command.ExecuteNonQuery();
-                                }
-                            }
-
-                        }
-                    }
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-        }
-
-        private void CreateTables()
-        {
-            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
-            {
-                connection.Open();
-                try
-                {
-                    foreach (MappingTable table in this.mapping)
-                    {
-                        var schemaTable = this.schema.GetTable(table.Name);
-                        if (schemaTable != null)
-                        {
-                            var cmdText = @"
-TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + table + @";
-";
-                            using (var command = new SqlCommand(cmdText, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-                        else
-                        {
-                            var sql = new StringBuilder();
-                            sql.Append("CREATE TABLE " + this.mapping.Database.SchemaName + "." + table + "\n");
-                            sql.Append("(\n");
-
-                            foreach (MappingColumn column in table)
-                            {
-                                sql.Append(column + " ");
-                                sql.Append(this.mapping.GetSqlType(column));
-
-                                if (column.IsIdentity)
-                                {
-                                    sql.Append(" IDENTITY");
-                                }
-
-                                sql.Append(",\n");
-                            }
-
-                            sql.Append("PRIMARY KEY (");
-                            var firstKey = true;
-                            foreach (MappingColumn field in table)
-                            {
-                                if (field.IsKey)
-                                {
-                                    if (firstKey)
-                                    {
-                                        firstKey = false;
-                                    }
-                                    else
-                                    {
-                                        sql.Append(", ");
-                                    }
-
-                                    sql.Append(field.Name);
-                                }
-                            }
-
-                            sql.Append(")\n");
-                            sql.Append(")\n");
-
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-                        }
-                    }
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-        }
-
-        private void CreateProcedures()
-        {
-            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            using (var connection = new SqlConnection(this.database.ConnectionString))
             {
                 connection.Open();
                 try
@@ -365,19 +121,8 @@ TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + table + @";
                     foreach (var dictionaryEntry in this.mapping.ProcedureDefinitionByName)
                     {
                         var name = dictionaryEntry.Key;
-                        var definition = dictionaryEntry.Value;
 
-                        if (name.Contains("gr_c1_c1one2manyi1") || definition.Contains("gr_c1_c1one2manyi1"))
-                        {
-                            Console.WriteLine(0);
-                        }
-
-                        var procedure = this.schema.GetProcedure(name);
-                        if (procedure != null && procedure.IsDefinitionCompatible(definition))
-                        {
-                            continue;
-                        }
-
+                        var procedure = this.validation.Schema.GetProcedure(name);
                         if (procedure != null)
                         {
                             using (var command = new SqlCommand("DROP PROCEDURE " + name, connection))
@@ -385,17 +130,210 @@ TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + table + @";
                                 command.ExecuteNonQuery();
                             }
                         }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
 
-                        using (var command = new SqlCommand(definition, connection))
+        private void DropTableTypes()
+        {
+            using (var connection = new SqlConnection(this.database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    foreach (var dictionaryEntry in this.mapping.TableTypeDefinitionByName)
+                    {
+                        var name = dictionaryEntry.Key;
+
+                        if (!this.validation.MissingTableTypeNames.Contains(name))
                         {
-                            try
+                            using (var command = new SqlCommand("DROP TYPE " + name, connection))
                             {
                                 command.ExecuteNonQuery();
                             }
-                            catch (Exception e)
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void CreateTableTypes()
+        {
+            using (var connection = new SqlConnection(this.database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    foreach (var dictionaryEntry in this.mapping.TableTypeDefinitionByName)
+                    {
+                        var definition = dictionaryEntry.Value;
+                        
+                        using (var command = new SqlCommand(definition, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void ProcessTables()
+        {
+            using (var connection = new SqlConnection(this.database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    if (!this.TruncateOrDropTable(connection, this.mapping.TableNameForObjects))
+                    {
+                        var sql = new StringBuilder();
+                        sql.Append("CREATE TABLE " + this.mapping.TableNameForObjects + "\n");
+                        sql.Append("(\n");
+                        sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " IDENTITY(1,1) PRIMARY KEY,\n");
+                        sql.Append(Mapping.ColumnNameForType + " " + Mapping.SqlTypeForType + ",\n");
+                        sql.Append(Mapping.ColumnNameForCache + " " + Mapping.SqlTypeForCache + "\n");
+                        sql.Append(")\n");
+
+                        using (var command = new SqlCommand(sql.ToString(), connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    
+                    foreach (var @class in this.mapping.Database.MetaPopulation.Classes)
+                    {
+                        var name = this.mapping.TableNameForObjectByClass[@class];
+
+                        if (name.Contains("User"))
+                        {
+                            Console.Write(0);
+                        }
+
+                        if (!this.TruncateOrDropTable(connection, name))
+                        {
+                            var sql = new StringBuilder();
+                            sql.Append("CREATE TABLE " + name + "\n");
+                            sql.Append("(\n");
+                            sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " PRIMARY KEY,\n");
+                            sql.Append(Mapping.ColumnNameForType + " " + Mapping.SqlTypeForType);
+
+                            foreach (var associationType in @class.AssociationTypes)
                             {
-                                throw;
+                                var relationType = associationType.RelationType;
+                                var roleType = relationType.RoleType;
+                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
+                                {
+                                    sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.SqlTypeForObject);
+                                }
                             }
+
+                            foreach (var roleType in @class.RoleTypes)
+                            {
+                                var relationType = roleType.RelationType;
+                                var associationType3 = relationType.AssociationType;
+                                if (roleType.ObjectType.IsUnit)
+                                {
+                                    sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.GetSqlType(roleType));
+                                }
+                                else
+                                {
+                                    if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
+                                    {
+                                        sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.SqlTypeForObject);
+                                    }
+                                }
+                            }
+
+                            sql.Append(")\n");
+
+                            using (var command = new SqlCommand(sql.ToString(), connection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                        }
+                    }
+
+                    foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                    {
+                        var associationType = relationType.AssociationType;
+                        var roleType = relationType.RoleType;
+
+                        if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                        {
+                            var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
+                            if (!this.TruncateOrDropTable(connection, tableName))
+                            {
+                                var primaryKey = false;
+
+                                var sql = new StringBuilder();
+                                sql.Append("CREATE TABLE " + tableName + "\n");
+                                sql.Append("(\n");
+                                sql.Append(Mapping.ColumnNameForAssociation + " " + this.mapping.SqlTypeForObject);
+
+                                if (associationType.IsOne)
+                                {
+                                    sql.Append(" PRIMARY KEY");
+                                    primaryKey = true;
+                                }
+
+                                sql.Append(",\n");
+
+                                sql.Append(Mapping.ColumnNameForRole + " " + this.mapping.SqlTypeForObject);
+
+                                if (!primaryKey && roleType.IsOne)
+                                {
+                                    sql.Append(" PRIMARY KEY");
+                                    primaryKey = true;
+                                }
+
+                                if (!primaryKey && roleType.IsMany)
+                                {
+                                    sql.Append(",\nCONSTRAINT PK_" + tableName.Replace(".","_") + " PRIMARY KEY (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + ")\n");
+                                }
+
+                                sql.Append(")\n");
+
+                                using (var command = new SqlCommand(sql.ToString(), connection))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        
+        private void CreateProcedures()
+        {
+            using (var connection = new SqlConnection(this.database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    foreach (var dictionaryEntry in this.mapping.ProcedureDefinitionByName)
+                    {
+                        var definition = dictionaryEntry.Value;
+                        using (var command = new SqlCommand(definition, connection))
+                        {
+                            command.ExecuteNonQuery();
                         }
                     }
                 }
@@ -408,65 +346,95 @@ TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + table + @";
 
         private void CreateIndeces()
         {
-            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            using (var connection = new SqlConnection(this.database.ConnectionString))
             {
                 connection.Open();
                 try
                 {
-                    foreach (MappingTable table in this.mapping)
-                    {
-                        foreach (MappingColumn column in table)
-                        {
-                            if (column.IndexType != MappingIndexType.None)
-                            {
-                                var indexName = "_" + column.Name;
+                    // TODO:
 
-                                if (column.IndexType == MappingIndexType.Single)
-                                {
-                                    var sql = new StringBuilder();
-                                    sql.Append("CREATE INDEX " + indexName + "\n");
-                                    sql.Append("ON " + this.mapping.Database.SchemaName + "." + table + " (" + column + ")");
 
-                                    var schemaIndex = this.schema.GetIndex(table.Name, indexName);
-                                    if (schemaIndex == null)
-                                    {
-                                        using (var command = new SqlCommand(sql.ToString(), connection))
-                                        {
-                                            command.ExecuteNonQuery();
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    var sql = new StringBuilder();
-                                    sql.Append("CREATE INDEX " + indexName + "\n");
-                                    sql.Append("ON " + this.mapping.Database.SchemaName + "." + table + " (" + column + ", " + table.FirstKeyColumn + ")");
+                    //foreach (MappingTable table in this.mapping)
+                    //{
+                    //    foreach (MappingColumn column in table)
+                    //    {
+                    //        if (column.IndexType != MappingIndexType.None)
+                    //        {
+                    //            var indexName = "_" + column.Name;
 
-                                    var schemaIndex = this.schema.GetIndex(table.Name, indexName);
-                                    if (schemaIndex == null)
-                                    {
-                                        using (var command = new SqlCommand(sql.ToString(), connection))
-                                        {
-                                            try
-                                            {
-                                                command.ExecuteNonQuery();
-                                            }
-                                            catch (Exception e)
-                                            {
-                                                Console.WriteLine(0);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    //            if (column.IndexType == MappingIndexType.Single)
+                    //            {
+                    //                var sql = new StringBuilder();
+                    //                sql.Append("CREATE INDEX " + indexName + "\n");
+                    //                sql.Append("ON " + this.database.SchemaName + "." + table + " (" + column + ")");
+
+                    //                var schemaIndex = this.schema.GetIndex(table.Name, indexName);
+                    //                if (schemaIndex == null)
+                    //                {
+                    //                    using (var command = new SqlCommand(sql.ToString(), connection))
+                    //                    {
+                    //                        command.ExecuteNonQuery();
+                    //                    }
+                    //                }
+                    //            }
+                    //            else
+                    //            {
+                    //                var sql = new StringBuilder();
+                    //                sql.Append("CREATE INDEX " + indexName + "\n");
+                    //                sql.Append("ON " + this.database.SchemaName + "." + table + " (" + column + ", " + table.FirstKeyColumn + ")");
+
+                    //                var schemaIndex = this.schema.GetIndex(table.Name, indexName);
+                    //                if (schemaIndex == null)
+                    //                {
+                    //                    using (var command = new SqlCommand(sql.ToString(), connection))
+                    //                    {
+                    //                        try
+                    //                        {
+                    //                            command.ExecuteNonQuery();
+                    //                        }
+                    //                        catch (Exception e)
+                    //                        {
+                    //                            Console.WriteLine(0);
+                    //                        }
+                    //                    }
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
                 }
                 finally
                 {
                     connection.Close();
                 }
             }
+        }
+
+        private bool TruncateOrDropTable(SqlConnection connection, string tableName)
+        {
+            if (!this.validation.MissingTableNames.Contains(tableName))
+            {
+                var table = this.validation.Schema.GetTable(tableName);
+                if (this.validation.InvalidTables.Contains(table))
+                {
+                    using (var command = new SqlCommand("DROP TABLE " + tableName, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+                else
+                {
+                    var cmdText = @"TRUNCATE TABLE " + tableName + @";";
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

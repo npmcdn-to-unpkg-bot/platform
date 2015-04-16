@@ -68,13 +68,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     var sql = this.Database.Mapping.ProcedureNameForCreateObjectByClass[exclusiveRootClass];
                     command = this.Session.CreateSqlCommand(sql);
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, schema.TypeId.Param, objectType.Id);
+                    this.AddInObject(command, Mapping.ParamNameForType, Mapping.SqlDbTypeForType, objectType.Id);
 
                     this.commandByIObjectType[exclusiveRootClass] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, schema.TypeId.Param, objectType.Id);
+                    this.SetInObject(command, Mapping.ParamNameForType, objectType.Id);
                 }
 
                 var result = command.ExecuteScalar();

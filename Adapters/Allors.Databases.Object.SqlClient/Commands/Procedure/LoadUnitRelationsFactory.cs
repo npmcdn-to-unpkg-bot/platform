@@ -76,7 +76,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             internal void Execute(IList<UnitRelation> relations, IObjectType exclusiveRootClass, IRoleType roleType)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
-                var schema = database.SqlClientMapping;
+                var schema = database.Mapping;
 
                 Dictionary<IRoleType, SqlCommand> commandByIRoleType;
                 if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))

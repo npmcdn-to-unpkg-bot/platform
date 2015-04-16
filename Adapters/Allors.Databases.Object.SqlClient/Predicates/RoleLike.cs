@@ -39,7 +39,7 @@ namespace Allors.Databases.Object.SqlClient
         internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Mapping;
-            statement.Append(" " + alias + "." + schema.Column(this.role) + " LIKE " + statement.AddParameter(this.like));
+            statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.role.RelationType] + " LIKE " + statement.AddParameter(this.like));
             return this.Include;
         }
 

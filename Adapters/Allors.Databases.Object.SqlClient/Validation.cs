@@ -1,46 +1,50 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
+    using System.Management.Instrumentation;
 
     using Allors.Meta;
 
     public class Validation
     {
         public readonly HashSet<string> MissingTableNames;
-        public readonly Dictionary<SchemaTable, HashSet<string>> MissingColumnNamesByTable;
-
         public readonly HashSet<SchemaTable> InvalidTables;
-        public readonly HashSet<SchemaTableColumn> InvalidColumns; 
+
+        public readonly HashSet<string> MissingTableTypeNames;
+        public readonly HashSet<SchemaTableType> InvalidTableTypes;
 
         private readonly Database database;
+        private readonly Mapping mapping;
         private readonly Schema schema;
 
-        private readonly bool success;
+        private readonly bool isValid;
 
         public Validation(Database database)
         {
             this.database = database;
+            this.mapping = database.Mapping;
             this.schema = new Schema(database);
             
             this.MissingTableNames = new HashSet<string>();
-            this.MissingColumnNamesByTable = new Dictionary<SchemaTable, HashSet<string>>();
-            
             this.InvalidTables = new HashSet<SchemaTable>();
-            this.InvalidColumns = new HashSet<SchemaTableColumn>();
+
+            this.MissingTableTypeNames = new HashSet<string>();
+            this.InvalidTableTypes = new HashSet<SchemaTableType>();
 
             this.Validate();
 
-            this.success = this.MissingTableNames.Count == 0 &
-                           this.MissingColumnNamesByTable.Count == 0 &
-                           this.InvalidTables.Count == 0 & 
-                           this.InvalidColumns.Count == 0;
+            this.isValid = 
+                this.MissingTableNames.Count == 0 & 
+                this.InvalidTables.Count == 0 &
+                this.MissingTableTypeNames.Count == 0 &
+                this.InvalidTableTypes.Count == 0;
         }
 
-        public bool Success
+        public bool IsValid
         {
             get
             {
-                return this.success;
+                return this.isValid;
             }
         }
 
@@ -62,13 +66,11 @@ namespace Allors.Databases.Object.SqlClient
 
         private void Validate()
         {
-            var mapping = this.Database.Mapping;
-
             // Objects Table
-            var objectsTable = this.Schema.GetTable(Mapping.TableNameObjects);
+            var objectsTable = this.Schema.GetTable(this.database.Mapping.TableNameForObjects);
             if (objectsTable == null)
             {
-                this.MissingTableNames.Add(Mapping.TableNameObjects);
+                this.MissingTableNames.Add(this.mapping.TableNameForObjects);
             }
             else
             {
@@ -77,27 +79,27 @@ namespace Allors.Databases.Object.SqlClient
                     this.InvalidTables.Add(objectsTable);
                 }
 
-                this.ValidateColumn(objectsTable, Mapping.TableColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
-                this.ValidateColumn(objectsTable, Mapping.TableColumnNameForType, Mapping.SqlTypeForType);
-                this.ValidateColumn(objectsTable, Mapping.TableColumnNameForCache, Mapping.SqlTypeForCache);
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForType, Mapping.SqlTypeForType);
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForCache, Mapping.SqlTypeForCache);
             }
             
             // Object Tables
-            foreach (var objectType in this.Database.MetaPopulation.Classes)
+            foreach (var @class in this.Database.MetaPopulation.Classes)
             {
-                var tableName = mapping.GetTableName(objectType);
+                var tableName = this.mapping.TableNameForObjectByClass[@class];
                 var table = this.Schema.GetTable(tableName);
 
                 if (table == null)
                 {
-                    this.MissingTableNames.Add(Mapping.TableNameObjects);
+                    this.MissingTableNames.Add(tableName);
                 }
                 else
                 {
-                    this.ValidateColumn(table, Mapping.TableColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
-                    this.ValidateColumn(table, Mapping.TableColumnNameForType, Mapping.SqlTypeForType);
+                    this.ValidateColumn(table, Mapping.ColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
+                    this.ValidateColumn(table, Mapping.ColumnNameForType, Mapping.SqlTypeForType);
 
-                    foreach (var associationType in objectType.AssociationTypes)
+                    foreach (var associationType in @class.AssociationTypes)
                     {
                         var relationType = associationType.RelationType;
                         var roleType = relationType.RoleType;
@@ -106,12 +108,12 @@ namespace Allors.Databases.Object.SqlClient
                         {
                             this.ValidateColumn(
                                 table,
-                                this.database.Mapping.Column(relationType).Name,
+                                this.database.Mapping.ColumnNameByRelationType[relationType],
                                 this.Database.Mapping.SqlTypeForObject);
                         }
                     }
 
-                    foreach (var roleType in objectType.RoleTypes)
+                    foreach (var roleType in @class.RoleTypes)
                     {
                         var relationType = roleType.RelationType;
                         var associationType = relationType.AssociationType;
@@ -119,7 +121,7 @@ namespace Allors.Databases.Object.SqlClient
                         {
                             this.ValidateColumn(
                                 table,
-                                this.database.Mapping.Column(relationType).Name,
+                                this.database.Mapping.ColumnNameByRelationType[relationType],
                                 this.Database.Mapping.GetSqlType(relationType.RoleType));
                         }
                         else
@@ -129,7 +131,7 @@ namespace Allors.Databases.Object.SqlClient
                             {
                                 this.ValidateColumn(
                                     table,
-                                    this.database.Mapping.Column(relationType).Name,
+                                    this.database.Mapping.ColumnNameByRelationType[relationType],
                                     this.Database.Mapping.SqlTypeForObject);
                             }
                         }
@@ -146,7 +148,7 @@ namespace Allors.Databases.Object.SqlClient
                 if (!roleType.ObjectType.IsUnit && 
                     ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                 {
-                    var tableName = mapping.GetTableName(relationType);
+                    var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
                     var table = this.Schema.GetTable(tableName);
 
                     if (table == null)
@@ -160,44 +162,96 @@ namespace Allors.Databases.Object.SqlClient
                             this.InvalidTables.Add(table);
                         }
 
-                        this.ValidateColumn(table, Mapping.TableColumnNameForAssociation, this.Database.Mapping.SqlTypeForObject);
+                        this.ValidateColumn(table, Mapping.ColumnNameForAssociation, this.Database.Mapping.SqlTypeForObject);
 
-                        var roleSqlType = relationType.RoleType.ObjectType.IsComposite ? this.Database.Mapping.SqlTypeForObject : mapping.GetSqlType(relationType.RoleType);
-                        this.ValidateColumn(table, Mapping.TableColumnNameForRole, roleSqlType);
+                        var roleSqlType = relationType.RoleType.ObjectType.IsComposite ? this.Database.Mapping.SqlTypeForObject : this.mapping.GetSqlType(relationType.RoleType);
+                        this.ValidateColumn(table, Mapping.ColumnNameForRole, roleSqlType);
                     }
+                }
+            }
+
+            // TableTypes
+            {
+                // Object TableType
+                var tableType = this.schema.GetTableType(this.mapping.TableTypeNameForObject);
+                if (tableType == null)
+                {
+                    this.MissingTableTypeNames.Add(this.mapping.TableTypeNameForObject);
+                }
+                else
+                {
+                    if (tableType.ColumnByLowercaseColumnName.Count != 1)
+                    {
+                        this.InvalidTableTypes.Add(tableType);
+                    }
+
+                    this.ValidateColumn(tableType, this.mapping.TableTypeColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
+                }
+            }
+
+            this.ValidateTableType(this.mapping.TableTypeNameForCompositeRelation, this.Database.Mapping.SqlTypeForObject);
+            this.ValidateTableType(this.mapping.TableTypeNameForStringRelation, "nvarchar(max)");
+            this.ValidateTableType(this.mapping.TableTypeNameForIntegerRelation, "int");
+            this.ValidateTableType(this.mapping.TableTypeNameForFloatRelation, "float");
+            this.ValidateTableType(this.mapping.TableTypeNameForDateTimeRelation, "datetime2");
+            this.ValidateTableType(this.mapping.TableTypeNameForBooleanRelation, "bit");
+            this.ValidateTableType(this.mapping.TableTypeNameForUniqueRelation, "uniqueidentifier");
+            this.ValidateTableType(this.mapping.TableTypeNameForBinaryRelation, "varbinary(max)");
+            this.ValidateTableType(this.mapping.TableTypeNameForBinaryRelation, "varbinary(max)");
+
+            // Decimal TableType
+            foreach (var precisionEntry in this.mapping.TableTypeNameForDecimalRelationByScaleByPrecision)
+            {
+                foreach (var scaleEntry in precisionEntry.Value)
+                {
+                    var name = scaleEntry.Value;
+                    var precision = precisionEntry.Key;
+                    var scale = scaleEntry.Key;
+
+                    this.ValidateTableType(name, "decimal(" + precision + "," + scale + ")");
                 }
             }
 
             // TODO: Procedures and Indeces
         }
 
+        private void ValidateTableType(string name, string columnType)
+        {
+            var tableType = this.schema.GetTableType(name);
+            if (tableType == null)
+            {
+                this.MissingTableTypeNames.Add(name);
+            }
+            else
+            {
+                if (tableType.ColumnByLowercaseColumnName.Count != 2)
+                {
+                    this.InvalidTableTypes.Add(tableType);
+                }
+
+                this.ValidateColumn(tableType, this.mapping.TableTypeColumnNameForAssociation, this.Database.Mapping.SqlTypeForObject);
+                this.ValidateColumn(tableType, this.mapping.TableTypeColumnNameForRole, columnType);
+            }
+        }
+
         private void ValidateColumn(SchemaTable table, string columnName, string sqlType)
         {
             var objectColumn = table.GetColumn(columnName);
 
-            if (objectColumn == null)
+            if (objectColumn == null || !objectColumn.SqlType.Equals(sqlType))
             {
-                this.AddMissingColumnName(table, columnName);
-            }
-            else
-            {
-                if (!objectColumn.SqlType.Equals(sqlType))
-                {
-                    this.InvalidColumns.Add(objectColumn);
-                }
+                this.InvalidTables.Add(table);
             }
         }
 
-        private void AddMissingColumnName(SchemaTable table, string columnName)
+        private void ValidateColumn(SchemaTableType tableType, string columnName, string sqlType)
         {
-            HashSet<string> missingColumnNames;
-            if (!this.MissingColumnNamesByTable.TryGetValue(table, out missingColumnNames))
-            {
-                missingColumnNames = new HashSet<string>();
-                this.MissingColumnNamesByTable[table] = missingColumnNames;
-            }
+            var objectColumn = tableType.GetColumn(columnName);
 
-            missingColumnNames.Add(columnName);
+            if (objectColumn == null || !objectColumn.SqlType.Equals(sqlType))
+            {
+                this.InvalidTableTypes.Add(tableType);
+            }
         }
     }
 }

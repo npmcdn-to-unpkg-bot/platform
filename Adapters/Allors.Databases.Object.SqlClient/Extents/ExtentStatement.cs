@@ -81,15 +81,15 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveLeafClasses)
                     {
-                        this.Append(" LEFT OUTER JOIN " + this.Mapping.Table(role) + " " + role.SingularFullName + "_R");
-                        this.Append(" ON " + alias + "." + this.Mapping.ObjectId + "=" + role.SingularFullName + "_R." + this.Mapping.AssociationId);
+                        this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForRelationByRelationType[relationType] + " " + role.SingularFullName + "_R");
+                        this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Mapping.ColumnNameForAssociation);
                     }
                     else
                     {
                         if (role.IsMany)
                         {
-                            this.Append(" LEFT OUTER JOIN " + this.Mapping.Table(((IComposite)role.ObjectType).ExclusiveLeafClass) + " " + role.SingularFullName + "_R");
-                            this.Append(" ON " + alias + "." + this.Mapping.ObjectId + "=" + role.SingularFullName + "_R." + this.Mapping.Column(association));
+                            this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjectByClass[((IComposite)role.ObjectType).ExclusiveLeafClass] + " " + role.SingularFullName + "_R");
+                            this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + this.Mapping.ColumnNameByRelationType[relationType]);
                         }
                     }
                 }
@@ -103,13 +103,13 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (!relationType.ExistExclusiveLeafClasses)
                     {
-                        this.Append(" LEFT OUTER JOIN " + this.Mapping.Objects + " " + this.GetJoinName(role));
-                        this.Append(" ON " + this.GetJoinName(role) + "." + this.Mapping.ObjectId + "=" + role.SingularFullName + "_R." + this.Mapping.RoleId + " ");
+                        this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjects + " " + this.GetJoinName(role));
+                        this.Append(" ON " + this.GetJoinName(role) + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " ");
                     }
                     else
                     {
-                        this.Append(" LEFT OUTER JOIN " + this.Mapping.Objects + " " + this.GetJoinName(role));
-                        this.Append(" ON " + this.GetJoinName(role) + "." + this.Mapping.ObjectId + "=" + alias + "." + this.Mapping.Column(role) + " ");
+                        this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjects + " " + this.GetJoinName(role));
+                        this.Append(" ON " + this.GetJoinName(role) + "." + Mapping.ColumnNameForObject + "=" + alias + "." + this.Mapping.ColumnNameByRelationType[relationType] + " ");
                     }
                 }
             }
@@ -121,15 +121,15 @@ namespace Allors.Databases.Object.SqlClient
 
                 if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveLeafClasses)
                 {
-                    this.Append(" LEFT OUTER JOIN " + this.Mapping.Table(association) + " " + association.SingularFullName + "_A");
-                    this.Append(" ON " + alias + "." + this.Mapping.ObjectId + "=" + association.SingularFullName + "_A." + this.Mapping.RoleId);
+                    this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForRelationByRelationType[relationType] + " " + association.SingularFullName + "_A");
+                    this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Mapping.ColumnNameForRole);
                 }
                 else
                 {
                     if (!role.IsMany)
                     {
-                        this.Append(" LEFT OUTER JOIN " + this.Mapping.Table(association.ObjectType.ExclusiveLeafClass) + " " + association.SingularFullName + "_A");
-                        this.Append(" ON " + alias + "." + this.Mapping.ObjectId + "=" + association.SingularFullName + "_A." + this.Mapping.Column(role));
+                        this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjectByClass[association.ObjectType.ExclusiveLeafClass] + " " + association.SingularFullName + "_A");
+                        this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + this.Mapping.ColumnNameByRelationType[relationType]);
                     }
                 }
             }
@@ -143,20 +143,20 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (!relationType.ExistExclusiveLeafClasses)
                     {
-                        this.Append(" LEFT OUTER JOIN " + this.Mapping.Objects + " " + this.GetJoinName(association));
-                        this.Append(" ON " + this.GetJoinName(association) + "." + this.Mapping.ObjectId + "=" + association.SingularFullName + "_A." + this.Mapping.AssociationId + " ");
+                        this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjects + " " + this.GetJoinName(association));
+                        this.Append(" ON " + this.GetJoinName(association) + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " ");
                     }
                     else
                     {
                         if (role.IsOne)
                         {
-                            this.Append(" LEFT OUTER JOIN " + this.Mapping.Objects + " " + this.GetJoinName(association));
-                            this.Append(" ON " + this.GetJoinName(association) + "." + this.Mapping.ObjectId + "=" + association.SingularFullName + "_A." + this.Mapping.ObjectId + " ");
+                            this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjects + " " + this.GetJoinName(association));
+                            this.Append(" ON " + this.GetJoinName(association) + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Mapping.ColumnNameForObject + " ");
                         }
                         else
                         {
-                            this.Append(" LEFT OUTER JOIN " + this.Mapping.Objects + " " + this.GetJoinName(association));
-                            this.Append(" ON " + this.GetJoinName(association) + "." + this.Mapping.ObjectId + "=" + alias + "." + this.Mapping.Column(association) + " ");
+                            this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjects + " " + this.GetJoinName(association));
+                            this.Append(" ON " + this.GetJoinName(association) + "." + Mapping.ColumnNameForObject + "=" + alias + "." + this.Mapping.ColumnNameByRelationType[relationType] + " ");
                         }
                     }
                 }
@@ -174,7 +174,7 @@ namespace Allors.Databases.Object.SqlClient
                 this.Append(" WHERE ( ");
                 if (!this.Type.IsInterface)
                 {
-                    this.Append(" " + alias + "." + this.Mapping.TypeId + "=" + this.AddParameter(this.Type.Id));
+                    this.Append(" " + alias + "." + Mapping.ColumnNameForType + "=" + this.AddParameter(this.Type.Id));
                 }
                 else
                 {
@@ -190,7 +190,7 @@ namespace Allors.Databases.Object.SqlClient
                             this.Append(" OR ");
                         }
 
-                        this.Append(" " + alias + "." + this.Mapping.TypeId + "=" + this.AddParameter(subClass.Id));
+                        this.Append(" " + alias + "." + Mapping.ColumnNameForType + "=" + this.AddParameter(subClass.Id));
                     }
                 }
 

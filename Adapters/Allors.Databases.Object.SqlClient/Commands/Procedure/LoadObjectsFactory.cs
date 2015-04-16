@@ -56,7 +56,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 var database = this.factory.ManagementSession.SqlClientDatabase;
 
                 var exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
-                var schema = database.SqlClientMapping;
+                var schema = database.Mapping;
 
                 lock (database)
                 {
@@ -64,7 +64,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     using (var command = this.factory.ManagementSession.CreateSqlCommand(sql))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        this.AddInObject(command, schema.TypeId.Param, objectType.Id);
+                        this.AddInObject(command, Mapping.ParamNameForType, Mapping.SqlDbTypeForType, objectType.Id);
                         this.AddInTable(command, schema.TableTypeNameForObject, database.CreateObjectTable(objectIds));
                         command.ExecuteNonQuery();
                     }

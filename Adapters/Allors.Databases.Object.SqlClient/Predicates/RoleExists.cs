@@ -39,23 +39,23 @@ namespace Allors.Databases.Object.SqlClient
             var schema = statement.Mapping;
             if (this.role.ObjectType.IsUnit)
             {
-                statement.Append(" " + alias + "." + schema.Column(this.role) + " IS NOT NULL");
+                statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.role.RelationType] + " IS NOT NULL");
             }
             else
             {
                 if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveLeafClasses)
                 {
-                    statement.Append(" " + this.role.SingularFullName + "_R." + schema.RoleId + " IS NOT NULL");
+                    statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL");
                 }
                 else
                 {
                     if (this.role.IsMany)
                     {
-                        statement.Append(" " + this.role.SingularFullName + "_R." + schema.ObjectId + " IS NOT NULL");
+                        statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForObject + " IS NOT NULL");
                     }
                     else
                     {
-                        statement.Append(" " + alias + "." + schema.Column(this.role) + " IS NOT NULL");
+                        statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.role.RelationType] + " IS NOT NULL");
                     }
                 }
             }

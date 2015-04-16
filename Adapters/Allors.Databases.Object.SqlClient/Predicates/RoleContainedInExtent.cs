@@ -46,8 +46,8 @@ namespace Allors.Databases.Object.SqlClient
 
             if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveLeafClasses)
             {
-                statement.Append(" (" + this.role.SingularFullName + "_R." + schema.RoleId + " IS NOT NULL AND ");
-                statement.Append(" " + this.role.SingularFullName + "_R." + schema.AssociationId + " IN (");
+                statement.Append(" (" + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL AND ");
+                statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForAssociation + " IN (");
                 this.inExtent.BuildSql(inStatement);
                 statement.Append(" ))");
             }
@@ -55,15 +55,15 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (this.role.IsMany)
                 {
-                    statement.Append(" (" + this.role.SingularFullName + "_R." + schema.ObjectId + " IS NOT NULL AND ");
-                    statement.Append(" " + this.role.SingularFullName + "_R." + schema.ObjectId + " IN (");
+                    statement.Append(" (" + this.role.SingularFullName + "_R." + Mapping.ColumnNameForObject + " IS NOT NULL AND ");
+                    statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForObject + " IN (");
                     this.inExtent.BuildSql(inStatement);
                     statement.Append(" ))");
                 }
                 else
                 {
-                    statement.Append(" (" + schema.Column(this.role) + " IS NOT NULL AND ");
-                    statement.Append(" " + schema.Column(this.role) + " IN (");
+                    statement.Append(" (" + schema.ColumnNameByRelationType[this.role.RelationType] + " IS NOT NULL AND ");
+                    statement.Append(" " + schema.ColumnNameByRelationType[this.role.RelationType] + " IN (");
                     this.inExtent.BuildSql(inStatement);
                     statement.Append(" ))");
                 }

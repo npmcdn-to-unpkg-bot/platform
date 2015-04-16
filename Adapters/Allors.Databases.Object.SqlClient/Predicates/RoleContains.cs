@@ -46,10 +46,10 @@ namespace Allors.Databases.Object.SqlClient
             {
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");
-                statement.Append("SELECT " + alias + "." + schema.ObjectId + "\n");
-                statement.Append("FROM " + schema.Table(this.role) + "\n");
-                statement.Append("WHERE   " + schema.AssociationId + "=" + alias + "." + schema.ObjectId + "\n");
-                statement.Append("AND " + schema.RoleId + "=" + this.allorsObject.Strategy.ObjectId + "\n");
+                statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject + "\n");
+                statement.Append("FROM " + schema.TableNameForRelationByRelationType[this.role.RelationType] + "\n");
+                statement.Append("WHERE   " + Mapping.ColumnNameForAssociation + "=" + alias + "." + Mapping.ColumnNameForObject + "\n");
+                statement.Append("AND " + Mapping.ColumnNameForRole + "=" + this.allorsObject.Strategy.ObjectId + "\n");
                 statement.Append(")\n");
             }
             else
@@ -62,10 +62,10 @@ namespace Allors.Databases.Object.SqlClient
 
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");
-                statement.Append("SELECT " + schema.ObjectId + "\n");
-                statement.Append("FROM " + schema.Table(((IComposite)this.role.ObjectType).ExclusiveLeafClass) + "\n");
-                statement.Append("WHERE " + schema.ObjectId + "=" + this.allorsObject.Strategy.ObjectId + "\n");
-                statement.Append("AND " + schema.Column(this.role.AssociationType) + "=" + alias + ".O\n");
+                statement.Append("SELECT " + Mapping.ColumnNameForObject + "\n");
+                statement.Append("FROM " + schema.TableNameForObjectByClass[((IComposite)this.role.ObjectType).ExclusiveLeafClass] + "\n");
+                statement.Append("WHERE " + Mapping.ColumnNameForObject + "=" + this.allorsObject.Strategy.ObjectId + "\n");
+                statement.Append("AND " + schema.ColumnNameByRelationType[this.role.RelationType] + "=" + alias + ".O\n");
                 statement.Append(")\n");
             }
 

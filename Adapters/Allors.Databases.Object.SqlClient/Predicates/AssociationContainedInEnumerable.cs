@@ -53,8 +53,8 @@ namespace Allors.Databases.Object.SqlClient
 
             if ((this.association.IsMany && this.association.RelationType.RoleType.IsMany) || !this.association.RelationType.ExistExclusiveLeafClasses)
             {
-                statement.Append(" (" + this.association.SingularFullName + "_A." + schema.AssociationId + " IS NOT NULL AND ");
-                statement.Append(" " + this.association.SingularFullName + "_A." + schema.AssociationId + " IN (\n");
+                statement.Append(" (" + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL AND ");
+                statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IN (\n");
                 statement.Append(inStatement.ToString());
                 statement.Append(" ))\n");
             }
@@ -62,15 +62,15 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (this.association.RelationType.RoleType.IsMany)
                 {
-                    statement.Append(" (" + alias + "." + schema.Column(this.association) + " IS NOT NULL AND ");
-                    statement.Append(" " + alias + "." + schema.Column(this.association) + " IN (\n");
+                    statement.Append(" (" + alias + "." + schema.ColumnNameByRelationType[this.association.RelationType] + " IS NOT NULL AND ");
+                    statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.association.RelationType] + " IN (\n");
                     statement.Append(inStatement.ToString());
                     statement.Append(" ))\n");
                 }
                 else
                 {
-                    statement.Append(" (" + this.association.SingularFullName + "_A." + schema.ObjectId + " IS NOT NULL AND ");
-                    statement.Append(" " + this.association.SingularFullName + "_A." + schema.ObjectId + " IN (\n");
+                    statement.Append(" (" + this.association.SingularFullName + "_A." + Mapping.ColumnNameForObject + " IS NOT NULL AND ");
+                    statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForObject + " IN (\n");
                     statement.Append(inStatement.ToString());
                     statement.Append(" ))\n");
                 }

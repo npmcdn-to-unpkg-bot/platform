@@ -83,7 +83,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 var command = this.factory.ManagementSession.CreateSqlCommand(this.sql);
                 command.CommandType = CommandType.StoredProcedure;
-                this.AddInTable(command, database.SqlClientMapping.TableTypeNameForCompositeRelation, database.CreateRelationTable(relations));
+                this.AddInTable(command, database.Mapping.TableTypeNameForCompositeRelation, database.CreateRelationTable(relations));
 
                 command.ExecuteNonQuery();
             }

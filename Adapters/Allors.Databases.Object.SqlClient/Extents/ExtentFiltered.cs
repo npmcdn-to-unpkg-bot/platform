@@ -61,7 +61,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal SqlClient.Mapping Mapping
+        internal Mapping Mapping
         {
             get { return this.session.SqlDatabase.Mapping; }
         }
@@ -176,13 +176,13 @@ namespace Allors.Databases.Object.SqlClient
 
             if (statement.IsRoot)
             {
-                statement.Append("SELECT DISTINCT " + alias + "." + this.Mapping.ObjectId);
+                statement.Append("SELECT DISTINCT " + alias + "." + Mapping.ColumnNameForObject);
                 if (statement.Sorter != null)
                 {
                     statement.Sorter.BuildSelect(statement, alias);
                 }
 
-                statement.Append(" FROM " + this.Mapping.Table(rootClass) + " " + alias);
+                statement.Append(" FROM " + this.Mapping.TableNameForObjectByClass[rootClass] + " " + alias);
                 statement.AddJoins(rootClass, alias);
                 statement.AddWhere(rootClass, alias);
                 if (this.filter != null)
@@ -201,21 +201,21 @@ namespace Allors.Databases.Object.SqlClient
                     var inIRelationType = inRole.RelationType;
                     if (inIRelationType.Multiplicity == Multiplicity.ManyToMany || !inIRelationType.ExistExclusiveLeafClasses)
                     {
-                        statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + this.Mapping.AssociationId);
+                        statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + Mapping.ColumnNameForAssociation);
                     }
                     else
                     {
                         if (inRole.IsMany)
                         {
-                            statement.Append("SELECT " + alias + "." + this.Mapping.ObjectId);
+                            statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject);
                         }
                         else
                         {
-                            statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + this.Mapping.Column(inRole.AssociationType));
+                            statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + this.Mapping.ColumnNameByRelationType[inRole.RelationType]);
                         }
                     }
 
-                    statement.Append(" FROM " + this.Mapping.Table(rootClass) + " " + alias);
+                    statement.Append(" FROM " + this.Mapping.TableNameForObjectByClass[rootClass] + " " + alias);
                     statement.AddJoins(rootClass, alias);
 
                     var wherePresent = statement.AddWhere(rootClass, alias);
@@ -236,18 +236,17 @@ namespace Allors.Databases.Object.SqlClient
 
                     if (inIRelationType.Multiplicity == Multiplicity.ManyToMany || !inIRelationType.ExistExclusiveLeafClasses)
                     {
-                        statement.Append(inRole.AssociationType.SingularFullName + "_A." + this.Mapping.AssociationId + " IS NOT NULL ");
+                        statement.Append(inRole.AssociationType.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL ");
                     }
                     else
                     {
                         if (inRole.IsMany)
                         {
-                            statement.Append(alias + "." + this.Mapping.Column(inRole.AssociationType) + " IS NOT NULL ");
+                            statement.Append(alias + "." + this.Mapping.ColumnNameByRelationType[inRole.RelationType] + " IS NOT NULL ");
                         }
                         else
                         {
-                            statement.Append(inRole.AssociationType.SingularFullName + "_A." +
-                                             this.Mapping.Column(inRole.AssociationType) + " IS NOT NULL ");
+                            statement.Append(inRole.AssociationType.SingularFullName + "_A." + this.Mapping.ColumnNameByRelationType[inRole.RelationType] + " IS NOT NULL ");
                         }
                     }
                 }
@@ -258,22 +257,21 @@ namespace Allors.Databases.Object.SqlClient
 
                     if (inIRelationType.Multiplicity == Multiplicity.ManyToMany || !inIRelationType.ExistExclusiveLeafClasses)
                     {
-                        statement.Append("SELECT " + inAssociation.RoleType.SingularFullName + "_R." + this.Mapping.RoleId);
+                        statement.Append("SELECT " + inAssociation.RoleType.SingularFullName + "_R." + Mapping.ColumnNameForRole);
                     }
                     else
                     {
                         if (inAssociation.RoleType.IsMany)
                         {
-                            statement.Append("SELECT " + inAssociation.RoleType.SingularFullName + "_R." +
-                                             this.Mapping.Column(inAssociation.RoleType));
+                            statement.Append("SELECT " + inAssociation.RoleType.SingularFullName + "_R." + this.Mapping.ColumnNameByRelationType[inAssociation.RelationType]);
                         }
                         else
                         {
-                            statement.Append("SELECT " + alias + "." + this.Mapping.ObjectId);
+                            statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject);
                         }
                     }
 
-                    statement.Append(" FROM " + this.Mapping.Table(rootClass) + " " + alias);
+                    statement.Append(" FROM " + this.Mapping.TableNameForObjectByClass[rootClass] + " " + alias);
                     statement.AddJoins(rootClass, alias);
 
                     var wherePresent = statement.AddWhere(rootClass, alias);
@@ -294,14 +292,13 @@ namespace Allors.Databases.Object.SqlClient
 
                     if (inIRelationType.Multiplicity == Multiplicity.ManyToMany || !inIRelationType.ExistExclusiveLeafClasses)
                     {
-                        statement.Append(inAssociation.RoleType.SingularFullName + "_R." + this.Mapping.RoleId + " IS NOT NULL ");
+                        statement.Append(inAssociation.RoleType.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL ");
                     }
                     else
                     {
                         if (inAssociation.RoleType.IsMany)
                         {
-                            statement.Append(inAssociation.RoleType.SingularFullName + "_R." +
-                                             this.Mapping.Column(inAssociation.RoleType) + " IS NOT NULL ");
+                            statement.Append(inAssociation.RoleType.SingularFullName + "_R." + this.Mapping.ColumnNameByRelationType[inAssociation.RelationType] + " IS NOT NULL ");
                         }
                         else
                         {
@@ -323,13 +320,13 @@ namespace Allors.Databases.Object.SqlClient
                     var alias = statement.CreateAlias();
                     var rootClass = this.objectType.LeafClasses.ToArray()[i];
 
-                    statement.Append("SELECT " + alias + "." + this.Mapping.ObjectId);
+                    statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject);
                     if (statement.Sorter != null)
                     {
                         statement.Sorter.BuildSelect(statement);
                     }
 
-                    statement.Append(" FROM " + this.Mapping.Table(rootClass) + " " + alias);
+                    statement.Append(" FROM " + this.Mapping.TableNameForObjectByClass[rootClass] + " " + alias);
 
                     statement.AddJoins(rootClass, alias);
                     statement.AddWhere(rootClass, alias);
@@ -375,21 +372,21 @@ namespace Allors.Databases.Object.SqlClient
 
                         if (inIRelationType.Multiplicity == Multiplicity.ManyToMany || !inIRelationType.ExistExclusiveLeafClasses)
                         {
-                            statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + this.Mapping.AssociationId);
+                            statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + Mapping.ColumnNameForAssociation);
                         }
                         else
                         {
                             if (inRole.IsMany)
                             {
-                                statement.Append("SELECT " + alias + "." + this.Mapping.ObjectId);
+                                statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject);
                             }
                             else
                             {
-                                statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + this.Mapping.Column(inRole.AssociationType));
+                                statement.Append("SELECT " + inRole.AssociationType.SingularFullName + "_A." + this.Mapping.ColumnNameByRelationType[inRole.RelationType]);
                             }
                         }
 
-                        statement.Append(" FROM " + this.Mapping.Table(rootClass) + " " + alias);
+                        statement.Append(" FROM " + this.Mapping.TableNameForObjectByClass[rootClass] + " " + alias);
 
                         statement.AddJoins(rootClass, alias);
 
@@ -411,17 +408,17 @@ namespace Allors.Databases.Object.SqlClient
 
                         if (inIRelationType.Multiplicity == Multiplicity.ManyToMany || !inIRelationType.ExistExclusiveLeafClasses)
                         {
-                            statement.Append(inRole.AssociationType.SingularFullName + "_A." + this.Mapping.AssociationId + " IS NOT NULL ");
+                            statement.Append(inRole.AssociationType.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL ");
                         }
                         else
                         {
                             if (inRole.IsMany)
                             {
-                                statement.Append(alias + "." + this.Mapping.Column(inRole.AssociationType) + " IS NOT NULL ");
+                                statement.Append(alias + "." + this.Mapping.ColumnNameByRelationType[inRole.RelationType] + " IS NOT NULL ");
                             }
                             else
                             {
-                                statement.Append(inRole.AssociationType.SingularFullName + "_A." + this.Mapping.Column(inRole.AssociationType) + " IS NOT NULL ");
+                                statement.Append(inRole.AssociationType.SingularFullName + "_A." + this.Mapping.ColumnNameByRelationType[inRole.RelationType] + " IS NOT NULL ");
                             }
                         }
                     }
@@ -435,7 +432,7 @@ namespace Allors.Databases.Object.SqlClient
 
                         if (statement.IsRoot)
                         {
-                            statement.Append("SELECT " + alias + "." + this.Mapping.ObjectId);
+                            statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject);
                             if (statement.Sorter != null)
                             {
                                 statement.Sorter.BuildSelect(statement);
@@ -443,10 +440,10 @@ namespace Allors.Databases.Object.SqlClient
                         }
                         else
                         {
-                            statement.Append("SELECT " + alias + "." + this.Mapping.ObjectId);
+                            statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject);
                         }
 
-                        statement.Append(" FROM " + this.Mapping.Table(rootClass) + " " + alias);
+                        statement.Append(" FROM " + this.Mapping.TableNameForObjectByClass[rootClass] + " " + alias);
 
                         statement.AddJoins(rootClass, alias);
                         statement.AddWhere(rootClass, alias);
