@@ -339,7 +339,7 @@ CREATE SCHEMA " + this.database.SchemaName;
                         {
                             var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
 
-                            var primaryKeyName = "pk_" + this.database.SchemaName + "_" + relationType.Id.ToString("N").ToLowerInvariant();
+                            var primaryKeyName = "pk_" + relationType.RoleType.SingularFullName.ToLowerInvariant();
 
                             var sql = new StringBuilder();
                             sql.Append("CREATE TABLE " + tableName + "\n");
@@ -404,7 +404,8 @@ CREATE SCHEMA " + this.database.SchemaName;
                                 var roleType = relationType.RoleType;
                                 if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
                                 {
-                                    this.CreateIndex(relationType, tableName, connection);
+                                    var indexName = "idx_" + @class.Name.ToLowerInvariant() + "_" + relationType.AssociationType.SingularPropertyName.ToLowerInvariant();
+                                    this.CreateIndex(connection, indexName, relationType, tableName);
                                 }
                             }
                         }
@@ -417,13 +418,15 @@ CREATE SCHEMA " + this.database.SchemaName;
                                 var associationType = relationType.AssociationType;
                                 if (roleType.ObjectType.IsUnit)
                                 {
-                                    this.CreateIndex(relationType, tableName, connection);
+                                    var indexName = "idx_" + @class.Name.ToLowerInvariant() + "_" + relationType.RoleType.SingularPropertyName.ToLowerInvariant();
+                                    this.CreateIndex(connection, indexName, relationType, tableName);
                                 }
                                 else
                                 {
                                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
                                     {
-                                        this.CreateIndex(relationType, tableName, connection);
+                                        var indexName = "idx_" + @class.Name.ToLowerInvariant() + "_" + relationType.RoleType.SingularPropertyName.ToLowerInvariant();
+                                        this.CreateIndex(connection, indexName, relationType, tableName);
                                     }
                                 }
                             }
@@ -439,7 +442,7 @@ CREATE SCHEMA " + this.database.SchemaName;
                             if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                             {
                                 var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
-                                var indexName = "idx_" + this.database.SchemaName + "_" + relationType.Id.ToString("N").ToLowerInvariant();
+                                var indexName = "idx_" + relationType.RoleType.SingularFullName.ToLowerInvariant() + "_" + Mapping.ColumnNameForRole.ToLowerInvariant();
                                 var sql = new StringBuilder();
                                 sql.Append("CREATE INDEX " + indexName + "\n");
                                 sql.Append("ON " + tableName + " (" + Mapping.ColumnNameForRole + ")");
@@ -478,9 +481,8 @@ CREATE SCHEMA " + this.database.SchemaName;
             }
         }
 
-        private void CreateIndex(IRelationType relationType, string tableName, SqlConnection connection)
+        private void CreateIndex(SqlConnection connection, string indexName, IRelationType relationType, string tableName)
         {
-            var indexName = "idx_" + this.database.SchemaName + "_" + relationType.Id.ToString("N").ToLowerInvariant();
             var sql = new StringBuilder();
             sql.Append("CREATE INDEX " + indexName + "\n");
             sql.Append("ON " + tableName + " (" + this.mapping.ColumnNameByRelationType[relationType] + ")");
