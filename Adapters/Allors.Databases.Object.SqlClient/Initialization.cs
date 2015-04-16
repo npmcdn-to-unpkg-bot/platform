@@ -19,6 +19,7 @@ namespace Allors.Databases.Object.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Runtime.InteropServices;
     using System.Text;
 
     using Allors.Meta;
@@ -44,7 +45,7 @@ namespace Allors.Databases.Object.SqlClient
 
             if (this.validation.IsValid)
             {
-                this.ProcessTables();
+                this.TruncateTables();
             }
             else
             {
@@ -52,7 +53,9 @@ namespace Allors.Databases.Object.SqlClient
 
                 this.DropProcedures();
 
-                this.ProcessTables();
+                this.DropTables();
+
+                this.CreateTables();
 
                 this.DropTableTypes();
 
@@ -190,14 +193,83 @@ CREATE SCHEMA " + this.database.SchemaName;
             }
         }
 
-        private void ProcessTables()
+        private void TruncateTables()
         {
             using (var connection = new SqlConnection(this.database.ConnectionString))
             {
                 connection.Open();
                 try
                 {
-                    if (!this.TruncateOrDropTable(connection, this.mapping.TableNameForObjects))
+                    this.TruncateTable(connection, this.mapping.TableNameForObjects);
+
+                    foreach (var @class in this.mapping.Database.MetaPopulation.Classes)
+                    {
+                        var tableName = this.mapping.TableNameForObjectByClass[@class];
+
+                        this.TruncateTable(connection, tableName);
+                    }
+
+                    foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                    {
+                        var associationType = relationType.AssociationType;
+                        var roleType = relationType.RoleType;
+
+                        if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                        {
+                            var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
+                            this.TruncateTable(connection, tableName);
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void DropTables()
+        {
+            using (var connection = new SqlConnection(this.database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    this.DropTable(connection, this.mapping.TableNameForObjects);
+
+                    foreach (var @class in this.mapping.Database.MetaPopulation.Classes)
+                    {
+                        var tableName = this.mapping.TableNameForObjectByClass[@class];
+
+                        this.DropTable(connection, tableName);
+                    }
+
+                    foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                    {
+                        var associationType = relationType.AssociationType;
+                        var roleType = relationType.RoleType;
+
+                        if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                        {
+                            var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
+                            this.DropTable(connection, tableName);
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void CreateTables()
+        {
+            using (var connection = new SqlConnection(this.database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
                     {
                         var sql = new StringBuilder();
                         sql.Append("CREATE TABLE " + this.mapping.TableNameForObjects + "\n");
@@ -215,54 +287,46 @@ CREATE SCHEMA " + this.database.SchemaName;
                     
                     foreach (var @class in this.mapping.Database.MetaPopulation.Classes)
                     {
-                        var name = this.mapping.TableNameForObjectByClass[@class];
+                        var tableName = this.mapping.TableNameForObjectByClass[@class];
 
-                        if (name.Contains("User"))
+                        var sql = new StringBuilder();
+                        sql.Append("CREATE TABLE " + tableName + "\n");
+                        sql.Append("(\n");
+                        sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " PRIMARY KEY,\n");
+                        sql.Append(Mapping.ColumnNameForType + " " + Mapping.SqlTypeForType);
+
+                        foreach (var associationType in @class.AssociationTypes)
                         {
-                            Console.Write(0);
+                            var relationType = associationType.RelationType;
+                            var roleType = relationType.RoleType;
+                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
+                            {
+                                sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.SqlTypeForObject);
+                            }
                         }
 
-                        if (!this.TruncateOrDropTable(connection, name))
+                        foreach (var roleType in @class.RoleTypes)
                         {
-                            var sql = new StringBuilder();
-                            sql.Append("CREATE TABLE " + name + "\n");
-                            sql.Append("(\n");
-                            sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " PRIMARY KEY,\n");
-                            sql.Append(Mapping.ColumnNameForType + " " + Mapping.SqlTypeForType);
-
-                            foreach (var associationType in @class.AssociationTypes)
+                            var relationType = roleType.RelationType;
+                            var associationType3 = relationType.AssociationType;
+                            if (roleType.ObjectType.IsUnit)
                             {
-                                var relationType = associationType.RelationType;
-                                var roleType = relationType.RoleType;
-                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
+                                sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.GetSqlType(roleType));
+                            }
+                            else
+                            {
+                                if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
                                 {
                                     sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.SqlTypeForObject);
                                 }
                             }
+                        }
 
-                            foreach (var roleType in @class.RoleTypes)
-                            {
-                                var relationType = roleType.RelationType;
-                                var associationType3 = relationType.AssociationType;
-                                if (roleType.ObjectType.IsUnit)
-                                {
-                                    sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.GetSqlType(roleType));
-                                }
-                                else
-                                {
-                                    if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
-                                    {
-                                        sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.SqlTypeForObject);
-                                    }
-                                }
-                            }
+                        sql.Append(")\n");
 
-                            sql.Append(")\n");
-
-                            using (var command = new SqlCommand(sql.ToString(), connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
+                        using (var command = new SqlCommand(sql.ToString(), connection))
+                        {
+                            command.ExecuteNonQuery();
                         }
                     }
 
@@ -274,42 +338,20 @@ CREATE SCHEMA " + this.database.SchemaName;
                         if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                         {
                             var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
-                            if (!this.TruncateOrDropTable(connection, tableName))
+
+                            var primaryKeyName = "pk_" + this.database.SchemaName + "_" + relationType.Id.ToString("N").ToLowerInvariant();
+
+                            var sql = new StringBuilder();
+                            sql.Append("CREATE TABLE " + tableName + "\n");
+                            sql.Append("(\n");
+                            sql.Append(Mapping.ColumnNameForAssociation + " " + this.mapping.SqlTypeForObject + ",\n");
+                            sql.Append(Mapping.ColumnNameForRole + " " + this.mapping.SqlTypeForObject + ",\n");
+                            sql.Append("CONSTRAINT " + primaryKeyName + " PRIMARY KEY (" + Mapping.ColumnNameForAssociation + ", " + Mapping.ColumnNameForRole + ")\n");
+                            sql.Append(")\n");
+
+                            using (var command = new SqlCommand(sql.ToString(), connection))
                             {
-                                var primaryKey = false;
-
-                                var sql = new StringBuilder();
-                                sql.Append("CREATE TABLE " + tableName + "\n");
-                                sql.Append("(\n");
-                                sql.Append(Mapping.ColumnNameForAssociation + " " + this.mapping.SqlTypeForObject);
-
-                                if (associationType.IsOne)
-                                {
-                                    sql.Append(" PRIMARY KEY");
-                                    primaryKey = true;
-                                }
-
-                                sql.Append(",\n");
-
-                                sql.Append(Mapping.ColumnNameForRole + " " + this.mapping.SqlTypeForObject);
-
-                                if (!primaryKey && roleType.IsOne)
-                                {
-                                    sql.Append(" PRIMARY KEY");
-                                    primaryKey = true;
-                                }
-
-                                if (!primaryKey && roleType.IsMany)
-                                {
-                                    sql.Append(",\nCONSTRAINT PK_" + tableName.Replace(".","_") + " PRIMARY KEY (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + ")\n");
-                                }
-
-                                sql.Append(")\n");
-
-                                using (var command = new SqlCommand(sql.ToString(), connection))
-                                {
-                                    command.ExecuteNonQuery();
-                                }
+                                command.ExecuteNonQuery();
                             }
                         }
                     }
@@ -351,57 +393,63 @@ CREATE SCHEMA " + this.database.SchemaName;
                 connection.Open();
                 try
                 {
-                    // TODO:
+                    foreach (var @class in this.mapping.Database.MetaPopulation.Classes)
+                    {
+                        var tableName = this.mapping.TableNameForObjectByClass[@class];
+                        foreach (var associationType in @class.AssociationTypes)
+                        {
+                            var relationType = associationType.RelationType;
+                            if (relationType.IsIndexed)
+                            {
+                                var roleType = relationType.RoleType;
+                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
+                                {
+                                    this.CreateIndex(relationType, tableName, connection);
+                                }
+                            }
+                        }
 
+                        foreach (var roleType in @class.RoleTypes)
+                        {
+                            var relationType = roleType.RelationType;
+                            if (relationType.IsIndexed)
+                            {
+                                var associationType = relationType.AssociationType;
+                                if (roleType.ObjectType.IsUnit)
+                                {
+                                    this.CreateIndex(relationType, tableName, connection);
+                                }
+                                else
+                                {
+                                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
+                                    {
+                                        this.CreateIndex(relationType, tableName, connection);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-                    //foreach (MappingTable table in this.mapping)
-                    //{
-                    //    foreach (MappingColumn column in table)
-                    //    {
-                    //        if (column.IndexType != MappingIndexType.None)
-                    //        {
-                    //            var indexName = "_" + column.Name;
-
-                    //            if (column.IndexType == MappingIndexType.Single)
-                    //            {
-                    //                var sql = new StringBuilder();
-                    //                sql.Append("CREATE INDEX " + indexName + "\n");
-                    //                sql.Append("ON " + this.database.SchemaName + "." + table + " (" + column + ")");
-
-                    //                var schemaIndex = this.schema.GetIndex(table.Name, indexName);
-                    //                if (schemaIndex == null)
-                    //                {
-                    //                    using (var command = new SqlCommand(sql.ToString(), connection))
-                    //                    {
-                    //                        command.ExecuteNonQuery();
-                    //                    }
-                    //                }
-                    //            }
-                    //            else
-                    //            {
-                    //                var sql = new StringBuilder();
-                    //                sql.Append("CREATE INDEX " + indexName + "\n");
-                    //                sql.Append("ON " + this.database.SchemaName + "." + table + " (" + column + ", " + table.FirstKeyColumn + ")");
-
-                    //                var schemaIndex = this.schema.GetIndex(table.Name, indexName);
-                    //                if (schemaIndex == null)
-                    //                {
-                    //                    using (var command = new SqlCommand(sql.ToString(), connection))
-                    //                    {
-                    //                        try
-                    //                        {
-                    //                            command.ExecuteNonQuery();
-                    //                        }
-                    //                        catch (Exception e)
-                    //                        {
-                    //                            Console.WriteLine(0);
-                    //                        }
-                    //                    }
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                    foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                    {
+                        if (relationType.IsIndexed)
+                        {
+                            var associationType = relationType.AssociationType;
+                            var roleType = relationType.RoleType;
+                            if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                            {
+                                var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
+                                var indexName = "idx_" + this.database.SchemaName + "_" + relationType.Id.ToString("N").ToLowerInvariant();
+                                var sql = new StringBuilder();
+                                sql.Append("CREATE INDEX " + indexName + "\n");
+                                sql.Append("ON " + tableName + " (" + Mapping.ColumnNameForRole + ")");
+                                using (var command = new SqlCommand(sql.ToString(), connection))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
                 }
                 finally
                 {
@@ -410,31 +458,36 @@ CREATE SCHEMA " + this.database.SchemaName;
             }
         }
 
-        private bool TruncateOrDropTable(SqlConnection connection, string tableName)
+        private void TruncateTable(SqlConnection connection, string tableName)
+        {
+            var cmdText = @"TRUNCATE TABLE " + tableName + @";";
+            using (var command = new SqlCommand(cmdText, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private void DropTable(SqlConnection connection, string tableName)
         {
             if (!this.validation.MissingTableNames.Contains(tableName))
             {
-                var table = this.validation.Schema.GetTable(tableName);
-                if (this.validation.InvalidTables.Contains(table))
+                using (var command = new SqlCommand("DROP TABLE " + tableName, connection))
                 {
-                    using (var command = new SqlCommand("DROP TABLE " + tableName, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
-                else
-                {
-                    var cmdText = @"TRUNCATE TABLE " + tableName + @";";
-                    using (var command = new SqlCommand(cmdText, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-
-                    return true;
+                    command.ExecuteNonQuery();
                 }
             }
+        }
 
-            return false;
+        private void CreateIndex(IRelationType relationType, string tableName, SqlConnection connection)
+        {
+            var indexName = "idx_" + this.database.SchemaName + "_" + relationType.Id.ToString("N").ToLowerInvariant();
+            var sql = new StringBuilder();
+            sql.Append("CREATE INDEX " + indexName + "\n");
+            sql.Append("ON " + tableName + " (" + this.mapping.ColumnNameByRelationType[relationType] + ")");
+            using (var command = new SqlCommand(sql.ToString(), connection))
+            {
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
