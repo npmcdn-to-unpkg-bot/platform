@@ -27,11 +27,19 @@ namespace Allors.Domain
     {
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
-
             if (!this.ExistFromDate)
             {
                 this.FromDate = DateTime.UtcNow;
+            }
+        }
+
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
+        {
+            var derivation = method.Derivation;
+
+            if (this.ExistEmployer)
+            {
+                derivation.AddDependency(this, this.Employer);
             }
         }
 
@@ -67,6 +75,32 @@ namespace Allors.Domain
                     salesRepRelationship.OnDerive(x => x.WithDerivation(derivation));
                 }
             }
+
+            this.AppsOnDeriveInternalOrganisationCustomer(derivation);
         }
+
+        public void AppsOnDeriveInternalOrganisationCustomer(IDerivation derivation)
+        {
+            if (this.ExistEmployee && this.ExistEmployer)
+            {
+
+                if (this.FromDate <= DateTime.UtcNow && (!this.ExistThroughDate || this.ThroughDate >= DateTime.UtcNow))
+                {
+                    if (!this.Employee.ExistInternalOrganisationWhereEmployee)
+                    {
+                        this.Employer.AddEmployee(this.Employee);
+                    }
+                }
+
+                if (this.FromDate > DateTime.UtcNow || (this.ExistThroughDate && this.ThroughDate < DateTime.UtcNow))
+                {
+                    if (this.Employee.ExistInternalOrganisationWhereEmployee)
+                    {
+                        this.Employer.RemoveEmployee(this.Employee);
+                    }
+                }
+            }
+        }
+
     }
 }

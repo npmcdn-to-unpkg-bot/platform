@@ -1148,6 +1148,8 @@ namespace Allors.Domain
 
 					WorkEffortPurpose WorkEffortPurposes {set;}
 
+					Priority Priority {set;}
+
 					global::System.String Name {set;}
 
 					Requirement RequirementFulfillments {set;}
@@ -2456,6 +2458,8 @@ namespace Allors.Domain
 					Counter QuoteCounter {set;}
 
 					Currency PreviousCurrency {set;}
+
+					Person Employees {set;}
 
 					GeneralLedgerAccount PurchasePaymentDifferencesAccount {set;}
 

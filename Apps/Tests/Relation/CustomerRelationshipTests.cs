@@ -123,6 +123,57 @@ namespace Allors.Domain
         }
 
         [Test]
+        public void GivenActiveEmployment_WhenDeriving_ThenInternalOrganisationEmployeesContainsEmployee()
+        {
+            var employee = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            var employer = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+
+            new EmploymentBuilder(this.DatabaseSession)
+                .WithEmployee(employee)
+                .WithEmployer(employer)
+                .Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.Contains(employee, employer.Employees);
+        }
+
+        [Test]
+        public void GivenEmploymentToCome_WhenDeriving_ThenInternalOrganisationEmployeesDosNotContainEmployee()
+        {
+            var employee = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            var employer = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+
+            new EmploymentBuilder(this.DatabaseSession)
+                .WithEmployee(employee)
+                .WithEmployer(employer)
+                .WithFromDate(DateTime.UtcNow.AddDays(1))
+                .Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsFalse(employer.Customers.Contains(employee));
+        }
+
+        [Test]
+        public void GivenEmploymentThatHasEnded_WhenDeriving_ThenInternalOrganisationEmployeesDosNotContainEmployee()
+        {
+            var employee = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            var employer = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+
+            new EmploymentBuilder(this.DatabaseSession)
+                .WithEmployee(employee)
+                .WithEmployer(employer)
+                .WithFromDate(DateTime.UtcNow.AddDays(-10))
+                .WithThroughDate(DateTime.UtcNow.AddDays(-1))
+                .Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsFalse(employer.Customers.Contains(employee));
+        }
+
+        [Test]
         public void GivenCustomerRelationshipBuilder_WhenBuild_ThenSubAccountNumerIsValidElevenTestNumber()
         {
             var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
