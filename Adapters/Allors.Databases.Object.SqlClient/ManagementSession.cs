@@ -132,8 +132,6 @@ namespace Allors.Databases.Object.SqlClient
             {
                 this.connection = null;
                 this.transaction = null;
-
-                this.loadUnitRelationsByRoleTypeByObjectType = null;
             }
         }
 
@@ -207,26 +205,8 @@ namespace Allors.Databases.Object.SqlClient
         }
 
 
-
-
-
-
-
-
-
-        private Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> loadUnitRelationsByRoleTypeByObjectType;
-
         public void LoadUnitRelations(List<UnitRelation> relations, IObjectType exclusiveRootClass, IRoleType roleType)
         {
-            this.loadUnitRelationsByRoleTypeByObjectType = this.loadUnitRelationsByRoleTypeByObjectType ?? new Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>>(); 
-
-            Dictionary<IRoleType, SqlCommand> commandByIRoleType;
-            if (!this.loadUnitRelationsByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))
-            {
-                commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
-                this.loadUnitRelationsByRoleTypeByObjectType.Add(exclusiveRootClass, commandByIRoleType);
-            }
-
             string tableTypeName;
 
             var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
@@ -268,26 +248,18 @@ namespace Allors.Databases.Object.SqlClient
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
 
-            SqlCommand command;
-            if (!commandByIRoleType.TryGetValue(roleType, out command))
-            {
-                var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
+            var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
                 
-                command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = tableTypeName;
-                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = database.CreateRelationTable(roleType, relations);
+            var command = this.CreateSqlCommand(sql);
+            command.CommandType = CommandType.StoredProcedure;
+            var sqlParameter = command.CreateParameter();
+            sqlParameter.SqlDbType = SqlDbType.Structured;
+            sqlParameter.TypeName = tableTypeName;
+            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+            sqlParameter.Value = this.database.CreateRelationTable(roleType, relations);
 
-                command.Parameters.Add(sqlParameter);
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForTableType].Value = database.CreateRelationTable(roleType, relations);
-            }
-
+            command.Parameters.Add(sqlParameter);
+            
             command.ExecuteNonQuery();
         }
     }
