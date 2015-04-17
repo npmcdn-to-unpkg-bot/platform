@@ -96,14 +96,14 @@
   <Interface Name="Allors.Meta.IMetaPopulation">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAGCAAAAAAgAACgAAAAIAAAAEAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAgAAAAAGCAAAAAAgAACgAAAAIAAAAEAAAAAAAAAA=</HashCode>
       <FileName>Meta\IMetaPopulation.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Allors.Meta.IObjectType">
     <Position X="2.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAAAAAQAACCAAAACAAAAAUAAAAA=</HashCode>
+      <HashCode>AAAAAIAAAAAAAAIAAAAAAAQAACCAAAACAAAAAUAAAAA=</HashCode>
       <FileName>Meta\IObjectType.cs</FileName>
     </TypeIdentifier>
   </Interface>

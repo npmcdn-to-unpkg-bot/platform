@@ -39,16 +39,6 @@ namespace Allors.Databases.Object.SqlClient
             this.associationType = associationType;
         }
 
-        internal override SqlExtent ContainedInExtent
-        {
-            get
-            {
-                this.LazyUpgrade();
-
-                return this.upgrade;
-            }
-        }
-
         public override int Count
         {
             get
@@ -96,6 +86,16 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.strategy.ObjectType;
+            }
+        }
+
+        internal override SqlExtent ContainedInExtent
+        {
+            get
+            {
+                this.LazyUpgrade();
+
+                return this.upgrade;
             }
         }
 
