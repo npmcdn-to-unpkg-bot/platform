@@ -20,7 +20,6 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
 
     internal sealed class CommandFactories 
@@ -34,7 +33,6 @@ namespace Allors.Databases.Object.SqlClient
         private InstantiateObjectFactory instantiateObjectFactory;
         private DeleteObjectFactory deleteObjectFactory;
         private SetUnitRolesFactory setUnitRolesFactory;
-        private UpdateCacheIdsFactory updateCacheIdsFactory;
         
         internal CommandFactories(Database database)
         {
@@ -86,14 +84,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.setUnitRolesFactory ?? (this.setUnitRolesFactory = new SetUnitRolesFactory(this.database));
-            }
-        }
-
-        internal UpdateCacheIdsFactory UpdateCacheIdsFactory
-        {
-            get
-            {
-                return this.updateCacheIdsFactory ?? (this.updateCacheIdsFactory = new UpdateCacheIdsFactory(this.SqlClientDatabase));
             }
         }
 

@@ -710,7 +710,7 @@ namespace Allors.Databases.Object.SqlClient
 
         protected virtual void UpdateCacheIds()
         {
-            this.SessionCommands.UpdateCacheIdsCommand.Execute(this.modifiedRolesByReference);
+            this.UpdateCacheIds(this.modifiedRolesByReference);
         }
 
         protected virtual Reference CreateReference(IClass objectType, ObjectId objectId, bool isNew)
@@ -879,6 +879,7 @@ namespace Allors.Databases.Object.SqlClient
             this.removeCompositeRoleByRoleType = null;
             this.setCompositeRoleByRoleType = null;
             this.setUnitRoleByIRoleTypeByIObjectType = null;
+            this.updateCacheIds = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1570,7 +1571,34 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             command.ExecuteNonQuery();
+        }
 
+        private SqlCommand updateCacheIds;
+
+        private void UpdateCacheIds(Dictionary<Reference, Roles> dictionary)
+        {
+            var command = this.updateCacheIds;
+            if (command == null)
+            {
+                var sql = this.Database.Mapping.ProcedureNameForUpdateCache;
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(modifiedRolesByReference.Keys);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.updateCacheIds = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(modifiedRolesByReference.Keys);
+            }
+
+            command.ExecuteNonQuery();
         }
     }
 }

@@ -20,7 +20,6 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
 
     internal sealed class SessionCommands
@@ -33,7 +32,6 @@ namespace Allors.Databases.Object.SqlClient
         private DeleteObjectFactory.DeleteObject deleteObject;
         private InstantiateObjectFactory.InstantiateObject instantiateObject;
         private InstantiateObjectsFactory.InstantiateObjects instantiateObjects;
-        private UpdateCacheIdsFactory.UpdateCacheIds updateCacheIds;
         private SetUnitRolesFactory.SetUnitRoles setUnitRoles;
 
         internal SessionCommands(DatabaseSession session)
@@ -87,13 +85,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.setUnitRoles ?? (this.setUnitRoles = this.commandFactories.SetUnitRolesFactory.Create(this.session));
-            }
-        }
-        internal UpdateCacheIdsFactory.UpdateCacheIds UpdateCacheIdsCommand
-        {
-            get
-            {
-                return this.updateCacheIds ?? (this.updateCacheIds = this.commandFactories.UpdateCacheIdsFactory.Create(this.session));
             }
         }
     }
