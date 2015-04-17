@@ -34,7 +34,6 @@ namespace Allors.Databases.Object.SqlClient
         private InsertObjectFactory insertObjectFactory;
         private InstantiateObjectFactory instantiateObjectFactory;
         private DeleteObjectFactory deleteObjectFactory;
-        private GetCompositeAssociationFactory getCompositeAssociationFactory;
         private GetCompositeAssociationsFactory getCompositeAssociationsFactory;
         private GetCompositeRoleFactory getCompositeRoleFactory;
         private GetCompositeRolesFactory getCompositeRolesFactory;
@@ -97,14 +96,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
         
-        internal GetCompositeAssociationFactory GetCompositeAssociationFactory
-        {
-            get
-            {
-                return this.getCompositeAssociationFactory ?? (this.getCompositeAssociationFactory = new GetCompositeAssociationFactory(this.database));
-            }
-        }
-
         internal GetCompositeAssociationsFactory GetCompositeAssociationsFactory
         {
             get

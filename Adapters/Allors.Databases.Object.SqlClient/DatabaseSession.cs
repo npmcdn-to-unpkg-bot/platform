@@ -461,7 +461,7 @@ namespace Allors.Databases.Object.SqlClient
             if (!associationByRole.TryGetValue(roleStrategy.Reference, out association))
             {
                 this.FlushConditionally(roleStrategy, associationType);
-                association = this.SessionCommands.GetCompositeAssociationCommand.Execute(roleStrategy.Reference, associationType);
+                association = this.GetCompositeAssociation(roleStrategy.Reference, associationType);
                 associationByRole[roleStrategy.Reference] = association;
             }
 
@@ -889,6 +889,7 @@ namespace Allors.Databases.Object.SqlClient
             this.createObjectByClass = null;
             this.createObjectsByClass = null;
             this.getCacheIds = null;
+            this.getCompositeAssociationByAssociationType = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1109,7 +1110,70 @@ namespace Allors.Databases.Object.SqlClient
             return cacheIdByObjectId;
         }
 
+        private Dictionary<IAssociationType, SqlCommand> getCompositeAssociationByAssociationType;
 
+        private Reference GetCompositeAssociation(Reference role, IAssociationType associationType)
+        {
+            this.getCompositeAssociationByAssociationType = this.getCompositeAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+
+            Reference associationObject = null;
+
+            SqlCommand command;
+            if (!this.getCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
+            {
+                var roleType = associationType.RoleType;
+
+                string sql;
+                if (associationType.RelationType.ExistExclusiveLeafClasses)
+                {
+                    if (roleType.IsOne)
+                    {
+                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                    }
+                    else
+                    {
+                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                    }
+                }
+                else
+                {
+                    sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
+                }
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForRole;
+                sqlParameter.SqlDbType = this.database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = role.ObjectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getCompositeAssociationByAssociationType[associationType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForRole].Value = role.ObjectId.Value ?? DBNull.Value;
+            }
+
+            object result = command.ExecuteScalar();
+
+            if (result != null && result != DBNull.Value)
+            {
+                var id = this.database.ObjectIds.Parse(result.ToString());
+
+                if (associationType.ObjectType.ExistExclusiveLeafClass)
+                {
+                    associationObject = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveLeafClass, id);
+                }
+                else
+                {
+                    associationObject = this.GetOrCreateAssociationForExistingObject(id);
+                }
+            }
+
+            return associationObject;
+        }
 
     }
 }
