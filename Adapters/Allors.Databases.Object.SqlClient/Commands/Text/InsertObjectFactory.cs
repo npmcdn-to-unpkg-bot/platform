@@ -22,6 +22,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
 
     using Allors.Databases.Object.SqlClient;
@@ -100,15 +101,25 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
 
-                    this.AddInObject(command, Mapping.ParamNameForObject, this.Database.Mapping.SqlDbTypeForObject, objectId.Value);
-                    this.AddInObject(command, Mapping.ParamNameForType, Mapping.SqlDbTypeForType, objectType.Id);
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                    sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                    sqlParameter.Value = objectId.Value ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter);
+                    var sqlParameter1 = command.CreateParameter();
+                    sqlParameter1.ParameterName = Mapping.ParamNameForType;
+                    sqlParameter1.SqlDbType = Mapping.SqlDbTypeForType;
+                    sqlParameter1.Value = (object)objectType.Id ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter1);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, Mapping.ParamNameForObject, objectId.Value);
-                    this.SetInObject(command, Mapping.ParamNameForType, objectType.Id);
+                    command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+                    command.Parameters[Mapping.ParamNameForType].Value = (object)objectType.Id ?? DBNull.Value;
                 }
 
                 var result = command.ExecuteScalar();

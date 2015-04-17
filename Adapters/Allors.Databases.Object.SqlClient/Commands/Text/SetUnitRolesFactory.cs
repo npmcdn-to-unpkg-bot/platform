@@ -20,7 +20,9 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
+    using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
     using System.Text;
 
@@ -75,7 +77,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (!commandByKey.TryGetValue(sortedIRoleTypes, out command))
                 {
                     command = this.session.CreateSqlCommand();
-                    this.AddInObject(command, Mapping.ParamNameForObject, this.Database.Mapping.SqlDbTypeForObject, roles.Reference.ObjectId.Value);
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                    sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                    sqlParameter.Value = roles.Reference.ObjectId.Value ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter);
 
                     var sql = new StringBuilder();
                     sql.Append("UPDATE " + mapping.TableNameForObjectByClass[exclusiveRootClass] + " SET\n");
@@ -94,7 +101,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                         sql.Append(column + "=" + mapping.ParamNameByRoleType[roleType]);
 
                         var unit = roles.ModifiedRoleByIRoleType[roleType];
-                        this.AddInObject(command, mapping.ParamNameByRoleType[roleType], mapping.GetSqlDbType(roleType) ,unit);
+                        var sqlParameter1 = command.CreateParameter();
+                        sqlParameter1.ParameterName = mapping.ParamNameByRoleType[roleType];
+                        sqlParameter1.SqlDbType = mapping.GetSqlDbType(roleType);
+                        sqlParameter1.Value = unit ?? DBNull.Value;
+
+                        command.Parameters.Add(sqlParameter1);
                     }
 
                     sql.Append("\nWHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n");
@@ -106,14 +118,14 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 }
                 else
                 {
-                    this.SetInObject(command, Mapping.ParamNameForObject, roles.Reference.ObjectId.Value);
-                    
+                    command.Parameters[Mapping.ParamNameForObject].Value = roles.Reference.ObjectId.Value ?? DBNull.Value;
+
                     foreach (var roleType in sortedIRoleTypes)
                     {
                         var column = mapping.ColumnNameByRelationType[roleType.RelationType];
 
                         var unit = roles.ModifiedRoleByIRoleType[roleType];
-                        this.SetInObject(command, mapping.ParamNameByRoleType[roleType], unit);
+                        command.Parameters[mapping.ParamNameByRoleType[roleType]].Value = unit ?? DBNull.Value;
                     }
 
                     command.ExecuteNonQuery();

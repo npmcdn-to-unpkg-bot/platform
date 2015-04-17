@@ -20,7 +20,9 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
+    using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
 
     using Allors.Databases.Object.SqlClient;
@@ -89,15 +91,20 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (!this.commandByIObjectType.TryGetValue(objectType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
-                    this.AddInObject(command, Mapping.ParamNameForObject, this.Database.Mapping.SqlDbTypeForObject, strategy.ObjectId.Value);
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                    sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                    sqlParameter.Value = strategy.ObjectId.Value ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, Mapping.ParamNameForObject, strategy.ObjectId.Value);
+                    command.Parameters[Mapping.ParamNameForObject].Value = strategy.ObjectId.Value ?? DBNull.Value;
                 }
-                
+
                 command.ExecuteNonQuery();
             }
         }

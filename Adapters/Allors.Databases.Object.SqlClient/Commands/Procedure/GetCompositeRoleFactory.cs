@@ -91,13 +91,18 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, Mapping.ParamNameForAssociation, this.factory.Database.Mapping.SqlDbTypeForObject, reference.ObjectId.Value);
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
+                    sqlParameter.SqlDbType = this.factory.Database.Mapping.SqlDbTypeForObject;
+                    sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter);
 
                     this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, Mapping.ParamNameForAssociation, reference.ObjectId.Value);
+                    command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value ?? DBNull.Value;
                 }
 
                 object result = command.ExecuteScalar();

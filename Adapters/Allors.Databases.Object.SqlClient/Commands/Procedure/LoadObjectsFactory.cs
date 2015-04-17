@@ -23,10 +23,14 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
 
     using Allors.Meta;
+
+    using Microsoft.SqlServer.Server;
 
     internal class LoadObjectsFactory
     {
@@ -42,7 +46,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return new LoadObjects(this);
         }
 
-        internal class LoadObjects : Commands.Command
+        internal class LoadObjects
         {
             private readonly LoadObjectsFactory factory;
 
@@ -64,8 +68,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     using (var command = this.factory.ManagementSession.CreateSqlCommand(sql))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        this.AddInObject(command, Mapping.ParamNameForType, Mapping.SqlDbTypeForType, objectType.Id);
-                        this.AddInTable(command, schema.TableTypeNameForObject, database.CreateObjectTable(objectIds));
+                        var sqlParameter = command.CreateParameter();
+                        sqlParameter.ParameterName = Mapping.ParamNameForType;
+                        sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                        sqlParameter.Value = (object)objectType.Id ?? DBNull.Value;
+
+                        command.Parameters.Add(sqlParameter);
+                        var sqlParameter1 = command.CreateParameter();
+                        sqlParameter1.SqlDbType = SqlDbType.Structured;
+                        sqlParameter1.TypeName = schema.TableTypeNameForObject;
+                        sqlParameter1.ParameterName = Mapping.ParamNameForTableType;
+                        sqlParameter1.Value = database.CreateObjectTable(objectIds);
+
+                        command.Parameters.Add(sqlParameter1);
                         command.ExecuteNonQuery();
                     }
                 }

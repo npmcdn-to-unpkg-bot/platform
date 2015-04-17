@@ -23,6 +23,7 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
@@ -68,13 +69,18 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     var sql = this.Database.Mapping.ProcedureNameForCreateObjectByClass[exclusiveRootClass];
                     command = this.Session.CreateSqlCommand(sql);
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, Mapping.ParamNameForType, Mapping.SqlDbTypeForType, objectType.Id);
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForType;
+                    sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                    sqlParameter.Value = (object)objectType.Id ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter);
 
                     this.commandByIObjectType[exclusiveRootClass] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, Mapping.ParamNameForType, objectType.Id);
+                    command.Parameters[Mapping.ParamNameForType].Value = (object)objectType.Id ?? DBNull.Value;
                 }
 
                 var result = command.ExecuteScalar();

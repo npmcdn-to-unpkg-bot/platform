@@ -82,13 +82,18 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, Mapping.ParamNameForObject, this.factory.Database.Mapping.SqlDbTypeForObject, reference.ObjectId.Value);
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                    sqlParameter.SqlDbType = this.factory.Database.Mapping.SqlDbTypeForObject;
+                    sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter);
 
                     this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, Mapping.ParamNameForObject, reference.ObjectId.Value);
+                    command.Parameters[Mapping.ParamNameForObject].Value = reference.ObjectId.Value ?? DBNull.Value;
                 }
 
                 using (DbDataReader reader = command.ExecuteReader())

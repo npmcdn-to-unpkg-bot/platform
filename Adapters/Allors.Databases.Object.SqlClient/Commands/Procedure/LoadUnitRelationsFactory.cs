@@ -28,6 +28,8 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
+    using Microsoft.SqlServer.Server;
+
     internal class LoadUnitRelationsFactory
     {
         internal readonly ManagementSession ManagementSession;
@@ -62,7 +64,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return sqlByIRoleType[roleType];
         }
 
-        internal class LoadUnitRelations : Commands.Command
+        internal class LoadUnitRelations
         {
             private readonly LoadUnitRelationsFactory factory;
             private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByRoleTypeByObjectType;
@@ -131,11 +133,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 {
                     command = this.factory.ManagementSession.CreateSqlCommand(this.factory.GetSql(exclusiveRootClass, roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, tableTypeName, database.CreateRelationTable(roleType, relations));
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.SqlDbType = SqlDbType.Structured;
+                    sqlParameter.TypeName = tableTypeName;
+                    sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                    sqlParameter.Value = database.CreateRelationTable(roleType, relations);
+
+                    command.Parameters.Add(sqlParameter);
                 }
                 else
                 {
-                    this.SetInTable(command, database.CreateRelationTable(roleType, relations));
+                    command.Parameters[Mapping.ParamNameForTableType].Value = database.CreateRelationTable(roleType, relations);
                 }
 
                 command.ExecuteNonQuery();

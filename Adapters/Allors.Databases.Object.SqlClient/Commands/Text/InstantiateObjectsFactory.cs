@@ -20,11 +20,15 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
+    using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
 
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+
+    using Microsoft.SqlServer.Server;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
@@ -66,11 +70,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (this.command == null)
                 {
                     this.command = this.Session.CreateSqlCommand(this.factory.Sql);
-                    this.AddInTable(this.command, this.Database.Mapping.TableTypeNameForObject, this.Database.CreateObjectTable(objectids));
+                    var sqlParameter = this.command.CreateParameter();
+                    sqlParameter.SqlDbType = SqlDbType.Structured;
+                    sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                    sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                    sqlParameter.Value = this.Database.CreateObjectTable(objectids);
+
+                    this.command.Parameters.Add(sqlParameter);
                 }
                 else
                 {
-                    this.SetInTable(this.command, this.Database.CreateObjectTable(objectids));
+                    this.command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(objectids);
                 }
 
                 using (var reader = this.command.ExecuteReader())
@@ -78,8 +88,8 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                     while (reader.Read())
                     {
                         var objectIdString = reader.GetValue(0).ToString();
-                        var classId = this.GetClassId(reader, 1);
-                        var cacheId = this.GetCachId(reader, 2);
+                        var classId = reader.GetGuid(1);
+                        var cacheId = reader.GetInt32(2);
 
                         var objectId = this.Database.ObjectIds.Parse(objectIdString);
                         var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);

@@ -22,9 +22,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
 
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+
+    using Microsoft.SqlServer.Server;
 
     internal class LoadCompositeRelationsFactory
     {
@@ -66,7 +69,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return new LoadCompositeRelations(this, sql);
         }
 
-        internal class LoadCompositeRelations : Commands.Command
+        internal class LoadCompositeRelations
         {
             private readonly LoadCompositeRelationsFactory factory;
             private readonly string sql;
@@ -83,7 +86,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 var command = this.factory.ManagementSession.CreateSqlCommand(this.sql);
                 command.CommandType = CommandType.StoredProcedure;
-                this.AddInTable(command, database.Mapping.TableTypeNameForCompositeRelation, database.CreateRelationTable(relations));
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = database.CreateRelationTable(relations);
+
+                command.Parameters.Add(sqlParameter);
 
                 command.ExecuteNonQuery();
             }

@@ -27,6 +27,8 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
     using Allors.Databases.Object.SqlClient;
 
+    using Microsoft.SqlServer.Server;
+
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
@@ -72,11 +74,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     var sql = this.Database.Mapping.ProcedureNameForGetCache;
                     this.command = this.Session.CreateSqlCommand(sql);
                     this.command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(this.command, mapping.TableTypeNameForObject, this.Database.CreateObjectTable(strategyReferences));
+                    var sqlParameter = this.command.CreateParameter();
+                    sqlParameter.SqlDbType = SqlDbType.Structured;
+                    sqlParameter.TypeName = mapping.TableTypeNameForObject;
+                    sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                    sqlParameter.Value = this.Database.CreateObjectTable(strategyReferences);
+
+                    this.command.Parameters.Add(sqlParameter);
                 }
                 else
                 {
-                    this.SetInTable(this.command, this.Database.CreateObjectTable(strategyReferences));
+                    this.command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(strategyReferences);
                 }
 
                 var cacheIdByObjectId = new Dictionary<ObjectId, int>();

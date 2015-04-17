@@ -28,6 +28,8 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Allors.Databases.Object.SqlClient;
     using Meta;
 
+    using Microsoft.SqlServer.Server;
+
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
@@ -135,11 +137,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(exclusiveRootClass, roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, tableTypeName, this.Database.CreateRelationTable(roleType, relation));
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.SqlDbType = SqlDbType.Structured;
+                    sqlParameter.TypeName = tableTypeName;
+                    sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                    sqlParameter.Value = this.Database.CreateRelationTable(roleType, relation);
+
+                    command.Parameters.Add(sqlParameter);
                 }
                 else
                 {
-                    this.SetInTable(command, this.Database.CreateRelationTable(roleType, relation));
+                    command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(roleType, relation);
                 }
 
                 command.ExecuteNonQuery();

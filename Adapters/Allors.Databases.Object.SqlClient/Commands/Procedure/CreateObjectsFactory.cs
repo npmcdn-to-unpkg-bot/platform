@@ -20,6 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
@@ -68,15 +69,25 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                     var sql = this.Database.Mapping.ProcedureNameForCreateObjectsByClass[exclusiveRootClass];
                     command = this.Session.CreateSqlCommand(sql);
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInObject(command, Mapping.ParamNameForType, Mapping.SqlDbTypeForType,  objectType.Id);
-                    this.AddInObject(command, Mapping.ParamNameForCount, Mapping.SqlDbTypeForCount, count);
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForType;
+                    sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                    sqlParameter.Value = (object)objectType.Id ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter);
+                    var sqlParameter1 = command.CreateParameter();
+                    sqlParameter1.ParameterName = Mapping.ParamNameForCount;
+                    sqlParameter1.SqlDbType = Mapping.SqlDbTypeForCount;
+                    sqlParameter1.Value = (object)count ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter1);
 
                     this.commandByIObjectType[exclusiveRootClass] = command;
                 }
                 else
                 {
-                    this.SetInObject(command, Mapping.ParamNameForType, objectType.Id);
-                    this.SetInObject(command, Mapping.ParamNameForCount, count);
+                    command.Parameters[Mapping.ParamNameForType].Value = (object)objectType.Id ?? DBNull.Value;
+                    command.Parameters[Mapping.ParamNameForCount].Value = (object)count ?? DBNull.Value;
                 }
 
                 var objectIds = new List<object>();

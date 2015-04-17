@@ -20,6 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
+    using System;
+    using System.Data;
     using System.Data.SqlClient;
 
     using Allors.Databases.Object.SqlClient;
@@ -62,19 +64,24 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (this.command == null)
                 {
                     this.command = this.Session.CreateSqlCommand(this.factory.Sql);
-                    this.AddInObject(this.command, Mapping.ParamNameForObject, this.Database.Mapping.SqlDbTypeForObject, objectId.Value);
+                    var sqlParameter = this.command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                    sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                    sqlParameter.Value = objectId.Value ?? DBNull.Value;
+
+                    this.command.Parameters.Add(sqlParameter);
                 }
                 else
                 {
-                    this.SetInObject(this.command, Mapping.ParamNameForObject, objectId.Value);
+                    this.command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
                 }
 
                 using (var reader = this.command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        var classId = this.GetClassId(reader, 0);
-                        var cacheId = this.GetCachId(reader, 1);
+                        var classId = reader.GetGuid(0);
+                        var cacheId = reader.GetInt32(1);
 
                         var type = (IClass)this.factory.Database.MetaPopulation.Find(classId);
                         return this.Session.GetOrCreateAssociationForExistingObject(type, objectId, cacheId);

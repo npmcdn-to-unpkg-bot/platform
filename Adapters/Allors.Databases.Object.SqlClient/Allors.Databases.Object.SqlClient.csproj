@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\DatabaseCommand.cs" />
     <Compile Include="Initialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Caching\Cache.cs" />
@@ -49,8 +50,6 @@
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFactories.cs" />
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\DatabaseCommand.cs" />
     <Compile Include="Commands\Procedure\AddCompositeRoleFactory.cs" />
     <Compile Include="Commands\Procedure\ClearCompositeAndCompositesRoleFactory.cs" />
     <Compile Include="Commands\Procedure\CreateObjectFactory.cs" />

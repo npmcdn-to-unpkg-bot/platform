@@ -27,6 +27,8 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
+    using Microsoft.SqlServer.Server;
+
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
@@ -89,13 +91,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
-                    this.AddInTable(command, schema.TableTypeNameForCompositeRelation, this.Database.CreateRelationTable(relations));
+                    var sqlParameter = command.CreateParameter();
+                    sqlParameter.SqlDbType = SqlDbType.Structured;
+                    sqlParameter.TypeName = schema.TableTypeNameForCompositeRelation;
+                    sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                    sqlParameter.Value = this.Database.CreateRelationTable(relations);
+
+                    command.Parameters.Add(sqlParameter);
 
                     this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {
-                    this.SetInTable(command, this.Database.CreateRelationTable(relations));
+                    command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(relations);
                 }
 
                 command.ExecuteNonQuery();

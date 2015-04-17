@@ -21,6 +21,7 @@
 namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System;
+    using System.Data;
     using System.Data.SqlClient;
 
     using Allors.Meta;
@@ -62,11 +63,16 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 if (this.command == null)
                 {
                     this.command = this.Session.CreateSqlCommand(this.factory.Sql);
-                    this.AddInObject(this.command, Mapping.ParamNameForObject, this.Database.Mapping.SqlDbTypeForObject, objectId.Value);
+                    var sqlParameter = this.command.CreateParameter();
+                    sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                    sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                    sqlParameter.Value = objectId.Value ?? DBNull.Value;
+
+                    this.command.Parameters.Add(sqlParameter);
                 }
                 else
                 {
-                    this.SetInObject(this.command, Mapping.ParamNameForObject, objectId.Value);
+                    this.command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
                 }
 
                 var result = this.command.ExecuteScalar();
