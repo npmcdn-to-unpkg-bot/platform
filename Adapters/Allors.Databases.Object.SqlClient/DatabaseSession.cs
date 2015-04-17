@@ -1057,23 +1057,25 @@ namespace Allors.Databases.Object.SqlClient
         Dictionary<ObjectId, int> GetCacheIds(ISet<Reference> strategyReferences)
         {
             var command = this.getCacheIds;
+            
             if (command == null)
             {
-                var sql = this.database.Mapping.ProcedureNameForGetCache;
+                var sql = this.Database.Mapping.ProcedureNameForGetCache;
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
-
                 var sqlParameter = command.CreateParameter();
                 sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForObject;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
                 sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = this.database.CreateObjectTable(strategyReferences);
+                sqlParameter.Value = this.Database.CreateObjectTable(strategyReferences);
 
+                command.Parameters.Add(sqlParameter);
+                
                 this.getCacheIds = command;
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateObjectTable(strategyReferences);
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(strategyReferences);
             }
 
             var cacheIdByObjectId = new Dictionary<ObjectId, int>();
@@ -1082,7 +1084,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    var objectId = this.database.ObjectIds.Parse(reader[0].ToString());
+                    var objectId = this.Database.ObjectIds.Parse(reader[0].ToString());
                     var cacheId = reader.GetInt32(1);
 
                     cacheIdByObjectId.Add(objectId, cacheId);
