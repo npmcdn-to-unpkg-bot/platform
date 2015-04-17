@@ -34,7 +34,6 @@ namespace Allors.Databases.Object.SqlClient
         private InstantiateObjectFactory.InstantiateObject instantiateObject;
         private InstantiateObjectsFactory.InstantiateObjects instantiateObjects;
         private SetCompositeRoleFactory.SetCompositeRole setCompositeRole;
-        private RemoveCompositeRoleFactory.RemoveCompositeRole removeCompositeRole;
         private UpdateCacheIdsFactory.UpdateCacheIds updateCacheIds;
         private SetUnitRoleFactory.SetUnitRole setUnitRole;
         private SetUnitRolesFactory.SetUnitRoles setUnitRoles;
@@ -106,14 +105,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.setCompositeRole ?? (this.setCompositeRole = this.commandFactories.SetCompositeRoleFactory.Create(this.session));
-            }
-        }
-
-        internal RemoveCompositeRoleFactory.RemoveCompositeRole RemoveCompositeRoleCommand
-        {
-            get
-            {
-                return this.removeCompositeRole ?? (this.removeCompositeRole = this.commandFactories.RemoveCompositeRoleFactory.Create(this.session));
             }
         }
 

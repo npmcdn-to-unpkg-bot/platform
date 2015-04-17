@@ -50,7 +50,6 @@
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFactories.cs" />
-    <Compile Include="Commands\Procedure\RemoveCompositeRoleFactory.cs" />
     <Compile Include="Commands\Procedure\SetCompositeRoleFactory.cs" />
     <Compile Include="Commands\Procedure\SetUnitRoleFactory.cs" />
     <Compile Include="Commands\Procedure\UpdateCacheIdsFactory.cs" />

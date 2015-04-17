@@ -876,6 +876,7 @@ namespace Allors.Databases.Object.SqlClient
             this.getCompositeRoleByRoleType = null;
             this.getCompositeRolesByRoleType = null;
             this.getUnitRolesByClass = null;
+            this.removeCompositeRoleByRoleType = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1407,6 +1408,47 @@ namespace Allors.Databases.Object.SqlClient
                     }
                 }
             }
+        }
+
+        private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
+
+        public void RemoveCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
+        {
+            this.removeCompositeRoleByRoleType = this.removeCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.removeCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                string sql;
+                var associationType = roleType.AssociationType;
+
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                }
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateRelationTable(relations);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.removeCompositeRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(relations);
+            }
+
+            command.ExecuteNonQuery();
         }
     }
 }
