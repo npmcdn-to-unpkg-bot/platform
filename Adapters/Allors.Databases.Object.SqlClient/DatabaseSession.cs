@@ -511,7 +511,7 @@ namespace Allors.Databases.Object.SqlClient
             if (!associationsByRole.TryGetValue(roleStrategy.Reference, out associations))
             {
                 this.FlushConditionally(roleStrategy, associationType);
-                associations = this.SessionCommands.GetCompositeAssociationsCommand.Execute(roleStrategy, associationType);
+                associations = this.GetCompositeAssociations(roleStrategy, associationType);
                 associationsByRole[roleStrategy.Reference] = associations;
             }
 
@@ -872,6 +872,7 @@ namespace Allors.Databases.Object.SqlClient
             this.createObjectsByClass = null;
             this.getCacheIds = null;
             this.getCompositeAssociationByAssociationType = null;
+            this.getCompositeAssociationsByAssociationType = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1157,6 +1158,57 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             return associationObject;
+        }
+
+
+        private Dictionary<IAssociationType, SqlCommand> getCompositeAssociationsByAssociationType;
+        
+        private ObjectId[] GetCompositeAssociations(Strategy role, IAssociationType associationType)
+        {
+            this.getCompositeAssociationsByAssociationType = this.getCompositeAssociationsByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+
+            var roleType = associationType.RoleType;
+
+            string sql;
+            if (roleType.IsMany || !associationType.RelationType.ExistExclusiveLeafClasses)
+            {
+                sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
+            }
+            else
+            {
+                sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+            }
+
+            SqlCommand command;
+            if (!this.getCompositeAssociationsByAssociationType.TryGetValue(associationType, out command))
+            {
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForRole;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = role.ObjectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getCompositeAssociationsByAssociationType[associationType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForRole].Value = role.ObjectId.Value ?? DBNull.Value;
+            }
+
+            var objectIds = new List<ObjectId>();
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var id = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    objectIds.Add(id);
+                }
+            }
+
+            return objectIds.ToArray();
         }
 
     }

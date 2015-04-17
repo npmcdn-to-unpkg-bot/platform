@@ -50,7 +50,6 @@
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFactories.cs" />
-    <Compile Include="Commands\Procedure\GetCompositeAssociationsFactory.cs" />
     <Compile Include="Commands\Procedure\GetCompositeRoleFactory.cs" />
     <Compile Include="Commands\Procedure\GetCompositeRolesFactory.cs" />
     <Compile Include="Commands\Procedure\GetUnitRolesFactory.cs" />
