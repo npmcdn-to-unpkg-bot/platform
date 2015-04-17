@@ -27,8 +27,6 @@ namespace Allors.Databases.Object.SqlClient
         private readonly DatabaseSession session;
         private readonly CommandFactories commandFactories;
 
-        private GetIObjectTypeFactory.GetIObjectType getIObjectType;
-        private InsertObjectFactory.InsertObject insertObject;
         private InstantiateObjectFactory.InstantiateObject instantiateObject;
         private InstantiateObjectsFactory.InstantiateObjects instantiateObjects;
         private SetUnitRolesFactory.SetUnitRoles setUnitRoles;
@@ -37,22 +35,6 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.session = session;
             this.commandFactories = this.session.SqlClientDatabase.SqlClientCommandFactories;
-        }
-
-        internal GetIObjectTypeFactory.GetIObjectType GetObjectType
-        {
-            get
-            {
-                return this.getIObjectType ?? (this.getIObjectType = this.commandFactories.GetIObjectTypeFactory.Create(this.session));
-            }
-        }
-
-        internal InsertObjectFactory.InsertObject InsertObjectCommand
-        {
-            get
-            {
-                return this.insertObject ?? (this.insertObject = this.commandFactories.InsertObjectFactory.Create(this.session));
-            }
         }
 
         internal InstantiateObjectFactory.InstantiateObject InstantiateObjectCommand

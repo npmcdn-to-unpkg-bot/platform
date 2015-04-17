@@ -196,7 +196,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            var strategyReference = this.SessionCommands.InsertObjectCommand.Execute(domainType, objectId);
+            var strategyReference = this.InsertObject(domainType, objectId);
             this.referenceByObjectId[objectId] = strategyReference;
             var insertedObject = strategyReference.Strategy.GetObject();
 
@@ -559,7 +559,7 @@ namespace Allors.Databases.Object.SqlClient
                 var objectType = this.Database.Cache.GetObjectType(objectId);
                 if (objectType == null)
                 {
-                    objectType = this.SessionCommands.GetObjectType.Execute(objectId);
+                    objectType = this.GetObjectType(objectId);
                     this.Database.Cache.SetObjectType(objectId, objectType);
                 }
 
@@ -881,6 +881,8 @@ namespace Allors.Databases.Object.SqlClient
             this.setUnitRoleByIRoleTypeByIObjectType = null;
             this.updateCacheIds = null;
             this.deleteObjectByClass = null;
+            this.getObjectType = null;
+            this.insertObjectByClass = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1642,5 +1644,112 @@ namespace Allors.Databases.Object.SqlClient
 
             command.ExecuteNonQuery();
         }
+
+        private SqlCommand getObjectType;
+
+        private IClass GetObjectType(ObjectId objectId)
+        {
+            var command = this.getObjectType;
+            if (command == null)
+            {
+                var sql = "SELECT " + Mapping.ColumnNameForType + "\n";
+                sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
+
+                command = this.CreateSqlCommand(sql);
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = objectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getObjectType = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+            }
+
+            var result = command.ExecuteScalar();
+            if (result == null)
+            {
+                return null;
+            }
+
+            return (IClass)this.SqlClientDatabase.ObjectFactory.GetObjectTypeForType((Guid)result);
+        }
+
+        private Dictionary<IClass, SqlCommand> insertObjectByClass;
+
+        private Reference InsertObject(IClass @class, ObjectId objectId)
+        {
+            this.insertObjectByClass = this.insertObjectByClass ?? new Dictionary<IClass, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.insertObjectByClass.TryGetValue(@class, out command))
+            {
+                var schema = this.Database.Mapping;
+
+                // TODO: Make this a single pass Query.
+                var sql = "IF EXISTS (\n";
+                sql += "    SELECT " + Mapping.ColumnNameForObject + "\n";
+                sql += "    FROM " + schema.TableNameForObjectByClass[@class.ExclusiveLeafClass] + "\n";
+                sql += "    WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
+                sql += ")\n";
+                sql += "    SELECT 1\n";
+                sql += "ELSE\n";
+                sql += "    BEGIN\n";
+
+                sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " ON\n";
+
+                sql += "    INSERT INTO " + schema.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + ")\n";
+                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ", " + Reference.InitialCacheId + ");\n";
+
+                sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " OFF;\n";
+
+                sql += "    INSERT INTO " + schema.TableNameForObjectByClass[@class.ExclusiveLeafClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ")\n";
+                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ");\n";
+
+                sql += "    SELECT 0;\n";
+                sql += "    END";
+
+                command = this.CreateSqlCommand(sql);
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = objectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+                var sqlParameter1 = command.CreateParameter();
+                sqlParameter1.ParameterName = Mapping.ParamNameForType;
+                sqlParameter1.SqlDbType = Mapping.SqlDbTypeForType;
+                sqlParameter1.Value = (object)@class.Id ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter1);
+
+                this.insertObjectByClass[@class] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
+            }
+
+            var result = command.ExecuteScalar();
+            if (result == null)
+            {
+                throw new Exception("Reader returned no rows");
+            }
+
+            if (long.Parse(result.ToString()) > 0)
+            {
+                throw new Exception("Duplicate id error");
+            }
+
+            return this.CreateAssociationForNewObject(@class, objectId);
+        }
+
     }
 }

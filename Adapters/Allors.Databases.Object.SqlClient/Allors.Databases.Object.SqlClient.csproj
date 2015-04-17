@@ -50,8 +50,6 @@
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFactories.cs" />
-    <Compile Include="Commands\Text\GetObjectTypeFactory.cs" />
-    <Compile Include="Commands\Text\InsertObjectFactory.cs" />
     <Compile Include="Commands\Text\InstantiateObjectFactory.cs" />
     <Compile Include="Commands\Text\InstantiateObjectsFactory.cs" />
     <Compile Include="Commands\Text\SetUnitRolesFactory.cs" />

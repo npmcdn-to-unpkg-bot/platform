@@ -27,31 +27,13 @@ namespace Allors.Databases.Object.SqlClient
         private readonly Database database;
 
         // Session
-        private GetIObjectTypeFactory getIObjectTypeFactory;
         private InstantiateObjectsFactory instantiateObjectsFactory;
-        private InsertObjectFactory insertObjectFactory;
         private InstantiateObjectFactory instantiateObjectFactory;
         private SetUnitRolesFactory setUnitRolesFactory;
         
         internal CommandFactories(Database database)
         {
             this.database = database;
-        }
-
-        internal GetIObjectTypeFactory GetIObjectTypeFactory
-        {
-            get
-            {
-                return this.getIObjectTypeFactory ?? (this.getIObjectTypeFactory = new GetIObjectTypeFactory(this.database));
-            }
-        }
-
-        internal InsertObjectFactory InsertObjectFactory
-        {
-            get
-            {
-                return this.insertObjectFactory ?? (this.insertObjectFactory = new InsertObjectFactory(this.SqlClientDatabase));
-            }
         }
 
         internal InstantiateObjectsFactory InstantiateObjectsFactory
