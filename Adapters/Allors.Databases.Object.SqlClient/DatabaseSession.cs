@@ -23,6 +23,7 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
 
@@ -889,6 +890,49 @@ namespace Allors.Databases.Object.SqlClient
 
                 this.connection = null;
             }
+        }
+
+
+
+
+
+        private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
+
+        public void AddCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
+        {
+            this.addCompositeRoleByRoleType = this.addCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.addCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                string sql;
+                if (roleType.AssociationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                {
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                }
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.database.CreateRelationTable(relations);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.addCompositeRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateRelationTable(relations);
+            }
+
+            command.ExecuteNonQuery();
         }
     }
 }

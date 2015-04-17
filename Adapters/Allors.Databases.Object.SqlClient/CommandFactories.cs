@@ -23,8 +23,6 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
 
-    using AddCompositeRoleFactory = Allors.Databases.Object.SqlClient.Commands.Procedure.AddCompositeRoleFactory;
-
     internal sealed class CommandFactories 
     {
         private readonly Database database;
@@ -32,7 +30,6 @@ namespace Allors.Databases.Object.SqlClient
         // Session
         private GetIObjectTypeFactory getIObjectTypeFactory;
         private InstantiateObjectsFactory instantiateObjectsFactory;
-        private AddCompositeRoleFactory addCompositeRoleFactory;
         private RemoveCompositeRoleFactory removeCompositeRoleFactory;
         private CreateObjectFactory createObjectFactory;
         private CreateObjectsFactory createObjectsFactory;
@@ -93,14 +90,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.instantiateObjectsFactory ?? (this.instantiateObjectsFactory = new InstantiateObjectsFactory(this.SqlClientDatabase));
-            }
-        }
-
-        internal AddCompositeRoleFactory AddCompositeRoleFactory
-        {
-            get
-            {
-                return this.addCompositeRoleFactory ?? (this.addCompositeRoleFactory = new AddCompositeRoleFactory(this.SqlClientDatabase));
             }
         }
 
