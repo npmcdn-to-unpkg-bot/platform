@@ -108,7 +108,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (!this.Reference.IsNew)
                     {
-                        this.Reference.Session.SessionCommands.GetUnitRolesCommand.Execute(this);
+                        this.Reference.Session.GetUnitRoles(this);
                         this.cachedObject.TryGetValue(roleType, out role);
                     }
                 }

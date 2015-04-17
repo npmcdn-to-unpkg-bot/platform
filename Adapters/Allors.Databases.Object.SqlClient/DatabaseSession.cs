@@ -875,6 +875,7 @@ namespace Allors.Databases.Object.SqlClient
             this.getCompositeAssociationsByAssociationType = null;
             this.getCompositeRoleByRoleType = null;
             this.getCompositeRolesByRoleType = null;
+            this.getUnitRolesByClass = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1315,6 +1316,95 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             roles.CachedObject.SetValue(roleType, objectIds.ToArray());
+        }
+
+        private Dictionary<IClass, SqlCommand> getUnitRolesByClass;
+
+        public void GetUnitRoles(Roles roles)
+        {
+            var reference = roles.Reference;
+            var @class = reference.ObjectType;
+
+            SqlCommand command;
+            if (!this.getUnitRolesByClass.TryGetValue(@class, out command))
+            {
+                var sql = this.Database.Mapping.ProcedureNameForGetUnitsByClass[@class];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getUnitRolesByClass[@class] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForObject].Value = reference.ObjectId.Value ?? DBNull.Value;
+            }
+
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    var sortedUnitRoles = this.Database.GetSortedUnitRolesByIObjectType(reference.ObjectType);
+
+                    for (var i = 0; i < sortedUnitRoles.Length; i++)
+                    {
+                        var roleType = sortedUnitRoles[i];
+
+                        object unit = null;
+                        if (!reader.IsDBNull(i))
+                        {
+                            var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
+                            switch (unitTypeTag)
+                            {
+                                case UnitTags.AllorsString:
+                                    unit = reader.GetString(i);
+                                    break;
+                                case UnitTags.AllorsInteger:
+                                    unit = reader.GetInt32(i);
+                                    break;
+                                case UnitTags.AllorsFloat:
+                                    unit = reader.GetDouble(i);
+                                    break;
+                                case UnitTags.AllorsDecimal:
+                                    unit = reader.GetDecimal(i);
+                                    break;
+                                case UnitTags.AllorsDateTime:
+                                    var dateTime = reader.GetDateTime(i);
+                                    if (dateTime == DateTime.MaxValue || dateTime == DateTime.MinValue)
+                                    {
+                                        unit = dateTime;
+                                    }
+                                    else
+                                    {
+                                        unit = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond, DateTimeKind.Utc);
+                                    }
+
+                                    break;
+                                case UnitTags.AllorsBoolean:
+                                    unit = reader.GetBoolean(i);
+                                    break;
+                                case UnitTags.AllorsUnique:
+                                    unit = reader.GetGuid(i);
+                                    break;
+                                case UnitTags.AllorsBinary:
+                                    var byteArray = (byte[])reader.GetValue(i);
+                                    unit = byteArray;
+                                    break;
+                                default:
+                                    throw new ArgumentException("Unknown Unit ObjectType: " + roleType.ObjectType.Name);
+                            }
+                        }
+
+                        roles.CachedObject.SetValue(roleType, unit);
+                    }
+                }
+            }
         }
     }
 }
