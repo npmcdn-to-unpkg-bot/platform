@@ -55,8 +55,6 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly ICache cache;
 
-        private readonly CommandFactories commandFactories;
-
         private readonly ObjectIds objectIds;
 
         private readonly string schemaName;
@@ -85,8 +83,6 @@ namespace Allors.Databases.Object.SqlClient
             this.sortedUnitRolesByIObjectType = new Dictionary<IObjectType, IRoleType[]>();
 
             this.cache = configuration.CacheFactory.CreateCache(this);
-
-            this.commandFactories = new CommandFactories(this);
 
             var connectionStringBuilder = new SqlConnectionStringBuilder(this.ConnectionString);
             var applicationName = connectionStringBuilder.ApplicationName.Trim();
@@ -262,14 +258,6 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.objectIds; }
         }
 
-        internal CommandFactories SqlClientCommandFactories
-        {
-            get
-            {
-                return this.commandFactories;
-            }
-        }
-
         internal Mapping Mapping
         {
             get
@@ -297,14 +285,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
         
-        internal CommandFactories CommandFactories
-        {
-            get
-            {
-                return this.commandFactories;
-            }
-        }
-
         public object this[string name]
         {
             get

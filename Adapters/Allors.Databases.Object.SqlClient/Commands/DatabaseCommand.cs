@@ -28,7 +28,7 @@ namespace Allors.Databases.Object.SqlClient.Commands
         protected DatabaseCommand(DatabaseSession session)
         {
             this.Session = session;
-            this.Database = this.Session.SqlClientDatabase;
+            this.Database = this.Session.Database;
         }
     }
 }

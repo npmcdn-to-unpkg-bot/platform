@@ -130,7 +130,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void SetUnitRoles(Roles roles, List<IRoleType> unitRoles)
         {
-            roles.Reference.Session.SessionCommands.SetUnitRolesCommand.Execute(roles, unitRoles);
+            roles.Reference.Session.SetUnitRoles(roles, unitRoles);
         }
 
         internal void SetUnitRole(Reference association, IRoleType roleType, object role)

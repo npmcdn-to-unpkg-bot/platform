@@ -49,9 +49,6 @@
     <Compile Include="Caching\ICacheFactory.cs" />
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Command.cs" />
-    <Compile Include="CommandFactories.cs" />
-    <Compile Include="Commands\Text\InstantiateObjectsFactory.cs" />
-    <Compile Include="Commands\Text\SetUnitRolesFactory.cs" />
     <Compile Include="CompositeRelation.cs" />
     <Compile Include="CompositeRoles.cs" />
     <Compile Include="Configuration.cs" />
@@ -120,7 +117,6 @@
     <Compile Include="Schema\SchemaTableTypeColumn.cs" />
     <Compile Include="Schema\SchemaTableColumn.cs" />
     <Compile Include="Schema\SchemaTableType.cs" />
-    <Compile Include="SessionCommands.cs" />
     <Compile Include="Strategy.cs" />
     <Compile Include="UnitRelation.cs" />
     <Compile Include="Validation.cs" />
