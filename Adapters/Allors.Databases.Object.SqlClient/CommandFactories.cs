@@ -33,7 +33,6 @@ namespace Allors.Databases.Object.SqlClient
         private InsertObjectFactory insertObjectFactory;
         private InstantiateObjectFactory instantiateObjectFactory;
         private DeleteObjectFactory deleteObjectFactory;
-        private SetUnitRoleFactory setUnitRoleFactory;
         private SetUnitRolesFactory setUnitRolesFactory;
         private UpdateCacheIdsFactory updateCacheIdsFactory;
         
@@ -79,14 +78,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.deleteObjectFactory ?? (this.deleteObjectFactory = new DeleteObjectFactory(this.database));
-            }
-        }
-
-        internal SetUnitRoleFactory SetUnitRoleFactory
-        {
-            get
-            {
-                return this.setUnitRoleFactory ?? (this.setUnitRoleFactory = new SetUnitRoleFactory(this.database));
             }
         }
 

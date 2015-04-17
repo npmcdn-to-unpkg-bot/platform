@@ -34,7 +34,6 @@ namespace Allors.Databases.Object.SqlClient
         private InstantiateObjectFactory.InstantiateObject instantiateObject;
         private InstantiateObjectsFactory.InstantiateObjects instantiateObjects;
         private UpdateCacheIdsFactory.UpdateCacheIds updateCacheIds;
-        private SetUnitRoleFactory.SetUnitRole setUnitRole;
         private SetUnitRolesFactory.SetUnitRoles setUnitRoles;
 
         internal SessionCommands(DatabaseSession session)
@@ -83,15 +82,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal SetUnitRoleFactory.SetUnitRole SetUnitRoleCommand
-        {
-            get
-            {
-                return this.setUnitRole ?? (this.setUnitRole = this.commandFactories.SetUnitRoleFactory.Create(this.session));
-            }
-        }
-
-        internal SetUnitRolesFactory.SetUnitRoles SetUnitRolesCommand
+       internal SetUnitRolesFactory.SetUnitRoles SetUnitRolesCommand
         {
             get
             {

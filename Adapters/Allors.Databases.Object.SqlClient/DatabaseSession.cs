@@ -878,6 +878,7 @@ namespace Allors.Databases.Object.SqlClient
             this.getUnitRolesByClass = null;
             this.removeCompositeRoleByRoleType = null;
             this.setCompositeRoleByRoleType = null;
+            this.setUnitRoleByIRoleTypeByIObjectType = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1490,6 +1491,86 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             command.ExecuteNonQuery();
+        }
+
+        private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> setUnitRoleByIRoleTypeByIObjectType;
+
+        public void SetUnitRole(List<UnitRelation> relations, IClass exclusiveRootClass, IRoleType roleType)
+        {
+            this.setUnitRoleByIRoleTypeByIObjectType = this.setUnitRoleByIRoleTypeByIObjectType ?? new Dictionary<IClass, Dictionary<IRoleType, SqlCommand>>();
+
+            var schema = this.Database.Mapping;
+
+            Dictionary<IRoleType, SqlCommand> commandByIRoleType;
+            if (!this.setUnitRoleByIRoleTypeByIObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))
+            {
+                commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
+                this.setUnitRoleByIRoleTypeByIObjectType.Add(exclusiveRootClass, commandByIRoleType);
+            }
+
+            string tableTypeName;
+
+            var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
+            switch (unitTypeTag)
+            {
+                case UnitTags.AllorsString:
+                    tableTypeName = schema.TableTypeNameForStringRelation;
+                    break;
+
+                case UnitTags.AllorsInteger:
+                    tableTypeName = schema.TableTypeNameForIntegerRelation;
+                    break;
+
+                case UnitTags.AllorsFloat:
+                    tableTypeName = schema.TableTypeNameForFloatRelation;
+                    break;
+
+                case UnitTags.AllorsBoolean:
+                    tableTypeName = schema.TableTypeNameForBooleanRelation;
+                    break;
+
+                case UnitTags.AllorsDateTime:
+                    tableTypeName = schema.TableTypeNameForDateTimeRelation;
+                    break;
+
+                case UnitTags.AllorsUnique:
+                    tableTypeName = schema.TableTypeNameForUniqueRelation;
+                    break;
+
+                case UnitTags.AllorsBinary:
+                    tableTypeName = schema.TableTypeNameForBinaryRelation;
+                    break;
+
+                case UnitTags.AllorsDecimal:
+                    tableTypeName = schema.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                    break;
+
+                default:
+                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+            }
+            
+            SqlCommand command;
+            if (!commandByIRoleType.TryGetValue(roleType, out command))
+            {
+                var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = tableTypeName;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateRelationTable(roleType, relations);
+
+                command.Parameters.Add(sqlParameter);
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(roleType, relations);
+            }
+
+            command.ExecuteNonQuery();
+
         }
     }
 }

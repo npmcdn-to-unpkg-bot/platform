@@ -28,7 +28,7 @@ namespace Allors.Databases.Object.SqlClient
         private const int BatchSize = 1000;
         private readonly DatabaseSession session;
 
-        private Dictionary<IObjectType, Dictionary<IRoleType, List<UnitRelation>>> setUnitRoleRelationsByIRoleTypeByExclusiveRootClass;
+        private Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>> setUnitRoleRelationsByIRoleTypeByExclusiveRootClass;
         private Dictionary<IRoleType, List<CompositeRelation>> setCompositeRoleRelationsByIRoleType;
         private Dictionary<IRoleType, List<CompositeRelation>> addCompositeRoleRelationsByIRoleType;
         private Dictionary<IRoleType, List<CompositeRelation>> removeCompositeRoleRelationsByIRoleType;
@@ -59,7 +59,7 @@ namespace Allors.Databases.Object.SqlClient
                         var relations = secondDictionaryEntry.Value;
                         if (relations.Count > 0)
                         {
-                            this.session.SessionCommands.SetUnitRoleCommand.Execute(relations, exclusiveRootClass, roleType);
+                            this.session.SetUnitRole(relations, exclusiveRootClass, roleType);
                         }
                     }
                 }
@@ -137,7 +137,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (this.setUnitRoleRelationsByIRoleTypeByExclusiveRootClass == null)
             {
-                this.setUnitRoleRelationsByIRoleTypeByExclusiveRootClass = new Dictionary<IObjectType, Dictionary<IRoleType, List<UnitRelation>>>();
+                this.setUnitRoleRelationsByIRoleTypeByExclusiveRootClass = new Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>>();
             }
 
             var exclusiveRootClass = association.ObjectType.ExclusiveLeafClass;
@@ -161,7 +161,7 @@ namespace Allors.Databases.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.SessionCommands.SetUnitRoleCommand.Execute(relations, exclusiveRootClass, roleType);
+                this.session.SetUnitRole(relations, exclusiveRootClass, roleType);
                 relations.Clear();
             }
         }
