@@ -627,7 +627,7 @@ namespace Allors.Databases.Object.SqlClient
 
         protected internal virtual void GetCacheIdsAndExists()
         {
-            var cacheIdByObjectId = this.SessionCommands.GetCacheIdsCommand.Execute(this.referencesWithoutCacheId);
+            var cacheIdByObjectId = this.GetCacheIds(this.referencesWithoutCacheId);
             foreach (var association in this.referencesWithoutCacheId)
             {
                 int cacheId;
@@ -888,6 +888,7 @@ namespace Allors.Databases.Object.SqlClient
             this.clearCompositeAndCompositesRoleByRoleType = null;
             this.createObjectByClass = null;
             this.createObjectsByClass = null;
+            this.getCacheIds = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1067,6 +1068,48 @@ namespace Allors.Databases.Object.SqlClient
 
             return strategies;
         }
+
+        private SqlCommand getCacheIds;
+
+        Dictionary<ObjectId, int> GetCacheIds(ISet<Reference> strategyReferences)
+        {
+            var command = this.getCacheIds;
+            if (command == null)
+            {
+                var sql = this.database.Mapping.ProcedureNameForGetCache;
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.database.CreateObjectTable(strategyReferences);
+
+                this.getCacheIds = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateObjectTable(strategyReferences);
+            }
+
+            var cacheIdByObjectId = new Dictionary<ObjectId, int>();
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var objectId = this.database.ObjectIds.Parse(reader[0].ToString());
+                    var cacheId = reader.GetInt32(1);
+
+                    cacheIdByObjectId.Add(objectId, cacheId);
+                }
+            }
+
+            return cacheIdByObjectId;
+        }
+
+
 
     }
 }

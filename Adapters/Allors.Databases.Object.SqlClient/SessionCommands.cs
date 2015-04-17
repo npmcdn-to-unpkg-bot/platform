@@ -43,7 +43,6 @@ namespace Allors.Databases.Object.SqlClient
         private GetUnitRolesFactory.GetUnitRoles getUnitRoles;
         private SetUnitRoleFactory.SetUnitRole setUnitRole;
         private SetUnitRolesFactory.SetUnitRoles setUnitRoles;
-        private GetCacheIdsFactory.GetCacheIds getCacheIds;
 
         internal SessionCommands(DatabaseSession session)
         {
@@ -168,14 +167,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.updateCacheIds ?? (this.updateCacheIds = this.commandFactories.UpdateCacheIdsFactory.Create(this.session));
-            }
-        }
-
-        internal GetCacheIdsFactory.GetCacheIds GetCacheIdsCommand
-        {
-            get
-            {
-                return this.getCacheIds ?? (this.getCacheIds = this.commandFactories.GetCacheIdsFactory.Create(this.session));
             }
         }
     }

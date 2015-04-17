@@ -42,7 +42,6 @@ namespace Allors.Databases.Object.SqlClient
         private SetCompositeRoleFactory setCompositeRoleFactory;
         private SetUnitRoleFactory setUnitRoleFactory;
         private SetUnitRolesFactory setUnitRolesFactory;
-        private GetCacheIdsFactory getCacheIdsFactory;
         private UpdateCacheIdsFactory updateCacheIdsFactory;
         
         internal CommandFactories(Database database)
@@ -159,14 +158,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.setUnitRolesFactory ?? (this.setUnitRolesFactory = new SetUnitRolesFactory(this.database));
-            }
-        }
-
-        internal GetCacheIdsFactory GetCacheIdsFactory
-        {
-            get
-            {
-                return this.getCacheIdsFactory ?? (this.getCacheIdsFactory = new GetCacheIdsFactory(this.database));
             }
         }
 
