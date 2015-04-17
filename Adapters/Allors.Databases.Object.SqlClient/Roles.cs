@@ -138,7 +138,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (!this.Reference.IsNew)
                     {
-                        this.Reference.Session.SessionCommands.GetCompositeRoleCommand.Execute(this, roleType);
+                        this.Reference.Session.GetCompositeRole(this, roleType);
                         this.cachedObject.TryGetValue(roleType, out role);
                     }
                 }

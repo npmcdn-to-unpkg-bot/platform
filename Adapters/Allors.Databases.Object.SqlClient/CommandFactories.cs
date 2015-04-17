@@ -34,7 +34,6 @@ namespace Allors.Databases.Object.SqlClient
         private InsertObjectFactory insertObjectFactory;
         private InstantiateObjectFactory instantiateObjectFactory;
         private DeleteObjectFactory deleteObjectFactory;
-        private GetCompositeRoleFactory getCompositeRoleFactory;
         private GetCompositeRolesFactory getCompositeRolesFactory;
         private GetUnitRolesFactory getUnitRolesFactory;
         private SetCompositeRoleFactory setCompositeRoleFactory;
@@ -95,14 +94,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
         
-        internal GetCompositeRoleFactory GetCompositeRoleFactory
-        {
-            get
-            {
-                return this.getCompositeRoleFactory ?? (this.getCompositeRoleFactory = new GetCompositeRoleFactory(this.database));
-            }
-        }
-
         internal GetCompositeRolesFactory GetCompositeRolesFactory
         {
             get
