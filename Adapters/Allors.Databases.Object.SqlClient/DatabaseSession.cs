@@ -32,6 +32,12 @@ namespace Allors.Databases.Object.SqlClient
 
     internal class DatabaseSession : IDatabaseSession, ICommandFactory
     {
+        private readonly Database database;
+
+        private SqlConnection connection;
+        private SqlTransaction transaction;
+        private SessionCommands sessionCommands;
+
         private ChangeSet changeSet;
 
         private Dictionary<Reference, Roles> modifiedRolesByReference;
@@ -48,19 +54,50 @@ namespace Allors.Databases.Object.SqlClient
 
         private Dictionary<string, object> properties;
 
+        internal DatabaseSession(Database database)
+        {
+            this.database = database;
+
+            this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
+            this.referencesWithoutCacheId = new HashSet<Reference>();
+
+            this.associationByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+            this.associationsByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
+
+            this.changeSet = new ChangeSet();
+        }
+
         internal event SessionCommittingEventHandler Committing;
 
         internal event SessionCommittedEventHandler Committed;
-
+        
         internal event SessionRollingBackEventHandler RollingBack;
-
+        
         internal event SessionRolledBackEventHandler RolledBack;
+
+        IDatabase IDatabaseSession.Database
+        {
+            get { return this.database; }
+        }
+
+        public Database Database
+        {
+            get { return this.database; }
+        }
 
         public IPopulation Population
         {
             get
             {
                 return this.Database;
+            }
+        }
+
+        internal ChangeSet ChangeSet
+        {
+            get
+            {
+                return this.changeSet;
             }
         }
 
@@ -96,14 +133,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal ChangeSet ChangeSet
-        {
-            get
-            {
-                return this.changeSet;
-            }
-        }
-
         public virtual IObject Create(IClass objectType)
         {
             if (!objectType.IsClass)
@@ -114,7 +143,7 @@ namespace Allors.Databases.Object.SqlClient
             var strategyReference = this.CreateObject(objectType);
             this.referenceByObjectId[strategyReference.ObjectId] = strategyReference;
 
-            this.SqlDatabase.Cache.SetObjectType(strategyReference.ObjectId, objectType);
+            this.Database.Cache.SetObjectType(strategyReference.ObjectId, objectType);
 
             this.changeSet.OnCreated(strategyReference.ObjectId);
 
@@ -130,7 +159,7 @@ namespace Allors.Databases.Object.SqlClient
 
             var strategyReferences = this.CreateObjects(objectType, count);
 
-            var arrayType = this.SqlDatabase.ObjectFactory.GetTypeForObjectType(objectType);
+            var arrayType = this.Database.ObjectFactory.GetTypeForObjectType(objectType);
             var domainObjects = (IObject[])Array.CreateInstance(arrayType, count);
 
             for (var i = 0; i < strategyReferences.Count; i++)
@@ -148,7 +177,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public virtual IObject Insert(IClass domainType, string objectIdString)
         {
-            var objectId = this.SqlDatabase.ObjectIds.Parse(objectIdString);
+            var objectId = this.Database.ObjectIds.Parse(objectIdString);
             var insertedObject = this.Insert(domainType, objectId);
 
             this.changeSet.OnCreated(objectId);
@@ -183,7 +212,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public virtual IObject Instantiate(string objectId)
         {
-            var id = this.SqlDatabase.ObjectIds.Parse(objectId);
+            var id = this.Database.ObjectIds.Parse(objectId);
             return this.Instantiate(id);
         }
 
@@ -214,7 +243,7 @@ namespace Allors.Databases.Object.SqlClient
             var objectIds = new ObjectId[objectIdStrings.Length];
             for (var i = 0; i < objectIdStrings.Length; i++)
             {
-                objectIds[i] = this.SqlDatabase.ObjectIds.Parse(objectIdStrings[i]);
+                objectIds[i] = this.Database.ObjectIds.Parse(objectIdStrings[i]);
             }
 
             return this.Instantiate(objectIds);
@@ -297,7 +326,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public virtual Extent<T> Extent<T>() where T : IObject
         {
-            return this.Extent((IComposite)this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T)));
+            return this.Extent((IComposite)this.Database.ObjectFactory.GetObjectTypeForType(typeof(T)));
         }
 
         public virtual Allors.Extent Extent(IComposite type)
@@ -371,7 +400,7 @@ namespace Allors.Databases.Object.SqlClient
 
                     this.busyCommittingOrRollingBack = false;
 
-                    this.SqlDatabase.Cache.OnCommit(accessed, changed);
+                    this.Database.Cache.OnCommit(accessed, changed);
 
                     this.ResetSqlCommands();
                 }
@@ -426,7 +455,7 @@ namespace Allors.Databases.Object.SqlClient
 
                     this.changeSet = new ChangeSet();
 
-                    this.SqlDatabase.Cache.OnRollback(accessed);
+                    this.Database.Cache.OnRollback(accessed);
 
                     this.ResetSqlCommands();
                 }
@@ -449,7 +478,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public virtual T Create<T>() where T : IObject
         {
-            var objectType = (IClass)this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T));
+            var objectType = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(typeof(T));
             return (T)this.Create(objectType);
         }
 
@@ -527,11 +556,11 @@ namespace Allors.Databases.Object.SqlClient
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
             {
-                var objectType = this.SqlDatabase.Cache.GetObjectType(objectId);
+                var objectType = this.Database.Cache.GetObjectType(objectId);
                 if (objectType == null)
                 {
                     objectType = this.SessionCommands.GetObjectType.Execute(objectId);
-                    this.SqlDatabase.Cache.SetObjectType(objectId, objectType);
+                    this.Database.Cache.SetObjectType(objectId, objectType);
                 }
 
                 association = this.CreateReference(objectType, objectId, false);
@@ -744,52 +773,6 @@ namespace Allors.Databases.Object.SqlClient
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private readonly Database database;
-
-        private SqlConnection connection;
-        private SqlTransaction transaction;
-
-        private SessionCommands sessionCommands;
-
-        internal DatabaseSession(Database database)
-        {
-            this.database = database;
-        
-            this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
-            this.referencesWithoutCacheId = new HashSet<Reference>();
-
-            this.associationByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-            this.associationsByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
-
-            this.changeSet = new ChangeSet();
-        }
-
-        public Allors.IDatabase Database
-        {
-            get { return this.database; }
-        }
-
-        internal Database SqlDatabase
-        {
-            get { return this.database; }
-        }
-
         internal Database SqlClientDatabase
         {
             get { return this.database; }
@@ -814,14 +797,14 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (this.connection == null)
             {
-                this.connection = new SqlConnection(this.SqlDatabase.ConnectionString);
+                this.connection = new SqlConnection(this.Database.ConnectionString);
                 this.connection.Open();
-                this.transaction = this.connection.BeginTransaction(this.SqlDatabase.IsolationLevel);
+                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
             }
 
             var command = this.connection.CreateCommand();
             command.Transaction = this.transaction;
-            command.CommandTimeout = this.SqlDatabase.CommandTimeout;
+            command.CommandTimeout = this.Database.CommandTimeout;
             return command;
         }
         
@@ -830,12 +813,12 @@ namespace Allors.Databases.Object.SqlClient
             return new Command(this, commandText);
         }
 
-        protected Flush CreateFlush(Dictionary<Reference, Roles> unsyncedRolesByReference)
+        private Flush CreateFlush(Dictionary<Reference, Roles> unsyncedRolesByReference)
         {
             return new Flush(this, unsyncedRolesByReference);
         }
 
-        protected void SqlCommit()
+        private void SqlCommit()
         {
             try
             {
@@ -857,7 +840,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected void SqlRollback()
+        private void SqlRollback()
         {
             try
             {
@@ -878,7 +861,6 @@ namespace Allors.Databases.Object.SqlClient
                 this.connection = null;
             }
         }
-
 
 
 

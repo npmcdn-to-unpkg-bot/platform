@@ -134,7 +134,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public override IObject[] ToArray()
         {
-            var clrType = this.Session.SqlDatabase.GetDomainType(this.ObjectType);
+            var clrType = this.Session.Database.GetDomainType(this.ObjectType);
             return this.ToArray(clrType);
         }
 

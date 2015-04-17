@@ -124,7 +124,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private void AddAscendingAppendix(ExtentStatement statement)
         {
-            var sortAppendix = this.session.SqlDatabase.AscendingSortAppendix;
+            var sortAppendix = this.session.Database.AscendingSortAppendix;
             if (sortAppendix != null)
             {
                 statement.Append(sortAppendix + " ");
@@ -133,7 +133,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private void AddDescendingAppendix(ExtentStatement statement)
         {
-            var sortAppendix = this.session.SqlDatabase.DescendingSortAppendix;
+            var sortAppendix = this.session.Database.DescendingSortAppendix;
             if (sortAppendix != null)
             {
                 statement.Append(sortAppendix + " ");

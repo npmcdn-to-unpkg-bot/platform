@@ -135,7 +135,7 @@ namespace Allors.Databases.Object.SqlClient
                 return this.upgrade.ToArray();
             }
             
-            var clrType = this.strategy.SqlSession.SqlDatabase.GetDomainType(this.roleType.ObjectType);
+            var clrType = this.strategy.SqlSession.Database.GetDomainType(this.roleType.ObjectType);
             return this.ToArray(clrType);
         }
 

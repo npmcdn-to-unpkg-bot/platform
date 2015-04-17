@@ -50,9 +50,9 @@ namespace Allors.Databases.Object.SqlClient
 
         internal abstract bool IsRoot { get; }
 
-        internal SqlClient.Mapping Mapping
+        internal Mapping Mapping
         {
-            get { return this.Session.SqlDatabase.Mapping; }
+            get { return this.Session.Database.Mapping; }
         }
 
         internal ExtentSort Sorter

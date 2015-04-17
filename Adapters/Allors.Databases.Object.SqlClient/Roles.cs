@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (this.cachedObject == null && !this.Reference.IsNew)
                 {
-                    var cache = this.Reference.Session.SqlDatabase.Cache;
+                    var cache = this.Reference.Session.Database.Cache;
                     this.cachedObject = cache.GetOrCreateCachedObject(this.Reference.ObjectType, this.Reference.ObjectId, this.Reference.CacheId);
                 }
 

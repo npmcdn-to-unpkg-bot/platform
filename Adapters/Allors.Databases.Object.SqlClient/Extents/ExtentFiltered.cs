@@ -63,7 +63,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal Mapping Mapping
         {
-            get { return this.session.SqlDatabase.Mapping; }
+            get { return this.session.Database.Mapping; }
         }
 
         internal override DatabaseSession Session
@@ -141,7 +141,7 @@ namespace Allors.Databases.Object.SqlClient
                     {
                         while (reader.Read())
                         {
-                            var objectId = this.session.SqlDatabase.ObjectIds.Parse(reader.GetValue(0).ToString());
+                            var objectId = this.session.Database.ObjectIds.Parse(reader.GetValue(0).ToString());
                             objectIds.Add(objectId);
                         }
 

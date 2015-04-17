@@ -74,7 +74,7 @@ namespace Allors.Databases.Object.SqlClient
                     statement.Append("\nINTERSECT\n");
                     break;
                 case ExtentOperations.Except:
-                    statement.Append("\n" + this.Session.SqlDatabase.Except + "\n");
+                    statement.Append("\n" + this.Session.Database.Except + "\n");
                     break;
             }
 
@@ -99,7 +99,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     while (reader.Read())
                     {
-                        var objectId = this.Session.SqlDatabase.ObjectIds.Parse(reader.GetValue(0).ToString());
+                        var objectId = this.Session.Database.ObjectIds.Parse(reader.GetValue(0).ToString());
                         objectIds.Add(objectId);
                     }
 
