@@ -178,8 +178,7 @@ namespace Allors.Databases.Object.SqlClient
 
                                 if (canLoad)
                                 {
-                                    var loadObjects = session.LoadObjectsFactory.Create(objectType);
-                                    loadObjects.Execute(objectType, objectIds);
+                                    session.LoadObjects(objectType, objectIds);
                                 }
                             }
                         }

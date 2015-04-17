@@ -33,7 +33,6 @@ namespace Allors.Databases.Object.SqlClient
         private SqlTransaction transaction;
         private SqlConnection connection;
        
-        private LoadObjectsFactory loadObjectsFactory;
         private LoadUnitRelationsFactory loadUnitRelationsFactory;
 
         internal ManagementSession(Database database)
@@ -49,14 +48,6 @@ namespace Allors.Databases.Object.SqlClient
         public void Dispose()
         {
             this.Rollback();
-        }
-
-        internal LoadObjectsFactory LoadObjectsFactory
-        {
-            get
-            {
-                return this.loadObjectsFactory ?? (this.loadObjectsFactory = new LoadObjectsFactory(this));
-            }
         }
 
         internal LoadUnitRelationsFactory LoadUnitRelationsFactory
@@ -199,17 +190,45 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            var command = this.CreateSqlCommand(sql);
-            command.CommandType = CommandType.StoredProcedure;
-            var sqlParameter = command.CreateParameter();
-            sqlParameter.SqlDbType = SqlDbType.Structured;
-            sqlParameter.TypeName = database.Mapping.TableTypeNameForCompositeRelation;
-            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-            sqlParameter.Value = database.CreateRelationTable(relations);
+            using (var command = this.CreateSqlCommand(sql))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = database.CreateRelationTable(relations);
 
-            command.Parameters.Add(sqlParameter);
+                command.Parameters.Add(sqlParameter);
 
-            command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void LoadObjects(IObjectType objectType, ObjectId[] objectIds)
+        {
+            var exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
+            var schema = this.database.Mapping;
+
+            var sql = this.Database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
+            using (var command = this.CreateSqlCommand(sql))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForType;
+                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                sqlParameter.Value = (object)objectType.Id ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+                var sqlParameter1 = command.CreateParameter();
+                sqlParameter1.SqlDbType = SqlDbType.Structured;
+                sqlParameter1.TypeName = schema.TableTypeNameForObject;
+                sqlParameter1.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter1.Value = database.CreateObjectTable(objectIds);
+
+                command.Parameters.Add(sqlParameter1);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
