@@ -50,7 +50,6 @@
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFactories.cs" />
-    <Compile Include="Commands\Procedure\CreateObjectsFactory.cs" />
     <Compile Include="Commands\Procedure\GetCacheIdsFactory.cs" />
     <Compile Include="Commands\Procedure\GetCompositeAssociationFactory.cs" />
     <Compile Include="Commands\Procedure\GetCompositeAssociationsFactory.cs" />

@@ -31,8 +31,6 @@ namespace Allors.Databases.Object.SqlClient
         private GetIObjectTypeFactory getIObjectTypeFactory;
         private InstantiateObjectsFactory instantiateObjectsFactory;
         private RemoveCompositeRoleFactory removeCompositeRoleFactory;
-        private CreateObjectFactory createObjectFactory;
-        private CreateObjectsFactory createObjectsFactory;
         private InsertObjectFactory insertObjectFactory;
         private InstantiateObjectFactory instantiateObjectFactory;
         private DeleteObjectFactory deleteObjectFactory;
@@ -57,22 +55,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.getIObjectTypeFactory ?? (this.getIObjectTypeFactory = new GetIObjectTypeFactory(this.database));
-            }
-        }
-
-        internal CreateObjectFactory CreateObjectFactory
-        {
-            get
-            {
-                return this.createObjectFactory ?? (this.createObjectFactory = new CreateObjectFactory(this.SqlClientDatabase));
-            }
-        }
-
-        internal CreateObjectsFactory CreateObjectsFactory
-        {
-            get
-            {
-                return this.createObjectsFactory ?? (this.createObjectsFactory = new CreateObjectsFactory(this.SqlClientDatabase));
             }
         }
 

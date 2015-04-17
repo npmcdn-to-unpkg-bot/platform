@@ -24,6 +24,7 @@ namespace Allors.Databases.Object.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.Common;
     using System.Data.SqlClient;
     using System.Linq;
 
@@ -127,7 +128,7 @@ namespace Allors.Databases.Object.SqlClient
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }
 
-            var strategyReferences = this.SessionCommands.CreateObjectsCommand.Execute(objectType, count);
+            var strategyReferences = this.CreateObjects(objectType, count);
 
             var arrayType = this.SqlDatabase.ObjectFactory.GetTypeForObjectType(objectType);
             var domainObjects = (IObject[])Array.CreateInstance(arrayType, count);
@@ -886,6 +887,7 @@ namespace Allors.Databases.Object.SqlClient
             this.addCompositeRoleByRoleType = null;
             this.clearCompositeAndCompositesRoleByRoleType = null;
             this.createObjectByClass = null;
+            this.createObjectsByClass = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1010,5 +1012,61 @@ namespace Allors.Databases.Object.SqlClient
             var objectId = this.database.ObjectIds.Parse(result.ToString());
             return this.CreateAssociationForNewObject(@class, objectId);
         }
+
+        private Dictionary<IClass, SqlCommand> createObjectsByClass;
+
+        private IList<Reference> CreateObjects(IClass @class, int count)
+        {
+            this.createObjectsByClass = this.createObjectsByClass ?? new Dictionary<IClass, SqlCommand>();
+            
+            SqlCommand command;
+            if (!this.createObjectsByClass.TryGetValue(@class, out command))
+            {
+                var sql = this.database.Mapping.ProcedureNameForCreateObjectsByClass[@class];
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForType;
+                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                sqlParameter.Value = (object)@class.Id ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+                var sqlParameter1 = command.CreateParameter();
+                sqlParameter1.ParameterName = Mapping.ParamNameForCount;
+                sqlParameter1.SqlDbType = Mapping.SqlDbTypeForCount;
+                sqlParameter1.Value = (object)count ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter1);
+
+                this.createObjectsByClass[@class] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForCount].Value = (object)count ?? DBNull.Value;
+            }
+
+            var objectIds = new List<object>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    object id = this.database.ObjectIds.Parse(reader[0].ToString());
+                    objectIds.Add(id);
+                }
+            }
+
+            var strategies = new List<Reference>();
+
+            foreach (object id in objectIds)
+            {
+                var objectId = this.database.ObjectIds.Parse(id.ToString());
+                var strategySql = this.CreateAssociationForNewObject(@class, objectId);
+                strategies.Add(strategySql);
+            }
+
+            return strategies;
+        }
+
     }
 }

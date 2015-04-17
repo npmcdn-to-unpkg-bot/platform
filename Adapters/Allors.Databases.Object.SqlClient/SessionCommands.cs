@@ -29,7 +29,6 @@ namespace Allors.Databases.Object.SqlClient
         private readonly CommandFactories commandFactories;
 
         private GetIObjectTypeFactory.GetIObjectType getIObjectType;
-        private CreateObjectsFactory.CreateObjects createObjects;
         private InsertObjectFactory.InsertObject insertObject;
         private DeleteObjectFactory.DeleteObject deleteObject;
         private InstantiateObjectFactory.InstantiateObject instantiateObject;
@@ -57,14 +56,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.getIObjectType ?? (this.getIObjectType = this.commandFactories.GetIObjectTypeFactory.Create(this.session));
-            }
-        }
-
-        internal CreateObjectsFactory.CreateObjects CreateObjectsCommand
-        {
-            get
-            {
-                return this.createObjects ?? (this.createObjects = this.commandFactories.CreateObjectsFactory.Create(this.session));
             }
         }
 
