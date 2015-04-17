@@ -120,7 +120,7 @@ namespace Allors.Databases.Object.SqlClient
                     var relations = dictionaryEntry.Value;
                     if (relations.Count > 0)
                     {
-                        this.session.SessionCommands.ClearCompositeAndCompositesRoleCommand.Execute(relations, roleType);
+                        this.session.ClearCompositeAndCompositesRole(relations, roleType);
                     }
                 }
             }
@@ -259,7 +259,7 @@ namespace Allors.Databases.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.SessionCommands.ClearCompositeAndCompositesRoleCommand.Execute(relations, roleType);
+                this.session.ClearCompositeAndCompositesRole(relations, roleType);
                 relations.Clear();
             }
         }

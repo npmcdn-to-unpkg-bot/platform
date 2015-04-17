@@ -41,7 +41,6 @@ namespace Allors.Databases.Object.SqlClient
         private GetCompositeRoleFactory getCompositeRoleFactory;
         private GetCompositeRolesFactory getCompositeRolesFactory;
         private GetUnitRolesFactory getUnitRolesFactory;
-        private ClearCompositeAndCompositesRoleFactory clearCompositeAndCompositesRoleFactory;
         private SetCompositeRoleFactory setCompositeRoleFactory;
         private SetUnitRoleFactory setUnitRoleFactory;
         private SetUnitRolesFactory setUnitRolesFactory;
@@ -154,14 +153,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.getUnitRolesFactory ?? (this.getUnitRolesFactory = new GetUnitRolesFactory(this.database));
-            }
-        }
-
-        internal ClearCompositeAndCompositesRoleFactory ClearCompositeAndCompositesRoleFactory
-        {
-            get
-            {
-                return this.clearCompositeAndCompositesRoleFactory ?? (this.clearCompositeAndCompositesRoleFactory = new ClearCompositeAndCompositesRoleFactory(this.database));
             }
         }
 

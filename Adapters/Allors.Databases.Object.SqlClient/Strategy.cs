@@ -176,7 +176,7 @@ namespace Allors.Databases.Object.SqlClient
             this.SqlSession.SessionCommands.DeleteObjectCommand.Execute(this);
             this.reference.Exists = false;
 
-            this.SqlSession.SqlChangeSet.OnDeleted(this.ObjectId);
+            this.SqlSession.ChangeSet.OnDeleted(this.ObjectId);
         }
 
         public virtual bool ExistRole(IRoleType roleType)

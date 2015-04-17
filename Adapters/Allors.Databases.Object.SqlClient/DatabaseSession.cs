@@ -95,30 +95,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal ChangeSet SqlChangeSet
+        internal ChangeSet ChangeSet
         {
             get
             {
                 return this.changeSet;
             }
-        }
-
-        internal IChangeSet Changes
-        {
-            get
-            {
-                return this.SqlChangeSet;
-            }
-        }
-
-        internal IWorkspaceSession WorkspaceSession
-        {
-            get { throw new NotSupportedException(); }
-        }
-
-        internal Mapping Mapping
-        {
-            get { return this.SqlDatabase.Mapping; }
         }
 
         public virtual IObject Create(IClass objectType)
@@ -389,6 +371,8 @@ namespace Allors.Databases.Object.SqlClient
                     this.busyCommittingOrRollingBack = false;
 
                     this.SqlDatabase.Cache.OnCommit(accessed, changed);
+
+                    this.ResetSqlCommands();
                 }
                 finally
                 {
@@ -442,6 +426,8 @@ namespace Allors.Databases.Object.SqlClient
                     this.changeSet = new ChangeSet();
 
                     this.SqlDatabase.Cache.OnRollback(accessed);
+
+                    this.ResetSqlCommands();
                 }
                 finally
                 {
@@ -837,7 +823,7 @@ namespace Allors.Databases.Object.SqlClient
             command.CommandTimeout = this.SqlDatabase.CommandTimeout;
             return command;
         }
-
+        
         internal Command CreateCommand(string commandText)
         {
             return new Command(this, commandText);
@@ -895,10 +881,15 @@ namespace Allors.Databases.Object.SqlClient
 
 
 
+        private void ResetSqlCommands()
+        {
+            this.addCompositeRoleByRoleType = null;
+            this.clearCompositeAndCompositesRoleByRoleType = null;
+        }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
 
-        public void AddCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
+        internal void AddCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
         {
             this.addCompositeRoleByRoleType = this.addCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
 
@@ -930,6 +921,59 @@ namespace Allors.Databases.Object.SqlClient
             else
             {
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateRelationTable(relations);
+            }
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private Dictionary<IRoleType, SqlCommand> clearCompositeAndCompositesRoleByRoleType;
+
+        internal void ClearCompositeAndCompositesRole(IList<ObjectId> associations, IRoleType roleType)
+        {
+            this.clearCompositeAndCompositesRoleByRoleType = this.clearCompositeAndCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            string sql;
+            if ((roleType.IsMany && roleType.AssociationType.IsMany) || !roleType.RelationType.ExistExclusiveLeafClasses)
+            {
+                sql = this.database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
+            }
+            else
+            {
+                if (roleType.IsOne)
+                {
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[roleType.AssociationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                }
+            }
+
+            SqlCommand command;
+            if (!this.clearCompositeAndCompositesRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.database.CreateObjectTable(associations);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.clearCompositeAndCompositesRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateObjectTable(associations);
             }
 
             command.ExecuteNonQuery();

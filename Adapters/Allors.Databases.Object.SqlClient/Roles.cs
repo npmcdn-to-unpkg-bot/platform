@@ -95,7 +95,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             get
             {
-                return this.Reference.Session.SqlChangeSet;
+                return this.Reference.Session.ChangeSet;
             }
         }
 
