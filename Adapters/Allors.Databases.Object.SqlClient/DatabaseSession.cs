@@ -733,7 +733,7 @@ namespace Allors.Databases.Object.SqlClient
             Reference strategyReference;
             if (!this.referenceByObjectId.TryGetValue(objectId, out strategyReference))
             {
-                strategyReference = this.SessionCommands.InstantiateObjectCommand.Execute(objectId);
+                strategyReference = this.InstantiateObject(objectId);
                 if (strategyReference != null)
                 {
                     this.referenceByObjectId[objectId] = strategyReference;
@@ -1751,5 +1751,45 @@ namespace Allors.Databases.Object.SqlClient
             return this.CreateAssociationForNewObject(@class, objectId);
         }
 
+        private SqlCommand instantiateObject;
+
+        private Reference InstantiateObject(ObjectId objectId)
+        {
+            var command = this.instantiateObject;
+            if (command == null)
+            {
+                var sql = "SELECT " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + "\n";
+                sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
+
+                command = this.CreateSqlCommand(sql);
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = objectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.instantiateObject = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+            }
+
+            using (var reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    var classId = reader.GetGuid(0);
+                    var cacheId = reader.GetInt32(1);
+
+                    var type = (IClass)this.Database.MetaPopulation.Find(classId);
+                    return this.GetOrCreateAssociationForExistingObject(type, objectId, cacheId);
+                }
+
+                return null;
+            }
+        }
     }
 }

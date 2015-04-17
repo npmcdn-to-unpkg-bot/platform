@@ -28,7 +28,6 @@ namespace Allors.Databases.Object.SqlClient
 
         // Session
         private InstantiateObjectsFactory instantiateObjectsFactory;
-        private InstantiateObjectFactory instantiateObjectFactory;
         private SetUnitRolesFactory setUnitRolesFactory;
         
         internal CommandFactories(Database database)
@@ -41,14 +40,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.instantiateObjectsFactory ?? (this.instantiateObjectsFactory = new InstantiateObjectsFactory(this.SqlClientDatabase));
-            }
-        }
-
-        internal InstantiateObjectFactory InstantiateObjectFactory
-        {
-            get
-            {
-                return this.instantiateObjectFactory ?? (this.instantiateObjectFactory = new InstantiateObjectFactory(this.database));
             }
         }
 
