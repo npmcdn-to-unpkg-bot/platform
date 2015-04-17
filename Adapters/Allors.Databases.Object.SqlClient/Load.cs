@@ -290,8 +290,7 @@ namespace Allors.Databases.Object.SqlClient
                                         this.LoadCompositeRelations(relationType, relations);
                                         if (relations.Count > 0)
                                         {
-                                            var loadCompositeRelations = session.LoadCompositeRelationsFactory.Create(relationType.RoleType);
-                                            loadCompositeRelations.Execute(relations);
+                                            session.LoadCompositeRelations(relationType.RoleType, relations);
                                         }
                                     }
                                 }

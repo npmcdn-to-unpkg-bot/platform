@@ -17,11 +17,14 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data;
     using System.Data.Common;
     using System.Data.SqlClient;
 
     using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
+    using Allors.Meta;
 
     internal class ManagementSession : ICommandFactory, IDisposable
     {
@@ -31,7 +34,6 @@ namespace Allors.Databases.Object.SqlClient
         private SqlConnection connection;
        
         private LoadObjectsFactory loadObjectsFactory;
-        private LoadCompositeRelationsFactory loadCompositeRelationsFactory;
         private LoadUnitRelationsFactory loadUnitRelationsFactory;
 
         internal ManagementSession(Database database)
@@ -54,14 +56,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.loadObjectsFactory ?? (this.loadObjectsFactory = new LoadObjectsFactory(this));
-            }
-        }
-
-        internal LoadCompositeRelationsFactory LoadCompositeRelationsFactory
-        {
-            get
-            {
-                return this.loadCompositeRelationsFactory ?? (this.loadCompositeRelationsFactory = new LoadCompositeRelationsFactory(this));
             }
         }
 
@@ -175,6 +169,47 @@ namespace Allors.Databases.Object.SqlClient
                 this.connection = null;
                 this.transaction = null;
             }
+        }
+
+        public void LoadCompositeRelations(IRoleType roleType, List<CompositeRelation> relations)
+        {
+            var associationType = roleType.AssociationType;
+
+            string sql;
+            if (roleType.IsMany)
+            {
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                }
+            }
+            else
+            {
+                if (!roleType.RelationType.ExistExclusiveLeafClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                }
+            }
+
+            var command = this.CreateSqlCommand(sql);
+            command.CommandType = CommandType.StoredProcedure;
+            var sqlParameter = command.CreateParameter();
+            sqlParameter.SqlDbType = SqlDbType.Structured;
+            sqlParameter.TypeName = database.Mapping.TableTypeNameForCompositeRelation;
+            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+            sqlParameter.Value = database.CreateRelationTable(relations);
+
+            command.Parameters.Add(sqlParameter);
+
+            command.ExecuteNonQuery();
         }
     }
 }
