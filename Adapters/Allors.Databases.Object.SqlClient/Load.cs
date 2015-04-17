@@ -74,9 +74,9 @@ namespace Allors.Databases.Object.SqlClient
 
                             this.LoadObjectsPostProcess(session);
                         }
-                        else if (reader.Name.Equals(Serialization.Relations))
+                        else if (this.reader.Name.Equals(Serialization.Relations))
                         {
-                            if (!reader.IsEmptyElement)
+                            if (!this.reader.IsEmptyElement)
                             {
                                 this.LoadRelations(session);
                             }
@@ -199,7 +199,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void LoadRelations(Databases.Object.SqlClient.ManagementSession session)
+        protected virtual void LoadRelations(ManagementSession session)
         {
             while (this.reader.Read())
             {
@@ -210,10 +210,10 @@ namespace Allors.Databases.Object.SqlClient
                         {
                             if (!this.reader.IsEmptyElement)
                             {
-                                this.LoadDatabaseIRelationTypes(session);
+                                this.LoadDatabaseRelationTypes(session);
                             }
                         }
-                        else if (reader.Name.Equals(Serialization.Workspace))
+                        else if (this.reader.Name.Equals(Serialization.Workspace))
                         {
                             throw new Exception("Can not load workspace relations in a database.");
                         }
@@ -235,7 +235,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void LoadDatabaseIRelationTypes(Databases.Object.SqlClient.ManagementSession session)
+        protected virtual void LoadDatabaseRelationTypes(ManagementSession session)
         {
             while (this.reader.Read())
             {
@@ -272,8 +272,7 @@ namespace Allors.Databases.Object.SqlClient
                                         {
                                             var exclusiveRootClass = dictionaryEntry.Key;
                                             var relations = dictionaryEntry.Value;
-                                            var loadUnitRelations = session.LoadUnitRelationsFactory.Create();
-                                            loadUnitRelations.Execute(relations, exclusiveRootClass, relationType.RoleType);
+                                            session.LoadUnitRelations(relations, exclusiveRootClass, relationType.RoleType);
                                         }
                                     }
                                 }

@@ -1322,6 +1322,8 @@ namespace Allors.Databases.Object.SqlClient
 
         public void GetUnitRoles(Roles roles)
         {
+            this.getUnitRolesByClass = this.getUnitRolesByClass ?? new Dictionary<IClass, SqlCommand>();
+
             var reference = roles.Reference;
             var @class = reference.ObjectType;
 

@@ -32,8 +32,6 @@ namespace Allors.Databases.Object.SqlClient
         
         private SqlTransaction transaction;
         private SqlConnection connection;
-       
-        private LoadUnitRelationsFactory loadUnitRelationsFactory;
 
         internal ManagementSession(Database database)
         {
@@ -50,14 +48,6 @@ namespace Allors.Databases.Object.SqlClient
             this.Rollback();
         }
 
-        internal LoadUnitRelationsFactory LoadUnitRelationsFactory
-        {
-            get
-            {
-                return this.loadUnitRelationsFactory ?? (this.loadUnitRelationsFactory = new LoadUnitRelationsFactory(this));
-            }
-        }
-
         internal Database Database
         {
             get
@@ -71,23 +61,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.database;
-            }
-        }
-
-        internal void ExecuteSql(string sql)
-        {
-            this.LazyConnect();
-            using (DbCommand command = this.CreateSqlCommand(sql))
-            {
-                try
-                {
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception e)
-                {
-                    Console.Error.WriteLine(e.Message + "\n-----" + sql + "\n-----");
-                    throw;
-                }
             }
         }
 
@@ -159,6 +132,8 @@ namespace Allors.Databases.Object.SqlClient
             {
                 this.connection = null;
                 this.transaction = null;
+
+                this.loadUnitRelationsByRoleTypeByObjectType = null;
             }
         }
 
@@ -229,6 +204,91 @@ namespace Allors.Databases.Object.SqlClient
                 command.Parameters.Add(sqlParameter1);
                 command.ExecuteNonQuery();
             }
+        }
+
+
+
+
+
+
+
+
+
+        private Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> loadUnitRelationsByRoleTypeByObjectType;
+
+        public void LoadUnitRelations(List<UnitRelation> relations, IObjectType exclusiveRootClass, IRoleType roleType)
+        {
+            this.loadUnitRelationsByRoleTypeByObjectType = this.loadUnitRelationsByRoleTypeByObjectType ?? new Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>>(); 
+
+            Dictionary<IRoleType, SqlCommand> commandByIRoleType;
+            if (!this.loadUnitRelationsByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))
+            {
+                commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
+                this.loadUnitRelationsByRoleTypeByObjectType.Add(exclusiveRootClass, commandByIRoleType);
+            }
+
+            string tableTypeName;
+
+            var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
+            switch (unitTypeTag)
+            {
+                case UnitTags.AllorsString:
+                    tableTypeName = this.database.Mapping.TableTypeNameForStringRelation;
+                    break;
+
+                case UnitTags.AllorsInteger:
+                    tableTypeName = this.database.Mapping.TableTypeNameForIntegerRelation;
+                    break;
+
+                case UnitTags.AllorsFloat:
+                    tableTypeName = this.database.Mapping.TableTypeNameForFloatRelation;
+                    break;
+
+                case UnitTags.AllorsBoolean:
+                    tableTypeName = this.database.Mapping.TableTypeNameForBooleanRelation;
+                    break;
+
+                case UnitTags.AllorsDateTime:
+                    tableTypeName = this.database.Mapping.TableTypeNameForDateTimeRelation;
+                    break;
+
+                case UnitTags.AllorsUnique:
+                    tableTypeName = this.database.Mapping.TableTypeNameForUniqueRelation;
+                    break;
+
+                case UnitTags.AllorsBinary:
+                    tableTypeName = this.database.Mapping.TableTypeNameForBinaryRelation;
+                    break;
+
+                case UnitTags.AllorsDecimal:
+                    tableTypeName = this.database.Mapping.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                    break;
+
+                default:
+                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+            }
+
+            SqlCommand command;
+            if (!commandByIRoleType.TryGetValue(roleType, out command))
+            {
+                var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
+                
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = tableTypeName;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = database.CreateRelationTable(roleType, relations);
+
+                command.Parameters.Add(sqlParameter);
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = database.CreateRelationTable(roleType, relations);
+            }
+
+            command.ExecuteNonQuery();
         }
     }
 }
