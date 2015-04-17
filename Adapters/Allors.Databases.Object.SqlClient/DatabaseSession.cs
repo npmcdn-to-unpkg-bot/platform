@@ -874,6 +874,7 @@ namespace Allors.Databases.Object.SqlClient
             this.getCompositeAssociationByAssociationType = null;
             this.getCompositeAssociationsByAssociationType = null;
             this.getCompositeRoleByRoleType = null;
+            this.getCompositeRolesByRoleType = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1216,7 +1217,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public void GetCompositeRole(Roles roles, IRoleType roleType)
         {
-            this.getCompositeAssociationsByAssociationType = this.getCompositeAssociationsByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+            this.getCompositeRoleByRoleType = this.getCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
 
             var reference = roles.Reference;
 
@@ -1262,6 +1263,58 @@ namespace Allors.Databases.Object.SqlClient
                 var objectId = this.Database.ObjectIds.Parse(result.ToString());
                 roles.CachedObject.SetValue(roleType, objectId);
             }
+        }
+
+        private Dictionary<IRoleType, SqlCommand> getCompositeRolesByRoleType;
+
+        public void GetCompositeRoles(Roles roles, IRoleType roleType)
+        {
+            this.getCompositeRolesByRoleType = this.getCompositeRolesByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            var reference = roles.Reference;
+
+            SqlCommand command;
+            if (!this.getCompositeRolesByRoleType.TryGetValue(roleType, out command))
+            {
+                var associationType = roleType.AssociationType;
+
+                string sql;
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                }
+ 
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getCompositeRolesByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value ?? DBNull.Value;
+            }
+
+            var objectIds = new List<ObjectId>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var id = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    objectIds.Add(id);
+                }
+            }
+
+            roles.CachedObject.SetValue(roleType, objectIds.ToArray());
         }
     }
 }

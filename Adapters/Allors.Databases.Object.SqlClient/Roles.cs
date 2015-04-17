@@ -454,7 +454,7 @@ namespace Allors.Databases.Object.SqlClient
                     return (ObjectId[])roleOut;
                 }
 
-                this.Reference.Session.SessionCommands.GetCompositeRolesCommand.Execute(this, roleType);
+                this.Reference.Session.GetCompositeRoles(this, roleType);
                 this.cachedObject.TryGetValue(roleType, out roleOut);
                 var role = (ObjectId[])roleOut;
                 return role;
