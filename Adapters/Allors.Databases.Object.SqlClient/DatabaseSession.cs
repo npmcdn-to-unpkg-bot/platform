@@ -110,7 +110,7 @@ namespace Allors.Databases.Object.SqlClient
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }
 
-            var strategyReference = this.SessionCommands.CreateObjectCommand.Execute(objectType);
+            var strategyReference = this.CreateObject(objectType);
             this.referenceByObjectId[strategyReference.ObjectId] = strategyReference;
 
             this.SqlDatabase.Cache.SetObjectType(strategyReference.ObjectId, objectType);
@@ -885,6 +885,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.addCompositeRoleByRoleType = null;
             this.clearCompositeAndCompositesRoleByRoleType = null;
+            this.createObjectByClass = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -977,6 +978,37 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             command.ExecuteNonQuery();
+        }
+
+        private Dictionary<IClass, SqlCommand> createObjectByClass;
+
+        private Reference CreateObject(IClass @class)
+        {
+            this.createObjectByClass = this.createObjectByClass ?? new Dictionary<IClass, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.createObjectByClass.TryGetValue(@class, out command))
+            {
+                var sql = this.database.Mapping.ProcedureNameForCreateObjectByClass[@class];
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForType;
+                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                sqlParameter.Value = (object)@class.Id ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.createObjectByClass[@class] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
+            }
+
+            var result = command.ExecuteScalar();
+            var objectId = this.database.ObjectIds.Parse(result.ToString());
+            return this.CreateAssociationForNewObject(@class, objectId);
         }
     }
 }
