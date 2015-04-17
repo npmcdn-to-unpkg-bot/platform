@@ -29,7 +29,6 @@ namespace Allors.Databases.Object.SqlClient
 
         private GetIObjectTypeFactory.GetIObjectType getIObjectType;
         private InsertObjectFactory.InsertObject insertObject;
-        private DeleteObjectFactory.DeleteObject deleteObject;
         private InstantiateObjectFactory.InstantiateObject instantiateObject;
         private InstantiateObjectsFactory.InstantiateObjects instantiateObjects;
         private SetUnitRolesFactory.SetUnitRoles setUnitRoles;
@@ -53,14 +52,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.insertObject ?? (this.insertObject = this.commandFactories.InsertObjectFactory.Create(this.session));
-            }
-        }
-
-        internal DeleteObjectFactory.DeleteObject DeleteObjectCommand
-        {
-            get
-            {
-                return this.deleteObject ?? (this.deleteObject = this.commandFactories.DeleteObjectFactory.Create(this.session));
             }
         }
 

@@ -31,7 +31,6 @@ namespace Allors.Databases.Object.SqlClient
         private InstantiateObjectsFactory instantiateObjectsFactory;
         private InsertObjectFactory insertObjectFactory;
         private InstantiateObjectFactory instantiateObjectFactory;
-        private DeleteObjectFactory deleteObjectFactory;
         private SetUnitRolesFactory setUnitRolesFactory;
         
         internal CommandFactories(Database database)
@@ -68,14 +67,6 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.instantiateObjectFactory ?? (this.instantiateObjectFactory = new InstantiateObjectFactory(this.database));
-            }
-        }
-
-        internal DeleteObjectFactory DeleteObjectFactory
-        {
-            get
-            {
-                return this.deleteObjectFactory ?? (this.deleteObjectFactory = new DeleteObjectFactory(this.database));
             }
         }
 

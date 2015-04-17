@@ -44,17 +44,22 @@ namespace Allors.Databases.Object.SqlClient
             this.objectId = reference.ObjectId;
         }
 
-        public ISession Session
-        {
-            get { return this.reference.Session; }
-        }
-
         public IDatabaseSession DatabaseSession
         {
             get
             {
                 return this.reference.Session;
             }
+        }
+
+        ISession IStrategy.Session
+        {
+            get { return this.reference.Session; }
+        }
+
+        public DatabaseSession Session
+        {
+            get { return this.reference.Session; }
         }
 
         public IClass ObjectType
@@ -99,11 +104,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal DatabaseSession SqlSession
-        {
-            get { return this.reference.Session; }
-        }
-
         internal Roles Roles
         {
             get
@@ -143,9 +143,9 @@ namespace Allors.Databases.Object.SqlClient
 
                 if (associationType.IsMany)
                 {
-                    foreach (var association in this.SqlSession.GetAssociations(this, associationType))
+                    foreach (var association in this.Session.GetAssociations(this, associationType))
                     {
-                        var associationStrategy = this.SqlSession.GetOrCreateAssociationForExistingObject(association).Strategy;
+                        var associationStrategy = this.Session.GetOrCreateAssociationForExistingObject(association).Strategy;
                         if (roleType.IsMany)
                         {
                             associationStrategy.RemoveCompositeRole(roleType, this.GetObject()); 
@@ -173,10 +173,10 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            this.SqlSession.SessionCommands.DeleteObjectCommand.Execute(this);
+            this.Session.DeleteObject(this);
             this.reference.Exists = false;
 
-            this.SqlSession.ChangeSet.OnDeleted(this.ObjectId);
+            this.Session.ChangeSet.OnDeleted(this.ObjectId);
         }
 
         public virtual bool ExistRole(IRoleType roleType)
@@ -298,7 +298,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
             var role = this.Roles.GetCompositeRole(roleType);
-            return (role == null) ? null : this.SqlSession.GetOrCreateAssociationForExistingObject(role).Strategy.GetObject();
+            return (role == null) ? null : this.Session.GetOrCreateAssociationForExistingObject(role).Strategy.GetObject();
         }
 
         public virtual void SetCompositeRole(IRoleType roleType, IObject newRoleObject)
@@ -401,7 +401,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (!newRoles.Contains(previousRole))
                     {
-                        this.Roles.RemoveCompositeRole(roleType, this.SqlSession.GetOrCreateAssociationForExistingObject(previousRole).Strategy);
+                        this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateAssociationForExistingObject(previousRole).Strategy);
                     }
                 }
             }
@@ -417,7 +417,7 @@ namespace Allors.Databases.Object.SqlClient
 
             foreach (var previousRole in previousRoles)
             {
-                this.Roles.RemoveCompositeRole(roleType, this.SqlSession.GetOrCreateAssociationForExistingObject(previousRole).Strategy);
+                this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateAssociationForExistingObject(previousRole).Strategy);
             }
         }
 
@@ -450,7 +450,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
 
-            var association = this.SqlSession.GetAssociation(this, associationType);
+            var association = this.Session.GetAssociation(this, associationType);
 
             return association == null ? null : association.Strategy.GetObject();
         }
@@ -487,12 +487,12 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
 
-            return this.Roles.ExtentFirst(this.SqlSession, roleType);
+            return this.Roles.ExtentFirst(this.Session, roleType);
         }
 
         internal void ExtentRolesCopyTo(IRoleType roleType, Array array, int index)
         {
-            this.Roles.ExtentCopyTo(this.SqlSession, roleType, array, index);
+            this.Roles.ExtentCopyTo(this.Session, roleType, array, index);
         }
 
         internal int ExtentIndexOf(IRoleType roleType, IObject value)
@@ -517,7 +517,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (i == index)
                 {
-                    return this.SqlSession.GetOrCreateAssociationForExistingObject(oid).Strategy.GetObject();
+                    return this.Session.GetOrCreateAssociationForExistingObject(oid).Strategy.GetObject();
                 }
                 ++i;
             }
@@ -534,7 +534,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
 
-            return this.SqlSession.GetAssociations(this, associationType);
+            return this.Session.GetAssociations(this, associationType);
         }
 
         protected virtual void AssertExist()

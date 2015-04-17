@@ -880,6 +880,7 @@ namespace Allors.Databases.Object.SqlClient
             this.setCompositeRoleByRoleType = null;
             this.setUnitRoleByIRoleTypeByIObjectType = null;
             this.updateCacheIds = null;
+            this.deleteObjectByClass = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1596,6 +1597,47 @@ namespace Allors.Databases.Object.SqlClient
             else
             {
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(modifiedRolesByReference.Keys);
+            }
+
+            command.ExecuteNonQuery();
+        }
+
+        private Dictionary<IClass, SqlCommand> deleteObjectByClass;
+
+        public void DeleteObject(Strategy strategy)
+        {
+            this.deleteObjectByClass = this.deleteObjectByClass ?? new Dictionary<IClass, SqlCommand>();
+            
+            var @class = strategy.ObjectType;
+
+            SqlCommand command;
+            if (!this.deleteObjectByClass.TryGetValue(@class, out command))
+            {
+                var sql = string.Empty;
+
+                sql += "BEGIN\n";
+
+                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjects + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
+
+                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjectByClass[(@class).ExclusiveLeafClass] + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
+
+                sql += "END;";
+                
+                command = this.CreateSqlCommand(sql);
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = strategy.ObjectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.deleteObjectByClass[@class] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForObject].Value = strategy.ObjectId.Value ?? DBNull.Value;
             }
 
             command.ExecuteNonQuery();

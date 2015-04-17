@@ -109,7 +109,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             var roles = this.strategy.Roles.GetCompositeRoles(this.roleType);
-            var references = this.strategy.SqlSession.GetOrCreateAssociationsForExistingObjects(roles);
+            var references = this.strategy.Session.GetOrCreateAssociationsForExistingObjects(roles);
             return new ExtentEnumerator(references);
         }
 
@@ -135,7 +135,7 @@ namespace Allors.Databases.Object.SqlClient
                 return this.upgrade.ToArray();
             }
             
-            var clrType = this.strategy.SqlSession.Database.GetDomainType(this.roleType.ObjectType);
+            var clrType = this.strategy.Session.Database.GetDomainType(this.roleType.ObjectType);
             return this.ToArray(clrType);
         }
 
@@ -192,7 +192,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (this.upgrade == null)
             {
-                this.upgrade = new ExtentFiltered(this.strategy.SqlSession, this.strategy, this.roleType);
+                this.upgrade = new ExtentFiltered(this.strategy.Session, this.strategy, this.roleType);
             }
         }
     }
