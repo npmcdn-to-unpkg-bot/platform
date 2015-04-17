@@ -877,6 +877,7 @@ namespace Allors.Databases.Object.SqlClient
             this.getCompositeRolesByRoleType = null;
             this.getUnitRolesByClass = null;
             this.removeCompositeRoleByRoleType = null;
+            this.setCompositeRoleByRoleType = null;
         }
 
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
@@ -1442,6 +1443,46 @@ namespace Allors.Databases.Object.SqlClient
                 command.Parameters.Add(sqlParameter);
 
                 this.removeCompositeRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(relations);
+            }
+
+            command.ExecuteNonQuery();
+        }
+
+        private Dictionary<IRoleType, SqlCommand> setCompositeRoleByRoleType;
+
+        public void SetCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
+        {
+            this.setCompositeRoleByRoleType = this.setCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.setCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                var associationType = roleType.AssociationType;
+
+                string sql;
+                if (!roleType.RelationType.ExistExclusiveLeafClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                }
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateRelationTable(relations);
+
+                command.Parameters.Add(sqlParameter);
+                this.setCompositeRoleByRoleType[roleType] = command;
             }
             else
             {
