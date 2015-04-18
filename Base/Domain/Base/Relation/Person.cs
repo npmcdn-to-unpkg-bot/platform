@@ -54,6 +54,19 @@ namespace Allors.Domain
             return false;
         }
 
+        public void BaseDelete(DeletableDelete method)
+        {
+            if (this.ExistOwnerSecurityToken)
+            {
+                foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
+                {
+                    acl.Delete();
+                }
+
+                this.OwnerSecurityToken.Delete();
+            }
+        }
+
         public void BaseOnBuild(ObjectOnBuild method)
         {
             var builder = method.Builder;

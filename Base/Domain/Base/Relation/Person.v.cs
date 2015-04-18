@@ -22,19 +22,6 @@ namespace Allors.Domain
 {
     public partial class Person
     {
-        public void BaseDelete(DeletableDelete method)
-        {
-            if (this.ExistOwnerSecurityToken)
-            {
-                foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
-                {
-                    acl.Delete();
-                }
-
-                this.OwnerSecurityToken.Delete();
-            }
-        }
-
         private void BuildOwnerSecurityToken()
         {
             this.BaseCreateOwnerSecurityToken();
