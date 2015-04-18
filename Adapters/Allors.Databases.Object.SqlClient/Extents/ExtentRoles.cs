@@ -87,7 +87,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             get
             {
-                return this.strategy.ObjectType;
+                return this.strategy.Class;
             }
         }
 

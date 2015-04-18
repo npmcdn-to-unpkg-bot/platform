@@ -145,7 +145,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
                 }
             }
             else
@@ -156,7 +156,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
                 }
             }
 
@@ -177,7 +177,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public void LoadObjects(IObjectType objectType, ObjectId[] objectIds)
         {
-            var exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
+            var exclusiveRootClass = ((IComposite)objectType).ExclusiveClass;
             var schema = this.database.Mapping;
 
             var sql = this.Database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];

@@ -76,7 +76,7 @@ namespace Allors.Databases.Object.SqlClient
                 var atLeastOne = false;
 
                 var sql = "SELECT " + Mapping.ColumnNameForObject + "\n";
-                sql += "FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveLeafClass] + "\n";
+                sql += "FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveClass] + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParamNameForType+ "\n";
                 sql += "ORDER BY " + Mapping.ColumnNameForObject;
 
@@ -115,7 +115,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected void SaveRelations(Databases.Object.SqlClient.ManagementSession session)
+        protected void SaveRelations(ManagementSession session)
         {
             var exclusiverRootClassesByIObjectType = new Dictionary<IObjectType, HashSet<IObjectType>>();
 
@@ -126,7 +126,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var associationType = relation.AssociationType;
 
-                if (associationType.ObjectType.ExistLeafClasses)
+                if (associationType.ObjectType.ExistClass)
                 {
                     var roleType = relation.RoleType;
 
@@ -137,9 +137,9 @@ namespace Allors.Databases.Object.SqlClient
                         if (!exclusiverRootClassesByIObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
                         {
                             exclusiveRootClasses = new HashSet<IObjectType>();
-                            foreach (var concreteClass in associationType.ObjectType.LeafClasses)
+                            foreach (var concreteClass in associationType.ObjectType.Classes)
                             {
-                                exclusiveRootClasses.Add(concreteClass.ExclusiveLeafClass);
+                                exclusiveRootClasses.Add(concreteClass.ExclusiveClass);
                             }
 
                             exclusiverRootClassesByIObjectType[associationType.ObjectType] = exclusiveRootClasses;
@@ -178,7 +178,7 @@ namespace Allors.Databases.Object.SqlClient
                             if (roleType.IsOne)
                             {
                                 sql += "SELECT " + Mapping.ColumnNameForObject + " As " + Mapping.ColumnNameForAssociation + ", " + this.database.Mapping.ColumnNameByRelationType[roleType.RelationType] + " As " + Mapping.ColumnNameForRole + "\n";
-                                sql += "FROM " + this.database.Mapping.TableNameForObjectByClass[associationType.ObjectType.ExclusiveLeafClass] + "\n";
+                                sql += "FROM " + this.database.Mapping.TableNameForObjectByClass[associationType.ObjectType.ExclusiveClass] + "\n";
                                 sql += "WHERE " + this.database.Mapping.ColumnNameByRelationType[roleType.RelationType] + " IS NOT NULL\n";
                                 sql += "ORDER BY " + Mapping.ColumnNameForAssociation;
                             }
@@ -186,7 +186,7 @@ namespace Allors.Databases.Object.SqlClient
                             {
                                 // role.Many
                                 sql += "SELECT " + this.database.Mapping.ColumnNameByRelationType[associationType.RelationType] + " As " + Mapping.ColumnNameForAssociation + ", " + Mapping.ColumnNameForObject + " As " + Mapping.ColumnNameForRole + "\n";
-                                sql += "FROM " + this.database.Mapping.TableNameForObjectByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass] + "\n";
+                                sql += "FROM " + this.database.Mapping.TableNameForObjectByClass[((IComposite)roleType.ObjectType).ExclusiveClass] + "\n";
                                 sql += "WHERE " + this.database.Mapping.ColumnNameByRelationType[associationType.RelationType] + " IS NOT NULL\n";
                                 sql += "ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
                             }

@@ -406,7 +406,7 @@ AS
                     }
 
 definition += @"
-    FROM " + this.TableNameForObjectByClass[@class.ExclusiveLeafClass] + @"
+    FROM " + this.TableNameForObjectByClass[@class.ExclusiveClass] + @"
     WHERE " + ColumnNameForObject + "=" + ParamNameForObject;
                     this.procedureDefinitionByName.Add(this.ProcedureNameForGetUnitsByClass[@class], definition);
                 }
@@ -480,7 +480,7 @@ WHILE @COUNTER < " + ParamNameForCount + @"
     SET @COUNTER = @COUNTER+1;
     END
 
-INSERT INTO " + this.TableNameForObjectByClass[@class.ExclusiveLeafClass] + " (" + ColumnNameForObject + "," + ColumnNameForType + @")
+INSERT INTO " + this.TableNameForObjectByClass[@class.ExclusiveClass] + " (" + ColumnNameForObject + "," + ColumnNameForType + @")
 SELECT ID," + ParamNameForType + @" FROM @IDS;
 
 SELECT id FROM @IDS;

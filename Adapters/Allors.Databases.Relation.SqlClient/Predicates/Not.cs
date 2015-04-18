@@ -238,7 +238,7 @@ namespace Allors.Databases.Relation.SqlClient
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            this.filter = new AllorsPredicateInstanceOfSql(this.extent, type, new List<IClass>(type.LeafClasses).ToArray());
+            this.filter = new AllorsPredicateInstanceOfSql(this.extent, type, new List<IClass>(type.Classes).ToArray());
             return this;
         }
 
@@ -246,7 +246,7 @@ namespace Allors.Databases.Relation.SqlClient
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            this.filter = new AllorsPredicateRoleInstanceofSql(this.extent, role, type, new List<IClass>(type.LeafClasses).ToArray());
+            this.filter = new AllorsPredicateRoleInstanceofSql(this.extent, role, type, new List<IClass>(type.Classes).ToArray());
             return this;
         }
 
@@ -254,7 +254,7 @@ namespace Allors.Databases.Relation.SqlClient
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            this.filter = new AllorsPredicateAssociationInstanceofSql(this.extent, association, type, new List<IClass>(type.LeafClasses).ToArray());
+            this.filter = new AllorsPredicateAssociationInstanceofSql(this.extent, association, type, new List<IClass>(type.Classes).ToArray());
             return this;
         }
 

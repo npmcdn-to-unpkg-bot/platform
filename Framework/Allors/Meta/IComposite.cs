@@ -32,21 +32,21 @@ namespace Allors.Meta
         IEnumerable<IInterface> DirectSupertypes { get; }
 
         IEnumerable<IInterface> Supertypes { get; }
-
-        bool ExistLeafClasses { get; }
-
-        IEnumerable<IClass> LeafClasses { get; }
-
-        bool ExistExclusiveLeafClass { get; }
-
-        IClass ExclusiveLeafClass { get; }
-        
+       
         bool ExistSupertype(IInterface @interface);
-
-        bool ExistLeafClass(IClass objectType);
 
         bool ExistAssociationType(IAssociationType association);
 
         bool ExistRoleType(IRoleType roleType);
+
+        bool IsAssignableFrom(IClass objectType);
+        
+        bool ExistClass { get; }
+
+        IEnumerable<IClass> Classes { get; }
+
+        bool ExistExclusiveClass { get; }
+
+        IClass ExclusiveClass { get; }
     }
 }

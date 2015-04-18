@@ -191,9 +191,9 @@ namespace Allors.Workspaces.Memory
 
         public void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
         {
-            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
+            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.Class))
             {
-                throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + roleType + ".");
+                throw new ArgumentException(strategy.Class + " is not a valid association object type for " + roleType + ".");
             }
 
             if (roleType.ObjectType is IComposite)
@@ -234,14 +234,14 @@ namespace Allors.Workspaces.Memory
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
             {
-                if (objectType.ExistExclusiveLeafClass)
+                if (objectType.ExistExclusiveClass)
                 {
-                    concreteClassOrClasses = objectType.ExclusiveLeafClass;
+                    concreteClassOrClasses = objectType.ExclusiveClass;
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
                 else
                 {
-                    concreteClassOrClasses = new HashSet<IObjectType>(objectType.LeafClasses);
+                    concreteClassOrClasses = new HashSet<IObjectType>(objectType.Classes);
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
             }
@@ -267,9 +267,9 @@ namespace Allors.Workspaces.Memory
 
         private void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
-            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
+            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.Class))
             {
-                throw new ArgumentException(strategy.ObjectType + " has no roleType with role " + roleType + ".");
+                throw new ArgumentException(strategy.Class + " has no roleType with role " + roleType + ".");
             }
 
             if (role != null)
@@ -291,9 +291,9 @@ namespace Allors.Workspaces.Memory
                     throw new ArgumentException(role + " has no CompositeType");
                 }
 
-                if (!compositeType.ExistLeafClass(role.Strategy.ObjectType))
+                if (!compositeType.IsAssignableFrom(role.Strategy.Class))
                 {
-                    throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
+                    throw new ArgumentException(role.Strategy.Class + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
             }
         }

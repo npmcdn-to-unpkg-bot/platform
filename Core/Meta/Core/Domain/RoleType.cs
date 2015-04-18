@@ -505,7 +505,7 @@ namespace Allors.Meta
             {
                 this.derivedSingularPropertyName = this.SingularName;
 
-                if (this.AssociationType.ObjectType.ExistLeafClasses)
+                if (this.AssociationType.ObjectType.ExistClass)
                 {
                     foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
                     {
@@ -536,7 +536,7 @@ namespace Allors.Meta
             {
                 this.derivedPluralPropertyName = this.PluralName;
 
-                if (this.AssociationType.ObjectType.ExistLeafClasses)
+                if (this.AssociationType.ObjectType.ExistClass)
                 {
                     foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
                     {

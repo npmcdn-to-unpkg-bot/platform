@@ -167,7 +167,7 @@ namespace Allors
         /// <returns>The new <see cref="IObject"/>.</returns>
         public IObject Create(IStrategy strategy)
         {
-            var objectType = strategy.ObjectType;
+            var objectType = strategy.Class;
             var constructor = this.contructorInfoByObjectType[objectType];
             object[] parameters = { strategy };
             

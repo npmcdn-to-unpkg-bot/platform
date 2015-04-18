@@ -889,7 +889,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -934,11 +934,11 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (roleType.IsOne)
                 {
-                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[roleType.AssociationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[roleType.AssociationType.ObjectType.ExclusiveClass][roleType.RelationType];
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
                 }
             }
 
@@ -1111,11 +1111,11 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (roleType.IsOne)
                     {
-                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
                     }
                     else
                     {
-                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
                     }
                 }
                 else
@@ -1145,9 +1145,9 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var id = this.database.ObjectIds.Parse(result.ToString());
 
-                if (associationType.ObjectType.ExistExclusiveLeafClass)
+                if (associationType.ObjectType.ExistExclusiveClass)
                 {
-                    associationObject = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveLeafClass, id);
+                    associationObject = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, id);
                 }
                 else
                 {
@@ -1174,7 +1174,7 @@ namespace Allors.Databases.Object.SqlClient
             }
             else
             {
-                sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
             }
 
             SqlCommand command;
@@ -1229,7 +1229,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1281,7 +1281,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
                 }
  
                 command = this.CreateSqlCommand(sql);
@@ -1422,7 +1422,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1463,7 +1463,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveLeafClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1598,7 +1598,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.deleteObjectByClass = this.deleteObjectByClass ?? new Dictionary<IClass, SqlCommand>();
             
-            var @class = strategy.ObjectType;
+            var @class = strategy.Class;
 
             SqlCommand command;
             if (!this.deleteObjectByClass.TryGetValue(@class, out command))
@@ -1610,7 +1610,7 @@ namespace Allors.Databases.Object.SqlClient
                 sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjects + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
 
-                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjectByClass[(@class).ExclusiveLeafClass] + "\n";
+                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjectByClass[(@class).ExclusiveClass] + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
 
                 sql += "END;";
@@ -1682,7 +1682,7 @@ namespace Allors.Databases.Object.SqlClient
                 // TODO: Make this a single pass Query.
                 var sql = "IF EXISTS (\n";
                 sql += "    SELECT " + Mapping.ColumnNameForObject + "\n";
-                sql += "    FROM " + schema.TableNameForObjectByClass[@class.ExclusiveLeafClass] + "\n";
+                sql += "    FROM " + schema.TableNameForObjectByClass[@class.ExclusiveClass] + "\n";
                 sql += "    WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
                 sql += ")\n";
                 sql += "    SELECT 1\n";
@@ -1696,7 +1696,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " OFF;\n";
 
-                sql += "    INSERT INTO " + schema.TableNameForObjectByClass[@class.ExclusiveLeafClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ")\n";
+                sql += "    INSERT INTO " + schema.TableNameForObjectByClass[@class.ExclusiveClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ")\n";
                 sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ");\n";
 
                 sql += "    SELECT 0;\n";
@@ -1833,7 +1833,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.commandByKeyBySortedRoleTypesObjectType = this.commandByKeyBySortedRoleTypesObjectType ?? new Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>>();
 
-            var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveLeafClass;
+            var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveClass;
 
             Dictionary<IList<IRoleType>, SqlCommand> commandByKey;
             if (!this.commandByKeyBySortedRoleTypesObjectType.TryGetValue(exclusiveRootClass, out commandByKey))

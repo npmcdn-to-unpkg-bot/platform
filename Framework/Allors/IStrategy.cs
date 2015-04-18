@@ -41,10 +41,10 @@ namespace Allors
         IDatabaseSession DatabaseSession { get; }
 
         /// <summary>
-        /// Gets the <see cref="ObjectType"/>.
+        /// Gets the <see cref="Class"/>.
         /// </summary>
         /// <value>The object type.</value>
-        IClass ObjectType { get; }
+        IClass Class { get; }
 
         /// <summary>
         /// Gets the <see cref="Allors.ObjectId"/>.

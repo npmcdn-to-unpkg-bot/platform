@@ -299,7 +299,7 @@ namespace Allors.Databases.Relation.SqlClient
 
         protected IClass[] GetConcreteSubClasses(IComposite type)
         {
-            return new List<IClass>(type.LeafClasses).ToArray();
+            return new List<IClass>(type.Classes).ToArray();
         }
 
         internal override void Setup(AllorsExtentFilteredSql extent, AllorsExtentStatementSql statement)

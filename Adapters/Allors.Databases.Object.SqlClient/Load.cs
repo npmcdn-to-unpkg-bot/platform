@@ -623,7 +623,7 @@ namespace Allors.Databases.Object.SqlClient
                     sql = new StringBuilder();
                     sql.Append("INSERT INTO " + this.database.Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + ")\n");
                     sql.Append("SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ", " + Reference.InitialCacheId + "\n");
-                    sql.Append("FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveLeafClass]);
+                    sql.Append("FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveClass]);
 
                     lock (this)
                     {

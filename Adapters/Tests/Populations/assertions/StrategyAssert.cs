@@ -69,13 +69,13 @@ namespace Allors.Populations
         {
             foreach (var associationType in associationTypes)
             {
-                if (!allorsObject.Strategy.ObjectType.ExistAssociationType(associationType))
+                if (!allorsObject.Strategy.Class.ExistAssociationType(associationType))
                 {
                     Assert.Fail();
                 }
             }
 
-            foreach (var associationType in allorsObject.Strategy.ObjectType.AssociationTypes)
+            foreach (var associationType in allorsObject.Strategy.Class.AssociationTypes)
             {
                 if (Array.IndexOf(associationTypes, associationType) >= 0)
                 {
@@ -137,13 +137,13 @@ namespace Allors.Populations
         {
             foreach (IRoleType roleType in roleTypes)
             {
-                if (!allorsObject.Strategy.ObjectType.ExistRoleType(roleType))
+                if (!allorsObject.Strategy.Class.ExistRoleType(roleType))
                 {
                     Assert.Fail();
                 }
             }
 
-            foreach (IRoleType roleType in allorsObject.Strategy.ObjectType.RoleTypes)
+            foreach (IRoleType roleType in allorsObject.Strategy.Class.RoleTypes)
             {
                 if (Array.IndexOf(roleTypes, roleType) >= 0)
                 {

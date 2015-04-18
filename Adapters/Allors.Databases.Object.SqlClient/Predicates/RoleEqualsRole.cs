@@ -48,7 +48,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.role.RelationType] + "=" + alias + "." + schema.ColumnNameByRelationType[this.equalsRole.RelationType]);
             }
-            else if (((IComposite)this.role.ObjectType).ExistExclusiveLeafClass && ((IComposite)this.equalsRole.ObjectType).ExistExclusiveLeafClass)
+            else if (((IComposite)this.role.ObjectType).ExistExclusiveClass && ((IComposite)this.equalsRole.ObjectType).ExistExclusiveClass)
             {
                 statement.Append(" " + alias + "." + schema.ColumnNameByRelationType[this.role.RelationType] + "=" + alias + "." + schema.ColumnNameByRelationType[this.equalsRole.RelationType]);
             }

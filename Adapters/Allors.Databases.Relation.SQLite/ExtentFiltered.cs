@@ -92,7 +92,7 @@ namespace Allors.Databases.Relation.SQLite
                 return this.strategy.ExtentGetCompositeAssociations(this.association);
             }
 
-            if (!this.type.ExistLeafClasses)
+            if (!this.type.ExistClass)
             {
                 return ObjectId.EmptyObjectIds;
             }

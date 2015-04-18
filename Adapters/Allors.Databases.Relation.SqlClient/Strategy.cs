@@ -83,7 +83,7 @@ namespace Allors.Databases.Relation.SqlClient
             }
         }
 
-        public IClass ObjectType
+        public IClass Class
         {
             get
             {

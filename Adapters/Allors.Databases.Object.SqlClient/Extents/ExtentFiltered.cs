@@ -87,14 +87,14 @@ namespace Allors.Databases.Object.SqlClient
             this.LazyLoadFilter();
             this.filter.Setup(statement);
 
-            if (this.objectType.ExistLeafClasses)
+            if (this.objectType.ExistClass)
             {
-                if (this.objectType.ExistExclusiveLeafClass)
+                if (this.objectType.ExistExclusiveClass)
                 {
-                    return this.BuildSqlWithExclusiveRootClass(statement);
+                    return this.BuildSqlWithExclusiveClass(statement);
                 }
 
-                return this.BuildSqlWithExclusiveRootClasses(statement);
+                return this.BuildSqlWithClasses(statement);
             }
 
             return null;
@@ -169,10 +169,10 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        private string BuildSqlWithExclusiveRootClass(ExtentStatement statement)
+        private string BuildSqlWithExclusiveClass(ExtentStatement statement)
         {
             var alias = statement.CreateAlias();
-            var rootClass = this.objectType.ExclusiveLeafClass;
+            var rootClass = this.objectType.ExclusiveClass;
 
             if (statement.IsRoot)
             {
@@ -311,14 +311,14 @@ namespace Allors.Databases.Object.SqlClient
             return alias;
         }
 
-        private string BuildSqlWithExclusiveRootClasses(ExtentStatement statement)
+        private string BuildSqlWithClasses(ExtentStatement statement)
         {
             if (statement.IsRoot)
             {
-                for (var i = 0; i < this.objectType.LeafClasses.Count(); i++)
+                for (var i = 0; i < this.objectType.Classes.Count(); i++)
                 {
                     var alias = statement.CreateAlias();
-                    var rootClass = this.objectType.LeafClasses.ToArray()[i];
+                    var rootClass = this.objectType.Classes.ToArray()[i];
 
                     statement.Append("SELECT " + alias + "." + Mapping.ColumnNameForObject);
                     if (statement.Sorter != null)
@@ -336,7 +336,7 @@ namespace Allors.Databases.Object.SqlClient
                         this.filter.BuildWhere(statement, alias);
                     }
 
-                    if (i < this.objectType.LeafClasses.Count() - 1)
+                    if (i < this.objectType.Classes.Count() - 1)
                     {
                         statement.Append("\nUNION\n");
                     }
@@ -349,12 +349,12 @@ namespace Allors.Databases.Object.SqlClient
                 if (inStatement.RoleType != null)
                 {
                     var useUnion = false;
-                    foreach (var rootClass in this.objectType.LeafClasses)
+                    foreach (var rootClass in this.objectType.Classes)
                     {
                         var inRole = inStatement.RoleType;
                         var inIRelationType = inRole.RelationType;
 
-                        if (!((IComposite)inRole.ObjectType).LeafClasses.Contains(rootClass))
+                        if (!((IComposite)inRole.ObjectType).Classes.Contains(rootClass))
                         {
                             continue;
                         }
@@ -425,10 +425,10 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    for (var i = 0; i < this.objectType.LeafClasses.Count(); i++)
+                    for (var i = 0; i < this.objectType.Classes.Count(); i++)
                     {
                         var alias = statement.CreateAlias();
-                        var rootClass = this.objectType.LeafClasses.ToArray()[i];
+                        var rootClass = this.objectType.Classes.ToArray()[i];
 
                         if (statement.IsRoot)
                         {
@@ -453,7 +453,7 @@ namespace Allors.Databases.Object.SqlClient
                             this.filter.BuildWhere(statement, alias);
                         }
 
-                        if (i < this.objectType.LeafClasses.Count() - 1)
+                        if (i < this.objectType.Classes.Count() - 1)
                         {
                             statement.Append("\nUNION\n");
                         }

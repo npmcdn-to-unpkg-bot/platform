@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RoleChecks.cs" company="Allors bvba">
+// <copyright file="RoleAssertions.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -27,9 +27,9 @@ namespace Allors.Populations
     {
         public static void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
         {
-            if (!roleType.AssociationType.ObjectType.ExistLeafClass(strategy.ObjectType))
+            if (!roleType.AssociationType.ObjectType.IsAssignableFrom(strategy.Class))
             {
-                throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + roleType + ".");
+                throw new ArgumentException(strategy.Class + " is not a valid association object type for " + roleType + ".");
             }
 
             if (roleType.ObjectType is IComposite)
@@ -72,9 +72,9 @@ namespace Allors.Populations
 
         private static void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
-            if (!roleType.AssociationType.ObjectType.ExistLeafClass(strategy.ObjectType))
+            if (!roleType.AssociationType.ObjectType.IsAssignableFrom(strategy.Class))
             {
-                throw new ArgumentException(strategy.ObjectType + " has no roleType with role " + roleType + ".");
+                throw new ArgumentException(strategy.Class + " has no roleType with role " + roleType + ".");
             }
 
             if (role != null)
@@ -96,9 +96,9 @@ namespace Allors.Populations
                     throw new ArgumentException(role + " has no CompositeType");
                 }
 
-                if (!compositeType.ExistLeafClass(role.Strategy.ObjectType))
+                if (!compositeType.IsAssignableFrom(role.Strategy.Class))
                 {
-                    throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
+                    throw new ArgumentException(role.Strategy.Class + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
             }
         }

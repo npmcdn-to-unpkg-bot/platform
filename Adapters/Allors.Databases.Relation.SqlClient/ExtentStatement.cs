@@ -116,7 +116,7 @@ namespace Allors.Databases.Relation.SqlClient
             else
             {
                 bool first = true;
-                foreach (var subClass in this.Type.LeafClasses)
+                foreach (var subClass in this.Type.Classes)
                 {
                     if (first)
                     {

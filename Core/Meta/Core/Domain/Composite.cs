@@ -39,7 +39,7 @@ namespace Allors.Meta
         {
         }
 
-        public bool ExistExclusiveLeafClass
+        public bool ExistExclusiveClass
         {
             get
             {
@@ -48,7 +48,7 @@ namespace Allors.Meta
             }
         }
 
-        public abstract bool ExistLeafClasses { get; }
+        public abstract bool ExistClass { get; }
 
         public bool ExistDirectSupertypes
         {
@@ -95,7 +95,7 @@ namespace Allors.Meta
             }
         }
 
-        IClass IComposite.ExclusiveLeafClass
+        IClass IComposite.ExclusiveClass
         {
             get
             {
@@ -109,7 +109,7 @@ namespace Allors.Meta
         /// <value>The exclusive concrete subclass.</value>
         public abstract Class ExclusiveLeafClass { get; }
 
-        IEnumerable<IClass> IComposite.LeafClasses
+        IEnumerable<IClass> IComposite.Classes
         {
             get
             {
@@ -287,7 +287,7 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public abstract bool ExistLeafClass(IClass objectType);
+        public abstract bool IsAssignableFrom(IClass objectType);
 
         internal abstract void BuildInheritances();
 

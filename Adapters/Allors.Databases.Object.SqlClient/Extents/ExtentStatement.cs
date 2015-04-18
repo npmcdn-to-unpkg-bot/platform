@@ -88,7 +88,7 @@ namespace Allors.Databases.Object.SqlClient
                     {
                         if (role.IsMany)
                         {
-                            this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjectByClass[((IComposite)role.ObjectType).ExclusiveLeafClass] + " " + role.SingularFullName + "_R");
+                            this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjectByClass[((IComposite)role.ObjectType).ExclusiveClass] + " " + role.SingularFullName + "_R");
                             this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + this.Mapping.ColumnNameByRelationType[relationType]);
                         }
                     }
@@ -128,7 +128,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (!role.IsMany)
                     {
-                        this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjectByClass[association.ObjectType.ExclusiveLeafClass] + " " + association.SingularFullName + "_A");
+                        this.Append(" LEFT OUTER JOIN " + this.Mapping.TableNameForObjectByClass[association.ObjectType.ExclusiveClass] + " " + association.SingularFullName + "_A");
                         this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + this.Mapping.ColumnNameByRelationType[relationType]);
                     }
                 }
@@ -167,7 +167,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal bool AddWhere(IObjectType rootClass, string alias)
         {
-            var useWhere = !this.Extent.ObjectType.ExistExclusiveLeafClass;
+            var useWhere = !this.Extent.ObjectType.ExistExclusiveClass;
             
             if (useWhere)
             {

@@ -99,7 +99,7 @@ namespace Allors.Databases.Memory
 
         public ObjectId ObjectId { get; internal set; }
 
-        public IClass ObjectType
+        public IClass Class
         {
             get
             {

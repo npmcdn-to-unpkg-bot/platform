@@ -62,7 +62,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.reference.Session; }
         }
 
-        public IClass ObjectType
+        public IClass Class
         {
             get
             {
@@ -129,7 +129,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
 
-            foreach (var roleType in this.ObjectType.RoleTypes)
+            foreach (var roleType in this.Class.RoleTypes)
             {
                 if (roleType.ObjectType.IsComposite)
                 {
@@ -137,7 +137,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            foreach (var associationType in this.ObjectType.AssociationTypes)
+            foreach (var associationType in this.Class.AssociationTypes)
             {
                 var roleType = associationType.RoleType;
 
@@ -468,7 +468,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public override string ToString()
         {
-            return "[" + this.ObjectType + ":" + this.ObjectId + "]";
+            return "[" + this.Class + ":" + this.ObjectId + "]";
         }
 
         internal virtual void Release()
@@ -541,7 +541,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (!this.reference.Exists)
             {
-                throw new Exception("Object of class " + this.ObjectType.Name + " with id " + this.ObjectId + " does not exist");
+                throw new Exception("Object of class " + this.Class.Name + " with id " + this.ObjectId + " does not exist");
             }
         }
     }

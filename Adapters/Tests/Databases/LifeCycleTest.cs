@@ -106,7 +106,7 @@ namespace Allors.Databases
                     var ids = new ArrayList();
                     foreach (C1 allorsObject in allorsObjects)
                     {
-                        Assert.AreEqual(Classes.C1, allorsObject.Strategy.ObjectType);
+                        Assert.AreEqual(Classes.C1, allorsObject.Strategy.Class);
                         ids.Add(allorsObject.Strategy.ObjectId);
                         allorsObject.C1AllorsString = "CreateMany";
                     }
@@ -118,7 +118,7 @@ namespace Allors.Databases
                     allorsObjects = this.Session.Instantiate((ObjectId[])ids.ToArray(typeof(ObjectId)));
                     foreach (C1 allorsObject in allorsObjects)
                     {
-                        Assert.AreEqual(Classes.C1, allorsObject.Strategy.ObjectType);
+                        Assert.AreEqual(Classes.C1, allorsObject.Strategy.Class);
                         allorsObject.C1AllorsString = "CreateMany";
                     }
 
@@ -4102,16 +4102,16 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 var switchC1A = (C1)this.Session.Instantiate(c1A.Id.ToString());
 
-                Assert.AreEqual(Classes.C1, switchC1A.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C1, switchC1A.Strategy.Class);
 
                 var switchC2A = switchC1A.C1I12one2one;
 
-                Assert.AreEqual(Classes.C2, switchC2A.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C2, switchC2A.Strategy.Class);
 
                 var switchC2BC = switchC1A.C1I12one2manies;
 
-                Assert.AreEqual(Classes.C2, switchC2BC[0].Strategy.ObjectType);
-                Assert.AreEqual(Classes.C2, switchC2BC[1].Strategy.ObjectType);
+                Assert.AreEqual(Classes.C2, switchC2BC[0].Strategy.Class);
+                Assert.AreEqual(Classes.C2, switchC2BC[1].Strategy.Class);
 
                 this.Session.Commit();
 
@@ -4245,11 +4245,11 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 init();
 
                 var c1a = this.Session.Create(Classes.C1);
-                Assert.AreEqual(Classes.C1, c1a.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C1, c1a.Strategy.Class);
 
                 this.Session.Commit();
 
-                Assert.AreEqual(Classes.C1, c1a.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C1, c1a.Strategy.Class);
 
                 var c1b = this.Session.Create(Classes.C1);
 
@@ -4259,7 +4259,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 try
                 {
-                    var objectType = c1b.Strategy.ObjectType;
+                    var objectType = c1b.Strategy.Class;
                 }
                 catch
                 {
@@ -4269,11 +4269,11 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 Assert.IsTrue(exceptionThrown);
 
                 var c2a = this.Session.Create(Classes.C2);
-                Assert.AreEqual(Classes.C2, c2a.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C2, c2a.Strategy.Class);
 
                 this.Session.Commit();
 
-                Assert.AreEqual(Classes.C2, c2a.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C2, c2a.Strategy.Class);
             }
         }
 

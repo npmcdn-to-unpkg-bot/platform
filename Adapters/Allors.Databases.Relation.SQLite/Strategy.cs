@@ -83,7 +83,7 @@ namespace Allors.Databases.Relation.SQLite
             }
         }
 
-        public IClass ObjectType
+        public IClass Class
         {
             get
             {

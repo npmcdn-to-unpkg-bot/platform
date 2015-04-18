@@ -64,7 +64,7 @@ namespace Allors.Meta
             }
         }
 
-        public override bool ExistLeafClasses
+        public override bool ExistClass
         {
             get
             {
@@ -146,7 +146,7 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public override bool ExistLeafClass(IClass objectType)
+        public override bool IsAssignableFrom(IClass objectType)
         {
             this.MetaPopulation.Derive();
             return this.derivedLeafClasses.Contains(objectType);

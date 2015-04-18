@@ -94,7 +94,7 @@ namespace Allors.Meta
             }
         }
 
-        public override bool ExistLeafClasses
+        public override bool ExistClass
         {
             get
             {
@@ -110,7 +110,7 @@ namespace Allors.Meta
             }
         }
 
-        public override bool ExistLeafClass(IClass objectType)
+        public override bool IsAssignableFrom(IClass objectType)
         {
             return this.Equals(objectType);
         }

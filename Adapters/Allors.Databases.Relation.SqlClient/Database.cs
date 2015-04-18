@@ -866,7 +866,7 @@ WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
             orderedRelationType.Sort(MetaObjectComparer.ById);
             foreach (var relation in orderedRelationType)
             {
-                if (relation.AssociationType.ObjectType.ExistLeafClasses)
+                if (relation.AssociationType.ObjectType.ExistClass)
                 {
                     var role = relation.RoleType;
                     

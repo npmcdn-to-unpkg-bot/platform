@@ -27,51 +27,61 @@
     <Position X="4" Y="5.75" Width="2" />
     <AssociationLine Name="DirectSupertypes" Type="Allors.Meta.IInterface" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6" Y="8.367" />
-        <Point X="6.375" Y="8.367" />
-        <Point X="6.375" Y="9.5" />
+        <Point X="6" Y="8.177" />
+        <Point X="6.625" Y="8.177" />
+        <Point X="6.625" Y="9.5" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="0.032" Y="0.658" />
+        <Position X="0.094" Y="0.95" />
       </MemberNameLabel>
     </AssociationLine>
     <AssociationLine Name="Supertypes" Type="Allors.Meta.IInterface" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6" Y="8.162" />
-        <Point X="6.75" Y="8.162" />
-        <Point X="6.75" Y="9.5" />
+        <Point X="6" Y="7.987" />
+        <Point X="7" Y="7.987" />
+        <Point X="7" Y="9.5" />
       </Path>
       <MemberNameLabel ManuallyPlaced="true">
-        <Position X="0.061" Y="1.237" />
+        <Position X="-0.001" Y="1.591" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="LeafClasses" Type="Allors.Meta.IClass" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Classes" Type="Allors.Meta.IClass" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="4" Y="7.906" />
-        <Point X="3.344" Y="7.906" />
-        <Point X="3.344" Y="9.5" />
+        <Point X="4" Y="7.749" />
+        <Point X="3.688" Y="7.749" />
+        <Point X="3.688" Y="9.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="ExclusiveClass" Type="Allors.Meta.IClass" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4" Y="7.25" />
+        <Point X="3.141" Y="7.25" />
+        <Point X="3.141" Y="9.5" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAIABgAAAAEAAAAAICAAAAAAAQIAEAACAQBAAAAAAAA=</HashCode>
+      <HashCode>AAIAAAAAAAFAAAABACAQAAAAAQAAEAACQQBAAAAAAAA=</HashCode>
       <FileName>Meta\IComposite.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ExclusiveClass" />
+    </ShowAsAssociation>
     <ShowAsCollectionAssociation>
       <Property Name="AssociationTypes" />
       <Property Name="RoleTypes" />
       <Property Name="DirectSupertypes" />
       <Property Name="Supertypes" />
-      <Property Name="LeafClasses" />
+      <Property Name="Classes" />
     </ShowAsCollectionAssociation>
   </Interface>
   <Interface Name="Allors.Meta.IInterface">
-    <Position X="5.25" Y="9.5" Width="1.5" />
+    <Position X="5.5" Y="9.5" Width="1.5" />
     <AssociationLine Name="Subtypes" Type="Allors.Meta.IComposite" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6.75" Y="9.875" />
-        <Point X="7.125" Y="9.875" />
-        <Point X="7.125" Y="7.556" />
-        <Point X="6" Y="7.556" />
+        <Point X="7" Y="9.875" />
+        <Point X="7.375" Y="9.875" />
+        <Point X="7.375" Y="7.425" />
+        <Point X="6" Y="7.425" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
