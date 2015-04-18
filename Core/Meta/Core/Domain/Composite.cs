@@ -44,7 +44,7 @@ namespace Allors.Meta
             get
             {
                 this.MetaPopulation.Derive();
-                return this.ExclusiveLeafClass != null;
+                return this.ExclusiveSubclass != null;
             }
         }
 
@@ -99,7 +99,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.ExclusiveLeafClass;
+                return this.ExclusiveSubclass;
             }
         }
 
@@ -107,13 +107,13 @@ namespace Allors.Meta
         /// Gets the exclusive concrete subclass.
         /// </summary>
         /// <value>The exclusive concrete subclass.</value>
-        public abstract Class ExclusiveLeafClass { get; }
+        public abstract Class ExclusiveSubclass { get; }
 
         IEnumerable<IClass> IComposite.Classes
         {
             get
             {
-                return this.LeafClasses;
+                return this.Classes;
             }
         } 
 
@@ -121,7 +121,7 @@ namespace Allors.Meta
         /// Gets the root classes.
         /// </summary>
         /// <value>The root classes.</value>
-        public abstract IEnumerable<Class> LeafClasses { get; }
+        public abstract IEnumerable<Class> Classes { get; }
 
         IEnumerable<IInterface> IComposite.DirectSupertypes
         {

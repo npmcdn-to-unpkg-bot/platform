@@ -35,7 +35,7 @@ namespace Allors.Meta
 
         Multiplicity Multiplicity { get; }
 
-        bool ExistExclusiveLeafClasses { get; }
+        bool ExistExclusiveClasses { get; }
 
         bool IsDerived { get; }
 

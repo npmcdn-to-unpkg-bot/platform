@@ -507,9 +507,9 @@ namespace Allors.Meta
 
                 if (this.AssociationType.ObjectType.ExistClass)
                 {
-                    foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
+                    foreach (var @class in this.AssociationType.ObjectType.Classes)
                     {
-                        foreach (var otherRole in leafClass.RoleTypes)
+                        foreach (var otherRole in @class.RoleTypes)
                         {
                             if (!Equals(otherRole))
                             {
@@ -538,9 +538,9 @@ namespace Allors.Meta
 
                 if (this.AssociationType.ObjectType.ExistClass)
                 {
-                    foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
+                    foreach (var @class in this.AssociationType.ObjectType.Classes)
                     {
-                        foreach (var otherRole in leafClass.RoleTypes)
+                        foreach (var otherRole in @class.RoleTypes)
                         {
                             if (!Equals(otherRole))
                             {

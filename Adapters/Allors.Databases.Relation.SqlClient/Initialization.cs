@@ -718,7 +718,7 @@ CREATE INDEX " + indexName + @" ON " + this.mapping.Database.SchemaName + "." + 
                         {
                             var relationType = associationType.RelationType;
                             var roleType = relationType.RoleType;
-                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
+                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                             {
                                 associationTypes.Add(associationType);
                             }
@@ -734,7 +734,7 @@ CREATE INDEX " + indexName + @" ON " + this.mapping.Database.SchemaName + "." + 
                             }
                             else
                             {
-                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
+                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
                                 {
                                     roleTypes.Add(roleType);
                                 }
@@ -802,7 +802,7 @@ CREATE INDEX " + indexName + @" ON " + this.mapping.Database.SchemaName + "." + 
                             var associationType = relationType.AssociationType;
                             var roleType = relationType.RoleType;
 
-                            if (!(roleType.ObjectType is IUnit) && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                            if (!(roleType.ObjectType is IUnit) && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
                             {
                                 viewName = relationType.RoleType.SingularFullName;
 

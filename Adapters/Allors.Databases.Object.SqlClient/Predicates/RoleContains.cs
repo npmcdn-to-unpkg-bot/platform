@@ -42,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient
         internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Mapping;
-            if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveLeafClasses)
+            if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveClasses)
             {
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");

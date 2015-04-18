@@ -103,7 +103,7 @@ namespace Allors.Databases.Object.SqlClient
                     {
                         var relationType = associationType.RelationType;
                         var roleType = relationType.RoleType;
-                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses
+                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses
                             && roleType.IsMany)
                         {
                             this.ValidateColumn(
@@ -126,7 +126,7 @@ namespace Allors.Databases.Object.SqlClient
                         }
                         else
                         {
-                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses
+                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses
                                 && !roleType.IsMany)
                             {
                                 this.ValidateColumn(
@@ -146,7 +146,7 @@ namespace Allors.Databases.Object.SqlClient
                 var roleType = relationType.RoleType;
 
                 if (!roleType.ObjectType.IsUnit && 
-                    ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                    ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
                 {
                     var tableName = this.mapping.TableNameForRelationByRelationType[relationType];
                     var table = this.Schema.GetTable(tableName);

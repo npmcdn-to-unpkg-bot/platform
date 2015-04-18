@@ -30,7 +30,7 @@ namespace Allors
         public static void BaseOnPostBuild(this Domain.Object @this, ObjectOnPostBuild method)
         {
             // TODO: Optimize
-            foreach (var concreteRoleType in ((Class)@this.Strategy.ObjectType).ConcreteRoleTypes)
+            foreach (var concreteRoleType in ((Class)@this.Strategy.Class).ConcreteRoleTypes)
             {
                 if (concreteRoleType.IsRequired)
                 {

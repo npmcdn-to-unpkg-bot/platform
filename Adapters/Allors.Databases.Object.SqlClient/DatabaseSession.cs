@@ -883,7 +883,7 @@ namespace Allors.Databases.Object.SqlClient
             if (!this.addCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 string sql;
-                if (roleType.AssociationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                if (roleType.AssociationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
                 {
                     sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
                 }
@@ -926,7 +926,7 @@ namespace Allors.Databases.Object.SqlClient
             this.clearCompositeAndCompositesRoleByRoleType = this.clearCompositeAndCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
 
             string sql;
-            if ((roleType.IsMany && roleType.AssociationType.IsMany) || !roleType.RelationType.ExistExclusiveLeafClasses)
+            if ((roleType.IsMany && roleType.AssociationType.IsMany) || !roleType.RelationType.ExistExclusiveClasses)
             {
                 sql = this.database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
             }
@@ -1107,7 +1107,7 @@ namespace Allors.Databases.Object.SqlClient
                 var roleType = associationType.RoleType;
 
                 string sql;
-                if (associationType.RelationType.ExistExclusiveLeafClasses)
+                if (associationType.RelationType.ExistExclusiveClasses)
                 {
                     if (roleType.IsOne)
                     {
@@ -1168,7 +1168,7 @@ namespace Allors.Databases.Object.SqlClient
             var roleType = associationType.RoleType;
 
             string sql;
-            if (roleType.IsMany || !associationType.RelationType.ExistExclusiveLeafClasses)
+            if (roleType.IsMany || !associationType.RelationType.ExistExclusiveClasses)
             {
                 sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
             }
@@ -1223,7 +1223,7 @@ namespace Allors.Databases.Object.SqlClient
                 IAssociationType associationType = roleType.AssociationType;
 
                 string sql;
-                if (!roleType.RelationType.ExistExclusiveLeafClasses)
+                if (!roleType.RelationType.ExistExclusiveClasses)
                 {
                     sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
                 }
@@ -1275,7 +1275,7 @@ namespace Allors.Databases.Object.SqlClient
                 var associationType = roleType.AssociationType;
 
                 string sql;
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
                 {
                     sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
                 }
@@ -1416,7 +1416,7 @@ namespace Allors.Databases.Object.SqlClient
                 string sql;
                 var associationType = roleType.AssociationType;
 
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
                 {
                     sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
                 }
@@ -1457,7 +1457,7 @@ namespace Allors.Databases.Object.SqlClient
                 var associationType = roleType.AssociationType;
 
                 string sql;
-                if (!roleType.RelationType.ExistExclusiveLeafClasses)
+                if (!roleType.RelationType.ExistExclusiveClasses)
                 {
                     sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }

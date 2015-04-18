@@ -85,7 +85,7 @@ namespace Allors.Domain
 
         public override string ToString()
         {
-            var associationName = this.Association.Strategy.ObjectType.Name;
+            var associationName = this.Association.Strategy.Class.Name;
             
             if (this.RoleType != null)
             {

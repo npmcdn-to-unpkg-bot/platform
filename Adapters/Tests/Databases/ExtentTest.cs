@@ -16109,7 +16109,7 @@ namespace Allors.Databases
         }
 
         [Test]
-        public void RoleContainsOne2ManySharedLeafClassAndContained()
+        public void RoleContainsOne2ManySharedClassAndContained()
         {
             foreach (var init in this.Inits)
             {

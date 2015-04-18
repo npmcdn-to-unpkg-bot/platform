@@ -46,7 +46,7 @@ namespace Allors.Domain
         public static void BaseOnPostDerive(this Object @this, ObjectOnPostDerive method)
         {
             var derivation = method.Derivation;
-            var @class = (Class)@this.Strategy.ObjectType;
+            var @class = (Class)@this.Strategy.Class;
 
             // Required
             RoleType[] requiredRoleTypes;

@@ -298,7 +298,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     var relationType = associationType.RelationType;
                     var roleType = relationType.RoleType;
-                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
+                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                     {
                         this.ColumnNameByRelationType[relationType] = this.NormalizeName(associationType.SingularPropertyName);
                     }
@@ -315,7 +315,7 @@ namespace Allors.Databases.Object.SqlClient
                     }
                     else
                     {
-                        if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
+                        if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
                         {
                             this.ColumnNameByRelationType[relationType] = this.NormalizeName(roleType.SingularPropertyName);
                         }
@@ -330,7 +330,7 @@ namespace Allors.Databases.Object.SqlClient
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;
 
-                if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
                 {
                     this.TableNameForRelationByRelationType.Add(relationType, this.database.SchemaName + "." + this.NormalizeName(relationType.RoleType.SingularFullName));
                 }
@@ -511,7 +511,7 @@ END";
                     var roleType = relationType.RoleType;
                     var relationTypeName = roleType.SingularFullName.ToLowerInvariant();
 
-                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
+                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                     {
                         procedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + className + "_" + relationTypeName);
                         procedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
@@ -708,7 +708,7 @@ AS
                     }
                     else
                     {
-                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsOne)
+                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsOne)
                         {
                             procedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + className + "_" + relationTypeName);
                             procedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
@@ -788,7 +788,7 @@ AS
                 var relationTypeName = roleType.SingularFullName.ToLowerInvariant();
 
 
-                if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
                 {
 
 

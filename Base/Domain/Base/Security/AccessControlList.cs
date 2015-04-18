@@ -48,7 +48,7 @@ namespace Allors.Domain
         public AccessControlList(IObject obj, User user)
         {
             this.user = user;
-            this.objectType = obj.Strategy.ObjectType;
+            this.objectType = obj.Strategy.Class;
             this.databaseSession = this.user.Strategy.DatabaseSession;
 
             if (!obj.Strategy.IsNewInWorkspace)

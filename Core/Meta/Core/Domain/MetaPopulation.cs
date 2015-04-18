@@ -497,16 +497,10 @@ namespace Allors.Meta
                         type.DeriveSubclasses(sharedClasses);
                     }
 
-                    // LeafClasses
+                    // Exclusive Subclass
                     foreach (var type in this.Interfaces)
                     {
-                        type.DeriveLeafClasses();
-                    }
-
-                    // Exclusive Root Class
-                    foreach (var type in this.Interfaces)
-                    {
-                        type.DeriveExclusiveLeafClass();
+                        type.DeriveExclusiveSubclass();
                     }
 
                     var roleTypesByAssociationObjectType = new Dictionary<ObjectType, HashSet<RoleType>>();

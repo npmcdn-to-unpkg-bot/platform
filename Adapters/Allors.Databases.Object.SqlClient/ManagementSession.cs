@@ -139,7 +139,7 @@ namespace Allors.Databases.Object.SqlClient
             string sql;
             if (roleType.IsMany)
             {
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
                 {
                     sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
                 }
@@ -150,7 +150,7 @@ namespace Allors.Databases.Object.SqlClient
             }
             else
             {
-                if (!roleType.RelationType.ExistExclusiveLeafClasses)
+                if (!roleType.RelationType.ExistExclusiveClasses)
                 {
                     sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }

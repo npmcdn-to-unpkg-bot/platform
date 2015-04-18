@@ -444,7 +444,7 @@ namespace Allors.Domain
                 if (priceComponent.FromDate <= this.SalesInvoiceWhereSalesInvoiceItem.InvoiceDate &&
                     (!priceComponent.ExistThroughDate || priceComponent.ThroughDate >= this.SalesInvoiceWhereSalesInvoiceItem.InvoiceDate))
                 {
-                    if (priceComponent.Strategy.ObjectType.Equals(BasePrices.Meta.ObjectType))
+                    if (priceComponent.Strategy.Class.Equals(BasePrices.Meta.ObjectType))
                     {
                         if (PriceComponents.IsEligible(new PriceComponents.IsEligibleParams
                                                            {
@@ -489,7 +489,7 @@ namespace Allors.Domain
 
                 foreach (var priceComponent in priceComponents)
                 {
-                    if (priceComponent.Strategy.ObjectType.Equals(DiscountComponents.Meta.ObjectType) || priceComponent.Strategy.ObjectType.Equals(SurchargeComponents.Meta.ObjectType))
+                    if (priceComponent.Strategy.Class.Equals(DiscountComponents.Meta.ObjectType) || priceComponent.Strategy.Class.Equals(SurchargeComponents.Meta.ObjectType))
                     {
                         if (PriceComponents.IsEligible(new PriceComponents.IsEligibleParams
                                                            {
@@ -506,7 +506,7 @@ namespace Allors.Domain
                         {
                             this.AddCurrentPriceComponent(priceComponent);
 
-                            if (priceComponent.Strategy.ObjectType.Equals(DiscountComponents.Meta.ObjectType))
+                            if (priceComponent.Strategy.Class.Equals(DiscountComponents.Meta.ObjectType))
                             {
                                 var discountComponent = (DiscountComponent)priceComponent;
                                 decimal discount;
@@ -545,7 +545,7 @@ namespace Allors.Domain
                                 }
                             }
 
-                            if (priceComponent.Strategy.ObjectType.Equals(SurchargeComponents.Meta.ObjectType))
+                            if (priceComponent.Strategy.Class.Equals(SurchargeComponents.Meta.ObjectType))
                             {
                                 var surchargeComponent = (SurchargeComponent)priceComponent;
                                 decimal surcharge;

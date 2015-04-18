@@ -27,7 +27,7 @@ namespace Allors.Meta
 
     public abstract partial class Class : Composite, IClass
     {
-        private readonly Class[] leafClasses;
+        private readonly Class[] classes;
 
         private readonly Dictionary<RoleType, ConcreteRoleType> concreteRoleTypeByRoleType;
 
@@ -45,7 +45,7 @@ namespace Allors.Meta
             this.concreteRoleTypeByRoleType = new Dictionary<RoleType, ConcreteRoleType>();
             this.concreteMethodTypeByMethodType = new Dictionary<MethodType, ConcreteMethodType>();
 
-            this.leafClasses = new[] { this };
+            this.classes = new[] { this };
             domain.OnClassCreated(this);
         }
 
@@ -86,11 +86,11 @@ namespace Allors.Meta
             }
         }
 
-        public override IEnumerable<Class> LeafClasses
+        public override IEnumerable<Class> Classes
         {
             get
             {
-                return this.leafClasses;
+                return this.classes;
             }
         }
 
@@ -102,7 +102,7 @@ namespace Allors.Meta
             }
         }
 
-        public override Class ExclusiveLeafClass
+        public override Class ExclusiveSubclass
         {
             get
             {

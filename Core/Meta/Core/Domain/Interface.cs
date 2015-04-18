@@ -33,9 +33,7 @@ namespace Allors.Meta
 
         private LazySet<Class> derivedSubclasses;
 
-        private LazySet<Class> derivedLeafClasses;
-
-        private Class derivedExclusiveLeafClass;
+        private Class derivedExclusiveSubclass;
 
         private Type clrType;
 
@@ -69,7 +67,7 @@ namespace Allors.Meta
             get
             {
                 this.MetaPopulation.Derive();
-                return this.derivedLeafClasses.Count > 0;
+                return this.derivedSubclasses.Count > 0;
             }
         }
 
@@ -96,6 +94,14 @@ namespace Allors.Meta
             }
         }
 
+        public override IEnumerable<Class> Classes
+        {
+            get
+            {
+                return this.Subclasses;
+            }
+        }
+
         IEnumerable<IComposite> IInterface.Subtypes
         {
             get
@@ -116,22 +122,13 @@ namespace Allors.Meta
                 return this.derivedSubtypes;
             }
         }
-
-        public override IEnumerable<Class> LeafClasses
+        
+        public override Class ExclusiveSubclass
         {
             get
             {
                 this.MetaPopulation.Derive();
-                return this.derivedLeafClasses;
-            }
-        }
-
-        public override Class ExclusiveLeafClass
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedExclusiveLeafClass;
+                return this.derivedExclusiveSubclass;
             }
         }
 
@@ -149,7 +146,7 @@ namespace Allors.Meta
         public override bool IsAssignableFrom(IClass objectType)
         {
             this.MetaPopulation.Derive();
-            return this.derivedLeafClasses.Contains(objectType);
+            return this.derivedSubclasses.Contains(objectType);
         }
 
         #endregion
@@ -200,19 +197,11 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Derive exclusive concrete leaf classes.
+        /// Derive exclusive sub classes.
         /// </summary>
-        internal void DeriveExclusiveLeafClass()
+        internal void DeriveExclusiveSubclass()
         {
-            this.derivedExclusiveLeafClass = this.derivedLeafClasses.Count == 1 ? this.derivedLeafClasses.First() : null;
-        }
-
-        /// <summary>
-        /// Derive root class for classes.
-        /// </summary>
-        internal void DeriveLeafClasses()
-        {
-            this.derivedLeafClasses = new LazySet<Class>(this.derivedSubclasses);
+            this.derivedExclusiveSubclass = this.derivedSubclasses.Count == 1 ? this.derivedSubclasses.First() : null;
         }
 
         /// <summary>

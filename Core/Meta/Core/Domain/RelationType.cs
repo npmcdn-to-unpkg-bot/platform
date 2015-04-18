@@ -134,12 +134,12 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether there exist exclusive leaf classes.
+        /// Gets a value indicating whether there exist exclusive classes.
         /// </summary>
         /// <value>
-        ///  <c>true</c> if [exist exclusive leaf classes]; otherwise, <c>false</c>.
+        ///  <c>true</c> if [exist exclusive classes]; otherwise, <c>false</c>.
         /// </value>
-        public bool ExistExclusiveLeafClasses
+        public bool ExistExclusiveClasses
         {
             get
             {
