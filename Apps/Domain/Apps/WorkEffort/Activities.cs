@@ -32,7 +32,7 @@ namespace Allors.Domain
 
             var openedState = new WorkEffortObjectStates(Session).NeedsAction;
             var cancelledState = new WorkEffortObjectStates(Session).Cancelled;
-            var finishedState = new WorkEffortObjectStates(Session).Finished;
+            var finishedState = new WorkEffortObjectStates(Session).Completed;
 
             config.Deny(this.ObjectType, openedState, WorkEfforts.Meta.Reopen);
 

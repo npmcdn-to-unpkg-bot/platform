@@ -1661,7 +1661,6 @@
     <Compile Include="Generated\Base\WorkEffortStatus.g.cs" />
     <Compile Include="Generated\Base\WorkEffortType.g.cs" />
     <Compile Include="Generated\Base\WorkEffortTypeKind.g.cs" />
-    <Compile Include="Generated\Base\WorkEffortWorkDone.g.cs" />
     <Compile Include="Generated\Base\WorkFlow.g.cs" />
     <Compile Include="Generated\Base\WorkRequirement.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

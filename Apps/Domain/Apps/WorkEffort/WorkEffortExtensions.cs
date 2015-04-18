@@ -42,14 +42,9 @@ namespace Allors.Domain
             @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Confirmed;
         }
 
-        public static void AppsWorkDone(this WorkEffort @this, WorkEffortWorkDone method)
-        {
-            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Fulffilled;
-        }
-
         public static void AppsFinish(this WorkEffort @this, WorkEffortFinish method)
         {
-            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Finished;
+            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Completed;
         }
 
         public static void AppsCancel(this WorkEffort @this, WorkEffortCancel cancel)

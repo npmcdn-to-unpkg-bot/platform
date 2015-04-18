@@ -53,7 +53,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);    
 
             Assert.AreEqual(2, workEffort.WorkEffortStatuses.Count);
-            Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).Finished, workEffort.CurrentWorkEffortStatus.WorkEffortObjectState);
+            Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).Completed, workEffort.CurrentWorkEffortStatus.WorkEffortObjectState);
         }
     }
 }
