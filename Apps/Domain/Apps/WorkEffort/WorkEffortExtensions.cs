@@ -59,7 +59,7 @@ namespace Allors.Domain
 
         public static void AppsReopen(this WorkEffort @this, WorkEffortReopen reopen)
         {
-            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Created;
+            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).NeedsAction;
         }
     }
 }

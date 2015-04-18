@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class WorkEffortObjectStates
     {
-        public static readonly Guid CreatedId = new Guid("0D2618A7-A3B7-40f5-88C4-30DADE4D5164");
+        public static readonly Guid NeedsActionId = new Guid("0D2618A7-A3B7-40f5-88C4-30DADE4D5164");
         public static readonly Guid ConfirmedId = new Guid("61E5FCB6-7814-4FED-8CE7-28C26EB88EE6");
         public static readonly Guid InProgressId = new Guid("0DFFC51A-4982-4DDA-808B-8F70D46F2749");
         public static readonly Guid FulffilledId = new Guid("F30F51F6-7301-456E-9AF3-E922739C73A1");
@@ -33,9 +33,9 @@ namespace Allors.Domain
 
         private UniquelyIdentifiableCache<WorkEffortObjectState> stateCache;
 
-        public WorkEffortObjectState Created
+        public WorkEffortObjectState NeedsAction
         {
-            get { return this.StateCache.Get(CreatedId); }
+            get { return this.StateCache.Get(NeedsActionId); }
         }
 
         public WorkEffortObjectState Confirmed
@@ -79,8 +79,8 @@ namespace Allors.Domain
             var dutchLocale = new Locales(Session).DutchNetherlands;
 
             new WorkEffortObjectStateBuilder(Session)
-                .WithUniqueId(CreatedId)
-                .WithName("Created")
+                .WithUniqueId(NeedsActionId)
+                .WithName("NeedsAction")
                 .Build();
 
             new WorkEffortObjectStateBuilder(Session)

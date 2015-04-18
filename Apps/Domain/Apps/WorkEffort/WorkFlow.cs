@@ -42,7 +42,7 @@ namespace Allors.Domain
         {
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.DatabaseSession).Created;
+                this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.DatabaseSession).NeedsAction;
             }
         }
 

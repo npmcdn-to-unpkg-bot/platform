@@ -33,7 +33,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).Created, workEffort.CurrentObjectState);
+            Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).NeedsAction, workEffort.CurrentObjectState);
             Assert.IsNotNull(workEffort.PreviousObjectState);
             Assert.AreEqual(workEffort.PreviousObjectState, workEffort.CurrentObjectState);
         }
@@ -46,7 +46,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(1, workEffort.WorkEffortStatuses.Count);
-            Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).Created, workEffort.CurrentWorkEffortStatus.WorkEffortObjectState);
+            Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).NeedsAction, workEffort.CurrentWorkEffortStatus.WorkEffortObjectState);
 
             workEffort.Finish();
 

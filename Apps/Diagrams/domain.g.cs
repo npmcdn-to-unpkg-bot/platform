@@ -1134,9 +1134,13 @@ namespace Allors.Domain
 
 					Deliverable DeliverablesProduced {set;}
 
+					global::System.DateTime? ActualStart {set;}
+
 					WorkEffortInventoryAssignment InventoryItemsNeeded {set;}
 
 					WorkEffort Children {set;}
+
+					global::System.DateTime? ActualCompletion {set;}
 
 					OrderItem OrderItemFulfillment {set;}
 
@@ -1158,6 +1162,8 @@ namespace Allors.Domain
 
 					WorkEffort Concurrencies {set;}
 
+					global::System.DateTime? ScheduledStart {set;}
+
 					global::System.Decimal? ActualHours {set;}
 
 					global::System.String Description {set;}
@@ -1165,6 +1171,8 @@ namespace Allors.Domain
 					WorkEffortObjectState PreviousObjectState {set;}
 
 					WorkEffortObjectState CurrentObjectState {set;}
+
+					global::System.DateTime? ScheduledCompletion {set;}
 
 					global::System.Decimal? EstimatedHours {set;}
 

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="aedad096-b297-47b7-98e4-69c6dde9b128">
+  <associationType id="13208331-e72f-4adb-9e78-c6ba7b68ce65">
+    <objectType idref="553a5280-a768-4ba1-8b5d-304d7c4bb7f1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e23b0aa8-8b02-4274-826c-af140683ad22">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>ScheduledStarts</pluralName>
+    <singularName>ScheduledStart</singularName>
+  </roleType>
+</relationType>

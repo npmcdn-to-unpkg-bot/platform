@@ -30,7 +30,7 @@ namespace Allors.Domain
 
             config.GrantAdministrator(this.ObjectType, full);
 
-            var openedState = new WorkEffortObjectStates(Session).Created;
+            var openedState = new WorkEffortObjectStates(Session).NeedsAction;
             var cancelledState = new WorkEffortObjectStates(Session).Cancelled;
             var finishedState = new WorkEffortObjectStates(Session).Finished;
 
