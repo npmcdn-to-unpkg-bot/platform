@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IModel.cs" company="Allors bvba">
+// <copyright file="WatermarkAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,9 +18,19 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc
+namespace Allors.Web.Mvc.Models.Annotations
 {
-    public partial interface ICompositeModel
+    using System.Web.Mvc;
+    using Humanizer;
+
+    public partial class WatermarkAnnotation : IPropertyMetadataAware 
     {
+        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
+        {
+            if (string.IsNullOrWhiteSpace(modelMetadata.Watermark))
+            {
+                modelMetadata.Watermark = modelMetadata.PropertyName.Humanize();
+            }
+        }
     }
 }

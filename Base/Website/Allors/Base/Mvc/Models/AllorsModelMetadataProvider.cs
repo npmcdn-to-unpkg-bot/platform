@@ -20,42 +20,48 @@ namespace Allors.Web.Mvc.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
 
     using Allors.Meta;
 
-    public class AllorsModelMetadataProvider : DataAnnotationsModelMetadataProvider
+    public class AllorsModelMetadataProvider : CachedDataAnnotationsModelMetadataProvider
     {
+        private static readonly ITypeMetadataAware[] EmptyTypeAnnotations = { };
+        private static readonly IPropertyMetadataAware[] EmptyPropertyAnnotations = { };
+
         private readonly Dictionary<Type, Composite> compositeByModelType;
-        private readonly List<IModelMetadataFilter> metadataFilters;
+        private readonly ITypeMetadataAware[] typeAnnotations;
+        private readonly IPropertyMetadataAware[] propertyAnnotations;
 
-        public AllorsModelMetadataProvider(Dictionary<Type, Composite> compositeByModelType)
+        public AllorsModelMetadataProvider(Dictionary<Type, Composite> compositeByModelType, ITypeMetadataAware[] typeAnnotations, IPropertyMetadataAware[] propertyAnnotations)
         {
-            this.metadataFilters = new List<IModelMetadataFilter>();
             this.compositeByModelType = compositeByModelType;
+            this.typeAnnotations = typeAnnotations ?? EmptyTypeAnnotations;
+            this.propertyAnnotations = propertyAnnotations ?? EmptyPropertyAnnotations;
         }
 
-        public List<IModelMetadataFilter> MetadataFilters 
+        protected override CachedDataAnnotationsModelMetadata CreateMetadataFromPrototype(CachedDataAnnotationsModelMetadata prototype, Func<object> modelAccessor)
         {
-            get
-            {
-                return this.metadataFilters;
-            }
-        }
-        
-        protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributeEnumerable, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
-        {
-            var attributes = attributeEnumerable.ToArray();
-            var metadata = base.CreateMetadata(attributes, containerType, modelAccessor, modelType, propertyName);
+            var modelMetaData = base.CreateMetadataFromPrototype(prototype, modelAccessor);
 
             Composite composite;
-            if (containerType != null && this.compositeByModelType.TryGetValue(containerType, out composite))
+            if (this.compositeByModelType.TryGetValue(modelMetaData.ModelType, out composite))
             {
-                this.MetadataFilters.ForEach(m => m.Transform(composite, metadata, attributes));
+                modelMetaData.SetComposite(composite);
+                foreach (var filter in this.typeAnnotations)
+                {
+                    filter.OnTypeMetadataCreated(modelMetaData);
+                }
+            }
+            else if (modelMetaData.ContainerType != null && this.compositeByModelType.TryGetValue(modelMetaData.ContainerType, out composite))
+            {
+                foreach (var filter in this.propertyAnnotations)
+                {
+                    filter.OnPropertyMetadataCreated(modelMetaData);
+                }
             }
 
-            return metadata;
+            return modelMetaData;
         }
     }
 }

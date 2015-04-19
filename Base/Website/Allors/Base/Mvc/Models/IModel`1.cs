@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IdFilter.cs" company="Allors bvba">
+// <copyright file="IModel`1.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,21 +20,10 @@
 
 namespace Allors.Web.Mvc.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Mvc;
-
     using Allors.Meta;
 
-    public partial class IdFilter : IModelMetadataFilter 
+    public interface IModel<T> : IModel
+        where T : Composite
     {
-        public void Transform(Composite composite, ModelMetadata metadata, IEnumerable<Attribute> attributes)
-        {
-            var propertyName = metadata.PropertyName;
-            if (propertyName != null && propertyName.EndsWith("Id"))
-            {
-                metadata.TemplateHint = @"HiddenInput";
-            }
-        }
     }
 }

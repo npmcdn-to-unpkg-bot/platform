@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IModelMetadataFilter.cs" company="Allors bvba">
+// <copyright file="FormAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,16 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models
+namespace Allors.Web.Mvc.Models.Annotations
 {
-    using System;
-    using System.Collections.Generic;
     using System.Web.Mvc;
 
-    using Allors.Meta;
-
-    public interface IModelMetadataFilter 
+    public partial class FormAnnotation : ITypeMetadataAware
     {
-        void Transform(Composite composite, ModelMetadata metadata, IEnumerable<Attribute> attributes);
+        public const string Name = "Form";
+
+        public void OnTypeMetadataCreated(ModelMetadata modelMetadata)
+        {
+            modelMetadata.TemplateHint = Name;
+        }
     }
 }

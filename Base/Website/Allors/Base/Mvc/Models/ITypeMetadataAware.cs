@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Select.cs" company="Allors bvba">
+// <copyright file="ITypeMetadataAware.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,10 +22,8 @@ namespace Allors.Web.Mvc.Models
 {
     using System.Web.Mvc;
 
-    public partial class Select
+    public interface ITypeMetadataAware
     {
-        public string Id { get; set; }
-
-        public SelectListItem[] List { get; set; }
+        void OnTypeMetadataCreated(ModelMetadata modelMetadata);
     }
 }

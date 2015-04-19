@@ -1,0 +1,10 @@
+@model Select
+
+@if (Model.List == null)
+{
+
+}
+else
+{
+    @Html.DropDownListFor(x => x.Id, Model.List, new { @class = "form-control" })
+}

@@ -1,9 +1,0 @@
-﻿@model Allors.Web.Mvc.Units.IntegerModel
-@if (Model.ReadOnly)
-{
-    @Html.EditorFor(x => x.Value, new { htmlAttributes = new { @class = "form-control", placeholder = ViewData.ModelMetadata.Watermark, disabled = "disabled", @readonly = "readonly" } })
-}
-else
-{
-    @Html.EditorFor(x => x.Value, new { htmlAttributes = new { @class = "form-control", placeholder = ViewData.ModelMetadata.Watermark, disabled = "disabled", @readonly = "readonly" } })
-}

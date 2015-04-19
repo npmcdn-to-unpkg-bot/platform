@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Model`1.cs" company="Allors bvba">
+// <copyright file="IPropertyMetadataAware.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc
+namespace Allors.Web.Mvc.Models
 {
-    using Allors.Meta;
+    using System.Web.Mvc;
 
-    public abstract partial class CompositeModel<T> : CompositeModel
-          where T : Composite
+    public interface IPropertyMetadataAware
     {
+        void OnPropertyMetadataCreated(ModelMetadata modelMetadata);
     }
 }

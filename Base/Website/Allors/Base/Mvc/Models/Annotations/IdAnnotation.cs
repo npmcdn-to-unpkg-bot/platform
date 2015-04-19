@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ButtonFilter.cs" company="Allors bvba">
+// <copyright file="IdAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,23 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models
+namespace Allors.Web.Mvc.Models.Annotations
 {
-    using System;
-    using System.Collections.Generic;
     using System.Web.Mvc;
 
-    using Allors.Meta;
-
-    public partial class ButtonFilter : IModelMetadataFilter 
+    public partial class IdAnnotation : IPropertyMetadataAware 
     {
-        public void Transform(Composite composite, ModelMetadata metadata, IEnumerable<Attribute> attributes)
+        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
         {
-            var propertyName = metadata.PropertyName;
-            if (!string.IsNullOrWhiteSpace(propertyName) &&
-                propertyName.ToLowerInvariant().EndsWith("button"))
+            if (modelMetadata.PropertyName.EndsWith("Id"))
             {
-                metadata.ShowForEdit = false;
+                modelMetadata.TemplateHint = @"HiddenInput";
             }
         }
     }
