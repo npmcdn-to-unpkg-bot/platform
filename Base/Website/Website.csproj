@@ -164,9 +164,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allors\Base\Account\AccountViewModels.cs" />
     <Compile Include="Allors\Base\Account\BaseAccountController.cs" />
     <Compile Include="Allors\Base\Data\BaseDataController.cs" />
-    <Compile Include="Allors\Base\Manage\BaseManageController.cs" />
     <Compile Include="Allors\Base\Identity\EmailService.cs" />
     <Compile Include="Allors\Base\Identity\IdentitySignInManager.cs" />
     <Compile Include="Allors\Base\Identity\IdentityUser.cs" />
@@ -175,6 +175,8 @@
     <Compile Include="Allors\Base\Identity\SmsService.cs" />
     <Compile Include="Allors\Base\Identity\UserStore.cs" />
     <Compile Include="Allors\Base\Identity\UserStore.v.cs" />
+    <Compile Include="Allors\Base\Manage\BaseManageController.cs" />
+    <Compile Include="Allors\Base\Manage\ManageViewModels.cs" />
     <Compile Include="Allors\Base\Mvc\AllorsContext.cs" />
     <Compile Include="Allors\Base\Mvc\Components\Menu.cs" />
     <Compile Include="Allors\Base\Mvc\Components\MenuForUser.cs" />
@@ -182,27 +184,21 @@
     <Compile Include="Allors\Base\Mvc\Components\MenuItemForUser.cs" />
     <Compile Include="Allors\Base\Mvc\Components\Menus.cs" />
     <Compile Include="Allors\Base\Mvc\Controllers\Controller.cs" />
-    <Compile Include="Allors\Base\Mvc\DependencyResolver.cs" />
     <Compile Include="Allors\Base\Mvc\Models\AllorsModelMetadataProvider.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Filters\ButtonFilter.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Filters\IdFilter.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Filters\LabelFilter.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Composite\ICompositeModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\IModelMetadataFilter.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Composite\CompositeModel%271.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Composite\CompositeModel.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Annotations\BootstrapThemeAnnotation.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Annotations\FormAnnotation.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Annotations\IdAnnotation.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Annotations\LabelAnnotation.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\Annotations\WatermarkAnnotation.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\IModel.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\IModel`1.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\IPropertyMetadataAware.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\ITypeMetadataAware.cs" />
+    <Compile Include="Allors\Base\Mvc\Models\ModelMetadataExtension.cs" />
     <Compile Include="Allors\Base\Mvc\Models\Select.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\StringModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\UniqueModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\FloatModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\IntegerModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\DecimalModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\UnitModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\DateTimeModel.cs" />
     <Compile Include="Allors\Base\Mvc\Views\ViewContextExtensions.cs" />
     <Compile Include="Allors\Base\Security\AllorsMembershipProvider.cs" />
     <Compile Include="Allors\Base\Security\AllorsRoleProvider.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Units\BooleanModel.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -216,12 +212,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Allors\Base\Account\AccountViewModels.cs" />
-    <Compile Include="Allors\Base\Manage\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Allors\Base\Account\ConfirmEmail.cshtml" />
+    <Content Include="Allors\Base\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Allors\Base\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Allors\Base\Account\ForgotPassword.cshtml" />
+    <Content Include="Allors\Base\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Allors\Base\Account\Login.cshtml" />
+    <Content Include="Allors\Base\Account\Register.cshtml" />
+    <Content Include="Allors\Base\Account\ResetPassword.cshtml" />
+    <Content Include="Allors\Base\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Allors\Base\Account\SendCode.cshtml" />
+    <Content Include="Allors\Base\Account\VerifyCode.cshtml" />
+    <Content Include="Allors\Base\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Allors\Base\Data\Index.cshtml" />
+    <Content Include="Allors\Base\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Allors\Base\Manage\ChangePassword.cshtml" />
+    <Content Include="Allors\Base\Manage\Index.cshtml" />
+    <Content Include="Allors\Base\Manage\ManageLogins.cshtml" />
+    <Content Include="Allors\Base\Manage\SetPassword.cshtml" />
+    <Content Include="Allors\Base\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Allors\Base\Shared\EditorTemplates\Select.cshtml" />
+    <Content Include="Allors\Base\Shared\_NavbarItemPartial.cshtml" />
+    <Content Include="Allors\Base\Shared\_NavbarPartial.cshtml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -233,16 +249,8 @@
     <Content Include="Views\Setup\Index.cshtml" />
     <Content Include="Allors\Web.config" />
     <Content Include="Allors\_ViewStart.cshtml" />
-    <Content Include="Allors\Base\Shared\_NavbarPartial.cshtml" />
-    <Content Include="Allors\Base\Data\Index.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\BooleanModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\CompositeModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Select.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\StringModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\FloatModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\DecimalModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\IntegerModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\UniqueModel.cshtml" />
+    <Content Include="Allors\Base\Shared\EditorTemplates\BootstrapForm.cshtml" />
+    <Content Include="Allors\Base\Shared\EditorTemplates\BootstrapSelect.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -269,32 +277,16 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Allors\Base\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Allors\Base\Account\ConfirmEmail.cshtml" />
-    <Content Include="Allors\Base\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Allors\Base\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Allors\Base\Account\ForgotPassword.cshtml" />
-    <Content Include="Allors\Base\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Allors\Base\Account\Login.cshtml" />
-    <Content Include="Allors\Base\Account\Register.cshtml" />
-    <Content Include="Allors\Base\Account\ResetPassword.cshtml" />
-    <Content Include="Allors\Base\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Allors\Base\Account\SendCode.cshtml" />
-    <Content Include="Allors\Base\Account\VerifyCode.cshtml" />
-    <Content Include="Allors\Base\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Allors\Base\Manage\ChangePassword.cshtml" />
-    <Content Include="Allors\Base\Manage\Index.cshtml" />
-    <Content Include="Allors\Base\Manage\ManageLogins.cshtml" />
-    <Content Include="Allors\Base\Manage\SetPassword.cshtml" />
-    <Content Include="Allors\Base\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Allors\Tests\Relation\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Allors\Base\Shared\_NavbarItemPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Allors\Base\Mvc\Models\Composite\" />
+    <Folder Include="Allors\Base\Mvc\Models\Filters\" />
+    <Folder Include="Allors\Base\Mvc\Models\Units\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
