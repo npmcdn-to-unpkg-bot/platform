@@ -29,15 +29,18 @@ namespace Allors.Databases.Object.SqlClient
     {
         private readonly DatabaseSession session;
 
+        private readonly List<Reference> references;
+
         private readonly bool unitRoleTypes;
         private readonly List<IRoleType> compositeRoleTypes;
-        private readonly List<IAssociationType> compositeAssociationTypes; 
+        private readonly List<IRoleType> compositesRoleTypes;
+        private readonly List<IAssociationType> compositeAssociationTypes;
+        private readonly List<IAssociationType> compositesAssociationTypes; 
         
-        private readonly Dictionary<IClass, List<Reference>> referencesByClass;
-
         public Prefetcher(DatabaseSession session, List<Reference> references, IPropertyType[] propertyTypes)
         {
             this.session = session;
+            this.references = references;
 
             foreach (var propertyType in propertyTypes)
             {
@@ -51,68 +54,84 @@ namespace Allors.Databases.Object.SqlClient
                     }
                     else
                     {
-                        if (this.compositeRoleTypes == null)
+                        if (roleType.IsOne)
                         {
-                            this.compositeRoleTypes = new List<IRoleType>();
-                        }
+                            if (this.compositeRoleTypes == null)
+                            {
+                                this.compositeRoleTypes = new List<IRoleType>();
+                            }
 
-                        this.compositeRoleTypes.Add(roleType);
+                            this.compositeRoleTypes.Add(roleType);
+                        }
+                        else
+                        {
+                            if (this.compositesRoleTypes == null)
+                            {
+                                this.compositesRoleTypes = new List<IRoleType>();
+                            }
+
+                            this.compositesRoleTypes.Add(roleType);
+                        }
                     }
                 }
                 else
                 {
                     var associationType = (IAssociationType)propertyType;
-                    if (this.compositeAssociationTypes == null)
+
+                    if (associationType.IsOne)
                     {
-                        this.compositeAssociationTypes = new List<IAssociationType>();
+                        if (this.compositeAssociationTypes == null)
+                        {
+                            this.compositeAssociationTypes = new List<IAssociationType>();
+                        }
+
+                        this.compositeAssociationTypes.Add(associationType);
                     }
+                    else
+                    {
+                        if (this.compositesAssociationTypes == null)
+                        {
+                            this.compositesAssociationTypes = new List<IAssociationType>();
+                        }
 
-                    this.compositeAssociationTypes.Add(associationType);
+                        this.compositesAssociationTypes.Add(associationType);
+                    }
                 }
-            }
-
-            this.referencesByClass = new Dictionary<IClass, List<Reference>>();
-            foreach (var reference in references)
-            {
-                List<Reference> refs;
-                if (!this.referencesByClass.TryGetValue(reference.Class, out refs))
-                {
-                    refs = new List<Reference>();
-                    this.referencesByClass.Add(reference.Class, refs);
-                }
-
-                refs.Add(reference);
             }
         }
 
         public void Execute()
         {
-            foreach (var dictionaryEntry in this.referencesByClass)
+            if (this.unitRoleTypes)
             {
-                var @class = dictionaryEntry.Key;
-                var references = dictionaryEntry.Value;
-
-                if (this.unitRoleTypes)
+                var referencesByClass = new Dictionary<IClass, List<Reference>>();
+                foreach (var reference in this.references)
                 {
-                    this.session.PrefetchUnitRoles(@class, references);
-                }
-
-                if (this.compositeRoleTypes != null)
-                {
-                    foreach (var roleType in this.compositeRoleTypes)
+                    List<Reference> classBasedReferences;
+                    if (!referencesByClass.TryGetValue(reference.Class, out classBasedReferences))
                     {
-                        this.session.PrefetchCompositeRoles(@class, references, roleType);
+                        classBasedReferences = new List<Reference>();
+                        referencesByClass.Add(reference.Class, classBasedReferences);
                     }
+
+                    classBasedReferences.Add(reference);
                 }
 
-                if (this.compositeAssociationTypes != null)
+                foreach (var dictionaryEntry in referencesByClass)
                 {
-                    foreach (var associationType in this.compositeAssociationTypes)
-                    {
-                        this.session.PrefetchCompositeAssociations(@class, references, associationType);
-                    }
-                }
+                    var @class = dictionaryEntry.Key;
+                    var classBasedReferences = dictionaryEntry.Value;
 
+                    this.session.PrefetchUnitRoles(@class, classBasedReferences);
+                }
+            }
+
+            if (this.compositeRoleTypes != null)
+            {
+                foreach (var roleType in this.compositeRoleTypes)
+                {
+                    this.session.PrefetchCompositeRole(this.references, roleType);
+                }
             }
         }
     }
