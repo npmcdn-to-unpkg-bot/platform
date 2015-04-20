@@ -114,7 +114,7 @@ namespace Allors.Databases.Object.SqlClient
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
 
-            var sql = this.database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
+            var sql = this.database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
 
             var command = this.CreateSqlCommand(sql);
             command.CommandType = CommandType.StoredProcedure;
@@ -142,7 +142,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
                 }
             }
             else
@@ -153,7 +153,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }
             }
 

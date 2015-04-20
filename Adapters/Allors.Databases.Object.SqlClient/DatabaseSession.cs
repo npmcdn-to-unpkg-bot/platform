@@ -779,7 +779,7 @@ namespace Allors.Databases.Object.SqlClient
             SqlCommand command;
             if (!this.getUnitRolesByClass.TryGetValue(@class, out command))
             {
-                var sql = this.Database.Mapping.ProcedureNameForGetUnitsByClass[@class];
+                var sql = this.Database.Mapping.ProcedureNameForGetUnitRolesByClass[@class];
 
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
@@ -865,7 +865,7 @@ namespace Allors.Databases.Object.SqlClient
             SqlCommand command;
             if (!this.prefetchUnitRolesByClass.TryGetValue(@class, out command))
             {
-                var sql = this.Database.Mapping.ProcedureNameForPrefetchUnitsByClass[@class];
+                var sql = this.Database.Mapping.ProcedureNameForPrefetchUnitRolesByClass[@class];
 
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
@@ -1019,7 +1019,7 @@ namespace Allors.Databases.Object.SqlClient
             SqlCommand command;
             if (!commandByRoleType.TryGetValue(roleType, out command))
             {
-                var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
+                var sql = this.Database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
 
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
@@ -1119,8 +1119,6 @@ namespace Allors.Databases.Object.SqlClient
             SqlCommand command;
             if (!this.getCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
-                IAssociationType associationType = roleType.AssociationType;
-
                 string sql;
                 if (!roleType.RelationType.ExistExclusiveClasses)
                 {
@@ -1128,7 +1126,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1156,6 +1154,7 @@ namespace Allors.Databases.Object.SqlClient
             else
             {
                 var objectId = this.Database.ObjectIds.Parse(result.ToString());
+                // TODO: Should add to objectsToLoad
                 roles.CachedObject.SetValue(roleType, objectId);
             }
         }
@@ -1187,39 +1186,39 @@ namespace Allors.Databases.Object.SqlClient
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
             }
 
-            //using (DbDataReader reader = command.ExecuteReader())
-            //{
-            //    var cache = this.Database.Cache;
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                var cache = this.Database.Cache;
 
-            //    while (reader.Read())
-            //    {
-            //        var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
-            //        var associationReference = this.referenceByObjectId[associationId];
+                while (reader.Read())
+                {
+                    var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var associationReference = this.referenceByObjectId[associationId];
 
-            //        Roles modifiedRoles = null;
-            //        if (this.modifiedRolesByReference != null)
-            //        {
-            //            this.modifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
-            //        }
+                    Roles modifiedRoles = null;
+                    if (this.modifiedRolesByReference != null)
+                    {
+                        this.modifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
+                    }
 
-            //        var cachedObject = cache.GetOrCreateCachedObject(associationReference.Class, associationId, associationReference.CacheId);
+                    var cachedObject = cache.GetOrCreateCachedObject(associationReference.Class, associationId, associationReference.CacheId);
 
-            //        var roleIdValue = reader[1];
+                    var roleIdValue = reader[1];
 
-            //        if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
-            //        {
-            //            if (roleIdValue == null || roleIdValue == DBNull.Value)
-            //            {
-            //                cachedObject.SetValue(roleType, null);
-            //            }
-            //            else
-            //            {
-            //                var objectId = this.Database.ObjectIds.Parse(roleIdValue.ToString());
-            //                cachedObject.SetValue(roleType, objectId);
-            //            }
-            //        }
-            //    }
-            //}
+                    if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                    {
+                        if (roleIdValue == null || roleIdValue == DBNull.Value)
+                        {
+                            cachedObject.SetValue(roleType, null);
+                        }
+                        else
+                        {
+                            var objectId = this.Database.ObjectIds.Parse(roleIdValue.ToString());
+                            cachedObject.SetValue(roleType, objectId);
+                        }
+                    }
+                }
+            }
         }
 
         internal void PrefetchCompositeRoleRelationTable(List<Reference> references, IRoleType roleType)
@@ -1229,9 +1228,7 @@ namespace Allors.Databases.Object.SqlClient
             SqlCommand command;
             if (!this.prefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
-                var associationType = roleType.AssociationType;
-
-                string sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                string sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
 
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
@@ -1251,39 +1248,43 @@ namespace Allors.Databases.Object.SqlClient
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
             }
 
-            //using (DbDataReader reader = command.ExecuteReader())
-            //{
-            //    var cache = this.Database.Cache;
+            var roleByAssociation = new Dictionary<Reference, ObjectId>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var associationReference = this.referenceByObjectId[associationId];
+                    var roleId = this.Database.ObjectIds.Parse(reader[1].ToString());
+                    roleByAssociation.Add(associationReference, roleId);
+                }
+            }
 
-            //    while (reader.Read())
-            //    {
-            //        var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
-            //        var associationReference = this.referenceByObjectId[associationId];
+            var cache = this.Database.Cache;
+            foreach (var reference in references)
+            {
+                Roles modifiedRoles = null;
+                if (this.modifiedRolesByReference != null)
+                {
+                    this.modifiedRolesByReference.TryGetValue(reference, out modifiedRoles);
+                }
 
-            //        Roles modifiedRoles = null;
-            //        if (this.modifiedRolesByReference != null)
-            //        {
-            //            this.modifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
-            //        }
 
-            //        var cachedObject = cache.GetOrCreateCachedObject(associationReference.Class, associationId, associationReference.CacheId);
+                if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                {
+                    var cachedObject = cache.GetOrCreateCachedObject(reference.Class, reference.ObjectId, reference.CacheId);
 
-            //        var roleIdValue = reader[1];
-
-            //        if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
-            //        {
-            //            if (roleIdValue == null || roleIdValue == DBNull.Value)
-            //            {
-            //                cachedObject.SetValue(roleType, null);
-            //            }
-            //            else
-            //            {
-            //                var objectId = this.Database.ObjectIds.Parse(roleIdValue.ToString());
-            //                cachedObject.SetValue(roleType, objectId);
-            //            }
-            //        }
-            //    }
-            //}
+                    ObjectId role;
+                    if (roleByAssociation.TryGetValue(reference, out role))
+                    {
+                        cachedObject.SetValue(roleType, role);
+                    }
+                    else
+                    {
+                        cachedObject.SetValue(roleType, null);
+                    }
+                }
+            }
         }
 
         internal void SetCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
@@ -1302,7 +1303,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1342,7 +1343,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1388,7 +1389,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1434,7 +1435,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
                 }
 
                 command = this.CreateSqlCommand(sql);
@@ -1470,11 +1471,11 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (roleType.IsOne)
                 {
-                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[roleType.AssociationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
                 }
             }
 
@@ -1517,11 +1518,11 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (roleType.IsOne)
                     {
-                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
                     }
                     else
                     {
-                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                        sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
                     }
                 }
                 else
@@ -1577,7 +1578,7 @@ namespace Allors.Databases.Object.SqlClient
             }
             else
             {
-                sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
             }
 
             SqlCommand command;
