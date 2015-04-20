@@ -497,7 +497,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal ManagementSession CreateSqlClientManagementSession()
+        private ManagementSession CreateSqlClientManagementSession()
         {
             return new ManagementSession(this);
         }

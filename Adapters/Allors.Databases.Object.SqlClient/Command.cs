@@ -22,7 +22,6 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Data;
-    using System.Data.Common;
     using System.Data.SqlClient;
 
     using Allors.Meta;
@@ -31,12 +30,17 @@ namespace Allors.Databases.Object.SqlClient
     {
         private readonly SqlCommand command;
 
-        internal Command(ICommandFactory commandFactory, string commandText)
+        internal Command(SqlCommand command)
         {
-            this.command = commandFactory.CreateSqlCommand(commandText);
+            this.command = command;
         }
 
-        internal object GetValue(DbDataReader reader, UnitTags unitTypeTag, int i)
+        public void Dispose()
+        {
+            this.command.Dispose();
+        }
+
+        internal object GetValue(SqlDataReader reader, UnitTags unitTypeTag, int i)
         {
             switch (unitTypeTag)
             {
@@ -66,9 +70,9 @@ namespace Allors.Databases.Object.SqlClient
             this.command.ExecuteNonQuery();
         }
 
-        internal DbDataReader ExecuteReader()
+        internal SqlDataReader ExecuteReader()
         {
-            return ((DbCommand)this.command).ExecuteReader();
+            return this.command.ExecuteReader();
         }
 
         internal void AddInParameter(string parameterName, object value)
@@ -87,11 +91,6 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             this.SetParameterValue(parameterName, value);
-        }
-
-        public void Dispose()
-        {
-            this.command.Dispose();
         }
 
         private void SetParameterValue(string parameterName, object value)

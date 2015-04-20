@@ -23,7 +23,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    internal class ManagementSession : ICommandFactory, IDisposable
+    internal class ManagementSession : IDisposable
     {
         private readonly Database database;
         
@@ -45,142 +45,12 @@ namespace Allors.Databases.Object.SqlClient
             this.Rollback();
         }
 
-        internal Database Database
-        {
-            get
-            {
-                return this.database;
-            }
-        }
-
-        internal Database SqlClientDatabase
-        {
-            get
-            {
-                return this.database;
-            }
-        }
-
-        internal Command CreateCommand(string commandText)
-        {
-            return new Command(this, commandText);
-        }
-
-        public SqlCommand CreateSqlCommand(string sql)
-        {
-            this.LazyConnect();
-            var command = this.connection.CreateCommand();
-            command.Transaction = this.transaction;
-            command.CommandTimeout = this.SqlClientDatabase.CommandTimeout;
-            command.CommandText = sql;
-            return command;
-        }
-
-        internal void Commit()
-        {
-            try
-            {
-                if (this.transaction != null)
-                {
-                    this.transaction.Commit();
-                }
-            }
-            finally
-            {
-                this.LazyDisconnect();
-            }
-        }
-
-        internal void Rollback()
-        {
-            try
-            {
-                if (this.transaction != null)
-                {
-                    this.transaction.Rollback();
-                }
-            }
-            finally
-            {
-                this.LazyDisconnect();
-            }
-        }
-
-        private void LazyConnect()
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SqlConnection(this.SqlClientDatabase.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction();
-            }
-        }
-
-        private void LazyDisconnect()
-        {
-            try
-            {
-                if (this.connection != null)
-                {
-                    this.connection.Close();
-                }
-            }
-            finally
-            {
-                this.connection = null;
-                this.transaction = null;
-            }
-        }
-
-        public void LoadCompositeRelations(IRoleType roleType, List<CompositeRelation> relations)
-        {
-            var associationType = roleType.AssociationType;
-
-            string sql;
-            if (roleType.IsMany)
-            {
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
-                {
-                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
-                }
-            }
-            else
-            {
-                if (!roleType.RelationType.ExistExclusiveClasses)
-                {
-                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
-                }
-            }
-
-            using (var command = this.CreateSqlCommand(sql))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = database.Mapping.TableTypeNameForCompositeRelation;
-                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = database.CreateRelationTable(relations);
-
-                command.Parameters.Add(sqlParameter);
-
-                command.ExecuteNonQuery();
-            }
-        }
-
         public void LoadObjects(IObjectType objectType, ObjectId[] objectIds)
         {
             var exclusiveRootClass = ((IComposite)objectType).ExclusiveClass;
             var schema = this.database.Mapping;
 
-            var sql = this.Database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
+            var sql = this.database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
             using (var command = this.CreateSqlCommand(sql))
             {
                 command.CommandType = CommandType.StoredProcedure;
@@ -200,7 +70,6 @@ namespace Allors.Databases.Object.SqlClient
                 command.ExecuteNonQuery();
             }
         }
-
 
         public void LoadUnitRelations(List<UnitRelation> relations, IObjectType exclusiveRootClass, IRoleType roleType)
         {
@@ -245,8 +114,8 @@ namespace Allors.Databases.Object.SqlClient
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
 
-            var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
-                
+            var sql = this.database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
+
             var command = this.CreateSqlCommand(sql);
             command.CommandType = CommandType.StoredProcedure;
             var sqlParameter = command.CreateParameter();
@@ -256,8 +125,123 @@ namespace Allors.Databases.Object.SqlClient
             sqlParameter.Value = this.database.CreateRelationTable(roleType, relations);
 
             command.Parameters.Add(sqlParameter);
-            
+
             command.ExecuteNonQuery();
+        }
+
+        public void LoadCompositeRelations(IRoleType roleType, List<CompositeRelation> relations)
+        {
+            var associationType = roleType.AssociationType;
+
+            string sql;
+            if (roleType.IsMany)
+            {
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
+                {
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                }
+            }
+            else
+            {
+                if (!roleType.RelationType.ExistExclusiveClasses)
+                {
+                    sql = this.database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                }
+            }
+
+            using (var command = this.CreateSqlCommand(sql))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = database.CreateRelationTable(relations);
+
+                command.Parameters.Add(sqlParameter);
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        internal Command CreateCommand(string commandText)
+        {
+            var command = this.CreateSqlCommand(commandText);
+            return new Command(command);
+        }
+
+        internal void Commit()
+        {
+            try
+            {
+                if (this.transaction != null)
+                {
+                    this.transaction.Commit();
+                }
+            }
+            finally
+            {
+                this.LazyDisconnect();
+            }
+        }
+
+        internal void Rollback()
+        {
+            try
+            {
+                if (this.transaction != null)
+                {
+                    this.transaction.Rollback();
+                }
+            }
+            finally
+            {
+                this.LazyDisconnect();
+            }
+        }
+
+        private SqlCommand CreateSqlCommand(string sql)
+        {
+            this.LazyConnect();
+            var command = this.connection.CreateCommand();
+            command.Transaction = this.transaction;
+            command.CommandTimeout = this.database.CommandTimeout;
+            command.CommandText = sql;
+            return command;
+        }
+
+        private void LazyConnect()
+        {
+            if (this.connection == null)
+            {
+                this.connection = new SqlConnection(this.database.ConnectionString);
+                this.connection.Open();
+                this.transaction = this.connection.BeginTransaction();
+            }
+        }
+
+        private void LazyDisconnect()
+        {
+            try
+            {
+                if (this.connection != null)
+                {
+                    this.connection.Close();
+                }
+            }
+            finally
+            {
+                this.connection = null;
+                this.transaction = null;
+            }
         }
     }
 }

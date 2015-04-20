@@ -58,15 +58,7 @@ namespace Allors.Databases.Object.SqlClient
                 return this.cachedObject;
             }
         }
-        
-        internal Dictionary<IRoleType, object> OriginalRoleByRoleType
-        {
-            get
-            {
-                return this.originalRoleByRoleType ?? (this.originalRoleByRoleType = new Dictionary<IRoleType, object>());
-            }
-        }
-        
+
         internal Dictionary<IRoleType, object> ModifiedRoleByRoleType
         {
             get
@@ -75,19 +67,27 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal Dictionary<IRoleType, CompositeRoles> ModifiedRolesByRoleType
+        private Dictionary<IRoleType, object> OriginalRoleByRoleType
         {
             get
             {
-                return this.modifiedRolesByRoleType ?? (this.modifiedRolesByRoleType = new Dictionary<IRoleType, CompositeRoles>());
+                return this.originalRoleByRoleType ?? (this.originalRoleByRoleType = new Dictionary<IRoleType, object>());
             }
         }
 
-        internal HashSet<IRoleType> RequireFlushRoles
+        private HashSet<IRoleType> RequireFlushRoles
         {
             get
             {
                 return this.requireFlushRoles ?? (this.requireFlushRoles = new HashSet<IRoleType>());
+            }
+        }
+
+        private Dictionary<IRoleType, CompositeRoles> ModifiedRolesByRoleType
+        {
+            get
+            {
+                return this.modifiedRolesByRoleType ?? (this.modifiedRolesByRoleType = new Dictionary<IRoleType, CompositeRoles>());
             }
         }
 
@@ -314,16 +314,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal void AddRequiresFlushIRoleType(IRoleType roleType)
-        {
-            if (this.requireFlushRoles == null)
-            {
-                this.requireFlushRoles = new HashSet<IRoleType>();
-            }
-
-            this.requireFlushRoles.Add(roleType);
-        }
-
         internal void Flush(Flush flush)
         {
             IRoleType unitRole = null;
@@ -444,6 +434,16 @@ namespace Allors.Databases.Object.SqlClient
             return Array.IndexOf(this.GetNonModifiedCompositeRoles(roleType), objectId) >= 0;
         }
 
+        private void AddRequiresFlushIRoleType(IRoleType roleType)
+        {
+            if (this.requireFlushRoles == null)
+            {
+                this.requireFlushRoles = new HashSet<IRoleType>();
+            }
+
+            this.requireFlushRoles.Add(roleType);
+        }
+
         private ObjectId[] GetNonModifiedCompositeRoles(IRoleType roleType)
         {
             if (!this.Reference.IsNew)
@@ -468,6 +468,181 @@ namespace Allors.Databases.Object.SqlClient
             if (!this.OriginalRoleByRoleType.ContainsKey(roleType))
             {
                 this.OriginalRoleByRoleType[roleType] = role;
+            }
+        }
+
+        private class CompositeRoles
+        {
+            private readonly HashSet<ObjectId> baseline;
+            private HashSet<ObjectId> original;
+            private HashSet<ObjectId> added;
+            private HashSet<ObjectId> removed;
+
+            internal CompositeRoles(IEnumerable<ObjectId> compositeRoles)
+            {
+                this.baseline = new HashSet<ObjectId>(compositeRoles);
+            }
+
+            internal HashSet<ObjectId> ObjectIds
+            {
+                get
+                {
+                    if ((this.removed == null || this.removed.Count == 0) && (this.added == null || this.added.Count == 0))
+                    {
+                        return this.baseline;
+                    }
+
+                    var merged = new HashSet<ObjectId>(this.baseline);
+                    if (this.removed != null && this.removed.Count > 0)
+                    {
+                        merged.ExceptWith(this.removed);
+                    }
+
+                    if (this.added != null && this.added.Count > 0)
+                    {
+                        merged.UnionWith(this.added);
+                    }
+
+                    return merged;
+                }
+            }
+
+            internal int Count
+            {
+                get
+                {
+                    var addedCount = this.added == null ? 0 : this.added.Count;
+                    var removedCount = this.removed == null ? 0 : this.removed.Count;
+
+                    return this.baseline.Count + addedCount - removedCount;
+                }
+            }
+
+            internal ObjectId First
+            {
+                get
+                {
+                    if (this.removed == null || this.removed.Count == 0)
+                    {
+                        if (this.baseline.Count > 0)
+                        {
+                            return this.GetFirst(this.baseline);
+                        }
+
+                        if (this.added != null && this.added.Count > 0)
+                        {
+                            return this.GetFirst(this.added);
+                        }
+
+                        return null;
+                    }
+
+                    var roles = this.ObjectIds;
+                    if (roles.Count > 0)
+                    {
+                        return this.GetFirst(roles);
+                    }
+
+                    return null;
+                }
+            }
+
+            internal bool Contains(ObjectId objectId)
+            {
+                if (this.removed != null && this.removed.Contains(objectId))
+                {
+                    return false;
+                }
+
+                return this.baseline.Contains(objectId) || (this.added != null && this.added.Contains(objectId));
+            }
+
+            internal void Add(ObjectId objectId)
+            {
+                if (this.original == null)
+                {
+                    this.original = new HashSet<ObjectId>(this.baseline);
+                }
+
+                if (this.removed != null && this.removed.Contains(objectId))
+                {
+                    this.removed.Remove(objectId);
+                    return;
+                }
+
+                if (!this.baseline.Contains(objectId))
+                {
+                    if (this.added == null)
+                    {
+                        this.added = new HashSet<ObjectId>();
+                    }
+
+                    this.added.Add(objectId);
+                }
+            }
+
+            internal void Remove(ObjectId objectId)
+            {
+                if (this.original == null)
+                {
+                    this.original = new HashSet<ObjectId>(this.baseline);
+                }
+
+                if (this.added != null && this.added.Contains(objectId))
+                {
+                    this.added.Remove(objectId);
+                    return;
+                }
+
+                if (this.baseline.Contains(objectId))
+                {
+                    if (this.removed == null)
+                    {
+                        this.removed = new HashSet<ObjectId>();
+                    }
+
+                    this.removed.Add(objectId);
+                }
+            }
+
+            internal void Flush(Flush flush, Roles roles, IRoleType roleType)
+            {
+                if (this.Count == 0)
+                {
+                    flush.ClearCompositeAndCompositesRole(roles.Reference, roleType);
+                }
+                else
+                {
+                    if (this.added != null && this.added.Count > 0)
+                    {
+                        flush.AddCompositeRole(roles.Reference, roleType, this.added);
+                    }
+
+                    if (this.removed != null && this.removed.Count > 0)
+                    {
+                        flush.RemoveCompositeRole(roles.Reference, roleType, this.removed);
+                    }
+                }
+
+                if (this.added != null)
+                {
+                    this.baseline.UnionWith(this.added);
+                }
+
+                if (this.removed != null)
+                {
+                    this.baseline.ExceptWith(this.removed);
+                }
+
+                this.added = null;
+                this.removed = null;
+            }
+
+            private ObjectId GetFirst(HashSet<ObjectId> hashSet)
+            {
+                var enumerator = hashSet.GetEnumerator();
+                enumerator.MoveNext();
+                return enumerator.Current;
             }
         }
     }

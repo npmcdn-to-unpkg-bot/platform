@@ -33,7 +33,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient.Caching;
     using Allors.Meta;
 
-    internal sealed class DatabaseSession : IDatabaseSession, ICommandFactory
+    internal sealed class DatabaseSession : IDatabaseSession
     {
         private readonly Database database;
 
@@ -725,7 +725,8 @@ namespace Allors.Databases.Object.SqlClient
         
         internal Command CreateCommand(string commandText)
         {
-            return new Command(this, commandText);
+            var command = this.CreateSqlCommand(commandText);
+            return new Command(command);
         }
 
         #region Sql Commands
