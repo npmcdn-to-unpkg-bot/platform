@@ -95,14 +95,6 @@ namespace Allors.Workspaces.Memory
             this.synced = false;
         }
 
-        public event SessionCommittingEventHandler Committing;
-
-        public event SessionCommittedEventHandler Committed;
-
-        public event SessionRollingBackEventHandler RollingBack;
-
-        public event SessionRolledBackEventHandler RolledBack;
-
         public IWorkspace Workspace
         {
             get { return this.MemoryWorkspace; }
@@ -673,13 +665,6 @@ namespace Allors.Workspaces.Memory
                 try
                 {
                     this.busyCommittingOrRollingBack = true;
-                    if (this.Committing != null)
-                    {
-                        // Errors thrown in Committing event handlers 
-                        // should cause the commit to fail. The current
-                        // session is not affected.
-                        this.Committing(this, new SessionCommittingEventArgs(this));
-                    }
 
                     foreach (var strategy in new List<Strategy>(this.strategyByObjectId.Values))
                     {
@@ -773,11 +758,6 @@ namespace Allors.Workspaces.Memory
                     }
 
                     this.changeSet = new ChangeSet();
-
-                    if (this.Committed != null)
-                    {
-                        this.Committed(this, new SessionCommittedEventArgs(this));
-                    }
                 }
                 finally
                 {
@@ -808,10 +788,6 @@ namespace Allors.Workspaces.Memory
                 try
                 {
                     this.busyCommittingOrRollingBack = true;
-                    if (this.RollingBack != null)
-                    {
-                        this.RollingBack(this, new SessionRollingBackEventArgs(this));
-                    }
 
                     foreach (var strategy in new List<Strategy>(this.strategyByObjectId.Values))
                     {
@@ -935,11 +911,6 @@ namespace Allors.Workspaces.Memory
                     }
 
                     this.changeSet = new ChangeSet();
-
-                    if (this.RolledBack != null)
-                    {
-                        this.RolledBack(this, new SessionRolledBackEventArgs(this));
-                    }
                 }
                 finally
                 {

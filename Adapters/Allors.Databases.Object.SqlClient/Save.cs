@@ -117,7 +117,7 @@ namespace Allors.Databases.Object.SqlClient
 
         protected void SaveRelations(ManagementSession session)
         {
-            var exclusiverRootClassesByIObjectType = new Dictionary<IObjectType, HashSet<IObjectType>>();
+            var exclusiverRootClassesByObjectType = new Dictionary<IObjectType, HashSet<IObjectType>>();
 
             var relations = new List<IRelationType>(this.database.MetaPopulation.RelationTypes);
             relations.Sort(MetaObjectComparer.ById);
@@ -134,7 +134,7 @@ namespace Allors.Databases.Object.SqlClient
                     if (roleType.ObjectType.IsUnit)
                     {
                         HashSet<IObjectType> exclusiveRootClasses;
-                        if (!exclusiverRootClassesByIObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
+                        if (!exclusiverRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
                         {
                             exclusiveRootClasses = new HashSet<IObjectType>();
                             foreach (var concreteClass in associationType.ObjectType.Classes)
@@ -142,7 +142,7 @@ namespace Allors.Databases.Object.SqlClient
                                 exclusiveRootClasses.Add(concreteClass.ExclusiveClass);
                             }
 
-                            exclusiverRootClassesByIObjectType[associationType.ObjectType] = exclusiveRootClasses;
+                            exclusiverRootClassesByObjectType[associationType.ObjectType] = exclusiveRootClasses;
                         }
 
                         var first = true;

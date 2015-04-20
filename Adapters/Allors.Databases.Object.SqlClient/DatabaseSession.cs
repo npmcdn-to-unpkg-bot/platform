@@ -32,7 +32,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    internal class DatabaseSession : IDatabaseSession, ICommandFactory
+    internal sealed class DatabaseSession : IDatabaseSession, ICommandFactory
     {
         private readonly Database database;
 
@@ -68,7 +68,7 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<IClass, SqlCommand> getUnitRolesByClass;
         private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> setCompositeRoleByRoleType;
-        private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> setUnitRoleByIRoleTypeByIObjectType;
+        private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> setUnitRoleByRoleTypeByObjectType;
         private Dictionary<IClass, SqlCommand> deleteObjectByClass;
         private SqlCommand getObjectType;
         private Dictionary<IClass, SqlCommand> insertObjectByClass;
@@ -88,14 +88,6 @@ namespace Allors.Databases.Object.SqlClient
 
             this.changeSet = new ChangeSet();
         }
-
-        internal event SessionCommittingEventHandler Committing;
-
-        internal event SessionCommittedEventHandler Committed;
-        
-        internal event SessionRollingBackEventHandler RollingBack;
-        
-        internal event SessionRolledBackEventHandler RolledBack;
 
         IDatabase IDatabaseSession.Database
         {
@@ -155,7 +147,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual IObject Create(IClass objectType)
+        public IObject Create(IClass objectType)
         {
             if (!objectType.IsClass)
             {
@@ -172,7 +164,7 @@ namespace Allors.Databases.Object.SqlClient
             return strategyReference.Strategy.GetObject();
         }
 
-        public virtual IObject[] Create(IClass objectType, int count)
+        public IObject[] Create(IClass objectType, int count)
         {
             if (!objectType.IsClass)
             {
@@ -197,7 +189,7 @@ namespace Allors.Databases.Object.SqlClient
             return domainObjects;
         }
 
-        public virtual IObject Insert(IClass domainType, string objectIdString)
+        public IObject Insert(IClass domainType, string objectIdString)
         {
             var objectId = this.Database.ObjectIds.Parse(objectIdString);
             var insertedObject = this.Insert(domainType, objectId);
@@ -207,7 +199,7 @@ namespace Allors.Databases.Object.SqlClient
             return insertedObject;
         }
 
-        public virtual IObject Insert(IClass domainType, ObjectId objectId)
+        public IObject Insert(IClass domainType, ObjectId objectId)
         {
             if (this.referenceByObjectId.ContainsKey(objectId))
             {
@@ -227,18 +219,18 @@ namespace Allors.Databases.Object.SqlClient
             return insertedObject;
         }
 
-        public virtual IObject Instantiate(IObject obj)
+        public IObject Instantiate(IObject obj)
         {
             return this.Instantiate(obj.Strategy.ObjectId);
         }
 
-        public virtual IObject Instantiate(string objectId)
+        public IObject Instantiate(string objectId)
         {
             var id = this.Database.ObjectIds.Parse(objectId);
             return this.Instantiate(id);
         }
 
-        public virtual IObject Instantiate(ObjectId objectId)
+        public IObject Instantiate(ObjectId objectId)
         {
             var strategyReference = this.InstantiateSqlStrategy(objectId);
             if (strategyReference == null)
@@ -249,7 +241,7 @@ namespace Allors.Databases.Object.SqlClient
             return strategyReference.Strategy.GetObject();
         }
 
-        public virtual IStrategy InstantiateStrategy(ObjectId objectId)
+        public IStrategy InstantiateStrategy(ObjectId objectId)
         {
             var strategyReference = this.InstantiateSqlStrategy(objectId);
             if (strategyReference == null)
@@ -260,7 +252,7 @@ namespace Allors.Databases.Object.SqlClient
             return strategyReference.Strategy;
         }
 
-        public virtual IObject[] Instantiate(string[] objectIdStrings)
+        public IObject[] Instantiate(string[] objectIdStrings)
         {
             var objectIds = new ObjectId[objectIdStrings.Length];
             for (var i = 0; i < objectIdStrings.Length; i++)
@@ -271,7 +263,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Instantiate(objectIds);
         }
 
-        public virtual IObject[] Instantiate(IObject[] objects)
+        public IObject[] Instantiate(IObject[] objects)
         {
             var objectIds = new ObjectId[objects.Length];
             for (var i = 0; i < objects.Length; i++)
@@ -282,7 +274,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Instantiate(objectIds);
         }
 
-        public virtual IObject[] Instantiate(ObjectId[] objectIds)
+        public IObject[] Instantiate(ObjectId[] objectIds)
         {
             var references = new List<Reference>(objectIds.Length);
 
@@ -383,44 +375,38 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual Extent<T> Extent<T>() where T : IObject
+        public Extent<T> Extent<T>() where T : IObject
         {
             return this.Extent((IComposite)this.Database.ObjectFactory.GetObjectTypeForType(typeof(T)));
         }
 
-        public virtual Allors.Extent Extent(IComposite type)
+        public Allors.Extent Extent(IComposite type)
         {
             return new ExtentFiltered(this, type);
         }
 
-        public virtual Allors.Extent Union(Allors.Extent firstOperand, Allors.Extent secondOperand)
+        public Allors.Extent Union(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             return new ExtentOperation(((Extent)firstOperand).ContainedInExtent, ((Extent)secondOperand).ContainedInExtent, ExtentOperations.Union);
         }
 
-        public virtual Allors.Extent Intersect(Allors.Extent firstOperand, Allors.Extent secondOperand)
+        public Allors.Extent Intersect(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             return new ExtentOperation(((Extent)firstOperand).ContainedInExtent, ((Extent)secondOperand).ContainedInExtent, ExtentOperations.Intersect);
         }
 
-        public virtual Allors.Extent Except(Allors.Extent firstOperand, Allors.Extent secondOperand)
+        public Allors.Extent Except(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             return new ExtentOperation(((Extent)firstOperand).ContainedInExtent, ((Extent)secondOperand).ContainedInExtent, ExtentOperations.Except);
         }
 
-        public virtual void Commit()
+        public void Commit()
         {
             if (!this.busyCommittingOrRollingBack)
             {
                 try
                 {
                     this.busyCommittingOrRollingBack = true;
-                    if (this.Committing != null)
-                    {
-                        // Errors thrown in Committing event handlers 
-                        // should have no effect on the current state of the Session.
-                        this.Committing(this, new SessionCommittingEventArgs(this));
-                    }
 
                     var accessed = new List<ObjectId>(this.referenceByObjectId.Keys);
                     var changed = ObjectId.EmptyObjectIds;
@@ -467,25 +453,16 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     this.busyCommittingOrRollingBack = false;
                 }
-
-                if (this.Committed != null)
-                {
-                    this.Committed(this, new SessionCommittedEventArgs(this));
-                }
             }
         }
 
-        public virtual void Rollback()
+        public void Rollback()
         {
             if (!this.busyCommittingOrRollingBack)
             {
                 try
                 {
                     this.busyCommittingOrRollingBack = true;
-                    if (this.RollingBack != null)
-                    {
-                        this.RollingBack(this, new SessionRollingBackEventArgs(this));
-                    }
 
                     var accessed = new List<ObjectId>(this.referenceByObjectId.Keys);
 
@@ -522,26 +499,21 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     this.busyCommittingOrRollingBack = false;
                 }
-
-                if (this.RolledBack != null)
-                {
-                    this.RolledBack(this, new SessionRolledBackEventArgs(this));
-                }
             }
         }
 
-        public virtual void Dispose()
+        public void Dispose()
         {
             this.Rollback();
         }
 
-        public virtual T Create<T>() where T : IObject
+        public T Create<T>() where T : IObject
         {
             var objectType = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(typeof(T));
             return (T)this.Create(objectType);
         }
 
-        public virtual SqlCommand CreateSqlCommand(string commandText)
+        public SqlCommand CreateSqlCommand(string commandText)
         {
             var command = this.CreateSqlCommand();
             command.CommandText = commandText;
@@ -553,7 +525,7 @@ namespace Allors.Databases.Object.SqlClient
             return "Session[id=" + this.GetHashCode() + "] " + this.Population;
         }
 
-        internal virtual Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
+        internal Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
 
@@ -574,7 +546,7 @@ namespace Allors.Databases.Object.SqlClient
             associationByRole[roleStrategy.Reference] = previousAssociation;
         }
 
-        internal virtual ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
+        internal ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -617,12 +589,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal virtual Reference[] GetOrCreateAssociationsForExistingObjects(IEnumerable<ObjectId> objectIds)
+        internal Reference[] GetOrCreateAssociationsForExistingObjects(IEnumerable<ObjectId> objectIds)
         {
             return objectIds.Select(this.GetOrCreateAssociationForExistingObject).ToArray();
         }
 
-        internal virtual Reference GetOrCreateAssociationForExistingObject(ObjectId objectId)
+        internal Reference GetOrCreateAssociationForExistingObject(ObjectId objectId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -642,39 +614,7 @@ namespace Allors.Databases.Object.SqlClient
             return association;
         }
 
-        internal virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
-        {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
-            {
-                association = this.CreateReference(objectType, objectId, false);
-                this.referenceByObjectId[objectId] = association;
-                this.referencesWithoutCacheId.Add(association);
-            }
-
-            return association;
-        }
-
-        internal virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
-        {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
-            {
-                association = this.CreateReference(objectType, objectId, cacheId);
-                this.referenceByObjectId[objectId] = association;
-            }
-
-            return association;
-        }
-
-        internal virtual Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
-        {
-            var strategyReference = this.CreateReference(objectType, objectId, true);
-            this.referenceByObjectId[objectId] = strategyReference;
-            return strategyReference;
-        }
-
-        internal virtual Roles GetOrCreateRoles(Reference reference)
+        internal Roles GetOrCreateRoles(Reference reference)
         {
             if (this.modifiedRolesByReference != null)
             {
@@ -688,7 +628,7 @@ namespace Allors.Databases.Object.SqlClient
             return new Roles(reference);
         }
 
-        internal virtual void Flush()
+        internal void Flush()
         {
             if (this.unflushedRolesByReference != null)
             {
@@ -700,27 +640,12 @@ namespace Allors.Databases.Object.SqlClient
             this.triggersFlushRolesByIAssociationType = null;
         }
 
-        internal virtual void FlushConditionally(Strategy strategy, IAssociationType associationType)
-        {
-            if (this.triggersFlushRolesByIAssociationType != null)
-            {
-                HashSet<ObjectId> roles;
-                if (this.triggersFlushRolesByIAssociationType.TryGetValue(associationType, out roles))
-                {
-                    if (roles.Contains(strategy.ObjectId))
-                    {
-                        this.Flush();
-                    }
-                }
-            }
-        }
-
         internal void AddReferenceWithoutCacheId(Reference reference)
         {
             this.referencesWithoutCacheId.Add(reference);
         }
 
-        protected internal virtual void GetCacheIdsAndExists()
+        internal void GetCacheIdsAndExists()
         {
             var cacheIdByObjectId = this.GetCacheIds(this.referencesWithoutCacheId);
             foreach (var association in this.referencesWithoutCacheId)
@@ -740,7 +665,7 @@ namespace Allors.Databases.Object.SqlClient
             this.referencesWithoutCacheId = new HashSet<Reference>();
         }
 
-        protected internal virtual void RequireFlush(Reference association, Roles roles)
+        internal void RequireFlush(Reference association, Roles roles)
         {
             if (this.unflushedRolesByReference == null)
             {
@@ -757,7 +682,7 @@ namespace Allors.Databases.Object.SqlClient
             this.modifiedRolesByReference[association] = roles;
         }
 
-        protected internal virtual void TriggerFlush(ObjectId role, IAssociationType associationType)
+        internal void TriggerFlush(ObjectId role, IAssociationType associationType)
         {
             if (this.triggersFlushRolesByIAssociationType == null)
             {
@@ -772,85 +697,6 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             associations.Add(role);
-        }
-
-        protected virtual void UpdateCacheIds()
-        {
-            this.UpdateCacheIds(this.modifiedRolesByReference);
-        }
-
-        protected virtual Reference CreateReference(IClass objectType, ObjectId objectId, bool isNew)
-        {
-            return new Reference(this, objectType, objectId, isNew);
-        }
-
-        protected virtual Reference CreateReference(IClass objectType, ObjectId objectId, int cacheId)
-        {
-            return new Reference(this, objectType, objectId, cacheId);
-        }
-
-        private Reference InstantiateSqlStrategy(ObjectId objectId)
-        {
-            if (objectId == null)
-            {
-                return null;
-            }
-
-            Reference strategyReference;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out strategyReference))
-            {
-                strategyReference = this.InstantiateObject(objectId);
-                if (strategyReference != null)
-                {
-                    this.referenceByObjectId[objectId] = strategyReference;
-                }
-            }
-
-            if (strategyReference == null || !strategyReference.Exists)
-            {
-                return null;
-            }
-
-            return strategyReference;
-        }
-
-        private Dictionary<Reference, Reference> GetAssociationByRole(IAssociationType associationType)
-        {
-            Dictionary<Reference, Reference> associationByRole;
-            if (!this.associationByRoleByIAssociationType.TryGetValue(associationType, out associationByRole))
-            {
-                associationByRole = new Dictionary<Reference, Reference>();
-                this.associationByRoleByIAssociationType[associationType] = associationByRole;
-            }
-
-            return associationByRole;
-        }
-
-        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
-        {
-            Dictionary<Reference, ObjectId[]> associationsByRole;
-            if (!this.associationsByRoleByIAssociationType.TryGetValue(associationType, out associationsByRole))
-            {
-                associationsByRole = new Dictionary<Reference, ObjectId[]>();
-                this.associationsByRoleByIAssociationType[associationType] = associationsByRole;
-            }
-
-            return associationsByRole;
-        }
-
-        internal virtual SqlCommand CreateSqlCommand()
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SqlConnection(this.Database.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
-            }
-
-            var command = this.connection.CreateCommand();
-            command.Transaction = this.transaction;
-            command.CommandTimeout = this.Database.CommandTimeout;
-            return command;
         }
         
         internal Command CreateCommand(string commandText)
@@ -1078,7 +924,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (reader.Read())
                 {
-                    var sortedUnitRoles = this.Database.GetSortedUnitRolesByIObjectType(reference.Class);
+                    var sortedUnitRoles = this.Database.GetSortedUnitRolesByObjectType(reference.Class);
 
                     for (var i = 0; i < sortedUnitRoles.Length; i++)
                     {
@@ -1214,15 +1060,15 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void SetUnitRole(List<UnitRelation> relations, IClass exclusiveRootClass, IRoleType roleType)
         {
-            this.setUnitRoleByIRoleTypeByIObjectType = this.setUnitRoleByIRoleTypeByIObjectType ?? new Dictionary<IClass, Dictionary<IRoleType, SqlCommand>>();
+            this.setUnitRoleByRoleTypeByObjectType = this.setUnitRoleByRoleTypeByObjectType ?? new Dictionary<IClass, Dictionary<IRoleType, SqlCommand>>();
 
             var schema = this.Database.Mapping;
 
-            Dictionary<IRoleType, SqlCommand> commandByIRoleType;
-            if (!this.setUnitRoleByIRoleTypeByIObjectType.TryGetValue(exclusiveRootClass, out commandByIRoleType))
+            Dictionary<IRoleType, SqlCommand> commandByRoleType;
+            if (!this.setUnitRoleByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByRoleType))
             {
-                commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
-                this.setUnitRoleByIRoleTypeByIObjectType.Add(exclusiveRootClass, commandByIRoleType);
+                commandByRoleType = new Dictionary<IRoleType, SqlCommand>();
+                this.setUnitRoleByRoleTypeByObjectType.Add(exclusiveRootClass, commandByRoleType);
             }
 
             string tableTypeName;
@@ -1267,7 +1113,7 @@ namespace Allors.Databases.Object.SqlClient
             }
             
             SqlCommand command;
-            if (!commandByIRoleType.TryGetValue(roleType, out command))
+            if (!commandByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
 
@@ -1330,7 +1176,7 @@ namespace Allors.Databases.Object.SqlClient
                     var column = this.Database.Mapping.ColumnNameByRelationType[roleType.RelationType];
                     sql.Append(column + "=" + this.Database.Mapping.ParamNameByRoleType[roleType]);
 
-                    var unit = roles.ModifiedRoleByIRoleType[roleType];
+                    var unit = roles.ModifiedRoleByRoleType[roleType];
                     var sqlParameter1 = command.CreateParameter();
                     sqlParameter1.ParameterName = this.Database.Mapping.ParamNameByRoleType[roleType];
                     sqlParameter1.SqlDbType = this.Database.Mapping.GetSqlDbType(roleType);
@@ -1352,9 +1198,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 foreach (var roleType in sortedRoleTypes)
                 {
-                    var column = this.Database.Mapping.ColumnNameByRelationType[roleType.RelationType];
-
-                    var unit = roles.ModifiedRoleByIRoleType[roleType];
+                    var unit = roles.ModifiedRoleByRoleType[roleType];
                     command.Parameters[this.Database.Mapping.ParamNameByRoleType[roleType]].Value = unit ?? DBNull.Value;
                 }
 
@@ -1400,6 +1244,132 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             command.ExecuteNonQuery();
+        }
+
+        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
+        {
+            Reference association;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            {
+                association = this.CreateReference(objectType, objectId, false);
+                this.referenceByObjectId[objectId] = association;
+                this.referencesWithoutCacheId.Add(association);
+            }
+
+            return association;
+        }
+
+        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
+        {
+            Reference association;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            {
+                association = this.CreateReference(objectType, objectId, cacheId);
+                this.referenceByObjectId[objectId] = association;
+            }
+
+            return association;
+        }
+
+        private Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
+        {
+            var strategyReference = this.CreateReference(objectType, objectId, true);
+            this.referenceByObjectId[objectId] = strategyReference;
+            return strategyReference;
+        }
+
+        private void UpdateCacheIds()
+        {
+            this.UpdateCacheIds(this.modifiedRolesByReference);
+        }
+
+        private Reference CreateReference(IClass objectType, ObjectId objectId, bool isNew)
+        {
+            return new Reference(this, objectType, objectId, isNew);
+        }
+
+        private Reference CreateReference(IClass objectType, ObjectId objectId, int cacheId)
+        {
+            return new Reference(this, objectType, objectId, cacheId);
+        }
+
+        private void FlushConditionally(Strategy strategy, IAssociationType associationType)
+        {
+            if (this.triggersFlushRolesByIAssociationType != null)
+            {
+                HashSet<ObjectId> roles;
+                if (this.triggersFlushRolesByIAssociationType.TryGetValue(associationType, out roles))
+                {
+                    if (roles.Contains(strategy.ObjectId))
+                    {
+                        this.Flush();
+                    }
+                }
+            }
+        }
+
+        private Reference InstantiateSqlStrategy(ObjectId objectId)
+        {
+            if (objectId == null)
+            {
+                return null;
+            }
+
+            Reference strategyReference;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out strategyReference))
+            {
+                strategyReference = this.InstantiateObject(objectId);
+                if (strategyReference != null)
+                {
+                    this.referenceByObjectId[objectId] = strategyReference;
+                }
+            }
+
+            if (strategyReference == null || !strategyReference.Exists)
+            {
+                return null;
+            }
+
+            return strategyReference;
+        }
+
+        private Dictionary<Reference, Reference> GetAssociationByRole(IAssociationType associationType)
+        {
+            Dictionary<Reference, Reference> associationByRole;
+            if (!this.associationByRoleByIAssociationType.TryGetValue(associationType, out associationByRole))
+            {
+                associationByRole = new Dictionary<Reference, Reference>();
+                this.associationByRoleByIAssociationType[associationType] = associationByRole;
+            }
+
+            return associationByRole;
+        }
+
+        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
+        {
+            Dictionary<Reference, ObjectId[]> associationsByRole;
+            if (!this.associationsByRoleByIAssociationType.TryGetValue(associationType, out associationsByRole))
+            {
+                associationsByRole = new Dictionary<Reference, ObjectId[]>();
+                this.associationsByRoleByIAssociationType[associationType] = associationsByRole;
+            }
+
+            return associationsByRole;
+        }
+
+        private SqlCommand CreateSqlCommand()
+        {
+            if (this.connection == null)
+            {
+                this.connection = new SqlConnection(this.Database.ConnectionString);
+                this.connection.Open();
+                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
+            }
+
+            var command = this.connection.CreateCommand();
+            command.Transaction = this.transaction;
+            command.CommandTimeout = this.Database.CommandTimeout;
+            return command;
         }
 
         private Reference CreateObject(IClass @class)
@@ -1866,7 +1836,7 @@ namespace Allors.Databases.Object.SqlClient
             this.getUnitRolesByClass = null;
             this.removeCompositeRoleByRoleType = null;
             this.setCompositeRoleByRoleType = null;
-            this.setUnitRoleByIRoleTypeByIObjectType = null;
+            this.setUnitRoleByRoleTypeByObjectType = null;
             this.updateCacheIds = null;
             this.deleteObjectByClass = null;
             this.getObjectType = null;

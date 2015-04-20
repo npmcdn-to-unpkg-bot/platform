@@ -39,7 +39,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly IObjectFactory objectFactory;
 
-        private readonly Dictionary<IObjectType, object> concreteClassesByIObjectType;
+        private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
 
         private readonly string id;
 
@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly IsolationLevel isolationLevel;
 
-        private readonly Dictionary<IObjectType, IRoleType[]> sortedUnitRolesByIObjectType;
+        private readonly Dictionary<IObjectType, IRoleType[]> sortedUnitRolesByObjectType;
 
         private readonly ICache cache;
 
@@ -73,14 +73,14 @@ namespace Allors.Databases.Object.SqlClient
                 throw new ArgumentException("Domain is invalid");
             }
 
-            this.concreteClassesByIObjectType = new Dictionary<IObjectType, object>();
+            this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
 
             this.workspaceFactory = configuration.WorkspaceFactory;
             this.connectionString = configuration.ConnectionString;
             this.commandTimeout = configuration.CommandTimeout;
             this.isolationLevel = configuration.IsolationLevel;
 
-            this.sortedUnitRolesByIObjectType = new Dictionary<IObjectType, IRoleType[]>();
+            this.sortedUnitRolesByObjectType = new Dictionary<IObjectType, IRoleType[]>();
 
             this.cache = configuration.CacheFactory.CreateCache(this);
 
@@ -399,17 +399,17 @@ namespace Allors.Databases.Object.SqlClient
         internal bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
         {
             object concreteClassOrClasses;
-            if (!this.concreteClassesByIObjectType.TryGetValue(objectType, out concreteClassOrClasses))
+            if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
             {
                 if (objectType.IsClass)
                 {
                     concreteClassOrClasses = objectType;
-                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
+                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
                 else
                 {
                     concreteClassOrClasses = new HashSet<IObjectType>(((IInterface)objectType).Subclasses);
-                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
+                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
             }
 
@@ -447,16 +447,16 @@ namespace Allors.Databases.Object.SqlClient
             return this.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        internal IRoleType[] GetSortedUnitRolesByIObjectType(IObjectType objectType)
+        internal IRoleType[] GetSortedUnitRolesByObjectType(IObjectType objectType)
         {
             IRoleType[] sortedUnitRoles;
-            if (!this.sortedUnitRolesByIObjectType.TryGetValue(objectType, out sortedUnitRoles))
+            if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
                 var sortedUnitRoleList =
                     new List<IRoleType>(((IComposite)objectType).RoleTypes.Where(r => r.ObjectType.IsUnit));
                 sortedUnitRoleList.Sort(MetaObjectComparer.ById);
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
-                this.sortedUnitRolesByIObjectType[objectType] = sortedUnitRoles;
+                this.sortedUnitRolesByObjectType[objectType] = sortedUnitRoles;
             }
 
             return sortedUnitRoles;

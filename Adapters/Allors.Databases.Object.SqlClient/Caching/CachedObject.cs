@@ -28,12 +28,12 @@ namespace Allors.Databases.Object.SqlClient.Caching
     {
         private readonly int localCacheVersion;
 
-        private readonly Dictionary<IRoleType, object> roleByIRoleType;
+        private readonly Dictionary<IRoleType, object> roleByRoleType;
 
         internal CachedObject(int localCacheVersion)
         {
             this.localCacheVersion = localCacheVersion;
-            this.roleByIRoleType = new Dictionary<IRoleType, object>();
+            this.roleByRoleType = new Dictionary<IRoleType, object>();
         }
 
         public int LocalCacheVersion
@@ -46,12 +46,12 @@ namespace Allors.Databases.Object.SqlClient.Caching
 
         public bool TryGetValue(IRoleType roleType, out object value)
         {
-            return this.roleByIRoleType.TryGetValue(roleType, out value);
+            return this.roleByRoleType.TryGetValue(roleType, out value);
         }
 
         public void SetValue(IRoleType roleType, object value)
         {
-            this.roleByIRoleType[roleType] = value;
+            this.roleByRoleType[roleType] = value;
         }
     }
 }

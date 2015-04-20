@@ -381,7 +381,7 @@ AS
             {
                 var className = @class.Name.ToLowerInvariant();
 
-                var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByIObjectType(@class);
+                var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(@class);
                 if (sortedUnitRoleTypes.Length > 0)
                 {
                     // Get Unit Roles
