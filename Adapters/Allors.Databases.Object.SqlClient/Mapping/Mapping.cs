@@ -87,45 +87,45 @@ namespace Allors.Databases.Object.SqlClient
         internal readonly string ProcedureNameForResetCache;
         
         internal readonly Dictionary<IClass, string> ProcedureNameForGetUnitsByClass;
+        internal readonly Dictionary<IClass, string> ProcedureNameForPrefetchUnitsByClass;
         internal readonly Dictionary<IClass, string> ProcedureNameForLoadObjectByClass;
         internal readonly Dictionary<IClass, string> ProcedureNameForCreateObjectByClass;
         internal readonly Dictionary<IClass, string> ProcedureNameForCreateObjectsByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForSetRoleByRelationTypeByClass;
+        internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForPrefetchRoleByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForGetRoleByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForGetAssociationByRelationTypeByClass;
+        internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForPrefetchAssociationByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForClearRoleByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForAddRoleByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForRemoveRoleByRelationTypeByClass;
-       
-        internal readonly Dictionary<IRelationType, string> ProcedureNameForSetRoleByRelationType;
+        
         internal readonly Dictionary<IRelationType, string> ProcedureNameForGetRoleByRelationType;
-        internal readonly Dictionary<IRelationType, string> ProcedureNameForGetAssociationByRelationType;
-        internal readonly Dictionary<IRelationType, string> ProcedureNameForClearRoleByRelationType;
+        internal readonly Dictionary<IRelationType, string> ProcedureNameForPrefetchRoleByRelationType;
+        internal readonly Dictionary<IRelationType, string> ProcedureNameForSetRoleByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForAddRoleByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForRemoveRoleByRelationType;
-
-        internal readonly Dictionary<IClass, string> ProcedureNameForPrefetchUnitsByClass;
-        internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForPrefetchRoleByRelationTypeByClass;
-        internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForPrefetchAssociationByRelationTypeByClass;
-        internal readonly Dictionary<IRelationType, string> ProcedureNameForPrefetchRoleByRelationType;
+        internal readonly Dictionary<IRelationType, string> ProcedureNameForClearRoleByRelationType;
+        internal readonly Dictionary<IRelationType, string> ProcedureNameForGetAssociationByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForPrefetchAssociationByRelationType;
-
-
+        
         private const string ProcedurePrefixForGetCache = "gc";
         private const string ProcedurePrefixForUpdateCache = "uc";
         private const string ProcedurePrefixForResetCache = "rc";
-        
-        private const string ProcedurePrefixForLoad = "l_";
         private const string ProcedurePrefixForCreateObject = "co_";
         private const string ProcedurePrefixForCreateObjects = "cos_";
+        private const string ProcedurePrefixForLoad = "l_";
+
         private const string ProcedurePrefixForGetUnits = "gu_";
         private const string ProcedurePrefixForPrefetchUnits = "pu_";
         private const string ProcedurePrefixForGetRole = "gr_";
+        private const string ProcedurePrefixForPrefetchRole = "pr_";
         private const string ProcedurePrefixForSetRole = "sr_";
         private const string ProcedurePrefixForClearRole = "cr_";
         private const string ProcedurePrefixForAddRole = "ar_";
         private const string ProcedurePrefixForRemoveRole = "rr_";
         private const string ProcedurePrefixForGetAssociation = "ga_";
+        private const string ProcedurePrefixForPrefetchAssociation = "pa_";
 
         private readonly Database database;
 
@@ -454,14 +454,13 @@ WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObje
             this.ProcedureNameForCreateObjectByClass = new Dictionary<IClass, string>();
             this.ProcedureNameForCreateObjectsByClass = new Dictionary<IClass, string>();
 
-            this.ProcedureNameForSetRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
             this.ProcedureNameForGetRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
-            this.ProcedureNameForGetAssociationByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
-            this.ProcedureNameForClearRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
+            this.ProcedureNameForPrefetchRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
+            this.ProcedureNameForSetRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
             this.ProcedureNameForAddRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
             this.ProcedureNameForRemoveRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
-
-            this.ProcedureNameForPrefetchRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
+            this.ProcedureNameForClearRoleByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
+            this.ProcedureNameForGetAssociationByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
             this.ProcedureNameForPrefetchAssociationByRelationTypeByClass = new Dictionary<IClass, Dictionary<IRelationType, string>>();
 
             foreach (var @class in this.Database.MetaPopulation.Classes)
@@ -528,14 +527,14 @@ SELECT id FROM @IDS;
 END";
                 this.procedureDefinitionByName.Add(this.ProcedureNameForCreateObjectsByClass[@class], definition);
 
-                var procedureNameForSetRoleByRelationType = new Dictionary<IRelationType, string>();
-                this.ProcedureNameForSetRoleByRelationTypeByClass.Add(@class, procedureNameForSetRoleByRelationType);
-
                 var procedureNameForGetRoleByRelationType = new Dictionary<IRelationType, string>();
                 this.ProcedureNameForGetRoleByRelationTypeByClass.Add(@class, procedureNameForGetRoleByRelationType);
 
-                var procedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
-                this.ProcedureNameForGetAssociationByRelationTypeByClass.Add(@class, procedureNameForGetAssociationByRelationType);
+                var procedureNameForPrefetchRoleByRelationType = new Dictionary<IRelationType, string>();
+                this.ProcedureNameForPrefetchRoleByRelationTypeByClass.Add(@class, procedureNameForPrefetchRoleByRelationType);
+
+                var procedureNameForSetRoleByRelationType = new Dictionary<IRelationType, string>();
+                this.ProcedureNameForSetRoleByRelationTypeByClass.Add(@class, procedureNameForSetRoleByRelationType);
 
                 var procedureNameForClearRoleByRelationType = new Dictionary<IRelationType, string>();
                 this.ProcedureNameForClearRoleByRelationTypeByClass.Add(@class, procedureNameForClearRoleByRelationType);
@@ -546,8 +545,8 @@ END";
                 var procedureNameForRemoveRoleByRelationType = new Dictionary<IRelationType, string>();
                 this.ProcedureNameForRemoveRoleByRelationTypeByClass.Add(@class, procedureNameForRemoveRoleByRelationType);
 
-                var procedureNameForPrefetchRoleByRelationType = new Dictionary<IRelationType, string>();
-                this.ProcedureNameForPrefetchRoleByRelationTypeByClass.Add(@class, procedureNameForPrefetchRoleByRelationType);
+                var procedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
+                this.ProcedureNameForGetAssociationByRelationTypeByClass.Add(@class, procedureNameForGetAssociationByRelationType);
 
                 var procedureNameForPrefetchAssociationByRelationType = new Dictionary<IRelationType, string>();
                 this.ProcedureNameForPrefetchAssociationByRelationTypeByClass.Add(@class, procedureNameForPrefetchAssociationByRelationType);
@@ -561,7 +560,9 @@ END";
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                     {
                         procedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + className + "_" + relationTypeName);
+                        procedureNameForPrefetchRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForPrefetchRole + className + "_" + relationTypeName);
                         procedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
+                        procedureNameForPrefetchAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForPrefetchAssociation + className + "_" + relationTypeName);
                         procedureNameForClearRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForClearRole + className + "_" + relationTypeName);
 
                         // Get Composites Role (1-*) [object table]
@@ -598,7 +599,7 @@ AS
                             definition = @"CREATE PROCEDURE " + procedureNameForPrefetchAssociationByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS
-    SELECT " + this.ColumnNameByRelationType[relationType] +  ", " + ColumnNameForObject + @"
+    SELECT " + this.ColumnNameByRelationType[relationType] + ", " + ColumnNameForObject + @"
     FROM " + table + @"
     WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
                             this.procedureDefinitionByName.Add(procedureNameForPrefetchAssociationByRelationType[relationType], definition);
@@ -651,10 +652,6 @@ AS
 
                     if (roleType.ObjectType.IsUnit)
                     {
-                        procedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + className + "_" + relationTypeName);
-                        procedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
-                        procedureNameForClearRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForClearRole + className + "_" + relationTypeName);
-
                         procedureNameForSetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForSetRole + className + "_" + relationTypeName);
 
                         var unitTypeTag = ((IUnit)relationType.RoleType.ObjectType).UnitTag;
@@ -777,7 +774,9 @@ AS
                         if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsOne)
                         {
                             procedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + className + "_" + relationTypeName);
+                            procedureNameForPrefetchRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForPrefetchRole + className + "_" + relationTypeName);
                             procedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
+                            procedureNameForPrefetchAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForPrefetchAssociation + className + "_" + relationTypeName);
                             procedureNameForClearRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForClearRole + className + "_" + relationTypeName);
 
                             // Get Composite Role (1-1 and *-1) [object table]
@@ -867,26 +866,29 @@ AS
                 }
             }
 
-            this.ProcedureNameForSetRoleByRelationType = new Dictionary<IRelationType, string>();
             this.ProcedureNameForGetRoleByRelationType = new Dictionary<IRelationType, string>();
-            this.ProcedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
-            this.ProcedureNameForClearRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.ProcedureNameForPrefetchRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.ProcedureNameForSetRoleByRelationType = new Dictionary<IRelationType, string>();
             this.ProcedureNameForAddRoleByRelationType = new Dictionary<IRelationType, string>();
             this.ProcedureNameForRemoveRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.ProcedureNameForClearRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.ProcedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
+            this.ProcedureNameForPrefetchAssociationByRelationType = new Dictionary<IRelationType, string>();
 
             foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;
                 var relationTypeName = roleType.SingularFullName.ToLowerInvariant();
-
-
+                
                 if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
                 {
                     var table = this.TableNameForRelationByRelationType[relationType];
 
                     this.ProcedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + relationTypeName);
+                    this.ProcedureNameForPrefetchRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForPrefetchRole + relationTypeName);
                     this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + relationTypeName);
+                    this.ProcedureNameForPrefetchAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForPrefetchAssociation + relationTypeName);
                     this.ProcedureNameForClearRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForClearRole + relationTypeName);
 
                     if (roleType.IsMany)
