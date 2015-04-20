@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IRoleType.cs" company="Allors bvba">
+// <copyright file="IPropertyType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,33 +21,12 @@
 
 namespace Allors.Meta
 {
+    using System;
+
     /// <summary>
-    /// A <see cref="IRoleType"/> defines the role side of a relation.
-    /// This is also called the 'passive' side.
-    /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
+    /// A <see cref="IPropertyType"/> can be a <see cref="IAssociationType"/> or a <see cref="IRoleType"/>.
     /// </summary>
-    public interface IRoleType : IPropertyType
+    public interface IPropertyType : IMetaObject, IComparable
     {
-        string SingularName { get; }
-
-        string SingularPropertyName { get; }
-
-        string SingularFullName { get; }
-
-        IObjectType ObjectType { get; }
-
-        bool IsMany { get; }
-
-        IAssociationType AssociationType { get; }
-
-        IRelationType RelationType { get; }
-
-        bool IsOne { get; }
-
-        int? Size { get; }
-
-        int? Precision { get; }
-
-        int? Scale { get; }
     }
 }

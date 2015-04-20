@@ -36,7 +36,7 @@ namespace Allors.Databases.Object.SqlClient
         private static readonly int MaskExistsKnown = BitVector32.CreateMask(MaskExists);
 
         private readonly DatabaseSession session;
-        private readonly IClass objectType;
+        private readonly IClass @class;
         private readonly ObjectId objectId;
         private int cacheId;
 
@@ -44,10 +44,10 @@ namespace Allors.Databases.Object.SqlClient
 
         private WeakReference weakReference;
 
-        internal Reference(DatabaseSession session, IClass objectType, ObjectId objectId, bool isNew)
+        internal Reference(DatabaseSession session, IClass @class, ObjectId objectId, bool isNew)
         {
             this.session = session;
-            this.objectType = objectType;
+            this.@class = @class;
             this.objectId = objectId;
 
             this.flags[MaskIsNew] = isNew;
@@ -58,8 +58,8 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal Reference(DatabaseSession session, IClass objectType, ObjectId objectId, int cacheId)
-            : this(session, objectType, objectId, false)
+        internal Reference(DatabaseSession session, IClass @class, ObjectId objectId, int cacheId)
+            : this(session, @class, objectId, false)
         {
             this.cacheId = cacheId;
             this.flags[MaskExistsKnown] = true;
@@ -90,11 +90,11 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal IClass ObjectType
+        internal IClass Class
         {
             get
             {
-                return this.objectType;
+                return this.@class;
             }
         }
 
@@ -152,6 +152,14 @@ namespace Allors.Databases.Object.SqlClient
                 this.flags[MaskExists] = value;
             }
         }
+        
+        internal bool ExistsKnown
+        {
+            get
+            {
+                return this.flags[MaskExistsKnown];
+            }
+        }
 
         internal Strategy Target
         {
@@ -174,7 +182,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public override string ToString()
         {
-            return "[" + this.objectType + ":" + this.ObjectId + "]";
+            return "[" + this.@class + ":" + this.ObjectId + "]";
         }
 
         internal virtual void Commit(HashSet<Reference> referencesWithStrategy)

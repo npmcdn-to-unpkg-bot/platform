@@ -140,7 +140,7 @@ namespace Allors.Databases.Object.SqlClient
                 this.setUnitRoleRelationsByIRoleTypeByExclusiveRootClass = new Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>>();
             }
 
-            var exclusiveRootClass = association.ObjectType.ExclusiveClass;
+            var exclusiveRootClass = association.Class.ExclusiveClass;
 
             Dictionary<IRoleType, List<UnitRelation>> setUnitRoleRelationsByIRoleType;
             if (!this.setUnitRoleRelationsByIRoleTypeByExclusiveRootClass.TryGetValue(exclusiveRootClass, out setUnitRoleRelationsByIRoleType))

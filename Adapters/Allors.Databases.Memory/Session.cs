@@ -337,6 +337,11 @@ namespace Allors.Databases.Memory
             return (IObject[])allorsObjects.ToArray(typeof(IObject));
         }
 
+        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        {
+            // nop
+        }
+
         public IChangeSet Checkpoint()
         {
             try

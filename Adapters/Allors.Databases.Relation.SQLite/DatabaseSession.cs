@@ -20,8 +20,6 @@ namespace Allors.Databases.Relation.SQLite
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SQLite;
-    using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Xml;
 
     using Allors.Databases;
@@ -366,6 +364,11 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
             }
 
             return objects != null ? objects.ToArray() : EmptyObjects;
+        }
+
+        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        {
+            // TODO:
         }
 
         public IObject Insert(IClass objectType, string objectIdString)

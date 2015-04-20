@@ -178,5 +178,7 @@ namespace Allors
         /// <param name="objectIds">The object ids.</param>
         /// <returns>The instantiated objects.</returns>
         IObject[] Instantiate(ObjectId[] objectIds);
+
+        void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes);
     }
 }

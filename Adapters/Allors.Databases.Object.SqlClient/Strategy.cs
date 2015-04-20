@@ -68,10 +68,10 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (!this.reference.Exists)
                 {
-                    throw new Exception("Object that had  " + this.reference.ObjectType.Name + " with id " + this.ObjectId + " does not exist");
+                    throw new Exception("Object that had  " + this.reference.Class.Name + " with id " + this.ObjectId + " does not exist");
                 }
 
-                return this.reference.ObjectType;
+                return this.reference.Class;
             }
         }
 

@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// This is also called the 'active', 'controlling' or 'owning' side.
     /// AssociationTypes can only have composite <see cref="ObjectType"/>s.
     /// </summary>
-    public interface IAssociationType : IMetaObject, IComparable
+    public interface IAssociationType : IPropertyType
     {
         string SingularName { get; }
 

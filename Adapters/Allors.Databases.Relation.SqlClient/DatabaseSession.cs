@@ -382,6 +382,11 @@ namespace Allors.Databases.Relation.SqlClient
             return objects;
         }
 
+        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        {
+            // TODO:
+        }
+
         public IObject Insert(IClass objectType, string objectIdString)
         {
              var objectId = this.Database.ObjectIds.Parse(objectIdString);

@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Initialization.cs" />
+    <Compile Include="Prefetcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Caching\Cache.cs" />
     <Compile Include="Caching\CachedObject.cs" />

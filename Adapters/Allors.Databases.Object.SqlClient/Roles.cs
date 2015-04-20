@@ -52,7 +52,7 @@ namespace Allors.Databases.Object.SqlClient
                 if (this.cachedObject == null && !this.Reference.IsNew)
                 {
                     var cache = this.Reference.Session.Database.Cache;
-                    this.cachedObject = cache.GetOrCreateCachedObject(this.Reference.ObjectType, this.Reference.ObjectId, this.Reference.CacheId);
+                    this.cachedObject = cache.GetOrCreateCachedObject(this.Reference.Class, this.Reference.ObjectId, this.Reference.CacheId);
                 }
 
                 return this.cachedObject;
