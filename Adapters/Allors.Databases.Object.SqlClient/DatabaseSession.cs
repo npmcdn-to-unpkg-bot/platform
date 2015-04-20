@@ -1160,42 +1160,96 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositeRole(List<Reference> references, IRoleType roleType)
+        internal void PrefetchCompositeRoleObjectTable(List<Reference> references, IRoleType roleType)
         {
-            //this.prefetchCompositeRoleByRoleType = this.prefetchCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+            this.prefetchCompositeRoleByRoleType = this.prefetchCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
 
-            //SqlCommand command;
-            //if (!this.prefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            SqlCommand command;
+            if (!this.prefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                string sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(references);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositeRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
+            }
+
+            //using (DbDataReader reader = command.ExecuteReader())
             //{
-            //    IAssociationType associationType = roleType.AssociationType;
+            //    var cache = this.Database.Cache;
 
-            //    string sql;
-            //    if (!roleType.RelationType.ExistExclusiveClasses)
+            //    while (reader.Read())
             //    {
-            //        sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
+            //        var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
+            //        var associationReference = this.referenceByObjectId[associationId];
+
+            //        Roles modifiedRoles = null;
+            //        if (this.modifiedRolesByReference != null)
+            //        {
+            //            this.modifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
+            //        }
+
+            //        var cachedObject = cache.GetOrCreateCachedObject(associationReference.Class, associationId, associationReference.CacheId);
+
+            //        var roleIdValue = reader[1];
+
+            //        if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+            //        {
+            //            if (roleIdValue == null || roleIdValue == DBNull.Value)
+            //            {
+            //                cachedObject.SetValue(roleType, null);
+            //            }
+            //            else
+            //            {
+            //                var objectId = this.Database.ObjectIds.Parse(roleIdValue.ToString());
+            //                cachedObject.SetValue(roleType, objectId);
+            //            }
+            //        }
             //    }
-            //    else
-            //    {
-            //        sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
-            //    }
-
-            //    command = this.CreateSqlCommand(sql);
-            //    command.CommandType = CommandType.StoredProcedure;
-
-            //    var sqlParameter = command.CreateParameter();
-            //    sqlParameter.SqlDbType = SqlDbType.Structured;
-            //    sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
-            //    sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-            //    sqlParameter.Value = this.Database.CreateObjectTable(references);
-
-            //    command.Parameters.Add(sqlParameter);
-
-            //    this.prefetchCompositeRoleByRoleType[roleType] = command;
             //}
-            //else
-            //{
-            //    command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
-            //}
+        }
+
+        internal void PrefetchCompositeRoleRelationTable(List<Reference> references, IRoleType roleType)
+        {
+            this.prefetchCompositeRoleByRoleType = this.prefetchCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                var associationType = roleType.AssociationType;
+
+                string sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(references);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositeRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
+            }
 
             //using (DbDataReader reader = command.ExecuteReader())
             //{

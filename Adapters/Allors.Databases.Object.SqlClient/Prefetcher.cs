@@ -32,10 +32,14 @@ namespace Allors.Databases.Object.SqlClient
         private readonly List<Reference> references;
 
         private readonly bool unitRoleTypes;
-        private readonly List<IRoleType> compositeRoleTypes;
-        private readonly List<IRoleType> compositesRoleTypes;
-        private readonly List<IAssociationType> compositeAssociationTypes;
-        private readonly List<IAssociationType> compositesAssociationTypes; 
+        private readonly List<IRoleType> compositeRoleTypesObjectTable;
+        private readonly List<IRoleType> compositeRoleTypesRelationTable;
+        private readonly List<IRoleType> compositesRoleTypesObjectTable;
+        private readonly List<IRoleType> compositesRoleTypesRelationTable;
+        private readonly List<IAssociationType> compositeAssociationTypesObjectTable;
+        private readonly List<IAssociationType> compositeAssociationTypesRelationTable;
+        private readonly List<IAssociationType> compositesAssociationTypesObjectTable;
+        private readonly List<IAssociationType> compositesAssociationTypesRelationTable; 
         
         public Prefetcher(DatabaseSession session, List<Reference> references, IPropertyType[] propertyTypes)
         {
@@ -44,9 +48,9 @@ namespace Allors.Databases.Object.SqlClient
 
             foreach (var propertyType in propertyTypes)
             {
-                var roleType = propertyType as IRoleType;
-                if (roleType != null)
+                if (propertyType is IRoleType)
                 {
+                    var roleType = (IRoleType)propertyType;
                     var objectType = roleType.ObjectType;
                     if (objectType.IsUnit)
                     {
@@ -54,47 +58,99 @@ namespace Allors.Databases.Object.SqlClient
                     }
                     else
                     {
+                        var relationType = roleType.RelationType;
                         if (roleType.IsOne)
                         {
-                            if (this.compositeRoleTypes == null)
+                            if (relationType.ExistExclusiveClasses)
                             {
-                                this.compositeRoleTypes = new List<IRoleType>();
-                            }
+                                if (this.compositeRoleTypesObjectTable == null)
+                                {
+                                    this.compositeRoleTypesObjectTable = new List<IRoleType>();
+                                }
 
-                            this.compositeRoleTypes.Add(roleType);
+                                this.compositeRoleTypesObjectTable.Add(roleType);
+                            }
+                            else
+                            {
+                                if (this.compositeRoleTypesRelationTable == null)
+                                {
+                                    this.compositeRoleTypesRelationTable = new List<IRoleType>();
+                                }
+
+                                this.compositeRoleTypesRelationTable.Add(roleType);
+                            }
                         }
                         else
                         {
-                            if (this.compositesRoleTypes == null)
+                            var associationType = relationType.AssociationType;
+                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                             {
-                                this.compositesRoleTypes = new List<IRoleType>();
-                            }
+                                if (this.compositesRoleTypesObjectTable == null)
+                                {
+                                    this.compositesRoleTypesObjectTable = new List<IRoleType>();
+                                }
 
-                            this.compositesRoleTypes.Add(roleType);
+                                this.compositesRoleTypesObjectTable.Add(roleType);
+                            }
+                            else
+                            {
+                                if (this.compositesRoleTypesRelationTable == null)
+                                {
+                                    this.compositesRoleTypesRelationTable = new List<IRoleType>();
+                                }
+
+                                this.compositesRoleTypesRelationTable.Add(roleType);
+                            }
                         }
                     }
                 }
                 else
                 {
                     var associationType = (IAssociationType)propertyType;
+                    var relationType = associationType.RelationType;
+                    var roleType = relationType.RoleType;
 
                     if (associationType.IsOne)
                     {
-                        if (this.compositeAssociationTypes == null)
+                        if (relationType.ExistExclusiveClasses)
                         {
-                            this.compositeAssociationTypes = new List<IAssociationType>();
-                        }
+                            if (this.compositeAssociationTypesObjectTable == null)
+                            {
+                                this.compositeAssociationTypesObjectTable = new List<IAssociationType>();
+                            }
 
-                        this.compositeAssociationTypes.Add(associationType);
+                            this.compositeAssociationTypesObjectTable.Add(associationType);
+                        }
+                        else
+                        {
+                            if (this.compositeAssociationTypesRelationTable == null)
+                            {
+                                this.compositeAssociationTypesRelationTable = new List<IAssociationType>();
+                            }
+
+                            this.compositeAssociationTypesRelationTable.Add(associationType);
+                        }
                     }
                     else
                     {
-                        if (this.compositesAssociationTypes == null)
+                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                         {
-                            this.compositesAssociationTypes = new List<IAssociationType>();
-                        }
+                            if (this.compositesAssociationTypesObjectTable == null)
+                            {
+                                this.compositesAssociationTypesObjectTable = new List<IAssociationType>();
+                            }
 
-                        this.compositesAssociationTypes.Add(associationType);
+                            this.compositesAssociationTypesObjectTable.Add(associationType);
+                        }
+                        else
+                        {
+                            if (this.compositesAssociationTypesRelationTable == null)
+                            {
+                                this.compositesAssociationTypesRelationTable = new List<IAssociationType>();
+                            }
+
+                            this.compositesAssociationTypesRelationTable.Add(associationType);
+                        }
                     }
                 }
             }
@@ -126,11 +182,19 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            if (this.compositeRoleTypes != null)
+            if (this.compositeRoleTypesObjectTable != null)
             {
-                foreach (var roleType in this.compositeRoleTypes)
+                foreach (var roleType in this.compositeRoleTypesObjectTable)
                 {
-                    this.session.PrefetchCompositeRole(this.references, roleType);
+                    this.session.PrefetchCompositeRoleObjectTable(this.references, roleType);
+                }
+            }
+
+            if (this.compositeRoleTypesRelationTable != null)
+            {
+                foreach (var roleType in this.compositeRoleTypesRelationTable)
+                {
+                    this.session.PrefetchCompositeRoleRelationTable(this.references, roleType);
                 }
             }
         }

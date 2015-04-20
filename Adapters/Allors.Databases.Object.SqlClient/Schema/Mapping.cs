@@ -91,6 +91,7 @@ namespace Allors.Databases.Object.SqlClient
         internal readonly Dictionary<IClass, string> ProcedureNameForLoadObjectByClass;
         internal readonly Dictionary<IClass, string> ProcedureNameForCreateObjectByClass;
         internal readonly Dictionary<IClass, string> ProcedureNameForCreateObjectsByClass;
+
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForSetRoleByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForPrefetchRoleByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForGetRoleByRelationTypeByClass;
