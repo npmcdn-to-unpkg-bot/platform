@@ -371,7 +371,7 @@ namespace Allors.Databases.Object.SqlClient
             if (unitRoles != null)
             {
                 unitRoles.Sort(MetaObjectComparer.ById);
-                flush.SetUnitRoles(this, unitRoles);
+                this.Reference.Session.SetUnitRoles(this, unitRoles);
             }
             else if (unitRole != null)
             {
@@ -454,7 +454,7 @@ namespace Allors.Databases.Object.SqlClient
                     return (ObjectId[])roleOut;
                 }
 
-                this.Reference.Session.GetCompositeRoles(this, roleType);
+                this.Reference.Session.GetCompositesRole(this, roleType);
                 this.cachedObject.TryGetValue(roleType, out roleOut);
                 var role = (ObjectId[])roleOut;
                 return role;

@@ -56,28 +56,33 @@ namespace Allors.Databases.Object.SqlClient
 
         private Dictionary<string, object> properties;
 
-        private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> clearCompositeAndCompositesRoleByRoleType;
-        private Dictionary<IClass, SqlCommand> createObjectByClass;
-        private Dictionary<IClass, SqlCommand> createObjectsByClass;
-        private SqlCommand getCacheIds;
-        private SqlCommand updateCacheIds;
-        private Dictionary<IAssociationType, SqlCommand> getCompositeAssociationByAssociationType;
-        private Dictionary<IAssociationType, SqlCommand> getCompositeAssociationsByAssociationType;
-        private Dictionary<IRoleType, SqlCommand> getCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> prefetchCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> getCompositeRolesByRoleType;
+        #region Commands
         private Dictionary<IClass, SqlCommand> getUnitRolesByClass;
         private Dictionary<IClass, SqlCommand> prefetchUnitRolesByClass;
-        private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
+        private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> setUnitRoleByRoleTypeByClass;
+        private Dictionary<IRoleType, SqlCommand> getCompositeRoleByRoleType;
+        private Dictionary<IRoleType, SqlCommand> prefetchCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> setCompositeRoleByRoleType;
-        private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> setUnitRoleByRoleTypeByObjectType;
-        private Dictionary<IClass, SqlCommand> deleteObjectByClass;
-        private SqlCommand getObjectType;
-        private Dictionary<IClass, SqlCommand> insertObjectByClass;
+        private Dictionary<IRoleType, SqlCommand> getCompositesRoleByRoleType;
+        private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
+        private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
+        private Dictionary<IRoleType, SqlCommand> clearCompositeAndCompositesRoleByRoleType;
+        private Dictionary<IAssociationType, SqlCommand> getCompositeAssociationByAssociationType;
+        private Dictionary<IAssociationType, SqlCommand> getCompositesAssociationByAssociationType;
+
         private SqlCommand instantiateObject;
         private SqlCommand instantiateObjects;
-        private Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>> commandByKeyBySortedRoleTypesObjectType;
+        private Dictionary<IClass, SqlCommand> createObjectByClass;
+        private Dictionary<IClass, SqlCommand> createObjectsByClass;
+        private Dictionary<IClass, SqlCommand> deleteObjectByClass;
+        private Dictionary<IClass, SqlCommand> insertObjectByClass;
+
+        private SqlCommand getCacheIds;
+        private SqlCommand updateCacheIds;
+        private SqlCommand getObjectType;
+        #endregion
+
+        private Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>> setUnitRolesByRoleTypeByClass;
 
         internal DatabaseSession(Database database)
         {
@@ -235,24 +240,38 @@ namespace Allors.Databases.Object.SqlClient
 
         public IObject Instantiate(ObjectId objectId)
         {
-            var strategyReference = this.InstantiateSqlStrategy(objectId);
-            if (strategyReference == null)
+            var strategy = this.InstantiateStrategy(objectId);
+            if (strategy == null)
             {
                 return null;
             }
 
-            return strategyReference.Strategy.GetObject();
+            return strategy.GetObject();
         }
 
         public IStrategy InstantiateStrategy(ObjectId objectId)
         {
-            var strategyReference = this.InstantiateSqlStrategy(objectId);
-            if (strategyReference == null)
+            if (objectId == null)
             {
                 return null;
             }
 
-            return strategyReference.Strategy;
+            Reference reference;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
+            {
+                reference = this.InstantiateObject(objectId);
+                if (reference != null)
+                {
+                    this.referenceByObjectId[objectId] = reference;
+                }
+            }
+
+            if (reference == null || !reference.Exists)
+            {
+                return null;
+            }
+
+            return reference.Strategy;
         }
 
         public IObject[] Instantiate(string[] objectIdStrings)
@@ -530,6 +549,40 @@ namespace Allors.Databases.Object.SqlClient
             return "Session[id=" + this.GetHashCode() + "] " + this.Population;
         }
 
+        internal Roles GetOrCreateRoles(Reference reference)
+        {
+            if (this.modifiedRolesByReference != null)
+            {
+                Roles roles;
+                if (this.modifiedRolesByReference.TryGetValue(reference, out roles))
+                {
+                    return roles;
+                }
+            }
+
+            return new Roles(reference);
+        }
+
+        internal Reference GetOrCreateAssociationForExistingObject(ObjectId objectId)
+        {
+            Reference association;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            {
+                var objectType = this.Database.Cache.GetObjectType(objectId);
+                if (objectType == null)
+                {
+                    objectType = this.GetObjectType(objectId);
+                    this.Database.Cache.SetObjectType(objectId, objectType);
+                }
+
+                association = new Reference(this, objectType, objectId, false);
+                this.referenceByObjectId[objectId] = association;
+                this.referencesWithoutCacheId.Add(association);
+            }
+
+            return association;
+        }
+
         internal Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
@@ -551,6 +604,11 @@ namespace Allors.Databases.Object.SqlClient
             associationByRole[roleStrategy.Reference] = previousAssociation;
         }
 
+        internal Reference[] GetOrCreateAssociationsForExistingObjects(IEnumerable<ObjectId> objectIds)
+        {
+            return objectIds.Select(this.GetOrCreateAssociationForExistingObject).ToArray();
+        }
+
         internal ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
@@ -559,7 +617,7 @@ namespace Allors.Databases.Object.SqlClient
             if (!associationsByRole.TryGetValue(roleStrategy.Reference, out associations))
             {
                 this.FlushConditionally(roleStrategy, associationType);
-                associations = this.GetCompositeAssociations(roleStrategy, associationType);
+                associations = this.GetCompositesAssociation(roleStrategy, associationType);
                 associationsByRole[roleStrategy.Reference] = associations;
             }
 
@@ -594,50 +652,11 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal Reference[] GetOrCreateAssociationsForExistingObjects(IEnumerable<ObjectId> objectIds)
-        {
-            return objectIds.Select(this.GetOrCreateAssociationForExistingObject).ToArray();
-        }
-
-        internal Reference GetOrCreateAssociationForExistingObject(ObjectId objectId)
-        {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
-            {
-                var objectType = this.Database.Cache.GetObjectType(objectId);
-                if (objectType == null)
-                {
-                    objectType = this.GetObjectType(objectId);
-                    this.Database.Cache.SetObjectType(objectId, objectType);
-                }
-
-                association = this.CreateReference(objectType, objectId, false);
-                this.referenceByObjectId[objectId] = association;
-                this.referencesWithoutCacheId.Add(association);
-            }
-
-            return association;
-        }
-
-        internal Roles GetOrCreateRoles(Reference reference)
-        {
-            if (this.modifiedRolesByReference != null)
-            {
-                Roles roles;
-                if (this.modifiedRolesByReference.TryGetValue(reference, out roles))
-                {
-                    return roles;
-                }
-            }
-
-            return new Roles(reference);
-        }
-
         internal void Flush()
         {
             if (this.unflushedRolesByReference != null)
             {
-                var flush = this.CreateFlush(this.unflushedRolesByReference);
+                var flush = new Flush(this, this.unflushedRolesByReference);
                 flush.Execute();
             }
 
@@ -709,192 +728,44 @@ namespace Allors.Databases.Object.SqlClient
             return new Command(this, commandText);
         }
 
-        internal void AddCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
+        #region Sql Commands
+        internal void DeleteObject(Strategy strategy)
         {
-            this.addCompositeRoleByRoleType = this.addCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+            this.deleteObjectByClass = this.deleteObjectByClass ?? new Dictionary<IClass, SqlCommand>();
+
+            var @class = strategy.Class;
 
             SqlCommand command;
-            if (!this.addCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            if (!this.deleteObjectByClass.TryGetValue(@class, out command))
             {
-                string sql;
-                if (roleType.AssociationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
-                {
-                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
-                }
+                var sql = String.Empty;
+
+                sql += "BEGIN\n";
+
+                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjects + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
+
+                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjectByClass[(@class).ExclusiveClass] + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
+
+                sql += "END;";
 
                 command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
                 var sqlParameter = command.CreateParameter();
-                sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForCompositeRelation;
-                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = this.database.CreateRelationTable(relations);
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = strategy.ObjectId.Value ?? DBNull.Value;
 
                 command.Parameters.Add(sqlParameter);
 
-                this.addCompositeRoleByRoleType[roleType] = command;
+                this.deleteObjectByClass[@class] = command;
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateRelationTable(relations);
-            }
-
-            try
-            {
-                command.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
-        internal void ClearCompositeAndCompositesRole(IList<ObjectId> associations, IRoleType roleType)
-        {
-            this.clearCompositeAndCompositesRoleByRoleType = this.clearCompositeAndCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
-
-            string sql;
-            if ((roleType.IsMany && roleType.AssociationType.IsMany) || !roleType.RelationType.ExistExclusiveClasses)
-            {
-                sql = this.database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
-            }
-            else
-            {
-                if (roleType.IsOne)
-                {
-                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[roleType.AssociationType.ObjectType.ExclusiveClass][roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
-                }
-            }
-
-            SqlCommand command;
-            if (!this.clearCompositeAndCompositesRoleByRoleType.TryGetValue(roleType, out command))
-            {
-                command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForObject;
-                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = this.database.CreateObjectTable(associations);
-
-                command.Parameters.Add(sqlParameter);
-
-                this.clearCompositeAndCompositesRoleByRoleType[roleType] = command;
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateObjectTable(associations);
+                command.Parameters[Mapping.ParamNameForObject].Value = strategy.ObjectId.Value ?? DBNull.Value;
             }
 
             command.ExecuteNonQuery();
-        }
-
-        internal void GetCompositeRole(Roles roles, IRoleType roleType)
-        {
-            this.getCompositeRoleByRoleType = this.getCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
-
-            var reference = roles.Reference;
-
-            SqlCommand command;
-            if (!this.getCompositeRoleByRoleType.TryGetValue(roleType, out command))
-            {
-                IAssociationType associationType = roleType.AssociationType;
-
-                string sql;
-                if (!roleType.RelationType.ExistExclusiveClasses)
-                {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
-                }
-
-                command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
-                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
-                sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
-
-                command.Parameters.Add(sqlParameter);
-
-                this.getCompositeRoleByRoleType[roleType] = command;
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value ?? DBNull.Value;
-            }
-
-            object result = command.ExecuteScalar();
-
-            if (result == null || result == DBNull.Value)
-            {
-                roles.CachedObject.SetValue(roleType, null);
-            }
-            else
-            {
-                var objectId = this.Database.ObjectIds.Parse(result.ToString());
-                roles.CachedObject.SetValue(roleType, objectId);
-            }
-        }
-
-        internal void GetCompositeRoles(Roles roles, IRoleType roleType)
-        {
-            this.getCompositeRolesByRoleType = this.getCompositeRolesByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
-
-            var reference = roles.Reference;
-
-            SqlCommand command;
-            if (!this.getCompositeRolesByRoleType.TryGetValue(roleType, out command))
-            {
-                var associationType = roleType.AssociationType;
-
-                string sql;
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
-                {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
-                }
- 
-                command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
-                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
-                sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
-
-                command.Parameters.Add(sqlParameter);
-
-                this.getCompositeRolesByRoleType[roleType] = command;
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value ?? DBNull.Value;
-            }
-
-            var objectIds = new List<ObjectId>();
-            using (DbDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    var id = this.Database.ObjectIds.Parse(reader[0].ToString());
-                    objectIds.Add(id);
-                }
-            }
-
-            roles.CachedObject.SetValue(roleType, objectIds.ToArray());
         }
 
         internal void GetUnitRoles(Roles roles)
@@ -984,271 +855,6 @@ namespace Allors.Databases.Object.SqlClient
                     }
                 }
             }
-        }
-
-        internal void RemoveCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
-        {
-            this.removeCompositeRoleByRoleType = this.removeCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
-
-            SqlCommand command;
-            if (!this.removeCompositeRoleByRoleType.TryGetValue(roleType, out command))
-            {
-                string sql;
-                var associationType = roleType.AssociationType;
-
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
-                {
-                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
-                }
-
-                command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForCompositeRelation;
-                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = this.Database.CreateRelationTable(relations);
-
-                command.Parameters.Add(sqlParameter);
-
-                this.removeCompositeRoleByRoleType[roleType] = command;
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(relations);
-            }
-
-            command.ExecuteNonQuery();
-        }
-
-        internal void SetCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
-        {
-            this.setCompositeRoleByRoleType = this.setCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
-
-            SqlCommand command;
-            if (!this.setCompositeRoleByRoleType.TryGetValue(roleType, out command))
-            {
-                var associationType = roleType.AssociationType;
-
-                string sql;
-                if (!roleType.RelationType.ExistExclusiveClasses)
-                {
-                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
-                }
-                else
-                {
-                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
-                }
-
-                command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForCompositeRelation;
-                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = this.Database.CreateRelationTable(relations);
-
-                command.Parameters.Add(sqlParameter);
-                this.setCompositeRoleByRoleType[roleType] = command;
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(relations);
-            }
-
-            command.ExecuteNonQuery();
-        }
-
-        internal void SetUnitRole(List<UnitRelation> relations, IClass exclusiveRootClass, IRoleType roleType)
-        {
-            this.setUnitRoleByRoleTypeByObjectType = this.setUnitRoleByRoleTypeByObjectType ?? new Dictionary<IClass, Dictionary<IRoleType, SqlCommand>>();
-
-            var schema = this.Database.Mapping;
-
-            Dictionary<IRoleType, SqlCommand> commandByRoleType;
-            if (!this.setUnitRoleByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByRoleType))
-            {
-                commandByRoleType = new Dictionary<IRoleType, SqlCommand>();
-                this.setUnitRoleByRoleTypeByObjectType.Add(exclusiveRootClass, commandByRoleType);
-            }
-
-            string tableTypeName;
-
-            var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
-            switch (unitTypeTag)
-            {
-                case UnitTags.AllorsString:
-                    tableTypeName = schema.TableTypeNameForStringRelation;
-                    break;
-
-                case UnitTags.AllorsInteger:
-                    tableTypeName = schema.TableTypeNameForIntegerRelation;
-                    break;
-
-                case UnitTags.AllorsFloat:
-                    tableTypeName = schema.TableTypeNameForFloatRelation;
-                    break;
-
-                case UnitTags.AllorsBoolean:
-                    tableTypeName = schema.TableTypeNameForBooleanRelation;
-                    break;
-
-                case UnitTags.AllorsDateTime:
-                    tableTypeName = schema.TableTypeNameForDateTimeRelation;
-                    break;
-
-                case UnitTags.AllorsUnique:
-                    tableTypeName = schema.TableTypeNameForUniqueRelation;
-                    break;
-
-                case UnitTags.AllorsBinary:
-                    tableTypeName = schema.TableTypeNameForBinaryRelation;
-                    break;
-
-                case UnitTags.AllorsDecimal:
-                    tableTypeName = schema.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
-                    break;
-
-                default:
-                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
-            }
-            
-            SqlCommand command;
-            if (!commandByRoleType.TryGetValue(roleType, out command))
-            {
-                var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
-
-                command = this.CreateSqlCommand(sql);
-                command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = tableTypeName;
-                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = this.Database.CreateRelationTable(roleType, relations);
-
-                command.Parameters.Add(sqlParameter);
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(roleType, relations);
-            }
-
-            command.ExecuteNonQuery();
-        }
-
-        internal void SetUnitRoles(Roles roles, List<IRoleType> sortedRoleTypes)
-        {
-            this.commandByKeyBySortedRoleTypesObjectType = this.commandByKeyBySortedRoleTypesObjectType ?? new Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>>();
-
-            var exclusiveRootClass = roles.Reference.Class.ExclusiveClass;
-
-            Dictionary<IList<IRoleType>, SqlCommand> commandByKey;
-            if (!this.commandByKeyBySortedRoleTypesObjectType.TryGetValue(exclusiveRootClass, out commandByKey))
-            {
-                commandByKey = new Dictionary<IList<IRoleType>, SqlCommand>(new SortedIRoleTypesComparer());
-                this.commandByKeyBySortedRoleTypesObjectType.Add(exclusiveRootClass, commandByKey);
-            }
-
-            SqlCommand command;
-            if (!commandByKey.TryGetValue(sortedRoleTypes, out command))
-            {
-                command = this.CreateSqlCommand();
-
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForObject;
-                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
-                sqlParameter.Value = roles.Reference.ObjectId.Value ?? DBNull.Value;
-
-                command.Parameters.Add(sqlParameter);
-
-                var sql = new StringBuilder();
-                sql.Append("UPDATE " + this.Database.Mapping.TableNameForObjectByClass[exclusiveRootClass] + " SET\n");
-
-                var count = 0;
-                foreach (var roleType in sortedRoleTypes)
-                {
-                    if (count > 0)
-                    {
-                        sql.Append(" , ");
-                    }
-
-                    ++count;
-
-                    var column = this.Database.Mapping.ColumnNameByRelationType[roleType.RelationType];
-                    sql.Append(column + "=" + this.Database.Mapping.ParamNameByRoleType[roleType]);
-
-                    var unit = roles.ModifiedRoleByRoleType[roleType];
-                    var sqlParameter1 = command.CreateParameter();
-                    sqlParameter1.ParameterName = this.Database.Mapping.ParamNameByRoleType[roleType];
-                    sqlParameter1.SqlDbType = this.Database.Mapping.GetSqlDbType(roleType);
-                    sqlParameter1.Value = unit ?? DBNull.Value;
-
-                    command.Parameters.Add(sqlParameter1);
-                }
-
-                sql.Append("\nWHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n");
-
-                command.CommandText = sql.ToString();
-                command.ExecuteNonQuery();
-
-                commandByKey.Add(sortedRoleTypes, command);
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForObject].Value = roles.Reference.ObjectId.Value ?? DBNull.Value;
-
-                foreach (var roleType in sortedRoleTypes)
-                {
-                    var unit = roles.ModifiedRoleByRoleType[roleType];
-                    command.Parameters[this.Database.Mapping.ParamNameByRoleType[roleType]].Value = unit ?? DBNull.Value;
-                }
-
-                command.ExecuteNonQuery();
-            }
-
-        }
-
-        internal void DeleteObject(Strategy strategy)
-        {
-            this.deleteObjectByClass = this.deleteObjectByClass ?? new Dictionary<IClass, SqlCommand>();
-            
-            var @class = strategy.Class;
-
-            SqlCommand command;
-            if (!this.deleteObjectByClass.TryGetValue(@class, out command))
-            {
-                var sql = String.Empty;
-
-                sql += "BEGIN\n";
-
-                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjects + "\n";
-                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
-
-                sql += "DELETE FROM " + this.Database.Mapping.TableNameForObjectByClass[(@class).ExclusiveClass] + "\n";
-                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + ";\n";
-
-                sql += "END;";
-                
-                command = this.CreateSqlCommand(sql);
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForObject;
-                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
-                sqlParameter.Value = strategy.ObjectId.Value ?? DBNull.Value;
-
-                command.Parameters.Add(sqlParameter);
-
-                this.deleteObjectByClass[@class] = command;
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForObject].Value = strategy.ObjectId.Value ?? DBNull.Value;
-            }
-
-            command.ExecuteNonQuery();
         }
 
         internal void PrefetchUnitRoles(IClass @class, List<Reference> references)
@@ -1355,6 +961,204 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
+        internal void SetUnitRole(List<UnitRelation> relations, IClass exclusiveRootClass, IRoleType roleType)
+        {
+            this.setUnitRoleByRoleTypeByClass = this.setUnitRoleByRoleTypeByClass ?? new Dictionary<IClass, Dictionary<IRoleType, SqlCommand>>();
+
+            var schema = this.Database.Mapping;
+
+            Dictionary<IRoleType, SqlCommand> commandByRoleType;
+            if (!this.setUnitRoleByRoleTypeByClass.TryGetValue(exclusiveRootClass, out commandByRoleType))
+            {
+                commandByRoleType = new Dictionary<IRoleType, SqlCommand>();
+                this.setUnitRoleByRoleTypeByClass.Add(exclusiveRootClass, commandByRoleType);
+            }
+
+            string tableTypeName;
+
+            var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
+            switch (unitTypeTag)
+            {
+                case UnitTags.AllorsString:
+                    tableTypeName = schema.TableTypeNameForStringRelation;
+                    break;
+
+                case UnitTags.AllorsInteger:
+                    tableTypeName = schema.TableTypeNameForIntegerRelation;
+                    break;
+
+                case UnitTags.AllorsFloat:
+                    tableTypeName = schema.TableTypeNameForFloatRelation;
+                    break;
+
+                case UnitTags.AllorsBoolean:
+                    tableTypeName = schema.TableTypeNameForBooleanRelation;
+                    break;
+
+                case UnitTags.AllorsDateTime:
+                    tableTypeName = schema.TableTypeNameForDateTimeRelation;
+                    break;
+
+                case UnitTags.AllorsUnique:
+                    tableTypeName = schema.TableTypeNameForUniqueRelation;
+                    break;
+
+                case UnitTags.AllorsBinary:
+                    tableTypeName = schema.TableTypeNameForBinaryRelation;
+                    break;
+
+                case UnitTags.AllorsDecimal:
+                    tableTypeName = schema.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                    break;
+
+                default:
+                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+            }
+
+            SqlCommand command;
+            if (!commandByRoleType.TryGetValue(roleType, out command))
+            {
+                var sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = tableTypeName;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateRelationTable(roleType, relations);
+
+                command.Parameters.Add(sqlParameter);
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(roleType, relations);
+            }
+
+            command.ExecuteNonQuery();
+        }
+
+        internal void SetUnitRoles(Roles roles, List<IRoleType> sortedRoleTypes)
+        {
+            this.setUnitRolesByRoleTypeByClass = this.setUnitRolesByRoleTypeByClass ?? new Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>>();
+
+            var exclusiveRootClass = roles.Reference.Class.ExclusiveClass;
+
+            Dictionary<IList<IRoleType>, SqlCommand> setUnitRoleByRoleType;
+            if (!this.setUnitRolesByRoleTypeByClass.TryGetValue(exclusiveRootClass, out setUnitRoleByRoleType))
+            {
+                setUnitRoleByRoleType = new Dictionary<IList<IRoleType>, SqlCommand>(new SortedRoleTypeComparer());
+                this.setUnitRolesByRoleTypeByClass.Add(exclusiveRootClass, setUnitRoleByRoleType);
+            }
+
+            SqlCommand command;
+            if (!setUnitRoleByRoleType.TryGetValue(sortedRoleTypes, out command))
+            {
+                command = this.CreateSqlCommand();
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = roles.Reference.ObjectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                var sql = new StringBuilder();
+                sql.Append("UPDATE " + this.Database.Mapping.TableNameForObjectByClass[exclusiveRootClass] + " SET\n");
+
+                var count = 0;
+                foreach (var roleType in sortedRoleTypes)
+                {
+                    if (count > 0)
+                    {
+                        sql.Append(" , ");
+                    }
+
+                    ++count;
+
+                    var column = this.Database.Mapping.ColumnNameByRelationType[roleType.RelationType];
+                    sql.Append(column + "=" + this.Database.Mapping.ParamNameByRoleType[roleType]);
+
+                    var unit = roles.ModifiedRoleByRoleType[roleType];
+                    var sqlParameter1 = command.CreateParameter();
+                    sqlParameter1.ParameterName = this.Database.Mapping.ParamNameByRoleType[roleType];
+                    sqlParameter1.SqlDbType = this.Database.Mapping.GetSqlDbType(roleType);
+                    sqlParameter1.Value = unit ?? DBNull.Value;
+
+                    command.Parameters.Add(sqlParameter1);
+                }
+
+                sql.Append("\nWHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n");
+
+                command.CommandText = sql.ToString();
+                command.ExecuteNonQuery();
+
+                setUnitRoleByRoleType.Add(sortedRoleTypes, command);
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForObject].Value = roles.Reference.ObjectId.Value ?? DBNull.Value;
+
+                foreach (var roleType in sortedRoleTypes)
+                {
+                    var unit = roles.ModifiedRoleByRoleType[roleType];
+                    command.Parameters[this.Database.Mapping.ParamNameByRoleType[roleType]].Value = unit ?? DBNull.Value;
+                }
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        internal void GetCompositeRole(Roles roles, IRoleType roleType)
+        {
+            this.getCompositeRoleByRoleType = this.getCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            var reference = roles.Reference;
+
+            SqlCommand command;
+            if (!this.getCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                IAssociationType associationType = roleType.AssociationType;
+
+                string sql;
+                if (!roleType.RelationType.ExistExclusiveClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                }
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getCompositeRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value ?? DBNull.Value;
+            }
+
+            object result = command.ExecuteScalar();
+
+            if (result == null || result == DBNull.Value)
+            {
+                roles.CachedObject.SetValue(roleType, null);
+            }
+            else
+            {
+                var objectId = this.Database.ObjectIds.Parse(result.ToString());
+                roles.CachedObject.SetValue(roleType, objectId);
+            }
+        }
+
         internal void PrefetchCompositeRole(List<Reference> references, IRoleType roleType)
         {
             //this.prefetchCompositeRoleByRoleType = this.prefetchCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
@@ -1427,253 +1231,219 @@ namespace Allors.Databases.Object.SqlClient
             //}
         }
 
-        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
+        internal void SetCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
         {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
-            {
-                association = this.CreateReference(objectType, objectId, false);
-                this.referenceByObjectId[objectId] = association;
-                this.referencesWithoutCacheId.Add(association);
-            }
-
-            return association;
-        }
-
-        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
-        {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
-            {
-                association = this.CreateReference(objectType, objectId, cacheId);
-                this.referenceByObjectId[objectId] = association;
-            }
-
-            return association;
-        }
-
-        private Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
-        {
-            var strategyReference = this.CreateReference(objectType, objectId, true);
-            this.referenceByObjectId[objectId] = strategyReference;
-            return strategyReference;
-        }
-
-        private void UpdateCacheIds()
-        {
-            this.UpdateCacheIds(this.modifiedRolesByReference);
-        }
-
-        private Reference CreateReference(IClass objectType, ObjectId objectId, bool isNew)
-        {
-            return new Reference(this, objectType, objectId, isNew);
-        }
-
-        private Reference CreateReference(IClass objectType, ObjectId objectId, int cacheId)
-        {
-            return new Reference(this, objectType, objectId, cacheId);
-        }
-
-        private void FlushConditionally(Strategy strategy, IAssociationType associationType)
-        {
-            if (this.triggersFlushRolesByIAssociationType != null)
-            {
-                HashSet<ObjectId> roles;
-                if (this.triggersFlushRolesByIAssociationType.TryGetValue(associationType, out roles))
-                {
-                    if (roles.Contains(strategy.ObjectId))
-                    {
-                        this.Flush();
-                    }
-                }
-            }
-        }
-
-        private Reference InstantiateSqlStrategy(ObjectId objectId)
-        {
-            if (objectId == null)
-            {
-                return null;
-            }
-
-            Reference strategyReference;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out strategyReference))
-            {
-                strategyReference = this.InstantiateObject(objectId);
-                if (strategyReference != null)
-                {
-                    this.referenceByObjectId[objectId] = strategyReference;
-                }
-            }
-
-            if (strategyReference == null || !strategyReference.Exists)
-            {
-                return null;
-            }
-
-            return strategyReference;
-        }
-
-        private Dictionary<Reference, Reference> GetAssociationByRole(IAssociationType associationType)
-        {
-            Dictionary<Reference, Reference> associationByRole;
-            if (!this.associationByRoleByIAssociationType.TryGetValue(associationType, out associationByRole))
-            {
-                associationByRole = new Dictionary<Reference, Reference>();
-                this.associationByRoleByIAssociationType[associationType] = associationByRole;
-            }
-
-            return associationByRole;
-        }
-
-        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
-        {
-            Dictionary<Reference, ObjectId[]> associationsByRole;
-            if (!this.associationsByRoleByIAssociationType.TryGetValue(associationType, out associationsByRole))
-            {
-                associationsByRole = new Dictionary<Reference, ObjectId[]>();
-                this.associationsByRoleByIAssociationType[associationType] = associationsByRole;
-            }
-
-            return associationsByRole;
-        }
-
-        private SqlCommand CreateSqlCommand()
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SqlConnection(this.Database.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
-            }
-
-            var command = this.connection.CreateCommand();
-            command.Transaction = this.transaction;
-            command.CommandTimeout = this.Database.CommandTimeout;
-            return command;
-        }
-
-        private Reference CreateObject(IClass @class)
-        {
-            this.createObjectByClass = this.createObjectByClass ?? new Dictionary<IClass, SqlCommand>();
+            this.setCompositeRoleByRoleType = this.setCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
 
             SqlCommand command;
-            if (!this.createObjectByClass.TryGetValue(@class, out command))
+            if (!this.setCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
-                var sql = this.database.Mapping.ProcedureNameForCreateObjectByClass[@class];
+                var associationType = roleType.AssociationType;
+
+                string sql;
+                if (!roleType.RelationType.ExistExclusiveClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationTypeByClass[associationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                }
+
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
                 var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForType;
-                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
-                sqlParameter.Value = (object)@class.Id ?? DBNull.Value;
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateRelationTable(relations);
 
                 command.Parameters.Add(sqlParameter);
-
-                this.createObjectByClass[@class] = command;
+                this.setCompositeRoleByRoleType[roleType] = command;
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(relations);
             }
 
-            var result = command.ExecuteScalar();
-            var objectId = this.database.ObjectIds.Parse(result.ToString());
-            return this.CreateAssociationForNewObject(@class, objectId);
+            command.ExecuteNonQuery();
         }
 
-        private IList<Reference> CreateObjects(IClass @class, int count)
+        internal void GetCompositesRole(Roles roles, IRoleType roleType)
         {
-            this.createObjectsByClass = this.createObjectsByClass ?? new Dictionary<IClass, SqlCommand>();
+            this.getCompositesRoleByRoleType = this.getCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            var reference = roles.Reference;
 
             SqlCommand command;
-            if (!this.createObjectsByClass.TryGetValue(@class, out command))
+            if (!this.getCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
-                var sql = this.database.Mapping.ProcedureNameForCreateObjectsByClass[@class];
+                var associationType = roleType.AssociationType;
+
+                string sql;
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                }
+
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
                 var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForType;
-                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
-                sqlParameter.Value = (object)@class.Id ?? DBNull.Value;
+                sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = reference.ObjectId.Value ?? DBNull.Value;
 
                 command.Parameters.Add(sqlParameter);
-                var sqlParameter1 = command.CreateParameter();
-                sqlParameter1.ParameterName = Mapping.ParamNameForCount;
-                sqlParameter1.SqlDbType = Mapping.SqlDbTypeForCount;
-                sqlParameter1.Value = (object)count ?? DBNull.Value;
 
-                command.Parameters.Add(sqlParameter1);
-
-                this.createObjectsByClass[@class] = command;
+                this.getCompositesRoleByRoleType[roleType] = command;
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
-                command.Parameters[Mapping.ParamNameForCount].Value = (object)count ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value ?? DBNull.Value;
             }
 
-            var objectIds = new List<object>();
+            var objectIds = new List<ObjectId>();
             using (DbDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    object id = this.database.ObjectIds.Parse(reader[0].ToString());
+                    var id = this.Database.ObjectIds.Parse(reader[0].ToString());
                     objectIds.Add(id);
                 }
             }
 
-            var strategies = new List<Reference>();
-
-            foreach (object id in objectIds)
-            {
-                var objectId = this.database.ObjectIds.Parse(id.ToString());
-                var strategySql = this.CreateAssociationForNewObject(@class, objectId);
-                strategies.Add(strategySql);
-            }
-
-            return strategies;
+            roles.CachedObject.SetValue(roleType, objectIds.ToArray());
         }
 
-        private Dictionary<ObjectId, int> GetCacheIds(ISet<Reference> strategyReferences)
+        internal void AddCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
         {
-            var command = this.getCacheIds;
+            this.addCompositeRoleByRoleType = this.addCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
 
-            if (command == null)
+            SqlCommand command;
+            if (!this.addCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
-                var sql = this.Database.Mapping.ProcedureNameForGetCache;
+                string sql;
+                if (roleType.AssociationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
+                {
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                }
+
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
-
                 var sqlParameter = command.CreateParameter();
                 sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForCompositeRelation;
                 sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = this.Database.CreateObjectTable(strategyReferences);
+                sqlParameter.Value = this.database.CreateRelationTable(relations);
 
                 command.Parameters.Add(sqlParameter);
 
-                this.getCacheIds = command;
+                this.addCompositeRoleByRoleType[roleType] = command;
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(strategyReferences);
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateRelationTable(relations);
             }
 
-            var cacheIdByObjectId = new Dictionary<ObjectId, int>();
-
-            using (var reader = command.ExecuteReader())
+            try
             {
-                while (reader.Read())
-                {
-                    var objectId = this.Database.ObjectIds.Parse(reader[0].ToString());
-                    var cacheId = reader.GetInt32(1);
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
 
-                    cacheIdByObjectId.Add(objectId, cacheId);
+        internal void RemoveCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
+        {
+            this.removeCompositeRoleByRoleType = this.removeCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.removeCompositeRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                string sql;
+                var associationType = roleType.AssociationType;
+
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
+                {
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
+                }
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateRelationTable(relations);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.removeCompositeRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateRelationTable(relations);
+            }
+
+            command.ExecuteNonQuery();
+        }
+
+        internal void ClearCompositeAndCompositesRole(IList<ObjectId> associations, IRoleType roleType)
+        {
+            this.clearCompositeAndCompositesRoleByRoleType = this.clearCompositeAndCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            string sql;
+            if ((roleType.IsMany && roleType.AssociationType.IsMany) || !roleType.RelationType.ExistExclusiveClasses)
+            {
+                sql = this.database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
+            }
+            else
+            {
+                if (roleType.IsOne)
+                {
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[roleType.AssociationType.ObjectType.ExclusiveClass][roleType.RelationType];
+                }
+                else
+                {
+                    sql = this.database.Mapping.ProcedureNameForClearRoleByRelationTypeByClass[((IComposite)roleType.ObjectType).ExclusiveClass][roleType.RelationType];
                 }
             }
 
-            return cacheIdByObjectId;
+            SqlCommand command;
+            if (!this.clearCompositeAndCompositesRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.database.CreateObjectTable(associations);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.clearCompositeAndCompositesRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.database.CreateObjectTable(associations);
+            }
+
+            command.ExecuteNonQuery();
         }
 
         private Reference GetCompositeAssociation(Reference role, IAssociationType associationType)
@@ -1739,9 +1509,9 @@ namespace Allors.Databases.Object.SqlClient
             return associationObject;
         }
 
-        private ObjectId[] GetCompositeAssociations(Strategy role, IAssociationType associationType)
+        private ObjectId[] GetCompositesAssociation(Strategy role, IAssociationType associationType)
         {
-            this.getCompositeAssociationsByAssociationType = this.getCompositeAssociationsByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+            this.getCompositesAssociationByAssociationType = this.getCompositesAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
 
             var roleType = associationType.RoleType;
 
@@ -1756,7 +1526,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             SqlCommand command;
-            if (!this.getCompositeAssociationsByAssociationType.TryGetValue(associationType, out command))
+            if (!this.getCompositesAssociationByAssociationType.TryGetValue(associationType, out command))
             {
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
@@ -1767,7 +1537,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 command.Parameters.Add(sqlParameter);
 
-                this.getCompositeAssociationsByAssociationType[associationType] = command;
+                this.getCompositesAssociationByAssociationType[associationType] = command;
             }
             else
             {
@@ -1786,38 +1556,87 @@ namespace Allors.Databases.Object.SqlClient
 
             return objectIds.ToArray();
         }
-
-        private IClass GetObjectType(ObjectId objectId)
+        
+        private Reference CreateObject(IClass @class)
         {
-            var command = this.getObjectType;
-            if (command == null)
-            {
-                var sql = "SELECT " + Mapping.ColumnNameForType + "\n";
-                sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
-                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
+            this.createObjectByClass = this.createObjectByClass ?? new Dictionary<IClass, SqlCommand>();
 
+            SqlCommand command;
+            if (!this.createObjectByClass.TryGetValue(@class, out command))
+            {
+                var sql = this.database.Mapping.ProcedureNameForCreateObjectByClass[@class];
                 command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
                 var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForObject;
-                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
-                sqlParameter.Value = objectId.Value ?? DBNull.Value;
+                sqlParameter.ParameterName = Mapping.ParamNameForType;
+                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                sqlParameter.Value = (object)@class.Id ?? DBNull.Value;
 
                 command.Parameters.Add(sqlParameter);
 
-                this.getObjectType = command;
+                this.createObjectByClass[@class] = command;
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
             }
 
             var result = command.ExecuteScalar();
-            if (result == null)
+            var objectId = this.database.ObjectIds.Parse(result.ToString());
+            return this.CreateAssociationForNewObject(@class, objectId);
+        }
+        
+        private IList<Reference> CreateObjects(IClass @class, int count)
+        {
+            this.createObjectsByClass = this.createObjectsByClass ?? new Dictionary<IClass, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.createObjectsByClass.TryGetValue(@class, out command))
             {
-                return null;
+                var sql = this.database.Mapping.ProcedureNameForCreateObjectsByClass[@class];
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForType;
+                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                sqlParameter.Value = (object)@class.Id ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+                var sqlParameter1 = command.CreateParameter();
+                sqlParameter1.ParameterName = Mapping.ParamNameForCount;
+                sqlParameter1.SqlDbType = Mapping.SqlDbTypeForCount;
+                sqlParameter1.Value = (object)count ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter1);
+
+                this.createObjectsByClass[@class] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForCount].Value = (object)count ?? DBNull.Value;
             }
 
-            return (IClass)this.Database.ObjectFactory.GetObjectTypeForType((Guid)result);
+            var objectIds = new List<object>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    object id = this.database.ObjectIds.Parse(reader[0].ToString());
+                    objectIds.Add(id);
+                }
+            }
+
+            var strategies = new List<Reference>();
+
+            foreach (object id in objectIds)
+            {
+                var objectId = this.database.ObjectIds.Parse(id.ToString());
+                var strategySql = this.CreateAssociationForNewObject(@class, objectId);
+                strategies.Add(strategySql);
+            }
+
+            return strategies;
         }
 
         private Reference InsertObject(IClass @class, ObjectId objectId)
@@ -1973,7 +1792,82 @@ namespace Allors.Databases.Object.SqlClient
             return references;
         }
 
-        private void UpdateCacheIds(Dictionary<Reference, Roles> dictionary)
+        private IClass GetObjectType(ObjectId objectId)
+        {
+            var command = this.getObjectType;
+            if (command == null)
+            {
+                var sql = "SELECT " + Mapping.ColumnNameForType + "\n";
+                sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
+                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
+
+                command = this.CreateSqlCommand(sql);
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.ParameterName = Mapping.ParamNameForObject;
+                sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
+                sqlParameter.Value = objectId.Value ?? DBNull.Value;
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getObjectType = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+            }
+
+            var result = command.ExecuteScalar();
+            if (result == null)
+            {
+                return null;
+            }
+
+            return (IClass)this.Database.ObjectFactory.GetObjectTypeForType((Guid)result);
+        }
+
+        private Dictionary<ObjectId, int> GetCacheIds(ISet<Reference> strategyReferences)
+        {
+            var command = this.getCacheIds;
+
+            if (command == null)
+            {
+                var sql = this.Database.Mapping.ProcedureNameForGetCache;
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(strategyReferences);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.getCacheIds = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(strategyReferences);
+            }
+
+            var cacheIdByObjectId = new Dictionary<ObjectId, int>();
+
+            using (var reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var objectId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var cacheId = reader.GetInt32(1);
+
+                    cacheIdByObjectId.Add(objectId, cacheId);
+                }
+            }
+
+            return cacheIdByObjectId;
+        }
+
+        private void UpdateCacheIds()
         {
             var command = this.updateCacheIds;
             if (command == null)
@@ -1999,10 +1893,7 @@ namespace Allors.Databases.Object.SqlClient
             command.ExecuteNonQuery();
         }
 
-        private Flush CreateFlush(Dictionary<Reference, Roles> unsyncedRolesByReference)
-        {
-            return new Flush(this, unsyncedRolesByReference);
-        }
+        #endregion
 
         private void ResetSqlCommands()
         {
@@ -2012,22 +1903,108 @@ namespace Allors.Databases.Object.SqlClient
             this.createObjectsByClass = null;
             this.getCacheIds = null;
             this.getCompositeAssociationByAssociationType = null;
-            this.getCompositeAssociationsByAssociationType = null;
+            this.getCompositesAssociationByAssociationType = null;
             this.getCompositeRoleByRoleType = null;
             this.prefetchCompositeRoleByRoleType = null;
-            this.getCompositeRolesByRoleType = null;
+            this.getCompositesRoleByRoleType = null;
             this.getUnitRolesByClass = null;
             this.removeCompositeRoleByRoleType = null;
             this.setCompositeRoleByRoleType = null;
-            this.setUnitRoleByRoleTypeByObjectType = null;
+            this.setUnitRoleByRoleTypeByClass = null;
             this.updateCacheIds = null;
             this.deleteObjectByClass = null;
             this.getObjectType = null;
             this.insertObjectByClass = null;
             this.instantiateObject = null;
             this.instantiateObjects = null;
-            this.commandByKeyBySortedRoleTypesObjectType = null;
+            this.setUnitRolesByRoleTypeByClass = null;
             this.prefetchUnitRolesByClass = null;
+        }
+
+        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
+        {
+            Reference association;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            {
+                association = new Reference(this, objectType, objectId, false);
+                this.referenceByObjectId[objectId] = association;
+                this.referencesWithoutCacheId.Add(association);
+            }
+
+            return association;
+        }
+
+        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
+        {
+            Reference association;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            {
+                association = new Reference(this, objectType, objectId, cacheId);
+                this.referenceByObjectId[objectId] = association;
+            }
+
+            return association;
+        }
+
+        private Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
+        {
+            var strategyReference = new Reference(this, objectType, objectId, true);
+            this.referenceByObjectId[objectId] = strategyReference;
+            return strategyReference;
+        }
+
+        private Dictionary<Reference, Reference> GetAssociationByRole(IAssociationType associationType)
+        {
+            Dictionary<Reference, Reference> associationByRole;
+            if (!this.associationByRoleByIAssociationType.TryGetValue(associationType, out associationByRole))
+            {
+                associationByRole = new Dictionary<Reference, Reference>();
+                this.associationByRoleByIAssociationType[associationType] = associationByRole;
+            }
+
+            return associationByRole;
+        }
+
+        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
+        {
+            Dictionary<Reference, ObjectId[]> associationsByRole;
+            if (!this.associationsByRoleByIAssociationType.TryGetValue(associationType, out associationsByRole))
+            {
+                associationsByRole = new Dictionary<Reference, ObjectId[]>();
+                this.associationsByRoleByIAssociationType[associationType] = associationsByRole;
+            }
+
+            return associationsByRole;
+        }
+
+        private void FlushConditionally(Strategy strategy, IAssociationType associationType)
+        {
+            if (this.triggersFlushRolesByIAssociationType != null)
+            {
+                HashSet<ObjectId> roles;
+                if (this.triggersFlushRolesByIAssociationType.TryGetValue(associationType, out roles))
+                {
+                    if (roles.Contains(strategy.ObjectId))
+                    {
+                        this.Flush();
+                    }
+                }
+            }
+        }
+
+        private SqlCommand CreateSqlCommand()
+        {
+            if (this.connection == null)
+            {
+                this.connection = new SqlConnection(this.Database.ConnectionString);
+                this.connection.Open();
+                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
+            }
+
+            var command = this.connection.CreateCommand();
+            command.Transaction = this.transaction;
+            command.CommandTimeout = this.Database.CommandTimeout;
+            return command;
         }
 
         private void SqlCommit()
@@ -2072,7 +2049,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        private class SortedIRoleTypesComparer : IEqualityComparer<IList<IRoleType>>
+        private class SortedRoleTypeComparer : IEqualityComparer<IList<IRoleType>>
         {
             public bool Equals(IList<IRoleType> x, IList<IRoleType> y)
             {

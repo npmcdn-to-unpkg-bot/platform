@@ -28,11 +28,11 @@ namespace Allors.Databases.Object.SqlClient
         private const int BatchSize = 1000;
         private readonly DatabaseSession session;
 
-        private Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveRootClass;
+        private Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveClass;
         private Dictionary<IRoleType, List<CompositeRelation>> setCompositeRoleRelationsByRoleType;
         private Dictionary<IRoleType, List<CompositeRelation>> addCompositeRoleRelationsByRoleType;
         private Dictionary<IRoleType, List<CompositeRelation>> removeCompositeRoleRelationsByRoleType;
-        private Dictionary<IRoleType, IList<ObjectId>> clearCompositeRoleRelationsByRoleType;
+        private Dictionary<IRoleType, IList<ObjectId>> clearCompositeAndCompositesRoleRelationsByRoleType;
 
         internal Flush(DatabaseSession session, Dictionary<Reference, Roles> unsyncedRolesByReference)
         {
@@ -47,9 +47,9 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void Execute()
         {
-            if (this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass != null)
+            if (this.setUnitRoleRelationsByRoleTypeByExclusiveClass != null)
             {
-                foreach (var firstDictionaryEntry in this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass)
+                foreach (var firstDictionaryEntry in this.setUnitRoleRelationsByRoleTypeByExclusiveClass)
                 {
                     var exclusiveRootClass = firstDictionaryEntry.Key;
                     var setUnitRoleRelationsByRoleType = firstDictionaryEntry.Value;
@@ -65,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass = null;
+            this.setUnitRoleRelationsByRoleTypeByExclusiveClass = null;
 
             if (this.setCompositeRoleRelationsByRoleType != null)
             {
@@ -112,9 +112,9 @@ namespace Allors.Databases.Object.SqlClient
 
             this.removeCompositeRoleRelationsByRoleType = null;
 
-            if (this.clearCompositeRoleRelationsByRoleType != null)
+            if (this.clearCompositeAndCompositesRoleRelationsByRoleType != null)
             {
-                foreach (var dictionaryEntry in this.clearCompositeRoleRelationsByRoleType)
+                foreach (var dictionaryEntry in this.clearCompositeAndCompositesRoleRelationsByRoleType)
                 {
                     var roleType = dictionaryEntry.Key;
                     var relations = dictionaryEntry.Value;
@@ -125,28 +125,23 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            this.clearCompositeRoleRelationsByRoleType = null;
-        }
-
-        internal void SetUnitRoles(Roles roles, List<IRoleType> unitRoles)
-        {
-            roles.Reference.Session.SetUnitRoles(roles, unitRoles);
+            this.clearCompositeAndCompositesRoleRelationsByRoleType = null;
         }
 
         internal void SetUnitRole(Reference association, IRoleType roleType, object role)
         {
-            if (this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass == null)
+            if (this.setUnitRoleRelationsByRoleTypeByExclusiveClass == null)
             {
-                this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass = new Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>>();
+                this.setUnitRoleRelationsByRoleTypeByExclusiveClass = new Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>>();
             }
 
-            var exclusiveRootClass = association.Class.ExclusiveClass;
+            var exclusiveClass = association.Class.ExclusiveClass;
 
             Dictionary<IRoleType, List<UnitRelation>> setUnitRoleRelationsByRoleType;
-            if (!this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass.TryGetValue(exclusiveRootClass, out setUnitRoleRelationsByRoleType))
+            if (!this.setUnitRoleRelationsByRoleTypeByExclusiveClass.TryGetValue(exclusiveClass, out setUnitRoleRelationsByRoleType))
             {
                 setUnitRoleRelationsByRoleType = new Dictionary<IRoleType, List<UnitRelation>>();
-                this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass[exclusiveRootClass] = setUnitRoleRelationsByRoleType;
+                this.setUnitRoleRelationsByRoleTypeByExclusiveClass[exclusiveClass] = setUnitRoleRelationsByRoleType;
             }
 
             List<UnitRelation> relations;
@@ -161,7 +156,7 @@ namespace Allors.Databases.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.SetUnitRole(relations, exclusiveRootClass, roleType);
+                this.session.SetUnitRole(relations, exclusiveClass, roleType);
                 relations.Clear();
             }
         }
@@ -243,16 +238,16 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void ClearCompositeAndCompositesRole(Reference association, IRoleType roleType)
         {
-            if (this.clearCompositeRoleRelationsByRoleType == null)
+            if (this.clearCompositeAndCompositesRoleRelationsByRoleType == null)
             {
-                this.clearCompositeRoleRelationsByRoleType = new Dictionary<IRoleType, IList<ObjectId>>();
+                this.clearCompositeAndCompositesRoleRelationsByRoleType = new Dictionary<IRoleType, IList<ObjectId>>();
             }
 
             IList<ObjectId> relations;
-            if (!this.clearCompositeRoleRelationsByRoleType.TryGetValue(roleType, out relations))
+            if (!this.clearCompositeAndCompositesRoleRelationsByRoleType.TryGetValue(roleType, out relations))
             {
                 relations = new List<ObjectId>();
-                this.clearCompositeRoleRelationsByRoleType[roleType] = relations;
+                this.clearCompositeAndCompositesRoleRelationsByRoleType[roleType] = relations;
             }
 
             relations.Add(association.ObjectId);
