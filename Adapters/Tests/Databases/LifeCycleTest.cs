@@ -4206,7 +4206,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 }
             }
         }
-
+        
         [Test]
         public virtual void CreateManyPopulations()
         {
@@ -4274,6 +4274,50 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 this.Session.Commit();
 
                 Assert.AreEqual(Classes.C2, c2a.Strategy.Class);
+            }
+        }
+
+        [Test]
+        public void PrefetchUnitRole()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1A = C1.Create(this.Session);
+                c1A.C1AllorsString = "1";
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+
+                Assert.AreEqual("1", c1A.C1AllorsString);
+
+                this.Session.Commit();
+
+                Assert.AreEqual("1", c1A.C1AllorsString);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+
+                Assert.AreEqual("1", c1A.C1AllorsString);
+
+                this.Session.Commit();
+
+                c1A.C1AllorsString = "2";
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+
+                Assert.AreEqual("2", c1A.C1AllorsString);
+
+                this.Session.Rollback();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+
+                Assert.AreEqual("1", c1A.C1AllorsString);
+
+                this.Session.Rollback();
+
+                Assert.AreEqual("1", c1A.C1AllorsString);
             }
         }
 

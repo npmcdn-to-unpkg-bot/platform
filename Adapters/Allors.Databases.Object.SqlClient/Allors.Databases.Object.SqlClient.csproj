@@ -124,6 +124,7 @@
   <ItemGroup>
     <None Include="Schema\Overview.cd" />
     <None Include="Settings.StyleCop" />
+    <None Include="Prefetch.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">

@@ -1,9 +1,6 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
-    using System.Management.Instrumentation;
-
-    using Allors.Meta;
 
     public class Validation
     {
@@ -12,6 +9,9 @@ namespace Allors.Databases.Object.SqlClient
 
         public readonly HashSet<string> MissingTableTypeNames;
         public readonly HashSet<SchemaTableType> InvalidTableTypes;
+
+        public readonly HashSet<string> MissingProcedureNames;
+        public readonly HashSet<SchemaProcedure> InvalidProcedures;
 
         private readonly Database database;
         private readonly Mapping mapping;
@@ -31,13 +31,18 @@ namespace Allors.Databases.Object.SqlClient
             this.MissingTableTypeNames = new HashSet<string>();
             this.InvalidTableTypes = new HashSet<SchemaTableType>();
 
+            this.MissingProcedureNames = new HashSet<string>();
+            this.InvalidProcedures = new HashSet<SchemaProcedure>();
+
             this.Validate();
 
             this.isValid = 
                 this.MissingTableNames.Count == 0 & 
                 this.InvalidTables.Count == 0 &
                 this.MissingTableTypeNames.Count == 0 &
-                this.InvalidTableTypes.Count == 0;
+                this.InvalidTableTypes.Count == 0 &
+                this.MissingProcedureNames.Count == 0 &
+                this.InvalidProcedures.Count == 0;
         }
 
         public bool IsValid
@@ -212,7 +217,28 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            // TODO: Procedures and Indeces
+            // Procedures Tables
+            foreach (var dictionaryEntry in this.mapping.ProcedureDefinitionByName)
+            {
+                var procedureName = dictionaryEntry.Key;
+                var procedureDefinition = dictionaryEntry.Value;
+
+                var procedure = this.Schema.GetProcedure(procedureName);
+
+                if (procedure == null)
+                {
+                    this.MissingTableNames.Add(procedureName);
+                }
+                else
+                {
+                    if (!procedure.IsDefinitionCompatible(procedureDefinition))
+                    {
+                        this.InvalidProcedures.Add(procedure);
+                    }
+                }
+            }
+
+            // TODO: Primary Keys and Indeces
         }
 
         private void ValidateTableType(string name, string columnType)

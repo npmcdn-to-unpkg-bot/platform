@@ -97,6 +97,8 @@ namespace Allors.Databases.Object.SqlClient
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForAddRoleByRelationTypeByClass;
         internal readonly Dictionary<IClass, Dictionary<IRelationType, string>> ProcedureNameForRemoveRoleByRelationTypeByClass;
 
+        internal readonly Dictionary<IClass, string> ProcedureNameForPrefetchUnitsByClass;
+        
         internal readonly Dictionary<IRelationType, string> ProcedureNameForSetRoleByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForGetRoleByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForGetAssociationByRelationType;
@@ -113,6 +115,7 @@ namespace Allors.Databases.Object.SqlClient
         private const string ProcedurePrefixForCreateObject = "co_";
         private const string ProcedurePrefixForCreateObjects = "cos_";
         private const string ProcedurePrefixForGetUnits = "gu_";
+        private const string ProcedurePrefixForPrefetchUnits = "pu_";
         private const string ProcedurePrefixForGetRole = "gr_";
         private const string ProcedurePrefixForSetRole = "sr_";
         private const string ProcedurePrefixForClearRole = "cr_";
@@ -377,6 +380,7 @@ AS
             this.procedureDefinitionByName.Add(this.ProcedureNameForResetCache, definition);
 
             this.ProcedureNameForGetUnitsByClass = new Dictionary<IClass, string>();
+            this.ProcedureNameForPrefetchUnitsByClass = new Dictionary<IClass, string>();
             foreach (var @class in this.Database.MetaPopulation.Classes)
             {
                 var className = @class.Name.ToLowerInvariant();
@@ -384,31 +388,61 @@ AS
                 var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(@class);
                 if (sortedUnitRoleTypes.Length > 0)
                 {
-                    // Get Unit Roles
-                    this.ProcedureNameForGetUnitsByClass.Add(@class, this.Database.SchemaName + "." + ProcedurePrefixForGetUnits + className);
-                    definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetUnitsByClass[@class] + @"
+                    {
+                        // Get Unit Roles
+                        this.ProcedureNameForGetUnitsByClass.Add(@class, this.Database.SchemaName + "." + ProcedurePrefixForGetUnits + className);
+                        definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetUnitsByClass[@class] + @"
     " + ParamNameForObject + " AS " + this.SqlTypeForObject + @"
 AS 
     SELECT ";
-                    var first = true;
-                    foreach (var role in sortedUnitRoleTypes)
-                    {
-                        if (first)
+                        var first = true;
+                        foreach (var role in sortedUnitRoleTypes)
                         {
-                            first = false;
-                        }
-                        else
-                        {
-                            definition += ", ";
+                            if (first)
+                            {
+                                first = false;
+                            }
+                            else
+                            {
+                                definition += ", ";
+                            }
+
+                            definition += this.ColumnNameByRelationType[role.RelationType];
                         }
 
-                        definition += this.ColumnNameByRelationType[role.RelationType];
-                    }
-
-definition += @"
+                        definition += @"
     FROM " + this.TableNameForObjectByClass[@class.ExclusiveClass] + @"
     WHERE " + ColumnNameForObject + "=" + ParamNameForObject;
-                    this.procedureDefinitionByName.Add(this.ProcedureNameForGetUnitsByClass[@class], definition);
+                        this.procedureDefinitionByName.Add(this.ProcedureNameForGetUnitsByClass[@class], definition);
+                    }
+
+                    {
+                        // Prefetch Unit Roles
+                        this.ProcedureNameForPrefetchUnitsByClass.Add(@class, this.Database.SchemaName + "." + ProcedurePrefixForPrefetchUnits + className);
+                        definition = @"CREATE PROCEDURE " + this.ProcedureNameForPrefetchUnitsByClass[@class] + @"
+    " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
+AS 
+    SELECT " + ColumnNameForObject + ", ";
+                        var first = true;
+                        foreach (var role in sortedUnitRoleTypes)
+                        {
+                            if (first)
+                            {
+                                first = false;
+                            }
+                            else
+                            {
+                                definition += ", ";
+                            }
+
+                            definition += this.ColumnNameByRelationType[role.RelationType];
+                        }
+
+                        definition += @"
+FROM " + this.TableNameForObjectByClass[@class.ExclusiveClass] + @"
+WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
+                        this.procedureDefinitionByName.Add(this.ProcedureNameForPrefetchUnitsByClass[@class], definition);
+                    }
                 }
             }
 

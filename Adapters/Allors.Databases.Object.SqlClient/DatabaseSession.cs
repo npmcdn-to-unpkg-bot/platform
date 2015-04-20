@@ -30,6 +30,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Runtime.InteropServices;
     using System.Text;
 
+    using Allors.Databases.Object.SqlClient.Caching;
     using Allors.Meta;
 
     internal sealed class DatabaseSession : IDatabaseSession, ICommandFactory
@@ -66,6 +67,7 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<IRoleType, SqlCommand> getCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> getCompositeRolesByRoleType;
         private Dictionary<IClass, SqlCommand> getUnitRolesByClass;
+        private Dictionary<IClass, SqlCommand> prefetchUnitRolesByClass;
         private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> setCompositeRoleByRoleType;
         private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> setUnitRoleByRoleTypeByObjectType;
@@ -337,7 +339,7 @@ namespace Allors.Databases.Object.SqlClient
                 this.referenceByObjectId.TryGetValue(objectId, out reference);
                 if (reference != null && reference.ExistsKnown)
                 {
-                    if (reference.Exists)
+                    if (reference.Exists && !reference.IsNew)
                     {
                         references.Add(reference);
                     }
@@ -357,6 +359,8 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var existsUnknownReferences = this.InstantiateObjects(existsUnknown);
                 references.AddRange(existsUnknownReferences);
+
+                this.GetCacheIdsAndExists();
             }
 
             var prefetcher = new Prefetcher(this, references, propertyTypes);
@@ -1246,6 +1250,118 @@ namespace Allors.Databases.Object.SqlClient
             command.ExecuteNonQuery();
         }
 
+        internal void PrefetchUnitRoles(IClass @class, List<Reference> references)
+        {
+            this.prefetchUnitRolesByClass = this.prefetchUnitRolesByClass ?? new Dictionary<IClass, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchUnitRolesByClass.TryGetValue(@class, out command))
+            {
+                var sql = this.Database.Mapping.ProcedureNameForPrefetchUnitsByClass[@class];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(references);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchUnitRolesByClass[@class] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
+            }
+
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                var sortedUnitRoles = this.Database.GetSortedUnitRolesByObjectType(@class);
+                var cache = this.Database.Cache;
+
+                while (reader.Read())
+                {
+                    var objectId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var reference = this.referenceByObjectId[objectId];
+
+                    Roles modifiedRoles = null;
+                    if (this.modifiedRolesByReference != null)
+                    {
+                        this.modifiedRolesByReference.TryGetValue(reference, out modifiedRoles);
+                    }
+
+                    var cachedObject = cache.GetOrCreateCachedObject(@class, objectId, reference.CacheId);
+
+                    for (var i = 0; i < sortedUnitRoles.Length; i++)
+                    {
+                        var roleType = sortedUnitRoles[i];
+
+                        var index = i + 1;
+                        object unit = null;
+                        if (!reader.IsDBNull(index))
+                        {
+                            var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
+                            switch (unitTypeTag)
+                            {
+                                case UnitTags.AllorsString:
+                                    unit = reader.GetString(index);
+                                    break;
+                                case UnitTags.AllorsInteger:
+                                    unit = reader.GetInt32(index);
+                                    break;
+                                case UnitTags.AllorsFloat:
+                                    unit = reader.GetDouble(index);
+                                    break;
+                                case UnitTags.AllorsDecimal:
+                                    unit = reader.GetDecimal(index);
+                                    break;
+                                case UnitTags.AllorsDateTime:
+                                    var dateTime = reader.GetDateTime(index);
+                                    if (dateTime == DateTime.MaxValue || dateTime == DateTime.MinValue)
+                                    {
+                                        unit = dateTime;
+                                    }
+                                    else
+                                    {
+                                        unit = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond, DateTimeKind.Utc);
+                                    }
+
+                                    break;
+                                case UnitTags.AllorsBoolean:
+                                    unit = reader.GetBoolean(index);
+                                    break;
+                                case UnitTags.AllorsUnique:
+                                    unit = reader.GetGuid(index);
+                                    break;
+                                case UnitTags.AllorsBinary:
+                                    var byteArray = (byte[])reader.GetValue(index);
+                                    unit = byteArray;
+                                    break;
+                                default:
+                                    throw new ArgumentException("Unknown Unit ObjectType: " + roleType.ObjectType.Name);
+                            }
+                        }
+
+                        if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                        {
+                            cachedObject.SetValue(roleType, unit);
+                        }
+                    }
+                }
+            }
+        }
+
+        internal void PrefetchCompositeRoles(IClass @class, List<Reference> references, IRoleType roleType)
+        {
+        }
+
+        internal void PrefetchCompositeAssociations(IClass @class, List<Reference> references, IAssociationType associationType)
+        {
+        }
+
         private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
         {
             Reference association;
@@ -1463,6 +1579,7 @@ namespace Allors.Databases.Object.SqlClient
                 var sql = this.Database.Mapping.ProcedureNameForGetCache;
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
+
                 var sqlParameter = command.CreateParameter();
                 sqlParameter.SqlDbType = SqlDbType.Structured;
                 sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
@@ -1748,7 +1865,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private IEnumerable<Reference> InstantiateObjects(List<ObjectId> objectids)
         {
-            var strategies = new List<Reference>();
+            var references = new List<Reference>();
 
             var command = this.instantiateObjects;
             if (command == null)
@@ -1784,11 +1901,11 @@ namespace Allors.Databases.Object.SqlClient
 
                     var objectId = this.Database.ObjectIds.Parse(objectIdString);
                     var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);
-                    strategies.Add(this.GetOrCreateAssociationForExistingObject(type, objectId, cacheId));
+                    references.Add(this.GetOrCreateAssociationForExistingObject(type, objectId, cacheId));
                 }
             }
 
-            return strategies;
+            return references;
         }
 
         private void UpdateCacheIds(Dictionary<Reference, Roles> dictionary)
@@ -1844,6 +1961,7 @@ namespace Allors.Databases.Object.SqlClient
             this.instantiateObject = null;
             this.instantiateObjects = null;
             this.commandByKeyBySortedRoleTypesObjectType = null;
+            this.prefetchUnitRolesByClass = null;
         }
 
         private void SqlCommit()

@@ -94,14 +94,14 @@ namespace Allors.Databases.Object.SqlClient
 
                 if (this.unitRoleTypes)
                 {
-                    this.PrefetchUnitRoles(@class, references);
+                    this.session.PrefetchUnitRoles(@class, references);
                 }
 
                 if (this.compositeRoleTypes != null)
                 {
                     foreach (var roleType in this.compositeRoleTypes)
                     {
-                        this.PrefetchCompositeRoles(@class, references, roleType);
+                        this.session.PrefetchCompositeRoles(@class, references, roleType);
                     }
                 }
 
@@ -109,23 +109,11 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     foreach (var associationType in this.compositeAssociationTypes)
                     {
-                        this.PrefetchCompositeAssociations(@class, references, associationType);
+                        this.session.PrefetchCompositeAssociations(@class, references, associationType);
                     }
                 }
 
             }
-        }
-
-        private void PrefetchUnitRoles(IClass @class, List<Reference> references)
-        {
-        }
-
-        private void PrefetchCompositeRoles(IClass @class, List<Reference> references, IRoleType roleType)
-        {
-        }
-
-        private void PrefetchCompositeAssociations(IClass @class, List<Reference> references, IAssociationType associationType)
-        {
         }
     }
 }

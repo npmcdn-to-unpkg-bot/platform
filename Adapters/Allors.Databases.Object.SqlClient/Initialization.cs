@@ -16,10 +16,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using System;
-    using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Runtime.InteropServices;
     using System.Text;
 
     using Allors.Meta;
