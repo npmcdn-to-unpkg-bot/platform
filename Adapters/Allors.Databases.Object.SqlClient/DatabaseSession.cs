@@ -383,8 +383,11 @@ namespace Allors.Databases.Object.SqlClient
                 this.GetCacheIdsAndExists();
             }
 
-            var prefetcher = new Prefetcher(this, references, propertyTypes);
-            prefetcher.Execute();
+            if (references.Count != 0)
+            {
+                var prefetcher = new Prefetcher(this, references, propertyTypes);
+                prefetcher.Execute();
+            }
         }
 
         public IChangeSet Checkpoint()

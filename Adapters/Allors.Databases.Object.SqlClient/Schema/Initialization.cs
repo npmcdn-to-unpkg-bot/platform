@@ -118,17 +118,11 @@ CREATE SCHEMA " + this.database.SchemaName;
                 connection.Open();
                 try
                 {
-                    foreach (var dictionaryEntry in this.mapping.ProcedureDefinitionByName)
+                    foreach (var name in this.validation.Schema.ProcedureByName.Keys)
                     {
-                        var name = dictionaryEntry.Key;
-
-                        var procedure = this.validation.Schema.GetProcedure(name);
-                        if (procedure != null)
+                        using (var command = new SqlCommand("DROP PROCEDURE " + name, connection))
                         {
-                            using (var command = new SqlCommand("DROP PROCEDURE " + name, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
+                            command.ExecuteNonQuery();
                         }
                     }
                 }
@@ -146,16 +140,11 @@ CREATE SCHEMA " + this.database.SchemaName;
                 connection.Open();
                 try
                 {
-                    foreach (var dictionaryEntry in this.mapping.TableTypeDefinitionByName)
+                    foreach (var name in this.validation.Schema.TableTypeByName.Keys)
                     {
-                        var name = dictionaryEntry.Key;
-
-                        if (!this.validation.MissingTableTypeNames.Contains(name))
+                        using (var command = new SqlCommand("DROP TYPE " + name, connection))
                         {
-                            using (var command = new SqlCommand("DROP TYPE " + name, connection))
-                            {
-                                command.ExecuteNonQuery();
-                            }
+                            command.ExecuteNonQuery();
                         }
                     }
                 }

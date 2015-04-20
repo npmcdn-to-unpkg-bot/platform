@@ -4321,6 +4321,52 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
             }
         }
 
+        [Test]
+        public void PrefetchCompositeRole()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1A = C1.Create(this.Session);
+                var c2A = C2.Create(this.Session);
+                var c2b = C2.Create(this.Session);
+                c1A.C1C2one2one = c2A;
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+
+                Assert.AreEqual(c2A, c1A.C1C2one2one);
+
+                this.Session.Commit();
+
+                Assert.AreEqual(c2A, c1A.C1C2one2one);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+
+                Assert.AreEqual(c2A, c1A.C1C2one2one);
+
+                this.Session.Commit();
+
+                c1A.C1C2one2one = c2b;
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+
+                Assert.AreEqual(c2b, c1A.C1C2one2one);
+
+                this.Session.Rollback();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+
+                Assert.AreEqual(c2A, c1A.C1C2one2one);
+
+                this.Session.Rollback();
+
+                Assert.AreEqual(c2A, c1A.C1C2one2one);
+            }
+        }
+
         protected abstract void SwitchDatabase();
 
         protected abstract IPopulation CreatePopulation();

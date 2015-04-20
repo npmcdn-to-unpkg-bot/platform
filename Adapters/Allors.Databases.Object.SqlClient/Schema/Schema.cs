@@ -9,17 +9,17 @@ namespace Allors.Databases.Object.SqlClient
     {
         public readonly bool Exists;
         
-        private readonly Dictionary<string, SchemaTable> tableByLowercaseTableName;
-        private readonly Dictionary<string, SchemaTableType> tableTypeByLowercaseTableTypeName;
-        private readonly Dictionary<string, SchemaProcedure> procedureByFullyQualifiedProcedureName;
-        private readonly Dictionary<string, Dictionary<string, SchemaIndex>> indexByLowercaseIndexNameByLowercaseTableName;
+        private readonly Dictionary<string, SchemaTable> tableByName;
+        private readonly Dictionary<string, SchemaTableType> tableTypeByName;
+        private readonly Dictionary<string, SchemaProcedure> procedureByName;
+        private readonly Dictionary<string, Dictionary<string, SchemaIndex>> indexByIndexNameByTableName;
 
         public Schema(Database database)
         {
-            this.tableByLowercaseTableName = new Dictionary<string, SchemaTable>();
-            this.tableTypeByLowercaseTableTypeName = new Dictionary<string, SchemaTableType>();
-            this.procedureByFullyQualifiedProcedureName = new Dictionary<string, SchemaProcedure>();
-            this.indexByLowercaseIndexNameByLowercaseTableName = new Dictionary<string, Dictionary<string, SchemaIndex>>();
+            this.tableByName = new Dictionary<string, SchemaTable>();
+            this.tableTypeByName = new Dictionary<string, SchemaTableType>();
+            this.procedureByName = new Dictionary<string, SchemaProcedure>();
+            this.indexByIndexNameByTableName = new Dictionary<string, Dictionary<string, SchemaIndex>>();
 
             using (var connection = new SqlConnection(database.ConnectionString))
             {
@@ -81,10 +81,10 @@ AND C.table_schema = @tableSchema";
                                 columnName = database.Mapping.NormalizeName(columnName);
 
                                 SchemaTable table;
-                                if (!this.tableByLowercaseTableName.TryGetValue(fullyQualifiedTableName, out table))
+                                if (!this.tableByName.TryGetValue(fullyQualifiedTableName, out table))
                                 {
                                     table = new SchemaTable(this, fullyQualifiedTableName);
-                                    this.tableByLowercaseTableName[fullyQualifiedTableName] = table;
+                                    this.tableByName[fullyQualifiedTableName] = table;
                                 }
 
                                 if (!reader.IsDBNull(columnNameOrdinal))
@@ -129,10 +129,10 @@ where tt.schema_id = SCHEMA_ID(@domainSchema)";
                                 var fullyQualifiedTableName = database.SchemaName + "." + tableName;
 
                                 SchemaTableType tableType;
-                                if (!this.tableTypeByLowercaseTableTypeName.TryGetValue(fullyQualifiedTableName, out tableType))
+                                if (!this.tableTypeByName.TryGetValue(fullyQualifiedTableName, out tableType))
                                 {
                                     tableType = new SchemaTableType(this, fullyQualifiedTableName);
-                                    this.tableTypeByLowercaseTableTypeName[fullyQualifiedTableName] = tableType;
+                                    this.tableTypeByName[fullyQualifiedTableName] = tableType;
                                 }
 
                                 if (!reader.IsDBNull(columnNameOrdinal))
@@ -161,7 +161,7 @@ WHERE routine_schema = @routineSchema";
                                 var routineDefinition = (string)reader["routine_definition"];
                                 var lowercaseRoutineName = routineName.Trim().ToLowerInvariant();
                                 var fullyQualifiedName = database.SchemaName + "." + lowercaseRoutineName;
-                                this.procedureByFullyQualifiedProcedureName[fullyQualifiedName] = new SchemaProcedure(this, routineName, routineDefinition);
+                                this.procedureByName[fullyQualifiedName] = new SchemaProcedure(this, routineName, routineDefinition);
                             }
                         }
                     }
@@ -197,10 +197,10 @@ WHERE
                                 indexName = indexName.Trim().ToLowerInvariant();
 
                                 Dictionary<string, SchemaIndex> indexByLowercaseIndexName;
-                                if (!this.indexByLowercaseIndexNameByLowercaseTableName.TryGetValue(tableName, out indexByLowercaseIndexName))
+                                if (!this.indexByIndexNameByTableName.TryGetValue(tableName, out indexByLowercaseIndexName))
                                 {
                                     indexByLowercaseIndexName = new Dictionary<string, SchemaIndex>();
-                                    this.indexByLowercaseIndexNameByLowercaseTableName[tableName] = indexByLowercaseIndexName;
+                                    this.indexByIndexNameByTableName[tableName] = indexByLowercaseIndexName;
                                 }
 
                                 SchemaIndex index;
@@ -220,31 +220,63 @@ WHERE
             }
         }
 
+        public Dictionary<string, SchemaTable> TableByName
+        {
+            get
+            {
+                return this.tableByName;
+            }
+        }
+
+        public Dictionary<string, SchemaTableType> TableTypeByName
+        {
+            get
+            {
+                return this.tableTypeByName;
+            }
+        }
+
+        public Dictionary<string, SchemaProcedure> ProcedureByName
+        {
+            get
+            {
+                return this.procedureByName;
+            }
+        }
+
+        public Dictionary<string, Dictionary<string, SchemaIndex>> IndexByIndexNameByTableName
+        {
+            get
+            {
+                return this.indexByIndexNameByTableName;
+            }
+        }
+
         public SchemaTable GetTable(string tableName)
         {
             SchemaTable table;
-            this.tableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table);
+            this.tableByName.TryGetValue(tableName.ToLowerInvariant(), out table);
             return table;
         }
 
         public SchemaTableType GetTableType(string tableTypeName)
         {
             SchemaTableType tableType;
-            this.tableTypeByLowercaseTableTypeName.TryGetValue(tableTypeName, out tableType);
+            this.tableTypeByName.TryGetValue(tableTypeName, out tableType);
             return tableType;
         }
 
         public SchemaProcedure GetProcedure(string procedureName)
         {
             SchemaProcedure procedure;
-            this.procedureByFullyQualifiedProcedureName.TryGetValue(procedureName, out procedure);
+            this.procedureByName.TryGetValue(procedureName, out procedure);
             return procedure;
         }
 
         public SchemaIndex GetIndex(string tableName, string indexName)
         {
             Dictionary<string, SchemaIndex> indexByLowercaseIndexName;
-            if (this.indexByLowercaseIndexNameByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out indexByLowercaseIndexName))
+            if (this.indexByIndexNameByTableName.TryGetValue(tableName.ToLowerInvariant(), out indexByLowercaseIndexName))
             {
                 SchemaIndex index;
                 indexByLowercaseIndexName.TryGetValue(indexName.ToLowerInvariant(), out index);
