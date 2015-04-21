@@ -353,7 +353,7 @@ namespace Allors.Databases.Object.SqlClient
         public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
             var references = new List<Reference>();
-            List<ObjectId> existsUnknown = null;
+            List<ObjectId> existsUnknownObjectIds = null;
 
             foreach (var objectId in objectIds)
             {
@@ -368,25 +368,25 @@ namespace Allors.Databases.Object.SqlClient
                 }
                 else
                 {
-                    if (existsUnknown == null)
+                    if (existsUnknownObjectIds == null)
                     {
-                        existsUnknown = new List<ObjectId>();
+                        existsUnknownObjectIds = new List<ObjectId>();
                     }
 
-                    existsUnknown.Add(objectId);
+                    existsUnknownObjectIds.Add(objectId);
                 }
             }
 
-            if (existsUnknown != null)
+            if (existsUnknownObjectIds != null)
             {
-                var existsUnknownReferences = this.InstantiateObjects(existsUnknown);
+                var existsUnknownReferences = this.InstantiateObjects(existsUnknownObjectIds);
                 references.AddRange(existsUnknownReferences);
-
-                this.GetCacheIdsAndExists();
             }
 
             if (references.Count != 0)
             {
+                this.Flush();
+
                 var prefetcher = new Prefetcher(this, references, prefetchPolicy);
                 prefetcher.Execute();
             }

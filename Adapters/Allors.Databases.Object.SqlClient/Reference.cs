@@ -132,6 +132,14 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
+        internal bool IsUnknownCacheId
+        {
+            get
+            {
+                return this.cacheId == UnknownCacheId;
+            }
+        }
+
         internal bool Exists
         {
             get

@@ -22,6 +22,7 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using Allors.Meta;
 
@@ -36,14 +37,18 @@ namespace Allors.Databases.Object.SqlClient
             this.session = session;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
+
         }
 
         public void Execute()
         {
-            this.session.Flush();
+            if (this.references.Any(reference => reference.IsUnknownCacheId || !reference.ExistsKnown))
+            {
+                this.session.GetCacheIdsAndExists();
+            }
 
             var unitRoles = false;
-            foreach (var prefetchRule in prefetchPolicy)
+            foreach (var prefetchRule in this.prefetchPolicy)
             {
                 var propertyType = prefetchRule.PropertyType;
                 if (propertyType is IRoleType)
