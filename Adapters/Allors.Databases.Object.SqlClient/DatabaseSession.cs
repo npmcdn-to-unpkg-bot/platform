@@ -69,6 +69,7 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> clearCompositeAndCompositesRoleByRoleType;
         private Dictionary<IAssociationType, SqlCommand> getCompositeAssociationByAssociationType;
+        private Dictionary<IAssociationType, SqlCommand> prefetchCompositeAssociationByAssociationType;
         private Dictionary<IAssociationType, SqlCommand> getCompositesAssociationByAssociationType;
 
         private SqlCommand instantiateObject;
@@ -1663,6 +1664,52 @@ namespace Allors.Databases.Object.SqlClient
             command.ExecuteNonQuery();
         }
 
+        internal void PrefetchCompositeAssociation(List<Reference> references, IAssociationType associationType)
+        {
+            this.prefetchCompositeAssociationByAssociationType = this.prefetchCompositeAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
+            {
+                var roleType = associationType.RoleType;
+
+                string sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(references);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositeAssociationByAssociationType[associationType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
+            }
+
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var association = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    if (associationType.ObjectType.ExistExclusiveClass)
+                    {
+                        this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, association);
+                    }
+                    else
+                    {
+                        this.GetOrCreateAssociationForExistingObject(association);
+                    }
+                }
+            }
+        }
+
         private Reference GetCompositeAssociation(Reference role, IAssociationType associationType)
         {
             this.getCompositeAssociationByAssociationType = this.getCompositeAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
@@ -1693,6 +1740,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 command = this.CreateSqlCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
+
                 var sqlParameter = command.CreateParameter();
                 sqlParameter.ParameterName = Mapping.ParamNameForRole;
                 sqlParameter.SqlDbType = this.database.Mapping.SqlDbTypeForObject;
@@ -1773,7 +1821,7 @@ namespace Allors.Databases.Object.SqlClient
 
             return objectIds.ToArray();
         }
-        
+
         private Reference CreateObject(IClass @class)
         {
             this.createObjectByClass = this.createObjectByClass ?? new Dictionary<IClass, SqlCommand>();
@@ -2128,6 +2176,7 @@ namespace Allors.Databases.Object.SqlClient
             this.clearCompositeAndCompositesRoleByRoleType = null;
             this.getCompositeAssociationByAssociationType = null;
             this.getCompositesAssociationByAssociationType = null;
+            this.prefetchCompositeAssociationByAssociationType = null;
 
             this.instantiateObject = null;
             this.instantiateObjects = null;

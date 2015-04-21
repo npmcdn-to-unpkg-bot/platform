@@ -4322,7 +4322,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
         }
 
         [Test]
-        public void PrefetchCompositeRole()
+        public void PrefetchCompositeRoleOne2One()
         {
             foreach (var init in this.Inits)
             {
@@ -4364,6 +4364,193 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 this.Session.Rollback();
 
                 Assert.AreEqual(c2A, c1A.C1C2one2one);
+            }
+        }
+
+        [Test]
+        public void PrefetchCompositeRolesOne2Many()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1A = C1.Create(this.Session);
+                var c2A = C2.Create(this.Session);
+                var c2b = C2.Create(this.Session);
+                c1A.AddC1C2one2many(c2A);
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+
+                Assert.Contains(c2A, c1A.C1C2one2manies);
+
+                this.Session.Commit();
+
+                Assert.Contains(c2A, c1A.C1C2one2manies);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+
+                Assert.Contains(c2A, c1A.C1C2one2manies);
+
+                this.Session.Commit();
+
+                c1A.RemoveC1C2one2many(c2A);
+                c1A.AddC1C2one2many(c2b);
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+
+                Assert.Contains(c2b, c1A.C1C2one2manies);
+
+                this.Session.Rollback();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+
+                Assert.Contains(c2A, c1A.C1C2one2manies);
+
+                this.Session.Rollback();
+
+                Assert.Contains(c2A, c1A.C1C2one2manies);
+            }
+        }
+
+        [Test]
+        public void PrefetchCompositeRolesMany2Many()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1A = C1.Create(this.Session);
+                var c2A = C2.Create(this.Session);
+                var c2b = C2.Create(this.Session);
+                c1A.AddC1C2many2many(c2A);
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+
+                Assert.Contains(c2A, c1A.C1C2many2manies);
+
+                this.Session.Commit();
+
+                Assert.Contains(c2A, c1A.C1C2many2manies);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+
+                Assert.Contains(c2A, c1A.C1C2many2manies);
+
+                this.Session.Commit();
+
+                c1A.RemoveC1C2many2many(c2A);
+                c1A.AddC1C2many2many(c2b);
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+
+                Assert.Contains(c2b, c1A.C1C2many2manies);
+
+                this.Session.Rollback();
+
+                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+
+                Assert.Contains(c2A, c1A.C1C2many2manies);
+
+                this.Session.Rollback();
+
+                Assert.Contains(c2A, c1A.C1C2many2manies);
+            }
+        }
+        
+        [Test]
+        public void PrefetchAssociationOne2One()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1a = C1.Create(this.Session);
+                var c1b = C1.Create(this.Session);
+                var c2a = C2.Create(this.Session);
+                c1a.C1C2one2one = c2a;
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+
+                Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+
+                this.Session.Commit();
+
+                Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+
+                Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+
+                this.Session.Commit();
+
+                c1b.C1C2one2one = c2a;
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+
+                Assert.AreEqual(c1b, c2a.C1WhereC2one2one);
+
+                this.Session.Rollback();
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+
+                Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+
+                this.Session.Rollback();
+
+                Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+            }
+        }
+
+        [Test]
+        public void PrefetchAssociationMany2Many()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1a = C1.Create(this.Session);
+                var c1b = C1.Create(this.Session);
+                var c2a = C2.Create(this.Session);
+                c1a.AddC1C2many2many(c2a);
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+
+                Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+
+                this.Session.Commit();
+
+                Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+
+                Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+
+                this.Session.Commit();
+
+                c1a.RemoveC1C2many2many(c2a);
+                c1b.AddC1C2many2many(c2a);
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+
+                Assert.Contains(c1b, c2a.C1sWhereC2many2many);
+
+                this.Session.Rollback();
+
+                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+
+                Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+
+                this.Session.Rollback();
+
+                Assert.Contains(c1a, c2a.C1sWhereC2many2many);
             }
         }
 
