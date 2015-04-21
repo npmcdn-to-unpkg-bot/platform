@@ -4540,6 +4540,9 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
 
+                var b = c1b.Strategy.ObjectId;
+                var assoc = c2a.C1sWhereC2many2many[0].Strategy.ObjectId;
+
                 Assert.Contains(c1b, c2a.C1sWhereC2many2many);
 
                 this.Session.Rollback();

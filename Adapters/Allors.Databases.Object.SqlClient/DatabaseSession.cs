@@ -44,13 +44,13 @@ namespace Allors.Databases.Object.SqlClient
 
         private Dictionary<Reference, Roles> modifiedRolesByReference;
         private Dictionary<Reference, Roles> unflushedRolesByReference;
-        private Dictionary<IAssociationType, HashSet<ObjectId>> triggersFlushRolesByIAssociationType;
+        private Dictionary<IAssociationType, HashSet<ObjectId>> triggersFlushRolesByAssociationType;
 
         private Dictionary<ObjectId, Reference> referenceByObjectId;
         private HashSet<Reference> referencesWithoutCacheId;
 
-        private Dictionary<IAssociationType, Dictionary<Reference, Reference>> associationByRoleByIAssociationType;
-        private Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>> associationsByRoleByIAssociationType;
+        private Dictionary<IAssociationType, Dictionary<Reference, Reference>> associationByRoleByAssociationType;
+        private Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>> associationsByRoleByAssociationType;
 
         private bool busyCommittingOrRollingBack;
 
@@ -93,8 +93,8 @@ namespace Allors.Databases.Object.SqlClient
             this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
             this.referencesWithoutCacheId = new HashSet<Reference>();
 
-            this.associationByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-            this.associationsByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
+            this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+            this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
             this.changeSet = new ChangeSet();
         }
@@ -467,8 +467,8 @@ namespace Allors.Databases.Object.SqlClient
                         this.referenceByObjectId[reference.ObjectId] = reference;
                     }
 
-                    this.associationByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
+                    this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+                    this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
                     this.changeSet = new ChangeSet();
 
@@ -513,10 +513,10 @@ namespace Allors.Databases.Object.SqlClient
 
                     this.unflushedRolesByReference = null;
                     this.modifiedRolesByReference = null;
-                    this.triggersFlushRolesByIAssociationType = null;
+                    this.triggersFlushRolesByAssociationType = null;
 
-                    this.associationByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByIAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
+                    this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+                    this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
                     this.changeSet = new ChangeSet();
 
@@ -595,7 +595,7 @@ namespace Allors.Databases.Object.SqlClient
             Reference association;
             if (!associationByRole.TryGetValue(roleStrategy.Reference, out association))
             {
-                this.FlushConditionally(roleStrategy, associationType);
+                this.FlushConditionally(roleStrategy.ObjectId, associationType);
                 association = this.GetCompositeAssociation(roleStrategy.Reference, associationType);
                 associationByRole[roleStrategy.Reference] = association;
             }
@@ -621,7 +621,7 @@ namespace Allors.Databases.Object.SqlClient
             ObjectId[] associations;
             if (!associationsByRole.TryGetValue(roleStrategy.Reference, out associations))
             {
-                this.FlushConditionally(roleStrategy, associationType);
+                this.FlushConditionally(roleStrategy.ObjectId, associationType);
                 associations = this.GetCompositesAssociation(roleStrategy, associationType);
                 associationsByRole[roleStrategy.Reference] = associations;
             }
@@ -663,10 +663,10 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var flush = new Flush(this, this.unflushedRolesByReference);
                 flush.Execute();
-            }
 
-            this.unflushedRolesByReference = null;
-            this.triggersFlushRolesByIAssociationType = null;
+                this.unflushedRolesByReference = null;
+                this.triggersFlushRolesByAssociationType = null;
+            }
         }
 
         internal void AddReferenceWithoutCacheId(Reference reference)
@@ -713,16 +713,16 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void TriggerFlush(ObjectId role, IAssociationType associationType)
         {
-            if (this.triggersFlushRolesByIAssociationType == null)
+            if (this.triggersFlushRolesByAssociationType == null)
             {
-                this.triggersFlushRolesByIAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();
+                this.triggersFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();
             }
 
             HashSet<ObjectId> associations;
-            if (!this.triggersFlushRolesByIAssociationType.TryGetValue(associationType, out associations))
+            if (!this.triggersFlushRolesByAssociationType.TryGetValue(associationType, out associations))
             {
                 associations = new HashSet<ObjectId>();
-                this.triggersFlushRolesByIAssociationType[associationType] = associations;
+                this.triggersFlushRolesByAssociationType[associationType] = associations;
             }
 
             associations.Add(role);
@@ -1664,7 +1664,7 @@ namespace Allors.Databases.Object.SqlClient
             command.ExecuteNonQuery();
         }
 
-        internal void PrefetchCompositeAssociation(List<Reference> references, IAssociationType associationType)
+        internal void PrefetchCompositeAssociationObjectTable(List<Reference> references, IAssociationType associationType)
         {
             this.prefetchCompositeAssociationByAssociationType = this.prefetchCompositeAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
 
@@ -1697,15 +1697,258 @@ namespace Allors.Databases.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    var association = this.Database.ObjectIds.Parse(reader[0].ToString());
-                    if (associationType.ObjectType.ExistExclusiveClass)
+                    var roleId = this.Database.ObjectIds.Parse(reader[1].ToString());
+                    var role = this.referenceByObjectId[roleId];
+
+                    var associationByRole = this.GetAssociationByRole(associationType);
+                    if (!associationByRole.ContainsKey(role))
                     {
-                        this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, association);
+                        var associationIdValue = reader[0];
+                        Reference association = null;
+                        if (associationIdValue != null && associationIdValue != DBNull.Value)
+                        {
+                            var associationId = this.Database.ObjectIds.Parse(associationIdValue.ToString());
+                            if (associationType.ObjectType.ExistExclusiveClass)
+                            {
+                                association = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                            }
+                            else
+                            {
+                                association = this.GetOrCreateAssociationForExistingObject(associationId);
+                            }
+                        }
+
+                        this.FlushConditionally(roleId, associationType);
+                        associationByRole[role] = association;
+                    }
+                }
+            }
+        }
+
+        internal void PrefetchCompositeAssociationRelationTable(List<Reference> roles, IAssociationType associationType)
+        {
+            this.prefetchCompositeAssociationByAssociationType = this.prefetchCompositeAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
+            {
+                var roleType = associationType.RoleType;
+
+                string sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(roles);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositeAssociationByAssociationType[associationType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(roles);
+            }
+
+            var prefetchedAssociationByRole = new Dictionary<Reference, ObjectId>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var roleId = this.Database.ObjectIds.Parse(reader[1].ToString());
+                    var roleReference = this.referenceByObjectId[roleId];
+                    var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    prefetchedAssociationByRole.Add(roleReference, associationId);
+                }
+            }
+
+            var associationByRole = this.GetAssociationByRole(associationType);
+            foreach (var role in roles)
+            {
+                if (!associationByRole.ContainsKey(role))
+                {
+                    Reference association = null;
+
+                    ObjectId associationId;
+                    if (prefetchedAssociationByRole.TryGetValue(role, out associationId))
+                    {
+                        if (associationType.ObjectType.ExistExclusiveClass)
+                        {
+                            association = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                        }
+                        else
+                        {
+                            association = this.GetOrCreateAssociationForExistingObject(associationId);
+                        }  
+                    }
+                    
+                    associationByRole[role] = association;
+
+                    this.FlushConditionally(role.ObjectId, associationType);
+                }
+            }
+        }
+
+        internal void PrefetchCompositesAssociationObjectTable(List<Reference> roles, IAssociationType associationType)
+        {
+            this.prefetchCompositeAssociationByAssociationType = this.prefetchCompositeAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
+            {
+                var roleType = associationType.RoleType;
+
+                string sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(roles);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositeAssociationByAssociationType[associationType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(roles);
+            }
+
+            var prefetchedAssociationByRole = new Dictionary<Reference, List<ObjectId>>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var roleId = this.Database.ObjectIds.Parse(reader[1].ToString());
+                    var roleReference = this.referenceByObjectId[roleId];
+
+                    var associationIdValue = reader[0];
+                    if (associationIdValue != null && associationIdValue != DBNull.Value)
+                    {
+                        List<ObjectId> associations;
+                        if (!prefetchedAssociationByRole.TryGetValue(roleReference, out associations))
+                        {
+                            associations = new List<ObjectId>();
+                            prefetchedAssociationByRole.Add(roleReference, associations);
+                        }
+
+                        var associationId = this.Database.ObjectIds.Parse(associationIdValue.ToString());
+                        associations.Add(associationId);
+
+                        if (associationType.ObjectType.ExistExclusiveClass)
+                        {
+                            this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                        }
+                        else
+                        {
+                            this.GetOrCreateAssociationForExistingObject(associationId);
+                        }
+                    }
+                }
+            }
+
+            var associationsByRole = this.GetAssociationsByRole(associationType);
+            foreach (var role in roles)
+            {
+                if (!associationsByRole.ContainsKey(role))
+                {
+                    List<ObjectId> associations;
+                    if (!prefetchedAssociationByRole.TryGetValue(role, out associations))
+                    {
+                        associationsByRole[role] = null;
                     }
                     else
                     {
-                        this.GetOrCreateAssociationForExistingObject(association);
+                        associationsByRole[role] = associations.ToArray();
                     }
+
+                    this.FlushConditionally(role.ObjectId, associationType);
+                }
+            }
+        }
+
+        internal void PrefetchCompositesAssociationRelationTable(List<Reference> roles, IAssociationType associationType)
+        {
+            this.prefetchCompositeAssociationByAssociationType = this.prefetchCompositeAssociationByAssociationType ?? new Dictionary<IAssociationType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
+            {
+                var roleType = associationType.RoleType;
+
+                string sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(roles);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositeAssociationByAssociationType[associationType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(roles);
+            }
+
+            var prefetchedAssociationByRole = new Dictionary<Reference, List<ObjectId>>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var roleId = this.Database.ObjectIds.Parse(reader[1].ToString());
+                    var roleReference = this.referenceByObjectId[roleId];
+
+                    List<ObjectId> associations;
+                    if (!prefetchedAssociationByRole.TryGetValue(roleReference, out associations))
+                    {
+                        associations = new List<ObjectId>();
+                        prefetchedAssociationByRole.Add(roleReference, associations);
+                    }
+
+                    var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    associations.Add(associationId);
+
+                    if (associationType.ObjectType.ExistExclusiveClass)
+                    {
+                        this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                    }
+                    else
+                    {
+                        this.GetOrCreateAssociationForExistingObject(associationId);
+                    }
+                }
+            }
+
+            var associationsByRole = this.GetAssociationsByRole(associationType);
+            foreach (var role in roles)
+            {
+                if (!associationsByRole.ContainsKey(role))
+                {
+                    List<ObjectId> associations;
+                    if (!prefetchedAssociationByRole.TryGetValue(role, out associations))
+                    {
+                        associationsByRole[role] = null;
+                    }
+                    else
+                    {
+                        associationsByRole[role] = associations.ToArray();
+                    }
+
+                    this.FlushConditionally(role.ObjectId, associationType);
                 }
             }
         }
@@ -2226,10 +2469,10 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<Reference, Reference> GetAssociationByRole(IAssociationType associationType)
         {
             Dictionary<Reference, Reference> associationByRole;
-            if (!this.associationByRoleByIAssociationType.TryGetValue(associationType, out associationByRole))
+            if (!this.associationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
             {
                 associationByRole = new Dictionary<Reference, Reference>();
-                this.associationByRoleByIAssociationType[associationType] = associationByRole;
+                this.associationByRoleByAssociationType[associationType] = associationByRole;
             }
 
             return associationByRole;
@@ -2238,23 +2481,23 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
         {
             Dictionary<Reference, ObjectId[]> associationsByRole;
-            if (!this.associationsByRoleByIAssociationType.TryGetValue(associationType, out associationsByRole))
+            if (!this.associationsByRoleByAssociationType.TryGetValue(associationType, out associationsByRole))
             {
                 associationsByRole = new Dictionary<Reference, ObjectId[]>();
-                this.associationsByRoleByIAssociationType[associationType] = associationsByRole;
+                this.associationsByRoleByAssociationType[associationType] = associationsByRole;
             }
 
             return associationsByRole;
         }
 
-        private void FlushConditionally(Strategy strategy, IAssociationType associationType)
+        private void FlushConditionally(ObjectId roleId, IAssociationType associationType)
         {
-            if (this.triggersFlushRolesByIAssociationType != null)
+            if (this.triggersFlushRolesByAssociationType != null)
             {
                 HashSet<ObjectId> roles;
-                if (this.triggersFlushRolesByIAssociationType.TryGetValue(associationType, out roles))
+                if (this.triggersFlushRolesByAssociationType.TryGetValue(associationType, out roles))
                 {
-                    if (roles.Contains(strategy.ObjectId))
+                    if (roles.Contains(roleId))
                     {
                         this.Flush();
                     }

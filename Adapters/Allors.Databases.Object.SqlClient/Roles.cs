@@ -196,7 +196,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 this.SetOriginal(roleType, newRole);
                 this.ModifiedRoleByRoleType[roleType] = newRole;
-                this.AddRequiresFlushIRoleType(roleType);
+                this.AddRequiresFlushRoleType(roleType);
                 this.Reference.Session.RequireFlush(this.Reference, this);
 
                 if (newRole != null)
@@ -231,7 +231,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 this.SetOriginal(roleType, null);
                 this.ModifiedRoleByRoleType[roleType] = null;
-                this.AddRequiresFlushIRoleType(roleType);
+                this.AddRequiresFlushRoleType(roleType);
                 this.Reference.Session.RequireFlush(this.Reference, this);
             }
         }
@@ -279,7 +279,7 @@ namespace Allors.Databases.Object.SqlClient
                     this.Reference.Session.TriggerFlush(role.ObjectId, roleType.AssociationType);
                 }
 
-                this.AddRequiresFlushIRoleType(roleType);
+                this.AddRequiresFlushRoleType(roleType);
                 this.Reference.Session.RequireFlush(this.Reference, this);
             }
         }
@@ -309,7 +309,7 @@ namespace Allors.Databases.Object.SqlClient
                     this.Reference.Session.TriggerFlush(role.ObjectId, roleType.AssociationType);
                 }
 
-                this.AddRequiresFlushIRoleType(roleType);
+                this.AddRequiresFlushRoleType(roleType);
                 this.Reference.Session.RequireFlush(this.Reference, this);
             }
         }
@@ -434,7 +434,7 @@ namespace Allors.Databases.Object.SqlClient
             return Array.IndexOf(this.GetNonModifiedCompositeRoles(roleType), objectId) >= 0;
         }
 
-        private void AddRequiresFlushIRoleType(IRoleType roleType)
+        private void AddRequiresFlushRoleType(IRoleType roleType)
         {
             if (this.requireFlushRoles == null)
             {

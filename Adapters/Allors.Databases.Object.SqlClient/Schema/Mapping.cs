@@ -562,7 +562,7 @@ AS
                             definition = @"CREATE PROCEDURE " + this.ProcedureNameForPrefetchAssociationByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS
-    SELECT " + this.ColumnNameByRelationType[relationType] + @"
+    SELECT " + this.ColumnNameByRelationType[relationType] + ", " + ColumnNameForObject + @"
     FROM " + table + @"
     WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
                             this.procedureDefinitionByName.Add(this.ProcedureNameForPrefetchAssociationByRelationType[relationType], definition);
@@ -777,7 +777,7 @@ AS
                                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForPrefetchAssociationByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 
-    SELECT " + ColumnNameForObject + @"
+    SELECT " + ColumnNameForObject + ", " + this.ColumnNameByRelationType[relationType] + @"
     FROM " + table + @"
     WHERE " + this.ColumnNameByRelationType[relationType] + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
                                 this.procedureDefinitionByName.Add(this.ProcedureNameForPrefetchAssociationByRelationType[relationType], definition);
@@ -799,7 +799,7 @@ AS
                                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForPrefetchAssociationByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 
-    SELECT " + ColumnNameForObject + @"
+    SELECT " + ColumnNameForObject + ", " + this.ColumnNameByRelationType[relationType] + @"
     FROM " + table + @"
     WHERE " + this.ColumnNameByRelationType[relationType] + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
                                 this.procedureDefinitionByName.Add(this.ProcedureNameForPrefetchAssociationByRelationType[relationType], definition);
@@ -947,7 +947,7 @@ AS
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForPrefetchAssociationByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS
-    SELECT " + ColumnNameForAssociation + @"
+    SELECT " + ColumnNameForAssociation + "," + ColumnNameForRole + @"
     FROM " + table + @"
     WHERE " + ColumnNameForRole + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
                         this.procedureDefinitionByName.Add(this.ProcedureNameForPrefetchAssociationByRelationType[relationType], definition);
@@ -968,7 +968,7 @@ AS
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForPrefetchAssociationByRelationType[relationType] + @"
    " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS
-    SELECT " + ColumnNameForAssociation + @"
+    SELECT " + ColumnNameForAssociation + "," + ColumnNameForRole + @"
     FROM " + table + @"
     WHERE " + ColumnNameForRole + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
                         this.procedureDefinitionByName.Add(this.ProcedureNameForPrefetchAssociationByRelationType[relationType], definition);

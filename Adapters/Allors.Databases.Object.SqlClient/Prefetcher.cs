@@ -36,7 +36,10 @@ namespace Allors.Databases.Object.SqlClient
         private readonly List<IRoleType> compositeRoleTypesRelationTable;
         private readonly List<IRoleType> compositesRoleTypesObjectTable;
         private readonly List<IRoleType> compositesRoleTypesRelationTable;
-        private readonly List<IAssociationType> associationTypes;
+        private readonly List<IAssociationType> compositeAssociationTypesObjectTable;
+        private readonly List<IAssociationType> compositeAssociationTypesRelationTable;
+        private readonly List<IAssociationType> compositesAssociationTypesObjectTable;
+        private readonly List<IAssociationType> compositesAssociationTypesRelationTable;
         
         public Prefetcher(DatabaseSession session, List<Reference> references, IPropertyType[] propertyTypes)
         {
@@ -104,19 +107,59 @@ namespace Allors.Databases.Object.SqlClient
                 else
                 {
                     var associationType = (IAssociationType)propertyType;
+                    var relationType = associationType.RelationType;
+                    var roleType = relationType.RoleType;
 
-                    if (this.associationTypes == null)
+                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                     {
-                        this.associationTypes = new List<IAssociationType>();
-                    }
+                        if (associationType.IsOne)
+                        {
+                            if (this.compositeAssociationTypesObjectTable == null)
+                            {
+                                this.compositeAssociationTypesObjectTable = new List<IAssociationType>();
+                            }
 
-                    this.associationTypes.Add(associationType);
+                            this.compositeAssociationTypesObjectTable.Add(associationType);
+                        }
+                        else
+                        {
+                            if (this.compositesAssociationTypesObjectTable == null)
+                            {
+                                this.compositesAssociationTypesObjectTable = new List<IAssociationType>();
+                            }
+
+                            this.compositesAssociationTypesObjectTable.Add(associationType);
+                        }
+                    }
+                    else
+                    {
+                        if (associationType.IsOne)
+                        {
+                            if (this.compositeAssociationTypesRelationTable == null)
+                            {
+                                this.compositeAssociationTypesRelationTable = new List<IAssociationType>();
+                            }
+
+                            this.compositeAssociationTypesRelationTable.Add(associationType);
+                        }
+                        else
+                        {
+                            if (this.compositesAssociationTypesRelationTable == null)
+                            {
+                                this.compositesAssociationTypesRelationTable = new List<IAssociationType>();
+                            }
+
+                            this.compositesAssociationTypesRelationTable.Add(associationType);
+                        }
+                    }
                 }
             }
         }
 
         public void Execute()
         {
+            this.session.Flush();
+
             if (this.unitRoleTypes)
             {
                 var referencesByClass = new Dictionary<IClass, List<Reference>>();
@@ -173,11 +216,35 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            if (this.associationTypes != null)
+            if (this.compositeAssociationTypesObjectTable != null)
             {
-                foreach (var associationType in this.associationTypes)
+                foreach (var associationType in this.compositeAssociationTypesObjectTable)
                 {
-                    this.session.PrefetchCompositeAssociation(this.references, associationType);
+                    this.session.PrefetchCompositeAssociationObjectTable(this.references, associationType);
+                }
+            }
+
+            if (this.compositesAssociationTypesObjectTable != null)
+            {
+                foreach (var associationType in this.compositesAssociationTypesObjectTable)
+                {
+                    this.session.PrefetchCompositesAssociationObjectTable(this.references, associationType);
+                }
+            }
+
+            if (this.compositeAssociationTypesRelationTable != null)
+            {
+                foreach (var associationType in this.compositeAssociationTypesRelationTable)
+                {
+                    this.session.PrefetchCompositeAssociationRelationTable(this.references, associationType);
+                }
+            }
+
+            if (this.compositesAssociationTypesRelationTable != null)
+            {
+                foreach (var associationType in this.compositesAssociationTypesRelationTable)
+                {
+                    this.session.PrefetchCompositesAssociationRelationTable(this.references, associationType);
                 }
             }
         }
