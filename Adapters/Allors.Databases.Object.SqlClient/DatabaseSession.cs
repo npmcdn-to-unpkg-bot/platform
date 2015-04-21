@@ -1460,21 +1460,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.prefetchCompositesRoleByRoleType = this.prefetchCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
 
-            var references = new List<Reference>();
-            foreach (var association in associations)
-            {
-                Roles modifiedRoles = null;
-                if (this.modifiedRolesByReference != null)
-                {
-                    this.modifiedRolesByReference.TryGetValue(association, out modifiedRoles);
-                    if (modifiedRoles != null && modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
-                    {
-                        continue;
-                    }
-                }
-
-                references.Add(association);
-            }
+            var references = this.FilterWithUnodifiedRoles(associations, roleType);
 
             SqlCommand command;
             if (!this.prefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
@@ -2495,6 +2481,31 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             return associationsByRole;
+        }
+
+        private List<Reference> FilterWithUnodifiedRoles(List<Reference> associations, IRoleType roleType)
+        {
+            if (this.modifiedRolesByReference == null)
+            {
+                return associations;
+            }
+
+            var references = new List<Reference>();
+            foreach (var association in associations)
+            {
+                Roles modifiedRoles;
+                if (this.modifiedRolesByReference.TryGetValue(association, out modifiedRoles))
+                {
+                    if (modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                    {
+                        continue;
+                    }
+                }
+
+                references.Add(association);
+            }
+
+            return references;
         }
 
         private void FlushConditionally(ObjectId roleId, IAssociationType associationType)
