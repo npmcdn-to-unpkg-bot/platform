@@ -64,6 +64,7 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<IRoleType, SqlCommand> prefetchCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> setCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> getCompositesRoleByRoleType;
+        private Dictionary<IRoleType, SqlCommand> prefetchCompositesRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
         private Dictionary<IRoleType, SqlCommand> clearCompositeAndCompositesRoleByRoleType;
@@ -1378,6 +1379,163 @@ namespace Allors.Databases.Object.SqlClient
             roles.CachedObject.SetValue(roleType, objectIds.ToArray());
         }
 
+        internal void PrefetchCompositesRoleObjectTable(List<Reference> references, IRoleType roleType)
+        {
+            this.prefetchCompositesRoleByRoleType = this.prefetchCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                string sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
+
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(references);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositesRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
+            }
+
+            var rolesByAssociation = new Dictionary<Reference, List<ObjectId>>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var associationReference = this.referenceByObjectId[associationId];
+                    
+                    Roles modifiedRoles = null;
+                    if (this.modifiedRolesByReference != null)
+                    {
+                        this.modifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
+                    }
+
+                    var roleIdValue = reader[1];
+
+                    if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                    {
+                        if (roleIdValue == null || roleIdValue == DBNull.Value)
+                        {
+                            rolesByAssociation[associationReference] = null;
+                        }
+                        else
+                        {
+                            var objectId = this.Database.ObjectIds.Parse(roleIdValue.ToString());
+                            List<ObjectId> roles;
+                            if (!rolesByAssociation.TryGetValue(associationReference, out roles))
+                            {
+                                roles = new List<ObjectId>();
+                                rolesByAssociation[associationReference] = roles;
+                            }
+
+                            roles.Add(objectId);
+                        }
+                    }
+                }
+            }
+
+            var cache = this.Database.Cache;
+            foreach (var dictionaryEntry in rolesByAssociation)
+            {
+                var association = dictionaryEntry.Key;
+                var roles = dictionaryEntry.Value;
+
+                var cachedObject = cache.GetOrCreateCachedObject(association.Class, association.ObjectId, association.CacheId);
+                cachedObject.SetValue(roleType, roles.ToArray());
+            }
+        }
+
+        internal void PrefetchCompositesRoleRelationTable(List<Reference> references, IRoleType roleType)
+        {
+            this.prefetchCompositesRoleByRoleType = this.prefetchCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            SqlCommand command;
+            if (!this.prefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
+            {
+                string sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
+                command = this.CreateSqlCommand(sql);
+                command.CommandType = CommandType.StoredProcedure;
+
+                var sqlParameter = command.CreateParameter();
+                sqlParameter.SqlDbType = SqlDbType.Structured;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForObject;
+                sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                sqlParameter.Value = this.Database.CreateObjectTable(references);
+
+                command.Parameters.Add(sqlParameter);
+
+                this.prefetchCompositesRoleByRoleType[roleType] = command;
+            }
+            else
+            {
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
+            }
+            
+            var rolesByAssociation = new Dictionary<Reference, List<ObjectId>>();
+            using (DbDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var associationReference = this.referenceByObjectId[associationId];
+
+                    Roles modifiedRoles = null;
+                    if (this.modifiedRolesByReference != null)
+                    {
+                        this.modifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
+                    }
+
+                    if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                    {
+                        var role = this.Database.ObjectIds.Parse(reader[1].ToString());
+                        List<ObjectId> roles;
+                        if (!rolesByAssociation.TryGetValue(associationReference, out roles))
+                        {
+                            roles = new List<ObjectId>();
+                            rolesByAssociation[associationReference] = roles;
+                        }
+
+                        roles.Add(role);
+                    }
+                }
+            }
+
+            var cache = this.Database.Cache;
+            foreach (var reference in references)
+            {
+                Roles modifiedRoles = null;
+                if (this.modifiedRolesByReference != null)
+                {
+                    this.modifiedRolesByReference.TryGetValue(reference, out modifiedRoles);
+                }
+                
+                if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                {
+                    var cachedObject = cache.GetOrCreateCachedObject(reference.Class, reference.ObjectId, reference.CacheId);
+
+                    List<ObjectId> roles;
+                    if (rolesByAssociation.TryGetValue(reference, out roles))
+                    {
+                        cachedObject.SetValue(roleType, roles.ToArray());
+                    }
+                    else
+                    {
+                        cachedObject.SetValue(roleType, null);
+                    }
+                }
+            }
+        }
+
         internal void AddCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
         {
             this.addCompositeRoleByRoleType = this.addCompositeRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
@@ -1956,28 +2114,32 @@ namespace Allors.Databases.Object.SqlClient
 
         private void ResetSqlCommands()
         {
-            this.addCompositeRoleByRoleType = null;
-            this.clearCompositeAndCompositesRoleByRoleType = null;
-            this.createObjectByClass = null;
-            this.createObjectsByClass = null;
-            this.getCacheIds = null;
-            this.getCompositeAssociationByAssociationType = null;
-            this.getCompositesAssociationByAssociationType = null;
+            this.getUnitRolesByClass = null;
+            this.prefetchUnitRolesByClass = null;
+            this.setUnitRoleByRoleTypeByClass = null;
+
             this.getCompositeRoleByRoleType = null;
+            this.setCompositeRoleByRoleType = null;
             this.prefetchCompositeRoleByRoleType = null;
             this.getCompositesRoleByRoleType = null;
-            this.getUnitRolesByClass = null;
+            this.prefetchCompositesRoleByRoleType = null;
+            this.addCompositeRoleByRoleType = null;
             this.removeCompositeRoleByRoleType = null;
-            this.setCompositeRoleByRoleType = null;
-            this.setUnitRoleByRoleTypeByClass = null;
-            this.updateCacheIds = null;
-            this.deleteObjectByClass = null;
-            this.getObjectType = null;
-            this.insertObjectByClass = null;
+            this.clearCompositeAndCompositesRoleByRoleType = null;
+            this.getCompositeAssociationByAssociationType = null;
+            this.getCompositesAssociationByAssociationType = null;
+
             this.instantiateObject = null;
             this.instantiateObjects = null;
             this.setUnitRolesByRoleTypeByClass = null;
-            this.prefetchUnitRolesByClass = null;
+            this.createObjectByClass = null;
+            this.createObjectsByClass = null;
+            this.insertObjectByClass = null;
+            this.deleteObjectByClass = null;
+
+            this.getCacheIds = null;
+            this.updateCacheIds = null;
+            this.getObjectType = null;
         }
 
         private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)

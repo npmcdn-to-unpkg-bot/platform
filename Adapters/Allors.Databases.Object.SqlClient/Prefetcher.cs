@@ -197,6 +197,22 @@ namespace Allors.Databases.Object.SqlClient
                     this.session.PrefetchCompositeRoleRelationTable(this.references, roleType);
                 }
             }
+
+            if (this.compositesRoleTypesObjectTable != null)
+            {
+                foreach (var roleType in this.compositesRoleTypesObjectTable)
+                {
+                    this.session.PrefetchCompositesRoleObjectTable(this.references, roleType);
+                }
+            }
+
+            if (this.compositesRoleTypesRelationTable != null)
+            {
+                foreach (var roleType in this.compositesRoleTypesRelationTable)
+                {
+                    this.session.PrefetchCompositesRoleRelationTable(this.references, roleType);
+                }
+            }
         }
     }
 }
