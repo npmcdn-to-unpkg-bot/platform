@@ -1456,9 +1456,25 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositesRoleRelationTable(List<Reference> references, IRoleType roleType)
+        internal void PrefetchCompositesRoleRelationTable(List<Reference> associations, IRoleType roleType)
         {
             this.prefetchCompositesRoleByRoleType = this.prefetchCompositesRoleByRoleType ?? new Dictionary<IRoleType, SqlCommand>();
+
+            var references = new List<Reference>();
+            foreach (var association in associations)
+            {
+                Roles modifiedRoles = null;
+                if (this.modifiedRolesByReference != null)
+                {
+                    this.modifiedRolesByReference.TryGetValue(association, out modifiedRoles);
+                    if (modifiedRoles != null && modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                    {
+                        continue;
+                    }
+                }
+
+                references.Add(association);
+            }
 
             SqlCommand command;
             if (!this.prefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
@@ -1490,24 +1506,15 @@ namespace Allors.Databases.Object.SqlClient
                     var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
                     var associationReference = this.referenceByObjectId[associationId];
 
-                    Roles modifiedRoles = null;
-                    if (this.modifiedRolesByReference != null)
+                    var role = this.Database.ObjectIds.Parse(reader[1].ToString());
+                    List<ObjectId> roles;
+                    if (!rolesByAssociation.TryGetValue(associationReference, out roles))
                     {
-                        this.modifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
+                        roles = new List<ObjectId>();
+                        rolesByAssociation[associationReference] = roles;
                     }
 
-                    if (modifiedRoles == null || !modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
-                    {
-                        var role = this.Database.ObjectIds.Parse(reader[1].ToString());
-                        List<ObjectId> roles;
-                        if (!rolesByAssociation.TryGetValue(associationReference, out roles))
-                        {
-                            roles = new List<ObjectId>();
-                            rolesByAssociation[associationReference] = roles;
-                        }
-
-                        roles.Add(role);
-                    }
+                    roles.Add(role);
                 }
             }
 
