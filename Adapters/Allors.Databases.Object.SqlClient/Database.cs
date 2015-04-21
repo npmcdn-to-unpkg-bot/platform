@@ -429,9 +429,9 @@ namespace Allors.Databases.Object.SqlClient
             return new ObjectDataRecord(this.mapping, objectids);
         }
 
-        internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<Reference> strategies)
+        internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<Reference> references)
         {
-            return new CompositesRoleDataRecords(this.mapping, strategies);
+            return new CompositesRoleDataRecords(this.mapping, references);
         }
 
         internal IEnumerable<SqlDataRecord> CreateRelationTable(IEnumerable<CompositeRelation> relations)

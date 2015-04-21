@@ -79,7 +79,7 @@ namespace Allors.Databases.Object.SqlClient
                                 var @class = dictionaryEntry.Key;
                                 var classBasedReferences = dictionaryEntry.Value;
 
-                                this.session.PrefetchUnitRoles(@class, classBasedReferences);
+                                this.session.PrefetchUnitRoles(@class, classBasedReferences, roleType);
                             }
                         }
                     }
