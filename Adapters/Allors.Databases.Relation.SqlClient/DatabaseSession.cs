@@ -382,7 +382,7 @@ namespace Allors.Databases.Relation.SqlClient
             return objects;
         }
 
-        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
             // TODO:
         }

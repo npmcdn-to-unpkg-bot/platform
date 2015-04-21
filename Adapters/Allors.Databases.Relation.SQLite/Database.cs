@@ -360,6 +360,10 @@ namespace Allors.Databases.Relation.SQLite
             this.SaveAllors(writer);
         }
 
+        public void Compile(PrefetchPolicy prefetchPolicy)
+        {
+        }
+
         public Validation Validate()
         {
             var validateResult = new Validation(this);

@@ -337,7 +337,7 @@ namespace Allors.Databases.Memory
             return (IObject[])allorsObjects.ToArray(typeof(IObject));
         }
 
-        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
             // nop
         }

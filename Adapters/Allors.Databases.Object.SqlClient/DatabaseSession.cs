@@ -350,7 +350,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
             var references = new List<Reference>();
             List<ObjectId> existsUnknown = null;
@@ -387,7 +387,7 @@ namespace Allors.Databases.Object.SqlClient
 
             if (references.Count != 0)
             {
-                var prefetcher = new Prefetcher(this, references, propertyTypes);
+                var prefetcher = new Prefetcher(this, references, prefetchPolicy);
                 prefetcher.Execute();
             }
         }

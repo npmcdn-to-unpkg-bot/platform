@@ -1019,7 +1019,7 @@ namespace Allors.Workspaces.Memory
             return allorsObjects.ToArray();
         }
 
-        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
             // TODO:
         }

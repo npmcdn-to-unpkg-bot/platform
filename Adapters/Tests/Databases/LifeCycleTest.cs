@@ -4287,7 +4287,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 var c1A = C1.Create(this.Session);
                 c1A.C1AllorsString = "1";
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1AllorsString }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual("1", c1A.C1AllorsString);
 
@@ -4297,7 +4297,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Commit();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1AllorsString }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual("1", c1A.C1AllorsString);
 
@@ -4305,13 +4305,13 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 c1A.C1AllorsString = "2";
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1AllorsString }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual("2", c1A.C1AllorsString);
 
                 this.Session.Rollback();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1AllorsString });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1AllorsString }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual("1", c1A.C1AllorsString);
 
@@ -4333,7 +4333,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 var c2b = C2.Create(this.Session);
                 c1A.C1C2one2one = c2A;
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2one }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual(c2A, c1A.C1C2one2one);
 
@@ -4343,7 +4343,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Commit();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2one }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual(c2A, c1A.C1C2one2one);
 
@@ -4351,13 +4351,13 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 c1A.C1C2one2one = c2b;
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2one }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual(c2b, c1A.C1C2one2one);
 
                 this.Session.Rollback();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2one }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.AreEqual(c2A, c1A.C1C2one2one);
 
@@ -4379,7 +4379,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 var c2b = C2.Create(this.Session);
                 c1A.AddC1C2one2many(c2A);
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2A, c1A.C1C2one2manies);
 
@@ -4389,7 +4389,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Commit();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2A, c1A.C1C2one2manies);
 
@@ -4398,13 +4398,13 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 c1A.RemoveC1C2one2many(c2A);
                 c1A.AddC1C2one2many(c2b);
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2b, c1A.C1C2one2manies);
 
                 this.Session.Rollback();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2one2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2A, c1A.C1C2one2manies);
 
@@ -4426,7 +4426,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 var c2b = C2.Create(this.Session);
                 c1A.AddC1C2many2many(c2A);
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2many2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2A, c1A.C1C2many2manies);
 
@@ -4436,7 +4436,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Commit();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2many2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2A, c1A.C1C2many2manies);
 
@@ -4445,13 +4445,13 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 c1A.RemoveC1C2many2many(c2A);
                 c1A.AddC1C2many2many(c2b);
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2many2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2b, c1A.C1C2many2manies);
 
                 this.Session.Rollback();
 
-                this.Session.Prefetch(new[] { c1A.Strategy.ObjectId }, new IPropertyType[] { C1.Meta.C1C2many2manies });
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2many2manies }, new[] { c1A.Strategy.ObjectId });
 
                 Assert.Contains(c2A, c1A.C1C2many2manies);
 
@@ -4473,7 +4473,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 var c2a = C2.Create(this.Session);
                 c1a.C1C2one2one = c2a;
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
 
                 Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
 
@@ -4483,7 +4483,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Commit();
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
 
                 Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
 
@@ -4491,13 +4491,13 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 c1b.C1C2one2one = c2a;
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
 
                 Assert.AreEqual(c1b, c2a.C1WhereC2one2one);
 
                 this.Session.Rollback();
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1WhereC2one2one });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
 
                 Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
 
@@ -4519,7 +4519,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 var c2a = C2.Create(this.Session);
                 c1a.AddC1C2many2many(c2a);
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
 
                 Assert.Contains(c1a, c2a.C1sWhereC2many2many);
 
@@ -4529,7 +4529,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Commit();
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
 
                 Assert.Contains(c1a, c2a.C1sWhereC2many2many);
 
@@ -4538,7 +4538,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 c1a.RemoveC1C2many2many(c2a);
                 c1b.AddC1C2many2many(c2a);
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
 
                 var b = c1b.Strategy.ObjectId;
                 var assoc = c2a.C1sWhereC2many2many[0].Strategy.ObjectId;
@@ -4547,7 +4547,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.Session.Rollback();
 
-                this.Session.Prefetch(new[] { c2a.Strategy.ObjectId }, new IPropertyType[] { C2.Meta.C1sWhereC2many2many });
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
 
                 Assert.Contains(c1a, c2a.C1sWhereC2many2many);
 

@@ -179,6 +179,6 @@ namespace Allors
         /// <returns>The instantiated objects.</returns>
         IObject[] Instantiate(ObjectId[] objectIds);
 
-        void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes);
+        void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds);
     }
 }

@@ -366,7 +366,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
             return objects != null ? objects.ToArray() : EmptyObjects;
         }
 
-        public void Prefetch(ObjectId[] objectIds, IPropertyType[] propertyTypes)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
             // TODO:
         }
