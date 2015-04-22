@@ -1041,7 +1041,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void PrefetchUnitRoles(IClass @class, List<Reference> associations, IRoleType anyRoleType)
         {
-            var references = this.FilterWithUnmodifiedCompositeRoles(associations, anyRoleType);
+            var references = this.FilterForPrefetchRoles(associations, anyRoleType);
             if (references.Count == 0)
             {
                 return;
@@ -1306,7 +1306,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void PrefetchCompositeRoleObjectTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
+            var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -1357,7 +1357,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void PrefetchCompositeRoleRelationTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
+            var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -1480,7 +1480,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void PrefetchCompositesRoleObjectTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
+            var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositesRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -1545,7 +1545,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void PrefetchCompositesRoleRelationTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
+            var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositesRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -2383,22 +2383,33 @@ namespace Allors.Databases.Object.SqlClient
             return associationsByRole;
         }
 
-        private List<Reference> FilterWithUnmodifiedCompositeRoles(List<Reference> associations, IRoleType roleType)
+        private List<Reference> FilterForPrefetchRoles(List<Reference> associations, IRoleType roleType)
         {
-            if (this.modifiedRolesByReference == null)
-            {
-                return associations;
-            }
-
             var references = new List<Reference>();
+
+            var cache = this.Database.Cache;
+            
             foreach (var association in associations)
             {
-                Roles modifiedRoles;
-                if (this.modifiedRolesByReference.TryGetValue(association, out modifiedRoles))
+                object role;
+
+                Roles roles;
+                if (this.modifiedRolesByReference != null && this.modifiedRolesByReference.TryGetValue(association, out roles))
                 {
-                    if (modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                    if (roles.TryGetUnitRole(roleType, out role))
                     {
                         continue;
+                    }
+                }
+                else
+                {
+                    if (!association.IsUnknownCacheId)
+                    {
+                        var cacheObject = cache.GetOrCreateCachedObject(association.Class, association.ObjectId, association.CacheId);
+                        if (cacheObject.TryGetValue(roleType, out role))
+                        {
+                            continue;
+                        }
                     }
                 }
 
@@ -2408,24 +2419,75 @@ namespace Allors.Databases.Object.SqlClient
             return references;
         }
 
-        private List<Reference> FilterWithUnmodifiedCompositeRoles(List<Reference> associations, IRoleType roleType, List<ObjectId> roles)
+        private List<Reference> FilterForPrefetchCompositeRoles(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjects)
         {
-            if (this.modifiedRolesByReference == null)
-            {
-                return associations;
-            }
-
             var references = new List<Reference>();
+
+            var cache = this.Database.Cache;
+
             foreach (var association in associations)
             {
-                Roles modifiedRoles;
-                if (this.modifiedRolesByReference.TryGetValue(association, out modifiedRoles))
+                Roles roles;
+                if (this.modifiedRolesByReference != null && this.modifiedRolesByReference.TryGetValue(association, out roles))
                 {
-                    object role;
-                    if (modifiedRoles.ModifiedRoleByRoleType.TryGetValue(roleType, out role))
+                    ObjectId role;
+                    if (roles.TryGetCompositeRole(roleType, out role))
                     {
-                        roles.Add((ObjectId)role);
+                        nestedObjects.Add(role);
                         continue;
+                    }
+                }
+                else
+                {
+                    if (!association.IsUnknownCacheId)
+                    {
+                        var cacheObject = cache.GetOrCreateCachedObject(association.Class, association.ObjectId, association.CacheId);
+
+                        object role;
+                        if (cacheObject.TryGetValue(roleType, out role))
+                        {
+                            nestedObjects.Add((ObjectId)role);
+                            continue;
+                        }
+                    }
+                }
+
+                references.Add(association);
+            }
+
+            return references;
+        }
+
+        private List<Reference> FilterForPrefetchCompositesRoles(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjects)
+        {
+            var references = new List<Reference>();
+
+            var cache = this.Database.Cache;
+
+            foreach (var association in associations)
+            {
+                Roles roles;
+                if (this.modifiedRolesByReference != null && this.modifiedRolesByReference.TryGetValue(association, out roles))
+                {
+                    IEnumerable<ObjectId> role;
+                    if (roles.TryGetCompositesRole(roleType, out role))
+                    {
+                        nestedObjects.AddRange(role);
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (!association.IsUnknownCacheId)
+                    {
+                        var cacheObject = cache.GetOrCreateCachedObject(association.Class, association.ObjectId, association.CacheId);
+
+                        object role;
+                        if (cacheObject.TryGetValue(roleType, out role))
+                        {
+                            nestedObjects.AddRange((ObjectId[])role);
+                            continue;
+                        }
                     }
                 }
 
