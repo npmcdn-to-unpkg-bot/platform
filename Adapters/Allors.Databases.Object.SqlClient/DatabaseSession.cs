@@ -727,7 +727,7 @@ namespace Allors.Databases.Object.SqlClient
                 var objectType = this.Database.Cache.GetObjectType(objectId);
                 if (objectType == null)
                 {
-                    objectType = this.GetObjectType(objectId);
+                    objectType = this.GetClass(objectId);
                     this.Database.Cache.SetObjectType(objectId, objectType);
                 }
 
@@ -1041,7 +1041,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal void PrefetchUnitRoles(IClass @class, List<Reference> associations, IRoleType anyRoleType)
         {
-            var references = this.FilterWithUnmodifiedRoles(associations, anyRoleType);
+            var references = this.FilterWithUnmodifiedCompositeRoles(associations, anyRoleType);
             if (references.Count == 0)
             {
                 return;
@@ -1304,9 +1304,9 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositeRoleObjectTable(List<Reference> associations, IRoleType roleType, List<ObjectId> roles)
+        internal void PrefetchCompositeRoleObjectTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = roles == null ? this.FilterWithUnmodifiedRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, roles);
+            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -1343,16 +1343,21 @@ namespace Allors.Databases.Object.SqlClient
                     }
                     else
                     {
-                        var objectId = this.Database.ObjectIds.Parse(roleIdValue.ToString());
-                        cachedObject.SetValue(roleType, objectId);
+                        var roleId = this.Database.ObjectIds.Parse(roleIdValue.ToString());
+                        cachedObject.SetValue(roleType, roleId);
+
+                        if (nestedObjectIds != null)
+                        {
+                            nestedObjectIds.Add(roleId);
+                        }
                     }
                 }
             }
         }
 
-        internal void PrefetchCompositeRoleRelationTable(List<Reference> associations, IRoleType roleType)
+        internal void PrefetchCompositeRoleRelationTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = this.FilterWithUnmodifiedRoles(associations, roleType);
+            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -1388,10 +1393,15 @@ namespace Allors.Databases.Object.SqlClient
             {
                 var cachedObject = cache.GetOrCreateCachedObject(reference.Class, reference.ObjectId, reference.CacheId);
 
-                ObjectId role;
-                if (roleByAssociation.TryGetValue(reference, out role))
+                ObjectId roleId;
+                if (roleByAssociation.TryGetValue(reference, out roleId))
                 {
-                    cachedObject.SetValue(roleType, role);
+                    cachedObject.SetValue(roleType, roleId);
+                
+                    if (nestedObjectIds != null)
+                    {
+                        nestedObjectIds.Add(roleId);
+                    }
                 }
                 else
                 {
@@ -1468,9 +1478,9 @@ namespace Allors.Databases.Object.SqlClient
             roles.CachedObject.SetValue(roleType, objectIds.ToArray());
         }
 
-        internal void PrefetchCompositesRoleObjectTable(List<Reference> associations, IRoleType roleType)
+        internal void PrefetchCompositesRoleObjectTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = this.FilterWithUnmodifiedRoles(associations, roleType);
+            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -1525,12 +1535,17 @@ namespace Allors.Databases.Object.SqlClient
 
                 var cachedObject = cache.GetOrCreateCachedObject(association.Class, association.ObjectId, association.CacheId);
                 cachedObject.SetValue(roleType, roles.ToArray());
+
+                if (nestedObjectIds != null)
+                {
+                    nestedObjectIds.AddRange(roles);
+                }
             }
         }
 
-        internal void PrefetchCompositesRoleRelationTable(List<Reference> associations, IRoleType roleType)
+        internal void PrefetchCompositesRoleRelationTable(List<Reference> associations, IRoleType roleType, List<ObjectId> nestedObjectIds)
         {
-            var references = this.FilterWithUnmodifiedRoles(associations, roleType);
+            var references = nestedObjectIds == null ? this.FilterWithUnmodifiedCompositeRoles(associations, roleType) : this.FilterWithUnmodifiedCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
             {
                 return;
@@ -1586,6 +1601,11 @@ namespace Allors.Databases.Object.SqlClient
                     if (rolesByAssociation.TryGetValue(reference, out roles))
                     {
                         cachedObject.SetValue(roleType, roles.ToArray());
+
+                        if (nestedObjectIds != null)
+                        {
+                            nestedObjectIds.AddRange(roles);
+                        }
                     }
                     else
                     {
@@ -1650,8 +1670,14 @@ namespace Allors.Databases.Object.SqlClient
             command.ExecuteNonQuery();
         }
 
-        internal void PrefetchCompositeAssociationObjectTable(List<Reference> references, IAssociationType associationType)
+        internal void PrefetchCompositeAssociationObjectTable(List<Reference> roles, IAssociationType associationType, List<ObjectId> nestedObjectIds)
         {
+            var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositeAssociations(roles, associationType, nestedObjectIds);
+            if (references.Count == 0)
+            {
+                return;
+            }
+
             SqlCommand command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
@@ -1689,17 +1715,29 @@ namespace Allors.Databases.Object.SqlClient
                             {
                                 association = this.GetOrCreateReferenceForExistingObject(associationId);
                             }
+
+                            if (nestedObjectIds != null)
+                            {
+                                nestedObjectIds.Add(association.ObjectId);
+                            }
                         }
 
-                        this.FlushConditionally(roleId, associationType);
                         associationByRole[role] = association;
+
+                        this.FlushConditionally(roleId, associationType);
                     }
                 }
             }
         }
 
-        internal void PrefetchCompositeAssociationRelationTable(List<Reference> roles, IAssociationType associationType)
+        internal void PrefetchCompositeAssociationRelationTable(List<Reference> roles, IAssociationType associationType, List<ObjectId> nestedObjectIds)
         {
+            var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositesAssociations(roles, associationType, nestedObjectIds);
+            if (references.Count == 0)
+            {
+                return;
+            }
+
             SqlCommand command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
@@ -1743,7 +1781,12 @@ namespace Allors.Databases.Object.SqlClient
                         else
                         {
                             association = this.GetOrCreateReferenceForExistingObject(associationId);
-                        }  
+                        }
+
+                        if (nestedObjectIds != null)
+                        {
+                            nestedObjectIds.Add(associationId);
+                        }
                     }
                     
                     associationByRole[role] = association;
@@ -1753,8 +1796,14 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositesAssociationObjectTable(List<Reference> roles, IAssociationType associationType)
+        internal void PrefetchCompositesAssociationObjectTable(List<Reference> roles, IAssociationType associationType, List<ObjectId> nestedObjectIds)
         {
+            var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositeAssociations(roles, associationType, nestedObjectIds);
+            if (references.Count == 0)
+            {
+                return;
+            }
+
             SqlCommand command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
@@ -1815,6 +1864,11 @@ namespace Allors.Databases.Object.SqlClient
                     else
                     {
                         associationsByRole[role] = associations.ToArray();
+
+                        if (nestedObjectIds != null)
+                        {
+                            nestedObjectIds.AddRange(associations);
+                        }
                     }
 
                     this.FlushConditionally(role.ObjectId, associationType);
@@ -1822,8 +1876,14 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositesAssociationRelationTable(List<Reference> roles, IAssociationType associationType)
+        internal void PrefetchCompositesAssociationRelationTable(List<Reference> roles, IAssociationType associationType, List<ObjectId> nestedObjectIds)
         {
+            var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositeAssociations(roles, associationType, nestedObjectIds);
+            if (references.Count == 0)
+            {
+                return;
+            }
+            
             SqlCommand command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
@@ -1880,6 +1940,11 @@ namespace Allors.Databases.Object.SqlClient
                     else
                     {
                         associationsByRole[role] = associations.ToArray();
+
+                        if (nestedObjectIds != null)
+                        {
+                            nestedObjectIds.AddRange(associations);
+                        }
                     }
 
                     this.FlushConditionally(role.ObjectId, associationType);
@@ -2142,7 +2207,7 @@ namespace Allors.Databases.Object.SqlClient
             return references;
         }
 
-        private IClass GetObjectType(ObjectId objectId)
+        private IClass GetClass(ObjectId objectId)
         {
             var command = this.getObjectType;
             if (command == null)
@@ -2318,6 +2383,31 @@ namespace Allors.Databases.Object.SqlClient
             return associationsByRole;
         }
 
+        private List<Reference> FilterWithUnmodifiedCompositeRoles(List<Reference> associations, IRoleType roleType)
+        {
+            if (this.modifiedRolesByReference == null)
+            {
+                return associations;
+            }
+
+            var references = new List<Reference>();
+            foreach (var association in associations)
+            {
+                Roles modifiedRoles;
+                if (this.modifiedRolesByReference.TryGetValue(association, out modifiedRoles))
+                {
+                    if (modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
+                    {
+                        continue;
+                    }
+                }
+
+                references.Add(association);
+            }
+
+            return references;
+        }
+
         private List<Reference> FilterWithUnmodifiedCompositeRoles(List<Reference> associations, IRoleType roleType, List<ObjectId> roles)
         {
             if (this.modifiedRolesByReference == null)
@@ -2345,31 +2435,65 @@ namespace Allors.Databases.Object.SqlClient
             return references;
         }
 
-        private List<Reference> FilterWithUnmodifiedRoles(List<Reference> associations, IRoleType roleType)
+        private List<Reference> FilterForPrefetchAssociations(List<Reference> roles, IAssociationType associationType)
         {
-            if (this.modifiedRolesByReference == null)
+            Dictionary<Reference, Reference> associationByRole;
+            if (!this.associationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
             {
-                return associations;
+                return roles;
+            }
+
+            return roles.Where(role => !associationByRole.ContainsKey(role)).ToList();
+        }
+
+        private List<Reference> FilterForPrefetchCompositeAssociations(List<Reference> roles, IAssociationType associationType, List<ObjectId> nestedObjectIds)
+        {
+            Dictionary<Reference, Reference> associationByRole;
+            if (!this.associationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
+            {
+                return roles;
             }
 
             var references = new List<Reference>();
-            foreach (var association in associations)
+            foreach (var role in roles)
             {
-                Roles modifiedRoles;
-                if (this.modifiedRolesByReference.TryGetValue(association, out modifiedRoles))
+                Reference association;
+                if (associationByRole.TryGetValue(role, out association))
                 {
-                    if (modifiedRoles.ModifiedRoleByRoleType.ContainsKey(roleType))
-                    {
-                        continue;
-                    }
+                    nestedObjectIds.Add(association.ObjectId);
+                    continue;
                 }
 
-                references.Add(association);
+                references.Add(role);
             }
 
             return references;
         }
 
+        private List<Reference> FilterForPrefetchCompositesAssociations(List<Reference> roles, IAssociationType associationType, List<ObjectId> nestedObjectIds)
+        {
+            Dictionary<Reference, ObjectId[]> associationByRole;
+            if (!this.associationsByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
+            {
+                return roles;
+            }
+
+            var references = new List<Reference>();
+            foreach (var role in roles)
+            {
+                ObjectId[] association;
+                if (associationByRole.TryGetValue(role, out association))
+                {
+                    nestedObjectIds.AddRange(association);
+                    continue;
+                }
+
+                references.Add(role);
+            }
+
+            return references;
+        }
+        
         private void FlushConditionally(ObjectId roleId, IAssociationType associationType)
         {
             if (this.triggersFlushRolesByAssociationType != null)
