@@ -8,22 +8,22 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <NestedTypes>
-      <Class Name="Allors.Databases.Object.SqlClient.Roles.CompositeRoles" Collapsed="true">
+      <Class Name="Allors.Databases.Object.SqlClient.Roles.CompositesRole" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>Roles.cs</NewMemberFileName>
         </TypeIdentifier>
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AEQACASgAQCAACQAgAQQgAAAAAAAAgAAEADAhBQJgAo=</HashCode>
+      <HashCode>AEQACASgAQCBACQAgAQQgAAAAAAAAgAAEABAhBQJgAo=</HashCode>
       <FileName>Roles.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="Reference" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Allors.Databases.Object.SqlClient.Reference" Collapsed="true">
-    <Position X="1.5" Y="2.5" Width="2" />
+  <Class Name="Allors.Databases.Object.SqlClient.Reference">
+    <Position X="1" Y="2.5" Width="2" />
     <Compartments>
       <Compartment Name="Properties" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
@@ -37,27 +37,18 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Allors.Databases.Object.SqlClient.DatabaseSession" Collapsed="true">
-    <Position X="3.75" Y="4.75" Width="3.75" />
+    <Position X="4.25" Y="4.75" Width="3.75" />
     <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Properties" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
-    <NestedTypes>
-      <Class Name="Allors.Databases.Object.SqlClient.DatabaseSession.SortedRoleTypeComparer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>DatabaseSession.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
     <AssociationLine Name="modifiedRolesByReference" Type="Allors.Databases.Object.SqlClient.Roles">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="-1.923" Y="0.243" />
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>2E5i1XTTkGHwXrVOqNY3ECA6EIhzAlIdB1QQBaIvkIM=</HashCode>
+      <HashCode>WE5g1XTDkOHwXrVPqFY3kCA6GJxzAlYcB14QBaIvkKI=</HashCode>
       <FileName>DatabaseSession.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

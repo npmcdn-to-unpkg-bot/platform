@@ -108,7 +108,7 @@ namespace Allors.Databases.Object.SqlClient
                 return this.upgrade.GetEnumerator();
             }
 
-            var roles = this.strategy.Roles.GetCompositeRoles(this.roleType);
+            var roles = this.strategy.Roles.GetCompositesRole(this.roleType);
             var references = this.strategy.Session.GetOrCreateReferencesForExistingObjects(roles);
             return new ExtentEnumerator(references);
         }

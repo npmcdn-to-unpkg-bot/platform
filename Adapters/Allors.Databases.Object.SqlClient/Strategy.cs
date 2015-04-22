@@ -378,7 +378,7 @@ namespace Allors.Databases.Object.SqlClient
                 this.AssertExist();
                 
                 // TODO: use CompositeRoles
-                var previousRoles = new List<ObjectId>(this.Roles.GetCompositeRoles(roleType));
+                var previousRoles = new List<ObjectId>(this.Roles.GetCompositesRole(roleType));
                 var newRoles = new HashSet<ObjectId>();
 
                 foreach (IObject roleObject in roleObjects)
@@ -413,7 +413,7 @@ namespace Allors.Databases.Object.SqlClient
 
             RoleAssertions.CompositeRoleChecks(this, roleType);
 
-            var previousRoles = this.Roles.GetCompositeRoles(roleType);
+            var previousRoles = this.Roles.GetCompositesRole(roleType);
 
             foreach (var previousRole in previousRoles)
             {
@@ -498,7 +498,7 @@ namespace Allors.Databases.Object.SqlClient
         internal int ExtentIndexOf(IRoleType roleType, IObject value)
         {
             var i = 0;
-            foreach (var oid in this.Roles.GetCompositeRoles(roleType))
+            foreach (var oid in this.Roles.GetCompositesRole(roleType))
             {
                 if (oid.Equals(value.Id))
                 {
@@ -513,7 +513,7 @@ namespace Allors.Databases.Object.SqlClient
         internal IObject ExtentGetItem(IRoleType roleType, int index)
         {
             var i = 0;
-            foreach (var oid in this.Roles.GetCompositeRoles(roleType))
+            foreach (var oid in this.Roles.GetCompositesRole(roleType))
             {
                 if (i == index)
                 {
