@@ -319,14 +319,14 @@ namespace Allors.Databases.Object.SqlClient
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }
 
-            var strategyReference = this.CreateObject(objectType);
-            this.referenceByObjectId[strategyReference.ObjectId] = strategyReference;
+            var reference = this.CreateObject(objectType);
+            this.referenceByObjectId[reference.ObjectId] = reference;
 
-            this.Database.Cache.SetObjectType(strategyReference.ObjectId, objectType);
+            this.Database.Cache.SetObjectType(reference.ObjectId, objectType);
 
-            this.changeSet.OnCreated(strategyReference.ObjectId);
+            this.changeSet.OnCreated(reference.ObjectId);
 
-            return strategyReference.Strategy.GetObject();
+            return reference.Strategy.GetObject();
         }
 
         public IObject[] Create(IClass objectType, int count)
@@ -336,19 +336,19 @@ namespace Allors.Databases.Object.SqlClient
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }
 
-            var strategyReferences = this.CreateObjects(objectType, count);
+            var references = this.CreateObjects(objectType, count);
 
             var arrayType = this.Database.ObjectFactory.GetTypeForObjectType(objectType);
             var domainObjects = (IObject[])Array.CreateInstance(arrayType, count);
 
-            for (var i = 0; i < strategyReferences.Count; i++)
+            for (var i = 0; i < references.Count; i++)
             {
-                var strategyReference = strategyReferences[i];
-                this.referenceByObjectId[strategyReference.ObjectId] = strategyReference;
+                var reference = references[i];
+                this.referenceByObjectId[reference.ObjectId] = reference;
 
-                domainObjects[i] = strategyReference.Strategy.GetObject();
+                domainObjects[i] = reference.Strategy.GetObject();
 
-                this.changeSet.OnCreated(strategyReference.ObjectId);
+                this.changeSet.OnCreated(reference.ObjectId);
             }
 
             return domainObjects;
@@ -375,9 +375,9 @@ namespace Allors.Databases.Object.SqlClient
                 }
             }
 
-            var strategyReference = this.InsertObject(domainType, objectId);
-            this.referenceByObjectId[objectId] = strategyReference;
-            var insertedObject = strategyReference.Strategy.GetObject();
+            var reference = this.InsertObject(domainType, objectId);
+            this.referenceByObjectId[objectId] = reference;
+            var insertedObject = reference.Strategy.GetObject();
 
             this.changeSet.OnCreated(objectId);
 
@@ -507,9 +507,22 @@ namespace Allors.Databases.Object.SqlClient
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
-            var references = new List<Reference>();
-            List<ObjectId> existsUnknownObjectIds = null;
+            var references = this.GetReferences(objectIds);
 
+            if (references.Count != 0)
+            {
+                this.Flush();
+
+                var prefetcher = new Prefetcher(this, references, prefetchPolicy);
+                prefetcher.Execute();
+            }
+        }
+
+        internal List<Reference> GetReferences(ObjectId[] objectIds)
+        {
+            var references = new List<Reference>();
+
+            List<ObjectId> existsUnknownObjectIds = null;
             foreach (var objectId in objectIds)
             {
                 Reference reference;
@@ -538,13 +551,7 @@ namespace Allors.Databases.Object.SqlClient
                 references.AddRange(existsUnknownReferences);
             }
 
-            if (references.Count != 0)
-            {
-                this.Flush();
-
-                var prefetcher = new Prefetcher(this, references, prefetchPolicy);
-                prefetcher.Execute();
-            }
+            return references;
         }
 
         public IChangeSet Checkpoint()
@@ -1404,7 +1411,7 @@ namespace Allors.Databases.Object.SqlClient
                 }
 
                 command = this.CreateSqlProcedureCommand(sql);
-                this.AddObjectParameter(command, reference.ObjectId);
+                this.AddAssociationParameter(command, reference.ObjectId);
                 this.getCompositesRoleByRoleType[roleType] = command;
             }
             else
@@ -2395,6 +2402,16 @@ namespace Allors.Databases.Object.SqlClient
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForCompositeRole;
+            sqlParameter.SqlDbType = this.database.Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId.Value;
+
+            command.Parameters.Add(sqlParameter);
+        }
+
+        private void AddAssociationParameter(SqlCommand command, ObjectId objectId)
+        {
+            var sqlParameter = command.CreateParameter();
+            sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
             sqlParameter.SqlDbType = this.database.Mapping.SqlDbTypeForObject;
             sqlParameter.Value = objectId.Value;
 
