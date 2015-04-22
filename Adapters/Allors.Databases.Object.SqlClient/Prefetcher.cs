@@ -23,21 +23,21 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
 
     using Allors.Meta;
 
     internal class Prefetcher
     {
         private readonly DatabaseSession session;
-        private readonly List<Reference> references;
         private readonly PrefetchPolicy prefetchPolicy;
+        private List<Reference> references;
 
         public Prefetcher(DatabaseSession session, List<Reference> references, PrefetchPolicy prefetchPolicy)
         {
             this.session = session;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
-
         }
 
         public void Execute()
@@ -60,7 +60,7 @@ namespace Allors.Databases.Object.SqlClient
                         if (!unitRoles)
                         {
                             unitRoles = true;
-                            
+
                             var referencesByClass = new Dictionary<IClass, List<Reference>>();
                             foreach (var reference in this.references)
                             {
@@ -85,12 +85,20 @@ namespace Allors.Databases.Object.SqlClient
                     }
                     else
                     {
+                        var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
+                        var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
+
                         var relationType = roleType.RelationType;
                         if (roleType.IsOne)
                         {
                             if (relationType.ExistExclusiveClasses)
                             {
-                                this.session.PrefetchCompositeRoleObjectTable(this.references, roleType);
+                                var roleIds = existNestedPrefetchPolicy ? new List<ObjectId>() : null;
+                                this.session.PrefetchCompositeRoleObjectTable(this.references, roleType, roleIds);
+                                
+                                if (existNestedPrefetchPolicy)
+                                {
+                                }
                             }
                             else
                             {

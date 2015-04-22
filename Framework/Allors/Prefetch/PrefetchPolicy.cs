@@ -61,6 +61,8 @@ namespace Allors
             }
         }
 
+        public bool AllowCompilation { get; set; }
+
         public static implicit operator PrefetchPolicy(PrefetchRule prefetchRule)
         {
             var rules = new[] { prefetchRule };

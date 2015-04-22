@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RelationTableForCompositeRelations.cs" company="Allors bvba">
+// <copyright file="CompositeRoleDataRecords.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under

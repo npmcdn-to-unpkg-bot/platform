@@ -189,10 +189,6 @@ namespace Allors.Workspaces.Memory
             }
         }
 
-        public void Compile(PrefetchPolicy prefetchPolicy)
-        {
-        }
-
         public void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
         {
             if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.Class))

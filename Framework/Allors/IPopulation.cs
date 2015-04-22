@@ -96,7 +96,5 @@ namespace Allors
         /// </summary>
         /// <param name="writer">The writer.</param>
         void Save(XmlWriter writer);
-
-        void Compile(PrefetchPolicy prefetchPolicy);
     }
 }

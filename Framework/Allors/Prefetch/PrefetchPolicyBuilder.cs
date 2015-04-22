@@ -29,6 +29,8 @@ namespace Allors
     {
         private List<PrefetchRule> rules;
 
+        private bool allowCompilation;
+
         public PrefetchPolicyBuilder()
         {
             this.rules = new List<PrefetchRule>();
@@ -48,11 +50,17 @@ namespace Allors
             return this;
         }
 
+        public PrefetchPolicyBuilder WithAllowCompilation(bool allowCompilation)
+        {
+            this.allowCompilation = allowCompilation;
+            return this;
+        }
+
         public PrefetchPolicy Build()
         {
             try
             {
-                return new PrefetchPolicy(this.rules.ToArray());
+                return new PrefetchPolicy(this.rules.ToArray()) { AllowCompilation = this.allowCompilation };
             }
             finally
             {

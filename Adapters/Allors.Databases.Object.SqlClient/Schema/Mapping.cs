@@ -54,7 +54,7 @@ namespace Allors.Databases.Object.SqlClient
         internal static readonly string ParamNameForType = string.Format(ParamFormat, ColumnNameForType);
         internal static readonly string ParamNameForCache = string.Format(ParamFormat, ColumnNameForCache);
         internal static readonly string ParamNameForAssociation = string.Format(ParamFormat, ColumnNameForAssociation);
-        internal static readonly string ParamNameForRole = string.Format(ParamFormat, ColumnNameForRole);
+        internal static readonly string ParamNameForCompositeRole = string.Format(ParamFormat, ColumnNameForRole);
         internal static readonly string ParamNameForCount = string.Format(ParamFormat, "count");
         internal static readonly string ParamNameForTableType = string.Format(ParamFormat, "table");
 
@@ -66,6 +66,7 @@ namespace Allors.Databases.Object.SqlClient
 
         internal readonly string TableTypeNameForObject;
         internal readonly string TableTypeColumnNameForObject;
+
         internal readonly string TableTypeNameForCompositeRelation;
         internal readonly string TableTypeNameForStringRelation;
         internal readonly string TableTypeNameForIntegerRelation;
@@ -74,6 +75,7 @@ namespace Allors.Databases.Object.SqlClient
         internal readonly string TableTypeNameForDateTimeRelation;
         internal readonly string TableTypeNameForUniqueRelation;
         internal readonly string TableTypeNameForBinaryRelation;
+        
         internal readonly string TableTypeColumnNameForAssociation;
         internal readonly string TableTypeColumnNameForRole;
 
@@ -550,11 +552,11 @@ AS
                             // Get Composite Association (1-*) [object table]
                             this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
                             definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
 AS
     SELECT " + this.ColumnNameByRelationType[relationType] + @"
     FROM " + table + @"
-    WHERE " + ColumnNameForObject + "=" + ParamNameForRole;
+    WHERE " + ColumnNameForObject + "=" + ParamNameForCompositeRole;
                             this.procedureDefinitionByName.Add(this.ProcedureNameForGetAssociationByRelationType[relationType], definition);
 
                             // Prefetch Composite Association (1-*) [object table]
@@ -765,11 +767,11 @@ AS
                                 // Get Composite Association (1-1) [object table]
                                 this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
                                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
 AS 
     SELECT " + ColumnNameForObject + @"
     FROM " + table + @"
-    WHERE " + this.ColumnNameByRelationType[relationType] + "=" + ParamNameForRole;
+    WHERE " + this.ColumnNameByRelationType[relationType] + "=" + ParamNameForCompositeRole;
                                 this.procedureDefinitionByName.Add(this.ProcedureNameForGetAssociationByRelationType[relationType], definition);
 
                                 // Prefetch Composite Association (1-1) [object table]
@@ -787,11 +789,11 @@ AS
                                 // Get Composite Association (*-1) [object table]
                                 this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
                                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
 AS 
     SELECT " + ColumnNameForObject + @"
     FROM " + table + @"
-    WHERE " + this.ColumnNameByRelationType[relationType] + "=" + ParamNameForRole;
+    WHERE " + this.ColumnNameByRelationType[relationType] + "=" + ParamNameForCompositeRole;
                                 this.procedureDefinitionByName.Add(this.ProcedureNameForGetAssociationByRelationType[relationType], definition);
 
                                 // Prefetch Composite Association (*-1) [object table]
@@ -936,11 +938,11 @@ AS
                         // Get Composite Association (1-1) [relation table]
                         this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + relationTypeName);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
 AS
     SELECT " + ColumnNameForAssociation + @"
     FROM " + table + @"
-    WHERE " + ColumnNameForRole + "=" + ParamNameForRole;
+    WHERE " + ColumnNameForRole + "=" + ParamNameForCompositeRole;
                         this.procedureDefinitionByName.Add(this.ProcedureNameForGetAssociationByRelationType[relationType], definition);
 
                         // Prefetch Composite Association (1-1) [relation table]
@@ -957,11 +959,11 @@ AS
                         // Get Composite Association (*-1) [relation table]
                         this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + relationTypeName);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
 AS
     SELECT " + ColumnNameForAssociation + @"
     FROM " + table + @"
-    WHERE " + ColumnNameForRole + "=" + ParamNameForRole;
+    WHERE " + ColumnNameForRole + "=" + ParamNameForCompositeRole;
                         this.procedureDefinitionByName.Add(this.ProcedureNameForGetAssociationByRelationType[relationType], definition);
 
                         // Prefetch Composite Association (*-1) [relation table]

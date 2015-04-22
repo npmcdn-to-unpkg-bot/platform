@@ -367,10 +367,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void Compile(PrefetchPolicy prefetchPolicy)
-        {
-        }
-
         public override string ToString()
         {
             return "Population[driver=Sql, type=Connected, id=" + this.GetHashCode() + "]";

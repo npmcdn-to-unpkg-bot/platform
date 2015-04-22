@@ -172,10 +172,6 @@ namespace Allors.Databases.Memory
             this.Session.Save(writer);
         }
 
-        public void Compile(PrefetchPolicy prefetchPolicy)
-        {
-        }
-
         public bool ContainsConcreteClass(IComposite objectType, IObjectType concreteClass)
         {
             object concreteClassOrClasses;
