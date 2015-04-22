@@ -366,7 +366,22 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
             return objects != null ? objects.ToArray() : EmptyObjects;
         }
 
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIds)
+        {
+            // TODO:
+        }
+
         public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
+        {
+            // TODO:
+        }
+
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params IStrategy[] strategies)
+        {
+            // TODO:
+        }
+
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params IObject[] objects)
         {
             // TODO:
         }

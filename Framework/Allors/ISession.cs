@@ -179,6 +179,12 @@ namespace Allors
         /// <returns>The instantiated objects.</returns>
         IObject[] Instantiate(ObjectId[] objectIds);
 
-        void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds);
+        void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIds);
+
+        void Prefetch(PrefetchPolicy prefetchPolicy, params ObjectId[] objectIds);
+
+        void Prefetch(PrefetchPolicy prefetchPolicy, params IStrategy[] strategies);
+
+        void Prefetch(PrefetchPolicy prefetchPolicy, params IObject[] objects);
     }
 }

@@ -77,7 +77,7 @@ namespace Allors.Databases.Object.SqlClient
                     return null;
                 }
 
-                return this.strategy.Session.GetOrCreateAssociationForExistingObject(associations[0]).Strategy.GetObject();
+                return this.strategy.Session.GetOrCreateReferenceForExistingObject(associations[0]).Strategy.GetObject();
             }
         }
 
@@ -112,7 +112,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             var associations = this.strategy.ExtentGetCompositeAssociations(this.associationType);
-            var references = this.strategy.Session.GetOrCreateAssociationsForExistingObjects(associations);
+            var references = this.strategy.Session.GetOrCreateReferencesForExistingObjects(associations);
             return new ExtentEnumerator(references);
         }
 
@@ -151,7 +151,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             var associations = this.strategy.ExtentGetCompositeAssociations(this.associationType);
-            var references = this.strategy.Session.GetOrCreateAssociationsForExistingObjects(associations);
+            var references = this.strategy.Session.GetOrCreateReferencesForExistingObjects(associations);
 
             var objects = new IObject[references.Length];
             for (var i = 0; i < objects.Length; i++)
@@ -199,7 +199,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             var associations = this.strategy.ExtentGetCompositeAssociations(this.associationType);
-            return this.strategy.Session.GetOrCreateAssociationForExistingObject(associations[index]).Strategy.GetObject();
+            return this.strategy.Session.GetOrCreateReferenceForExistingObject(associations[index]).Strategy.GetObject();
         }
 
         private void LazyUpgrade()

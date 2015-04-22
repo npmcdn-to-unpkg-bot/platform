@@ -505,6 +505,38 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params IObject[] objects)
+        {
+            var objectIds = objects.Select(x => x.Strategy.ObjectId);
+            var references = this.GetReferences(objectIds);
+
+            if (references.Count != 0)
+            {
+                this.Flush();
+
+                var prefetcher = new Prefetcher(this, prefetchPolicy, references);
+                prefetcher.Execute();
+            }
+        }
+
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params IStrategy[] strategies)
+        {
+            var objectIds = strategies.Select(x => x.ObjectId);
+            var references = this.GetReferences(objectIds);
+
+            if (references.Count != 0)
+            {
+                this.Flush();
+
+                var prefetcher = new Prefetcher(this, prefetchPolicy, references);
+                prefetcher.Execute();
+            }
+        }
+
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIds)
+        {
+        }
+
         public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
         {
             var references = this.GetReferences(objectIds);
@@ -513,45 +545,9 @@ namespace Allors.Databases.Object.SqlClient
             {
                 this.Flush();
 
-                var prefetcher = new Prefetcher(this, references, prefetchPolicy);
+                var prefetcher = new Prefetcher(this, prefetchPolicy, references);
                 prefetcher.Execute();
             }
-        }
-
-        internal List<Reference> GetReferences(ObjectId[] objectIds)
-        {
-            var references = new List<Reference>();
-
-            List<ObjectId> existsUnknownObjectIds = null;
-            foreach (var objectId in objectIds)
-            {
-                Reference reference;
-                this.referenceByObjectId.TryGetValue(objectId, out reference);
-                if (reference != null && reference.ExistsKnown)
-                {
-                    if (reference.Exists && !reference.IsNew)
-                    {
-                        references.Add(reference);
-                    }
-                }
-                else
-                {
-                    if (existsUnknownObjectIds == null)
-                    {
-                        existsUnknownObjectIds = new List<ObjectId>();
-                    }
-
-                    existsUnknownObjectIds.Add(objectId);
-                }
-            }
-
-            if (existsUnknownObjectIds != null)
-            {
-                var existsUnknownReferences = this.InstantiateObjects(existsUnknownObjectIds);
-                references.AddRange(existsUnknownReferences);
-            }
-
-            return references;
         }
 
         public IChangeSet Checkpoint()
@@ -723,10 +719,10 @@ namespace Allors.Databases.Object.SqlClient
             return new Roles(reference);
         }
 
-        internal Reference GetOrCreateAssociationForExistingObject(ObjectId objectId)
+        internal Reference GetOrCreateReferenceForExistingObject(ObjectId objectId)
         {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            Reference reference;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
             {
                 var objectType = this.Database.Cache.GetObjectType(objectId);
                 if (objectType == null)
@@ -735,12 +731,16 @@ namespace Allors.Databases.Object.SqlClient
                     this.Database.Cache.SetObjectType(objectId, objectType);
                 }
 
-                association = new Reference(this, objectType, objectId, false);
-                this.referenceByObjectId[objectId] = association;
-                this.referencesWithoutCacheId.Add(association);
+                reference = new Reference(this, objectType, objectId, false);
+                this.referenceByObjectId[objectId] = reference;
+                this.referencesWithoutCacheId.Add(reference);
+            }
+            else
+            {
+                reference.Exists = true;
             }
 
-            return association;
+            return reference;
         }
 
         internal Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
@@ -764,9 +764,9 @@ namespace Allors.Databases.Object.SqlClient
             associationByRole[roleStrategy.Reference] = previousAssociation;
         }
 
-        internal Reference[] GetOrCreateAssociationsForExistingObjects(IEnumerable<ObjectId> objectIds)
+        internal Reference[] GetOrCreateReferencesForExistingObjects(IEnumerable<ObjectId> objectIds)
         {
-            return objectIds.Select(this.GetOrCreateAssociationForExistingObject).ToArray();
+            return objectIds.Select(this.GetOrCreateReferenceForExistingObject).ToArray();
         }
 
         internal ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
@@ -824,7 +824,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        internal void AddReferenceWithoutCacheId(Reference reference)
+        internal void AddReferenceWithoutCacheIdOrExistsKnown(Reference reference)
         {
             this.referencesWithoutCacheId.Add(reference);
         }
@@ -885,7 +885,43 @@ namespace Allors.Databases.Object.SqlClient
 
             associations.Add(role);
         }
-        
+
+        internal List<Reference> GetReferences(IEnumerable<ObjectId> objectIds)
+        {
+            var references = new List<Reference>();
+
+            List<ObjectId> referencesToInstantiate = null;
+            foreach (var objectId in objectIds)
+            {
+                Reference reference;
+                this.referenceByObjectId.TryGetValue(objectId, out reference);
+                if (reference != null && reference.ExistsKnown && !reference.IsUnknownCacheId)
+                {
+                    if (reference.Exists && !reference.IsNew)
+                    {
+                        references.Add(reference);
+                    }
+                }
+                else
+                {
+                    if (referencesToInstantiate == null)
+                    {
+                        referencesToInstantiate = new List<ObjectId>();
+                    }
+
+                    referencesToInstantiate.Add(objectId);
+                }
+            }
+
+            if (referencesToInstantiate != null)
+            {
+                var existsUnknownReferences = this.InstantiateObjects(referencesToInstantiate);
+                references.AddRange(existsUnknownReferences);
+            }
+
+            return references;
+        }
+
         internal Command CreateCommand(string commandText)
         {
             var command = this.CreateSqlCommand(commandText);
@@ -1647,11 +1683,11 @@ namespace Allors.Databases.Object.SqlClient
                             var associationId = this.Database.ObjectIds.Parse(associationIdValue.ToString());
                             if (associationType.ObjectType.ExistExclusiveClass)
                             {
-                                association = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                                association = this.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
                             }
                             else
                             {
-                                association = this.GetOrCreateAssociationForExistingObject(associationId);
+                                association = this.GetOrCreateReferenceForExistingObject(associationId);
                             }
                         }
 
@@ -1702,11 +1738,11 @@ namespace Allors.Databases.Object.SqlClient
                     {
                         if (associationType.ObjectType.ExistExclusiveClass)
                         {
-                            association = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                            association = this.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
                         }
                         else
                         {
-                            association = this.GetOrCreateAssociationForExistingObject(associationId);
+                            association = this.GetOrCreateReferenceForExistingObject(associationId);
                         }  
                     }
                     
@@ -1756,11 +1792,11 @@ namespace Allors.Databases.Object.SqlClient
 
                         if (associationType.ObjectType.ExistExclusiveClass)
                         {
-                            this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                            this.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
                         }
                         else
                         {
-                            this.GetOrCreateAssociationForExistingObject(associationId);
+                            this.GetOrCreateReferenceForExistingObject(associationId);
                         }
                     }
                 }
@@ -1822,11 +1858,11 @@ namespace Allors.Databases.Object.SqlClient
 
                     if (associationType.ObjectType.ExistExclusiveClass)
                     {
-                        this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                        this.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
                     }
                     else
                     {
-                        this.GetOrCreateAssociationForExistingObject(associationId);
+                        this.GetOrCreateReferenceForExistingObject(associationId);
                     }
                 }
             }
@@ -1877,11 +1913,11 @@ namespace Allors.Databases.Object.SqlClient
 
                 if (associationType.ObjectType.ExistExclusiveClass)
                 {
-                    associationObject = this.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveClass, id);
+                    associationObject = this.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, id);
                 }
                 else
                 {
-                    associationObject = this.GetOrCreateAssociationForExistingObject(id);
+                    associationObject = this.GetOrCreateReferenceForExistingObject(id);
                 }
             }
 
@@ -2059,7 +2095,7 @@ namespace Allors.Databases.Object.SqlClient
                     var cacheId = reader.GetInt32(1);
 
                     var type = (IClass)this.Database.MetaPopulation.Find(classId);
-                    return this.GetOrCreateAssociationForExistingObject(type, objectId, cacheId);
+                    return this.GetOrCreateReferenceForExistingObject(type, objectId, cacheId);
                 }
 
                 return null;
@@ -2098,7 +2134,8 @@ namespace Allors.Databases.Object.SqlClient
 
                     var objectId = this.Database.ObjectIds.Parse(objectIdString);
                     var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);
-                    references.Add(this.GetOrCreateAssociationForExistingObject(type, objectId, cacheId));
+                    var reference = this.GetOrCreateReferenceForExistingObject(type, objectId, cacheId);
+                    references.Add(reference);
                 }
             }
 
@@ -2216,29 +2253,38 @@ namespace Allors.Databases.Object.SqlClient
             this.getObjectType = null;
         }
 
-        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
+        private Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId)
         {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            Reference reference;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
             {
-                association = new Reference(this, objectType, objectId, false);
-                this.referenceByObjectId[objectId] = association;
-                this.referencesWithoutCacheId.Add(association);
+                reference = new Reference(this, objectType, objectId, false);
+                this.referenceByObjectId[objectId] = reference;
+                this.referencesWithoutCacheId.Add(reference);
+            }
+            else
+            {
+                reference.Exists = true;
             }
 
-            return association;
+            return reference;
         }
 
-        private Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
+        private Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
         {
-            Reference association;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out association))
+            Reference reference;
+            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
             {
-                association = new Reference(this, objectType, objectId, cacheId);
-                this.referenceByObjectId[objectId] = association;
+                reference = new Reference(this, objectType, objectId, cacheId);
+                this.referenceByObjectId[objectId] = reference;
+            }
+            else
+            {
+                reference.CacheId = cacheId;
+                reference.Exists = true;
             }
 
-            return association;
+            return reference;
         }
 
         private Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)

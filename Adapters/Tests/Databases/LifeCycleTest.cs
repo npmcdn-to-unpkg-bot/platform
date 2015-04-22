@@ -4368,6 +4368,60 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
         }
 
         [Test]
+        public void PrefetchCompositeRoleOne2OneAndUnit()
+        {
+            var prefetchPolicy = new PrefetchPolicyBuilder()
+                .WithRule(C1.Meta.C1C2one2one, new IPropertyType[] { C2.Meta.C2AllorsString })
+                .Build();
+
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1a = C1.Create(this.Session);
+                var c2a = C2.Create(this.Session);
+                var c2b = C2.Create(this.Session);
+
+                c2a.C2AllorsString = "c2a";
+                c2b.C2AllorsString = "c2b";
+
+                c1a.C1C2one2one = c2a;
+
+                this.Session.Prefetch(prefetchPolicy, c1a);
+
+                Assert.AreEqual(c2a, c1a.C1C2one2one);
+
+                this.Session.Commit();
+
+                Assert.AreEqual(c2a, c1a.C1C2one2one);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(prefetchPolicy, c1a);
+
+                Assert.AreEqual(c2a, c1a.C1C2one2one);
+
+                this.Session.Commit();
+
+                c1a.C1C2one2one = c2b;
+
+                this.Session.Prefetch(prefetchPolicy, c1a);
+
+                Assert.AreEqual(c2b, c1a.C1C2one2one);
+
+                this.Session.Rollback();
+
+                this.Session.Prefetch(prefetchPolicy, c1a);
+
+                Assert.AreEqual(c2a, c1a.C1C2one2one);
+
+                this.Session.Rollback();
+
+                Assert.AreEqual(c2a, c1a.C1C2one2one);
+            }
+        }
+
+        [Test]
         public void PrefetchCompositeRolesOne2Many()
         {
             foreach (var init in this.Inits)

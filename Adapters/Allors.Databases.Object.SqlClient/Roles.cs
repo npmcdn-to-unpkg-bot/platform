@@ -160,7 +160,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (previousRole != null)
                     {
-                        var previousRoleStrategy = this.Reference.Session.GetOrCreateAssociationForExistingObject(previousRole).Strategy;
+                        var previousRoleStrategy = this.Reference.Session.GetOrCreateReferenceForExistingObject(previousRole).Strategy;
                         var previousAssociation = previousRoleStrategy.GetCompositeAssociation(roleType.AssociationType);
                         if (previousAssociation != null)
                         {
@@ -180,7 +180,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (previousRole != null)
                     {
-                        var previousRoleReference = this.Reference.Session.GetOrCreateAssociationForExistingObject(previousRole);
+                        var previousRoleReference = this.Reference.Session.GetOrCreateReferenceForExistingObject(previousRole);
                         this.Reference.Session.RemoveAssociation(this.Reference, previousRoleReference, roleType.AssociationType);
                     }
                 }
@@ -215,7 +215,7 @@ namespace Allors.Databases.Object.SqlClient
             var currentRole = this.GetCompositeRole(roleType);
             if (currentRole != null)
             {
-                var currentRoleStrategy = this.Reference.Session.GetOrCreateAssociationForExistingObject(currentRole).Strategy;
+                var currentRoleStrategy = this.Reference.Session.GetOrCreateReferenceForExistingObject(currentRole).Strategy;
 
                 this.ChangeSet.OnChangingCompositeRole(this, roleType, currentRoleStrategy == null ? null : currentRoleStrategy.ObjectId, null);
 
@@ -388,13 +388,13 @@ namespace Allors.Databases.Object.SqlClient
             if (this.ModifiedRolesByRoleType != null && this.ModifiedRolesByRoleType.TryGetValue(roleType, out compositeRoles))
             {
                 var objectId = compositeRoles.First;
-                return objectId == null ? null : session.GetOrCreateAssociationForExistingObject(objectId).Strategy.GetObject();
+                return objectId == null ? null : session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject();
             }
 
             var nonModifiedCompositeRoles = this.GetNonModifiedCompositeRoles(roleType);
             if (nonModifiedCompositeRoles.Length > 0)
             {
-                return session.GetOrCreateAssociationForExistingObject(nonModifiedCompositeRoles[0]).Strategy.GetObject();
+                return session.GetOrCreateReferenceForExistingObject(nonModifiedCompositeRoles[0]).Strategy.GetObject();
             }
 
             return null;
@@ -408,7 +408,7 @@ namespace Allors.Databases.Object.SqlClient
                 var i = 0;
                 foreach (var objectId in compositeRoles.ObjectIds)
                 {
-                    array.SetValue(session.GetOrCreateAssociationForExistingObject(objectId).Strategy.GetObject(), index + i);
+                    array.SetValue(session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject(), index + i);
                     ++i;
                 }
 
@@ -419,7 +419,7 @@ namespace Allors.Databases.Object.SqlClient
             for (var i = 0; i < nonModifiedCompositeRoles.Length; i++)
             {
                 var objectId = nonModifiedCompositeRoles[i];
-                array.SetValue(session.GetOrCreateAssociationForExistingObject(objectId).Strategy.GetObject(), index + i);
+                array.SetValue(session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject(), index + i);
             }
         }
 

@@ -31,13 +31,20 @@ namespace Allors.Databases.Object.SqlClient
     {
         private readonly DatabaseSession session;
         private readonly PrefetchPolicy prefetchPolicy;
-        private List<Reference> references;
+        private readonly List<Reference> references;
 
-        public Prefetcher(DatabaseSession session, List<Reference> references, PrefetchPolicy prefetchPolicy)
+        public Prefetcher(DatabaseSession session, PrefetchPolicy prefetchPolicy, List<Reference> references)
         {
             this.session = session;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
+        }
+
+        private Prefetcher(DatabaseSession session, PrefetchPolicy prefetchPolicy, IEnumerable<ObjectId> objectIds)
+        {
+            this.session = session;
+            this.prefetchPolicy = prefetchPolicy;
+            this.references = session.GetReferences(objectIds);
         }
 
         public void Execute()
@@ -98,6 +105,7 @@ namespace Allors.Databases.Object.SqlClient
                                 
                                 if (existNestedPrefetchPolicy)
                                 {
+                                    new Prefetcher(this.session, nestedPrefetchPolicy, roleIds).Execute();
                                 }
                             }
                             else

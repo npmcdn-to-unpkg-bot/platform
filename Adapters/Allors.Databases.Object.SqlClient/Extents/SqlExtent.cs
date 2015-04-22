@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (this.ObjectIds.Count > 0)
                 {
-                    return this.Session.GetOrCreateAssociationForExistingObject(this.ObjectIds[0]).Strategy.GetObject();
+                    return this.Session.GetOrCreateReferenceForExistingObject(this.ObjectIds[0]).Strategy.GetObject();
                 }
 
                 return null;
@@ -118,7 +118,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public override IEnumerator GetEnumerator()
         {
-            var references = this.Session.GetOrCreateAssociationsForExistingObjects(this.ObjectIds);
+            var references = this.Session.GetOrCreateReferencesForExistingObjects(this.ObjectIds);
             return new ExtentEnumerator(references);
         }
 
@@ -143,7 +143,7 @@ namespace Allors.Databases.Object.SqlClient
             var array = Array.CreateInstance(type, this.ObjectIds.Count);
             for (var i = 0; i < this.ObjectIds.Count; i++)
             {
-                var allorsObject = this.Session.GetOrCreateAssociationForExistingObject(this.ObjectIds[i]).Strategy.GetObject();
+                var allorsObject = this.Session.GetOrCreateReferenceForExistingObject(this.ObjectIds[i]).Strategy.GetObject();
                 array.SetValue(allorsObject, i);
             }
 
@@ -169,7 +169,7 @@ namespace Allors.Databases.Object.SqlClient
         protected override IObject GetItem(int index)
         {
             var objectId = this.ObjectIds[index];
-            return this.Session.GetOrCreateAssociationForExistingObject(objectId).Strategy.GetObject();
+            return this.Session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject();
         }
 
         protected abstract IList<ObjectId> GetObjectIds();

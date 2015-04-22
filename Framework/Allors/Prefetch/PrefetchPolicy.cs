@@ -66,13 +66,19 @@ namespace Allors
         public static implicit operator PrefetchPolicy(PrefetchRule prefetchRule)
         {
             var rules = new[] { prefetchRule };
-            return new PrefetchPolicy(rules);
+            return new PrefetchPolicy(rules)
+                        {
+                            AllowCompilation = false
+                        };
         }
 
         public static implicit operator PrefetchPolicy(IPropertyType[] propertyTypes)
         {
             var rules = propertyTypes.Select(x => new PrefetchRule(x, null)).ToArray();
-            return new PrefetchPolicy(rules);
+            return new PrefetchPolicy(rules)
+                       {
+                           AllowCompilation = false
+                       };
         }
 
         public IEnumerator<PrefetchRule> GetEnumerator()

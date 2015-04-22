@@ -29,7 +29,7 @@ namespace Allors
     {
         private List<PrefetchRule> rules;
 
-        private bool allowCompilation;
+        private bool allowCompilation = true;
 
         public PrefetchPolicyBuilder()
         {

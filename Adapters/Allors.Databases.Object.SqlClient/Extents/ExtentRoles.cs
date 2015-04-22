@@ -109,7 +109,7 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             var roles = this.strategy.Roles.GetCompositeRoles(this.roleType);
-            var references = this.strategy.Session.GetOrCreateAssociationsForExistingObjects(roles);
+            var references = this.strategy.Session.GetOrCreateReferencesForExistingObjects(roles);
             return new ExtentEnumerator(references);
         }
 

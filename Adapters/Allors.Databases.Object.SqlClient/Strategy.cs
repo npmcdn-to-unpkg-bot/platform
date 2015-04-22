@@ -145,7 +145,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     foreach (var association in this.Session.GetAssociations(this, associationType))
                     {
-                        var associationStrategy = this.Session.GetOrCreateAssociationForExistingObject(association).Strategy;
+                        var associationStrategy = this.Session.GetOrCreateReferenceForExistingObject(association).Strategy;
                         if (roleType.IsMany)
                         {
                             associationStrategy.RemoveCompositeRole(roleType, this.GetObject()); 
@@ -298,7 +298,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
             var role = this.Roles.GetCompositeRole(roleType);
-            return (role == null) ? null : this.Session.GetOrCreateAssociationForExistingObject(role).Strategy.GetObject();
+            return (role == null) ? null : this.Session.GetOrCreateReferenceForExistingObject(role).Strategy.GetObject();
         }
 
         public virtual void SetCompositeRole(IRoleType roleType, IObject newRoleObject)
@@ -401,7 +401,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (!newRoles.Contains(previousRole))
                     {
-                        this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateAssociationForExistingObject(previousRole).Strategy);
+                        this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateReferenceForExistingObject(previousRole).Strategy);
                     }
                 }
             }
@@ -417,7 +417,7 @@ namespace Allors.Databases.Object.SqlClient
 
             foreach (var previousRole in previousRoles)
             {
-                this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateAssociationForExistingObject(previousRole).Strategy);
+                this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateReferenceForExistingObject(previousRole).Strategy);
             }
         }
 
@@ -517,7 +517,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (i == index)
                 {
-                    return this.Session.GetOrCreateAssociationForExistingObject(oid).Strategy.GetObject();
+                    return this.Session.GetOrCreateReferenceForExistingObject(oid).Strategy.GetObject();
                 }
                 ++i;
             }

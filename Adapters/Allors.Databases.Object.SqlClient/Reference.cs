@@ -112,6 +112,7 @@ namespace Allors.Databases.Object.SqlClient
             {
                 if (!this.IsNew && this.cacheId == UnknownCacheId)
                 {
+                    this.Session.AddReferenceWithoutCacheIdOrExistsKnown(this);
                     this.Session.GetCacheIdsAndExists();
                 }
 
@@ -136,7 +137,8 @@ namespace Allors.Databases.Object.SqlClient
         {
             get
             {
-                return this.cacheId == UnknownCacheId;
+                var isUnknown = this.cacheId == UnknownCacheId; 
+                return isUnknown;
             }
         }
 
@@ -147,7 +149,7 @@ namespace Allors.Databases.Object.SqlClient
                 var flagsExistsKnown = this.flags[MaskExistsKnown];
                 if (!flagsExistsKnown)
                 {
-                    this.Session.AddReferenceWithoutCacheId(this);
+                    this.Session.AddReferenceWithoutCacheIdOrExistsKnown(this);
                     this.Session.GetCacheIdsAndExists();
                 }
 
@@ -165,7 +167,8 @@ namespace Allors.Databases.Object.SqlClient
         {
             get
             {
-                return this.flags[MaskExistsKnown];
+                var existsKnown = this.flags[MaskExistsKnown];
+                return existsKnown;
             }
         }
 
