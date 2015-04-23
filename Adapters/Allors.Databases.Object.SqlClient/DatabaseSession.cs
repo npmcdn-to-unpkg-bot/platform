@@ -2436,7 +2436,11 @@ namespace Allors.Databases.Object.SqlClient
                     ObjectId role;
                     if (roles.TryGetCompositeRole(roleType, out role))
                     {
-                        nestedObjects.Add(role);
+                        if (role != null)
+                        {
+                            nestedObjects.Add(role);
+                        }
+
                         continue;
                     }
                 }
@@ -2449,7 +2453,11 @@ namespace Allors.Databases.Object.SqlClient
                         object role;
                         if (cacheObject.TryGetValue(roleType, out role))
                         {
-                            nestedObjects.Add((ObjectId)role);
+                            if (role != null)
+                            {
+                                nestedObjects.Add((ObjectId)role);
+                            }
+
                             continue;
                         }
                     }

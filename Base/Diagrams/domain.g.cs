@@ -64,7 +64,7 @@ namespace Allors.Domain
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface User  : Object, SecurityTokenOwner, AccessControlledObject, Localised 
+    public interface User : Object, SecurityTokenOwner, Localised 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -270,7 +270,7 @@ namespace Allors.Domain
 	public interface Shared  : Object 
 	{
 	}
-	public interface AccessControl  : Object, Deletable, AccessControlledObject 
+    public interface AccessControl : Object, Deletable 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -370,7 +370,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Permission  : Object, Deletable, AccessControlledObject 
+    public interface Permission : Object, Deletable 
 	{
 					global::System.Guid OperandTypePointer {set;}
 
@@ -425,7 +425,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Role  : Object, AccessControlledObject, UniquelyIdentifiable 
+    public interface Role : Object, UniquelyIdentifiable 
 	{
 					Permission Permissions {set;}
 
@@ -466,7 +466,7 @@ namespace Allors.Domain
 					ObjectState ToState {set;}
 
 	}
-	public interface UserGroup  : Object, UniquelyIdentifiable, AccessControlledObject 
+    public interface UserGroup : Object, UniquelyIdentifiable 
 	{
 					Role Role {set;}
 
