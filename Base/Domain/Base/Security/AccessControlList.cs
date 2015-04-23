@@ -22,6 +22,7 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     using Allors;
@@ -32,6 +33,8 @@ namespace Allors.Domain
     /// </summary>
     public class AccessControlList : IAccessControlList
     {
+        public static readonly PrefetchPolicy PrefetchPolicy;
+
         private static readonly IList<Operation> EmptyOperations = new List<Operation>();
         private static readonly Dictionary<Guid, IList<Operation>> EmptyOperationsByOperandTypeId = new Dictionary<Guid, IList<Operation>>();
 
@@ -44,6 +47,20 @@ namespace Allors.Domain
 
         private bool hasWriteOperation;
         private bool hasReadOperation;
+        
+        static AccessControlList()
+        {
+            var subjectGroupPrefetch = new PrefetchPolicyBuilder()
+                .WithRule(UserGroup.Meta.Members)
+                .Build();
+
+            PrefetchPolicy = new PrefetchPolicyBuilder()
+                .WithRule(AccessControl.Meta.Role)
+                .WithRule(AccessControl.Meta.Objects)
+                .WithRule(AccessControl.Meta.Subjects)
+                .WithRule(AccessControl.Meta.SubjectGroups, subjectGroupPrefetch)
+                .Build();
+        }
 
         public AccessControlList(IObject obj, User user)
         {
@@ -178,40 +195,12 @@ namespace Allors.Domain
 
                 if (this.accessControlledObject != null)
                 {
-                    Extent<AccessControl> accessControls = null;
+                    AccessControl[] accessControls;
 
                     if (this.accessControlledObject.ExistSecurityTokens)
                     {
                         var securityTokens = this.accessControlledObject.SecurityTokens;
-
-                        if (this.accessControlledObject.Strategy.Session.Population is IWorkspace)
-                        {
-                            ICompositePredicate or = null;
-                            foreach (SecurityToken securityToken in securityTokens)
-                            {
-                                foreach (AccessControl accessControl in securityToken.AccessControlsWhereObject)
-                                {
-                                    var connectedAccessControl = (AccessControl)this.databaseSession.Instantiate(accessControl.Id);
-                                    if (connectedAccessControl == null)
-                                    {
-                                        throw new Exception("AccessControl must exist in the connected population.");
-                                    }
-
-                                    if (or == null)
-                                    {
-                                        accessControls = this.databaseSession.Extent<AccessControl>();
-                                        or = accessControls.Filter.AddOr();
-                                    }
-
-                                    or.AddEquals(connectedAccessControl);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            accessControls = this.databaseSession.Extent<AccessControl>();
-                            accessControls.Filter.AddContainedIn(AccessControls.Meta.Objects, (Extent)securityTokens);
-                        }
+                        accessControls = securityTokens.SelectMany(x => x.AccessControlsWhereObject).ToArray();
                     }
                     else
                     {
@@ -228,14 +217,9 @@ namespace Allors.Domain
                         }
                     }
 
-                    var subjectOr = accessControls.Filter.AddOr();
-                    subjectOr.AddContains(AccessControls.Meta.Subjects, this.user);
-                    foreach (UserGroup userGroup in this.user.UserGroupsWhereMember)
-                    {
-                        subjectOr.AddContains(AccessControls.Meta.SubjectGroups, userGroup);
-                    }
+                    accessControls = accessControls.Where(x => x.Subjects.Contains(this.user) || x.SubjectGroups.Any(y => y.Members.Contains(this.user))).ToArray();
 
-                    if (accessControls.Count > 0)
+                    if (accessControls.Length > 0)
                     {
                         Permission[] deniedPermissions;
                         if (this.accessControlledObject.Strategy.Session.Population is IWorkspace)
