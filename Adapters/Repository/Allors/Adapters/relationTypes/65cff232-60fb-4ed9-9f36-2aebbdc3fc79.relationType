@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="65cff232-60fb-4ed9-9f36-2aebbdc3fc79">
+  <associationType id="6c51970a-30b0-4881-b63b-ce51a7a64e03">
+    <objectType idref="7041c691-d896-4628-8f50-1c24f5d03414" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="80e71d74-6abc-4503-bddf-b86da1848ac3">
+    <objectType idref="c28e515b-cae8-4d6b-95bf-062aec8042fc" />
+    <pluralName>IndexedMaxBinaries</pluralName>
+    <singularName>IndexedMaxBinary</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

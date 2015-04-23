@@ -4611,6 +4611,74 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
             }
         }
 
+        [Test]
+        public void PrefetchCompositeRolesOne2ManyEmpty()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1A = C1.Create(this.Session);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2one2manies }, c1A);
+
+                Assert.AreEqual(0, c1A.C1C2one2manies.Count);
+            }
+        }
+
+        [Test]
+        public void PrefetchCompositeRolesMany2ManyEmpty()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1A = C1.Create(this.Session);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2many2manies }, c1A);
+
+                Assert.AreEqual(0, c1A.C1C2many2manies.Count);
+            }
+        }
+
+        [Test]
+        public void PrefetchCompositAssociationMany2ManyEmpty()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c2A = C2.Create(this.Session);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, c2A);
+
+                Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+            }
+        }
+
+        [Test]
+        public void PrefetchCompositAssociationMany2OneEmpty()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c2A = C2.Create(this.Session);
+
+                this.Session.Commit();
+
+                this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2one }, c2A);
+
+                Assert.AreEqual(0, c2A.C1sWhereC2many2one.Count);
+            }
+        }
+
         protected abstract void SwitchDatabase();
 
         protected abstract IPopulation CreatePopulation();

@@ -23,6 +23,7 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
     using System.Data.SqlClient;
@@ -35,6 +36,8 @@ namespace Allors.Databases.Object.SqlClient
 
     internal sealed class DatabaseSession : IDatabaseSession
     {
+        private static readonly ObjectId[] EmptyObjectIds = { };
+
         private readonly Database database;
 
         private SqlConnection connection;
@@ -1534,7 +1537,7 @@ namespace Allors.Databases.Object.SqlClient
                 var roles = dictionaryEntry.Value;
 
                 var cachedObject = cache.GetOrCreateCachedObject(association.Class, association.ObjectId, association.CacheId);
-                cachedObject.SetValue(roleType, roles.ToArray());
+                cachedObject.SetValue(roleType, roles == null ? EmptyObjectIds : roles.ToArray());
 
                 if (nestedObjectIds != null)
                 {
@@ -1609,7 +1612,7 @@ namespace Allors.Databases.Object.SqlClient
                     }
                     else
                     {
-                        cachedObject.SetValue(roleType, null);
+                        cachedObject.SetValue(roleType, EmptyObjectIds);
                     }
                 }
             }
@@ -1859,7 +1862,7 @@ namespace Allors.Databases.Object.SqlClient
                     List<ObjectId> associations;
                     if (!prefetchedAssociationByRole.TryGetValue(role, out associations))
                     {
-                        associationsByRole[role] = null;
+                        associationsByRole[role] = EmptyObjectIds;
                     }
                     else
                     {
@@ -1935,7 +1938,7 @@ namespace Allors.Databases.Object.SqlClient
                     List<ObjectId> associations;
                     if (!prefetchedAssociationByRole.TryGetValue(role, out associations))
                     {
-                        associationsByRole[role] = null;
+                        associationsByRole[role] = EmptyObjectIds;
                     }
                     else
                     {

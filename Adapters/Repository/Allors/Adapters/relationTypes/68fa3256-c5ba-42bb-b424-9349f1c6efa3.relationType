@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="68fa3256-c5ba-42bb-b424-9349f1c6efa3">
+  <associationType id="2984cad9-47c1-4606-9f5f-5fc2c0f40a3d">
+    <objectType idref="7041c691-d896-4628-8f50-1c24f5d03414" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="307ff3be-adf5-4914-9eaf-974161ff61f8">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>IndexedMaxStrings</pluralName>
+    <singularName>IndexedMaxString</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>
