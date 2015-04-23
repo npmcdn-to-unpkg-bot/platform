@@ -16,6 +16,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
+    using System;
     using System.Data.SqlClient;
     using System.Text;
 
@@ -388,17 +389,6 @@ CREATE SCHEMA " + this.database.SchemaName;
                             if (relationType.IsIndexed)
                             {
                                 var roleType = relationType.RoleType;
-                                if (roleType.ObjectType.IsUnit)
-                                {
-                                    var unit = (IUnit)roleType.ObjectType;
-                                    if (unit.IsString || unit.IsBinary)
-                                    {
-                                        if (roleType.Size > 4000)
-                                        {
-                                            continue;
-                                        }
-                                    }
-                                }
 
                                 if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                                 {
@@ -413,6 +403,18 @@ CREATE SCHEMA " + this.database.SchemaName;
                             var relationType = roleType.RelationType;
                             if (relationType.IsIndexed)
                             {
+                                if (roleType.ObjectType.IsUnit)
+                                {
+                                    var unit = (IUnit)roleType.ObjectType;
+                                    if (unit.IsString || unit.IsBinary)
+                                    {
+                                        if (roleType.Size == -1 || roleType.Size > 4000)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                }
+                                
                                 var associationType = relationType.AssociationType;
                                 if (roleType.ObjectType.IsUnit)
                                 {
