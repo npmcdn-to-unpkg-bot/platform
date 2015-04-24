@@ -51,6 +51,11 @@ namespace Allors.Domain
 
         void AddDerivables(IEnumerable<Object> derivables);
 
+        /// <summary>
+        /// The dependee is derived before the dependent object;
+        /// </summary>
+        /// <param name="dependent"></param>
+        /// <param name="dependee"></param>
         void AddDependency(Object dependent, Object dependee);
 
         DerivationLog Derive();

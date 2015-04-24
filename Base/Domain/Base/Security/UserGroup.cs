@@ -20,6 +20,8 @@
 
 namespace Allors.Domain
 {
+    using System;
+
     public partial class UserGroup
     {
         public bool ContainsMember(User user)
@@ -38,7 +40,7 @@ namespace Allors.Domain
         protected void BaseOnPreDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
-            
+
             foreach (Object member in this.Members)
             {
                 derivation.AddDependency(member, this);
@@ -50,6 +52,11 @@ namespace Allors.Domain
             if (this.ExistParent)
             {
                 // TODO: members should be added to ancestor groups
+            }
+
+            foreach (AccessControl accessControl in this.AccessControlsWhereSubjectGroup)
+            {
+                accessControl.CacheId = Guid.NewGuid();
             }
         }
     }

@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Meta\Overview.cd" />
+    <None Include="Prefetch\Prefetch.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

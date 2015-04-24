@@ -216,7 +216,6 @@ namespace Allors.Domain
 
                             roleUniqueIds.Add(cacheEntry.RoleUniqueId);
                         }
-                    
                     }
 
                     if (roleUniqueIds != null)
