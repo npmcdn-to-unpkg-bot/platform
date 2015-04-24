@@ -368,7 +368,7 @@ namespace Allors.Security
             this.DatabaseSession.Derive(true);
             this.DatabaseSession.Commit();
 
-            var sessions = new ISession[] { this.DatabaseSession, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.CreateWorkspaceSession(), this.DatabaseSession };
             foreach (var session in sessions)
             {
                 session.Commit();

@@ -85,27 +85,16 @@ namespace Allors.Domain
             singleton = null;
         }
 
-        public Dictionary<Guid, IList<Operation>> GetOperationsByOperandObjectId(Extent<AccessControl> accessControls, ObjectType objectType, out bool hasWriteOperation, out bool hasReadOperation)
+        public Dictionary<Guid, IList<Operation>> GetOperationsByOperandObjectId(IList<Guid> roleUniqueIds, ObjectType objectType, out bool hasWriteOperation, out bool hasReadOperation)
         {
-            var roles = new HashSet<Role>();
-            foreach (AccessControl accessControl in accessControls)
-            {
-                roles.Add(accessControl.Role);
-            }
-
             var operationsByOperandId = new Dictionary<Guid, IList<Operation>>();
 
             hasWriteOperation = false;
             hasReadOperation = false;
 
-            foreach (var role in roles)
+            foreach (var roleUniqueId in roleUniqueIds)
             {
-                if (!role.ExistUniqueId)
-                {
-                    throw new Exception("Role " + role + " has no unique id");
-                }
-
-                var roleOperationsByOperandIdByObjectType = this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId];
+                var roleOperationsByOperandIdByObjectType = this.operationsByOperandTypeIdByObjectTypeIdByRoleId[roleUniqueId];
                 Dictionary<Guid, List<Operation>> roleOperationsByOperandObjectId;
                 if (roleOperationsByOperandIdByObjectType.TryGetValue(objectType.Id, out roleOperationsByOperandObjectId))
                 {

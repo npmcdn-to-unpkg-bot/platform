@@ -33,8 +33,6 @@ namespace Allors.Domain
     /// </summary>
     public class AccessControlList : IAccessControlList
     {
-        public static readonly PrefetchPolicy PrefetchPolicy;
-
         private static readonly IList<Operation> EmptyOperations = new List<Operation>();
         private static readonly Dictionary<Guid, IList<Operation>> EmptyOperationsByOperandTypeId = new Dictionary<Guid, IList<Operation>>();
 
@@ -48,20 +46,6 @@ namespace Allors.Domain
         private bool hasWriteOperation;
         private bool hasReadOperation;
         
-        static AccessControlList()
-        {
-            var subjectGroupPrefetch = new PrefetchPolicyBuilder()
-                .WithRule(UserGroup.Meta.Members)
-                .Build();
-
-            PrefetchPolicy = new PrefetchPolicyBuilder()
-                .WithRule(AccessControl.Meta.Role)
-                .WithRule(AccessControl.Meta.Objects)
-                .WithRule(AccessControl.Meta.Subjects)
-                .WithRule(AccessControl.Meta.SubjectGroups, subjectGroupPrefetch)
-                .Build();
-        }
-
         public AccessControlList(IObject obj, User user)
         {
             this.user = user;
@@ -217,9 +201,25 @@ namespace Allors.Domain
                         }
                     }
 
-                    accessControls = accessControls.Where(x => x.Subjects.Contains(this.user) || x.SubjectGroups.Any(y => y.Members.Contains(this.user))).ToArray();
+                    var cache = new AccessControlCache(this.databaseSession);
 
-                    if (accessControls.Length > 0)
+                    List<Guid> roleUniqueIds = null;
+                    foreach (var accessControl in accessControls)
+                    {
+                        var cacheEntry = cache[accessControl];
+                        if (cacheEntry.UserObjectIds.Contains(this.user.Id))
+                        {
+                            if (roleUniqueIds == null)
+                            {
+                                roleUniqueIds = new List<Guid>();
+                            }
+
+                            roleUniqueIds.Add(cacheEntry.RoleUniqueId);
+                        }
+                    
+                    }
+
+                    if (roleUniqueIds != null)
                     {
                         Permission[] deniedPermissions;
                         if (this.accessControlledObject.Strategy.Session.Population is IWorkspace)
@@ -232,7 +232,7 @@ namespace Allors.Domain
                         }
 
                         var securityCache = SecurityCache.GetSingleton(this.databaseSession);
-                        this.operationsByOperandId = securityCache.GetOperationsByOperandObjectId(accessControls, (ObjectType)this.objectType, out this.hasWriteOperation, out this.hasReadOperation);
+                        this.operationsByOperandId = securityCache.GetOperationsByOperandObjectId(roleUniqueIds, (ObjectType)this.objectType, out this.hasWriteOperation, out this.hasReadOperation);
 
                         foreach (var deniedPermission in deniedPermissions)
                         {

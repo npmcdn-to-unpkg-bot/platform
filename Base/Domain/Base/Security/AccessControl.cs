@@ -20,11 +20,18 @@
 
 namespace Allors.Domain
 {
+    using System;
+
     public partial class AccessControl
     {
         public void BaseOnDerive(ObjectOnDerive method)
         {
             method.Derivation.Log.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
+        }
+
+        public void BaseOnPostDerive(ObjectOnPostDerive method)
+        {
+            this.CacheId = Guid.NewGuid();
         }
     }
 }
