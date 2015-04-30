@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using Allors.Web.Mvc.Models
+@model dynamic
 
 @foreach (var property in ViewData.ModelMetadata.Properties.Where(p => p.ShowForEdit))
 {
