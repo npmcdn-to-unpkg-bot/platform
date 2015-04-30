@@ -310,6 +310,9 @@
     <Compile Include="..\..\Base\Domain\Base\Security\AccessControls.cs">
       <Link>Base\Security\AccessControls.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Security\Cache\AccessControlCache.cs">
+      <Link>Base\Security\Cache\AccessControlCache.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Security\Cache\SecurityCache.cs">
       <Link>Base\Security\Cache\SecurityCache.cs</Link>
     </Compile>

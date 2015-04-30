@@ -1193,6 +1193,8 @@ namespace Allors.Domain
 
 					Role Role {set;}
 
+					global::System.Guid CacheId {set;}
+
 	}
 	public interface Counter  : Object, UniquelyIdentifiable 
 	{
