@@ -10,5 +10,7 @@
         public string Name { get; set; }
 
         public Select Owner { get; set; }
+
+        public MultipleSelect Employees { get; set; }
     }
 }

@@ -113,6 +113,7 @@
                 {
                     organisation.Name = model.Name;
                     organisation.Owner = (Person)this.AllorsSession.Instantiate(model.Owner.Id);
+                    organisation.Employees = this.AllorsSession.Instantiate(model.Employees.Ids);
 
                     var derivationLog = this.AllorsSession.Derive();
                     if (derivationLog.HasErrors)
@@ -164,7 +165,7 @@
                     Id = organisation.ExistOwner ? organisation.Owner.Id.ToString() : "0", 
                     List = new[]
                                {
-                                   new SelectListItem { Text = "Select a person", Value = "0" }
+                                   new SelectListItem { Value = "0" }
                                }
                             .Concat(this.AllorsSession.Extent<Person>().Select(x => new SelectListItem
                                                                                          {
@@ -172,6 +173,15 @@
                                                                                              Value = x.Id.ToString(),
                                                                                          }))
                             .ToArray() 
+                };
+                edit.Employees = new MultipleSelect
+                {
+                    Ids = organisation.Employees.Select(x => x.Id.ToString()).ToArray(),
+                    List = this.AllorsSession.Extent<Person>().Select(x => new SelectListItem
+                            {
+                                Text = x.UserName,
+                                Value = x.Id.ToString(),
+                            }).ToArray()
                 };
             }
         }
