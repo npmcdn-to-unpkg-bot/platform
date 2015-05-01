@@ -203,11 +203,11 @@
     <Compile Include="Allors\Base\Security\AllorsMembershipProvider.cs" />
     <Compile Include="Allors\Base\Security\AllorsRoleProvider.cs" />
     <Compile Include="Allors\Tests\Organisation\Command.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Add.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Edit.cs" />
+    <Compile Include="Allors\Tests\Organisation\Models\Add\Add.cs" />
+    <Compile Include="Allors\Tests\Organisation\Models\Edit\Edit.cs" />
     <Compile Include="Allors\Tests\Organisation\Models\IFilter.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Index.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Index_Organisation.cs" />
+    <Compile Include="Allors\Tests\Organisation\Models\Index\Index.cs" />
+    <Compile Include="Allors\Tests\Organisation\Models\Index\Index_Organisation.cs" />
     <Compile Include="Allors\Tests\Organisation\OrganisationController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
