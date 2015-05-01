@@ -1,6 +1,7 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
+    using System.Text;
 
     public class Validation
     {
@@ -66,6 +67,70 @@ namespace Allors.Databases.Object.SqlClient
             get
             {
                 return this.schema;
+            }
+        }
+
+        public string Message 
+        {
+            get
+            {
+                var message = new StringBuilder();
+
+                if (this.MissingTableNames.Count > 0)
+                {
+                    message.Append("Missing Tables:\n");
+                    foreach (var missingTable in this.MissingTableNames)
+                    {
+                        message.Append("- " + missingTable + ":\n");
+                    }
+                }
+
+                if (this.InvalidTables.Count > 0)
+                {
+                    message.Append("Invalid Tables:\n");
+                    foreach (var invalidTable in this.InvalidTables)
+                    {
+                        message.Append("- " + invalidTable.Name + ":\n");
+                    }
+                }
+
+                if (this.MissingTableTypeNames.Count > 0)
+                {
+                    message.Append("Missing Table Types:\n");
+                    foreach (var missingTableType in this.MissingTableTypeNames)
+                    {
+                        message.Append("- " + missingTableType + ":\n");
+                    }
+                }
+
+                if (this.InvalidTableTypes.Count > 0)
+                {
+                    message.Append("Invalid Table Types:\n");
+                    foreach (var invalidTableType in this.InvalidTableTypes)
+                    {
+                        message.Append("- " + invalidTableType.Name + ":\n");
+                    }
+                }
+
+                if (this.MissingProcedureNames.Count > 0)
+                {
+                    message.Append("Missing Procedures:\n");
+                    foreach (var missingProcedure in this.MissingProcedureNames)
+                    {
+                        message.Append("- " + missingProcedure + ":\n");
+                    }
+                }
+
+                if (this.InvalidProcedures.Count > 0)
+                {
+                    message.Append("Invalid Procedures:\n");
+                    foreach (var invalidProcedure in this.InvalidProcedures)
+                    {
+                        message.Append("- " + invalidProcedure.Name + ":\n");
+                    }
+                }
+
+                return message.ToString();
             }
         }
 

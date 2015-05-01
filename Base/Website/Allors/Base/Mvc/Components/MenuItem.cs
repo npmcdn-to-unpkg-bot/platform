@@ -34,6 +34,11 @@ namespace Allors.Web.Mvc
     {
         private readonly List<MenuItem> items = new List<MenuItem>();
 
+        public MenuItem()
+        {
+            this.AllowAnonymous = true;
+        }
+
         public MenuItem Action<TController>(Expression<Action<TController>> expression) where TController : System.Web.Mvc.Controller
         {
             var valuesFromExpression = ExpressionHelper.GetRouteValuesFromExpression(expression);

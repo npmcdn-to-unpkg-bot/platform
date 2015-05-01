@@ -1,0 +1,6 @@
+﻿@model Website.OrganisationMvc.Index_Organisation
+@Html.HiddenFor(x => x.Id)
+<tr>
+    <td>@Html.DisplayFor(model => model.Name, new { @class = "col-md-2 control-label" })</td>
+    <td>@Html.ActionLink("Edit", "Edit", "Organisation", new {id = Model.Id}, null)</td>
+</tr>

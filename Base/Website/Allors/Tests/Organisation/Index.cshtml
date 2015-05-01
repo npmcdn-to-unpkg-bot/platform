@@ -1,0 +1,27 @@
+﻿@using Website.OrganisationMvc
+@model Index
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+@using (Html.BeginForm("Index", "Organisation", FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Partial("_Filter", Model)
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <table class="table table-condensed table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+        </thead>
+        @Html.DisplayFor(x => x.Organisations)
+    </table>
+
+    <div class="row">
+        @Html.ActionLink("Add new Organisation", "Add")
+
+    </div>
+}
+</div>

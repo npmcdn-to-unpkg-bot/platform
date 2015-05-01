@@ -3,9 +3,12 @@
   <Interface Name="Allors.Domain.Enumeration">
     <Position X="4.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAgAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LocalisedNames" />
+    </ShowAsAssociation>
   </Interface>
   <Interface Name="Allors.Domain.LocalisedText">
     <Position X="7.25" Y="2" Width="1.5" />
@@ -31,8 +34,8 @@
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Country" />
       <Property Name="Language" />
+      <Property Name="Country" />
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Allors.Domain.Country" Collapsed="true">

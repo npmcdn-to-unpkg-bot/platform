@@ -21,6 +21,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
+    using System.Text;
     using System.Xml;
 
     using Allors.Databases.Object.SqlClient.Caching;
@@ -62,6 +63,8 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<string, object> properties;
 
         private bool? isValid;
+
+        private string validationMessage;
 
         public Database(Configuration configuration)
         {
@@ -179,6 +182,7 @@ namespace Allors.Databases.Object.SqlClient
                         if (!this.isValid.HasValue)
                         {
                             var validate = this.Validate();
+                            this.validationMessage = validate.Message;
                             return validate.IsValid;
                         }
                     }
@@ -511,23 +515,8 @@ namespace Allors.Databases.Object.SqlClient
         {
             if (!this.IsValid)
             {
-                throw new Exception("Schema is invalid.");
+                throw new Exception(this.validationMessage);
             }
-
-
-            //if (this.Mapping.MappingValidationErrors.HasErrors)
-            //{
-            //    var errors = new StringBuilder();
-            //    foreach (var error in this.Mapping.MappingValidationErrors.Errors)
-            //    {
-            //        errors.Append("\n");
-            //        errors.Append(error.Message);
-            //    }
-
-            //    throw new MappingValidationException(
-            //        this.Mapping.MappingValidationErrors,
-            //        "Database schema is not compatible with domain.\nUpgrade manually or use Save & Load.\n" + errors);
-            //}
 
             return new DatabaseSession(this);
         }

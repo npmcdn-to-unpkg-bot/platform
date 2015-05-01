@@ -707,6 +707,8 @@ namespace Allors.Domain
 
 					global::System.String Size {set;}
 
+					Address MainAddress {set;}
+
 	}
 	public interface Place  : Object 
 	{
