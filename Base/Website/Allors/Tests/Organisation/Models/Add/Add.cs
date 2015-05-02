@@ -3,7 +3,7 @@
     using Allors.Meta;
     using Allors.Web.Mvc.Models;
 
-    public class Add : IModel<OrganisationClass>
+    public class Add : IMetadataModel<OrganisationClass>
     {
         public string Id { get; set; }
 

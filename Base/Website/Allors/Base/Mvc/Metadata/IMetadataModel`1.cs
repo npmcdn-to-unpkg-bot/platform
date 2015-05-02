@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="LabelAnnotation.cs" company="Allors bvba">
+// <copyright file="IMetadataModel`1.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,19 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models.Annotations
+namespace Allors.Web.Mvc.Models
 {
-    using System.Web.Mvc;
-    using Humanizer;
+    using Allors.Meta;
 
-    public partial class LabelAnnotation : IPropertyMetadataAware 
+    public interface IMetadataModel<T> : IMetadataModel
+        where T : Composite
     {
-        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
-        {
-            if (string.IsNullOrWhiteSpace(modelMetadata.DisplayName))
-            {
-                modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize();
-            }
-        }
     }
 }

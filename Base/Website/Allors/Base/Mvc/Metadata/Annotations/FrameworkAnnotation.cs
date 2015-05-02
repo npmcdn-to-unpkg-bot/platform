@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FormAnnotation.cs" company="Allors bvba">
+// <copyright file="FrameworkAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,13 +22,30 @@ namespace Allors.Web.Mvc.Models.Annotations
 {
     using System.Web.Mvc;
 
-    public partial class FormAnnotation : ITypeMetadataAware
+    public partial class FrameworkAnnotation : ITypeMetadataAware,  IPropertyMetadataAware
     {
-        public const string Name = "Form";
+        public const string Default = "Bootstrap";
+
+        public string Name { get; private set; }
+
+        public FrameworkAnnotation()
+            : this(Default)
+        {
+        }
+
+        public FrameworkAnnotation(string name)
+        {
+            this.Name = name ?? Default;
+        }
 
         public void OnTypeMetadataCreated(ModelMetadata modelMetadata)
         {
-            modelMetadata.TemplateHint = Name;
+            modelMetadata.SetFramework(this.Name);
+        }
+
+        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
+        {
+            modelMetadata.SetFramework(this.Name);
         }
     }
 }

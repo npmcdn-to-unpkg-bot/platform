@@ -20,11 +20,13 @@
 
 namespace Domain
 {
+    using System.Collections;
     using System.Collections.Generic;
 
     using Allors;
     using Allors.Domain;
     using Allors.Meta;
+    using Allors.Meta.Ids;
 
     using Moq;
 
@@ -34,7 +36,7 @@ namespace Domain
     public class PathTests : DomainTest
     {
         [Test]
-        public void One2Many()
+        public void One2ManyWithPropertyTypes()
         {
             var c2A = new C2Builder(this.Session).WithC2AllorsString("c2A").Build();
             var c2B = new C2Builder(this.Session).WithC2AllorsString("c2B").Build();
@@ -67,6 +69,76 @@ namespace Domain
             Assert.AreEqual(2, result.Count);
             Assert.IsTrue(result.Contains("c2B"));
             Assert.IsTrue(result.Contains("c2C"));
+        }
+
+        [Test]
+        public void One2ManyWithPropertyTypeIds()
+        {
+            var c2A = new C2Builder(this.Session).WithC2AllorsString("c2A").Build();
+            var c2B = new C2Builder(this.Session).WithC2AllorsString("c2B").Build();
+            var c2C = new C2Builder(this.Session).WithC2AllorsString("c2C").Build();
+
+            var c1a = new C1Builder(this.Session)
+                .WithC1AllorsString("c1A")
+                .WithC1C2One2Many(c2A)
+                .Build();
+
+            var c1b = new C1Builder(this.Session)
+                .WithC1AllorsString("c1B")
+                .WithC1C2One2Many(c2B)
+                .WithC1C2One2Many(c2C)
+                .Build();
+
+            this.Session.Derive(true);
+
+            var metaPopulation = MetaPopulation.Instance;
+            var path = new Path(metaPopulation, C1Ids.C1C2One2Manies, C2Ids.C2AllorsString);
+
+            var aclMock = new Mock<IAccessControlList>();
+            aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);
+            var acls = new AccessControlListCache(null, (allorsObject, user) => aclMock.Object);
+
+            var result = (ISet<object>)path.Get(c1a, acls);
+            Assert.AreEqual(1, result.Count);
+            Assert.IsTrue(result.Contains("c2A"));
+
+            result = (ISet<object>)path.Get(c1b, acls);
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Contains("c2B"));
+            Assert.IsTrue(result.Contains("c2C"));
+        }
+
+        [Test]
+        public void One2ManyWithPropertyNames()
+        {
+            var c2A = new C2Builder(this.Session).WithC2AllorsString("c2A").Build();
+            var c2B = new C2Builder(this.Session).WithC2AllorsString("c2B").Build();
+            var c2C = new C2Builder(this.Session).WithC2AllorsString("c2C").Build();
+
+            var c1A = new C1Builder(this.Session)
+                .WithC1AllorsString("c1A")
+                .WithC1C2One2Many(c2A)
+                .Build();
+
+            var c1B = new C1Builder(this.Session)
+                .WithC1AllorsString("c1B")
+                .WithC1C2One2Many(c2B)
+                .WithC1C2One2Many(c2C)
+                .Build();
+
+            this.Session.Derive(true);
+
+            var path = new Path(C2.Meta.ObjectType, "C2One2ManyC1");
+
+            var aclMock = new Mock<IAccessControlList>();
+            aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);
+            var acls = new AccessControlListCache(null, (allorsObject, user) => aclMock.Object);
+
+            var result = (C1)path.Get(c2A, acls);
+            Assert.AreEqual(result, c1A);
+            
+            result = (C1)path.Get(c2B, acls);
+            Assert.AreEqual(result, c1B);
         }
     }
 }

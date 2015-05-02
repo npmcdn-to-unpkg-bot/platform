@@ -2,7 +2,7 @@
 {
     using Allors.Web.Mvc.Models;
 
-    public interface IFilter : IModel
+    public interface IFilter : IMetadataModel
     {
         string FilterName { get; set; }
     }

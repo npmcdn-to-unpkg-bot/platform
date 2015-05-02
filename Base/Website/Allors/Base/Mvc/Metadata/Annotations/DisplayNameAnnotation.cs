@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BootstrapThemeAnnotation.cs" company="Allors bvba">
+// <copyright file="DisplayNameAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,22 +21,16 @@
 namespace Allors.Web.Mvc.Models.Annotations
 {
     using System.Web.Mvc;
+    using Humanizer;
 
-    public partial class BootstrapThemeAnnotation : ITypeMetadataAware,  IPropertyMetadataAware
+    public partial class DisplayNameAnnotation : IPropertyMetadataAware 
     {
-        private const string Name = "Bootstrap";
-
-        public void OnTypeMetadataCreated(ModelMetadata modelMetadata)
-        {
-            if (!string.IsNullOrEmpty(modelMetadata.TemplateHint))
-            {
-                modelMetadata.TemplateHint = Name + modelMetadata.TemplateHint;
-            }
-        }
-
         public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
         {
-            modelMetadata.SetTheme(Name);
+            if (string.IsNullOrWhiteSpace(modelMetadata.DisplayName))
+            {
+                modelMetadata.DisplayName = modelMetadata.PropertyName.Humanize();
+            }
         }
     }
 }

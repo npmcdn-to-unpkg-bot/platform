@@ -20,10 +20,16 @@
 
 namespace Allors.Meta
 {
+    using System;
+    using System.Linq;
     using System.Text;
     
     public class Path
     {
+        public Path()
+        {
+        }
+
         public Path(params PropertyType[] propertyTypes)
         {
             if (propertyTypes.Length > 0)
@@ -39,7 +45,13 @@ namespace Allors.Meta
             }
         }
 
-        public Path()
+        public Path(MetaPopulation metaPopulation, params string[] propertyTypeIds)
+            : this(propertyTypeIds.Select(x => (PropertyType)metaPopulation.Find(new Guid(x))).ToArray())
+        {
+        }
+
+        public Path(Composite composite, string pathString)
+            : this(Resolve(composite, pathString))
         {
         }
 
@@ -99,6 +111,37 @@ namespace Allors.Meta
             }
 
             return this.PropertyType.GetObjectType();
+        }
+
+        private static PropertyType Resolve(Composite composite, string propertyName)
+        {
+            var lowerCasePropertyName = propertyName.ToLowerInvariant();
+
+            foreach (var roleType in composite.RoleTypes)
+            {
+                if (roleType.SingularName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    roleType.SingularFullName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    roleType.PluralName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    roleType.PluralFullName.ToLowerInvariant().Equals(lowerCasePropertyName))
+                {
+                    return roleType;
+                }
+            }
+
+            foreach (var associationType in composite.AssociationTypes)
+            {
+                if (associationType.SingularName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    associationType.SingularFullName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    associationType.SingularPropertyName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    associationType.PluralName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    associationType.PluralFullName.ToLowerInvariant().Equals(lowerCasePropertyName) ||
+                    associationType.PluralPropertyName.ToLowerInvariant().Equals(lowerCasePropertyName))
+                {
+                    return associationType;
+                }
+            }
+
+            throw new Exception("Could not find " + propertyName + " on " + composite);
         }
 
         private void AppendToName(StringBuilder name)

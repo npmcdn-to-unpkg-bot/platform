@@ -266,6 +266,7 @@
     <Compile Include="Generated\I1.g.cs" />
     <Compile Include="Generated\I12.g.cs" />
     <Compile Include="Generated\I2.g.cs" />
+    <Compile Include="Generated\Ids.g.cs" />
     <Compile Include="Generated\Image.g.cs" />
     <Compile Include="Generated\Language.g.cs" />
     <Compile Include="Generated\Locale.g.cs" />

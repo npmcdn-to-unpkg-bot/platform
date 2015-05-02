@@ -30,6 +30,7 @@ namespace Allors.Databases.Memory
     public abstract class Session : IDatabaseSession
     {
         private static readonly HashSet<Strategy> EmptyStrategies = new HashSet<Strategy>();
+        private static readonly IObject[] EmptyObjects = { };
 
         private readonly Dictionary<IObjectType, IObjectType[]> concreteClassesByObjectType;
 
@@ -301,13 +302,18 @@ namespace Allors.Databases.Memory
 
         public IObject[] Instantiate(string[] objectIdStrings)
         {
-            var objectIds = new ObjectId[objectIdStrings.Length];
-            for (var i = 0; i < objectIdStrings.Length; i++)
+            if (objectIdStrings != null)
             {
-                objectIds[i] = this.ObjectIds.Parse(objectIdStrings[i]);
+                var objectIds = new ObjectId[objectIdStrings.Length];
+                for (var i = 0; i < objectIdStrings.Length; i++)
+                {
+                    objectIds[i] = this.ObjectIds.Parse(objectIdStrings[i]);
+                }
+
+                return this.Instantiate(objectIds);
             }
 
-            return this.Instantiate(objectIds);
+            return EmptyObjects;
         }
 
         public IObject[] Instantiate(IObject[] objects)

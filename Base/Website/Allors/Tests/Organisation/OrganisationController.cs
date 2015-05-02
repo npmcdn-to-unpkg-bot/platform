@@ -103,7 +103,7 @@
         {
             if (command == Command.Cancel)
             {
-                return RedirectToRoute("Default", new { controller = "Organisation", action = "Index" });
+                return this.RedirectToRoute("Default", new { controller = "Organisation", action = "Index" });
             }
             var organisation = (Organisation)this.AllorsSession.Instantiate(model.Id);
 
@@ -112,8 +112,11 @@
                 if (this.ModelState.IsValid)
                 {
                     organisation.Name = model.Name;
+                    organisation.Description = model.Description;
+                    organisation.Incorporated = model.Incorporated;
+                    organisation.IncorporationDate = model.IncorporationDate;
                     organisation.Owner = (Person)this.AllorsSession.Instantiate(model.Owner.Id);
-                    organisation.Employees = this.AllorsSession.Instantiate(model.Employees.Ids);
+                    organisation.Employees = this.AllorsSession.Instantiate(model.Werknemers.Ids);
 
                     var derivationLog = this.AllorsSession.Derive();
                     if (derivationLog.HasErrors)
@@ -160,6 +163,9 @@
             {
                 edit.Id = organisation.Id.ToString();
                 edit.Name = organisation.Name;
+                edit.Description = organisation.Description;
+                edit.Incorporated = organisation.Incorporated;
+                edit.IncorporationDate = organisation.IncorporationDate;
                 edit.Owner = new Select 
                 { 
                     Id = organisation.ExistOwner ? organisation.Owner.Id.ToString() : "0", 
@@ -174,7 +180,7 @@
                                                                                          }))
                             .ToArray() 
                 };
-                edit.Employees = new MultipleSelect
+                edit.Werknemers = new MultipleSelect
                 {
                     Ids = organisation.Employees.Select(x => x.Id.ToString()).ToArray(),
                     List = this.AllorsSession.Extent<Person>().Select(x => new SelectListItem

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IModel.cs" company="Allors bvba">
+// <copyright file="TemplateHintAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,9 +18,33 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models
+namespace Allors.Web.Mvc.Models.Annotations
 {
-    public interface IModel
+    using System.Web.Mvc;
+
+    public partial class TemplateHintAnnotation : ITypeMetadataAware
     {
+        public const string Default = "Form";
+
+        public string Name { get; private set; }
+
+        public TemplateHintAnnotation()
+            : this(Default)
+        {
+        }
+
+        public TemplateHintAnnotation(string name)
+        {
+            this.Name = name ?? Default;
+        }
+        
+
+        public void OnTypeMetadataCreated(ModelMetadata modelMetadata)
+        {
+            if (string.IsNullOrWhiteSpace(modelMetadata.TemplateHint))
+            {
+                modelMetadata.TemplateHint = this.Name;
+            }
+        }
     }
 }

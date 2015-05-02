@@ -30,12 +30,16 @@ namespace Allors.Web.Mvc.Models
         private static readonly IPropertyMetadataAware[] EmptyPropertyAnnotations = { };
 
         private readonly Dictionary<Type, Composite> compositeByModelType;
+        private readonly Dictionary<Type, Dictionary<string, Path>> pathByPropertyNameByModelType;
+ 
         private readonly ITypeMetadataAware[] typeAnnotations;
         private readonly IPropertyMetadataAware[] propertyAnnotations;
 
         public AllorsModelMetadataProvider(Dictionary<Type, Composite> compositeByModelType, ITypeMetadataAware[] typeAnnotations, IPropertyMetadataAware[] propertyAnnotations)
         {
             this.compositeByModelType = compositeByModelType;
+            this.pathByPropertyNameByModelType = new Dictionary<Type, Dictionary<string, Path>>();
+
             this.typeAnnotations = typeAnnotations ?? EmptyTypeAnnotations;
             this.propertyAnnotations = propertyAnnotations ?? EmptyPropertyAnnotations;
         }
@@ -47,6 +51,7 @@ namespace Allors.Web.Mvc.Models
             Composite composite;
             if (this.compositeByModelType.TryGetValue(modelMetaData.ModelType, out composite))
             {
+                // CompositeType
                 modelMetaData.SetComposite(composite);
                 foreach (var filter in this.typeAnnotations)
                 {
@@ -55,6 +60,36 @@ namespace Allors.Web.Mvc.Models
             }
             else if (modelMetaData.ContainerType != null && this.compositeByModelType.TryGetValue(modelMetaData.ContainerType, out composite))
             {
+                modelMetaData.SetComposite(composite);
+
+                Path path = null;
+                if (composite != null)
+                {
+                    Dictionary<string, Path> pathByPropertyName;
+                    if (!this.pathByPropertyNameByModelType.TryGetValue(modelMetaData.ContainerType, out pathByPropertyName))
+                    {
+                        pathByPropertyName = new Dictionary<string, Path>();
+                        this.pathByPropertyNameByModelType[modelMetaData.ContainerType] = pathByPropertyName;
+                    }
+
+                    var pathString = modelMetaData.PropertyName;
+                    if (!pathByPropertyName.TryGetValue(pathString, out path))
+                    {
+                        var pathPropertyIds = modelMetaData.GetPathPropertyIds();
+                        if (pathPropertyIds != null && pathPropertyIds.Length > 0)
+                        {
+                            path = new Path(composite.MetaPopulation, pathPropertyIds);
+                        }
+                        else
+                        {
+                            path = new Path(composite, pathString);
+                        }
+                    }
+                }
+
+                modelMetaData.SetPath(path);
+
+                // Path
                 foreach (var filter in this.propertyAnnotations)
                 {
                     filter.OnPropertyMetadataCreated(modelMetaData);

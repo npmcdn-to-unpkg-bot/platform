@@ -14,15 +14,15 @@
     {
         private static readonly ITypeMetadataAware[] DefaultTypeAnnotations =
             {
-                new FormAnnotation(), 
-                new BootstrapThemeAnnotation(), 
+                new TemplateHintAnnotation(), 
+                new FrameworkAnnotation(), 
             };
 
         private static readonly IPropertyMetadataAware[] DefaultPropertyAnnotations =
             {
-                new BootstrapThemeAnnotation(), 
-                new IdAnnotation(), 
-                new LabelAnnotation(), 
+                new IdPostfixAnnotation(), 
+                new FrameworkAnnotation(), 
+                new DisplayNameAnnotation(), 
                 new WatermarkAnnotation()
             };
 
@@ -34,15 +34,15 @@
                     Assembly.GetExecutingAssembly()
                         .GetTypes()
                         .Where(type => 
-                            type != typeof(IModel) && 
-                            type != typeof(IModel<>) && 
-                            typeof(IModel).IsAssignableFrom(type))
+                            type != typeof(IMetadataModel) && 
+                            type != typeof(IMetadataModel<>) && 
+                            typeof(IMetadataModel).IsAssignableFrom(type))
                         .ToArray();
 
                 var compositeByModelType = new Dictionary<Type, Composite>();
                 foreach (var modelType in modelTypes)
                 {
-                    var genericModelInterface = modelType.GetInterfaces().FirstOrDefault(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IModel<>));
+                    var genericModelInterface = modelType.GetInterfaces().FirstOrDefault(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IMetadataModel<>));
                     if (genericModelInterface != null)
                     {
                         var compositeType = genericModelInterface.GenericTypeArguments[0];

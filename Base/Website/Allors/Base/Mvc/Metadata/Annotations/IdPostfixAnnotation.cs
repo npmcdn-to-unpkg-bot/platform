@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IModel`1.cs" company="Allors bvba">
+// <copyright file="IdPostfixAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,12 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models
+namespace Allors.Web.Mvc.Models.Annotations
 {
-    using Allors.Meta;
+    using System.Web.Mvc;
 
-    public interface IModel<T> : IModel
-        where T : Composite
+    public partial class IdPostfixAnnotation : IPropertyMetadataAware 
     {
+        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
+        {
+            if (modelMetadata.PropertyName.EndsWith("Id"))
+            {
+                modelMetadata.TemplateHint = @"HiddenInput";
+            }
+        }
     }
 }

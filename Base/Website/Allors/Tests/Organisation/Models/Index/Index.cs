@@ -2,7 +2,7 @@
 {
     using Allors.Web.Mvc.Models;
 
-    public class Index : IModel, IFilter
+    public class Index : IMetadataModel, IFilter
     {
         #region Filter
         public string FilterName { get; set; }

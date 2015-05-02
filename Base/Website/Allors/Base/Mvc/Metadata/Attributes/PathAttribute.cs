@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IdAnnotation.cs" company="Allors bvba">
+// <copyright file="PathAttribute.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,18 +18,24 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models.Annotations
+namespace Allors.Web.Mvc.Models
 {
+    using System;
     using System.Web.Mvc;
 
-    public partial class IdAnnotation : IPropertyMetadataAware 
+    [AttributeUsage(AttributeTargets.Property)]
+    public class PathAttribute : Attribute, IMetadataAware
     {
-        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
+        private readonly string[] propertyIds;
+
+        public PathAttribute(params string[] propertyIds)
         {
-            if (modelMetadata.PropertyName.EndsWith("Id"))
-            {
-                modelMetadata.TemplateHint = @"HiddenInput";
-            }
+            this.propertyIds = propertyIds;
+        }
+
+        public void OnMetadataCreated(ModelMetadata metadata)
+        {
+            metadata.SetPathPropertyIds(this.propertyIds);
         }
     }
 }

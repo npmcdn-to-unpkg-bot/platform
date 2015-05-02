@@ -1,12 +1,12 @@
 group AllorsCSharpRepository;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
-TemplateName() ::= <<Allors C# Repository>>
-TemplateVersion() ::= <<1.0.9>>
+TemplateName() ::= <<Allors C# Meta>>
+TemplateVersion() ::= <<1.0.10>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
-Copyright 2002-2014 Allors bvba.
+Copyright 2002-2015 Allors bvba.
 
 Dual Licensed under
   a) the Lesser General Public Licence v3 (LGPL)
@@ -23,18 +23,76 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
+	<generation template="ids" output="Ids.g.cs"/> 
 	<generation template="meta" output="Meta.g.cs"/> 
 $domain.compositeObjectTypes:{objectType|
-	<generation template="objectType" input="$objectType.Id $" output="$objectType.SingularName$.g.cs"/>
+	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.g.cs"/>
 }$
 </generations>
 >>
+
+ids(domain, settings) ::= <<
+namespace Allors.Meta
+{
+	public static class ObjectTypeIds
+	{
+$domain.ObjectTypes:{objectType|
+		public const string $objectType.SingularName$ = "$objectType.IdAsString$";
+}$
+	}
+
+	public static class InheritanceIds
+	{
+$domain.Inheritances:{inheritance|
+		public const string $inheritance.Subtype.Name$$inheritance.Supertype.Name$ = "$inheritance.IdAsString$";
+}$
+	}
+
+	public static class RelationTypeIds
+	{
+$domain.RelationTypes:{relationType|
+		public const string $relationType.RoleType.FullSingularName$ = "$relationType.IdAsString$";
+}$
+	}
+
+	public static class AssociationTypeIds
+	{
+$domain.RelationTypes:{relationType|
+		public const string $relationType.AssociationType.FullSingularName$ = "$relationType.AssociationType.IdAsString$";
+}$
+	}
+
+	public static class RoleTypeIds
+	{
+$domain.RelationTypes:{relationType|
+		public const string $relationType.RoleType.FullSingularName$ = "$relationType.RoleType.IdAsString$";
+}$
+	}
+}
+
+namespace Allors.Meta.Ids
+{
+$domain.ObjectTypes:{objectType|$idsObjectType()$}$
+}
+>>
+
+idsObjectType() ::= <<
+	public static class $objectType.Name$Ids
+	{
+$objectType.RoleTypes:{roleType|				public const string $roleType.Name$ = RoleTypeIds.$roleType.FullSingularName$;
+}$
+
+$objectType.AssociationTypes:{associationType|				public const string $associationType.Name$ = AssociationTypeIds.$associationType.FullSingularName$;
+}$
+	}
+
+>>
+
 
 meta(domain, settings) ::= <<
 namespace Allors.Meta
 {
 	using System;
-
 $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDomain(domain=superDomain)$$endif$}$
 
 	public partial class $domain.Name$Domain : Domain
