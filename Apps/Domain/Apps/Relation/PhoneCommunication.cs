@@ -38,7 +38,7 @@ namespace Allors.Domain
         public void AppsOnDeriveFromParties()
         {
             this.RemoveFromParties();
-            this.AddFromParty(this.Caller);
+            this.FromParties = (Extent) this.Callers;
 
             if (this.IsIncomingCall())
             {

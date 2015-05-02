@@ -3355,7 +3355,7 @@ namespace Allors.Domain
 
 					Party Receivers {set;}
 
-					Party Caller {set;}
+					Party Callers {set;}
 
 	}
 	public interface PickList  : Object, AccessControlledObject, Printable, Transitional, UniquelyIdentifiable 
