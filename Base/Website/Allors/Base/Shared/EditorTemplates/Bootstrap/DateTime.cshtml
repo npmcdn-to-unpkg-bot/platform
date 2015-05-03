@@ -1,0 +1,18 @@
+@using System.Threading
+@model DateTime?
+
+<div class="input-group date" id="@Html.IdForModel()">
+    @Html.TextBoxFor(x => x, new { @class = "form-control" })
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#@Html.IdForModel()').datetimepicker({
+            // Locale should be set from controller
+            locale: '@Thread.CurrentThread.CurrentCulture.Name'
+        });
+    });
+</script>

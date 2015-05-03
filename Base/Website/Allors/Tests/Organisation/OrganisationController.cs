@@ -1,5 +1,6 @@
 ﻿namespace Website.OrganisationMvc
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
     using Allors;
@@ -116,7 +117,7 @@
                     organisation.Name = model.Name;
                     organisation.Description = model.Description;
                     organisation.Incorporated = model.Incorporated;
-                    organisation.IncorporationDate = model.IncorporationDate;
+                    organisation.IncorporationDate = DateTimeFactory.CreateDateTime(model.IncorporationDate);
                     organisation.Owner = (Person)this.AllorsSession.Instantiate(model.Owner.Id);
                     organisation.Employees = this.AllorsSession.Instantiate(model.Werknemers.Ids);
 

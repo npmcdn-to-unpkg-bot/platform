@@ -8,7 +8,9 @@
     <title>@ViewBag.Title - Allors</title>
     @Styles.Render("~/Content/css")
     @RenderSection("styles", required: false)
+
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -40,7 +42,7 @@
         </div>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

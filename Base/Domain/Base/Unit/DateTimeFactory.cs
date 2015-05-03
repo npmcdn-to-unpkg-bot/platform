@@ -34,16 +34,26 @@ namespace Allors.Domain
             return new DateTime(year, month, day, hour, min, sec, milliSec, DateTimeKind.Utc);
         }
 
-        public static DateTime CreateDate(DateTime dateTime)
+        public static DateTime? CreateDate(DateTime? dateTime)
         {
-            var utcDateTime = dateTime.ToUniversalTime();
-            return CreateDate(utcDateTime.Year, utcDateTime.Month, utcDateTime.Day);
+            if (dateTime.HasValue)
+            {
+                var utcDateTime = dateTime.Value.ToUniversalTime();
+                return CreateDate(utcDateTime.Year, utcDateTime.Month, utcDateTime.Day);
+            }
+
+            return null;
         }
 
-        public static DateTime CreateDateTime(DateTime dateTime)
+        public static DateTime? CreateDateTime(DateTime? dateTime)
         {
-            var utcDateTime = dateTime.ToUniversalTime();
-            return CreateDateTime(utcDateTime.Year, utcDateTime.Month, utcDateTime.Day, utcDateTime.Hour, utcDateTime.Minute, utcDateTime.Second, utcDateTime.Millisecond);
+            if (dateTime.HasValue)
+            {
+                var utcDateTime = dateTime.Value.ToUniversalTime();
+                return CreateDateTime(utcDateTime.Year, utcDateTime.Month, utcDateTime.Day, utcDateTime.Hour, utcDateTime.Minute, utcDateTime.Second, utcDateTime.Millisecond);
+            }
+
+            return null;
         }
     }
 }

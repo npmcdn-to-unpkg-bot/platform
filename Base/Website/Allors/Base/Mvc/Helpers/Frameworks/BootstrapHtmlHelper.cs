@@ -25,6 +25,7 @@ namespace Allors.Web.Mvc.Helpers
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
 
+    using Allors.Meta;
     using Allors.Web.Mvc.Models;
 
     public partial class BootstrapHtmlHelper<TModel> : IHtmlHelper<TModel>
@@ -38,7 +39,7 @@ namespace Allors.Web.Mvc.Helpers
 
         public virtual MvcHtmlString EditorForModel()
         {
-            return this.html.EditorForModel("BootstrapObject");
+            return this.html.EditorForModel("Bootstrap/AllorsObject");
         }
 
         public MvcHtmlString Label(string expression)
@@ -84,14 +85,64 @@ namespace Allors.Web.Mvc.Helpers
 
         protected virtual MvcHtmlString OnEditor(ModelMetadata propertyModelMetadata)
         {
-            if (propertyModelMetadata.ModelType == typeof(Select))
+            var modelType = Nullable.GetUnderlyingType(propertyModelMetadata.ModelType) ?? propertyModelMetadata.ModelType;
+
+            if (modelType == typeof(Select))
             {
-                return this.html.Editor(propertyModelMetadata.PropertyName, "BootstrapSelect");
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/Select");
             }
 
-            if (propertyModelMetadata.ModelType == typeof(MultipleSelect))
+            if (modelType == typeof(MultipleSelect))
             {
-                return this.html.Editor(propertyModelMetadata.PropertyName, "BootstrapMultipleSelect");
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/MultipleSelect");
+            }
+
+            var path = propertyModelMetadata.GetPath();
+            var propertyType = path != null ? path.End.PropertyType : null;
+            var roleType = propertyType as IRoleType;
+
+            if (roleType != null)
+            {
+                var unitType = roleType.ObjectType as IUnit;
+                if (unitType != null)
+                {
+                    switch (unitType.UnitTag)
+                    {
+                        case UnitTags.AllorsBinary:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsBinary");
+
+                        case UnitTags.AllorsBoolean:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsBoolean");
+
+                        case UnitTags.AllorsDateTime:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsDateTime");
+
+                        case UnitTags.AllorsDecimal:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsDecimal");
+
+                        case UnitTags.AllorsFloat:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsFloat");
+
+                        case UnitTags.AllorsInteger:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsInteger");
+
+                        case UnitTags.AllorsString:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsString");
+
+                        case UnitTags.AllorsUnique:
+                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsUnique");
+                    }
+                }
+            }
+
+            if (propertyType != null)
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsProperty");
+            }
+
+            if (modelType == typeof(DateTime))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/DateTime");
             }
 
             return this.html.Editor(propertyModelMetadata.PropertyName, new { htmlAttributes = new { @class = "form-control", placeholder = this.html.ViewData.ModelMetadata.Watermark } });

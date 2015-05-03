@@ -9,7 +9,7 @@
     @using (Html.BeginForm("Edit", "Organisation", FormMethod.Post, htmlAttributes: new {@class = "form-horizontal", role = "form"}))
     {
         @Html.AntiForgeryToken()
-        <h2>Wijzig een persoon</h2>
+        <h2>Edit organisation</h2>
         <hr/>
         @Html.ValidationSummary("", new {@class = "text-danger"})
         @Html.Allors().EditorForModel()

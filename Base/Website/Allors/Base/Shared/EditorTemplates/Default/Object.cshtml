@@ -1,0 +1,20 @@
+﻿@using Allors.Web.Mvc.Helpers
+@model dynamic
+
+@foreach (var property in ViewData.ModelMetadata.Properties.Where(p => p.ShowForEdit))
+{
+    if (property.TemplateHint == "HiddenInput")
+    {
+        @Html.Hidden(property.PropertyName)
+    }
+    else
+    {
+        <div class="row form-group">
+            @Html.Allors().Label(property.PropertyName)
+            <div class="col-md-6">
+                @Html.Allors().Editor(property.PropertyName)
+                @Html.ValidationMessage(property.PropertyName)
+            </div>
+        </div>
+    }
+}
