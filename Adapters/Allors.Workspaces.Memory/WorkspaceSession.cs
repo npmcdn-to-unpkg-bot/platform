@@ -31,6 +31,8 @@ namespace Allors.Workspaces.Memory
 
     public class WorkspaceSession : IWorkspaceSession
     {
+        private static readonly IObject[] EmptyObjects = { };
+
         private readonly Dictionary<IObjectType, IObjectType[]> concreteClassesByObjectType;
         private ChangeSet changeSet;
         
@@ -983,6 +985,11 @@ namespace Allors.Workspaces.Memory
 
         public virtual IObject[] Instantiate(string[] objectIdStrings)
         {
+            if (objectIdStrings == null || objectIdStrings.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var objectIds = new ObjectId[objectIdStrings.Length];
             for (var i = 0; i < objectIdStrings.Length; i++)
             {
@@ -994,6 +1001,11 @@ namespace Allors.Workspaces.Memory
 
         public virtual IObject[] Instantiate(IObject[] objects)
         {
+            if (objects == null || objects.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var objectIds = new ObjectId[objects.Length];
             for (var i = 0; i < objects.Length; i++)
             {
@@ -1005,6 +1017,11 @@ namespace Allors.Workspaces.Memory
 
         public virtual IObject[] Instantiate(ObjectId[] objectIds)
         {
+            if (objectIds == null || objectIds.Length == 0)
+            {
+                return EmptyObjects;
+            }
+            
             var allorsObjects = new List<IObject>(objectIds.Length);
 
             foreach (var objectId in objectIds)

@@ -339,6 +339,11 @@ namespace Allors.Databases.Relation.SqlClient
 
         public IObject[] Instantiate(IObject[] objects)
         {
+            if (objects == null || objects.Length == 0)
+            {
+                return EmptyObjects;
+            }
+            
             var objectIds = new List<ObjectId>(objects.Length);
             foreach (var obj in objects)
             {
@@ -353,6 +358,11 @@ namespace Allors.Databases.Relation.SqlClient
 
         public IObject[] Instantiate(string[] objectIdStrings)
         {
+            if (objectIdStrings == null || objectIdStrings.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var objectIds = new List<ObjectId>(objectIdStrings.Length);
             foreach (var objectIdString in objectIdStrings)
             {
@@ -367,6 +377,11 @@ namespace Allors.Databases.Relation.SqlClient
 
         public IObject[] Instantiate(ObjectId[] objectIds)
         {
+            if (objectIds == null || objectIds.Length == 0)
+            {
+                return EmptyObjects;
+            }
+            
             var strategies = this.InstantiateStrategies(objectIds);
             if (strategies == null || strategies.Length == 0)
             {

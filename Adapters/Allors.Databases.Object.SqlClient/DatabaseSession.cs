@@ -37,6 +37,7 @@ namespace Allors.Databases.Object.SqlClient
     internal sealed class DatabaseSession : IDatabaseSession
     {
         private static readonly ObjectId[] EmptyObjectIds = { };
+        private static readonly IObject[] EmptyObjects = { };
 
         private readonly Database database;
 
@@ -436,6 +437,11 @@ namespace Allors.Databases.Object.SqlClient
 
         public IObject[] Instantiate(string[] objectIdStrings)
         {
+            if (objectIdStrings == null || objectIdStrings.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var objectIds = new ObjectId[objectIdStrings.Length];
             for (var i = 0; i < objectIdStrings.Length; i++)
             {
@@ -447,6 +453,11 @@ namespace Allors.Databases.Object.SqlClient
 
         public IObject[] Instantiate(IObject[] objects)
         {
+            if (objects == null || objects.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var objectIds = new ObjectId[objects.Length];
             for (var i = 0; i < objects.Length; i++)
             {
@@ -458,6 +469,11 @@ namespace Allors.Databases.Object.SqlClient
 
         public IObject[] Instantiate(ObjectId[] objectIds)
         {
+            if (objectIds == null || objectIds.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var references = new List<Reference>(objectIds.Length);
 
             var nonCachedObjectIds = new List<ObjectId>();

@@ -3627,7 +3627,7 @@ namespace Allors.Databases
         [Test]
         public void InstantiateMany()
         {
-                       foreach (var init in this.Inits)
+            foreach (var init in this.Inits)
             {
                 init();
 
@@ -3635,6 +3635,19 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 foreach (int run in runs)
                 {
+                    // Empty arrays
+                    ObjectId[] nullObjectIdArray = null;
+                    var allorsObjects = this.Session.Instantiate(nullObjectIdArray);
+                    Assert.AreEqual(0, allorsObjects.Length);
+
+                    string[] nullStringArray = null;
+                    allorsObjects = this.Session.Instantiate(nullStringArray);
+                    Assert.AreEqual(0, allorsObjects.Length);
+
+                    IObject[] nullObjectArray = null;
+                    allorsObjects = this.Session.Instantiate(nullObjectArray);
+                    Assert.AreEqual(0, allorsObjects.Length);
+
                     var objects = new IObject[run];
                     var idStrings = new string[run];
                     var ids = new ObjectId[run];
@@ -3648,7 +3661,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                     this.Session.Commit();
 
-                    var allorsObjects = this.Session.Instantiate(objects);
+                    allorsObjects = this.Session.Instantiate(objects);
 
                     Assert.AreEqual(run, allorsObjects.Length);
                     for (int i = 0; i < allorsObjects.Length; i++)

@@ -318,6 +318,11 @@ namespace Allors.Databases.Memory
 
         public IObject[] Instantiate(IObject[] objects)
         {
+            if (objects == null || objects.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var objectIds = new ObjectId[objects.Length];
             for (var i = 0; i < objects.Length; i++)
             {
@@ -329,6 +334,11 @@ namespace Allors.Databases.Memory
 
         public IObject[] Instantiate(ObjectId[] objectIds)
         {
+            if (objectIds == null || objectIds.Length == 0)
+            {
+                return EmptyObjects;
+            }
+
             var allorsObjects = new ArrayList(objectIds.Length);
 
             foreach (var objectId in objectIds)

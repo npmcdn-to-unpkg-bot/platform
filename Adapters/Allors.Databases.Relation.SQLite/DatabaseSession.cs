@@ -320,6 +320,11 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 
         public IObject[] Instantiate(IObject[] objects)
         {
+            if (objects == null || objects.Length == 0)
+            {
+                return EmptyObjects;
+            }
+            
             var objectIds = new List<ObjectId>(objects.Length);
             foreach (var obj in objects)
             {
@@ -334,6 +339,11 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 
         public IObject[] Instantiate(string[] objectIdStrings)
         {
+            if (objectIdStrings == null || objectIdStrings.Length == 0)
+            {
+                return EmptyObjects;
+            }
+            
             var objectIds = new List<ObjectId>(objectIdStrings.Length);
             foreach (var objectIdString in objectIdStrings)
             {
@@ -348,6 +358,11 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 
         public IObject[] Instantiate(ObjectId[] objectIds)
         {
+            if (objectIds == null || objectIds.Length == 0)
+            {
+                return EmptyObjects;
+            } 
+            
             List<IObject> objects = null;
             foreach (var objectId in objectIds)
             {
