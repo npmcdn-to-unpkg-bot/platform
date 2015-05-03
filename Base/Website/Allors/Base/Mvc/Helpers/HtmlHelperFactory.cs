@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ViewContextExtensions.cs" company="Allors bvba">
+// <copyright file="HtmlHelperFactory.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,21 +18,21 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Views
+namespace Allors.Web.Mvc.Helpers
 {
+    using System;
     using System.Web.Mvc;
 
-    public static partial class ViewContextExtensions
+    public class HtmlHelperFactory : IHtmlHelperFactory
     {
-        public static ViewContext RootViewContext(this ViewContext @this)
+        public virtual IHtmlHelper<TModel> Create<TModel>(HtmlHelper<TModel> html, string cssFramework)
         {
-            var parent = @this;
-            while (parent.IsChildAction)
+            if ("bootstrap".Equals(cssFramework, StringComparison.InvariantCultureIgnoreCase))
             {
-                parent = parent.ParentActionViewContext;
+                return new BootstrapHtmlHelper<TModel>(html);
             }
 
-            return parent;
+            return new DefaultHtmlHelper<TModel>(html);
         }
     }
 }

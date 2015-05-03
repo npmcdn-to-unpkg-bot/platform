@@ -29,7 +29,6 @@ namespace Allors.Web.Mvc.Models
         private const string CompositeKey = "Composite";
         private const string PathPropertyIdsKey = "PathPropertyIds";
         private const string PathKey = "Path";
-        private const string FrameworkKey = "Framework";
 
         public static bool ExistComposite(this ModelMetadata modelMetadata)
         {
@@ -80,30 +79,6 @@ namespace Allors.Web.Mvc.Models
         public static void SetPath(this ModelMetadata modelMetadata, Path value)
         {
             modelMetadata.AdditionalValues[PathKey] = value;
-        }
-
-        public static bool ExistFramework(this ModelMetadata modelMetadata)
-        {
-            return modelMetadata.AdditionalValues.ContainsKey(FrameworkKey);
-        }
-
-        public static string GetFramework(this ModelMetadata modelMetadata)
-        {
-            object theme;
-            modelMetadata.AdditionalValues.TryGetValue(FrameworkKey, out theme);
-            return (string)theme;
-        }
-
-        public static void SetFramework(this ModelMetadata modelMetadata, string value)
-        {
-            modelMetadata.AdditionalValues[FrameworkKey] = value;
-        }
-
-        public static string GetEditorTemplate(this ModelMetadata modelMetadata)
-        {
-            var framework = GetFramework(modelMetadata);
-            var template = framework + modelMetadata.ModelType.Name;
-            return template;
         }
     }
 }

@@ -22,5 +22,7 @@
 
         [Path(OrganisationIds.Employees)]
         public MultipleSelect Werknemers { get; set; }
+
+        public int EmployeeCount { get; set; }
     }
 }

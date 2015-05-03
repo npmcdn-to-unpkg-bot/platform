@@ -187,9 +187,13 @@
     <Compile Include="Allors\Base\Mvc\Components\MenuItemForUser.cs" />
     <Compile Include="Allors\Base\Mvc\Components\Menus.cs" />
     <Compile Include="Allors\Base\Mvc\Controllers\Controller.cs" />
+    <Compile Include="Allors\Base\Mvc\Helpers\IHtmlHelper.cs" />
+    <Compile Include="Allors\Base\Mvc\Helpers\Frameworks\BootstrapHtmlHelper.cs" />
+    <Compile Include="Allors\Base\Mvc\Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Allors\Base\Mvc\Helpers\Frameworks\DefaultHtmlHelper.cs" />
+    <Compile Include="Allors\Base\Mvc\Helpers\HtmlHelperFactory.cs" />
+    <Compile Include="Allors\Base\Mvc\Helpers\IHtmlHelperFactory.cs" />
     <Compile Include="Allors\Base\Mvc\Metadata\AllorsModelMetadataProvider.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\Annotations\FrameworkAnnotation.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\Annotations\TemplateHintAnnotation.cs" />
     <Compile Include="Allors\Base\Mvc\Metadata\Annotations\IdPostfixAnnotation.cs" />
     <Compile Include="Allors\Base\Mvc\Metadata\Annotations\DisplayNameAnnotation.cs" />
     <Compile Include="Allors\Base\Mvc\Metadata\Annotations\WatermarkAnnotation.cs" />
@@ -201,6 +205,7 @@
     <Compile Include="Allors\Base\Mvc\Metadata\ModelMetadataExtension.cs" />
     <Compile Include="Allors\Base\Mvc\Models\MultipleSelect.cs" />
     <Compile Include="Allors\Base\Mvc\Models\Select.cs" />
+    <Compile Include="Allors\Base\Mvc\Views\CssFrameworkAttribute.cs" />
     <Compile Include="Allors\Base\Mvc\Views\ViewContextExtensions.cs" />
     <Compile Include="Allors\Base\Security\AllorsMembershipProvider.cs" />
     <Compile Include="Allors\Base\Security\AllorsRoleProvider.cs" />
@@ -217,9 +222,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MenuConfig.cs" />
     <Compile Include="App_Start\MetaConfig.cs" />
-    <Compile Include="App_Start\ModelMetadataConfig.cs" />
+    <Compile Include="App_Start\ModelConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\ViewEngineConfig.cs" />
+    <Compile Include="App_Start\ViewConfig.cs" />
     <Compile Include="Controllers\LocalController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -249,7 +254,7 @@
     <Content Include="Allors\Base\Manage\ManageLogins.cshtml" />
     <Content Include="Allors\Base\Manage\SetPassword.cshtml" />
     <Content Include="Allors\Base\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Select.cshtml" />
+    <Content Include="Allors\Base\Shared\EditorTemplates\DefaultSelect.cshtml" />
     <Content Include="Allors\Base\Shared\_NavbarItemPartial.cshtml" />
     <Content Include="Allors\Base\Shared\_NavbarPartial.cshtml" />
     <Content Include="bootstrap-maxlength.js" />
@@ -272,6 +277,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\chosen-sprite%402x.png" />
     <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\jasny-bootstrap.css" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\styles\alert-bangtidy.css" />
     <Content Include="Content\styles\alert-blackgloss.css" />
     <Content Include="favicon.ico" />
@@ -304,6 +311,9 @@
     <Content Include="Allors\Base\Shared\EditorTemplates\BootstrapMultipleSelect.cshtml" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
+    <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Allors\Base\Shared\EditorTemplates\DefaultMultipleSelect.cshtml" />
+    <Content Include="Allors\Base\Shared\EditorTemplates\DefaultObject.cshtml" />
     <None Include="Scripts\jquery-2.1.3-vsdoc.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
@@ -347,6 +357,8 @@
     <Content Include="Scripts\i18n\defaults-zh_CN.min.js" />
     <Content Include="Scripts\i18n\defaults-zh_TW.js" />
     <Content Include="Scripts\i18n\defaults-zh_TW.min.js" />
+    <Content Include="Scripts\jasny-bootstrap.js" />
+    <Content Include="Scripts\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -427,7 +439,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Allors\Web.config" />
     <Content Include="Allors\_ViewStart.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\BootstrapForm.cshtml" />
+    <Content Include="Allors\Base\Shared\EditorTemplates\BootstrapObject.cshtml" />
     <Content Include="Allors\Base\Shared\EditorTemplates\BootstrapSelect.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
@@ -451,6 +463,7 @@
     <Content Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Allors\Base\Shared\DisplayTemplates\" />
     <Folder Include="Allors\Tests\Organisation\EditorTemplates\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />

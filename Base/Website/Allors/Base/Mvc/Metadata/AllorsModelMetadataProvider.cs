@@ -82,7 +82,7 @@ namespace Allors.Web.Mvc.Models
                         }
                         else
                         {
-                            path = new Path(composite, pathString);
+                            Path.TryParse(composite, pathString, out path);
                         }
                     }
                 }

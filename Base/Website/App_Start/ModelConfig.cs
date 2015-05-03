@@ -10,18 +10,15 @@
     using Allors.Web.Mvc.Models;
     using Allors.Web.Mvc.Models.Annotations;
 
-    public class ModelMetadataConfig
+    public class ModelConfig
     {
         private static readonly ITypeMetadataAware[] DefaultTypeAnnotations =
             {
-                new TemplateHintAnnotation(), 
-                new FrameworkAnnotation(), 
             };
 
         private static readonly IPropertyMetadataAware[] DefaultPropertyAnnotations =
             {
                 new IdPostfixAnnotation(), 
-                new FrameworkAnnotation(), 
                 new DisplayNameAnnotation(), 
                 new WatermarkAnnotation()
             };

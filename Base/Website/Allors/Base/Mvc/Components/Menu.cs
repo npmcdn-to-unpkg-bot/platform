@@ -26,6 +26,8 @@ namespace Allors.Web.Mvc
     using System.Security.Principal;
     using System.Web.Mvc;
 
+    using Allors.Web.Mvc.Views;
+
     public partial class Menu : IEnumerable<MenuItem>
     {
         private readonly List<MenuItem> items = new List<MenuItem>();
@@ -48,7 +50,8 @@ namespace Allors.Web.Mvc
 
         public MenuForUser For(ViewContext context)
         {
-            var controller = context.RootController();
+            var rootViewContext = context.RootViewContext();
+            var controller = rootViewContext.Controller;
             var typeName = controller.GetType().Name;
             var controllerName = typeName.ToLowerInvariant().EndsWith("controller")
                                       ? typeName.Substring(0, typeName.ToLowerInvariant().LastIndexOf("controller", StringComparison.Ordinal))

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FrameworkAnnotation.cs" company="Allors bvba">
+// <copyright file="IHtmlHelper.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,34 +18,24 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models.Annotations
+namespace Allors.Web.Mvc.Helpers
 {
+    using System;
+    using System.Linq.Expressions;
     using System.Web.Mvc;
 
-    public partial class FrameworkAnnotation : ITypeMetadataAware,  IPropertyMetadataAware
+    public partial interface IHtmlHelper<TModel>
     {
-        public const string Default = "Bootstrap";
+        MvcHtmlString EditorForModel();
 
-        public string Name { get; private set; }
+        MvcHtmlString Label(string expression);
 
-        public FrameworkAnnotation()
-            : this(Default)
-        {
-        }
+        MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression);
 
-        public FrameworkAnnotation(string name)
-        {
-            this.Name = name ?? Default;
-        }
+        MvcHtmlString Editor(string expression);
 
-        public void OnTypeMetadataCreated(ModelMetadata modelMetadata)
-        {
-            modelMetadata.SetFramework(this.Name);
-        }
+        MvcHtmlString EditorFor<TValue>(Expression<Func<TModel, TValue>> expression);
 
-        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
-        {
-            modelMetadata.SetFramework(this.Name);
-        }
+        MvcHtmlString ValidationMessage(string expression);
     }
 }

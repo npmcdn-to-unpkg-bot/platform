@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TemplateHintAnnotation.cs" company="Allors bvba">
+// <copyright file="HtmlHelperExtensions.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,33 +18,34 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Models.Annotations
+namespace Allors.Web.Mvc.Helpers
 {
     using System.Web.Mvc;
 
-    public partial class TemplateHintAnnotation : ITypeMetadataAware
+    using Allors.Web.Mvc.Views;
+
+    public static class HtmlHelperExtensions
     {
-        public const string Default = "Form";
+        private static IHtmlHelperFactory factory = new HtmlHelperFactory();
 
-        public string Name { get; private set; }
-
-        public TemplateHintAnnotation()
-            : this(Default)
+        public static IHtmlHelperFactory Factory
         {
-        }
-
-        public TemplateHintAnnotation(string name)
-        {
-            this.Name = name ?? Default;
-        }
-        
-
-        public void OnTypeMetadataCreated(ModelMetadata modelMetadata)
-        {
-            if (string.IsNullOrWhiteSpace(modelMetadata.TemplateHint))
+            get
             {
-                modelMetadata.TemplateHint = this.Name;
+                return factory;
             }
+
+            set
+            {
+                factory = value;
+            }
+        }
+
+        public static IHtmlHelper<TModel> Allors<TModel>(this HtmlHelper<TModel> html)
+        {
+            var rootViewContext = html.ViewContext.RootViewContext();
+            var cssFramework = CssFrameworkAttribute.GetValue(rootViewContext.ViewData);
+            return Factory.Create(html, cssFramework);
         }
     }
 }

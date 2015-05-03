@@ -32,8 +32,8 @@
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             MetaConfig.Register();
-            ModelMetadataConfig.Register();
-            ViewEngineConfig.Register();
+            ModelConfig.Register();
+            ViewConfig.Register();
             MenuConfig.Register();
         }
     }

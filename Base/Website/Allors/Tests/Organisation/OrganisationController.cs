@@ -5,8 +5,10 @@
     using Allors;
     using Allors.Domain;
     using Allors.Web.Mvc.Models;
+    using Allors.Web.Mvc.Views;
 
     //[Authorize]
+    [CssFramework("Bootstrap")]
     public class OrganisationController : Allors.Web.Mvc.Controller
     {
         [HttpGet]
@@ -166,6 +168,7 @@
                 edit.Description = organisation.Description;
                 edit.Incorporated = organisation.Incorporated;
                 edit.IncorporationDate = organisation.IncorporationDate;
+                edit.EmployeeCount = organisation.Employees.Count;
                 edit.Owner = new Select 
                 { 
                     Id = organisation.ExistOwner ? organisation.Owner.Id.ToString() : "0", 

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ViewContextExtensions.cs" company="Allors bvba">
+// <copyright file="CssFrameworkAttribute.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,17 +22,29 @@ namespace Allors.Web.Mvc.Views
 {
     using System.Web.Mvc;
 
-    public static partial class ViewContextExtensions
+    public class CssFrameworkAttribute : FilterAttribute, IResultFilter
     {
-        public static ViewContext RootViewContext(this ViewContext @this)
-        {
-            var parent = @this;
-            while (parent.IsChildAction)
-            {
-                parent = parent.ParentActionViewContext;
-            }
+        private const string Key = "Allors.CssFramework";
 
-            return parent;
+        private readonly string name;
+
+        public CssFrameworkAttribute(string name)
+        {
+            this.name = name;
+        }
+
+        void IResultFilter.OnResultExecuted(ResultExecutedContext filterContext)
+        {
+        }
+
+        void IResultFilter.OnResultExecuting(ResultExecutingContext filterContext)
+        {
+            filterContext.Controller.ViewData[Key] = this.name;
+        }
+
+        public static string GetValue(ViewDataDictionary viewData)
+        {
+            return (string)viewData[Key];
         }
     }
 }

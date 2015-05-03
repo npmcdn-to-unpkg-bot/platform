@@ -50,11 +50,6 @@ namespace Allors.Meta
         {
         }
 
-        public Path(Composite composite, string pathString)
-            : this(Resolve(composite, pathString))
-        {
-        }
-
         public bool ExistPropertyType
         {
             get
@@ -96,6 +91,13 @@ namespace Allors.Meta
 
                 return name.ToString();
             }
+        }
+
+        public static bool TryParse(Composite composite, string pathString, out Path path)
+        {
+            var propertyType = Resolve(composite, pathString);
+            path = propertyType == null ? null : new Path(propertyType);
+            return path != null;
         }
 
         public override string ToString()
@@ -141,7 +143,7 @@ namespace Allors.Meta
                 }
             }
 
-            throw new Exception("Could not find " + propertyName + " on " + composite);
+            return null;
         }
 
         private void AppendToName(StringBuilder name)
