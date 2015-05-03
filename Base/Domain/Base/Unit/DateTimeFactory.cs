@@ -28,9 +28,22 @@ namespace Allors.Domain
         {
             return new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
         }
-        public static DateTime CreateDateTime(int year, int month, int day, int hour, int min, int sec)
+
+        public static DateTime CreateDateTime(int year, int month, int day, int hour, int min, int sec, int milliSec)
         {
-            return new DateTime(year, month, day, hour, min, sec, DateTimeKind.Utc);
+            return new DateTime(year, month, day, hour, min, sec, milliSec, DateTimeKind.Utc);
+        }
+
+        public static DateTime CreateDate(DateTime dateTime)
+        {
+            var utcDateTime = dateTime.ToUniversalTime();
+            return CreateDate(utcDateTime.Year, utcDateTime.Month, utcDateTime.Day);
+        }
+
+        public static DateTime CreateDateTime(DateTime dateTime)
+        {
+            var utcDateTime = dateTime.ToUniversalTime();
+            return CreateDateTime(utcDateTime.Year, utcDateTime.Month, utcDateTime.Day, utcDateTime.Hour, utcDateTime.Minute, utcDateTime.Second, utcDateTime.Millisecond);
         }
     }
 }
