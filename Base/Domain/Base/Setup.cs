@@ -21,6 +21,7 @@
 namespace Allors
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Reflection;
 
     using Allors.Domain;
@@ -29,12 +30,14 @@ namespace Allors
     public partial class Setup
     {
         private readonly IDatabaseSession session;
+
         private readonly Dictionary<IObjectType, IObjects> objectsByObjectType;
         private readonly ObjectsGraph objectsGraph;
 
-        public Setup(IDatabaseSession session)
+        public Setup(IDatabaseSession session, DirectoryInfo dataPath)
         {
             this.session = session;
+            this.DataPath = dataPath;
 
             this.objectsByObjectType = new Dictionary<IObjectType, IObjects>();
             foreach (ObjectType objectType in session.Database.MetaPopulation.Composites)
@@ -44,7 +47,17 @@ namespace Allors
 
             this.objectsGraph = new ObjectsGraph();
         }
-        
+
+        public DirectoryInfo DataPath { get; private set; }
+
+        public bool ExistDataPath 
+        {
+            get
+            {
+                return this.DataPath != null;
+            }
+        }
+
         public void Apply()
         {
             this.OnPrePrepare();

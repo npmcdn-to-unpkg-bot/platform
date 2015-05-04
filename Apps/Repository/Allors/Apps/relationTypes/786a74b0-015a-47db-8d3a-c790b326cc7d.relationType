@@ -5,7 +5,7 @@
   </associationType>
   <isIndexed>true</isIndexed>
   <roleType id="1c339b5d-6f97-41bd-952a-3706d383c3d8">
-    <objectType idref="da5b86a3-4f33-4c0d-965d-f4fbc1179374" />
+    <objectType idref="caa2a2de-9454-4812-a69f-9d3728706345" />
     <pluralName>LogoImages</pluralName>
     <singularName>LogoImage</singularName>
   </roleType>
