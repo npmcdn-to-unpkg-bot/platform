@@ -128,9 +128,9 @@ namespace Allors.Web.Mvc.Helpers
                 return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/guid");
             }
 
-            if (modelType == typeof(long))
+            if (modelType == typeof(int))
             {
-                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/long");
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/int");
             }
 
             if (modelType == typeof(string))
