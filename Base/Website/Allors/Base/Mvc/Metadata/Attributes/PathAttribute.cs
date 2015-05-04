@@ -26,16 +26,16 @@ namespace Allors.Web.Mvc.Models
     [AttributeUsage(AttributeTargets.Property)]
     public class PathAttribute : Attribute, IMetadataAware
     {
-        private readonly string[] propertyIds;
-
         public PathAttribute(params string[] propertyIds)
         {
-            this.propertyIds = propertyIds;
+            this.PropertyIds = propertyIds;
         }
+
+        public string[] PropertyIds { get; private set; }
 
         public void OnMetadataCreated(ModelMetadata metadata)
         {
-            metadata.SetPathPropertyIds(this.propertyIds);
+            metadata.SetPathPropertyIds(this.PropertyIds);
         }
     }
 }

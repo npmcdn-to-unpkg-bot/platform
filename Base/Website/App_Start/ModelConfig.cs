@@ -18,8 +18,8 @@
 
         private static readonly IPropertyMetadataAware[] DefaultPropertyAnnotations =
             {
-                new IdPostfixAnnotation(), 
-                new DisplayNameAnnotation(), 
+                new HidePostfixIdsAnnotation(), 
+                new HumanizePropertyNameAnnotation(), 
                 new WatermarkAnnotation()
             };
 

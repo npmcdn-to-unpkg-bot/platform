@@ -20,6 +20,8 @@ namespace Allors.Web.Mvc.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
 
     using Allors.Meta;
@@ -53,6 +55,7 @@ namespace Allors.Web.Mvc.Models
             {
                 // CompositeType
                 modelMetaData.SetComposite(composite);
+
                 foreach (var filter in this.typeAnnotations)
                 {
                     filter.OnTypeMetadataCreated(modelMetaData);
@@ -62,34 +65,20 @@ namespace Allors.Web.Mvc.Models
             {
                 modelMetaData.SetComposite(composite);
 
-                Path path = null;
+                // Path
                 if (composite != null)
                 {
                     Dictionary<string, Path> pathByPropertyName;
-                    if (!this.pathByPropertyNameByModelType.TryGetValue(modelMetaData.ContainerType, out pathByPropertyName))
+                    if (this.pathByPropertyNameByModelType.TryGetValue(modelMetaData.ContainerType, out pathByPropertyName))
                     {
-                        pathByPropertyName = new Dictionary<string, Path>();
-                        this.pathByPropertyNameByModelType[modelMetaData.ContainerType] = pathByPropertyName;
-                    }
-
-                    var pathString = modelMetaData.PropertyName;
-                    if (!pathByPropertyName.TryGetValue(pathString, out path))
-                    {
-                        var pathPropertyIds = modelMetaData.GetPathPropertyIds();
-                        if (pathPropertyIds != null && pathPropertyIds.Length > 0)
+                        Path path;
+                        if (pathByPropertyName.TryGetValue(modelMetaData.PropertyName, out path))
                         {
-                            path = new Path(composite.MetaPopulation, pathPropertyIds);
-                        }
-                        else
-                        {
-                            Path.TryParse(composite, pathString, out path);
+                            modelMetaData.SetPath(path);
                         }
                     }
                 }
 
-                modelMetaData.SetPath(path);
-
-                // Path
                 foreach (var filter in this.propertyAnnotations)
                 {
                     filter.OnPropertyMetadataCreated(modelMetaData);
@@ -97,6 +86,69 @@ namespace Allors.Web.Mvc.Models
             }
 
             return modelMetaData;
+        }
+
+        protected override CachedDataAnnotationsModelMetadata CreateMetadataPrototype(IEnumerable<Attribute> attributeEnumerations, Type containerType, Type modelType, string propertyName)
+        {
+            var attributes = new List<Attribute>(attributeEnumerations);
+
+            Composite composite;
+            if (containerType != null && this.compositeByModelType.TryGetValue(containerType, out composite))
+            {
+                Path path;
+                if (composite != null)
+                {
+                    Dictionary<string, Path> pathByPropertyName;
+                    if (!this.pathByPropertyNameByModelType.TryGetValue(containerType, out pathByPropertyName))
+                    {
+                        pathByPropertyName = new Dictionary<string, Path>();
+                        this.pathByPropertyNameByModelType[containerType] = pathByPropertyName;
+                    }
+
+                    var pathString = propertyName;
+                    if (!pathByPropertyName.TryGetValue(pathString, out path))
+                    {
+                        var pathAttribute = (PathAttribute)attributes.FirstOrDefault(x => x is PathAttribute);
+                        if (pathAttribute != null && pathAttribute.PropertyIds.Length > 0)
+                        {
+                            path = new Path(composite.MetaPopulation, pathAttribute.PropertyIds);
+                        }
+                        else
+                        {
+                            Path.TryParse(composite, pathString, out path);
+                        }
+
+                        pathByPropertyName[pathString] = path;
+
+                        if (path != null)
+                        {
+                            var roleType = path.End.PropertyType as RoleType;
+                            if (roleType != null)
+                            {
+                                if (!attributes.Any(x => x is DisplayAttribute))
+                                {
+                                    var displayAttribute = roleType.DisplayAttribute;
+                                    if (displayAttribute != null)
+                                    {
+                                        attributes.Add(displayAttribute);
+                                    }
+                                }
+
+                                if (!attributes.Any(x => x is DataTypeAttribute))
+                                {
+                                    var dataTypeAttribute = roleType.DataTypeAttribute;
+                                    if (dataTypeAttribute != null)
+                                    {
+                                        attributes.Add(dataTypeAttribute);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return base.CreateMetadataPrototype(attributes, containerType, modelType, propertyName);
         }
     }
 }

@@ -1,6 +1,7 @@
 namespace Allors.Meta
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class OrganisationClass
     {
@@ -11,6 +12,11 @@ namespace Allors.Meta
                 ObjectType = Instance,
                 Name = "JustDoIt"
             };
+
+            this.Roles.Description.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
+
+            this.Roles.Information.DisplayAttribute = new DisplayAttribute{Name = "Informational Text"};
+            this.Roles.Information.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
         }
     }
 }

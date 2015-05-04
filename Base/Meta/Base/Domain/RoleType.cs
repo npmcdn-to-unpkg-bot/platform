@@ -21,10 +21,16 @@
 
 namespace Allors.Meta
 {
+    using System.ComponentModel.DataAnnotations;
+
     public partial class RoleType
     {
         public bool IsRequired { get; set; }
 
         public bool IsUnique { get; set; }
+
+        public DataTypeAttribute DataTypeAttribute { get; set; }
+
+        public DisplayAttribute DisplayAttribute { get; set; }
     }
 }

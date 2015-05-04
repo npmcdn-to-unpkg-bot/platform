@@ -292,7 +292,7 @@ namespace Allors.Databases.Object.SqlClient
 
                 if (procedure == null)
                 {
-                    this.MissingTableNames.Add(procedureName);
+                    this.MissingProcedureNames.Add(procedureName);
                 }
                 else
                 {

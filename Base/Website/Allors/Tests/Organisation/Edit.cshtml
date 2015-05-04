@@ -6,7 +6,7 @@
 }
 <div class="container">
     <br/><br/>
-    @using (Html.BeginForm("Edit", "Organisation", FormMethod.Post, htmlAttributes: new {@class = "form-horizontal", role = "form"}))
+    @using (Html.BeginForm("Edit", "Organisation", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <h2>Edit organisation</h2>

@@ -1,0 +1,16 @@
+@model bool?
+
+@if (@Model.HasValue)
+{
+    @Html.CheckBoxFor(x => x.Value, new { id = Html.IdForModel() })
+}
+else
+{
+    <input name="@Html.NameForModel()" id="@Html.IdForModel()" checked="" data-indeterminate="true" type="checkbox">
+}
+
+<script>
+    $(document).ready(function () {
+        $('#@Html.IdForModel()').bootstrapSwitch();
+    });
+</script>

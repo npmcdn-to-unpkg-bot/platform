@@ -29,7 +29,7 @@ namespace Allors.Web.Mvc.Models.Annotations
         {
             if (string.IsNullOrWhiteSpace(modelMetadata.Watermark))
             {
-                modelMetadata.Watermark = modelMetadata.PropertyName.Humanize();
+                modelMetadata.Watermark = modelMetadata.DisplayName.Humanize();
             }
         }
     }

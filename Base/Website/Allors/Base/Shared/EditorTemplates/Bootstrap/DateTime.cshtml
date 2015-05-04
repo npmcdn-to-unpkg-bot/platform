@@ -2,7 +2,7 @@
 @model DateTime?
 
 <div class="input-group date" id="@Html.IdForModel()">
-    @Html.TextBoxFor(x => x, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x, new { @class = "form-control", placeholder = ViewData.ModelMetadata.Watermark })
     <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
     </span>

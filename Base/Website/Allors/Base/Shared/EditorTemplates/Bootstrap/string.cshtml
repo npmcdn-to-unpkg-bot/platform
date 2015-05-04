@@ -1,0 +1,24 @@
+@using System.ComponentModel.DataAnnotations
+@model string
+
+@if (@ViewData.ModelMetadata.DataTypeName == DataType.Html.ToString())
+{
+    @Html.TextAreaFor(x => x, new { @class = "form-control", id = Html.IdForModel(), placeholder = ViewData.ModelMetadata.Watermark })
+
+    <script>
+        $(document).ready(function () {
+            tinymce.init({
+                selector: "#@Html.IdForModel()"
+            });
+        });
+    </script>
+
+}
+else if (@ViewData.ModelMetadata.DataTypeName == DataType.MultilineText.ToString())
+{
+    @Html.TextAreaFor(x => x, new { @class = "form-control", placeholder = ViewData.ModelMetadata.Watermark })
+}
+else
+{
+    @Html.TextBoxFor(x => x, new { @class = "form-control", placeholder = ViewData.ModelMetadata.Watermark })
+}

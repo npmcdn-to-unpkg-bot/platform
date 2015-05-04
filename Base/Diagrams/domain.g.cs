@@ -685,6 +685,8 @@ namespace Allors.Domain
 	}
 	public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
+					global::System.String Information {set;}
+
 					Person Shareholders {set;}
 
 					global::System.String Name {set;}

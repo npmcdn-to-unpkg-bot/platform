@@ -22,6 +22,7 @@ namespace Allors.Web.Mvc.Helpers
 {
     using System;
     using System.Linq.Expressions;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
 
@@ -39,7 +40,7 @@ namespace Allors.Web.Mvc.Helpers
 
         public virtual MvcHtmlString EditorForModel()
         {
-            return this.html.EditorForModel("Bootstrap/AllorsObject");
+            return this.html.EditorForModel("Bootstrap/object");
         }
 
         public MvcHtmlString Label(string expression)
@@ -87,62 +88,59 @@ namespace Allors.Web.Mvc.Helpers
         {
             var modelType = Nullable.GetUnderlyingType(propertyModelMetadata.ModelType) ?? propertyModelMetadata.ModelType;
 
+            if (modelType == typeof(IMetadataModel))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/object");
+            }
+
             if (modelType == typeof(Select))
             {
-                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/Select");
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/select");
             }
 
             if (modelType == typeof(MultipleSelect))
             {
-                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/MultipleSelect");
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/multipleSelect");
             }
 
-            var path = propertyModelMetadata.GetPath();
-            var propertyType = path != null ? path.End.PropertyType : null;
-            var roleType = propertyType as IRoleType;
-
-            if (roleType != null)
+            if (modelType == typeof(bool))
             {
-                var unitType = roleType.ObjectType as IUnit;
-                if (unitType != null)
-                {
-                    switch (unitType.UnitTag)
-                    {
-                        case UnitTags.AllorsBinary:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsBinary");
-
-                        case UnitTags.AllorsBoolean:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsBoolean");
-
-                        case UnitTags.AllorsDateTime:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsDateTime");
-
-                        case UnitTags.AllorsDecimal:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsDecimal");
-
-                        case UnitTags.AllorsFloat:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsFloat");
-
-                        case UnitTags.AllorsInteger:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsInteger");
-
-                        case UnitTags.AllorsString:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsString");
-
-                        case UnitTags.AllorsUnique:
-                            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsUnique");
-                    }
-                }
-            }
-
-            if (propertyType != null)
-            {
-                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/AllorsProperty");
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/bool");
             }
 
             if (modelType == typeof(DateTime))
             {
-                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/DateTime");
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/dateTime");
+            }
+
+            if (modelType == typeof(decimal))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/decimal");
+            }
+
+            if (modelType == typeof(double))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/double");
+            }
+
+            if (modelType == typeof(Guid))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/guid");
+            }
+
+            if (modelType == typeof(long))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/long");
+            }
+
+            if (modelType == typeof(string))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/string");
+            }
+
+            if (modelType == typeof(HttpPostedFileBase))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/file");
             }
 
             return this.html.Editor(propertyModelMetadata.PropertyName, new { htmlAttributes = new { @class = "form-control", placeholder = this.html.ViewData.ModelMetadata.Watermark } });

@@ -21,6 +21,8 @@
 
 namespace Allors.Meta
 {
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ConcreteRoleType
     {
         public bool IsRequired
@@ -42,5 +44,25 @@ namespace Allors.Meta
         }
 
         public bool? IsUniqueOverride { get; set; }
+
+        public DataTypeAttribute DataTypeAttribute
+        {
+            get
+            {
+                return this.DataTypeAttributeOverride ?? this.roleType.DataTypeAttribute;
+            }
+        }
+
+        public DataTypeAttribute DataTypeAttributeOverride { get; set; }
+        
+        public DisplayAttribute DisplayAttribute
+        {
+            get
+            {
+                return this.DisplayAttributeOverride ?? this.roleType.DisplayAttribute;
+            }
+        }
+
+        public DisplayAttribute DisplayAttributeOverride { get; set; }
     }
 }

@@ -16,8 +16,6 @@
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                         "~/Scripts/moment-with-locales.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
@@ -25,12 +23,17 @@
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/bootstrap-select.js",
                       "~/Scripts/bootstrap-datetimepicker.js",
+                      "~/Scripts/bootstrap-switch.js",
+                      "~/Scripts/jasny-bootstrap.js",
+                      "~/Scripts/tinymce/tinymce.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-select.css",
                       "~/Content/bootstrap-datetimepicker.css",
+                      "~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css",
+                      "~/Content/jasny-bootstrap.css",
                       "~/Content/site.css"));
         }
     }

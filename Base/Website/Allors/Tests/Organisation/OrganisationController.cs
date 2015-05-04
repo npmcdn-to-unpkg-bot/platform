@@ -1,6 +1,5 @@
 ﻿namespace Website.OrganisationMvc
 {
-    using System;
     using System.Linq;
     using System.Web.Mvc;
     using Allors;
@@ -116,10 +115,11 @@
                 {
                     organisation.Name = model.Name;
                     organisation.Description = model.Description;
+                    organisation.Information = model.Information;
                     organisation.Incorporated = model.Incorporated;
                     organisation.IncorporationDate = DateTimeFactory.CreateDateTime(model.IncorporationDate);
                     organisation.Owner = (Person)this.AllorsSession.Instantiate(model.Owner.Id);
-                    organisation.Employees = this.AllorsSession.Instantiate(model.Werknemers.Ids);
+                    organisation.Employees = model.Werknemers != null ? this.AllorsSession.Instantiate(model.Werknemers.Ids) : null;
 
                     var derivationLog = this.AllorsSession.Derive();
                     if (derivationLog.HasErrors)
@@ -167,6 +167,7 @@
                 edit.Id = organisation.Id.ToString();
                 edit.Name = organisation.Name;
                 edit.Description = organisation.Description;
+                edit.Information = organisation.Information;
                 edit.Incorporated = organisation.Incorporated;
                 edit.IncorporationDate = organisation.IncorporationDate;
                 edit.EmployeeCount = organisation.Employees.Count;
