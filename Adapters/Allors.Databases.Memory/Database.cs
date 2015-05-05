@@ -130,6 +130,8 @@ namespace Allors.Databases.Memory
             }
         }
 
+        public abstract void Init();
+
         public IWorkspace CreateWorkspace()
         {
             return this.workspaceFactory.CreateWorkspace(this);
@@ -149,14 +151,7 @@ namespace Allors.Databases.Memory
         {
             return this.Session;
         }
-
-        public void Init()
-        {
-            this.Session.Init();
-
-            this.Properties = null;
-        }
-
+        
         public void Load(XmlReader reader)
         {
             this.Init();

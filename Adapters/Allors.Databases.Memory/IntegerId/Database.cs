@@ -33,5 +33,12 @@ namespace Allors.Databases.Memory.IntegerId
         {
             get { return this.session ?? (this.session = new Session(this)); }
         }
+
+        public override void Init()
+        {
+            this.session.Init();
+            this.session = null;
+            this.Properties = null;
+        }        
     }
 }
