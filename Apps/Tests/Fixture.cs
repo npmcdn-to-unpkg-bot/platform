@@ -73,7 +73,7 @@ namespace Allors
 
             using (var session = database.CreateSession())
             {
-                new Setup(session).Apply();
+                new Setup(session, null).Apply();
                 new Security(session).Apply();
 
                 session.Derive(true);
@@ -103,7 +103,7 @@ namespace Allors
 
             using (var session = database.CreateSession())
             {
-                new Setup(session).Apply();
+                new Setup(session, null).Apply();
                 new Security(session).Apply();
 
                 session.Derive(true);

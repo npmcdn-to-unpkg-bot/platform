@@ -2868,7 +2868,7 @@ namespace Allors.Domain
 
 					Person CurrentContacts {set;}
 
-					Media LogoImage {set;}
+					Image LogoImage {set;}
 
 					UserGroup PartnerContactUserGroup {set;}
 

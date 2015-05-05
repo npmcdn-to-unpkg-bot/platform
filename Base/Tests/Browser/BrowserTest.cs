@@ -20,7 +20,7 @@ namespace Browser
 
             if (setup)
             {
-                new Setup(this.Session).Apply();
+                new Setup(this.Session, null).Apply();
                 this.Session.Commit();
             }
         }

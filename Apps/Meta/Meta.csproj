@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -973,6 +974,7 @@
     <Compile Include="Generated\GoodOrderItem.g.cs" />
     <Compile Include="Generated\HazardousMaterialsDocument.g.cs" />
     <Compile Include="Generated\Hobby.g.cs" />
+    <Compile Include="Generated\Ids.g.cs" />
     <Compile Include="Generated\Image.g.cs" />
     <Compile Include="Generated\Incentive.g.cs" />
     <Compile Include="Generated\IndustryClassification.g.cs" />

@@ -1,6 +1,8 @@
 ﻿namespace Website.Controllers
 {
     using System;
+    using System.Configuration;
+    using System.IO;
     using System.Web;
     using System.Web.Configuration;
     using System.Web.Mvc;
@@ -84,13 +86,20 @@
             var database = Config.Default;
             database.Init();
 
+            var dataPath = ConfigurationManager.AppSettings["dataPath"];
+            if (!Path.IsPathRooted(dataPath))
+            {
+                dataPath = HttpRuntime.AppDomainAppPath + dataPath;
+            }
+
             using (var session = database.CreateSession())
             {
-                new Setup(session).Apply();
+                new Setup(session, new DirectoryInfo(dataPath)).Apply();
 
                 session.Derive();
                 session.Commit();
             }
+
 
             return this.View("Index");
         }
