@@ -36,7 +36,8 @@ namespace Allors.Databases.Memory.IntegerId
 
         public override void Init()
         {
-            this.session.Init();
+            this.Session.Rollback();
+            this.Session.Init();
             this.session = null;
             this.Properties = null;
         }        
