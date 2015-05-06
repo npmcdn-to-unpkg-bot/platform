@@ -8,10 +8,10 @@
 else if (@ViewData.ModelMetadata.DataTypeName == DataType.MultilineText.ToString())
 {
     <pre>
-        @Html.DisplayForModel(Model)
+        @Model
     </pre>
 }
 else
 {
-    @Html.DisplayForModel(Model)
+    @Model
 }
