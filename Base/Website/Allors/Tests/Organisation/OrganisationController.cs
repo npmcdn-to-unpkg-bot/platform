@@ -82,10 +82,20 @@
                     {
                         this.AllorsSession.Commit();
                         this.ModelState.Clear();
+                        return this.RedirectToAction("Index");
                     }
                 }
             }
 
+            this.Map(model, organisation);
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public ActionResult View(string id)
+        {
+            var organisation = (Organisation)this.AllorsSession.Instantiate(id);
+            var model = new View();
             this.Map(model, organisation);
             return this.View(model);
         }
@@ -157,6 +167,43 @@
             {
                 add.Id = organisation.Id.ToString();
                 add.Name = organisation.Name;
+            }
+        }
+
+        private void Map(View view, Organisation organisation)
+        {
+            if (organisation != null)
+            {
+                view.Id = organisation.Id.ToString();
+                view.Name = organisation.Name;
+                view.Description = organisation.Description;
+                view.Information = organisation.Information;
+                view.Incorporated = organisation.Incorporated;
+                view.IncorporationDate = organisation.IncorporationDate;
+                view.EmployeeCount = organisation.Employees.Count;
+                view.Owner = new Select
+                {
+                    Id = organisation.ExistOwner ? organisation.Owner.Id.ToString() : "0",
+                    List = new[]
+                               {
+                                   new SelectListItem { Value = "0" }
+                               }
+                            .Concat(this.AllorsSession.Extent<Person>().Select(x => new SelectListItem
+                            {
+                                Text = x.UserName,
+                                Value = x.Id.ToString(),
+                            }))
+                            .ToArray()
+                };
+                view.Werknemers = new MultipleSelect
+                {
+                    Ids = organisation.Employees.Select(x => x.Id.ToString()).ToArray(),
+                    List = this.AllorsSession.Extent<Person>().Select(x => new SelectListItem
+                    {
+                        Text = x.UserName,
+                        Value = x.Id.ToString(),
+                    }).ToArray()
+                };
             }
         }
 

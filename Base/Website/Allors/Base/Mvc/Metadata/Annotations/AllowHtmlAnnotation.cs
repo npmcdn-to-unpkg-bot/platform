@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IHtmlHelper.cs" company="Allors bvba">
+// <copyright file="AllowHtmlAnnotation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,30 +18,26 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Web.Mvc.Helpers
+namespace Allors.Web.Mvc.Models.Annotations
 {
-    using System;
-    using System.Linq.Expressions;
+    using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
-    public partial interface IHtmlHelper<TModel>
+    using Allors.Meta;
+
+    public partial class AllowHtmlAnnotation : IPropertyMetadataAware 
     {
-        MvcHtmlString DisplayForModel();
-
-        MvcHtmlString Display(string expression);
-
-        MvcHtmlString DisplayFor<TValue>(Expression<Func<TModel, TValue>> expression);
-
-        MvcHtmlString EditorForModel();
-
-        MvcHtmlString Label(string expression);
-
-        MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression);
-
-        MvcHtmlString Editor(string expression);
-
-        MvcHtmlString EditorFor<TValue>(Expression<Func<TModel, TValue>> expression);
-
-        MvcHtmlString ValidationMessage(string expression);
+        public void OnPropertyMetadataCreated(ModelMetadata modelMetadata)
+        {
+            var path = modelMetadata.GetPath();
+            if (path != null)
+            {
+                var roleType = path.End.PropertyType as RoleType;
+                if (roleType != null && roleType.DataTypeAttribute != null && roleType.DataTypeAttribute.DataType == DataType.Html)
+                {
+                    modelMetadata.RequestValidationEnabled = false;
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,17 @@
+@using System.ComponentModel.DataAnnotations
+@model string
+
+@if (@ViewData.ModelMetadata.DataTypeName == DataType.Html.ToString())
+{
+    @Html.Raw(Model)
+}
+else if (@ViewData.ModelMetadata.DataTypeName == DataType.MultilineText.ToString())
+{
+    <pre>
+        @Html.DisplayForModel(Model)
+    </pre>
+}
+else
+{
+    @Html.DisplayForModel(Model)
+}

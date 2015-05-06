@@ -3,5 +3,5 @@
 <tr>
     <td>@Html.DisplayFor(model => model.Name, new { @class = "col-md-2 control-label" })</td>
     <td>@Html.DisplayFor(model => model.Owner, new { @class = "col-md-2 control-label" })</td>
-    <td>@Html.ActionLink("Edit", "Edit", "Organisation", new {id = Model.Id}, null)</td>
+    <td>@Html.ActionLink("View", "View", "Organisation", new {id = Model.Id}, null) | @Html.ActionLink("Edit", "Edit", "Organisation", new { id = Model.Id }, null)</td>
 </tr>

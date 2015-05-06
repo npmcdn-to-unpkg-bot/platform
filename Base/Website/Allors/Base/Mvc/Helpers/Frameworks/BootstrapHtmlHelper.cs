@@ -37,6 +37,23 @@ namespace Allors.Web.Mvc.Helpers
         {
             this.html = html;
         }
+        
+        public MvcHtmlString DisplayForModel()
+        {
+            return this.html.DisplayForModel("Bootstrap/object");
+        }
+
+        public MvcHtmlString Display(string expression)
+        {
+            var modelMetaData = ModelMetadata.FromStringExpression(expression, this.html.ViewData);
+            return this.OnDisplay(modelMetaData);
+        }
+
+        public MvcHtmlString DisplayFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            var modelMetaData = ModelMetadata.FromLambdaExpression(expression, this.html.ViewData);
+            return this.OnDisplay(modelMetaData);
+        }
 
         public virtual MvcHtmlString EditorForModel()
         {
@@ -77,6 +94,53 @@ namespace Allors.Web.Mvc.Helpers
         {
             var modelMetaData = ModelMetadata.FromLambdaExpression(expression, this.html.ViewData);
             return this.OnValidationMessage(modelMetaData);
+        }
+
+        protected virtual MvcHtmlString OnDisplay(ModelMetadata propertyModelMetadata)
+        {
+            var modelType = Nullable.GetUnderlyingType(propertyModelMetadata.ModelType) ?? propertyModelMetadata.ModelType;
+
+            if (modelType == typeof(IMetadataModel))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/object");
+            }
+            
+            if (modelType == typeof(bool))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/bool");
+            }
+
+            if (modelType == typeof(DateTime))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/dateTime");
+            }
+
+            if (modelType == typeof(decimal))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/decimal");
+            }
+
+            if (modelType == typeof(double))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/double");
+            }
+
+            if (modelType == typeof(Guid))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/guid");
+            }
+
+            if (modelType == typeof(int))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/int");
+            }
+
+            if (modelType == typeof(string))
+            {
+                return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/string");
+            }
+
+            return this.html.Display(propertyModelMetadata.PropertyName, new { htmlAttributes = new { @class = "form-control", placeholder = this.html.ViewData.ModelMetadata.Watermark } });
         }
 
         protected virtual MvcHtmlString OnLabel(ModelMetadata propertyModelMetadata)

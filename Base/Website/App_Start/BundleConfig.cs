@@ -23,7 +23,6 @@
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/bootstrap-select.js",
                       "~/Scripts/bootstrap-datetimepicker.js",
-                      "~/Scripts/bootstrap-switch.js",
                       "~/Scripts/jasny-bootstrap.js",
                       "~/Scripts/tinymce/tinymce.js",
                       "~/Scripts/respond.js"));
@@ -32,7 +31,6 @@
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-select.css",
                       "~/Content/bootstrap-datetimepicker.css",
-                      "~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css",
                       "~/Content/jasny-bootstrap.css",
                       "~/Content/site.css"));
         }

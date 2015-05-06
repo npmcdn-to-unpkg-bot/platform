@@ -1,0 +1,6 @@
+@model Allors.Web.Mvc.Models.MultipleSelect
+
+@if (Model.List != null)
+{
+    @Html.ListBoxFor(x => x.Ids, Model.List, new { @class = "form-control selectpicker", @data_live_search = "true" })
+}

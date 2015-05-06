@@ -1,16 +1,8 @@
 @model bool?
 
-@if (@Model.HasValue)
-{
-    @Html.CheckBoxFor(x => x.Value, new { id = Html.IdForModel() })
-}
-else
-{
-    <input name="@Html.NameForModel()" id="@Html.IdForModel()" checked="" data-indeterminate="true" type="checkbox">
-}
-
-<script>
-    $(document).ready(function () {
-        $('#@Html.IdForModel()').bootstrapSwitch();
-    });
-</script>
+<label class="radio-inline">
+    <input type="radio" name="@Html.NameForModel()" value="true" checked="@(Model.HasValue && Model.Value)"/> true
+</label>
+<label class="radio-inline">
+    <input type="radio" name="@Html.NameForModel()" value="false" checked="@(Model.HasValue && !Model.Value)" /> false
+</label>

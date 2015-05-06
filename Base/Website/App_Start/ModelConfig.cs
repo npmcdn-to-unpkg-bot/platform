@@ -18,6 +18,7 @@
 
         private static readonly IPropertyMetadataAware[] DefaultPropertyAnnotations =
             {
+                new AllowHtmlAnnotation(), 
                 new HidePostfixIdsAnnotation(), 
                 new HumanizePropertyNameAnnotation(), 
                 new WatermarkAnnotation()

@@ -34,6 +34,23 @@ namespace Allors.Web.Mvc.Helpers
             this.html = html;
         }
 
+        public MvcHtmlString DisplayForModel()
+        {
+            return this.html.DisplayForModel();
+        }
+
+        public MvcHtmlString Display(string expression)
+        {
+            var modelMetaData = ModelMetadata.FromStringExpression(expression, this.html.ViewData);
+            return this.OnDisplay(modelMetaData);
+        }
+
+        public MvcHtmlString DisplayFor<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            var modelMetaData = ModelMetadata.FromLambdaExpression(expression, this.html.ViewData);
+            return this.OnDisplay(modelMetaData);
+        }
+
         public virtual MvcHtmlString EditorForModel()
         {
             return this.html.EditorForModel();
@@ -75,19 +92,24 @@ namespace Allors.Web.Mvc.Helpers
             return this.OnValidationMessage(modelMetaData);
         }
 
+        protected virtual MvcHtmlString OnDisplay(ModelMetadata modelMetadata)
+        {
+            return this.html.Display(modelMetadata.PropertyName);
+        }
+
         protected virtual MvcHtmlString OnLabel(ModelMetadata modelMetadata)
         {
-            return this.html.Label(modelMetadata.PropertyName, new { @class = "col-md-2 control-label" });
+            return this.html.Label(modelMetadata.PropertyName);
         }
 
         protected virtual MvcHtmlString OnEditor(ModelMetadata modelMetadata)
         {
-            return this.html.Editor(modelMetadata.PropertyName, new { htmlAttributes = new { @class = "form-control", placeholder = this.html.ViewData.ModelMetadata.Watermark } });
+            return this.html.Editor(modelMetadata.PropertyName);
         }
 
         protected virtual MvcHtmlString OnValidationMessage(ModelMetadata modelMetadata)
         {
-            return this.html.ValidationMessage(modelMetadata.PropertyName, new { @class = "col-md-2 control-label" });
+            return this.html.ValidationMessage(modelMetadata.PropertyName);
         }
     }
 }

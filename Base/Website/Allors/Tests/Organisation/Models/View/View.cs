@@ -3,13 +3,12 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
-    using System.Web.Mvc;
 
     using Allors.Meta;
     using Allors.Meta.Ids;
     using Allors.Web.Mvc.Models;
 
-    public class Edit : IMetadataModel<OrganisationClass>
+    public class View : IMetadataModel<OrganisationClass>
     {
         public string Id { get; set; }
 

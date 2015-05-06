@@ -143,7 +143,7 @@
   <ItemGroup>
     <Compile Include="Browser\BrowserFixture.cs" />
     <Compile Include="Browser\BrowserTest.cs" />
-    <Compile Include="Browser\AccountTest.cs" />
+    <Compile Include="Browser\OrganisationTest.cs" />
     <Compile Include="Components\ComponentsTest.cs" />
     <Compile Include="Components\ComponentsFixture.cs" />
     <Compile Include="Components\Menu\MenuTests.cs" />
