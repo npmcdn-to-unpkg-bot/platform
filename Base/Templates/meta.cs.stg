@@ -2,7 +2,7 @@ group AllorsCSharpRepository;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Meta>>
-TemplateVersion() ::= <<1.0.11>>
+TemplateVersion() ::= <<1.0.12>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
@@ -23,11 +23,9 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
-	<generation template="ids" output="Ids.g.cs"/> 
-	<generation template="meta" output="Meta.g.cs"/> 
-$domain.compositeObjectTypes:{objectType|
-	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.g.cs"/>
-}$
+	<generation template="ids" output="ids.g.cs"/> 
+	<generation template="meta" output="domain.g.cs"/> 
+	<generation template="objectTypes" output="objectTypes.g.cs"/> 
 </generations>
 >>
 
@@ -134,14 +132,19 @@ superDomain(domain) ::= <<
 	}
 >>
 
-objectType(domain, objectType, settings) ::= <<$if(objectType.IsInterface)$$interface()$$else$$class()$$endif$
->>
-
-interface() ::= <<
+objectTypes(domain, settings) ::= <<
 namespace Allors.Meta
 {
 	using System;
 
+$domain.compositeObjectTypes:{objectType|$objectType(domain=domain, objectType=objectType)$}$
+}
+>>
+
+objectType(domain, objectType) ::= <<$if(objectType.IsInterface)$$interface()$$else$$class()$$endif$
+>>
+
+interface() ::= <<
 	public partial class $objectType.SingularName$Interface: Interface
 	{
 		public static $objectType.SingularName$Interface Instance {get; internal set;}
@@ -182,14 +185,9 @@ $objectType.AssociationTypesWhereObjectType:{associationType|				internal RoleTy
 }$
 		}
 	}
-}
 >>
 
 class() ::= <<
-namespace Allors.Meta
-{
-	using System;
-
 	public partial class $objectType.SingularName$Class : Class
 	{
 		public static $objectType.SingularName$Class Instance {get; internal set;}
@@ -236,7 +234,6 @@ $objectType.RoleTypes:{roleType|				internal ConcreteRoleType $roleType.Hierarch
 }$
 		}
 	}
-}
 >>
 
 relationType(relationType) ::= <<
