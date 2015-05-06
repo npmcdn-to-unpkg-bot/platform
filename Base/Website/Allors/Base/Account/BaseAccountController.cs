@@ -644,7 +644,7 @@
         /// <summary>
         /// Gets the authentication manager.
         /// </summary>
-        private IAuthenticationManager AuthenticationManager
+        protected IAuthenticationManager AuthenticationManager
         {
             get
             {
