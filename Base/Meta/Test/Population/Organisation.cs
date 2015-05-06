@@ -15,7 +15,7 @@ namespace Allors.Meta
 
             this.Roles.Description.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
 
-            this.Roles.Information.DisplayAttribute = new DisplayAttribute{Name = "Informational Text"};
+            this.Roles.Information.DisplayAttribute = new DisplayAttribute{ Name = "Ik ben het label" };
             this.Roles.Information.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
         }
     }
