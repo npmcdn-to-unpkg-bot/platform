@@ -117,34 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DerivationErrorAtLeastOne" xml:space="preserve">
-    <value>{0} at least one</value>
+  <data name="AccountNumberUniqueWithinChartOfAccounts" xml:space="preserve">
+    <value>Rekeningnummer moet uniek zijn binnen het rekeningstelsel</value>
   </data>
-  <data name="DerivationErrorAtMostOne" xml:space="preserve">
-    <value>{0} at most one</value>
+  <data name="ActiveDeploymentRegistered" xml:space="preserve">
+    <value>actieve werknemer bij {0}</value>
   </data>
-  <data name="DerivationErrorConflict" xml:space="preserve">
-    <value>{0} is in conflict</value>
+  <data name="BasePriceOrderQuantityBreakNotAllowed" xml:space="preserve">
+    <value>order korting in aantal niet toegestaan voor een basisprijs</value>
   </data>
-  <data name="DerivationErrorEquals" xml:space="preserve">
-    <value>{0} are not equal</value>
+  <data name="BasePriceOrderValueNotAllowed" xml:space="preserve">
+    <value>order korting in prijs niet toegestaan voor een basisprijs</value>
   </data>
-  <data name="DerivationErrorNotAllowed" xml:space="preserve">
-    <value>{0} is not allowed</value>
+  <data name="BasePriceRevenueQuantityBreakNotAllowed" xml:space="preserve">
+    <value>volume korting in aantal niet toegestaan voor een basisprijs</value>
   </data>
-  <data name="DerivationErrorRequired" xml:space="preserve">
-    <value>{0} is required</value>
+  <data name="BasePriceRevenueValueBreakNotAllowed" xml:space="preserve">
+    <value>volume korting in prijs niet toegestaan voor een basisprijs</value>
   </data>
-  <data name="DerivationErrorUnique" xml:space="preserve">
-    <value>{0} is not unique</value>
+  <data name="CostCenterNotAllowed" xml:space="preserve">
+    <value>Kostenplaats niet in lijst van toegestane kostenplaatsen</value>
   </data>
-  <data name="PermissionOnlyExecuteForMethodType" xml:space="preserve">
-    <value>only execute is allowed for method type</value>
+  <data name="CostUnitNotAllowed" xml:space="preserve">
+    <value>Kostendrager niet in lijst van toegestane kostendragers</value>
   </data>
-  <data name="PermissionOnlyReadForRoleOrAssociationType" xml:space="preserve">
-    <value>only read is allowed for a role or an association type</value>
+  <data name="GeneralLedgerAccountNotBalanceAccount" xml:space="preserve">
+    <value>Grootboek rekening moet balans rekening zijn.</value>
   </data>
-  <data name="PermissionOnlyWriteForRoleType" xml:space="preserve">
-    <value>only write is allowed for a role type</value>
+  <data name="GeneralLedgerAccountNotNeutral" xml:space="preserve">
+    <value>Grootboek rekening al toegewezen</value>
+  </data>
+  <data name="IbanCheckDigitsError" xml:space="preserve">
+    <value>IBAN controle nummers zijn fout</value>
+  </data>
+  <data name="IbanIllegalCharacters" xml:space="preserve">
+    <value>IBAN bevat ongeldige tekens</value>
+  </data>
+  <data name="IbanIncorrect" xml:space="preserve">
+    <value>Het IBAN nummer is niet correct</value>
+  </data>
+  <data name="IbanLengthFailure" xml:space="preserve">
+    <value>IBAN lengte is fout</value>
+  </data>
+  <data name="IbanStructuralFailure" xml:space="preserve">
+    <value>IBAN structuur past niet bij land</value>
+  </data>
+  <data name="IbanValidationUnavailable" xml:space="preserve">
+    <value>IBAN validatie regels voor dit land zijn onbekend</value>
+  </data>
+  <data name="NotACostCenterAccount" xml:space="preserve">
+    <value>Rekening is geen kostenplaats rekening</value>
+  </data>
+  <data name="NotACostUnitAccount" xml:space="preserve">
+    <value>Rekening is geen kostendrager rekening</value>
+  </data>
+  <data name="NotAValidBic" xml:space="preserve">
+    <value>geen geldige BIC code</value>
+  </data>
+  <data name="PackagingContentMaximum" xml:space="preserve">
+    <value>maximale inhoud pakket</value>
+  </data>
+  <data name="PartyIsNotACustomer" xml:space="preserve">
+    <value>Gekozen partij is geen klant voor deze interne organisatie</value>
+  </data>
+  <data name="PartyIsNotASupplier" xml:space="preserve">
+    <value>Gekozen partij is geen leverancier voor deze interne organisatie</value>
+  </data>
+  <data name="PaymentApplicationNotLargerThanInvoiceAmount" xml:space="preserve">
+    <value>bedrag kan niet groter zijn dan bedrag van factuur</value>
+  </data>
+  <data name="PaymentApplicationNotLargerThanInvoiceItemAmount" xml:space="preserve">
+    <value>bedrag kan niet groter zijn dan bedrag van factuurlijn</value>
+  </data>
+  <data name="PaymentApplicationNotLargerThanPaymentAmount" xml:space="preserve">
+    <value>bedrag kan niet groter zijn dan bedrag van betaling</value>
+  </data>
+  <data name="PaymentMethodNotAllowedForInternalOrganisation" xml:space="preserve">
+    <value>Betaalmethode niet beschikbaar voor eigenaar van deze store</value>
+  </data>
+  <data name="PickListItemQuantityMoreThanAllowed" xml:space="preserve">
+    <value>hoeveelheid overschreidt toegestane</value>
+  </data>
+  <data name="ProductCategoryPackageOnlyAtLowestLevel" xml:space="preserve">
+    <value>pakket alleen toegestaan op laagste niveau</value>
+  </data>
+  <data name="ReceiptAmountIsToSmall" xml:space="preserve">
+    <value>bedrag is te klein</value>
+  </data>
+  <data name="SalesOrderItemLessThanAlreadeyShipped" xml:space="preserve">
+    <value>hoeveelheid kleiner dan reeds verzonden</value>
+  </data>
+  <data name="SalesOrderItemProductChangeNotAllowed" xml:space="preserve">
+    <value>productwissel niet toegestaan, gebruik annuleer orderlijn in de plaats</value>
+  </data>
+  <data name="SalesOrderItemQuantityToShipNowIsLargerThanQuantityOrdered" xml:space="preserve">
+    <value>Het aantal dat nu verzonden moet worden is meer dan het orderitem aantal</value>
+  </data>
+  <data name="SalesOrderItemQuantityToShipNowIsLargerThanQuantityRemaining" xml:space="preserve">
+    <value>Het aantal dat nu verzonden moet worden is meer dan het resterende aantal dat nog verzonden moet worden</value>
+  </data>
+  <data name="SalesOrderItemQuantityToShipNowNotAvailable" xml:space="preserve">
+    <value>Het aantal dat nu verzonden moet worden is niet beschikbaar</value>
   </data>
 </root>
