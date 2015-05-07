@@ -37,6 +37,10 @@ namespace Allors.Domain
 
         //    base.RemovePaymentMethod(value);
         //}
+        public void AppsOnDeriveCurrentContacts(IDerivation derivation)
+        {
+            this.RemoveCurrentContacts();
+        }
 
         public int DeriveNextSubAccountNumber()
         {

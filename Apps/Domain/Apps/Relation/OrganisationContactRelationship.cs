@@ -43,7 +43,7 @@ namespace Allors.Domain
             ////Before deriving this.Contact
             if (this.ExistOrganisation)
             {
-                this.Organisation.DeriveCurrentContacts(derivation);
+                this.Organisation.AppsOnDeriveCurrentContacts(derivation);
             }
 
             ////After deriving this.Organisation

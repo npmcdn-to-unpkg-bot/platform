@@ -42,5 +42,10 @@ namespace Allors.Domain
             var derivation = method.Derivation;
             this.PartyName = this.Name;
         }
+
+        public void AppsOnDeriveCurrentContacts(IDerivation derivation)
+        {
+            this.RemoveCurrentContacts();
+        }
     }
 }

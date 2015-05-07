@@ -436,7 +436,7 @@ namespace Allors.Domain
 
             this.PartyName = this.DerivePartyName();
             this.DeriveCurrentEmployment(derivation);
-            this.DeriveCurrentContacts(derivation);
+            this.AppsOnDeriveCurrentContacts(derivation);
             this.DeriveCommission();
         }
 

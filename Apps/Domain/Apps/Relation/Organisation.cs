@@ -188,7 +188,7 @@ namespace Allors.Domain
             }
 
             this.DeriveUserGroups(derivation);
-            this.DeriveCurrentContacts(derivation);
+            this.AppsOnDeriveCurrentContacts(derivation);
         }
         
         private bool AppsIsActiveClient(DateTime? date)

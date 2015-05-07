@@ -42,5 +42,7 @@ namespace Allors.Domain
         void DeriveRevenue();
 
         CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod);
+
+        void AppsOnDeriveCurrentContacts(IDerivation derivation);
     }
 }

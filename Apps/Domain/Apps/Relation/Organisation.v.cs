@@ -114,10 +114,5 @@ namespace Allors.Domain
         {
             this.AppsOnDeriveUserGroups(derivation);
         }
-
-        public void DeriveCurrentContacts(IDerivation derivation)
-        {
-            this.AppsOnDeriveCurrentContacts(derivation);
-        }
     }
 }

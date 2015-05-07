@@ -82,11 +82,6 @@ namespace Allors.Domain
             this.AppsOnDeriveRevenue();
         }
 
-        public void DeriveCurrentContacts(IDerivation derivation)
-        {
-            this.AppsOnDeriveCurrentContacts(derivation);
-        }
-
         public NumberFormatInfo CurrencyFormat {
             get
             {
