@@ -1,4 +1,4 @@
-﻿namespace Website.OrganisationMvc
+﻿namespace Areas.Default.Tests.OrganisationMvc
 {
     using Allors.Meta;
     using Allors.Web.Mvc.Models;

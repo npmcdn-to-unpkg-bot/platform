@@ -18,7 +18,7 @@
 // </copyright>
 // ------------------------------------------------------------------------------------------------
 
-namespace Website.MediaMvc
+namespace Allors.Web.Media
 {
     using System;
     using System.Web;

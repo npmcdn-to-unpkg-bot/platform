@@ -1,4 +1,4 @@
-﻿namespace Website.OrganisationMvc
+﻿namespace Areas.Default.Tests.OrganisationMvc
 {
     using System.Linq;
     using System.Web.Mvc;

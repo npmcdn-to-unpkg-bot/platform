@@ -10,7 +10,7 @@ namespace Controllers
 
     using Should;
 
-    using Website.OrganisationMvc;
+    using Areas.Default.Tests.OrganisationMvc;
 
     public class OrganisationEditTests : ControllersTest
     {

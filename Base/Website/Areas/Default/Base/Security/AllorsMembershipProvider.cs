@@ -14,10 +14,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Web.Security
+namespace Allors.Web.Security
 {
     using System;
-    using System.Web;
     using System.Web.Security;
 
     using Allors;

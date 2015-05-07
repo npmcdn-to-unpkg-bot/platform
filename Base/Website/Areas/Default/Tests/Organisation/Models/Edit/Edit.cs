@@ -1,4 +1,4 @@
-﻿namespace Website.OrganisationMvc
+﻿namespace Areas.Default.Tests.OrganisationMvc
 {
     using System;
     using System.ComponentModel.DataAnnotations;

@@ -1,16 +1,17 @@
-﻿namespace Website.Controllers
+﻿namespace Allors.Web.Identity
 {
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
 
-    using Allors.Web.Identity;
     using Allors.Web.Identity.Models;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
+
+    using Website.Controllers;
 
     [Authorize]
     public abstract class BaseManageController : Controller
@@ -24,19 +25,19 @@
 
         public BaseManageController(IdentityUserManager userManager, IdentitySignInManager signInManager)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            this.UserManager = userManager;
+            this.SignInManager = signInManager;
         }
 
         public virtual IdentitySignInManager SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<IdentitySignInManager>();
+                return this._signInManager ?? this.HttpContext.GetOwinContext().Get<IdentitySignInManager>();
             }
             private set 
             { 
-                _signInManager = value; 
+                this._signInManager = value; 
             }
         }
 
@@ -44,11 +45,11 @@
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<IdentityUserManager>();
+                return this._userManager ?? this.HttpContext.GetOwinContext().GetUserManager<IdentityUserManager>();
             }
             private set
             {
-                _userManager = value;
+                this._userManager = value;
             }
         }
 
@@ -56,7 +57,7 @@
         // GET: /Manage/Index
         public virtual ActionResult Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
+            this.ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
@@ -65,16 +66,16 @@
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
-            var userId = User.Identity.GetUserId();
+            var userId = this.User.Identity.GetUserId();
             var model = new IndexViewModel
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = UserManager.GetPhoneNumber(userId),
-                TwoFactor = UserManager.GetTwoFactorEnabled(userId),
-                Logins = UserManager.GetLogins(userId),
-                BrowserRemembered = AuthenticationManager.TwoFactorBrowserRemembered(userId)
+                HasPassword = this.HasPassword(),
+                PhoneNumber = this.UserManager.GetPhoneNumber(userId),
+                TwoFactor = this.UserManager.GetTwoFactorEnabled(userId),
+                Logins = this.UserManager.GetLogins(userId),
+                BrowserRemembered = this.AuthenticationManager.TwoFactorBrowserRemembered(userId)
             };
-            return View(model);
+            return this.View(model);
         }
 
         //
@@ -84,13 +85,13 @@
         public virtual ActionResult RemoveLogin(string loginProvider, string providerKey)
         {
             ManageMessageId? message;
-            var result = UserManager.RemoveLogin(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            var result = this.UserManager.RemoveLogin(this.User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
-                var user = UserManager.FindById(User.Identity.GetUserId());
+                var user = this.UserManager.FindById(this.User.Identity.GetUserId());
                 if (user != null)
                 {
-                    SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                    this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 }
                 message = ManageMessageId.RemoveLoginSuccess;
             }
@@ -98,14 +99,14 @@
             {
                 message = ManageMessageId.Error;
             }
-            return RedirectToAction("ManageLogins", new { Message = message });
+            return this.RedirectToAction("ManageLogins", new { Message = message });
         }
 
         //
         // GET: /Manage/AddPhoneNumber
         public virtual ActionResult AddPhoneNumber()
         {
-            return View();
+            return this.View();
         }
 
         //
@@ -114,22 +115,22 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult AddPhoneNumber(AddPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
             // Generate the token and send it
-            var code = UserManager.GenerateChangePhoneNumberToken(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null)
+            var code = this.UserManager.GenerateChangePhoneNumberToken(this.User.Identity.GetUserId(), model.Number);
+            if (this.UserManager.SmsService != null)
             {
                 var message = new IdentityMessage
                 {
                     Destination = model.Number,
                     Body = "Your security code is: " + code
                 };
-                UserManager.SmsService.Send(message);
+                this.UserManager.SmsService.Send(message);
             }
-            return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+            return this.RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
         //
@@ -138,13 +139,13 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult EnableTwoFactorAuthentication()
         {
-            UserManager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            this.UserManager.SetTwoFactorEnabled(this.User.Identity.GetUserId(), true);
+            var user = this.UserManager.FindById(this.User.Identity.GetUserId());
             if (user != null)
             {
-                SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "Manage");
+            return this.RedirectToAction("Index", "Manage");
         }
 
         //
@@ -153,22 +154,22 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult DisableTwoFactorAuthentication()
         {
-            UserManager.SetTwoFactorEnabled(User.Identity.GetUserId(), false);
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            this.UserManager.SetTwoFactorEnabled(this.User.Identity.GetUserId(), false);
+            var user = this.UserManager.FindById(this.User.Identity.GetUserId());
             if (user != null)
             {
-                SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", "Manage");
+            return this.RedirectToAction("Index", "Manage");
         }
 
         //
         // GET: /Manage/VerifyPhoneNumber
         public virtual ActionResult VerifyPhoneNumber(string phoneNumber)
         {
-            var code = UserManager.GenerateChangePhoneNumberToken(User.Identity.GetUserId(), phoneNumber);
+            var code = this.UserManager.GenerateChangePhoneNumberToken(this.User.Identity.GetUserId(), phoneNumber);
             // Send an SMS through the SMS provider to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            return phoneNumber == null ? this.View("Error") : this.View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
         //
@@ -177,47 +178,47 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
-            var result = UserManager.ChangePhoneNumber(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
+            var result = this.UserManager.ChangePhoneNumber(this.User.Identity.GetUserId(), model.PhoneNumber, model.Code);
             if (result.Succeeded)
             {
-                var user = UserManager.FindById(User.Identity.GetUserId());
+                var user = this.UserManager.FindById(this.User.Identity.GetUserId());
                 if (user != null)
                 {
-                    SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                    this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+                return this.RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
-            return View(model);
+            this.ModelState.AddModelError("", "Failed to verify phone");
+            return this.View(model);
         }
 
         //
         // GET: /Manage/RemovePhoneNumber
         public virtual ActionResult RemovePhoneNumber()
         {
-            var result = UserManager.SetPhoneNumber(User.Identity.GetUserId(), null);
+            var result = this.UserManager.SetPhoneNumber(this.User.Identity.GetUserId(), null);
             if (!result.Succeeded)
             {
-                return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+                return this.RedirectToAction("Index", new { Message = ManageMessageId.Error });
             }
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            var user = this.UserManager.FindById(this.User.Identity.GetUserId());
             if (user != null)
             {
-                SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
             }
-            return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+            return this.RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
         //
         // GET: /Manage/ChangePassword
         public virtual ActionResult ChangePassword()
         {
-            return View();
+            return this.View();
         }
 
         //
@@ -226,29 +227,29 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult ChangePassword(ChangePasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
-            var result = UserManager.ChangePassword(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var result = this.UserManager.ChangePassword(this.User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
-                var user = UserManager.FindById(User.Identity.GetUserId());
+                var user = this.UserManager.FindById(this.User.Identity.GetUserId());
                 if (user != null)
                 {
-                    SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                    this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return this.RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
-            AddErrors(result);
-            return View(model);
+            this.AddErrors(result);
+            return this.View(model);
         }
 
         //
         // GET: /Manage/SetPassword
         public virtual ActionResult SetPassword()
         {
-            return View();
+            return this.View();
         }
 
         //
@@ -257,42 +258,42 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult SetPassword(SetPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var result = UserManager.AddPassword(User.Identity.GetUserId(), model.NewPassword);
+                var result = this.UserManager.AddPassword(this.User.Identity.GetUserId(), model.NewPassword);
                 if (result.Succeeded)
                 {
-                    var user = UserManager.FindById(User.Identity.GetUserId());
+                    var user = this.UserManager.FindById(this.User.Identity.GetUserId());
                     if (user != null)
                     {
-                        SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                        this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return this.RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
                 }
-                AddErrors(result);
+                this.AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         //
         // GET: /Manage/ManageLogins
         public virtual ActionResult ManageLogins(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
+            this.ViewBag.StatusMessage =
                 message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            var user = this.UserManager.FindById(this.User.Identity.GetUserId());
             if (user == null)
             {
-                return View("Error");
+                return this.View("Error");
             }
-            var userLogins = UserManager.GetLogins(User.Identity.GetUserId());
-            var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
-            ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
-            return View(new ManageLoginsViewModel
+            var userLogins = this.UserManager.GetLogins(this.User.Identity.GetUserId());
+            var otherLogins = this.AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
+            this.ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
+            return this.View(new ManageLoginsViewModel
             {
                 CurrentLogins = userLogins,
                 OtherLogins = otherLogins
@@ -306,28 +307,28 @@
         public virtual ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+            return new AccountController.ChallengeResult(provider, this.Url.Action("LinkLoginCallback", "Manage"), this.User.Identity.GetUserId());
         }
 
         //
         // GET: /Manage/LinkLoginCallback
         public virtual ActionResult LinkLoginCallback()
         {
-            var loginInfo = AuthenticationManager.GetExternalLoginInfo(XsrfKey, User.Identity.GetUserId());
+            var loginInfo = this.AuthenticationManager.GetExternalLoginInfo(XsrfKey, this.User.Identity.GetUserId());
             if (loginInfo == null)
             {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+                return this.RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
             }
-            var result = UserManager.AddLogin(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+            var result = this.UserManager.AddLogin(this.User.Identity.GetUserId(), loginInfo.Login);
+            return result.Succeeded ? this.RedirectToAction("ManageLogins") : this.RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && _userManager != null)
+            if (disposing && this._userManager != null)
             {
-                _userManager.Dispose();
-                _userManager = null;
+                this._userManager.Dispose();
+                this._userManager = null;
             }
 
             base.Dispose(disposing);
@@ -341,7 +342,7 @@
         {
             get
             {
-                return HttpContext.GetOwinContext().Authentication;
+                return this.HttpContext.GetOwinContext().Authentication;
             }
         }
 
@@ -349,13 +350,13 @@
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                this.ModelState.AddModelError("", error);
             }
         }
 
         private bool HasPassword()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            var user = this.UserManager.FindById(this.User.Identity.GetUserId());
             if (user != null)
             {
                 return user.PasswordHash != null;

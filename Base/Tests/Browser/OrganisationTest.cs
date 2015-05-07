@@ -10,7 +10,7 @@
 
     using SpecsFor.Mvc.Helpers;
 
-    using Website.OrganisationMvc;
+    using Areas.Default.Tests.OrganisationMvc;
 
     public class OrganisationTest : BrowserTest
     {

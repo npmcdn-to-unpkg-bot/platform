@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Web.Security
+namespace Allors.Web.Security
 {
     using System;
     using System.Collections;

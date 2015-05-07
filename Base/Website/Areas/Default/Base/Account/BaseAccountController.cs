@@ -1,11 +1,10 @@
-﻿namespace Website.Controllers
+﻿namespace Allors.Web.Identity
 {
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
 
-    using Allors.Web.Identity;
     using Allors.Web.Identity.Models;
 
     using Microsoft.AspNet.Identity;
@@ -124,7 +123,7 @@
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = SignInManager.PasswordSignIn(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = this.SignInManager.PasswordSignIn(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -244,9 +243,9 @@
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    string code = UserManager.GenerateEmailConfirmationToken(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    UserManager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = this.UserManager.GenerateEmailConfirmationToken(user.Id);
+                    var callbackUrl = this.Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: this.Request.Url.Scheme);
+                    this.UserManager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return this.RedirectToAction("Index", "Home");
                 }
@@ -255,7 +254,7 @@
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         // GET: /Account/ConfirmEmail
@@ -276,11 +275,11 @@
         {
             if (userId == null || code == null)
             {
-                return View("Error");
+                return this.View("Error");
             }
 
-            var result = UserManager.ConfirmEmail(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            var result = this.UserManager.ConfirmEmail(userId, code);
+            return this.View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         // GET: /Account/ForgotPassword
@@ -293,7 +292,7 @@
         [AllowAnonymous]
         public virtual ActionResult ForgotPassword()
         {
-            return View();
+            return this.View();
         }
 
         // POST: /Account/ForgotPassword
@@ -311,25 +310,25 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                var user = UserManager.FindByName(model.Email);
-                if (user == null || !(UserManager.IsEmailConfirmed(user.Id)))
+                var user = this.UserManager.FindByName(model.Email);
+                if (user == null || !(this.UserManager.IsEmailConfirmed(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    return this.View("ForgotPasswordConfirmation");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                var code = UserManager.GeneratePasswordResetToken(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                UserManager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                var code = this.UserManager.GeneratePasswordResetToken(user.Id);
+                var callbackUrl = this.Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: this.Request.Url.Scheme);
+                this.UserManager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return this.RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return this.View(model);
         }
 
         // GET: /Account/ForgotPasswordConfirmation
@@ -342,7 +341,7 @@
         [AllowAnonymous]
         public virtual ActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 
         // GET: /Account/ResetPassword
@@ -358,7 +357,7 @@
         [AllowAnonymous]
         public virtual ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return code == null ? this.View("Error") : this.View();
         }
 
         // POST: /Account/ResetPassword
@@ -376,26 +375,26 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return this.View(model);
             }
 
-            var user = UserManager.FindByName(model.Email);
+            var user = this.UserManager.FindByName(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return this.RedirectToAction("ResetPasswordConfirmation", "Account");
             }
 
-            var result = UserManager.ResetPassword(user.Id, model.Code, model.Password);
+            var result = this.UserManager.ResetPassword(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return this.RedirectToAction("ResetPasswordConfirmation", "Account");
             }
 
-            AddErrors(result);
-            return View();
+            this.AddErrors(result);
+            return this.View();
         }
 
         // GET: /Account/ResetPasswordConfirmation
@@ -408,7 +407,7 @@
         [AllowAnonymous]
         public virtual ActionResult ResetPasswordConfirmation()
         {
-            return View();
+            return this.View();
         }
 
         // POST: /Account/ExternalLogin
@@ -430,7 +429,7 @@
         public virtual ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return new ChallengeResult(provider, this.Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
         // GET: /Account/SendCode
@@ -449,15 +448,15 @@
         [AllowAnonymous]
         public virtual ActionResult SendCode(string returnUrl, bool rememberMe)
         {
-            var userId = SignInManager.GetVerifiedUserId();
+            var userId = this.SignInManager.GetVerifiedUserId();
             if (userId == null)
             {
-                return View("Error");
+                return this.View("Error");
             }
 
-            var userFactors = UserManager.GetValidTwoFactorProviders(userId);
+            var userFactors = this.UserManager.GetValidTwoFactorProviders(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            return this.View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
         // POST: /Account/SendCode
@@ -475,18 +474,18 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult SendCode(SendCodeViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View();
+                return this.View();
             }
 
             // Generate the token and send it
-            if (!SignInManager.SendTwoFactorCode(model.SelectedProvider))
+            if (!this.SignInManager.SendTwoFactorCode(model.SelectedProvider))
             {
-                return View("Error");
+                return this.View("Error");
             }
 
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return this.RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
         // GET: /Account/ExternalLoginCallback
@@ -502,29 +501,29 @@
         [AllowAnonymous]
         public virtual ActionResult ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = AuthenticationManager.GetExternalLoginInfo();
+            var loginInfo = this.AuthenticationManager.GetExternalLoginInfo();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return this.RedirectToAction("Login");
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = SignInManager.ExternalSignIn(loginInfo, isPersistent: false);
+            var result = this.SignInManager.ExternalSignIn(loginInfo, isPersistent: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return this.RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
-                    return View("Lockout");
+                    return this.View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+                    return this.RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
                 case SignInStatus.Failure:
                 default:
 
                     // If the user does not have an account, then prompt the user to create an account
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    this.ViewBag.ReturnUrl = returnUrl;
+                    this.ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                    return this.View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
 
@@ -546,37 +545,37 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return this.RedirectToAction("Index", "Manage");
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = AuthenticationManager.GetExternalLoginInfo();
+                var info = this.AuthenticationManager.GetExternalLoginInfo();
                 if (info == null)
                 {
-                    return View("ExternalLoginFailure");
+                    return this.View("ExternalLoginFailure");
                 }
 
                 var user = new IdentityUser { UserName = model.Email, Email = model.Email };
-                var result = UserManager.Create(user);
+                var result = this.UserManager.Create(user);
                 if (result.Succeeded)
                 {
-                    result = UserManager.AddLogin(user.Id, info.Login);
+                    result = this.UserManager.AddLogin(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToLocal(returnUrl);
+                        this.SignInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
+                        return this.RedirectToLocal(returnUrl);
                     }
                 }
 
-                AddErrors(result);
+                this.AddErrors(result);
             }
 
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            this.ViewBag.ReturnUrl = returnUrl;
+            return this.View(model);
         }
 
         // POST: /Account/LogOff
@@ -590,8 +589,8 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            this.AuthenticationManager.SignOut();
+            return this.RedirectToAction("Index", "Home");
         }
 
         // GET: /Account/ExternalLoginFailure
@@ -604,7 +603,7 @@
         [AllowAnonymous]
         public virtual ActionResult ExternalLoginFailure()
         {
-            return View();
+            return this.View();
         }
 
         /// <summary>
@@ -648,7 +647,7 @@
         {
             get
             {
-                return HttpContext.GetOwinContext().Authentication;
+                return this.HttpContext.GetOwinContext().Authentication;
             }
         }
 
@@ -662,7 +661,7 @@
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error);
+                this.ModelState.AddModelError(string.Empty, error);
             }
         }
 
@@ -677,12 +676,12 @@
         /// </returns>
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (this.Url.IsLocalUrl(returnUrl))
             {
-                return Redirect(returnUrl);
+                return this.Redirect(returnUrl);
             }
 
-            return RedirectToAction("Index", "Home");
+            return this.RedirectToAction("Index", "Home");
         }
 
         /// <summary>
@@ -718,9 +717,9 @@
             /// </param>
             public ChallengeResult(string provider, string redirectUri, string userId)
             {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
+                this.LoginProvider = provider;
+                this.RedirectUri = redirectUri;
+                this.UserId = userId;
             }
 
             /// <summary>
@@ -746,13 +745,13 @@
             /// </param>
             public override void ExecuteResult(ControllerContext context)
             {
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != null)
+                var properties = new AuthenticationProperties { RedirectUri = this.RedirectUri };
+                if (this.UserId != null)
                 {
-                    properties.Dictionary[XsrfKey] = UserId;
+                    properties.Dictionary[XsrfKey] = this.UserId;
                 }
 
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, this.LoginProvider);
             }
         }
 

@@ -3,7 +3,7 @@
     using Allors.Web.Mvc;
 
     using Website.Controllers;
-    using Website.OrganisationMvc;
+    using Areas.Default.Tests.OrganisationMvc;
 
     public class MenuConfig
     {
