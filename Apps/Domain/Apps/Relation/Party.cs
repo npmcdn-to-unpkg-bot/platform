@@ -48,6 +48,28 @@ namespace Allors.Domain
             return preOrders;
         }
 
+        public static Person AppsFindCurrentContactByName(this Party party, string name)
+        {
+            var personsFound = new List<Person>();
+            name = name.ToLower();
+            foreach (Person person in party.CurrentContacts)
+            {
+                if ((person.ExistPartyName && person.PartyName.ToLower() == name) ||
+                    (person.ExistLastName && person.LastName.ToLower() == name) ||
+                    (person.ExistFirstName && person.FirstName.ToLower() == name))
+                {
+                    personsFound.Add(person);
+                }
+            }
+
+            if (personsFound.Count == 1)
+            {
+                return personsFound[0];
+            }
+
+            return null;
+        }
+
         public static IEnumerable<CustomerShipment> AppsGetPendingCustomerShipments(this Party party)
         {
             var shipments = party.ShipmentsWhereShipToParty;

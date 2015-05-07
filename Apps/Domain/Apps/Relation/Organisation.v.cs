@@ -85,11 +85,6 @@ namespace Allors.Domain
             return this.AppsIsActiveDistributor(date);
         }
 
-        public Person FindCurrentContactByName(string name)
-        {
-            return this.AppsFindCurrentContactByName(name);
-        }
-
         public bool IsActivePartner(DateTime date)
         {
             return this.AppsIsActivePartner(date);

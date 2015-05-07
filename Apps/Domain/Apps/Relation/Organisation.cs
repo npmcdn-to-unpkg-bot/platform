@@ -191,28 +191,6 @@ namespace Allors.Domain
             this.DeriveCurrentContacts(derivation);
         }
         
-        private Person AppsFindCurrentContactByName(string name)
-        {
-            var personsFound = new List<Person>();
-            name = name.ToLower();
-            foreach (Person person in this.CurrentContacts)
-            {
-                if ((person.ExistPartyName && person.PartyName.ToLower() == name) || 
-                    (person.ExistLastName && person.LastName.ToLower() == name) || 
-                    (person.ExistFirstName &&person.FirstName.ToLower() == name))
-                {
-                    personsFound.Add(person);
-                }
-            }
-
-            if (personsFound.Count == 1)
-            {
-                return personsFound[0];
-            }
-
-            return null;
-        }
-
         private bool AppsIsActiveClient(DateTime? date)
         {
             if (date == DateTime.MinValue)
