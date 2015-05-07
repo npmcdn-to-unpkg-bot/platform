@@ -1,7 +1,7 @@
 <relationType allors="1.0" id="59500ed1-2de5-45ff-bec7-275c1941d153">
   <associationType id="bd699a2c-e1dc-48dd-9d0a-c1aec3b18f44">
     <isMany>true</isMany>
-    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
   </associationType>
   <isDerived>true</isDerived>
   <isIndexed>true</isIndexed>

@@ -783,6 +783,8 @@ namespace Allors.Domain
 
 					BankAccount BankAccounts {set;}
 
+					Person CurrentContacts {set;}
+
 					ContactMechanism BillingAddress {set;}
 
 					ShipmentMethod DefaultShipmentMethod {set;}
@@ -2865,8 +2867,6 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 					UserGroup CustomerContactUserGroup {set;}
-
-					Person CurrentContacts {set;}
 
 					Image LogoImage {set;}
 

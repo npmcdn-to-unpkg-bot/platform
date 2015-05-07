@@ -435,9 +435,8 @@ namespace Allors.Domain
             }
 
             this.PartyName = this.DerivePartyName();
-
             this.DeriveCurrentEmployment(derivation);
-
+            this.DeriveCurrentContacts(derivation);
             this.DeriveCommission();
         }
 
@@ -447,7 +446,7 @@ namespace Allors.Domain
             this.AddSecurityToken(this.OwnerSecurityToken);
             this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
-            foreach (Organisation organisation in this.OrganisationsWhereCurrentContact)
+            foreach (Organisation organisation in this.PartiesWhereCurrentContact)
             {
                 this.AddSecurityToken(organisation.OwnerSecurityToken);
             }
@@ -474,6 +473,24 @@ namespace Allors.Domain
             foreach (CustomerRelationship customerRelationship in this.CustomerRelationshipsWhereCustomer)
             {
                 this.AddSecurityToken(customerRelationship.InternalOrganisation.OwnerSecurityToken);
+            }
+        }
+
+        public void AppsOnDeriveCurrentContacts(IDerivation derivation)
+        {
+            this.RemoveCurrentContacts();
+
+            var contactRelationships = this.OrganisationContactRelationshipsWhereContact;
+            foreach (OrganisationContactRelationship contactRelationship in contactRelationships)
+            {
+                if (contactRelationship.FromDate <= DateTime.UtcNow &&
+                    (!contactRelationship.ExistThroughDate || contactRelationship.ThroughDate >= DateTime.UtcNow))
+                {
+                    if (contactRelationship.Contact != this)
+                    {
+                        this.AddCurrentContact(contactRelationship.Contact);
+                    }
+                }
             }
         }
 

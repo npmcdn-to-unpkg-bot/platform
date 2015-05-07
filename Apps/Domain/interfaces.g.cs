@@ -9136,6 +9136,24 @@ namespace Allors.Domain
 		void RemoveBankAccounts();
 
 
+		global::Allors.Extent<Person> CurrentContacts
+		{ 
+			get;
+			set;
+		}
+
+		void AddCurrentContact (Person value);
+
+		void RemoveCurrentContact (Person value);
+
+		bool ExistCurrentContacts
+		{
+			get;
+		}
+
+		void RemoveCurrentContacts();
+
+
 		ContactMechanism BillingAddress
 		{ 
 			get;
@@ -10225,6 +10243,7 @@ namespace Allors.Domain
 		public global::Allors.Meta.RoleType PartyClassifications  =  (global::Allors.Meta.RoleType)global::Allors.Meta.MetaPopulation.Instance.Find(new System.Guid("766900b8-646c-4b59-b022-5143cf5e5ce9"));
 		public global::Allors.Meta.RoleType ExcludeFromDunning  =  (global::Allors.Meta.RoleType)global::Allors.Meta.MetaPopulation.Instance.Find(new System.Guid("09d4533e-d118-4395-a7f1-358aad00f6e4"));
 		public global::Allors.Meta.RoleType BankAccounts  =  (global::Allors.Meta.RoleType)global::Allors.Meta.MetaPopulation.Instance.Find(new System.Guid("fb2c26d4-c23c-4817-94ee-5f2acebb4e41"));
+		public global::Allors.Meta.RoleType CurrentContacts  =  (global::Allors.Meta.RoleType)global::Allors.Meta.MetaPopulation.Instance.Find(new System.Guid("9501b51f-92e1-4ab8-862b-c6b6fd469b68"));
 		public global::Allors.Meta.RoleType BillingAddress  =  (global::Allors.Meta.RoleType)global::Allors.Meta.MetaPopulation.Instance.Find(new System.Guid("f2455f15-83f5-4599-9b2e-c1b8d9b92995"));
 		public global::Allors.Meta.RoleType DefaultShipmentMethod  =  (global::Allors.Meta.RoleType)global::Allors.Meta.MetaPopulation.Instance.Find(new System.Guid("711fc18b-b5f8-4235-8a51-22f91e4c194e"));
 		public global::Allors.Meta.RoleType Resumes  =  (global::Allors.Meta.RoleType)global::Allors.Meta.MetaPopulation.Instance.Find(new System.Guid("468e863c-79f9-48a1-a28e-ad6159940b01"));

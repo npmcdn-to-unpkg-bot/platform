@@ -1875,7 +1875,7 @@ namespace Allors.Meta
 		public const string ShipmentRouteSegmentToFacility = "591427f6-b61c-4c19-9f82-e97570d9bead";
 		public const string PartyFixedAssetAssignmentParty = "59187015-4689-4ef8-942f-c36ff4c74e64";
 		public const string CustomerShipmentStatusCustomerShipmentObjectState = "591d3237-220b-4765-8001-4bc18ecd2d8c";
-		public const string OrganisationCurrentContact = "59500ed1-2de5-45ff-bec7-275c1941d153";
+		public const string PartyCurrentContact = "59500ed1-2de5-45ff-bec7-275c1941d153";
 		public const string BudgetCurrentObjectState = "59cbc253-e17d-4405-bea8-09ad420bf8bc";
 		public const string SalesRepProductCategoryRevenueSalesRepName = "59d7cb27-e752-405b-9515-7db04aa37da7";
 		public const string PaymentMethodGlPaymentInTransit = "59da5fc4-e861-4c7d-aa96-c15cebbb63f2";
@@ -3693,7 +3693,7 @@ namespace Allors.Meta
 		public const string ToFacilityShipmentRouteSegment = "352996f3-ffa9-4453-a602-938c7543a7c1";
 		public const string PartyPartyFixedAssetAssignment = "4f0c5035-bfd2-4843-8d6e-d3df15a7f5dd";
 		public const string CustomerShipmentObjectStateCustomerShipmentStatus = "2a2704d6-44f6-4e86-a8c9-407842b7eb83";
-		public const string CurrentContactOrganisation = "bd699a2c-e1dc-48dd-9d0a-c1aec3b18f44";
+		public const string CurrentContactParty = "bd699a2c-e1dc-48dd-9d0a-c1aec3b18f44";
 		public const string CurrentObjectStateBudget = "6f6d9d35-daf5-4a79-85ce-d662cd7ec2d4";
 		public const string SalesRepNameSalesRepProductCategoryRevenue = "348f4a59-ef85-47b1-af43-05ed9982c594";
 		public const string GlPaymentInTransitPaymentMethod = "7e050127-bbea-490a-ac78-354c37daa799";
@@ -5511,7 +5511,7 @@ namespace Allors.Meta
 		public const string ShipmentRouteSegmentToFacility = "bd604c1a-3540-472a-90f5-69ed94a82f03";
 		public const string PartyFixedAssetAssignmentParty = "38f3a7f5-53b5-4572-bcb0-347fa3a543f3";
 		public const string CustomerShipmentStatusCustomerShipmentObjectState = "fd56e773-b27b-4336-b1be-e262d1d26b41";
-		public const string OrganisationCurrentContact = "9501b51f-92e1-4ab8-862b-c6b6fd469b68";
+		public const string PartyCurrentContact = "9501b51f-92e1-4ab8-862b-c6b6fd469b68";
 		public const string BudgetCurrentObjectState = "a6ec675f-c28a-470e-9923-e623e0ca9c58";
 		public const string SalesRepProductCategoryRevenueSalesRepName = "61a193c4-66ae-48ff-b810-437b9812e77f";
 		public const string PaymentMethodGlPaymentInTransit = "e48560a6-b94d-459b-98d1-4bf429816798";
@@ -8761,6 +8761,7 @@ namespace Allors.Meta.Ids
 			public const string PartyClassifications = RoleTypeIds.PartyPartyClassification;
 			public const string ExcludeFromDunning = RoleTypeIds.PartyExcludeFromDunning;
 			public const string BankAccounts = RoleTypeIds.PartyBankAccount;
+			public const string CurrentContacts = RoleTypeIds.PartyCurrentContact;
 			public const string BillingAddress = RoleTypeIds.PartyBillingAddress;
 			public const string DefaultShipmentMethod = RoleTypeIds.PartyDefaultShipmentMethod;
 			public const string Resumes = RoleTypeIds.PartyResume;
@@ -9089,7 +9090,6 @@ namespace Allors.Meta.Ids
 			public const string LegalForm = RoleTypeIds.OrganisationLegalForm;
 			public const string Name = RoleTypeIds.OrganisationName;
 			public const string CustomerContactUserGroup = RoleTypeIds.OrganisationCustomerContactUserGroup;
-			public const string CurrentContacts = RoleTypeIds.OrganisationCurrentContact;
 			public const string LogoImage = RoleTypeIds.OrganisationLogoImage;
 			public const string PartnerContactUserGroup = RoleTypeIds.OrganisationPartnerContactUserGroup;
 			public const string TaxNumber = RoleTypeIds.OrganisationTaxNumber;
@@ -9112,6 +9112,7 @@ namespace Allors.Meta.Ids
 			public const string PartyClassifications = RoleTypeIds.PartyPartyClassification;
 			public const string ExcludeFromDunning = RoleTypeIds.PartyExcludeFromDunning;
 			public const string BankAccounts = RoleTypeIds.PartyBankAccount;
+			public const string CurrentContacts = RoleTypeIds.PartyCurrentContact;
 			public const string BillingAddress = RoleTypeIds.PartyBillingAddress;
 			public const string DefaultShipmentMethod = RoleTypeIds.PartyDefaultShipmentMethod;
 			public const string Resumes = RoleTypeIds.PartyResume;
@@ -9370,6 +9371,7 @@ namespace Allors.Meta.Ids
 			public const string PartyClassifications = RoleTypeIds.PartyPartyClassification;
 			public const string ExcludeFromDunning = RoleTypeIds.PartyExcludeFromDunning;
 			public const string BankAccounts = RoleTypeIds.PartyBankAccount;
+			public const string CurrentContacts = RoleTypeIds.PartyCurrentContact;
 			public const string BillingAddress = RoleTypeIds.PartyBillingAddress;
 			public const string DefaultShipmentMethod = RoleTypeIds.PartyDefaultShipmentMethod;
 			public const string Resumes = RoleTypeIds.PartyResume;
@@ -14776,6 +14778,7 @@ namespace Allors.Meta.Ids
 			public const string PartyClassifications = RoleTypeIds.PartyPartyClassification;
 			public const string ExcludeFromDunning = RoleTypeIds.PartyExcludeFromDunning;
 			public const string BankAccounts = RoleTypeIds.PartyBankAccount;
+			public const string CurrentContacts = RoleTypeIds.PartyCurrentContact;
 			public const string BillingAddress = RoleTypeIds.PartyBillingAddress;
 			public const string DefaultShipmentMethod = RoleTypeIds.PartyDefaultShipmentMethod;
 			public const string Resumes = RoleTypeIds.PartyResume;
@@ -18268,6 +18271,7 @@ namespace Allors.Meta.Ids
 			public const string PartyClassifications = RoleTypeIds.PartyPartyClassification;
 			public const string ExcludeFromDunning = RoleTypeIds.PartyExcludeFromDunning;
 			public const string BankAccounts = RoleTypeIds.PartyBankAccount;
+			public const string CurrentContacts = RoleTypeIds.PartyCurrentContact;
 			public const string BillingAddress = RoleTypeIds.PartyBillingAddress;
 			public const string DefaultShipmentMethod = RoleTypeIds.PartyDefaultShipmentMethod;
 			public const string Resumes = RoleTypeIds.PartyResume;
@@ -18302,7 +18306,7 @@ namespace Allors.Meta.Ids
 			public const string SalesOrdersWhereSalesRep = AssociationTypeIds.SalesRepSalesOrder;
 			public const string PositionFulfillmentsWherePerson = AssociationTypeIds.PersonPositionFulfillment;
 			public const string WorkEffortAssignmentsWhereProfessional = AssociationTypeIds.ProfessionalWorkEffortAssignment;
-			public const string OrganisationsWhereCurrentContact = AssociationTypeIds.CurrentContactOrganisation;
+			public const string PartiesWhereCurrentContact = AssociationTypeIds.CurrentContactParty;
 			public const string PerformanceNotesWhereGivenByManager = AssociationTypeIds.GivenByManagerPerformanceNote;
 			public const string SalesRepRevenueHistoriesWhereSalesRep = AssociationTypeIds.SalesRepSalesRepRevenueHistory;
 			public const string ProfessionalServicesRelationshipsWhereProfessional = AssociationTypeIds.ProfessionalProfessionalServicesRelationship;

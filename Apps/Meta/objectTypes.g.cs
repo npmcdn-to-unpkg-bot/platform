@@ -10772,6 +10772,7 @@ namespace Allors.Meta
 			internal ConcreteRoleType PartyClassification;
 			internal ConcreteRoleType ExcludeFromDunning;
 			internal ConcreteRoleType BankAccount;
+			internal ConcreteRoleType CurrentContact;
 			internal ConcreteRoleType BillingAddress;
 			internal ConcreteRoleType DefaultShipmentMethod;
 			internal ConcreteRoleType Resume;
@@ -12037,18 +12038,6 @@ namespace Allors.Meta
 			OrganisationCustomerContactUserGroup.RoleType.AssignedPluralName = "CustomerContactUserGroups";
 			this.Roles.CustomerContactUserGroup = OrganisationCustomerContactUserGroup.RoleType;
 
-			var OrganisationCurrentContact = new RelationType(AppsDomain.Instance, new Guid("59500ed1-2de5-45ff-bec7-275c1941d153"), new Guid("bd699a2c-e1dc-48dd-9d0a-c1aec3b18f44"), new Guid("9501b51f-92e1-4ab8-862b-c6b6fd469b68"));
-			OrganisationCurrentContact.AssignedMultiplicity = Multiplicity.ManyToMany;
-			OrganisationCurrentContact.IsDerived = true;
-			OrganisationCurrentContact.IsIndexed = true;
-
-			OrganisationCurrentContact.AssociationType.ObjectType = this;
-
-			OrganisationCurrentContact.RoleType.ObjectType = PersonClass.Instance;;
-			OrganisationCurrentContact.RoleType.AssignedSingularName = "CurrentContact";
-			OrganisationCurrentContact.RoleType.AssignedPluralName = "CurrentContacts";
-			this.Roles.CurrentContact = OrganisationCurrentContact.RoleType;
-
 			var OrganisationLogoImage = new RelationType(AppsDomain.Instance, new Guid("786a74b0-015a-47db-8d3a-c790b326cc7d"), new Guid("6f7363d4-46c5-4bcb-b19c-314733af9e9e"), new Guid("1c339b5d-6f97-41bd-952a-3706d383c3d8"));
 			OrganisationLogoImage.AssignedMultiplicity = Multiplicity.ManyToOne;
 			OrganisationLogoImage.IsIndexed = true;
@@ -12114,8 +12103,6 @@ namespace Allors.Meta
 
 			OrganisationClass.Instance.ConcreteRoles.CustomerContactUserGroup = OrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.CustomerContactUserGroup]; 
 
-			OrganisationClass.Instance.ConcreteRoles.CurrentContact = OrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.CurrentContact]; 
-
 			OrganisationClass.Instance.ConcreteRoles.LogoImage = OrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.LogoImage]; 
 
 			OrganisationClass.Instance.ConcreteRoles.PartnerContactUserGroup = OrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.PartnerContactUserGroup]; 
@@ -12134,7 +12121,6 @@ namespace Allors.Meta
 			internal RoleType LegalForm;
 			internal RoleType Name;
 			internal RoleType CustomerContactUserGroup;
-			internal RoleType CurrentContact;
 			internal RoleType LogoImage;
 			internal RoleType PartnerContactUserGroup;
 			internal RoleType TaxNumber;
@@ -12148,7 +12134,6 @@ namespace Allors.Meta
 			internal ConcreteRoleType LegalForm;
 			internal ConcreteRoleType Name;
 			internal ConcreteRoleType CustomerContactUserGroup;
-			internal ConcreteRoleType CurrentContact;
 			internal ConcreteRoleType LogoImage;
 			internal ConcreteRoleType PartnerContactUserGroup;
 			internal ConcreteRoleType TaxNumber;
@@ -12171,6 +12156,7 @@ namespace Allors.Meta
 			internal ConcreteRoleType PartyClassification;
 			internal ConcreteRoleType ExcludeFromDunning;
 			internal ConcreteRoleType BankAccount;
+			internal ConcreteRoleType CurrentContact;
 			internal ConcreteRoleType BillingAddress;
 			internal ConcreteRoleType DefaultShipmentMethod;
 			internal ConcreteRoleType Resume;
@@ -13182,6 +13168,18 @@ namespace Allors.Meta
 			PartyBankAccount.RoleType.AssignedPluralName = "BankAccounts";
 			this.Roles.BankAccount = PartyBankAccount.RoleType;
 
+			var PartyCurrentContact = new RelationType(AppsDomain.Instance, new Guid("59500ed1-2de5-45ff-bec7-275c1941d153"), new Guid("bd699a2c-e1dc-48dd-9d0a-c1aec3b18f44"), new Guid("9501b51f-92e1-4ab8-862b-c6b6fd469b68"));
+			PartyCurrentContact.AssignedMultiplicity = Multiplicity.ManyToMany;
+			PartyCurrentContact.IsDerived = true;
+			PartyCurrentContact.IsIndexed = true;
+
+			PartyCurrentContact.AssociationType.ObjectType = this;
+
+			PartyCurrentContact.RoleType.ObjectType = PersonClass.Instance;;
+			PartyCurrentContact.RoleType.AssignedSingularName = "CurrentContact";
+			PartyCurrentContact.RoleType.AssignedPluralName = "CurrentContacts";
+			this.Roles.CurrentContact = PartyCurrentContact.RoleType;
+
 			var PartyBillingAddress = new RelationType(AppsDomain.Instance, new Guid("70ada4aa-c51c-4f1d-a3d2-ea6de31cb988"), new Guid("9f1ea588-8dd9-4f48-a905-0271e694f1fe"), new Guid("f2455f15-83f5-4599-9b2e-c1b8d9b92995"));
 			PartyBillingAddress.AssignedMultiplicity = Multiplicity.ManyToOne;
 			PartyBillingAddress.IsDerived = true;
@@ -13492,6 +13490,11 @@ namespace Allors.Meta
 			InternalOrganisationClass.Instance.ConcreteRoles.BankAccount = InternalOrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.BankAccount]; 
 			PersonClass.Instance.ConcreteRoles.BankAccount = PersonClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.BankAccount]; 
 
+			AutomatedAgentClass.Instance.ConcreteRoles.CurrentContact = AutomatedAgentClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.CurrentContact]; 
+			OrganisationClass.Instance.ConcreteRoles.CurrentContact = OrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.CurrentContact]; 
+			InternalOrganisationClass.Instance.ConcreteRoles.CurrentContact = InternalOrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.CurrentContact]; 
+			PersonClass.Instance.ConcreteRoles.CurrentContact = PersonClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.CurrentContact]; 
+
 			AutomatedAgentClass.Instance.ConcreteRoles.BillingAddress = AutomatedAgentClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.BillingAddress]; 
 			OrganisationClass.Instance.ConcreteRoles.BillingAddress = OrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.BillingAddress]; 
 			InternalOrganisationClass.Instance.ConcreteRoles.BillingAddress = InternalOrganisationClass.Instance.ConcreteRoleTypeByRoleType[this.Roles.BillingAddress]; 
@@ -13609,6 +13612,7 @@ namespace Allors.Meta
 			internal RoleType PartyClassification;
 			internal RoleType ExcludeFromDunning;
 			internal RoleType BankAccount;
+			internal RoleType CurrentContact;
 			internal RoleType BillingAddress;
 			internal RoleType DefaultShipmentMethod;
 			internal RoleType Resume;
@@ -42880,6 +42884,7 @@ namespace Allors.Meta
 			internal ConcreteRoleType PartyClassification;
 			internal ConcreteRoleType ExcludeFromDunning;
 			internal ConcreteRoleType BankAccount;
+			internal ConcreteRoleType CurrentContact;
 			internal ConcreteRoleType BillingAddress;
 			internal ConcreteRoleType DefaultShipmentMethod;
 			internal ConcreteRoleType Resume;
@@ -56744,6 +56749,7 @@ namespace Allors.Meta
 			internal ConcreteRoleType PartyClassification;
 			internal ConcreteRoleType ExcludeFromDunning;
 			internal ConcreteRoleType BankAccount;
+			internal ConcreteRoleType CurrentContact;
 			internal ConcreteRoleType BillingAddress;
 			internal ConcreteRoleType DefaultShipmentMethod;
 			internal ConcreteRoleType Resume;
