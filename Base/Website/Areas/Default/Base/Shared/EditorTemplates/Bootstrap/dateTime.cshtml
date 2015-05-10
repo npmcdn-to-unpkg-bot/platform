@@ -1,4 +1,3 @@
-@using System.Threading
 @model DateTime?
 
 <div class="input-group date" id="@Html.IdForModel()">
@@ -12,7 +11,7 @@
     $(document).ready(function () {
         $('#@Html.IdForModel()').datetimepicker({
             // Locale should be set from controller
-            locale: '@Thread.CurrentThread.CurrentCulture.Name'
+            locale: '@System.Threading.Thread.CurrentThread.CurrentCulture.Name'
         });
     });
 </script>

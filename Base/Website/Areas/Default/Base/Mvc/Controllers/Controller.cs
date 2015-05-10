@@ -21,6 +21,8 @@
 namespace Allors.Web.Mvc
 {
     using System;
+    using System.Globalization;
+    using System.Threading;
     using System.Web.Mvc;
     using System.Web.Routing;
 
@@ -29,7 +31,7 @@ namespace Allors.Web.Mvc
     public abstract partial class Controller : System.Web.Mvc.Controller
     {
         private ISession allorsSession;
-        private User authenticatedUser; 
+        private User authenticatedUser;
 
         ~Controller()
         {
@@ -54,20 +56,6 @@ namespace Allors.Web.Mvc
             }
         }
 
-        public ViewContext RootViewContext
-        {
-            get
-            {
-                var viewContext = this.ControllerContext.ParentActionViewContext;
-                if (viewContext.ParentActionViewContext != null)
-                {
-                    viewContext = viewContext.ParentActionViewContext;
-                }
-
-                return viewContext;
-            }
-        }
-
         public User AuthenticatedUser
         {
             get
@@ -89,6 +77,37 @@ namespace Allors.Web.Mvc
             {
                 this.authenticatedUser = value;
             }
+        }
+
+        protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
+        {
+            if (this.AuthenticatedUser != null)
+            {
+                var locale = this.AuthenticatedUser.Locale;
+                if (locale != null)
+                {
+                    var cultureInfo = locale.CultureInfo;
+
+                    if (cultureInfo != null)
+                    {
+                        var originalCurrentCulture = Thread.CurrentThread.CurrentCulture;
+                        var originalCurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+
+                        try
+                        {
+                            Thread.CurrentThread.CurrentCulture = cultureInfo;
+                            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+                        }
+                        catch
+                        {
+                            Thread.CurrentThread.CurrentCulture = originalCurrentCulture;
+                            Thread.CurrentThread.CurrentUICulture = originalCurrentUICulture;
+                        }
+                    }
+                }
+            }
+
+            return base.BeginExecuteCore(callback, state);
         }
 
         protected override void Initialize(RequestContext requestContext)
