@@ -40,7 +40,7 @@ namespace Allors.Domain
             this.RemoveFromParties();
             this.FromParties = (Extent) this.Callers;
 
-            if (this.IsIncomingCall())
+            if (this.IncomingCall)
             {
                 var party = this.GetRelationshipWithParty();
                 if (party != null)
@@ -55,7 +55,7 @@ namespace Allors.Domain
             this.RemoveToParties();
             this.ToParties = (Extent)this.Receivers;
 
-            if (!this.IsIncomingCall())
+            if (!this.IncomingCall)
             {
                 var party = this.GetRelationshipWithParty();
                 if (party != null)
@@ -63,11 +63,6 @@ namespace Allors.Domain
                     this.AddToParty(party);
                 }
             }
-        }
-
-        private bool IsIncomingCall()
-        {
-            return this.IncomingCall.HasValue && this.IncomingCall.Value;
         }
 
         private Party GetRelationshipWithParty()

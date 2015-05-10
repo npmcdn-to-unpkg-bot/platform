@@ -6,6 +6,7 @@ namespace Allors.Meta
         {
             this.Roles.Caller.IsRequired = true;
             this.Roles.Receiver.IsRequired = true;
-		}
+            this.Roles.IncomingCall.IsRequired = true;
+        }
 	}
 }
