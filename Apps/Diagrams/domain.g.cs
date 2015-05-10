@@ -3351,7 +3351,7 @@ namespace Allors.Domain
 	{
 					global::System.Boolean? LeftVoiceMail {set;}
 
-					global::System.Boolean? IncomingCall {set;}
+					global::System.Boolean IncomingCall {set;}
 
 					Party Receivers {set;}
 
