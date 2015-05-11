@@ -24,4 +24,17 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        @* Disable Number Validation for non en-us *@
+        $(function () {
+            if ($.validator && $.validator.methods) {
+                var lang = $("html:lang(en-us)");
+                if (lang.length === 0) {
+                    $.validator.methods.number = function (){
+                        return true;
+                    }
+                }
+            }
+        });
+    </script>
 }

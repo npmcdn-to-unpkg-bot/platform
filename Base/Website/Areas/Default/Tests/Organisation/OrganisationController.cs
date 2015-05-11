@@ -1,5 +1,6 @@
 ﻿namespace Areas.Default.Tests.OrganisationMvc
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
     using Allors;
@@ -119,6 +120,10 @@
             }
             var organisation = (Organisation)this.AllorsSession.Instantiate(model.Id);
 
+
+            var currentCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+            var currentUICultureInfo = System.Threading.Thread.CurrentThread.CurrentUICulture;
+
             if (command == Command.Save)
             {
                 if (this.ModelState.IsValid)
@@ -127,7 +132,7 @@
                     organisation.Description = model.Description;
                     organisation.Information = model.Information;
                     organisation.Incorporated = model.Incorporated;
-                    organisation.IncorporationDate = DateTimeFactory.CreateDateTime(model.IncorporationDate);
+                    organisation.IncorporationDate = model.IncorporationDate.HasValue ? model.IncorporationDate.Value.ToUniversalTime() : (DateTime?)null;
                     organisation.Owner = (Person)this.AllorsSession.Instantiate(model.Owner.Id);
                     organisation.Employees = model.Werknemers != null ? this.AllorsSession.Instantiate(model.Werknemers.Ids) : null;
 

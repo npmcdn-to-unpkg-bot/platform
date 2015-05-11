@@ -80,6 +80,131 @@ namespace Allors.Domain
 					Place Place {set;}
 
 	}
+	public interface DerivationLogI12  : Object 
+	{
+					global::System.Guid? UniqueId {set;}
+
+	}
+	public interface I1  : Object, I12, S1 
+	{
+					I1 I1I1Many2One {set;}
+
+					I12 I1I12Many2Manies {set;}
+
+					I2 I1I2Many2Manies {set;}
+
+					I2 I1I2Many2One {set;}
+
+					global::System.String I1AllorsString {set;}
+
+					I12 I1I12Many2One {set;}
+
+					global::System.DateTime? I1AllorsDateTime {set;}
+
+					I2 I1I2One2Manies {set;}
+
+					C2 I1C2One2Manies {set;}
+
+					C1 I1C1One2One {set;}
+
+					global::System.Int32? I1AllorsInteger {set;}
+
+					C2 I1C2Many2Manies {set;}
+
+					I1 I1I1One2Manies {set;}
+
+					I1 I1I1Many2Manies {set;}
+
+					global::System.Boolean? I1AllorsBoolean {set;}
+
+					global::System.Decimal? I1AllorsDecimal {set;}
+
+					I12 I1I12One2One {set;}
+
+					I2 I1I2One2One {set;}
+
+					C2 I1C2One2One {set;}
+
+					C1 I1C1One2Manies {set;}
+
+					global::System.Byte[] I1AllorsBinary {set;}
+
+					C1 I1C1Many2Manies {set;}
+
+					global::System.Double? I1AllorsFloat {set;}
+
+					I1 I1I1One2One {set;}
+
+					C1 I1C1Many2One {set;}
+
+					I12 I1I12One2Manies {set;}
+
+					C2 I1C2Many2One {set;}
+
+					global::System.Guid? I1AllorsUnique {set;}
+
+	}
+	public interface I12  : Object 
+	{
+					global::System.Byte[] I12AllorsBinary {set;}
+
+					C2 I12C2One2One {set;}
+
+					global::System.Double? I12AllorsFloat {set;}
+
+					I1 I12I1Many2One {set;}
+
+					global::System.String I12AllorsString {set;}
+
+					I12 I12I12Many2Manies {set;}
+
+					global::System.Decimal? I12AllorsDecimal {set;}
+
+					I2 I12I2Many2Manies {set;}
+
+					C2 I12C2Many2Manies {set;}
+
+					I1 I12I1Many2Manies {set;}
+
+					I12 I12I12One2Manies {set;}
+
+					global::System.String Name {set;}
+
+					C1 I12C1Many2Manies {set;}
+
+					I2 I12I2Many2One {set;}
+
+					global::System.Guid? I12AllorsUnique {set;}
+
+					global::System.Int32? I12AllorsInteger {set;}
+
+					I1 I12I1One2Manies {set;}
+
+					C1 I12C1One2One {set;}
+
+					I12 I12I12One2One {set;}
+
+					I2 I12I2One2One {set;}
+
+					I12 Dependencies {set;}
+
+					I2 I12I2One2Manies {set;}
+
+					C2 I12C2Many2One {set;}
+
+					I12 I12I12Many2One {set;}
+
+					global::System.Boolean? I12AllorsBoolean {set;}
+
+					I1 I12I1One2One {set;}
+
+					C1 I12C1One2Manies {set;}
+
+					C1 I12C1Many2One {set;}
+
+					global::System.DateTime? I12AllorsDateTime {set;}
+
+	}
 	public interface I2  : Object, I12 
 	{
 					I2 I2I2Many2One {set;}
@@ -144,131 +269,6 @@ namespace Allors.Domain
 	}
 	public interface Shared  : Object 
 	{
-	}
-	public interface I12  : Object 
-	{
-					global::System.Byte[] I12AllorsBinary {set;}
-
-					C2 I12C2One2One {set;}
-
-					global::System.Double? I12AllorsFloat {set;}
-
-					I1 I12I1Many2One {set;}
-
-					global::System.String I12AllorsString {set;}
-
-					I12 I12I12Many2Manies {set;}
-
-					global::System.Decimal? I12AllorsDecimal {set;}
-
-					I2 I12I2Many2Manies {set;}
-
-					C2 I12C2Many2Manies {set;}
-
-					I1 I12I1Many2Manies {set;}
-
-					I12 I12I12One2Manies {set;}
-
-					global::System.String Name {set;}
-
-					C1 I12C1Many2Manies {set;}
-
-					I2 I12I2Many2One {set;}
-
-					global::System.Guid? I12AllorsUnique {set;}
-
-					global::System.Int32? I12AllorsInteger {set;}
-
-					I1 I12I1One2Manies {set;}
-
-					C1 I12C1One2One {set;}
-
-					I12 I12I12One2One {set;}
-
-					I2 I12I2One2One {set;}
-
-					I12 Dependencies {set;}
-
-					I2 I12I2One2Manies {set;}
-
-					C2 I12C2Many2One {set;}
-
-					I12 I12I12Many2One {set;}
-
-					global::System.Boolean? I12AllorsBoolean {set;}
-
-					I1 I12I1One2One {set;}
-
-					C1 I12C1One2Manies {set;}
-
-					C1 I12C1Many2One {set;}
-
-					global::System.DateTime? I12AllorsDateTime {set;}
-
-	}
-	public interface DerivationLogI12  : Object 
-	{
-					global::System.Guid? UniqueId {set;}
-
-	}
-	public interface I1  : Object, I12, S1 
-	{
-					I1 I1I1Many2One {set;}
-
-					I12 I1I12Many2Manies {set;}
-
-					I2 I1I2Many2Manies {set;}
-
-					I2 I1I2Many2One {set;}
-
-					global::System.String I1AllorsString {set;}
-
-					I12 I1I12Many2One {set;}
-
-					global::System.DateTime? I1AllorsDateTime {set;}
-
-					I2 I1I2One2Manies {set;}
-
-					C2 I1C2One2Manies {set;}
-
-					C1 I1C1One2One {set;}
-
-					global::System.Int32? I1AllorsInteger {set;}
-
-					C2 I1C2Many2Manies {set;}
-
-					I1 I1I1One2Manies {set;}
-
-					I1 I1I1Many2Manies {set;}
-
-					global::System.Boolean? I1AllorsBoolean {set;}
-
-					global::System.Decimal? I1AllorsDecimal {set;}
-
-					I12 I1I12One2One {set;}
-
-					I2 I1I2One2One {set;}
-
-					C2 I1C2One2One {set;}
-
-					C1 I1C1One2Manies {set;}
-
-					global::System.Byte[] I1AllorsBinary {set;}
-
-					C1 I1C1Many2Manies {set;}
-
-					global::System.Double? I1AllorsFloat {set;}
-
-					I1 I1I1One2One {set;}
-
-					C1 I1C1Many2One {set;}
-
-					I12 I1I12One2Manies {set;}
-
-					C2 I1C2Many2One {set;}
-
-					global::System.Guid? I1AllorsUnique {set;}
-
 	}
 	public interface AccessControl  : Object, Deletable, AccessControlledObject 
 	{
@@ -479,140 +479,17 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Dependent  : Object, Deletable 
+	public interface BadUI  : Object 
 	{
-					Dependee Dependee {set;}
+					Person PersonsMany {set;}
 
-					global::System.Int32? Counter {set;}
+					Organisation CompanyOne {set;}
 
-					global::System.Int32? Subcounter {set;}
+					Person PersonOne {set;}
 
-	}
-	public interface Four  : Object, Shared 
-	{
-	}
-	public interface First  : Object 
-	{
-					Second Second {set;}
-
-					global::System.Boolean? CreateCycle {set;}
-
-					global::System.Boolean? IsDerived {set;}
-
-	}
-	public interface DerivationLogC1  : Object, DerivationLogI12 
-	{
-	}
-	public interface HomeAddress  : Object, Address 
-	{
-					global::System.String Street {set;}
-
-					global::System.String HouseNumber {set;}
-
-	}
-	public interface Place  : Object 
-	{
-					Country Country {set;}
-
-					global::System.String City {set;}
-
-					global::System.String PostalCode {set;}
-
-	}
-	public interface Gender  : Object, Enumeration 
-	{
-	}
-	public interface Dependee  : Object 
-	{
-					Subdependee Subdependee {set;}
-
-					global::System.Int32? Subcounter {set;}
-
-					global::System.Int32? Counter {set;}
-
-					global::System.Boolean? DeleteDependent {set;}
-
-	}
-	public interface SimpleJob  : Object 
-	{
-					global::System.Int32? Index {set;}
-
-	}
-	public interface Third  : Object 
-	{
-					global::System.Boolean? IsDerived {set;}
-
-	}
-	public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
-	{
-					global::System.String Information {set;}
-
-					Person Shareholders {set;}
-
-					global::System.String Name {set;}
-
-					global::System.String Description {set;}
-
-					Person Employees {set;}
-
-					global::System.Boolean? Incorporated {set;}
-
-					global::System.Boolean? IsSupplier {set;}
-
-					global::System.DateTime? IncorporationDate {set;}
-
-					Address Addresses {set;}
-
-					Person Owner {set;}
-
-					Media Logo {set;}
-
-					global::System.String Size {set;}
-
-					Address MainAddress {set;}
-
-	}
-	public interface Subdependee  : Object 
-	{
-					global::System.Int32? Subcounter {set;}
-
-	}
-	public interface Unit  : Object, AccessControlledObject 
-	{
-					global::System.Byte[] AllorsBinary {set;}
-
-					global::System.DateTime? AllorsDateTime {set;}
-
-					global::System.Boolean? AllorsBoolean {set;}
-
-					global::System.Double? AllorsFloat {set;}
-
-					global::System.Int32? AllorsInteger {set;}
+					Organisation CompanyMany {set;}
 
 					global::System.String AllorsString {set;}
-
-					global::System.Guid? AllorsUnique {set;}
-
-					global::System.Decimal? AllorsDecimal {set;}
-
-	}
-	public interface One  : Object, Shared 
-	{
-					Two Two {set;}
-
-	}
-	public interface From  : Object 
-	{
-					To Tos {set;}
-
-	}
-	public interface StatefulCompany  : Object 
-	{
-					Person Employee {set;}
-
-					global::System.String Name {set;}
-
-					Person Manager {set;}
 
 	}
 	public interface C1  : Object, I1, AccessControlledObject 
@@ -735,9 +612,65 @@ namespace Allors.Domain
 					global::System.Byte[] C2AllorsBinary {set;}
 
 	}
-	public interface To  : Object 
+	public interface ClassWithoutRoles  : Object 
 	{
-					global::System.String Name {set;}
+	}
+	public interface Dependee  : Object 
+	{
+					Subdependee Subdependee {set;}
+
+					global::System.Int32? Subcounter {set;}
+
+					global::System.Int32? Counter {set;}
+
+					global::System.Boolean? DeleteDependent {set;}
+
+	}
+	public interface Dependent  : Object, Deletable 
+	{
+					Dependee Dependee {set;}
+
+					global::System.Int32? Counter {set;}
+
+					global::System.Int32? Subcounter {set;}
+
+	}
+	public interface DerivationLogC1  : Object, DerivationLogI12 
+	{
+	}
+	public interface DerivationLogC2  : Object, DerivationLogI12 
+	{
+	}
+	public interface Extender  : Object 
+	{
+					global::System.String AllorsString {set;}
+
+	}
+	public interface First  : Object 
+	{
+					Second Second {set;}
+
+					global::System.Boolean? CreateCycle {set;}
+
+					global::System.Boolean? IsDerived {set;}
+
+	}
+	public interface Four  : Object, Shared 
+	{
+	}
+	public interface From  : Object 
+	{
+					To Tos {set;}
+
+	}
+	public interface Gender  : Object, Enumeration 
+	{
+	}
+	public interface HomeAddress  : Object, Address 
+	{
+					global::System.String Street {set;}
+
+					global::System.String HouseNumber {set;}
 
 	}
 	public interface MailboxAddress  : Object, Address 
@@ -745,34 +678,47 @@ namespace Allors.Domain
 					global::System.String PoBox {set;}
 
 	}
-	public interface Extender  : Object 
+	public interface One  : Object, Shared 
 	{
-					global::System.String AllorsString {set;}
+					Two Two {set;}
 
 	}
-	public interface Two  : Object, Shared 
+	public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
-					Shared Shared {set;}
+					global::System.String Information {set;}
+
+					Person Shareholders {set;}
+
+					global::System.String Name {set;}
+
+					global::System.String Description {set;}
+
+					Person Employees {set;}
+
+					global::System.Boolean? Incorporated {set;}
+
+					global::System.Boolean? IsSupplier {set;}
+
+					global::System.DateTime? IncorporationDate {set;}
+
+					Address Addresses {set;}
+
+					Person Owner {set;}
+
+					Media Logo {set;}
+
+					global::System.String Size {set;}
+
+					Address MainAddress {set;}
 
 	}
-	public interface BadUI  : Object 
+	public interface Place  : Object 
 	{
-					Person PersonsMany {set;}
+					Country Country {set;}
 
-					Organisation CompanyOne {set;}
+					global::System.String City {set;}
 
-					Person PersonOne {set;}
-
-					Organisation CompanyMany {set;}
-
-					global::System.String AllorsString {set;}
-
-	}
-	public interface Three  : Object, Shared 
-	{
-					Four Four {set;}
-
-					global::System.String AllorsString {set;}
+					global::System.String PostalCode {set;}
 
 	}
 	public interface Second  : Object 
@@ -782,10 +728,64 @@ namespace Allors.Domain
 					global::System.Boolean? IsDerived {set;}
 
 	}
-	public interface DerivationLogC2  : Object, DerivationLogI12 
+	public interface SimpleJob  : Object 
 	{
+					global::System.Int32? Index {set;}
+
 	}
-	public interface ClassWithoutRoles  : Object 
+	public interface StatefulCompany  : Object 
 	{
+					Person Employee {set;}
+
+					global::System.String Name {set;}
+
+					Person Manager {set;}
+
+	}
+	public interface Subdependee  : Object 
+	{
+					global::System.Int32? Subcounter {set;}
+
+	}
+	public interface Third  : Object 
+	{
+					global::System.Boolean? IsDerived {set;}
+
+	}
+	public interface Three  : Object, Shared 
+	{
+					Four Four {set;}
+
+					global::System.String AllorsString {set;}
+
+	}
+	public interface To  : Object 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface Two  : Object, Shared 
+	{
+					Shared Shared {set;}
+
+	}
+	public interface Unit  : Object, AccessControlledObject 
+	{
+					global::System.Byte[] AllorsBinary {set;}
+
+					global::System.DateTime? AllorsDateTime {set;}
+
+					global::System.Boolean? AllorsBoolean {set;}
+
+					global::System.Double? AllorsFloat {set;}
+
+					global::System.Int32? AllorsInteger {set;}
+
+					global::System.String AllorsString {set;}
+
+					global::System.Guid? AllorsUnique {set;}
+
+					global::System.Decimal? AllorsDecimal {set;}
+
 	}
 }
