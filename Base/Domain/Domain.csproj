@@ -225,7 +225,7 @@
     <Compile Include="Base\Content\HtmlRules.cs" />
     <Compile Include="Base\Content\HtmlSanitize.cs" />
     <Compile Include="Base\Content\Image.cs" />
-    <Compile Include="Base\Content\Image.v..cs" />
+    <Compile Include="Base\Content\Image.v.cs" />
     <Compile Include="Base\Content\Media.cs" />
     <Compile Include="Base\Content\MediaBuilder.cs" />
     <Compile Include="Base\Content\MediaContent.cs" />

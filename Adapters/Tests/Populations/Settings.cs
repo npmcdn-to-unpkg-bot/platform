@@ -25,10 +25,10 @@ namespace Allors.Populations
     public static class Settings
     {
         // Smoke
-        private const int DefaultNumberOfRuns = 1;
+        private const int DefaultNumberOfRuns = 2;
         private const int DefaultLargeArraySize = 10;
-        private const bool DefaultExtraMarkers = false;
-        private const bool DefaultExtraInits = false;
+        private const bool DefaultExtraMarkers = true;
+        private const bool DefaultExtraInits = true;
 
         // Full
         //private const int DefaultNumberOfRuns = 2;

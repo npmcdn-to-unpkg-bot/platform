@@ -45,30 +45,46 @@ namespace Allors.Domain
                     var original = new Bitmap(stream);
                     var mediaType = new MediaTypes(this.Strategy.Session).Jpeg;
 
-                    var responsive = CreateResponsive(original, mediaType);
-                    if (!this.ExistResponsive || !responsive.SequenceEqual(this.Responsive.Content))
                     {
-                        if (this.ExistResponsive)
+                        var responsive = Resize(original, mediaType, ResponsiveMaxHeight);
+                        if (!this.ExistResponsive || !responsive.SequenceEqual(this.Responsive.Content))
                         {
-                            this.Responsive.Delete();
-                        }
+                            if (this.ExistResponsive)
+                            {
+                                this.Responsive.Delete();
+                            }
 
-                        this.Responsive = new MediaBuilder(this.Strategy.Session).WithContent(responsive).WithMediaType(mediaType).Build();
+                            this.Responsive = new MediaBuilder(this.Strategy.Session).WithContent(responsive).WithMediaType(mediaType).Build();
+                        }
+                    }
+
+                    {
+                        var thumbnail = Resize(original, mediaType, ThumbnailMaxHeight);
+                        if (!this.ExistThumbnail || !thumbnail.SequenceEqual(this.Thumbnail.Content))
+                        {
+                            if (this.ExistThumbnail)
+                            {
+                                this.Thumbnail.Delete();
+                            }
+
+                            this.Thumbnail = new MediaBuilder(this.Strategy.Session).WithContent(thumbnail).WithMediaType(mediaType).Build();
+                        }
                     }
                 }
             }
             else
             {
                 this.RemoveResponsive();
+                this.RemoveThumbnail();
             }
         }
 
-        private static byte[] CoreCreateResponsive(Bitmap original, MediaType mediaType)
+        private static byte[] CoreResize(Bitmap original, MediaType mediaType, int maxHeight)
         {
             var responsive = original;
-            if (original.Height > 600)
+            if (original.Height > maxHeight)
             {
-                responsive = original.ScaleToHeight(600);
+                responsive = original.ScaleToHeight(maxHeight);
             }
 
             var encoder = ImageCodecInfo.GetImageEncoders().FirstOrDefault(e => e.MimeType == mediaType.Name);

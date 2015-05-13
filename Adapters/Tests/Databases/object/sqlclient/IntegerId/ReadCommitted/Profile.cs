@@ -25,6 +25,8 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
 
     public class Profile : SqlClient.Profile
     {
+        private readonly Prefetchers prefetchers = new Prefetchers();
+
         public override Action[] Markers
         {
             get
@@ -32,7 +34,7 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
                 var markers = new List<Action> 
                 { 
                     () => { }, 
-                    () => this.Session.Commit() 
+                    () => this.Session.Commit(), 
                 };
 
                 if (Settings.ExtraMarkers)
@@ -40,8 +42,11 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
                     markers.Add(
                         () =>
                         {
-                            this.Session.Commit();
-                            //((Database)this.DatabaseSession.Population).Cache.Invalidate();
+                            foreach (var @class in this.Session.Population.MetaPopulation.Classes)
+                            {
+                                var prefetchPolicy = this.prefetchers[@class];
+                                this.Session.Prefetch(prefetchPolicy, this.Session.Extent(@class));
+                            }
                         });
                 }
 

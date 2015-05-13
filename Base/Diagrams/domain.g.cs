@@ -318,6 +318,8 @@ namespace Allors.Domain
 
 					global::System.String OriginalFilename {set;}
 
+					Media Thumbnail {set;}
+
 	}
 	public interface Language  : Object, AccessControlledObject 
 	{

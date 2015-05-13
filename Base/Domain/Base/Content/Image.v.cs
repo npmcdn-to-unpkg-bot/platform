@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Image.cs" company="Allors bvba">
+// <copyright file="Image.v.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -24,9 +24,13 @@ namespace Allors.Domain
 
     public partial class Image
     {
-        private static byte[] CreateResponsive(Bitmap original, MediaType mediaType)
+        public const int ResponsiveMaxHeight = 600;
+
+        public const int ThumbnailMaxHeight = 150;
+
+        private static byte[] Resize(Bitmap original, MediaType mediaType, int maxHeight)
         {
-            return CoreCreateResponsive(original, mediaType);
+            return CoreResize(original, mediaType, maxHeight);
         }
     }
 }

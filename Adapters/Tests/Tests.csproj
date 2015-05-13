@@ -95,6 +95,7 @@
     <Compile Include="Databases\object\sqlclient\UnitTest.cs" />
     <Compile Include="Databases\One2ManyTest.cs" />
     <Compile Include="Databases\One2OneTest.cs" />
+    <Compile Include="Databases\Prefetchers.cs" />
     <Compile Include="Databases\Profile.cs" />
     <Compile Include="Databases\PropertiesTest.cs" />
     <Compile Include="Databases\RelationExtentTest.cs" />
