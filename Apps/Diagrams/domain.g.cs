@@ -1247,6 +1247,8 @@ namespace Allors.Domain
 
 					global::System.String OriginalFilename {set;}
 
+					Media Thumbnail {set;}
+
 	}
 	public interface Language  : Object, AccessControlledObject 
 	{
@@ -5203,7 +5205,7 @@ namespace Allors.Domain
 					Product Product {set;}
 
 	}
-	public interface WorkEffortPurpose  : Object, Enumeration 
+	public interface IndustryClassification  : Object, OrganisationClassification 
 	{
 	}
 	public interface ProspectRelationship  : Object, PartyRelationship 
@@ -5213,7 +5215,7 @@ namespace Allors.Domain
 					Party Prospect {set;}
 
 	}
-	public interface IndustryClassification  : Object, OrganisationClassification 
+	public interface WorkEffortPurpose  : Object, Enumeration 
 	{
 	}
 }
