@@ -17,7 +17,7 @@ namespace Allors.Meta
             this.Roles.CurrentObjectState.IsRequired = true;
             this.Roles.ActualStart.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
             this.Roles.ActualCompletion.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
-            this.Roles.ActualCompletion.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
+            this.Roles.ScheduledStart.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
             this.Roles.ScheduledCompletion.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
         }
 	}
