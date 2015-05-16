@@ -191,7 +191,7 @@ namespace Allors.Domain
             this.AppsOnDeriveCurrentContacts(derivation);
         }
         
-        private bool AppsIsActiveClient(DateTime? date)
+        public bool AppsIsActiveClient(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -211,7 +211,24 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActiveCustomer(DateTime? date)
+        public ClientRelationship ClientRelationShip(InternalOrganisation internalOrganisation)
+        {
+            var relationships = this.ClientRelationshipsWhereClient;
+            relationships.Filter.AddEquals(ClientRelationships.Meta.InternalOrganisation, internalOrganisation);
+
+            foreach (ClientRelationship relationship in relationships)
+            {
+                if (relationship.FromDate <= DateTime.Now &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= DateTime.Now))
+                {
+                    return relationship;
+                }
+            }
+
+            return null;
+        }
+
+        public bool AppsIsActiveCustomer(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -231,7 +248,24 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActiveDistributor(DateTime? date)
+        public CustomerRelationship CustomerRelationship(InternalOrganisation internalOrganisation)
+        {
+            var relationships = this.CustomerRelationshipsWhereCustomer;
+            relationships.Filter.AddEquals(CustomerRelationships.Meta.InternalOrganisation, internalOrganisation);
+
+            foreach (CustomerRelationship relationship in relationships)
+            {
+                if (relationship.FromDate <= DateTime.Now &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= DateTime.Now))
+                {
+                    return relationship;
+                }
+            }
+
+            return null;
+        }
+
+        public bool AppsIsActiveDistributor(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -251,7 +285,24 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActivePartner(DateTime? date)
+        public DistributionChannelRelationship DistributionChannelRelationship(InternalOrganisation internalOrganisation)
+        {
+            var relationships = this.DistributionChannelRelationshipsWhereDistributor;
+            relationships.Filter.AddEquals(DistributionChannelRelationships.Meta.InternalOrganisation, internalOrganisation);
+
+            foreach (DistributionChannelRelationship relationship in relationships)
+            {
+                if (relationship.FromDate <= DateTime.Now &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= DateTime.Now))
+                {
+                    return relationship;
+                }
+            }
+
+            return null;
+        }
+
+        public bool AppsIsActivePartner(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -271,7 +322,24 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActiveProfessionalServicesProvider(DateTime? date)
+        public Partnership Partnership(InternalOrganisation internalOrganisation)
+        {
+            var relationships = this.PartnershipsWherePartner;
+            relationships.Filter.AddEquals(Partnerships.Meta.InternalOrganisation, internalOrganisation);
+
+            foreach (Partnership relationship in relationships)
+            {
+                if (relationship.FromDate <= DateTime.Now &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= DateTime.Now))
+                {
+                    return relationship;
+                }
+            }
+
+            return null;
+        }
+
+        public bool AppsIsActiveProfessionalServicesProvider(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -291,7 +359,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActiveProspect(DateTime? date)
+        public bool AppsIsActiveProspect(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -311,7 +379,24 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActiveSubContractor(DateTime? date)
+        public ProspectRelationship ProspectRelationship(InternalOrganisation internalOrganisation)
+        {
+            var relationships = this.ProspectRelationshipsWhereProspect;
+            relationships.Filter.AddEquals(ProspectRelationships.Meta.InternalOrganisation, internalOrganisation);
+
+            foreach (ProspectRelationship relationship in relationships)
+            {
+                if (relationship.FromDate <= DateTime.Now &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= DateTime.Now))
+                {
+                    return relationship;
+                }
+            }
+
+            return null;
+        }
+
+        public bool AppsIsActiveSubContractor(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -331,7 +416,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActiveSupplier(DateTime? date)
+        public bool AppsIsActiveSupplier(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -349,6 +434,23 @@ namespace Allors.Domain
             }
 
             return false;
+        }
+
+        public SupplierRelationship SupplierRelationship(InternalOrganisation internalOrganisation)
+        {
+            var relationships = this.SupplierRelationshipsWhereSupplier;
+            relationships.Filter.AddEquals(SupplierRelationships.Meta.InternalOrganisation, internalOrganisation);
+
+            foreach (SupplierRelationship relationship in relationships)
+            {
+                if (relationship.FromDate <= DateTime.Now &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= DateTime.Now))
+                {
+                    return relationship;
+                }
+            }
+
+            return null;
         }
 
         public void AppsOnDeriveUserGroups(IDerivation derivation)
