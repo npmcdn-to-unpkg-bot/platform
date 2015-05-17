@@ -35,7 +35,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly Dictionary<ObjectId, IObjectType> objectTypeByObjectId;
 
-        internal void Execute(Databases.Object.SqlClient.ManagementSession session)
+        internal void Execute(ManagementSession session)
         {
             while (this.reader.Read())
             {
@@ -57,7 +57,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void LoadPopulation(Databases.Object.SqlClient.ManagementSession session)
+        protected virtual void LoadPopulation(ManagementSession session)
         {
             while (this.reader.Read())
             {
@@ -73,6 +73,8 @@ namespace Allors.Databases.Object.SqlClient
                             }
 
                             this.LoadObjectsPostProcess(session);
+
+                            session.Commit();
                         }
                         else if (this.reader.Name.Equals(Serialization.Relations))
                         {
@@ -80,6 +82,8 @@ namespace Allors.Databases.Object.SqlClient
                             {
                                 this.LoadRelations(session);
                             }
+
+                            session.Commit();
                         }
                         else
                         {
