@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title>@ViewBag.Title - Allors</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/css/default")
     @RenderSection("styles", required: false)
-
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js/default/pre")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -42,8 +40,35 @@
         </div>
     </div>
 
-    @Scripts.Render("~/bundles/moment")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js/default/post")
     @RenderSection("scripts", required: false)
+
+    @section Scripts {
+        <script>
+        @* Disable client site validation for non en-us locales *@
+        $(function () {
+            if ($.validator && $.validator.methods) {
+                var lang = $("html:lang(en-us)");
+                if (lang.length === 0) {
+                    $.validator.methods.number = function (){
+                        return true;
+                    }
+                    $.validator.methods.min = function () {
+                        return true;
+                    }
+                    $.validator.methods.max = function () {
+                        return true;
+                    }
+                    $.validator.methods.range = function () {
+                        return true;
+                    }
+                    $.validator.methods.date = function () {
+                        return true;
+                    }
+                }
+            }
+        });
+        </script>
+    }
 </body>
 </html>
