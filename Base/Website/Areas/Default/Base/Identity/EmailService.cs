@@ -12,7 +12,7 @@
         public Task SendAsync(IdentityMessage message)
         {
             var client = new SmtpClient();
-            var from = ConfigurationManager.AppSettings["allors.identity.mailservice.from"] ?? "support@" + HttpContext.Current.Request.Url.Host;
+            var from = ConfigurationManager.AppSettings["allors.identity.mailservice.from"] ?? "support@" + System.Environment.MachineName.ToLower();
             client.Send(from, message.Destination, message.Subject, message.Body);
            
             return Task.FromResult(0);
