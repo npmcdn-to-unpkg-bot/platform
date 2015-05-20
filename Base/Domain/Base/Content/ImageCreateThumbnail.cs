@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MediaTypes.v.cs" company="Allors bvba">
+// <copyright file="ImageCreateThumbnail.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -20,16 +20,8 @@
 
 namespace Allors.Domain
 {
-    public partial class MediaTypes
+    public partial class ImageCreateThumbnail
     {
-        /// <summary>
-        /// Infers an existing MediaType from the content.
-        /// </summary>
-        /// <param name="content">The content.</param>
-        /// <returns>the inferred MediaType</returns>
-        public MediaType Infer(byte[] content)
-        {
-            return this.BaseInfer(content);
-        }
+        public int? MaxHeight { get; set; }
     }
 }

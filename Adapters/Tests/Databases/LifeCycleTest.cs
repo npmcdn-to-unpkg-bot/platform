@@ -4675,6 +4675,10 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                     c1A.AddC1C2many2many(c2A);
 
                     this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2many2manies }, new[] { c1A.Strategy.ObjectId });
+                    if (twice)
+                    {
+                        this.Session.Prefetch(new IPropertyType[] { C1.Meta.C1C2many2manies }, new[] { c1A.Strategy.ObjectId });
+                    }
 
                     Assert.Contains(c2A, c1A.C1C2many2manies);
 

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Locales.v.cs" company="Allors bvba">
+// <copyright file="ImageCreateResponsive.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -20,11 +20,8 @@
 
 namespace Allors.Domain
 {
-    public partial class Locales
+    public partial class ImageCreateResponsive
     {
-        public void Sync()
-        {
-            this.BaseSync();
-        }
+        public int? MaxHeight { get; set; }
     }
 }

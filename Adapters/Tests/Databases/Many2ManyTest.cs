@@ -1798,6 +1798,39 @@ namespace Allors.Databases
                         mark();
                         Assert.AreEqual(1, from1.C1C1many2manies.ToArray().Length);
                         Assert.AreEqual(to1, from1.C1C1many2manies.ToArray()[0]);
+
+                        // Rollback
+                        // TODO: Add to Rollback to other tests
+                        from1 = C1.Create(this.Session);
+                        to1 = C1.Create(this.Session);
+                        to2 = C1.Create(this.Session);
+                        
+                        from1.AddC1C1many2many(to1);
+
+                        Assert.Contains(to1, from1.C1C1many2manies);
+
+                        this.Session.Commit();
+
+                        Assert.Contains(to1, from1.C1C1many2manies);
+
+                        this.Session.Commit();
+
+                        Assert.Contains(to1, from1.C1C1many2manies);
+
+                        this.Session.Commit();
+
+                        from1.RemoveC1C1many2many(to1);
+                        from1.AddC1C1many2many(to2);
+
+                        Assert.Contains(to2, from1.C1C1many2manies);
+
+                        this.Session.Rollback();
+
+                        Assert.Contains(to1, from1.C1C1many2manies);
+
+                        this.Session.Rollback();
+
+                        Assert.Contains(to1, from1.C1C1many2manies);
                     }
                 }
             }

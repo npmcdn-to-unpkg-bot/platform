@@ -79,7 +79,7 @@ namespace Allors.Domain
             this.BuildOwnerSecurityToken();
         }
 
-        private void BaseCreateOwnerSecurityToken()
+        public void BuildOwnerSecurityToken()
         {
             if (!this.ExistOwnerSecurityToken)
             {

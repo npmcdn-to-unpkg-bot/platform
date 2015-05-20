@@ -39,38 +39,8 @@ namespace Allors.Domain
 
             if (this.ExistOriginal)
             {
-                // Stream should be left open for Save to work
-                using (Stream stream = new MemoryStream(this.Original.Content))
-                {
-                    var original = new Bitmap(stream);
-                    var mediaType = new MediaTypes(this.Strategy.Session).Jpeg;
-
-                    {
-                        var responsive = Resize(original, mediaType, ResponsiveMaxHeight);
-                        if (!this.ExistResponsive || !responsive.SequenceEqual(this.Responsive.Content))
-                        {
-                            if (this.ExistResponsive)
-                            {
-                                this.Responsive.Delete();
-                            }
-
-                            this.Responsive = new MediaBuilder(this.Strategy.Session).WithContent(responsive).WithMediaType(mediaType).Build();
-                        }
-                    }
-
-                    {
-                        var thumbnail = Resize(original, mediaType, ThumbnailMaxHeight);
-                        if (!this.ExistThumbnail || !thumbnail.SequenceEqual(this.Thumbnail.Content))
-                        {
-                            if (this.ExistThumbnail)
-                            {
-                                this.Thumbnail.Delete();
-                            }
-
-                            this.Thumbnail = new MediaBuilder(this.Strategy.Session).WithContent(thumbnail).WithMediaType(mediaType).Build();
-                        }
-                    }
-                }
+                this.CreateResponsive();
+                this.CreateThumbnail();
             }
             else
             {
@@ -79,20 +49,74 @@ namespace Allors.Domain
             }
         }
 
-        private static byte[] CoreResize(Bitmap original, MediaType mediaType, int maxHeight)
+        public void BaseCreateResponsive(ImageCreateResponsive method)
         {
-            var responsive = original;
-            if (original.Height > maxHeight)
+            var mediaType = new MediaTypes(this.Strategy.Session).Jpeg;
+
+            byte[] content;
+
+            // Stream should be left open for Save to work
+            using (Stream stream = new MemoryStream(this.Original.Content))
             {
-                responsive = original.ScaleToHeight(maxHeight);
+                var maxHeight = method.MaxHeight ?? 600;
+
+                var responsive = new Bitmap(stream);
+                if (responsive.Height > maxHeight)
+                {
+                    responsive = responsive.ScaleToHeight(maxHeight);
+                }
+
+                var encoder = ImageCodecInfo.GetImageEncoders().FirstOrDefault(e => e.MimeType == mediaType.Name);
+                var encoderParams = new EncoderParameters(1);
+                var qualityParam = Encoder.Quality;
+                encoderParams.Param[0] = new EncoderParameter(qualityParam, 72L);
+
+                content = responsive.Save(encoder, encoderParams);
             }
 
-            var encoder = ImageCodecInfo.GetImageEncoders().FirstOrDefault(e => e.MimeType == mediaType.Name);
-            var encoderParams = new EncoderParameters(1);
-            var quality = Encoder.Quality;
-            encoderParams.Param[0] = new EncoderParameter(quality, 30L);
+            if (!this.ExistResponsive || !content.SequenceEqual(this.Responsive.Content))
+            {
+                if (this.ExistResponsive)
+                {
+                    this.Responsive.Delete();
+                }
 
-            return responsive.Save(encoder, encoderParams);
+                this.Responsive = new MediaBuilder(this.Strategy.Session).WithContent(content).WithMediaType(mediaType).Build();
+            }
+        }
+
+        public void BaseCreateThumbnail(ImageCreateResponsive method)
+        {
+            var mediaType = new MediaTypes(this.Strategy.Session).Png;
+
+            byte[] content;
+
+            // Stream should be left open for Save to work
+            using (Stream stream = new MemoryStream(this.Original.Content))
+            {
+                var maxHeight = method.MaxHeight ?? 150;
+
+                var thumbnail = new Bitmap(stream);
+                if (thumbnail.Height > maxHeight)
+                {
+                    thumbnail = thumbnail.ScaleToHeight(maxHeight);
+                }
+
+                var encoder = ImageCodecInfo.GetImageEncoders().FirstOrDefault(e => e.MimeType == mediaType.Name);
+                var encoderParams = new EncoderParameters(0);
+
+                content = thumbnail.Save(encoder, encoderParams);
+            }
+
+            if (!this.ExistThumbnail || !content.SequenceEqual(this.Thumbnail.Content))
+            {
+                if (this.ExistThumbnail)
+                {
+                    this.Thumbnail.Delete();
+                }
+
+                this.Thumbnail = new MediaBuilder(this.Strategy.Session).WithContent(content).WithMediaType(mediaType).Build();
+            }
         }
     }
 }

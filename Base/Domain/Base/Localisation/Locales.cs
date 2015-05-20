@@ -61,16 +61,7 @@ namespace Allors.Domain
             get { return this.FindBy(Meta.Name, DutchBelgiumName); }
         }
 
-        protected override void BaseSecure(Security config)
-        {
-            base.BaseSecure(config);
-
-            var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
-
-            config.GrantAdministrator(this.ObjectType, full);
-        }
-
-        private void BaseSync()
+        public void Sync()
         {
             var englishNameByCountry = new Dictionary<Country, string>();
             var englishNameByCurrency = new Dictionary<Currency, string>();
@@ -223,6 +214,15 @@ namespace Allors.Domain
                     language.AddLocalisedName(englishLanguageName);
                 }
             }
+        }
+
+        protected override void BaseSecure(Security config)
+        {
+            base.BaseSecure(config);
+
+            var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
+
+            config.GrantAdministrator(this.ObjectType, full);
         }
     }
 }

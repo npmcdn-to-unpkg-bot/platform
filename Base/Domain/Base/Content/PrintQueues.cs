@@ -53,7 +53,7 @@ namespace Allors.Domain
             config.GrantAdministrator(this.ObjectType, full);
         }
 
-        private PrintQueue BaseLocate(Printable printable)
+        public PrintQueue Locate(Printable printable)
         {
             return this.DefaultPrintQueue;
         }

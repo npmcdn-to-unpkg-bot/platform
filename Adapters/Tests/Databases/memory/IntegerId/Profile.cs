@@ -43,7 +43,6 @@ namespace Allors.Databases.Memory.IntegerId
                     markers.Add(
                         () =>
                         {
-                            this.Session.Commit();
                             this.Session.Checkpoint();
                         });
                 }

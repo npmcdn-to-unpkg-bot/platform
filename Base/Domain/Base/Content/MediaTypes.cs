@@ -24,12 +24,12 @@ namespace Allors.Domain
 
     public partial class MediaTypes
     {
-        private const string PngName = "image/png";
-        private const string JpegName = "image/jpeg";
-        private const string GifName = "image/gif";
-        private const string BmpName = "image/bmp";
-        private const string PdfName = "application/pdf";
-        private const string OctetStreamName = "application/octet-stream";
+        public const string PngName = "image/png";
+        public const string JpegName = "image/jpeg";
+        public const string GifName = "image/gif";
+        public const string BmpName = "image/bmp";
+        public const string PdfName = "application/pdf";
+        public const string OctetStreamName = "application/octet-stream";
 
         // File signatures
         // See http://en.wikipedia.org/wiki/List_of_file_signatures and http://www.garykessler.net/library/file_sigs.html
@@ -139,7 +139,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private MediaType BaseInfer(byte[] content)
+        public MediaType Infer(byte[] content)
         {
             if (Match(content, PngSignature))
             {
