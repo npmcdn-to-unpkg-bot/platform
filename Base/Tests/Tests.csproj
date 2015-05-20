@@ -157,6 +157,7 @@
     <Compile Include="Domain\Content\CsvExportFunctionTests.cs" />
     <Compile Include="Domain\Content\CsvExportPathTests.cs" />
     <Compile Include="Domain\Content\HtmlSanitizerTests.cs" />
+    <Compile Include="Domain\Content\ImageTest.cs" />
     <Compile Include="Domain\Content\MediaTest.cs" />
     <Compile Include="Domain\Content\MediatypeTest.cs" />
     <Compile Include="Domain\Content\PathTests.cs" />
@@ -235,6 +236,7 @@
       <Link>IEDriverServer.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Resources\logo.png" />
     <EmbeddedResource Include="Resources\PdfAs.jpg" />
     <EmbeddedResource Include="Domain\Resources\PdfAs.jpg" />
   </ItemGroup>

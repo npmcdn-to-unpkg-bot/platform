@@ -23,6 +23,7 @@ namespace System.Drawing
     using System.Drawing.Drawing2D;
     using System.Drawing.Imaging;
     using System.IO;
+    using System.Linq;
 
     public static partial class BitmapExtensions
     {
@@ -58,6 +59,44 @@ namespace System.Drawing
             }
 
             return scaled;
+        }
+
+        public static Bitmap Rotate(this Bitmap bitmap)
+        {
+            const int ExifOrientationPropertyId = 0x122;
+
+            if (Array.IndexOf(bitmap.PropertyIdList, ExifOrientationPropertyId) >= 0)
+            {
+                var orientation = (int)bitmap.GetPropertyItem(0x122).Value[0];
+                switch (orientation)
+                {
+                    case 2:
+                        bitmap.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                        break;
+                    case 3:
+                        bitmap.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        break;
+                    case 4:
+                        bitmap.RotateFlip(RotateFlipType.Rotate180FlipX);
+                        break;
+                    case 5:
+                        bitmap.RotateFlip(RotateFlipType.Rotate90FlipX);
+                        break;
+                    case 6:
+                        bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        break;
+                    case 7:
+                        bitmap.RotateFlip(RotateFlipType.Rotate270FlipX);
+                        break;
+                    case 8:
+                        bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        break;
+                }
+
+                bitmap.RemovePropertyItem(ExifOrientationPropertyId);
+            }
+
+            return bitmap;
         }
 
         public static byte[] Save(this Bitmap bitmap, ImageFormat format)

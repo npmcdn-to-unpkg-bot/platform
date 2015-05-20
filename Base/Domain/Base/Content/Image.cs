@@ -58,13 +58,10 @@ namespace Allors.Domain
             // Stream should be left open for Save to work
             using (Stream stream = new MemoryStream(this.Original.Content))
             {
-                var maxHeight = method.MaxHeight ?? 600;
-
                 var responsive = new Bitmap(stream);
-                if (responsive.Height > maxHeight)
-                {
-                    responsive = responsive.ScaleToHeight(maxHeight);
-                }
+
+                responsive = responsive.Rotate();
+                responsive = responsive.ScaleToHeight(method.MaxHeight ?? 600);
 
                 var encoder = ImageCodecInfo.GetImageEncoders().FirstOrDefault(e => e.MimeType == mediaType.Name);
                 var encoderParams = new EncoderParameters(1);
@@ -94,18 +91,12 @@ namespace Allors.Domain
             // Stream should be left open for Save to work
             using (Stream stream = new MemoryStream(this.Original.Content))
             {
-                var maxHeight = method.MaxHeight ?? 150;
-
                 var thumbnail = new Bitmap(stream);
-                if (thumbnail.Height > maxHeight)
-                {
-                    thumbnail = thumbnail.ScaleToHeight(maxHeight);
-                }
 
-                var encoder = ImageCodecInfo.GetImageEncoders().FirstOrDefault(e => e.MimeType == mediaType.Name);
-                var encoderParams = new EncoderParameters(0);
+                thumbnail = thumbnail.Rotate();
+                thumbnail = thumbnail.ScaleToHeight(method.MaxHeight ?? 150);
 
-                content = thumbnail.Save(encoder, encoderParams);
+                content = thumbnail.Save(ImageFormat.Png);
             }
 
             if (!this.ExistThumbnail || !content.SequenceEqual(this.Thumbnail.Content))
