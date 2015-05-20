@@ -85,7 +85,7 @@ namespace Allors.Domain
             }
         }
 
-        public void BaseCreateThumbnail(ImageCreateResponsive method)
+        public void BaseCreateThumbnail(ImageCreateThumbnail method)
         {
             var mediaType = new MediaTypes(this.Strategy.Session).Png;
 
