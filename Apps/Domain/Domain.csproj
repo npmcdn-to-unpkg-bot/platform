@@ -139,9 +139,6 @@
     <Compile Include="..\..\Base\Domain\Base\Common\Singleton.cs">
       <Link>Base\Common\Singleton.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Common\Singleton.v.cs">
-      <Link>Base\Common\Singleton.v.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\Singletons.cs">
       <Link>Base\Common\Singletons.cs</Link>
     </Compile>
@@ -178,8 +175,11 @@
     <Compile Include="..\..\Base\Domain\Base\Content\Image.cs">
       <Link>Base\Content\Image.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Content\Image.v.cs">
-      <Link>Base\Content\Image.v.cs</Link>
+    <Compile Include="..\..\Base\Domain\Base\Content\ImageCreateResponsive.cs">
+      <Link>Base\Content\ImageCreateResponsive.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Content\ImageCreateThumbnail.cs">
+      <Link>Base\Content\ImageCreateThumbnail.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Content\Media.cs">
       <Link>Base\Content\Media.cs</Link>
@@ -199,14 +199,8 @@
     <Compile Include="..\..\Base\Domain\Base\Content\MediaTypes.cs">
       <Link>Base\Content\MediaTypes.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Content\MediaTypes.v.cs">
-      <Link>Base\Content\MediaTypes.v.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Content\PrintQueues.cs">
       <Link>Base\Content\PrintQueues.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Content\PrintQueues.v.cs">
-      <Link>Base\Content\PrintQueues.v.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Content\StringTemplate.cs">
       <Link>Base\Content\StringTemplate.cs</Link>
@@ -270,9 +264,6 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Localisation\Locales.cs">
       <Link>Base\Localisation\Locales.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Localisation\Locales.v.cs">
-      <Link>Base\Localisation\Locales.v.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Localisation\LocalisedTexts.cs">
       <Link>Base\Localisation\LocalisedTexts.cs</Link>
@@ -1282,6 +1273,8 @@
     <Compile Include="Generated\HazardousMaterialsDocument.g.cs" />
     <Compile Include="Generated\Hobby.g.cs" />
     <Compile Include="Generated\Image.g.cs" />
+    <Compile Include="Generated\ImageCreateResponsive.g.cs" />
+    <Compile Include="Generated\ImageCreateThumbnail.g.cs" />
     <Compile Include="Generated\Incentive.g.cs" />
     <Compile Include="Generated\IndustryClassification.g.cs" />
     <Compile Include="Generated\InternalAccountingTransaction.g.cs" />

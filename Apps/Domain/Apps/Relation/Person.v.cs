@@ -112,10 +112,5 @@ namespace Allors.Domain
         {
             this.AppsOnDeriveCurrentEmployment(derivation);
         }
-
-        private void BuildOwnerSecurityToken()
-        {
-            this.AppsBuildOwnerSecurityToken();
-        }
     }
 }
