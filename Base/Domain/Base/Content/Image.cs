@@ -61,7 +61,7 @@ namespace Allors.Domain
                 var responsive = new Bitmap(stream);
 
                 responsive = responsive.Rotate();
-                responsive = responsive.ScaleToHeight(method.MaxHeight ?? 600);
+                responsive = responsive.MaxHeight(method.MaxHeight ?? 600);
 
                 var encoder = ImageCodecInfo.GetImageEncoders().FirstOrDefault(e => e.MimeType == mediaType.Name);
                 var encoderParams = new EncoderParameters(1);
@@ -94,7 +94,7 @@ namespace Allors.Domain
                 var thumbnail = new Bitmap(stream);
 
                 thumbnail = thumbnail.Rotate();
-                thumbnail = thumbnail.ScaleToHeight(method.MaxHeight ?? 150);
+                thumbnail = thumbnail.MaxHeight(method.MaxHeight ?? 150);
 
                 content = thumbnail.Save(ImageFormat.Png);
             }

@@ -27,9 +27,29 @@ namespace System.Drawing
 
     public static partial class BitmapExtensions
     {
-        public static Bitmap ScaleToWidth(this Bitmap highRes, int width)
+        public static Bitmap MaxWidth(this Bitmap bitmap, int maxWidth)
         {
-            var ratio = (float)highRes.Height / highRes.Width;
+            if (bitmap.Height <= maxWidth)
+            {
+                return bitmap;
+            }
+
+            return ScaleToWidth(bitmap, maxWidth);
+        }
+
+        public static Bitmap MaxHeight(this Bitmap bitmap, int maxHeight)
+        {
+            if (bitmap.Height <= maxHeight)
+            {
+                return bitmap;
+            }
+
+            return ScaleToHeight(bitmap, maxHeight);
+        }
+
+        public static Bitmap ScaleToWidth(this Bitmap bitmap, int width)
+        {
+            var ratio = (float)bitmap.Height / bitmap.Width;
             var height = (int)(width * ratio);
             var scaled = new Bitmap(width, height);
             using (var graphics = Graphics.FromImage(scaled))
@@ -38,15 +58,15 @@ namespace System.Drawing
                 graphics.SmoothingMode = SmoothingMode.HighQuality;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.DrawImage(highRes, 0, 0, width, height);
+                graphics.DrawImage(bitmap, 0, 0, width, height);
             }
 
             return scaled;
         }
 
-        public static Bitmap ScaleToHeight(this Bitmap highRes, int height)
+        public static Bitmap ScaleToHeight(this Bitmap bitmap, int height)
         {
-            var ratio = (float)highRes.Width / highRes.Height;
+            var ratio = (float)bitmap.Width / bitmap.Height;
             var width = (int)(height * ratio);
             var scaled = new Bitmap(width, height);
             using (var graphics = Graphics.FromImage(scaled))
@@ -55,7 +75,7 @@ namespace System.Drawing
                 graphics.SmoothingMode = SmoothingMode.HighQuality;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.DrawImage(highRes, 0, 0, width, height);
+                graphics.DrawImage(bitmap, 0, 0, width, height);
             }
 
             return scaled;
@@ -63,11 +83,11 @@ namespace System.Drawing
 
         public static Bitmap Rotate(this Bitmap bitmap)
         {
-            const int ExifOrientationPropertyId = 0x122;
+            const int ExifOrientationPropertyId = 0x112;
 
-            if (Array.IndexOf(bitmap.PropertyIdList, ExifOrientationPropertyId) >= 0)
+            if (bitmap.PropertyIdList.Any(x => x == ExifOrientationPropertyId))
             {
-                var orientation = (int)bitmap.GetPropertyItem(0x122).Value[0];
+                var orientation = (int)bitmap.GetPropertyItem(ExifOrientationPropertyId).Value[0];
                 switch (orientation)
                 {
                     case 2:

@@ -22,6 +22,7 @@
 namespace Domain
 {
     using System;
+    using System.Drawing;
     using System.IO;
 
     using Allors;
@@ -30,6 +31,8 @@ namespace Domain
     using global::System.Reflection;
 
     using NUnit.Framework;
+
+    using Should;
 
     [TestFixture]
     public class ImageTest : ContentTests
@@ -52,6 +55,37 @@ namespace Domain
             var image = new ImageBuilder(this.Session).WithOriginal(media).Build();
 
             this.Session.Derive(true);
+        }
+
+        [Test]
+        public void Orientation()
+        {
+            for (var i = 1; i <= 8; i++)
+            {
+                var resourceName = string.Format("Tests.Resources.orientation.Landscape_{0}.jpg", i);
+                var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+
+                byte[] content;
+                using (var output = new MemoryStream())
+                {
+                    resource.CopyTo(output);
+                    content = output.ToArray();
+                }
+
+                var media = new MediaBuilder(this.Session).WithContent(content).Build();
+                media.MediaType = new MediaTypes(this.Session).Infer(media.Content);
+
+                var image = new ImageBuilder(this.Session).WithOriginal(media).Build();
+
+                this.Session.Derive(true);
+
+                using (Stream stream = new MemoryStream(image.Responsive.Content))
+                {
+                    var responsive = new Bitmap(stream);
+                    responsive.Width.ShouldEqual(600);
+                    responsive.Height.ShouldEqual(450);
+                }
+            }
         }
     }
 }
