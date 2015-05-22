@@ -1,0 +1,4 @@
+﻿@model Allors.Web.Content.ImageModel
+
+<img class="img-responsive project-image" src="/Media/Display/@Model.UniqueId" alt="@Model.FileName"><br/>
+@Html.Allors().EditorFor(x=>x.PostedFile)

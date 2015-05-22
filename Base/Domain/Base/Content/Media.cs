@@ -49,6 +49,14 @@ namespace Allors.Domain
             }
         }
 
+        public void BaseDelete(DeletableDelete method)
+        {
+            if (this.ExistMediaContent)
+            {
+                this.MediaContent.Delete();
+            }
+        }
+
         public void BaseOnBuild(ObjectOnBuild method)
         {
             var builder = method.Builder;
@@ -57,6 +65,11 @@ namespace Allors.Domain
             if (mediaBuilder.MediaContentValue != null)
             {
                 this.MediaContent = new MediaContentBuilder(this.Strategy.Session).WithValue(mediaBuilder.MediaContentValue).Build();
+
+                if (!this.ExistMediaType)
+                {
+                    this.MediaType = new MediaTypes(this.Strategy.Session).Infer(this.Content);
+                }
             }
         }
     }

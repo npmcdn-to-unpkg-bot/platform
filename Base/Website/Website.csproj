@@ -170,6 +170,10 @@
   <ItemGroup>
     <Compile Include="Areas\Default\Base\Account\AccountViewModels.cs" />
     <Compile Include="Areas\Default\Base\Account\BaseAccountController.cs" />
+    <Compile Include="Areas\Default\Base\Content\HttpPostedFileBaseExtension.cs" />
+    <Compile Include="Areas\Default\Base\Content\ImagesItemModel.cs" />
+    <Compile Include="Areas\Default\Base\Content\ImagesModel.cs" />
+    <Compile Include="Areas\Default\Base\Content\ImageModel.cs" />
     <Compile Include="Areas\Default\Base\Identity\EmailService.cs" />
     <Compile Include="Areas\Default\Base\Identity\IdentitySignInManager.cs" />
     <Compile Include="Areas\Default\Base\Identity\IdentityUser.cs" />
@@ -228,6 +232,7 @@
     <Compile Include="App_Start\ModelConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ViewConfig.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -300,7 +305,7 @@
     <Content Include="Areas\Default\Tests\Organisation\_Filter.cshtml" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <Content Include="Content\bootstrap-select.css.map" />
-    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\multipleSelect.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\MultipleSelect.cshtml" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
     <Content Include="Content\jasny-bootstrap.css.map" />
@@ -310,10 +315,10 @@
     <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\bool.cshtml" />
     <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\decimal.cshtml" />
     <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\double.cshtml" />
-    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\guid.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\Guid.cshtml" />
     <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\string.cshtml" />
-    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\object.cshtml" />
-    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\file.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\Object.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\File.cshtml" />
     <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\int.cshtml" />
     <Content Include="Areas\Default\Tests\Organisation\View.cshtml" />
     <Content Include="Areas\Default\Base\Shared\DisplayTemplates\Bootstrap\object.cshtml" />
@@ -369,6 +374,10 @@
     <Content Include="Scripts\i18n\defaults-zh_TW.min.js" />
     <Content Include="Scripts\jasny-bootstrap.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\ImageModel.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\ImagesModel.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\ImagesItemModel.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\ImagesItemModels.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -389,7 +398,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Areas\Default\Tests\Web.config" />
     <Content Include="Areas\Default\_ViewStart.cshtml" />
-    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\select.cshtml" />
+    <Content Include="Areas\Default\Base\Shared\EditorTemplates\Bootstrap\Select.cshtml" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />

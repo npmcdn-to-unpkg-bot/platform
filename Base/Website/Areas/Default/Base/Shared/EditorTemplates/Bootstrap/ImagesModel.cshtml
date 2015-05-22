@@ -1,0 +1,7 @@
+﻿@model Allors.Web.Content.ImagesModel
+
+<div class="row">
+    @Html.EditorFor(x=>x.Items, "Bootstrap/ImagesItemModels")
+</div>
+
+@Html.Allors().EditorFor(x=>x.PostedFile)

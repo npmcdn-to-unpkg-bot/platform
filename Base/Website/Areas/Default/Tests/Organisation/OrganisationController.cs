@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Allors;
     using Allors.Domain;
+    using Allors.Web.Content;
     using Allors.Web.Mvc.Models;
     using Allors.Web.Mvc.Views;
 
@@ -55,7 +56,7 @@
         {
             if (command == Command.Cancel)
             {
-                return RedirectToRoute("Default", new { controller = "Organisation", action = "Index" });
+                return this.RedirectToRoute("Default", new { controller = "Organisation", action = "Index" });
             }
 
             var organisation = (Organisation)this.AllorsSession.Instantiate(model.Id);
@@ -119,8 +120,7 @@
                 return this.RedirectToRoute("Default", new { controller = "Organisation", action = "Index" });
             }
             var organisation = (Organisation)this.AllorsSession.Instantiate(model.Id);
-
-
+            
             var currentCultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
             var currentUICultureInfo = System.Threading.Thread.CurrentThread.CurrentUICulture;
 
@@ -135,6 +135,37 @@
                     organisation.IncorporationDate = model.IncorporationDate.HasValue ? model.IncorporationDate.Value.ToUniversalTime() : (DateTime?)null;
                     organisation.Owner = (Person)this.AllorsSession.Instantiate(model.Owner.Id);
                     organisation.Employees = model.Werknemers != null ? this.AllorsSession.Instantiate(model.Werknemers.Ids) : null;
+
+                    if (model.Logo.PostedFile != null)
+                    {
+                        if (organisation.ExistLogo)
+                        {
+                            organisation.Logo.Delete();
+                        }
+
+                        var media = new MediaBuilder(this.AllorsSession).WithContent(model.Logo.PostedFile.GetContent()).Build();
+                        var image = new ImageBuilder(this.AllorsSession).WithOriginalFilename(model.Logo.PostedFile.FileName).WithOriginal(media).Build();
+
+                        organisation.Logo = image;
+                    }
+
+                    if (model.Images.PostedFile != null)
+                    {
+                        var media = new MediaBuilder(this.AllorsSession).WithContent(model.Images.PostedFile.GetContent()).Build();
+                        var image = new ImageBuilder(this.AllorsSession).WithOriginalFilename(model.Images.PostedFile.FileName).WithOriginal(media).Build();
+
+                        organisation.AddImage(image);
+                    }
+
+                    foreach (var item in model.Images.Items)
+                    {
+                        if (item.Delete)
+                        {
+                            var image = (Image)this.AllorsSession.Instantiate(item.Id);
+                            image.Delete();
+                        }
+                    }
+
 
                     var derivationLog = this.AllorsSession.Derive();
                     if (derivationLog.HasErrors)
@@ -245,6 +276,20 @@
                                 Text = x.UserName,
                                 Value = x.Id.ToString(),
                             }).ToArray()
+                };
+                edit.Logo = new ImageModel
+                                {
+                                    UniqueId = organisation.ExistLogo ? organisation.Logo.Thumbnail.UniqueId.ToString("N") : null, 
+                                    FileName = organisation.ExistLogo ? organisation.Logo.OriginalFilename : null
+                                };
+                edit.Images = new ImagesModel
+                {
+                    Items = organisation.Images.Select(x => new ImagesItemModel
+                                                                {
+                                                                    Id = x.Id.ToString(),
+                                                                    UniqueId = x.Thumbnail.UniqueId.ToString("N"),
+                                                                    FileName = x.OriginalFilename
+                                                                }).ToArray()
                 };
             }
         }

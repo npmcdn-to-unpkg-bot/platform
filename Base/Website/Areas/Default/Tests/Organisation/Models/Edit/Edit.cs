@@ -1,12 +1,9 @@
 ﻿namespace Areas.Default.Tests.OrganisationMvc
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web;
-    using System.Web.Mvc;
-
     using Allors.Meta;
     using Allors.Meta.Ids;
+    using Allors.Web.Content;
     using Allors.Web.Mvc.Models;
 
     public class Edit : IMetadataModel<OrganisationClass>
@@ -30,7 +27,8 @@
 
         public int EmployeeCount { get; set; }
 
-        [DataType(DataType.Upload)]
-        public HttpPostedFileBase Image { get; set; }
+        public ImageModel Logo { get; set; }
+
+        public ImagesModel Images { get; set; }
     }
 }

@@ -21,10 +21,14 @@
 namespace Allors.Web.Mvc.Helpers
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq.Expressions;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
+    using System.Web.UI.WebControls;
 
     using Allors.Meta;
     using Allors.Web.Mvc.Models;
@@ -140,7 +144,7 @@ namespace Allors.Web.Mvc.Helpers
                 return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/string");
             }
 
-            return this.html.Display(propertyModelMetadata.PropertyName, new { htmlAttributes = new { @class = "form-control", placeholder = this.html.ViewData.ModelMetadata.Watermark } });
+            return this.html.Display(propertyModelMetadata.PropertyName, "Bootstrap/" + propertyModelMetadata.ModelType.Name);
         }
 
         protected virtual MvcHtmlString OnLabel(ModelMetadata propertyModelMetadata)
@@ -207,7 +211,12 @@ namespace Allors.Web.Mvc.Helpers
                 return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/file");
             }
 
-            return this.html.Editor(propertyModelMetadata.PropertyName, new { htmlAttributes = new { @class = "form-control", placeholder = this.html.ViewData.ModelMetadata.Watermark } });
+            if (string.IsNullOrWhiteSpace(propertyModelMetadata.PropertyName))
+            {
+                return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/" + propertyModelMetadata.ModelType.Name);
+            }
+ 
+            return this.html.Editor(propertyModelMetadata.PropertyName, "Bootstrap/" + propertyModelMetadata.ModelType.Name);
         }
 
         protected virtual MvcHtmlString OnValidationMessage(ModelMetadata propertyModelMetadata)

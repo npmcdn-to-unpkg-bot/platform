@@ -360,7 +360,7 @@ namespace Allors.Domain
 					MediaContent MediaContent {set;}
 
 	}
-	public interface MediaContent  : Object 
+	public interface MediaContent  : Object, Deletable 
 	{
 					global::System.Byte[] Value {set;}
 
@@ -691,6 +691,8 @@ namespace Allors.Domain
 
 					Person Shareholders {set;}
 
+					Image Images {set;}
+
 					global::System.String Name {set;}
 
 					global::System.String Description {set;}
@@ -707,7 +709,7 @@ namespace Allors.Domain
 
 					Person Owner {set;}
 
-					Media Logo {set;}
+					Image Logo {set;}
 
 					global::System.String Size {set;}
 

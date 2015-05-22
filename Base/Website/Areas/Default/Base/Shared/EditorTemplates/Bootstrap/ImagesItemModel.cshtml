@@ -1,0 +1,11 @@
+﻿@model Allors.Web.Content.ImagesItemModel
+
+<div class="col-xs-6 col-md-3">
+    <div class="thumbnail">
+        <img class="img-responsive project-image" src="/Media/Display/@Model.UniqueId" alt="@Model.FileName">
+        <div class="caption">
+            @Html.HiddenFor(x=>x.Id)
+            <label>@Html.EditorFor(x => x.Delete) Delete</label>
+        </div>
+    </div>
+</div>

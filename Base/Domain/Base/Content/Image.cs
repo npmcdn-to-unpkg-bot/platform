@@ -29,8 +29,9 @@ namespace Allors.Domain
     {
         public void BaseDelete(DeletableDelete method)
         {
-            this.RemoveOriginal();
-            this.RemoveResponsive();
+            this.Original.Delete();
+            this.Responsive.Delete();
+            this.Thumbnail.Delete();
         }
 
         public void BaseOnDerive(ObjectOnDerive method)
