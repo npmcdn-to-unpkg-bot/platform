@@ -29,14 +29,6 @@ namespace Allors.Domain
 
     public partial class SalesInvoice
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -614,7 +606,6 @@ namespace Allors.Domain
 
             this.PreviousBillToCustomer = this.BillToCustomer;
             this.PreviousShipToCustomer = this.ShipToCustomer;
-            this.PreviousObjectState = this.CurrentObjectState;
 
             this.DeriveTemplate(derivation);
             this.AppsOnDeriveRevenues(derivation);
@@ -717,7 +708,6 @@ namespace Allors.Domain
                 var currentStatus = new SalesInvoiceStatusBuilder(this.Strategy.Session).WithSalesInvoiceObjectState(this.CurrentObjectState).Build();
                 this.AddInvoiceStatus(currentStatus);
                 this.CurrentInvoiceStatus = currentStatus;
-                this.PreviousObjectState = this.CurrentObjectState;
             }
 
             if (this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).Paid))

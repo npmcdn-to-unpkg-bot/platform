@@ -24,6 +24,14 @@ namespace Allors.Domain
 
     public partial class AccountingPeriod
     {
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+
         public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistActive)
@@ -122,22 +130,6 @@ namespace Allors.Domain
 
             this.InternalOrganisationWhereAccountingPeriod.AddAccountingPeriod(newSemester);
             return newSemester;
-        }
-
-        ObjectState Transitional.PreviousObjectState 
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState 
-        {
-            get
-            {
-                return this.CurrentObjectState;
-            }
         }
     }
 }

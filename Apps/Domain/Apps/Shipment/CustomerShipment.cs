@@ -25,6 +25,14 @@ namespace Allors.Domain
 
     public partial class CustomerShipment
     {
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+
         public bool CanEdit
         {
             get
@@ -81,22 +89,6 @@ namespace Allors.Domain
         public string ShortShipDateString
         {
             get { return this.EstimatedShipDate.ToShortDateString(); }
-        }
-
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState
-        {
-            get
-            {
-                return this.CurrentObjectState;
-            }
         }
 
         private PickList PendingPickList
@@ -253,8 +245,6 @@ namespace Allors.Domain
             
             this.DeriveCurrentObjectState(derivation);
             
-            this.PreviousObjectState = this.CurrentObjectState;
-
             this.DeriveTemplate(derivation);
         }
 

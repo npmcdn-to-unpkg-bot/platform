@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Base\Common\Counter.cs" />
     <Compile Include="Base\Common\DeletableDelete.cs" />
+    <Compile Include="Base\Common\TransitionalExtensions.cs" />
     <Compile Include="Base\Common\UniquelyIdentifiableExtension.cs" />
     <Compile Include="Base\Content\ImageCreateThumbnail.cs" />
     <Compile Include="Base\Content\ImageCreateResponsive.cs" />
@@ -125,6 +126,8 @@
     <Compile Include="Generated\ObjectOnPreDerive.g.cs" />
     <Compile Include="Generated\ObjectState.g.cs" />
     <Compile Include="Generated\One.g.cs" />
+    <Compile Include="Generated\Order.g.cs" />
+    <Compile Include="Generated\OrderObjectState.g.cs" />
     <Compile Include="Generated\Organisation.g.cs" />
     <Compile Include="Generated\OrganisationJustDoIt.g.cs" />
     <Compile Include="Generated\Period.g.cs" />
@@ -165,6 +168,8 @@
     <Compile Include="Test\Derivations\Second.cs" />
     <Compile Include="Test\Derivations\Subdependee.cs" />
     <Compile Include="Test\Derivations\Third.cs" />
+    <Compile Include="Test\General\Order.cs" />
+    <Compile Include="Test\General\OrderObjectStates.cs" />
     <Compile Include="Test\General\HomeAddress.cs" />
     <Compile Include="Test\General\MailboxAddress.cs" />
     <Compile Include="Test\Methods\SuperinterfaceMethod.cs" />

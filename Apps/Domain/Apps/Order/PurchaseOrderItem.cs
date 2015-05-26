@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class PurchaseOrderItem
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -245,7 +237,6 @@ namespace Allors.Domain
                 var currentStatus = new PurchaseOrderItemStatusBuilder(this.Strategy.Session).WithPurchaseOrderItemObjectState(this.CurrentObjectState).Build();
                 this.AddOrderItemStatus(currentStatus);
                 this.CurrentOrderItemStatus = currentStatus;
-                this.PreviousObjectState = this.CurrentObjectState;
             }
 
             if (this.CurrentObjectState.Equals(new PurchaseOrderItemObjectStates(this.Strategy.Session).InProcess))

@@ -23,19 +23,55 @@
 
 namespace Domain
 {
+    using Allors;
+    using Allors.Domain;
+
     using NUnit.Framework;
+
+    using Should;
 
     [TestFixture]
     public class ObjectStateTests : DomainTest
     {
-        // TODO: Test
+        [Test]
+        public void Transitions()
+        {
+            var initial = new OrderObjectStates(this.Session).Initial;
+            var confirmed = new OrderObjectStates(this.Session).Confirmed;
+            var cancelled = new OrderObjectStates(this.Session).Cancelled;
 
-        //[Test]
-        //public void GivenDefaultLocaleEnglish_WhenRetrievingObjectState_ThenNameIsEnglishName()
-        //{
-        //    ObjectState completed = new SalesOrderObjectStates(this.DatabaseSession).Completed;
+            var order = new OrderBuilder(this.Session).Build();
 
-        //    Assert.AreEqual("Completed", completed.DisplayName);
-        //}
+            this.Session.Derive(true);
+
+            order.CurrentObjectState.ShouldBeNull();
+            order.LastObjectState.ShouldBeNull();
+            order.PreviousObjectState.ShouldBeNull();
+
+            order.Amount = 10;
+            order.CurrentObjectState = initial;
+
+            this.Session.Derive(true);
+
+            order.CurrentObjectState.ShouldEqual(initial);
+            order.LastObjectState.ShouldEqual(initial);
+            order.PreviousObjectState.ShouldBeNull();
+
+            order.CurrentObjectState = confirmed;
+
+            this.Session.Derive(true);
+
+            order.CurrentObjectState.ShouldEqual(confirmed);
+            order.LastObjectState.ShouldEqual(confirmed);
+            order.PreviousObjectState.ShouldEqual(initial);
+
+            order.Amount = 0;
+
+            this.Session.Derive(true);
+
+            order.CurrentObjectState.ShouldEqual(cancelled);
+            order.LastObjectState.ShouldEqual(cancelled);
+            order.PreviousObjectState.ShouldEqual(confirmed);
+        }
     }
 }

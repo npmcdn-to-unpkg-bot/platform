@@ -29,10 +29,5 @@ namespace Allors.Domain
                 this.CurrentObjectState = new PartSpecificationObjectStates(this.Strategy.DatabaseSession).Created;
             }
         }
-
-        public void AppsOnDerive(ObjectOnDerive method)
-        {
-            this.PreviousObjectState = this.CurrentObjectState;
-        }
     }
 }

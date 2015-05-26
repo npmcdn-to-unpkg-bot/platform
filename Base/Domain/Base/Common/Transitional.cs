@@ -22,11 +22,6 @@ namespace Allors.Domain
 {
     public partial interface Transitional
     {
-        ObjectState PreviousObjectState
-        {
-            get;
-        }
-
         ObjectState CurrentObjectState
         {
             get;

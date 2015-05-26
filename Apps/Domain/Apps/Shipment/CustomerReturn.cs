@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class CustomerReturn
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -45,14 +37,10 @@ namespace Allors.Domain
 
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new CustomerReturnObjectStates(this.Strategy.DatabaseSession).Received;
             }
-
-            this.PreviousObjectState = this.CurrentObjectState;
         }
 
         public void AppsOnDerive(ObjectOnDerive method)
@@ -71,7 +59,6 @@ namespace Allors.Domain
             }
 
             this.DeriveCurrentObjectState(derivation);
-            this.PreviousObjectState = this.CurrentObjectState;
 
             this.DeriveTemplate(derivation);
         }

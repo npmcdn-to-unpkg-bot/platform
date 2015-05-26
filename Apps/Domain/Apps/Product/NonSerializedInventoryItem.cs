@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class NonSerializedInventoryItem
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -40,8 +32,6 @@ namespace Allors.Domain
 
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new NonSerializedInventoryItemObjectStates(this.Strategy.Session).Good;
@@ -109,7 +99,6 @@ namespace Allors.Domain
                 this.Good.DeriveAvailableToPromise();
             }
 
-            this.PreviousObjectState = this.CurrentObjectState;
             this.PreviousQuantityOnHand = this.QuantityOnHand;
         }
 

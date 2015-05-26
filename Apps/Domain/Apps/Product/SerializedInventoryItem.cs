@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class SerializedInventoryItem
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -40,8 +32,6 @@ namespace Allors.Domain
 
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new SerializedInventoryItemObjectStates(this.Strategy.Session).Good;
@@ -64,8 +54,6 @@ namespace Allors.Domain
             derivation.Log.AssertExistsAtMostOne(this, SerializedInventoryItems.Meta.Good, SerializedInventoryItems.Meta.Part);
 
             this.DeriveCurrentObjectState(derivation);
-
-            this.PreviousObjectState = this.CurrentObjectState;
         }
 
         public void AppsOnDeriveCurrentObjectState(IDerivation derivation)

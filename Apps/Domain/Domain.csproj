@@ -145,6 +145,9 @@
     <Compile Include="..\..\Base\Domain\Base\Common\Transitional.cs">
       <Link>Base\Common\Transitional.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Common\TransitionalExtensions.cs">
+      <Link>Base\Common\TransitionalExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\UniquelyIdentifiableCache.cs">
       <Link>Base\Common\UniquelyIdentifiableCache.cs</Link>
     </Compile>

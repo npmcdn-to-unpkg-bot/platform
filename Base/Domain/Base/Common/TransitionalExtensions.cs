@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UniquelyIdentifiableCache.cs" company="Allors bvba">
+// <copyright file="TransitionalExtensions.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -20,16 +20,16 @@
 
 namespace Allors.Domain
 {
-    using System;
-
-    using Allors;
-
-    public class UniquelyIdentifiableCache<TObject> : Cache<Guid, TObject>
-        where TObject : class, IObject
+    public static partial class TransitionalExtensions
     {
-        public UniquelyIdentifiableCache(ISession session)
-            : base(session, UniquelyIdentifiables.Meta.UniqueId)
+        public static void TestsOnPostDerive(this Transitional @this, ObjectOnPostDerive method)
         {
+            if (@this.CurrentObjectState != null && !@this.CurrentObjectState.Equals(@this.LastObjectState))
+            {
+                @this.PreviousObjectState = @this.LastObjectState;
+            }
+
+            @this.LastObjectState = @this.CurrentObjectState;
         }
     }
 }

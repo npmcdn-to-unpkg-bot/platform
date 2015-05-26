@@ -1,8 +1,3 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SalesOrderItem.cs" company="">
-//   
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
 namespace Allors.Domain
 {
     using System.Collections.Generic;
@@ -11,14 +6,6 @@ namespace Allors.Domain
 
     public partial class SalesOrderItem
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -380,7 +367,6 @@ namespace Allors.Domain
                 var currentStatus = new SalesOrderItemStatusBuilder(this.Strategy.Session).WithSalesOrderItemObjectState(this.CurrentObjectState).Build();
                 this.AddOrderItemStatus(currentStatus);
                 this.CurrentOrderItemStatus = currentStatus;
-                this.PreviousObjectState = this.CurrentObjectState;
             }
 
             if (this.CurrentObjectState.Equals(new SalesOrderItemObjectStates(this.Strategy.Session).InProcess))

@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class FaxCommunication
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -40,8 +32,6 @@ namespace Allors.Domain
 
         public void AppsOnDerive(ObjectOnDerive method)
         {
-            this.PreviousObjectState = this.CurrentObjectState;
-
             this.AppsOnDeriveFromParties();
             this.AppsOnDeriveToParties();
             this.AppsOnDeriveInvolvedParties();

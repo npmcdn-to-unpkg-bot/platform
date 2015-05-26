@@ -25,14 +25,6 @@ namespace Allors.Domain
 
     public partial class PurchaseShipment
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -146,7 +138,6 @@ namespace Allors.Domain
             }
 
             this.DeriveCurrentObjectState(derivation);
-            this.PreviousObjectState = this.CurrentObjectState;
 
             foreach (ShipmentItem shipmentItem in this.ShipmentItems)
             {

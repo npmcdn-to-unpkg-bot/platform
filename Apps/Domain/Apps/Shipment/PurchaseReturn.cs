@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class PurchaseReturn
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -66,7 +58,6 @@ namespace Allors.Domain
             }
 
             this.DeriveCurrentObjectState(derivation);
-            this.PreviousObjectState = this.CurrentObjectState;
 
             this.DeriveTemplate(derivation);
         }

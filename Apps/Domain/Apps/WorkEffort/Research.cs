@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class Research
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -44,11 +36,6 @@ namespace Allors.Domain
             {
                 this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.DatabaseSession).NeedsAction;
             }
-        }
-
-        public void AppsOnDerive(ObjectOnDerive method)
-        {
-            this.PreviousObjectState = this.CurrentObjectState;
         }
     }
 }

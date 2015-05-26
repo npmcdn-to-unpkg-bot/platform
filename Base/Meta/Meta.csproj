@@ -299,6 +299,8 @@
     <Compile Include="Generated\Meta.g.cs" />
     <Compile Include="Generated\ObjectState.g.cs" />
     <Compile Include="Generated\One.g.cs" />
+    <Compile Include="Generated\Order.g.cs" />
+    <Compile Include="Generated\OrderObjectState.g.cs" />
     <Compile Include="Generated\Organisation.g.cs" />
     <Compile Include="Generated\Period.g.cs" />
     <Compile Include="Generated\Permission.g.cs" />

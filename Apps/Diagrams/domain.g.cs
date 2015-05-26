@@ -58,6 +58,10 @@ namespace Allors.Domain
 	}
 	public interface Transitional  : Object, AccessControlledObject 
 	{
+					ObjectState PreviousObjectState {set;}
+
+					ObjectState LastObjectState {set;}
+
 	}
 	public interface UniquelyIdentifiable  : Object 
 	{
@@ -141,8 +145,6 @@ namespace Allors.Domain
 
 					BudgetObjectState CurrentObjectState {set;}
 
-					BudgetObjectState PreviousObjectState {set;}
-
 					BudgetReview BudgetReviews {set;}
 
 					BudgetStatus CurrentBudgetStatus {set;}
@@ -189,8 +191,6 @@ namespace Allors.Domain
 					Party FromParties {set;}
 
 					global::System.String Subject {set;}
-
-					CommunicationEventObjectState PreviousObjectState {set;}
 
 					Media Documents {set;}
 
@@ -742,8 +742,6 @@ namespace Allors.Domain
 
 					PartSpecificationStatus CurrentPartSpecificationStatus {set;}
 
-					PartSpecificationObjectState PreviousObjectState {set;}
-
 					global::System.String Description {set;}
 
 	}
@@ -1028,8 +1026,6 @@ namespace Allors.Domain
 	{
 					global::System.DateTime? RequiredByDate {set;}
 
-					RequirementObjectState PreviousObjectState {set;}
-
 					Party Authorizer {set;}
 
 					RequirementStatus RequirementStatuses {set;}
@@ -1170,8 +1166,6 @@ namespace Allors.Domain
 
 					global::System.String Description {set;}
 
-					WorkEffortObjectState PreviousObjectState {set;}
-
 					WorkEffortObjectState CurrentObjectState {set;}
 
 					global::System.DateTime? ScheduledCompletion {set;}
@@ -1289,7 +1283,7 @@ namespace Allors.Domain
 					MediaContent MediaContent {set;}
 
 	}
-	public interface MediaContent  : Object 
+	public interface MediaContent  : Object, Deletable 
 	{
 					global::System.Byte[] Value {set;}
 
@@ -1692,8 +1686,6 @@ namespace Allors.Domain
 
 					global::System.String Description {set;}
 
-					CaseObjectState PreviousObjectState {set;}
-
 	}
 	public interface CaseObjectState  : Object, ObjectState 
 	{
@@ -1864,8 +1856,6 @@ namespace Allors.Domain
 	{
 					CustomerReturnStatus CurrentShipmentStatus {set;}
 
-					CustomerReturnObjectState PreviousObjectState {set;}
-
 					CustomerReturnStatus ShipmentStatuses {set;}
 
 					CustomerReturnObjectState CurrentObjectState {set;}
@@ -1886,8 +1876,6 @@ namespace Allors.Domain
 	public interface CustomerShipment  : Object, Deletable, Shipment 
 	{
 					CustomerShipmentStatus CurrentShipmentStatus {set;}
-
-					CustomerShipmentObjectState PreviousObjectState {set;}
 
 					global::System.Boolean ReleasedManually {set;}
 
@@ -2018,8 +2006,6 @@ namespace Allors.Domain
 					DropShipmentStatus ShipmentStatuses {set;}
 
 					DropShipmentStatus CurrentShipmentStatus {set;}
-
-					DropShipmentObjectState PreviousObjectState {set;}
 
 					DropShipmentObjectState CurrentObjectState {set;}
 
@@ -2163,8 +2149,6 @@ namespace Allors.Domain
 					Person Authorizer {set;}
 
 					global::System.String Description {set;}
-
-					EngineeringChangeObjectState PreviousObjectState {set;}
 
 					Person Designer {set;}
 
@@ -2756,8 +2740,6 @@ namespace Allors.Domain
 					global::System.Decimal QuantityCommittedOut {set;}
 
 					NonSerializedInventoryItemStatus NonSerializedInventoryItemStatuses {set;}
-
-					NonSerializedInventoryItemObjectState PreviousObjectState {set;}
 
 					NonSerializedInventoryItemStatus CurrentInventoryItemStatus {set;}
 
@@ -3376,8 +3358,6 @@ namespace Allors.Domain
 
 					PickListStatus PickListStatuses {set;}
 
-					PickListObjectState PreviousObjectState {set;}
-
 					Party ShipToParty {set;}
 
 					Store Store {set;}
@@ -3705,8 +3685,6 @@ namespace Allors.Domain
 	}
 	public interface PurchaseInvoice  : Object, Invoice 
 	{
-					PurchaseInvoiceObjectState PreviousObjectState {set;}
-
 					PurchaseInvoiceItem PurchaseInvoiceItems {set;}
 
 					InternalOrganisation BilledToInternalOrganisation {set;}
@@ -3724,8 +3702,6 @@ namespace Allors.Domain
 	}
 	public interface PurchaseInvoiceItem  : Object, InvoiceItem 
 	{
-					PurchaseInvoiceItemObjectState PreviousObjectState {set;}
-
 					PurchaseInvoiceItemType PurchaseInvoiceItemType {set;}
 
 					Part Part {set;}
@@ -3795,8 +3771,6 @@ namespace Allors.Domain
 
 					PostalAddress ShipToAddress {set;}
 
-					PurchaseOrderObjectState PreviousObjectState {set;}
-
 					InternalOrganisation BillToPurchaser {set;}
 
 	}
@@ -3819,8 +3793,6 @@ namespace Allors.Domain
 					PurchaseOrderItemStatus CurrentOrderItemStatus {set;}
 
 					PurchaseOrderItemStatus CurrentPaymentStatus {set;}
-
-					PurchaseOrderItemObjectState PreviousObjectState {set;}
 
 					Part Part {set;}
 
@@ -3853,8 +3825,6 @@ namespace Allors.Domain
 
 					PurchaseReturnStatus ShipmentStatuses {set;}
 
-					PurchaseReturnObjectState PreviousObjectState {set;}
-
 	}
 	public interface PurchaseReturnObjectState  : Object, ObjectState 
 	{
@@ -3871,8 +3841,6 @@ namespace Allors.Domain
 					PurchaseShipmentObjectState CurrentObjectState {set;}
 
 					Facility Facility {set;}
-
-					PurchaseShipmentObjectState PreviousObjectState {set;}
 
 					PurchaseShipmentStatus ShipmentStatuses {set;}
 
@@ -4121,8 +4089,6 @@ namespace Allors.Domain
 	{
 					SalesInvoiceObjectState CurrentObjectState {set;}
 
-					SalesInvoiceObjectState PreviousObjectState {set;}
-
 					global::System.Decimal? TotalListPrice {set;}
 
 					InternalOrganisation BilledFromInternalOrganisation {set;}
@@ -4210,8 +4176,6 @@ namespace Allors.Domain
 
 					global::System.Decimal? RequiredMarkupPercentage {set;}
 
-					SalesInvoiceItemObjectState PreviousObjectState {set;}
-
 	}
 	public interface SalesInvoiceItemObjectState  : Object, ObjectState 
 	{
@@ -4270,8 +4234,6 @@ namespace Allors.Domain
 					Person SalesReps {set;}
 
 					global::System.Decimal InitialProfitMargin {set;}
-
-					SalesOrderObjectState PreviousObjectState {set;}
 
 					global::System.Decimal TotalListPrice {set;}
 
@@ -4367,8 +4329,6 @@ namespace Allors.Domain
 					global::System.Decimal QuantityPendingShipment {set;}
 
 					global::System.Decimal MaintainedMarkupPercentage {set;}
-
-					SalesOrderItemObjectState PreviousObjectState {set;}
 
 					global::System.Decimal InitialMarkupPercentage {set;}
 
@@ -4532,8 +4492,6 @@ namespace Allors.Domain
 	}
 	public interface SerializedInventoryItem  : Object, InventoryItem 
 	{
-					SerializedInventoryItemObjectState PreviousObjectState {set;}
-
 					SerializedInventoryItemStatus InventoryItemStatuses {set;}
 
 					global::System.String SerialNumber {set;}
@@ -4923,8 +4881,6 @@ namespace Allors.Domain
 	}
 	public interface Transfer  : Object, Shipment 
 	{
-					TransferObjectState PreviousObjectState {set;}
-
 					TransferObjectState CurrentObjectState {set;}
 
 					TransferStatus CurrentShipmentStatus {set;}

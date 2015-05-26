@@ -22,32 +22,19 @@ namespace Allors.Domain
 {
     public partial class CapitalBudget
     {
-        public void AppsOnBuild(ObjectOnBuild method)
-        {
-            if (!this.ExistCurrentObjectState)
-            {
-                this.CurrentObjectState = new BudgetObjectStates(this.Strategy.DatabaseSession).Opened;
-            }
-        }
-
-        public void AppsOnDerive(ObjectOnDerive method)
-        {
-            this.PreviousObjectState = this.CurrentObjectState;
-        }
-
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
             {
                 return this.CurrentObjectState;
+            }
+        }
+
+        public void AppsOnBuild(ObjectOnBuild method)
+        {
+            if (!this.ExistCurrentObjectState)
+            {
+                this.CurrentObjectState = new BudgetObjectStates(this.Strategy.DatabaseSession).Opened;
             }
         }
     }

@@ -1,22 +1,9 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SalesInvoiceItem.cs" company="">
-//   
-// </copyright>
-// --------------------------------------------------------------------------------------------------------------------
 namespace Allors.Domain
 {
     using System.Collections.Generic;
 
     public partial class SalesInvoiceItem
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -324,7 +311,6 @@ namespace Allors.Domain
                 var currentStatus = new SalesInvoiceItemStatusBuilder(this.Strategy.Session).WithSalesInvoiceItemObjectState(this.CurrentObjectState).Build();
                 this.AddInvoiceItemStatus(currentStatus);
                 this.CurrentInvoiceItemStatus = currentStatus;
-                this.PreviousObjectState = this.CurrentObjectState;
                 
                 this.CurrentObjectState.Process(this);
             }
@@ -377,7 +363,6 @@ namespace Allors.Domain
                 var currentStatus = new SalesInvoiceItemStatusBuilder(this.Strategy.Session).WithSalesInvoiceItemObjectState(this.CurrentObjectState).Build();
                 this.AddInvoiceItemStatus(currentStatus);
                 this.CurrentInvoiceItemStatus = currentStatus;
-                this.PreviousObjectState = this.CurrentObjectState;
             }
 
             if (this.ExistCurrentObjectState)

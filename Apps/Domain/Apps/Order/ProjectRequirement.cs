@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class ProjectRequirement
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -44,11 +36,6 @@ namespace Allors.Domain
             {
                 this.CurrentObjectState = new RequirementObjectStates(this.Strategy.DatabaseSession).Active;
             }
-        }
-
-        public void AppsOnDerive(ObjectOnDerive method)
-        {
-            this.PreviousObjectState = this.CurrentObjectState;
         }
     }
 }

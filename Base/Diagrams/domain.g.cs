@@ -58,6 +58,10 @@ namespace Allors.Domain
 	}
 	public interface Transitional  : Object, AccessControlledObject 
 	{
+					ObjectState PreviousObjectState {set;}
+
+					ObjectState LastObjectState {set;}
+
 	}
 	public interface UniquelyIdentifiable  : Object 
 	{
@@ -684,6 +688,16 @@ namespace Allors.Domain
 	{
 					Two Two {set;}
 
+	}
+	public interface Order  : Object, Transitional 
+	{
+					OrderObjectState CurrentObjectState {set;}
+
+					global::System.Int32? Amount {set;}
+
+	}
+	public interface OrderObjectState  : Object, ObjectState 
+	{
 	}
 	public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{

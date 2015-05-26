@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class Case
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -51,10 +43,8 @@ namespace Allors.Domain
         public void AppsOnDerive(ObjectOnDerive method)
         {
             this.DeriveCurrentObjectState();
-
-            this.PreviousObjectState = this.CurrentObjectState;
         }
-
+        
         private void DeriveCurrentObjectState()
         {
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))

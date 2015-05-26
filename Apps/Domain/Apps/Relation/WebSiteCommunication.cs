@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class WebSiteCommunication
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -41,8 +33,6 @@ namespace Allors.Domain
         public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
-
-            this.PreviousObjectState = this.CurrentObjectState;
 
             this.AppsOnDeriveFromParties();
             this.AppsOnDeriveToParties();

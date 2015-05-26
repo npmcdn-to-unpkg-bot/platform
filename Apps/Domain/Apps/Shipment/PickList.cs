@@ -25,14 +25,6 @@ namespace Allors.Domain
 
     public partial class PickList
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -129,8 +121,6 @@ namespace Allors.Domain
                 this.AppsOnDeriveTemplate(derivation);
             }
 
-            this.PreviousObjectState = this.CurrentObjectState;
-
             this.AppsOnDeriveTemplate(derivation);
         }
 
@@ -166,8 +156,6 @@ namespace Allors.Domain
             {
                 this.CurrentObjectState.Process(this);
             }
-
-            this.PreviousObjectState = this.CurrentObjectState;
         }
 
         public void AppsCancel(PickListCancel method)

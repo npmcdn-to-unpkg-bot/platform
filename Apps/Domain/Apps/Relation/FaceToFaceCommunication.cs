@@ -24,14 +24,6 @@ namespace Allors.Domain
     
     public partial class FaceToFaceCommunication
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -43,8 +35,6 @@ namespace Allors.Domain
         public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
-
-            this.PreviousObjectState = this.CurrentObjectState;
 
             this.FromParties = this.Participants;
             this.ToParties = this.Participants;

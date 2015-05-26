@@ -24,12 +24,16 @@ namespace Allors.Domain
 {
     public partial class PhoneCommunication
     {
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+
         public void AppsOnDerive(ObjectOnDerive method)
         {
-            var derivation = method.Derivation;
-            
-            this.PreviousObjectState = this.CurrentObjectState;
-
             this.AppsOnDeriveFromParties();
             this.AppsOnDeriveToParties();
             this.AppsOnDeriveInvolvedParties();
@@ -152,22 +156,6 @@ namespace Allors.Domain
             foreach (Party party in this.ToParties)
             {
                 this.AddInvolvedParty(party);
-            }
-        }
-
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState
-        {
-            get
-            {
-                return this.CurrentObjectState;
             }
         }
     }

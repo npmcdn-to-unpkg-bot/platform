@@ -28,14 +28,6 @@ namespace Allors.Domain
 
     public partial class SalesOrder
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -678,7 +670,6 @@ namespace Allors.Domain
                 var currentStatus = new SalesOrderStatusBuilder(this.Strategy.Session).WithSalesOrderObjectState(this.CurrentObjectState).Build();
                 this.AddOrderStatus(currentStatus);
                 this.CurrentOrderStatus = currentStatus;
-                this.PreviousObjectState = this.CurrentObjectState;
             }
         }
 

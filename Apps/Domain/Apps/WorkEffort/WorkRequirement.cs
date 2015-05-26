@@ -22,30 +22,19 @@ namespace Allors.Domain
 {
     public partial class WorkRequirement
     {
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+
         public void AppsOnBuild(ObjectOnBuild method)
         {
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new Allors.Domain.RequirementObjectStates(this.Strategy.DatabaseSession).Active;
-            }
-        }
-
-        public void AppsOnDerive(ObjectOnDerive method)
-        {
-            this.PreviousObjectState = this.CurrentObjectState;
-        }
-
-        ObjectState Transitional.PreviousObjectState {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState {
-            get
-            {
-                return this.CurrentObjectState;
             }
         }
     }

@@ -24,10 +24,16 @@ namespace Allors.Domain
 {
     public partial class EmailCommunication
     {
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+
         public void AppsOnDerive(ObjectOnDerive method)
         {
-            this.PreviousObjectState = this.CurrentObjectState;
-
             this.AppsOnDeriveFromParties();
             this.AppsOnDeriveToParties();
             this.AppsOnDeriveInvolvedParties();
@@ -166,20 +172,6 @@ namespace Allors.Domain
             }
 
             return null;
-        }
-
-        ObjectState Transitional.PreviousObjectState {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState {
-            get
-            {
-                return this.CurrentObjectState;
-            }
         }
     }
 }

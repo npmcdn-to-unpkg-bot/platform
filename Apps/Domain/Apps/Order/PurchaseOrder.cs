@@ -27,14 +27,6 @@ namespace Allors.Domain
 
     public partial class PurchaseOrder
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -352,7 +344,6 @@ namespace Allors.Domain
             this.DeriveOrderTotals(derivation);
 
             this.PreviousTakenViaSupplier = this.TakenViaSupplier;
-            this.PreviousObjectState = this.CurrentObjectState;
 
             this.DeriveTemplate(derivation);
         }

@@ -26,14 +26,6 @@ namespace Allors.Domain
 
     public partial class PurchaseInvoice
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
@@ -321,8 +313,6 @@ namespace Allors.Domain
                 this.AddInvoiceStatus(currentStatus);
                 this.CurrentInvoiceStatus = currentStatus;
             }
-
-            this.PreviousObjectState = this.CurrentObjectState;
 
             this.DeriveInvoiceItems(derivation);
             this.DeriveInvoiceTotals();

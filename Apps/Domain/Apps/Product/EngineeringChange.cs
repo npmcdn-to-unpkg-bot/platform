@@ -22,25 +22,12 @@ namespace Allors.Domain
 {
     public partial class EngineeringChange
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
             {
                 return this.CurrentObjectState;
             }
-        }
-
-        public void AppsOnDerive(ObjectOnDerive method)
-        {
-            this.PreviousObjectState = this.CurrentObjectState;
         }
     }
 }

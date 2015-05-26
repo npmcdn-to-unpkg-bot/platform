@@ -22,25 +22,17 @@ namespace Allors.Domain
 {
     public partial class TestingRequirement
     {
-        public void Approve()
-        {
-            this.AppsApprove();
-        }
-
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
             {
                 return this.CurrentObjectState;
             }
+        }
+
+        public void Approve()
+        {
+            this.AppsApprove();
         }
     }
 }

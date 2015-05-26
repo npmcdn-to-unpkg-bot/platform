@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConstraintSpecification.cs" company="Allors bvba">
-//   Copyright 2002-2012 Allors bvba.
+//------------------------------------------------------------------------------------------------- 
+// <copyright file="Order.cs" company="Allors bvba">
+// Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the General Public Licence v3 (GPL)
@@ -16,11 +16,12 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// <summary>Defines the HomeAddress type.</summary>
+//-------------------------------------------------------------------------------------------------
 
 namespace Allors.Domain
 {
-    public partial class ConstraintSpecification
+    public partial class Order
     {
         ObjectState Transitional.CurrentObjectState
         {
@@ -30,11 +31,11 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsOnBuild(ObjectOnBuild method)
+        public void TestsOnDerive(ObjectOnDerive method)
         {
-            if (!this.ExistCurrentObjectState)
+            if (0 == this.Amount)
             {
-                this.CurrentObjectState = new PartSpecificationObjectStates(this.Strategy.DatabaseSession).Created;
+                this.CurrentObjectState = new OrderObjectStates(this.Strategy.Session).Cancelled;
             }
         }
     }

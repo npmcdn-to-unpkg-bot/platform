@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     public partial class JournalEntry
     {
-        public ObjectState PreviousObjectState { get; private set; }
-
         public ObjectState CurrentObjectState { get; private set; }
     }
 }

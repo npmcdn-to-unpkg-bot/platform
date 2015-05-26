@@ -22,32 +22,19 @@ namespace Allors.Domain
 {
     public partial class Maintenance
     {
-        public void AppsOnBuild(ObjectOnBuild method)
-        {
-            if (!this.ExistCurrentObjectState)
-            {
-                this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.DatabaseSession).NeedsAction;
-            }
-        }
-
-        public void AppsOnDerive(ObjectOnDerive method)
-        {
-            this.PreviousObjectState = this.CurrentObjectState;
-        }
-
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
             {
                 return this.CurrentObjectState;
+            }
+        }
+
+        public void AppsOnBuild(ObjectOnBuild method)
+        {
+            if (!this.ExistCurrentObjectState)
+            {
+                this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.DatabaseSession).NeedsAction;
             }
         }
     }

@@ -22,14 +22,6 @@ namespace Allors.Domain
 {
     public partial class PurchaseInvoiceItem
     {
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
         ObjectState Transitional.CurrentObjectState
         {
             get
