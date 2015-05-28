@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static partial class TransitionalExtensions
     {
-        public static void TestsOnPostDerive(this Transitional @this, ObjectOnPostDerive method)
+        public static void BaseOnPostDerive(this Transitional @this, ObjectOnPostDerive method)
         {
             if (@this.CurrentObjectState != null && !@this.CurrentObjectState.Equals(@this.LastObjectState))
             {
