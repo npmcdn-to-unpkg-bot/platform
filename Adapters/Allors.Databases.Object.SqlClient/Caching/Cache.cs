@@ -20,6 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient.Caching
 {
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
 
     using Allors.Meta;
@@ -31,13 +32,13 @@ namespace Allors.Databases.Object.SqlClient.Caching
     {
         private readonly HashSet<IClass> transientConcreteClasses; 
 
-        private readonly Dictionary<ObjectId, CachedObject> cachedObjectByObjectId;
-        private readonly Dictionary<ObjectId, IClass> objectTypeByObjectId;
+        private readonly ConcurrentDictionary<ObjectId, CachedObject> cachedObjectByObjectId;
+        private readonly ConcurrentDictionary<ObjectId, IClass> objectTypeByObjectId;
 
         public Cache(IComposite[] transientObjectTypes)
         {
-            this.cachedObjectByObjectId = new Dictionary<ObjectId, CachedObject>();
-            this.objectTypeByObjectId = new Dictionary<ObjectId, IClass>();
+            this.cachedObjectByObjectId = new ConcurrentDictionary<ObjectId, CachedObject>();
+            this.objectTypeByObjectId = new ConcurrentDictionary<ObjectId, IClass>();
 
             if (transientObjectTypes != null)
             {
