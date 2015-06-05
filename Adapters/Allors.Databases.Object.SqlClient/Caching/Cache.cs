@@ -110,7 +110,8 @@ namespace Allors.Databases.Object.SqlClient.Caching
             {
                 foreach (var changedObjectId in changedObjectIds)
                 {
-                    this.cachedObjectByObjectId.Remove(changedObjectId);
+                    CachedObject removedObject;
+                    this.cachedObjectByObjectId.TryRemove(changedObjectId, out removedObject);
                 }
             }
         }
