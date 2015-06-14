@@ -2858,6 +2858,8 @@ namespace Allors.Domain
 
 					global::System.String TaxNumber {set;}
 
+					IndustryClassification IndustryClassification {set;}
+
 					UserGroup SupplierContactUserGroup {set;}
 
 					OrganisationClassification OrganisationClassifications {set;}

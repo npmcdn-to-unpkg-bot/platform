@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Party.cs" company="Allors bvba">
+// <copyright file="PartyExtensions.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -145,6 +145,7 @@ namespace Allors.Domain
                 }
             }
         }
+
         public static void AppsOnDeriveOpenOrderAmount(this Party party)
         {
             party.OpenOrderAmount = 0;

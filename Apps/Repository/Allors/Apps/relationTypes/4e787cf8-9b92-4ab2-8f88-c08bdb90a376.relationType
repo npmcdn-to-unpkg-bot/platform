@@ -3,6 +3,7 @@
     <isMany>true</isMany>
     <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
   </associationType>
+  <isDerived>true</isDerived>
   <isIndexed>true</isIndexed>
   <roleType id="766900b8-646c-4b59-b022-5143cf5e5ce9">
     <isMany>true</isMany>
