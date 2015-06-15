@@ -57,7 +57,7 @@ namespace Allors.Web.Mvc
                     this.session = Config.Default.CreateSession();
                 }
 
-                return this.Session;
+                return this.session;
             }
         }
 
