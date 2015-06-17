@@ -24,4 +24,17 @@ namespace Allors.Domain
     {
         bool IsPostalAddress { get; }
     }
+
+    public static partial class ContactMechanismExtensions
+    {
+        public static void AppsOnPreDerive(this ContactMechanism @this, ObjectOnPreDerive method)
+        {
+            var derivation = method.Derivation;
+
+            foreach (PartyContactMechanism partyContactMechanism in @this.PartyContactMechanismsWhereContactMechanism)
+            {
+                derivation.AddDependency(partyContactMechanism, @this);
+            }
+        }
+    }
 }

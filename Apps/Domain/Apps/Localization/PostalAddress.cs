@@ -35,16 +35,6 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsOnPreDerive(ObjectOnPreDerive method)
-        {
-            var derivation = method.Derivation;
-
-            foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanismsWhereContactMechanism)
-            {
-                derivation.AddDependency(partyContactMechanism, this);
-            }
-        }
-
         public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
