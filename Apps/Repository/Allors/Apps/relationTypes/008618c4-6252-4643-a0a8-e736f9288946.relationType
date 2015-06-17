@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="008618c4-6252-4643-a0a8-e736f9288946">
+  <associationType id="5282ba00-8bbc-4086-994d-7e68ce9224b6">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="ca45e298-96eb-4166-9450-c65344fb9979">
+    <objectType idref="d54b4bba-a84c-4826-85ba-7340714035c7" />
+    <pluralName>GeneralCorrespondences</pluralName>
+    <singularName>GeneralCorrespondence</singularName>
+  </roleType>
+</relationType>

@@ -747,6 +747,8 @@ namespace Allors.Domain
 	}
 	public interface Party  : Object, Localised, AccessControlledObject, SecurityTokenOwner, UniquelyIdentifiable 
 	{
+					PostalAddress GeneralCorrespondence {set;}
+
 					global::System.Decimal YTDRevenue {set;}
 
 					global::System.Decimal LastYearsRevenue {set;}
@@ -784,6 +786,8 @@ namespace Allors.Domain
 					Person CurrentContacts {set;}
 
 					ContactMechanism BillingAddress {set;}
+
+					ElectronicAddress GeneralEmail {set;}
 
 					ShipmentMethod DefaultShipmentMethod {set;}
 

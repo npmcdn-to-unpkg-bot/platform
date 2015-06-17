@@ -46,6 +46,14 @@ namespace Allors.Domain
             }
         }
 
+        public bool IsGeneralPhoneNumber
+        {
+            get
+            {
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).GeneralPhoneNumber);
+            }
+        }
+
         public bool IsGeneralFaxNumber
         {
             get
@@ -53,12 +61,20 @@ namespace Allors.Domain
                 return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).GeneralFaxNumber);
             }
         }
-
-        public bool IsGeneralPhoneNumber
+        
+        public bool IsGeneralEmail
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).GeneralPhoneNumber);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).GeneralEmail);
+            }
+        }
+
+        public bool IsGeneralCorrespondence
+        {
+            get
+            {
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).GeneralCorrespondence);
             }
         }
 

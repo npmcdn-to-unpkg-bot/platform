@@ -108,6 +108,18 @@ namespace Allors.Domain
                         continue;
                     }
 
+                    if (partyContactMechanism.ContactPurpose.IsGeneralCorrespondence)
+                    {
+                        this.GeneralCorrespondence = partyContactMechanism.ContactMechanism as PostalAddress;
+                        continue;
+                    }
+
+                    if (partyContactMechanism.ContactPurpose.IsGeneralEmail)
+                    {
+                        this.GeneralEmail = partyContactMechanism.ContactMechanism as ElectronicAddress;
+                        continue;
+                    }
+
                     if (partyContactMechanism.ContactPurpose.IsGeneralFaxNumber)
                     {
                         this.GeneralFaxNumber = partyContactMechanism.ContactMechanism as TelecommunicationsNumber;
