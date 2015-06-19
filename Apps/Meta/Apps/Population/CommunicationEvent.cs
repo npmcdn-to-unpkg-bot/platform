@@ -14,7 +14,7 @@ namespace Allors.Meta
 
 
             this.Roles.Description.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
-            this.Roles.Note.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
+            this.Roles.Note.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
 
             this.Roles.CurrentObjectState.IsRequired = true;
             this.Roles.Subject.IsRequired = true;
