@@ -13,7 +13,8 @@
         {
             this.ViewBag.Message = "About.";
 
-            return this.View();
+            // TODO: 
+            return this.View("Index");
         }
 
         [Authorize(Roles="Administrators, users")]
@@ -21,7 +22,8 @@
         {
             this.ViewBag.Message = "Contact.";
 
-            return this.View();
+            // TODO: 
+            return this.View("Index");
         }
     }
 }
