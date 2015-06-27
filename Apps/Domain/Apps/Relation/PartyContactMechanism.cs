@@ -18,13 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Allors.Domain
 {
     public partial class PartyContactMechanism
     {
         public void AppsOnBuild(ObjectOnBuild method)
         {
-            
+            if (!this.ExistFromDate)
+            {
+                this.FromDate = DateTime.UtcNow;
+            }
 
             if (!this.ExistUseAsDefault)
             {

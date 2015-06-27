@@ -42,6 +42,21 @@ namespace Allors.Domain
             this.RemoveCurrentContacts();
         }
 
+        public void AppsOnDeriveInactiveContacts(IDerivation derivation)
+        {
+            this.RemoveInactiveContacts();
+        }
+
+        public void AppsOnDeriveCurrentPartyContactRelationships(IDerivation derivation)
+        {
+            this.RemoveCurrentPartyContactMechanisms();
+        }
+
+        public void AppsOnDeriveInactivePartyContactRelationships(IDerivation derivation)
+        {
+            this.RemoveInactivePartyContactMechanisms();
+        }
+
         public int DeriveNextSubAccountNumber()
         {
             var next = this.SubAccountCounter.NextValue();

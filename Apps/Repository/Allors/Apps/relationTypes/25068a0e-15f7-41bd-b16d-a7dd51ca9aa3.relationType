@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="25068a0e-15f7-41bd-b16d-a7dd51ca9aa3">
+  <associationType id="f37e7ab6-e6c2-4a51-bbb9-bfffab638084">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="7fd1e04c-fa8e-40fb-bb8d-e4b26d0c3895">
+    <isMany>true</isMany>
+    <objectType idref="ca633037-ba1e-4304-9f2c-3353c287474b" />
+    <pluralName>InactivePartyContactMechanisms</pluralName>
+    <singularName>InactivePartyContactMechanism</singularName>
+  </roleType>
+</relationType>

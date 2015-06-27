@@ -50,7 +50,7 @@ namespace Allors.Domain
 
             workEffort.Finish();
 
-            this.DatabaseSession.Derive(true);    
+            this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(2, workEffort.WorkEffortStatuses.Count);
             Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).Completed, workEffort.CurrentWorkEffortStatus.WorkEffortObjectState);

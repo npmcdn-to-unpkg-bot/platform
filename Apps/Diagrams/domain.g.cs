@@ -761,6 +761,10 @@ namespace Allors.Domain
 
 					ContactMechanism SalesOffice {set;}
 
+					Person InactiveContacts {set;}
+
+					PartyContactMechanism InactivePartyContactMechanisms {set;}
+
 					TelecommunicationsNumber OrderInquiriesFax {set;}
 
 					Person CurrentSalesReps {set;}
@@ -818,6 +822,8 @@ namespace Allors.Domain
 					TelecommunicationsNumber GeneralFaxNumber {set;}
 
 					PaymentMethod DefaultPaymentMethod {set;}
+
+					PartyContactMechanism CurrentPartyContactMechanisms {set;}
 
 					TelecommunicationsNumber GeneralPhoneNumber {set;}
 
@@ -3048,7 +3054,7 @@ namespace Allors.Domain
 					Employment Employment {set;}
 
 	}
-	public interface PartyContactMechanism  : Object, Commentable, AccessControlledObject 
+	public interface PartyContactMechanism  : Object, Commentable, AccessControlledObject, Period 
 	{
 					ContactMechanismPurpose ContactPurpose {set;}
 

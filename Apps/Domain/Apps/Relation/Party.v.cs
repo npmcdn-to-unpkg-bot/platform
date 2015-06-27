@@ -44,5 +44,11 @@ namespace Allors.Domain
         CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod);
 
         void AppsOnDeriveCurrentContacts(IDerivation derivation);
+
+        void AppsOnDeriveInactiveContacts(IDerivation derivation);
+
+        void AppsOnDeriveCurrentPartyContactRelationships(IDerivation derivation);
+
+        void AppsOnDeriveInactivePartyContactRelationships(IDerivation derivation);
     }
 }
