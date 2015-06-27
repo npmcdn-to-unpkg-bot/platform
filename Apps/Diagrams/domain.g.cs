@@ -759,6 +759,8 @@ namespace Allors.Domain
 
 					ContactMechanism HomeAddress {set;}
 
+					OrganisationContactRelationship InactiveOrganisationContactRelationships {set;}
+
 					ContactMechanism SalesOffice {set;}
 
 					Person InactiveContacts {set;}
@@ -816,6 +818,8 @@ namespace Allors.Domain
 					CreditCard CreditCards {set;}
 
 					PostalAddress ShippingAddress {set;}
+
+					OrganisationContactRelationship CurrentOrganisationContactRelationships {set;}
 
 					global::System.Decimal OpenOrderAmount {set;}
 

@@ -450,8 +450,10 @@ namespace Allors.Domain
             this.DeriveCurrentEmployment(derivation);
             this.AppsOnDeriveCurrentContacts(derivation);
             this.AppsOnDeriveInactiveContacts(derivation);
-            this.AppsOnDeriveCurrentPartyContactRelationships(derivation);
-            this.AppsOnDeriveInactivePartyContactRelationships(derivation);
+            this.AppsOnDeriveCurrentOrganisationContactRelationships(derivation);
+            this.AppsOnDeriveInactiveOrganisationContactRelationships(derivation);
+            this.AppsOnDeriveCurrentPartyContactMechanisms(derivation);
+            this.AppsOnDeriveInactivePartyContactMechanisms(derivation);
             this.DeriveCommission();
         }
 
@@ -501,14 +503,42 @@ namespace Allors.Domain
             this.RemoveInactiveContacts();
         }
 
-        public void AppsOnDeriveCurrentPartyContactRelationships(IDerivation derivation)
+        public void AppsOnDeriveCurrentOrganisationContactRelationships(IDerivation derivation)
         {
-            this.RemoveCurrentPartyContactMechanisms();
+            this.RemoveCurrentOrganisationContactRelationships();
         }
 
-        public void AppsOnDeriveInactivePartyContactRelationships(IDerivation derivation)
+        public void AppsOnDeriveInactiveOrganisationContactRelationships(IDerivation derivation)
+        {
+            this.RemoveInactiveOrganisationContactRelationships();
+        }
+
+        public void AppsOnDeriveCurrentPartyContactMechanisms(IDerivation derivation)
+        {
+            this.RemoveCurrentPartyContactMechanisms();
+
+            foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanisms)
+            {
+                if (partyContactMechanism.FromDate <= DateTime.UtcNow &&
+                    (!partyContactMechanism.ExistThroughDate || partyContactMechanism.ThroughDate >= DateTime.UtcNow))
+                {
+                    this.AddCurrentPartyContactMechanism(partyContactMechanism);
+                }
+            }
+        }
+
+        public void AppsOnDeriveInactivePartyContactMechanisms(IDerivation derivation)
         {
             this.RemoveInactivePartyContactMechanisms();
+
+            foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanisms)
+            {
+                if (partyContactMechanism.FromDate > DateTime.UtcNow ||
+                    (partyContactMechanism.ExistThroughDate && partyContactMechanism.ThroughDate < DateTime.UtcNow))
+                {
+                    this.AddCurrentPartyContactMechanism(partyContactMechanism);
+                }
+            }
         }
 
         public void AppsOnDeriveCommission()

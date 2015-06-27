@@ -202,8 +202,10 @@ namespace Allors.Domain
             this.DeriveUserGroups(derivation);
             this.AppsOnDeriveCurrentContacts(derivation);
             this.AppsOnDeriveInactiveContacts(derivation);
-            this.AppsOnDeriveCurrentPartyContactRelationships(derivation);
-            this.AppsOnDeriveInactivePartyContactRelationships(derivation);
+            this.AppsOnDeriveCurrentOrganisationContactRelationships(derivation);
+            this.AppsOnDeriveInactiveOrganisationContactRelationships(derivation);
+            this.AppsOnDeriveCurrentPartyContactMechanisms(derivation);
+            this.AppsOnDeriveInactivePartyContactMechanisms(derivation);
         }
         
         public bool AppsIsActiveClient(DateTime? date)
@@ -563,12 +565,39 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsOnDeriveCurrentPartyContactRelationships(IDerivation derivation)
+        public void AppsOnDeriveCurrentOrganisationContactRelationships(IDerivation derivation)
+        {
+            this.RemoveCurrentOrganisationContactRelationships();
+
+            foreach (OrganisationContactRelationship organisationContactRelationship in this.OrganisationContactRelationshipsWhereOrganisation)
+            {
+                if (organisationContactRelationship.FromDate <= DateTime.UtcNow &&
+                    (!organisationContactRelationship.ExistThroughDate || organisationContactRelationship.ThroughDate >= DateTime.UtcNow))
+                {
+                    this.AddCurrentOrganisationContactRelationship(organisationContactRelationship);
+                }
+            }
+        }
+
+        public void AppsOnDeriveInactiveOrganisationContactRelationships(IDerivation derivation)
+        {
+            this.RemoveInactiveOrganisationContactRelationships();
+
+            foreach (OrganisationContactRelationship organisationContactRelationship in this.OrganisationContactRelationshipsWhereOrganisation)
+            {
+                if (organisationContactRelationship.FromDate > DateTime.UtcNow ||
+                    (organisationContactRelationship.ExistThroughDate && organisationContactRelationship.ThroughDate < DateTime.UtcNow))
+                {
+                    this.AddInactiveOrganisationContactRelationship(organisationContactRelationship);
+                }
+            }
+        }
+
+        public void AppsOnDeriveCurrentPartyContactMechanisms(IDerivation derivation)
         {
             this.RemoveCurrentPartyContactMechanisms();
 
-            var partyContactMechanisms = this.PartyContactMechanisms;
-            foreach (PartyContactMechanism partyContactMechanism in partyContactMechanisms)
+            foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanisms)
             {
                 if (partyContactMechanism.FromDate <= DateTime.UtcNow &&
                     (!partyContactMechanism.ExistThroughDate || partyContactMechanism.ThroughDate >= DateTime.UtcNow))
@@ -578,12 +607,11 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsOnDeriveInactivePartyContactRelationships(IDerivation derivation)
+        public void AppsOnDeriveInactivePartyContactMechanisms(IDerivation derivation)
         {
             this.RemoveInactivePartyContactMechanisms();
 
-            var partyContactMechanisms = this.PartyContactMechanisms;
-            foreach (PartyContactMechanism partyContactMechanism in partyContactMechanisms)
+            foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanisms)
             {
                 if (partyContactMechanism.FromDate > DateTime.UtcNow ||
                     (partyContactMechanism.ExistThroughDate && partyContactMechanism.ThroughDate < DateTime.UtcNow))

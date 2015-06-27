@@ -53,12 +53,22 @@ namespace Allors.Domain
             this.RemoveInactiveContacts();
         }
 
-        public void AppsOnDeriveCurrentPartyContactRelationships(IDerivation derivation)
+        public void AppsOnDeriveCurrentOrganisationContactRelationships(IDerivation derivation)
         {
             this.RemoveCurrentPartyContactMechanisms();
         }
 
-        public void AppsOnDeriveInactivePartyContactRelationships(IDerivation derivation)
+        public void AppsOnDeriveInactiveOrganisationContactRelationships(IDerivation derivation)
+        {
+            this.RemoveInactivePartyContactMechanisms();
+        }
+
+        public void AppsOnDeriveCurrentPartyContactMechanisms(IDerivation derivation)
+        {
+            this.RemoveCurrentPartyContactMechanisms();
+        }
+
+        public void AppsOnDeriveInactivePartyContactMechanisms(IDerivation derivation)
         {
             this.RemoveInactivePartyContactMechanisms();
         }
