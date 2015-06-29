@@ -60,5 +60,9 @@ namespace Allors.Domain
                 }   
             }
         }
+        public bool IsActive
+        {
+            get { return this.ExistPartyWhereCurrentPartyContactMechanism; }
+        }
     }
 }

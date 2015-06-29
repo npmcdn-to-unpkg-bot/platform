@@ -37,5 +37,18 @@ namespace Allors.Domain
                 this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.DatabaseSession).NeedsAction;
             }
         }
+        public void AppsDelete(DeletableDelete method)
+        {
+            foreach (WorkEffortStatus workEffortStatus in WorkEffortStatuses)
+            {
+                workEffortStatus.Delete();
+            }
+
+            foreach (WorkEffortAssignment workEffortAssignment in this.WorkEffortAssignmentsWhereAssignment)
+            {
+                workEffortAssignment.Delete();
+            }
+        }
+
     }
 }

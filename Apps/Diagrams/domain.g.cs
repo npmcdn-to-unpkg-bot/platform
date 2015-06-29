@@ -160,7 +160,7 @@ namespace Allors.Domain
 	public interface CommunicationAttachment  : Object, AccessControlledObject 
 	{
 	}
-	public interface CommunicationEvent  : Object, Transitional, AccessControlledObject, Commentable, UniquelyIdentifiable 
+	public interface CommunicationEvent  : Object, Transitional, AccessControlledObject, Deletable, Commentable, UniquelyIdentifiable 
 	{
 					global::System.DateTime? ScheduledStart {set;}
 
@@ -1136,7 +1136,7 @@ namespace Allors.Domain
 					global::System.DateTime? EstimatedArrivalDate {set;}
 
 	}
-	public interface WorkEffort  : Object, AccessControlledObject, Transitional, UniquelyIdentifiable 
+	public interface WorkEffort  : Object, AccessControlledObject, Transitional, UniquelyIdentifiable, Deletable 
 	{
 					WorkEffortStatus CurrentWorkEffortStatus {set;}
 
@@ -5033,7 +5033,7 @@ namespace Allors.Domain
 					Disbursement Disbursement {set;}
 
 	}
-	public interface WorkEffortAssignment  : Object, Period, AccessControlledObject, Commentable 
+	public interface WorkEffortAssignment  : Object, Period, AccessControlledObject, Commentable, Deletable 
 	{
 					Person Professional {set;}
 
@@ -5128,7 +5128,7 @@ namespace Allors.Domain
 					global::System.Decimal? EstimatedCost {set;}
 
 	}
-	public interface WorkEffortStatus  : Object, AccessControlledObject 
+	public interface WorkEffortStatus  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
