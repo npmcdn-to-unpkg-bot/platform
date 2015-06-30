@@ -536,7 +536,7 @@ namespace Allors.Domain
                 if (partyContactMechanism.FromDate > DateTime.UtcNow ||
                     (partyContactMechanism.ExistThroughDate && partyContactMechanism.ThroughDate < DateTime.UtcNow))
                 {
-                    this.AddCurrentPartyContactMechanism(partyContactMechanism);
+                    this.AddInactivePartyContactMechanism(partyContactMechanism);
                 }
             }
         }
