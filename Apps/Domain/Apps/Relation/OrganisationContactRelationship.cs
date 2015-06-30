@@ -31,6 +31,15 @@ namespace Allors.Domain
                 this.FromDate = DateTime.UtcNow;
             }
         }
+        public void AppsOnPreDerive(ObjectOnPreDerive method)
+        {
+            var derivation = method.Derivation;
+
+            if (this.ExistOrganisation)
+            {
+                derivation.AddDependency(this.Organisation, this);
+            }
+        }
 
         public void AppsOnDerive(ObjectOnDerive method)
         {
