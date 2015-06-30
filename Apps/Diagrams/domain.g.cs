@@ -1756,7 +1756,7 @@ namespace Allors.Domain
 	public interface CommunicationEventPurpose  : Object, Enumeration 
 	{
 	}
-	public interface CommunicationEventStatus  : Object, AccessControlledObject 
+	public interface CommunicationEventStatus  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 

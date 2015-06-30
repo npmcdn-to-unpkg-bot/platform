@@ -102,6 +102,18 @@ namespace Allors.Domain
             }
         }
 
+
+        public static void AppsDelete(this CommunicationEvent @this, DeletableDelete method)
+        {
+            foreach (CommunicationEventStatus communicationEventStatus in @this.CommunicationEventStatuses)
+            {
+                communicationEventStatus.Delete();
+            }
+
+            @this.RemoveWorkEfforts();
+        }
+
+
         public static void AppsClose(this CommunicationEvent @this, CommunicationEventClose method)
         {
             @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Completed;
