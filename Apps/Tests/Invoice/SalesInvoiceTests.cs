@@ -32,7 +32,7 @@ namespace Allors.Domain
     public class SalesInvoiceTests : DomainTest
     {
         [Test]
-        public void GivenSalesInvoice_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenSalesInvoice_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var customer = new OrganisationBuilder(this.DatabaseSession).WithName("customer").Build();
             var contactMechanism = new PostalAddressBuilder(this.DatabaseSession)
@@ -57,8 +57,35 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new SalesInvoiceObjectStates(this.DatabaseSession).ReadyForPosting, invoice.CurrentObjectState);
-            Assert.IsNotNull(invoice.PreviousObjectState);
-            Assert.AreEqual(invoice.PreviousObjectState, invoice.CurrentObjectState);
+            Assert.AreEqual(invoice.LastObjectState, invoice.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenSalesInvoice_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var customer = new OrganisationBuilder(this.DatabaseSession).WithName("customer").Build();
+            var contactMechanism = new PostalAddressBuilder(this.DatabaseSession)
+                .WithAddress1("Haverwerf 15")
+                .WithPostalBoundary(new PostalBoundaryBuilder(this.DatabaseSession)
+                                        .WithLocality("Mechelen")
+                                        .WithCountry(new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "BE"))
+                                        .Build())
+
+                .Build();
+
+            var invoice = new SalesInvoiceBuilder(this.DatabaseSession)
+                .WithInvoiceNumber("1")
+                .WithBillToCustomer(customer)
+                .WithBillToContactMechanism(contactMechanism)
+                .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
+                .WithBilledFromInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
+                .Build();
+
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation).Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(invoice.PreviousObjectState);
         }
 
         [Test]
@@ -156,7 +183,7 @@ namespace Allors.Domain
 
             Assert.AreEqual(invoice.CurrentInvoiceStatus.SalesInvoiceObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).ReadyForPosting);
             Assert.AreEqual(invoice.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).ReadyForPosting);
-            Assert.AreEqual(invoice.CurrentObjectState, invoice.PreviousObjectState);
+            Assert.AreEqual(invoice.CurrentObjectState, invoice.LastObjectState);
 
             builder.WithBilledFromInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"));
             builder.Build();

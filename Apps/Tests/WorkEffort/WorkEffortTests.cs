@@ -27,15 +27,24 @@ namespace Allors.Domain
     public class WorkEffortTests : DomainTest
     {
         [Test]
-        public void GivenCustomerShipment_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenCustomerShipment_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var workEffort = new ActivityBuilder(this.DatabaseSession).WithDescription("Activity").Build();
 
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new WorkEffortObjectStates(this.DatabaseSession).NeedsAction, workEffort.CurrentObjectState);
-            Assert.IsNotNull(workEffort.PreviousObjectState);
-            Assert.AreEqual(workEffort.PreviousObjectState, workEffort.CurrentObjectState);
+            Assert.AreEqual(workEffort.LastObjectState, workEffort.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenCustomerShipment_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var workEffort = new ActivityBuilder(this.DatabaseSession).WithDescription("Activity").Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(workEffort.PreviousObjectState);
         }
 
         [Test]

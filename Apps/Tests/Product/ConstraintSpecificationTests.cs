@@ -43,7 +43,7 @@ namespace Allors.Domain
 
             Assert.AreEqual(specification.CurrentPartSpecificationStatus.PartSpecificationObjectState, new PartSpecificationObjectStates(this.DatabaseSession).Created);
             Assert.AreEqual(specification.CurrentObjectState, new PartSpecificationObjectStates(this.DatabaseSession).Created);
-            Assert.AreEqual(specification.CurrentObjectState, specification.PreviousObjectState);
+            Assert.AreEqual(specification.CurrentObjectState, specification.LastObjectState);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Allors.Domain
 
             Assert.AreEqual(activity.CurrentWorkEffortStatus.WorkEffortObjectState, new WorkEffortObjectStates(this.DatabaseSession).NeedsAction);
             Assert.AreEqual(activity.CurrentObjectState, new WorkEffortObjectStates(this.DatabaseSession).NeedsAction);
-            Assert.AreEqual(activity.CurrentObjectState, activity.PreviousObjectState);
+            Assert.AreEqual(activity.CurrentObjectState, activity.LastObjectState);
         }
     }
 }

@@ -1426,7 +1426,7 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSalesOrder_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenSalesOrder_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var customer = new PersonBuilder(this.DatabaseSession).WithFirstName("Koen").Build();
             var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
@@ -1445,8 +1445,29 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new SalesOrderObjectStates(this.DatabaseSession).Provisional, order.CurrentObjectState);
-            Assert.IsNotNull(order.PreviousObjectState);
-            Assert.AreEqual(order.PreviousObjectState, order.CurrentObjectState);
+            Assert.AreEqual(order.LastObjectState, order.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenSalesOrder_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var customer = new PersonBuilder(this.DatabaseSession).WithFirstName("Koen").Build();
+            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).Build();
+
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+
+            var order = new SalesOrderBuilder(this.DatabaseSession)
+                .WithBillToCustomer(customer)
+                .WithShipToCustomer(customer)
+                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+                .WithTakenByInternalOrganisation(internalOrganisation)
+                .Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(order.PreviousObjectState);
         }
 
         [Test]

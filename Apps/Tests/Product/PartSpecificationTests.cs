@@ -30,15 +30,24 @@ namespace Allors.Domain
     public class PartSpecificationTests : DomainTest
     {
         [Test]
-        public void GivenConstraintSpecification_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenConstraintSpecification_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var specification = new ConstraintSpecificationBuilder(this.DatabaseSession).WithDescription("specification").Build();
 
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new PartSpecificationObjectStates(this.DatabaseSession).Created, specification.CurrentObjectState);
-            Assert.IsNotNull(specification.PreviousObjectState);
-            Assert.AreEqual(specification.PreviousObjectState, specification.CurrentObjectState);
+            Assert.AreEqual(specification.LastObjectState, specification.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenConstraintSpecification_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var specification = new ConstraintSpecificationBuilder(this.DatabaseSession).WithDescription("specification").Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(specification.PreviousObjectState);
         }
 
         [Test]

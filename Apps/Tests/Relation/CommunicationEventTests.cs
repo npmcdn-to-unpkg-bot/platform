@@ -29,7 +29,7 @@ namespace Allors.Domain
     public class CommunicationEventTests : DomainTest
     {
         [Test]
-        public void GivenCommunicationEvent_WhenInProgress_ThenCurrencObjectStateIsInProgress()
+        public void GivenCommunicationEvent_WhenInProgress_ThenCurrentObjectStateIsInProgress()
         {
             var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
                 .WithParticipant(new PersonBuilder(this.DatabaseSession).WithLastName("participant").Build())
@@ -40,7 +40,6 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).InProgress, communication.CurrentObjectState);
-            Assert.IsNotNull(communication.PreviousObjectState);
         }
 
         [Test]
@@ -56,7 +55,6 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).Completed, communication.CurrentObjectState);
-            Assert.IsNotNull(communication.PreviousObjectState);
         }
 
         [Test]
@@ -72,7 +70,6 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).Scheduled, communication.CurrentObjectState);
-            Assert.IsNotNull(communication.PreviousObjectState);
         }
 
         [Test]

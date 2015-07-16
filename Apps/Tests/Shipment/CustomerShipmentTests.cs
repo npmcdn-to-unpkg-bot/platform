@@ -31,7 +31,7 @@ namespace Allors.Domain
     public class CustomerShipmentTests : DomainTest
     {
         [Test]
-        public void GivenCustomerShipment_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenCustomerShipment_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
             var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
@@ -46,8 +46,25 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new CustomerShipmentObjectStates(this.DatabaseSession).Created, shipment.CurrentObjectState);
-            Assert.IsNotNull(shipment.PreviousObjectState);
-            Assert.AreEqual(shipment.PreviousObjectState, shipment.CurrentObjectState);
+            Assert.AreEqual(shipment.LastObjectState, shipment.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenCustomerShipment_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+
+            var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
+                .WithShipToParty(customer)
+                .WithShipToAddress(shipToAddress)
+                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
+                .Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(shipment.PreviousObjectState);
         }
 
         [Test]

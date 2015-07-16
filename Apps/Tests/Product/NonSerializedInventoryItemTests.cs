@@ -28,7 +28,7 @@ namespace Allors.Domain
     public class NonSerializedInventoryItemTests : DomainTest
     {
         [Test]
-        public void GivenInventoryItem_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenInventoryItem_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var item = new NonSerializedInventoryItemBuilder(this.DatabaseSession)
                 .WithPart(new FinishedGoodBuilder(this.DatabaseSession).WithName("part").WithManufacturerId("10101").Build())
@@ -37,8 +37,19 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new NonSerializedInventoryItemObjectStates(this.DatabaseSession).Good, item.CurrentObjectState);
-            Assert.IsNotNull(item.PreviousObjectState);
-            Assert.AreEqual(item.PreviousObjectState, item.CurrentObjectState);
+            Assert.AreEqual(item.LastObjectState, item.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenInventoryItem_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var item = new NonSerializedInventoryItemBuilder(this.DatabaseSession)
+                .WithPart(new FinishedGoodBuilder(this.DatabaseSession).WithName("part").WithManufacturerId("10101").Build())
+                .Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(item.PreviousObjectState);
         }
 
         [Test]

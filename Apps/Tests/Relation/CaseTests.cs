@@ -29,15 +29,24 @@ namespace Allors.Domain
     public class CaseTests : DomainTest
     {
         [Test]
-        public void GivenCase_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenCase_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var complaint = new CaseBuilder(this.DatabaseSession).WithDescription("Complaint").Build();
 
             this.DatabaseSession.Derive(true);
             
             Assert.AreEqual(new CaseObjectStates(this.DatabaseSession).Opened, complaint.CurrentObjectState);
-            Assert.IsNotNull(complaint.PreviousObjectState);
-            Assert.AreEqual(complaint.PreviousObjectState, complaint.CurrentObjectState);
+            Assert.AreEqual(complaint.LastObjectState, complaint.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenCase_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var complaint = new CaseBuilder(this.DatabaseSession).WithDescription("Complaint").Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(complaint.PreviousObjectState);
         }
 
         [Test]

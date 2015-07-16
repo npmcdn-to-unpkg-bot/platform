@@ -43,7 +43,7 @@ namespace Allors.Domain
 
             Assert.AreEqual(requirement.CurrentRequirementStatus.RequirementObjectState, new RequirementObjectStates(this.DatabaseSession).Active);
             Assert.AreEqual(requirement.CurrentObjectState, new RequirementObjectStates(this.DatabaseSession).Active);
-            Assert.AreEqual(requirement.CurrentObjectState, requirement.PreviousObjectState);
+            Assert.AreEqual(requirement.CurrentObjectState, requirement.LastObjectState);
         }
     }
 }

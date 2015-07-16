@@ -29,7 +29,7 @@ namespace Allors.Domain
     public class BudgetTests : DomainTest
     {
         [Test]
-        public void GivenOperatingBudget_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenOperatingBudget_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var budget = new OperatingBudgetBuilder(this.DatabaseSession)
                 .WithDescription("Budget")
@@ -40,8 +40,21 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new BudgetObjectStates(this.DatabaseSession).Opened, budget.CurrentObjectState);
-            Assert.IsNotNull(budget.PreviousObjectState);
-            Assert.AreEqual(budget.PreviousObjectState, budget.CurrentObjectState);
+            Assert.AreEqual(budget.LastObjectState, budget.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenOperatingBudget_WhenBuild_ThenPreviousObjectStateIsNUll()
+        {
+            var budget = new OperatingBudgetBuilder(this.DatabaseSession)
+                .WithDescription("Budget")
+                .WithFromDate(DateTime.UtcNow)
+                .WithThroughDate(DateTime.UtcNow.AddYears(1))
+                .Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(budget.PreviousObjectState);
         }
 
         [Test]
@@ -90,7 +103,7 @@ namespace Allors.Domain
 
             Assert.AreEqual(budget.CurrentBudgetStatus.BudgetObjectState, new BudgetObjectStates(this.DatabaseSession).Opened);
             Assert.AreEqual(budget.CurrentObjectState, new BudgetObjectStates(this.DatabaseSession).Opened);
-            Assert.AreEqual(budget.CurrentObjectState, budget.PreviousObjectState);
+            Assert.AreEqual(budget.CurrentObjectState, budget.LastObjectState);
         }
     }
 }

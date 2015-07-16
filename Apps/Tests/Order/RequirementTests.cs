@@ -27,15 +27,24 @@ namespace Allors.Domain
     public class RequirementTests : DomainTest
     {
         [Test]
-        public void GivenCustomerRequirement_WhenBuild_ThenPreviousObjectStateEqualsCurrencObjectState()
+        public void GivenCustomerRequirement_WhenBuild_ThenLastObjectStateEqualsCurrencObjectState()
         {
             var requirement = new CustomerRequirementBuilder(this.DatabaseSession).WithDescription("CustomerRequirement").Build();
 
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(new RequirementObjectStates(this.DatabaseSession).Active, requirement.CurrentObjectState);
-            Assert.IsNotNull(requirement.PreviousObjectState);
-            Assert.AreEqual(requirement.PreviousObjectState, requirement.CurrentObjectState);
+            Assert.AreEqual(requirement.LastObjectState, requirement.CurrentObjectState);
+        }
+
+        [Test]
+        public void GivenCustomerRequirement_WhenBuild_ThenPreviousObjectStateIsNull()
+        {
+            var requirement = new CustomerRequirementBuilder(this.DatabaseSession).WithDescription("CustomerRequirement").Build();
+
+            this.DatabaseSession.Derive(true);
+
+            Assert.IsNull(requirement.PreviousObjectState);
         }
 
         [Test]
