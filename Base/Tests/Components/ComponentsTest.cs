@@ -61,7 +61,7 @@ namespace Components
                 this.Session.Commit();
             }
             
-            SecurityCache.Invalidate();
+            new SecurityCache(this.Session).Invalidate();
         }
 
         protected IObject[] GetObjects(ISession session, Composite objectType)

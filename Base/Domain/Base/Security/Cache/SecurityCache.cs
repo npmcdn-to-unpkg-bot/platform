@@ -28,66 +28,82 @@ namespace Allors.Domain
 
     public class SecurityCache
     {
-        private static SecurityCache singleton;
+        /// <summary>
+        /// The cache key.
+        /// </summary>
+        private const string CacheKey = "Allors.Cache.Security";
 
+        private readonly IDatabase database;
         private readonly Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>> operationsByOperandTypeIdByObjectTypeIdByRoleId;
 
-        private SecurityCache(ISession session)
+        public SecurityCache(ISession session)
         {
-            this.operationsByOperandTypeIdByObjectTypeIdByRoleId = new Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>>();
-            foreach (Role role in new Roles(session).Extent())
+            if (session is IDatabaseSession)
             {
-                if (!role.ExistUniqueId)
+                this.database = ((IDatabaseSession)session).Database;
+            }
+            else
+            {
+                this.database = ((IWorkspaceSession)session).Workspace.Database;
+            }
+            
+            this.operationsByOperandTypeIdByObjectTypeIdByRoleId = (Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>>)this.database[CacheKey];
+
+            if (this.operationsByOperandTypeIdByObjectTypeIdByRoleId == null)
+            {
+                this.operationsByOperandTypeIdByObjectTypeIdByRoleId = new Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>>();
+
+                foreach (Role role in new Roles(session).Extent())
                 {
-                    throw new Exception("Role " + role + " has no unique id");
+                    if (!role.ExistUniqueId)
+                    {
+                        throw new Exception("Role " + role + " has no unique id");
+                    }
+
+                    var operationsByOperandTypeIdByObjectTypeId = new Dictionary<Guid, Dictionary<Guid, List<Operation>>>();
+                    this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId] = operationsByOperandTypeIdByObjectTypeId;
+
+                    foreach (Permission permission in role.Permissions)
+                    {
+                        if (!permission.ExistConcreteClassPointer || !permission.ExistOperandTypePointer || !permission.ExistOperation)
+                        {
+                            throw new Exception("Permission " + permission + " has no concrete class, operand type and/or operation.");
+                        }
+
+                        var concreteClassId = permission.ConcreteClassPointer;
+                        var operandTypeId = permission.OperandTypePointer;
+                        var operation = permission.Operation;
+
+                        Dictionary<Guid, List<Operation>> operationsByOperandTypeId;
+                        if (!operationsByOperandTypeIdByObjectTypeId.TryGetValue(concreteClassId, out operationsByOperandTypeId))
+                        {
+                            operationsByOperandTypeId = new Dictionary<Guid, List<Operation>>();
+                            operationsByOperandTypeIdByObjectTypeId[concreteClassId] = operationsByOperandTypeId;
+                        }
+
+                        List<Operation> operations;
+                        if (!operationsByOperandTypeId.TryGetValue(operandTypeId, out operations))
+                        {
+                            operations = new List<Operation>();
+                            operationsByOperandTypeId[operandTypeId] = operations;
+                        }
+
+                        operations.Add(operation);
+                    }
                 }
 
-                var operationsByOperandObjectIdByObjectTypeId = new Dictionary<Guid, Dictionary<Guid, List<Operation>>>();
-                this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId] = operationsByOperandObjectIdByObjectTypeId;
-
-                foreach (Permission permission in role.Permissions)
-                {
-                    if (!permission.ExistConcreteClassPointer || !permission.ExistOperandTypePointer || !permission.ExistOperation)
-                    {
-                        throw new Exception("Permission " + permission + " has no concrete class, operand type and/or operation.");
-                    }
-
-                    var concreteClassId = permission.ConcreteClassPointer;
-                    var operandTypeId = permission.OperandTypePointer;
-                    var operation = permission.Operation;
-                    
-                    Dictionary<Guid, List<Operation>> operationsByOperandObjectId;
-                    if (!operationsByOperandObjectIdByObjectTypeId.TryGetValue(concreteClassId, out operationsByOperandObjectId))
-                    {
-                        operationsByOperandObjectId = new Dictionary<Guid, List<Operation>>();
-                        operationsByOperandObjectIdByObjectTypeId[concreteClassId] = operationsByOperandObjectId;
-                    }
-
-                    List<Operation> operations;
-                    if (!operationsByOperandObjectId.TryGetValue(operandTypeId, out operations))
-                    {
-                        operations = new List<Operation>();
-                        operationsByOperandObjectId[operandTypeId] = operations;
-                    }
-
-                    operations.Add(operation);
-                }
+                database[CacheKey] = this.operationsByOperandTypeIdByObjectTypeIdByRoleId;
             }
         }
 
-        public static SecurityCache GetSingleton(ISession session)
+        public void Invalidate()
         {
-            return singleton ?? (singleton = new SecurityCache(session));
+            this.database[CacheKey] = null;
         }
 
-        public static void Invalidate()
+        public Dictionary<Guid, IList<Operation>> GetOperationsByOperandTypeId(HashSet<Guid> roleUniqueIds, ObjectType objectType, out bool hasWriteOperation, out bool hasReadOperation)
         {
-            singleton = null;
-        }
-
-        public Dictionary<Guid, IList<Operation>> GetOperationsByOperandObjectId(IList<Guid> roleUniqueIds, ObjectType objectType, out bool hasWriteOperation, out bool hasReadOperation)
-        {
-            var operationsByOperandId = new Dictionary<Guid, IList<Operation>>();
+            var resultOperationsByOperandId = new Dictionary<Guid, IList<Operation>>();
 
             hasWriteOperation = false;
             hasReadOperation = false;
@@ -103,16 +119,16 @@ namespace Allors.Domain
                         var roleOperandTypeId = dictionaryEntry.Key;
                         var roleOperations = dictionaryEntry.Value;
 
-                        IList<Operation> operations;
-                        if (!operationsByOperandId.TryGetValue(roleOperandTypeId, out operations))
+                        IList<Operation> resultOperations;
+                        if (!resultOperationsByOperandId.TryGetValue(roleOperandTypeId, out resultOperations))
                         {
-                            operations = new List<Operation>();
-                            operationsByOperandId[roleOperandTypeId] = operations;
+                            resultOperations = new List<Operation>();
+                            resultOperationsByOperandId[roleOperandTypeId] = resultOperations;
                         }
 
                         foreach (var roleOperation in roleOperations)
                         {
-                            if (!operations.Contains(roleOperation))
+                            if (!resultOperations.Contains(roleOperation))
                             {
                                 if (roleOperation == Operation.Write)
                                 {
@@ -124,14 +140,14 @@ namespace Allors.Domain
                                     hasReadOperation = true;
                                 }
 
-                                operations.Add(roleOperation);
+                                resultOperations.Add(roleOperation);
                             }
                         }
                     }
                 }
             }
 
-            return operationsByOperandId;
+            return resultOperationsByOperandId;
         }
     }
 }

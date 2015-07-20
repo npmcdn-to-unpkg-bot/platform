@@ -25,7 +25,7 @@ namespace Allors.Domain
     {
         public void BaseOnDerive(ObjectOnDerive method)
         {
-            SecurityCache.Invalidate();
+            new SecurityCache(this.Strategy.Session).Invalidate();
         }
     }
 }

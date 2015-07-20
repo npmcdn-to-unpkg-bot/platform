@@ -92,11 +92,11 @@ namespace Allors.Domain
         {
             get
             {
-                return this.OperationsByOperandObjectId.Count;
+                return this.OperationsByOperandTypeId.Count;
             }
         }
 
-        private Dictionary<Guid, IList<Operation>> OperationsByOperandObjectId
+        private Dictionary<Guid, IList<Operation>> OperationsByOperandTypeId
         {
             get
             {
@@ -108,11 +108,11 @@ namespace Allors.Domain
         public override string ToString()
         {
             var toString = new StringBuilder();
-            foreach (var objectId in this.OperationsByOperandObjectId.Keys)
+            foreach (var objectId in this.OperationsByOperandTypeId.Keys)
             {
                 var operandType = (OperandType)this.user.Strategy.Session.Population.MetaPopulation.Find(objectId);
                 toString.Append(operandType.DisplayName + ":");
-                foreach (var operation in this.OperationsByOperandObjectId[objectId])
+                foreach (var operation in this.OperationsByOperandTypeId[objectId])
                 {
                     toString.Append(" ");
                     toString.Append(Enum.GetName(typeof(Operation), operation));
@@ -147,7 +147,7 @@ namespace Allors.Domain
         public IList<Operation> GetOperations(OperandType operandType)
         {
             IList<Operation> operations;
-            if (!this.OperationsByOperandObjectId.TryGetValue(operandType.Id, out operations))
+            if (!this.OperationsByOperandTypeId.TryGetValue(operandType.Id, out operations))
             {
                 return EmptyOperations;
             }
@@ -162,9 +162,9 @@ namespace Allors.Domain
 
         private bool IsPermitted(Guid operandTypeId, Operation operation)
         {
-            if (this.OperationsByOperandObjectId.ContainsKey(operandTypeId))
+            if (this.OperationsByOperandTypeId.ContainsKey(operandTypeId))
             {
-                var operationsList = this.OperationsByOperandObjectId[operandTypeId];
+                var operationsList = this.OperationsByOperandTypeId[operandTypeId];
                 return operationsList.Contains(operation);
             }
 
@@ -203,7 +203,7 @@ namespace Allors.Domain
 
                     var cache = new AccessControlCache(this.databaseSession);
 
-                    List<Guid> roleUniqueIds = null;
+                    HashSet<Guid> roleUniqueIds = null;
                     foreach (var accessControl in accessControls)
                     {
                         var cacheEntry = cache[accessControl];
@@ -211,7 +211,7 @@ namespace Allors.Domain
                         {
                             if (roleUniqueIds == null)
                             {
-                                roleUniqueIds = new List<Guid>();
+                                roleUniqueIds = new HashSet<Guid>();
                             }
 
                             roleUniqueIds.Add(cacheEntry.RoleUniqueId);
@@ -230,8 +230,8 @@ namespace Allors.Domain
                             deniedPermissions = this.accessControlledObject.DeniedPermissions;
                         }
 
-                        var securityCache = SecurityCache.GetSingleton(this.databaseSession);
-                        this.operationsByOperandId = securityCache.GetOperationsByOperandObjectId(roleUniqueIds, (ObjectType)this.objectType, out this.hasWriteOperation, out this.hasReadOperation);
+                        var securityCache = new SecurityCache(this.databaseSession);
+                        this.operationsByOperandId = securityCache.GetOperationsByOperandTypeId(roleUniqueIds, (ObjectType)this.objectType, out this.hasWriteOperation, out this.hasReadOperation);
 
                         foreach (var deniedPermission in deniedPermissions)
                         {

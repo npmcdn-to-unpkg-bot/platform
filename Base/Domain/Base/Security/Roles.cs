@@ -77,7 +77,7 @@ namespace Allors.Domain
             // DAC emulation
             new RoleBuilder(this.Session).WithName(OwnerName).WithUniqueId(OwnerId).Build();
 
-            SecurityCache.Invalidate();
+            new SecurityCache(this.Session).Invalidate();
         }
 
         protected override void BaseSecure(Security config)

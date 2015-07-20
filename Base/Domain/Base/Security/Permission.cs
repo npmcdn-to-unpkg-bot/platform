@@ -166,7 +166,7 @@ namespace Allors.Domain
                     break;
             }
 
-            SecurityCache.Invalidate();
+            new SecurityCache(this.Strategy.Session).Invalidate();
         }
     }
 }

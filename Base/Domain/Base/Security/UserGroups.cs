@@ -65,7 +65,7 @@ namespace Allors.Domain
             new UserGroupBuilder(Session).WithName(GuestsName).WithUniqueId(GuestsId).WithRole(new Roles(Session).Guest).Build();
             new UserGroupBuilder(Session).WithName(AdministratorsName).WithUniqueId(AdministratorsId).WithRole(new Roles(Session).Administrator).Build();
 
-            SecurityCache.Invalidate();
+            new SecurityCache(this.Session).Invalidate();
         }
 
         protected override void BaseSecure(Security config)

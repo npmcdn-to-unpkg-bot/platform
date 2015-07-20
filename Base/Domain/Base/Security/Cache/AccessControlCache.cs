@@ -30,7 +30,7 @@ namespace Allors.Domain
         /// <summary>
         /// The cache key.
         /// </summary>
-        private readonly string cacheKey = "Allors.Cache." + typeof(AccessControl);
+        private static readonly string CacheKey = "Allors.Cache." + typeof(AccessControl);
 
         /// <summary>
         /// The entry by object id.
@@ -46,11 +46,11 @@ namespace Allors.Domain
         public AccessControlCache(IDatabaseSession session)
         {
             var database = session.Database;
-            this.entryByObjectId = (Dictionary<ObjectId, Entry>)database[this.cacheKey];
+            this.entryByObjectId = (Dictionary<ObjectId, Entry>)database[CacheKey];
             if (this.entryByObjectId == null)
             {
                 this.entryByObjectId = new Dictionary<ObjectId, Entry>();
-                database[this.cacheKey] = this.entryByObjectId;
+                database[CacheKey] = this.entryByObjectId;
             }
         }
 
@@ -93,6 +93,7 @@ namespace Allors.Domain
             {
                 this.CacheId = accessControl.CacheId;
 
+                // TODO: Nested groups
                 var users = accessControl.SubjectGroups.SelectMany(x => x.Members).ToList();
                 users.AddRange(accessControl.Subjects);
 

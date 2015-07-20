@@ -98,7 +98,7 @@ namespace Controllers
                 this.Session.Commit();
             }
 
-            SecurityCache.Invalidate();
+            new SecurityCache(this.Session).Invalidate();
         }
 
         /// <summary>
