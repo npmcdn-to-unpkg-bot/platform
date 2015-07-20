@@ -47,7 +47,7 @@ namespace Allors.Domain
         <tr>
             <td>
             $if(this.BilledFromInternalOrganisation.ExistLogoImage)$
-                <img src = ""\\media\\i_$this.BilledFromInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
+                <img src = ""\\media\\i_$this.BilledFromInternalOrganisation.LogoImage.UniqueId$"" alt=""company logo"" width=""200"" />
             $endif$
             $if(this.ExistBilledFromInternalOrganisation)$
                 <p>
@@ -119,7 +119,6 @@ namespace Allors.Domain
         $if(this.ExistShipment)$
             Shipment:&#160;$this.Shipment.Carrier.PartyName;format=""xml-encode""$&#160;$this.Shipment.ShipmentMethod.Name;format=""xml-encode""$<br />
         $endif$
-        Payment method:&#160;$this.GetPaymentMethod.Description;format=""xml-encode""$<br />
         $if(this.ExistMessage)$
         <p class=""message"">
             $this.Message;format=""xml-encode""$
@@ -260,10 +259,10 @@ $if(party.ExistBillingAddress)$
     $party.BillingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Phone number: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Phone number: $party.GeneralPhoneNumber.Description;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax number: $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax number: $party.GeneralFaxNumber.Description;format=""xml-encode""$<br />
 $endif$
 >>
 
@@ -358,7 +357,7 @@ $endif$
         <tr>
             <td>
             $if(this.BilledFromInternalOrganisation.ExistLogoImage)$
-                <img src = ""\\media\\i_$this.BilledFromInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
+                <img src = ""\\media\\i_$this.BilledFromInternalOrganisation.LogoImage.UniqueId$"" alt=""company logo"" width=""200"" />
             $endif$
             $if(this.ExistBilledFromInternalOrganisation)$
                 <p>
@@ -430,7 +429,6 @@ $endif$
         $if(this.ExistShipment)$
             Transport:&#160;$this.Shipment.Carrier.PartyName;format=""xml-encode""$&#160;$this.Shipment.ShipmentMethod.Name;format=""xml-encode""$<br />
         $endif$
-        Betaalwijze:&#160;$this.GetPaymentMethod.Description;format=""xml-encode""$<br />
         $if(this.ExistMessage)$
         <p class=""message"">
             $this.Message;format=""xml-encode""$
@@ -571,10 +569,10 @@ $if(party.ExistBillingAddress)$
     $party.BillingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Telefoon: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Telefoon: $party.GeneralPhoneNumber.Description;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax: $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax: $party.GeneralFaxNumber.Description;format=""xml-encode""$<br />
 $endif$
 >>
 

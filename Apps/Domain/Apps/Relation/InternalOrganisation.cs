@@ -69,7 +69,7 @@ namespace Allors.Domain
 
         public int DeriveNextSubAccountNumber()
         {
-            var next = this.SubAccountCounter.NextValue();
+            var next = this.SubAccountCounter.NextElfProefValue();
             return next;
         }
 

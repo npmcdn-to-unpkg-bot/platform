@@ -177,7 +177,7 @@ namespace Allors.Domain
         public void GivenCustomerRelationshipBuilder_WhenBuild_ThenSubAccountNumerIsValidElevenTestNumber()
         {
             var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
-            internalOrganisation.SubAccountCounter.Value = 1007;
+            internalOrganisation.SubAccountCounter.Value = 1000;
 
             this.DatabaseSession.Commit();
 
@@ -218,10 +218,20 @@ namespace Allors.Domain
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
                 .Build();
 
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            var address1 = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+
+            var billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(address1)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
+                .Build();
+
             var internalOrganisation2 = new InternalOrganisationBuilder(this.DatabaseSession)
                 .WithName("internalOrganisation2")
                 .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
                 .WithEmployeeRole(new Roles(this.DatabaseSession).Administrator)
+                .WithPartyContactMechanism(billingAddress)
                 .WithDefaultPaymentMethod(ownBankAccount)
                 .WithPreferredCurrency(euro)
                 .Build();

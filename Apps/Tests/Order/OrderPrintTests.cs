@@ -61,6 +61,12 @@ namespace Allors.Domain
                 .WithContactNumber("3301 3301")
                 .Build();
 
+            var billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(postalAddress)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
+                .Build();
+
             var headQuartersAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
                 .WithContactMechanism(postalAddress)
                 .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).ShippingAddress)
@@ -74,14 +80,22 @@ namespace Allors.Domain
                 .Build();
 
             var logo = new MediaBuilder(this.DatabaseSession)
-                    .WithContent(this.GetEmbeddedResource("Tests.logo.png"))
+                    .WithContent(GetEmbeddedResource("Tests.Resources.logo.png"))
                     .WithUniqueId(new Guid("9c41233f-9480-4df9-9421-63ed61f80623"))
+                    .WithMediaType(new MediaTypes(this.DatabaseSession).Png)
                     .Build();
+
+            var fortis = new BankBuilder(this.DatabaseSession).WithName("Fortis België").WithBic("GEBABEBB").WithCountry(belgie).Build();
+            var bankaccount = new BankAccountBuilder(this.DatabaseSession).WithBank(fortis).WithIban("BE23 3300 6167 6391").WithCurrency(euro).WithNameOnAccount("Koen").Build();
+            var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession).WithDescription("own account").WithBankAccount(bankaccount).Build();
 
             var internalOrganisation = new InternalOrganisationBuilder(this.DatabaseSession)
                 .WithName("Allors bvba")
+                .WithPartyContactMechanism(billingAddress)
                 .WithPartyContactMechanism(headQuartersAddress)
                 .WithPartyContactMechanism(generalPhoneNumber)
+                .WithDefaultPaymentMethod(ownBankAccount)
+                .WithBankAccount(bankaccount)
                 .WithLogoImage(logo)
                 .WithTaxNumber("11111111")
                 .WithLocale(englishLocale)

@@ -35,6 +35,19 @@ namespace Allors.Domain
             }
         }
 
+        public string FullAddress
+        {
+            get
+            {
+                if (this.ExistFormattedFullAddress)
+                {
+                    return this.FormattedFullAddress.Replace(Break, ", ");
+                }
+
+                return string.Empty;
+            }
+        }
+
         public void AppsOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
@@ -46,6 +59,8 @@ namespace Allors.Domain
             this.AppsOnDerivePostalCode();
             this.AppsOnDeriveCity();
             this.AppsOnDeriveCountry();
+
+            this.Description = this.FormattedFullAddress;
         }
 
         private static void AppendNextLine(StringBuilder fullAddress)

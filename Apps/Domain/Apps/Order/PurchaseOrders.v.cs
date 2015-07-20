@@ -204,10 +204,10 @@ $if(party.ExistShippingAddress)$
     $party.ShippingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Telephone: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Telephone: $party.GeneralPhoneNumber.Description;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax: $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax: $party.GeneralFaxNumber.Description;format=""xml-encode""$<br />
 $endif$
 >>
 
@@ -450,10 +450,10 @@ $if(party.ExistShippingAddress)$
     $party.ShippingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Telefoon: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Telefoon: $party.GeneralPhoneNumber.Description;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax     : $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax     : $party.GeneralFaxNumber.Description;format=""xml-encode""$<br />
 $endif$
 >>
 

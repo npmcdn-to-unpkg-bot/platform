@@ -77,8 +77,9 @@ namespace Allors.Domain
                 .Build();
 
             var logo = new MediaBuilder(this.DatabaseSession)
-                    .WithContent(GetEmbeddedResource("Tests.logo.png"))
+                    .WithContent(GetEmbeddedResource("Tests.Resources.logo.png"))
                     .WithUniqueId(new Guid("9c41233f-9480-4df9-9421-63ed61f80623"))
+                    .WithMediaType(new MediaTypes(this.DatabaseSession).Png)
                     .Build();
 
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();

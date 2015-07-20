@@ -1172,7 +1172,7 @@ namespace Allors.Domain
 
         public void AppsOnDeriveOnShip(IDerivation derivation)
         {
-            this.QuantityPendingShipment += this.QuantityRequestsShipping;
+             this.QuantityPendingShipment += this.QuantityRequestsShipping;
             this.QuantityRequestsShipping = 0;
         }
 

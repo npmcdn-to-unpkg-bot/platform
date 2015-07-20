@@ -87,7 +87,6 @@ namespace Allors.Domain
             Invoice date  :&#160;22/02/2011<br />
             Duedate       :&#160;22/02/2011<br />
         </h4>
-        Payment method:&#160;Fortis België BE23 3300 6167 6391<br />
         <p class=""message"">
             Thanks for your order.
         </p>

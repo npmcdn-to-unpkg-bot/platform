@@ -475,7 +475,7 @@ namespace Allors.Domain
                     this.ShipmentMethod = this.ShipToCustomer.DefaultShipmentMethod;
                 }
 
-                if (this.ShipToCustomer != null && this.ExistStore)
+                if (this.ShipmentMethod == null && this.ExistStore)
                 {
                     this.ShipmentMethod = this.Store.DefaultShipmentMethod;
                 }

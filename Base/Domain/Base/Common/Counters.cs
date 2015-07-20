@@ -60,5 +60,53 @@ namespace Allors.Domain
 
             return counter.Value;
         }
+
+        public static int NextElfProefValue(ISession session, Guid counterId)
+        {
+            if (Config.Serializable != null)
+            {
+                using (var counterSession = Config.Default.CreateSession())
+                {
+                    var serializableCounter = new Counters(counterSession).CounterById[counterId];
+                    var newValue = serializableCounter.Value + 1;
+                    serializableCounter.Value = newValue;
+
+                    counterSession.Commit();
+
+                    return newValue;
+                }
+            }
+
+            var counter = new Counters(session).CounterById[counterId];
+            counter.Value = counter.Value + 1;
+
+            while (!IsValidElfProefNumber(counter.Value))
+            {
+                counter.Value = counter.Value + 1;
+            }
+
+            return counter.Value;
+        }
+
+        public static bool IsValidElfProefNumber(int number)
+        {
+            var numberString = number.ToString();
+            var length = numberString.Length;
+            
+            // ... the number must be validatable to the so-called 11-proof ...
+            long total = 0;
+            for (var i = 0; i <= numberString.Length - 1; i++)
+            {
+                var nummertje = Convert.ToInt32(numberString[i].ToString());
+                total += (nummertje * length);
+                length--;
+            }
+
+            // ... not result in a 0 when dividing by 11 ...
+            if (total == 0) return false;
+
+            // ... and not have a modulo when dividing by 11.
+            return total % 11 == 0;
+        }
     }
 }

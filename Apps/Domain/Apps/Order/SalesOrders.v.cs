@@ -52,7 +52,7 @@ namespace Allors.Domain
         <tr>
             <td>
             $if(this.TakenByInternalOrganisation.ExistLogoImage)$
-                <img src = ""\\media\\i_$this.TakenByInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
+                <img src = ""\\media\\i_$this.TakenByInternalOrganisation.LogoImage.UniqueId$"" alt=""company logo"" width=""200"" />
             $endif$
             $if(this.ExistTakenByInternalOrganisation)$
                 <p>
@@ -62,6 +62,7 @@ namespace Allors.Domain
                 $if(this.TakenByInternalOrganisation.ExistTaxNumber)$
                     Tax number: $this.TakenByInternalOrganisation.TaxNumber$<br />
                 $endif$
+                $this.TakenByInternalOrganisation.BankAccounts:{bankAccount|$bank(bankAccount)$}$
             $endif$
             </td>
             <td>
@@ -114,7 +115,7 @@ namespace Allors.Domain
             Your reference:&#160;$this.CustomerReference;format=""xml-encode""$<br />
         </h4>
         $endif$
-        Shipment method:&#160;$this.ShipmentMethod$<br />
+        Shipment method:&#160;$this.ShipmentMethod.Name$<br />
         $if(this.ExistMessage)$
         <p class=""message"">
             $this.Message;format=""xml-encode""$
@@ -276,10 +277,10 @@ $if(party.ExistShippingAddress)$
     $party.ShippingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Phone number: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Phone number: $party.GeneralPhoneNumber.Description;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax number: $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax number: $party.GeneralFaxNumber.Description;format=""xml-encode""$<br />
 $endif$
 >>
 
@@ -346,10 +347,10 @@ $if(item.ExistMessage || item.ExistAssignedShipToParty || item.ExistAssignedShip
     $if(item.ExistAssignedShipToParty || item.ExistAssignedShipToAddress)$
         Item shipped to: &#xA0;
         $if(item.ItemDifferentShippingParty)$
-            $item.ItemDifferentShippingParty.PartyName;format=""xml-encode""$ &#xA0;
+            $item.ItemDifferentShippingParty.PartyName;format=""xml-encode""$
         $endif$
         $if(item.ItemDifferentShippingAddress)$
-            $item.ItemDifferentShippingAddress.Name;format=""xml-encode""$  
+            $item.ItemDifferentShippingAddress.FullAddress;format=""xml-encode""$  
         $endif$
     $endif$
     </td>
@@ -388,7 +389,7 @@ $endif$
         <tr>
             <td>
             $if(this.TakenByInternalOrganisation.ExistLogoImage)$
-                <img src = ""\\media\\i_$this.TakenByInternalOrganisation.LogoImage.Id$"" alt=""company logo"" width=""200"" />
+                <img src = ""\\media\\i_$this.TakenByInternalOrganisation.LogoImage.UniqueId$"" alt=""company logo"" width=""200"" />
             $endif$
             $if(this.ExistTakenByInternalOrganisation)$
                 <p>
@@ -398,6 +399,7 @@ $endif$
                 $if(this.TakenByInternalOrganisation.ExistTaxNumber)$
                     BTW-nummer: $this.TakenByInternalOrganisation.TaxNumber$<br />
                 $endif$
+                $this.TakenByInternalOrganisation.BankAccounts:{bankAccount|$bank(bankAccount)$}$
             $endif$
             </td>
             <td>
@@ -450,7 +452,7 @@ $endif$
             Uw Referentie:&#160;$this.CustomerReference;format=""xml-encode""$<br />
         </h4>
         $endif$
-        Verzend methode:&#160;$this.GetShipmentMethod$<br />
+        Verzend methode:&#160;$this.ShipmentMethod.Name$<br />
         $if(this.ExistMessage)$
         <p class=""message"">
             $this.Message;format=""xml-encode""$
@@ -612,10 +614,10 @@ $if(party.ExistShippingAddress)$
     $party.ShippingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Telefoon: $party.GeneralPhoneNumber.AreaCode;format=""xml-encode""$ $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
+    Telefoon: $party.GeneralPhoneNumber.Description;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax: $party.GeneralFaxNumber.AreaCode;format=""xml-encode""$ $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
+    Fax: $party.GeneralFaxNumber.Description;format=""xml-encode""$<br />
 $endif$
 >>
 
@@ -682,10 +684,10 @@ $if(item.ExistMessage || item.ExistAssignedShipToParty || item.ExistAssignedShip
     $if(item.ExistAssignedShipToParty || item.ExistAssignedShipToAddress)$
         Afleveradres voor dit item: &#xA0;
         $if(item.ItemDifferentShippingParty)$
-            $item.ItemDifferentShippingParty.Name;format=""xml-encode""$ &#xA0;
+            $item.ItemDifferentShippingParty.Name;format=""xml-encode""$;
         $endif$
         $if(item.ItemDifferentShippingAddress)$
-            $item.ItemDifferentShippingAddress.Name;format=""xml-encode""$  
+            $item.ItemDifferentShippingAddress.FullAddress;format=""xml-encode""$  
         $endif$
     $endif$
     </td>

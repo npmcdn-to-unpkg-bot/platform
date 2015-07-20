@@ -34,5 +34,10 @@ namespace Allors.Domain
         {
             return Counters.NextValue(this.Strategy.Session, this.UniqueId);
         }
+
+        public int NextElfProefValue()
+        {
+            return Counters.NextElfProefValue(this.Strategy.Session, this.UniqueId);
+        }
     }
 }

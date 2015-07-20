@@ -312,16 +312,16 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            //// Orderitems are sorted as follows: item2, item1, item4, item 3
+            //// Orderitems are sorted as follows: item1, item2, item3, item4
             Assert.AreEqual(0, item1.QuantityRequestsShipping);
-            Assert.AreEqual(5, item1.QuantityPendingShipment);
+            Assert.AreEqual(10, item1.QuantityPendingShipment);
             Assert.AreEqual(10, item1.QuantityReserved);
-            Assert.AreEqual(5, item1.QuantityShortFalled);
+            Assert.AreEqual(0, item1.QuantityShortFalled);
                 
             Assert.AreEqual(0, item2.QuantityRequestsShipping);
-            Assert.AreEqual(15, item2.QuantityPendingShipment);
+            Assert.AreEqual(10, item2.QuantityPendingShipment);
             Assert.AreEqual(20, item2.QuantityReserved);
-            Assert.AreEqual(5, item2.QuantityShortFalled);
+            Assert.AreEqual(10, item2.QuantityShortFalled);
                 
             Assert.AreEqual(0, item3.QuantityRequestsShipping);
             Assert.AreEqual(0, item3.QuantityPendingShipment);

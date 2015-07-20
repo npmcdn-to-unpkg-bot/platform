@@ -86,7 +86,6 @@ namespace Allors.Domain
             Order date:&#160;&#160;22/02/2011<br />
         </h4>
         Shipment method:&#160;Ground<br />
-        Payment method:&#160;Fortis België BE23 3300 6167 6391<br />
         <p class=""message"">
             Thanks for your order.
         </p>
