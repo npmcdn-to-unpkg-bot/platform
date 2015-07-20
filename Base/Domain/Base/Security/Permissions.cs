@@ -37,7 +37,7 @@ namespace Allors.Domain
                 if (!(permission.ExistOperandType && permission.ExistConcreteClass && permission.ExistOperation))
                 {
                     permission.Delete();
-                    return;
+                    continue;
                 }
 
                 Dictionary<ObjectType, Dictionary<Operation, Permission>> permissionByOperationByConcreteClass;
