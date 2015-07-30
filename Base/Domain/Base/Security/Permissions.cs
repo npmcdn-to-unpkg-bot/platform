@@ -34,7 +34,7 @@ namespace Allors.Domain
 
             foreach (Permission permission in new Permissions(this.Session).Extent())
             {
-                if (!(permission.ExistOperandType && permission.ExistConcreteClass && permission.ExistOperation))
+                if (permission.OperandType == null || !permission.ExistConcreteClass || !permission.ExistOperation))
                 {
                     permission.Delete();
                     continue;
