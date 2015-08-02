@@ -49,7 +49,7 @@ namespace Allors
         {
             if(parameter == null)
             {
-                return null;
+                return default(T);
             }
             
             var workspaceSession = this.Session as IWorkspaceSession;
