@@ -47,6 +47,11 @@ namespace Allors
 
         public T FindBy(RoleType roleType, object parameter)
         {
+            if(parameter == null)
+            {
+                return null;
+            }
+            
             var workspaceSession = this.Session as IWorkspaceSession;
             if (workspaceSession != null)
             {
