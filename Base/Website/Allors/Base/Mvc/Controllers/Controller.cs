@@ -56,7 +56,7 @@ namespace Allors.Web.Mvc
             }
         }
 
-        public User AuthenticatedUser
+        public virtual User AuthenticatedUser
         {
             get
             {
