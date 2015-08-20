@@ -37,6 +37,9 @@
 
                 return this.authenticatedUser;
             }
+
+            set { this.authenticatedUser = value; }
+            
         }
 
         protected void AddModelErrors(DerivationLog derivationLog)
