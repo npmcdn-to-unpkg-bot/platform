@@ -21,7 +21,7 @@
 
         protected ISession AllorsSession { get; private set; }
 
-        protected User AuthenticatedUser
+        protected virtual User AuthenticatedUser
         {
             get
             {
