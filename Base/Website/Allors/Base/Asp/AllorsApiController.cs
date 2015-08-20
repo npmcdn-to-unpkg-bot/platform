@@ -1,4 +1,4 @@
-﻿namespace Taalruil.Api
+﻿namespace Allors.Api
 {
     using System.Web.Http;
 
