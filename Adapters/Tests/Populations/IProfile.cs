@@ -24,7 +24,7 @@ namespace Allors.Adapters
     {
         IDatabase Population { get; }
 
-        IDatabaseSession Session { get; }
+        ISession Session { get; }
 
         Action[] Markers { get; }
 

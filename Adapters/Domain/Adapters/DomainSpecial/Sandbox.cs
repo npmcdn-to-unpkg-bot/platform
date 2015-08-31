@@ -24,22 +24,22 @@ namespace Allors.Domain
 
     public partial class Sandbox
     {
-        public static Sandbox Create(IDatabaseSession session)
+        public static Sandbox Create(ISession session)
         {
             return (Sandbox)session.Create(Meta.ObjectType);
         }
 
-        public static Sandbox[] Create(IDatabaseSession session, int count)
+        public static Sandbox[] Create(ISession session, int count)
         {
             return (Sandbox[])session.Create(Meta.ObjectType, count);
         }
 
-        public static Sandbox[] Instantiate(IDatabaseSession session, string[] ids)
+        public static Sandbox[] Instantiate(ISession session, string[] ids)
         {
             return (Sandbox[])session.Instantiate(ids);
         }
 
-        public static Sandbox[] Extent(IDatabaseSession session)
+        public static Sandbox[] Extent(ISession session)
         {
             return (Sandbox[])session.Extent(Meta.ObjectType).ToArray();
         }

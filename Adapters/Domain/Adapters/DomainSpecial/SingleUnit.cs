@@ -24,22 +24,22 @@ namespace Allors.Domain
 
     public partial class SingleUnit
     {
-        public static SingleUnit Create(IDatabaseSession session)
+        public static SingleUnit Create(ISession session)
         {
             return (SingleUnit)session.Create(Meta.ObjectType);
         }
 
-        public static SingleUnit[] Create(IDatabaseSession session, int count)
+        public static SingleUnit[] Create(ISession session, int count)
         {
             return (SingleUnit[])session.Create(Meta.ObjectType, count);
         }
 
-        public static SingleUnit[] Instantiate(IDatabaseSession session, string[] ids)
+        public static SingleUnit[] Instantiate(ISession session, string[] ids)
         {
             return (SingleUnit[])session.Instantiate(ids);
         }
 
-        public static SingleUnit[] Extent(IDatabaseSession session)
+        public static SingleUnit[] Extent(ISession session)
         {
             return (SingleUnit[])session.Extent(Meta.ObjectType).ToArray();
         }

@@ -27,17 +27,17 @@ namespace Allors.Adapters.Relation.SqlClient
 
     public class Strategy : IStrategy
     {
-        private readonly DatabaseSession session;
+        private readonly Session session;
         private readonly ObjectId objectId;
         private IObject domainObject;
        
-        internal Strategy(DatabaseSession session, ObjectId objectId)
+        internal Strategy(Session session, ObjectId objectId)
         {
             this.session = session;
             this.objectId = objectId;
         }
 
-        IDatabaseSession IStrategy.Session 
+        ISession IStrategy.Session 
         {
             get
             {

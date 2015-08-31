@@ -54,7 +54,7 @@ namespace Allors.Adapters.Object.SqlClient
             get { return null; }
         }
 
-        internal override DatabaseSession Session
+        internal override Session Session
         {
             get { return this.first.Session; }
         }

@@ -29,10 +29,10 @@ namespace Allors.Adapters.Relation.SqlClient
     {
         private readonly SortDirection sortDirection;
         private readonly IRoleType roleType;
-        private readonly DatabaseSession session;
+        private readonly Session session;
         private AllorsExtentSortSql subSorter;
 
-        internal AllorsExtentSortSql(DatabaseSession session, IRoleType roleType, SortDirection sortDirection)
+        internal AllorsExtentSortSql(Session session, IRoleType roleType, SortDirection sortDirection)
         {
             this.session = session;
             this.roleType = roleType;

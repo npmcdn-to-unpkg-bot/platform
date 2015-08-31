@@ -32,7 +32,7 @@ namespace Allors
         /// Gets the database session.
         /// </summary>
         /// <value>The database session.</value>
-        IDatabaseSession Session { get; }
+        ISession Session { get; }
 
         /// <summary>
         /// Gets the <see cref="Class"/>.

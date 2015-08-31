@@ -56,7 +56,7 @@ namespace Allors
         /// Creates a new database Session.
         /// </summary>
         /// <returns>a newly created AllorsSession</returns>
-        IDatabaseSession CreateSession();
+        ISession CreateSession();
 
         /// <summary>
         ///  Gets

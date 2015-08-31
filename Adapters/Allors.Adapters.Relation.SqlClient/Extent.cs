@@ -55,7 +55,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
         internal AllorsExtentOperationSql ParentOperationExtent { get; set; }
 
-        internal abstract DatabaseSession Session { get; }
+        internal abstract Session Session { get; }
 
         internal AllorsExtentSortSql Sorter
         {

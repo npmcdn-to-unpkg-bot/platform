@@ -28,7 +28,7 @@ namespace Allors.Adapters.Object.SqlClient
     internal class Flush
     {
         private const int BatchSize = 1000;
-        private readonly DatabaseSession session;
+        private readonly Session session;
 
         private Dictionary<IClass, Dictionary<IRoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveClass;
         private Dictionary<IRoleType, List<CompositeRelation>> setCompositeRoleRelationsByRoleType;
@@ -36,7 +36,7 @@ namespace Allors.Adapters.Object.SqlClient
         private Dictionary<IRoleType, List<CompositeRelation>> removeCompositeRoleRelationsByRoleType;
         private Dictionary<IRoleType, IList<ObjectId>> clearCompositeAndCompositesRoleRelationsByRoleType;
 
-        internal Flush(DatabaseSession session, Dictionary<Reference, Roles> unsyncedRolesByReference)
+        internal Flush(Session session, Dictionary<Reference, Roles> unsyncedRolesByReference)
         {
             this.session = session;
 

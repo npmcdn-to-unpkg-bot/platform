@@ -32,7 +32,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
     public class AllorsExtentFilteredSql : AllorsExtentSql
     {
-        internal readonly DatabaseSession session;
+        internal readonly Session session;
         internal readonly IComposite type;
         internal IAssociationType association;
         private AllorsPredicateAndSql filter;
@@ -40,19 +40,19 @@ namespace Allors.Adapters.Relation.SqlClient
         // IRelationTypes direct from Strategy
         internal Strategy strategy;
 
-        internal AllorsExtentFilteredSql(DatabaseSession session, Strategy strategy, IRoleType role) : this(session, (IComposite)role.ObjectType)
+        internal AllorsExtentFilteredSql(Session session, Strategy strategy, IRoleType role) : this(session, (IComposite)role.ObjectType)
         {
             this.strategy = strategy;
             this.role = role;
         }
 
-        internal AllorsExtentFilteredSql(DatabaseSession session, Strategy strategy, IAssociationType association) : this(session, association.ObjectType)
+        internal AllorsExtentFilteredSql(Session session, Strategy strategy, IAssociationType association) : this(session, association.ObjectType)
         {
             this.strategy = strategy;
             this.association = association;
         }
 
-        internal AllorsExtentFilteredSql(DatabaseSession session, IComposite type)
+        internal AllorsExtentFilteredSql(Session session, IComposite type)
         {
             this.session = session;
             this.type = type;
@@ -72,7 +72,7 @@ namespace Allors.Adapters.Relation.SqlClient
             get { return session.Database.Mapping; }
         }
 
-        internal override DatabaseSession Session
+        internal override Session Session
         {
             get { return session; }
         }

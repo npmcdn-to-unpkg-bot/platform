@@ -16,7 +16,7 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the DatabaseSession type.</summary>
+// <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Adapters.Memory.LongId

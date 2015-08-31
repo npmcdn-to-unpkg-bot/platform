@@ -70,7 +70,7 @@
     <Compile Include="ICompositePredicate.cs" />
     <Compile Include="IConflict.cs" />
     <Compile Include="IDatabase.cs" />
-    <Compile Include="IDatabaseSession.cs" />
+    <Compile Include="ISession.cs" />
     <Compile Include="IObject.cs" />
     <Compile Include="IObjectFactory.cs" />
     <Compile Include="IStrategy.cs" />

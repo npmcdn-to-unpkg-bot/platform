@@ -24,34 +24,34 @@ namespace Allors.Domain
 
     public partial class Person
     {
-        public static Person Create(IDatabaseSession session)
+        public static Person Create(ISession session)
         {
             return (Person)session.Create(Meta.ObjectType);
         }
 
-        public static Person[] Create(IDatabaseSession session, int count)
+        public static Person[] Create(ISession session, int count)
         {
             return (Person[])session.Create(Meta.ObjectType, count);
         }
 
-        public static Person[] Instantiate(IDatabaseSession session, string[] ids)
+        public static Person[] Instantiate(ISession session, string[] ids)
         {
             return (Person[])session.Instantiate(ids);
         }
 
-        public static Person[] Extent(IDatabaseSession session)
+        public static Person[] Extent(ISession session)
         {
             return (Person[])session.Extent(Meta.ObjectType).ToArray();
         }
 
-        public static Person Create(IDatabaseSession session, string name)
+        public static Person Create(ISession session, string name)
         {
             Person person = Create(session);
             person.Name = name;
             return person;
         }
 
-        public static Person Create(IDatabaseSession session, string name, int index)
+        public static Person Create(ISession session, string name, int index)
         {
             Person person = Create(session);
             person.Name = name;

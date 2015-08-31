@@ -30,26 +30,26 @@ namespace Allors.Adapters.Object.SqlClient
 
     internal class ExtentFiltered : SqlExtent
     {
-        private readonly DatabaseSession session;
+        private readonly Session session;
         private readonly IComposite objectType;
 
         private AndPredicate filter;
 
-        internal ExtentFiltered(DatabaseSession session, Strategy strategy, IRoleType roleType)
+        internal ExtentFiltered(Session session, Strategy strategy, IRoleType roleType)
             : this(session, (IComposite)roleType.ObjectType)
         {
             this.Strategy = strategy;
             this.RoleType = roleType;
         }
 
-        internal ExtentFiltered(DatabaseSession session, Strategy strategy, IAssociationType associationType)
+        internal ExtentFiltered(Session session, Strategy strategy, IAssociationType associationType)
             : this(session, associationType.ObjectType)
         {
             this.Strategy = strategy;
             this.AssociationType = associationType;
         }
 
-        internal ExtentFiltered(DatabaseSession session, IComposite objectType)
+        internal ExtentFiltered(Session session, IComposite objectType)
         {
             this.session = session;
             this.objectType = objectType;
@@ -69,7 +69,7 @@ namespace Allors.Adapters.Object.SqlClient
             get { return this.session.Database.Mapping; }
         }
 
-        internal override DatabaseSession Session
+        internal override Session Session
         {
             get { return this.session; }
         }

@@ -434,7 +434,7 @@ namespace Allors.Adapters.Object.SqlClient
             return this.GetNonModifiedCompositeRoles(roleType).Length;
         }
 
-        internal IObject ExtentFirst(DatabaseSession session, IRoleType roleType)
+        internal IObject ExtentFirst(Session session, IRoleType roleType)
         {
             CompositesRole compositesRole;
             if (this.ModifiedRolesByRoleType != null && this.ModifiedRolesByRoleType.TryGetValue(roleType, out compositesRole))
@@ -452,7 +452,7 @@ namespace Allors.Adapters.Object.SqlClient
             return null;
         }
 
-        internal void ExtentCopyTo(DatabaseSession session, IRoleType roleType, Array array, int index)
+        internal void ExtentCopyTo(Session session, IRoleType roleType, Array array, int index)
         {
             CompositesRole compositesRole;
             if (this.ModifiedRolesByRoleType != null && this.ModifiedRolesByRoleType.TryGetValue(roleType, out compositesRole))

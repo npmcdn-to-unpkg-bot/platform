@@ -54,13 +54,13 @@ namespace Allors.Adapters.Relation.SQLite
             }
         }
 
-        public long Next(DatabaseSession databaseSession)
+        public long Next(Session session)
         {
             lock (this.lockObject)
             {
                 if (!this.current.HasValue)
                 {
-                    var command = databaseSession.CreateCommand("SELECT MAX(" + Mapping.ColumnNameForObject + ") FROM " + Mapping.TableNameForObjects);
+                    var command = session.CreateCommand("SELECT MAX(" + Mapping.ColumnNameForObject + ") FROM " + Mapping.TableNameForObjects);
                     var result = command.ExecuteScalar();
                     if (result == null || result.Equals(DBNull.Value))
                     {

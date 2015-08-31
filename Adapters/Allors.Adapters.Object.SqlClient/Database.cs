@@ -319,7 +319,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public IDatabaseSession CreateSession()
+        public ISession CreateSession()
         {
             return this.CreateDatabaseSession();
         }
@@ -383,7 +383,7 @@ namespace Allors.Adapters.Object.SqlClient
             return validateResult;
         }
 
-        IDatabaseSession IDatabase.CreateSession()
+        ISession IDatabase.CreateSession()
         {
             return this.CreateDatabaseSession();
         }
@@ -501,14 +501,14 @@ namespace Allors.Adapters.Object.SqlClient
             this.mapping = null;
         }
 
-        private IDatabaseSession CreateDatabaseSession()
+        private ISession CreateDatabaseSession()
         {
             if (!this.IsValid)
             {
                 throw new Exception(this.validationMessage);
             }
 
-            return new DatabaseSession(this);
+            return new Session(this);
         }
        
         private ManagementSession CreateManagementSession()

@@ -27,7 +27,7 @@ namespace Allors
     /// <summary>
     /// A change set is created during a checkpoint
     /// and contains all changes that have
-    /// occurred in a <see cref="IDatabaseSession"/> either starting
+    /// occurred in a <see cref="ISession"/> either starting
     /// from the beginning of the transaction or from a 
     /// previous checkpoint.
     /// </summary>

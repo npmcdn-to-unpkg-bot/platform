@@ -37,7 +37,7 @@ namespace Allors.Adapters.Object.SqlClient
         private static readonly int MaskExists = BitVector32.CreateMask(MaskIsNew);
         private static readonly int MaskExistsKnown = BitVector32.CreateMask(MaskExists);
 
-        private readonly DatabaseSession session;
+        private readonly Session session;
         private readonly IClass @class;
         private readonly ObjectId objectId;
         private int cacheId;
@@ -46,7 +46,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         private WeakReference weakReference;
 
-        internal Reference(DatabaseSession session, IClass @class, ObjectId objectId, bool isNew)
+        internal Reference(Session session, IClass @class, ObjectId objectId, bool isNew)
         {
             this.session = session;
             this.@class = @class;
@@ -60,7 +60,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal Reference(DatabaseSession session, IClass @class, ObjectId objectId, int cacheId)
+        internal Reference(Session session, IClass @class, ObjectId objectId, int cacheId)
             : this(session, @class, objectId, false)
         {
             this.cacheId = cacheId;
@@ -84,7 +84,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal DatabaseSession Session
+        internal Session Session
         {
             get
             {

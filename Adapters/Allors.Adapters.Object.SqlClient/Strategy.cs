@@ -47,20 +47,12 @@ namespace Allors.Adapters.Object.SqlClient
             this.objectId = reference.ObjectId;
         }
 
-        public IDatabaseSession DatabaseSession
-        {
-            get
-            {
-                return this.reference.Session;
-            }
-        }
-
-        IDatabaseSession IStrategy.Session
+        ISession IStrategy.Session
         {
             get { return this.reference.Session; }
         }
 
-        public DatabaseSession Session
+        public Session Session
         {
             get { return this.reference.Session; }
         }

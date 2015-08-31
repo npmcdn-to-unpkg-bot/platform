@@ -41,7 +41,7 @@ namespace Allors
 
         /// <summary>
         /// Gets a value that can be used as a properties key 
-        /// in a <see cref="IDatabase"/> or <see cref="IDatabaseSession"/>.
+        /// in a <see cref="IDatabase"/> or <see cref="ISession"/>.
         /// </summary>
         /// <value>The value.</value>
         public string Key

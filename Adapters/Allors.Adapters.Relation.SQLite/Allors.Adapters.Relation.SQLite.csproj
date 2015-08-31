@@ -47,7 +47,7 @@
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="DatabaseSession.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Extent.cs" />
     <Compile Include="ExtentFiltered.cs" />
     <Compile Include="ExtentOperation.cs" />

@@ -31,18 +31,18 @@ namespace Allors.Adapters.Object.SqlClient
 
     internal class Prefetcher
     {
-        private readonly DatabaseSession session;
+        private readonly Session session;
         private readonly PrefetchPolicy prefetchPolicy;
         private readonly List<Reference> references;
 
-        public Prefetcher(DatabaseSession session, PrefetchPolicy prefetchPolicy, List<Reference> references)
+        public Prefetcher(Session session, PrefetchPolicy prefetchPolicy, List<Reference> references)
         {
             this.session = session;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
         }
 
-        private Prefetcher(DatabaseSession session, PrefetchPolicy prefetchPolicy, IEnumerable<ObjectId> objectIds)
+        private Prefetcher(Session session, PrefetchPolicy prefetchPolicy, IEnumerable<ObjectId> objectIds)
         {
             this.session = session;
             this.prefetchPolicy = prefetchPolicy;

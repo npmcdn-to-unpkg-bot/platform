@@ -298,19 +298,19 @@ namespace Allors.Adapters.Relation.SqlClient
             this.properties = null;
         }
 
-        IDatabaseSession IDatabase.CreateSession()
+        ISession IDatabase.CreateSession()
         {
             return this.CreateSession();
         }
 
-        public DatabaseSession CreateSession()
+        public Session CreateSession()
         {
             if (!this.IsValid)
             {
                 throw new Exception("Schema is invalid.");
             }
 
-            return new DatabaseSession(this);
+            return new Session(this);
         }
 
         public void Load(XmlReader reader)

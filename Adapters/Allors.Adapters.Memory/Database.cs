@@ -131,17 +131,17 @@ namespace Allors.Adapters.Memory
 
         public abstract void Init();
 
-        public IDatabaseSession CreateSession()
+        public ISession CreateSession()
         {
             return this.CreateDatabaseSession();
         }
 
-        IDatabaseSession IDatabase.CreateSession()
+        ISession IDatabase.CreateSession()
         {
             return this.CreateDatabaseSession();
         }
 
-        public IDatabaseSession CreateDatabaseSession()
+        public ISession CreateDatabaseSession()
         {
             return this.Session;
         }

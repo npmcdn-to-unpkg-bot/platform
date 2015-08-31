@@ -30,7 +30,7 @@ namespace Allors.Adapters
     [TestFixture]
     public class StrategyAssertTest
     {
-        private IDatabaseSession session;
+        private ISession session;
 
         [SetUp]
         protected void Init()

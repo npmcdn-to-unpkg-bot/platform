@@ -24,34 +24,34 @@ namespace Allors.Domain
 
     public partial class Company
     {
-        public static Company Create(IDatabaseSession session)
+        public static Company Create(ISession session)
         {
             return (Company)session.Create(Meta.ObjectType);
         }
 
-        public static Company[] Create(IDatabaseSession session, int count)
+        public static Company[] Create(ISession session, int count)
         {
             return (Company[])session.Create(Meta.ObjectType, count);
         }
 
-        public static Company[] Instantiate(IDatabaseSession session, string[] ids)
+        public static Company[] Instantiate(ISession session, string[] ids)
         {
             return (Company[])session.Instantiate(ids);
         }
 
-        public static Company[] Extent(IDatabaseSession session)
+        public static Company[] Extent(ISession session)
         {
             return (Company[])session.Extent(Meta.ObjectType).ToArray();
         }
 
-        public static Company Create(IDatabaseSession session, string name)
+        public static Company Create(ISession session, string name)
         {
             Company company = Create(session);
             company.Name = name;
             return company;
         }
 
-        public static Company Create(IDatabaseSession session, string name, int index)
+        public static Company Create(ISession session, string name, int index)
         {
             Company company = Create(session);
             company.Name = name;

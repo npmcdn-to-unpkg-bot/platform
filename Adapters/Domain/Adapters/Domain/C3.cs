@@ -24,27 +24,27 @@ namespace Allors.Domain
 
     public partial class C3 
     {
-        public static C3 Create(IDatabaseSession session)
+        public static C3 Create(ISession session)
         {
             return (C3)session.Create(Meta.ObjectType);
         }
 
-        public static C3[] Create(IDatabaseSession session, int count)
+        public static C3[] Create(ISession session, int count)
         {
             return (C3[])session.Create(Meta.ObjectType, count);
         }
 
-        public static C3 Instantiate(IDatabaseSession session, ObjectId id)
+        public static C3 Instantiate(ISession session, ObjectId id)
         {
             return (C3)session.Instantiate(id);
         }
 
-        public static C3[] Instantiate(IDatabaseSession session, string[] ids)
+        public static C3[] Instantiate(ISession session, string[] ids)
         {
             return (C3[])session.Instantiate(ids);
         }
 
-        public static C3[] Extent(IDatabaseSession session)
+        public static C3[] Extent(ISession session)
         {
             return (C3[])session.Extent(Meta.ObjectType).ToArray();
         }

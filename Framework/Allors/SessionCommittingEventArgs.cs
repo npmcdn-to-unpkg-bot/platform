@@ -35,13 +35,13 @@ namespace Allors
         /// <summary>
         /// The session
         /// </summary>
-        private readonly IDatabaseSession session;
+        private readonly ISession session;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionCommittingEventArgs"/> class.
         /// </summary>
         /// <param name="session">The session.</param>
-        public SessionCommittingEventArgs(IDatabaseSession session)
+        public SessionCommittingEventArgs(ISession session)
         {
             this.session = session;
         }
@@ -50,7 +50,7 @@ namespace Allors
         /// Gets the session.
         /// </summary>
         /// <value>The session.</value>
-        public IDatabaseSession Session
+        public ISession Session
         {
             get { return this.session; }
         }

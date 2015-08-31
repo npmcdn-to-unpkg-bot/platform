@@ -39,7 +39,7 @@
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="DatabaseSession.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="DataRecords\CompositeRoleDataRecords.cs" />
     <Compile Include="DataRecords\CompositesRoleDataRecords.cs" />
     <Compile Include="DataRecords\ObjectDataRecords.cs" />

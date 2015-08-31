@@ -230,7 +230,7 @@ namespace Allors.Domain
             get { return this.strategy; }
         }
 
-		public static $class.name$ Instantiate (Allors.IDatabaseSession allorsSession, string allorsObjectId)
+		public static $class.name$ Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return ($class.name$) allorsSession.Instantiate(allorsObjectId);		
 		}

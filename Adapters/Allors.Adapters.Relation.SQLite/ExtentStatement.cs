@@ -63,7 +63,7 @@ namespace Allors.Adapters.Relation.SQLite
             get { return Session.Database.Mapping; }
         }
 
-        protected DatabaseSession Session
+        protected Session Session
         {
             get { return extent.Session; }
         }

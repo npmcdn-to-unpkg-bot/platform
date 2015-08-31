@@ -29,7 +29,7 @@ namespace Allors.Adapters.Memory
 
     using Allors.Meta;
 
-    public abstract class Session : IDatabaseSession
+    public abstract class Session : ISession
     {
         private static readonly HashSet<Strategy> EmptyStrategies = new HashSet<Strategy>();
         private static readonly IObject[] EmptyObjects = { };
@@ -55,14 +55,6 @@ namespace Allors.Adapters.Memory
             this.concreteClassesByObjectType = new Dictionary<IObjectType, IObjectType[]>();
 
             this.changeSet = new ChangeSet();
-        }
-
-        public IDatabaseSession DatabaseSession
-        {
-            get
-            {
-                return this;
-            }
         }
 
         public IDatabase Population

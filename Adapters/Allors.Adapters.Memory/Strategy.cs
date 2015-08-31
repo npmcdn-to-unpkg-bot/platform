@@ -110,17 +110,9 @@ namespace Allors.Adapters.Memory
             }
         }
 
-        public IDatabaseSession Session
+        public ISession Session
         {
             get { return this.session; }
-        }
-
-        public IDatabaseSession DatabaseSession
-        {
-            get
-            {
-                return this.session;
-            }
         }
 
         internal IClass UncheckedObjectType
