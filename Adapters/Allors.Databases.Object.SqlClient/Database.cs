@@ -316,7 +316,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public ISession CreateSession()
+        public IDatabaseSession CreateSession()
         {
             return this.CreateDatabaseSession();
         }

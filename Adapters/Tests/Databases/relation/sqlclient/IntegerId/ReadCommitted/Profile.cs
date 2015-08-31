@@ -76,7 +76,7 @@ namespace Allors.Databases.Relation.SqlClient.ReadCommitted
             return database;
         }
 
-        public override IPopulation CreatePopulation()
+        public override IDatabase CreatePopulation()
         {
             return new Memory.IntegerId.Database(new Memory.IntegerId.Configuration { ObjectFactory = this.ObjectFactory });
         }

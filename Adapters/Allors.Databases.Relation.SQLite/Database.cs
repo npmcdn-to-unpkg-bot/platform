@@ -322,11 +322,6 @@ namespace Allors.Databases.Relation.SQLite
             return this.CreateSession();
         }
 
-        ISession IPopulation.CreateSession()
-        {
-            return this.CreateSession();
-        }
-
         public DatabaseSession CreateSession()
         {
             if (!this.IsValid)

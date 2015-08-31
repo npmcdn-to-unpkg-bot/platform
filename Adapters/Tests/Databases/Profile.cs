@@ -34,7 +34,7 @@ namespace Allors.Databases
 
         private int eventCounter;
         private IDatabase database;
-        private ISession session;
+        private IDatabaseSession session;
 
         protected Profile()
         {
@@ -49,12 +49,12 @@ namespace Allors.Databases
             }
         }
 
-        public ISession Session
+        public IDatabaseSession Session
         {
             get { return this.session; }
         }
 
-        public IPopulation Population
+        public IDatabase Population
         {
             get { return this.database; }
         }
@@ -99,11 +99,11 @@ namespace Allors.Databases
             this.database = null;
         }
 
-        public abstract IPopulation CreatePopulation();
+        public abstract IDatabase CreatePopulation();
 
         public abstract IDatabase CreateDatabase();
         
-        internal ISession CreateSession()
+        internal IDatabaseSession CreateSession()
         {
             return this.database.CreateSession();
         }

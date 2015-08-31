@@ -24,22 +24,22 @@ namespace Allors.Domain
 
     public partial class LT32
     {
-        public static LT32 Create(ISession session)
+        public static LT32 Create(IDatabaseSession session)
         {
             return (LT32)session.Create(Meta.ObjectType);
         }
 
-        public static LT32[] Create(ISession session, int count)
+        public static LT32[] Create(IDatabaseSession session, int count)
         {
             return (LT32[])session.Create(Meta.ObjectType, count);
         }
 
-        public static LT32[] Instantiate(ISession session, string[] ids)
+        public static LT32[] Instantiate(IDatabaseSession session, string[] ids)
         {
             return (LT32[])session.Instantiate(ids);
         }
 
-        public static LT32[] Extent(ISession session)
+        public static LT32[] Extent(IDatabaseSession session)
         {
             return (LT32[])session.Extent(Meta.ObjectType).ToArray();
         }

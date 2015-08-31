@@ -30,7 +30,7 @@ namespace Allors.Populations
     [TestFixture]
     public class StrategyAssertTest
     {
-        private ISession session;
+        private IDatabaseSession session;
 
         [SetUp]
         protected void Init()

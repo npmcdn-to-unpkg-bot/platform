@@ -38,7 +38,7 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
             }
         }
 
-        protected override IPopulation CreatePopulation()
+        protected override IDatabase CreatePopulation()
         {
             return this.profile.CreatePopulation();
         }

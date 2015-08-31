@@ -49,12 +49,12 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
             this.profile.SwitchDatabase();
         }
 
-        protected override IPopulation CreatePopulation()
+        protected override IDatabase CreatePopulation()
         {
             return this.profile.CreateDatabase();
         }
 
-        protected override ISession CreateSession()
+        protected override IDatabaseSession CreateSession()
         {
             return this.profile.CreateSession();
         }

@@ -31,7 +31,7 @@ namespace Allors.Databases.Relation.SQLite
     {
         protected abstract IProfile Profile { get; }
 
-        protected ISession Session
+        protected IDatabaseSession Session
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Allors.Databases.Relation.SQLite
             }
         }
 
-        protected ISession CreateSession()
+        protected IDatabaseSession CreateSession()
         {
             return this.Profile.Population.CreateSession();
         }

@@ -108,7 +108,7 @@ namespace Allors.Databases.Memory
             }
         }
 
-        public ISession Session
+        public IDatabaseSession Session
         {
             get { return this.session; }
         }

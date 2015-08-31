@@ -24,27 +24,27 @@ namespace Allors.Domain
 
     public partial class C4 
     {
-        public static C4 Create(ISession session)
+        public static C4 Create(IDatabaseSession session)
         {
             return (C4)session.Create(Meta.ObjectType);
         }
         
-        public static C4[] Create(ISession session, int count)
+        public static C4[] Create(IDatabaseSession session, int count)
         {
             return (C4[])session.Create(Meta.ObjectType, count);
         }
        
-        public static C4 Instantiate(ISession session, ObjectId id)
+        public static C4 Instantiate(IDatabaseSession session, ObjectId id)
         {
             return (C4)session.Instantiate(id);
         }
         
-        public static C4[] Instantiate(ISession session, string[] ids)
+        public static C4[] Instantiate(IDatabaseSession session, string[] ids)
         {
             return (C4[])session.Instantiate(ids);
         }
  
-        public static C4[] Extent(ISession session)
+        public static C4[] Extent(IDatabaseSession session)
         {
             return (C4[])session.Extent(Meta.ObjectType).ToArray();
         }

@@ -76,7 +76,7 @@ namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
             return database;
         }
 
-        public override IPopulation CreatePopulation()
+        public override IDatabase CreatePopulation()
         {
             return new Memory.LongId.Database(new Memory.LongId.Configuration { ObjectFactory = this.ObjectFactory });
         }

@@ -65,7 +65,7 @@ namespace Allors.Databases
 
         protected abstract IProfile Profile { get; }
 
-        protected IPopulation Population
+        protected IDatabase Population
         {
             get
             {
@@ -73,7 +73,7 @@ namespace Allors.Databases
             }
         }
 
-        protected ISession Session
+        protected IDatabaseSession Session
         {
             get
             {
@@ -332,7 +332,7 @@ namespace Allors.Databases
 
                 var stringWriter = new StringWriter();
                 var writer = new XmlTextWriter(stringWriter);
-                loadSession.Population.Save(writer);
+                loadSession.Database.Save(writer);
                 writer.Close();
 
                 Thread.CurrentThread.CurrentCulture = readCultureInfo;
@@ -517,11 +517,11 @@ namespace Allors.Databases
 
                     var stringWriter = new StringWriter();
                     var writer = new XmlTextWriter(stringWriter);
-                    session.Population.Save(writer);
+                    session.Database.Save(writer);
                     writer.Close();
 
                     writer = new XmlTextWriter(@"population.xml", new UTF8Encoding());
-                    session.Population.Save(writer);
+                    session.Database.Save(writer);
                     writer.Close();
 
                     Thread.CurrentThread.CurrentCulture = readCultureInfo;
@@ -596,9 +596,9 @@ namespace Allors.Databases
             }
         }
 
-        protected abstract IPopulation CreatePopulation();
+        protected abstract IDatabase CreatePopulation();
 
-        private void AssertPopulation(ISession session)
+        private void AssertPopulation(IDatabaseSession session)
         {
             Assert.AreEqual(4, this.GetExtent(session, C1.Meta.ObjectType).Length);
             Assert.AreEqual(4, this.GetExtent(session, C2.Meta.ObjectType).Length);
@@ -680,7 +680,7 @@ namespace Allors.Databases
             }
         }
 
-        private void Populate(ISession session)
+        private void Populate(IDatabaseSession session)
         {
             this.c1A = C1.Create(session);
             this.c1B = C1.Create(session);
@@ -745,7 +745,7 @@ namespace Allors.Databases
             session.Commit();
         }
 
-        private IObject[] GetExtent(ISession session, IComposite objectType)
+        private IObject[] GetExtent(IDatabaseSession session, IComposite objectType)
         {
             return session.Extent(objectType);
         }

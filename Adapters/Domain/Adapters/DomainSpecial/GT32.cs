@@ -24,22 +24,22 @@ namespace Allors.Domain
 
     public partial class GT32 
     {
-        public static GT32 Create(ISession session)
+        public static GT32 Create(IDatabaseSession session)
         {
             return (GT32)session.Create(Meta.ObjectType);
         }
 
-        public static GT32[] Create(ISession session, int count)
+        public static GT32[] Create(IDatabaseSession session, int count)
         {
             return (GT32[])session.Create(Meta.ObjectType, count);
         }
 
-        public static GT32[] Instantiate(ISession session, string[] ids)
+        public static GT32[] Instantiate(IDatabaseSession session, string[] ids)
         {
             return (GT32[])session.Instantiate(ids);
         }
 
-        public static GT32[] Extent(ISession session)
+        public static GT32[] Extent(IDatabaseSession session)
         {
             return (GT32[])session.Extent(Meta.ObjectType).ToArray();
         }

@@ -35,15 +35,7 @@ namespace Allors.Databases.Relation.SQLite
             this.objectId = objectId;
         }
 
-        ISession IStrategy.Session 
-        {
-            get
-            {
-                return this.session;
-            }
-        }
-
-        IDatabaseSession IStrategy.DatabaseSession 
+        IDatabaseSession IStrategy.Session 
         {
             get
             {

@@ -2,7 +2,7 @@ delimiters "$", "$"
 
 TemplateId() ::= <<17ED40F8-BDF8-4A7C-9AE9-1C4D2AD6BA2B>>
 TemplateName() ::= <<C# Adapters>>
-TemplateVersion() ::= <<1.0.76>>
+TemplateVersion() ::= <<1.0.77>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $!
@@ -230,7 +230,7 @@ namespace Allors.Domain
             get { return this.strategy; }
         }
 
-		public static $class.name$ Instantiate (Allors.ISession allorsSession, string allorsObjectId)
+		public static $class.name$ Instantiate (Allors.IDatabaseSession allorsSession, string allorsObjectId)
 		{
 			return ($class.name$) allorsSession.Instantiate(allorsObjectId);		
 		}
@@ -240,7 +240,7 @@ namespace Allors.Domain
             var typedObj = obj as IObject;
             return typedObj != null &&
                    typedObj.Strategy.ObjectId.Equals(this.Strategy.ObjectId) &&
-                   typedObj.Strategy.Session.Population.Id.Equals(this.Strategy.Session.Population.Id);
+                   typedObj.Strategy.Session.Database.Id.Equals(this.Strategy.Session.Database.Id);
         }
 
 		public override int GetHashCode()

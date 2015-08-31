@@ -67,8 +67,6 @@
     <Compile Include="IDatabaseSession.cs" />
     <Compile Include="IObject.cs" />
     <Compile Include="IObjectFactory.cs" />
-    <Compile Include="IPopulation.cs" />
-    <Compile Include="ISession.cs" />
     <Compile Include="IStrategy.cs" />
     <Compile Include="Meta\IAssociationType.cs" />
     <Compile Include="Meta\IClass.cs" />

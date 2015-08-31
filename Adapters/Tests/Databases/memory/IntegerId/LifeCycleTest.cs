@@ -53,12 +53,12 @@ namespace Allors.Databases.Memory.IntegerId
         {
         }
 
-        protected override IPopulation CreatePopulation()
+        protected override IDatabase CreatePopulation()
         {
             return this.profile.CreateDatabase();
         }
 
-        protected override ISession CreateSession()
+        protected override IDatabaseSession CreateSession()
         {
             return this.profile.CreateSession();
         }

@@ -35,7 +35,7 @@ namespace Allors.Databases
     {
         protected abstract IProfile Profile { get; }
 
-        protected ISession Session
+        protected IDatabaseSession Session
         {
             get
             {

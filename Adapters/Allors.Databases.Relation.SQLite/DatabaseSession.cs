@@ -78,14 +78,6 @@ namespace Allors.Databases.Relation.SQLite
             this.classCache = database.ClassCache;
         }
 
-        IPopulation ISession.Population 
-        {
-            get
-            {
-                return this.database;
-            }
-        }
-
         IDatabase IDatabaseSession.Database 
         {
             get

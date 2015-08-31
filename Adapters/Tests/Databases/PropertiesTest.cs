@@ -35,7 +35,7 @@ namespace Allors.Databases
 
         protected abstract IProfile Profile { get; }
 
-        protected ISession Session
+        protected IDatabaseSession Session
         {
             get
             {
@@ -82,18 +82,15 @@ namespace Allors.Databases
             {
                 init();
 
-                var database = this.Session.Population as IDatabase;
+                var database = this.Session.Database;
 
-                if (database != null)
-                {
-                    Assert.IsNull(database["key"]);
+                Assert.IsNull(database["key"]);
 
-                    database["key"] = "value";
+                database["key"] = "value";
 
-                    database.Init();
+                database.Init();
 
-                    Assert.IsNull(database["key"]);
-                }
+                Assert.IsNull(database["key"]);
             }
         }
         
@@ -105,20 +102,17 @@ namespace Allors.Databases
             {
                 init();
 
-                var database = this.Session.Population as IDatabase;
+                var database = this.Session.Database;
 
-                if (database != null)
+                Assert.IsNull(this.Session["key"]);
+
+                this.Session["key"] = "value";
+
+                database.Init();
+
+                using (var newSession = database.CreateSession())
                 {
-                    Assert.IsNull(this.Session["key"]);
-
-                    this.Session["key"] = "value";
-
-                    database.Init();
-
-                    using (var newSession = database.CreateSession())
-                    {
-                        Assert.IsNull(newSession["key"]);
-                    }
+                    Assert.IsNull(newSession["key"]);
                 }
             }
         }

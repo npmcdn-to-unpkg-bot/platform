@@ -38,7 +38,7 @@ namespace Allors.Databases.Memory.IntegerId
             }
         }
 
-        protected override IPopulation CreatePopulation()
+        protected override IDatabase CreatePopulation()
         {
             return this.profile.CreatePopulation();
         }

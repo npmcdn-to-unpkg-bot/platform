@@ -24,27 +24,27 @@ namespace Allors.Domain
 
     public partial class LT32UnitGT32Composite 
     {
-        public static LT32UnitGT32Composite Create(ISession session)
+        public static LT32UnitGT32Composite Create(IDatabaseSession session)
         {
             return
                 (LT32UnitGT32Composite)session.Create(Meta.ObjectType);
         }
 
-        public static LT32UnitGT32Composite[] Create(ISession session, int count)
+        public static LT32UnitGT32Composite[] Create(IDatabaseSession session, int count)
         {
             return
                 (LT32UnitGT32Composite[])
                 session.Create(Meta.ObjectType, count);
         }
 
-        public static LT32UnitGT32Composite[] Instantiate(ISession session, string[] ids)
+        public static LT32UnitGT32Composite[] Instantiate(IDatabaseSession session, string[] ids)
         {
             return
                 (LT32UnitGT32Composite[])
                 session.Instantiate(ids);
         }
 
-        public static LT32UnitGT32Composite[] Extent(ISession session)
+        public static LT32UnitGT32Composite[] Extent(IDatabaseSession session)
         {
             return
                 (LT32UnitGT32Composite[])

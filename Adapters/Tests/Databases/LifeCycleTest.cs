@@ -37,7 +37,7 @@ namespace Allors.Databases
 
         protected abstract IProfile Profile { get; }
 
-        protected ISession Session
+        protected IDatabaseSession Session
         {
             get
             {
@@ -3219,46 +3219,6 @@ namespace Allors.Databases
         }
 
         [Test]
-        public void IsWorkspace()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-
-                var population = this.Session.Population;
-
-                if (population is IDatabase)
-                {
-                    Assert.IsFalse(population.IsWorkspace);
-                }
-                else
-                {
-                    Assert.IsTrue(population.IsWorkspace);
-                }
-            }
-        }
-
-        [Test]
-        public void IsDatabase()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-
-                var population = this.Session.Population;
-
-                if (population is IDatabase)
-                {
-                    Assert.IsTrue(population.IsDatabase);
-                }
-                else
-                {
-                    Assert.IsFalse(population.IsDatabase);
-                }
-            }
-        }
-
-        [Test]
         public void Instantiate()
         {
             foreach (var init in this.Inits)
@@ -4223,7 +4183,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 init();
 
                 // don't garbage collect populations
-                var populations = new List<IPopulation>();
+                var populations = new List<IDatabase>();
 
                 for (int i = 0; i < 100; i++)
                 {
@@ -5133,9 +5093,9 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
         protected abstract void SwitchDatabase();
 
-        protected abstract IPopulation CreatePopulation();
+        protected abstract IDatabase CreatePopulation();
 
-        protected abstract ISession CreateSession();
+        protected abstract IDatabaseSession CreateSession();
 
         private IObject[] GetExtent(IComposite objectType)
         {

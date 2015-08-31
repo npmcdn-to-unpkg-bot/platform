@@ -52,7 +52,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        ISession IStrategy.Session
+        IDatabaseSession IStrategy.Session
         {
             get { return this.reference.Session; }
         }

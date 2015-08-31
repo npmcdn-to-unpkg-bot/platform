@@ -50,7 +50,7 @@ namespace Allors.Databases.Memory.IntegerId
             }
         }
 
-        public override IPopulation CreatePopulation()
+        public override IDatabase CreatePopulation()
         {
             return this.CreateDatabase();
         }

@@ -42,7 +42,7 @@ namespace Allors.Populations
         public readonly C4 C4C;
         public readonly C4 C4D;
 
-        public TestPopulation(ISession session)
+        public TestPopulation(IDatabaseSession session)
         {
             this.C1A = C1.Create(session);
             this.C1B = C1.Create(session);

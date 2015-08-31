@@ -112,7 +112,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.database; }
         }
 
-        public IPopulation Population
+        public IDatabase Population
         {
             get
             {

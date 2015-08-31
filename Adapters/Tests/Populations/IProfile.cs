@@ -20,9 +20,9 @@ namespace Allors.Populations
 
     public interface IProfile : IDisposable
     {
-        IPopulation Population { get; }
+        IDatabase Population { get; }
 
-        ISession Session { get; }
+        IDatabaseSession Session { get; }
 
         Action[] Markers { get; }
 

@@ -37,7 +37,7 @@ namespace Allors.Databases.Relation.SQLite
                 init();
 
                 // don't garbage collect populations
-                var populations = new List<IPopulation>();
+                var populations = new List<IDatabase>();
 
                 for (int i = 0; i < 100; i++)
                 {

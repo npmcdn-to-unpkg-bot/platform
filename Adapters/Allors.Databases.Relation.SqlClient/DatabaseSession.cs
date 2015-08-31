@@ -79,14 +79,6 @@ namespace Allors.Databases.Relation.SqlClient
             this.classCache = database.ClassCache;
         }
 
-        IPopulation ISession.Population 
-        {
-            get
-            {
-                return this.database;
-            }
-        }
-
         IDatabase IDatabaseSession.Database 
         {
             get

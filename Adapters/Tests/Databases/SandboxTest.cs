@@ -33,7 +33,7 @@ namespace Allors.Databases
     {
         protected abstract IProfile Profile { get; }
 
-        protected IPopulation Population
+        protected IDatabase Population
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Allors.Databases
             }
         }
 
-        protected ISession Session
+        protected IDatabaseSession Session
         {
             get
             {

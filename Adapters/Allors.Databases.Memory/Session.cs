@@ -63,7 +63,7 @@ namespace Allors.Databases.Memory
             }
         }
 
-        public IPopulation Population
+        public IDatabase Population
         {
             get { return this.database; }
         }

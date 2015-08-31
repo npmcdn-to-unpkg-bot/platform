@@ -29,16 +29,10 @@ namespace Allors
     public interface IStrategy
     {
         /// <summary>
-        /// Gets the session.
-        /// </summary>
-        /// <value>The session.</value>
-        ISession Session { get; }
-
-        /// <summary>
         /// Gets the database session.
         /// </summary>
         /// <value>The database session.</value>
-        IDatabaseSession DatabaseSession { get; }
+        IDatabaseSession Session { get; }
 
         /// <summary>
         /// Gets the <see cref="Class"/>.

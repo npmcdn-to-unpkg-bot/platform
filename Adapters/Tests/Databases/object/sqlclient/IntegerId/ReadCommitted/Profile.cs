@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
                     markers.Add(
                         () =>
                         {
-                            foreach (var @class in this.Session.Population.MetaPopulation.Classes)
+                            foreach (var @class in this.Session.Database.MetaPopulation.Classes)
                             {
                                 var prefetchPolicy = this.prefetchers[@class];
                                 this.Session.Prefetch(prefetchPolicy, this.Session.Extent(@class));
@@ -78,7 +78,7 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
             return database;
         }
 
-        public override IPopulation CreatePopulation()
+        public override IDatabase CreatePopulation()
         {
             return new Memory.IntegerId.Database(new Memory.IntegerId.Configuration { ObjectFactory = this.ObjectFactory });
         }

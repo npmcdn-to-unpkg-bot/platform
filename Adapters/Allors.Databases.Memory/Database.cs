@@ -129,7 +129,7 @@ namespace Allors.Databases.Memory
 
         public abstract void Init();
 
-        public ISession CreateSession()
+        public IDatabaseSession CreateSession()
         {
             return this.CreateDatabaseSession();
         }
