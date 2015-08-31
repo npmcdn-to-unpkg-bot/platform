@@ -161,21 +161,21 @@
       <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
       <Name>Allors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
+    <ProjectReference Include="..\Allors.Adapters.Memory\Allors.Adapters.Memory.csproj">
       <Project>{cb9b7108-c8f3-459c-b2da-88187c84cfc1}</Project>
-      <Name>Allors.Databases.Memory</Name>
+      <Name>Allors.Adapters.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
+    <ProjectReference Include="..\Allors.Adapters.Object.SqlClient\Allors.Adapters.Object.SqlClient.csproj">
       <Project>{06bc1665-8fe8-4f04-9e80-ec2d54404ba7}</Project>
-      <Name>Allors.Databases.Object.SqlClient</Name>
+      <Name>Allors.Adapters.Object.SqlClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Allors.Databases.Relation.SqlClient\Allors.Databases.Relation.SqlClient.csproj">
+    <ProjectReference Include="..\Allors.Adapters.Relation.SqlClient\Allors.Adapters.Relation.SqlClient.csproj">
       <Project>{91356b87-6321-45c3-88cc-d3deae2dc16c}</Project>
-      <Name>Allors.Databases.Relation.SqlClient</Name>
+      <Name>Allors.Adapters.Relation.SqlClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Allors.Databases.Relation.SQLite\Allors.Databases.Relation.SQLite.csproj">
+    <ProjectReference Include="..\Allors.Adapters.Relation.SQLite\Allors.Adapters.Relation.SQLite.csproj">
       <Project>{ec88ff02-135b-459d-b53e-5fad2dbeaf2e}</Project>
-      <Name>Allors.Databases.Relation.SQLite</Name>
+      <Name>Allors.Adapters.Relation.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{50ed5307-33e3-4fda-8268-d844b77981c8}</Project>

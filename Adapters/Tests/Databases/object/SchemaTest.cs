@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object
+namespace Allors.Adapters.Object
 {
     using System;
 
@@ -26,7 +26,7 @@ namespace Allors.Databases.Object
 
     using NUnit.Framework;
 
-    public abstract class SchemaTest : Databases.SchemaTest
+    public abstract class SchemaTest : Adapters.SchemaTest
     {
     }
 }

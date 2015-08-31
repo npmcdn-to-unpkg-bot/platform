@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.IntegerId
+namespace Allors.Adapters.Memory.IntegerId
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class RelationExtentTest : Databases.RelationExtentTest
+    public class RelationExtentTest : Adapters.RelationExtentTest
     {
         private readonly Profile profile = new Profile();
 

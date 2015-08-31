@@ -18,9 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 

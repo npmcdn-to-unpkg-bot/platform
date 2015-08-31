@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class PropertiesTest : Databases.PropertiesTest
+    public class PropertiesTest : Adapters.PropertiesTest
     {
         private readonly Profile profile = new Profile();
 

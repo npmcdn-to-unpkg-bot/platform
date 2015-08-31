@@ -14,13 +14,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SqlClient
+using Allors.Domain;
+
+namespace Allors.Adapters.Relation.SqlClient
 {
     using System;
 
     using Allors;
     using Allors.Meta;
-    using Allors.Populations;
+    using Adapters;
 
     using Domain;
 

@@ -18,15 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.IntegerId
+namespace Allors.Adapters.Memory.IntegerId
 {
     using Allors;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class SerializationTest : Databases.SerializationTest
+    public class SerializationTest : Adapters.SerializationTest
     {
         private readonly Profile profile = new Profile();
 

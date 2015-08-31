@@ -18,17 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SqlClient.ReadCommitted
+namespace Allors.Adapters.Relation.SqlClient.ReadCommitted
 {
     using System;
 
     using Allors;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class One2OneTest : Databases.One2OneTest
+    public class One2OneTest : Adapters.One2OneTest
     {
         private readonly Profile profile = new Profile();
 

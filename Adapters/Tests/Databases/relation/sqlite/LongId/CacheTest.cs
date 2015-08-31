@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
+namespace Allors.Adapters.Relation.SQLite.LongId.ReadCommitted
 {
     //[TestFixture]
     //public class CacheTest : Special.CacheTest

@@ -18,7 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient
+using Allors;
+using Allors.Domain;
+
+namespace Allors.Adapters.Object.SqlClient
 {
     using Allors.Meta;
 
@@ -26,7 +29,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using NUnit.Framework;
 
-    public abstract class ExtentTest : Databases.ExtentTest
+    public abstract class ExtentTest : Adapters.ExtentTest
     {
         [Test]
         public override void SortOne()

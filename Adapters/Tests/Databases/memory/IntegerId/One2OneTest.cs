@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.IntegerId
+namespace Allors.Adapters.Memory.IntegerId
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class One2OneTest : Databases.One2OneTest
+    public class One2OneTest : Adapters.One2OneTest
     {
         private readonly Profile profile = new Profile();
 

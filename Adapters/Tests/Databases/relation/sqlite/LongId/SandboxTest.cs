@@ -18,17 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
+namespace Allors.Adapters.Relation.SQLite.LongId.ReadCommitted
 {
     using System.Data.SQLite;
 
     using Allors;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class SandboxTest : Databases.SandboxTest
+    public class SandboxTest : Adapters.SandboxTest
     {
         private readonly Profile profile = new Profile();
 

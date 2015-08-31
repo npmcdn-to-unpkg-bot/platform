@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases
+namespace Allors.Adapters
 {
     using System;
     using System.Collections;
@@ -27,7 +27,7 @@ namespace Allors.Databases
     using Allors;
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 

@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient
+namespace Allors.Adapters.Object.SqlClient
 {
     using System.Data;
     using System.Data.SqlClient;
     using System.Text;
 
-    public abstract class Profile : Databases.Profile
+    public abstract class Profile : Adapters.Profile
     {
         protected abstract string ConnectionString { get; }
 

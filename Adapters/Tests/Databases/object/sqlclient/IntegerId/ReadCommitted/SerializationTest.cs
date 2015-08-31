@@ -18,15 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
     using Allors;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class SerializationTest : Databases.SerializationTest
+    public class SerializationTest : Adapters.SerializationTest
     {
         private readonly Profile profile = new Profile();
 

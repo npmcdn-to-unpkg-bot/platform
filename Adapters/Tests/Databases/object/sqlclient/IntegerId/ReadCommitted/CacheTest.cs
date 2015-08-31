@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
     //[TestFixture]
     //public class CacheTest : Special.CacheTest

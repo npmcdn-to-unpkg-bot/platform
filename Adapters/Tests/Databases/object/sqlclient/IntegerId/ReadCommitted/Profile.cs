@@ -14,13 +14,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.ReadCommitted
+using Allors;
+
+namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
     using System;
     using System.Collections.Generic;
 
     using Allors.Meta;
-    using Allors.Populations;
+    using Adapters;
 
     public class Profile : SqlClient.Profile
     {

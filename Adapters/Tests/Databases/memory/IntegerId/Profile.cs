@@ -18,14 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.IntegerId
+using Allors;
+
+namespace Allors.Adapters.Memory.IntegerId
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.Populations;
+    using Adapters;
 
-    public class Profile : Databases.Profile
+    public class Profile : Adapters.Profile
     {
         public override Action[] Markers
         {
@@ -57,7 +59,7 @@ namespace Allors.Databases.Memory.IntegerId
 
         public override IDatabase CreateDatabase()
         {
-            return new Databases.Memory.IntegerId.Database(new Databases.Memory.IntegerId.Configuration { ObjectFactory = this.ObjectFactory });
+            return new Database(new Configuration { ObjectFactory = this.ObjectFactory });
         }
     }
 }

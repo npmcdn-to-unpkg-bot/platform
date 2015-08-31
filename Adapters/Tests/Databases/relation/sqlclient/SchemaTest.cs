@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SqlClient
+namespace Allors.Adapters.Relation.SqlClient
 {
     using NUnit.Framework;
 

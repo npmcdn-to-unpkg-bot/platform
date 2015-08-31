@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation
+namespace Allors.Adapters.Relation
 {
     using System;
 
@@ -26,7 +26,7 @@ namespace Allors.Databases.Relation
 
     using NUnit.Framework;
 
-    public abstract class SchemaTest : Databases.SchemaTest
+    public abstract class SchemaTest : Adapters.SchemaTest
     {
         //[Test]
         //public void OneToOne()

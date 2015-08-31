@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite
+namespace Allors.Adapters.Relation.SQLite
 {
     using System.Data;
     using System.Data.SQLite;
     using System.Reflection;
     using System.Text;
 
-    public abstract class Profile : Databases.Profile
+    public abstract class Profile : Adapters.Profile
     {
         public abstract string ConnectionString { get; }
 

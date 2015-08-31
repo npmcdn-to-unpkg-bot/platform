@@ -18,7 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite
+using Allors;
+
+namespace Allors.Adapters.Relation.SQLite
 {
     using System.Collections.Generic;
 
@@ -26,7 +28,7 @@ namespace Allors.Databases.Relation.SQLite
     using NUnit.Framework;
 
     [TestFixture]
-    public abstract class LifeCycleLongIdTest : Databases.LifeCycleLongIdTest
+    public abstract class LifeCycleLongIdTest : Adapters.LifeCycleLongIdTest
     {
         [Test]
         public override void CreateManyPopulations()

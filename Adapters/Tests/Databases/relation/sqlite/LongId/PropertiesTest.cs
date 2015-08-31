@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
+namespace Allors.Adapters.Relation.SQLite.LongId.ReadCommitted
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class PropertiesTest : Databases.PropertiesTest
+    public class PropertiesTest : Adapters.PropertiesTest
     {
         private readonly Profile profile = new Profile();
 

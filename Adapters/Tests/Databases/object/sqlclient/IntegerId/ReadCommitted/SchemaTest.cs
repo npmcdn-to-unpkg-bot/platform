@@ -14,11 +14,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.ReadCommitted
+using Allors;
+
+namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
-    using Allors.Databases.Object.SqlClient;
+    using Adapters.Object.SqlClient;
     using Allors.Meta;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 

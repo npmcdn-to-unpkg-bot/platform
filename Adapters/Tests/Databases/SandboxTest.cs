@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases
+namespace Allors.Adapters
 {
     using System;
 
     using Allors;
 
     using Allors.Domain;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 

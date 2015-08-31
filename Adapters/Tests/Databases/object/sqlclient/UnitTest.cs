@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient
+namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using Allors.Domain;
     using NUnit.Framework;
 
     [TestFixture]
-    public abstract class UnitTest : Databases.UnitTest
+    public abstract class UnitTest : Adapters.UnitTest
     {
         [Test]
         public override void AllorsDecimal()

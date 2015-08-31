@@ -21,7 +21,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases
+namespace Allors.Adapters
 {
     using System;
     using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace Allors.Databases
     using Allors;
 
     using Allors.Domain;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
     using Allors.Meta;

@@ -18,15 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
     using Allors;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class RelationExtentTest : Databases.RelationExtentTest
+    public class RelationExtentTest : Adapters.RelationExtentTest
     {
         private readonly Profile profile = new Profile();
 

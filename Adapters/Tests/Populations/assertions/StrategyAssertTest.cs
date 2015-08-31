@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Populations
+namespace Allors.Adapters
 {
     using Allors;
-    using Allors.Databases.Memory.IntegerId;
+    using Adapters.Memory.IntegerId;
     using Allors.Domain;
     using Allors.Meta;
 
@@ -35,7 +35,7 @@ namespace Allors.Populations
         [SetUp]
         protected void Init()
         {
-            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(C1).Assembly, "Allors.Domain") };
+            var configuration = new Adapters.Memory.IntegerId.Configuration { ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(C1).Assembly, "Allors.Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

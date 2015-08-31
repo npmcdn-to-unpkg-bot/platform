@@ -21,14 +21,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.IntegerId
+namespace Allors.Adapters.Memory.IntegerId
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class UnitTest : Databases.UnitTest
+    public class UnitTest : Adapters.UnitTest
     {
         private readonly Profile profile = new Profile();
 

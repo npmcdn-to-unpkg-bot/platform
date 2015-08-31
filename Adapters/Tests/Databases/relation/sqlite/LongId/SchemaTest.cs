@@ -14,11 +14,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
+using Allors;
+
+namespace Allors.Adapters.Relation.SQLite.LongId.ReadCommitted
 {
-    using Allors.Databases.Relation.SQLite;
+    using Adapters.Relation.SQLite;
     using Allors.Meta;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 

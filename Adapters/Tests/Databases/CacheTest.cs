@@ -18,7 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases
+using Allors.Domain;
+using IDatabase = Allors.IDatabase;
+
+namespace Allors.Adapters
 {
     using Allors;
 

@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite
+namespace Allors.Adapters.Relation.SQLite
 {
     using NUnit.Framework;
 

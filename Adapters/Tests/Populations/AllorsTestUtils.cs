@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Populations
+namespace Allors.Adapters
 {
     using Allors;
 

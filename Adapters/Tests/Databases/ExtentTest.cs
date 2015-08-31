@@ -18,14 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases
+using Allors.Domain;
+
+namespace Allors.Adapters
 {
     using System;
     using System.Collections.Generic;
 
     using Allors;
     using Allors.Meta;
-    using Allors.Populations;
+    using Adapters;
 
     using Domain;
 

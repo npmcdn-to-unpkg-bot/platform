@@ -21,14 +21,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
+namespace Allors.Adapters.Relation.SQLite.LongId.ReadCommitted
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class Many2ManyTest : Databases.Many2ManyTest
+    public class Many2ManyTest : Adapters.Many2ManyTest
     {
         private readonly Profile profile = new Profile();
 

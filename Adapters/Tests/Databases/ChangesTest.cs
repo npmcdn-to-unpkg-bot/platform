@@ -15,7 +15,7 @@
 // <summary>Defines the ExtentTest type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases
+namespace Allors.Adapters
 {
     using System;
     using System.Linq;
@@ -24,7 +24,7 @@ namespace Allors.Databases
 
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
