@@ -22,7 +22,6 @@ namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
     using Allors.Databases.Relation.SQLite;
     using Allors.Meta;
     using Allors.Populations;
-    using Allors.Workspaces.Memory.LongId;
 
     using Configuration = Configuration;
 
@@ -93,12 +92,6 @@ namespace Allors.Databases.Relation.SQLite.LongId.ReadCommitted
             var database = new Database(configuration);
 
             return database;
-        }
-
-        public override IWorkspace CreateWorkspace(IDatabase database)
-        {
-            var configuration = new Workspaces.Memory.LongId.Configuration { Database = database };
-            return new Workspace(configuration);
         }
 
         protected override bool Match(ColumnTypes columnType, string dataType)

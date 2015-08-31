@@ -55,8 +55,6 @@ namespace Allors.Databases.Memory
             this.changeSet = new ChangeSet();
         }
 
-        public abstract IWorkspaceSession WorkspaceSession { get; }
-
         public IDatabaseSession DatabaseSession
         {
             get

@@ -66,9 +66,7 @@
     <Compile Include="Databases\memory\IntegerId\RelationExtentTest.cs" />
     <Compile Include="Databases\memory\IntegerId\SandboxTest.cs" />
     <Compile Include="Databases\memory\IntegerId\SerializationTest.cs" />
-    <Compile Include="Databases\memory\IntegerId\SyncTest.cs" />
     <Compile Include="Databases\memory\IntegerId\UnitTest.cs" />
-    <Compile Include="Databases\memory\IntegerId\WorkspaceTest.cs" />
     <Compile Include="Databases\object\SchemaTest.cs" />
     <Compile Include="Databases\object\sqlclient\ExtentTest.cs" />
     <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
@@ -86,9 +84,7 @@
     <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs" />
     <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
     <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
-    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
     <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
-    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\WorkspaceTest.cs" />
     <Compile Include="Databases\object\sqlclient\Profile.cs" />
     <Compile Include="Databases\object\sqlclient\SchemaTest.cs" />
     <Compile Include="Databases\object\sqlclient\SqlClientTest.cs" />
@@ -116,9 +112,7 @@
     <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs" />
     <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
     <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
-    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
     <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
-    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\WorkspaceTest.cs" />
     <Compile Include="Databases\relation\sqlclient\Profile.cs" />
     <Compile Include="Databases\relation\sqlclient\SchemaTest.cs" />
     <Compile Include="Databases\relation\sqlclient\SqlClientTest.cs" />
@@ -140,21 +134,15 @@
     <Compile Include="Databases\relation\sqlite\LongId\SchemaTest.cs" />
     <Compile Include="Databases\relation\sqlite\LongId\SerializationTest.cs" />
     <Compile Include="Databases\relation\sqlite\LongId\SqlClientTest.cs" />
-    <Compile Include="Databases\relation\sqlite\LongId\SyncTest.cs" />
     <Compile Include="Databases\relation\sqlite\LongId\UnitTest.cs" />
-    <Compile Include="Databases\relation\sqlite\LongId\WorkspaceTest.cs" />
     <Compile Include="Databases\relation\sqlite\Profile.cs" />
     <Compile Include="Databases\relation\sqlite\SchemaTest.cs" />
     <Compile Include="Databases\relation\sqlite\SqlClientTest.cs" />
-    <Compile Include="Databases\relation\sqlite\SyncTest.cs" />
     <Compile Include="Databases\relation\sqlite\UnitTest.cs" />
-    <Compile Include="Databases\relation\sqlite\WorkspaceTest.cs" />
     <Compile Include="Databases\SandboxTest.cs" />
     <Compile Include="Databases\SchemaTest.cs" />
     <Compile Include="Databases\SerializationTest.cs" />
-    <Compile Include="Databases\SyncTest.cs" />
     <Compile Include="Databases\UnitTest.cs" />
-    <Compile Include="Databases\WorkspaceTest.cs" />
     <Compile Include="Populations\AllorsTestUtils.cs" />
     <Compile Include="Populations\assertions\StrategyAssert.cs" />
     <Compile Include="Populations\assertions\StrategyAssertTest.cs" />
@@ -162,25 +150,6 @@
     <Compile Include="Populations\Settings.cs" />
     <Compile Include="Populations\TestPopulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Workspace\ExtentTest.cs" />
-    <Compile Include="Workspace\Many2ManyTest.cs" />
-    <Compile Include="Workspace\Many2OneTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\ChangesTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\ExtentTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\LifeCycleTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\Many2ManyTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\Many2OneTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\One2ManyTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\One2OneTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\Profile.cs" />
-    <Compile Include="Workspace\memory\IntegerId\PropertiesTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\RelationExtentTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\SandboxTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\SerializationTest.cs" />
-    <Compile Include="Workspace\memory\IntegerId\UnitTest.cs" />
-    <Compile Include="Workspace\One2ManyTest.cs" />
-    <Compile Include="Workspace\One2OneTest.cs" />
-    <Compile Include="Workspace\Profile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -207,10 +176,6 @@
     <ProjectReference Include="..\Allors.Databases.Relation.SQLite\Allors.Databases.Relation.SQLite.csproj">
       <Project>{ec88ff02-135b-459d-b53e-5fad2dbeaf2e}</Project>
       <Name>Allors.Databases.Relation.SQLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
-      <Project>{db96de40-9b4c-4112-bb6f-c6c4c6a9b5a9}</Project>
-      <Name>Allors.Workspaces.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{50ed5307-33e3-4fda-8268-d844b77981c8}</Project>

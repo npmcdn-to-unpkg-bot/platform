@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Memory", "Allors.Databases.Memory\Allors.Databases.Memory.csproj", "{CB9B7108-C8F3-459C-B2DA-88187C84CFC1}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Relation.SqlClient", "Allors.Databases.Relation.SqlClient\Allors.Databases.Relation.SqlClient.csproj", "{91356B87-6321-45C3-88CC-D3DEAE2DC16C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Relation.SQLite", "Allors.Databases.Relation.SQLite\Allors.Databases.Relation.SQLite.csproj", "{EC88FF02-135B-459D-B53E-5FAD2DBEAF2E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Workspaces.Memory", "Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj", "{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{064AF0AE-8B29-4C35-9DEA-06C0F6935E4C}"
 EndProject
@@ -49,10 +47,6 @@ Global
 		{EC88FF02-135B-459D-B53E-5FAD2DBEAF2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC88FF02-135B-459D-B53E-5FAD2DBEAF2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC88FF02-135B-459D-B53E-5FAD2DBEAF2E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{064AF0AE-8B29-4C35-9DEA-06C0F6935E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{064AF0AE-8B29-4C35-9DEA-06C0F6935E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{064AF0AE-8B29-4C35-9DEA-06C0F6935E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU

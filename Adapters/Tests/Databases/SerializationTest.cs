@@ -747,13 +747,6 @@ namespace Allors.Databases
 
         private IObject[] GetExtent(ISession session, IComposite objectType)
         {
-            var workspaceSession = session as IWorkspaceSession;
-
-            if (workspaceSession != null)
-            {
-                return workspaceSession.LocalExtent(objectType);
-            }
-
             return session.Extent(objectType);
         }
     }

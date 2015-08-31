@@ -20,7 +20,6 @@ namespace Allors.Databases.Relation.SqlClient.ReadCommitted
     using System.Collections.Generic;
 
     using Allors.Databases.Relation.SqlClient;
-    using Allors.Workspaces.Memory.IntegerId;
     using Allors.Meta;
     using Allors.Populations;
 
@@ -93,12 +92,6 @@ namespace Allors.Databases.Relation.SqlClient.ReadCommitted
             var database = new Database(configuration);
 
             return database;
-        }
-
-        public override IWorkspace CreateWorkspace(IDatabase database)
-        {
-            var configuration = new Workspaces.Memory.IntegerId.Configuration { Database = database };
-            return new Workspace(configuration);
         }
 
         protected override bool Match(ColumnTypes columnType, string dataType)

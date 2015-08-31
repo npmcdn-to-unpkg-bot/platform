@@ -40,20 +40,6 @@ namespace Allors.Databases
             }
         }
 
-        protected IDatabaseSession DatabaseSession
-        {
-            get
-            {
-                var workspaceSession = this.Session as IWorkspaceSession;
-                if (workspaceSession != null)
-                {
-                    return workspaceSession.DatabaseSession;
-                }
-
-                return (IDatabaseSession)this.Profile.Session;
-            }
-        }
-
         protected Action[] Markers
         {
             get
@@ -77,9 +63,9 @@ namespace Allors.Databases
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(Classes.C1);
-                var c = this.DatabaseSession.Create(Classes.C3);
-                this.DatabaseSession.Commit();
+                var a = (C1)this.Session.Create(Classes.C1);
+                var c = this.Session.Create(Classes.C3);
+                this.Session.Commit();
 
                 a = (C1)this.Session.Instantiate(a);
                 var b = C2.Create(this.Session);
@@ -246,10 +232,10 @@ namespace Allors.Databases
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(Classes.C1);
-                var c = (C2)this.DatabaseSession.Create(Classes.C2);
+                var a = (C1)this.Session.Create(Classes.C1);
+                var c = (C2)this.Session.Create(Classes.C2);
 
-                this.DatabaseSession.Commit();
+                this.Session.Commit();
 
                 a = (C1)this.Session.Instantiate(a);
                 var b = C2.Create(this.Session);
@@ -396,10 +382,10 @@ namespace Allors.Databases
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(Classes.C1);
-                var c = (C2)this.DatabaseSession.Create(Classes.C2);
+                var a = (C1)this.Session.Create(Classes.C1);
+                var c = (C2)this.Session.Create(Classes.C2);
 
-                this.DatabaseSession.Commit();
+                this.Session.Commit();
 
                 a = (C1)this.Session.Instantiate(a);
                 var b = C2.Create(this.Session);
@@ -586,9 +572,9 @@ namespace Allors.Databases
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(Classes.C1);
-                var c = this.DatabaseSession.Create(Classes.C3);
-                this.DatabaseSession.Commit();
+                var a = (C1)this.Session.Create(Classes.C1);
+                var c = this.Session.Create(Classes.C3);
+                this.Session.Commit();
 
                 a = (C1)this.Session.Instantiate(a);
                 var b = C2.Create(this.Session);
@@ -626,9 +612,9 @@ namespace Allors.Databases
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(Classes.C1);
-                var c = this.DatabaseSession.Create(Classes.C3);
-                this.DatabaseSession.Commit();
+                var a = (C1)this.Session.Create(Classes.C1);
+                var c = this.Session.Create(Classes.C3);
+                this.Session.Commit();
 
                 a = (C1)this.Session.Instantiate(a);
                 var b = C2.Create(this.Session);

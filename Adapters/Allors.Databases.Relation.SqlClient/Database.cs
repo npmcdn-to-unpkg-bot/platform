@@ -49,7 +49,6 @@ namespace Allors.Databases.Relation.SqlClient
         private readonly int commandTimeout;
         private readonly string schemaName;
         private readonly bool useViews;
-        private readonly IWorkspaceFactory workspaceFactory;
 
         private Dictionary<string, object> properties;
 
@@ -65,8 +64,6 @@ namespace Allors.Databases.Relation.SqlClient
             {
                 throw new Exception("Configuration.ConnectionString is missing");
             }
-
-            this.workspaceFactory = configuration.WorkspaceFactory;
 
             var connectionStringBuilder = new SqlConnectionStringBuilder(this.connectionString);
             var applicationName = connectionStringBuilder.ApplicationName.Trim();
@@ -299,11 +296,6 @@ namespace Allors.Databases.Relation.SqlClient
             this.classCache.Invalidate();
 
             this.properties = null;
-        }
-
-        public IWorkspace CreateWorkspace()
-        {
-            return this.workspaceFactory.CreateWorkspace(this);
         }
 
         IDatabaseSession IDatabase.CreateSession()

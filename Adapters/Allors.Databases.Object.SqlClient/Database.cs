@@ -42,8 +42,6 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly string id;
 
-        private readonly IWorkspaceFactory workspaceFactory;
-
         private readonly string connectionString;
 
         private readonly int commandTimeout;
@@ -76,7 +74,6 @@ namespace Allors.Databases.Object.SqlClient
 
             this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
 
-            this.workspaceFactory = configuration.WorkspaceFactory;
             this.connectionString = configuration.ConnectionString;
             this.commandTimeout = configuration.CommandTimeout;
             this.isolationLevel = configuration.IsolationLevel;
@@ -374,16 +371,6 @@ namespace Allors.Databases.Object.SqlClient
         public override string ToString()
         {
             return "Population[driver=Sql, type=Connected, id=" + this.GetHashCode() + "]";
-        }
-
-        public IWorkspace CreateWorkspace()
-        {
-            if (this.workspaceFactory == null)
-            {
-                throw new Exception("No workspacefactory defined");
-            }
-
-            return this.workspaceFactory.CreateWorkspace(this);
         }
 
         public Validation Validate()

@@ -49,8 +49,6 @@ namespace Allors
         /// </summary>
         void Init();
 
-        IWorkspace CreateWorkspace();
-
         /// <summary>
         /// Creates a new database Session.
         /// </summary>

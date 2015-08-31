@@ -52,7 +52,6 @@ namespace Allors.Databases.Relation.SQLite
         private readonly int commandTimeout;
         private readonly IsolationLevel isolationLevel;
         private readonly bool autoIncrement;
-        private readonly IWorkspaceFactory workspaceFactory;
 
         private readonly SQLiteConnection inMemoryConnection;
 
@@ -106,8 +105,6 @@ namespace Allors.Databases.Relation.SQLite
             {
                 throw new Exception("Configuration.ObjectFactory is missing");
             }
-
-            this.workspaceFactory = configuration.WorkspaceFactory;
 
             this.roleCache = configuration.RoleCache ?? new RoleCache();
             this.classCache = configuration.ClassCache ?? new ClassCache();
@@ -318,11 +315,6 @@ namespace Allors.Databases.Relation.SQLite
             this.classCache.Invalidate();
 
             this.properties = null;
-        }
-
-        public IWorkspace CreateWorkspace()
-        {
-            return this.workspaceFactory.CreateWorkspace(this);
         }
 
         IDatabaseSession IDatabase.CreateSession()

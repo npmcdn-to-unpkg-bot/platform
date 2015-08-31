@@ -74,14 +74,7 @@ namespace Allors.Databases
 
                 long nextId = long.Parse(this.Session.Create<C1>().Strategy.ObjectId.ToString());
 
-                if (this.Session.Population is IWorkspace)
-                {
-                    Assert.AreEqual(id, nextId + 1);
-                }
-                else
-                {
-                    Assert.AreEqual(id, nextId - 1);
-                }
+                Assert.AreEqual(id, nextId + 1);
             }
         }
 
@@ -5146,13 +5139,6 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
         private IObject[] GetExtent(IComposite objectType)
         {
-            var workspaceSession = this.Session as IWorkspaceSession;
-
-            if (workspaceSession != null)
-            {
-                return workspaceSession.LocalExtent(objectType);
-            }
-
             return this.Session.Extent(objectType);
         }
     }

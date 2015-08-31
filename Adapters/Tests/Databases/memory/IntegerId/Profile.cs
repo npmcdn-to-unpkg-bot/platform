@@ -24,7 +24,6 @@ namespace Allors.Databases.Memory.IntegerId
     using System.Collections.Generic;
 
     using Allors.Populations;
-    using Allors.Workspaces.Memory.IntegerId;
 
     public class Profile : Databases.Profile
     {
@@ -59,12 +58,6 @@ namespace Allors.Databases.Memory.IntegerId
         public override IDatabase CreateDatabase()
         {
             return new Databases.Memory.IntegerId.Database(new Databases.Memory.IntegerId.Configuration { ObjectFactory = this.ObjectFactory });
-        }
-
-        public override IWorkspace CreateWorkspace(IDatabase database)
-        {
-            var configuration = new Workspaces.Memory.IntegerId.Configuration { Database = database };
-            return new Workspace(configuration);
         }
     }
 }

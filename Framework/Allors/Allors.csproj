@@ -70,9 +70,6 @@
     <Compile Include="IPopulation.cs" />
     <Compile Include="ISession.cs" />
     <Compile Include="IStrategy.cs" />
-    <Compile Include="IWorkspace.cs" />
-    <Compile Include="IWorkspaceFactory.cs" />
-    <Compile Include="IWorkspaceSession.cs" />
     <Compile Include="Meta\IAssociationType.cs" />
     <Compile Include="Meta\IClass.cs" />
     <Compile Include="Meta\IComposite.cs" />

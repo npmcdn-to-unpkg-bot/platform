@@ -31,7 +31,5 @@ namespace Allors.Populations
         IObjectFactory ObjectFactory { get; }
 
         IDatabase CreateDatabase();
-
-        IWorkspace CreateWorkspace(IDatabase database);
     }
 }

@@ -33,11 +33,6 @@ namespace Allors.Databases.Memory.LongId
             this.Reset();
         }
 
-        public override IWorkspaceSession WorkspaceSession
-        {
-            get { throw new NotSupportedException(); }
-        }
-
         internal override Memory.ObjectIds ObjectIds
         {
             get { return this.objectIds; }

@@ -103,8 +103,6 @@ namespace Allors.Databases
 
         public abstract IDatabase CreateDatabase();
         
-        public abstract IWorkspace CreateWorkspace(IDatabase database);
-
         internal ISession CreateSession()
         {
             return this.database.CreateSession();
