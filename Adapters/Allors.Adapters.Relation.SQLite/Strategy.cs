@@ -53,10 +53,13 @@ namespace Allors.Adapters.Relation.SQLite
             }
         }
 
-        public ObjectVersion ObjectVersion {
+        public ObjectVersion ObjectVersion
+        {
             get
             {
-                throw new NotImplementedException();
+                this.AssertNotDeleted();
+                var cacheId = this.session.GetCacheId(objectId);
+                return new ObjectVersionLong(cacheId);
             }
         }
 

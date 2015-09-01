@@ -46,7 +46,7 @@ namespace Allors.Adapters.Relation.SQLite
 
         public const DbType DbTypeForId = DbType.Int64;
         public const DbType DbTypeForType = DbType.Guid;
-        public const DbType DbTypeForCache = DbType.Int32;
+        public const DbType DbTypeForCache = DbType.Int64;
 
         private readonly Database database;
 

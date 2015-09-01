@@ -36,7 +36,8 @@ namespace Allors.Adapters.Memory.LongId
 
         public override void Init()
         {
-            this.session.Init();
+            this.Session.Init();
+
             this.session = null;
             this.Properties = null;
         }        

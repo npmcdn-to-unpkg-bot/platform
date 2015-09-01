@@ -14,8 +14,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Relation.SQLite
 {
     using System;
@@ -30,7 +28,7 @@ namespace Allors.Adapters.Relation.SQLite
 
     public class Database : IDatabase
     {
-        internal const int CacheDefaultValue = int.MaxValue;
+        internal const long CacheDefaultValue = 0;
 
         private const string FullUriKey = "fulluri";
         private const string SharedCacheKey = "?cache=shared";
@@ -510,7 +508,10 @@ namespace Allors.Adapters.Relation.SQLite
 
                 for (var i = 0; i < oids.Length; i++)
                 {
-                    var objectId = new ObjectIdLong(long.Parse(oids[i]));
+                    var objectArray = oids[i].Split(Serialization.ObjectSplitterCharArray);
+
+                    var objectId = new ObjectIdLong(long.Parse(objectArray[0]));
+                    var cacheId = new ObjectVersionLong(objectArray[1]);
 
                     if (!(objectType is IClass))
                     {
@@ -527,7 +528,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
                         {
                             command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId).Value = objectId.Value;
                             command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = objectType.Id;
-                            command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = CacheDefaultValue;
+                            command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = cacheId.Value;
 
                             command.ExecuteNonQuery();
                         }
@@ -827,7 +828,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
                 var atLeastOne = false;
 
                 var cmdText = @"
-SELECT " + Mapping.ColumnNameForObject + @"
+SELECT " + Mapping.ColumnNameForObject + @", " + Mapping.ColumnNameForCache + @"
 FROM " + Mapping.TableNameForObjects + @"
 WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
 
@@ -851,8 +852,10 @@ WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
                                 writer.WriteString(Serialization.ObjectsSplitter);
                             }
 
-                            var role = reader[0].ToString();
-                            writer.WriteString(role);
+                            var objectId = reader[0].ToString();
+                            var objectVersion = reader[1].ToString();
+
+                            writer.WriteString(objectId + Serialization.ObjectSplitter + objectVersion);
                         }
 
                         reader.Close();

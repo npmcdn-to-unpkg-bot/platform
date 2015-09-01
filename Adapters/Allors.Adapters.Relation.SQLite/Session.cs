@@ -14,8 +14,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Relation.SQLite
 {
     using System;
@@ -41,7 +39,7 @@ namespace Allors.Adapters.Relation.SQLite
         private Dictionary<string, object> properties;
 
         private Dictionary<ObjectId, IClass> classByObjectId;
-        private Dictionary<ObjectId, int> cacheIdByObjectId;
+        private Dictionary<ObjectId, long> cacheIdByObjectId;
 
         private HashSet<ObjectId> newObjects;
         private HashSet<ObjectId> deletedObjects;
@@ -267,7 +265,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                 }
 
                 this.classByObjectId[objectId] = objectType;
@@ -427,7 +425,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                 }
 
                 this.classByObjectId[objectId] = objectType;
@@ -1256,9 +1254,9 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
             flushChanged = changed;
         }
 
-        private int GetCacheId(ObjectId objectId)
+        internal long GetCacheId(ObjectId objectId)
         {
-            int cacheId;
+            long cacheId;
             if (!this.cacheIdByObjectId.TryGetValue(objectId, out cacheId))
             {
                 this.FetchObject(objectId);
@@ -1315,7 +1313,7 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject 
 
                         if (this.cacheIdByObjectId == null)
                         {
-                            this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                            this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                         }
                         
                         this.classByObjectId[objectId] = type;
@@ -1998,7 +1996,7 @@ AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
             {
                 var cmdText = @"
 UPDATE " + Mapping.TableNameForObjects + @"
-SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" - 1
+SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" + 1
 WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
                 using (var command = this.CreateCommand(cmdText))
                 {
