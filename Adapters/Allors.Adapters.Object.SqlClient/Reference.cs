@@ -30,8 +30,8 @@ namespace Allors.Adapters.Object.SqlClient
 
     internal class Reference
     {
-        internal const int UnknownCacheId = int.MaxValue;
-        internal const int InitialCacheId = int.MaxValue - 1;
+        internal const long UnknownCacheId = -1;
+        internal const long InitialCacheId = 0;
 
         private static readonly int MaskIsNew = BitVector32.CreateMask();
         private static readonly int MaskExists = BitVector32.CreateMask(MaskIsNew);
@@ -40,7 +40,7 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly Session session;
         private readonly IClass @class;
         private readonly ObjectId objectId;
-        private int cacheId;
+        private long cacheId;
 
         private BitVector32 flags;
 
@@ -60,7 +60,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal Reference(Session session, IClass @class, ObjectId objectId, int cacheId)
+        internal Reference(Session session, IClass @class, ObjectId objectId, long cacheId)
             : this(session, @class, objectId, false)
         {
             this.cacheId = cacheId;
@@ -108,7 +108,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal int CacheId
+        internal long CacheId
         {
             get
             {

@@ -75,6 +75,13 @@ namespace Allors.Adapters.Object.SqlClient
             get { return this.objectId; }
         }
 
+        public ObjectVersion ObjectVersion {
+            get
+            {
+                return new ObjectVersionLong(this.reference.CacheId);
+            }
+        }
+
         public bool IsDeleted
         {
             get
@@ -88,14 +95,6 @@ namespace Allors.Adapters.Object.SqlClient
             get
             {
                 return this.reference.IsNew;
-            }
-        }
-
-        public bool IsNewInWorkspace
-        {
-            get
-            {
-                return false;
             }
         }
 

@@ -419,6 +419,11 @@ namespace Allors.Adapters.Object.SqlClient
             return new ObjectDataRecord(this.mapping, objectids);
         }
 
+        internal IEnumerable<SqlDataRecord> CreateVersionedObjectTable(Dictionary<ObjectId, ObjectVersion> versionedObjects)
+        {
+            return new VersionedObjectDataRecord(this.mapping, versionedObjects);
+        }
+
         internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<Reference> references)
         {
             return new CompositesRoleDataRecords(this.mapping, references);

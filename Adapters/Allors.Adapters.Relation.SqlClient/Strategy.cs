@@ -53,6 +53,13 @@ namespace Allors.Adapters.Relation.SqlClient
             }
         }
 
+        public ObjectVersion ObjectVersion {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public bool IsDeleted 
         {
             get
@@ -66,14 +73,6 @@ namespace Allors.Adapters.Relation.SqlClient
             get
             {
                 return this.session.IsNew(this.ObjectId);
-            }
-        }
-
-        public bool IsNewInWorkspace 
-        {
-            get
-            {
-                return false;
             }
         }
 

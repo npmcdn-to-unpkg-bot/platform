@@ -3130,7 +3130,7 @@ namespace Allors.Adapters
                 {
                     extent = this.Session.Except(firstExtent, secondExtent);
                 }
-                catch (ArgumentException e)
+                catch (ArgumentException)
                 {
                     exceptionThrown = true;
                 }

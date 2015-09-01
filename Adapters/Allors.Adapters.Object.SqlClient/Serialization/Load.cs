@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
+using System.Data;
 
 namespace Allors.Adapters.Object.SqlClient
 {
@@ -36,6 +36,7 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly XmlReader reader;
 
         private readonly Dictionary<ObjectId, IObjectType> objectTypeByObjectId;
+        private readonly Dictionary<ObjectId, ObjectVersion> objectVersionByObjectId;
 
         internal void Execute(ManagementSession session)
         {
@@ -75,6 +76,7 @@ namespace Allors.Adapters.Object.SqlClient
                             }
 
                             this.LoadObjectsPostProcess(session);
+                            this.LoadObjectsSetCache(session);
 
                             session.Commit();
                         }
@@ -115,7 +117,7 @@ namespace Allors.Adapters.Object.SqlClient
                         {
                             if (!this.reader.IsEmptyElement)
                             {
-                                this.LoadDatabaseIObjectTypes(session);
+                                this.LoadDatabaseObjectTypes(session);
                             }
                         }
                         else if (reader.Name.Equals(Serialization.Workspace))
@@ -139,7 +141,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        protected virtual void LoadDatabaseIObjectTypes(ManagementSession session)
+        protected virtual void LoadDatabaseObjectTypes(ManagementSession session)
         {
             while (this.reader.Read())
             {
@@ -166,15 +168,23 @@ namespace Allors.Adapters.Object.SqlClient
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
 
                                 var objectIds = new ObjectId[objectIdStringArray.Length];
+                                var cacheIds = new ObjectVersion[objectIdStringArray.Length];
                                 for (var i = 0; i < objectIds.Length; i++)
                                 {
                                     var objectIdString = objectIdStringArray[i];
 
                                     if (canLoad)
                                     {
-                                        var objectId = this.database.ObjectIds.Parse(objectIdString);
+                                        var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
+
+                                        var objectId = this.database.ObjectIds.Parse(objectArray[0]);
+                                        var cacheId = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(Reference.InitialCacheId);
+
                                         objectIds[i] = objectId;
+                                        cacheIds[i] = cacheId;
+
                                         this.objectTypeByObjectId[objectId] = objectType;
+                                        this.objectVersionByObjectId[objectId] = cacheId;
                                     }
                                     else
                                     {
@@ -607,9 +617,10 @@ namespace Allors.Adapters.Object.SqlClient
             this.reader = reader;
 
             this.objectTypeByObjectId = new Dictionary<ObjectId, IObjectType>();
+            this.objectVersionByObjectId = new Dictionary<ObjectId, ObjectVersion>();
         }
 
-        protected void LoadObjectsPostProcess(ManagementSession session)
+        private void LoadObjectsPostProcess(ManagementSession session)
         {
             var sql = new StringBuilder();
 
@@ -650,6 +661,22 @@ namespace Allors.Adapters.Object.SqlClient
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        private void LoadObjectsSetCache(ManagementSession session)
+        {
+            var sql = this.database.Mapping.ProcedureNameForSetCache;
+            var command = session.CreateSqlCommand(sql);
+
+            command.CommandType = CommandType.StoredProcedure;
+
+            var sqlParameter = command.CreateParameter();
+            sqlParameter.SqlDbType = SqlDbType.Structured;
+            sqlParameter.TypeName = database.Mapping.TableTypeNameForVersionedObject;
+            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+            sqlParameter.Value = database.CreateVersionedObjectTable(this.objectVersionByObjectId);
+
+            command.Parameters.Add(sqlParameter);
         }
     }
 }

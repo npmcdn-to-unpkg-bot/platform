@@ -857,7 +857,7 @@ namespace Allors.Adapters.Object.SqlClient
                 var cacheIdByObjectId = this.GetCacheIds(this.referencesWithoutCacheId);
                 foreach (var association in this.referencesWithoutCacheId)
                 {
-                    int cacheId;
+                    long cacheId;
                     if (cacheIdByObjectId.TryGetValue(association.ObjectId, out cacheId))
                     {
                         association.CacheId = cacheId;
@@ -2178,7 +2178,7 @@ namespace Allors.Adapters.Object.SqlClient
                 if (reader.Read())
                 {
                     var classId = reader.GetGuid(0);
-                    var cacheId = reader.GetInt32(1);
+                    var cacheId = reader.GetInt64(1);
 
                     var type = (IClass)this.Database.MetaPopulation.Find(classId);
                     return this.GetOrCreateReferenceForExistingObject(type, objectId, cacheId);
@@ -2216,7 +2216,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     var objectIdString = reader.GetValue(0).ToString();
                     var classId = reader.GetGuid(1);
-                    var cacheId = reader.GetInt32(2);
+                    var cacheId = reader.GetInt64(2);
 
                     var objectId = this.Database.ObjectIds.Parse(objectIdString);
                     var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);
@@ -2256,7 +2256,7 @@ namespace Allors.Adapters.Object.SqlClient
             return (IClass)this.Database.ObjectFactory.GetObjectTypeForType((Guid)result);
         }
 
-        private Dictionary<ObjectId, int> GetCacheIds(ISet<Reference> references)
+        private Dictionary<ObjectId, long> GetCacheIds(ISet<Reference> references)
         {
             var command = this.getCacheIds;
 
@@ -2272,14 +2272,14 @@ namespace Allors.Adapters.Object.SqlClient
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
             }
 
-            var cacheIdByObjectId = new Dictionary<ObjectId, int>();
+            var cacheIdByObjectId = new Dictionary<ObjectId, long>();
 
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
                     var objectId = this.Database.ObjectIds.Parse(reader[0].ToString());
-                    var cacheId = reader.GetInt32(1);
+                    var cacheId = reader.GetInt64(1);
 
                     cacheIdByObjectId.Add(objectId, cacheId);
                 }
@@ -2356,7 +2356,7 @@ namespace Allors.Adapters.Object.SqlClient
             return reference;
         }
 
-        private Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
+        private Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId, long cacheId)
         {
             Reference reference;
             if (!this.referenceByObjectId.TryGetValue(objectId, out reference))

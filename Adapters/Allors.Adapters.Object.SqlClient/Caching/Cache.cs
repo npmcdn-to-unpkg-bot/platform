@@ -69,7 +69,7 @@ namespace Allors.Adapters.Object.SqlClient.Caching
             this.objectTypeByObjectId.Clear();
         }
 
-        public ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, int localCacheId)
+        public ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, long localCacheId)
         {
             if (this.transientConcreteClasses != null && this.transientConcreteClasses.Contains(concreteClass))
             {

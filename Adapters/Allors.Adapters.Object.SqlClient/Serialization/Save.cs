@@ -75,7 +75,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var atLeastOne = false;
 
-                var sql = "SELECT " + Mapping.ColumnNameForObject + "\n";
+                var sql = "SELECT " + Mapping.ColumnNameForObject + ", "+ Mapping.ColumnNameForCache  + "\n";
                 sql += "FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveClass] + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParamNameForType+ "\n";
                 sql += "ORDER BY " + Mapping.ColumnNameForObject;
@@ -101,7 +101,10 @@ namespace Allors.Adapters.Object.SqlClient
                             }
 
                             var objectId = this.database.ObjectIds.Parse(reader[0].ToString());
-                            this.writer.WriteString(objectId.Value.ToString());
+                            var cacheId = new ObjectVersionLong(reader[1].ToString());
+
+                            this.writer.WriteAttributeString(Serialization.Id, type.Id.ToString());
+                            this.writer.WriteString(objectId.Value + Serialization.ObjectSplitter + cacheId.Value);
                         }
 
                         reader.Close();

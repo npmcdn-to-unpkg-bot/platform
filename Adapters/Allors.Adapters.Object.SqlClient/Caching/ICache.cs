@@ -31,7 +31,7 @@ namespace Allors.Adapters.Object.SqlClient.Caching
     /// </summary>
     public interface ICache
     {
-        ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, int localCacheId);
+        ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, long localCacheId);
 
         IClass GetObjectType(ObjectId objectId);
 

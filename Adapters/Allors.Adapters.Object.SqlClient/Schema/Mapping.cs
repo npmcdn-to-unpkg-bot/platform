@@ -38,11 +38,11 @@ namespace Allors.Adapters.Object.SqlClient
         public const string ColumnNameForRole = "r";
 
         public const string SqlTypeForType = "uniqueidentifier";
-        public const string SqlTypeForCache = "int";
+        public const string SqlTypeForCache = "bigint";
         public const string SqlTypeForCount = "int";
 
         public const SqlDbType SqlDbTypeForType = SqlDbType.UniqueIdentifier;
-        public const SqlDbType SqlDbTypeForCache = SqlDbType.Int;
+        public const SqlDbType SqlDbTypeForCache = SqlDbType.BigInt;
         public const SqlDbType SqlDbTypeForCount = SqlDbType.Int;
 
         public readonly string SqlTypeForObject;
@@ -65,7 +65,10 @@ namespace Allors.Adapters.Object.SqlClient
         internal readonly Dictionary<IRelationType, string> TableNameForRelationByRelationType;
 
         internal readonly string TableTypeNameForObject;
+        internal readonly string TableTypeNameForVersionedObject;
+
         internal readonly string TableTypeColumnNameForObject;
+        internal readonly string TableTypeColumnNameForCache;
 
         internal readonly string TableTypeNameForCompositeRelation;
         internal readonly string TableTypeNameForStringRelation;
@@ -75,16 +78,17 @@ namespace Allors.Adapters.Object.SqlClient
         internal readonly string TableTypeNameForDateTimeRelation;
         internal readonly string TableTypeNameForUniqueRelation;
         internal readonly string TableTypeNameForBinaryRelation;
-        
+
+        internal readonly string TableTypeNamePrefixForDecimalRelation;
+
         internal readonly string TableTypeColumnNameForAssociation;
         internal readonly string TableTypeColumnNameForRole;
 
-        internal readonly string TableTypeNamePrefixForDecimalRelation;
         internal readonly Dictionary<int, Dictionary<int, string>> TableTypeNameForDecimalRelationByScaleByPrecision;
        
         internal readonly string ProcedureNameForGetCache;
+        internal readonly string ProcedureNameForSetCache;
         internal readonly string ProcedureNameForUpdateCache;
-        internal readonly string ProcedureNameForResetCache;
         
         internal readonly Dictionary<IClass, string> ProcedureNameForLoadObjectByClass;
         internal readonly Dictionary<IClass, string> ProcedureNameForCreateObjectByClass;
@@ -104,6 +108,7 @@ namespace Allors.Adapters.Object.SqlClient
         internal readonly Dictionary<IRelationType, string> ProcedureNameForPrefetchAssociationByRelationType;
         
         private const string ProcedurePrefixForGetCache = "gc";
+        private const string ProcedurePrefixForSetCache = "sc";
         private const string ProcedurePrefixForUpdateCache = "uc";
         private const string ProcedurePrefixForResetCache = "rc";
         private const string ProcedurePrefixForCreateObject = "co_";
@@ -145,6 +150,7 @@ namespace Allors.Adapters.Object.SqlClient
             // TableTypes
             // ----------
             this.TableTypeNameForObject = database.SchemaName + "." + "_t_o";
+            this.TableTypeNameForVersionedObject = database.SchemaName + "." + "_t_vo";
             this.TableTypeNameForCompositeRelation = database.SchemaName + "." + "_t_c";
             this.TableTypeNameForStringRelation = database.SchemaName + "." + "_t_s";
             this.TableTypeNameForIntegerRelation = database.SchemaName + "." + "_t_i";
@@ -156,6 +162,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.TableTypeNamePrefixForDecimalRelation = database.SchemaName + "." + "_t_de";
             
             this.TableTypeColumnNameForObject = "_o";
+            this.TableTypeColumnNameForCache = "_c";
             this.TableTypeColumnNameForAssociation = "_a";
             this.TableTypeColumnNameForRole = "_r";
 
@@ -192,6 +199,15 @@ namespace Allors.Adapters.Object.SqlClient
                 sql.Append("(" + this.TableTypeColumnNameForObject + " " + this.SqlTypeForObject + ")\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForObject, sql.ToString()); 
+            }
+
+            {
+                var sql = new StringBuilder();
+                sql.Append("CREATE TYPE " + this.TableTypeNameForVersionedObject + " AS TABLE\n");
+                sql.Append("(" + this.TableTypeColumnNameForObject + " " + this.SqlTypeForObject + ",\n");
+                sql.Append(this.TableTypeColumnNameForCache + " " + SqlTypeForCache + ")\n");
+
+                this.tableTypeDefinitionByName.Add(this.TableTypeNameForVersionedObject, sql.ToString());
             }
 
             {
@@ -370,6 +386,20 @@ AS
     WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
             this.procedureDefinitionByName.Add(this.ProcedureNameForGetCache, definition);
 
+            // Set Cache Ids
+            this.ProcedureNameForSetCache = this.Database.SchemaName + "." + ProcedurePrefixForSetCache;
+            definition = 
+@"CREATE PROCEDURE " + this.ProcedureNameForSetCache + @"
+    " + ParamNameForTableType + @" " + this.TableTypeNameForVersionedObject + @" READONLY
+AS 
+    UPDATE " + this.TableNameForObjects + @"
+    SET " + ColumnNameForCache + " = r." + this.TableTypeColumnNameForCache + @"
+    FROM " + this.TableNameForObjects + @"
+    INNER JOIN " + ParamNameForTableType + @" AS r
+    ON " + ColumnNameForObject + " = r." + this.TableTypeColumnNameForObject + @"
+";
+            this.procedureDefinitionByName.Add(this.ProcedureNameForSetCache, definition);
+
             // Update Cache Ids
             this.ProcedureNameForUpdateCache = this.Database.SchemaName + "." + ProcedurePrefixForUpdateCache;
             definition =
@@ -377,22 +407,10 @@ AS
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 
     UPDATE " + this.TableNameForObjects + @"
-    SET " + ColumnNameForCache + " = " + ColumnNameForCache + @" - 1
+    SET " + ColumnNameForCache + " = " + ColumnNameForCache + @" + 1
     FROM " + this.TableNameForObjects + @"
     WHERE " + ColumnNameForObject + " IN ( SELECT " + this.TableTypeColumnNameForObject + " FROM " + ParamNameForTableType + ");\n\n";
             this.procedureDefinitionByName.Add(this.ProcedureNameForUpdateCache, definition);
-
-            // Reset Cache Ids
-            this.ProcedureNameForResetCache = this.Database.SchemaName + "." + ProcedurePrefixForResetCache;
-            definition =
-@"CREATE PROCEDURE " + this.ProcedureNameForResetCache + @"
-    " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
-AS 
-    UPDATE " + this.TableNameForObjects + @"
-    SET " + ColumnNameForCache + " = " + Reference.InitialCacheId + @"
-    FROM " + this.TableNameForObjects + @"
-    WHERE " + ColumnNameForObject + " IN ( SELECT " + this.TableTypeColumnNameForObject + " FROM " + ParamNameForTableType + ");\n\n";
-            this.procedureDefinitionByName.Add(this.ProcedureNameForResetCache, definition);
 
             foreach (var @class in this.Database.MetaPopulation.Classes)
             {
@@ -641,7 +659,7 @@ AS
 
                             case UnitTags.AllorsInteger:
                                 // Set Integer Role
-                                definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
+definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForIntegerRelation + @" READONLY
 AS 
     UPDATE " + table + @"

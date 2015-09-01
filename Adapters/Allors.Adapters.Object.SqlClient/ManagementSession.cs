@@ -56,12 +56,13 @@ namespace Allors.Adapters.Object.SqlClient
             using (var command = this.CreateSqlCommand(sql))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                var sqlParameter = command.CreateParameter();
-                sqlParameter.ParameterName = Mapping.ParamNameForType;
-                sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
-                sqlParameter.Value = (object)objectType.Id ?? DBNull.Value;
 
-                command.Parameters.Add(sqlParameter);
+                var objectTypeSqlParameter = command.CreateParameter();
+                objectTypeSqlParameter.ParameterName = Mapping.ParamNameForType;
+                objectTypeSqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                objectTypeSqlParameter.Value = (object)objectType.Id ?? DBNull.Value;
+
+                command.Parameters.Add(objectTypeSqlParameter);
                 var sqlParameter1 = command.CreateParameter();
                 sqlParameter1.SqlDbType = SqlDbType.Structured;
                 sqlParameter1.TypeName = schema.TableTypeNameForObject;
@@ -180,6 +181,17 @@ namespace Allors.Adapters.Object.SqlClient
             return new Command(command);
         }
 
+        internal SqlCommand CreateSqlCommand(string sql)
+        {
+            this.LazyConnect();
+            var command = this.connection.CreateCommand();
+            command.Transaction = this.transaction;
+            command.CommandTimeout = this.database.CommandTimeout;
+            command.CommandText = sql;
+            return command;
+        }
+
+
         internal void Commit()
         {
             try
@@ -208,16 +220,6 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 this.LazyDisconnect();
             }
-        }
-
-        private SqlCommand CreateSqlCommand(string sql)
-        {
-            this.LazyConnect();
-            var command = this.connection.CreateCommand();
-            command.Transaction = this.transaction;
-            command.CommandTimeout = this.database.CommandTimeout;
-            command.CommandText = sql;
-            return command;
         }
 
         private void LazyConnect()
