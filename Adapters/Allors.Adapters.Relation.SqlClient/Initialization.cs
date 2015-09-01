@@ -359,7 +359,7 @@ CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
 AS 
 
 UPDATE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
-SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" - 1
+SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" + 1
 WHERE " + Mapping.ColumnNameForObject + " IN ( SELECT * FROM " + Mapping.ParameterNameForObjectTable + @");
 ";
 

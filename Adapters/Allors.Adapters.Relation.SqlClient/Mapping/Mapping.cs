@@ -58,7 +58,7 @@ namespace Allors.Adapters.Relation.SqlClient
         public const string ParameterNameForRelationTable = ParamPrefix + "rt";
 
         public const string SqlTypeForType = "uniqueidentifier";
-        public const string SqlTypeForCache = "int";
+        public const string SqlTypeForCache = "bigint";
         public const string SqlTypeForCount = "int";
 
         public const SqlDbType SqlDbTypeForType = SqlDbType.UniqueIdentifier;

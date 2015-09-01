@@ -39,7 +39,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
         private Dictionary<string, object> properties;
 
-        private Dictionary<ObjectId, int> cacheIdByObjectId;
+        private Dictionary<ObjectId, long> cacheIdByObjectId;
         private Dictionary<ObjectId, IClass> classByObjectId;
 
         private HashSet<ObjectId> newObjects;
@@ -250,7 +250,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                 }
 
                 if (this.classByObjectId == null)
@@ -284,7 +284,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                 }
 
                 if (this.classByObjectId == null)
@@ -444,7 +444,7 @@ END
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                 }
 
                 if (this.classByObjectId == null)
@@ -1264,9 +1264,9 @@ END
             flushChanged = changed;
         }
 
-        private int GetCacheId(ObjectId objectId)
+        internal long GetCacheId(ObjectId objectId)
         {
-            int cacheId;
+            long cacheId;
             if (this.cacheIdByObjectId == null || !this.cacheIdByObjectId.TryGetValue(objectId, out cacheId))
             {
                 this.AddObjectToFetch(objectId);
@@ -1350,7 +1350,7 @@ END
                     {
                         var objectId = this.database.ObjectIds.Parse(reader.GetValue(0).ToString());
                         var typeId = reader.GetGuid(1);
-                        var cacheId = reader.GetInt32(2);
+                        var cacheId = reader.GetInt64(2);
                         var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
 
                         if (this.classByObjectId == null)
@@ -1360,7 +1360,7 @@ END
 
                         if (this.cacheIdByObjectId == null)
                         {
-                            this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                            this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                         }
                         
                         this.classByObjectId[objectId] = type;

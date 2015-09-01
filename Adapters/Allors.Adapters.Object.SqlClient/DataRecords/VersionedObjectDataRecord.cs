@@ -41,31 +41,43 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
-            var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
-            var sqlDataRecord = new SqlDataRecord(metaData);
-
             if (this.mapping.IsObjectIdInteger)
             {
+                var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
+                var metaData = new SqlMetaData[]
+                {
+                    new SqlMetaData(objectArrayElement, SqlDbType.Int),
+                    new SqlMetaData(objectArrayElement, SqlDbType.BigInt)
+                };
+                var sqlDataRecord = new SqlDataRecord(metaData);
+
                 foreach (var dictionaryEntry in this.versionedObjects)
                 {
                     var objectId = dictionaryEntry.Key;
                     var objectVersion = dictionaryEntry.Value;
 
                     sqlDataRecord.SetInt32(0, (int)objectId.Value);
-                    sqlDataRecord.SetInt64(0, (long)objectVersion.Value);
+                    sqlDataRecord.SetInt64(1, (long)objectVersion.Value);
                     yield return sqlDataRecord;
                 }
             }
             else
             {
+                var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
+                var metaData = new SqlMetaData[]
+                {
+                    new SqlMetaData(objectArrayElement, SqlDbType.BigInt),
+                    new SqlMetaData(objectArrayElement, SqlDbType.BigInt)
+                };
+                var sqlDataRecord = new SqlDataRecord(metaData);
+
                 foreach (var dictionaryEntry in this.versionedObjects)
                 {
                     var objectId = dictionaryEntry.Key;
                     var objectVersion = dictionaryEntry.Value;
 
                     sqlDataRecord.SetInt64(0, (long)objectId.Value);
-                    sqlDataRecord.SetInt64(0, (long)objectVersion.Value);
+                    sqlDataRecord.SetInt64(1, (long)objectVersion.Value);
                     yield return sqlDataRecord;
                 }
             }

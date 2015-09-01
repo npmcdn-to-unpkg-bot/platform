@@ -677,6 +677,8 @@ namespace Allors.Adapters.Object.SqlClient
             sqlParameter.Value = database.CreateVersionedObjectTable(this.objectVersionByObjectId);
 
             command.Parameters.Add(sqlParameter);
+
+            command.ExecuteNonQuery();
         }
     }
 }

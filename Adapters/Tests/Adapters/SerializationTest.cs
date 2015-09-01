@@ -257,8 +257,7 @@ namespace Allors.Adapters
 
                         Assert.AreEqual(otherC1.Strategy.ObjectVersion, c1.Strategy.ObjectVersion);
                     }
-
-
+                    
                     // Change
                     otherC1.C1AllorsString = "Changed";
 
@@ -560,6 +559,79 @@ namespace Allors.Adapters
                     using (var saveSession = savePopulation.CreateSession())
                     {
                         this.AssertPopulation(saveSession);
+                    }
+                }
+            }
+        }
+
+
+        [Test]
+        [Category("Save & Load")]
+        public void SaveVersions()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                using (var session = this.Population.CreateSession())
+                {
+                    // Initial
+                    var c1 = session.Create<C1>();
+
+                    session.Commit();
+
+                    var initialObjectVersion = c1.Strategy.ObjectVersion;
+
+                    var xml = Save(this.Population);
+
+                    var otherPopulation = this.CreatePopulation();
+                    Load(otherPopulation, xml);
+
+                    using (var otherSession = otherPopulation.CreateSession())
+                    {
+                        var otherC1 = otherSession.Instantiate(c1.Id);
+
+                        Assert.AreEqual(c1.Strategy.ObjectVersion, otherC1.Strategy.ObjectVersion);
+                    }
+
+
+                    // Change
+                    c1.C1AllorsString = "Changed";
+
+                    session.Commit();
+
+                    var changedObjectVersion = c1.Strategy.ObjectVersion;
+
+                    xml = Save(this.Population);
+
+                    otherPopulation = this.CreatePopulation();
+                    Load(otherPopulation, xml);
+
+                    using (var otherSession = otherPopulation.CreateSession())
+                    {
+                        var otherC1 = otherSession.Instantiate(c1.Id);
+
+                        Assert.AreEqual(c1.Strategy.ObjectVersion, otherC1.Strategy.ObjectVersion);
+                        Assert.AreNotEqual(initialObjectVersion, otherC1.Strategy.ObjectVersion);
+                    }
+
+                    // Change again
+                    c1.C1AllorsString = "Changed again";
+
+                    session.Commit();
+
+                    xml = Save(this.Population);
+
+                    otherPopulation = this.CreatePopulation();
+                    Load(otherPopulation, xml);
+
+                    using (var otherSession = otherPopulation.CreateSession())
+                    {
+                        var otherC1 = otherSession.Instantiate(c1.Id);
+
+                        Assert.AreEqual(c1.Strategy.ObjectVersion, otherC1.Strategy.ObjectVersion);
+                        Assert.AreNotEqual(initialObjectVersion, otherC1.Strategy.ObjectVersion);
+                        Assert.AreNotEqual(changedObjectVersion, otherC1.Strategy.ObjectVersion);
                     }
                 }
             }
