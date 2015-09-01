@@ -55,7 +55,9 @@ namespace Allors.Adapters.Memory
 
         private WeakReference allorizedObjectWeakReference;
 
-        internal Strategy(Session session, IClass objectType, ObjectId objectId)
+        private ObjectVersion version;
+
+        internal Strategy(Session session, IClass objectType, ObjectId objectId, ObjectVersion version)
         {
             this.session = session;
             this.objectType = objectType;
@@ -64,6 +66,8 @@ namespace Allors.Adapters.Memory
             this.isDeleted = false;
             this.isDeletedOnRollback = true;
             this.isNew = true;
+
+            this.version = version;
 
             this.unitRoleByRoleType = new Dictionary<IRoleType, object>();
             this.compositeRoleByRoleType = new Dictionary<IRoleType, Strategy>();
@@ -91,15 +95,14 @@ namespace Allors.Adapters.Memory
             }
         }
 
-        public bool IsNewInWorkspace
-        {
+        public ObjectId ObjectId { get; internal set; }
+
+        public ObjectVersion ObjectVersion {
             get
             {
-                return false;
+                return version;
             }
         }
-
-        public ObjectId ObjectId { get; internal set; }
 
         public IClass Class
         {
@@ -637,6 +640,19 @@ namespace Allors.Adapters.Memory
             this.isDeletedOnRollback = this.isDeleted;
             this.isNew = false;
 
+            if (!this.IsDeleted && !this.MemorySession.MemoryDatabase.IsLoading)
+            {
+                if (this.rollbackUnitRoleByRoleType != null ||
+                    this.rollbackCompositeRoleByRoleType != null ||
+                    this.rollbackCompositeRoleByRoleType != null ||
+                    this.rollbackCompositeRoleByRoleType != null ||
+                    this.rollbackCompositeRoleByRoleType != null ||
+                    this.rollbackCompositeRoleByRoleType != null)
+                {
+                    this.version = version.Next();
+                }
+            }
+            
             this.rollbackUnitRoleByRoleType = null;
             this.rollbackCompositeRoleByRoleType = null;
             this.rollbackCompositesRoleByRoleType = null;

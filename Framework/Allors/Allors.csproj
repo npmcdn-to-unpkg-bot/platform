@@ -56,6 +56,9 @@
     <Compile Include="Adapters\Configuration.cs" />
     <Compile Include="Adapters\EmptySet.cs" />
     <Compile Include="Adapters\MetaObjectComparer.cs" />
+    <Compile Include="Adapters\ObjectVersionLong.cs" />
+    <Compile Include="Adapters\ObjectVersions.cs" />
+    <Compile Include="Adapters\ObjectVersionsLong.cs" />
     <Compile Include="Adapters\PredicateAssertions.cs" />
     <Compile Include="Adapters\RoleAssertions.cs" />
     <Compile Include="Adapters\RoleTypeExtensions.cs" />
@@ -68,7 +71,6 @@
     <Compile Include="ExtentT.cs" />
     <Compile Include="IChangeSet.cs" />
     <Compile Include="ICompositePredicate.cs" />
-    <Compile Include="IConflict.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="ISession.cs" />
     <Compile Include="IObject.cs" />
@@ -91,12 +93,13 @@
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />
     <Compile Include="ObjectFactory.cs" />
+    <Compile Include="ObjectVersion.cs" />
     <Compile Include="ObjectId.cs" />
-    <Compile Include="ObjectIdInteger.cs" />
-    <Compile Include="ObjectIdLong.cs" />
-    <Compile Include="ObjectIds.cs" />
-    <Compile Include="ObjectIdsInteger.cs" />
-    <Compile Include="ObjectIdsLong.cs" />
+    <Compile Include="Adapters\ObjectIdInteger.cs" />
+    <Compile Include="Adapters\ObjectIdLong.cs" />
+    <Compile Include="Adapters\ObjectIds.cs" />
+    <Compile Include="Adapters\ObjectIdsInteger.cs" />
+    <Compile Include="Adapters\ObjectIdsLong.cs" />
     <Compile Include="ObjectNotLoadedEventArgs.cs" />
     <Compile Include="Prefetch\PrefetchPolicyBuilder.cs" />
     <Compile Include="Prefetch\PrefetchRule.cs" />

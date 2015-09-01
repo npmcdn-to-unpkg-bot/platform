@@ -49,7 +49,7 @@ namespace Allors.Adapters.Memory
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
-
+        
         public string Id
         {
             get { return this.id; }
@@ -94,6 +94,8 @@ namespace Allors.Adapters.Memory
                 return this.objectFactory.MetaPopulation;
             }
         }
+
+        internal bool IsLoading { get; private set; }
 
         protected abstract Session Session { get; }
 
@@ -150,10 +152,19 @@ namespace Allors.Adapters.Memory
         {
             this.Init();
 
-            var load = new Load(this.Session, reader);
-            load.Execute();
+            try
+            {
+                this.IsLoading = true;
 
-            this.Session.Commit();
+                var load = new Load(this.Session, reader);
+                load.Execute();
+
+                this.Session.Commit();
+            }
+            finally
+            {
+                this.IsLoading = false;
+            }
         }
 
         public void Save(XmlWriter writer)

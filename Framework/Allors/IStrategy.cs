@@ -45,7 +45,13 @@ namespace Allors
         /// </summary>
         /// <value>The object id.</value>
         ObjectId ObjectId { get; }
-
+        
+        /// <summary>
+        /// Gets the <see cref="Allors.ObjectId"/>.
+        /// </summary>
+        /// <value>The object id.</value>
+        ObjectVersion ObjectVersion { get; }
+        
         /// <summary>
         /// Gets a value indicating whether this instance is deleted.
         /// </summary>
@@ -61,14 +67,6 @@ namespace Allors
         ///  <c>true</c> if this object is new in the current session otherwise, <c>false</c>.
         /// </value>
         bool IsNewInSession { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether this object is new in the workspace.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this object is new in the workspace otherwise, <c>false</c>.
-        /// </value>
-        bool IsNewInWorkspace { get; }
 
         /// <summary>
         /// Gets the <see cref="IObject"/>.

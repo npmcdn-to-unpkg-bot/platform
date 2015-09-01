@@ -91,7 +91,7 @@ namespace Allors.Adapters.Memory
                             this.writer.WriteString(Serialization.ObjectsSplitter);
                         }
 
-                        this.writer.WriteString(strategy.ObjectId.ToString());
+                        this.writer.WriteString(strategy.ObjectId + Serialization.ObjectSplitter + strategy.ObjectVersion);
                     }
 
                     this.writer.WriteEndElement();

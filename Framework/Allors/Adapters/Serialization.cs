@@ -92,6 +92,11 @@ namespace Allors.Adapters
         public const string ObjectsSplitter = ",";
 
         /// <summary>
+        /// This character is used to group multiple <see cref="ObjectId"/>s into one value.
+        /// </summary>
+        public const string ObjectSplitter = ":";
+
+        /// <summary>
         /// This element groups <see cref="IObject"/>s having the same <see cref="ObjectType"/>.
         /// Child element of the <see cref="Serialization#Objects"/> element.
         /// </summary>
@@ -145,6 +150,11 @@ namespace Allors.Adapters
         /// Char array for <see cref="Serialization#ObjectsSplitter"/>.
         /// </summary>
         public static readonly char[] ObjectsSplitterCharArray = { ObjectsSplitter[0] };
+
+        /// <summary>
+        /// Char array for <see cref="Serialization#ObjectSplitter"/>.
+        /// </summary>
+        public static readonly char[] ObjectSplitterCharArray = { ObjectSplitter[0] };
 
         /// <summary>
         /// Checks if the <see cref="IDatabase#Version"/> is correct.

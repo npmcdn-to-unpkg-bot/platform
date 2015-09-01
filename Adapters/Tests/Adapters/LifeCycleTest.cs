@@ -3180,7 +3180,7 @@ namespace Allors.Adapters
                     C1 b;
 
                     long aLongId = long.Parse(a.Strategy.ObjectId.ToString());
-                    if (a.Strategy.IsNewInWorkspace)
+                    if (a.Strategy.IsNewInSession)
                     {
                         b = (C1)session.Insert(Classes.C1, (aLongId - 1).ToString());
                     }
@@ -4023,6 +4023,47 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 allorsObjects = this.Session.Instantiate(ids);
 
                 Assert.AreEqual(0, allorsObjects.Length);
+            }
+        }
+
+        [Test]
+        public void Versioning()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var obj = this.Session.Create<C1>();
+                
+                Assert.AreEqual("0", obj.Strategy.ObjectVersion.ToString());
+
+                this.Session.Commit();
+
+                Assert.AreEqual("0", obj.Strategy.ObjectVersion.ToString());
+
+                obj.C1AllorsString = "Changed";
+
+                Assert.AreEqual("0", obj.Strategy.ObjectVersion.ToString());
+
+                this.Session.Commit();
+
+                Assert.AreEqual("1", obj.Strategy.ObjectVersion.ToString());
+
+                obj.C1AllorsString = "Changed again.";
+
+                Assert.AreEqual("1", obj.Strategy.ObjectVersion.ToString());
+
+                this.Session.Commit();
+
+                Assert.AreEqual("2", obj.Strategy.ObjectVersion.ToString());
+
+                obj.RemoveC1AllorsString();
+
+                Assert.AreEqual("2", obj.Strategy.ObjectVersion.ToString());
+
+                this.Session.Commit();
+
+                Assert.AreEqual("3", obj.Strategy.ObjectVersion.ToString());
             }
         }
 

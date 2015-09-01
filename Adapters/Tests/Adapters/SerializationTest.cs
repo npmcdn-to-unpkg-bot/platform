@@ -232,6 +232,73 @@ namespace Allors.Adapters
 
         [Test]
         [Category("Save & Load")]
+        public void LoadVersions()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var otherPopulation = this.CreatePopulation();
+                using (var otherSession = otherPopulation.CreateSession())
+                {
+                    // Initial
+                    var otherC1 = otherSession.Create<C1>();
+
+                    otherSession.Commit();
+
+                    var initialObjectVersion = otherC1.Strategy.ObjectVersion;
+
+                    var xml = Save(otherPopulation);
+                    Load(this.Population, xml);
+
+                    using (var session = this.Population.CreateSession())
+                    {
+                        var c1 = session.Instantiate(otherC1.Id);
+
+                        Assert.AreEqual(otherC1.Strategy.ObjectVersion, c1.Strategy.ObjectVersion);
+                    }
+
+
+                    // Change
+                    otherC1.C1AllorsString = "Changed";
+
+                    otherSession.Commit();
+
+                    var changedObjectVersion = otherC1.Strategy.ObjectVersion;
+
+                    xml = Save(otherPopulation);
+                    Load(this.Population, xml);
+
+                    using (var session = this.Population.CreateSession())
+                    {
+                        var c1 = session.Instantiate(otherC1.Id);
+
+                        Assert.AreEqual(otherC1.Strategy.ObjectVersion, c1.Strategy.ObjectVersion);
+                        Assert.AreNotEqual(initialObjectVersion, c1.Strategy.ObjectVersion);
+                    }
+
+                    // Change again
+                    otherC1.C1AllorsString = "Changed again";
+
+                    otherSession.Commit();
+
+                    xml = Save(otherPopulation);
+                    Load(this.Population, xml);
+
+                    using (var session = this.Population.CreateSession())
+                    {
+                        var c1 = session.Instantiate(otherC1.Id);
+
+                        Assert.AreEqual(otherC1.Strategy.ObjectVersion, c1.Strategy.ObjectVersion);
+                        Assert.AreNotEqual(initialObjectVersion, c1.Strategy.ObjectVersion);
+                        Assert.AreNotEqual(changedObjectVersion, c1.Strategy.ObjectVersion);
+                    }
+                }
+            }
+        }
+
+        [Test]
+        [Category("Save & Load")]
         public void LoadRollback()
         {
             foreach (var init in this.Inits)
@@ -597,6 +664,24 @@ namespace Allors.Adapters
         }
 
         protected abstract IDatabase CreatePopulation();
+
+        private static string Save(IDatabase otherPopulation)
+        {
+            var stringWriter = new StringWriter();
+            var writer = new XmlTextWriter(stringWriter);
+            otherPopulation.Save(writer);
+            writer.Close();
+
+            return stringWriter.ToString();
+        }
+
+        private static void Load(IDatabase database, string xml)
+        {
+            var stringReader = new StringReader(xml);
+            var reader = new XmlTextReader(stringReader);
+            database.Load(reader);
+            reader.Close();
+        }
 
         private void AssertPopulation(ISession session)
         {

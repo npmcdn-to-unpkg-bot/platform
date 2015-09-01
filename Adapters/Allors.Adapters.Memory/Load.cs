@@ -14,8 +14,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Memory
 {
     using System;
@@ -110,7 +108,7 @@ namespace Allors.Adapters.Memory
                         {
                             if (!this.reader.IsEmptyElement)
                             {
-                                this.LoadDatabaseObjectTypes();
+                                this.LoadObjectTypes();
                             }
                         }
                         else if (reader.Name.Equals(Serialization.Workspace))
@@ -134,7 +132,7 @@ namespace Allors.Adapters.Memory
             }
         }
 
-        private void LoadDatabaseObjectTypes()
+        private void LoadObjectTypes()
         {
             while (this.reader.Read())
             {
@@ -160,11 +158,14 @@ namespace Allors.Adapters.Memory
 
                                 foreach (var objectIdString in objectIdStringArray)
                                 {
-                                    var objectId = this.session.ObjectIds.Parse(objectIdString);
+                                    var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
+
+                                    var objectId = this.session.ObjectIds.Parse(objectArray[0]);
+                                    var objectVersion = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(); 
 
                                     if (objectType is IClass)
                                     {
-                                        this.session.InsertStrategy((IClass)objectType, objectId);
+                                        this.session.InsertStrategy((IClass)objectType, objectId, objectVersion);
                                     }
                                     else
                                     {

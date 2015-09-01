@@ -53,6 +53,13 @@ namespace Allors.Adapters.Relation.SQLite
             }
         }
 
+        public ObjectVersion ObjectVersion {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public bool IsDeleted 
         {
             get
@@ -66,14 +73,6 @@ namespace Allors.Adapters.Relation.SQLite
             get
             {
                 return this.session.IsNew(this.ObjectId);
-            }
-        }
-
-        public bool IsNewInWorkspace 
-        {
-            get
-            {
-                return false;
             }
         }
 
