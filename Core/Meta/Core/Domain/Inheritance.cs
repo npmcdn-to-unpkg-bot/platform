@@ -30,9 +30,11 @@ namespace Allors.Meta
 
         private Interface supertype;
 
-        internal Inheritance(Domain domain, Guid id)
-            : base(domain, id)
+        internal Inheritance(Domain domain)
+            : base(domain)
         {
+            this.Id = Guid.NewGuid();
+
             domain.OnInheritanceCreated(this);
         }
 

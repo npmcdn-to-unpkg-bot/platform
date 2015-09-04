@@ -32,7 +32,7 @@ namespace Allors.Domain
         {
             get
             {
-                return (OperandType)this.Strategy.Session.Population.MetaPopulation.Find(this.OperandTypePointer); 
+                return (OperandType)this.Strategy.Session.Database.MetaPopulation.Find(this.OperandTypePointer); 
             }
 
             set
@@ -81,7 +81,7 @@ namespace Allors.Domain
         {
             get
             {
-                return (ObjectType)this.Strategy.Session.Population.MetaPopulation.Find(this.ConcreteClassPointer);
+                return (ObjectType)this.Strategy.Session.Database.MetaPopulation.Find(this.ConcreteClassPointer);
             }
 
             set

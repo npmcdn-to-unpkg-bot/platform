@@ -21,12 +21,13 @@
 
 namespace Allors.Meta
 {
+    [Id("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9")]
     public partial class AllorsStringUnit : Unit
     {
         public static AllorsStringUnit Instance { get; internal set; }
 
         internal AllorsStringUnit()
-            : base(CoreDomain.Instance, UnitIds.StringId)
+            : base(CoreDomain.Instance)
         {
             this.SingularName = "AllorsString";
             this.PluralName = "AllorsStrings";

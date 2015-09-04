@@ -24,14 +24,13 @@ namespace Controllers
     using System.Threading;
 
     using Allors;
-    using Allors.Databases.Memory.IntegerId;
+    using Allors.Adapters.Memory.IntegerId;
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.Workspaces.Memory.LongId;
 
     using NUnit.Framework;
 
-    using Configuration = Allors.Databases.Memory.IntegerId.Configuration;
+    using Configuration = Allors.Adapters.Memory.IntegerId.Configuration;
 
     /// <summary>
     /// The controller test.
@@ -41,7 +40,7 @@ namespace Controllers
         /// <summary>
         /// Gets the database session.
         /// </summary>
-        protected IDatabaseSession Session { get; private set; }
+        protected ISession Session { get; private set; }
 
         /// <summary>
         /// The set up.
@@ -63,18 +62,6 @@ namespace Controllers
         }
 
         /// <summary>
-        /// The create workspace session.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IWorkspaceSession"/>.
-        /// </returns>
-        public IWorkspaceSession CreateWorkspaceSession()
-        {
-            var workspace = Config.Default.CreateWorkspace();
-            return workspace.CreateSession();
-        }
-
-        /// <summary>
         /// The init.
         /// </summary>
         /// <param name="populate">
@@ -82,7 +69,7 @@ namespace Controllers
         /// </param>
         protected void Setup(bool populate)
         {
-            var configuration = new Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
+            var configuration = new Configuration { ObjectFactory = Config.ObjectFactory };
             Config.Default = new Database(configuration);
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("nl-BE");
@@ -115,13 +102,7 @@ namespace Controllers
         /// </returns>
         protected IObject[] GetObjects(ISession session, Composite objectType)
         {
-            if (session is IDatabaseSession)
-            {
-                return session.Extent(objectType);
-            }
-
-            var workspaceSess = (IWorkspaceSession)session;
-            return workspaceSess.LocalExtent(objectType);
+            return session.Extent(objectType);
         }
     }
 }

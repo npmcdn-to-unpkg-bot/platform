@@ -1,22 +1,15 @@
 namespace Allors.Meta
 {
-    using System;
-
     public partial class C1Class
     {
+        [Id("44E6A9A3-0E1D-435F-A863-8E8F12580D91")]
+        public MethodType ClassMethod;
+
+        [Id("8AF21FFB-7E5C-4AD4-A2A6-8BDDA7F28510")]
+        public MethodType Sum;
+
         internal override void BaseExtend()
         {
-            new MethodType(BaseDomain.Instance, new Guid("A80E3732-DAF2-4AD4-9378-B4BC13E74DDE"))
-            {
-                ObjectType = Instance,
-                Name = "ClassMethod"
-            };
-
-            new MethodType(BaseDomain.Instance, new Guid("30BF52C7-7DF6-4A34-8333-F114E2752905"))
-            {
-                ObjectType = Instance,
-                Name = "Sum"
-            };
         }
     }
 }

@@ -29,10 +29,15 @@ namespace Allors.Meta
     {
         private Guid id;
 
-        protected MetaObject(MetaPopulation metaPopulation, Guid id)
+        protected MetaObject(MetaPopulation metaPopulation)
         {
             this.MetaPopulation = metaPopulation;
-            this.Id = id;
+
+            var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(this.GetType(), typeof (IdAttribute));
+            if (idAttribute != null)
+            {
+                this.Id = new Guid(idAttribute.Value);
+            }
         }
 
         IMetaPopulation IMetaObject.MetaPopulation
@@ -56,7 +61,7 @@ namespace Allors.Meta
                 return this.id;
             }
 
-            private set
+            set
             {
                 this.MetaPopulation.AssertUnlocked();
                 this.id = value;

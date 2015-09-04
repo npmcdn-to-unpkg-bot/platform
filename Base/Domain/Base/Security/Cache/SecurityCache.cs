@@ -38,14 +38,7 @@ namespace Allors.Domain
 
         public SecurityCache(ISession session)
         {
-            if (session is IDatabaseSession)
-            {
-                this.database = ((IDatabaseSession)session).Database;
-            }
-            else
-            {
-                this.database = ((IWorkspaceSession)session).Workspace.Database;
-            }
+            this.database = session.Database;
             
             this.operationsByOperandTypeIdByObjectTypeIdByRoleId = (Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>>)this.database[CacheKey];
 

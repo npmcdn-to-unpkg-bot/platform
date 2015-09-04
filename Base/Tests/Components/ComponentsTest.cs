@@ -29,7 +29,7 @@ namespace Components
 
     public class ComponentsTest
     {
-        protected IDatabaseSession Session { get; private set; }
+        protected ISession Session { get; private set; }
 
         [SetUp]
         public virtual void SetUp()
@@ -42,12 +42,6 @@ namespace Components
         {
             this.Session.Rollback();
             this.Session = null;
-        }
-
-        public IWorkspaceSession CreateWorkspaceSession()
-        {
-            var workspace = Config.Default.CreateWorkspace();
-            return workspace.CreateSession();
         }
 
         protected void SetUp(bool setup)
@@ -66,13 +60,7 @@ namespace Components
 
         protected IObject[] GetObjects(ISession session, Composite objectType)
         {
-            if (session is IDatabaseSession)
-            {
-                return session.Extent(objectType);
-            }
-
-            var workspaceSess = (IWorkspaceSession)session;
-            return workspaceSess.LocalExtent(objectType);
+            return session.Extent(objectType);
         }
     }
 }

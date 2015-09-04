@@ -83,7 +83,7 @@ namespace Domain
         [Test]
         public void WhenSyncingPermissionsThenObsolotePermissionsAreDeleted()
         {
-            var domain = (Domain)this.Session.Population.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
+            var domain = (Domain)this.Session.Database.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
 
             var count = new Permissions(this.Session).Extent().Count;
 

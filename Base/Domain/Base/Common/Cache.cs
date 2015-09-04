@@ -30,8 +30,7 @@ namespace Allors.Domain
     {
         private readonly string cacheKey = "Allors.Cache." + typeof(TObject);
 
-        private readonly IWorkspaceSession workspaceSession;
-        private readonly IDatabaseSession databaseSession;
+        private readonly ISession databaseSession;
         private readonly IDatabase database;
         private readonly RoleType roleType;
 
@@ -48,16 +47,7 @@ namespace Allors.Domain
 
             this.roleType = roleType;
 
-            this.workspaceSession = session as IWorkspaceSession;
-            if (this.workspaceSession == null)
-            {
-                this.databaseSession = (IDatabaseSession)session;
-            }
-            else
-            {
-                this.databaseSession = this.workspaceSession.DatabaseSession;
-            }
-
+            this.databaseSession = session;
             this.database = this.databaseSession.Database;
         }
 
@@ -91,47 +81,19 @@ namespace Allors.Domain
 
                 if (!this.databaseCache.TryGetValue(key, out cachedObjectId))
                 {
-                    if (this.workspaceSession != null)
+                    var extent = this.databaseSession.Extent<TObject>();
+                    extent.Filter.AddEquals(this.roleType, key);
+
+                    var databaseObject = extent.First;
+
+                    if (databaseObject != null)
                     {
-                        this.LazyLoadWorkspaceSessionCache();
+                        cachedObjectId = databaseObject.Id;
 
-                        if (!this.workspaceSessionCache.TryGetValue(key, out cachedObjectId))
+                        this.databaseSessionCache[key] = databaseObject.Id;
+                        if (!databaseObject.Strategy.IsNewInSession)
                         {
-                            var objectType = (Composite)this.database.ObjectFactory.GetObjectTypeForType(typeof(TObject));
-                            foreach (TObject workspaceObject in this.workspaceSession.LocalExtent(objectType))
-                            {
-                                var role = workspaceObject.Strategy.GetUnitRole(this.roleType);
-                                if (Equals(key, role))
-                                {
-                                    cachedObjectId = workspaceObject.Id;
-
-                                    if (!workspaceObject.Strategy.IsNewInWorkspace)
-                                    {
-                                        this.workspaceSessionCache[key] = cachedObjectId;
-                                    }
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (cachedObjectId == null)
-                    {
-                        Extent<TObject> extent = this.databaseSession.Extent<TObject>();
-                        extent.Filter.AddEquals(this.roleType, key);
-
-                        var databaseObject = extent.First;
-
-                        if (databaseObject != null)
-                        {
-                            cachedObjectId = databaseObject.Id;
-
-                            this.databaseSessionCache[key] = databaseObject.Id;
-                            if (!databaseObject.Strategy.IsNewInSession)
-                            {
-                                this.databaseCache[key] = databaseObject.Id;
-                            }
+                            this.databaseCache[key] = databaseObject.Id;
                         }
                     }
                 }
@@ -139,11 +101,6 @@ namespace Allors.Domain
 
             if (cachedObjectId != null)
             {
-                if (this.workspaceSession != null)
-                {
-                    return (TObject)this.workspaceSession.Instantiate(cachedObjectId);
-                }
-
                 return (TObject)this.databaseSession.Instantiate(cachedObjectId);
             }
 
@@ -152,7 +109,7 @@ namespace Allors.Domain
 
         public void Add(TObject cachedObject)
         {
-            if (this.workspaceSession == null && cachedObject != null)
+            if (cachedObject != null)
             {
                 if (cachedObject.Strategy.ExistUnitRole(this.roleType))
                 {
@@ -193,19 +150,6 @@ namespace Allors.Domain
                 {
                     this.database[this.cacheKey] = new Dictionary<TKey, ObjectId>();
                     this.databaseCache = (Dictionary<TKey, ObjectId>)this.database[this.cacheKey];
-                }
-            }
-        }
-
-        private void LazyLoadWorkspaceSessionCache()
-        {
-            if (this.workspaceSessionCache == null)
-            {
-                this.workspaceSessionCache = (Dictionary<TKey, ObjectId>)this.workspaceSession[this.cacheKey];
-                if (this.workspaceSessionCache == null)
-                {
-                    this.workspaceSession[this.cacheKey] = new Dictionary<TKey, ObjectId>();
-                    this.workspaceSessionCache = (Dictionary<TKey, ObjectId>)this.workspaceSession[this.cacheKey];
                 }
             }
         }

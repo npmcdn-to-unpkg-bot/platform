@@ -37,8 +37,8 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Interface(Domain domain, Guid id)
-            : base(domain, id)
+        internal Interface(Domain domain)
+            : base(domain)
         {
             domain.OnInterfaceCreated(this);
         }

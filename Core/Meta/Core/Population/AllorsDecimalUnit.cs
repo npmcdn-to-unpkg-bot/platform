@@ -21,12 +21,13 @@
 
 namespace Allors.Meta
 {
+    [Id("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8")]
     public partial class AllorsDecimalUnit : Unit
     {
         public static AllorsDecimalUnit Instance { get; internal set; }
 
         internal AllorsDecimalUnit()
-            : base(CoreDomain.Instance, UnitIds.DecimalId)
+            : base(CoreDomain.Instance)
         {
             this.SingularName = "AllorsDecimal";
             this.PluralName = "AllorsDecimals";

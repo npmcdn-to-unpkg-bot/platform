@@ -28,7 +28,7 @@ namespace Allors
     {
         public static IObjects GetObjects(this ObjectType objectType, ISession session)
         {
-            var objectFactory = session.Population.ObjectFactory;
+            var objectFactory = session.Database.ObjectFactory;
             var type = objectFactory.Assembly.GetType(objectFactory.Namespace + "." + objectType.PluralName);
             return (IObjects)Activator.CreateInstance(type, new object[] { session });
         }

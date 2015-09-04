@@ -24,12 +24,11 @@ namespace Components
     using System.Threading;
 
     using Allors;
-    using Allors.Databases.Memory.IntegerId;
-    using Allors.Workspaces.Memory.IntegerId;
+    using Allors.Adapters.Memory.IntegerId;
 
     using NUnit.Framework;
 
-    using Configuration = Allors.Databases.Memory.IntegerId.Configuration;
+    using Configuration = Allors.Adapters.Memory.IntegerId.Configuration;
 
     [SetUpFixture]
     public class ComponentsFixture
@@ -37,7 +36,7 @@ namespace Components
         [SetUp]
         public void SetUp()
         {
-            var configuration = new Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
+            var configuration = new Configuration { ObjectFactory = Config.ObjectFactory };
             Config.Default = new Database(configuration);
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");

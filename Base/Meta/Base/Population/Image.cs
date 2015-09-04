@@ -1,22 +1,15 @@
 namespace Allors.Meta
 {
-    using System;
-
     public partial class ImageClass
     {
+        [Id("5EE8B041-5400-4A9A-8154-2539CCA8FD64")]
+        public MethodType CreateResponsive;
+
+        [Id("D523E7D7-4A98-4763-9A17-C906D774699A")]
+        public MethodType CreateThumbnail;
+
         internal override void BaseExtend()
         {
-            new MethodType(BaseDomain.Instance, new Guid("28950711-D4A2-4EAA-A0EE-7F1312A67F2E"))
-            {
-                ObjectType = Instance,
-                Name = "CreateResponsive"
-            };
-
-            new MethodType(BaseDomain.Instance, new Guid("2716D4E4-52B2-471B-8241-1D6F1E2DD0E9"))
-            {
-                ObjectType = Instance,
-                Name = "CreateThumbnail"
-            };
         }
     }
 }

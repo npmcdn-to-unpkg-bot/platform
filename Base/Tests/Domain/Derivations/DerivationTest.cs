@@ -33,29 +33,6 @@ namespace Domain
     public class DerivationTest : DomainTest
     {
         [Test]
-        public void Conflicts()
-        {
-            var workspaceSession = this.CreateWorkspaceSession();
-
-            var organisation = new OrganisationBuilder(this.Session).WithName("Acme Corp.").Build();
-
-            var disconnectedOrganisation = (Organisation)workspaceSession.Instantiate(organisation.Strategy.ObjectId);
-            disconnectedOrganisation.Name = "Acme Ltd.";
-
-            organisation.Name = "Acme Inc.";
-            workspaceSession.DatabaseSession.Commit();
-
-            var conflicts = workspaceSession.Conflicts;
-
-            Assert.AreEqual(1, conflicts.Length);
-
-            var derivationLog = new Derivation(workspaceSession).Log;
-            derivationLog.AddConflicts(conflicts);
-
-            Assert.AreEqual(1, derivationLog.Errors.Length);
-        }
-
-        [Test]
         public void Next()
         {
             var first = new FirstBuilder(this.Session).Build();

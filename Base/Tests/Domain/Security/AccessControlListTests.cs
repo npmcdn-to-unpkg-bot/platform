@@ -43,7 +43,7 @@ namespace Domain
             this.Session.Derive(true);
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.Session, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();
@@ -76,7 +76,7 @@ namespace Domain
 
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.Session, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();
@@ -116,7 +116,7 @@ namespace Domain
 
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.Session, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();
@@ -157,7 +157,7 @@ namespace Domain
             new AccessControlBuilder(this.Session).WithSubject(anotherPerson).WithRole(databaseRole).Build();
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.Session, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();
@@ -198,7 +198,7 @@ namespace Domain
 
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.Session, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();
@@ -223,140 +223,6 @@ namespace Domain
         }
 
         [Test]
-        public void GivenAWorkspaceNewAccessControlledObjectWhenGettingTheAccessControlListThenUserHasAccessToThePermissionsInTheRole()
-        {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
-            var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
-
-            var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
-
-            this.Session.Derive(true);
-            this.Session.Commit();
-
-            new AccessControlBuilder(this.Session).WithSubject(person).WithRole(databaseRole).Build();
-
-            this.Session.Commit();
-
-            var workspaceSession = this.CreateWorkspaceSession();
-
-            var organisation = new OrganisationBuilder(workspaceSession).WithName("Organisation").Build();
-
-            var token = new SecurityTokenBuilder(workspaceSession).Build();
-            organisation.AddSecurityToken(token);
-
-            var role = (Role)workspaceSession.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
-            var accessControl = (AccessControl)workspaceSession.Instantiate(role.AccessControlsWhereRole.First);
-            accessControl.AddObject(token);
-
-            Assert.IsFalse(this.Session.Derive().HasErrors);
-
-            var accessList = new AccessControlList(organisation, person);
-            accessList.CanRead(Organisations.Meta.Name);
-        }
-
-        [Test]
-        public void GivenAUserGroupWhenSettingTheTokenInTheWorkspaceAndGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
-        {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
-            var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
-
-            var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
-            var userGroup = new UserGroupBuilder(this.Session).WithName("Group").WithMember(person).Build();
-
-            this.Session.Derive(true);
-            this.Session.Commit();
-
-            new AccessControlBuilder(this.Session).WithSubjectGroup(userGroup).WithRole(databaseRole).Build();
-
-            this.Session.Commit();
-
-            var workspaceSession = this.CreateWorkspaceSession();
-
-            var organisation = new OrganisationBuilder(workspaceSession).WithName("Organisation").Build();
-
-            var token = new SecurityTokenBuilder(workspaceSession).Build();
-            organisation.AddSecurityToken(token);
-
-            var role = (Role)workspaceSession.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
-            var accessControl = (AccessControl)workspaceSession.Instantiate(role.AccessControlsWhereRole.First);
-            accessControl.AddObject(token);
-
-            Assert.IsFalse(this.Session.Derive().HasErrors);
-
-            var accessList = new AccessControlList(organisation, person);
-
-            Assert.IsTrue(accessList.CanRead(Organisations.Meta.Name));
-        }
-
-        [Test]
-        public void GivenAnotherUserWhenSettingTheTokenInTheWorkspaceAndGettingTheAccessControlListThenUserHasNoAccessToThePermissionsInTheRole()
-        {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
-            var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
-
-            var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
-            var anotherPerson = new PersonBuilder(this.Session).WithFirstName("Jane").WithLastName("Doe").Build();
-
-            this.Session.Derive(true);
-            this.Session.Commit();
-
-            new AccessControlBuilder(this.Session).WithSubject(anotherPerson).WithRole(databaseRole).Build();
-
-            this.Session.Commit();
-
-            var workspaceSession = this.CreateWorkspaceSession();
-
-            var organisation = new OrganisationBuilder(workspaceSession).WithName("Organisation").Build();
-
-            var token = new SecurityTokenBuilder(workspaceSession).Build();
-            organisation.AddSecurityToken(token);
-
-            var role = (Role)workspaceSession.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
-            var accessControl = (AccessControl)workspaceSession.Instantiate(role.AccessControlsWhereRole.First);
-            accessControl.AddObject(token);
-
-            Assert.IsFalse(this.Session.Derive().HasErrors);
-
-            var accessList = new AccessControlList(organisation, person);
-
-            Assert.IsFalse(accessList.CanRead(Organisations.Meta.Name));
-        }
-
-        [Test]
-        public void GivenAnotherUserGroupWhenSettingTheTokenInTheWorkspaceAndGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
-        {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
-            var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
-            
-            this.Session.Derive(true);
-            this.Session.Commit();
-
-            var person = new PersonBuilder(this.Session).WithLastName("Person").Build();
-            new UserGroupBuilder(this.Session).WithName("AGroup").WithMember(person).Build();
-            var anotherUserGroup = new UserGroupBuilder(this.Session).WithName("AnotherGroup").Build();
-
-            this.Session.Derive(true);
-            this.Session.Commit();
-
-            new AccessControlBuilder(this.Session).WithSubjectGroup(anotherUserGroup).WithRole(databaseRole).Build();
-
-            var workspaceSession = this.CreateWorkspaceSession();
-
-            var organisation = new OrganisationBuilder(workspaceSession).WithName("Organisation").Build();
-
-            var token = new SecurityTokenBuilder(workspaceSession).Build();
-            organisation.AddSecurityToken(token);
-
-            var role = (Role)workspaceSession.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
-            var accessControl = (AccessControl)workspaceSession.Instantiate(role.AccessControlsWhereRole.First);
-            accessControl.AddObject(token);
-
-            var accessList = new AccessControlList(organisation, person);
-
-            Assert.IsFalse(accessList.CanRead(Organisations.Meta.Name));
-        }
-
-        [Test]
         public void GivenAnAccessListWithWriteOperationsWhenUsingTheHasWriteOperationBeforeAnyOtherMehodThenHasWriteOperationReturnTrue()
         {
             var guest = new PersonBuilder(this.Session).WithUserName("guest").WithLastName("Guest").Build();
@@ -368,7 +234,7 @@ namespace Domain
             this.Session.Derive(true);
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.CreateWorkspaceSession(), this.Session };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();
@@ -395,7 +261,7 @@ namespace Domain
             new AccessControlBuilder(this.Session).WithRole(databaseRole).WithSubject(person).Build();
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.Session, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();

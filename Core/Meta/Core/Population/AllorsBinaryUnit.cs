@@ -21,12 +21,13 @@
 
 namespace Allors.Meta
 {
+    [Id("c28e515b-cae8-4d6b-95bf-062aec8042fc")]
     public partial class AllorsBinaryUnit : Unit
     {
         public static AllorsBinaryUnit Instance { get; internal set; }
 
         internal AllorsBinaryUnit()
-            : base(CoreDomain.Instance, UnitIds.BinaryId)
+            : base(CoreDomain.Instance)
         {
             this.SingularName = "AllorsBinary";
             this.PluralName = "AllorsBinarys";

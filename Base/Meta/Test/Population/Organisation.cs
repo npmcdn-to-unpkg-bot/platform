@@ -1,18 +1,14 @@
 namespace Allors.Meta
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     public partial class OrganisationClass
     {
+        [Id("CBF9121E-A5E5-45C6-99FE-52FA80DC3220")]
+        public MethodType JustDoIt;
+
         internal override void BaseExtend()
         {
-            new MethodType(BaseDomain.Instance, new Guid("55AAC529-BEAE-4D29-B069-DECDA86710A9"))
-            {
-                ObjectType = Instance,
-                Name = "JustDoIt"
-            };
-
             this.Roles.Description.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
 
             this.Roles.Information.DisplayAttribute = new DisplayAttribute { Name = "Ik ben het label" };

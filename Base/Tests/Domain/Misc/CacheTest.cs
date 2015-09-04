@@ -37,7 +37,7 @@ namespace Domain
             this.Session.Derive(true);
             this.Session.Commit();
 
-            var sessions = new ISession[] { this.Session, this.CreateWorkspaceSession() };
+            var sessions = new ISession[] { this.Session };
             foreach (var session in sessions)
             {
                 session.Commit();

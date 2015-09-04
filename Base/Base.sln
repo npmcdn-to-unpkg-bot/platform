@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meta", "Meta\Meta.csproj", "{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}"
 EndProject
@@ -29,11 +29,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors", "..\Framework\Allors\Allors.csproj", "{5B4E2D7C-8EF8-45F5-BFB2-E595C401A95F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Memory", "..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj", "{CB9B7108-C8F3-459C-B2DA-88187C84CFC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Memory", "..\Adapters\Allors.Adapters.Memory\Allors.Adapters.Memory.csproj", "{CB9B7108-C8F3-459C-B2DA-88187C84CFC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Object.SqlClient", "..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj", "{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Workspaces.Memory", "..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj", "{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Object.SqlClient", "..\Adapters\Allors.Adapters.Object.SqlClient\Allors.Adapters.Object.SqlClient.csproj", "{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}"
 EndProject
@@ -117,14 +115,6 @@ Global
 		{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}.Release|x64.ActiveCfg = Release|x64
 		{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}.Release|x64.Build.0 = Release|x64
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Debug|x64.ActiveCfg = Debug|x64
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Debug|x64.Build.0 = Debug|x64
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Release|x64.ActiveCfg = Release|x64
-		{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}.Release|x64.Build.0 = Release|x64
 		{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}.Debug|x64.ActiveCfg = Debug|x64

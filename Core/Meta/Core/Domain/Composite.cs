@@ -34,8 +34,8 @@ namespace Allors.Meta
         private LazySet<RoleType> derivedRoleTypes;
         private LazySet<MethodType> derivedMethodTypes;
 
-        protected Composite(Domain domain, Guid id)
-            : base(domain, id)
+        protected Composite(Domain domain)
+            : base(domain)
         {
         }
 

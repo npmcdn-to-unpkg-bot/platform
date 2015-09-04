@@ -89,22 +89,6 @@ namespace Allors.Domain
             }
         }
 
-        public bool InDatabase
-        {
-            get
-            {
-                return this.Session is IDatabaseSession;
-            }
-        }
-
-        public bool InWorkspace
-        {
-            get
-            {
-                return this.Session is IWorkspaceSession;
-            }
-        }
-
         public ISession Session
         {
             get

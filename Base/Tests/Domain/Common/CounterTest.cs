@@ -28,7 +28,6 @@ namespace Domain
 
     using Allors;
     using Allors.Domain;
-    using Allors.Workspaces.Memory.IntegerId;
 
     using NUnit.Framework;
 
@@ -60,13 +59,12 @@ namespace Domain
 
             try
             {
-                var configuration = new Allors.Databases.Object.SqlClient.Configuration
+                var configuration = new Allors.Adapters.Object.SqlClient.Configuration
                 {
                     ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                     ObjectFactory = Config.ObjectFactory,
-                    WorkspaceFactory = new WorkspaceFactory()
                 };
-                Config.Default = new Allors.Databases.Object.SqlClient.Database(configuration);
+                Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
                 Config.Serializable = null;
 
                 this.SetUp(true);
@@ -95,13 +93,12 @@ namespace Domain
 
             try
             {
-                var configuration = new Allors.Databases.Object.SqlClient.Configuration
+                var configuration = new Allors.Adapters.Object.SqlClient.Configuration
                                         {
                                             ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                             ObjectFactory = Config.ObjectFactory,
-                                            WorkspaceFactory = new WorkspaceFactory()
                                         };
-                Config.Default = new Allors.Databases.Object.SqlClient.Database(configuration);
+                Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
                 Config.Serializable = null;
 
                 this.SetUp(true);
@@ -130,18 +127,15 @@ namespace Domain
 
             try
             {
-                var workspaceFactory = new WorkspaceFactory();
-                Config.Default = new Allors.Databases.Object.SqlClient.Database(new Allors.Databases.Object.SqlClient.Configuration
+                Config.Default = new Allors.Adapters.Object.SqlClient.Database(new Allors.Adapters.Object.SqlClient.Configuration
                                                                                                     {
                                                                                                         ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
-                                                                                                        ObjectFactory = Config.ObjectFactory,
-                                                                                                        WorkspaceFactory = workspaceFactory
+                                                                                                        ObjectFactory = Config.ObjectFactory
                                                                                                     });
-                Config.Serializable = new Allors.Databases.Object.SqlClient.Database(new Allors.Databases.Object.SqlClient.Configuration
+                Config.Serializable = new Allors.Adapters.Object.SqlClient.Database(new Allors.Adapters.Object.SqlClient.Configuration
                                                                                                 {
                                                                                                     ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                                                                                     ObjectFactory = Config.ObjectFactory,
-                                                                                                    WorkspaceFactory = workspaceFactory,
                                                                                                     IsolationLevel = IsolationLevel.Serializable
                                                                                                 });
 

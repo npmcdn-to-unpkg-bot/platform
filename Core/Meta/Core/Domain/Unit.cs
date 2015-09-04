@@ -29,8 +29,8 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Unit(Domain domain, Guid id)
-            : base(domain, id)
+        internal Unit(Domain domain)
+            : base(domain)
         {
             domain.OnUnitCreated(this);
         }

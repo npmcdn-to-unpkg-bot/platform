@@ -1,40 +1,25 @@
 namespace Allors.Meta
 {
-    using System;
-
     public partial class ObjectInterface
     {
+        [Id("76DE1BA6-735E-494D-BE8A-344E14580F57")]
+        public MethodType OnBuild;
+
+        [Id("1989B10E-0293-4FDA-A32F-E4B7783CF430")]
+        public MethodType OnPostBuild;
+
+        [Id("BF273E72-BBDD-47E8-8066-F66ABD2EF648")]
+        public MethodType OnPreDerive;
+
+        [Id("5B41C8C1-A3EA-4E47-A432-8CC0B881A5C3")]
+        public MethodType OnDerive;
+
+        [Id("EB0F0242-FDBF-423F-BB0C-FBE2F6E433EB")]
+        public MethodType OnPostDerive;
+
         internal override void BaseExtend()
         {
-            new MethodType(BaseDomain.Instance, new Guid("62D48A76-A500-4D16-9D20-6FEF43AC6DCB"))
-            {
-                ObjectType = Instance,
-                Name = "OnBuild"
-            };
 
-            new MethodType(BaseDomain.Instance, new Guid("042375D8-BBDD-46E8-80B6-CC89D8782F1C"))
-            {
-                ObjectType = Instance,
-                Name = "OnPostBuild"
-            };
-
-            new MethodType(BaseDomain.Instance, new Guid("122D3D78-AB97-4A69-A725-F465C71757DA"))
-            {
-                ObjectType = Instance,
-                Name = "OnPreDerive"
-            };
-
-            new MethodType(BaseDomain.Instance, new Guid("527DA7F8-68B4-46AB-B0D8-6B9E82D2A5AC"))
-            {
-                ObjectType = Instance,
-                Name = "OnDerive"
-            };
-
-            new MethodType(BaseDomain.Instance, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D"))
-            {
-                ObjectType = Instance,
-                Name = "OnPostDerive"
-            };
         }
     }
 }

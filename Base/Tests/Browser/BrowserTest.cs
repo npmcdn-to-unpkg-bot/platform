@@ -30,7 +30,7 @@ namespace Browser
              this.ReleaseSession();   
         }
 
-        protected IDatabaseSession Session { get; private set; }
+        protected ISession Session { get; private set; }
 
         public override void TearDown()
         {

@@ -39,7 +39,7 @@ namespace Allors.Domain
         private readonly AccessControlledObject accessControlledObject;
         private readonly User user;
         private readonly IObjectType objectType;
-        private readonly IDatabaseSession databaseSession;
+        private readonly ISession databaseSession;
 
         private Dictionary<Guid, IList<Operation>> operationsByOperandId;
 
@@ -50,16 +50,8 @@ namespace Allors.Domain
         {
             this.user = user;
             this.objectType = obj.Strategy.Class;
-            this.databaseSession = this.user.Strategy.DatabaseSession;
-
-            if (!obj.Strategy.IsNewInWorkspace)
-            {
-                this.accessControlledObject = (AccessControlledObject)this.databaseSession.Instantiate(obj.Id);
-            }
-            else
-            {
-                this.accessControlledObject = (AccessControlledObject)obj;
-            }
+            this.databaseSession = this.user.Strategy.Session;
+            this.accessControlledObject = (AccessControlledObject)obj;
         }
 
         public User User
@@ -110,7 +102,7 @@ namespace Allors.Domain
             var toString = new StringBuilder();
             foreach (var objectId in this.OperationsByOperandTypeId.Keys)
             {
-                var operandType = (OperandType)this.user.Strategy.Session.Population.MetaPopulation.Find(objectId);
+                var operandType = (OperandType)this.user.Strategy.Session.Database.MetaPopulation.Find(objectId);
                 toString.Append(operandType.DisplayName + ":");
                 foreach (var operation in this.OperationsByOperandTypeId[objectId])
                 {
@@ -220,15 +212,7 @@ namespace Allors.Domain
 
                     if (roleUniqueIds != null)
                     {
-                        Permission[] deniedPermissions;
-                        if (this.accessControlledObject.Strategy.Session.Population is IWorkspace)
-                        {
-                            deniedPermissions = (Extent<Permission>)this.databaseSession.Instantiate(this.accessControlledObject.DeniedPermissions);
-                        }
-                        else
-                        {
-                            deniedPermissions = this.accessControlledObject.DeniedPermissions;
-                        }
+                        Permission[] deniedPermissions = this.accessControlledObject.DeniedPermissions;
 
                         var securityCache = new SecurityCache(this.databaseSession);
                         this.operationsByOperandId = securityCache.GetOperationsByOperandTypeId(roleUniqueIds, (ObjectType)this.objectType, out this.hasWriteOperation, out this.hasReadOperation);

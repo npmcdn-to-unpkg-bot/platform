@@ -23,12 +23,13 @@ namespace Allors.Meta
 {
     using System;
 
+    [Id("FC9BAD0E-D70D-4F93-BCA7-0C7944EF1ABB")]
     public partial class CoreDomain : Domain
     {
         public static CoreDomain Instance { get; internal set;}
 
         internal CoreDomain(MetaPopulation metaPopulation)
-            : base(metaPopulation, new Guid("2d337e3a-5e9e-4705-b327-c14bd279d322"))
+            : base(metaPopulation)
         {
             this.Name = "Core";
         }

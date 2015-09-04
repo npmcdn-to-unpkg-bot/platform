@@ -39,8 +39,8 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Class(Domain domain, Guid id)
-            : base(domain, id)
+        internal Class(Domain domain)
+            : base(domain)
         {
             this.concreteRoleTypeByRoleType = new Dictionary<RoleType, ConcreteRoleType>();
             this.concreteMethodTypeByMethodType = new Dictionary<MethodType, ConcreteMethodType>();

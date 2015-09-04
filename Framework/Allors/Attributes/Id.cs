@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="DomainObject.cs" company="Allors bvba">
+// <copyright file="IdAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,21 +16,21 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Domain type.</summary>
+// <summary>Defines the Extent type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+using System;
+
+namespace Allors
 {
-    using System;
-
-    public abstract partial class DomainObject : MetaObject
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
+    public class IdAttribute : Attribute
     {
-        protected DomainObject(Domain definingDomain)
-            : base(definingDomain.MetaPopulation)
+        public IdAttribute(string value)
         {
-            this.DefiningDomain = definingDomain;
+            this.Value = value;
         }
-
-        public Domain DefiningDomain { get; private set; }
+        
+        public string Value { get; set; }
     }
 }

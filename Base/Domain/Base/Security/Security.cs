@@ -30,7 +30,7 @@ namespace Allors.Domain
     {
         private static readonly Operation[] ReadWriteExecute = { Operation.Read, Operation.Write, Operation.Execute };
 
-        private readonly IDatabaseSession session;
+        private readonly ISession session;
         private readonly Dictionary<ObjectType, IObjects> objectsByObjectType;
 
         private readonly Dictionary<Guid, Role> roleById;
@@ -40,7 +40,7 @@ namespace Allors.Domain
 
         private readonly Dictionary<Guid, Dictionary<Guid, Permission>> deniablePermissionByOperandTypeIdByObjectTypeId;
 
-        public Security(IDatabaseSession session)
+        public Security(ISession session)
         {
             this.session = session;
 

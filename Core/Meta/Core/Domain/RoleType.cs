@@ -49,9 +49,11 @@ namespace Allors.Meta
         private int? size;
 
         internal RoleType(RelationType relationType, Guid id)
-            : base(relationType.DefiningDomain, id)
+            : base(relationType.DefiningDomain)
         {
             this.relationType = relationType;
+
+            this.Id = id;
 
             relationType.DefiningDomain.OnRoleTypeCreated(this);
         }

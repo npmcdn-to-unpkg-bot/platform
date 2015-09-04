@@ -47,11 +47,11 @@ namespace Allors
             get { return this.session; }
         }
 
-        protected IDatabaseSession DatabaseSession
+        protected ISession DatabaseSession
         {
             get
             {
-                return this.session as IDatabaseSession ?? ((IWorkspaceSession)this.session).DatabaseSession;
+                return this.session;
             }
         }
 

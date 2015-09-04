@@ -17,15 +17,14 @@ namespace Browser
         [SetUp]
         public void SetUp()
         {
-            var configuration = new Allors.Databases.Object.SqlClient.Configuration
+            var configuration = new Allors.Adapters.Object.SqlClient.Configuration
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                 ObjectFactory = Config.ObjectFactory,
-                WorkspaceFactory = new Allors.Workspaces.Memory.IntegerId.WorkspaceFactory(),
                 CommandTimeout = 0
             };
 
-            Config.Default = new Allors.Databases.Object.SqlClient.Database(configuration);
+            Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
 
 
             var config = new SpecsForMvcConfig();

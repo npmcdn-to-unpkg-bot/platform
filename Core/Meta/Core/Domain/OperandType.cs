@@ -24,8 +24,8 @@ namespace Allors.Meta
 
     public abstract partial class OperandType : DomainObject
     {
-        public OperandType(Domain definingDomain, Guid id)
-            : base(definingDomain, id)
+        public OperandType(Domain definingDomain)
+            : base(definingDomain)
         {
         }
 

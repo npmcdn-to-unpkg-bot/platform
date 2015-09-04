@@ -64,16 +64,6 @@ namespace Allors.Domain
             this.AddError(error);
         }
 
-        public void AddConflicts(IConflict[] conflicts)
-        {
-            foreach (var conflict in conflicts)
-            {
-                var derivationRole = new DerivationRelation(conflict.Object, (RoleType)conflict.RoleType);
-                var derivationErrorConflict = new DerivationErrorConflict(this, derivationRole);
-                this.AddError(derivationErrorConflict);
-            }
-        }
-
         public void AssertExists(IObject association, RoleType roleType)
         {
             if (!association.Strategy.ExistRole(roleType))
@@ -120,68 +110,11 @@ namespace Allors.Domain
                     if (role != null)
                     {
                         var session = association.Strategy.Session;
-                        if (session is IDatabaseSession)
+                        var extent = association.Strategy.Session.Extent(objectType);
+                        extent.Filter.AddEquals(roleType, role);
+                        if (extent.Count != 1)
                         {
-                            var extent = association.Strategy.DatabaseSession.Extent(objectType);
-                            extent.Filter.AddEquals(roleType, role);
-                            if (extent.Count != 1)
-                            {
-                                this.AddError(new DerivationErrorUnique(this, association, roleType));
-                            }
-                        }
-                        else
-                        {
-                            var workspaceSession = (IWorkspaceSession)session;
-
-                            // First check workspace
-                            IObject[] workspaceObjects = workspaceSession.LocalExtent(objectType);
-                            var workspaceMatch = false;
-                            foreach (var workspaceObject in workspaceObjects)
-                            {
-                                var workspaceRole = workspaceObject.Strategy.GetRole(roleType);
-                                if (role.Equals(workspaceRole))
-                                {
-                                    if (workspaceMatch)
-                                    {
-                                        this.AddError(new DerivationErrorUnique(this, association, roleType));
-                                        break;
-                                    }
-
-                                    workspaceMatch = true;
-                                }
-                            }
-
-                            if (!workspaceMatch)
-                            {
-                                var databaseSession = ((IWorkspaceSession)session).DatabaseSession;
-                                var databaseAssociation = databaseSession.Instantiate(association);
-                                var databaseRole = role is IObject ? databaseSession.Instantiate((IObject)role) : role;
-
-                                var extent = association.Strategy.DatabaseSession.Extent(objectType);
-                                extent.Filter.AddEquals(roleType, databaseRole);
-
-                                if (databaseAssociation == null)
-                                {
-                                    if (extent.Count > 0)
-                                    {
-                                        this.AddError(new DerivationErrorUnique(this, association, roleType));
-                                    }
-                                }
-                                else
-                                {
-                                    if (extent.Count == 1)
-                                    {
-                                        if (!extent[0].Equals(databaseAssociation))
-                                        {
-                                            this.AddError(new DerivationErrorUnique(this, association, roleType));
-                                        }
-                                    }
-                                    else if (extent.Count > 1)
-                                    {
-                                        this.AddError(new DerivationErrorUnique(this, association, roleType));
-                                    }
-                                }
-                            }
+                            this.AddError(new DerivationErrorUnique(this, association, roleType));
                         }
                     }
                 }

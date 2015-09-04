@@ -4,13 +4,11 @@ namespace Allors.Meta
 
     public partial class S1Interface
     {
+        [Id("709F5C76-D6C6-4F96-9C24-1E85956D5491")]
+        public MethodType SuperinterfaceMethod;
+
         internal override void BaseExtend()
         {
-            new MethodType(BaseDomain.Instance, new Guid("5C7F1AB4-0B61-416D-97F4-660663F0E933"))
-            {
-                ObjectType = Instance,
-                Name = "SuperinterfaceMethod"
-            };
         }
     }
 }

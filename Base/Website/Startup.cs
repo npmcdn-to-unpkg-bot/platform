@@ -8,9 +8,8 @@ namespace Website
     using System.Configuration;
 
     using Allors;
-    using Allors.Databases.Object.SqlClient;
+    using Allors.Adapters.Object.SqlClient;
     using Allors.Web.Identity;
-    using Allors.Workspaces.Memory.IntegerId;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
@@ -18,7 +17,7 @@ namespace Website
 
     using Owin;
 
-    using Configuration = Allors.Databases.Object.SqlClient.Configuration;
+    using Configuration = Allors.Adapters.Object.SqlClient.Configuration;
 
     public partial class Startup
     {
@@ -27,8 +26,7 @@ namespace Website
             var configuration = new Configuration
             {
                 ConnectionString = ConfigurationManager.ConnectionStrings["allors"].ConnectionString, 
-                ObjectFactory = Config.ObjectFactory, 
-                WorkspaceFactory = new WorkspaceFactory()
+                ObjectFactory = Config.ObjectFactory 
             };
             Config.Default = new Database(configuration);
 

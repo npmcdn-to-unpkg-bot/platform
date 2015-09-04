@@ -29,12 +29,12 @@ namespace Allors
 
     public partial class Setup
     {
-        private readonly IDatabaseSession session;
+        private readonly ISession session;
 
         private readonly Dictionary<IObjectType, IObjects> objectsByObjectType;
         private readonly ObjectsGraph objectsGraph;
 
-        public Setup(IDatabaseSession session, DirectoryInfo dataPath)
+        public Setup(ISession session, DirectoryInfo dataPath)
         {
             this.session = session;
             this.DataPath = dataPath;

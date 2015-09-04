@@ -43,7 +43,7 @@ namespace Allors.Domain
         /// <param name="session">
         /// The session.
         /// </param>
-        public AccessControlCache(IDatabaseSession session)
+        public AccessControlCache(ISession session)
         {
             var database = session.Database;
             this.entryByObjectId = (Dictionary<ObjectId, Entry>)database[CacheKey];

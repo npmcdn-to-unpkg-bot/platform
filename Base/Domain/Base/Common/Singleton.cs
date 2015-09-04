@@ -28,19 +28,7 @@ namespace Allors.Domain
 
         public static Singleton Instance(ISession session)
         {
-            var instance = (Singleton)session[SessionKey];
-            if (instance == null)
-            {
-                if (session is IDatabaseSession)
-                {
-                    instance = (Singleton)session.Extent<Singleton>().First;
-                }
-                else
-                {
-                    var workspaceSession = (IWorkspaceSession)session;
-                    instance = Instance(workspaceSession.DatabaseSession);
-                }
-            }
+            var instance = (Singleton)session[SessionKey] ?? session.Extent<Singleton>().First;
 
             session[SessionKey] = instance;
             return instance;

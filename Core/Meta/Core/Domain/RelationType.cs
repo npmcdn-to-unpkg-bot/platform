@@ -39,8 +39,10 @@ namespace Allors.Meta
         private bool isIndexed;
 
         internal RelationType(Domain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
-            : base(domain, id)
+            : base(domain)
         {
+            this.Id = id;
+
             this.associationType = new AssociationType(this, associationTypeId);
             this.roleType = new RoleType(this, roleTypdId);
 

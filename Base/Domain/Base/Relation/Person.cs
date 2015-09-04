@@ -86,10 +86,10 @@ namespace Allors.Domain
                 var mySecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
                 this.OwnerSecurityToken = mySecurityToken;
 
-                if (!this.ExistAccessControlsWhereSubject && this.Strategy.Session.Population is IDatabase)
+                if (!this.ExistAccessControlsWhereSubject)
                 {
-                    new AccessControlBuilder(this.Strategy.DatabaseSession)
-                        .WithRole(new Roles(this.Strategy.DatabaseSession).Owner)
+                    new AccessControlBuilder(this.Strategy.Session)
+                        .WithRole(new Roles(this.Strategy.Session).Owner)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)
                         .Build();

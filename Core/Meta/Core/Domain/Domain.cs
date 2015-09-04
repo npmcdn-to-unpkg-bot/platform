@@ -50,8 +50,8 @@ namespace Allors.Meta
 
         private IList<MethodType> definedMethodTypes;
 
-        internal Domain(MetaPopulation metaPopulation, Guid id)
-            : base(metaPopulation, id)
+        internal Domain(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
             this.directSuperdomains = new List<Domain>();
 

@@ -40,9 +40,11 @@ namespace Allors.Meta
         private Composite objectType;
 
         internal AssociationType(RelationType relationType, Guid id)
-            : base(relationType.DefiningDomain, id)
+            : base(relationType.DefiningDomain)
         {
             this.relationType = relationType;
+
+            this.Id = id;
 
             relationType.DefiningDomain.OnAssociationTypeCreated(this);
         }

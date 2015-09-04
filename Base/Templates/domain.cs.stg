@@ -216,7 +216,7 @@ namespace Allors.Domain
             var typedObj = obj as IObject;
             return typedObj != null &&
                    typedObj.Strategy.ObjectId.Equals(this.Strategy.ObjectId) &&
-                   typedObj.Strategy.Session.Population.Id.Equals(this.Strategy.Session.Population.Id);
+                   typedObj.Strategy.Session.Database.Id.Equals(this.Strategy.Session.Database.Id);
         }
 
 		public override int GetHashCode()

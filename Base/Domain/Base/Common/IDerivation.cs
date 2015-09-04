@@ -27,10 +27,6 @@ namespace Allors.Domain
 
     public interface IDerivation
     {
-        bool InDatabase { get; }
-
-        bool InWorkspace { get; }
-
         ISession Session { get; }
 
         DerivationLog Log { get; }

@@ -21,12 +21,13 @@
 
 namespace Allors.Meta
 {
+    [Id("c4c09343-61d3-418c-ade2-fe6fd588f128")]
     public partial class AllorsDateTimeUnit : Unit
     {
         public static AllorsDateTimeUnit Instance { get; internal set; }
 
         internal AllorsDateTimeUnit()
-            : base(CoreDomain.Instance, UnitIds.DateTimeId)
+            : base(CoreDomain.Instance)
         {
             this.SingularName = "AllorsDateTime";
             this.PluralName = "AllorsDateTimes";
