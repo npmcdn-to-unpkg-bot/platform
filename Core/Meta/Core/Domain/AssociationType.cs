@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// This is also called the 'active', 'controlling' or 'owning' side.
     /// AssociationTypes can only have composite <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class AssociationType : PropertyType, IAssociationType
+    public sealed partial class AssociationType : PropertyType, IAssociationType, IComparable
     {
         /// <summary>
         /// Used to create property names.
@@ -284,7 +284,7 @@ namespace Allors.Meta
             var that = obj as AssociationType;
             if (that != null)
             {
-                return string.CompareOrdinal(this.SingularName, that.SingularName);
+                return this.RelationType.Id.CompareTo(that.RelationType.Id);
             }
 
             return -1;

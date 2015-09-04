@@ -95,11 +95,12 @@ namespace Allors.Meta
 	using System;
 $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDomain(domain=superDomain)$$endif$}$
 
+	[Id("$domain.IdAsString$")]
 	public partial class $domain.Name$Domain : Domain
 	{
 		public static $domain.Name$Domain Instance { get; internal set; }
 
-		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation, new Guid("$domain.IdAsString$"))
+		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
         {
 			this.Name = "$domain.Name$";
         }
@@ -116,11 +117,12 @@ $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDom
 >>
 
 superDomain(domain) ::= <<
+	[Id("$domain.IdAsString$")]
 	public partial class $domain.Name$Domain : Domain
 	{
 		public static $domain.Name$Domain Instance { get; internal set; }
 
-		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation, new Guid("$domain.IdAsString$"))
+		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
         {
 			this.Name = "$domain.Name$";
         }
@@ -142,29 +144,20 @@ namespace Allors.Meta
 {
 	using System;
 
-	public partial class $objectType.SingularName$Interface: Interface
+$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
+}$
+	[Id("$objectType.IdAsString$")]
+  	public partial class $objectType.SingularName$Interface: Interface
 	{
 		public static $objectType.SingularName$Interface Instance {get; internal set;}
 
 		internal readonly RolesType Roles = new RolesType();
 
-		internal $objectType.SingularName$Interface() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance, new Guid("$objectType.IdAsString$"))
+		internal $objectType.SingularName$Interface() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
         {
 			this.SingularName = "$objectType.SingularName$";
 			this.PluralName = "$objectType.PluralName$";
         }
-
-		internal override void BuildInheritances()
-		{
-			new Inheritance($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance, Guid.NewGuid())
-			{
-				Subtype = Instance,
-				Supertype = ObjectInterface.Instance
-			};
-			
-$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$}$
-
-		}
 
 		internal override void BuildRelationTypes()
 		{
@@ -190,6 +183,9 @@ namespace Allors.Meta
 {
 	using System;
 
+$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
+}$
+	[Id("$objectType.IdAsString$")]
 	public partial class $objectType.SingularName$Class : Class
 	{
 		public static $objectType.SingularName$Class Instance {get; internal set;}
@@ -197,22 +193,11 @@ namespace Allors.Meta
 		internal readonly RolesType Roles = new RolesType();
 		internal readonly ConcreteRolesType ConcreteRoles = new ConcreteRolesType();
 
-		internal $objectType.SingularName$Class() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance, new Guid("$objectType.IdAsString$"))
+		internal $objectType.SingularName$Class() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
         {
 			this.SingularName = "$objectType.SingularName$";
 			this.PluralName = "$objectType.PluralName$";
         }
-
-		internal override void BuildInheritances()
-		{
-			new Inheritance($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance, Guid.NewGuid())
-			{
-				Subtype = Instance,
-				Supertype = ObjectInterface.Instance
-			};
-
-$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$}$
-		}
 
 		internal override void BuildRelationTypes()
 		{
@@ -280,12 +265,7 @@ setRelationType(relationType) ::= <<
 
 
 inheritanceInit(inheritance) ::= <<
-			new Inheritance($inheritance.DomainWhereDeclaredInheritance.Name$Domain.Instance, new Guid("$inheritance.IdAsString$"))
-			{
-				Subtype = Instance,
-				Supertype = $inheritance.Supertype.Name$Interface.Instance
-			};
-
+	[Inherit(typeof($inheritance.Supertype.Name$Interface))]
 >>
 
 newObjectType(objectType) ::= <%

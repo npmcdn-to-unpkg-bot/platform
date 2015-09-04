@@ -72,7 +72,7 @@ namespace Allors.Adapters.Memory
             this.writer.WriteStartElement(Serialization.Database);
 
             var sortedObjectTypes = new List<IObjectType>(this.sortedNonDeletedStrategiesByObjectType.Keys);
-            sortedObjectTypes.Sort(MetaObjectComparer.ById);
+            sortedObjectTypes.Sort();
 
             foreach (var objectType in sortedObjectTypes)
             {
@@ -125,7 +125,7 @@ namespace Allors.Adapters.Memory
             }
 
             var sortedRelationTypes = new List<IRelationType>(this.session.Population.MetaPopulation.RelationTypes);
-            sortedRelationTypes.Sort(MetaObjectComparer.ById);
+            sortedRelationTypes.Sort();
             foreach (var relationType in sortedRelationTypes)
             {
                 var roleType = relationType.RoleType;

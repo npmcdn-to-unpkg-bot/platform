@@ -27,7 +27,7 @@ namespace Allors.Meta
     /// A <see cref="RelationType"/> defines the state and behavior for
     /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
     /// </summary>
-    public sealed partial class RelationType : DomainObject, IRelationType
+    public sealed partial class RelationType : DomainObject, IRelationType, IComparable
     {
         private readonly AssociationType associationType;
         private readonly RoleType roleType;
@@ -245,7 +245,7 @@ namespace Allors.Meta
         public int CompareTo(object obj)
         {
             var that = obj as RelationType;
-            return that != null ? string.CompareOrdinal(this.Name, that.Name) : -1;
+            return that != null ? this.Id.CompareTo(that.Id) : -1;
         }
 
         /// <summary>

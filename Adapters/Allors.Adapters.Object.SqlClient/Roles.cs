@@ -412,7 +412,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (unitRoles != null)
             {
-                unitRoles.Sort(MetaObjectComparer.ById);
+                unitRoles.Sort();
                 this.Reference.Session.SetUnitRoles(this, unitRoles);
             }
             else if (unitRole != null)

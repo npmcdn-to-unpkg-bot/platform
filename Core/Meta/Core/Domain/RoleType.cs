@@ -23,7 +23,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public sealed partial class RoleType : PropertyType, IRoleType
+    public sealed partial class RoleType : PropertyType, IRoleType, IComparable
     {
         /// <summary>
         /// The maximum size value.
@@ -375,7 +375,7 @@ namespace Allors.Meta
             var that = obj as RoleType;
             if (that != null)
             {
-                return string.CompareOrdinal(this.SingularName, that.SingularName);
+                return this.RelationType.Id.CompareTo(that.RelationType.Id);
             }
 
             return -1;

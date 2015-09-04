@@ -23,7 +23,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class ObjectType : DomainObject, IObjectType
+    public abstract partial class ObjectType : DomainObject, IObjectType, IComparable
     {
         private string singularName;
 
@@ -141,7 +141,7 @@ namespace Allors.Meta
             var that = obj as ObjectType;
             if (that != null)
             {
-                return string.CompareOrdinal(this.Name, that.Name);
+                return this.Id.CompareTo(that.Id);
             }
 
             return -1;

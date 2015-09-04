@@ -1,6 +1,6 @@
-//------------------------------------------------------------------------------------------------- 
-// <copyright file="Composite.cs" company="Allors bvba">
-// Copyright 2002-2013 Allors bvba.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IMetaObject.cs" company="Allors bvba">
+//   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -16,12 +16,17 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
-//-------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    public partial class Composite
+    using System;
+
+    /// <summary>
+    /// Base interface for Meta objects.
+    /// </summary>
+    public interface IMetaIdentifiableObject : IMetaObject
     {
+        Guid Id { get; }
     }
 }

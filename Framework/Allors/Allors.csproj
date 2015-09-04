@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="Adapters\Configuration.cs" />
     <Compile Include="Adapters\EmptySet.cs" />
-    <Compile Include="Adapters\MetaObjectComparer.cs" />
     <Compile Include="Adapters\ObjectVersionLong.cs" />
     <Compile Include="Adapters\ObjectVersions.cs" />
     <Compile Include="Adapters\ObjectVersionsLong.cs" />
@@ -83,6 +82,7 @@
     <Compile Include="Meta\IComposite.cs" />
     <Compile Include="Meta\IDomain.cs" />
     <Compile Include="Meta\IInterface.cs" />
+    <Compile Include="Meta\IMetaIdentifiableObject.cs" />
     <Compile Include="Meta\IMetaObject.cs" />
     <Compile Include="Meta\IMetaPopulation.cs" />
     <Compile Include="Meta\IObjectType.cs" />

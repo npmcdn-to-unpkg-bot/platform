@@ -805,7 +805,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
         private void SaveObjects(XmlWriter writer)
         {
             var orderedClasses = new List<IClass>(this.ObjectFactory.MetaPopulation.Classes);
-            orderedClasses.Sort(MetaObjectComparer.ById);
+            orderedClasses.Sort();
             foreach (var type in orderedClasses)
             {
                 var atLeastOne = false;
@@ -855,7 +855,7 @@ WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
         private void SaveRelations(XmlWriter writer)
         {
             var orderedRelationType = new List<IRelationType>(this.ObjectFactory.MetaPopulation.RelationTypes);
-            orderedRelationType.Sort(MetaObjectComparer.ById);
+            orderedRelationType.Sort();
             foreach (var relation in orderedRelationType)
             {
                 if (relation.AssociationType.ObjectType.ExistClass)

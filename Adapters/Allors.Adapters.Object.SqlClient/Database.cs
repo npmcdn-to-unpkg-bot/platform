@@ -449,9 +449,8 @@ namespace Allors.Adapters.Object.SqlClient
             IRoleType[] sortedUnitRoles;
             if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
-                var sortedUnitRoleList =
-                    new List<IRoleType>(((IComposite)objectType).RoleTypes.Where(r => r.ObjectType.IsUnit));
-                sortedUnitRoleList.Sort(MetaObjectComparer.ById);
+                var sortedUnitRoleList = new List<IRoleType>(((IComposite)objectType).RoleTypes.Where(r => r.ObjectType.IsUnit));
+                sortedUnitRoleList.Sort();
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
                 this.sortedUnitRolesByObjectType[objectType] = sortedUnitRoles;
             }
