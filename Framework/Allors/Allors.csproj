@@ -67,6 +67,7 @@
     <Compile Include="Adapters\IClassCache.cs" />
     <Compile Include="Adapters\IRoleCache.cs" />
     <Compile Include="Adapters\RoleCache.cs" />
+    <Compile Include="Attributes\Inherit.cs" />
     <Compile Include="Attributes\Id.cs" />
     <Compile Include="Extent.cs" />
     <Compile Include="ExtentT.cs" />

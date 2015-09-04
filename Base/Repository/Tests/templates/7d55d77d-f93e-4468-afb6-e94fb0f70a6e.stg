@@ -144,8 +144,10 @@ namespace Allors.Meta
 {
 	using System;
 
+$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
+}$
 	[Id("$objectType.IdAsString$")]
-	public partial class $objectType.SingularName$Interface: Interface
+  	public partial class $objectType.SingularName$Interface: Interface
 	{
 		public static $objectType.SingularName$Interface Instance {get; internal set;}
 
@@ -156,18 +158,6 @@ namespace Allors.Meta
 			this.SingularName = "$objectType.SingularName$";
 			this.PluralName = "$objectType.PluralName$";
         }
-
-		internal override void BuildInheritances()
-		{
-			new Inheritance($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
-			{
-				Subtype = Instance,
-				Supertype = ObjectInterface.Instance
-			};
-			
-$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$}$
-
-		}
 
 		internal override void BuildRelationTypes()
 		{
@@ -193,6 +183,8 @@ namespace Allors.Meta
 {
 	using System;
 
+$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
+}$
 	[Id("$objectType.IdAsString$")]
 	public partial class $objectType.SingularName$Class : Class
 	{
@@ -206,17 +198,6 @@ namespace Allors.Meta
 			this.SingularName = "$objectType.SingularName$";
 			this.PluralName = "$objectType.PluralName$";
         }
-
-		internal override void BuildInheritances()
-		{
-			new Inheritance($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
-			{
-				Subtype = Instance,
-				Supertype = ObjectInterface.Instance
-			};
-
-$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$}$
-		}
 
 		internal override void BuildRelationTypes()
 		{
@@ -284,12 +265,7 @@ setRelationType(relationType) ::= <<
 
 
 inheritanceInit(inheritance) ::= <<
-			new Inheritance($inheritance.DomainWhereDeclaredInheritance.Name$Domain.Instance)
-			{
-				Subtype = Instance,
-				Supertype = $inheritance.Supertype.Name$Interface.Instance
-			};
-
+	[Inherit(typeof($inheritance.Supertype.Name$Interface))]
 >>
 
 newObjectType(objectType) ::= <%

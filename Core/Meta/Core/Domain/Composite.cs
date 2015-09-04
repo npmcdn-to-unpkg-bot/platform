@@ -289,8 +289,6 @@ namespace Allors.Meta
         /// </returns>
         public abstract bool IsAssignableFrom(IClass objectType);
 
-        internal abstract void BuildInheritances();
-
         internal abstract void BuildRelationTypes();
 
         internal abstract void SetRelationTypes();

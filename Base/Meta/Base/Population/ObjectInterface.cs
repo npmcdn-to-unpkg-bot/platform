@@ -19,7 +19,6 @@ namespace Allors.Meta
 
         internal override void BaseExtend()
         {
-
         }
     }
 }

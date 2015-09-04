@@ -18,7 +18,7 @@ namespace Allors.Domain
 	public interface Deletable  : Object 
 	{
 	}
-	public interface Enumeration  : Object, AccessControlledObject, UniquelyIdentifiable 
+	public interface Enumeration  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					LocalisedText LocalisedNames {set;}
 
@@ -46,7 +46,7 @@ namespace Allors.Domain
 					global::System.DateTime? ThroughDate {set;}
 
 	}
-	public interface Printable  : Object, AccessControlledObject, UniquelyIdentifiable 
+	public interface Printable  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					global::System.String PrintContent {set;}
 
@@ -89,7 +89,7 @@ namespace Allors.Domain
 					global::System.Guid? UniqueId {set;}
 
 	}
-	public interface I1  : Object, I12, S1 
+	public interface I1  : Object, S1, I12 
 	{
 					I1 I1I1Many2One {set;}
 
@@ -274,7 +274,7 @@ namespace Allors.Domain
 	public interface Shared  : Object 
 	{
 	}
-	public interface AccessControl  : Object, Deletable, AccessControlledObject 
+	public interface AccessControl  : Object, AccessControlledObject, Deletable 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -343,7 +343,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface LocalisedText  : Object, AccessControlledObject, Localised 
+	public interface LocalisedText  : Object, Localised, AccessControlledObject 
 	{
 					global::System.String Text {set;}
 
@@ -357,7 +357,7 @@ namespace Allors.Domain
 					User User {set;}
 
 	}
-	public interface Media  : Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
+	public interface Media  : Object, AccessControlledObject, Deletable, UniquelyIdentifiable 
 	{
 					MediaType MediaType {set;}
 
@@ -387,7 +387,7 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, Printable, Deletable 
+	public interface Person  : Object, Printable, Deletable, User, AccessControlledObject, UniquelyIdentifiable 
 	{
 					global::System.String LastName {set;}
 
@@ -498,7 +498,7 @@ namespace Allors.Domain
 					global::System.String AllorsString {set;}
 
 	}
-	public interface C1  : Object, I1, AccessControlledObject 
+	public interface C1  : Object, AccessControlledObject, I1 
 	{
 					I1 C1I1One2One {set;}
 

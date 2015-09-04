@@ -82,12 +82,57 @@ namespace Allors.Meta
 
             foreach (var composite in Instance.Composites)
             {
-                composite.BuildInheritances();
+                var type = composite.GetType();
+
+                // Always inherit from Object
+                if (!composite.Equals(ObjectInterface.Instance))
+                {
+                    new Inheritance(composite.DefiningDomain)
+                    {
+                        Subtype = composite,
+                        Supertype = ObjectInterface.Instance
+                    };
+                }
+
+                // Create Inheritance objects
+                foreach (var attribute in type.GetCustomAttributes(typeof(InheritAttribute)))
+                {
+                    var inheritanceAttribute = (InheritAttribute)attribute;
+                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(inheritanceAttribute.Value, typeof(IdAttribute));
+                    var id = new Guid(idAttribute.Value);
+                    var supertype = (Interface)Instance.Find(id);
+
+                    new Inheritance(composite.DefiningDomain)
+                    {
+                        Subtype = composite,
+                        Supertype = supertype
+                    };
+                }
+            }
+            
+            foreach (var composite in Instance.Composites)
+            {
+                composite.BuildRelationTypes();
             }
 
             foreach (var composite in Instance.Composites)
             {
-                composite.BuildRelationTypes();
+                var type = composite.GetType();
+
+                // Create MethodType objects
+                var methodTypeFields = type
+                    .GetFields()
+                    .Where(field => field.FieldType == typeof(MethodType));
+
+                foreach (var methodTypeField in methodTypeFields)
+                {
+                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(methodTypeField, typeof(IdAttribute));
+                    var id = new Guid(idAttribute.Value);
+                    var methodType = (MethodType)Activator.CreateInstance(typeof(MethodType), new object[] { composite.DefiningDomain, id });
+                    methodType.Name = methodTypeField.Name;
+                    methodType.ObjectType = composite;
+                    methodTypeField.SetValue(composite, methodType);
+                }
             }
 
             foreach (var composite in Instance.Composites)
