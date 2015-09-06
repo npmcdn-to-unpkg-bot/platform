@@ -208,11 +208,6 @@ namespace Allors.Meta
                 }
             }
 
-            foreach (var composite in Instance.Composites)
-            {
-                composite.SetRelationTypes();
-            }
-
             Instance.Extend();
         }
 

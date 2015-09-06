@@ -289,12 +289,10 @@ namespace Allors.Meta
         /// </returns>
         public abstract bool IsAssignableFrom(IClass objectType);
 
-        internal abstract void SetRelationTypes();
-
         /// <summary>
-        /// Derive direct super type derivations.
-        /// </summary>
-        /// <param name="directSupertypes">The direct super types.</param>
+/// Derive direct super type derivations.
+/// </summary>
+/// <param name="directSupertypes">The direct super types.</param>
         internal void DeriveDirectSupertypes(HashSet<Interface> directSupertypes)
         {
             directSupertypes.Clear();
