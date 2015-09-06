@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IObjectType.cs" company="Allors bvba">
+// <copyright file="MultiplicityAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,29 +16,22 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the IObjectType type.</summary>
+// <summary>Defines the Extent type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+using System;
+using Allors.Meta;
+
+namespace Allors
 {
-    using System;
-
-    public interface IObjectType : IMetaObject, IComparable
+    [AttributeUsage(AttributeTargets.Field)]
+    public class MultiplicityAttribute : MetaAttribute
     {
-        string SingularName { get; }
-
-        string PluralName { get; }
-
-        bool IsUnit { get; }
-
-        bool IsComposite { get; }
-
-        bool IsInterface { get; }
-
-        bool IsClass { get; }
-
-        string Name { get; }
-
-        Type ClrType { get; }
+        public MultiplicityAttribute(Multiplicity value)
+        {
+            this.Value = value;
+        }
+        
+        public Multiplicity Value { get; set; }
     }
 }

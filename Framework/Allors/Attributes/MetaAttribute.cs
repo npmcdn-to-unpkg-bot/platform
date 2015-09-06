@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IMetaObject.cs" company="Allors bvba">
-//   Copyright 2002-2013 Allors bvba.
+//------------------------------------------------------------------------------------------------- 
+// <copyright file="AssociationIdAttribute.cs" company="Allors bvba">
+// Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -16,17 +16,14 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
+// <summary>Defines the Extent type.</summary>
+//-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+using System;
+
+namespace Allors
 {
-    using System;
-
-    /// <summary>
-    /// Base interface for Meta objects.
-    /// </summary>
-    public interface IMetaIdentifiableObject : IMetaObject
+    public class MetaAttribute : Attribute
     {
-        Guid Id { get; }
     }
 }

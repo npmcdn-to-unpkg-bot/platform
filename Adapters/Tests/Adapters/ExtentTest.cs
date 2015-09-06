@@ -9728,7 +9728,7 @@ namespace Allors.Adapters
 
                 // Between -10 and 0
                 var extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddBetween(RoleTypes.C1AllorsFloat, -10, 0);
+                extent.Filter.AddBetween(RoleTypes.C1AllorsDouble, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9738,7 +9738,7 @@ namespace Allors.Adapters
 
                 // Between 0 and 1
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddBetween(RoleTypes.C1AllorsFloat, 0, 1);
+                extent.Filter.AddBetween(RoleTypes.C1AllorsDouble, 0, 1);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -9748,7 +9748,7 @@ namespace Allors.Adapters
 
                 // Between 1 and 2
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddBetween(RoleTypes.C1AllorsFloat, 1, 2);
+                extent.Filter.AddBetween(RoleTypes.C1AllorsDouble, 1, 2);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -9758,7 +9758,7 @@ namespace Allors.Adapters
 
                 // Between 3 and 10
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddBetween(RoleTypes.C1AllorsFloat, 3, 10);
+                extent.Filter.AddBetween(RoleTypes.C1AllorsDouble, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9770,7 +9770,7 @@ namespace Allors.Adapters
 
                 // Between -10 and 0
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddBetween(RoleTypes.I12AllorsFloat, -10, 0);
+                extent.Filter.AddBetween(RoleTypes.I12AllorsDouble, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9780,7 +9780,7 @@ namespace Allors.Adapters
 
                 // Between 0 and 1
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddBetween(RoleTypes.I12AllorsFloat, 0, 1);
+                extent.Filter.AddBetween(RoleTypes.I12AllorsDouble, 0, 1);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -9790,7 +9790,7 @@ namespace Allors.Adapters
 
                 // Between 1 and 2
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddBetween(RoleTypes.I12AllorsFloat, 1, 2);
+                extent.Filter.AddBetween(RoleTypes.I12AllorsDouble, 1, 2);
 
                 Assert.AreEqual(6, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -9800,7 +9800,7 @@ namespace Allors.Adapters
 
                 // Between 3 and 10
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddBetween(RoleTypes.I12AllorsFloat, 3, 10);
+                extent.Filter.AddBetween(RoleTypes.I12AllorsDouble, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9812,7 +9812,7 @@ namespace Allors.Adapters
 
                 // Between -10 and 0
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddBetween(RoleTypes.S1234AllorsFloat, -10, 0);
+                extent.Filter.AddBetween(RoleTypes.S1234AllorsDouble, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9822,7 +9822,7 @@ namespace Allors.Adapters
 
                 // Between 0 and 1
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddBetween(RoleTypes.S1234AllorsFloat, 0, 1);
+                extent.Filter.AddBetween(RoleTypes.S1234AllorsDouble, 0, 1);
 
                 Assert.AreEqual(4, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -9832,7 +9832,7 @@ namespace Allors.Adapters
 
                 // Between 1 and 2
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddBetween(RoleTypes.S1234AllorsFloat, 1, 2);
+                extent.Filter.AddBetween(RoleTypes.S1234AllorsDouble, 1, 2);
 
                 Assert.AreEqual(12, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -9842,7 +9842,7 @@ namespace Allors.Adapters
 
                 // Between 3 and 10
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddBetween(RoleTypes.S1234AllorsFloat, 3, 10);
+                extent.Filter.AddBetween(RoleTypes.S1234AllorsDouble, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9858,7 +9858,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddBetween(RoleTypes.C2AllorsFloat, -10, 0);
+                    extent.Filter.AddBetween(RoleTypes.C2AllorsDouble, -10, 0);
                 }
                 catch
                 {
@@ -9873,7 +9873,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddBetween(RoleTypes.C2AllorsFloat, 0, 1);
+                    extent.Filter.AddBetween(RoleTypes.C2AllorsDouble, 0, 1);
                 }
                 catch
                 {
@@ -9888,7 +9888,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddBetween(RoleTypes.C2AllorsFloat, 1, 2);
+                    extent.Filter.AddBetween(RoleTypes.C2AllorsDouble, 1, 2);
                 }
                 catch
                 {
@@ -9903,7 +9903,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddBetween(RoleTypes.C2AllorsFloat, 3, 10);
+                    extent.Filter.AddBetween(RoleTypes.C2AllorsDouble, 3, 10);
                 }
                 catch
                 {
@@ -9926,7 +9926,7 @@ namespace Allors.Adapters
 
                 // Less Than 1
                 var extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddLessThan(RoleTypes.C1AllorsFloat, 1);
+                extent.Filter.AddLessThan(RoleTypes.C1AllorsDouble, 1);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9936,7 +9936,7 @@ namespace Allors.Adapters
 
                 // Less Than 2
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddLessThan(RoleTypes.C1AllorsFloat, 2);
+                extent.Filter.AddLessThan(RoleTypes.C1AllorsDouble, 2);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -9946,7 +9946,7 @@ namespace Allors.Adapters
 
                 // Less Than 3
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddLessThan(RoleTypes.C1AllorsFloat, 3);
+                extent.Filter.AddLessThan(RoleTypes.C1AllorsDouble, 3);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -9958,7 +9958,7 @@ namespace Allors.Adapters
 
                 // Less Than 1
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddLessThan(RoleTypes.I12AllorsFloat, 1);
+                extent.Filter.AddLessThan(RoleTypes.I12AllorsDouble, 1);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -9968,7 +9968,7 @@ namespace Allors.Adapters
 
                 // Less Than 2
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddLessThan(RoleTypes.I12AllorsFloat, 2);
+                extent.Filter.AddLessThan(RoleTypes.I12AllorsDouble, 2);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -9978,7 +9978,7 @@ namespace Allors.Adapters
 
                 // Less Than 3
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddLessThan(RoleTypes.I12AllorsFloat, 3);
+                extent.Filter.AddLessThan(RoleTypes.I12AllorsDouble, 3);
 
                 Assert.AreEqual(6, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -9990,7 +9990,7 @@ namespace Allors.Adapters
 
                 // Less Than 1
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddLessThan(RoleTypes.S1234AllorsFloat, 1);
+                extent.Filter.AddLessThan(RoleTypes.S1234AllorsDouble, 1);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -10000,7 +10000,7 @@ namespace Allors.Adapters
 
                 // Less Than 2
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddLessThan(RoleTypes.S1234AllorsFloat, 2);
+                extent.Filter.AddLessThan(RoleTypes.S1234AllorsDouble, 2);
 
                 Assert.AreEqual(4, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -10010,7 +10010,7 @@ namespace Allors.Adapters
 
                 // Less Than 3
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddLessThan(RoleTypes.S1234AllorsFloat, 3);
+                extent.Filter.AddLessThan(RoleTypes.S1234AllorsDouble, 3);
 
                 Assert.AreEqual(12, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -10026,7 +10026,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.C2AllorsFloat, 1);
+                    extent.Filter.AddLessThan(RoleTypes.C2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10041,7 +10041,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.C2AllorsFloat, 2);
+                    extent.Filter.AddLessThan(RoleTypes.C2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10056,7 +10056,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.C2AllorsFloat, 3);
+                    extent.Filter.AddLessThan(RoleTypes.C2AllorsDouble, 3);
                 }
                 catch
                 {
@@ -10073,7 +10073,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.I2AllorsFloat, 1);
+                    extent.Filter.AddLessThan(RoleTypes.I2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10088,7 +10088,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.I2AllorsFloat, 2);
+                    extent.Filter.AddLessThan(RoleTypes.I2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10103,7 +10103,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.I2AllorsFloat, 3);
+                    extent.Filter.AddLessThan(RoleTypes.I2AllorsDouble, 3);
                 }
                 catch
                 {
@@ -10120,7 +10120,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.S2AllorsFloat, 1);
+                    extent.Filter.AddLessThan(RoleTypes.S2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10135,7 +10135,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.S2AllorsFloat, 2);
+                    extent.Filter.AddLessThan(RoleTypes.S2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10150,7 +10150,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddLessThan(RoleTypes.S2AllorsFloat, 3);
+                    extent.Filter.AddLessThan(RoleTypes.S2AllorsDouble, 3);
                 }
                 catch
                 {
@@ -10173,7 +10173,7 @@ namespace Allors.Adapters
 
                 // Greater Than 0
                 var extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddGreaterThan(RoleTypes.C1AllorsFloat, 0);
+                extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDouble, 0);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -10183,7 +10183,7 @@ namespace Allors.Adapters
 
                 // Greater Than 1
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddGreaterThan(RoleTypes.C1AllorsFloat, 1);
+                extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDouble, 1);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, false, true, true);
@@ -10193,7 +10193,7 @@ namespace Allors.Adapters
 
                 // Greater Than 2
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddGreaterThan(RoleTypes.C1AllorsFloat, 2);
+                extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDouble, 2);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -10205,7 +10205,7 @@ namespace Allors.Adapters
 
                 // Greater Than 0
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddGreaterThan(RoleTypes.I12AllorsFloat, 0);
+                extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDouble, 0);
 
                 Assert.AreEqual(6, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -10215,7 +10215,7 @@ namespace Allors.Adapters
 
                 // Greater Than 1
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddGreaterThan(RoleTypes.I12AllorsFloat, 1);
+                extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDouble, 1);
 
                 Assert.AreEqual(4, extent.Count);
                 this.AssertC1(extent, false, false, true, true);
@@ -10225,7 +10225,7 @@ namespace Allors.Adapters
 
                 // Greater Than 2
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddGreaterThan(RoleTypes.I12AllorsFloat, 2);
+                extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDouble, 2);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -10237,7 +10237,7 @@ namespace Allors.Adapters
 
                 // Greater Than 0
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsFloat, 0);
+                extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDouble, 0);
 
                 Assert.AreEqual(12, extent.Count);
                 this.AssertC1(extent, false, true, true, true);
@@ -10247,7 +10247,7 @@ namespace Allors.Adapters
 
                 // Greater Than 1
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsFloat, 1);
+                extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDouble, 1);
 
                 Assert.AreEqual(8, extent.Count);
                 this.AssertC1(extent, false, false, true, true);
@@ -10257,7 +10257,7 @@ namespace Allors.Adapters
 
                 // Greater Than 2
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsFloat, 2);
+                extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDouble, 2);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -10273,7 +10273,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.C2AllorsFloat, 0);
+                    extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDouble, 0);
                 }
                 catch
                 {
@@ -10288,7 +10288,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.C2AllorsFloat, 1);
+                    extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10303,7 +10303,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.C2AllorsFloat, 2);
+                    extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10320,7 +10320,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsFloat, 0);
+                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDouble, 0);
                 }
                 catch
                 {
@@ -10335,7 +10335,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsFloat, 1);
+                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10350,7 +10350,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsFloat, 2);
+                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10367,7 +10367,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsFloat, 0);
+                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDouble, 0);
                 }
                 catch
                 {
@@ -10382,7 +10382,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsFloat, 1);
+                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10397,7 +10397,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsFloat, 2);
+                    extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10419,7 +10419,7 @@ namespace Allors.Adapters
                 // Class
                 // Equal 0
                 var extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddEquals(RoleTypes.C1AllorsFloat, 0);
+                extent.Filter.AddEquals(RoleTypes.C1AllorsDouble, 0);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -10429,7 +10429,7 @@ namespace Allors.Adapters
 
                 // Equal 1
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddEquals(RoleTypes.C1AllorsFloat, 1);
+                extent.Filter.AddEquals(RoleTypes.C1AllorsDouble, 1);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -10439,7 +10439,7 @@ namespace Allors.Adapters
 
                 // Equal 2
                 extent = this.LocalExtent(Classes.C1);
-                extent.Filter.AddEquals(RoleTypes.C1AllorsFloat, 2);
+                extent.Filter.AddEquals(RoleTypes.C1AllorsDouble, 2);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, false, true, true);
@@ -10450,7 +10450,7 @@ namespace Allors.Adapters
                 // Interface
                 // Equal 0
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddEquals(RoleTypes.I12AllorsFloat, 0);
+                extent.Filter.AddEquals(RoleTypes.I12AllorsDouble, 0);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -10460,7 +10460,7 @@ namespace Allors.Adapters
 
                 // Equal 1
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddEquals(RoleTypes.I12AllorsFloat, 1);
+                extent.Filter.AddEquals(RoleTypes.I12AllorsDouble, 1);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -10470,7 +10470,7 @@ namespace Allors.Adapters
 
                 // Equal 2
                 extent = this.LocalExtent(Interfaces.I12);
-                extent.Filter.AddEquals(RoleTypes.I12AllorsFloat, 2);
+                extent.Filter.AddEquals(RoleTypes.I12AllorsDouble, 2);
 
                 Assert.AreEqual(4, extent.Count);
                 this.AssertC1(extent, false, false, true, true);
@@ -10481,7 +10481,7 @@ namespace Allors.Adapters
                 // Super Interface
                 // Equal 0
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddEquals(RoleTypes.S1234AllorsFloat, 0);
+                extent.Filter.AddEquals(RoleTypes.S1234AllorsDouble, 0);
 
                 Assert.AreEqual(0, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -10491,7 +10491,7 @@ namespace Allors.Adapters
 
                 // Equal 1
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddEquals(RoleTypes.S1234AllorsFloat, 1);
+                extent.Filter.AddEquals(RoleTypes.S1234AllorsDouble, 1);
 
                 Assert.AreEqual(4, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -10501,7 +10501,7 @@ namespace Allors.Adapters
 
                 // Equal 2
                 extent = this.LocalExtent(Interfaces.S1234);
-                extent.Filter.AddEquals(RoleTypes.S1234AllorsFloat, 2);
+                extent.Filter.AddEquals(RoleTypes.S1234AllorsDouble, 2);
 
                 Assert.AreEqual(8, extent.Count);
                 this.AssertC1(extent, false, false, true, true);
@@ -10516,7 +10516,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.C2AllorsFloat, 0);
+                    extent.Filter.AddEquals(RoleTypes.C2AllorsDouble, 0);
                 }
                 catch
                 {
@@ -10531,7 +10531,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.C2AllorsFloat, 1);
+                    extent.Filter.AddEquals(RoleTypes.C2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10546,7 +10546,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.C2AllorsFloat, 2);
+                    extent.Filter.AddEquals(RoleTypes.C2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10562,7 +10562,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.I2AllorsFloat, 0);
+                    extent.Filter.AddEquals(RoleTypes.I2AllorsDouble, 0);
                 }
                 catch
                 {
@@ -10577,7 +10577,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.I2AllorsFloat, 1);
+                    extent.Filter.AddEquals(RoleTypes.I2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10592,7 +10592,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.I2AllorsFloat, 2);
+                    extent.Filter.AddEquals(RoleTypes.I2AllorsDouble, 2);
                 }
                 catch
                 {
@@ -10608,7 +10608,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.S2AllorsFloat, 0);
+                    extent.Filter.AddEquals(RoleTypes.S2AllorsDouble, 0);
                 }
                 catch
                 {
@@ -10623,7 +10623,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.S2AllorsFloat, 1);
+                    extent.Filter.AddEquals(RoleTypes.S2AllorsDouble, 1);
                 }
                 catch
                 {
@@ -10638,7 +10638,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(RoleTypes.S2AllorsFloat, 2);
+                    extent.Filter.AddEquals(RoleTypes.S2AllorsDouble, 2);
                 }
                 catch
                 {

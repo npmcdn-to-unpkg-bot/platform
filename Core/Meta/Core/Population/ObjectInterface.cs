@@ -11,10 +11,6 @@ namespace Allors.Meta
 		    this.PluralName = "Objects";
 		}
 
-        internal override void BuildRelationTypes()
-	    {
-	    }
-
 	    internal override void SetRelationTypes()
 	    {
 }

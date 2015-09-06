@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IdAttribute.cs" company="Allors bvba">
+// <copyright file="PrecisionAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,14 +23,14 @@ using System;
 
 namespace Allors
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
-    public class IdAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Field)]
+    public class PrecisionAttribute : MetaAttribute
     {
-        public IdAttribute(string value)
+        public PrecisionAttribute(int value)
         {
             this.Value = value;
         }
         
-        public string Value { get; set; }
+        public int Value { get; set; }
     }
 }

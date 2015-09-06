@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IObjectType.cs" company="Allors bvba">
+// <copyright file="IdAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,29 +16,21 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the IObjectType type.</summary>
+// <summary>Defines the Extent type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+using System;
+
+namespace Allors
 {
-    using System;
-
-    public interface IObjectType : IMetaObject, IComparable
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
+    public class IdAttribute : MetaAttribute
     {
-        string SingularName { get; }
-
-        string PluralName { get; }
-
-        bool IsUnit { get; }
-
-        bool IsComposite { get; }
-
-        bool IsInterface { get; }
-
-        bool IsClass { get; }
-
-        string Name { get; }
-
-        Type ClrType { get; }
+        public IdAttribute(string value)
+        {
+            this.Value = value;
+        }
+        
+        public string Value { get; set; }
     }
 }

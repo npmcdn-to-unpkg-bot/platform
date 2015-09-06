@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IObjectType.cs" company="Allors bvba">
+// <copyright file="ScaleAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,29 +16,21 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the IObjectType type.</summary>
+// <summary>Defines the Extent type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+using System;
+
+namespace Allors
 {
-    using System;
-
-    public interface IObjectType : IMetaObject, IComparable
+    [AttributeUsage(AttributeTargets.Field)]
+    public class ScaleAttribute : MetaAttribute
     {
-        string SingularName { get; }
-
-        string PluralName { get; }
-
-        bool IsUnit { get; }
-
-        bool IsComposite { get; }
-
-        bool IsInterface { get; }
-
-        bool IsClass { get; }
-
-        string Name { get; }
-
-        Type ClrType { get; }
+        public ScaleAttribute(int value)
+        {
+            this.Value = value;
+        }
+        
+        public int Value { get; set; }
     }
 }

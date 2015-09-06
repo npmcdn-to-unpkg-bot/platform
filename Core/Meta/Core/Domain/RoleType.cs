@@ -30,6 +30,8 @@ namespace Allors.Meta
         /// </summary>
         public const int MaximumSize = -1;
 
+        public const string PluralSuffix = "s";
+
         private readonly RelationType relationType;
 
         private ObjectType objectType;
@@ -210,7 +212,7 @@ namespace Allors.Meta
                     return this.AssignedPluralName;
                 }
 
-                return this.ObjectType != null ? this.ObjectType.PluralName : this.IdAsString;
+                return this.AssignedSingularName != null ? this.AssignedSingularName + PluralSuffix : this.IdAsString;
             }
         }
 
@@ -571,12 +573,6 @@ namespace Allors.Meta
             {
                 var message = this.ValidationName + " has no IObjectType";
                 validationLog.AddError(message, this, ValidationKind.Required, "RoleType.IObjectType");
-            }
-            
-            if (!string.IsNullOrEmpty(this.AssignedSingularName) && string.IsNullOrEmpty(this.AssignedPluralName))
-            {
-                var message = this.ValidationName + " has a singular but no plural name";
-                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.AssignedPluralName");
             }
 
             if (!string.IsNullOrEmpty(this.AssignedSingularName) && this.AssignedSingularName.Length < 2)

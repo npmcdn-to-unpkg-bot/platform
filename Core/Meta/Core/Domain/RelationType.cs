@@ -38,7 +38,7 @@ namespace Allors.Meta
         private bool isDerived;
         private bool isIndexed;
 
-        internal RelationType(Domain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
+        public RelationType(Domain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
             : base(domain)
         {
             this.Id = id;

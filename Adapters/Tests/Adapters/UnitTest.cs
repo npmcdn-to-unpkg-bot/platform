@@ -721,7 +721,7 @@ namespace Allors.Adapters
         }
 
         [Test]
-        public void AllorsFloat()
+        public void AllorsDouble()
         {
             foreach (var init in this.Inits)
             {
@@ -731,68 +731,68 @@ namespace Allors.Adapters
                     {
                         // Positive
                         var values = C1.Create(this.Session);
-                        values.C1AllorsFloat = 10.10d;
-                        values.I1AllorsFloat = 10.10d;
-                        values.S1AllorsFloat = 10.10d;
+                        values.C1AllorsDouble = 10.10d;
+                        values.I1AllorsDouble = 10.10d;
+                        values.S1AllorsDouble = 10.10d;
 
                         mark();
-                        Assert.AreEqual(10.10d, values.C1AllorsFloat);
-                        Assert.AreEqual(10.10d, values.I1AllorsFloat);
-                        Assert.AreEqual(10.10d, values.S1AllorsFloat);
+                        Assert.AreEqual(10.10d, values.C1AllorsDouble);
+                        Assert.AreEqual(10.10d, values.I1AllorsDouble);
+                        Assert.AreEqual(10.10d, values.S1AllorsDouble);
                     }
 
                     {
                         // Negative
                         var values = C1.Create(this.Session);
-                        values.C1AllorsFloat = -10.10d;
-                        values.I1AllorsFloat = -10.10d;
-                        values.S1AllorsFloat = -10.10d;
+                        values.C1AllorsDouble = -10.10d;
+                        values.I1AllorsDouble = -10.10d;
+                        values.S1AllorsDouble = -10.10d;
 
                         mark();
-                        Assert.AreEqual(-10.10d, values.C1AllorsFloat);
-                        Assert.AreEqual(-10.10d, values.I1AllorsFloat);
-                        Assert.AreEqual(-10.10d, values.S1AllorsFloat);
+                        Assert.AreEqual(-10.10d, values.C1AllorsDouble);
+                        Assert.AreEqual(-10.10d, values.I1AllorsDouble);
+                        Assert.AreEqual(-10.10d, values.S1AllorsDouble);
                     }
 
                     {
                         // Zero
                         var values = C1.Create(this.Session);
-                        values.C1AllorsFloat = 0d;
-                        values.I1AllorsFloat = 0d;
-                        values.S1AllorsFloat = 0d;
+                        values.C1AllorsDouble = 0d;
+                        values.I1AllorsDouble = 0d;
+                        values.S1AllorsDouble = 0d;
 
                         mark();
-                        Assert.AreEqual(0d, values.C1AllorsFloat);
-                        Assert.AreEqual(0d, values.I1AllorsFloat);
-                        Assert.AreEqual(0d, values.S1AllorsFloat);
+                        Assert.AreEqual(0d, values.C1AllorsDouble);
+                        Assert.AreEqual(0d, values.I1AllorsDouble);
+                        Assert.AreEqual(0d, values.S1AllorsDouble);
                     }
 
                     // Minimum
                     if (this.UseFloatMinimum)
                     {
                         C1 values = C1.Create(this.Session);
-                        values.C1AllorsFloat = double.MinValue;
-                        values.I1AllorsFloat = double.MinValue;
-                        values.S1AllorsFloat = double.MinValue;
+                        values.C1AllorsDouble = double.MinValue;
+                        values.I1AllorsDouble = double.MinValue;
+                        values.S1AllorsDouble = double.MinValue;
 
                         mark();
-                        Assert.AreEqual(double.MinValue, values.C1AllorsFloat);
-                        Assert.AreEqual(double.MinValue, values.I1AllorsFloat);
-                        Assert.AreEqual(double.MinValue, values.S1AllorsFloat);
+                        Assert.AreEqual(double.MinValue, values.C1AllorsDouble);
+                        Assert.AreEqual(double.MinValue, values.I1AllorsDouble);
+                        Assert.AreEqual(double.MinValue, values.S1AllorsDouble);
                     }
 
                     // Maximum
                     if (this.UseFloatMaximum)
                     {
                         var values = C1.Create(this.Session);
-                        values.C1AllorsFloat = double.MaxValue;
-                        values.I1AllorsFloat = double.MaxValue;
-                        values.S1AllorsFloat = double.MaxValue;
+                        values.C1AllorsDouble = double.MaxValue;
+                        values.I1AllorsDouble = double.MaxValue;
+                        values.S1AllorsDouble = double.MaxValue;
 
                         mark();
-                        Assert.AreEqual(double.MaxValue, values.C1AllorsFloat);
-                        Assert.AreEqual(double.MaxValue, values.I1AllorsFloat);
-                        Assert.AreEqual(double.MaxValue, values.S1AllorsFloat);
+                        Assert.AreEqual(double.MaxValue, values.C1AllorsDouble);
+                        Assert.AreEqual(double.MaxValue, values.I1AllorsDouble);
+                        Assert.AreEqual(double.MaxValue, values.S1AllorsDouble);
                     }
 
                     {
@@ -802,100 +802,100 @@ namespace Allors.Adapters
                         double? value = null;
 
                         mark();
-                        value = values.C1AllorsFloat;
+                        value = values.C1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.I1AllorsFloat;
+                        value = values.I1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.S1AllorsFloat;
+                        value = values.S1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        Assert.IsFalse(values.ExistC1AllorsFloat);
-                        Assert.IsFalse(values.ExistI1AllorsFloat);
-                        Assert.IsFalse(values.ExistS1AllorsFloat);
+                        Assert.IsFalse(values.ExistC1AllorsDouble);
+                        Assert.IsFalse(values.ExistI1AllorsDouble);
+                        Assert.IsFalse(values.ExistS1AllorsDouble);
 
                         mark();
 
                         mark();
-                        value = values.C1AllorsFloat;
+                        value = values.C1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.I1AllorsFloat;
+                        value = values.I1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.S1AllorsFloat;
+                        value = values.S1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        Assert.IsFalse(values.ExistC1AllorsFloat);
-                        Assert.IsFalse(values.ExistI1AllorsFloat);
-                        Assert.IsFalse(values.ExistS1AllorsFloat);
+                        Assert.IsFalse(values.ExistC1AllorsDouble);
+                        Assert.IsFalse(values.ExistI1AllorsDouble);
+                        Assert.IsFalse(values.ExistS1AllorsDouble);
                     }
 
                     {
                         // reset empty
                         var values = C1.Create(this.Session);
-                        values.C1AllorsFloat = 10.10d;
-                        values.I1AllorsFloat = 10.10d;
-                        values.S1AllorsFloat = 10.10d;
+                        values.C1AllorsDouble = 10.10d;
+                        values.I1AllorsDouble = 10.10d;
+                        values.S1AllorsDouble = 10.10d;
 
                         mark();
-                        Assert.IsTrue(values.ExistC1AllorsFloat);
-                        Assert.IsTrue(values.ExistI1AllorsFloat);
-                        Assert.IsTrue(values.ExistS1AllorsFloat);
+                        Assert.IsTrue(values.ExistC1AllorsDouble);
+                        Assert.IsTrue(values.ExistI1AllorsDouble);
+                        Assert.IsTrue(values.ExistS1AllorsDouble);
 
-                        values.RemoveC1AllorsFloat();
-                        values.RemoveI1AllorsFloat();
-                        values.RemoveS1AllorsFloat();
+                        values.RemoveC1AllorsDouble();
+                        values.RemoveI1AllorsDouble();
+                        values.RemoveS1AllorsDouble();
 
                         double? value = null;
 
                         mark();
-                        value = values.C1AllorsFloat;
+                        value = values.C1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.I1AllorsFloat;
+                        value = values.I1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.S1AllorsFloat;
+                        value = values.S1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        Assert.IsFalse(values.ExistC1AllorsFloat);
-                        Assert.IsFalse(values.ExistI1AllorsFloat);
-                        Assert.IsFalse(values.ExistS1AllorsFloat);
+                        Assert.IsFalse(values.ExistC1AllorsDouble);
+                        Assert.IsFalse(values.ExistI1AllorsDouble);
+                        Assert.IsFalse(values.ExistS1AllorsDouble);
 
                         mark();
-                        value = values.C1AllorsFloat;
+                        value = values.C1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.I1AllorsFloat;
+                        value = values.I1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.S1AllorsFloat;
+                        value = values.S1AllorsDouble;
                         Assert.IsNull(value);
 
                         mark();
-                        Assert.IsFalse(values.ExistC1AllorsFloat);
-                        Assert.IsFalse(values.ExistI1AllorsFloat);
-                        Assert.IsFalse(values.ExistS1AllorsFloat);
+                        Assert.IsFalse(values.ExistC1AllorsDouble);
+                        Assert.IsFalse(values.ExistI1AllorsDouble);
+                        Assert.IsFalse(values.ExistS1AllorsDouble);
                     }
                 }
             }
         }
 
         [Test]
-        public void AllorsFloatWeakReference()
+        public void AllorsDoubleWeakReference()
         {
             foreach (var init in this.Inits)
             {
@@ -905,11 +905,11 @@ namespace Allors.Adapters
                     C1 c1 = C1.Create(this.Session);
                     var c1Id = c1.Id.ToString();
 
-                    c1.C1AllorsFloat = 1;
+                    c1.C1AllorsDouble = 1;
 
                     // Force a Flush
                     Extent<C1> extent = this.Session.Extent(Classes.C1);
-                    extent.Filter.AddEquals(RoleTypes.C1AllorsFloat, 1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDouble, 1);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -920,7 +920,7 @@ namespace Allors.Adapters
 
                     c1 = (C1)this.Session.Instantiate(c1Id);
 
-                    Assert.AreEqual(1, c1.C1AllorsFloat);
+                    Assert.AreEqual(1, c1.C1AllorsDouble);
                 }
             }
         }
@@ -1944,7 +1944,7 @@ namespace Allors.Adapters
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsFloat, "Oops");
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDouble, "Oops");
                     }
                     catch
                     {
@@ -2023,7 +2023,7 @@ namespace Allors.Adapters
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsFloat, c1B);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDouble, c1B);
                     }
                     catch
                     {
@@ -2089,7 +2089,7 @@ namespace Allors.Adapters
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsFloat, 0.01m);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsDouble, 0.01m);
                     }
                     catch
                     {

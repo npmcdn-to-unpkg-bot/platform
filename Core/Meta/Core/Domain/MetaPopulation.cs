@@ -112,7 +112,80 @@ namespace Allors.Meta
             
             foreach (var composite in Instance.Composites)
             {
-                composite.BuildRelationTypes();
+                var type = composite.GetType();
+
+                // Create RelationType objects
+                var relationTypeFields = type
+                    .GetFields()
+                    .Where(field => field.FieldType == typeof(RelationType));
+
+                foreach (var relationTypeField in relationTypeFields)
+                {
+                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(IdAttribute));
+                    var associationIdAttribute = (AssociationIdAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(AssociationIdAttribute));
+                    var roleIdAttribute = (RoleIdAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(RoleIdAttribute));
+                    var id = new Guid(idAttribute.Value);
+                    var associationId = new Guid(associationIdAttribute.Value);
+                    var roleId = new Guid(roleIdAttribute.Value);
+                    var relationType = (RelationType)Activator.CreateInstance(typeof(RelationType), new object[] { composite.DefiningDomain, id , associationId, roleId });
+
+                    relationType.AssociationType.ObjectType = composite;
+
+                    var multiplicityTypeAttribute = (MultiplicityAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(MultiplicityAttribute));
+                    if (multiplicityTypeAttribute != null)
+                    {
+                        relationType.AssignedMultiplicity = multiplicityTypeAttribute.Value;
+                    }
+
+                    var derivedAttribute = (DerivedAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(DerivedAttribute));
+                    if (derivedAttribute != null)
+                    {
+                        relationType.IsDerived = derivedAttribute.Value;
+                    }
+
+                    var indexedAttribute = (IndexedAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(IndexedAttribute));
+                    if (indexedAttribute != null)
+                    {
+                        relationType.IsIndexed = indexedAttribute.Value;
+                    }
+
+                    relationType.AssociationType.ObjectType = composite;
+
+                    relationType.RoleType.AssignedSingularName = relationTypeField.Name;
+
+                    var roleTypeAttribute = (TypeAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(TypeAttribute));
+                    var roleTypeIdAttribute = (IdAttribute)Attribute.GetCustomAttribute(roleTypeAttribute.Value, typeof(IdAttribute));
+                    var roleTypeId = new Guid(roleTypeIdAttribute.Value);
+                    var roleType = (ObjectType)Instance.Find(roleTypeId);
+
+                    relationType.RoleType.ObjectType = roleType;
+
+                    var scaleAttribute = (ScaleAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(ScaleAttribute));
+                    if (scaleAttribute != null)
+                    {
+                        relationType.RoleType.Scale = scaleAttribute.Value;
+                    }
+
+                    var precisionAttribute = (PrecisionAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(PrecisionAttribute));
+                    if (precisionAttribute != null)
+                    {
+                        relationType.RoleType.Precision = precisionAttribute.Value;
+                    }
+
+                    var sizeAttribute = (SizeAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(SizeAttribute));
+                    if (sizeAttribute != null)
+                    {
+                        relationType.RoleType.Size = sizeAttribute.Value;
+                    }
+
+                    var pluralAttribute = (PluralAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(PluralAttribute));
+                    if (pluralAttribute != null)
+                    {
+                        relationType.RoleType.AssignedPluralName = pluralAttribute.Value;
+                    }
+
+                    relationTypeField.SetValue(composite, relationType);
+                }
             }
 
             foreach (var composite in Instance.Composites)

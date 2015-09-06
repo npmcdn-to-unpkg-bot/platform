@@ -236,9 +236,9 @@ namespace Allors.Adapters
             this.C4D.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
             
             // Float
-            this.C1B.C1AllorsFloat = 1;
-            this.C1C.C1AllorsFloat = 2;
-            this.C1D.C1AllorsFloat = 2;
+            this.C1B.C1AllorsDouble = 1;
+            this.C1C.C1AllorsDouble = 2;
+            this.C1D.C1AllorsDouble = 2;
 
             this.C1B.C1FloatLessThan = 0;
             this.C1C.C1FloatLessThan = 2;
@@ -255,33 +255,33 @@ namespace Allors.Adapters
             this.C1D.C1FloatBetweenA = 0;
             this.C1D.C1FloatBetweenB = 10;
 
-            this.C1B.I1AllorsFloat = 1;
-            this.C1C.I1AllorsFloat = 2;
-            this.C1D.I1AllorsFloat = 2;
+            this.C1B.I1AllorsDouble = 1;
+            this.C1C.I1AllorsDouble = 2;
+            this.C1D.I1AllorsDouble = 2;
 
-            this.C1B.S1AllorsFloat = 1;
-            this.C1C.S1AllorsFloat = 2;
-            this.C1D.S1AllorsFloat = 2;
+            this.C1B.S1AllorsDouble = 1;
+            this.C1C.S1AllorsDouble = 2;
+            this.C1D.S1AllorsDouble = 2;
 
-            this.C1B.I12AllorsFloat = 1;
-            this.C1C.I12AllorsFloat = 2;
-            this.C1D.I12AllorsFloat = 2;
-            this.C2B.I12AllorsFloat = 1;
-            this.C2C.I12AllorsFloat = 2;
-            this.C2D.I12AllorsFloat = 2;
+            this.C1B.I12AllorsDouble = 1;
+            this.C1C.I12AllorsDouble = 2;
+            this.C1D.I12AllorsDouble = 2;
+            this.C2B.I12AllorsDouble = 1;
+            this.C2C.I12AllorsDouble = 2;
+            this.C2D.I12AllorsDouble = 2;
 
-            this.C1B.S1234AllorsFloat = 1;
-            this.C1C.S1234AllorsFloat = 2;
-            this.C1D.S1234AllorsFloat = 2;
-            this.C2B.S1234AllorsFloat = 1;
-            this.C2C.S1234AllorsFloat = 2;
-            this.C2D.S1234AllorsFloat = 2;
-            this.C3B.S1234AllorsFloat = 1;
-            this.C3C.S1234AllorsFloat = 2;
-            this.C3D.S1234AllorsFloat = 2;
-            this.C4B.S1234AllorsFloat = 1;
-            this.C4C.S1234AllorsFloat = 2;
-            this.C4D.S1234AllorsFloat = 2;
+            this.C1B.S1234AllorsDouble = 1;
+            this.C1C.S1234AllorsDouble = 2;
+            this.C1D.S1234AllorsDouble = 2;
+            this.C2B.S1234AllorsDouble = 1;
+            this.C2C.S1234AllorsDouble = 2;
+            this.C2D.S1234AllorsDouble = 2;
+            this.C3B.S1234AllorsDouble = 1;
+            this.C3C.S1234AllorsDouble = 2;
+            this.C3D.S1234AllorsDouble = 2;
+            this.C4B.S1234AllorsDouble = 1;
+            this.C4C.S1234AllorsDouble = 2;
+            this.C4D.S1234AllorsDouble = 2;
 
             // Decimal
             this.C1B.C1AllorsDecimal = 1;
