@@ -21,16 +21,11 @@
 
 namespace Allors.Meta
 {
-    using System;
-
     public abstract partial class DomainObject : MetaObject
     {
-        protected DomainObject(Domain definingDomain)
-            : base(definingDomain.MetaPopulation)
+        protected DomainObject(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
-            this.DefiningDomain = definingDomain;
         }
-
-        public Domain DefiningDomain { get; private set; }
     }
 }

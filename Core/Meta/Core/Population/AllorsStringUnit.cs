@@ -27,7 +27,7 @@ namespace Allors.Meta
         public static AllorsStringUnit Instance { get; internal set; }
 
         internal AllorsStringUnit()
-            : base(CoreDomain.Instance)
+            : base(MetaPopulation.Instance)
         {
             this.SingularName = "AllorsString";
             this.PluralName = "AllorsStrings";

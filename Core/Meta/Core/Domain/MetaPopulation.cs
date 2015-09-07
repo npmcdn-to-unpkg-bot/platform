@@ -107,7 +107,7 @@ namespace Allors.Meta
                 // Always inherit from Object
                 if (!composite.Equals(ObjectInterface.Instance))
                 {
-                    new Inheritance(composite.DefiningDomain)
+                    new Inheritance(Instance)
                     {
                         Subtype = composite,
                         Supertype = ObjectInterface.Instance
@@ -122,7 +122,7 @@ namespace Allors.Meta
                     var id = new Guid(idAttribute.Value);
                     var supertype = (Interface)Instance.Find(id);
 
-                    new Inheritance(composite.DefiningDomain)
+                    new Inheritance(Instance)
                     {
                         Subtype = composite,
                         Supertype = supertype
@@ -147,7 +147,7 @@ namespace Allors.Meta
                     var id = new Guid(idAttribute.Value);
                     var associationId = new Guid(associationIdAttribute.Value);
                     var roleId = new Guid(roleIdAttribute.Value);
-                    var relationType = (RelationType)Activator.CreateInstance(typeof(RelationType), new object[] { composite.DefiningDomain, id , associationId, roleId });
+                    var relationType = (RelationType)Activator.CreateInstance(typeof(RelationType), new object[] { Instance, id , associationId, roleId });
 
                     relationType.AssociationType.ObjectType = composite;
 
@@ -221,7 +221,7 @@ namespace Allors.Meta
                 {
                     var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(methodTypeField, typeof(IdAttribute));
                     var id = new Guid(idAttribute.Value);
-                    var methodType = (MethodType)Activator.CreateInstance(typeof(MethodType), new object[] { composite.DefiningDomain, id });
+                    var methodType = (MethodType)Activator.CreateInstance(typeof(MethodType), new object[] { Instance, id });
                     methodType.Name = methodTypeField.Name;
                     methodType.ObjectType = composite;
                     methodTypeField.SetValue(composite, methodType);

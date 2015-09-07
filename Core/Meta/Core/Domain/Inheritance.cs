@@ -30,12 +30,12 @@ namespace Allors.Meta
 
         private Interface supertype;
 
-        internal Inheritance(Domain domain)
-            : base(domain)
+        internal Inheritance(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
             this.Id = Guid.NewGuid();
 
-            domain.OnInheritanceCreated(this);
+            metaPopulation.OnInheritanceCreated(this);
         }
 
         public Composite Subtype

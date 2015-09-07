@@ -27,7 +27,7 @@ namespace Allors.Meta
         public static AllorsDateTimeUnit Instance { get; internal set; }
 
         internal AllorsDateTimeUnit()
-            : base(CoreDomain.Instance)
+            : base(MetaPopulation.Instance)
         {
             this.SingularName = "AllorsDateTime";
             this.PluralName = "AllorsDateTimes";

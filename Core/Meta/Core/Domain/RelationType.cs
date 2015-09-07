@@ -38,15 +38,15 @@ namespace Allors.Meta
         private bool isDerived;
         private bool isIndexed;
 
-        public RelationType(Domain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
-            : base(domain)
+        public RelationType(MetaPopulation metaPopulation, Guid id, Guid associationTypeId, Guid roleTypdId)
+            : base(metaPopulation)
         {
             this.Id = id;
 
             this.associationType = new AssociationType(this, associationTypeId);
             this.roleType = new RoleType(this, roleTypdId);
 
-            domain.OnRelationTypeCreated(this);
+            metaPopulation.OnRelationTypeCreated(this);
         }
 
         public bool IsDerived

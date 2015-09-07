@@ -24,8 +24,8 @@ namespace Allors.Meta
 
     public abstract partial class OperandType : DomainObject
     {
-        public OperandType(Domain definingDomain)
-            : base(definingDomain)
+        public OperandType(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
         }
 

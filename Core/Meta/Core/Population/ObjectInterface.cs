@@ -5,7 +5,7 @@ namespace Allors.Meta
 	{
         public static ObjectInterface Instance { get; internal set; }
 
-		private ObjectInterface() : base(CoreDomain.Instance)
+		private ObjectInterface() : base(MetaPopulation.Instance)
 		{
 		    this.SingularName = "Object";
 		    this.PluralName = "Objects";

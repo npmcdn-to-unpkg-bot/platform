@@ -27,7 +27,7 @@ namespace Allors.Meta
         public static AllorsBooleanUnit Instance { get; internal set; }
 
         internal AllorsBooleanUnit()
-            : base(CoreDomain.Instance)
+            : base(MetaPopulation.Instance)
         {
             this.SingularName = "AllorsBoolean";
             this.PluralName = "AllorsBooleans";

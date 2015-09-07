@@ -37,10 +37,10 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Interface(Domain domain)
-            : base(domain)
+        internal Interface(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
-            domain.OnInterfaceCreated(this);
+            metaPopulation.OnInterfaceCreated(this);
         }
 
         #region Exist

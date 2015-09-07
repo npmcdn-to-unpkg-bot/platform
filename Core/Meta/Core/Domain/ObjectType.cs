@@ -29,8 +29,8 @@ namespace Allors.Meta
 
         private string pluralName;
 
-        protected ObjectType(Domain domain)
-            : base(domain)
+        protected ObjectType(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
         }
 

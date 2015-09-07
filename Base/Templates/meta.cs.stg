@@ -89,7 +89,7 @@ $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relat
 
 		public static $objectType.SingularName$Interface Instance {get; internal set;}
 
-		internal $objectType.SingularName$Interface() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
+		internal $objectType.SingularName$Interface() : base(MetaPopulation.Instance)
         {
 			this.SingularName = "$objectType.SingularName$";
 			this.PluralName = "$objectType.PluralName$";
@@ -116,7 +116,7 @@ $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relat
 
 		public static $objectType.SingularName$Class Instance {get; internal set;}
 
-		internal $objectType.SingularName$Class() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
+		internal $objectType.SingularName$Class() : base(MetaPopulation.Instance)
         {
 			this.SingularName = "$objectType.SingularName$";
 			this.PluralName = "$objectType.PluralName$";
@@ -156,8 +156,6 @@ $if(!relationType.RoleType.ObjectType.IsUnit)$
 $endif$
 		public RelationType $relationType.RoleType.SingularName$;
 >>
-
-
 
 inheritanceInit(inheritance) ::= <<
 	[Inherit(typeof($inheritance.Supertype.Name$Interface))]

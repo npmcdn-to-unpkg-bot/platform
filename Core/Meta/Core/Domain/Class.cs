@@ -39,14 +39,14 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Class(Domain domain)
-            : base(domain)
+        internal Class(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
             this.concreteRoleTypeByRoleType = new Dictionary<RoleType, ConcreteRoleType>();
             this.concreteMethodTypeByMethodType = new Dictionary<MethodType, ConcreteMethodType>();
 
             this.classes = new[] { this };
-            domain.OnClassCreated(this);
+            metaPopulation.OnClassCreated(this);
         }
 
         public Dictionary<RoleType, ConcreteRoleType> ConcreteRoleTypeByRoleType

@@ -51,13 +51,13 @@ namespace Allors.Meta
         private int? size;
 
         internal RoleType(RelationType relationType, Guid id)
-            : base(relationType.DefiningDomain)
+            : base(relationType.MetaPopulation)
         {
             this.relationType = relationType;
 
             this.Id = id;
 
-            relationType.DefiningDomain.OnRoleTypeCreated(this);
+            relationType.MetaPopulation.OnRoleTypeCreated(this);
         }
 
         IObjectType IRoleType.ObjectType

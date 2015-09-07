@@ -28,12 +28,12 @@ namespace Allors.Meta
 
         private Composite objectType;
 
-        public MethodType(Domain domain, Guid id)
-            : base(domain)
+        public MethodType(MetaPopulation metaPopulation, Guid id)
+            : base(metaPopulation)
         {
             this.Id = id;
 
-            domain.OnMethodTypeCreated(this);
+            metaPopulation.OnMethodTypeCreated(this);
         }
 
         public string Name

@@ -29,10 +29,10 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Unit(Domain domain)
-            : base(domain)
+        internal Unit(MetaPopulation metaPopulation)
+            : base(metaPopulation)
         {
-            domain.OnUnitCreated(this);
+            metaPopulation.OnUnitCreated(this);
         }
 
         public UnitTags UnitTag
