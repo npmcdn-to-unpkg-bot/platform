@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="4f53e1e7-e88a-4161-969c-1fed0b3a24a2">
-  <isInterface>true</isInterface>
-  <namespace idref="e9c45748-90db-4a90-bcd5-bee9bd2668ab" />
-  <pluralName>ILT32Composites</pluralName>
-  <singularName>ILT32Composite</singularName>
-</objectType>
