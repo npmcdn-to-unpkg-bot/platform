@@ -26,7 +26,7 @@ namespace Allors
     [AttributeUsage(AttributeTargets.Field)]
     public class IndexedAttribute : MetaAttribute
     {
-        public IndexedAttribute(bool value)
+        public IndexedAttribute(bool value = true)
         {
             this.Value = value;
         }

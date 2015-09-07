@@ -26,7 +26,7 @@ namespace Allors
     [AttributeUsage(AttributeTargets.Field)]
     public class DerivedAttribute : MetaAttribute
     {
-        public DerivedAttribute(bool value)
+        public DerivedAttribute(bool value = true)
         {
             this.Value = value;
         }
