@@ -116,12 +116,12 @@ namespace Allors.Meta
             new MethodType(AppsDomain.Instance, new Guid("BD7F0406-29E2-4A10-AE55-C2849D257B01")) { ObjectType = this, Name = "SetPicked" };
             new MethodType(AppsDomain.Instance, new Guid("F484244D-BB1D-4158-9A4D-40267D4B7D5B")) { ObjectType = this, Name = "SetPacked" };
 
-            this.Roles.ShipmentValue.IsRequired = true;
+            this.ShipmentValue.RoleType.IsRequired = true;
 
-            this.Roles.CurrentObjectState.IsRequired = true;
-            this.Roles.ReleasedManually.IsRequired = true;
-            this.Roles.HeldManually.IsRequired = true;
-            this.Roles.WithoutCharges.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
+            this.ReleasedManually.RoleType.IsRequired = true;
+            this.HeldManually.RoleType.IsRequired = true;
+            this.WithoutCharges.RoleType.IsRequired = true;
 
             this.ConcreteRoles.ShipToAddress.IsRequiredOverride = true;
             this.ConcreteRoles.ShipFromAddress.IsRequiredOverride = true;

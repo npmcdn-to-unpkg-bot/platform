@@ -33,7 +33,7 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.TimeFrequency.IsRequired = true;
+            this.TimeFrequency.RoleType.IsRequired = true;
         }
     }
 }

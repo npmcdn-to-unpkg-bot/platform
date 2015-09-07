@@ -39,8 +39,8 @@ namespace Allors.Meta
         }
         internal override void AppsExtend()
         {
-            this.Roles.StartDateTime.IsRequired = true;
-            this.Roles.BudgetObjectState.IsRequired = true;
+            this.StartDateTime.RoleType.IsRequired = true;
+            this.BudgetObjectState.RoleType.IsRequired = true;
         }
     }
 }

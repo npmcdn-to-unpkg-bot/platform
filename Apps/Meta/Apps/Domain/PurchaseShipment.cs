@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.CurrentObjectState.IsRequired = true;
-            this.Roles.Facility.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
+            this.Facility.RoleType.IsRequired = true;
 
             this.ConcreteRoles.ShipToParty.IsRequiredOverride = true;
             this.ConcreteRoles.EstimatedArrivalDate.IsRequiredOverride = true;

@@ -4,28 +4,28 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.TotalIncVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalBasePrice.IsRequired = true;
-			this.Roles.TotalSurcharge.IsRequired = true;
-			this.Roles.TotalInvoiceAdjustment.IsRequired = true;
-			this.Roles.TotalExVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalDiscount.IsRequired = true;
-			this.Roles.CalculatedUnitPrice.IsRequired = true;
-			this.Roles.UnitDiscount.IsRequired = true;
-			this.Roles.TotalIncVat.IsRequired = true;
-			this.Roles.UnitBasePrice.IsRequired = true;
-			this.Roles.TotalSurchargeCustomerCurrency.IsRequired = true;
-			this.Roles.TotalInvoiceAdjustmentCustomerCurrency.IsRequired = true;
-			this.Roles.AmountPaid.IsRequired = true;
-			this.Roles.TotalDiscountCustomerCurrency.IsRequired = true;
-			this.Roles.UnitSurcharge.IsRequired = true;
-			this.Roles.TotalExVat.IsRequired = true;
-			this.Roles.TotalBasePriceCustomerCurrency.IsRequired = true;
-			this.Roles.TotalVat.IsRequired = true;
-			this.Roles.UnitVat.IsRequired = true;
+			this.TotalIncVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalBasePrice.RoleType.IsRequired = true;
+			this.TotalSurcharge.RoleType.IsRequired = true;
+			this.TotalInvoiceAdjustment.RoleType.IsRequired = true;
+			this.TotalExVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalDiscount.RoleType.IsRequired = true;
+			this.CalculatedUnitPrice.RoleType.IsRequired = true;
+			this.UnitDiscount.RoleType.IsRequired = true;
+			this.TotalIncVat.RoleType.IsRequired = true;
+			this.UnitBasePrice.RoleType.IsRequired = true;
+			this.TotalSurchargeCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalInvoiceAdjustmentCustomerCurrency.RoleType.IsRequired = true;
+			this.AmountPaid.RoleType.IsRequired = true;
+			this.TotalDiscountCustomerCurrency.RoleType.IsRequired = true;
+			this.UnitSurcharge.RoleType.IsRequired = true;
+			this.TotalExVat.RoleType.IsRequired = true;
+			this.TotalBasePriceCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalVat.RoleType.IsRequired = true;
+			this.UnitVat.RoleType.IsRequired = true;
 
-            this.Roles.Quantity.IsRequired = true;
+            this.Quantity.RoleType.IsRequired = true;
 }
 	}
 }

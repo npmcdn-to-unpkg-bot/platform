@@ -40,7 +40,7 @@ namespace Allors.Meta
         }
         internal override void AppsExtend()
         {
-            this.Roles.ContainerDescription.IsRequired = true;
+            this.ContainerDescription.RoleType.IsRequired = true;
         }
     }
 }

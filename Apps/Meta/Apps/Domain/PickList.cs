@@ -11,8 +11,8 @@ namespace Allors.Meta
 	        new MethodType(AppsDomain.Instance, new Guid("41E4C5C4-2CFE-4B7F-80FD-E4C0263FDF62")) { ObjectType = this, Name = "Cancel" };
 	        new MethodType(AppsDomain.Instance, new Guid("CAC524A5-47A9-4FFD-ABC2-D5D3C0ABBFDD")) { ObjectType = this, Name = "SetPicked" };
 
-	        this.Roles.CreationDate.IsRequired = true;
-	        this.Roles.CurrentObjectState.IsRequired = true;
+	        this.CreationDate.RoleType.IsRequired = true;
+	        this.CurrentObjectState.RoleType.IsRequired = true;
 	    }
 	}
 }

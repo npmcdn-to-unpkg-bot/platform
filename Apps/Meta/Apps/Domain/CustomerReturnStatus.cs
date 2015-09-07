@@ -51,8 +51,8 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.StartDateTime.IsRequired = true;
-            this.Roles.CustomerReturnObjectState.IsRequired = true;
+            this.StartDateTime.RoleType.IsRequired = true;
+            this.CustomerReturnObjectState.RoleType.IsRequired = true;
         }
     }
 }

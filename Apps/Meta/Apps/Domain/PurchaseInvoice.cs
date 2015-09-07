@@ -10,11 +10,11 @@ namespace Allors.Meta
             new MethodType(AppsDomain.Instance, new Guid("16C0CC36-B908-4912-B420-2FD3E31BB966")){ObjectType=this, Name="Approve"};
             new MethodType(AppsDomain.Instance, new Guid("46BB5168-5250-4B5A-9DF0-045AFB589AAD")){ObjectType=this, Name="Cancel"};
 
-	        this.Roles.PurchaseInvoiceType.IsRequired = true;
-            this.Roles.BilledToInternalOrganisation.IsRequired = true;
-            this.Roles.BilledFromParty.IsRequired = true;
+	        this.PurchaseInvoiceType.RoleType.IsRequired = true;
+            this.BilledToInternalOrganisation.RoleType.IsRequired = true;
+            this.BilledFromParty.RoleType.IsRequired = true;
 
-            this.Roles.CurrentObjectState.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
         }
 	}
 }

@@ -4,26 +4,26 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.TotalFeeCustomerCurrency.IsRequired = true;
-			this.Roles.TotalExVatCustomerCurrency.IsRequired = true;
-			this.Roles.AmountPaid.IsRequired = true;
-			this.Roles.TotalDiscount.IsRequired = true;
-			this.Roles.TotalIncVat.IsRequired = true;
-			this.Roles.TotalSurcharge.IsRequired = true;
-			this.Roles.TotalBasePrice.IsRequired = true;
-			this.Roles.TotalVatCustomerCurrency.IsRequired = true;
-			this.Roles.EntryDate.IsRequired = true;
-			this.Roles.TotalIncVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalShippingAndHandling.IsRequired = true;
-			this.Roles.TotalBasePriceCustomerCurrency.IsRequired = true;
-			this.Roles.TotalExVat.IsRequired = true;
-			this.Roles.TotalSurchargeCustomerCurrency.IsRequired = true;
-			this.Roles.TotalDiscountCustomerCurrency.IsRequired = true;
-			this.Roles.TotalVat.IsRequired = true;
-			this.Roles.TotalFee.IsRequired = true;
-            this.Roles.InvoiceDate.IsRequired = true;
-            this.Roles.InvoiceNumber.IsRequired = true;
-            this.Roles.TotalShippingAndHandlingCustomerCurrency.IsRequired = true;
+			this.TotalFeeCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalExVatCustomerCurrency.RoleType.IsRequired = true;
+			this.AmountPaid.RoleType.IsRequired = true;
+			this.TotalDiscount.RoleType.IsRequired = true;
+			this.TotalIncVat.RoleType.IsRequired = true;
+			this.TotalSurcharge.RoleType.IsRequired = true;
+			this.TotalBasePrice.RoleType.IsRequired = true;
+			this.TotalVatCustomerCurrency.RoleType.IsRequired = true;
+			this.EntryDate.RoleType.IsRequired = true;
+			this.TotalIncVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalShippingAndHandling.RoleType.IsRequired = true;
+			this.TotalBasePriceCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalExVat.RoleType.IsRequired = true;
+			this.TotalSurchargeCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalDiscountCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalVat.RoleType.IsRequired = true;
+			this.TotalFee.RoleType.IsRequired = true;
+            this.InvoiceDate.RoleType.IsRequired = true;
+            this.InvoiceNumber.RoleType.IsRequired = true;
+            this.TotalShippingAndHandlingCustomerCurrency.RoleType.IsRequired = true;
 		}
 	}
 }

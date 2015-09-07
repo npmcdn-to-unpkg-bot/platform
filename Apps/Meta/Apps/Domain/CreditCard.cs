@@ -70,12 +70,12 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.CardNumber.IsRequired = true;
-            this.Roles.CardNumber.IsUnique = true;
-            this.Roles.CreditCardCompany.IsRequired = true;
-            this.Roles.ExpirationMonth.IsRequired = true;
-            this.Roles.ExpirationYear.IsRequired = true;
-            this.Roles.NameOnCard.IsRequired = true;
+            this.CardNumber.RoleType.IsRequired = true;
+            this.CardNumber.IsUnique = true;
+            this.CreditCardCompany.RoleType.IsRequired = true;
+            this.ExpirationMonth.RoleType.IsRequired = true;
+            this.ExpirationYear.RoleType.IsRequired = true;
+            this.NameOnCard.RoleType.IsRequired = true;
         }
     }
 }

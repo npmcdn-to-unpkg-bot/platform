@@ -29,7 +29,7 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.RevisionDate.IsRequired = true;
+            this.RevisionDate.RoleType.IsRequired = true;
         }
     }
 }

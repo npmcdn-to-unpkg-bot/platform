@@ -4,18 +4,18 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.TotalPurchasePrice.IsRequired = true;
-			this.Roles.TotalListPriceCustomerCurrency.IsRequired = true;
-			this.Roles.MaintainedProfitMargin.IsRequired = true;
-			this.Roles.InitialProfitMargin.IsRequired = true;
-			this.Roles.TotalListPrice.IsRequired = true;
-			this.Roles.MaintainedMarkupPercentage.IsRequired = true;
-			this.Roles.InitialMarkupPercentage.IsRequired = true;
+			this.TotalPurchasePrice.RoleType.IsRequired = true;
+			this.TotalListPriceCustomerCurrency.RoleType.IsRequired = true;
+			this.MaintainedProfitMargin.RoleType.IsRequired = true;
+			this.InitialProfitMargin.RoleType.IsRequired = true;
+			this.TotalListPrice.RoleType.IsRequired = true;
+			this.MaintainedMarkupPercentage.RoleType.IsRequired = true;
+			this.InitialMarkupPercentage.RoleType.IsRequired = true;
 
-            this.Roles.CurrentObjectState.IsRequired = true;
-            this.Roles.TakenByInternalOrganisation.IsRequired = true;
-            this.Roles.Store.IsRequired = true;
-            this.Roles.PartiallyShip.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
+            this.TakenByInternalOrganisation.RoleType.IsRequired = true;
+            this.Store.RoleType.IsRequired = true;
+            this.PartiallyShip.RoleType.IsRequired = true;
 
             this.ConcreteRoles.CustomerCurrency.IsRequiredOverride = true;
             this.ConcreteRoles.DeliveryDate.IsRequiredOverride = true;

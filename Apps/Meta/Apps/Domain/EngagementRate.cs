@@ -86,8 +86,8 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.RatingType.IsRequired = true;
-            this.Roles.BillingRate.IsRequired = true;
+            this.RatingType.RoleType.IsRequired = true;
+            this.BillingRate.RoleType.IsRequired = true;
         }
     }
 }

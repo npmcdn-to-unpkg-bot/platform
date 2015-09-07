@@ -13,31 +13,31 @@ namespace Allors.Meta
             new MethodType(AppsDomain.Instance, new Guid("C1517567-1708-47E6-8298-9D9B157E45FF")){ObjectType=this, Name="Finish"};
             new MethodType(AppsDomain.Instance, new Guid("3962ED58-44BD-4A79-8F0C-6A98ED88BD44")){ObjectType=this, Name="Delete"};
 
-			this.Roles.TotalDiscountAsPercentage.IsRequired = true;
-			this.Roles.UnitVat.IsRequired = true;
-			this.Roles.TotalVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalVat.IsRequired = true;
-			this.Roles.UnitSurcharge.IsRequired = true;
-			this.Roles.UnitDiscount.IsRequired = true;
-			this.Roles.PreviousQuantity.IsRequired = true;
-			this.Roles.TotalExVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalIncVatCustomerCurrency.IsRequired = true;
-			this.Roles.UnitBasePrice.IsRequired = true;
-			this.Roles.CalculatedUnitPrice.IsRequired = true;
-			this.Roles.TotalOrderAdjustmentCustomerCurrency.IsRequired = true;
-			this.Roles.TotalOrderAdjustment.IsRequired = true;
-			this.Roles.TotalSurchargeCustomerCurrency.IsRequired = true;
-			this.Roles.TotalIncVat.IsRequired = true;
-			this.Roles.TotalSurchargeAsPercentage.IsRequired = true;
-			this.Roles.TotalDiscountCustomerCurrency.IsRequired = true;
-			this.Roles.TotalDiscount.IsRequired = true;
-			this.Roles.TotalSurcharge.IsRequired = true;
-			this.Roles.TotalBasePrice.IsRequired = true;
-			this.Roles.TotalExVat.IsRequired = true;
-			this.Roles.TotalBasePriceCustomerCurrency.IsRequired = true;
+			this.TotalDiscountAsPercentage.RoleType.IsRequired = true;
+			this.UnitVat.RoleType.IsRequired = true;
+			this.TotalVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalVat.RoleType.IsRequired = true;
+			this.UnitSurcharge.RoleType.IsRequired = true;
+			this.UnitDiscount.RoleType.IsRequired = true;
+			this.PreviousQuantity.RoleType.IsRequired = true;
+			this.TotalExVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalIncVatCustomerCurrency.RoleType.IsRequired = true;
+			this.UnitBasePrice.RoleType.IsRequired = true;
+			this.CalculatedUnitPrice.RoleType.IsRequired = true;
+			this.TotalOrderAdjustmentCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalOrderAdjustment.RoleType.IsRequired = true;
+			this.TotalSurchargeCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalIncVat.RoleType.IsRequired = true;
+			this.TotalSurchargeAsPercentage.RoleType.IsRequired = true;
+			this.TotalDiscountCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalDiscount.RoleType.IsRequired = true;
+			this.TotalSurcharge.RoleType.IsRequired = true;
+			this.TotalBasePrice.RoleType.IsRequired = true;
+			this.TotalExVat.RoleType.IsRequired = true;
+			this.TotalBasePriceCustomerCurrency.RoleType.IsRequired = true;
 
-            this.Roles.QuantityOrdered.IsRequired = true;
-            this.Roles.DerivedVatRate.IsRequired = true;
+            this.QuantityOrdered.RoleType.IsRequired = true;
+            this.DerivedVatRate.RoleType.IsRequired = true;
 		}
 	}
 }

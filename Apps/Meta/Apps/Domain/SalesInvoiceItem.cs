@@ -4,15 +4,15 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
 	    {
-	        this.Roles.CurrentObjectState.IsRequired = true;
+	        this.CurrentObjectState.RoleType.IsRequired = true;
 
-			this.Roles.InitialMarkupPercentage.IsRequired = true;
-			this.Roles.MaintainedMarkupPercentage.IsRequired = true;
-			this.Roles.UnitPurchasePrice.IsRequired = true;
-			this.Roles.InitialProfitMargin.IsRequired = true;
-			this.Roles.MaintainedProfitMargin.IsRequired = true;
+			this.InitialMarkupPercentage.RoleType.IsRequired = true;
+			this.MaintainedMarkupPercentage.RoleType.IsRequired = true;
+			this.UnitPurchasePrice.RoleType.IsRequired = true;
+			this.InitialProfitMargin.RoleType.IsRequired = true;
+			this.MaintainedProfitMargin.RoleType.IsRequired = true;
 
-            this.Roles.SalesInvoiceItemType.IsRequired = true;
+            this.SalesInvoiceItemType.RoleType.IsRequired = true;
 
             this.ConcreteRoles.Quantity.IsRequiredOverride = true;
             this.ConcreteRoles.AmountPaid.IsRequiredOverride = true;

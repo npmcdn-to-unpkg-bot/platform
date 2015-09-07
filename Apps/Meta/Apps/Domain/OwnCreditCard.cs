@@ -4,7 +4,7 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.CreditCard.IsRequired = true;
+            this.CreditCard.RoleType.IsRequired = true;
         }
 	}
 }

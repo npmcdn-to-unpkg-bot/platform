@@ -4,7 +4,7 @@ namespace Allors.Meta
     {
         internal override void AppsExtend()
         {
-            this.Roles.BankAccount.IsRequired = true;
+            this.BankAccount.RoleType.IsRequired = true;
         }
     }
 }

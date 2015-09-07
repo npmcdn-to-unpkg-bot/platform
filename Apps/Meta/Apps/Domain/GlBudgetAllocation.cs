@@ -4,9 +4,9 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.AllocationPercentage.IsRequired = true;
-            this.Roles.BudgetItem.IsRequired = true;
-            this.Roles.GeneralLedgerAccount.IsRequired = true;
+            this.AllocationPercentage.RoleType.IsRequired = true;
+            this.BudgetItem.RoleType.IsRequired = true;
+            this.GeneralLedgerAccount.RoleType.IsRequired = true;
         }
 	}
 }

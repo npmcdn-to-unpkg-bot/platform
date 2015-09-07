@@ -188,10 +188,10 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.Description.IsRequired = true;
-            this.Roles.BillToParty.IsRequired = true;
-            this.Roles.TakenViaInternalOrganisation.IsRequired = true;
-            this.Roles.BillToContactMechanism.IsRequired = true;
+            this.Description.RoleType.IsRequired = true;
+            this.BillToParty.RoleType.IsRequired = true;
+            this.TakenViaInternalOrganisation.RoleType.IsRequired = true;
+            this.BillToContactMechanism.RoleType.IsRequired = true;
         }
     }
 }

@@ -4,13 +4,13 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.Description.IsRequired = true;
-            this.Roles.InternalOrganisation.IsRequired = true;
-            this.Roles.JournalType.IsRequired = true;
-            this.Roles.ContraAccount.IsRequired = true;
-            this.Roles.BlockUnpaidTransactions.IsRequired = true;
-            this.Roles.CloseWhenInBalance.IsRequired = true;
-            this.Roles.UseAsDefault.IsRequired = true;
+            this.Description.RoleType.IsRequired = true;
+            this.InternalOrganisation.RoleType.IsRequired = true;
+            this.JournalType.RoleType.IsRequired = true;
+            this.ContraAccount.RoleType.IsRequired = true;
+            this.BlockUnpaidTransactions.RoleType.IsRequired = true;
+            this.CloseWhenInBalance.RoleType.IsRequired = true;
+            this.UseAsDefault.RoleType.IsRequired = true;
         }
 	}
 }

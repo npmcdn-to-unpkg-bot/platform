@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.RateType.IsRequired = true;
-            this.Roles.WorkEffortPartyAssignment.IsRequired = true;
+            this.RateType.RoleType.IsRequired = true;
+            this.WorkEffortPartyAssignment.RoleType.IsRequired = true;
         }
 	}
 }

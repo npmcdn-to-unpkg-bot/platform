@@ -4,17 +4,17 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.PurchaseInvoiceCounter.IsRequired = true;
-			this.Roles.QuoteCounter.IsRequired = true;
-			this.Roles.PurchaseOrderCounter.IsRequired = true;
-			this.Roles.IncomingShipmentCounter.IsRequired = true;
-            this.Roles.SubAccountCounter.IsRequired = true;
+			this.PurchaseInvoiceCounter.RoleType.IsRequired = true;
+			this.QuoteCounter.RoleType.IsRequired = true;
+			this.PurchaseOrderCounter.RoleType.IsRequired = true;
+			this.IncomingShipmentCounter.RoleType.IsRequired = true;
+            this.SubAccountCounter.RoleType.IsRequired = true;
 
-            this.Roles.Name.IsRequired = true;
-            this.Roles.FiscalYearStartMonth.IsRequired = true;
-            this.Roles.FiscalYearStartDay.IsRequired = true;
-            this.Roles.DoAccounting.IsRequired = true;
-            this.Roles.InvoiceSequence.IsRequired = true;
+            this.Name.RoleType.IsRequired = true;
+            this.FiscalYearStartMonth.RoleType.IsRequired = true;
+            this.FiscalYearStartDay.RoleType.IsRequired = true;
+            this.DoAccounting.RoleType.IsRequired = true;
+            this.InvoiceSequence.RoleType.IsRequired = true;
 
 	        this.ConcreteRoles.DefaultPaymentMethod.IsRequiredOverride = true;
             this.ConcreteRoles.Locale.IsRequiredOverride = true;

@@ -274,11 +274,11 @@ namespace Allors.Meta
             new MethodType(AppsDomain.Instance, new Guid("0E18F37B-39AA-452A-8085-6BD8AA686D33")) { ObjectType = this, Name = "Reopen" };
 
 
-            this.Roles.Description.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
-            this.Roles.Note.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
+            this.Description.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
+            this.Note.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
 
-            this.Roles.CurrentObjectState.IsRequired = true;
-            this.Roles.Subject.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
+            this.Subject.RoleType.IsRequired = true;
         }
 	}
 }

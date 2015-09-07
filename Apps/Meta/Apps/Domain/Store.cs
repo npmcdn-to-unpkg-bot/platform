@@ -4,19 +4,19 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.SalesOrderCounter.IsRequired = true;
-            this.Roles.OutgoingShipmentCounter.IsRequired = true;
+			this.SalesOrderCounter.RoleType.IsRequired = true;
+            this.OutgoingShipmentCounter.RoleType.IsRequired = true;
 
-            this.Roles.Name.IsRequired = true;
-            this.Roles.PaymentNetDays.IsRequired = true;
-            this.Roles.PaymentGracePeriod.IsRequired = true;
-            this.Roles.CreditLimit.IsRequired = true;
-            this.Roles.ShipmentThreshold.IsRequired = true;
-            this.Roles.OrderThreshold.IsRequired = true;
+            this.Name.RoleType.IsRequired = true;
+            this.PaymentNetDays.RoleType.IsRequired = true;
+            this.PaymentGracePeriod.RoleType.IsRequired = true;
+            this.CreditLimit.RoleType.IsRequired = true;
+            this.ShipmentThreshold.RoleType.IsRequired = true;
+            this.OrderThreshold.RoleType.IsRequired = true;
 
-            this.Roles.DefaultPaymentMethod.IsRequired = true;
-            this.Roles.DefaultShipmentMethod.IsRequired = true;
-            this.Roles.DefaultCarrier.IsRequired = true;
+            this.DefaultPaymentMethod.RoleType.IsRequired = true;
+            this.DefaultShipmentMethod.RoleType.IsRequired = true;
+            this.DefaultCarrier.RoleType.IsRequired = true;
 		}
 	}
 }

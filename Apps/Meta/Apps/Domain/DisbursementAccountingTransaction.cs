@@ -31,7 +31,7 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.Disbursement.IsRequired = true;
+            this.Disbursement.RoleType.IsRequired = true;
         }
     }
 }

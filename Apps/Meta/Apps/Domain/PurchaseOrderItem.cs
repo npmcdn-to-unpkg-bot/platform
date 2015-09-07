@@ -8,9 +8,9 @@ namespace Allors.Meta
         {
             new MethodType(AppsDomain.Instance, new Guid("3F65C670-B891-4979-B664-D47D45833AF5")) { ObjectType = this, Name = "Complete" };
 
-            this.Roles.QuantityReceived.IsRequired = true;
+            this.QuantityReceived.RoleType.IsRequired = true;
 
-            this.Roles.CurrentObjectState.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
         }
     }
 }

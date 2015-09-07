@@ -40,8 +40,8 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.StartDateTime.IsRequired = true;
-            this.Roles.DropShipmentObjectState.IsRequired = true;
+            this.StartDateTime.RoleType.IsRequired = true;
+            this.DropShipmentObjectState.RoleType.IsRequired = true;
         }
     }
 }

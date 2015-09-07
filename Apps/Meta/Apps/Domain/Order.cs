@@ -15,33 +15,33 @@ namespace Allors.Meta
             new MethodType(AppsDomain.Instance, new Guid("7154A033-6A07-49FE-B928-9EDD843FC56C")){ObjectType=this, Name="Complete"};
             new MethodType(AppsDomain.Instance, new Guid("E3441FE1-E403-4709-AF7F-84238D0E69F0")){ObjectType=this, Name="Finish"};
 
-			this.Roles.TotalBasePriceCustomerCurrency.IsRequired = true;
-			this.Roles.TotalIncVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalDiscountCustomerCurrency.IsRequired = true;
-			this.Roles.TotalExVat.IsRequired = true;
-			this.Roles.TotalVat.IsRequired = true;
-			this.Roles.TotalSurcharge.IsRequired = true;
-			this.Roles.OrderNumber.IsRequired = true;
-			this.Roles.TotalVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalDiscount.IsRequired = true;
-			this.Roles.TotalShippingAndHandlingCustomerCurrency.IsRequired = true;
-			this.Roles.EntryDate.IsRequired = true;
-			this.Roles.TotalIncVat.IsRequired = true;
-			this.Roles.TotalSurchargeCustomerCurrency.IsRequired = true;
-			this.Roles.TotalFeeCustomerCurrency.IsRequired = true;
-			this.Roles.TotalShippingAndHandling.IsRequired = true;
-			this.Roles.TotalExVatCustomerCurrency.IsRequired = true;
-			this.Roles.TotalBasePrice.IsRequired = true;
-			this.Roles.TotalFee.IsRequired = true;
+			this.TotalBasePriceCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalIncVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalDiscountCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalExVat.RoleType.IsRequired = true;
+			this.TotalVat.RoleType.IsRequired = true;
+			this.TotalSurcharge.RoleType.IsRequired = true;
+			this.OrderNumber.RoleType.IsRequired = true;
+			this.TotalVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalDiscount.RoleType.IsRequired = true;
+			this.TotalShippingAndHandlingCustomerCurrency.RoleType.IsRequired = true;
+			this.EntryDate.RoleType.IsRequired = true;
+			this.TotalIncVat.RoleType.IsRequired = true;
+			this.TotalSurchargeCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalFeeCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalShippingAndHandling.RoleType.IsRequired = true;
+			this.TotalExVatCustomerCurrency.RoleType.IsRequired = true;
+			this.TotalBasePrice.RoleType.IsRequired = true;
+			this.TotalFee.RoleType.IsRequired = true;
 
-            this.Roles.OrderDate.IsRequired = true;
+            this.OrderDate.RoleType.IsRequired = true;
 
-            this.Roles.OrderDate.IsRequired = true;
-            this.Roles.OrderDate.IsRequired = true;
-            this.Roles.OrderDate.IsRequired = true;
-            this.Roles.OrderDate.IsRequired = true;
-            this.Roles.OrderDate.IsRequired = true;
-            this.Roles.OrderDate.IsRequired = true;
+            this.OrderDate.RoleType.IsRequired = true;
+            this.OrderDate.RoleType.IsRequired = true;
+            this.OrderDate.RoleType.IsRequired = true;
+            this.OrderDate.RoleType.IsRequired = true;
+            this.OrderDate.RoleType.IsRequired = true;
+            this.OrderDate.RoleType.IsRequired = true;
         }
 	}
 }

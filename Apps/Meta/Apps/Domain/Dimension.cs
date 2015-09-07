@@ -42,7 +42,7 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.UnitOfMeasure.IsRequired = true;
+            this.UnitOfMeasure.RoleType.IsRequired = true;
         }
     }
 }

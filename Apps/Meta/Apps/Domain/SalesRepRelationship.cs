@@ -4,12 +4,12 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.LastYearsCommission.IsRequired = true;
-			this.Roles.YTDCommission.IsRequired = true;
+			this.LastYearsCommission.RoleType.IsRequired = true;
+			this.YTDCommission.RoleType.IsRequired = true;
 
-            this.Roles.Customer.IsRequired = true;
-            this.Roles.InternalOrganisation.IsRequired = true;
-            this.Roles.SalesRepresentative.IsRequired = true;
+            this.Customer.RoleType.IsRequired = true;
+            this.InternalOrganisation.RoleType.IsRequired = true;
+            this.SalesRepresentative.RoleType.IsRequired = true;
 		}
 	}
 }

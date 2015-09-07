@@ -138,14 +138,14 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.AmountDue.IsRequired = true;
-            this.Roles.YTDRevenue.IsRequired = true;
-            this.Roles.LastYearsRevenue.IsRequired = true;
+            this.AmountDue.RoleType.IsRequired = true;
+            this.YTDRevenue.RoleType.IsRequired = true;
+            this.LastYearsRevenue.RoleType.IsRequired = true;
 
-            this.Roles.Customer.IsRequired = true;
-            this.Roles.InternalOrganisation.IsRequired = true;
-            this.Roles.SubAccountNumber.IsRequired = true;
-            this.Roles.AmountOverDue.IsRequired = true;
+            this.Customer.RoleType.IsRequired = true;
+            this.InternalOrganisation.RoleType.IsRequired = true;
+            this.SubAccountNumber.RoleType.IsRequired = true;
+            this.AmountOverDue.RoleType.IsRequired = true;
         }
     }
 }

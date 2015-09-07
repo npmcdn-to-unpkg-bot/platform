@@ -41,8 +41,8 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.StartDateTime.IsRequired = true;
-            this.Roles.CommunicationEventObjectState.IsRequired = true;
+            this.StartDateTime.RoleType.IsRequired = true;
+            this.CommunicationEventObjectState.RoleType.IsRequired = true;
         }
     }
 }

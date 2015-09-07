@@ -13,12 +13,12 @@ namespace Allors.Meta
             new MethodType(AppsDomain.Instance, new Guid("0A66E9CA-89A8-4D5A-B63F-E061CDBC0A2E")) { ObjectType = this, Name = "Cancel" };
             new MethodType(AppsDomain.Instance, new Guid("A1189C0F-8E2E-41B7-B61E-36525B3895B5")) { ObjectType = this, Name = "Reopen" };
 
-            this.Roles.Description.IsRequired = true;
-            this.Roles.CurrentObjectState.IsRequired = true;
-            this.Roles.ActualStart.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
-            this.Roles.ActualCompletion.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
-            this.Roles.ScheduledStart.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
-            this.Roles.ScheduledCompletion.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
+            this.Description.RoleType.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
+            this.ActualStart.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
+            this.ActualCompletion.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
+            this.ScheduledStart.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
+            this.ScheduledCompletion.DataTypeAttribute = new DataTypeAttribute(DataType.DateTime);
         }
 	}
 }

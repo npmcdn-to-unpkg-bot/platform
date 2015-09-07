@@ -4,11 +4,11 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
 	    {
-	        this.Roles.CurrentObjectState.IsRequired = true;
-            this.Roles.ShipToBuyer.IsRequired = true;
-            this.Roles.BillToPurchaser.IsRequired = true;
-            this.Roles.TakenViaSupplier.IsRequired = true;
-            this.Roles.BillToContactMechanism.IsRequired = true;
+	        this.CurrentObjectState.RoleType.IsRequired = true;
+            this.ShipToBuyer.RoleType.IsRequired = true;
+            this.BillToPurchaser.RoleType.IsRequired = true;
+            this.TakenViaSupplier.RoleType.IsRequired = true;
+            this.BillToContactMechanism.RoleType.IsRequired = true;
         }
 	}
 }

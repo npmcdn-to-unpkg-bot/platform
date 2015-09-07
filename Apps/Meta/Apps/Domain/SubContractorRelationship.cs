@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.Contractor.IsRequired = true;
-            this.Roles.SubContractor.IsRequired = true;
+            this.Contractor.RoleType.IsRequired = true;
+            this.SubContractor.RoleType.IsRequired = true;
 		}
 	}
 }

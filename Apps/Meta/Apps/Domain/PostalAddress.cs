@@ -4,9 +4,9 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.FormattedFullAddress.IsRequired = true;
+			this.FormattedFullAddress.RoleType.IsRequired = true;
 
-            this.Roles.Address1.IsRequired = true;
+            this.Address1.RoleType.IsRequired = true;
 		}
 	}
 }

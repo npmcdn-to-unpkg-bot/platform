@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.Latitude.IsRequired = true;
-			this.Roles.Longitude.IsRequired = true;
+			this.Latitude.RoleType.IsRequired = true;
+			this.Longitude.RoleType.IsRequired = true;
 
 		}
 	}

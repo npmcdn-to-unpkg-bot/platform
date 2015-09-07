@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.StartDateTime.IsRequired = true;
-            this.Roles.PurchaseOrderItemObjectState.IsRequired = true;
+            this.StartDateTime.RoleType.IsRequired = true;
+            this.PurchaseOrderItemObjectState.RoleType.IsRequired = true;
         }
 	}
 }

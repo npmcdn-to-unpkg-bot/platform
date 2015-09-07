@@ -4,9 +4,9 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.NextSalesInvoiceNumber.IsRequired = true;
+			this.NextSalesInvoiceNumber.RoleType.IsRequired = true;
 
-            this.Roles.FiscalYear.IsRequired = true;
+            this.FiscalYear.RoleType.IsRequired = true;
 		}
 	}
 }

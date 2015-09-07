@@ -4,9 +4,9 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.Child.IsRequired = true;
-            this.Roles.Parent.IsRequired = true;
-            this.Roles.RollupKind.IsRequired = true;
+            this.Child.RoleType.IsRequired = true;
+            this.Parent.RoleType.IsRequired = true;
+            this.RollupKind.RoleType.IsRequired = true;
         }
 	}
 }

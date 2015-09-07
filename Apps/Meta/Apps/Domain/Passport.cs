@@ -4,8 +4,8 @@ namespace Allors.Meta
     {
         internal override void AppsExtend()
         {
-            this.Roles.Number.IsRequired = true;
-            this.Roles.Number.IsUnique = true;
+            this.Number.RoleType.IsRequired = true;
+            this.Number.IsUnique = true;
         }
     }
 }

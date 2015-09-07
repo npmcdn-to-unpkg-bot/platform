@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.Value.IsRequired = true;
-			this.Roles.Hash.IsRequired = true;
+			this.Value.RoleType.IsRequired = true;
+			this.Hash.RoleType.IsRequired = true;
 
 		}
 	}

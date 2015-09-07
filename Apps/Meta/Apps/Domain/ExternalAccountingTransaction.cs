@@ -42,8 +42,8 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.FromParty.IsRequired = true;
-            this.Roles.ToParty.IsRequired = true;
+            this.FromParty.RoleType.IsRequired = true;
+            this.ToParty.RoleType.IsRequired = true;
         }
     }
 }

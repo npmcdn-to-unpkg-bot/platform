@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.PerformanceReviewItemType.IsRequired = true;
-            this.Roles.RatingType.IsRequired = true;
+            this.PerformanceReviewItemType.RoleType.IsRequired = true;
+            this.RatingType.RoleType.IsRequired = true;
         }
 	}
 }

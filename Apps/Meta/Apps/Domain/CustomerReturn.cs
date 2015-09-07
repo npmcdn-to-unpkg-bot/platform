@@ -56,7 +56,7 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.CurrentObjectState.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
 
             this.ConcreteRoles.ShipToAddress.IsRequiredOverride = true;
         }

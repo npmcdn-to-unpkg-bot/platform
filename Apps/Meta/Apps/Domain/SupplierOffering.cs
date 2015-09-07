@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.Supplier.IsRequired = true;
-            this.Roles.ProductPurchasePrice.IsRequired = true;
+            this.Supplier.RoleType.IsRequired = true;
+            this.ProductPurchasePrice.RoleType.IsRequired = true;
         }
 	}
 }

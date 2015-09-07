@@ -4,11 +4,11 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.ReceivedDateTime.IsRequired = true;
-            this.Roles.InventoryItem.IsRequired = true;
-            this.Roles.QuantityAccepted.IsRequired = true;
-            this.Roles.QuantityRejected.IsRequired = true;
-            this.Roles.ShipmentItem.IsRequired = true;
+            this.ReceivedDateTime.RoleType.IsRequired = true;
+            this.InventoryItem.RoleType.IsRequired = true;
+            this.QuantityAccepted.RoleType.IsRequired = true;
+            this.QuantityRejected.RoleType.IsRequired = true;
+            this.ShipmentItem.RoleType.IsRequired = true;
         }
 	}
 }

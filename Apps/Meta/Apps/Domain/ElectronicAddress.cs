@@ -30,7 +30,7 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            this.Roles.ElectronicAddressString.IsRequired = true;
+            this.ElectronicAddressString.RoleType.IsRequired = true;
         }
     }
 }

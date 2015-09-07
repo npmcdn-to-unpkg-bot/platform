@@ -4,8 +4,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-            this.Roles.ResumeDate.IsRequired = true;
-            this.Roles.ResumeText.IsRequired = true;
+            this.ResumeDate.RoleType.IsRequired = true;
+            this.ResumeText.RoleType.IsRequired = true;
         }
 	}
 }
