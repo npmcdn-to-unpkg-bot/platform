@@ -23,71 +23,12 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
-	<generation template="ids" output="Ids.g.cs"/> 
-	<generation template="meta" output="Meta.g.cs"/> 
+	<generation template="meta" output="Meta.cs"/> 
 $domain.compositeObjectTypes:{objectType|
-	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.g.cs"/>
+	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.cs"/>
 }$
 </generations>
 >>
-
-ids(domain, settings) ::= <<
-namespace Allors.Meta
-{
-	public static class ObjectTypeIds
-	{
-$domain.ObjectTypes:{objectType|
-		public const string $objectType.SingularName$ = "$objectType.IdAsString$";
-}$
-	}
-
-	public static class InheritanceIds
-	{
-$domain.Inheritances:{inheritance|
-		public const string $inheritance.Subtype.Name$$inheritance.Supertype.Name$ = "$inheritance.IdAsString$";
-}$
-	}
-
-	public static class RelationTypeIds
-	{
-$domain.RelationTypes:{relationType|
-		public const string $relationType.RoleType.FullSingularName$ = "$relationType.IdAsString$";
-}$
-	}
-
-	public static class AssociationTypeIds
-	{
-$domain.RelationTypes:{relationType|
-		public const string $relationType.AssociationType.FullSingularName$ = "$relationType.AssociationType.IdAsString$";
-}$
-	}
-
-	public static class RoleTypeIds
-	{
-$domain.RelationTypes:{relationType|
-		public const string $relationType.RoleType.FullSingularName$ = "$relationType.RoleType.IdAsString$";
-}$
-	}
-}
-
-namespace Allors.Meta.Ids
-{
-$domain.ObjectTypes:{objectType|$idsObjectType()$}$
-}
->>
-
-idsObjectType() ::= <<
-	public static class $objectType.Name$Ids
-	{
-$objectType.RoleTypes:{roleType|				public const string $roleType.Name$ = RoleTypeIds.$roleType.FullSingularName$;
-}$
-
-$objectType.AssociationTypes:{associationType|				public const string $associationType.Name$ = AssociationTypeIds.$associationType.FullSingularName$;
-}$
-	}
-
->>
-
 
 meta(domain, settings) ::= <<
 namespace Allors.Meta
@@ -95,44 +36,35 @@ namespace Allors.Meta
 	using System;
 $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDomain(domain=superDomain)$$endif$}$
 
+	#region Allors
+	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$	[Inherit(typeof($superDomain.Name$Domain))]$endif$
+}$
 	[Id("$domain.IdAsString$")]
+	#endregion
 	public partial class $domain.Name$Domain : Domain
 	{
 		public static $domain.Name$Domain Instance { get; internal set; }
 
 		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
         {
-			this.Name = "$domain.Name$";
         }
-
-		internal override void Build()
-		{
-			this.AddDirectSuperdomain(CoreDomain.Instance);
-			$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$	this.AddDirectSuperdomain($superDomain.Name$Domain.Instance);$endif$
-}$
-		}
-
 	}
 }
 >>
 
 superDomain(domain) ::= <<
+	#region Allors
+	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$		[Inherit(typeof($superDomain.Name$Domain))]$endif$
+}$
 	[Id("$domain.IdAsString$")]
+	#endregion
 	public partial class $domain.Name$Domain : Domain
 	{
 		public static $domain.Name$Domain Instance { get; internal set; }
 
 		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
         {
-			this.Name = "$domain.Name$";
         }
-
-		internal override void Build()
-		{
-			this.AddDirectSuperdomain(CoreDomain.Instance);
-			$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$		this.AddDirectSuperdomain($superDomain.Name$Domain.Instance);$endif$
-}$
-		}
 	}
 >>
 
@@ -144,9 +76,12 @@ namespace Allors.Meta
 {
 	using System;
 
+	#region Allors
+	[Id("$objectType.IdAsString$")]
+	#endregion
+	[Plural("$objectType.PluralName$")]
 $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 }$
-	[Id("$objectType.IdAsString$")]
   	public partial class $objectType.SingularName$Interface: Interface
 	{
 $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$
@@ -155,19 +90,9 @@ $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relat
 
 		public static $objectType.SingularName$Interface Instance {get; internal set;}
 
-		internal readonly RolesType Roles = new RolesType();
-
-		internal $objectType.SingularName$Interface() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
+		internal $objectType.SingularName$Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "$objectType.SingularName$";
-			this.PluralName = "$objectType.PluralName$";
         }
-
-		internal class RolesType
-		{
-$objectType.AssociationTypesWhereObjectType:{associationType|				internal RoleType $associationType.RelationType.RoleType.HierarchySingularName$;
-}$
-		}
 	}
 }
 >>
@@ -177,83 +102,58 @@ namespace Allors.Meta
 {
 	using System;
 
+	#region Allors
+	[Id("$objectType.IdAsString$")]
+	#endregion
 $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 }$
-	[Id("$objectType.IdAsString$")]
+	[Plural("$objectType.PluralName$")]
 	public partial class $objectType.SingularName$Class : Class
 	{
-		$objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$
+$objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$
 
 		}$
 
 		public static $objectType.SingularName$Class Instance {get; internal set;}
 
-		internal readonly RolesType Roles = new RolesType();
-		internal readonly ConcreteRolesType ConcreteRoles = new ConcreteRolesType();
-
-		internal $objectType.SingularName$Class() : base($objectType.DomainWhereDeclaredObjectType.Name$Domain.Instance)
+		internal $objectType.SingularName$Class() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "$objectType.SingularName$";
-			this.PluralName = "$objectType.PluralName$";
         }
-
-		internal override void SetRelationTypes()
-		{
-$objectType.AssociationTypesWhereObjectType:{associationType|$setRelationType(relationType=associationType.RelationType)$}$
-		}
-
-		internal class RolesType
-		{
-$objectType.AssociationTypesWhereObjectType:{associationType|				internal RoleType $associationType.RelationType.RoleType.HierarchySingularName$;
-}$
-		}
-
-		internal class ConcreteRolesType
-		{
-$objectType.RoleTypes:{roleType|				internal ConcreteRoleType $roleType.HierarchySingularName$;
-}$
-		}
 	}
 }
 >>
 
 relationType(relationType) ::= <<
-			#region Allors
-			[Multiplicity($multiplicity()$)]
+
+		#region Allors
+		[Id("$relationType.IdAsString$")]
+		[AssociationId("$relationType.AssociationType.IdAsString$")]
+		[RoleId("$relationType.RoleType.IdAsString$")]
+		#endregion
 $if(relationType.IsDerived)$
-			[Derived($boolean(relationType.IsDerived)$)]
+		[Derived]
 $endif$
 $if(relationType.IsIndexed)$
-			[Indexed($boolean(relationType.IsIndexed)$)]
+		[Indexed]
 $endif$
-			[Type(typeof($newObjectType(relationType.RoleType.ObjectType)$))]
-$if(!relationType.RoleType.IsScaleDefault)$
-			[Scale($relationType.RoleType.Scale$)]
-$endif$
+		[Type(typeof($newObjectType(relationType.RoleType.ObjectType)$))]
 $if(!relationType.RoleType.IsPrecisionDefault)$
-			[Precision($relationType.RoleType.Precision$)]
+		[Precision($relationType.RoleType.Precision$)]
+$endif$
+$if(!relationType.RoleType.IsScaleDefault)$
+		[Scale($relationType.RoleType.Scale$)]
 $endif$
 $if(!relationType.RoleType.IsSizeDefault)$
-			[Size($relationType.RoleType.Size$)]
+		[Size($relationType.RoleType.Size$)]
 $endif$
 $if(relationType.RoleType.ExistAssignedPluralName)$
-			[Plural("$relationType.RoleType.AssignedPluralName$")]
+		[Plural("$relationType.RoleType.AssignedPluralName$")]
 $endif$
-			[Id("$relationType.IdAsString$")]
-			[AssociationId("$relationType.AssociationType.IdAsString$")]
-			[RoleId("$relationType.RoleType.IdAsString$")]
-			#endregion
-			public RelationType $relationType.RoleType.SingularName$;
+$if(!relationType.RoleType.ObjectType.IsUnit)$
+		[Multiplicity($multiplicity()$)]
+$endif$
+		public RelationType $relationType.RoleType.SingularName$;
 >>
-
-
-setRelationType(relationType) ::= <<
-			this.Roles.$relationType.RoleType.HierarchySingularName$ = $relationType.RoleType.SingularName$.RoleType;
-			$relationType.AssociationType.ObjectType.ConcreteClasses:{class|$class.Name$Class.Instance.ConcreteRoles.$relationType.RoleType.HierarchySingularName$ = $class.Name$Class.Instance.ConcreteRoleTypeByRoleType[this.Roles.$relationType.RoleType.HierarchySingularName$]; 
-}$
-
->>
-
 
 inheritanceInit(inheritance) ::= <<
 	[Inherit(typeof($inheritance.Supertype.Name$Interface))]

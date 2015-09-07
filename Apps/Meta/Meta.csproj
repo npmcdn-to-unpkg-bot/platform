@@ -65,191 +65,152 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Base\Meta\Base\Domain\Composite.cs">
-      <Link>Base\Domain\Composite.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\AccessControl.cs">
+      <Link>Base\Domain\AccessControl.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Domain\ConcreteRoleType.cs">
-      <Link>Base\Domain\ConcreteRoleType.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\AccessControlledObject.cs">
+      <Link>Base\Domain\AccessControlledObject.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Domain\Path.cs">
-      <Link>Base\Domain\Path.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Base.cs">
+      <Link>Base\Domain\Base.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Domain\RoleType.cs">
-      <Link>Base\Domain\RoleType.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Commentable.cs">
+      <Link>Base\Domain\Commentable.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\AccessControl.cs">
-      <Link>Base\Population\AccessControl.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Counter.cs">
+      <Link>Base\Domain\Counter.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\AccessControlledObject.cs">
-      <Link>Base\Population\AccessControlledObject.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Country.cs">
+      <Link>Base\Domain\Country.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Commentable.cs">
-      <Link>Base\Population\Commentable.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Currency.cs">
+      <Link>Base\Domain\Currency.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Counter.cs">
-      <Link>Base\Population\Counter.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Deletable.cs">
+      <Link>Base\Domain\Deletable.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Country.cs">
-      <Link>Base\Population\Country.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Enumeration.cs">
+      <Link>Base\Domain\Enumeration.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Currency.cs">
-      <Link>Base\Population\Currency.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Image.cs">
+      <Link>Base\Domain\Image.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Deletable.cs">
-      <Link>Base\Population\Deletable.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Language.cs">
+      <Link>Base\Domain\Language.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Enumeration.cs">
-      <Link>Base\Population\Enumeration.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Locale.cs">
+      <Link>Base\Domain\Locale.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Image.cs">
-      <Link>Base\Population\Image.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Localised.cs">
+      <Link>Base\Domain\Localised.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Language.cs">
-      <Link>Base\Population\Language.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\LocalisedText.cs">
+      <Link>Base\Domain\LocalisedText.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Locale.cs">
-      <Link>Base\Population\Locale.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Login.cs">
+      <Link>Base\Domain\Login.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Localised.cs">
-      <Link>Base\Population\Localised.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Media.cs">
+      <Link>Base\Domain\Media.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\LocalisedText.cs">
-      <Link>Base\Population\LocalisedText.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\MediaContent.cs">
+      <Link>Base\Domain\MediaContent.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Login.cs">
-      <Link>Base\Population\Login.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\MediaType.cs">
+      <Link>Base\Domain\MediaType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Media.cs">
-      <Link>Base\Population\Media.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\ObjectInterface.cs">
+      <Link>Base\Domain\ObjectInterface.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\MediaContent.cs">
-      <Link>Base\Population\MediaContent.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\ObjectState.cs">
+      <Link>Base\Domain\ObjectState.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\MediaType.cs">
-      <Link>Base\Population\MediaType.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Period.cs">
+      <Link>Base\Domain\Period.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\ObjectInterface.cs">
-      <Link>Base\Population\ObjectInterface.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Permission.cs">
+      <Link>Base\Domain\Permission.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\ObjectState.cs">
-      <Link>Base\Population\ObjectState.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Person.cs">
+      <Link>Base\Domain\Person.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Period.cs">
-      <Link>Base\Population\Period.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Printable.cs">
+      <Link>Base\Domain\Printable.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Permission.cs">
-      <Link>Base\Population\Permission.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\PrintQueue.cs">
+      <Link>Base\Domain\PrintQueue.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Person.cs">
-      <Link>Base\Population\Person.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Role.cs">
+      <Link>Base\Domain\Role.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Printable.cs">
-      <Link>Base\Population\Printable.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\SecurityToken.cs">
+      <Link>Base\Domain\SecurityToken.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\PrintQueue.cs">
-      <Link>Base\Population\PrintQueue.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\SecurityTokenOwner.cs">
+      <Link>Base\Domain\SecurityTokenOwner.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Role.cs">
-      <Link>Base\Population\Role.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Singleton.cs">
+      <Link>Base\Domain\Singleton.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\SecurityToken.cs">
-      <Link>Base\Population\SecurityToken.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\StringTemplate.cs">
+      <Link>Base\Domain\StringTemplate.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\SecurityTokenOwner.cs">
-      <Link>Base\Population\SecurityTokenOwner.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Transition.cs">
+      <Link>Base\Domain\Transition.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Singleton.cs">
-      <Link>Base\Population\Singleton.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\Transitional.cs">
+      <Link>Base\Domain\Transitional.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\StringTemplate.cs">
-      <Link>Base\Population\StringTemplate.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\UniquelyIdentifiable.cs">
+      <Link>Base\Domain\UniquelyIdentifiable.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Transition.cs">
-      <Link>Base\Population\Transition.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\User.cs">
+      <Link>Base\Domain\User.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Transitional.cs">
-      <Link>Base\Population\Transitional.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Domain\UserGroup.cs">
+      <Link>Base\Domain\UserGroup.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\UniquelyIdentifiable.cs">
-      <Link>Base\Population\UniquelyIdentifiable.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Meta\Composite.cs">
+      <Link>Base\Meta\Composite.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\User.cs">
-      <Link>Base\Population\User.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Meta\ConcreteRoleType.cs">
+      <Link>Base\Meta\ConcreteRoleType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\UserGroup.cs">
-      <Link>Base\Population\UserGroup.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Meta\Path.cs">
+      <Link>Base\Meta\Path.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AssociationType.cs">
-      <Link>Core\Domain\AssociationType.cs</Link>
+    <Compile Include="..\..\Base\Meta\Base\Meta\RoleType.cs">
+      <Link>Base\Meta\RoleType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Class.cs">
-      <Link>Core\Domain\Class.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBinaryUnit.cs">
+      <Link>Core\Domain\AllorsBinaryUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Composite.cs">
-      <Link>Core\Domain\Composite.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBooleanUnit.cs">
+      <Link>Core\Domain\AllorsBooleanUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ConcreteMethodType.cs">
-      <Link>Core\Domain\ConcreteMethodType.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDateTimeUnit.cs">
+      <Link>Core\Domain\AllorsDateTimeUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ConcreteRoleType.cs">
-      <Link>Core\Domain\ConcreteRoleType.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDecimalUnit.cs">
+      <Link>Core\Domain\AllorsDecimalUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Domain.cs">
-      <Link>Core\Domain\Domain.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsFloatUnit.cs">
+      <Link>Core\Domain\AllorsFloatUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\DomainObject.cs">
-      <Link>Core\Domain\DomainObject.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsIntegerUnit.cs">
+      <Link>Core\Domain\AllorsIntegerUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Inheritance.cs">
-      <Link>Core\Domain\Inheritance.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsStringUnit.cs">
+      <Link>Core\Domain\AllorsStringUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Interface.cs">
-      <Link>Core\Domain\Interface.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsUniqueUnit.cs">
+      <Link>Core\Domain\AllorsUniqueUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\LazySet.cs">
-      <Link>Core\Domain\LazySet.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\CoreDomain.cs">
+      <Link>Core\Domain\CoreDomain.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MetaObject.cs">
-      <Link>Core\Domain\MetaObject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MetaPopulation.cs">
-      <Link>Core\Domain\MetaPopulation.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Method.cs">
-      <Link>Core\Domain\Method.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MethodInvocation.cs">
-      <Link>Core\Domain\MethodInvocation.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MethodType.cs">
-      <Link>Core\Domain\MethodType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ObjectType.cs">
-      <Link>Core\Domain\ObjectType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\OperandType.cs">
-      <Link>Core\Domain\OperandType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\PropertyType.cs">
-      <Link>Core\Domain\PropertyType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\RelationType.cs">
-      <Link>Core\Domain\RelationType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\RoleType.cs">
-      <Link>Core\Domain\RoleType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Unit.cs">
-      <Link>Core\Domain\Unit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ValidationError.cs">
-      <Link>Core\Domain\ValidationError.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ValidationKind.cs">
-      <Link>Core\Domain\ValidationKind.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ValidationLog.cs">
-      <Link>Core\Domain\ValidationLog.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\ObjectInterface.cs">
+      <Link>Core\Domain\ObjectInterface.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\Generation\Generate.cs">
       <Link>Core\Generation\Generate.cs</Link>
@@ -272,1093 +233,847 @@
     <Compile Include="..\..\Core\Meta\Core\Generation\StringTemplate.cs">
       <Link>Core\Generation\StringTemplate.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsBinaryUnit.cs">
-      <Link>Core\Population\AllorsBinaryUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\AssociationType.cs">
+      <Link>Core\Meta\AssociationType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsBooleanUnit.cs">
-      <Link>Core\Population\AllorsBooleanUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Class.cs">
+      <Link>Core\Meta\Class.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsDateTimeUnit.cs">
-      <Link>Core\Population\AllorsDateTimeUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Composite.cs">
+      <Link>Core\Meta\Composite.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsDecimalUnit.cs">
-      <Link>Core\Population\AllorsDecimalUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ConcreteMethodType.cs">
+      <Link>Core\Meta\ConcreteMethodType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsFloatUnit.cs">
-      <Link>Core\Population\AllorsFloatUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ConcreteRoleType.cs">
+      <Link>Core\Meta\ConcreteRoleType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsIntegerUnit.cs">
-      <Link>Core\Population\AllorsIntegerUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Domain.cs">
+      <Link>Core\Meta\Domain.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsStringUnit.cs">
-      <Link>Core\Population\AllorsStringUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\DomainObject.cs">
+      <Link>Core\Meta\DomainObject.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsUniqueUnit.cs">
-      <Link>Core\Population\AllorsUniqueUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Inheritance.cs">
+      <Link>Core\Meta\Inheritance.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\CoreDomain.cs">
-      <Link>Core\Population\CoreDomain.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Interface.cs">
+      <Link>Core\Meta\Interface.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\ObjectInterface.cs">
-      <Link>Core\Population\ObjectInterface.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\LazySet.cs">
+      <Link>Core\Meta\LazySet.cs</Link>
     </Compile>
-    <Compile Include="Apps\Domain\Composite.cs" />
+    <Compile Include="..\..\Core\Meta\Core\Meta\MetaObject.cs">
+      <Link>Core\Meta\MetaObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\MetaPopulation.cs">
+      <Link>Core\Meta\MetaPopulation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Method.cs">
+      <Link>Core\Meta\Method.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\MethodInvocation.cs">
+      <Link>Core\Meta\MethodInvocation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\MethodType.cs">
+      <Link>Core\Meta\MethodType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ObjectType.cs">
+      <Link>Core\Meta\ObjectType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\OperandType.cs">
+      <Link>Core\Meta\OperandType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\PropertyType.cs">
+      <Link>Core\Meta\PropertyType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\RelationType.cs">
+      <Link>Core\Meta\RelationType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\RoleType.cs">
+      <Link>Core\Meta\RoleType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Unit.cs">
+      <Link>Core\Meta\Unit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ValidationError.cs">
+      <Link>Core\Meta\ValidationError.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ValidationKind.cs">
+      <Link>Core\Meta\ValidationKind.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ValidationLog.cs">
+      <Link>Core\Meta\ValidationLog.cs</Link>
+    </Compile>
+    <Compile Include="Apps\Meta\Composite.cs" />
     <Compile Include="Apps\MetaPopulation.v.cs" />
-    <Compile Include="Apps\Population\AccessControl.cs" />
-    <Compile Include="Apps\Population\AccessControlledObject.cs" />
-    <Compile Include="Apps\Population\AccountAdjustment.cs" />
-    <Compile Include="Apps\Population\AccountingPeriod.cs" />
-    <Compile Include="Apps\Population\AccountingTransaction.cs" />
-    <Compile Include="Apps\Population\AccountingTransactionDetail.cs" />
-    <Compile Include="Apps\Population\AccountingTransactionNumber.cs" />
-    <Compile Include="Apps\Population\AccountingTransactionType.cs" />
-    <Compile Include="Apps\Population\Activity.cs" />
-    <Compile Include="Apps\Population\ActivityUsage.cs" />
-    <Compile Include="Apps\Population\Addendum.cs" />
-    <Compile Include="Apps\Population\Agreement.cs" />
-    <Compile Include="Apps\Population\AgreementExhibit.cs" />
-    <Compile Include="Apps\Population\AgreementItem.cs" />
-    <Compile Include="Apps\Population\AgreementPricingProgram.cs" />
-    <Compile Include="Apps\Population\AgreementSection.cs" />
-    <Compile Include="Apps\Population\AgreementTerm.cs" />
-    <Compile Include="Apps\Population\Amortization.cs" />
-    <Compile Include="Apps\Population\AmountDue.cs" />
-    <Compile Include="Apps\Population\AssetAssignmentStatus.cs" />
-    <Compile Include="Apps\Population\AutomatedAgent.cs" />
-    <Compile Include="Apps\Population\Bank.cs" />
-    <Compile Include="Apps\Population\BankAccount.cs" />
-    <Compile Include="Apps\Population\Barrel.cs" />
-    <Compile Include="Apps\Population\BasePrice.cs" />
-    <Compile Include="Apps\Population\Benefit.cs" />
-    <Compile Include="Apps\Population\BillingAccount.cs" />
-    <Compile Include="Apps\Population\BillOfLading.cs" />
-    <Compile Include="Apps\Population\Bin.cs" />
-    <Compile Include="Apps\Population\Brand.cs" />
-    <Compile Include="Apps\Population\Budget.cs" />
-    <Compile Include="Apps\Population\BudgetItem.cs" />
-    <Compile Include="Apps\Population\BudgetObjectState.cs" />
-    <Compile Include="Apps\Population\BudgetReview.cs" />
-    <Compile Include="Apps\Population\BudgetRevision.cs" />
-    <Compile Include="Apps\Population\BudgetRevisionImpact.cs" />
-    <Compile Include="Apps\Population\BudgetStatus.cs" />
-    <Compile Include="Apps\Population\Building.cs" />
-    <Compile Include="Apps\Population\CapitalBudget.cs" />
-    <Compile Include="Apps\Population\Capitalization.cs" />
-    <Compile Include="Apps\Population\Carrier.cs" />
-    <Compile Include="Apps\Population\Case.cs" />
-    <Compile Include="Apps\Population\CaseObjectState.cs" />
-    <Compile Include="Apps\Population\CaseStatus.cs" />
-    <Compile Include="Apps\Population\Cash.cs" />
-    <Compile Include="Apps\Population\ChartOfAccounts.cs" />
-    <Compile Include="Apps\Population\Citizenship.cs" />
-    <Compile Include="Apps\Population\City.cs" />
-    <Compile Include="Apps\Population\CityBound.cs" />
-    <Compile Include="Apps\Population\ClientAgreement.cs" />
-    <Compile Include="Apps\Population\ClientRelationship.cs" />
-    <Compile Include="Apps\Population\Colour.cs" />
-    <Compile Include="Apps\Population\Commentable.cs" />
-    <Compile Include="Apps\Population\CommunicationAttachment.cs" />
-    <Compile Include="Apps\Population\CommunicationEvent.cs" />
-    <Compile Include="Apps\Population\CommunicationEventObjectState.cs" />
-    <Compile Include="Apps\Population\CommunicationEventPurpose.cs" />
-    <Compile Include="Apps\Population\CommunicationEventStatus.cs" />
-    <Compile Include="Apps\Population\ConstraintSpecification.cs" />
-    <Compile Include="Apps\Population\ContactMechanism.cs" />
-    <Compile Include="Apps\Population\ContactMechanismPurpose.cs" />
-    <Compile Include="Apps\Population\Container.cs" />
-    <Compile Include="Apps\Population\CostCenter.cs" />
-    <Compile Include="Apps\Population\CostCenterCategory.cs" />
-    <Compile Include="Apps\Population\CostCenterSplitMethod.cs" />
-    <Compile Include="Apps\Population\CostOfGoodsSoldMethod.cs" />
-    <Compile Include="Apps\Population\Counter.cs" />
-    <Compile Include="Apps\Population\Country.cs" />
-    <Compile Include="Apps\Population\CountryBound.cs" />
-    <Compile Include="Apps\Population\County.cs" />
-    <Compile Include="Apps\Population\CreditCard.cs" />
-    <Compile Include="Apps\Population\CreditCardCompany.cs" />
-    <Compile Include="Apps\Population\CreditLine.cs" />
-    <Compile Include="Apps\Population\Currency.cs" />
-    <Compile Include="Apps\Population\CustomEngagementItem.cs" />
-    <Compile Include="Apps\Population\CustomerRelationship.cs" />
-    <Compile Include="Apps\Population\CustomerRequirement.cs" />
-    <Compile Include="Apps\Population\CustomerReturn.cs" />
-    <Compile Include="Apps\Population\CustomerReturnObjectState.cs" />
-    <Compile Include="Apps\Population\CustomerReturnStatus.cs" />
-    <Compile Include="Apps\Population\CustomerShipment.cs" />
-    <Compile Include="Apps\Population\CustomerShipmentObjectState.cs" />
-    <Compile Include="Apps\Population\CustomerShipmentStatus.cs" />
-    <Compile Include="Apps\Population\DebitCreditConstant.cs" />
-    <Compile Include="Apps\Population\Deduction.cs" />
-    <Compile Include="Apps\Population\DeductionType.cs" />
-    <Compile Include="Apps\Population\Deletable.cs" />
-    <Compile Include="Apps\Population\Deliverable.cs" />
-    <Compile Include="Apps\Population\DeliverableBasedService.cs" />
-    <Compile Include="Apps\Population\DeliverableOrderItem.cs" />
-    <Compile Include="Apps\Population\DeliverableTurnover.cs" />
-    <Compile Include="Apps\Population\DeliverableType.cs" />
-    <Compile Include="Apps\Population\Deployment.cs" />
-    <Compile Include="Apps\Population\DeploymentUsage.cs" />
-    <Compile Include="Apps\Population\Deposit.cs" />
-    <Compile Include="Apps\Population\Depreciation.cs" />
-    <Compile Include="Apps\Population\DepreciationMethod.cs" />
-    <Compile Include="Apps\Population\DesiredProductFeature.cs" />
-    <Compile Include="Apps\Population\Dimension.cs" />
-    <Compile Include="Apps\Population\Disbursement.cs" />
-    <Compile Include="Apps\Population\DisbursementAccountingTransaction.cs" />
-    <Compile Include="Apps\Population\DiscountAdjustment.cs" />
-    <Compile Include="Apps\Population\DiscountComponent.cs" />
-    <Compile Include="Apps\Population\DistributionChannelRelationship.cs" />
-    <Compile Include="Apps\Population\Document.cs" />
-    <Compile Include="Apps\Population\DropShipment.cs" />
-    <Compile Include="Apps\Population\DropShipmentObjectState.cs" />
-    <Compile Include="Apps\Population\DropShipmentStatus.cs" />
-    <Compile Include="Apps\Population\DunningType.cs" />
-    <Compile Include="Apps\Population\ElectronicAddress.cs" />
-    <Compile Include="Apps\Population\EmailAddress.cs" />
-    <Compile Include="Apps\Population\EmailCommunication.cs" />
-    <Compile Include="Apps\Population\EmailTemplate.cs" />
-    <Compile Include="Apps\Population\Employment.cs" />
-    <Compile Include="Apps\Population\EmploymentAgreement.cs" />
-    <Compile Include="Apps\Population\EmploymentApplication.cs" />
-    <Compile Include="Apps\Population\EmploymentApplicationSource.cs" />
-    <Compile Include="Apps\Population\EmploymentApplicationStatus.cs" />
-    <Compile Include="Apps\Population\EmploymentTermination.cs" />
-    <Compile Include="Apps\Population\EmploymentTerminationReason.cs" />
-    <Compile Include="Apps\Population\Engagement.cs" />
-    <Compile Include="Apps\Population\EngagementItem.cs" />
-    <Compile Include="Apps\Population\EngagementRate.cs" />
-    <Compile Include="Apps\Population\EngineeringBom.cs" />
-    <Compile Include="Apps\Population\EngineeringChange.cs" />
-    <Compile Include="Apps\Population\EngineeringChangeObjectState.cs" />
-    <Compile Include="Apps\Population\EngineeringChangeStatus.cs" />
-    <Compile Include="Apps\Population\EngineeringDocument.cs" />
-    <Compile Include="Apps\Population\Enumeration.cs" />
-    <Compile Include="Apps\Population\Equipment.cs" />
-    <Compile Include="Apps\Population\EstimatedLaborCost.cs" />
-    <Compile Include="Apps\Population\EstimatedMaterialCost.cs" />
-    <Compile Include="Apps\Population\EstimatedOtherCost.cs" />
-    <Compile Include="Apps\Population\EstimatedProductCost.cs" />
-    <Compile Include="Apps\Population\EuSalesListType.cs" />
-    <Compile Include="Apps\Population\Event.cs" />
-    <Compile Include="Apps\Population\EventRegistration.cs" />
-    <Compile Include="Apps\Population\ExpenseEntry.cs" />
-    <Compile Include="Apps\Population\ExportDocument.cs" />
-    <Compile Include="Apps\Population\ExternalAccountingTransaction.cs" />
-    <Compile Include="Apps\Population\FaceToFaceCommunication.cs" />
-    <Compile Include="Apps\Population\Facility.cs" />
-    <Compile Include="Apps\Population\FaxCommunication.cs" />
-    <Compile Include="Apps\Population\Fee.cs" />
-    <Compile Include="Apps\Population\FinancialAccount.cs" />
-    <Compile Include="Apps\Population\FinancialAccountAdjustment.cs" />
-    <Compile Include="Apps\Population\FinancialAccountTransaction.cs" />
-    <Compile Include="Apps\Population\FinancialTerm.cs" />
-    <Compile Include="Apps\Population\FinishedGood.cs" />
-    <Compile Include="Apps\Population\FiscalYearInvoiceNumber.cs" />
-    <Compile Include="Apps\Population\FixedAsset.cs" />
-    <Compile Include="Apps\Population\Floor.cs" />
-    <Compile Include="Apps\Population\GenderType.cs" />
-    <Compile Include="Apps\Population\GeneralLedgerAccount.cs" />
-    <Compile Include="Apps\Population\GeneralLedgerAccountGroup.cs" />
-    <Compile Include="Apps\Population\GeneralLedgerAccountType.cs" />
-    <Compile Include="Apps\Population\GeographicBoundary.cs" />
-    <Compile Include="Apps\Population\GeographicBoundaryComposite.cs" />
-    <Compile Include="Apps\Population\GeoLocatable.cs" />
-    <Compile Include="Apps\Population\GlBudgetAllocation.cs" />
-    <Compile Include="Apps\Population\Good.cs" />
-    <Compile Include="Apps\Population\GoodOrderItem.cs" />
-    <Compile Include="Apps\Population\HazardousMaterialsDocument.cs" />
-    <Compile Include="Apps\Population\Hobby.cs" />
-    <Compile Include="Apps\Population\Image.cs" />
-    <Compile Include="Apps\Population\Incentive.cs" />
-    <Compile Include="Apps\Population\InternalAccountingTransaction.cs" />
-    <Compile Include="Apps\Population\InternalOrganisation.cs" />
-    <Compile Include="Apps\Population\InternalOrganisationAccountingPreference.cs" />
-    <Compile Include="Apps\Population\InternalOrganisationRevenue.cs" />
-    <Compile Include="Apps\Population\InternalOrganisationRevenueHistory.cs" />
-    <Compile Include="Apps\Population\InternalRequirement.cs" />
-    <Compile Include="Apps\Population\InventoryItem.cs" />
-    <Compile Include="Apps\Population\InventoryItemConfiguration.cs" />
-    <Compile Include="Apps\Population\InventoryItemKind.cs" />
-    <Compile Include="Apps\Population\InventoryItemVariance.cs" />
-    <Compile Include="Apps\Population\InvestmentAccount.cs" />
-    <Compile Include="Apps\Population\Invoice.cs" />
-    <Compile Include="Apps\Population\InvoiceItem.cs" />
-    <Compile Include="Apps\Population\InvoiceSequence.cs" />
-    <Compile Include="Apps\Population\InvoiceTerm.cs" />
-    <Compile Include="Apps\Population\InvoiceVatRateItem.cs" />
-    <Compile Include="Apps\Population\ItemIssuance.cs" />
-    <Compile Include="Apps\Population\ItemVarianceAccountingTransaction.cs" />
-    <Compile Include="Apps\Population\IUnitOfMeasure.cs" />
-    <Compile Include="Apps\Population\Journal.cs" />
-    <Compile Include="Apps\Population\JournalEntry.cs" />
-    <Compile Include="Apps\Population\JournalEntryDetail.cs" />
-    <Compile Include="Apps\Population\JournalEntryNumber.cs" />
-    <Compile Include="Apps\Population\JournalType.cs" />
-    <Compile Include="Apps\Population\Language.cs" />
-    <Compile Include="Apps\Population\LegalForm.cs" />
-    <Compile Include="Apps\Population\LegalTerm.cs" />
-    <Compile Include="Apps\Population\LetterCorrespondence.cs" />
-    <Compile Include="Apps\Population\Locale.cs" />
-    <Compile Include="Apps\Population\Localised.cs" />
-    <Compile Include="Apps\Population\LocalisedText.cs" />
-    <Compile Include="Apps\Population\Login.cs" />
-    <Compile Include="Apps\Population\Lot.cs" />
-    <Compile Include="Apps\Population\Maintenance.cs" />
-    <Compile Include="Apps\Population\Manifest.cs" />
-    <Compile Include="Apps\Population\ManufacturerSuggestedRetailPrice.cs" />
-    <Compile Include="Apps\Population\ManufacturingBom.cs" />
-    <Compile Include="Apps\Population\ManufacturingConfiguration.cs" />
-    <Compile Include="Apps\Population\MaritalStatus.cs" />
-    <Compile Include="Apps\Population\MarketingMaterial.cs" />
-    <Compile Include="Apps\Population\MarketingPackage.cs" />
-    <Compile Include="Apps\Population\MaterialsUsage.cs" />
-    <Compile Include="Apps\Population\Media.cs" />
-    <Compile Include="Apps\Population\MediaContent.cs" />
-    <Compile Include="Apps\Population\MediaType.cs" />
-    <Compile Include="Apps\Population\Model.cs" />
-    <Compile Include="Apps\Population\NeededSkill.cs" />
-    <Compile Include="Apps\Population\NewsItem.cs" />
-    <Compile Include="Apps\Population\NonSerializedInventoryItem.cs" />
-    <Compile Include="Apps\Population\NonSerializedInventoryItemObjectState.cs" />
-    <Compile Include="Apps\Population\NonSerializedInventoryItemStatus.cs" />
-    <Compile Include="Apps\Population\Note.cs" />
-    <Compile Include="Apps\Population\ObjectState.cs" />
-    <Compile Include="Apps\Population\Obligation.cs" />
-    <Compile Include="Apps\Population\Office.cs" />
-    <Compile Include="Apps\Population\OneTimeCharge.cs" />
-    <Compile Include="Apps\Population\OperatingBudget.cs" />
-    <Compile Include="Apps\Population\OperatingCondition.cs" />
-    <Compile Include="Apps\Population\Order.cs" />
-    <Compile Include="Apps\Population\OrderAdjustment.cs" />
-    <Compile Include="Apps\Population\OrderItem.cs" />
-    <Compile Include="Apps\Population\OrderItemBilling.cs" />
-    <Compile Include="Apps\Population\OrderKind.cs" />
-    <Compile Include="Apps\Population\OrderQuantityBreak.cs" />
-    <Compile Include="Apps\Population\OrderRequirementCommitment.cs" />
-    <Compile Include="Apps\Population\OrderShipment.cs" />
-    <Compile Include="Apps\Population\OrderTerm.cs" />
-    <Compile Include="Apps\Population\OrderValue.cs" />
-    <Compile Include="Apps\Population\Ordinal.cs" />
-    <Compile Include="Apps\Population\Organisation.cs" />
-    <Compile Include="Apps\Population\OrganisationContactKind.cs" />
-    <Compile Include="Apps\Population\OrganisationContactRelationship.cs" />
-    <Compile Include="Apps\Population\OrganisationGlAccount.cs" />
-    <Compile Include="Apps\Population\OrganisationGlAccountBalance.cs" />
-    <Compile Include="Apps\Population\OrganisationRollUp.cs" />
-    <Compile Include="Apps\Population\OrganisationUnit.cs" />
-    <Compile Include="Apps\Population\OwnBankAccount.cs" />
-    <Compile Include="Apps\Population\OwnCreditCard.cs" />
-    <Compile Include="Apps\Population\Package.cs" />
-    <Compile Include="Apps\Population\PackageQuantityBreak.cs" />
-    <Compile Include="Apps\Population\PackageRevenue.cs" />
-    <Compile Include="Apps\Population\PackageRevenueHistory.cs" />
-    <Compile Include="Apps\Population\PackagingContent.cs" />
-    <Compile Include="Apps\Population\PackagingSlip.cs" />
-    <Compile Include="Apps\Population\Part.cs" />
-    <Compile Include="Apps\Population\PartBillOfMaterial.cs" />
-    <Compile Include="Apps\Population\PartBillOfMaterialSubstitute.cs" />
-    <Compile Include="Apps\Population\Partnership.cs" />
-    <Compile Include="Apps\Population\PartRevision.cs" />
-    <Compile Include="Apps\Population\PartSpecification.cs" />
-    <Compile Include="Apps\Population\PartSpecificationObjectState.cs" />
-    <Compile Include="Apps\Population\PartSpecificationStatus.cs" />
-    <Compile Include="Apps\Population\PartSubstitute.cs" />
-    <Compile Include="Apps\Population\Party.cs" />
-    <Compile Include="Apps\Population\PartyBenefit.cs" />
-    <Compile Include="Apps\Population\PartyClassification.cs" />
-    <Compile Include="Apps\Population\PartyContactMechanism.cs" />
-    <Compile Include="Apps\Population\PartyFixedAssetAssignment.cs" />
-    <Compile Include="Apps\Population\PartyPackageRevenue.cs" />
-    <Compile Include="Apps\Population\PartyPackageRevenueHistory.cs" />
-    <Compile Include="Apps\Population\PartyProductCategoryRevenue.cs" />
-    <Compile Include="Apps\Population\PartyProductCategoryRevenueHistory.cs" />
-    <Compile Include="Apps\Population\PartyProductRevenue.cs" />
-    <Compile Include="Apps\Population\PartyProductRevenueHistory.cs" />
-    <Compile Include="Apps\Population\PartyRelationship.cs" />
-    <Compile Include="Apps\Population\PartyRelationshipStatus.cs" />
-    <Compile Include="Apps\Population\PartyRevenue.cs" />
-    <Compile Include="Apps\Population\PartyRevenueHistory.cs" />
-    <Compile Include="Apps\Population\PartySkill.cs" />
-    <Compile Include="Apps\Population\Passport.cs" />
-    <Compile Include="Apps\Population\PayCheck.cs" />
-    <Compile Include="Apps\Population\PayGrade.cs" />
-    <Compile Include="Apps\Population\PayHistory.cs" />
-    <Compile Include="Apps\Population\Payment.cs" />
-    <Compile Include="Apps\Population\PaymentApplication.cs" />
-    <Compile Include="Apps\Population\PaymentBudgetAllocation.cs" />
-    <Compile Include="Apps\Population\PaymentMethod.cs" />
-    <Compile Include="Apps\Population\PayrollPreference.cs" />
-    <Compile Include="Apps\Population\PerformanceNote.cs" />
-    <Compile Include="Apps\Population\PerformanceReview.cs" />
-    <Compile Include="Apps\Population\PerformanceReviewItem.cs" />
-    <Compile Include="Apps\Population\PerformanceReviewItemType.cs" />
-    <Compile Include="Apps\Population\PerformanceSpecification.cs" />
-    <Compile Include="Apps\Population\Period.cs" />
-    <Compile Include="Apps\Population\Permission.cs" />
-    <Compile Include="Apps\Population\Person.cs" />
-    <Compile Include="Apps\Population\PersonalTitle.cs" />
-    <Compile Include="Apps\Population\PersonTraining.cs" />
-    <Compile Include="Apps\Population\Phase.cs" />
-    <Compile Include="Apps\Population\PhoneCommunication.cs" />
-    <Compile Include="Apps\Population\PickList.cs" />
-    <Compile Include="Apps\Population\PickListItem.cs" />
-    <Compile Include="Apps\Population\PickListObjectState.cs" />
-    <Compile Include="Apps\Population\PickListStatus.cs" />
-    <Compile Include="Apps\Population\Plant.cs" />
-    <Compile Include="Apps\Population\Position.cs" />
-    <Compile Include="Apps\Population\PositionFulfillment.cs" />
-    <Compile Include="Apps\Population\PositionReportingStructure.cs" />
-    <Compile Include="Apps\Population\PositionResponsibility.cs" />
-    <Compile Include="Apps\Population\PositionStatus.cs" />
-    <Compile Include="Apps\Population\PositionType.cs" />
-    <Compile Include="Apps\Population\PositionTypeRate.cs" />
-    <Compile Include="Apps\Population\PostalAddress.cs" />
-    <Compile Include="Apps\Population\PostalBoundary.cs" />
-    <Compile Include="Apps\Population\PostalCode.cs" />
-    <Compile Include="Apps\Population\PriceComponent.cs" />
-    <Compile Include="Apps\Population\Printable.cs" />
-    <Compile Include="Apps\Population\PrintQueue.cs" />
-    <Compile Include="Apps\Population\Priority.cs" />
-    <Compile Include="Apps\Population\Product.cs" />
-    <Compile Include="Apps\Population\ProductAssociation.cs" />
-    <Compile Include="Apps\Population\ProductCategory.cs" />
-    <Compile Include="Apps\Population\ProductCategoryRevenue.cs" />
-    <Compile Include="Apps\Population\ProductCategoryRevenueHistory.cs" />
-    <Compile Include="Apps\Population\ProductConfiguration.cs" />
-    <Compile Include="Apps\Population\ProductDeliverySkillRequirement.cs" />
-    <Compile Include="Apps\Population\ProductDrawing.cs" />
-    <Compile Include="Apps\Population\ProductFeature.cs" />
-    <Compile Include="Apps\Population\ProductFeatureApplicabilityRelationship.cs" />
-    <Compile Include="Apps\Population\ProductionRun.cs" />
-    <Compile Include="Apps\Population\ProductModel.cs" />
-    <Compile Include="Apps\Population\ProductPurchasePrice.cs" />
-    <Compile Include="Apps\Population\ProductQuality.cs" />
-    <Compile Include="Apps\Population\ProductQuote.cs" />
-    <Compile Include="Apps\Population\ProductRequirement.cs" />
-    <Compile Include="Apps\Population\ProductRevenue.cs" />
-    <Compile Include="Apps\Population\ProductRevenueHistory.cs" />
-    <Compile Include="Apps\Population\ProfessionalAssignment.cs" />
-    <Compile Include="Apps\Population\ProfessionalPlacement.cs" />
-    <Compile Include="Apps\Population\ProfessionalServicesRelationship.cs" />
-    <Compile Include="Apps\Population\Program.cs" />
-    <Compile Include="Apps\Population\Project.cs" />
-    <Compile Include="Apps\Population\ProjectRequirement.cs" />
-    <Compile Include="Apps\Population\Property.cs" />
-    <Compile Include="Apps\Population\Proposal.cs" />
-    <Compile Include="Apps\Population\Province.cs" />
-    <Compile Include="Apps\Population\PurchaseAgreement.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoice.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoiceItem.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoiceItemObjectState.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoiceItemStatus.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoiceItemType.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoiceObjectState.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoiceStatus.cs" />
-    <Compile Include="Apps\Population\PurchaseInvoiceType.cs" />
-    <Compile Include="Apps\Population\PurchaseOrder.cs" />
-    <Compile Include="Apps\Population\PurchaseOrderItem.cs" />
-    <Compile Include="Apps\Population\PurchaseOrderItemObjectState.cs" />
-    <Compile Include="Apps\Population\PurchaseOrderItemStatus.cs" />
-    <Compile Include="Apps\Population\PurchaseOrderObjectState.cs" />
-    <Compile Include="Apps\Population\PurchaseOrderStatus.cs" />
-    <Compile Include="Apps\Population\PurchaseReturn.cs" />
-    <Compile Include="Apps\Population\PurchaseReturnObjectState.cs" />
-    <Compile Include="Apps\Population\PurchaseReturnStatus.cs" />
-    <Compile Include="Apps\Population\PurchaseShipment.cs" />
-    <Compile Include="Apps\Population\PurchaseShipmentObjectState.cs" />
-    <Compile Include="Apps\Population\PurchaseShipmentStatus.cs" />
-    <Compile Include="Apps\Population\Qualification.cs" />
-    <Compile Include="Apps\Population\Quote.cs" />
-    <Compile Include="Apps\Population\QuoteItem.cs" />
-    <Compile Include="Apps\Population\QuoteTerm.cs" />
-    <Compile Include="Apps\Population\RateType.cs" />
-    <Compile Include="Apps\Population\RatingType.cs" />
-    <Compile Include="Apps\Population\RawMaterial.cs" />
-    <Compile Include="Apps\Population\Receipt.cs" />
-    <Compile Include="Apps\Population\ReceiptAccountingTransaction.cs" />
-    <Compile Include="Apps\Population\RecurringCharge.cs" />
-    <Compile Include="Apps\Population\Region.cs" />
-    <Compile Include="Apps\Population\Request.cs" />
-    <Compile Include="Apps\Population\RequestForInformation.cs" />
-    <Compile Include="Apps\Population\RequestForProposal.cs" />
-    <Compile Include="Apps\Population\RequestForQuote.cs" />
-    <Compile Include="Apps\Population\RequestItem.cs" />
-    <Compile Include="Apps\Population\Requirement.cs" />
-    <Compile Include="Apps\Population\RequirementBudgetAllocation.cs" />
-    <Compile Include="Apps\Population\RequirementCommunication.cs" />
-    <Compile Include="Apps\Population\RequirementObjectState.cs" />
-    <Compile Include="Apps\Population\RequirementStatus.cs" />
-    <Compile Include="Apps\Population\Research.cs" />
-    <Compile Include="Apps\Population\ResourceRequirement.cs" />
-    <Compile Include="Apps\Population\RespondingParty.cs" />
-    <Compile Include="Apps\Population\Responsibility.cs" />
-    <Compile Include="Apps\Population\Resume.cs" />
-    <Compile Include="Apps\Population\RevenueQuantityBreak.cs" />
-    <Compile Include="Apps\Population\RevenueValueBreak.cs" />
-    <Compile Include="Apps\Population\Role.cs" />
-    <Compile Include="Apps\Population\Room.cs" />
-    <Compile Include="Apps\Population\SalaryStep.cs" />
-    <Compile Include="Apps\Population\SalesAccountingTransaction.cs" />
-    <Compile Include="Apps\Population\SalesAgreement.cs" />
-    <Compile Include="Apps\Population\SalesChannel.cs" />
-    <Compile Include="Apps\Population\SalesChannelRevenue.cs" />
-    <Compile Include="Apps\Population\SalesChannelRevenueHistory.cs" />
-    <Compile Include="Apps\Population\SalesInvoice.cs" />
-    <Compile Include="Apps\Population\SalesInvoiceItem.cs" />
-    <Compile Include="Apps\Population\SalesInvoiceItemObjectState.cs" />
-    <Compile Include="Apps\Population\SalesInvoiceItemStatus.cs" />
-    <Compile Include="Apps\Population\SalesInvoiceItemType.cs" />
-    <Compile Include="Apps\Population\SalesInvoiceObjectState.cs" />
-    <Compile Include="Apps\Population\SalesInvoiceStatus.cs" />
-    <Compile Include="Apps\Population\SalesInvoiceType.cs" />
-    <Compile Include="Apps\Population\SalesOrder.cs" />
-    <Compile Include="Apps\Population\SalesOrderItem.cs" />
-    <Compile Include="Apps\Population\SalesOrderItemObjectState.cs" />
-    <Compile Include="Apps\Population\SalesOrderItemStatus.cs" />
-    <Compile Include="Apps\Population\SalesOrderObjectState.cs" />
-    <Compile Include="Apps\Population\SalesOrderStatus.cs" />
-    <Compile Include="Apps\Population\SalesRepCommission.cs" />
-    <Compile Include="Apps\Population\SalesRepPartyProductCategoryRevenue.cs" />
-    <Compile Include="Apps\Population\SalesRepPartyRevenue.cs" />
-    <Compile Include="Apps\Population\SalesRepProductCategoryRevenue.cs" />
-    <Compile Include="Apps\Population\SalesRepRelationship.cs" />
-    <Compile Include="Apps\Population\SalesRepRevenue.cs" />
-    <Compile Include="Apps\Population\SalesRepRevenueHistory.cs" />
-    <Compile Include="Apps\Population\SalesTerritory.cs" />
-    <Compile Include="Apps\Population\Salutation.cs" />
-    <Compile Include="Apps\Population\SecurityToken.cs" />
-    <Compile Include="Apps\Population\SecurityTokenOwner.cs" />
-    <Compile Include="Apps\Population\SerializedInventoryItem.cs" />
-    <Compile Include="Apps\Population\SerializedInventoryItemObjectState.cs" />
-    <Compile Include="Apps\Population\SerializedInventoryItemStatus.cs" />
-    <Compile Include="Apps\Population\Service.cs" />
-    <Compile Include="Apps\Population\ServiceConfiguration.cs" />
-    <Compile Include="Apps\Population\ServiceEntry.cs" />
-    <Compile Include="Apps\Population\ServiceEntryBilling.cs" />
-    <Compile Include="Apps\Population\ServiceEntryHeader.cs" />
-    <Compile Include="Apps\Population\ServiceFeature.cs" />
-    <Compile Include="Apps\Population\ServiceTerritory.cs" />
-    <Compile Include="Apps\Population\Shelf.cs" />
-    <Compile Include="Apps\Population\Shipment.cs" />
-    <Compile Include="Apps\Population\ShipmentItem.cs" />
-    <Compile Include="Apps\Population\ShipmentMethod.cs" />
-    <Compile Include="Apps\Population\ShipmentPackage.cs" />
-    <Compile Include="Apps\Population\ShipmentReceipt.cs" />
-    <Compile Include="Apps\Population\ShipmentRouteSegment.cs" />
-    <Compile Include="Apps\Population\ShipmentValue.cs" />
-    <Compile Include="Apps\Population\ShippingAndHandlingCharge.cs" />
-    <Compile Include="Apps\Population\ShippingAndHandlingComponent.cs" />
-    <Compile Include="Apps\Population\Singleton.cs" />
-    <Compile Include="Apps\Population\Size.cs" />
-    <Compile Include="Apps\Population\Skill.cs" />
-    <Compile Include="Apps\Population\SkillLevel.cs" />
-    <Compile Include="Apps\Population\SkillRating.cs" />
-    <Compile Include="Apps\Population\SoftwareFeature.cs" />
-    <Compile Include="Apps\Population\StandardServiceOrderItem.cs" />
-    <Compile Include="Apps\Population\State.cs" />
-    <Compile Include="Apps\Population\StatementOfWork.cs" />
-    <Compile Include="Apps\Population\Store.cs" />
-    <Compile Include="Apps\Population\StoreRevenue.cs" />
-    <Compile Include="Apps\Population\StoreRevenueHistory.cs" />
-    <Compile Include="Apps\Population\StringTemplate.cs" />
-    <Compile Include="Apps\Population\SubAgreement.cs" />
-    <Compile Include="Apps\Population\SubAssembly.cs" />
-    <Compile Include="Apps\Population\SubContractorAgreement.cs" />
-    <Compile Include="Apps\Population\SubContractorRelationship.cs" />
-    <Compile Include="Apps\Population\SupplierOffering.cs" />
-    <Compile Include="Apps\Population\SupplierRelationship.cs" />
-    <Compile Include="Apps\Population\SurchargeAdjustment.cs" />
-    <Compile Include="Apps\Population\SurchargeComponent.cs" />
-    <Compile Include="Apps\Population\Task.cs" />
-    <Compile Include="Apps\Population\TaxDocument.cs" />
-    <Compile Include="Apps\Population\TaxDue.cs" />
-    <Compile Include="Apps\Population\TelecommunicationsNumber.cs" />
-    <Compile Include="Apps\Population\TemplatePurpose.cs" />
-    <Compile Include="Apps\Population\TermType.cs" />
-    <Compile Include="Apps\Population\Territory.cs" />
-    <Compile Include="Apps\Population\TestingRequirement.cs" />
-    <Compile Include="Apps\Population\Threshold.cs" />
-    <Compile Include="Apps\Population\TimeAndMaterialsService.cs" />
-    <Compile Include="Apps\Population\TimeEntry.cs" />
-    <Compile Include="Apps\Population\TimeFrequency.cs" />
-    <Compile Include="Apps\Population\TimePeriodUsage.cs" />
-    <Compile Include="Apps\Population\Tolerance.cs" />
-    <Compile Include="Apps\Population\Training.cs" />
-    <Compile Include="Apps\Population\Transfer.cs" />
-    <Compile Include="Apps\Population\TransferObjectState.cs" />
-    <Compile Include="Apps\Population\TransferStatus.cs" />
-    <Compile Include="Apps\Population\Transition.cs" />
-    <Compile Include="Apps\Population\Transitional.cs" />
-    <Compile Include="Apps\Population\UniquelyIdentifiable.cs" />
-    <Compile Include="Apps\Population\UnitOfMeasure.cs" />
-    <Compile Include="Apps\Population\UnitOfMeasureConversion.cs" />
-    <Compile Include="Apps\Population\User.cs" />
-    <Compile Include="Apps\Population\UserGroup.cs" />
-    <Compile Include="Apps\Population\UtilizationCharge.cs" />
-    <Compile Include="Apps\Population\VarianceReason.cs" />
-    <Compile Include="Apps\Population\VatCalculationMethod.cs" />
-    <Compile Include="Apps\Population\VatForm.cs" />
-    <Compile Include="Apps\Population\VatRate.cs" />
-    <Compile Include="Apps\Population\VatRatePurchaseKind.cs" />
-    <Compile Include="Apps\Population\VatRateUsage.cs" />
-    <Compile Include="Apps\Population\VatRegime.cs" />
-    <Compile Include="Apps\Population\VatReturnBox.cs" />
-    <Compile Include="Apps\Population\VatReturnBoxType.cs" />
-    <Compile Include="Apps\Population\VatTariff.cs" />
-    <Compile Include="Apps\Population\Vehicle.cs" />
-    <Compile Include="Apps\Population\VolumeUsage.cs" />
-    <Compile Include="Apps\Population\Warehouse.cs" />
-    <Compile Include="Apps\Population\WebAddress.cs" />
-    <Compile Include="Apps\Population\WebSiteCommunication.cs" />
-    <Compile Include="Apps\Population\Withdrawal.cs" />
-    <Compile Include="Apps\Population\WorkEffort.cs" />
-    <Compile Include="Apps\Population\WorkEffortAssignment.cs" />
-    <Compile Include="Apps\Population\WorkEffortAssignmentRate.cs" />
-    <Compile Include="Apps\Population\WorkEffortBilling.cs" />
-    <Compile Include="Apps\Population\WorkEffortFixedAssetAssignment.cs" />
-    <Compile Include="Apps\Population\WorkEffortFixedAssetStandard.cs" />
-    <Compile Include="Apps\Population\WorkEffortGoodStandard.cs" />
-    <Compile Include="Apps\Population\WorkEffortInventoryAssignment.cs" />
-    <Compile Include="Apps\Population\WorkEffortObjectState.cs" />
-    <Compile Include="Apps\Population\WorkEffortPartStandard.cs" />
-    <Compile Include="Apps\Population\WorkEffortPartyAssignment.cs" />
-    <Compile Include="Apps\Population\WorkEffortSkillStandard.cs" />
-    <Compile Include="Apps\Population\WorkEffortStatus.cs" />
-    <Compile Include="Apps\Population\WorkEffortType.cs" />
-    <Compile Include="Apps\Population\WorkEffortTypeKind.cs" />
-    <Compile Include="Apps\Population\WorkFlow.cs" />
-    <Compile Include="Apps\Population\WorkRequirement.cs" />
-    <Compile Include="Generated\AccessControl.g.cs" />
-    <Compile Include="Generated\AccessControlledObject.g.cs" />
-    <Compile Include="Generated\AccountAdjustment.g.cs" />
-    <Compile Include="Generated\AccountingPeriod.g.cs" />
-    <Compile Include="Generated\AccountingTransaction.g.cs" />
-    <Compile Include="Generated\AccountingTransactionDetail.g.cs" />
-    <Compile Include="Generated\AccountingTransactionNumber.g.cs" />
-    <Compile Include="Generated\AccountingTransactionType.g.cs" />
-    <Compile Include="Generated\Activity.g.cs" />
-    <Compile Include="Generated\ActivityUsage.g.cs" />
-    <Compile Include="Generated\Addendum.g.cs" />
-    <Compile Include="Generated\Agreement.g.cs" />
-    <Compile Include="Generated\AgreementExhibit.g.cs" />
-    <Compile Include="Generated\AgreementItem.g.cs" />
-    <Compile Include="Generated\AgreementPricingProgram.g.cs" />
-    <Compile Include="Generated\AgreementSection.g.cs" />
-    <Compile Include="Generated\AgreementTerm.g.cs" />
-    <Compile Include="Generated\Amortization.g.cs" />
-    <Compile Include="Generated\AmountDue.g.cs" />
-    <Compile Include="Generated\AssetAssignmentStatus.g.cs" />
-    <Compile Include="Generated\AutomatedAgent.g.cs" />
-    <Compile Include="Generated\Bank.g.cs" />
-    <Compile Include="Generated\BankAccount.g.cs" />
-    <Compile Include="Generated\Barrel.g.cs" />
-    <Compile Include="Generated\BasePrice.g.cs" />
-    <Compile Include="Generated\Benefit.g.cs" />
-    <Compile Include="Generated\BillingAccount.g.cs" />
-    <Compile Include="Generated\BillOfLading.g.cs" />
-    <Compile Include="Generated\Bin.g.cs" />
-    <Compile Include="Generated\Brand.g.cs" />
-    <Compile Include="Generated\Budget.g.cs" />
-    <Compile Include="Generated\BudgetItem.g.cs" />
-    <Compile Include="Generated\BudgetObjectState.g.cs" />
-    <Compile Include="Generated\BudgetReview.g.cs" />
-    <Compile Include="Generated\BudgetRevision.g.cs" />
-    <Compile Include="Generated\BudgetRevisionImpact.g.cs" />
-    <Compile Include="Generated\BudgetStatus.g.cs" />
-    <Compile Include="Generated\Building.g.cs" />
-    <Compile Include="Generated\CapitalBudget.g.cs" />
-    <Compile Include="Generated\Capitalization.g.cs" />
-    <Compile Include="Generated\Carrier.g.cs" />
-    <Compile Include="Generated\Case.g.cs" />
-    <Compile Include="Generated\CaseObjectState.g.cs" />
-    <Compile Include="Generated\CaseStatus.g.cs" />
-    <Compile Include="Generated\Cash.g.cs" />
-    <Compile Include="Generated\ChartOfAccounts.g.cs" />
-    <Compile Include="Generated\Citizenship.g.cs" />
-    <Compile Include="Generated\City.g.cs" />
-    <Compile Include="Generated\CityBound.g.cs" />
-    <Compile Include="Generated\ClientAgreement.g.cs" />
-    <Compile Include="Generated\ClientRelationship.g.cs" />
-    <Compile Include="Generated\Colour.g.cs" />
-    <Compile Include="Generated\Commentable.g.cs" />
-    <Compile Include="Generated\CommunicationAttachment.g.cs" />
-    <Compile Include="Generated\CommunicationEvent.g.cs" />
-    <Compile Include="Generated\CommunicationEventObjectState.g.cs" />
-    <Compile Include="Generated\CommunicationEventPurpose.g.cs" />
-    <Compile Include="Generated\CommunicationEventStatus.g.cs" />
-    <Compile Include="Generated\ConstraintSpecification.g.cs" />
-    <Compile Include="Generated\ContactMechanism.g.cs" />
-    <Compile Include="Generated\ContactMechanismPurpose.g.cs" />
-    <Compile Include="Generated\Container.g.cs" />
-    <Compile Include="Generated\CostCenter.g.cs" />
-    <Compile Include="Generated\CostCenterCategory.g.cs" />
-    <Compile Include="Generated\CostCenterSplitMethod.g.cs" />
-    <Compile Include="Generated\CostOfGoodsSoldMethod.g.cs" />
-    <Compile Include="Generated\Counter.g.cs" />
-    <Compile Include="Generated\Country.g.cs" />
-    <Compile Include="Generated\CountryBound.g.cs" />
-    <Compile Include="Generated\County.g.cs" />
-    <Compile Include="Generated\CreditCard.g.cs" />
-    <Compile Include="Generated\CreditCardCompany.g.cs" />
-    <Compile Include="Generated\CreditLine.g.cs" />
-    <Compile Include="Generated\Currency.g.cs" />
-    <Compile Include="Generated\CustomEngagementItem.g.cs" />
-    <Compile Include="Generated\CustomerRelationship.g.cs" />
-    <Compile Include="Generated\CustomerRequirement.g.cs" />
-    <Compile Include="Generated\CustomerReturn.g.cs" />
-    <Compile Include="Generated\CustomerReturnObjectState.g.cs" />
-    <Compile Include="Generated\CustomerReturnStatus.g.cs" />
-    <Compile Include="Generated\CustomerShipment.g.cs" />
-    <Compile Include="Generated\CustomerShipmentObjectState.g.cs" />
-    <Compile Include="Generated\CustomerShipmentStatus.g.cs" />
-    <Compile Include="Generated\DebitCreditConstant.g.cs" />
-    <Compile Include="Generated\Deduction.g.cs" />
-    <Compile Include="Generated\DeductionType.g.cs" />
-    <Compile Include="Generated\Deletable.g.cs" />
-    <Compile Include="Generated\Deliverable.g.cs" />
-    <Compile Include="Generated\DeliverableBasedService.g.cs" />
-    <Compile Include="Generated\DeliverableOrderItem.g.cs" />
-    <Compile Include="Generated\DeliverableTurnover.g.cs" />
-    <Compile Include="Generated\DeliverableType.g.cs" />
-    <Compile Include="Generated\Deployment.g.cs" />
-    <Compile Include="Generated\DeploymentUsage.g.cs" />
-    <Compile Include="Generated\Deposit.g.cs" />
-    <Compile Include="Generated\Depreciation.g.cs" />
-    <Compile Include="Generated\DepreciationMethod.g.cs" />
-    <Compile Include="Generated\DesiredProductFeature.g.cs" />
-    <Compile Include="Generated\Dimension.g.cs" />
-    <Compile Include="Generated\Disbursement.g.cs" />
-    <Compile Include="Generated\DisbursementAccountingTransaction.g.cs" />
-    <Compile Include="Generated\DiscountAdjustment.g.cs" />
-    <Compile Include="Generated\DiscountComponent.g.cs" />
-    <Compile Include="Generated\DistributionChannelRelationship.g.cs" />
-    <Compile Include="Generated\Document.g.cs" />
-    <Compile Include="Generated\DropShipment.g.cs" />
-    <Compile Include="Generated\DropShipmentObjectState.g.cs" />
-    <Compile Include="Generated\DropShipmentStatus.g.cs" />
-    <Compile Include="Generated\DunningType.g.cs" />
-    <Compile Include="Generated\ElectronicAddress.g.cs" />
-    <Compile Include="Generated\EmailAddress.g.cs" />
-    <Compile Include="Generated\EmailCommunication.g.cs" />
-    <Compile Include="Generated\EmailTemplate.g.cs" />
-    <Compile Include="Generated\Employment.g.cs" />
-    <Compile Include="Generated\EmploymentAgreement.g.cs" />
-    <Compile Include="Generated\EmploymentApplication.g.cs" />
-    <Compile Include="Generated\EmploymentApplicationSource.g.cs" />
-    <Compile Include="Generated\EmploymentApplicationStatus.g.cs" />
-    <Compile Include="Generated\EmploymentTermination.g.cs" />
-    <Compile Include="Generated\EmploymentTerminationReason.g.cs" />
-    <Compile Include="Generated\Engagement.g.cs" />
-    <Compile Include="Generated\EngagementItem.g.cs" />
-    <Compile Include="Generated\EngagementRate.g.cs" />
-    <Compile Include="Generated\EngineeringBom.g.cs" />
-    <Compile Include="Generated\EngineeringChange.g.cs" />
-    <Compile Include="Generated\EngineeringChangeObjectState.g.cs" />
-    <Compile Include="Generated\EngineeringChangeStatus.g.cs" />
-    <Compile Include="Generated\EngineeringDocument.g.cs" />
-    <Compile Include="Generated\Enumeration.g.cs" />
-    <Compile Include="Generated\Equipment.g.cs" />
-    <Compile Include="Generated\EstimatedLaborCost.g.cs" />
-    <Compile Include="Generated\EstimatedMaterialCost.g.cs" />
-    <Compile Include="Generated\EstimatedOtherCost.g.cs" />
-    <Compile Include="Generated\EstimatedProductCost.g.cs" />
-    <Compile Include="Generated\EuSalesListType.g.cs" />
-    <Compile Include="Generated\Event.g.cs" />
-    <Compile Include="Generated\EventRegistration.g.cs" />
-    <Compile Include="Generated\ExpenseEntry.g.cs" />
-    <Compile Include="Generated\ExportDocument.g.cs" />
-    <Compile Include="Generated\ExternalAccountingTransaction.g.cs" />
-    <Compile Include="Generated\FaceToFaceCommunication.g.cs" />
-    <Compile Include="Generated\Facility.g.cs" />
-    <Compile Include="Generated\FaxCommunication.g.cs" />
-    <Compile Include="Generated\Fee.g.cs" />
-    <Compile Include="Generated\FinancialAccount.g.cs" />
-    <Compile Include="Generated\FinancialAccountAdjustment.g.cs" />
-    <Compile Include="Generated\FinancialAccountTransaction.g.cs" />
-    <Compile Include="Generated\FinancialTerm.g.cs" />
-    <Compile Include="Generated\FinishedGood.g.cs" />
-    <Compile Include="Generated\FiscalYearInvoiceNumber.g.cs" />
-    <Compile Include="Generated\FixedAsset.g.cs" />
-    <Compile Include="Generated\Floor.g.cs" />
-    <Compile Include="Generated\GenderType.g.cs" />
-    <Compile Include="Generated\GeneralLedgerAccount.g.cs" />
-    <Compile Include="Generated\GeneralLedgerAccountGroup.g.cs" />
-    <Compile Include="Generated\GeneralLedgerAccountType.g.cs" />
-    <Compile Include="Generated\GeographicBoundary.g.cs" />
-    <Compile Include="Generated\GeographicBoundaryComposite.g.cs" />
-    <Compile Include="Generated\GeoLocatable.g.cs" />
-    <Compile Include="Generated\GlBudgetAllocation.g.cs" />
-    <Compile Include="Generated\Good.g.cs" />
-    <Compile Include="Generated\GoodOrderItem.g.cs" />
-    <Compile Include="Generated\HazardousMaterialsDocument.g.cs" />
-    <Compile Include="Generated\Hobby.g.cs" />
-    <Compile Include="Generated\Ids.g.cs" />
-    <Compile Include="Generated\Image.g.cs" />
-    <Compile Include="Generated\Incentive.g.cs" />
-    <Compile Include="Generated\IndustryClassification.g.cs" />
-    <Compile Include="Generated\InternalAccountingTransaction.g.cs" />
-    <Compile Include="Generated\InternalOrganisation.g.cs" />
-    <Compile Include="Generated\InternalOrganisationAccountingPreference.g.cs" />
-    <Compile Include="Generated\InternalOrganisationRevenue.g.cs" />
-    <Compile Include="Generated\InternalOrganisationRevenueHistory.g.cs" />
-    <Compile Include="Generated\InternalRequirement.g.cs" />
-    <Compile Include="Generated\InventoryItem.g.cs" />
-    <Compile Include="Generated\InventoryItemConfiguration.g.cs" />
-    <Compile Include="Generated\InventoryItemKind.g.cs" />
-    <Compile Include="Generated\InventoryItemVariance.g.cs" />
-    <Compile Include="Generated\InvestmentAccount.g.cs" />
-    <Compile Include="Generated\Invoice.g.cs" />
-    <Compile Include="Generated\InvoiceItem.g.cs" />
-    <Compile Include="Generated\InvoiceSequence.g.cs" />
-    <Compile Include="Generated\InvoiceTerm.g.cs" />
-    <Compile Include="Generated\InvoiceVatRateItem.g.cs" />
-    <Compile Include="Generated\ItemIssuance.g.cs" />
-    <Compile Include="Generated\ItemVarianceAccountingTransaction.g.cs" />
-    <Compile Include="Generated\IUnitOfMeasure.g.cs" />
-    <Compile Include="Generated\Journal.g.cs" />
-    <Compile Include="Generated\JournalEntry.g.cs" />
-    <Compile Include="Generated\JournalEntryDetail.g.cs" />
-    <Compile Include="Generated\JournalEntryNumber.g.cs" />
-    <Compile Include="Generated\JournalType.g.cs" />
-    <Compile Include="Generated\Language.g.cs" />
-    <Compile Include="Generated\LegalForm.g.cs" />
-    <Compile Include="Generated\LegalTerm.g.cs" />
-    <Compile Include="Generated\LetterCorrespondence.g.cs" />
-    <Compile Include="Generated\Locale.g.cs" />
-    <Compile Include="Generated\Localised.g.cs" />
-    <Compile Include="Generated\LocalisedText.g.cs" />
-    <Compile Include="Generated\Login.g.cs" />
-    <Compile Include="Generated\Lot.g.cs" />
-    <Compile Include="Generated\Maintenance.g.cs" />
-    <Compile Include="Generated\Manifest.g.cs" />
-    <Compile Include="Generated\ManufacturerSuggestedRetailPrice.g.cs" />
-    <Compile Include="Generated\ManufacturingBom.g.cs" />
-    <Compile Include="Generated\ManufacturingConfiguration.g.cs" />
-    <Compile Include="Generated\MaritalStatus.g.cs" />
-    <Compile Include="Generated\MarketingMaterial.g.cs" />
-    <Compile Include="Generated\MarketingPackage.g.cs" />
-    <Compile Include="Generated\MaterialsUsage.g.cs" />
-    <Compile Include="Generated\Media.g.cs" />
-    <Compile Include="Generated\MediaContent.g.cs" />
-    <Compile Include="Generated\MediaType.g.cs" />
-    <Compile Include="Generated\Meta.g.cs" />
-    <Compile Include="Generated\Model.g.cs" />
-    <Compile Include="Generated\NeededSkill.g.cs" />
-    <Compile Include="Generated\NewsItem.g.cs" />
-    <Compile Include="Generated\NonSerializedInventoryItem.g.cs" />
-    <Compile Include="Generated\NonSerializedInventoryItemObjectState.g.cs" />
-    <Compile Include="Generated\NonSerializedInventoryItemStatus.g.cs" />
-    <Compile Include="Generated\Note.g.cs" />
-    <Compile Include="Generated\ObjectState.g.cs" />
-    <Compile Include="Generated\Obligation.g.cs" />
-    <Compile Include="Generated\Office.g.cs" />
-    <Compile Include="Generated\OneTimeCharge.g.cs" />
-    <Compile Include="Generated\OperatingBudget.g.cs" />
-    <Compile Include="Generated\OperatingCondition.g.cs" />
-    <Compile Include="Generated\Order.g.cs" />
-    <Compile Include="Generated\OrderAdjustment.g.cs" />
-    <Compile Include="Generated\OrderItem.g.cs" />
-    <Compile Include="Generated\OrderItemBilling.g.cs" />
-    <Compile Include="Generated\OrderKind.g.cs" />
-    <Compile Include="Generated\OrderQuantityBreak.g.cs" />
-    <Compile Include="Generated\OrderRequirementCommitment.g.cs" />
-    <Compile Include="Generated\OrderShipment.g.cs" />
-    <Compile Include="Generated\OrderTerm.g.cs" />
-    <Compile Include="Generated\OrderValue.g.cs" />
-    <Compile Include="Generated\Ordinal.g.cs" />
-    <Compile Include="Generated\Organisation.g.cs" />
-    <Compile Include="Generated\OrganisationClassification.g.cs" />
-    <Compile Include="Generated\OrganisationContactKind.g.cs" />
-    <Compile Include="Generated\OrganisationContactRelationship.g.cs" />
-    <Compile Include="Generated\OrganisationGlAccount.g.cs" />
-    <Compile Include="Generated\OrganisationGlAccountBalance.g.cs" />
-    <Compile Include="Generated\OrganisationRollUp.g.cs" />
-    <Compile Include="Generated\OrganisationUnit.g.cs" />
-    <Compile Include="Generated\OwnBankAccount.g.cs" />
-    <Compile Include="Generated\OwnCreditCard.g.cs" />
-    <Compile Include="Generated\Package.g.cs" />
-    <Compile Include="Generated\PackageQuantityBreak.g.cs" />
-    <Compile Include="Generated\PackageRevenue.g.cs" />
-    <Compile Include="Generated\PackageRevenueHistory.g.cs" />
-    <Compile Include="Generated\PackagingContent.g.cs" />
-    <Compile Include="Generated\PackagingSlip.g.cs" />
-    <Compile Include="Generated\Part.g.cs" />
-    <Compile Include="Generated\PartBillOfMaterial.g.cs" />
-    <Compile Include="Generated\PartBillOfMaterialSubstitute.g.cs" />
-    <Compile Include="Generated\Partnership.g.cs" />
-    <Compile Include="Generated\PartRevision.g.cs" />
-    <Compile Include="Generated\PartSpecification.g.cs" />
-    <Compile Include="Generated\PartSpecificationObjectState.g.cs" />
-    <Compile Include="Generated\PartSpecificationStatus.g.cs" />
-    <Compile Include="Generated\PartSubstitute.g.cs" />
-    <Compile Include="Generated\Party.g.cs" />
-    <Compile Include="Generated\PartyBenefit.g.cs" />
-    <Compile Include="Generated\PartyClassification.g.cs" />
-    <Compile Include="Generated\PartyContactMechanism.g.cs" />
-    <Compile Include="Generated\PartyFixedAssetAssignment.g.cs" />
-    <Compile Include="Generated\PartyPackageRevenue.g.cs" />
-    <Compile Include="Generated\PartyPackageRevenueHistory.g.cs" />
-    <Compile Include="Generated\PartyProductCategoryRevenue.g.cs" />
-    <Compile Include="Generated\PartyProductCategoryRevenueHistory.g.cs" />
-    <Compile Include="Generated\PartyProductRevenue.g.cs" />
-    <Compile Include="Generated\PartyProductRevenueHistory.g.cs" />
-    <Compile Include="Generated\PartyRelationship.g.cs" />
-    <Compile Include="Generated\PartyRelationshipStatus.g.cs" />
-    <Compile Include="Generated\PartyRevenue.g.cs" />
-    <Compile Include="Generated\PartyRevenueHistory.g.cs" />
-    <Compile Include="Generated\PartySkill.g.cs" />
-    <Compile Include="Generated\Passport.g.cs" />
-    <Compile Include="Generated\PayCheck.g.cs" />
-    <Compile Include="Generated\PayGrade.g.cs" />
-    <Compile Include="Generated\PayHistory.g.cs" />
-    <Compile Include="Generated\Payment.g.cs" />
-    <Compile Include="Generated\PaymentApplication.g.cs" />
-    <Compile Include="Generated\PaymentBudgetAllocation.g.cs" />
-    <Compile Include="Generated\PaymentMethod.g.cs" />
-    <Compile Include="Generated\PayrollPreference.g.cs" />
-    <Compile Include="Generated\PerformanceNote.g.cs" />
-    <Compile Include="Generated\PerformanceReview.g.cs" />
-    <Compile Include="Generated\PerformanceReviewItem.g.cs" />
-    <Compile Include="Generated\PerformanceReviewItemType.g.cs" />
-    <Compile Include="Generated\PerformanceSpecification.g.cs" />
-    <Compile Include="Generated\Period.g.cs" />
-    <Compile Include="Generated\Permission.g.cs" />
-    <Compile Include="Generated\Person.g.cs" />
-    <Compile Include="Generated\PersonalTitle.g.cs" />
-    <Compile Include="Generated\PersonClassification.g.cs" />
-    <Compile Include="Generated\PersonTraining.g.cs" />
-    <Compile Include="Generated\Phase.g.cs" />
-    <Compile Include="Generated\PhoneCommunication.g.cs" />
-    <Compile Include="Generated\PickList.g.cs" />
-    <Compile Include="Generated\PickListItem.g.cs" />
-    <Compile Include="Generated\PickListObjectState.g.cs" />
-    <Compile Include="Generated\PickListStatus.g.cs" />
-    <Compile Include="Generated\Plant.g.cs" />
-    <Compile Include="Generated\Position.g.cs" />
-    <Compile Include="Generated\PositionFulfillment.g.cs" />
-    <Compile Include="Generated\PositionReportingStructure.g.cs" />
-    <Compile Include="Generated\PositionResponsibility.g.cs" />
-    <Compile Include="Generated\PositionStatus.g.cs" />
-    <Compile Include="Generated\PositionType.g.cs" />
-    <Compile Include="Generated\PositionTypeRate.g.cs" />
-    <Compile Include="Generated\PostalAddress.g.cs" />
-    <Compile Include="Generated\PostalBoundary.g.cs" />
-    <Compile Include="Generated\PostalCode.g.cs" />
-    <Compile Include="Generated\PriceComponent.g.cs" />
-    <Compile Include="Generated\Printable.g.cs" />
-    <Compile Include="Generated\PrintQueue.g.cs" />
-    <Compile Include="Generated\Priority.g.cs" />
-    <Compile Include="Generated\Product.g.cs" />
-    <Compile Include="Generated\ProductAssociation.g.cs" />
-    <Compile Include="Generated\ProductCategory.g.cs" />
-    <Compile Include="Generated\ProductCategoryRevenue.g.cs" />
-    <Compile Include="Generated\ProductCategoryRevenueHistory.g.cs" />
-    <Compile Include="Generated\ProductConfiguration.g.cs" />
-    <Compile Include="Generated\ProductDeliverySkillRequirement.g.cs" />
-    <Compile Include="Generated\ProductDrawing.g.cs" />
-    <Compile Include="Generated\ProductFeature.g.cs" />
-    <Compile Include="Generated\ProductFeatureApplicabilityRelationship.g.cs" />
-    <Compile Include="Generated\ProductionRun.g.cs" />
-    <Compile Include="Generated\ProductModel.g.cs" />
-    <Compile Include="Generated\ProductPurchasePrice.g.cs" />
-    <Compile Include="Generated\ProductQuality.g.cs" />
-    <Compile Include="Generated\ProductQuote.g.cs" />
-    <Compile Include="Generated\ProductRequirement.g.cs" />
-    <Compile Include="Generated\ProductRevenue.g.cs" />
-    <Compile Include="Generated\ProductRevenueHistory.g.cs" />
-    <Compile Include="Generated\ProfessionalAssignment.g.cs" />
-    <Compile Include="Generated\ProfessionalPlacement.g.cs" />
-    <Compile Include="Generated\ProfessionalServicesRelationship.g.cs" />
-    <Compile Include="Generated\Program.g.cs" />
-    <Compile Include="Generated\Project.g.cs" />
-    <Compile Include="Generated\ProjectRequirement.g.cs" />
-    <Compile Include="Generated\Property.g.cs" />
-    <Compile Include="Generated\Proposal.g.cs" />
-    <Compile Include="Generated\ProspectRelationship.g.cs" />
-    <Compile Include="Generated\Province.g.cs" />
-    <Compile Include="Generated\PurchaseAgreement.g.cs" />
-    <Compile Include="Generated\PurchaseInvoice.g.cs" />
-    <Compile Include="Generated\PurchaseInvoiceItem.g.cs" />
-    <Compile Include="Generated\PurchaseInvoiceItemObjectState.g.cs" />
-    <Compile Include="Generated\PurchaseInvoiceItemStatus.g.cs" />
-    <Compile Include="Generated\PurchaseInvoiceItemType.g.cs" />
-    <Compile Include="Generated\PurchaseInvoiceObjectState.g.cs" />
-    <Compile Include="Generated\PurchaseInvoiceStatus.g.cs" />
-    <Compile Include="Generated\PurchaseInvoiceType.g.cs" />
-    <Compile Include="Generated\PurchaseOrder.g.cs" />
-    <Compile Include="Generated\PurchaseOrderItem.g.cs" />
-    <Compile Include="Generated\PurchaseOrderItemObjectState.g.cs" />
-    <Compile Include="Generated\PurchaseOrderItemStatus.g.cs" />
-    <Compile Include="Generated\PurchaseOrderObjectState.g.cs" />
-    <Compile Include="Generated\PurchaseOrderStatus.g.cs" />
-    <Compile Include="Generated\PurchaseReturn.g.cs" />
-    <Compile Include="Generated\PurchaseReturnObjectState.g.cs" />
-    <Compile Include="Generated\PurchaseReturnStatus.g.cs" />
-    <Compile Include="Generated\PurchaseShipment.g.cs" />
-    <Compile Include="Generated\PurchaseShipmentObjectState.g.cs" />
-    <Compile Include="Generated\PurchaseShipmentStatus.g.cs" />
-    <Compile Include="Generated\Qualification.g.cs" />
-    <Compile Include="Generated\Quote.g.cs" />
-    <Compile Include="Generated\QuoteItem.g.cs" />
-    <Compile Include="Generated\QuoteTerm.g.cs" />
-    <Compile Include="Generated\RateType.g.cs" />
-    <Compile Include="Generated\RatingType.g.cs" />
-    <Compile Include="Generated\RawMaterial.g.cs" />
-    <Compile Include="Generated\Receipt.g.cs" />
-    <Compile Include="Generated\ReceiptAccountingTransaction.g.cs" />
-    <Compile Include="Generated\RecurringCharge.g.cs" />
-    <Compile Include="Generated\Region.g.cs" />
-    <Compile Include="Generated\Request.g.cs" />
-    <Compile Include="Generated\RequestForInformation.g.cs" />
-    <Compile Include="Generated\RequestForProposal.g.cs" />
-    <Compile Include="Generated\RequestForQuote.g.cs" />
-    <Compile Include="Generated\RequestItem.g.cs" />
-    <Compile Include="Generated\Requirement.g.cs" />
-    <Compile Include="Generated\RequirementBudgetAllocation.g.cs" />
-    <Compile Include="Generated\RequirementCommunication.g.cs" />
-    <Compile Include="Generated\RequirementObjectState.g.cs" />
-    <Compile Include="Generated\RequirementStatus.g.cs" />
-    <Compile Include="Generated\Research.g.cs" />
-    <Compile Include="Generated\ResourceRequirement.g.cs" />
-    <Compile Include="Generated\RespondingParty.g.cs" />
-    <Compile Include="Generated\Responsibility.g.cs" />
-    <Compile Include="Generated\Resume.g.cs" />
-    <Compile Include="Generated\RevenueQuantityBreak.g.cs" />
-    <Compile Include="Generated\RevenueValueBreak.g.cs" />
-    <Compile Include="Generated\Role.g.cs" />
-    <Compile Include="Generated\Room.g.cs" />
-    <Compile Include="Generated\SalaryStep.g.cs" />
-    <Compile Include="Generated\SalesAccountingTransaction.g.cs" />
-    <Compile Include="Generated\SalesAgreement.g.cs" />
-    <Compile Include="Generated\SalesChannel.g.cs" />
-    <Compile Include="Generated\SalesChannelRevenue.g.cs" />
-    <Compile Include="Generated\SalesChannelRevenueHistory.g.cs" />
-    <Compile Include="Generated\SalesInvoice.g.cs" />
-    <Compile Include="Generated\SalesInvoiceItem.g.cs" />
-    <Compile Include="Generated\SalesInvoiceItemObjectState.g.cs" />
-    <Compile Include="Generated\SalesInvoiceItemStatus.g.cs" />
-    <Compile Include="Generated\SalesInvoiceItemType.g.cs" />
-    <Compile Include="Generated\SalesInvoiceObjectState.g.cs" />
-    <Compile Include="Generated\SalesInvoiceStatus.g.cs" />
-    <Compile Include="Generated\SalesInvoiceType.g.cs" />
-    <Compile Include="Generated\SalesOrder.g.cs" />
-    <Compile Include="Generated\SalesOrderItem.g.cs" />
-    <Compile Include="Generated\SalesOrderItemObjectState.g.cs" />
-    <Compile Include="Generated\SalesOrderItemStatus.g.cs" />
-    <Compile Include="Generated\SalesOrderObjectState.g.cs" />
-    <Compile Include="Generated\SalesOrderStatus.g.cs" />
-    <Compile Include="Generated\SalesRepCommission.g.cs" />
-    <Compile Include="Generated\SalesRepPartyProductCategoryRevenue.g.cs" />
-    <Compile Include="Generated\SalesRepPartyRevenue.g.cs" />
-    <Compile Include="Generated\SalesRepProductCategoryRevenue.g.cs" />
-    <Compile Include="Generated\SalesRepRelationship.g.cs" />
-    <Compile Include="Generated\SalesRepRevenue.g.cs" />
-    <Compile Include="Generated\SalesRepRevenueHistory.g.cs" />
-    <Compile Include="Generated\SalesTerritory.g.cs" />
-    <Compile Include="Generated\Salutation.g.cs" />
-    <Compile Include="Generated\SecurityToken.g.cs" />
-    <Compile Include="Generated\SecurityTokenOwner.g.cs" />
-    <Compile Include="Generated\SerializedInventoryItem.g.cs" />
-    <Compile Include="Generated\SerializedInventoryItemObjectState.g.cs" />
-    <Compile Include="Generated\SerializedInventoryItemStatus.g.cs" />
-    <Compile Include="Generated\Service.g.cs" />
-    <Compile Include="Generated\ServiceConfiguration.g.cs" />
-    <Compile Include="Generated\ServiceEntry.g.cs" />
-    <Compile Include="Generated\ServiceEntryBilling.g.cs" />
-    <Compile Include="Generated\ServiceEntryHeader.g.cs" />
-    <Compile Include="Generated\ServiceFeature.g.cs" />
-    <Compile Include="Generated\ServiceTerritory.g.cs" />
-    <Compile Include="Generated\Shelf.g.cs" />
-    <Compile Include="Generated\Shipment.g.cs" />
-    <Compile Include="Generated\ShipmentItem.g.cs" />
-    <Compile Include="Generated\ShipmentMethod.g.cs" />
-    <Compile Include="Generated\ShipmentPackage.g.cs" />
-    <Compile Include="Generated\ShipmentReceipt.g.cs" />
-    <Compile Include="Generated\ShipmentRouteSegment.g.cs" />
-    <Compile Include="Generated\ShipmentValue.g.cs" />
-    <Compile Include="Generated\ShippingAndHandlingCharge.g.cs" />
-    <Compile Include="Generated\ShippingAndHandlingComponent.g.cs" />
-    <Compile Include="Generated\Singleton.g.cs" />
-    <Compile Include="Generated\Size.g.cs" />
-    <Compile Include="Generated\Skill.g.cs" />
-    <Compile Include="Generated\SkillLevel.g.cs" />
-    <Compile Include="Generated\SkillRating.g.cs" />
-    <Compile Include="Generated\SoftwareFeature.g.cs" />
-    <Compile Include="Generated\StandardServiceOrderItem.g.cs" />
-    <Compile Include="Generated\State.g.cs" />
-    <Compile Include="Generated\StatementOfWork.g.cs" />
-    <Compile Include="Generated\Store.g.cs" />
-    <Compile Include="Generated\StoreRevenue.g.cs" />
-    <Compile Include="Generated\StoreRevenueHistory.g.cs" />
-    <Compile Include="Generated\StringTemplate.g.cs" />
-    <Compile Include="Generated\SubAgreement.g.cs" />
-    <Compile Include="Generated\SubAssembly.g.cs" />
-    <Compile Include="Generated\SubContractorAgreement.g.cs" />
-    <Compile Include="Generated\SubContractorRelationship.g.cs" />
-    <Compile Include="Generated\SupplierOffering.g.cs" />
-    <Compile Include="Generated\SupplierRelationship.g.cs" />
-    <Compile Include="Generated\SurchargeAdjustment.g.cs" />
-    <Compile Include="Generated\SurchargeComponent.g.cs" />
-    <Compile Include="Generated\Task.g.cs" />
-    <Compile Include="Generated\TaxDocument.g.cs" />
-    <Compile Include="Generated\TaxDue.g.cs" />
-    <Compile Include="Generated\TelecommunicationsNumber.g.cs" />
-    <Compile Include="Generated\TemplatePurpose.g.cs" />
-    <Compile Include="Generated\TermType.g.cs" />
-    <Compile Include="Generated\Territory.g.cs" />
-    <Compile Include="Generated\TestingRequirement.g.cs" />
-    <Compile Include="Generated\Threshold.g.cs" />
-    <Compile Include="Generated\TimeAndMaterialsService.g.cs" />
-    <Compile Include="Generated\TimeEntry.g.cs" />
-    <Compile Include="Generated\TimeFrequency.g.cs" />
-    <Compile Include="Generated\TimePeriodUsage.g.cs" />
-    <Compile Include="Generated\Tolerance.g.cs" />
-    <Compile Include="Generated\Training.g.cs" />
-    <Compile Include="Generated\Transfer.g.cs" />
-    <Compile Include="Generated\TransferObjectState.g.cs" />
-    <Compile Include="Generated\TransferStatus.g.cs" />
-    <Compile Include="Generated\Transition.g.cs" />
-    <Compile Include="Generated\Transitional.g.cs" />
-    <Compile Include="Generated\UniquelyIdentifiable.g.cs" />
-    <Compile Include="Generated\UnitOfMeasure.g.cs" />
-    <Compile Include="Generated\UnitOfMeasureConversion.g.cs" />
-    <Compile Include="Generated\User.g.cs" />
-    <Compile Include="Generated\UserGroup.g.cs" />
-    <Compile Include="Generated\UtilizationCharge.g.cs" />
-    <Compile Include="Generated\VarianceReason.g.cs" />
-    <Compile Include="Generated\VatCalculationMethod.g.cs" />
-    <Compile Include="Generated\VatForm.g.cs" />
-    <Compile Include="Generated\VatRate.g.cs" />
-    <Compile Include="Generated\VatRatePurchaseKind.g.cs" />
-    <Compile Include="Generated\VatRateUsage.g.cs" />
-    <Compile Include="Generated\VatRegime.g.cs" />
-    <Compile Include="Generated\VatReturnBox.g.cs" />
-    <Compile Include="Generated\VatReturnBoxType.g.cs" />
-    <Compile Include="Generated\VatTariff.g.cs" />
-    <Compile Include="Generated\Vehicle.g.cs" />
-    <Compile Include="Generated\VolumeUsage.g.cs" />
-    <Compile Include="Generated\Warehouse.g.cs" />
-    <Compile Include="Generated\WebAddress.g.cs" />
-    <Compile Include="Generated\WebSiteCommunication.g.cs" />
-    <Compile Include="Generated\Withdrawal.g.cs" />
-    <Compile Include="Generated\WorkEffort.g.cs" />
-    <Compile Include="Generated\WorkEffortAssignment.g.cs" />
-    <Compile Include="Generated\WorkEffortAssignmentRate.g.cs" />
-    <Compile Include="Generated\WorkEffortBilling.g.cs" />
-    <Compile Include="Generated\WorkEffortFixedAssetAssignment.g.cs" />
-    <Compile Include="Generated\WorkEffortFixedAssetStandard.g.cs" />
-    <Compile Include="Generated\WorkEffortGoodStandard.g.cs" />
-    <Compile Include="Generated\WorkEffortInventoryAssignment.g.cs" />
-    <Compile Include="Generated\WorkEffortObjectState.g.cs" />
-    <Compile Include="Generated\WorkEffortPartStandard.g.cs" />
-    <Compile Include="Generated\WorkEffortPartyAssignment.g.cs" />
-    <Compile Include="Generated\WorkEffortPurpose.g.cs" />
-    <Compile Include="Generated\WorkEffortSkillStandard.g.cs" />
-    <Compile Include="Generated\WorkEffortStatus.g.cs" />
-    <Compile Include="Generated\WorkEffortType.g.cs" />
-    <Compile Include="Generated\WorkEffortTypeKind.g.cs" />
-    <Compile Include="Generated\WorkFlow.g.cs" />
-    <Compile Include="Generated\WorkRequirement.g.cs" />
+    <Compile Include="Apps\Domain\AccountingPeriod.cs" />
+    <Compile Include="Apps\Domain\AccountingTransaction.cs" />
+    <Compile Include="Apps\Domain\AccountingTransactionDetail.cs" />
+    <Compile Include="Apps\Domain\ActivityUsage.cs" />
+    <Compile Include="Apps\Domain\Addendum.cs" />
+    <Compile Include="Apps\Domain\Agreement.cs" />
+    <Compile Include="Apps\Domain\AgreementItem.cs" />
+    <Compile Include="Apps\Domain\AutomatedAgent.cs" />
+    <Compile Include="Apps\Domain\Bank.cs" />
+    <Compile Include="Apps\Domain\BankAccount.cs" />
+    <Compile Include="Apps\Domain\BasePrice.cs" />
+    <Compile Include="Apps\Domain\Benefit.cs" />
+    <Compile Include="Apps\Domain\BillingAccount.cs" />
+    <Compile Include="Apps\Domain\Brand.cs" />
+    <Compile Include="Apps\Domain\Budget.cs" />
+    <Compile Include="Apps\Domain\BudgetItem.cs" />
+    <Compile Include="Apps\Domain\BudgetReview.cs" />
+    <Compile Include="Apps\Domain\BudgetRevision.cs" />
+    <Compile Include="Apps\Domain\BudgetRevisionImpact.cs" />
+    <Compile Include="Apps\Domain\BudgetStatus.cs" />
+    <Compile Include="Apps\Domain\CapitalBudget.cs" />
+    <Compile Include="Apps\Domain\Carrier.cs" />
+    <Compile Include="Apps\Domain\Case.cs" />
+    <Compile Include="Apps\Domain\CaseStatus.cs" />
+    <Compile Include="Apps\Domain\ChartOfAccounts.cs" />
+    <Compile Include="Apps\Domain\Citizenship.cs" />
+    <Compile Include="Apps\Domain\City.cs" />
+    <Compile Include="Apps\Domain\ClientRelationship.cs" />
+    <Compile Include="Apps\Domain\CommunicationEvent.cs" />
+    <Compile Include="Apps\Domain\CommunicationEventStatus.cs" />
+    <Compile Include="Apps\Domain\Container.cs" />
+    <Compile Include="Apps\Domain\CostCenter.cs" />
+    <Compile Include="Apps\Domain\CostCenterCategory.cs" />
+    <Compile Include="Apps\Domain\Country.cs" />
+    <Compile Include="Apps\Domain\County.cs" />
+    <Compile Include="Apps\Domain\CreditCard.cs" />
+    <Compile Include="Apps\Domain\CreditCardCompany.cs" />
+    <Compile Include="Apps\Domain\CustomerRelationship.cs" />
+    <Compile Include="Apps\Domain\CustomerReturn.cs" />
+    <Compile Include="Apps\Domain\CustomerReturnStatus.cs" />
+    <Compile Include="Apps\Domain\CustomerShipment.cs" />
+    <Compile Include="Apps\Domain\CustomerShipmentStatus.cs" />
+    <Compile Include="Apps\Domain\Deduction.cs" />
+    <Compile Include="Apps\Domain\Deliverable.cs" />
+    <Compile Include="Apps\Domain\DeliverableTurnover.cs" />
+    <Compile Include="Apps\Domain\DeploymentUsage.cs" />
+    <Compile Include="Apps\Domain\Depreciation.cs" />
+    <Compile Include="Apps\Domain\DepreciationMethod.cs" />
+    <Compile Include="Apps\Domain\DesiredProductFeature.cs" />
+    <Compile Include="Apps\Domain\Dimension.cs" />
+    <Compile Include="Apps\Domain\DisbursementAccountingTransaction.cs" />
+    <Compile Include="Apps\Domain\DistributionChannelRelationship.cs" />
+    <Compile Include="Apps\Domain\Document.cs" />
+    <Compile Include="Apps\Domain\DropShipment.cs" />
+    <Compile Include="Apps\Domain\DropShipmentStatus.cs" />
+    <Compile Include="Apps\Domain\ElectronicAddress.cs" />
+    <Compile Include="Apps\Domain\EmailCommunication.cs" />
+    <Compile Include="Apps\Domain\EmailTemplate.cs" />
+    <Compile Include="Apps\Domain\Employment.cs" />
+    <Compile Include="Apps\Domain\EmploymentApplication.cs" />
+    <Compile Include="Apps\Domain\Engagement.cs" />
+    <Compile Include="Apps\Domain\EngagementItem.cs" />
+    <Compile Include="Apps\Domain\EngagementRate.cs" />
+    <Compile Include="Apps\Domain\EngineeringChange.cs" />
+    <Compile Include="Apps\Domain\EngineeringChangeStatus.cs" />
+    <Compile Include="Apps\Domain\EstimatedProductCost.cs" />
+    <Compile Include="Apps\Domain\ExpenseEntry.cs" />
+    <Compile Include="Apps\Domain\ExternalAccountingTransaction.cs" />
+    <Compile Include="Apps\Domain\FaceToFaceCommunication.cs" />
+    <Compile Include="Apps\Domain\Facility.cs" />
+    <Compile Include="Apps\Domain\FaxCommunication.cs" />
+    <Compile Include="Apps\Domain\FinancialAccountTransaction.cs" />
+    <Compile Include="Apps\Domain\FiscalYearInvoiceNumber.cs" />
+    <Compile Include="Apps\Domain\FixedAsset.cs" />
+    <Compile Include="Apps\Domain\GeneralLedgerAccount.cs" />
+    <Compile Include="Apps\Domain\GeneralLedgerAccountGroup.cs" />
+    <Compile Include="Apps\Domain\GeneralLedgerAccountType.cs" />
+    <Compile Include="Apps\Domain\GeoLocatable.cs" />
+    <Compile Include="Apps\Domain\GlBudgetAllocation.cs" />
+    <Compile Include="Apps\Domain\Good.cs" />
+    <Compile Include="Apps\Domain\InternalOrganisation.cs" />
+    <Compile Include="Apps\Domain\InternalOrganisationAccountingPreference.cs" />
+    <Compile Include="Apps\Domain\InternalOrganisationRevenue.cs" />
+    <Compile Include="Apps\Domain\InventoryItem.cs" />
+    <Compile Include="Apps\Domain\InventoryItemConfiguration.cs" />
+    <Compile Include="Apps\Domain\InventoryItemVariance.cs" />
+    <Compile Include="Apps\Domain\InvestmentAccount.cs" />
+    <Compile Include="Apps\Domain\Invoice.cs" />
+    <Compile Include="Apps\Domain\InvoiceItem.cs" />
+    <Compile Include="Apps\Domain\InvoiceTerm.cs" />
+    <Compile Include="Apps\Domain\ItemIssuance.cs" />
+    <Compile Include="Apps\Domain\Journal.cs" />
+    <Compile Include="Apps\Domain\LegalForm.cs" />
+    <Compile Include="Apps\Domain\Lot.cs" />
+    <Compile Include="Apps\Domain\ManufacturerSuggestedRetailPrice.cs" />
+    <Compile Include="Apps\Domain\MarketingPackage.cs" />
+    <Compile Include="Apps\Domain\MaterialsUsage.cs" />
+    <Compile Include="Apps\Domain\MediaContent.cs" />
+    <Compile Include="Apps\Domain\NeededSkill.cs" />
+    <Compile Include="Apps\Domain\NonSerializedInventoryItem.cs" />
+    <Compile Include="Apps\Domain\NonSerializedInventoryItemStatus.cs" />
+    <Compile Include="Apps\Domain\OneTimeCharge.cs" />
+    <Compile Include="Apps\Domain\OperatingBudget.cs" />
+    <Compile Include="Apps\Domain\Order.cs" />
+    <Compile Include="Apps\Domain\OrderItem.cs" />
+    <Compile Include="Apps\Domain\OrderItemBilling.cs" />
+    <Compile Include="Apps\Domain\OrderKind.cs" />
+    <Compile Include="Apps\Domain\OrderRequirementCommitment.cs" />
+    <Compile Include="Apps\Domain\OrderShipment.cs" />
+    <Compile Include="Apps\Domain\OrderTerm.cs" />
+    <Compile Include="Apps\Domain\Organisation.cs" />
+    <Compile Include="Apps\Domain\OrganisationContactKind.cs" />
+    <Compile Include="Apps\Domain\OrganisationContactRelationship.cs" />
+    <Compile Include="Apps\Domain\OrganisationGlAccount.cs" />
+    <Compile Include="Apps\Domain\OrganisationGlAccountBalance.cs" />
+    <Compile Include="Apps\Domain\OrganisationRollUp.cs" />
+    <Compile Include="Apps\Domain\OwnBankAccount.cs" />
+    <Compile Include="Apps\Domain\OwnCreditCard.cs" />
+    <Compile Include="Apps\Domain\Package.cs" />
+    <Compile Include="Apps\Domain\PackageRevenue.cs" />
+    <Compile Include="Apps\Domain\PackagingContent.cs" />
+    <Compile Include="Apps\Domain\Part.cs" />
+    <Compile Include="Apps\Domain\PartBillOfMaterial.cs" />
+    <Compile Include="Apps\Domain\PartBillOfMaterialSubstitute.cs" />
+    <Compile Include="Apps\Domain\Partnership.cs" />
+    <Compile Include="Apps\Domain\PartRevision.cs" />
+    <Compile Include="Apps\Domain\PartSpecification.cs" />
+    <Compile Include="Apps\Domain\PartSpecificationStatus.cs" />
+    <Compile Include="Apps\Domain\PartSubstitute.cs" />
+    <Compile Include="Apps\Domain\Party.cs" />
+    <Compile Include="Apps\Domain\PartyBenefit.cs" />
+    <Compile Include="Apps\Domain\PartyClassification.cs" />
+    <Compile Include="Apps\Domain\PartyContactMechanism.cs" />
+    <Compile Include="Apps\Domain\PartyFixedAssetAssignment.cs" />
+    <Compile Include="Apps\Domain\PartyPackageRevenue.cs" />
+    <Compile Include="Apps\Domain\PartyProductCategoryRevenue.cs" />
+    <Compile Include="Apps\Domain\PartyProductCategoryRevenueHistory.cs" />
+    <Compile Include="Apps\Domain\PartyProductRevenue.cs" />
+    <Compile Include="Apps\Domain\PartyRevenue.cs" />
+    <Compile Include="Apps\Domain\PartyRevenueHistory.cs" />
+    <Compile Include="Apps\Domain\PartySkill.cs" />
+    <Compile Include="Apps\Domain\Passport.cs" />
+    <Compile Include="Apps\Domain\PayCheck.cs" />
+    <Compile Include="Apps\Domain\PayGrade.cs" />
+    <Compile Include="Apps\Domain\PayHistory.cs" />
+    <Compile Include="Apps\Domain\Payment.cs" />
+    <Compile Include="Apps\Domain\PaymentApplication.cs" />
+    <Compile Include="Apps\Domain\PaymentBudgetAllocation.cs" />
+    <Compile Include="Apps\Domain\PaymentMethod.cs" />
+    <Compile Include="Apps\Domain\PayrollPreference.cs" />
+    <Compile Include="Apps\Domain\PerformanceNote.cs" />
+    <Compile Include="Apps\Domain\PerformanceReview.cs" />
+    <Compile Include="Apps\Domain\PerformanceReviewItem.cs" />
+    <Compile Include="Apps\Domain\Period.cs" />
+    <Compile Include="Apps\Domain\PersonTraining.cs" />
+    <Compile Include="Apps\Domain\PhoneCommunication.cs" />
+    <Compile Include="Apps\Domain\PickList.cs" />
+    <Compile Include="Apps\Domain\PickListItem.cs" />
+    <Compile Include="Apps\Domain\PickListStatus.cs" />
+    <Compile Include="Apps\Domain\Position.cs" />
+    <Compile Include="Apps\Domain\PositionFulfillment.cs" />
+    <Compile Include="Apps\Domain\PositionReportingStructure.cs" />
+    <Compile Include="Apps\Domain\PositionResponsibility.cs" />
+    <Compile Include="Apps\Domain\PositionType.cs" />
+    <Compile Include="Apps\Domain\PositionTypeRate.cs" />
+    <Compile Include="Apps\Domain\PostalAddress.cs" />
+    <Compile Include="Apps\Domain\PostalBoundary.cs" />
+    <Compile Include="Apps\Domain\PostalCode.cs" />
+    <Compile Include="Apps\Domain\PriceComponent.cs" />
+    <Compile Include="Apps\Domain\Printable.cs" />
+    <Compile Include="Apps\Domain\Product.cs" />
+    <Compile Include="Apps\Domain\ProductCategory.cs" />
+    <Compile Include="Apps\Domain\ProductCategoryRevenue.cs" />
+    <Compile Include="Apps\Domain\ProductConfiguration.cs" />
+    <Compile Include="Apps\Domain\ProductDeliverySkillRequirement.cs" />
+    <Compile Include="Apps\Domain\ProductFeatureApplicabilityRelationship.cs" />
+    <Compile Include="Apps\Domain\ProductPurchasePrice.cs" />
+    <Compile Include="Apps\Domain\ProductRevenue.cs" />
+    <Compile Include="Apps\Domain\ProfessionalAssignment.cs" />
+    <Compile Include="Apps\Domain\ProfessionalServicesRelationship.cs" />
+    <Compile Include="Apps\Domain\Province.cs" />
+    <Compile Include="Apps\Domain\PurchaseInvoice.cs" />
+    <Compile Include="Apps\Domain\PurchaseInvoiceItem.cs" />
+    <Compile Include="Apps\Domain\PurchaseInvoiceItemStatus.cs" />
+    <Compile Include="Apps\Domain\PurchaseOrder.cs" />
+    <Compile Include="Apps\Domain\PurchaseOrderItem.cs" />
+    <Compile Include="Apps\Domain\PurchaseOrderItemStatus.cs" />
+    <Compile Include="Apps\Domain\PurchaseOrderStatus.cs" />
+    <Compile Include="Apps\Domain\PurchaseReturn.cs" />
+    <Compile Include="Apps\Domain\PurchaseReturnStatus.cs" />
+    <Compile Include="Apps\Domain\PurchaseShipment.cs" />
+    <Compile Include="Apps\Domain\PurchaseShipmentStatus.cs" />
+    <Compile Include="Apps\Domain\Quote.cs" />
+    <Compile Include="Apps\Domain\QuoteTerm.cs" />
+    <Compile Include="Apps\Domain\Receipt.cs" />
+    <Compile Include="Apps\Domain\ReceiptAccountingTransaction.cs" />
+    <Compile Include="Apps\Domain\RecurringCharge.cs" />
+    <Compile Include="Apps\Domain\Region.cs" />
+    <Compile Include="Apps\Domain\Request.cs" />
+    <Compile Include="Apps\Domain\Requirement.cs" />
+    <Compile Include="Apps\Domain\RequirementBudgetAllocation.cs" />
+    <Compile Include="Apps\Domain\RequirementCommunication.cs" />
+    <Compile Include="Apps\Domain\RequirementStatus.cs" />
+    <Compile Include="Apps\Domain\RespondingParty.cs" />
+    <Compile Include="Apps\Domain\Responsibility.cs" />
+    <Compile Include="Apps\Domain\Resume.cs" />
+    <Compile Include="Apps\Domain\SalaryStep.cs" />
+    <Compile Include="Apps\Domain\SalesAccountingTransaction.cs" />
+    <Compile Include="Apps\Domain\SalesChannelRevenue.cs" />
+    <Compile Include="Apps\Domain\SalesInvoice.cs" />
+    <Compile Include="Apps\Domain\SalesInvoiceItem.cs" />
+    <Compile Include="Apps\Domain\SalesInvoiceItemStatus.cs" />
+    <Compile Include="Apps\Domain\SalesInvoiceStatus.cs" />
+    <Compile Include="Apps\Domain\SalesOrder.cs" />
+    <Compile Include="Apps\Domain\SalesOrderItem.cs" />
+    <Compile Include="Apps\Domain\SalesOrderItemStatus.cs" />
+    <Compile Include="Apps\Domain\SalesOrderStatus.cs" />
+    <Compile Include="Apps\Domain\SalesRepCommission.cs" />
+    <Compile Include="Apps\Domain\SalesRepPartyProductCategoryRevenue.cs" />
+    <Compile Include="Apps\Domain\SalesRepPartyRevenue.cs" />
+    <Compile Include="Apps\Domain\SalesRepProductCategoryRevenue.cs" />
+    <Compile Include="Apps\Domain\SalesRepRelationship.cs" />
+    <Compile Include="Apps\Domain\SalesRepRevenue.cs" />
+    <Compile Include="Apps\Domain\SalesTerritory.cs" />
+    <Compile Include="Apps\Domain\SerializedInventoryItem.cs" />
+    <Compile Include="Apps\Domain\SerializedInventoryItemStatus.cs" />
+    <Compile Include="Apps\Domain\ServiceEntryBilling.cs" />
+    <Compile Include="Apps\Domain\ServiceEntryHeader.cs" />
+    <Compile Include="Apps\Domain\ServiceTerritory.cs" />
+    <Compile Include="Apps\Domain\Shipment.cs" />
+    <Compile Include="Apps\Domain\ShipmentItem.cs" />
+    <Compile Include="Apps\Domain\ShipmentPackage.cs" />
+    <Compile Include="Apps\Domain\ShipmentReceipt.cs" />
+    <Compile Include="Apps\Domain\ShippingAndHandlingComponent.cs" />
+    <Compile Include="Apps\Domain\State.cs" />
+    <Compile Include="Apps\Domain\Store.cs" />
+    <Compile Include="Apps\Domain\StoreRevenue.cs" />
+    <Compile Include="Apps\Domain\StringTemplate.cs" />
+    <Compile Include="Apps\Domain\SubContractorRelationship.cs" />
+    <Compile Include="Apps\Domain\SupplierOffering.cs" />
+    <Compile Include="Apps\Domain\SupplierRelationship.cs" />
+    <Compile Include="Apps\Domain\TelecommunicationsNumber.cs" />
+    <Compile Include="Apps\Domain\Territory.cs" />
+    <Compile Include="Apps\Domain\TimeEntry.cs" />
+    <Compile Include="Apps\Domain\Training.cs" />
+    <Compile Include="Apps\Domain\Transfer.cs" />
+    <Compile Include="Apps\Domain\TransferStatus.cs" />
+    <Compile Include="Apps\Domain\UniquelyIdentifiable.cs" />
+    <Compile Include="Apps\Domain\UnitOfMeasureConversion.cs" />
+    <Compile Include="Apps\Domain\UtilizationCharge.cs" />
+    <Compile Include="Apps\Domain\VatRate.cs" />
+    <Compile Include="Apps\Domain\VolumeUsage.cs" />
+    <Compile Include="Apps\Domain\Warehouse.cs" />
+    <Compile Include="Apps\Domain\WorkEffort.cs" />
+    <Compile Include="Apps\Domain\WorkEffortAssignment.cs" />
+    <Compile Include="Apps\Domain\WorkEffortAssignmentRate.cs" />
+    <Compile Include="Apps\Domain\WorkEffortBilling.cs" />
+    <Compile Include="Apps\Domain\WorkEffortFixedAssetAssignment.cs" />
+    <Compile Include="Apps\Domain\WorkEffortFixedAssetStandard.cs" />
+    <Compile Include="Apps\Domain\WorkEffortGoodStandard.cs" />
+    <Compile Include="Apps\Domain\WorkEffortInventoryAssignment.cs" />
+    <Compile Include="Apps\Domain\WorkEffortPartStandard.cs" />
+    <Compile Include="Apps\Domain\WorkEffortPartyAssignment.cs" />
+    <Compile Include="Apps\Domain\WorkEffortStatus.cs" />
+    <Compile Include="Apps\Domain\WorkEffortType.cs" />
+    <Compile Include="Generated\AccountAdjustment.cs" />
+    <Compile Include="Generated\AccountingPeriod.cs" />
+    <Compile Include="Generated\AccountingTransaction.cs" />
+    <Compile Include="Generated\AccountingTransactionDetail.cs" />
+    <Compile Include="Generated\AccountingTransactionNumber.cs" />
+    <Compile Include="Generated\AccountingTransactionType.cs" />
+    <Compile Include="Generated\Activity.cs" />
+    <Compile Include="Generated\ActivityUsage.cs" />
+    <Compile Include="Generated\Addendum.cs" />
+    <Compile Include="Generated\Agreement.cs" />
+    <Compile Include="Generated\AgreementExhibit.cs" />
+    <Compile Include="Generated\AgreementItem.cs" />
+    <Compile Include="Generated\AgreementPricingProgram.cs" />
+    <Compile Include="Generated\AgreementSection.cs" />
+    <Compile Include="Generated\AgreementTerm.cs" />
+    <Compile Include="Generated\Amortization.cs" />
+    <Compile Include="Generated\AmountDue.cs" />
+    <Compile Include="Generated\AssetAssignmentStatus.cs" />
+    <Compile Include="Generated\AutomatedAgent.cs" />
+    <Compile Include="Generated\Bank.cs" />
+    <Compile Include="Generated\BankAccount.cs" />
+    <Compile Include="Generated\Barrel.cs" />
+    <Compile Include="Generated\BasePrice.cs" />
+    <Compile Include="Generated\Benefit.cs" />
+    <Compile Include="Generated\BillingAccount.cs" />
+    <Compile Include="Generated\BillOfLading.cs" />
+    <Compile Include="Generated\Bin.cs" />
+    <Compile Include="Generated\Brand.cs" />
+    <Compile Include="Generated\Budget.cs" />
+    <Compile Include="Generated\BudgetItem.cs" />
+    <Compile Include="Generated\BudgetObjectState.cs" />
+    <Compile Include="Generated\BudgetReview.cs" />
+    <Compile Include="Generated\BudgetRevision.cs" />
+    <Compile Include="Generated\BudgetRevisionImpact.cs" />
+    <Compile Include="Generated\BudgetStatus.cs" />
+    <Compile Include="Generated\Building.cs" />
+    <Compile Include="Generated\CapitalBudget.cs" />
+    <Compile Include="Generated\Capitalization.cs" />
+    <Compile Include="Generated\Carrier.cs" />
+    <Compile Include="Generated\Case.cs" />
+    <Compile Include="Generated\CaseObjectState.cs" />
+    <Compile Include="Generated\CaseStatus.cs" />
+    <Compile Include="Generated\Cash.cs" />
+    <Compile Include="Generated\ChartOfAccounts.cs" />
+    <Compile Include="Generated\Citizenship.cs" />
+    <Compile Include="Generated\City.cs" />
+    <Compile Include="Generated\CityBound.cs" />
+    <Compile Include="Generated\ClientAgreement.cs" />
+    <Compile Include="Generated\ClientRelationship.cs" />
+    <Compile Include="Generated\Colour.cs" />
+    <Compile Include="Generated\CommunicationAttachment.cs" />
+    <Compile Include="Generated\CommunicationEvent.cs" />
+    <Compile Include="Generated\CommunicationEventObjectState.cs" />
+    <Compile Include="Generated\CommunicationEventPurpose.cs" />
+    <Compile Include="Generated\CommunicationEventStatus.cs" />
+    <Compile Include="Generated\ConstraintSpecification.cs" />
+    <Compile Include="Generated\ContactMechanism.cs" />
+    <Compile Include="Generated\ContactMechanismPurpose.cs" />
+    <Compile Include="Generated\Container.cs" />
+    <Compile Include="Generated\CostCenter.cs" />
+    <Compile Include="Generated\CostCenterCategory.cs" />
+    <Compile Include="Generated\CostCenterSplitMethod.cs" />
+    <Compile Include="Generated\CostOfGoodsSoldMethod.cs" />
+    <Compile Include="Generated\Country.cs" />
+    <Compile Include="Generated\CountryBound.cs" />
+    <Compile Include="Generated\County.cs" />
+    <Compile Include="Generated\CreditCard.cs" />
+    <Compile Include="Generated\CreditCardCompany.cs" />
+    <Compile Include="Generated\CreditLine.cs" />
+    <Compile Include="Generated\Currency.cs" />
+    <Compile Include="Generated\CustomEngagementItem.cs" />
+    <Compile Include="Generated\CustomerRelationship.cs" />
+    <Compile Include="Generated\CustomerRequirement.cs" />
+    <Compile Include="Generated\CustomerReturn.cs" />
+    <Compile Include="Generated\CustomerReturnObjectState.cs" />
+    <Compile Include="Generated\CustomerReturnStatus.cs" />
+    <Compile Include="Generated\CustomerShipment.cs" />
+    <Compile Include="Generated\CustomerShipmentObjectState.cs" />
+    <Compile Include="Generated\CustomerShipmentStatus.cs" />
+    <Compile Include="Generated\DebitCreditConstant.cs" />
+    <Compile Include="Generated\Deduction.cs" />
+    <Compile Include="Generated\DeductionType.cs" />
+    <Compile Include="Generated\Deliverable.cs" />
+    <Compile Include="Generated\DeliverableBasedService.cs" />
+    <Compile Include="Generated\DeliverableOrderItem.cs" />
+    <Compile Include="Generated\DeliverableTurnover.cs" />
+    <Compile Include="Generated\DeliverableType.cs" />
+    <Compile Include="Generated\Deployment.cs" />
+    <Compile Include="Generated\DeploymentUsage.cs" />
+    <Compile Include="Generated\Deposit.cs" />
+    <Compile Include="Generated\Depreciation.cs" />
+    <Compile Include="Generated\DepreciationMethod.cs" />
+    <Compile Include="Generated\DesiredProductFeature.cs" />
+    <Compile Include="Generated\Dimension.cs" />
+    <Compile Include="Generated\Disbursement.cs" />
+    <Compile Include="Generated\DisbursementAccountingTransaction.cs" />
+    <Compile Include="Generated\DiscountAdjustment.cs" />
+    <Compile Include="Generated\DiscountComponent.cs" />
+    <Compile Include="Generated\DistributionChannelRelationship.cs" />
+    <Compile Include="Generated\Document.cs" />
+    <Compile Include="Generated\DropShipment.cs" />
+    <Compile Include="Generated\DropShipmentObjectState.cs" />
+    <Compile Include="Generated\DropShipmentStatus.cs" />
+    <Compile Include="Generated\DunningType.cs" />
+    <Compile Include="Generated\ElectronicAddress.cs" />
+    <Compile Include="Generated\EmailAddress.cs" />
+    <Compile Include="Generated\EmailCommunication.cs" />
+    <Compile Include="Generated\EmailTemplate.cs" />
+    <Compile Include="Generated\Employment.cs" />
+    <Compile Include="Generated\EmploymentAgreement.cs" />
+    <Compile Include="Generated\EmploymentApplication.cs" />
+    <Compile Include="Generated\EmploymentApplicationSource.cs" />
+    <Compile Include="Generated\EmploymentApplicationStatus.cs" />
+    <Compile Include="Generated\EmploymentTermination.cs" />
+    <Compile Include="Generated\EmploymentTerminationReason.cs" />
+    <Compile Include="Generated\Engagement.cs" />
+    <Compile Include="Generated\EngagementItem.cs" />
+    <Compile Include="Generated\EngagementRate.cs" />
+    <Compile Include="Generated\EngineeringBom.cs" />
+    <Compile Include="Generated\EngineeringChange.cs" />
+    <Compile Include="Generated\EngineeringChangeObjectState.cs" />
+    <Compile Include="Generated\EngineeringChangeStatus.cs" />
+    <Compile Include="Generated\EngineeringDocument.cs" />
+    <Compile Include="Generated\Equipment.cs" />
+    <Compile Include="Generated\EstimatedLaborCost.cs" />
+    <Compile Include="Generated\EstimatedMaterialCost.cs" />
+    <Compile Include="Generated\EstimatedOtherCost.cs" />
+    <Compile Include="Generated\EstimatedProductCost.cs" />
+    <Compile Include="Generated\EuSalesListType.cs" />
+    <Compile Include="Generated\Event.cs" />
+    <Compile Include="Generated\EventRegistration.cs" />
+    <Compile Include="Generated\ExpenseEntry.cs" />
+    <Compile Include="Generated\ExportDocument.cs" />
+    <Compile Include="Generated\ExternalAccountingTransaction.cs" />
+    <Compile Include="Generated\FaceToFaceCommunication.cs" />
+    <Compile Include="Generated\Facility.cs" />
+    <Compile Include="Generated\FaxCommunication.cs" />
+    <Compile Include="Generated\Fee.cs" />
+    <Compile Include="Generated\FinancialAccount.cs" />
+    <Compile Include="Generated\FinancialAccountAdjustment.cs" />
+    <Compile Include="Generated\FinancialAccountTransaction.cs" />
+    <Compile Include="Generated\FinancialTerm.cs" />
+    <Compile Include="Generated\FinishedGood.cs" />
+    <Compile Include="Generated\FiscalYearInvoiceNumber.cs" />
+    <Compile Include="Generated\FixedAsset.cs" />
+    <Compile Include="Generated\Floor.cs" />
+    <Compile Include="Generated\GenderType.cs" />
+    <Compile Include="Generated\GeneralLedgerAccount.cs" />
+    <Compile Include="Generated\GeneralLedgerAccountGroup.cs" />
+    <Compile Include="Generated\GeneralLedgerAccountType.cs" />
+    <Compile Include="Generated\GeographicBoundary.cs" />
+    <Compile Include="Generated\GeographicBoundaryComposite.cs" />
+    <Compile Include="Generated\GeoLocatable.cs" />
+    <Compile Include="Generated\GlBudgetAllocation.cs" />
+    <Compile Include="Generated\Good.cs" />
+    <Compile Include="Generated\GoodOrderItem.cs" />
+    <Compile Include="Generated\HazardousMaterialsDocument.cs" />
+    <Compile Include="Generated\Hobby.cs" />
+    <Compile Include="Generated\Incentive.cs" />
+    <Compile Include="Generated\IndustryClassification.cs" />
+    <Compile Include="Generated\InternalAccountingTransaction.cs" />
+    <Compile Include="Generated\InternalOrganisation.cs" />
+    <Compile Include="Generated\InternalOrganisationAccountingPreference.cs" />
+    <Compile Include="Generated\InternalOrganisationRevenue.cs" />
+    <Compile Include="Generated\InternalOrganisationRevenueHistory.cs" />
+    <Compile Include="Generated\InternalRequirement.cs" />
+    <Compile Include="Generated\InventoryItem.cs" />
+    <Compile Include="Generated\InventoryItemConfiguration.cs" />
+    <Compile Include="Generated\InventoryItemKind.cs" />
+    <Compile Include="Generated\InventoryItemVariance.cs" />
+    <Compile Include="Generated\InvestmentAccount.cs" />
+    <Compile Include="Generated\Invoice.cs" />
+    <Compile Include="Generated\InvoiceItem.cs" />
+    <Compile Include="Generated\InvoiceSequence.cs" />
+    <Compile Include="Generated\InvoiceTerm.cs" />
+    <Compile Include="Generated\InvoiceVatRateItem.cs" />
+    <Compile Include="Generated\ItemIssuance.cs" />
+    <Compile Include="Generated\ItemVarianceAccountingTransaction.cs" />
+    <Compile Include="Generated\IUnitOfMeasure.cs" />
+    <Compile Include="Generated\Journal.cs" />
+    <Compile Include="Generated\JournalEntry.cs" />
+    <Compile Include="Generated\JournalEntryDetail.cs" />
+    <Compile Include="Generated\JournalEntryNumber.cs" />
+    <Compile Include="Generated\JournalType.cs" />
+    <Compile Include="Generated\LegalForm.cs" />
+    <Compile Include="Generated\LegalTerm.cs" />
+    <Compile Include="Generated\LetterCorrespondence.cs" />
+    <Compile Include="Generated\Lot.cs" />
+    <Compile Include="Generated\Maintenance.cs" />
+    <Compile Include="Generated\Manifest.cs" />
+    <Compile Include="Generated\ManufacturerSuggestedRetailPrice.cs" />
+    <Compile Include="Generated\ManufacturingBom.cs" />
+    <Compile Include="Generated\ManufacturingConfiguration.cs" />
+    <Compile Include="Generated\MaritalStatus.cs" />
+    <Compile Include="Generated\MarketingMaterial.cs" />
+    <Compile Include="Generated\MarketingPackage.cs" />
+    <Compile Include="Generated\MaterialsUsage.cs" />
+    <Compile Include="Generated\Meta.cs" />
+    <Compile Include="Generated\Model.cs" />
+    <Compile Include="Generated\NeededSkill.cs" />
+    <Compile Include="Generated\NewsItem.cs" />
+    <Compile Include="Generated\NonSerializedInventoryItem.cs" />
+    <Compile Include="Generated\NonSerializedInventoryItemObjectState.cs" />
+    <Compile Include="Generated\NonSerializedInventoryItemStatus.cs" />
+    <Compile Include="Generated\Note.cs" />
+    <Compile Include="Generated\Obligation.cs" />
+    <Compile Include="Generated\Office.cs" />
+    <Compile Include="Generated\OneTimeCharge.cs" />
+    <Compile Include="Generated\OperatingBudget.cs" />
+    <Compile Include="Generated\OperatingCondition.cs" />
+    <Compile Include="Generated\Order.cs" />
+    <Compile Include="Generated\OrderAdjustment.cs" />
+    <Compile Include="Generated\OrderItem.cs" />
+    <Compile Include="Generated\OrderItemBilling.cs" />
+    <Compile Include="Generated\OrderKind.cs" />
+    <Compile Include="Generated\OrderQuantityBreak.cs" />
+    <Compile Include="Generated\OrderRequirementCommitment.cs" />
+    <Compile Include="Generated\OrderShipment.cs" />
+    <Compile Include="Generated\OrderTerm.cs" />
+    <Compile Include="Generated\OrderValue.cs" />
+    <Compile Include="Generated\Ordinal.cs" />
+    <Compile Include="Generated\Organisation.cs" />
+    <Compile Include="Generated\OrganisationClassification.cs" />
+    <Compile Include="Generated\OrganisationContactKind.cs" />
+    <Compile Include="Generated\OrganisationContactRelationship.cs" />
+    <Compile Include="Generated\OrganisationGlAccount.cs" />
+    <Compile Include="Generated\OrganisationGlAccountBalance.cs" />
+    <Compile Include="Generated\OrganisationRollUp.cs" />
+    <Compile Include="Generated\OrganisationUnit.cs" />
+    <Compile Include="Generated\OwnBankAccount.cs" />
+    <Compile Include="Generated\OwnCreditCard.cs" />
+    <Compile Include="Generated\Package.cs" />
+    <Compile Include="Generated\PackageQuantityBreak.cs" />
+    <Compile Include="Generated\PackageRevenue.cs" />
+    <Compile Include="Generated\PackageRevenueHistory.cs" />
+    <Compile Include="Generated\PackagingContent.cs" />
+    <Compile Include="Generated\PackagingSlip.cs" />
+    <Compile Include="Generated\Part.cs" />
+    <Compile Include="Generated\PartBillOfMaterial.cs" />
+    <Compile Include="Generated\PartBillOfMaterialSubstitute.cs" />
+    <Compile Include="Generated\Partnership.cs" />
+    <Compile Include="Generated\PartRevision.cs" />
+    <Compile Include="Generated\PartSpecification.cs" />
+    <Compile Include="Generated\PartSpecificationObjectState.cs" />
+    <Compile Include="Generated\PartSpecificationStatus.cs" />
+    <Compile Include="Generated\PartSubstitute.cs" />
+    <Compile Include="Generated\Party.cs" />
+    <Compile Include="Generated\PartyBenefit.cs" />
+    <Compile Include="Generated\PartyClassification.cs" />
+    <Compile Include="Generated\PartyContactMechanism.cs" />
+    <Compile Include="Generated\PartyFixedAssetAssignment.cs" />
+    <Compile Include="Generated\PartyPackageRevenue.cs" />
+    <Compile Include="Generated\PartyPackageRevenueHistory.cs" />
+    <Compile Include="Generated\PartyProductCategoryRevenue.cs" />
+    <Compile Include="Generated\PartyProductCategoryRevenueHistory.cs" />
+    <Compile Include="Generated\PartyProductRevenue.cs" />
+    <Compile Include="Generated\PartyProductRevenueHistory.cs" />
+    <Compile Include="Generated\PartyRelationship.cs" />
+    <Compile Include="Generated\PartyRelationshipStatus.cs" />
+    <Compile Include="Generated\PartyRevenue.cs" />
+    <Compile Include="Generated\PartyRevenueHistory.cs" />
+    <Compile Include="Generated\PartySkill.cs" />
+    <Compile Include="Generated\Passport.cs" />
+    <Compile Include="Generated\PayCheck.cs" />
+    <Compile Include="Generated\PayGrade.cs" />
+    <Compile Include="Generated\PayHistory.cs" />
+    <Compile Include="Generated\Payment.cs" />
+    <Compile Include="Generated\PaymentApplication.cs" />
+    <Compile Include="Generated\PaymentBudgetAllocation.cs" />
+    <Compile Include="Generated\PaymentMethod.cs" />
+    <Compile Include="Generated\PayrollPreference.cs" />
+    <Compile Include="Generated\PerformanceNote.cs" />
+    <Compile Include="Generated\PerformanceReview.cs" />
+    <Compile Include="Generated\PerformanceReviewItem.cs" />
+    <Compile Include="Generated\PerformanceReviewItemType.cs" />
+    <Compile Include="Generated\PerformanceSpecification.cs" />
+    <Compile Include="Generated\Person.cs" />
+    <Compile Include="Generated\PersonalTitle.cs" />
+    <Compile Include="Generated\PersonClassification.cs" />
+    <Compile Include="Generated\PersonTraining.cs" />
+    <Compile Include="Generated\Phase.cs" />
+    <Compile Include="Generated\PhoneCommunication.cs" />
+    <Compile Include="Generated\PickList.cs" />
+    <Compile Include="Generated\PickListItem.cs" />
+    <Compile Include="Generated\PickListObjectState.cs" />
+    <Compile Include="Generated\PickListStatus.cs" />
+    <Compile Include="Generated\Plant.cs" />
+    <Compile Include="Generated\Position.cs" />
+    <Compile Include="Generated\PositionFulfillment.cs" />
+    <Compile Include="Generated\PositionReportingStructure.cs" />
+    <Compile Include="Generated\PositionResponsibility.cs" />
+    <Compile Include="Generated\PositionStatus.cs" />
+    <Compile Include="Generated\PositionType.cs" />
+    <Compile Include="Generated\PositionTypeRate.cs" />
+    <Compile Include="Generated\PostalAddress.cs" />
+    <Compile Include="Generated\PostalBoundary.cs" />
+    <Compile Include="Generated\PostalCode.cs" />
+    <Compile Include="Generated\PriceComponent.cs" />
+    <Compile Include="Generated\Priority.cs" />
+    <Compile Include="Generated\Product.cs" />
+    <Compile Include="Generated\ProductAssociation.cs" />
+    <Compile Include="Generated\ProductCategory.cs" />
+    <Compile Include="Generated\ProductCategoryRevenue.cs" />
+    <Compile Include="Generated\ProductCategoryRevenueHistory.cs" />
+    <Compile Include="Generated\ProductConfiguration.cs" />
+    <Compile Include="Generated\ProductDeliverySkillRequirement.cs" />
+    <Compile Include="Generated\ProductDrawing.cs" />
+    <Compile Include="Generated\ProductFeature.cs" />
+    <Compile Include="Generated\ProductFeatureApplicabilityRelationship.cs" />
+    <Compile Include="Generated\ProductionRun.cs" />
+    <Compile Include="Generated\ProductModel.cs" />
+    <Compile Include="Generated\ProductPurchasePrice.cs" />
+    <Compile Include="Generated\ProductQuality.cs" />
+    <Compile Include="Generated\ProductQuote.cs" />
+    <Compile Include="Generated\ProductRequirement.cs" />
+    <Compile Include="Generated\ProductRevenue.cs" />
+    <Compile Include="Generated\ProductRevenueHistory.cs" />
+    <Compile Include="Generated\ProfessionalAssignment.cs" />
+    <Compile Include="Generated\ProfessionalPlacement.cs" />
+    <Compile Include="Generated\ProfessionalServicesRelationship.cs" />
+    <Compile Include="Generated\Program.cs" />
+    <Compile Include="Generated\Project.cs" />
+    <Compile Include="Generated\ProjectRequirement.cs" />
+    <Compile Include="Generated\Property.cs" />
+    <Compile Include="Generated\Proposal.cs" />
+    <Compile Include="Generated\ProspectRelationship.cs" />
+    <Compile Include="Generated\Province.cs" />
+    <Compile Include="Generated\PurchaseAgreement.cs" />
+    <Compile Include="Generated\PurchaseInvoice.cs" />
+    <Compile Include="Generated\PurchaseInvoiceItem.cs" />
+    <Compile Include="Generated\PurchaseInvoiceItemObjectState.cs" />
+    <Compile Include="Generated\PurchaseInvoiceItemStatus.cs" />
+    <Compile Include="Generated\PurchaseInvoiceItemType.cs" />
+    <Compile Include="Generated\PurchaseInvoiceObjectState.cs" />
+    <Compile Include="Generated\PurchaseInvoiceStatus.cs" />
+    <Compile Include="Generated\PurchaseInvoiceType.cs" />
+    <Compile Include="Generated\PurchaseOrder.cs" />
+    <Compile Include="Generated\PurchaseOrderItem.cs" />
+    <Compile Include="Generated\PurchaseOrderItemObjectState.cs" />
+    <Compile Include="Generated\PurchaseOrderItemStatus.cs" />
+    <Compile Include="Generated\PurchaseOrderObjectState.cs" />
+    <Compile Include="Generated\PurchaseOrderStatus.cs" />
+    <Compile Include="Generated\PurchaseReturn.cs" />
+    <Compile Include="Generated\PurchaseReturnObjectState.cs" />
+    <Compile Include="Generated\PurchaseReturnStatus.cs" />
+    <Compile Include="Generated\PurchaseShipment.cs" />
+    <Compile Include="Generated\PurchaseShipmentObjectState.cs" />
+    <Compile Include="Generated\PurchaseShipmentStatus.cs" />
+    <Compile Include="Generated\Qualification.cs" />
+    <Compile Include="Generated\Quote.cs" />
+    <Compile Include="Generated\QuoteItem.cs" />
+    <Compile Include="Generated\QuoteTerm.cs" />
+    <Compile Include="Generated\RateType.cs" />
+    <Compile Include="Generated\RatingType.cs" />
+    <Compile Include="Generated\RawMaterial.cs" />
+    <Compile Include="Generated\Receipt.cs" />
+    <Compile Include="Generated\ReceiptAccountingTransaction.cs" />
+    <Compile Include="Generated\RecurringCharge.cs" />
+    <Compile Include="Generated\Region.cs" />
+    <Compile Include="Generated\Request.cs" />
+    <Compile Include="Generated\RequestForInformation.cs" />
+    <Compile Include="Generated\RequestForProposal.cs" />
+    <Compile Include="Generated\RequestForQuote.cs" />
+    <Compile Include="Generated\RequestItem.cs" />
+    <Compile Include="Generated\Requirement.cs" />
+    <Compile Include="Generated\RequirementBudgetAllocation.cs" />
+    <Compile Include="Generated\RequirementCommunication.cs" />
+    <Compile Include="Generated\RequirementObjectState.cs" />
+    <Compile Include="Generated\RequirementStatus.cs" />
+    <Compile Include="Generated\Research.cs" />
+    <Compile Include="Generated\ResourceRequirement.cs" />
+    <Compile Include="Generated\RespondingParty.cs" />
+    <Compile Include="Generated\Responsibility.cs" />
+    <Compile Include="Generated\Resume.cs" />
+    <Compile Include="Generated\RevenueQuantityBreak.cs" />
+    <Compile Include="Generated\RevenueValueBreak.cs" />
+    <Compile Include="Generated\Room.cs" />
+    <Compile Include="Generated\SalaryStep.cs" />
+    <Compile Include="Generated\SalesAccountingTransaction.cs" />
+    <Compile Include="Generated\SalesAgreement.cs" />
+    <Compile Include="Generated\SalesChannel.cs" />
+    <Compile Include="Generated\SalesChannelRevenue.cs" />
+    <Compile Include="Generated\SalesChannelRevenueHistory.cs" />
+    <Compile Include="Generated\SalesInvoice.cs" />
+    <Compile Include="Generated\SalesInvoiceItem.cs" />
+    <Compile Include="Generated\SalesInvoiceItemObjectState.cs" />
+    <Compile Include="Generated\SalesInvoiceItemStatus.cs" />
+    <Compile Include="Generated\SalesInvoiceItemType.cs" />
+    <Compile Include="Generated\SalesInvoiceObjectState.cs" />
+    <Compile Include="Generated\SalesInvoiceStatus.cs" />
+    <Compile Include="Generated\SalesInvoiceType.cs" />
+    <Compile Include="Generated\SalesOrder.cs" />
+    <Compile Include="Generated\SalesOrderItem.cs" />
+    <Compile Include="Generated\SalesOrderItemObjectState.cs" />
+    <Compile Include="Generated\SalesOrderItemStatus.cs" />
+    <Compile Include="Generated\SalesOrderObjectState.cs" />
+    <Compile Include="Generated\SalesOrderStatus.cs" />
+    <Compile Include="Generated\SalesRepCommission.cs" />
+    <Compile Include="Generated\SalesRepPartyProductCategoryRevenue.cs" />
+    <Compile Include="Generated\SalesRepPartyRevenue.cs" />
+    <Compile Include="Generated\SalesRepProductCategoryRevenue.cs" />
+    <Compile Include="Generated\SalesRepRelationship.cs" />
+    <Compile Include="Generated\SalesRepRevenue.cs" />
+    <Compile Include="Generated\SalesRepRevenueHistory.cs" />
+    <Compile Include="Generated\SalesTerritory.cs" />
+    <Compile Include="Generated\Salutation.cs" />
+    <Compile Include="Generated\SerializedInventoryItem.cs" />
+    <Compile Include="Generated\SerializedInventoryItemObjectState.cs" />
+    <Compile Include="Generated\SerializedInventoryItemStatus.cs" />
+    <Compile Include="Generated\Service.cs" />
+    <Compile Include="Generated\ServiceConfiguration.cs" />
+    <Compile Include="Generated\ServiceEntry.cs" />
+    <Compile Include="Generated\ServiceEntryBilling.cs" />
+    <Compile Include="Generated\ServiceEntryHeader.cs" />
+    <Compile Include="Generated\ServiceFeature.cs" />
+    <Compile Include="Generated\ServiceTerritory.cs" />
+    <Compile Include="Generated\Shelf.cs" />
+    <Compile Include="Generated\Shipment.cs" />
+    <Compile Include="Generated\ShipmentItem.cs" />
+    <Compile Include="Generated\ShipmentMethod.cs" />
+    <Compile Include="Generated\ShipmentPackage.cs" />
+    <Compile Include="Generated\ShipmentReceipt.cs" />
+    <Compile Include="Generated\ShipmentRouteSegment.cs" />
+    <Compile Include="Generated\ShipmentValue.cs" />
+    <Compile Include="Generated\ShippingAndHandlingCharge.cs" />
+    <Compile Include="Generated\ShippingAndHandlingComponent.cs" />
+    <Compile Include="Generated\Singleton.cs" />
+    <Compile Include="Generated\Size.cs" />
+    <Compile Include="Generated\Skill.cs" />
+    <Compile Include="Generated\SkillLevel.cs" />
+    <Compile Include="Generated\SkillRating.cs" />
+    <Compile Include="Generated\SoftwareFeature.cs" />
+    <Compile Include="Generated\StandardServiceOrderItem.cs" />
+    <Compile Include="Generated\State.cs" />
+    <Compile Include="Generated\StatementOfWork.cs" />
+    <Compile Include="Generated\Store.cs" />
+    <Compile Include="Generated\StoreRevenue.cs" />
+    <Compile Include="Generated\StoreRevenueHistory.cs" />
+    <Compile Include="Generated\SubAgreement.cs" />
+    <Compile Include="Generated\SubAssembly.cs" />
+    <Compile Include="Generated\SubContractorAgreement.cs" />
+    <Compile Include="Generated\SubContractorRelationship.cs" />
+    <Compile Include="Generated\SupplierOffering.cs" />
+    <Compile Include="Generated\SupplierRelationship.cs" />
+    <Compile Include="Generated\SurchargeAdjustment.cs" />
+    <Compile Include="Generated\SurchargeComponent.cs" />
+    <Compile Include="Generated\Task.cs" />
+    <Compile Include="Generated\TaxDocument.cs" />
+    <Compile Include="Generated\TaxDue.cs" />
+    <Compile Include="Generated\TelecommunicationsNumber.cs" />
+    <Compile Include="Generated\TemplatePurpose.cs" />
+    <Compile Include="Generated\TermType.cs" />
+    <Compile Include="Generated\Territory.cs" />
+    <Compile Include="Generated\TestingRequirement.cs" />
+    <Compile Include="Generated\Threshold.cs" />
+    <Compile Include="Generated\TimeAndMaterialsService.cs" />
+    <Compile Include="Generated\TimeEntry.cs" />
+    <Compile Include="Generated\TimeFrequency.cs" />
+    <Compile Include="Generated\TimePeriodUsage.cs" />
+    <Compile Include="Generated\Tolerance.cs" />
+    <Compile Include="Generated\Training.cs" />
+    <Compile Include="Generated\Transfer.cs" />
+    <Compile Include="Generated\TransferObjectState.cs" />
+    <Compile Include="Generated\TransferStatus.cs" />
+    <Compile Include="Generated\UnitOfMeasure.cs" />
+    <Compile Include="Generated\UnitOfMeasureConversion.cs" />
+    <Compile Include="Generated\UserGroup.cs" />
+    <Compile Include="Generated\UtilizationCharge.cs" />
+    <Compile Include="Generated\VarianceReason.cs" />
+    <Compile Include="Generated\VatCalculationMethod.cs" />
+    <Compile Include="Generated\VatForm.cs" />
+    <Compile Include="Generated\VatRate.cs" />
+    <Compile Include="Generated\VatRatePurchaseKind.cs" />
+    <Compile Include="Generated\VatRateUsage.cs" />
+    <Compile Include="Generated\VatRegime.cs" />
+    <Compile Include="Generated\VatReturnBox.cs" />
+    <Compile Include="Generated\VatReturnBoxType.cs" />
+    <Compile Include="Generated\VatTariff.cs" />
+    <Compile Include="Generated\Vehicle.cs" />
+    <Compile Include="Generated\VolumeUsage.cs" />
+    <Compile Include="Generated\Warehouse.cs" />
+    <Compile Include="Generated\WebAddress.cs" />
+    <Compile Include="Generated\WebSiteCommunication.cs" />
+    <Compile Include="Generated\Withdrawal.cs" />
+    <Compile Include="Generated\WorkEffort.cs" />
+    <Compile Include="Generated\WorkEffortAssignment.cs" />
+    <Compile Include="Generated\WorkEffortAssignmentRate.cs" />
+    <Compile Include="Generated\WorkEffortBilling.cs" />
+    <Compile Include="Generated\WorkEffortFixedAssetAssignment.cs" />
+    <Compile Include="Generated\WorkEffortFixedAssetStandard.cs" />
+    <Compile Include="Generated\WorkEffortGoodStandard.cs" />
+    <Compile Include="Generated\WorkEffortInventoryAssignment.cs" />
+    <Compile Include="Generated\WorkEffortObjectState.cs" />
+    <Compile Include="Generated\WorkEffortPartStandard.cs" />
+    <Compile Include="Generated\WorkEffortPartyAssignment.cs" />
+    <Compile Include="Generated\WorkEffortPurpose.cs" />
+    <Compile Include="Generated\WorkEffortSkillStandard.cs" />
+    <Compile Include="Generated\WorkEffortStatus.cs" />
+    <Compile Include="Generated\WorkEffortType.cs" />
+    <Compile Include="Generated\WorkEffortTypeKind.cs" />
+    <Compile Include="Generated\WorkFlow.cs" />
+    <Compile Include="Generated\WorkRequirement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
