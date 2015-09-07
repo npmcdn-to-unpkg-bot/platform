@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("584681af-90f0-45b1-a80e-6a73c3592600")]
 	#endregion
@@ -336,15 +334,11 @@ namespace Allors.Meta
 		[Size(256)]
 		[Plural("AllorsStrings9")]
 		public RelationType AllorsString9;
-
-
-
+        
 		public static IGT32UnitInterface Instance {get; internal set;}
 
 		internal IGT32UnitInterface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "IGT32Unit";
-			this.PluralName = "IGT32Units";
         }
 	}
 }

@@ -1,14 +1,11 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("19bb2bc3-d53a-4d15-86d0-b250fdbcb0a0")]
 	#endregion
 	[Inherit(typeof(S1234Interface))]
 	[Inherit(typeof(S2Interface))]
-
-  	public partial class I2Interface: Interface
+    public partial class I2Interface: Interface
 	{
 		#region Allors
 		[Id("35040d7c-ab7f-4a99-9d09-e01e24ca3cb9")]
@@ -61,14 +58,10 @@ namespace Allors.Meta
 		[Type(typeof(AllorsFloatUnit))]
 		public RelationType AllorsDouble;
 
-
-
 		public static I2Interface Instance {get; internal set;}
 
 		internal I2Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "I2";
-			this.PluralName = "I2s";
         }
 	}
 }

@@ -23,9 +23,9 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
-	<generation template="meta" output="Meta.g.cs"/> 
+	<generation template="meta" output="Meta.cs"/> 
 $domain.compositeObjectTypes:{objectType|
-	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.g.cs"/>
+	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.cs"/>
 }$
 </generations>
 >>
@@ -37,7 +37,7 @@ namespace Allors.Meta
 $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDomain(domain=superDomain)$$endif$}$
 
 	#region Allors
-	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$	[Inherit(typeof($superDomain.Name$Domain)]$endif$
+	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$	[Inherit(typeof($superDomain.Name$Domain))]$endif$
 }$
 	[Id("$domain.IdAsString$")]
 	#endregion
@@ -54,7 +54,7 @@ $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDom
 
 superDomain(domain) ::= <<
 	#region Allors
-	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$		[Inherit(typeof($superDomain.Name$Domain)]$endif$
+	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$		[Inherit(typeof($superDomain.Name$Domain))]$endif$
 }$
 	[Id("$domain.IdAsString$")]
 	#endregion
@@ -79,6 +79,7 @@ namespace Allors.Meta
 	#region Allors
 	[Id("$objectType.IdAsString$")]
 	#endregion
+	[Plural("$objectType.PluralName$")]
 $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 }$
   	public partial class $objectType.SingularName$Interface: Interface
@@ -91,8 +92,6 @@ $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relat
 
 		internal $objectType.SingularName$Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "$objectType.SingularName$";
-			this.PluralName = "$objectType.PluralName$";
         }
 	}
 }
@@ -108,6 +107,7 @@ namespace Allors.Meta
 	#endregion
 $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 }$
+	[Plural("$objectType.PluralName$")]
 	public partial class $objectType.SingularName$Class : Class
 	{
 $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$
@@ -118,8 +118,6 @@ $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relat
 
 		internal $objectType.SingularName$Class() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "$objectType.SingularName$";
-			this.PluralName = "$objectType.PluralName$";
         }
 	}
 }

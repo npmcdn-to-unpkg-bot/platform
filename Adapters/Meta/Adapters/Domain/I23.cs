@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("29cb9717-2452-4da0-9a29-8bd5d815307a")]
 	#endregion
@@ -16,14 +14,10 @@ namespace Allors.Meta
 		[Size(256)]
 		public RelationType AllorsString;
 
-
-
-		public static I23Interface Instance {get; internal set;}
+        public static I23Interface Instance {get; internal set;}
 
 		internal I23Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "I23";
-			this.PluralName = "I23s";
         }
 	}
 }

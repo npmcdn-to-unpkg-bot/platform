@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("c3c0ecf3-9f8d-4701-854f-8ddea1bd69fd")]
 	#endregion
@@ -148,14 +146,10 @@ namespace Allors.Meta
 		[Type(typeof(AllorsBooleanUnit))]
 		public RelationType AllorsBoolean;
 
-
-
 		public static S1234Interface Instance {get; internal set;}
 
 		internal S1234Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "S1234";
-			this.PluralName = "S1234s";
         }
 	}
 }

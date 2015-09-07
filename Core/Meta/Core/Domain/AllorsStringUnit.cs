@@ -29,8 +29,6 @@ namespace Allors.Meta
         internal AllorsStringUnit()
             : base(MetaPopulation.Instance)
         {
-            this.SingularName = "AllorsString";
-            this.PluralName = "AllorsStrings";
             this.UnitTag = UnitTags.AllorsString;
         }
     }

@@ -2,7 +2,6 @@
 {
     using System;
     using Allors.Meta;
-    using Allors.Meta.Ids;
     using Allors.Web.Content;
     using Allors.Web.Mvc.Models;
 
@@ -22,7 +21,7 @@
 
         public Select Owner { get; set; }
 
-        [Path(OrganisationIds.Employees)]
+        [Path("b95c7b34-a295-4600-82c8-826cc2186a00")]
         public MultipleSelect Werknemers { get; set; }
 
         public int EmployeeCount { get; set; }

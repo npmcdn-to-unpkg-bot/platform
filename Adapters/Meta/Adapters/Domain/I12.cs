@@ -1,12 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("97755724-b934-4cc5-beb4-3d49a7a4b27e")]
 	#endregion
 	[Inherit(typeof(S12Interface))]
-
   	public partial class I12Interface: Interface
 	{
 		#region Allors
@@ -190,14 +187,10 @@ namespace Allors.Meta
 		[Multiplicity(Multiplicity.OneToMany)]
 		public RelationType C2one2many;
 
-
-
 		public static I12Interface Instance {get; internal set;}
 
 		internal I12Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "I12";
-			this.PluralName = "I12s";
         }
 	}
 }

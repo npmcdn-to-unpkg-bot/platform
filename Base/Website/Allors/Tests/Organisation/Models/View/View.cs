@@ -5,7 +5,6 @@
     using System.Web;
 
     using Allors.Meta;
-    using Allors.Meta.Ids;
     using Allors.Web.Mvc.Models;
 
     public class View : IMetadataModel<OrganisationClass>
@@ -24,7 +23,7 @@
 
         public Select Owner { get; set; }
 
-        [Path(OrganisationIds.Employees)]
+        [Path("b95c7b34-a295-4600-82c8-826cc2186a00")]
         public MultipleSelect Werknemers { get; set; }
 
         public int EmployeeCount { get; set; }

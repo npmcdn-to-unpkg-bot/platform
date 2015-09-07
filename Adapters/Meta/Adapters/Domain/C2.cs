@@ -1,14 +1,11 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("72c07e8a-03f5-4da8-ab37-236333d4f74e")]
 	#endregion
 	[Inherit(typeof(I2Interface))]
 	[Inherit(typeof(I23Interface))]
 	[Inherit(typeof(I12Interface))]
-
 	public partial class C2Class : Class
 	{
 		#region Allors
@@ -163,15 +160,11 @@ namespace Allors.Meta
 		[Plural("C3Many2Ones")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType C3Many2One;
-
-
-
+        
 		public static C2Class Instance {get; internal set;}
 
 		internal C2Class() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "C2";
-			this.PluralName = "C2s";
         }
 	}
 }

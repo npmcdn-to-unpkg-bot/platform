@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("15c3bb71-075d-48ad-8a00-250c2f627092")]
 	#endregion
@@ -166,15 +164,11 @@ namespace Allors.Meta
 		[Plural("C1one2manies")]
 		[Multiplicity(Multiplicity.OneToMany)]
 		public RelationType C1one2many;
-
-
-
+        
 		public static S1Interface Instance {get; internal set;}
 
 		internal S1Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "S1";
-			this.PluralName = "S1s";
         }
 	}
 }

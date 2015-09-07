@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("fcaa52e3-4a90-4981-b45d-d158e2589506")]
 	#endregion
@@ -26,14 +24,10 @@ namespace Allors.Meta
 		[Plural("Indeces")]
 		public RelationType Index;
 
-
-
 		public static NamedInterface Instance {get; internal set;}
 
 		internal NamedInterface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "Named";
-			this.PluralName = "Nameds";
         }
 	}
 }

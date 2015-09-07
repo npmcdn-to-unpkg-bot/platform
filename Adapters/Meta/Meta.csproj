@@ -191,7 +191,7 @@
     <Compile Include="Adapters\Domain\ISandbox.cs" />
     <Compile Include="Adapters\Domain\LT32.cs" />
     <Compile Include="Adapters\Domain\LT32UnitGT32Composite.cs" />
-    <Compile Include="Adapters\Domain\Meta.cs" />
+    <Compile Include="Adapters\Domain\Adapters.cs" />
     <Compile Include="Adapters\Domain\Named.cs" />
     <Compile Include="Adapters\Domain\Person.cs" />
     <Compile Include="Adapters\Domain\S1.cs" />

@@ -29,8 +29,6 @@ namespace Allors.Meta
         internal AllorsUniqueUnit()
             : base(MetaPopulation.Instance)
         {
-            this.SingularName = "AllorsUnique";
-            this.PluralName = "AllorsUniques";
             this.UnitTag = UnitTags.AllorsUnique;
         }
     }

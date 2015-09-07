@@ -29,8 +29,6 @@ namespace Allors.Meta
         internal AllorsDateTimeUnit()
             : base(MetaPopulation.Instance)
         {
-            this.SingularName = "AllorsDateTime";
-            this.PluralName = "AllorsDateTimes";
             this.UnitTag = UnitTags.AllorsDateTime;
         }
     }

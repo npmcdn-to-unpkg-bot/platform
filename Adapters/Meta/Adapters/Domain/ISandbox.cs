@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("7ba2ab26-491b-49eb-944c-26f6bb66e50f")]
 	#endregion
@@ -37,14 +35,10 @@ namespace Allors.Meta
 		[Multiplicity(Multiplicity.OneToOne)]
 		public RelationType InvisibleOne;
 
-
-
 		public static ISandboxInterface Instance {get; internal set;}
 
 		internal ISandboxInterface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "ISandbox";
-			this.PluralName = "ISandboxes";
         }
 	}
 }

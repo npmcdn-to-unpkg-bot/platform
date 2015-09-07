@@ -29,8 +29,6 @@ namespace Allors.Meta
         internal AllorsBinaryUnit()
             : base(MetaPopulation.Instance)
         {
-            this.SingularName = "AllorsBinary";
-            this.PluralName = "AllorsBinarys";
             this.UnitTag = UnitTags.AllorsBinary;
         }
     }

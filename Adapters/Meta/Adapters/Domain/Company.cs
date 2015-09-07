@@ -1,12 +1,10 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("b1b6361e-5ee5-434c-9c92-46c6166195c4")]
 	#endregion
+    [Plural("Companies")]
 	[Inherit(typeof(NamedInterface))]
-
 	public partial class CompanyClass : Class
 	{
 		#region Allors
@@ -160,15 +158,11 @@ namespace Allors.Meta
 		[Plural("NamedsOneSort1")]
 		[Multiplicity(Multiplicity.OneToMany)]
 		public RelationType NamedOneSort1;
-
-
-
+        
 		public static CompanyClass Instance {get; internal set;}
 
 		internal CompanyClass() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "Company";
-			this.PluralName = "Companies";
         }
 	}
 }

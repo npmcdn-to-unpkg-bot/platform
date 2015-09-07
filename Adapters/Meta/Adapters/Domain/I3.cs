@@ -1,13 +1,10 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("2d86277f-3993-4831-a7de-3640166d3d50")]
 	#endregion
 	[Inherit(typeof(S1234Interface))]
 	[Inherit(typeof(S3Interface))]
-
   	public partial class I3Interface: Interface
 	{
 		#region Allors
@@ -119,14 +116,10 @@ namespace Allors.Meta
 		[Multiplicity(Multiplicity.OneToOne)]
 		public RelationType C1one2one;
 
-
-
 		public static I3Interface Instance {get; internal set;}
 
 		internal I3Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "I3";
-			this.PluralName = "I3s";
         }
 	}
 }

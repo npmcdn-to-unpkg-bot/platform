@@ -61,77 +61,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AssociationType.cs">
-      <Link>Core\Domain\AssociationType.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBinaryUnit.cs">
+      <Link>Core\Domain\AllorsBinaryUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Class.cs">
-      <Link>Core\Domain\Class.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBooleanUnit.cs">
+      <Link>Core\Domain\AllorsBooleanUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Composite.cs">
-      <Link>Core\Domain\Composite.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDateTimeUnit.cs">
+      <Link>Core\Domain\AllorsDateTimeUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ConcreteMethodType.cs">
-      <Link>Core\Domain\ConcreteMethodType.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDecimalUnit.cs">
+      <Link>Core\Domain\AllorsDecimalUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ConcreteRoleType.cs">
-      <Link>Core\Domain\ConcreteRoleType.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsFloatUnit.cs">
+      <Link>Core\Domain\AllorsFloatUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Domain.cs">
-      <Link>Core\Domain\Domain.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsIntegerUnit.cs">
+      <Link>Core\Domain\AllorsIntegerUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\DomainObject.cs">
-      <Link>Core\Domain\DomainObject.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsStringUnit.cs">
+      <Link>Core\Domain\AllorsStringUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Inheritance.cs">
-      <Link>Core\Domain\Inheritance.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsUniqueUnit.cs">
+      <Link>Core\Domain\AllorsUniqueUnit.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Interface.cs">
-      <Link>Core\Domain\Interface.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\CoreDomain.cs">
+      <Link>Core\Domain\CoreDomain.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\LazySet.cs">
-      <Link>Core\Domain\LazySet.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MetaObject.cs">
-      <Link>Core\Domain\MetaObject.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MetaPopulation.cs">
-      <Link>Core\Domain\MetaPopulation.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Method.cs">
-      <Link>Core\Domain\Method.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MethodInvocation.cs">
-      <Link>Core\Domain\MethodInvocation.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\MethodType.cs">
-      <Link>Core\Domain\MethodType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ObjectType.cs">
-      <Link>Core\Domain\ObjectType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\OperandType.cs">
-      <Link>Core\Domain\OperandType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\PropertyType.cs">
-      <Link>Core\Domain\PropertyType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\RelationType.cs">
-      <Link>Core\Domain\RelationType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\RoleType.cs">
-      <Link>Core\Domain\RoleType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\Unit.cs">
-      <Link>Core\Domain\Unit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ValidationError.cs">
-      <Link>Core\Domain\ValidationError.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ValidationKind.cs">
-      <Link>Core\Domain\ValidationKind.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ValidationLog.cs">
-      <Link>Core\Domain\ValidationLog.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\ObjectInterface.cs">
+      <Link>Core\Domain\ObjectInterface.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\Generation\Generate.cs">
       <Link>Core\Generation\Generate.cs</Link>
@@ -154,188 +112,161 @@
     <Compile Include="..\..\Core\Meta\Core\Generation\StringTemplate.cs">
       <Link>Core\Generation\StringTemplate.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsBinaryUnit.cs">
-      <Link>Core\Population\AllorsBinaryUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\AssociationType.cs">
+      <Link>Core\Meta\AssociationType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsBooleanUnit.cs">
-      <Link>Core\Population\AllorsBooleanUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Class.cs">
+      <Link>Core\Meta\Class.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsDateTimeUnit.cs">
-      <Link>Core\Population\AllorsDateTimeUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Composite.cs">
+      <Link>Core\Meta\Composite.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsDecimalUnit.cs">
-      <Link>Core\Population\AllorsDecimalUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ConcreteMethodType.cs">
+      <Link>Core\Meta\ConcreteMethodType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsFloatUnit.cs">
-      <Link>Core\Population\AllorsFloatUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ConcreteRoleType.cs">
+      <Link>Core\Meta\ConcreteRoleType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsIntegerUnit.cs">
-      <Link>Core\Population\AllorsIntegerUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Domain.cs">
+      <Link>Core\Meta\Domain.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsStringUnit.cs">
-      <Link>Core\Population\AllorsStringUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\DomainObject.cs">
+      <Link>Core\Meta\DomainObject.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\AllorsUniqueUnit.cs">
-      <Link>Core\Population\AllorsUniqueUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Inheritance.cs">
+      <Link>Core\Meta\Inheritance.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\CoreDomain.cs">
-      <Link>Core\Population\CoreDomain.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Interface.cs">
+      <Link>Core\Meta\Interface.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Population\ObjectInterface.cs">
-      <Link>Core\Population\ObjectInterface.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Meta\LazySet.cs">
+      <Link>Core\Meta\LazySet.cs</Link>
     </Compile>
-    <Compile Include="Base\Domain\Composite.cs" />
-    <Compile Include="Base\Domain\RoleType.cs" />
-    <Compile Include="Base\Domain\ConcreteRoleType.cs" />
-    <Compile Include="Base\Domain\Path.cs" />
-    <Compile Include="Base\Population\AccessControl.cs">
+    <Compile Include="..\..\Core\Meta\Core\Meta\MetaObject.cs">
+      <Link>Core\Meta\MetaObject.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\MetaPopulation.cs">
+      <Link>Core\Meta\MetaPopulation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Method.cs">
+      <Link>Core\Meta\Method.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\MethodInvocation.cs">
+      <Link>Core\Meta\MethodInvocation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\MethodType.cs">
+      <Link>Core\Meta\MethodType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ObjectType.cs">
+      <Link>Core\Meta\ObjectType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\OperandType.cs">
+      <Link>Core\Meta\OperandType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\PropertyType.cs">
+      <Link>Core\Meta\PropertyType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\RelationType.cs">
+      <Link>Core\Meta\RelationType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\RoleType.cs">
+      <Link>Core\Meta\RoleType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Unit.cs">
+      <Link>Core\Meta\Unit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ValidationError.cs">
+      <Link>Core\Meta\ValidationError.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ValidationKind.cs">
+      <Link>Core\Meta\ValidationKind.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ValidationLog.cs">
+      <Link>Core\Meta\ValidationLog.cs</Link>
+    </Compile>
+    <Compile Include="Base\Domain\Base.cs" />
+    <Compile Include="Base\Meta\Composite.cs" />
+    <Compile Include="Base\Meta\RoleType.cs" />
+    <Compile Include="Base\Meta\ConcreteRoleType.cs" />
+    <Compile Include="Base\Meta\Path.cs" />
+    <Compile Include="Base\Domain\ObjectInterface.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base\Population\AccessControlledObject.cs" />
-    <Compile Include="Base\Population\Commentable.cs" />
-    <Compile Include="Base\Population\Counter.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Country.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Currency.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Deletable.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Enumeration.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Image.cs" />
-    <Compile Include="Base\Population\Language.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Locale.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Localised.cs" />
-    <Compile Include="Base\Population\LocalisedText.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Login.cs" />
-    <Compile Include="Base\Population\Media.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\MediaContent.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\MediaType.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\ObjectInterface.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\ObjectState.cs" />
-    <Compile Include="Base\Population\Period.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Permission.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Person.cs" />
-    <Compile Include="Base\Population\Printable.cs" />
-    <Compile Include="Base\Population\PrintQueue.cs" />
-    <Compile Include="Base\Population\Role.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\SecurityToken.cs" />
-    <Compile Include="Base\Population\SecurityTokenOwner.cs" />
-    <Compile Include="Base\Population\Singleton.cs" />
-    <Compile Include="Base\Population\StringTemplate.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\Transition.cs" />
-    <Compile Include="Base\Population\Transitional.cs" />
-    <Compile Include="Base\Population\UniquelyIdentifiable.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\Population\User.cs" />
-    <Compile Include="Base\Population\UserGroup.cs" />
-    <Compile Include="Generated\AccessControl.g.cs" />
-    <Compile Include="Generated\AccessControlledObject.g.cs" />
-    <Compile Include="Generated\Address.g.cs" />
-    <Compile Include="Generated\BadUI.g.cs" />
-    <Compile Include="Generated\C1.g.cs" />
-    <Compile Include="Generated\C2.g.cs" />
-    <Compile Include="Generated\ClassWithoutRoles.g.cs" />
-    <Compile Include="Generated\Commentable.g.cs" />
-    <Compile Include="Generated\Counter.g.cs" />
-    <Compile Include="Generated\Country.g.cs" />
-    <Compile Include="Generated\Currency.g.cs" />
-    <Compile Include="Generated\Deletable.g.cs" />
-    <Compile Include="Generated\Dependee.g.cs" />
-    <Compile Include="Generated\Dependent.g.cs" />
-    <Compile Include="Generated\DerivationLogC1.g.cs" />
-    <Compile Include="Generated\DerivationLogC2.g.cs" />
-    <Compile Include="Generated\DerivationLogI12.g.cs" />
-    <Compile Include="Generated\Enumeration.g.cs" />
-    <Compile Include="Generated\Extender.g.cs" />
-    <Compile Include="Generated\First.g.cs" />
-    <Compile Include="Generated\Four.g.cs" />
-    <Compile Include="Generated\From.g.cs" />
-    <Compile Include="Generated\Gender.g.cs" />
-    <Compile Include="Generated\HomeAddress.g.cs" />
-    <Compile Include="Generated\I1.g.cs" />
-    <Compile Include="Generated\I12.g.cs" />
-    <Compile Include="Generated\I2.g.cs" />
-    <Compile Include="Generated\Ids.g.cs" />
-    <Compile Include="Generated\Image.g.cs" />
-    <Compile Include="Generated\Language.g.cs" />
-    <Compile Include="Generated\Locale.g.cs" />
-    <Compile Include="Generated\Localised.g.cs" />
-    <Compile Include="Generated\LocalisedText.g.cs" />
-    <Compile Include="Generated\Login.g.cs" />
-    <Compile Include="Generated\MailboxAddress.g.cs" />
-    <Compile Include="Generated\Media.g.cs" />
-    <Compile Include="Generated\MediaContent.g.cs" />
-    <Compile Include="Generated\MediaType.g.cs" />
-    <Compile Include="Generated\Meta.g.cs" />
-    <Compile Include="Generated\ObjectState.g.cs" />
-    <Compile Include="Generated\One.g.cs" />
-    <Compile Include="Generated\Order.g.cs" />
-    <Compile Include="Generated\OrderObjectState.g.cs" />
-    <Compile Include="Generated\Organisation.g.cs" />
-    <Compile Include="Generated\Period.g.cs" />
-    <Compile Include="Generated\Permission.g.cs" />
-    <Compile Include="Generated\Person.g.cs" />
-    <Compile Include="Generated\Place.g.cs" />
-    <Compile Include="Generated\Printable.g.cs" />
-    <Compile Include="Generated\PrintQueue.g.cs" />
-    <Compile Include="Generated\Role.g.cs" />
-    <Compile Include="Generated\S1.g.cs" />
-    <Compile Include="Generated\Second.g.cs" />
-    <Compile Include="Generated\SecurityToken.g.cs" />
-    <Compile Include="Generated\SecurityTokenOwner.g.cs" />
-    <Compile Include="Generated\Shared.g.cs" />
-    <Compile Include="Generated\SimpleJob.g.cs" />
-    <Compile Include="Generated\Singleton.g.cs" />
-    <Compile Include="Generated\StatefulCompany.g.cs" />
-    <Compile Include="Generated\StringTemplate.g.cs" />
-    <Compile Include="Generated\Subdependee.g.cs" />
-    <Compile Include="Generated\Third.g.cs" />
-    <Compile Include="Generated\Three.g.cs" />
-    <Compile Include="Generated\To.g.cs" />
-    <Compile Include="Generated\Transition.g.cs" />
-    <Compile Include="Generated\Transitional.g.cs" />
-    <Compile Include="Generated\Two.g.cs" />
-    <Compile Include="Generated\UniquelyIdentifiable.g.cs" />
-    <Compile Include="Generated\Unit.g.cs" />
-    <Compile Include="Generated\User.g.cs" />
-    <Compile Include="Generated\UserGroup.g.cs" />
+    <Compile Include="Base\Domain\AccessControl.cs" />
+    <Compile Include="Base\Domain\AccessControlledObject.cs" />
+    <Compile Include="Test\Domain\Address.cs" />
+    <Compile Include="Test\Domain\BadUI.cs" />
+    <Compile Include="Test\Domain\C1.cs" />
+    <Compile Include="Test\Domain\C2.cs" />
+    <Compile Include="Test\Domain\ClassWithoutRoles.cs" />
+    <Compile Include="Base\Domain\Commentable.cs" />
+    <Compile Include="Base\Domain\Counter.cs" />
+    <Compile Include="Base\Domain\Country.cs" />
+    <Compile Include="Base\Domain\Currency.cs" />
+    <Compile Include="Base\Domain\Deletable.cs" />
+    <Compile Include="Test\Domain\Dependee.cs" />
+    <Compile Include="Test\Domain\Dependent.cs" />
+    <Compile Include="Test\Domain\DerivationLogC1.cs" />
+    <Compile Include="Test\Domain\DerivationLogC2.cs" />
+    <Compile Include="Test\Domain\DerivationLogI12.cs" />
+    <Compile Include="Base\Domain\Enumeration.cs" />
+    <Compile Include="Test\Domain\Extender.cs" />
+    <Compile Include="Test\Domain\First.cs" />
+    <Compile Include="Test\Domain\Four.cs" />
+    <Compile Include="Test\Domain\From.cs" />
+    <Compile Include="Test\Domain\Gender.cs" />
+    <Compile Include="Test\Domain\HomeAddress.cs" />
+    <Compile Include="Test\Domain\I1.cs" />
+    <Compile Include="Test\Domain\I12.cs" />
+    <Compile Include="Test\Domain\I2.cs" />
+    <Compile Include="Base\Domain\Image.cs" />
+    <Compile Include="Base\Domain\Language.cs" />
+    <Compile Include="Base\Domain\Locale.cs" />
+    <Compile Include="Base\Domain\Localised.cs" />
+    <Compile Include="Base\Domain\LocalisedText.cs" />
+    <Compile Include="Base\Domain\Login.cs" />
+    <Compile Include="Test\Domain\MailboxAddress.cs" />
+    <Compile Include="Base\Domain\Media.cs" />
+    <Compile Include="Base\Domain\MediaContent.cs" />
+    <Compile Include="Base\Domain\MediaType.cs" />
+    <Compile Include="Test\Domain\Person.cs" />
+    <Compile Include="Test\Domain\Singleton.cs" />
+    <Compile Include="Test\Domain\Tests.cs" />
+    <Compile Include="Base\Domain\ObjectState.cs" />
+    <Compile Include="Test\Domain\One.cs" />
+    <Compile Include="Test\Domain\Order.cs" />
+    <Compile Include="Test\Domain\OrderObjectState.cs" />
+    <Compile Include="Test\Domain\Organisation.cs" />
+    <Compile Include="Base\Domain\Period.cs" />
+    <Compile Include="Base\Domain\Permission.cs" />
+    <Compile Include="Base\Domain\Person.cs" />
+    <Compile Include="Test\Domain\Place.cs" />
+    <Compile Include="Base\Domain\Printable.cs" />
+    <Compile Include="Base\Domain\PrintQueue.cs" />
+    <Compile Include="Base\Domain\Role.cs" />
+    <Compile Include="Test\Domain\S1.cs" />
+    <Compile Include="Test\Domain\Second.cs" />
+    <Compile Include="Base\Domain\SecurityToken.cs" />
+    <Compile Include="Base\Domain\SecurityTokenOwner.cs" />
+    <Compile Include="Test\Domain\Shared.cs" />
+    <Compile Include="Test\Domain\SimpleJob.cs" />
+    <Compile Include="Base\Domain\Singleton.cs" />
+    <Compile Include="Test\Domain\StatefulCompany.cs" />
+    <Compile Include="Base\Domain\StringTemplate.cs" />
+    <Compile Include="Test\Domain\Subdependee.cs" />
+    <Compile Include="Test\Domain\Third.cs" />
+    <Compile Include="Test\Domain\Three.cs" />
+    <Compile Include="Test\Domain\To.cs" />
+    <Compile Include="Base\Domain\Transition.cs" />
+    <Compile Include="Base\Domain\Transitional.cs" />
+    <Compile Include="Test\Domain\Two.cs" />
+    <Compile Include="Base\Domain\UniquelyIdentifiable.cs" />
+    <Compile Include="Test\Domain\Unit.cs" />
+    <Compile Include="Base\Domain\User.cs" />
+    <Compile Include="Base\Domain\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\MetaPopulation.v.cs" />
-    <Compile Include="Test\Domain\Composite.cs" />
-    <Compile Include="Test\Population\Organisation.cs" />
-    <Compile Include="Test\Population\S1.cs" />
-    <Compile Include="Test\Population\I1.cs" />
-    <Compile Include="Test\Population\C1.cs" />
+    <Compile Include="Test\Meta\Composite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Core\Meta\Core\Generate.proj">

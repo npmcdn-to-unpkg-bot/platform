@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("ebc22540-54c8-4601-a43d-2ed6da9f3e79")]
 	#endregion
@@ -50,14 +48,10 @@ namespace Allors.Meta
 		[Size(256)]
 		public RelationType AllorsString;
 
-
-
 		public static I34Interface Instance {get; internal set;}
 
 		internal I34Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "I34";
-			this.PluralName = "I34s";
         }
 	}
 }

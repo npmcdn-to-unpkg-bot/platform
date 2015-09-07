@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("4f53e1e7-e88a-4161-969c-1fed0b3a24a2")]
 	#endregion
@@ -36,15 +34,11 @@ namespace Allors.Meta
 		[Plural("Selfs1")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Self1;
-
-
-
+        
 		public static ILT32CompositeInterface Instance {get; internal set;}
 
 		internal ILT32CompositeInterface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "ILT32Composite";
-			this.PluralName = "ILT32Composites";
         }
 	}
 }

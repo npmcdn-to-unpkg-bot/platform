@@ -1,13 +1,10 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("20049a79-20c7-478b-a5ba-c54b1e615168")]
 	#endregion
 	[Inherit(typeof(I4Interface))]
 	[Inherit(typeof(I34Interface))]
-
 	public partial class C4Class : Class
 	{
 		#region Allors
@@ -19,14 +16,10 @@ namespace Allors.Meta
 		[Size(256)]
 		public RelationType AllorsString;
 
-
-
 		public static C4Class Instance {get; internal set;}
 
 		internal C4Class() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "C4";
-			this.PluralName = "C4s";
         }
 	}
 }

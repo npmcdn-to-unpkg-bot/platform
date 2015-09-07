@@ -59,6 +59,7 @@ namespace Allors.Meta
             var assembly = Assembly.GetExecutingAssembly();
             var classes = new List<Type>(assembly.GetTypes().Where(type => type.IsClass && !type.IsAbstract));
 
+            // Domains
             foreach (var domainType in classes.Where(type => type.GetInterfaces().Contains(typeof(IDomain))))
             {
                 var constructor = domainType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new []{Instance.GetType()}, null);
@@ -70,6 +71,7 @@ namespace Allors.Meta
                 instanceProperty.SetMethod.Invoke(null, new[] { domain });
             }
 
+            // Domain Inheritance
             foreach (var domain in Instance.Domains)
             {
                 var type = domain.GetType();
@@ -92,14 +94,41 @@ namespace Allors.Meta
                 }
             }
 
+            // ObjectTypes
             foreach (var objectType in classes.Where(type => type.GetInterfaces().Contains(typeof(IUnit)) || type.GetInterfaces().Contains(typeof(IInterface)) || type.GetInterfaces().Contains(typeof(IClass))))
             {
                 var constructor = objectType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
-                var instance = constructor.Invoke(null);
+                var instance = (ObjectType)constructor.Invoke(null);
+
+                if (instance is IUnit)
+                {
+                    instance.SingularName = objectType.Name.Substring(0, objectType.Name.Length - "Unit".Length);
+                }
+                else if (instance is IClass)
+                {
+                    instance.SingularName = objectType.Name.Substring(0, objectType.Name.Length - "Class".Length);
+                }
+                else if (instance is IInterface)
+                {
+                    instance.SingularName = objectType.Name.Substring(0, objectType.Name.Length - "Interface".Length);
+                }
+
+                var pluralAttribute = (PluralAttribute)Attribute.GetCustomAttribute(objectType, typeof(PluralAttribute));
+                if (pluralAttribute != null)
+                {
+                    instance.PluralName = pluralAttribute.Value;
+                }
+                else
+                {
+                    instance.PluralName = instance.SingularName + "s";
+                }
+
+
                 var instanceProperty = objectType.GetProperty("Instance");
                 instanceProperty.SetMethod.Invoke(null, new[] { instance });
             }
 
+            // ObjectType Inheritance
             foreach (var composite in Instance.Composites)
             {
                 var type = composite.GetType();

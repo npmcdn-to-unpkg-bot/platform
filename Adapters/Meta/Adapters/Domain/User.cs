@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("0d6bc154-112b-4a58-aa96-3b2a96f82523")]
 	#endregion
@@ -28,14 +26,10 @@ namespace Allors.Meta
 		[Plural("Froms")]
 		public RelationType From;
 
-
-
 		public static UserClass Instance {get; internal set;}
 
 		internal UserClass() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "User";
-			this.PluralName = "Users";
         }
 	}
 }

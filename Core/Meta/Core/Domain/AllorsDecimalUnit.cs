@@ -29,8 +29,6 @@ namespace Allors.Meta
         internal AllorsDecimalUnit()
             : base(MetaPopulation.Instance)
         {
-            this.SingularName = "AllorsDecimal";
-            this.PluralName = "AllorsDecimals";
             this.UnitTag = UnitTags.AllorsDecimal;
         }
     }

@@ -26,7 +26,6 @@ namespace Domain
     using Allors;
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.Meta.Ids;
 
     using Moq;
 
@@ -92,7 +91,7 @@ namespace Domain
             this.Session.Derive(true);
 
             var metaPopulation = MetaPopulation.Instance;
-            var path = new Path(metaPopulation, C1Ids.C1C2One2Manies, C2Ids.C2AllorsString);
+            var path = new Path(C1Meta.Instance.C1C2One2Manies, C2Meta.Instance.C2AllorsString);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);

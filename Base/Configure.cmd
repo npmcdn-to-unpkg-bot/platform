@@ -4,8 +4,6 @@
 
 @msbuild Resources/Merge.proj /verbosity:minimal
 
-@msbuild Meta/Generate.proj /verbosity:minimal
-
 @msbuild Base.sln /target:Meta:Rebuild /p:Configuration="Debug" /verbosity:minimal
 
 @msbuild Domain/Generate.proj /verbosity:minimal

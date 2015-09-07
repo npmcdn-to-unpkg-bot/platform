@@ -1,10 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("73970b0f-1ff4-4d39-aad8-fdbfbaae472f")]
 	#endregion
+    [Plural("Sandboxes")]
 	public partial class SandboxClass : Class
 	{
 		#region Allors
@@ -64,14 +63,10 @@ namespace Allors.Meta
 		[Size(256)]
 		public RelationType AllorsString;
 
-
-
 		public static SandboxClass Instance {get; internal set;}
 
 		internal SandboxClass() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "Sandbox";
-			this.PluralName = "Sandboxes";
         }
 	}
 }

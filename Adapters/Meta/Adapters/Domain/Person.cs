@@ -1,12 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("6a082a25-a8f2-4acd-a1a3-ba4461b729f1")]
 	#endregion
 	[Inherit(typeof(NamedInterface))]
-
 	public partial class PersonClass : Class
 	{
 		#region Allors
@@ -28,15 +25,11 @@ namespace Allors.Meta
 		[Type(typeof(CompanyClass))]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Company;
-
-
-
+        
 		public static PersonClass Instance {get; internal set;}
 
 		internal PersonClass() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "Person";
-			this.PluralName = "Persons";
         }
 	}
 }

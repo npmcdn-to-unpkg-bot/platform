@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("c3e82ab0-f586-4913-acb0-838ffd6701f8")]
 	#endregion
@@ -15,14 +13,10 @@ namespace Allors.Meta
 		[Type(typeof(AllorsIntegerUnit))]
 		public RelationType AllorsInteger;
 
-
-
 		public static SingleUnitClass Instance {get; internal set;}
 
 		internal SingleUnitClass() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "SingleUnit";
-			this.PluralName = "SingleUnits";
         }
 	}
 }

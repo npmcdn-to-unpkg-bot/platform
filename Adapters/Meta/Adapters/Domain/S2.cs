@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("feeb7027-7c6c-4cb5-8718-93e6e8a4afd8")]
 	#endregion
@@ -58,14 +56,10 @@ namespace Allors.Meta
 		[Type(typeof(AllorsDateTimeUnit))]
 		public RelationType AllorsDateTime;
 
-
-
 		public static S2Interface Instance {get; internal set;}
 
 		internal S2Interface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "S2";
-			this.PluralName = "S2s";
         }
 	}
 }

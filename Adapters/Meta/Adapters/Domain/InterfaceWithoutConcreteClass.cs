@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("2f4bc713-47c9-4e07-9f2b-1d22a0cb4fad")]
 	#endregion
@@ -15,14 +13,10 @@ namespace Allors.Meta
 		[Type(typeof(AllorsBooleanUnit))]
 		public RelationType AllorsBoolean;
 
-
-
 		public static InterfaceWithoutConcreteClassInterface Instance {get; internal set;}
 
 		internal InterfaceWithoutConcreteClassInterface() : base(MetaPopulation.Instance)
         {
-			this.SingularName = "InterfaceWithoutConcreteClass";
-			this.PluralName = "InterfacesWithoutConcreteClass";
         }
 	}
 }

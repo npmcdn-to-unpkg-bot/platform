@@ -26,81 +26,6 @@ namespace Allors.Meta.Static
     public class DomainTest : AbstractTest
     {
         [Test]
-        public void DefinedInheritances()
-        {
-            var domain = this.Domain;
-            var superdomain = new Domain(this.MetaPopulation, Guid.NewGuid());
-            domain.AddDirectSuperdomain(superdomain);
-
-            var c1 = new ClassBuilder(domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
-            var c2 = new ClassBuilder(superdomain, Guid.NewGuid()).WithSingularName("c2").WithPluralName("c2s").Build();
-
-            var i1 = new InterfaceBuilder(domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
-            var i2 = new InterfaceBuilder(superdomain, Guid.NewGuid()).WithSingularName("i2").WithPluralName("i2s").Build();
-
-            Assert.AreEqual(0, domain.DefinedInheritances.Count());
-            Assert.AreEqual(0, superdomain.DefinedInheritances.Count());
-
-            new InheritanceBuilder(domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i1).Build();
-
-            Assert.AreEqual(1, this.Domain.DefinedInheritances.Count());
-            Assert.AreEqual(0, superdomain.DefinedInheritances.Count());
-
-            new InheritanceBuilder(superdomain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(i2).Build();
-
-            Assert.AreEqual(1, this.Domain.DefinedInheritances.Count());
-            Assert.AreEqual(1, superdomain.DefinedInheritances.Count());
-
-            new InheritanceBuilder(domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i2).Build();
-
-            Assert.AreEqual(2, this.Domain.DefinedInheritances.Count());
-            Assert.AreEqual(1, superdomain.DefinedInheritances.Count());
-        }
-        
-        [Test]
-        public void DefinedClasses()
-        {
-            var domain = this.Domain;
-            var superdomain = new Domain(this.MetaPopulation, Guid.NewGuid());
-            domain.AddDirectSuperdomain(superdomain);
-
-            Assert.AreEqual(0, domain.DefinedClasses.Count());
-            Assert.AreEqual(0, superdomain.DefinedClasses.Count());
-
-            var c1 = new ClassBuilder(domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
-
-            Assert.AreEqual(1, domain.DefinedClasses.Count());
-            Assert.AreEqual(0, superdomain.DefinedClasses.Count());
-
-            var c2 = new ClassBuilder(superdomain, Guid.NewGuid()).WithSingularName("c2").WithPluralName("c2s").Build();
-
-            Assert.AreEqual(1, domain.DefinedClasses.Count());
-            Assert.AreEqual(1, superdomain.DefinedClasses.Count());
-        }
-
-        [Test]
-        public void DefinedUnits()
-        {
-            var metaPopulation = new MetaPopulation();
-            var domain = new Domain(metaPopulation, Guid.NewGuid());
-            var superdomain = new Domain(metaPopulation, Guid.NewGuid());
-            domain.AddDirectSuperdomain(superdomain);
-
-            Assert.AreEqual(0, domain.DefinedUnits.Count());
-            Assert.AreEqual(0, superdomain.DefinedUnits.Count());
-
-            var allorsString = new UnitBuilder(domain, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
-
-            Assert.AreEqual(1, domain.DefinedUnits.Count());
-            Assert.AreEqual(0, superdomain.DefinedUnits.Count());
-
-            var allorsInteger = new UnitBuilder(superdomain, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
-
-            Assert.AreEqual(1, domain.DefinedUnits.Count());
-            Assert.AreEqual(1, superdomain.DefinedUnits.Count());
-        }
-
-        [Test]
         public void Create()
         {
             var metaPopulation = new MetaPopulation();
@@ -112,14 +37,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, metaPopulation.Domains.Count());
 
             Assert.AreEqual(0, domain.DirectSuperdomains.Count());
-            Assert.AreEqual(0, domain.DefinedAssociationTypes.Count());
-            Assert.AreEqual(0, domain.DefinedClasses.Count());
-            Assert.AreEqual(0, domain.DefinedInheritances.Count());
-            Assert.AreEqual(0, domain.DefinedInterfaces.Count());
-            Assert.AreEqual(0, domain.DefinedMethodTypes.Count());
-            Assert.AreEqual(0, domain.DefinedRelationTypes.Count());
-            Assert.AreEqual(0, domain.DefinedRoleTypes.Count());
-            Assert.AreEqual(0, domain.DefinedUnits.Count());
 
             var superdomain = new Domain(metaPopulation, Guid.NewGuid()) { Name = "Superdomain" };
 
@@ -130,26 +47,9 @@ namespace Allors.Meta.Static
             Assert.AreEqual(2, metaPopulation.Domains.Count());
 
             Assert.AreEqual(1, domain.DirectSuperdomains.Count());
-            Assert.AreEqual(0, domain.DefinedAssociationTypes.Count());
-            Assert.AreEqual(0, domain.DefinedClasses.Count());
-            Assert.AreEqual(0, domain.DefinedInheritances.Count());
-            Assert.AreEqual(0, domain.DefinedInterfaces.Count());
-            Assert.AreEqual(0, domain.DefinedMethodTypes.Count());
-            Assert.AreEqual(0, domain.DefinedRelationTypes.Count());
-            Assert.AreEqual(0, domain.DefinedRoleTypes.Count());
-            Assert.AreEqual(0, domain.DefinedUnits.Count());
 
             Assert.AreEqual(0, superdomain.DirectSuperdomains.Count());
-            Assert.AreEqual(0, superdomain.DefinedAssociationTypes.Count());
-            Assert.AreEqual(0, superdomain.DefinedClasses.Count());
-            Assert.AreEqual(0, superdomain.DefinedInheritances.Count());
-            Assert.AreEqual(0, superdomain.DefinedInterfaces.Count());
-            Assert.AreEqual(0, superdomain.DefinedMethodTypes.Count());
-            Assert.AreEqual(0, superdomain.DefinedRelationTypes.Count());
-            Assert.AreEqual(0, superdomain.DefinedRoleTypes.Count());
-            Assert.AreEqual(0, superdomain.DefinedUnits.Count());
         }
-
 
         [Test]
         public void Validate()

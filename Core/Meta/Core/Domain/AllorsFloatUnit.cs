@@ -29,8 +29,6 @@ namespace Allors.Meta
         private AllorsFloatUnit()
             : base(MetaPopulation.Instance)
         {
-            this.SingularName = "AllorsFloat";
-            this.PluralName = "AllorsFloats";
             this.UnitTag = UnitTags.AllorsFloat;
         }
     }

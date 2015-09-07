@@ -10,6 +10,11 @@ namespace Allors.Domain
 					SecurityToken SecurityTokens {set;}
 
 	}
+	public interface Address  : Object 
+	{
+					Place Place {set;}
+
+	}
 	public interface Commentable  : Object 
 	{
 					global::System.String Comment {set;}
@@ -18,6 +23,11 @@ namespace Allors.Domain
 	public interface Deletable  : Object 
 	{
 	}
+	public interface DerivationLogI12  : Object 
+	{
+					global::System.Guid? UniqueId {set;}
+
+	}
 	public interface Enumeration  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					LocalisedText LocalisedNames {set;}
@@ -25,68 +35,6 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 					global::System.Boolean IsActive {set;}
-
-	}
-	public interface Localised  : Object 
-	{
-					Locale Locale {set;}
-
-	}
-	public interface ObjectState  : Object, UniquelyIdentifiable 
-	{
-					Permission DeniedPermissions {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface Period  : Object 
-	{
-					global::System.DateTime FromDate {set;}
-
-					global::System.DateTime? ThroughDate {set;}
-
-	}
-	public interface Printable  : Object, UniquelyIdentifiable, AccessControlledObject 
-	{
-					global::System.String PrintContent {set;}
-
-	}
-	public interface SecurityTokenOwner  : Object 
-	{
-					SecurityToken OwnerSecurityToken {set;}
-
-	}
-	public interface Transitional  : Object, AccessControlledObject 
-	{
-					ObjectState PreviousObjectState {set;}
-
-					ObjectState LastObjectState {set;}
-
-	}
-	public interface UniquelyIdentifiable  : Object 
-	{
-					global::System.Guid UniqueId {set;}
-
-	}
-	public interface User  : Object, SecurityTokenOwner, AccessControlledObject, Localised 
-	{
-					global::System.Boolean? UserEmailConfirmed {set;}
-
-					global::System.String UserName {set;}
-
-					global::System.String UserEmail {set;}
-
-					global::System.String UserPasswordHash {set;}
-
-	}
-	public interface Address  : Object 
-	{
-					Place Place {set;}
-
-	}
-	public interface DerivationLogI12  : Object 
-	{
-					global::System.Guid? UniqueId {set;}
 
 	}
 	public interface I1  : Object, S1, I12 
@@ -135,7 +83,7 @@ namespace Allors.Domain
 
 					C1 I1C1Many2Manies {set;}
 
-					global::System.Double? I1AllorsFloat {set;}
+					global::System.Double? I1AllorsDouble {set;}
 
 					I1 I1I1One2One {set;}
 
@@ -154,7 +102,7 @@ namespace Allors.Domain
 
 					C2 I12C2One2One {set;}
 
-					global::System.Double? I12AllorsFloat {set;}
+					global::System.Double? I12AllorsDouble {set;}
 
 					I1 I12I1Many2One {set;}
 
@@ -265,14 +213,66 @@ namespace Allors.Domain
 
 					C2 I2C2One2One {set;}
 
-					global::System.Double? I2AllorsFloat {set;}
+					global::System.Double? I2AllorsDouble {set;}
+
+	}
+	public interface Localised  : Object 
+	{
+					Locale Locale {set;}
+
+	}
+	public interface ObjectState  : Object, UniquelyIdentifiable 
+	{
+					Permission DeniedPermissions {set;}
+
+					global::System.String Name {set;}
+
+	}
+	public interface Period  : Object 
+	{
+					global::System.DateTime FromDate {set;}
+
+					global::System.DateTime? ThroughDate {set;}
+
+	}
+	public interface Printable  : Object, UniquelyIdentifiable, AccessControlledObject 
+	{
+					global::System.String PrintContent {set;}
 
 	}
 	public interface S1  : Object 
 	{
 	}
+	public interface SecurityTokenOwner  : Object 
+	{
+					SecurityToken OwnerSecurityToken {set;}
+
+	}
 	public interface Shared  : Object 
 	{
+	}
+	public interface Transitional  : Object, AccessControlledObject 
+	{
+					ObjectState PreviousObjectState {set;}
+
+					ObjectState LastObjectState {set;}
+
+	}
+	public interface UniquelyIdentifiable  : Object 
+	{
+					global::System.Guid UniqueId {set;}
+
+	}
+	public interface User  : Object, Localised, AccessControlledObject, SecurityTokenOwner 
+	{
+					global::System.Boolean? UserEmailConfirmed {set;}
+
+					global::System.String UserName {set;}
+
+					global::System.String UserEmail {set;}
+
+					global::System.String UserPasswordHash {set;}
+
 	}
 	public interface AccessControl  : Object, AccessControlledObject, Deletable 
 	{
@@ -285,204 +285,6 @@ namespace Allors.Domain
 					Role Role {set;}
 
 					global::System.Guid CacheId {set;}
-
-	}
-	public interface Counter  : Object, UniquelyIdentifiable 
-	{
-					global::System.Int32 Value {set;}
-
-	}
-	public interface Country  : Object, AccessControlledObject 
-	{
-					Currency Currency {set;}
-
-					global::System.String Name {set;}
-
-					LocalisedText LocalisedNames {set;}
-
-					global::System.String IsoCode {set;}
-
-	}
-	public interface Currency  : Object, AccessControlledObject 
-	{
-					global::System.String IsoCode {set;}
-
-					global::System.String Name {set;}
-
-					global::System.String Symbol {set;}
-
-					LocalisedText LocalisedNames {set;}
-
-	}
-	public interface Image  : Object, Deletable 
-	{
-					Media Original {set;}
-
-					Media Responsive {set;}
-
-					global::System.String OriginalFilename {set;}
-
-					Media Thumbnail {set;}
-
-	}
-	public interface Language  : Object, AccessControlledObject 
-	{
-					global::System.String Name {set;}
-
-					global::System.String IsoCode {set;}
-
-					LocalisedText LocalisedNames {set;}
-
-	}
-	public interface Locale  : Object, AccessControlledObject 
-	{
-					global::System.String Name {set;}
-
-					Language Language {set;}
-
-					Country Country {set;}
-
-	}
-	public interface LocalisedText  : Object, Localised, AccessControlledObject 
-	{
-					global::System.String Text {set;}
-
-	}
-	public interface Login  : Object, Deletable 
-	{
-					global::System.String Key {set;}
-
-					global::System.String Provider {set;}
-
-					User User {set;}
-
-	}
-	public interface Media  : Object, AccessControlledObject, Deletable, UniquelyIdentifiable 
-	{
-					MediaType MediaType {set;}
-
-					MediaContent MediaContent {set;}
-
-	}
-	public interface MediaContent  : Object, Deletable 
-	{
-					global::System.Byte[] Value {set;}
-
-					global::System.String Hash {set;}
-
-	}
-	public interface MediaType  : Object, AccessControlledObject 
-	{
-					global::System.String DefaultFileExtension {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface Permission  : Object, Deletable, AccessControlledObject 
-	{
-					global::System.Guid OperandTypePointer {set;}
-
-					global::System.Guid ConcreteClassPointer {set;}
-
-					global::System.Int32 OperationEnum {set;}
-
-	}
-	public interface Person  : Object, Printable, Deletable, User, AccessControlledObject, UniquelyIdentifiable 
-	{
-					global::System.String LastName {set;}
-
-					global::System.String MiddleName {set;}
-
-					global::System.String FirstName {set;}
-
-					Address MainAddress {set;}
-
-					global::System.String TinyMCEText {set;}
-
-					global::System.String Text {set;}
-
-					global::System.Int32? Age {set;}
-
-					global::System.Boolean? IsStudent {set;}
-
-					MailboxAddress MailboxAddress {set;}
-
-					Gender Gender {set;}
-
-					global::System.String FullName {set;}
-
-					global::System.Int32? ShirtSize {set;}
-
-					global::System.String CKEditorText {set;}
-
-					global::System.Boolean? IsMarried {set;}
-
-					global::System.DateTime? BirthDate {set;}
-
-					global::System.Decimal? Weight {set;}
-
-					Media Photo {set;}
-
-					Address Addresses {set;}
-
-	}
-	public interface PrintQueue  : Object, AccessControlledObject, UniquelyIdentifiable 
-	{
-					Printable Printables {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface Role  : Object, AccessControlledObject, UniquelyIdentifiable 
-	{
-					Permission Permissions {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface SecurityToken  : Object, Deletable 
-	{
-	}
-	public interface Singleton  : Object, AccessControlledObject 
-	{
-					PrintQueue DefaultPrintQueue {set;}
-
-					Locale DefaultLocale {set;}
-
-					Locale Locales {set;}
-
-					SecurityToken AdministratorSecurityToken {set;}
-
-					User Guest {set;}
-
-					SecurityToken DefaultSecurityToken {set;}
-
-					StringTemplate PersonTemplate {set;}
-
-	}
-	public interface StringTemplate  : Object, UniquelyIdentifiable, Localised 
-	{
-					global::System.String Body {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface Transition  : Object 
-	{
-					ObjectState FromStates {set;}
-
-					ObjectState ToState {set;}
-
-	}
-	public interface UserGroup  : Object, UniquelyIdentifiable, AccessControlledObject 
-	{
-					Role Role {set;}
-
-					User Members {set;}
-
-					UserGroup Parent {set;}
-
-					global::System.String Name {set;}
 
 	}
 	public interface BadUI  : Object 
@@ -552,7 +354,7 @@ namespace Allors.Domain
 
 					global::System.DateTime? C1AllorsDateTime {set;}
 
-					global::System.Double? C1AllorsFloat {set;}
+					global::System.Double? C1AllorsDouble {set;}
 
 					C2 C1C2Many2Manies {set;}
 
@@ -575,7 +377,7 @@ namespace Allors.Domain
 
 					I1 C2I1Many2Manies {set;}
 
-					global::System.Double? C2AllorsFloat {set;}
+					global::System.Double? C2AllorsDouble {set;}
 
 					I1 C2I1One2Manies {set;}
 
@@ -620,6 +422,33 @@ namespace Allors.Domain
 	}
 	public interface ClassWithoutRoles  : Object 
 	{
+	}
+	public interface Counter  : Object, UniquelyIdentifiable 
+	{
+					global::System.Int32 Value {set;}
+
+	}
+	public interface Country  : Object, AccessControlledObject 
+	{
+					Currency Currency {set;}
+
+					global::System.String Name {set;}
+
+					LocalisedText LocalisedNames {set;}
+
+					global::System.String IsoCode {set;}
+
+	}
+	public interface Currency  : Object, AccessControlledObject 
+	{
+					global::System.String IsoCode {set;}
+
+					global::System.String Name {set;}
+
+					global::System.String Symbol {set;}
+
+					LocalisedText LocalisedNames {set;}
+
 	}
 	public interface Dependee  : Object 
 	{
@@ -679,9 +508,129 @@ namespace Allors.Domain
 					global::System.String HouseNumber {set;}
 
 	}
+	public interface Image  : Object, Deletable 
+	{
+					Media Original {set;}
+
+					Media Responsive {set;}
+
+					global::System.String OriginalFilename {set;}
+
+					Media Thumbnail {set;}
+
+	}
+	public interface Language  : Object, AccessControlledObject 
+	{
+					global::System.String Name {set;}
+
+					global::System.String IsoCode {set;}
+
+					LocalisedText LocalisedNames {set;}
+
+	}
+	public interface Locale  : Object, AccessControlledObject 
+	{
+					global::System.String Name {set;}
+
+					Language Language {set;}
+
+					Country Country {set;}
+
+	}
+	public interface LocalisedText  : Object, AccessControlledObject, Localised 
+	{
+					global::System.String Text {set;}
+
+	}
+	public interface Login  : Object, Deletable 
+	{
+					global::System.String Key {set;}
+
+					global::System.String Provider {set;}
+
+					User User {set;}
+
+	}
 	public interface MailboxAddress  : Object, Address 
 	{
 					global::System.String PoBox {set;}
+
+	}
+	public interface Media  : Object, Deletable, UniquelyIdentifiable, AccessControlledObject 
+	{
+					MediaType MediaType {set;}
+
+					MediaContent MediaContent {set;}
+
+	}
+	public interface MediaContent  : Object, Deletable 
+	{
+					global::System.Byte[] Value {set;}
+
+					global::System.String Hash {set;}
+
+	}
+	public interface MediaType  : Object, AccessControlledObject 
+	{
+					global::System.String DefaultFileExtension {set;}
+
+					global::System.String Name {set;}
+
+	}
+	public interface Person  : Object, Deletable, Printable, User, AccessControlledObject, UniquelyIdentifiable 
+	{
+					Address MainAddress {set;}
+
+					global::System.String TinyMCEText {set;}
+
+					global::System.String Text {set;}
+
+					global::System.Int32? Age {set;}
+
+					global::System.Boolean? IsStudent {set;}
+
+					MailboxAddress MailboxAddress {set;}
+
+					Gender Gender {set;}
+
+					global::System.String FullName {set;}
+
+					global::System.Int32? ShirtSize {set;}
+
+					global::System.String CKEditorText {set;}
+
+					global::System.Boolean? IsMarried {set;}
+
+					global::System.DateTime? BirthDate {set;}
+
+					global::System.Decimal? Weight {set;}
+
+					Media Photo {set;}
+
+					Address Addresses {set;}
+
+					global::System.String LastName {set;}
+
+					global::System.String MiddleName {set;}
+
+					global::System.String FirstName {set;}
+
+	}
+	public interface Singleton  : Object, AccessControlledObject 
+	{
+					StringTemplate PersonTemplate {set;}
+
+					PrintQueue DefaultPrintQueue {set;}
+
+					Locale DefaultLocale {set;}
+
+					Locale Locales {set;}
+
+					SecurityToken AdministratorSecurityToken {set;}
+
+					User Guest {set;}
+
+					SecurityToken DefaultSecurityToken {set;}
 
 	}
 	public interface One  : Object, Shared 
@@ -730,6 +679,15 @@ namespace Allors.Domain
 					Address MainAddress {set;}
 
 	}
+	public interface Permission  : Object, AccessControlledObject, Deletable 
+	{
+					global::System.Guid OperandTypePointer {set;}
+
+					global::System.Guid ConcreteClassPointer {set;}
+
+					global::System.Int32 OperationEnum {set;}
+
+	}
 	public interface Place  : Object 
 	{
 					Country Country {set;}
@@ -739,12 +697,29 @@ namespace Allors.Domain
 					global::System.String PostalCode {set;}
 
 	}
+	public interface PrintQueue  : Object, UniquelyIdentifiable, AccessControlledObject 
+	{
+					Printable Printables {set;}
+
+					global::System.String Name {set;}
+
+	}
+	public interface Role  : Object, AccessControlledObject, UniquelyIdentifiable 
+	{
+					Permission Permissions {set;}
+
+					global::System.String Name {set;}
+
+	}
 	public interface Second  : Object 
 	{
 					Third Third {set;}
 
 					global::System.Boolean? IsDerived {set;}
 
+	}
+	public interface SecurityToken  : Object, Deletable 
+	{
 	}
 	public interface SimpleJob  : Object 
 	{
@@ -758,6 +733,13 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 					Person Manager {set;}
+
+	}
+	public interface StringTemplate  : Object, UniquelyIdentifiable, Localised 
+	{
+					global::System.String Body {set;}
+
+					global::System.String Name {set;}
 
 	}
 	public interface Subdependee  : Object 
@@ -782,6 +764,13 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
+	public interface Transition  : Object 
+	{
+					ObjectState FromStates {set;}
+
+					ObjectState ToState {set;}
+
+	}
 	public interface Two  : Object, Shared 
 	{
 					Shared Shared {set;}
@@ -795,7 +784,7 @@ namespace Allors.Domain
 
 					global::System.Boolean? AllorsBoolean {set;}
 
-					global::System.Double? AllorsFloat {set;}
+					global::System.Double? AllorsDouble {set;}
 
 					global::System.Int32? AllorsInteger {set;}
 
@@ -804,6 +793,17 @@ namespace Allors.Domain
 					global::System.Guid? AllorsUnique {set;}
 
 					global::System.Decimal? AllorsDecimal {set;}
+
+	}
+	public interface UserGroup  : Object, UniquelyIdentifiable, AccessControlledObject 
+	{
+					Role Role {set;}
+
+					User Members {set;}
+
+					UserGroup Parent {set;}
+
+					global::System.String Name {set;}
 
 	}
 }
