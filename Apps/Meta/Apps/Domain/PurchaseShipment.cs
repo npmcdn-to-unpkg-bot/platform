@@ -7,8 +7,8 @@ namespace Allors.Meta
             this.CurrentObjectState.RoleType.IsRequired = true;
             this.Facility.RoleType.IsRequired = true;
 
-            this.ConcreteRoles.ShipToParty.IsRequiredOverride = true;
-            this.ConcreteRoles.EstimatedArrivalDate.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.ShipToParty.RoleType].IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.EstimatedArrivalDate.RoleType].IsRequiredOverride = true;
         }
 	}
 }

@@ -1,13 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("a981c832-dd3a-4b97-9bc9-d2dd83872bf2")]
 	#endregion
 	[Inherit(typeof(ShipmentInterface))]
-
-	[Plural("DropShipments")]
 	public partial class DropShipmentClass : Class
 	{
 		#region Allors
@@ -46,8 +42,6 @@ namespace Allors.Meta
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType CurrentObjectState;
 
-
-
 		public static DropShipmentClass Instance {get; internal set;}
 
 		internal DropShipmentClass() : base(MetaPopulation.Instance)
@@ -58,7 +52,7 @@ namespace Allors.Meta
         {
             this.CurrentObjectState.RoleType.IsRequired = true;
 
-            this.ConcreteRoles.ShipToAddress.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.ShipToAddress.RoleType].IsRequiredOverride = true;
         }
     }
 }

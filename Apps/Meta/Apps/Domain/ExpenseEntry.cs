@@ -1,12 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("f15e6b0e-0222-4f9b-8ae2-20c20f3b3673")]
 	#endregion
 	[Inherit(typeof(ServiceEntryInterface))]
-
 	[Plural("ExpenseEntries")]
 	public partial class ExpenseEntryClass : Class
 	{
@@ -18,10 +15,7 @@ namespace Allors.Meta
 		[Type(typeof(AllorsDecimalUnit))]
 		[Precision(19)]
 		[Scale(2)]
-		[Plural("Amounts")]
 		public RelationType Amount;
-
-
 
 		public static ExpenseEntryClass Instance {get; internal set;}
 
@@ -33,7 +27,7 @@ namespace Allors.Meta
         {
             this.Amount.RoleType.IsRequired = true;
 
-            this.ConcreteRoles.Description.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ServiceEntryInterface.Instance.Description.RoleType].IsRequiredOverride = true;
         }
     }
 }

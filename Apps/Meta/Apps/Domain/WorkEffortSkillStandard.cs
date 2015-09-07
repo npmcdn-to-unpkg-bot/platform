@@ -1,13 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("da16f5ee-0e04-41a7-afd7-b12e20414135")]
 	#endregion
 	[Inherit(typeof(AccessControlledObjectInterface))]
-
-	[Plural("WorkEffortSkillStandards")]
 	public partial class WorkEffortSkillStandardClass : Class
 	{
 		#region Allors
@@ -51,9 +47,7 @@ namespace Allors.Meta
 		[Scale(2)]
 		[Plural("EstimatedCosts")]
 		public RelationType EstimatedCost;
-
-
-
+        
 		public static WorkEffortSkillStandardClass Instance {get; internal set;}
 
 		internal WorkEffortSkillStandardClass() : base(MetaPopulation.Instance)

@@ -1,18 +1,54 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("9301efcb-2f08-4825-aa60-752c031e4697")]
 	#endregion
 	[Inherit(typeof(DeletableInterface))]
 	[Inherit(typeof(ShipmentInterface))]
-
-	[Plural("CustomerShipments")]
 	public partial class CustomerShipmentClass : Class
 	{
-		#region Allors
-		[Id("15e8f37c-3963-490c-8f22-7fb1e40209df")]
+        #region Allors
+        [Id("9E89A8AD-2EFE-4A21-815B-9598D7D7C1F7")]
+        #endregion
+        public MethodType Hold;
+
+        #region Allors
+        [Id("1A64504B-0115-4D4D-BBE0-35792A8BCA1A")]
+        #endregion
+        public MethodType PutOnHold;
+
+        #region Allors
+        [Id("9DD73148-A1C0-4631-91AF-E13116FC0102")]
+        #endregion
+        public MethodType Cancel;
+
+        #region Allors
+        [Id("6E09CAC6-327F-49DD-B4AB-07D075C7579E")]
+        #endregion
+        public MethodType Continue;
+
+        #region Allors
+        [Id("1B56BF7E-08BE-49B1-92A1-4CE89B329D77")]
+        #endregion
+        public MethodType Ship;
+
+        #region Allors
+        [Id("9AFF4390-9B51-4C33-A0CF-125FED33E34F")]
+        #endregion
+        public MethodType ProcessOnContinue;
+
+        #region Allors
+        [Id("BD7F0406-29E2-4A10-AE55-C2849D257B01")]
+        #endregion
+        public MethodType SetPicked;
+
+        #region Allors
+        [Id("F484244D-BB1D-4158-9A4D-40267D4B7D5B")]
+        #endregion
+        public MethodType SetPacked;
+
+        #region Allors
+        [Id("15e8f37c-3963-490c-8f22-7fb1e40209df")]
 		[AssociationId("30b4e232-dd11-4ee6-b1dd-ef1e05b54d92")]
 		[RoleId("a282ae7a-2280-4ea8-a8c8-cf170f0714ac")]
 		#endregion
@@ -97,8 +133,6 @@ namespace Allors.Meta
 		[Plural("ShipmentValues")]
 		public RelationType ShipmentValue;
 
-
-
 		public static CustomerShipmentClass Instance {get; internal set;}
 
 		internal CustomerShipmentClass() : base(MetaPopulation.Instance)
@@ -107,15 +141,6 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            new MethodType(AppsDomain.Instance, new Guid("9E89A8AD-2EFE-4A21-815B-9598D7D7C1F7")) { ObjectType = this, Name = "Hold" };
-            new MethodType(AppsDomain.Instance, new Guid("1A64504B-0115-4D4D-BBE0-35792A8BCA1A")) { ObjectType = this, Name = "PutOnHold" };
-            new MethodType(AppsDomain.Instance, new Guid("9DD73148-A1C0-4631-91AF-E13116FC0102")) { ObjectType = this, Name = "Cancel" };
-            new MethodType(AppsDomain.Instance, new Guid("6E09CAC6-327F-49DD-B4AB-07D075C7579E")) { ObjectType = this, Name = "Continue" };
-            new MethodType(AppsDomain.Instance, new Guid("1B56BF7E-08BE-49B1-92A1-4CE89B329D77")) { ObjectType = this, Name = "Ship" };
-            new MethodType(AppsDomain.Instance, new Guid("9AFF4390-9B51-4C33-A0CF-125FED33E34F")) { ObjectType = this, Name = "ProcessOnContinue" };
-            new MethodType(AppsDomain.Instance, new Guid("BD7F0406-29E2-4A10-AE55-C2849D257B01")) { ObjectType = this, Name = "SetPicked" };
-            new MethodType(AppsDomain.Instance, new Guid("F484244D-BB1D-4158-9A4D-40267D4B7D5B")) { ObjectType = this, Name = "SetPacked" };
-
             this.ShipmentValue.RoleType.IsRequired = true;
 
             this.CurrentObjectState.RoleType.IsRequired = true;
@@ -123,12 +148,12 @@ namespace Allors.Meta
             this.HeldManually.RoleType.IsRequired = true;
             this.WithoutCharges.RoleType.IsRequired = true;
 
-            this.ConcreteRoles.ShipToAddress.IsRequiredOverride = true;
-            this.ConcreteRoles.ShipFromAddress.IsRequiredOverride = true;
-            this.ConcreteRoles.ShipmentMethod.IsRequiredOverride = true;
-            this.ConcreteRoles.Carrier.IsRequiredOverride = true;
-            this.ConcreteRoles.EstimatedShipDate.IsRequiredOverride = true;
-            this.ConcreteRoles.ShipFromParty.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.ShipToAddress.RoleType].IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.ShipFromAddress.RoleType].IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.ShipmentMethod.RoleType].IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.Carrier.RoleType].IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.EstimatedShipDate.RoleType].IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.ShipFromParty.RoleType].IsRequiredOverride = true;
         }
     }
 }

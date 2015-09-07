@@ -14,8 +14,8 @@ namespace Allors.Meta
 
             this.SalesInvoiceItemType.RoleType.IsRequired = true;
 
-            this.ConcreteRoles.Quantity.IsRequiredOverride = true;
-            this.ConcreteRoles.AmountPaid.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[InvoiceItemInterface.Instance.Quantity.RoleType].IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[InvoiceItemInterface.Instance.AmountPaid.RoleType].IsRequiredOverride = true;
 		}
 	}
 }

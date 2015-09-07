@@ -1,13 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("fa4303c8-a09d-4dd5-97b3-76459b8e038d")]
 	#endregion
 	[Inherit(typeof(RequirementInterface))]
-
-	[Plural("WorkRequirements")]
 	public partial class WorkRequirementClass : Class
 	{
 		#region Allors
@@ -17,7 +13,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(FixedAssetInterface))]
-		[Plural("FixedAssets")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType FixedAsset;
 
@@ -28,7 +23,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(DeliverableClass))]
-		[Plural("Deliverables")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Deliverable;
 
@@ -39,12 +33,9 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(ProductInterface))]
-		[Plural("Products")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Product;
-
-
-
+        
 		public static WorkRequirementClass Instance {get; internal set;}
 
 		internal WorkRequirementClass() : base(MetaPopulation.Instance)

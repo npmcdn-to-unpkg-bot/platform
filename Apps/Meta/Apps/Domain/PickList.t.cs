@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("27b6630a-35d0-4352-9223-b5b6c8d7496b")]
 	#endregion
@@ -9,12 +7,30 @@ namespace Allors.Meta
 	[Inherit(typeof(PrintableInterface))]
 	[Inherit(typeof(TransitionalInterface))]
 	[Inherit(typeof(UniquelyIdentifiableInterface))]
-
-	[Plural("PickLists")]
 	public partial class PickListClass : Class
 	{
-		#region Allors
-		[Id("0bdfcd8a-af37-41a7-be2c-db7848d4fd05")]
+        #region Allors
+        [Id("CCBD7DB6-EC0F-4D70-9833-BC2A9E3A9292")]
+        #endregion
+        public MethodType Hold;
+
+        #region Allors
+        [Id("B88AF2FA-0940-4C3B-90E7-9937DF6C05AC")]
+        #endregion
+        public MethodType Continue;
+
+        #region Allors
+        [Id("41E4C5C4-2CFE-4B7F-80FD-E4C0263FDF62")]
+        #endregion
+        public MethodType Cancel;
+
+        #region Allors
+        [Id("CAC524A5-47A9-4FFD-ABC2-D5D3C0ABBFDD")]
+        #endregion
+        public MethodType SetPicked;
+
+        #region Allors
+        [Id("0bdfcd8a-af37-41a7-be2c-db7848d4fd05")]
 		[AssociationId("88919577-6835-4c84-9e3d-a1ec50fc5c2b")]
 		[RoleId("6042abcd-a859-42bb-818d-9409f7b08d7a")]
 		#endregion
@@ -112,13 +128,17 @@ namespace Allors.Meta
 		[Plural("Stores")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Store;
-
-
-
+        
 		public static PickListClass Instance {get; internal set;}
 
 		internal PickListClass() : base(MetaPopulation.Instance)
         {
         }
-	}
+
+        internal override void AppsExtend()
+        {
+            this.CreationDate.RoleType.IsRequired = true;
+            this.CurrentObjectState.RoleType.IsRequired = true;
+        }
+    }
 }

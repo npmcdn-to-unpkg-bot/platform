@@ -1,13 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("7dd7114a-9e74-45d5-b904-415514af5628")]
 	#endregion
 	[Inherit(typeof(ShipmentInterface))]
-
-	[Plural("CustomerReturns")]
 	public partial class CustomerReturnClass : Class
 	{
 		#region Allors
@@ -46,8 +42,6 @@ namespace Allors.Meta
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType CurrentObjectState;
 
-
-
 		public static CustomerReturnClass Instance {get; internal set;}
 
 		internal CustomerReturnClass() : base(MetaPopulation.Instance)
@@ -58,7 +52,7 @@ namespace Allors.Meta
         {
             this.CurrentObjectState.RoleType.IsRequired = true;
 
-            this.ConcreteRoles.ShipToAddress.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ShipmentInterface.Instance.ShipToAddress.RoleType].IsRequiredOverride = true;
         }
     }
 }

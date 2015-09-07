@@ -1,18 +1,39 @@
 namespace Allors.Meta
 {
-	using System;
-
 	public partial class OrderItemInterface
 	{
-	    internal override void AppsExtend()
-        {
-            new MethodType(AppsDomain.Instance, new Guid("AC6B2E9E-DC3B-4FA5-80B2-EA13C0461F5F")){ObjectType=this, Name="Cancel"};
-            new MethodType(AppsDomain.Instance, new Guid("A1E84095-C5A3-4E4E-B449-FC400A3E0D06")){ObjectType=this, Name="Reject"};
-            new MethodType(AppsDomain.Instance, new Guid("D0FDE3AB-EEC4-46C6-A545-30C4EB57B9D9")){ObjectType=this, Name="Confirm"};
-            new MethodType(AppsDomain.Instance, new Guid("D3953352-DB9E-4A59-8504-A0C400DC515E")){ObjectType=this, Name="Approve"};
-            new MethodType(AppsDomain.Instance, new Guid("C1517567-1708-47E6-8298-9D9B157E45FF")){ObjectType=this, Name="Finish"};
-            new MethodType(AppsDomain.Instance, new Guid("3962ED58-44BD-4A79-8F0C-6A98ED88BD44")){ObjectType=this, Name="Delete"};
+        #region Allors
+	    [Id("AC6B2E9E-DC3B-4FA5-80B2-EA13C0461F5F")]
+	    #endregion
+	    public MethodType Cancel;
 
+        #region Allors
+        [Id("A1E84095-C5A3-4E4E-B449-FC400A3E0D06")]
+        #endregion
+        public MethodType Reject;
+
+        #region Allors
+        [Id("D0FDE3AB-EEC4-46C6-A545-30C4EB57B9D9")]
+        #endregion
+        public MethodType Confirm;
+
+        #region Allors
+        [Id("D3953352-DB9E-4A59-8504-A0C400DC515E")]
+        #endregion
+        public MethodType Approve;
+
+        #region Allors
+        [Id("C1517567-1708-47E6-8298-9D9B157E45FF")]
+        #endregion
+        public MethodType Finish;
+
+        #region Allors
+        [Id("3962ED58-44BD-4A79-8F0C-6A98ED88BD44")]
+        #endregion
+        public MethodType Delete;
+
+        internal override void AppsExtend()
+        {
 			this.TotalDiscountAsPercentage.RoleType.IsRequired = true;
 			this.UnitVat.RoleType.IsRequired = true;
 			this.TotalVatCustomerCurrency.RoleType.IsRequired = true;
@@ -35,7 +56,6 @@ namespace Allors.Meta
 			this.TotalBasePrice.RoleType.IsRequired = true;
 			this.TotalExVat.RoleType.IsRequired = true;
 			this.TotalBasePriceCustomerCurrency.RoleType.IsRequired = true;
-
             this.QuantityOrdered.RoleType.IsRequired = true;
             this.DerivedVatRate.RoleType.IsRequired = true;
 		}

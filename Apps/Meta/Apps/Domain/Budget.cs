@@ -1,21 +1,27 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("ebd4da8c-b86a-4317-86b9-e90a02994dcc")]
 	#endregion
-	[Plural("Budgets")]
 	[Inherit(typeof(PeriodInterface))]
 	[Inherit(typeof(CommentableInterface))]
 	[Inherit(typeof(UniquelyIdentifiableInterface))]
 	[Inherit(typeof(TransitionalInterface))]
 	[Inherit(typeof(AccessControlledObjectInterface))]
-
   	public partial class BudgetInterface: Interface
 	{
-		#region Allors
-		[Id("1848add9-ab90-4191-b7f1-eb392be3ec4e")]
+        #region Allors
+        [Id("3E913270-98BC-4A29-8C54-AD94B78D62A3")]
+        #endregion
+        public MethodType Close;
+
+        #region Allors
+        [Id("4D8FD306-049E-4909-AFA8-91A615B76314")]
+        #endregion
+        public MethodType Reopen;
+
+        #region Allors
+        [Id("1848add9-ab90-4191-b7f1-eb392be3ec4e")]
 		[AssociationId("8232c215-e592-4ec7-8c44-391c917b7e89")]
 		[RoleId("5e27d83d-a601-4101-b4dd-7eef98de82e8")]
 		#endregion
@@ -103,8 +109,6 @@ namespace Allors.Meta
 		[Multiplicity(Multiplicity.OneToMany)]
 		public RelationType BudgetItem;
 
-
-
 		public static BudgetInterface Instance {get; internal set;}
 
 		internal BudgetInterface() : base(MetaPopulation.Instance)
@@ -113,11 +117,7 @@ namespace Allors.Meta
 
         internal override void AppsExtend()
         {
-            new MethodType(AppsDomain.Instance, new Guid("3E913270-98BC-4A29-8C54-AD94B78D62A3")) { ObjectType = this, Name = "Close" };
-            new MethodType(AppsDomain.Instance, new Guid("4D8FD306-049E-4909-AFA8-91A615B76314")) { ObjectType = this, Name = "Reopen" };
-
             this.Description.RoleType.IsRequired = true;
         }
-
     }
 }

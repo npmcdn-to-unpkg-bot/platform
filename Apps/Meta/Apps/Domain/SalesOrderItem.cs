@@ -4,10 +4,13 @@ namespace Allors.Meta
 
 	public partial class SalesOrderItemClass
 	{
+        #region Allors
+        [Id("F04381CD-3B28-4DD5-BBE8-873C5A56AEE2")]
+        #endregion
+        public MethodType Continue;
+
 	    internal override void AppsExtend()
 	    {
-	        new MethodType(AppsDomain.Instance, new Guid("F04381CD-3B28-4DD5-BBE8-873C5A56AEE2")) { ObjectType = this, Name = "Continue" };
-
             this.UnitPurchasePrice.RoleType.IsRequired = true;
             this.InitialMarkupPercentage.RoleType.IsRequired = true;
             this.InitialProfitMargin.RoleType.IsRequired = true;

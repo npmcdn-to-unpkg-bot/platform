@@ -444,7 +444,6 @@
     <Compile Include="Apps\Domain\OneTimeCharge.cs" />
     <Compile Include="Apps\Domain\OperatingBudget.cs" />
     <Compile Include="Apps\Domain\OperatingCondition.cs" />
-    <Compile Include="Apps\Domain\Order.cs" />
     <Compile Include="Apps\Domain\OrderAdjustment.cs" />
     <Compile Include="Apps\Domain\OrderItem.cs" />
     <Compile Include="Apps\Domain\OrderItemBilling.cs" />
@@ -517,7 +516,6 @@
     <Compile Include="Apps\Domain\PersonTraining.cs" />
     <Compile Include="Apps\Domain\Phase.cs" />
     <Compile Include="Apps\Domain\PhoneCommunication.cs" />
-    <Compile Include="Apps\Domain\PickList.cs" />
     <Compile Include="Apps\Domain\PickListItem.cs" />
     <Compile Include="Apps\Domain\PickListObjectState.cs" />
     <Compile Include="Apps\Domain\PickListStatus.cs" />
@@ -532,7 +530,6 @@
     <Compile Include="Apps\Domain\PostalAddress.cs" />
     <Compile Include="Apps\Domain\PostalBoundary.cs" />
     <Compile Include="Apps\Domain\PostalCode.cs" />
-    <Compile Include="Apps\Domain\PriceComponent.cs" />
     <Compile Include="Apps\Domain\Printable.cs" />
     <Compile Include="Apps\Domain\Priority.cs" />
     <Compile Include="Apps\Domain\Product.cs" />
@@ -564,7 +561,6 @@
     <Compile Include="Apps\Domain\ProspectRelationship.cs" />
     <Compile Include="Apps\Domain\Province.cs" />
     <Compile Include="Apps\Domain\PurchaseAgreement.cs" />
-    <Compile Include="Apps\Domain\PurchaseInvoice.cs" />
     <Compile Include="Apps\Domain\PurchaseInvoiceItem.cs" />
     <Compile Include="Apps\Domain\PurchaseInvoiceItemObjectState.cs" />
     <Compile Include="Apps\Domain\PurchaseInvoiceItemStatus.cs" />
@@ -573,7 +569,6 @@
     <Compile Include="Apps\Domain\PurchaseInvoiceStatus.cs" />
     <Compile Include="Apps\Domain\PurchaseInvoiceType.cs" />
     <Compile Include="Apps\Domain\PurchaseOrder.cs" />
-    <Compile Include="Apps\Domain\PurchaseOrderItem.cs" />
     <Compile Include="Apps\Domain\PurchaseOrderItemObjectState.cs" />
     <Compile Include="Apps\Domain\PurchaseOrderItemStatus.cs" />
     <Compile Include="Apps\Domain\PurchaseOrderObjectState.cs" />
@@ -619,7 +614,6 @@
     <Compile Include="Apps\Domain\SalesChannel.cs" />
     <Compile Include="Apps\Domain\SalesChannelRevenue.cs" />
     <Compile Include="Apps\Domain\SalesChannelRevenueHistory.cs" />
-    <Compile Include="Apps\Domain\SalesInvoice.cs" />
     <Compile Include="Apps\Domain\SalesInvoiceItem.cs" />
     <Compile Include="Apps\Domain\SalesInvoiceItemObjectState.cs" />
     <Compile Include="Apps\Domain\SalesInvoiceItemStatus.cs" />
@@ -705,7 +699,6 @@
     <Compile Include="Apps\Domain\UnitOfMeasure.cs" />
     <Compile Include="Apps\Domain\UnitOfMeasureConversion.cs" />
     <Compile Include="Apps\Domain\UserGroup.cs" />
-    <Compile Include="Apps\Domain\UtilizationCharge.cs" />
     <Compile Include="Apps\Domain\VarianceReason.cs" />
     <Compile Include="Apps\Domain\VatCalculationMethod.cs" />
     <Compile Include="Apps\Domain\VatForm.cs" />
@@ -732,11 +725,8 @@
     <Compile Include="Apps\Domain\WorkEffortInventoryAssignment.cs" />
     <Compile Include="Apps\Domain\WorkEffortObjectState.cs" />
     <Compile Include="Apps\Domain\WorkEffortPartStandard.cs" />
-    <Compile Include="Apps\Domain\WorkEffortPartyAssignment.cs" />
     <Compile Include="Apps\Domain\WorkEffortPurpose.cs" />
     <Compile Include="Apps\Domain\WorkEffortSkillStandard.cs" />
-    <Compile Include="Apps\Domain\WorkEffortStatus.cs" />
-    <Compile Include="Apps\Domain\WorkEffortType.cs" />
     <Compile Include="Apps\Domain\WorkEffortTypeKind.cs" />
     <Compile Include="Apps\Domain\WorkFlow.cs" />
     <Compile Include="Apps\Domain\WorkRequirement.cs" />
@@ -844,7 +834,7 @@
     <Compile Include="Apps\Domain\NonSerializedInventoryItemStatus.t.cs" />
     <Compile Include="Apps\Domain\OneTimeCharge.t.cs" />
     <Compile Include="Apps\Domain\OperatingBudget.t.cs" />
-    <Compile Include="Apps\Domain\Order.t.cs" />
+    <Compile Include="Apps\Domain\Order.cs" />
     <Compile Include="Apps\Domain\OrderItem.t.cs" />
     <Compile Include="Apps\Domain\OrderItemBilling.t.cs" />
     <Compile Include="Apps\Domain\OrderKind.t.cs" />
@@ -920,11 +910,11 @@
     <Compile Include="Apps\Domain\ProfessionalAssignment.t.cs" />
     <Compile Include="Apps\Domain\ProfessionalServicesRelationship.t.cs" />
     <Compile Include="Apps\Domain\Province.t.cs" />
-    <Compile Include="Apps\Domain\PurchaseInvoice.t.cs" />
+    <Compile Include="Apps\Domain\PurchaseInvoice.cs" />
     <Compile Include="Apps\Domain\PurchaseInvoiceItem.t.cs" />
     <Compile Include="Apps\Domain\PurchaseInvoiceItemStatus.t.cs" />
     <Compile Include="Apps\Domain\PurchaseOrder.t.cs" />
-    <Compile Include="Apps\Domain\PurchaseOrderItem.t.cs" />
+    <Compile Include="Apps\Domain\PurchaseOrderItem.cs" />
     <Compile Include="Apps\Domain\PurchaseOrderItemStatus.t.cs" />
     <Compile Include="Apps\Domain\PurchaseOrderStatus.t.cs" />
     <Compile Include="Apps\Domain\PurchaseReturn.t.cs" />
@@ -948,7 +938,7 @@
     <Compile Include="Apps\Domain\SalaryStep.t.cs" />
     <Compile Include="Apps\Domain\SalesAccountingTransaction.t.cs" />
     <Compile Include="Apps\Domain\SalesChannelRevenue.t.cs" />
-    <Compile Include="Apps\Domain\SalesInvoice.t.cs" />
+    <Compile Include="Apps\Domain\SalesInvoice.cs" />
     <Compile Include="Apps\Domain\SalesInvoiceItem.t.cs" />
     <Compile Include="Apps\Domain\SalesInvoiceItemStatus.t.cs" />
     <Compile Include="Apps\Domain\SalesInvoiceStatus.t.cs" />
@@ -986,7 +976,7 @@
     <Compile Include="Apps\Domain\Transfer.t.cs" />
     <Compile Include="Apps\Domain\TransferStatus.t.cs" />
     <Compile Include="Apps\Domain\UnitOfMeasureConversion.t.cs" />
-    <Compile Include="Apps\Domain\UtilizationCharge.t.cs" />
+    <Compile Include="Apps\Domain\UtilizationCharge.cs" />
     <Compile Include="Apps\Domain\VatRate.t.cs" />
     <Compile Include="Apps\Domain\VolumeUsage.t.cs" />
     <Compile Include="Apps\Domain\Warehouse.t.cs" />
@@ -999,9 +989,9 @@
     <Compile Include="Apps\Domain\WorkEffortGoodStandard.t.cs" />
     <Compile Include="Apps\Domain\WorkEffortInventoryAssignment.t.cs" />
     <Compile Include="Apps\Domain\WorkEffortPartStandard.t.cs" />
-    <Compile Include="Apps\Domain\WorkEffortPartyAssignment.t.cs" />
-    <Compile Include="Apps\Domain\WorkEffortStatus.t.cs" />
-    <Compile Include="Apps\Domain\WorkEffortType.t.cs" />
+    <Compile Include="Apps\Domain\WorkEffortPartyAssignment.cs" />
+    <Compile Include="Apps\Domain\WorkEffortStatus.cs" />
+    <Compile Include="Apps\Domain\WorkEffortType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

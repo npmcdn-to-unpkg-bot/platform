@@ -1,13 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("48733d8e-506a-4add-a230-907221ca7a9a")]
 	#endregion
 	[Inherit(typeof(ServiceEntryInterface))]
-
-	[Plural("DeliverableTurnovers")]
 	public partial class DeliverableTurnoverClass : Class
 	{
 		#region Allors
@@ -21,8 +17,6 @@ namespace Allors.Meta
 		[Plural("Amounts")]
 		public RelationType Amount;
 
-
-
 		public static DeliverableTurnoverClass Instance {get; internal set;}
 
 		internal DeliverableTurnoverClass() : base(MetaPopulation.Instance)
@@ -33,7 +27,7 @@ namespace Allors.Meta
         {
             this.Amount.RoleType.IsRequired = true;
 
-            this.ConcreteRoles.Description.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[ServiceEntryInterface.Instance.Description.RoleType].IsRequiredOverride = true;
         }
     }
 }

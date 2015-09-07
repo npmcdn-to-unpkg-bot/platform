@@ -2,27 +2,37 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("b05371ff-0c9e-4ee3-b31d-e2edeed8649e")]
 	#endregion
-	[Plural("CommunicationEvents")]
 	[Inherit(typeof(TransitionalInterface))]
 	[Inherit(typeof(AccessControlledObjectInterface))]
 	[Inherit(typeof(DeletableInterface))]
 	[Inherit(typeof(CommentableInterface))]
 	[Inherit(typeof(UniquelyIdentifiableInterface))]
-
   	public partial class CommunicationEventInterface: Interface
 	{
-		#region Allors
-		[Id("01665c57-a343-441d-9760-53763badce51")]
+        #region Allors
+        [Id("433211EF-4376-451E-863F-376F5EC66758")]
+        #endregion
+        public MethodType Cancel;
+
+        #region Allors
+        [Id("53138963-6B25-4A90-BFE3-89B77AF73329")]
+        #endregion
+        public MethodType Close;
+
+        #region Allors
+        [Id("0E18F37B-39AA-452A-8085-6BD8AA686D33")]
+        #endregion
+        public MethodType Reopen;
+
+        #region Allors
+        [Id("01665c57-a343-441d-9760-53763badce51")]
 		[AssociationId("82c1dad0-6d6d-440c-8bf0-f20d35ab0863")]
 		[RoleId("0dd9728e-0887-4029-af20-dd69371fbba0")]
 		#endregion
 		[Type(typeof(AllorsDateTimeUnit))]
-		[Plural("ScheduledStarts")]
 		public RelationType ScheduledStart;
 
 		#region Allors
@@ -44,7 +54,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(ContactMechanismInterface))]
-		[Plural("ToContactMechanisms")]
 		[Multiplicity(Multiplicity.ManyToMany)]
 		public RelationType ToContactMechanism;
 
@@ -78,7 +87,6 @@ namespace Allors.Meta
 		[RoleId("8e7c8bab-063d-4f77-99ae-6e7979b63ce4")]
 		#endregion
 		[Type(typeof(AllorsDateTimeUnit))]
-		[Plural("InitialScheduledStarts")]
 		public RelationType InitialScheduledStart;
 
 		#region Allors
@@ -89,7 +97,6 @@ namespace Allors.Meta
 		[Derived]
 		[Indexed]
 		[Type(typeof(CommunicationEventObjectStateClass))]
-		[Plural("CurrentObjectStates")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType CurrentObjectState;
 
@@ -100,7 +107,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(CommunicationEventPurposeClass))]
-		[Plural("EventPurposes")]
 		[Multiplicity(Multiplicity.ManyToMany)]
 		public RelationType EventPurpose;
 
@@ -110,7 +116,6 @@ namespace Allors.Meta
 		[RoleId("1d09f872-86ef-4970-9459-d03075799145")]
 		#endregion
 		[Type(typeof(AllorsDateTimeUnit))]
-		[Plural("ScheduledEnds")]
 		public RelationType ScheduledEnd;
 
 		#region Allors
@@ -119,7 +124,6 @@ namespace Allors.Meta
 		[RoleId("10be3680-44d1-41c9-a084-fbd27a36ecbb")]
 		#endregion
 		[Type(typeof(AllorsDateTimeUnit))]
-		[Plural("ActualEnds")]
 		public RelationType ActualEnd;
 
 		#region Allors
@@ -129,7 +133,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(WorkEffortInterface))]
-		[Plural("WorkEfforts")]
 		[Multiplicity(Multiplicity.ManyToMany)]
 		public RelationType WorkEffort;
 
@@ -140,7 +143,6 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(-1)]
-		[Plural("Descriptions")]
 		public RelationType Description;
 
 		#region Allors
@@ -149,7 +151,6 @@ namespace Allors.Meta
 		[RoleId("346af9bb-6091-4d5b-ad8e-92d254876f4a")]
 		#endregion
 		[Type(typeof(AllorsDateTimeUnit))]
-		[Plural("InitialScheduledEnds")]
 		public RelationType InitialScheduledEnd;
 
 		#region Allors
@@ -171,7 +172,6 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(-1)]
-		[Plural("Subjects")]
 		public RelationType Subject;
 
 		#region Allors
@@ -181,7 +181,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(MediaClass))]
-		[Plural("Documents")]
 		[Multiplicity(Multiplicity.OneToMany)]
 		public RelationType Document;
 
@@ -192,7 +191,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(CaseClass))]
-		[Plural("Cases")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Case;
 
@@ -204,7 +202,8 @@ namespace Allors.Meta
 		[Indexed]
 		[Type(typeof(PriorityClass))]
 		[Multiplicity(Multiplicity.ManyToOne)]
-		public RelationType Priority;
+        [Plural("Priorities")]
+        public RelationType Priority;
 
 		#region Allors
 		[Id("c1655c56-9e3d-4fe3-9592-681087dfac13")]
@@ -213,7 +212,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(ContactMechanismInterface))]
-		[Plural("FromContactMechanisms")]
 		[Multiplicity(Multiplicity.ManyToMany)]
 		public RelationType FromContactMechanism;
 
@@ -224,7 +222,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(PersonClass))]
-		[Plural("Owners")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Owner;
 
@@ -247,7 +244,6 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(-1)]
-		[Plural("Notes")]
 		public RelationType Note;
 
 		#region Allors
@@ -256,10 +252,7 @@ namespace Allors.Meta
 		[RoleId("406f48d7-a0be-48c9-81f5-7b506b41e114")]
 		#endregion
 		[Type(typeof(AllorsDateTimeUnit))]
-		[Plural("ActualStarts")]
 		public RelationType ActualStart;
-
-
 
 		public static CommunicationEventInterface Instance {get; internal set;}
 
@@ -269,13 +262,8 @@ namespace Allors.Meta
 
 	    internal override void AppsExtend()
 	    {
-            new MethodType(AppsDomain.Instance, new Guid("433211EF-4376-451E-863F-376F5EC66758")) { ObjectType = this, Name = "Cancel" };
-            new MethodType(AppsDomain.Instance, new Guid("53138963-6B25-4A90-BFE3-89B77AF73329")) { ObjectType = this, Name = "Close" };
-            new MethodType(AppsDomain.Instance, new Guid("0E18F37B-39AA-452A-8085-6BD8AA686D33")) { ObjectType = this, Name = "Reopen" };
-
-
-            this.Description.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
-            this.Note.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
+            this.Description.RoleType.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
+            this.Note.RoleType.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
 
             this.CurrentObjectState.RoleType.IsRequired = true;
             this.Subject.RoleType.IsRequired = true;

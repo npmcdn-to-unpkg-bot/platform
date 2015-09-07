@@ -1,15 +1,12 @@
 namespace Allors.Meta
 {
-	using System;
 
 	#region Allors
 	[Id("383589fb-f410-4d22-ade6-aa5126fdef18")]
 	#endregion
-	[Plural("PriceComponents")]
 	[Inherit(typeof(PeriodInterface))]
 	[Inherit(typeof(AccessControlledObjectInterface))]
 	[Inherit(typeof(CommentableInterface))]
-
   	public partial class PriceComponentInterface: Interface
 	{
 		#region Allors
@@ -217,5 +214,11 @@ namespace Allors.Meta
 		internal PriceComponentInterface() : base(MetaPopulation.Instance)
         {
         }
-	}
+
+        internal override void AppsExtend()
+        {
+            this.Description.RoleType.IsRequired = true;
+            this.SpecifiedFor.RoleType.IsRequired = true;
+        }
+    }
 }

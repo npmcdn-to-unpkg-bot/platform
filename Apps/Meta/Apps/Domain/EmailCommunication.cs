@@ -1,13 +1,9 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("9426c214-c85d-491b-a5a6-9f573c3341a0")]
 	#endregion
 	[Inherit(typeof(CommunicationEventInterface))]
-
-	[Plural("EmailCommunications")]
 	public partial class EmailCommunicationClass : Class
 	{
 		#region Allors
@@ -64,17 +60,16 @@ namespace Allors.Meta
 		[Plural("EmailTemplates")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType EmailTemplate;
-
-
-
+        
 		public static EmailCommunicationClass Instance {get; internal set;}
 
 		internal EmailCommunicationClass() : base(MetaPopulation.Instance)
         {
         }
+
         internal override void AppsExtend()
         {
-            this.ConcreteRoles.Subject.IsRequiredOverride = true;
+            this.ConcreteRoleTypeByRoleType[CommunicationEventInterface.Instance.Subject.RoleType].IsRequiredOverride = true;
         }
     }
 }
