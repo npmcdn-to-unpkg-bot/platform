@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="3a3e6acf-48f4-4a33-848c-0c77cb18693a">
-  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
-  <pluralName>ShipmentMethods</pluralName>
-  <singularName>ShipmentMethod</singularName>
-</objectType>

@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="2ab70094-5481-4ecc-ae15-cb2131fbc2f1">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>CostCenters</pluralName>
-  <singularName>CostCenter</singularName>
-</objectType>

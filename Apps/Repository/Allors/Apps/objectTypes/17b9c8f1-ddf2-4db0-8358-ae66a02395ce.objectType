@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="17b9c8f1-ddf2-4db0-8358-ae66a02395ce">
-  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
-  <pluralName>PositionTypeRates</pluralName>
-  <singularName>PositionTypeRate</singularName>
-</objectType>

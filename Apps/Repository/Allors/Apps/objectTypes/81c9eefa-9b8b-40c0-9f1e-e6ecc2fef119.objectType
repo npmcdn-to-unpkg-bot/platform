@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="81c9eefa-9b8b-40c0-9f1e-e6ecc2fef119">
-  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
-  <pluralName>SalesInvoiceTypes</pluralName>
-  <singularName>SalesInvoiceType</singularName>
-</objectType>

@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="22f87630-11dd-480e-a721-9836af7685b1">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>PartRevisions</pluralName>
-  <singularName>PartRevision</singularName>
-</objectType>

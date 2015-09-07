@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="208a5af6-8dd8-4a48-acb2-2ecb89e8d322">
-  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
-  <pluralName>PayHistories</pluralName>
-  <singularName>PayHistory</singularName>
-</objectType>

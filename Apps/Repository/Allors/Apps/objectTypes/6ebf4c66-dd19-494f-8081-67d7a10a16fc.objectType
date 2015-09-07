@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="6ebf4c66-dd19-494f-8081-67d7a10a16fc">
-  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
-  <pluralName>SalarySteps</pluralName>
-  <singularName>SalaryStep</singularName>
-</objectType>

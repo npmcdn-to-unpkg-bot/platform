@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="a917f763-e54a-4693-bf7b-d8e7aead8fe6">
-  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
-  <pluralName>InvoiceTerms</pluralName>
-  <singularName>InvoiceTerm</singularName>
-</objectType>

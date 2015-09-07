@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="c758f77e-e3b3-4517-831a-af1bf0e1dceb">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>VatRatePurchaseKinds</pluralName>
-  <singularName>VatRatePurchaseKind</singularName>
-</objectType>

@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="0aecacff-23d0-48ff-8934-a4e5f711c729">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>SalesAccountingTransactions</pluralName>
-  <singularName>SalesAccountingTransaction</singularName>
-</objectType>

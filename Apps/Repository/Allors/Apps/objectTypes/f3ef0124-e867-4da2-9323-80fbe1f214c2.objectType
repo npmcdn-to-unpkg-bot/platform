@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="f3ef0124-e867-4da2-9323-80fbe1f214c2">
-  <isInterface>true</isInterface>
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>OrderItems</pluralName>
-  <singularName>OrderItem</singularName>
-</objectType>

@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="122ccfe1-f902-44c1-9d6c-6f6a0afa9469">
-  <isInterface>true</isInterface>
-  <namespace idref="fcf317ee-ab3c-4aeb-add3-154be33b1241" />
-  <pluralName>UniquelyIdentifiables</pluralName>
-  <singularName>UniquelyIdentifiable</singularName>
-</objectType>

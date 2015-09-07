@@ -1,5 +1,0 @@
-<template allors="1.0">
-  <name>Meta</name>
-  <output>../../Meta/Generated</output>
-  <source>file:///C:/github/allors/Base/Templates/meta.cs.stg</source>
-</template>

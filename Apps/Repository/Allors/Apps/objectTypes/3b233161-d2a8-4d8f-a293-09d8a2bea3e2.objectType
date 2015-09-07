@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="3b233161-d2a8-4d8f-a293-09d8a2bea3e2">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>VatReturnBoxTypes</pluralName>
-  <singularName>VatReturnBoxType</singularName>
-</objectType>

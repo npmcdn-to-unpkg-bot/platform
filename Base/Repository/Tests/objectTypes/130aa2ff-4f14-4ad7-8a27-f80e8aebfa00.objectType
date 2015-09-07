@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="130aa2ff-4f14-4ad7-8a27-f80e8aebfa00">
-  <isInterface>true</isInterface>
-  <namespace idref="35c3f396-af3c-4882-92ba-abe26b01b921" />
-  <pluralName>Addresses</pluralName>
-  <singularName>Address</singularName>
-</objectType>

@@ -1,8 +1,0 @@
-<relationType allors="1.0" id="5cb44331-fd8c-4f73-8994-161f702849b6">
-  <associationType id="2484aae6-db3b-4795-be76-016b33cbb679">
-    <objectType idref="fefcf1b6-ac8f-47b0-bed5-939207a2833e" />
-  </associationType>
-  <roleType id="c9f9dd15-54b4-4847-8b7e-ac88063804a3">
-    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
-  </roleType>
-</relationType>

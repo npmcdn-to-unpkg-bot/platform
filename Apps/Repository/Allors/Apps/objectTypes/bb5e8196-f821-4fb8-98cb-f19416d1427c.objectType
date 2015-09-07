@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="bb5e8196-f821-4fb8-98cb-f19416d1427c">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>SalesRepCommissions</pluralName>
-  <singularName>SalesRepCommission</singularName>
-</objectType>

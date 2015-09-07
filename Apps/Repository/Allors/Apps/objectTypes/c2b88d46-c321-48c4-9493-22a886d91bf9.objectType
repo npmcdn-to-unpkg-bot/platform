@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="c2b88d46-c321-48c4-9493-22a886d91bf9">
-  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
-  <pluralName>TransferStatuses</pluralName>
-  <singularName>TransferStatus</singularName>
-</objectType>

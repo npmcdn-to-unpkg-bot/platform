@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="5c5c17d1-2132-403b-8819-e3c1aa7bd6a9">
-  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
-  <pluralName>BillOfLadings</pluralName>
-  <singularName>BillOfLading</singularName>
-</objectType>

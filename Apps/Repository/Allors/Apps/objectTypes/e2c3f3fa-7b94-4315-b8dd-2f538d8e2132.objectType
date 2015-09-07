@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="e2c3f3fa-7b94-4315-b8dd-2f538d8e2132">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
-  <pluralName>CommunicationEventStatuses</pluralName>
-  <singularName>CommunicationEventStatus</singularName>
-</objectType>

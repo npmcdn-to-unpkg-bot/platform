@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="d4cfdb68-9128-4afc-8670-192e55115499">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>ManufacturerSuggestedRetailPrices</pluralName>
-  <singularName>ManufacturerSuggestedRetailPrice</singularName>
-</objectType>

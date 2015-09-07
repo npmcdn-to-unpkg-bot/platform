@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="321a6047-2233-4bec-a1b1-9b965c0099e5">
-  <isInterface>true</isInterface>
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>Requests</pluralName>
-  <singularName>Request</singularName>
-</objectType>

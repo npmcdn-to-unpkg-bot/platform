@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="d204e616-039c-40c8-81cc-18f3a7345d99">
-  <isInterface>true</isInterface>
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>PartBillOfMaterials</pluralName>
-  <singularName>PartBillOfMaterial</singularName>
-</objectType>

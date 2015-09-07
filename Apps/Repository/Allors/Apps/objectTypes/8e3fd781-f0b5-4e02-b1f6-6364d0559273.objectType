@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="8e3fd781-f0b5-4e02-b1f6-6364d0559273">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
-  <pluralName>CommunicationEventPurposes</pluralName>
-  <singularName>CommunicationEventPurpose</singularName>
-</objectType>

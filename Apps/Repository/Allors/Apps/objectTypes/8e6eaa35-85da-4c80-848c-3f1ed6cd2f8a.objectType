@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="8e6eaa35-85da-4c80-848c-3f1ed6cd2f8a">
-  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
-  <pluralName>ShipmentRouteSegments</pluralName>
-  <singularName>ShipmentRouteSegment</singularName>
-</objectType>

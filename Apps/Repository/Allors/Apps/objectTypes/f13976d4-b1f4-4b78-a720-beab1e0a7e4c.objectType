@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="f13976d4-b1f4-4b78-a720-beab1e0a7e4c">
-  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
-  <pluralName>CustomerShipmentStatuses</pluralName>
-  <singularName>CustomerShipmentStatus</singularName>
-</objectType>

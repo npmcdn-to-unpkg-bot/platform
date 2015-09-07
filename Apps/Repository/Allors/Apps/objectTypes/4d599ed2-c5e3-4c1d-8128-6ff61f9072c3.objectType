@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="4d599ed2-c5e3-4c1d-8128-6ff61f9072c3">
-  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
-  <pluralName>PositionTypes</pluralName>
-  <singularName>PositionType</singularName>
-</objectType>

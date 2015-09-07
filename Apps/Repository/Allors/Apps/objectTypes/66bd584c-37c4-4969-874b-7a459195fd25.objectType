@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="66bd584c-37c4-4969-874b-7a459195fd25">
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>DeliverableOrderItems</pluralName>
-  <singularName>DeliverableOrderItem</singularName>
-</objectType>

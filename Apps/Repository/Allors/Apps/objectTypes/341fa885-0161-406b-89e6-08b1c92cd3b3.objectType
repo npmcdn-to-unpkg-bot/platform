@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="341fa885-0161-406b-89e6-08b1c92cd3b3">
-  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
-  <pluralName>FiscalYearInvoiceNumbers</pluralName>
-  <singularName>FiscalYearInvoiceNumber</singularName>
-</objectType>

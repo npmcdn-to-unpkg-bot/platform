@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="684ce40f-6950-4163-b110-e83e65c31f0a">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>InternalOrganisationRevenueHistories</pluralName>
-  <singularName>InternalOrganisationRevenueHistory</singularName>
-</objectType>

@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="acbe7b46-bcfe-4e8b-b8a7-7b9eeac4d6e2">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>EuSalesListTypes</pluralName>
-  <singularName>EuSalesListType</singularName>
-</objectType>

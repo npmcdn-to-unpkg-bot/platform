@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="bfdd33dc-5701-41ec-a768-f745155663d3">
-  <isInterface>true</isInterface>
-  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
-  <pluralName>CityBounds</pluralName>
-  <singularName>CityBound</singularName>
-</objectType>

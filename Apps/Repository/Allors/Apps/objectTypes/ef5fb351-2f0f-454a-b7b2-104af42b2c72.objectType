@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="ef5fb351-2f0f-454a-b7b2-104af42b2c72">
-  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
-  <pluralName>PayChecks</pluralName>
-  <singularName>PayCheck</singularName>
-</objectType>

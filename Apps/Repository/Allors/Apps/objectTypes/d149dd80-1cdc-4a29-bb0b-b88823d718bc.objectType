@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="d149dd80-1cdc-4a29-bb0b-b88823d718bc">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>EngineeringChangeStatuses</pluralName>
-  <singularName>EngineeringChangeStatus</singularName>
-</objectType>

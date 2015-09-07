@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="b00e2650-283f-4326-bdd3-46a2890e2037">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>InventoryItemVariances</pluralName>
-  <singularName>InventoryItemVariance</singularName>
-</objectType>

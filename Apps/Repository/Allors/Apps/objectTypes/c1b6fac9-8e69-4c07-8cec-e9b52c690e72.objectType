@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="c1b6fac9-8e69-4c07-8cec-e9b52c690e72">
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>GoodOrderItems</pluralName>
-  <singularName>GoodOrderItem</singularName>
-</objectType>

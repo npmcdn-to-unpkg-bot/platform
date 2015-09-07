@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="da504b46-2fd0-4500-ae23-61fa73151077">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>TimeAndMaterialsServices</pluralName>
-  <singularName>TimeAndMaterialsService</singularName>
-</objectType>

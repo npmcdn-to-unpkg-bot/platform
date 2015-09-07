@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="5b294591-e20a-4bad-940a-27ae7b2f8770">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>NonSerializedInventoryItems</pluralName>
-  <singularName>NonSerializedInventoryItem</singularName>
-</objectType>

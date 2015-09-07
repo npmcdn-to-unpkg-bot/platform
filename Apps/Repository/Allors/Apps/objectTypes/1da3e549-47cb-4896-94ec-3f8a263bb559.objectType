@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="1da3e549-47cb-4896-94ec-3f8a263bb559">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>SerializedInventoryItemStatuses</pluralName>
-  <singularName>SerializedInventoryItemStatus</singularName>
-</objectType>

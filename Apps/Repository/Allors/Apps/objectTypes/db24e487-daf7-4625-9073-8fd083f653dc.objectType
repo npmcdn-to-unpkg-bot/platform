@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="db24e487-daf7-4625-9073-8fd083f653dc">
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>CustomerRequirements</pluralName>
-  <singularName>CustomerRequirement</singularName>
-</objectType>

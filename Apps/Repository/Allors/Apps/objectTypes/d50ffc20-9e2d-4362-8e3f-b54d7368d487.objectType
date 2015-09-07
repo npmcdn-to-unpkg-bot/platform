@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="d50ffc20-9e2d-4362-8e3f-b54d7368d487">
-  <namespace idref="14720772-4daf-431c-ac0a-513b8c6f4254" />
-  <pluralName>NewsItems</pluralName>
-  <singularName>NewsItem</singularName>
-</objectType>

@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="d551887b-8520-478d-bf2c-b0f26e3bc356">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>PackageQuantityBreaks</pluralName>
-  <singularName>PackageQuantityBreak</singularName>
-</objectType>

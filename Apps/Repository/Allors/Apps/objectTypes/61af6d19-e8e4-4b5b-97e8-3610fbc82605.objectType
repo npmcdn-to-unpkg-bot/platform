@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="61af6d19-e8e4-4b5b-97e8-3610fbc82605">
-  <isInterface>true</isInterface>
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>InventoryItems</pluralName>
-  <singularName>InventoryItem</singularName>
-</objectType>

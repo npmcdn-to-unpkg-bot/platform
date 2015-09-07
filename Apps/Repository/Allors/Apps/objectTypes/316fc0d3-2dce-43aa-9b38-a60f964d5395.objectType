@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="316fc0d3-2dce-43aa-9b38-a60f964d5395">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
-  <pluralName>OrganisationRollUps</pluralName>
-  <singularName>OrganisationRollUp</singularName>
-</objectType>

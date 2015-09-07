@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="72237d95-e9c0-42c1-afe3-ec34f2e6cbfb">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
-  <pluralName>AgreementPricingPrograms</pluralName>
-  <singularName>AgreementPricingProgram</singularName>
-</objectType>

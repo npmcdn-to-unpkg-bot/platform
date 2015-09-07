@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="a3f63642-b397-4281-ba7e-8c77e9f30658">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>VatTariffs</pluralName>
-  <singularName>VatTariff</singularName>
-</objectType>

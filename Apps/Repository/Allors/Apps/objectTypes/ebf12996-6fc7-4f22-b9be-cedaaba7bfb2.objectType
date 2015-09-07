@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="ebf12996-6fc7-4f22-b9be-cedaaba7bfb2">
-  <namespace idref="ef87a95b-2f92-4bdb-adef-f84bccf79109" />
-  <pluralName>TemplatePurposes</pluralName>
-  <singularName>TemplatePurpose</singularName>
-</objectType>

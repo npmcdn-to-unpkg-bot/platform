@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="15f511a9-7a08-42e4-a690-e0d2f01c9686">
-  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
-  <pluralName>PurchaseReturnStatuses</pluralName>
-  <singularName>PurchaseReturnStatus</singularName>
-</objectType>

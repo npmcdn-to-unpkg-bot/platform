@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="3b330b42-b359-4de7-a084-cc96ce1e6420">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>DebitCreditConstants</pluralName>
-  <singularName>DebitCreditConstant</singularName>
-</objectType>

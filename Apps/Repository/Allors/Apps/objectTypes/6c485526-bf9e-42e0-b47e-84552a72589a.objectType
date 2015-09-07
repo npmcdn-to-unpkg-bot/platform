@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="6c485526-bf9e-42e0-b47e-84552a72589a">
-  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
-  <pluralName>PurchaseInvoiceObjectStates</pluralName>
-  <singularName>PurchaseInvoiceObjectState</singularName>
-</objectType>

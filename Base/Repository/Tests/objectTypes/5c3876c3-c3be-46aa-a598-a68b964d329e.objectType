@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="5c3876c3-c3be-46aa-a598-a68b964d329e">
-  <isInterface>true</isInterface>
-  <namespace idref="e9c45748-90db-4a90-bcd5-bee9bd2668ab" />
-  <pluralName>Shareds</pluralName>
-  <singularName>Shared</singularName>
-</objectType>

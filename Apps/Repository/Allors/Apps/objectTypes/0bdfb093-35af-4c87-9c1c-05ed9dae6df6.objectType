@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="0bdfb093-35af-4c87-9c1c-05ed9dae6df6">
-  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
-  <pluralName>WorkEffortPartyAssignments</pluralName>
-  <singularName>WorkEffortPartyAssignment</singularName>
-</objectType>

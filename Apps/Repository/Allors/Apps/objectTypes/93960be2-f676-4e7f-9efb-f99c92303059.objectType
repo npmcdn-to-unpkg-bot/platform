@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="93960be2-f676-4e7f-9efb-f99c92303059">
-  <isInterface>true</isInterface>
-  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
-  <pluralName>GeoLocatables</pluralName>
-  <singularName>GeoLocatable</singularName>
-</objectType>

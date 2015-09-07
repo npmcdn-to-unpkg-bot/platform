@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="644660d4-d5d0-4bd9-8cba-17696af0b9ed">
-  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
-  <pluralName>AssetAssignmentStatuses</pluralName>
-  <singularName>AssetAssignmentStatus</singularName>
-</objectType>

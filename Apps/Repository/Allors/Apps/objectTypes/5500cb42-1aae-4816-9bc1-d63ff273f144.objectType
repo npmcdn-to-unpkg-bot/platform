@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="5500cb42-1aae-4816-9bc1-d63ff273f144">
-  <isInterface>true</isInterface>
-  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
-  <pluralName>FinancialAccountTransactions</pluralName>
-  <singularName>FinancialAccountTransaction</singularName>
-</objectType>

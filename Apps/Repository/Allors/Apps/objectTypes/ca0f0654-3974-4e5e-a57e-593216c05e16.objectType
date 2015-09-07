@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="ca0f0654-3974-4e5e-a57e-593216c05e16">
-  <isInterface>true</isInterface>
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>DeploymentUsages</pluralName>
-  <singularName>DeploymentUsage</singularName>
-</objectType>

@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="2561e93c-5b85-44fb-a924-a1c0d1f78846">
-  <namespace idref="35c3f396-af3c-4882-92ba-abe26b01b921" />
-  <pluralName>HomeAddresses</pluralName>
-  <singularName>HomeAddress</singularName>
-</objectType>

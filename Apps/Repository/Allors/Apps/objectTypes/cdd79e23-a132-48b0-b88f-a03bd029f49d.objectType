@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="cdd79e23-a132-48b0-b88f-a03bd029f49d">
-  <isInterface>true</isInterface>
-  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
-  <pluralName>Facilities</pluralName>
-  <singularName>Facility</singularName>
-</objectType>

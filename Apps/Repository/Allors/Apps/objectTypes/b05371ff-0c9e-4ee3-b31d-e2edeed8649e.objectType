@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="b05371ff-0c9e-4ee3-b31d-e2edeed8649e">
-  <isInterface>true</isInterface>
-  <pluralName>CommunicationEvents</pluralName>
-  <singularName>CommunicationEvent</singularName>
-</objectType>

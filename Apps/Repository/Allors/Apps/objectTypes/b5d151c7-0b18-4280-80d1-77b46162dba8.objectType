@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="b5d151c7-0b18-4280-80d1-77b46162dba8">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>OperatingBudgets</pluralName>
-  <singularName>OperatingBudget</singularName>
-</objectType>

@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="4af573b7-a87f-400c-97e4-80bda17376e0">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>ItemVarianceAccountingTransactions</pluralName>
-  <singularName>ItemVarianceAccountingTransaction</singularName>
-</objectType>

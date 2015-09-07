@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="48733d8e-506a-4add-a230-907221ca7a9a">
-  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
-  <pluralName>DeliverableTurnovers</pluralName>
-  <singularName>DeliverableTurnover</singularName>
-</objectType>

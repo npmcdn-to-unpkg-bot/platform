@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="99ea8125-7d86-4cb6-b453-27752c434fc7">
-  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
-  <pluralName>ProductModels</pluralName>
-  <singularName>ProductModel</singularName>
-</objectType>

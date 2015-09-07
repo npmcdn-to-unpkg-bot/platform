@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="2fcdaf95-c3ec-4da2-8e7e-09c55741082f">
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>OrderRequirementCommitments</pluralName>
-  <singularName>OrderRequirementCommitment</singularName>
-</objectType>

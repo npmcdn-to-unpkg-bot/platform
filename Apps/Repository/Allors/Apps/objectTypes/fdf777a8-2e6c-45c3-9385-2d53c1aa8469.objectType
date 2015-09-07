@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="fdf777a8-2e6c-45c3-9385-2d53c1aa8469">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>PartyProductRevenueHistories</pluralName>
-  <singularName>PartyProductRevenueHistory</singularName>
-</objectType>

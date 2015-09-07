@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="848053ee-18d8-4962-81c3-bd6c7837565a">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>AmountsDue</pluralName>
-  <singularName>AmountDue</singularName>
-</objectType>

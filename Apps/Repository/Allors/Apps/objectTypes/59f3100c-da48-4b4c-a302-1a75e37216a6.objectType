@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="59f3100c-da48-4b4c-a302-1a75e37216a6">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>OrganisationGlAccounts</pluralName>
-  <singularName>OrganisationGlAccount</singularName>
-</objectType>

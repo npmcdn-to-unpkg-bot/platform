@@ -70,11 +70,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
+    <ProjectReference Include="..\..\Adapters\Allors.Adapters.Memory\Allors.Adapters.Memory.csproj">
       <Project>{cb9b7108-c8f3-459c-b2da-88187c84cfc1}</Project>
       <Name>Allors.Databases.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
+    <ProjectReference Include="..\..\Adapters\Allors.Adapters.Object.SqlClient\Allors.Adapters.Object.SqlClient.csproj">
       <Project>{06bc1665-8fe8-4f04-9e80-ec2d54404ba7}</Project>
       <Name>Allors.Databases.Object.SqlClient</Name>
     </ProjectReference>

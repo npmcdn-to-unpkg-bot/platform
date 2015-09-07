@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="3b9f21f4-2f2c-47a9-9c76-15f5ef4f5e00">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
-  <pluralName>CustomerRelationships</pluralName>
-  <singularName>CustomerRelationship</singularName>
-</objectType>

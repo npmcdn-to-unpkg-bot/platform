@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="daf83fcc-832e-4d5e-ba71-5a08f42355db">
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>RequestItems</pluralName>
-  <singularName>RequestItem</singularName>
-</objectType>

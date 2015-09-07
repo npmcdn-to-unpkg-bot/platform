@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="d0f9fc0d-a3c5-46cc-ab00-4c724995fc14">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
-  <pluralName>FaceToFaceCommunications</pluralName>
-  <singularName>FaceToFaceCommunication</singularName>
-</objectType>

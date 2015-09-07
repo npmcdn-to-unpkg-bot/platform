@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="21f09e4c-7b3f-4152-8822-8c485011759c">
-  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
-  <pluralName>SalesOrderItemObjectStates</pluralName>
-  <singularName>SalesOrderItemObjectState</singularName>
-</objectType>

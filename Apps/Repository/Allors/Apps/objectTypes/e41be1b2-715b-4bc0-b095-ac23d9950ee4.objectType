@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="e41be1b2-715b-4bc0-b095-ac23d9950ee4">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>AccountingTransactionDetails</pluralName>
-  <singularName>AccountingTransactionDetail</singularName>
-</objectType>

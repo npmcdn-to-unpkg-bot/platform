@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="ca008b8d-584e-4aa5-a759-895b634defc5">
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>OwnBankAccounts</pluralName>
-  <singularName>OwnBankAccount</singularName>
-</objectType>

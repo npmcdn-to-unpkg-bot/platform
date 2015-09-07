@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="6bfa631c-80f4-495f-bb9a-0d3351390d64">
-  <isInterface>true</isInterface>
-  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
-  <pluralName>ExternalAccountingTransactions</pluralName>
-  <singularName>ExternalAccountingTransaction</singularName>
-</objectType>

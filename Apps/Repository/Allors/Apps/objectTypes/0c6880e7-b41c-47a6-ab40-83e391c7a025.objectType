@@ -1,5 +1,0 @@
-<objectType allors="1.0" id="0c6880e7-b41c-47a6-ab40-83e391c7a025">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
-  <pluralName>ContactMechanismPurposes</pluralName>
-  <singularName>ContactMechanismPurpose</singularName>
-</objectType>
