@@ -2,6 +2,8 @@
 
 @msbuild Base.sln /target:Clean /verbosity:minimal
 
+@msbuild Base.sln /target:Merge:Rebuild /p:Configuration="Debug" /verbosity:minimal
+
 @msbuild Resources/Merge.proj /verbosity:minimal
 
 @msbuild Base.sln /target:Meta:Rebuild /p:Configuration="Debug" /verbosity:minimal

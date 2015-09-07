@@ -29,11 +29,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors", "..\Framework\Allors\Allors.csproj", "{5B4E2D7C-8EF8-45F5-BFB2-E595C401A95F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Memory", "..\Adapters\Allors.Adapters.Memory\Allors.Adapters.Memory.csproj", "{CB9B7108-C8F3-459C-B2DA-88187C84CFC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Adapters.Memory", "..\Adapters\Allors.Adapters.Memory\Allors.Adapters.Memory.csproj", "{CB9B7108-C8F3-459C-B2DA-88187C84CFC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Object.SqlClient", "..\Adapters\Allors.Adapters.Object.SqlClient\Allors.Adapters.Object.SqlClient.csproj", "{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Adapters.Object.SqlClient", "..\Adapters\Allors.Adapters.Object.SqlClient\Allors.Adapters.Object.SqlClient.csproj", "{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Merge", "Merge\Merge.csproj", "{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,14 @@ Global
 		{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}.Release|x64.ActiveCfg = Release|x64
 		{F89CBFCF-B8A4-4664-AB02-6C9E0B643C92}.Release|x64.Build.0 = Release|x64
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Debug|x64.Build.0 = Debug|Any CPU
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Release|x64.ActiveCfg = Release|Any CPU
+		{F192CA79-CB0F-43A6-AC0A-3F9685BDB8E1}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
