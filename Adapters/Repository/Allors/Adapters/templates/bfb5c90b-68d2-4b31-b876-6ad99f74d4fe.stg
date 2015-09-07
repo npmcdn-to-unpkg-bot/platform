@@ -23,7 +23,6 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
-	<generation template="ids" output="Ids.g.cs"/> 
 	<generation template="meta" output="Meta.g.cs"/> 
 $domain.compositeObjectTypes:{objectType|
 	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.g.cs"/>
@@ -31,108 +30,41 @@ $domain.compositeObjectTypes:{objectType|
 </generations>
 >>
 
-ids(domain, settings) ::= <<
-namespace Allors.Meta
-{
-	public static class ObjectTypeIds
-	{
-$domain.ObjectTypes:{objectType|
-		public const string $objectType.SingularName$ = "$objectType.IdAsString$";
-}$
-	}
-
-	public static class InheritanceIds
-	{
-$domain.Inheritances:{inheritance|
-		public const string $inheritance.Subtype.Name$$inheritance.Supertype.Name$ = "$inheritance.IdAsString$";
-}$
-	}
-
-	public static class RelationTypeIds
-	{
-$domain.RelationTypes:{relationType|
-		public const string $relationType.RoleType.FullSingularName$ = "$relationType.IdAsString$";
-}$
-	}
-
-	public static class AssociationTypeIds
-	{
-$domain.RelationTypes:{relationType|
-		public const string $relationType.AssociationType.FullSingularName$ = "$relationType.AssociationType.IdAsString$";
-}$
-	}
-
-	public static class RoleTypeIds
-	{
-$domain.RelationTypes:{relationType|
-		public const string $relationType.RoleType.FullSingularName$ = "$relationType.RoleType.IdAsString$";
-}$
-	}
-}
-
-namespace Allors.Meta.Ids
-{
-$domain.ObjectTypes:{objectType|$idsObjectType()$}$
-}
->>
-
-idsObjectType() ::= <<
-	public static class $objectType.Name$Ids
-	{
-$objectType.RoleTypes:{roleType|				public const string $roleType.Name$ = RoleTypeIds.$roleType.FullSingularName$;
-}$
-
-$objectType.AssociationTypes:{associationType|				public const string $associationType.Name$ = AssociationTypeIds.$associationType.FullSingularName$;
-}$
-	}
-
->>
-
-
 meta(domain, settings) ::= <<
 namespace Allors.Meta
 {
 	using System;
 $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDomain(domain=superDomain)$$endif$}$
 
+	#region Allors
+	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$	[Inherit(typeof($superDomain.Name$Domain)]$endif$
+}$
 	[Id("$domain.IdAsString$")]
+	#endregion
 	public partial class $domain.Name$Domain : Domain
 	{
 		public static $domain.Name$Domain Instance { get; internal set; }
 
 		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
         {
-			this.Name = "$domain.Name$";
         }
-
-		internal override void Build()
-		{
-			this.AddDirectSuperdomain(CoreDomain.Instance);
-			$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$	this.AddDirectSuperdomain($superDomain.Name$Domain.Instance);$endif$
-}$
-		}
-
 	}
 }
 >>
 
 superDomain(domain) ::= <<
+	#region Allors
+	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$		[Inherit(typeof($superDomain.Name$Domain)]$endif$
+}$
 	[Id("$domain.IdAsString$")]
+	#endregion
 	public partial class $domain.Name$Domain : Domain
 	{
 		public static $domain.Name$Domain Instance { get; internal set; }
 
 		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
         {
-			this.Name = "$domain.Name$";
         }
-
-		internal override void Build()
-		{
-			this.AddDirectSuperdomain(CoreDomain.Instance);
-			$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$		this.AddDirectSuperdomain($superDomain.Name$Domain.Instance);$endif$
-}$
-		}
 	}
 >>
 
@@ -144,9 +76,11 @@ namespace Allors.Meta
 {
 	using System;
 
+	#region Allors
 $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 }$
 	[Id("$objectType.IdAsString$")]
+	#endregion
   	public partial class $objectType.SingularName$Interface: Interface
 	{
 $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$
@@ -169,9 +103,11 @@ namespace Allors.Meta
 {
 	using System;
 
+	#region Allors
 $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 }$
 	[Id("$objectType.IdAsString$")]
+	#endregion
 	public partial class $objectType.SingularName$Class : Class
 	{
 		$objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$

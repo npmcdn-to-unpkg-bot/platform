@@ -66,6 +66,7 @@
     <Compile Include="Adapters\IClassCache.cs" />
     <Compile Include="Adapters\IRoleCache.cs" />
     <Compile Include="Adapters\RoleCache.cs" />
+    <Compile Include="Attributes\DomainAttribute.cs" />
     <Compile Include="Attributes\TypeAttribute.cs" />
     <Compile Include="Attributes\IndexedAttribute.cs" />
     <Compile Include="Attributes\DerivedAttribute.cs" />

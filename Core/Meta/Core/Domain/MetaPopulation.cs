@@ -57,22 +57,42 @@ namespace Allors.Meta
             Instance = new MetaPopulation();
 
             var assembly = Assembly.GetExecutingAssembly();
-            var nonAbstractClasses = new List<Type>(assembly.GetTypes().Where(type => type.IsClass && !type.IsAbstract));
+            var classes = new List<Type>(assembly.GetTypes().Where(type => type.IsClass && !type.IsAbstract));
 
-            foreach (var domainType in nonAbstractClasses.Where(type => type.GetInterfaces().Contains(typeof(IDomain))))
+            foreach (var domainType in classes.Where(type => type.GetInterfaces().Contains(typeof(IDomain))))
             {
                 var constructor = domainType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new []{Instance.GetType()}, null);
-                var instance = constructor.Invoke(new object[] { Instance });
+                var domain = (Domain)constructor.Invoke(new object[] { Instance });
+
+                domain.Name = domainType.Name.Substring(0, domainType.Name.Length-"Domain".Length);
+
                 var instanceProperty = domainType.GetProperty("Instance");
-                instanceProperty.SetMethod.Invoke(null, new[] { instance });
+                instanceProperty.SetMethod.Invoke(null, new[] { domain });
             }
 
             foreach (var domain in Instance.Domains)
             {
-                domain.Build();
+                var type = domain.GetType();
+
+                // Always inherit from Object
+                if (!domain.Equals(CoreDomain.Instance))
+                {
+                    domain.AddDirectSuperdomain(CoreDomain.Instance);
+                }
+
+                // Create Inheritance objects
+                foreach (var attribute in type.GetCustomAttributes(typeof(InheritAttribute)))
+                {
+                    var inheritanceAttribute = (InheritAttribute)attribute;
+                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(inheritanceAttribute.Value, typeof(IdAttribute));
+                    var id = new Guid(idAttribute.Value);
+                    var superdomain = (Domain)Instance.Find(id);
+
+                    domain.AddDirectSuperdomain(superdomain);
+                }
             }
 
-            foreach (var objectType in nonAbstractClasses.Where(type => type.GetInterfaces().Contains(typeof(IUnit)) || type.GetInterfaces().Contains(typeof(IInterface)) || type.GetInterfaces().Contains(typeof(IClass))))
+            foreach (var objectType in classes.Where(type => type.GetInterfaces().Contains(typeof(IUnit)) || type.GetInterfaces().Contains(typeof(IInterface)) || type.GetInterfaces().Contains(typeof(IClass))))
             {
                 var constructor = objectType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
                 var instance = constructor.Invoke(null);

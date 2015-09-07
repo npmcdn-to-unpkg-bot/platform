@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="CoreDomain.cs" company="Allors bvba">
+// <copyright file="DomainAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,21 +16,21 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the Extent type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
-{
-    #region Allors
-    [Id("FC9BAD0E-D70D-4F93-BCA7-0C7944EF1ABB")]
-    #endregion
-    public partial class CoreDomain : Domain
-    {
-        public static CoreDomain Instance { get; internal set;}
+using System;
 
-        internal CoreDomain(MetaPopulation metaPopulation)
-            : base(metaPopulation)
+namespace Allors
+{
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
+    public class DomainAttribute : MetaAttribute
+    {
+        public DomainAttribute(Type value)
         {
+            this.Value = value;
         }
+        
+        public Type Value { get; set; }
     }
 }
