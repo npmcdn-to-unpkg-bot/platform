@@ -34,7 +34,7 @@ namespace Allors.Domain
         {
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.DatabaseSession).NeedsAction;
+                this.CurrentObjectState = new WorkEffortObjectStates(this.Strategy.Session).NeedsAction;
             }
         }
 

@@ -37,10 +37,10 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.DatabaseSession).Created) ||
-                    this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.DatabaseSession).Picked) ||
-                    this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.DatabaseSession).OnHold) ||
-                    this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.DatabaseSession).Packed))
+                if (this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.Session).Created) ||
+                    this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.Session).Picked) ||
+                    this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.Session).OnHold) ||
+                    this.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.Strategy.Session).Packed))
                 {
                     return true;
                 }
@@ -518,7 +518,7 @@ namespace Allors.Domain
 
             if (!this.WithoutCharges)
             {
-                foreach (ShippingAndHandlingComponent shippingAndHandlingComponent in new ShippingAndHandlingComponents(this.Strategy.DatabaseSession).Extent())
+                foreach (ShippingAndHandlingComponent shippingAndHandlingComponent in new ShippingAndHandlingComponents(this.Strategy.Session).Extent())
                 {
                     if (shippingAndHandlingComponent.FromDate <= DateTime.UtcNow &&
                         (!shippingAndHandlingComponent.ExistThroughDate || shippingAndHandlingComponent.ThroughDate >= DateTime.UtcNow))

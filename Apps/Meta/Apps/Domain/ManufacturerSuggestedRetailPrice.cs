@@ -1,10 +1,20 @@
 namespace Allors.Meta
 {
-    public partial class ManufacturerSuggestedRetailPriceClass
+	#region Allors
+	[Id("d4cfdb68-9128-4afc-8670-192e55115499")]
+	#endregion
+	[Inherit(typeof(PriceComponentInterface))]
+	public partial class ManufacturerSuggestedRetailPriceClass : Class
 	{
-	    internal override void AppsExtend()
+		public static ManufacturerSuggestedRetailPriceClass Instance {get; internal set;}
+
+		internal ManufacturerSuggestedRetailPriceClass() : base(MetaPopulation.Instance)
         {
-            this.ConcreteRoles.Price.IsRequiredOverride = true;
         }
-	}
+
+        internal override void AppsExtend()
+        {
+            this.ConcreteRoleTypeByRoleType[PriceComponentInterface.Instance.Price.RoleType].IsRequiredOverride = true;
+        }
+    }
 }

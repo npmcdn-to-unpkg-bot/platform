@@ -66,21 +66,18 @@ namespace Allors.Domain
             this.DeriveMembership(derivation);
             this.DeriveInternalOrganisationSupplier(derivation);
 
-            if (this.Strategy.Session is IDatabaseSession)
+            var supplierRelationships = this.InternalOrganisation.SupplierRelationshipsWhereInternalOrganisation;
+            supplierRelationships.Filter.AddEquals(SupplierRelationships.Meta.SubAccountNumber, this.SubAccountNumber);
+            if (supplierRelationships.Count == 1)
             {
-                var supplierRelationships = this.InternalOrganisation.SupplierRelationshipsWhereInternalOrganisation;
-                supplierRelationships.Filter.AddEquals(SupplierRelationships.Meta.SubAccountNumber, this.SubAccountNumber);
-                if (supplierRelationships.Count == 1)
-                {
-                    if (!supplierRelationships[0].Equals(this))
-                    {
-                        derivation.Log.AddError(new DerivationErrorUnique(derivation.Log, this, SupplierRelationships.Meta.SubAccountNumber));
-                    }
-                }
-                else if (supplierRelationships.Count > 1)
+                if (!supplierRelationships[0].Equals(this))
                 {
                     derivation.Log.AddError(new DerivationErrorUnique(derivation.Log, this, SupplierRelationships.Meta.SubAccountNumber));
                 }
+            }
+            else if (supplierRelationships.Count > 1)
+            {
+                derivation.Log.AddError(new DerivationErrorUnique(derivation.Log, this, SupplierRelationships.Meta.SubAccountNumber));
             }
         }
 

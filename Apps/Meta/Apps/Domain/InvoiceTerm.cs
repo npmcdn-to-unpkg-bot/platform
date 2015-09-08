@@ -1,10 +1,21 @@
 namespace Allors.Meta
 {
-    public partial class InvoiceTermClass
+	#region Allors
+	[Id("a917f763-e54a-4693-bf7b-d8e7aead8fe6")]
+	#endregion
+	[Inherit(typeof(AccessControlledObjectInterface))]
+	[Inherit(typeof(AgreementTermInterface))]
+	public partial class InvoiceTermClass : Class
 	{
-	    internal override void AppsExtend()
+		public static InvoiceTermClass Instance {get; internal set;}
+
+		internal InvoiceTermClass() : base(MetaPopulation.Instance)
         {
-            this.ConcreteRoles.TermType.IsRequiredOverride = true;
         }
-	}
+
+        internal override void AppsExtend()
+        {
+            this.ConcreteRoleTypeByRoleType[AgreementTermInterface.Instance.TermType.RoleType].IsRequiredOverride = true;
+        }
+    }
 }

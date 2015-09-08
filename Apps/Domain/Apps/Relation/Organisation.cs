@@ -472,66 +472,63 @@ namespace Allors.Domain
 
         public void AppsOnDeriveUserGroups(IDerivation derivation)
         {
-            if (this.Strategy.Session.Population is IDatabase)
+            var customerContactGroupName = string.Format("Customer contacts at {0} ({1})", this.Name, this.UniqueId);
+            var supplierContactGroupName = string.Format("Supplier contacts at {0} ({1})", this.Name, this.UniqueId);
+            var partnerContactGroupName = string.Format("Partner contacts at {0} ({1})", this.Name, this.UniqueId);
+
+            var customerContactGroupFound = false;
+            var supplierContactGroupFound = false;
+            var partnerContactGroupFound = false;
+
+            foreach (UserGroup userGroup in this.UserGroupsWhereParty)
             {
-                var customerContactGroupName = string.Format("Customer contacts at {0} ({1})", this.Name, this.UniqueId);
-                var supplierContactGroupName = string.Format("Supplier contacts at {0} ({1})", this.Name, this.UniqueId);
-                var partnerContactGroupName = string.Format("Partner contacts at {0} ({1})", this.Name, this.UniqueId);
-
-                var customerContactGroupFound = false;
-                var supplierContactGroupFound = false;
-                var partnerContactGroupFound = false;
-
-                foreach (UserGroup userGroup in this.UserGroupsWhereParty)
+                if (userGroup.Name == customerContactGroupName)
                 {
-                    if (userGroup.Name == customerContactGroupName)
-                    {
-                        customerContactGroupFound = true;
-                    }
-
-                    if (userGroup.Name == supplierContactGroupName)
-                    {
-                        supplierContactGroupFound = true;
-                    }
-
-                    if (userGroup.Name == partnerContactGroupName)
-                    {
-                        partnerContactGroupFound = true;
-                    }
+                    customerContactGroupFound = true;
                 }
 
-                if (!customerContactGroupFound)
+                if (userGroup.Name == supplierContactGroupName)
                 {
-                    this.CustomerContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
-                        .WithName(customerContactGroupName)
-                        .WithParty(this)
-                        .WithParent(new UserGroups(this.Strategy.Session).Customers)
-                        .Build();
-
-                    new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.DatabaseSession).Customer).WithSubjectGroup(this.CustomerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
+                    supplierContactGroupFound = true;
                 }
 
-                if (!supplierContactGroupFound)
+                if (userGroup.Name == partnerContactGroupName)
                 {
-                    this.SupplierContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
-                        .WithName(supplierContactGroupName)
-                        .WithParty(this)
-                        .WithParent(new UserGroups(this.Strategy.Session).Suppliers)
-                        .Build();
-
-                    new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.DatabaseSession).Supplier).WithSubjectGroup(this.SupplierContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
+                    partnerContactGroupFound = true;
                 }
+            }
 
-                if (!partnerContactGroupFound)
-                {
-                    this.PartnerContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
-                        .WithName(partnerContactGroupName)
-                        .WithParty(this)
-                        .WithParent(new UserGroups(this.Strategy.Session).Partners)
-                        .Build();
+            if (!customerContactGroupFound)
+            {
+                this.CustomerContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
+                    .WithName(customerContactGroupName)
+                    .WithParty(this)
+                    .WithParent(new UserGroups(this.Strategy.Session).Customers)
+                    .Build();
 
-                    new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.DatabaseSession).Partner).WithSubjectGroup(this.PartnerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
-                }
+                new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.Session).Customer).WithSubjectGroup(this.CustomerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
+            }
+
+            if (!supplierContactGroupFound)
+            {
+                this.SupplierContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
+                    .WithName(supplierContactGroupName)
+                    .WithParty(this)
+                    .WithParent(new UserGroups(this.Strategy.Session).Suppliers)
+                    .Build();
+
+                new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.Session).Supplier).WithSubjectGroup(this.SupplierContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
+            }
+
+            if (!partnerContactGroupFound)
+            {
+                this.PartnerContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
+                    .WithName(partnerContactGroupName)
+                    .WithParty(this)
+                    .WithParent(new UserGroups(this.Strategy.Session).Partners)
+                    .Build();
+
+                new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.Session).Partner).WithSubjectGroup(this.PartnerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
             }
         }
 

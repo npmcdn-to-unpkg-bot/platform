@@ -6,7 +6,7 @@ namespace Allors.Meta
         {
             this.CurrentObjectState.RoleType.IsRequired = true;
             this.SerialNumber.RoleType.IsRequired = true;
-            this.SerialNumber.IsUnique = true;
+            this.SerialNumber.RoleType.IsUnique = true;
         }
     }
 }

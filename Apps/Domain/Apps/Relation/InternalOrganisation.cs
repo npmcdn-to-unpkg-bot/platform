@@ -138,8 +138,8 @@ namespace Allors.Domain
                 this.FiscalYearStartDay = 1;
             }
             
-            if (this.Strategy.DatabaseSession.Extent<TemplatePurpose>().Count > 0 &&
-                this.Strategy.DatabaseSession.Extent<StringTemplate>().Count > 0)
+            if (this.Strategy.Session.Extent<TemplatePurpose>().Count > 0 &&
+                this.Strategy.Session.Extent<StringTemplate>().Count > 0)
             {
                 if (!this.ExistPurchaseOrderTemplates)
                 {
@@ -406,13 +406,13 @@ namespace Allors.Domain
 
                 if (!employeeUserGroupsByName.ContainsKey(userGroupName))
                 {
-                    var userGroup = new UserGroupBuilder(this.Strategy.DatabaseSession)
+                    var userGroup = new UserGroupBuilder(this.Strategy.Session)
                         .WithName(userGroupName)
                         .WithParty(this)
                         .WithParent(role.UserGroupWhereRole)
                         .Build();
 
-                    new AccessControlBuilder(this.Strategy.DatabaseSession).WithRole(role).WithSubjectGroup(userGroup).WithObject(this.OwnerSecurityToken).Build();
+                    new AccessControlBuilder(this.Strategy.Session).WithRole(role).WithSubjectGroup(userGroup).WithObject(this.OwnerSecurityToken).Build();
                 }
             }
         }

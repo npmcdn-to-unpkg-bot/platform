@@ -39,10 +39,10 @@ namespace Allors.Domain
         {
             get
             {
-                if (!this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.DatabaseSession).Finished) &&
-                    !this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.DatabaseSession).Completed) &&
-                    !this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.DatabaseSession).Rejected) &&
-                    !this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.DatabaseSession).Cancelled))
+                if (!this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.Session).Finished) &&
+                    !this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.Session).Completed) &&
+                    !this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.Session).Rejected) &&
+                    !this.CurrentObjectState.Equals(new PurchaseOrderObjectStates(this.Strategy.Session).Cancelled))
                 {
                     return true;
                 }

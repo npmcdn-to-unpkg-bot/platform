@@ -2,9 +2,8 @@
 
 @msbuild Apps.sln /target:Clean /verbosity:minimal
 
+@msbuild Apps.sln /target:Merge:Rebuild /p:Configuration="Debug" /verbosity:minimal
 @msbuild Resources/Merge.proj /verbosity:minimal
-
-@msbuild Meta/Generate.proj /verbosity:minimal
 
 @msbuild Apps.sln /target:Meta:Rebuild /p:Configuration="Debug" /verbosity:minimal
 

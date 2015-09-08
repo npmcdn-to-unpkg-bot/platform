@@ -39,7 +39,7 @@ namespace Allors.Domain
             var preOrders = new List<SalesOrder>();
             foreach (SalesOrder salesOrder in party.SalesOrdersWhereBillToCustomer)
             {
-                if (salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(party.Strategy.DatabaseSession).Provisional))
+                if (salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(party.Strategy.Session).Provisional))
                 {
                     preOrders.Add(salesOrder);
                 }
@@ -77,10 +77,10 @@ namespace Allors.Domain
             var pending = new List<CustomerShipment>();
             foreach (CustomerShipment shipment in shipments)
             {
-                if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Created) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Picked) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).OnHold) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Packed))
+                if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).Created) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).Picked) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).OnHold) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).Packed))
                 {
                     pending.Add(shipment);
                 }
@@ -98,10 +98,10 @@ namespace Allors.Domain
 
             foreach (CustomerShipment shipment in shipments)
             {
-                if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Created) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Picked) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).OnHold) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Packed))
+                if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).Created) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).Picked) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).OnHold) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.Session).Packed))
                 {
                     return shipment;
                 }                

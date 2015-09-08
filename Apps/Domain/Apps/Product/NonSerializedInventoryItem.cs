@@ -209,7 +209,7 @@ namespace Allors.Domain
 
         public void AppsReplenishSalesOrders(IDerivation derivation)
         {
-            Extent<SalesOrderItem> salesOrderItems = this.Strategy.DatabaseSession.Extent<SalesOrderItem>();
+            Extent<SalesOrderItem> salesOrderItems = this.Strategy.Session.Extent<SalesOrderItem>();
             salesOrderItems.Filter.AddEquals(SalesOrderItems.Meta.CurrentObjectState, new SalesOrderItemObjectStates(this.Strategy.Session).InProcess);
             salesOrderItems.AddSort(SalesOrderItems.Meta.DeliveryDate, SortDirection.Ascending);
 
@@ -246,7 +246,7 @@ namespace Allors.Domain
 
         public void AppsDepleteSalesOrders(IDerivation derivation)
         {
-            Extent<SalesOrderItem> salesOrderItems = this.Strategy.DatabaseSession.Extent<SalesOrderItem>();
+            Extent<SalesOrderItem> salesOrderItems = this.Strategy.Session.Extent<SalesOrderItem>();
             salesOrderItems.Filter.AddEquals(SalesOrderItems.Meta.CurrentObjectState, new SalesOrderItemObjectStates(this.Strategy.Session).InProcess);
             salesOrderItems.AddSort(SalesOrderItems.Meta.DeliveryDate, SortDirection.Descending);
 

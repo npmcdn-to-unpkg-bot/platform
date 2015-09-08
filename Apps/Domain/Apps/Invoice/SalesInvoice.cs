@@ -41,9 +41,9 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).Sent) ||
-                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).ReadyForPosting) ||
-                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).PartiallyPaid))
+                if (this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).Sent) ||
+                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).ReadyForPosting) ||
+                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).PartiallyPaid))
                 {
                     return true;
                 }
@@ -363,7 +363,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).ReadyForPosting;
+                this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).ReadyForPosting;
             }
 
             if (!this.ExistEntryDate)
@@ -401,7 +401,7 @@ namespace Allors.Domain
 
             if (!this.ExistSalesInvoiceType)
             {
-                this.SalesInvoiceType = new SalesInvoiceTypes(this.Strategy.DatabaseSession).SalesInvoice;
+                this.SalesInvoiceType = new SalesInvoiceTypes(this.Strategy.Session).SalesInvoice;
             }
 
             if (!this.ExistCustomerCurrency)

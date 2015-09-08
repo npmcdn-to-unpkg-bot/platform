@@ -1,14 +1,11 @@
 namespace Allors.Meta
 {
-	using System;
 
 	#region Allors
 	[Id("7041c691-d896-4628-8f50-1c24f5d03414")]
 	#endregion
 	[Inherit(typeof(I1Interface))]
 	[Inherit(typeof(AccessControlledObjectInterface))]
-
-	[Plural("C1s")]
 	public partial class C1Class : Class
 	{
         [Id("44E6A9A3-0E1D-435F-A863-8E8F12580D91")]
@@ -315,8 +312,6 @@ namespace Allors.Meta
 		[Indexed]
 		[Type(typeof(AllorsIntegerUnit))]
 		public RelationType AllorsInteger;
-
-
 
 		public static C1Class Instance {get; internal set;}
 

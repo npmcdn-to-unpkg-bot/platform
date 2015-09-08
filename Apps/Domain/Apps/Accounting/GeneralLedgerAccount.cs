@@ -70,7 +70,7 @@ namespace Allors.Domain
 
             if (this.ExistChartOfAccountsWhereGeneralLedgerAccount)
             {
-                var extent = this.Strategy.DatabaseSession.Extent<GeneralLedgerAccount>();
+                var extent = this.Strategy.Session.Extent<GeneralLedgerAccount>();
                 extent.Filter.AddEquals(GeneralLedgerAccounts.Meta.ChartOfAccountsWhereGeneralLedgerAccount, this.ChartOfAccountsWhereGeneralLedgerAccount);
                 extent.Filter.AddEquals(GeneralLedgerAccounts.Meta.AccountNumber, this.AccountNumber);
 

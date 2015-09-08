@@ -71,7 +71,7 @@ namespace Allors.Meta
         internal override void AppsExtend()
         {
             this.CardNumber.RoleType.IsRequired = true;
-            this.CardNumber.IsUnique = true;
+            this.CardNumber.RoleType.IsUnique = true;
             this.CreditCardCompany.RoleType.IsRequired = true;
             this.ExpirationMonth.RoleType.IsRequired = true;
             this.ExpirationYear.RoleType.IsRequired = true;

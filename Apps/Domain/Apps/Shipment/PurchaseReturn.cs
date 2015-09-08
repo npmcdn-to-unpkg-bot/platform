@@ -39,7 +39,7 @@ namespace Allors.Domain
         {
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new PurchaseReturnObjectStates(this.Strategy.DatabaseSession).Created;
+                this.CurrentObjectState = new PurchaseReturnObjectStates(this.Strategy.Session).Created;
             }
         }
 

@@ -603,17 +603,17 @@ namespace Allors.Domain
                 this.OwnerSecurityToken = mySecurityToken;
 
                 //// In case person does not belong to any group (i.e. private person placing an order) this person should be granted customer permissions.
-                if (!this.ExistAccessControlsWhereSubject && this.Strategy.Session.Population is IDatabase)
+                if (!this.ExistAccessControlsWhereSubject)
                 {
-                    var customerRole = new Roles(this.Strategy.DatabaseSession).Customer;
-                    new AccessControlBuilder(this.Strategy.DatabaseSession)
+                    var customerRole = new Roles(this.Strategy.Session).Customer;
+                    new AccessControlBuilder(this.Strategy.Session)
                         .WithRole(customerRole)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)
                         .Build();
 
-                    var ownerRole = new Roles(this.Strategy.DatabaseSession).Owner;
-                    new AccessControlBuilder(this.Strategy.DatabaseSession)
+                    var ownerRole = new Roles(this.Strategy.Session).Owner;
+                    new AccessControlBuilder(this.Strategy.Session)
                         .WithRole(ownerRole)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)

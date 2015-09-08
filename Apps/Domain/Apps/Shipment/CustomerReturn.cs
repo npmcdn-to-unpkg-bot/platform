@@ -39,7 +39,7 @@ namespace Allors.Domain
         {
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new CustomerReturnObjectStates(this.Strategy.DatabaseSession).Received;
+                this.CurrentObjectState = new CustomerReturnObjectStates(this.Strategy.Session).Received;
             }
         }
 

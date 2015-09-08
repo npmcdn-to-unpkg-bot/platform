@@ -27,7 +27,6 @@ namespace Allors
     using System.Xml;
 
     using Allors.Domain;
-    using Allors.Workspaces.Memory.IntegerId;
 
     public class Fixture
     {
@@ -62,8 +61,8 @@ namespace Allors
 
         private static void SetupBasic()
         {
-            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
-            Config.Default = new Databases.Memory.IntegerId.Database(configuration);
+            var configuration = new Adapters.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory };
+            Config.Default = new Adapters.Memory.IntegerId.Database(configuration);
             
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-GB");
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-GB");
@@ -92,8 +91,8 @@ namespace Allors
 
         private static void SetupFull()
         {
-            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
-            Config.Default = new Databases.Memory.IntegerId.Database(configuration);
+            var configuration = new Adapters.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory };
+            Config.Default = new Adapters.Memory.IntegerId.Database(configuration);
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-GB");
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-GB");

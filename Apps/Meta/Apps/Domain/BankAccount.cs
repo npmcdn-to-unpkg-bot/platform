@@ -95,7 +95,7 @@ namespace Allors.Meta
         internal override void AppsExtend()
         {
             this.Iban.RoleType.IsRequired = true;
-            this.Iban.IsUnique = true;
+            this.Iban.RoleType.IsUnique = true;
         }
     }
 }

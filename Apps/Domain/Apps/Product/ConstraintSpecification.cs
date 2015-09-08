@@ -34,7 +34,7 @@ namespace Allors.Domain
         {
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new PartSpecificationObjectStates(this.Strategy.DatabaseSession).Created;
+                this.CurrentObjectState = new PartSpecificationObjectStates(this.Strategy.Session).Created;
             }
         }
     }

@@ -128,21 +128,18 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            if (this.Strategy.Session is IDatabaseSession)
+            var customerRelationships = this.InternalOrganisation.CustomerRelationshipsWhereInternalOrganisation;
+            customerRelationships.Filter.AddEquals(CustomerRelationships.Meta.SubAccountNumber, this.SubAccountNumber);
+            if (customerRelationships.Count == 1)
             {
-                var customerRelationships = this.InternalOrganisation.CustomerRelationshipsWhereInternalOrganisation;
-                customerRelationships.Filter.AddEquals(CustomerRelationships.Meta.SubAccountNumber, this.SubAccountNumber);
-                if (customerRelationships.Count == 1)
-                {
-                    if (!customerRelationships[0].Equals(this))
-                    {
-                        derivation.Log.AddError(new DerivationErrorUnique(derivation.Log, this, CustomerRelationships.Meta.SubAccountNumber));
-                    }
-                }
-                else if (customerRelationships.Count > 1)
+                if (!customerRelationships[0].Equals(this))
                 {
                     derivation.Log.AddError(new DerivationErrorUnique(derivation.Log, this, CustomerRelationships.Meta.SubAccountNumber));
                 }
+            }
+            else if (customerRelationships.Count > 1)
+            {
+                derivation.Log.AddError(new DerivationErrorUnique(derivation.Log, this, CustomerRelationships.Meta.SubAccountNumber));
             }
 
             this.DeriveInternalOrganisationCustomer(derivation);

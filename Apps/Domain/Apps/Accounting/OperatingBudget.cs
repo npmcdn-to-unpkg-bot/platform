@@ -26,7 +26,7 @@ namespace Allors.Domain
         {
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new BudgetObjectStates(this.Strategy.DatabaseSession).Opened;
+                this.CurrentObjectState = new BudgetObjectStates(this.Strategy.Session).Opened;
             }
         }
 

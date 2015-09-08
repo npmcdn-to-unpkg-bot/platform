@@ -37,7 +37,7 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.CurrentObjectState.Equals(new PurchaseShipmentObjectStates(this.Strategy.DatabaseSession).Created))
+                if (this.CurrentObjectState.Equals(new PurchaseShipmentObjectStates(this.Strategy.Session).Created))
                 {
                     return true;
                 }

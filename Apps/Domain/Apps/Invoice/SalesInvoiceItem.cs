@@ -227,7 +227,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.DatabaseSession).ReadyForPosting;
+                this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.Session).ReadyForPosting;
             }
 
             if (!this.ExistQuantity)

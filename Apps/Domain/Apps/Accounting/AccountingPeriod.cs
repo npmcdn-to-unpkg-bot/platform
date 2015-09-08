@@ -62,7 +62,7 @@ namespace Allors.Domain
         private AccountingPeriod AppsAddNextMonth()
         {
             var allPeriods = this.InternalOrganisationWhereAccountingPeriod.AccountingPeriods;
-            allPeriods.Filter.AddEquals(AccountingPeriods.Meta.TimeFrequency, new TimeFrequencies(this.Strategy.DatabaseSession).Month);
+            allPeriods.Filter.AddEquals(AccountingPeriods.Meta.TimeFrequency, new TimeFrequencies(this.Strategy.Session).Month);
             allPeriods.AddSort(AccountingPeriods.Meta.FromDate, SortDirection.Descending);
 
             var mostRecentMonth = allPeriods.First;

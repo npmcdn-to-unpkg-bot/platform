@@ -39,7 +39,7 @@ namespace Allors.Domain
         {
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new DropShipmentObjectStates(this.Strategy.DatabaseSession).Created;
+                this.CurrentObjectState = new DropShipmentObjectStates(this.Strategy.Session).Created;
             }
         }
 

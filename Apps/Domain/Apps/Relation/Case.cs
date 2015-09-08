@@ -36,7 +36,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new CaseObjectStates(this.Strategy.DatabaseSession).Opened;
+                this.CurrentObjectState = new CaseObjectStates(this.Strategy.Session).Opened;
             }
         }
 

@@ -69,10 +69,10 @@ namespace Allors.Domain
         {
             get
             {
-                if (!this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.DatabaseSession).Finished) &&
-                    !this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.DatabaseSession).Completed) &&
-                    !this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.DatabaseSession).Rejected) &&
-                    !this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.DatabaseSession).Cancelled))
+                if (!this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.Session).Finished) &&
+                    !this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.Session).Completed) &&
+                    !this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.Session).Rejected) &&
+                    !this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.Session).Cancelled))
                 {
                     return true;
                 }
@@ -1040,7 +1040,7 @@ namespace Allors.Domain
 
         public void AppsTryShip(IDerivation derivation)
         {
-            if (this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.DatabaseSession).InProcess))
+            if (this.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Strategy.Session).InProcess))
             {
                 var somethingToShip = false;
                 var allItemsAvailable = true;
