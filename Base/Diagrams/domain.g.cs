@@ -28,7 +28,7 @@ namespace Allors.Domain
 					global::System.Guid? UniqueId {set;}
 
 	}
-	public interface Enumeration  : Object, UniquelyIdentifiable, AccessControlledObject 
+	public interface Enumeration  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					LocalisedText LocalisedNames {set;}
 
@@ -37,7 +37,7 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface I1  : Object, S1, I12 
+	public interface I1  : Object, I12, S1 
 	{
 					I1 I1I1Many2One {set;}
 
@@ -263,7 +263,7 @@ namespace Allors.Domain
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface User  : Object, Localised, AccessControlledObject, SecurityTokenOwner 
+	public interface User  : Object, AccessControlledObject, Localised, SecurityTokenOwner 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -274,7 +274,7 @@ namespace Allors.Domain
 					global::System.String UserPasswordHash {set;}
 
 	}
-	public interface AccessControl  : Object, AccessControlledObject, Deletable 
+	public interface AccessControl  : Object, Deletable, AccessControlledObject 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -795,7 +795,7 @@ namespace Allors.Domain
 					global::System.Decimal? AllorsDecimal {set;}
 
 	}
-	public interface UserGroup  : Object, UniquelyIdentifiable, AccessControlledObject 
+	public interface UserGroup  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					Role Role {set;}
 

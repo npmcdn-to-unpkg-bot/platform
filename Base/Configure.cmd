@@ -8,6 +8,7 @@
 @msbuild Base.sln /target:Meta:Rebuild /p:Configuration="Debug" /verbosity:minimal
 
 @msbuild Domain/Generate.proj /verbosity:minimal
+@msbuild Angular/Generate.proj /verbosity:minimal
 @msbuild Diagrams/Generate.proj /verbosity:minimal
 
 @pause
