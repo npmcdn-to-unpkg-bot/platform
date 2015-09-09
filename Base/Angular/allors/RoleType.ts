@@ -1,9 +1,12 @@
 ﻿module Allors {
     export class RoleType {
-        public name: string;
-        public objectType: string;
+        name: string;
+        objectType: string;
 
-        constructor() {
+        diff(role: any, originalRole: any) : RoleDiff {
+            var roleDiff = new RoleDiff();
+            roleDiff.set = role;
+            return roleDiff;
         }
     }
 }

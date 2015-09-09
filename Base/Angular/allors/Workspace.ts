@@ -23,5 +23,16 @@
 
             return workspaceObject;
         }
+
+        diff() : Diff {
+            var diff = new Diff();
+
+            for (var id in this.workspaceObjectById) {
+                var object = <WorkspaceObject>this.workspaceObjectById[id];
+                object.diff(diff);
+            }
+
+            return diff;
+        }
     }
 }

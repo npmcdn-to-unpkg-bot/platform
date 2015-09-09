@@ -1,6 +1,6 @@
 ﻿module Allors {
     export class Database {
-        private objectTypeByName: { [id: string]: ObjectType; };
+        objectTypeByName: { [id: string]: ObjectType; };
         private databaseObjectById: { [id: string]: DatabaseObject; } = {};
 
         constructor(objectTypeByName: { [id: string]: ObjectType; }) {

@@ -18,6 +18,14 @@ var Allors;
             }
             return workspaceObject;
         };
+        Workspace.prototype.diff = function () {
+            var diff = new Allors.Diff();
+            for (var id in this.workspaceObjectById) {
+                var object = this.workspaceObjectById[id];
+                object.diff(diff);
+            }
+            return diff;
+        };
         return Workspace;
     })();
     Allors.Workspace = Workspace;
