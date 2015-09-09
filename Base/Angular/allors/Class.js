@@ -9,4 +9,3 @@ var Allors;
     })();
     Allors.Class = Class;
 })(Allors || (Allors = {}));
-//# sourceMappingURL=Class.js.map

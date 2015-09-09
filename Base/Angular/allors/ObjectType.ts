@@ -1,12 +1,9 @@
-﻿/// <reference path="./RoleType.ts"/>
-
-module Allors {
-    export class Class {
+﻿module Allors {
+    export class ObjectType {
         public name: string;
         public roles: { [id: string]: RoleType; } = {};
 
         constructor() {
         }
-
     }
 }
