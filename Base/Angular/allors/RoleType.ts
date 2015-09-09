@@ -1,7 +1,7 @@
 ﻿module Allors {
     export class RoleType {
         public name: string;
-        public type: string;
+        public objectType: string;
 
         constructor() {
         }

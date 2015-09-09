@@ -22,10 +22,9 @@
                 }
             }
         }
-
+        
         get(id: string): DatabaseObject {
             return this.databaseObjectById[id];
         }
-
-    }
+}
 }

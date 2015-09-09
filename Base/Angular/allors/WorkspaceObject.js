@@ -1,8 +1,13 @@
 var Allors;
 (function (Allors) {
     var WorkspaceObject = (function () {
-        function WorkspaceObject() {
+        function WorkspaceObject(databaseObject) {
+            this.databaseObject = databaseObject;
         }
+        WorkspaceObject.prototype.get = function (roleType) {
+        };
+        WorkspaceObject.prototype.set = function (roleType, newValue) {
+        };
         return WorkspaceObject;
     })();
     Allors.WorkspaceObject = WorkspaceObject;

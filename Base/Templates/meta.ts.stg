@@ -41,7 +41,7 @@ $meta.classes:{class|$class(class)$
 class(class) ::= <<
 		"$class.Name$" : {
 			name: "$class.Name$",
-			roles: {
+			roleTypeByName: {
 $class.roleTypes:{roleType|$roleType(roleType)$
 }$			}
 	},
@@ -50,6 +50,6 @@ $class.roleTypes:{roleType|$roleType(roleType)$
 roleType(roleType) ::= <<
 				"$roleType.PropertyName$" : { 
 					name: "$roleType.PropertyName$",
-					type: "$roleType.ObjectType.Name$" 
+					objectType: "$roleType.ObjectType.Name$" 
 				},
 >>

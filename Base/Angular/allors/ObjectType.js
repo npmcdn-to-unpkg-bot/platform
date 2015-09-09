@@ -2,7 +2,7 @@ var Allors;
 (function (Allors) {
     var ObjectType = (function () {
         function ObjectType() {
-            this.roles = {};
+            this.roleTypeByName = {};
         }
         return ObjectType;
     })();
