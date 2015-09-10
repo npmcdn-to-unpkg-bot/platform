@@ -7,8 +7,8 @@
 /// <reference path="/Generated/meta.g.js" />
 /// <reference path="data.js" />
 
-test("database update", function () {
-    var database = new Allors.Database();
+test("database load", function () {
+    var database = new Allors.Database(Allors.Data.meta);
     database.load(fixture.loadData);
 
     var martien = database.get("3");
@@ -19,8 +19,8 @@ test("database update", function () {
     ok(martien.LastName === "van Knippenberg");
 });
 
-test("workspace get", function () {
-    var database = new Allors.Database();
+test("workspace unit get", function () {
+    var database = new Allors.Database(Allors.Data.meta);
     database.load(fixture.loadData);
 
     var workspace = new Allors.Workspace(database);
@@ -31,8 +31,8 @@ test("workspace get", function () {
     ok(martien.LastName === "van Knippenberg");
 });
 
-test("workspace set", function () {
-    var database = new Allors.Database();
+test("workspace unit set", function () {
+    var database = new Allors.Database(Allors.Data.meta);
     database.load(fixture.loadData);
 
     var workspace1 = new Allors.Workspace(database);
@@ -50,8 +50,8 @@ test("workspace set", function () {
     ok(martien2.LastName === "van Knippenberg");
 });
 
-test("workspace diff", function () {
-    var database = new Allors.Database();
+test("workspace unit save", function () {
+    var database = new Allors.Database(Allors.Data.meta);
     database.load(fixture.loadData);
 
     var workspace = new Allors.Workspace(database);
@@ -68,3 +68,57 @@ test("workspace diff", function () {
     ok(save.objects.length === 2);
 });
 
+test("workspace composite get", function () {
+    var database = new Allors.Database(Allors.Data.meta);
+    database.load(fixture.loadData);
+
+    var workspace = new Allors.Workspace(database);
+
+    var koen = workspace.get("1");
+    var patrick = workspace.get("2");
+    var martien = workspace.get("3");
+
+    var acme = workspace.get("4");
+    var ocme = workspace.get("5");
+    var icme = workspace.get("6");
+
+    ok(acme.Owner === koen);
+    ok(ocme.Owner === patrick);
+    ok(icme.Owner === martien);
+});
+
+test("workspace composite set", function () {
+    var database = new Allors.Database(Allors.Data.meta);
+    database.load(fixture.loadData);
+
+    var workspace1 = new Allors.Workspace(database);
+
+    var workspace2 = new Allors.Workspace(database);
+
+    var koen1 = workspace1.get("1");
+    var patrick1 = workspace1.get("2");
+    var martien1 = workspace1.get("3");
+
+    var acme1 = workspace1.get("4");
+    var ocme1 = workspace1.get("5");
+    var icme1 = workspace1.get("6");
+
+    var koen2 = workspace2.get("1");
+    var patrick2 = workspace2.get("2");
+    var martien2 = workspace2.get("3");
+
+    var acme2 = workspace2.get("4");
+    var ocme2 = workspace2.get("5");
+    var icme2 = workspace2.get("6");
+
+    acme2.Owner = martien2;
+    ocme2.Owner = null;
+
+    ok(acme1.Owner === koen1);
+    ok(ocme1.Owner === patrick1);
+    ok(icme1.Owner === martien1);
+
+    ok(acme2.Owner === martien2);
+    ok(ocme2.Owner === null);
+    ok(icme2.Owner === martien2);
+});

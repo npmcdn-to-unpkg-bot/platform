@@ -1,13 +1,9 @@
 var Allors;
 (function (Allors) {
     var RoleType = (function () {
-        function RoleType() {
+        function RoleType(data) {
+            this.name = data.name;
         }
-        RoleType.prototype.diff = function (role, originalRole) {
-            var roleDiff = new Allors.RoleDiff();
-            roleDiff.set = role;
-            return roleDiff;
-        };
         return RoleType;
     })();
     Allors.RoleType = RoleType;

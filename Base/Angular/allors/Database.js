@@ -1,8 +1,14 @@
 var Allors;
 (function (Allors) {
     var Database = (function () {
-        function Database() {
+        function Database(data) {
+            var _this = this;
+            this.objectTypeByName = {};
             this.databaseObjectById = {};
+            _.forEach(data.classes, function (objectTypeData) {
+                var objectType = new Allors.ObjectType(objectTypeData);
+                _this.objectTypeByName[objectType.name] = objectType;
+            });
         }
         Database.prototype.load = function (data) {
             var _this = this;

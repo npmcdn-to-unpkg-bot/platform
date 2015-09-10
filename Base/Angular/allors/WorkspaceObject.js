@@ -1,8 +1,7 @@
 var Allors;
 (function (Allors) {
     var WorkspaceObject = (function () {
-        function WorkspaceObject(databaseObject) {
-            this.databaseObject = databaseObject;
+        function WorkspaceObject() {
         }
         WorkspaceObject.prototype.save = function () {
             var _this = this;
@@ -34,7 +33,7 @@ var Allors;
             enumerable: true,
             configurable: true
         });
-        WorkspaceObject.prototype.get = function (roleTypeName) {
+        WorkspaceObject.prototype.getUnit = function (roleTypeName) {
             var value;
             if (this.roleByRoleTypeName !== undefined) {
                 value = this.roleByRoleTypeName[roleTypeName];
@@ -44,7 +43,45 @@ var Allors;
             }
             return value;
         };
-        WorkspaceObject.prototype.set = function (roleTypeName, value) {
+        WorkspaceObject.prototype.setUnit = function (roleTypeName, value) {
+            if (this.roleByRoleTypeName === undefined) {
+                this.roleByRoleTypeName = {};
+            }
+            this.roleByRoleTypeName[roleTypeName] = value;
+        };
+        WorkspaceObject.prototype.getOne = function (roleTypeName) {
+            var value;
+            if (this.roleByRoleTypeName !== undefined) {
+                value = this.roleByRoleTypeName[roleTypeName];
+            }
+            if (value === undefined) {
+                value = this.databaseObject[roleTypeName];
+            }
+            if (value === null) {
+                return null;
+            }
+            return this.workspace.get(value);
+        };
+        WorkspaceObject.prototype.setOne = function (roleTypeName, value) {
+            if (this.roleByRoleTypeName === undefined) {
+                this.roleByRoleTypeName = {};
+            }
+            if (value === undefined) {
+                throw "Setter does not allow undefined, use null instead";
+            }
+            this.roleByRoleTypeName[roleTypeName] = value === null ? null : value.id;
+        };
+        WorkspaceObject.prototype.getMany = function (roleTypeName) {
+            var value;
+            if (this.roleByRoleTypeName !== undefined) {
+                value = this.roleByRoleTypeName[roleTypeName];
+            }
+            if (value === undefined) {
+                value = this.databaseObject[roleTypeName];
+            }
+            return value;
+        };
+        WorkspaceObject.prototype.setMany = function (roleTypeName, value) {
             if (this.roleByRoleTypeName === undefined) {
                 this.roleByRoleTypeName = {};
             }

@@ -1,12 +1,9 @@
 ﻿module Allors {
     export class WorkspaceObject {
+        private workspace : Workspace;
         private databaseObject: DatabaseObject;
 
         private roleByRoleTypeName: { [id: string]: any; };
-
-        constructor(databaseObject: DatabaseObject) {
-            this.databaseObject = databaseObject;
-        }
 
         save() : Data.SaveObjectData {
             if (this.roleByRoleTypeName !== undefined) {
@@ -35,7 +32,7 @@
             return this.databaseObject.version;
         }
 
-        get(roleTypeName: string): any {
+        getUnit(roleTypeName: string): any {
             var value;
 
             if (this.roleByRoleTypeName !== undefined) {
@@ -49,7 +46,59 @@
             return value;
         }
 
-        set(roleTypeName: string, value: any) {
+        setUnit(roleTypeName: string, value: any) {
+            if (this.roleByRoleTypeName === undefined) {
+                this.roleByRoleTypeName = {};
+            }
+
+            this.roleByRoleTypeName[roleTypeName] = value;
+        }
+
+        getOne(roleTypeName: string): any {
+            var value;
+
+            if (this.roleByRoleTypeName !== undefined) {
+                value = this.roleByRoleTypeName[roleTypeName];
+            }
+
+            if (value === undefined) {
+                value = this.databaseObject[roleTypeName];
+            }
+
+            if (value === null) {
+                return null;
+            }
+
+            return this.workspace.get(value);
+        }
+
+        setOne(roleTypeName: string, value: any) {
+            if (this.roleByRoleTypeName === undefined) {
+                this.roleByRoleTypeName = {};
+            }
+
+            if (value === undefined) {
+                throw "Setter does not allow undefined, use null instead";
+            }
+
+            this.roleByRoleTypeName[roleTypeName] = value===null ? null : value.id;
+        }
+
+        getMany(roleTypeName: string): any {
+            var value;
+
+            if (this.roleByRoleTypeName !== undefined) {
+                value = this.roleByRoleTypeName[roleTypeName];
+            }
+
+            if (value === undefined) {
+                value = this.databaseObject[roleTypeName];
+            }
+
+            return value;
+        }
+
+        setMany(roleTypeName: string, value: any) {
             if (this.roleByRoleTypeName === undefined) {
                 this.roleByRoleTypeName = {};
             }
