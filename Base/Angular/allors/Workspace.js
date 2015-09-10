@@ -9,8 +9,7 @@ var Allors;
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
                 var databaseObject = this.database.get(id);
-                var objectType = databaseObject.objectType;
-                var type = Allors.Domain[objectType.name];
+                var type = Allors.Domain[databaseObject.type];
                 workspaceObject = new type();
                 workspaceObject.workspace = this;
                 workspaceObject.databaseObject = databaseObject;
@@ -18,13 +17,16 @@ var Allors;
             }
             return workspaceObject;
         };
-        Workspace.prototype.diff = function () {
-            var diff = new Allors.Diff();
-            for (var id in this.workspaceObjectById) {
-                var object = this.workspaceObjectById[id];
-                object.diff(diff);
-            }
-            return diff;
+        Workspace.prototype.save = function () {
+            var data = new Allors.Data.SaveData();
+            data.objects = [];
+            _.forEach(this.workspaceObjectById, function (workspaceObject) {
+                var objectData = workspaceObject.save();
+                if (objectData !== undefined) {
+                    data.objects.push(objectData);
+                }
+            });
+            return data;
         };
         return Workspace;
     })();

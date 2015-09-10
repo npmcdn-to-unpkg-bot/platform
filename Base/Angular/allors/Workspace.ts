@@ -11,9 +11,8 @@
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
                 var databaseObject = this.database.get(id);
-                var objectType = databaseObject.objectType;
 
-                var type = Allors.Domain[objectType.name];
+                var type = Domain[databaseObject.type];
                 workspaceObject = new type();
                 workspaceObject.workspace = this;
                 workspaceObject.databaseObject = databaseObject;
@@ -24,15 +23,18 @@
             return workspaceObject;
         }
 
-        diff() : Diff {
-            var diff = new Diff();
+        save() : Data.SaveData {
+            var data = new Data.SaveData();
+            data.objects = [];
 
-            for (var id in this.workspaceObjectById) {
-                var object = <WorkspaceObject>this.workspaceObjectById[id];
-                object.diff(diff);
-            }
+            _.forEach(this.workspaceObjectById, workspaceObject => {
+                var objectData = workspaceObject.save();
+                if (objectData !== undefined) {
+                    data.objects.push(objectData);
+                }
+            });
 
-            return diff;
+            return data;
         }
     }
 }

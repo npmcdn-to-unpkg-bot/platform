@@ -175,13 +175,10 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="allors\RoleDiff.ts" />
-    <TypeScriptCompile Include="allors\ObjectDiff.ts" />
-    <TypeScriptCompile Include="allors\Diff.ts" />
+    <TypeScriptCompile Include="allors\data\LoadData.ts" />
+    <TypeScriptCompile Include="allors\data\SaveData.ts" />
     <TypeScriptCompile Include="allors\WorkspaceObject.ts" />
     <TypeScriptCompile Include="allors\DatabaseObject.ts" />
-    <TypeScriptCompile Include="allors\RoleType.ts" />
-    <TypeScriptCompile Include="allors\ObjectType.ts" />
     <TypeScriptCompile Include="allors\Workspace.ts" />
     <TypeScriptCompile Include="allors\Database.ts" />
     <TypeScriptCompile Include="Generated\AccessControl.g.ts" />
@@ -221,7 +218,6 @@
     <TypeScriptCompile Include="Generated\Media.g.ts" />
     <TypeScriptCompile Include="Generated\MediaContent.g.ts" />
     <TypeScriptCompile Include="Generated\MediaType.g.ts" />
-    <TypeScriptCompile Include="Generated\meta.g.ts" />
     <TypeScriptCompile Include="Generated\Object.g.ts" />
     <TypeScriptCompile Include="Generated\ObjectState.g.ts" />
     <TypeScriptCompile Include="Generated\One.g.ts" />

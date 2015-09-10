@@ -7,60 +7,9 @@
 /// <reference path="/Generated/meta.g.js" />
 /// <reference path="data.js" />
 
-test("meta classes", function () {
-    var classes = Allors.Meta.classes;
-
-    var c1 = classes["C1"];
-
-    ok(c1.name === "C1");
-});
-
 test("database update", function () {
-    var objectTypeByName = {
-        "Person": {
-            name: "Person",
-            roleTypeByName: {
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                },
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                }
-            }
-        }
-    };
-
-    var database = new Allors.Database(objectTypeByName);
-
-    var updates = [
-    {
-        objectType : "Person", 
-        objects : [
-            {
-                id: "1",
-                version: "10",
-                FirstName: "Koen",
-                LastName: "Van Exem"
-            },
-            {
-                id: "2",
-                version: "11",
-                FirstName: "Patrick",
-                LastName: "De Boeck"
-            },
-            {
-                id: "3",
-                version: "12",
-                FirstName: "Martien",
-                LastName: "van Knippenberg"
-            }
-        ]
-        }
-    ];
-
-    database.update(updates);
+    var database = new Allors.Database();
+    database.load(fixture.loadData);
 
     var martien = database.get("3");
     
@@ -71,51 +20,8 @@ test("database update", function () {
 });
 
 test("workspace get", function () {
-    var objectTypeByName = {
-        "Person": {
-            name: "Person",
-            roleTypeByName: {
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                },
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                }
-            }
-        }
-    };
-
-    var database = new Allors.Database(objectTypeByName);
-
-    var updates = [
-    {
-        objectType: "Person",
-        objects: [
-            {
-                id: "1",
-                version: "10",
-                FirstName: "Koen",
-                LastName: "Van Exem"
-            },
-            {
-                id: "2",
-                version: "11",
-                FirstName: "Patrick",
-                LastName: "De Boeck"
-            },
-            {
-                id: "3",
-                version: "12",
-                FirstName: "Martien",
-                LastName: "van Knippenberg"
-            }
-        ]
-    }
-    ];
-
-    database.update(updates);
+    var database = new Allors.Database();
+    database.load(fixture.loadData);
 
     var workspace = new Allors.Workspace(database);
 
@@ -126,51 +32,8 @@ test("workspace get", function () {
 });
 
 test("workspace set", function () {
-    var objectTypeByName = {
-        "Person": {
-            name: "Person",
-            roleTypeByName: {
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                },
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                }
-            }
-        }
-    };
-
-    var database = new Allors.Database(objectTypeByName);
-
-    var updates = [
-    {
-        objectType: "Person",
-        objects: [
-            {
-                id: "1",
-                version: "10",
-                FirstName: "Koen",
-                LastName: "Van Exem"
-            },
-            {
-                id: "2",
-                version: "11",
-                FirstName: "Patrick",
-                LastName: "De Boeck"
-            },
-            {
-                id: "3",
-                version: "12",
-                FirstName: "Martien",
-                LastName: "van Knippenberg"
-            }
-        ]
-    }
-    ];
-
-    database.update(updates);
+    var database = new Allors.Database();
+    database.load(fixture.loadData);
 
     var workspace1 = new Allors.Workspace(database);
     var martien1 = workspace1.get("3");
@@ -188,51 +51,8 @@ test("workspace set", function () {
 });
 
 test("workspace diff", function () {
-    var objectTypeByName = {
-        "Person": {
-            name: "Person",
-            roleTypeByName: {
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                },
-                "FirstName": {
-                    name: "FirstName",
-                    type: "AllorsString"
-                }
-            }
-        }
-    };
-
-    var database = new Allors.Database(objectTypeByName);
-
-    var updates = [
-    {
-        objectType: "Person",
-        objects: [
-            {
-                id: "1",
-                version: "10",
-                FirstName: "Koen",
-                LastName: "Van Exem"
-            },
-            {
-                id: "2",
-                version: "11",
-                FirstName: "Patrick",
-                LastName: "De Boeck"
-            },
-            {
-                id: "3",
-                version: "12",
-                FirstName: "Martien",
-                LastName: "van Knippenberg"
-            }
-        ]
-    }
-    ];
-
-    database.update(updates);
+    var database = new Allors.Database();
+    database.load(fixture.loadData);
 
     var workspace = new Allors.Workspace(database);
     var koen = workspace.get("1");
@@ -243,8 +63,8 @@ test("workspace diff", function () {
     koen.LastName = "VE";
     martien.FirstName = "Martinus";
 
-    var diff = workspace.diff();
+    var save = workspace.save();
 
-    ok(diff.objects.length === 2);
+    ok(save.objects.length === 2);
 });
 

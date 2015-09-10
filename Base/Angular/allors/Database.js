@@ -1,22 +1,15 @@
 var Allors;
 (function (Allors) {
     var Database = (function () {
-        function Database(objectTypeByName) {
+        function Database() {
             this.databaseObjectById = {};
-            this.objectTypeByName = objectTypeByName;
         }
-        Database.prototype.update = function (updates) {
-            for (var i = 0; i < updates.length; i++) {
-                var update = updates[i];
-                var objectType = this.objectTypeByName[update.objectType];
-                var objects = update.objects;
-                for (var j = 0; j < objects.length; j++) {
-                    var object = objects[j];
-                    object.database = this;
-                    object.objectType = objectType;
-                    this.databaseObjectById[object.id] = object;
-                }
-            }
+        Database.prototype.load = function (data) {
+            var _this = this;
+            _.forEach(data.objects, function (objectData) {
+                var databaseObject = new Allors.DatabaseObject(_this, objectData);
+                _this.databaseObjectById[databaseObject.id] = databaseObject;
+            });
         };
         Database.prototype.get = function (id) {
             return this.databaseObjectById[id];

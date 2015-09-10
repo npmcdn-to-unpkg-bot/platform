@@ -8,21 +8,23 @@
             this.databaseObject = databaseObject;
         }
 
-        diff(diff: Diff) {
+        save() : Data.SaveObjectData {
             if (this.roleByRoleTypeName !== undefined) {
-                var objectDiff = new ObjectDiff(this.id, this.version);
+                var data = new Data.SaveObjectData();
+                data.id = this.id;
+                data.version = this.version;
+                data.roles = [];
 
-                for (var roleTypeName in this.roleByRoleTypeName) {
+                _.forEach(this.roleByRoleTypeName, (role, roleTypeName) => {
                     var role = this.roleByRoleTypeName[roleTypeName];
                     var originalRole = this.databaseObject[roleTypeName];
+                    data.roles.push(role);
+                });
 
-                    var objectType = this.databaseObject.database.objectTypeByName[this.databaseObject.objectType.name];
-                    var roleType = objectType.roleTypeByName[roleTypeName];
+                return data;
+            } 
 
-                    var roleDiff = roleType.diff(role, originalRole);
-                    objectDiff.roleDiffByRoleTypeName[roleTypeName] = roleDiff;
-                }
-            }
+            return undefined;
         }
  
         get id(): string {
@@ -48,7 +50,7 @@
         }
 
         set(roleTypeName: string, value: any) {
-            if (this.roleByRoleTypeName !== undefined) {
+            if (this.roleByRoleTypeName === undefined) {
                 this.roleByRoleTypeName = {};
             }
 

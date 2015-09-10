@@ -4,15 +4,21 @@ var Allors;
         function WorkspaceObject(databaseObject) {
             this.databaseObject = databaseObject;
         }
-        WorkspaceObject.prototype.diff = function (diff) {
+        WorkspaceObject.prototype.save = function () {
+            var _this = this;
             if (this.roleByRoleTypeName !== undefined) {
-                var objectDiff = new Allors.ObjectDiff(this.id, this.version);
-                for (var roleTypeName in this.roleByRoleTypeName) {
-                    var role = this.roleByRoleTypeName[roleTypeName];
-                    var objectType = this.databaseObject.database.objectTypeByName[this.databaseObject.objectType.name];
-                    var roleType = objectType.roleTypeByName[roleTypeName];
-                }
+                var data = new Allors.Data.SaveObjectData();
+                data.id = this.id;
+                data.version = this.version;
+                data.roles = [];
+                _.forEach(this.roleByRoleTypeName, function (role, roleTypeName) {
+                    var role = _this.roleByRoleTypeName[roleTypeName];
+                    var originalRole = _this.databaseObject[roleTypeName];
+                    data.roles.push(role);
+                });
+                return data;
             }
+            return undefined;
         };
         Object.defineProperty(WorkspaceObject.prototype, "id", {
             get: function () {
@@ -39,7 +45,7 @@ var Allors;
             return value;
         };
         WorkspaceObject.prototype.set = function (roleTypeName, value) {
-            if (this.roleByRoleTypeName !== undefined) {
+            if (this.roleByRoleTypeName === undefined) {
                 this.roleByRoleTypeName = {};
             }
             this.roleByRoleTypeName[roleTypeName] = value;

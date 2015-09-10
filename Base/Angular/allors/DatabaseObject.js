@@ -1,7 +1,9 @@
 var Allors;
 (function (Allors) {
     var DatabaseObject = (function () {
-        function DatabaseObject() {
+        function DatabaseObject(database, loadObject) {
+            _.assign(this, loadObject);
+            this.database = database;
         }
         return DatabaseObject;
     })();
