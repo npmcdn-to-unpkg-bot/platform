@@ -1,4 +1,8 @@
-﻿/// <reference path="/allors/DatabaseObject.js" />
+﻿function arrayEqual(array1, array2) {
+    return _.isEmpty(_.difference(array1, array2)) && _.isEmpty(_.difference(array2, array1));
+}
+
+/// <reference path="/allors/DatabaseObject.js" />
 /// <reference path="/allors/Database.js" />
 /// <reference path="/allors/ObjectType.js" />
 /// <reference path="/allors/RoleType.js" />
@@ -68,7 +72,7 @@ test("workspace unit save", function () {
     ok(save.objects.length === 2);
 });
 
-test("workspace composite get", function () {
+test("workspace one get", function () {
     var database = new Allors.Database(Allors.Data.meta);
     database.load(fixture.loadData);
 
@@ -78,16 +82,16 @@ test("workspace composite get", function () {
     var patrick = workspace.get("2");
     var martien = workspace.get("3");
 
-    var acme = workspace.get("4");
-    var ocme = workspace.get("5");
-    var icme = workspace.get("6");
+    var acme = workspace.get("101");
+    var ocme = workspace.get("102");
+    var icme = workspace.get("103");
 
     ok(acme.Owner === koen);
     ok(ocme.Owner === patrick);
     ok(icme.Owner === martien);
 });
 
-test("workspace composite set", function () {
+test("workspace one set", function () {
     var database = new Allors.Database(Allors.Data.meta);
     database.load(fixture.loadData);
 
@@ -99,17 +103,17 @@ test("workspace composite set", function () {
     var patrick1 = workspace1.get("2");
     var martien1 = workspace1.get("3");
 
-    var acme1 = workspace1.get("4");
-    var ocme1 = workspace1.get("5");
-    var icme1 = workspace1.get("6");
+    var acme1 = workspace1.get("101");
+    var ocme1 = workspace1.get("102");
+    var icme1 = workspace1.get("103");
 
     var koen2 = workspace2.get("1");
     var patrick2 = workspace2.get("2");
     var martien2 = workspace2.get("3");
 
-    var acme2 = workspace2.get("4");
-    var ocme2 = workspace2.get("5");
-    var icme2 = workspace2.get("6");
+    var acme2 = workspace2.get("101");
+    var ocme2 = workspace2.get("102");
+    var icme2 = workspace2.get("103");
 
     acme2.Owner = martien2;
     ocme2.Owner = null;
@@ -121,4 +125,103 @@ test("workspace composite set", function () {
     ok(acme2.Owner === martien2);
     ok(ocme2.Owner === null);
     ok(icme2.Owner === martien2);
+});
+
+test("workspace one save", function () {
+    var database = new Allors.Database(Allors.Data.meta);
+    database.load(fixture.loadData);
+
+    var workspace = new Allors.Workspace(database);
+    
+    var koen = workspace.get("1");
+    var patrick = workspace.get("2");
+    var martien = workspace.get("3");
+
+    var acme = workspace.get("101");
+    var ocme = workspace.get("102");
+    var icme = workspace.get("103");
+   
+    acme.Owner = martien;
+    ocme.Owner = null;
+
+    var save = workspace.save();
+
+    ok(save.objects.length === 2);
+});
+
+test("workspace many get", function () {
+    var database = new Allors.Database(Allors.Data.meta);
+    database.load(fixture.loadData);
+
+    var workspace = new Allors.Workspace(database);
+
+    var koen = workspace.get("1");
+    var patrick = workspace.get("2");
+    var martien = workspace.get("3");
+
+    var acme = workspace.get("101");
+    var ocme = workspace.get("102");
+    var icme = workspace.get("103");
+
+    ok(arrayEqual(acme.Employees, [koen,patrick,martien]));
+    ok(arrayEqual(ocme.Employees, [koen]));
+    ok(arrayEqual(icme.Employees, []));
+});
+
+test("workspace many set", function () {
+    var database = new Allors.Database(Allors.Data.meta);
+    database.load(fixture.loadData);
+
+    var workspace1 = new Allors.Workspace(database);
+
+    var workspace2 = new Allors.Workspace(database);
+
+    var koen1 = workspace1.get("1");
+    var patrick1 = workspace1.get("2");
+    var martien1 = workspace1.get("3");
+
+    var acme1 = workspace1.get("101");
+    var ocme1 = workspace1.get("102");
+    var icme1 = workspace1.get("103");
+
+    var koen2 = workspace2.get("1");
+    var patrick2 = workspace2.get("2");
+    var martien2 = workspace2.get("3");
+
+    var acme2 = workspace2.get("101");
+    var ocme2 = workspace2.get("102");
+    var icme2 = workspace2.get("103");
+
+    acme2.Employees = null;
+    icme2.Employees = [koen2,patrick2,martien2];
+
+    ok(arrayEqual(acme1.Employees, [koen1, patrick1, martien1]));
+    ok(arrayEqual(ocme1.Employees, [koen1]));
+    ok(arrayEqual(icme1.Employees, []));
+
+    ok(arrayEqual(acme2.Employees, null));
+    ok(arrayEqual(ocme2.Employees, [koen2]));
+    ok(arrayEqual(icme2.Employees, [koen2, patrick2, martien2]));
+});
+
+test("workspace many save", function () {
+    var database = new Allors.Database(Allors.Data.meta);
+    database.load(fixture.loadData);
+
+    var workspace = new Allors.Workspace(database);
+
+    var koen = workspace.get("1");
+    var patrick = workspace.get("2");
+    var martien = workspace.get("3");
+
+    var acme = workspace.get("101");
+    var ocme = workspace.get("102");
+    var icme = workspace.get("103");
+
+    acme.Employees = null;
+    icme.Employees = [koen, patrick, martien];
+
+    var save = workspace.save();
+
+    ok(save.objects.length === 2);
 });

@@ -72,6 +72,7 @@ var Allors;
             this.roleByRoleTypeName[roleTypeName] = value === null ? null : value.id;
         };
         WorkspaceObject.prototype.getMany = function (roleTypeName) {
+            var _this = this;
             var value;
             if (this.roleByRoleTypeName !== undefined) {
                 value = this.roleByRoleTypeName[roleTypeName];
@@ -79,13 +80,23 @@ var Allors;
             if (value === undefined) {
                 value = this.databaseObject[roleTypeName];
             }
-            return value;
+            if (_.isUndefined(value) || _.isNull(value)) {
+                return [];
+            }
+            return _.map(value, function (item) {
+                return _this.workspace.get(item);
+            });
         };
         WorkspaceObject.prototype.setMany = function (roleTypeName, value) {
             if (this.roleByRoleTypeName === undefined) {
                 this.roleByRoleTypeName = {};
             }
-            this.roleByRoleTypeName[roleTypeName] = value;
+            if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
+                this.roleByRoleTypeName[roleTypeName] = null;
+            }
+            this.roleByRoleTypeName[roleTypeName] = _.map(value, function (item) {
+                return item.id;
+            });
         };
         return WorkspaceObject;
     })();

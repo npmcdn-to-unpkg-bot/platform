@@ -24,21 +24,23 @@
                 LastName: "van Knippenberg"
             },
             {
-                id: "4",
+                id: "101",
                 version: "20",
                 type: "Organisation",
                 Name: "Acme",
-                Owner: "1"
+                Owner: "1",
+                Employees: ["1","2","3"]
             },
             {
-                id: "5",
+                id: "102",
                 version: "21",
                 type: "Organisation",
                 Name: "Ocme",
-                Owner: "2"
+                Owner: "2",
+                Employees: ["1"]
             },
             {
-                id: "6",
+                id: "103",
                 version: "22",
                 type: "Organisation",
                 Name: "Icme",

@@ -95,7 +95,13 @@
                 value = this.databaseObject[roleTypeName];
             }
 
-            return value;
+            if (_.isUndefined(value) || _.isNull(value)) {
+                return [];
+            }
+
+            return _.map(value, item => {
+                return this.workspace.get(<string>item);
+            });
         }
 
         setMany(roleTypeName: string, value: any) {
@@ -103,7 +109,13 @@
                 this.roleByRoleTypeName = {};
             }
 
-            this.roleByRoleTypeName[roleTypeName] = value;
+            if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
+                this.roleByRoleTypeName[roleTypeName] = null;
+            }
+
+            this.roleByRoleTypeName[roleTypeName] = _.map(value, item => {
+                return (<WorkspaceObject>item).id;
+            });
         }
     }
 }
