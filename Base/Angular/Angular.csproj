@@ -175,6 +175,8 @@
     <Content Include="Scripts\jquery-2.1.4.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="allors\data\IdData.ts" />
+    <TypeScriptCompile Include="allors\data\IdWithVersionData.ts" />
     <TypeScriptCompile Include="allors\RoleType.ts" />
     <TypeScriptCompile Include="allors\ObjectType.ts" />
     <TypeScriptCompile Include="allors\data\MetaData.ts" />

@@ -17,6 +17,26 @@
             });
         }
 
+        check(data: Data.IdWithVersionData) {
+
+            var requireLoadIdsWithVersion = _.filter(data.idsWithVersion, idAndVersion => {
+                var id = idAndVersion[0];
+                var version = idAndVersion[1];
+
+                var databaseObject = this.databaseObjectById[id];
+
+                return (databaseObject === undefined) || (databaseObject === null) || (databaseObject.version !== version);
+            });
+
+            var requireLoadIds = new Data.IdData();
+            requireLoadIds.ids = _.map(requireLoadIdsWithVersion, idWithVersion =>
+            {
+                return idWithVersion[0];
+            });
+
+            return requireLoadIds;
+        }
+
         get(id: string): DatabaseObject {
             return this.databaseObjectById[id];
         }

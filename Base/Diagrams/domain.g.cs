@@ -672,6 +672,8 @@ namespace Allors.Domain
 
 					Person Owner {set;}
 
+					Person Manager {set;}
+
 					Image Logo {set;}
 
 					global::System.String Size {set;}

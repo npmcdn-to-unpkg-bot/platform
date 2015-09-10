@@ -41,7 +41,7 @@ var Allors;
             if (value === undefined) {
                 value = this.databaseObject[roleTypeName];
             }
-            return value;
+            return value === undefined ? null : value;
         };
         WorkspaceObject.prototype.setUnit = function (roleTypeName, value) {
             if (this.roleByRoleTypeName === undefined) {
@@ -57,7 +57,7 @@ var Allors;
             if (value === undefined) {
                 value = this.databaseObject[roleTypeName];
             }
-            if (value === null) {
+            if (value === null || value === undefined) {
                 return null;
             }
             return this.workspace.get(value);
@@ -80,7 +80,7 @@ var Allors;
             if (value === undefined) {
                 value = this.databaseObject[roleTypeName];
             }
-            if (_.isUndefined(value) || _.isNull(value)) {
+            if (value === undefined || value === null) {
                 return [];
             }
             return _.map(value, function (item) {

@@ -122,12 +122,21 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(PersonClass))]
-		[Plural("Owners")]
 		[Multiplicity(Multiplicity.OneToOne)]
 		public RelationType Owner;
 
-		#region Allors
-		[Id("b201d2a0-2335-47a1-aa8d-8416e89a9fec")]
+        #region Allors
+        [Id("DBEF262D-7184-4B98-8F1F-CF04E884BB92")]
+        [AssociationId("ED76A631-00C4-4753-B3D4-B3A53B9ECF4A")]
+        [RoleId("19DE0627-FB1C-4F55-9B65-31D8008D0A48")]
+        #endregion
+        [Indexed]
+        [Type(typeof(PersonClass))]
+        [Multiplicity(Multiplicity.OneToOne)]
+        public RelationType Manager;
+
+        #region Allors
+        [Id("b201d2a0-2335-47a1-aa8d-8416e89a9fec")]
 		[AssociationId("e332003a-0287-4aab-9d95-257146ee4f1c")]
 		[RoleId("b1f5b479-e4d0-46de-8ad4-347076d9f180")]
 		#endregion

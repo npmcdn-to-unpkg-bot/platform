@@ -43,7 +43,7 @@
                 value = this.databaseObject[roleTypeName];
             }
 
-            return value;
+            return value === undefined ? null : value;
         }
 
         setUnit(roleTypeName: string, value: any) {
@@ -65,7 +65,7 @@
                 value = this.databaseObject[roleTypeName];
             }
 
-            if (value === null) {
+            if (value === null || value === undefined) {
                 return null;
             }
 
@@ -95,7 +95,7 @@
                 value = this.databaseObject[roleTypeName];
             }
 
-            if (_.isUndefined(value) || _.isNull(value)) {
+            if (value === undefined || value === null) {
                 return [];
             }
 
