@@ -5,9 +5,9 @@
 
         private roleByRoleTypeName: { [id: string]: any; };
 
-        save() : Data.SaveObjectRequest {
+        save() : Data.SaveRequestObject {
             if (this.roleByRoleTypeName !== undefined) {
-                var data = new Data.SaveObjectRequest();
+                var data = new Data.SaveRequestObject();
                 data.i = this.id;
                 data.v  = this.version;
                 data.roles = [];
@@ -17,7 +17,7 @@
                 _.forEach(this.roleByRoleTypeName, (role, roleTypeName) => {
                     var roleType = objectType.roleTypeByName[roleTypeName];
 
-                    var save = new Data.SaveRoleRequest;
+                    var save = new Data.SaveRequestRole;
                     save.t = roleType.name;
 
                     if (roleType.isUnit) {

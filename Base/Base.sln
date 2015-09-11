@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Merge", "Merge\Merge.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{F0AF00FF-5189-4DB5-ACE7-1013472F3FEC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Tests", "Web.Tests\Web.Tests.csproj", "{E64A0DC0-04D1-4410-8843-3C590EED6CEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,14 @@ Global
 		{F0AF00FF-5189-4DB5-ACE7-1013472F3FEC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0AF00FF-5189-4DB5-ACE7-1013472F3FEC}.Release|x64.ActiveCfg = Release|Any CPU
 		{F0AF00FF-5189-4DB5-ACE7-1013472F3FEC}.Release|x64.Build.0 = Release|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Debug|x64.Build.0 = Debug|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Release|x64.ActiveCfg = Release|Any CPU
+		{E64A0DC0-04D1-4410-8843-3C590EED6CEF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

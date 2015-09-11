@@ -2,18 +2,18 @@ var Allors;
 (function (Allors) {
     var Data;
     (function (Data) {
-        var SaveRoleRequest = (function () {
-            function SaveRoleRequest() {
+        var SaveRequestRole = (function () {
+            function SaveRequestRole() {
             }
-            return SaveRoleRequest;
+            return SaveRequestRole;
         })();
-        Data.SaveRoleRequest = SaveRoleRequest;
-        var SaveObjectRequest = (function () {
-            function SaveObjectRequest() {
+        Data.SaveRequestRole = SaveRequestRole;
+        var SaveRequestObject = (function () {
+            function SaveRequestObject() {
             }
-            return SaveObjectRequest;
+            return SaveRequestObject;
         })();
-        Data.SaveObjectRequest = SaveObjectRequest;
+        Data.SaveRequestObject = SaveRequestObject;
         var SaveRequest = (function () {
             function SaveRequest() {
             }

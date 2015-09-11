@@ -12,7 +12,7 @@
 /// <reference path="../Allors/Base/Client/Service/Response.js" />
 /// <reference path="../Allors/Base/Client/Service/LoadRequest.js" />
 /// <reference path="../Allors/Base/Client/Service/LoadResponse.js" />
-/// <reference path="../Allors/Base/Client/Service/SaveRequests.js" />
+/// <reference path="../Allors/Base/Client/Service/SaveRequest.js" />
 
 /// <reference path="../Generated/meta.g.js" />
 /// <reference path="../Generated/organisation.g.js" />

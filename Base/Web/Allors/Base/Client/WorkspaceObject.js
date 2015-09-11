@@ -6,14 +6,14 @@ var Allors;
         WorkspaceObject.prototype.save = function () {
             var _this = this;
             if (this.roleByRoleTypeName !== undefined) {
-                var data = new Allors.Data.SaveObjectRequest();
+                var data = new Allors.Data.SaveRequestObject();
                 data.i = this.id;
                 data.v = this.version;
                 data.roles = [];
                 var objectType = this.databaseObject.objectType;
                 _.forEach(this.roleByRoleTypeName, function (role, roleTypeName) {
                     var roleType = objectType.roleTypeByName[roleTypeName];
-                    var save = new Allors.Data.SaveRoleRequest;
+                    var save = new Allors.Data.SaveRequestRole;
                     save.t = roleType.name;
                     if (roleType.isUnit) {
                         save.s = role;

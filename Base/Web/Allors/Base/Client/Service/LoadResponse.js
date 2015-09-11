@@ -2,12 +2,12 @@ var Allors;
 (function (Allors) {
     var Data;
     (function (Data) {
-        var LoadObjectResponse = (function () {
-            function LoadObjectResponse() {
+        var LoadResponseObject = (function () {
+            function LoadResponseObject() {
             }
-            return LoadObjectResponse;
+            return LoadResponseObject;
         })();
-        Data.LoadObjectResponse = LoadObjectResponse;
+        Data.LoadResponseObject = LoadResponseObject;
         var LoadResponse = (function () {
             function LoadResponse() {
             }

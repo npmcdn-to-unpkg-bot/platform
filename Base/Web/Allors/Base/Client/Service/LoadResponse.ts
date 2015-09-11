@@ -1,11 +1,11 @@
 ﻿module Allors.Data {
-    export class LoadObjectResponse {
+    export class LoadResponseObject {
         i: string;
         v: string;
         t: string;
     }
 
     export class LoadResponse {
-        objects: LoadObjectResponse[];
+        objects: LoadResponseObject[];
     }
 }

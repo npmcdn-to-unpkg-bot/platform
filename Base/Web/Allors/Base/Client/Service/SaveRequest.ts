@@ -1,18 +1,18 @@
 ﻿module Allors.Data {
-    export class SaveRoleRequest {
+    export class SaveRequestRole {
         t: string;
         s: any;
         a: string[];
         r: string[];
     }
 
-    export class SaveObjectRequest {
+    export class SaveRequestObject {
         i: string;
         v: string;
-        roles: SaveRoleRequest[];
+        roles: SaveRequestRole[];
     }
 
     export class SaveRequest {
-        objects: SaveObjectRequest[];
+        objects: SaveRequestObject[];
     }
 }

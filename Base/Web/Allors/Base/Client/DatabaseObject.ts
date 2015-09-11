@@ -5,7 +5,7 @@
         private v: string;
         private t: string;
 
-        constructor(database: Database, loadObject: Data.LoadObjectResponse) {
+        constructor(database: Database, loadObject: Data.LoadResponseObject) {
             _.assign(this, loadObject);
             this.database = database;
         }
