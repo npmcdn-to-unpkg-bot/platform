@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -24,6 +25,7 @@
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -181,64 +183,70 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Allors\Base\Account\AccountViewModels.cs" />
-    <Compile Include="Allors\Base\Account\BaseAccountController.cs" />
-    <Compile Include="Allors\Base\Asp\AllorsApiController.cs" />
-    <Compile Include="Allors\Base\Content\HttpPostedFileBaseExtension.cs" />
-    <Compile Include="Allors\Base\Content\ImagesItemModel.cs" />
-    <Compile Include="Allors\Base\Content\ImagesModel.cs" />
-    <Compile Include="Allors\Base\Content\ImageModel.cs" />
-    <Compile Include="Allors\Base\Identity\EmailService.cs" />
-    <Compile Include="Allors\Base\Identity\IdentitySignInManager.cs" />
-    <Compile Include="Allors\Base\Identity\IdentityUser.cs" />
-    <Compile Include="Allors\Base\Identity\IdentityUser.v.cs" />
-    <Compile Include="Allors\Base\Identity\IdentityUserManager.cs" />
-    <Compile Include="Allors\Base\Identity\SmsService.cs" />
-    <Compile Include="Allors\Base\Identity\UserStore.cs" />
-    <Compile Include="Allors\Base\Identity\UserStore.v.cs" />
-    <Compile Include="Allors\Base\Manage\BaseManageController.cs" />
-    <Compile Include="Allors\Base\Manage\ManageViewModels.cs" />
-    <Compile Include="Allors\Base\Mvc\AllorsContext.cs" />
-    <Compile Include="Allors\Base\Mvc\Components\Menu.cs" />
-    <Compile Include="Allors\Base\Mvc\Components\MenuForUser.cs" />
-    <Compile Include="Allors\Base\Mvc\Components\MenuItem.cs" />
-    <Compile Include="Allors\Base\Mvc\Components\MenuItemForUser.cs" />
-    <Compile Include="Allors\Base\Mvc\Components\Menus.cs" />
-    <Compile Include="Allors\Base\Mvc\Controllers\Controller.cs" />
-    <Compile Include="Allors\Base\Mvc\Helpers\IHtmlHelper.cs" />
-    <Compile Include="Allors\Base\Mvc\Helpers\Frameworks\BootstrapHtmlHelper.cs" />
-    <Compile Include="Allors\Base\Mvc\Helpers\HtmlHelperExtensions.cs" />
-    <Compile Include="Allors\Base\Mvc\Helpers\Frameworks\DefaultHtmlHelper.cs" />
-    <Compile Include="Allors\Base\Mvc\Helpers\HtmlHelperFactory.cs" />
-    <Compile Include="Allors\Base\Mvc\Helpers\IHtmlHelperFactory.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\AllorsModelMetadataProvider.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\Annotations\AllowHtmlAnnotation.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\Annotations\HumanizePropertyNameAnnotation.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\Annotations\HidePostfixIdsAnnotation.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\Annotations\WatermarkAnnotation.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\Attributes\PathAttribute.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\IMetadataModel.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\IMetadataModel`1.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\IPropertyMetadataAware.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\ITypeMetadataAware.cs" />
-    <Compile Include="Allors\Base\Mvc\Metadata\ModelMetadataExtension.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\MultipleSelect.cs" />
-    <Compile Include="Allors\Base\Mvc\Models\Select.cs" />
-    <Compile Include="Allors\Base\Mvc\Views\CssFrameworkAttribute.cs" />
-    <Compile Include="Allors\Base\Mvc\Views\ViewContextExtensions.cs" />
-    <Compile Include="Allors\Base\Security\AllorsMembershipProvider.cs" />
-    <Compile Include="Allors\Base\Security\AllorsRoleProvider.cs" />
-    <Compile Include="Allors\Base\Media\BaseMediaController.cs" />
-    <Compile Include="Allors\Tests\Organisation\Command.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Add\Add.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\View\View.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Edit\Edit.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Allors\Tests\Organisation\Models\IFilter.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Index\Index.cs" />
-    <Compile Include="Allors\Tests\Organisation\Models\Index\Index_Organisation.cs" />
-    <Compile Include="Allors\Tests\Organisation\OrganisationController.cs" />
+    <Compile Include="Allors\Server\Base\Account\AccountViewModels.cs" />
+    <Compile Include="Allors\Server\Base\Account\BaseAccountController.cs" />
+    <Compile Include="Allors\Server\Base\Asp\AllorsApiController.cs" />
+    <Compile Include="Allors\Server\Base\Content\HttpPostedFileBaseExtension.cs" />
+    <Compile Include="Allors\Server\Base\Content\ImageModel.cs" />
+    <Compile Include="Allors\Server\Base\Content\ImagesItemModel.cs" />
+    <Compile Include="Allors\Server\Base\Content\ImagesModel.cs" />
+    <Compile Include="Allors\Server\Base\Identity\EmailService.cs" />
+    <Compile Include="Allors\Server\Base\Identity\IdentitySignInManager.cs" />
+    <Compile Include="Allors\Server\Base\Identity\IdentityUser.cs" />
+    <Compile Include="Allors\Server\Base\Identity\IdentityUser.v.cs" />
+    <Compile Include="Allors\Server\Base\Identity\IdentityUserManager.cs" />
+    <Compile Include="Allors\Server\Base\Identity\SmsService.cs" />
+    <Compile Include="Allors\Server\Base\Identity\UserStore.cs" />
+    <Compile Include="Allors\Server\Base\Identity\UserStore.v.cs" />
+    <Compile Include="Allors\Server\Base\Manage\BaseManageController.cs" />
+    <Compile Include="Allors\Server\Base\Manage\ManageViewModels.cs" />
+    <Compile Include="Allors\Server\Base\Media\BaseMediaController.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\AllorsContext.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Components\Menu.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Components\MenuForUser.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Components\MenuItem.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Components\MenuItemForUser.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Components\Menus.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Controllers\Controller.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Helpers\Frameworks\BootstrapHtmlHelper.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Helpers\Frameworks\DefaultHtmlHelper.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Helpers\HtmlHelperFactory.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Helpers\IHtmlHelper.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Helpers\IHtmlHelperFactory.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\AllorsModelMetadataProvider.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\Annotations\AllowHtmlAnnotation.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\Annotations\HidePostfixIdsAnnotation.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\Annotations\HumanizePropertyNameAnnotation.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\Annotations\WatermarkAnnotation.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\Attributes\PathAttribute.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\IMetadataModel.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\IMetadataModel`1.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\IPropertyMetadataAware.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\ITypeMetadataAware.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Metadata\ModelMetadataExtension.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Models\MultipleSelect.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Models\Select.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Views\CssFrameworkAttribute.cs" />
+    <Compile Include="Allors\Server\Base\Mvc\Views\ViewContextExtensions.cs" />
+    <Compile Include="Allors\Server\Base\Security\AllorsMembershipProvider.cs" />
+    <Compile Include="Allors\Server\Base\Security\AllorsRoleProvider.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Load\LoadObjectResponse.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Load\LoadRequest.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponse.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Response.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequest.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestObject.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestRole.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\WorkspaceController.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\Command.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\Models\Add\Add.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\Models\Edit\Edit.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\Models\IFilter.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\Models\Index\Index.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\Models\Index\Index_Organisation.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\Models\View\View.cs" />
+    <Compile Include="Allors\Server\Tests\Organisation\OrganisationController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MenuConfig.cs" />
@@ -258,27 +266,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Allors\Base\Account\ConfirmEmail.cshtml" />
-    <Content Include="Allors\Base\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Allors\Base\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Allors\Base\Account\ForgotPassword.cshtml" />
-    <Content Include="Allors\Base\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Allors\Base\Account\Login.cshtml" />
-    <Content Include="Allors\Base\Account\Register.cshtml" />
-    <Content Include="Allors\Base\Account\ResetPassword.cshtml" />
-    <Content Include="Allors\Base\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Allors\Base\Account\SendCode.cshtml" />
-    <Content Include="Allors\Base\Account\VerifyCode.cshtml" />
-    <Content Include="Allors\Base\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Allors\Base\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Allors\Base\Manage\ChangePassword.cshtml" />
-    <Content Include="Allors\Base\Manage\Index.cshtml" />
-    <Content Include="Allors\Base\Manage\ManageLogins.cshtml" />
-    <Content Include="Allors\Base\Manage\SetPassword.cshtml" />
-    <Content Include="Allors\Base\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Default\Select.cshtml" />
-    <Content Include="Allors\Base\Shared\_NavbarItemPartial.cshtml" />
-    <Content Include="Allors\Base\Shared\_NavbarPartial.cshtml" />
     <Content Include="bootstrap-maxlength.js" />
     <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -305,36 +292,9 @@
     <Content Include="Scripts\bootstrap-sortable.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Allors\Tests\Organisation\Add.cshtml" />
-    <Content Include="Allors\Tests\Organisation\DisplayTemplates\Index_Organisation.cshtml" />
-    <Content Include="Allors\Tests\Organisation\Edit.cshtml" />
-    <Content Include="Allors\Tests\Organisation\Index.cshtml" />
-    <Content Include="Allors\Tests\Organisation\_Filter.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\MultipleSelect.cshtml" />
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
     <Content Include="Content\jasny-bootstrap.css.map" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Default\MultipleSelect.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Default\Object.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\dateTime.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\bool.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\decimal.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\double.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\Guid.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\string.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\Object.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\File.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\int.cshtml" />
-    <Content Include="Allors\Tests\Organisation\View.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\object.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\bool.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\dateTime.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\decimal.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\double.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\guid.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\int.cshtml" />
-    <Content Include="Allors\Base\Shared\DisplayTemplates\Bootstrap\string.cshtml" />
-    <Content Include="Allors\Web.config" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\i18n\defaults-bg_BG.js" />
@@ -389,10 +349,6 @@
     <Content Include="Scripts\i18n\defaults-zh_TW.min.js" />
     <Content Include="Scripts\jasny-bootstrap.js" />
     <Content Include="Scripts\jasny-bootstrap.min.js" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\ImageModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\ImagesModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\ImagesItemModel.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\ImagesItemModels.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -401,6 +357,63 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <Content Include="Content\bootstrap-select.css.map" />
+    <Content Include="Allors\Server\Base\Account\ConfirmEmail.cshtml" />
+    <Content Include="Allors\Server\Base\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Allors\Server\Base\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Allors\Server\Base\Account\ForgotPassword.cshtml" />
+    <Content Include="Allors\Server\Base\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Allors\Server\Base\Account\Login.cshtml" />
+    <Content Include="Allors\Server\Base\Account\Register.cshtml" />
+    <Content Include="Allors\Server\Base\Account\ResetPassword.cshtml" />
+    <Content Include="Allors\Server\Base\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Allors\Server\Base\Account\SendCode.cshtml" />
+    <Content Include="Allors\Server\Base\Account\VerifyCode.cshtml" />
+    <Content Include="Allors\Server\Base\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Allors\Server\Base\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Allors\Server\Base\Manage\ChangePassword.cshtml" />
+    <Content Include="Allors\Server\Base\Manage\Index.cshtml" />
+    <Content Include="Allors\Server\Base\Manage\ManageLogins.cshtml" />
+    <Content Include="Allors\Server\Base\Manage\SetPassword.cshtml" />
+    <Content Include="Allors\Server\Base\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\bool.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\dateTime.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\decimal.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\double.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\file.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\guid.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\int.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\multipleSelect.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\object.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\DisplayTemplates\Bootstrap\string.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\bool.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\dateTime.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\decimal.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\double.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\File.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\Guid.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\ImageModel.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\ImagesItemModel.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\ImagesItemModels.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\ImagesModel.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\int.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\MultipleSelect.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\Object.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\Select.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Bootstrap\string.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Default\MultipleSelect.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Default\Object.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\EditorTemplates\Default\Select.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\_NavbarItemPartial.cshtml" />
+    <Content Include="Allors\Server\Base\Shared\_NavbarPartial.cshtml" />
+    <Content Include="Allors\Server\Tests\Organisation\Add.cshtml" />
+    <Content Include="Allors\Server\Tests\Organisation\DisplayTemplates\Index_Organisation.cshtml" />
+    <Content Include="Allors\Server\Tests\Organisation\Edit.cshtml" />
+    <Content Include="Allors\Server\Tests\Organisation\Index.cshtml" />
+    <Content Include="Allors\Server\Tests\Organisation\View.cshtml" />
+    <Content Include="Allors\Server\Tests\Organisation\_Filter.cshtml" />
+    <Content Include="Allors\Server\Tests\Web.config" />
+    <Content Include="Allors\Server\Web.config" />
+    <Content Include="Allors\Server\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -410,6 +423,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lodash.js" />
+    <Content Include="Scripts\lodash.min.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -418,9 +433,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Allors\Tests\Web.config" />
-    <Content Include="Allors\_ViewStart.cshtml" />
-    <Content Include="Allors\Base\Shared\EditorTemplates\Bootstrap\Select.cshtml" />
     <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
     <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
     <Content Include="Scripts\tinymce\plugins\hr\plugin.js" />
@@ -447,6 +459,11 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Tests\data.js" />
+    <Content Include="Tests\qunit.css" />
+    <Content Include="Tests\qunit.js" />
+    <Content Include="Tests\test.html" />
+    <Content Include="Tests\tests.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -467,7 +484,7 @@
     <Content Include="Scripts\tinymce\langs\readme.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Allors\Tests\Organisation\EditorTemplates\" />
+    <Folder Include="Allors\Server\Tests\Organisation\EditorTemplates\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\tinymce\plugins\image\" />
@@ -501,6 +518,94 @@
       <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Allors\Client\Base\Database.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\DatabaseObject.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Meta\Population.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\ObjectType.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\RoleType.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\LoadRequest.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\LoadResponse.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\Response.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\SaveRequest.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\WorkspaceObject.ts" />
+    <TypeScriptCompile Include="Generated\domain\AccessControl.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\AccessControlledObject.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Address.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\BadUI.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\C1.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\C2.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\ClassWithoutRoles.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Commentable.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Counter.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Country.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Currency.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Deletable.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Dependee.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Dependent.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\DerivationLogC1.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\DerivationLogC2.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\DerivationLogI12.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Enumeration.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Extender.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\First.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Four.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\From.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Gender.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\HomeAddress.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\I1.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\I12.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\I2.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Image.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Language.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Locale.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Localised.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\LocalisedText.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Login.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\MailboxAddress.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Media.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\MediaContent.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\MediaType.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Object.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\ObjectState.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\One.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Order.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\OrderObjectState.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Organisation.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Period.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Permission.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Person.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Place.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Printable.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\PrintQueue.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Role.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\S1.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Second.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\SecurityToken.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\SecurityTokenOwner.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Shared.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\SimpleJob.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Singleton.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\StatefulCompany.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\StringTemplate.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Subdependee.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Third.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Three.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\To.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Transition.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Transitional.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Two.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\UniquelyIdentifiable.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\Unit.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\User.g.ts" />
+    <TypeScriptCompile Include="Generated\domain\UserGroup.g.ts" />
+    <TypeScriptCompile Include="Generated\meta\meta.g.ts" />
+    <TypeScriptCompile Include="Scripts\typings\lodash\lodash.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -524,6 +629,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
