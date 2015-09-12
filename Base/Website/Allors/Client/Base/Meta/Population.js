@@ -22,4 +22,3 @@ var Allors;
         Meta.Population = Population;
     })(Meta = Allors.Meta || (Allors.Meta = {}));
 })(Allors || (Allors = {}));
-//# sourceMappingURL=Population.js.map

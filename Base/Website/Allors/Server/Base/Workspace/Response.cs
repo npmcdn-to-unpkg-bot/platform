@@ -2,6 +2,6 @@
 {
     public class Response
     {
-        public string[][] Objects;
-    }
+        public string[][] Objects { get; set; }
+}
 }

@@ -17,7 +17,7 @@
             });
         }
 
-        check(data: Data.Response) {
+        check(data: Data.Response): Data.LoadRequest {
 
             var requireLoadIdsWithVersion = _.filter(data.objects, idAndVersion => {
                 var id = idAndVersion[0];
