@@ -3,14 +3,14 @@
   <Interface Name="Allors.Domain.Organisation">
     <Position X="4.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AABAEQCAAAAggAAAIAACQAQACAAAAAAAAEAAAAAAAAA=</HashCode>
+      <HashCode>AABAEQCAAAAggAAAIAACQAQACAAABBAAAEAAAAAAAAA=</HashCode>
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Addresses" />
-      <Property Name="Employees" />
-      <Property Name="Owner" />
       <Property Name="Shareholders" />
+      <Property Name="Employees" />
+      <Property Name="Addresses" />
+      <Property Name="Owner" />
       <Property Name="MainAddress" />
     </ShowAsAssociation>
   </Interface>
@@ -36,8 +36,8 @@
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Addresses" />
       <Property Name="Photo" />
+      <Property Name="Addresses" />
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Allors.Domain.HomeAddress">
@@ -61,8 +61,8 @@
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="MediaContent" />
       <Property Name="MediaType" />
+      <Property Name="MediaContent" />
     </ShowAsAssociation>
   </Interface>
   <Interface Name="Allors.Domain.MediaContent" Collapsed="true">

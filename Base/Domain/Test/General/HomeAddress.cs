@@ -28,7 +28,7 @@ namespace Allors.Domain
     /// </summary>
     public partial class HomeAddress
     {
-        public void TestsOnDerive(ObjectOnDerive method)
+        public void TestOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
             

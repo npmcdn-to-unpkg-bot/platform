@@ -247,11 +247,11 @@
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadObjectResponse.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadRequest.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponse.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\ResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Response.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequest.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestRole.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\WorkspaceController.cs" />
     <Compile Include="Allors\Server\Tests\Organisation\Command.cs" />
     <Compile Include="Allors\Server\Tests\Organisation\Models\Add\Add.cs" />
     <Compile Include="Allors\Server\Tests\Organisation\Models\Edit\Edit.cs" />

@@ -1,4 +1,6 @@
-﻿using Allors.Web;
+﻿using Allors.Meta;
+using Allors.Web;
+using Allors.Web.Workspace;
 
 namespace Website.Controllers
 {
@@ -15,7 +17,7 @@ namespace Website.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Load()
+        public ActionResult Load(LoadRequest loadRequest)
         {
             return Json(null);
         }
@@ -24,9 +26,9 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Main()
         {
-            var response = new Response();
-
-            return Json(response);
+            var responseBuilder = new ResponseBuilder();
+            responseBuilder.Add("root", this.AuthenticatedUser, PersonClass.Instance.HomeTree);
+            return Json(responseBuilder.Build());
         }
 
     }

@@ -64,7 +64,7 @@
   <ItemGroup>
     <None Include="Transitional.cd" />
     <None Include="Content.cd" />
-    <None Include="Tests.cd" />
+    <None Include="Test.cd" />
     <None Include="Security.cd" />
     <None Include="Localization.cd" />
   </ItemGroup>

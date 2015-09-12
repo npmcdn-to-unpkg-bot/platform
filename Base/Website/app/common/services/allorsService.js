@@ -44,3 +44,4 @@ var App;
         })(Services = Common.Services || (Common.Services = {}));
     })(Common = App.Common || (App.Common = {}));
 })(App || (App = {}));
+//# sourceMappingURL=allorsService.js.map

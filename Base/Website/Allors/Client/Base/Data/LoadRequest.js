@@ -10,3 +10,4 @@ var Allors;
         Data.LoadRequest = LoadRequest;
     })(Data = Allors.Data || (Allors.Data = {}));
 })(Allors || (Allors = {}));
+//# sourceMappingURL=LoadRequest.js.map

@@ -1,7 +1,7 @@
 namespace Allors.Meta
 {
-	[Inherit(typeof(PrintableInterface))]
-	[Inherit(typeof(DeletableInterface))]
+    [Inherit(typeof(PrintableInterface))]
+    [Inherit(typeof(DeletableInterface))]
 	public partial class PersonClass : Class
 	{
 		#region Allors
@@ -145,5 +145,14 @@ namespace Allors.Meta
 		[Plural("Addresses")]
 		[Multiplicity(Multiplicity.ManyToMany)]
 		public RelationType Address;
+
+	    public Tree HomeTree { get; private set; }
+
+	    internal override void TestExtend()
+	    {
+            this.HomeTree = new Tree(this)
+                .Add(this.Photo.RoleType);
+         
+	    }
 	}
 }

@@ -155,6 +155,7 @@
     <Compile Include="Components\ComponentsFixture.cs" />
     <Compile Include="Components\Menu\MenuTests.cs" />
     <Compile Include="Controllers\ControllersFixture.cs" />
+    <Compile Include="Controllers\Workspace\ResponseTests.cs" />
     <Compile Include="Controllers\Workspace\LoadTests.cs" />
     <Compile Include="Controllers\Organisation\EditTests.cs" />
     <Compile Include="Controllers\ControllersTest.cs" />

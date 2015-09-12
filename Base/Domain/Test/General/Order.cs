@@ -31,7 +31,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestsOnDerive(ObjectOnDerive method)
+        public void TestOnDerive(ObjectOnDerive method)
         {
             if (0 == this.Amount)
             {

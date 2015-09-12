@@ -38,3 +38,4 @@ var Allors;
     })();
     Allors.Database = Database;
 })(Allors || (Allors = {}));
+//# sourceMappingURL=Database.js.map

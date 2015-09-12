@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Reflection;
-
 namespace Allors.Meta
 {
     public partial class MetaPopulation
@@ -15,7 +11,7 @@ namespace Allors.Meta
 
             foreach (var composite in this.Composites)
             {
-                composite.TestsExtend();
+                composite.TestExtend();
             }
         }
     }

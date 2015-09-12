@@ -28,7 +28,7 @@ namespace Allors.Domain
 					global::System.Guid? UniqueId {set;}
 
 	}
-	public interface Enumeration  : Object, AccessControlledObject, UniquelyIdentifiable 
+	public interface Enumeration  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					LocalisedText LocalisedNames {set;}
 
@@ -263,7 +263,7 @@ namespace Allors.Domain
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface User  : Object, AccessControlledObject, Localised, SecurityTokenOwner 
+	public interface User  : Object, Localised, AccessControlledObject, SecurityTokenOwner 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -300,7 +300,7 @@ namespace Allors.Domain
 					global::System.String AllorsString {set;}
 
 	}
-	public interface C1  : Object, AccessControlledObject, I1 
+	public interface C1  : Object, I1, AccessControlledObject 
 	{
 					I1 C1I1One2One {set;}
 
@@ -537,7 +537,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface LocalisedText  : Object, AccessControlledObject, Localised 
+	public interface LocalisedText  : Object, Localised, AccessControlledObject 
 	{
 					global::System.String Text {set;}
 
@@ -556,7 +556,7 @@ namespace Allors.Domain
 					global::System.String PoBox {set;}
 
 	}
-	public interface Media  : Object, Deletable, UniquelyIdentifiable, AccessControlledObject 
+	public interface Media  : Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
 	{
 					MediaType MediaType {set;}
 
@@ -577,7 +577,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Person  : Object, Deletable, Printable, User, AccessControlledObject, UniquelyIdentifiable 
+	public interface Person  : Object, Printable, Deletable, UniquelyIdentifiable, AccessControlledObject, User 
 	{
 					Address MainAddress {set;}
 
@@ -648,7 +648,7 @@ namespace Allors.Domain
 	public interface OrderObjectState  : Object, ObjectState 
 	{
 	}
-	public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
+	public interface Organisation  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					global::System.String Information {set;}
 
@@ -681,7 +681,7 @@ namespace Allors.Domain
 					Address MainAddress {set;}
 
 	}
-	public interface Permission  : Object, AccessControlledObject, Deletable 
+	public interface Permission  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.Guid OperandTypePointer {set;}
 
@@ -706,7 +706,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Role  : Object, AccessControlledObject, UniquelyIdentifiable 
+	public interface Role  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					Permission Permissions {set;}
 

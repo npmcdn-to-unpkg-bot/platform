@@ -1,3 +1,5 @@
+using Website.Controllers;
+
 namespace Controllers.Workspace
 {
     using System.Web.Mvc;
@@ -24,7 +26,7 @@ namespace Controllers.Workspace
             {
             };
 
-            var controller = new WorkspaceController { AllorsSession = this.Session };
+            var controller = new AngularController { AllorsSession = this.Session };
 
             // Act
             var jsonResult = (JsonResult)controller.Load(loadRequest);

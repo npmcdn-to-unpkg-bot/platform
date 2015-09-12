@@ -20,3 +20,4 @@ var Allors;
     })();
     Allors.RoleType = RoleType;
 })(Allors || (Allors = {}));
+//# sourceMappingURL=RoleType.js.map

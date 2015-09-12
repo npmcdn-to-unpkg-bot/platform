@@ -186,6 +186,7 @@
     </Compile>
     <Compile Include="Base\Domain\Base.cs" />
     <Compile Include="Base\Meta\Composite.cs" />
+    <Compile Include="Base\Meta\Tree.cs" />
     <Compile Include="Base\Meta\RoleType.cs" />
     <Compile Include="Base\Meta\ConcreteRoleType.cs" />
     <Compile Include="Base\Meta\Path.cs" />
@@ -194,6 +195,7 @@
     </Compile>
     <Compile Include="Base\Domain\AccessControl.cs" />
     <Compile Include="Base\Domain\AccessControlledObject.cs" />
+    <Compile Include="Base\Meta\TreeNode.cs" />
     <Compile Include="Test\Domain\Address.cs" />
     <Compile Include="Test\Domain\BadUI.cs" />
     <Compile Include="Test\Domain\C1.cs" />
@@ -231,7 +233,7 @@
     <Compile Include="Base\Domain\MediaType.cs" />
     <Compile Include="Test\Domain\Person.cs" />
     <Compile Include="Test\Domain\Singleton.cs" />
-    <Compile Include="Test\Domain\Tests.cs" />
+    <Compile Include="Test\Domain\Test.cs" />
     <Compile Include="Base\Domain\ObjectState.cs" />
     <Compile Include="Test\Domain\One.cs" />
     <Compile Include="Test\Domain\Order.cs" />
@@ -275,6 +277,7 @@
     <None Include="..\..\Core\Meta\Core\Overview.cd">
       <Link>Core\Overview.cd</Link>
     </None>
+    <None Include="Base\Meta\Tree.cd" />
     <None Include="Base\RelationType.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />

@@ -16,3 +16,4 @@ var App;
             .controller("organisationController", OrganisationController);
     })(Organisation = App.Organisation || (App.Organisation = {}));
 })(App || (App = {}));
+//# sourceMappingURL=person.js.map
