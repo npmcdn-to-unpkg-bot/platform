@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Allors Base</a>
+                <a class="navbar-brand" ui-sref="home">Allors Base</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -40,14 +40,9 @@
     <script src="/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
 
     <script src="/Scripts/lodash.js"></script>
-    @Scripts.Render("~/bundles/allors")
-    @Scripts.Render("~/bundles/generated")
 
-    <script src="/app/app.module.js"></script>
-
-    <script src="/app/controller/main.js"></script>
-    <script src="/app/controller/home.js"></script>
-    <script src="/app/controller/person.js"></script>
+    @Scripts.Render("~/bundles/angular/app")
+    @Scripts.Render("~/bundles/angular/allors")
 
 </body>
 </html>

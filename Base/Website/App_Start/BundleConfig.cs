@@ -32,11 +32,11 @@
                 "~/Scripts/jquery.validate*"));
 
             // Angular bundles
-            bundles.Add(new ScriptBundle("$/bundles/angular/app")
-                .Include("~/app/" + "~/app/app.module.js.js")
+            bundles.Add(new ScriptBundle("~/bundles/angular/app")
+                .Include("~/app/" + "~/app/app.js")
                 .IncludeDirectory("~/app/", "*.js",  true));
 
-            bundles.Add(new ScriptBundle("$/bundles/angular/allors")
+            bundles.Add(new ScriptBundle("~/bundles/angular/allors")
                 .IncludeDirectory("~/allors/client/", "*.js", true));
         }
     }
