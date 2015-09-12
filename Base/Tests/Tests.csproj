@@ -155,7 +155,8 @@
     <Compile Include="Components\ComponentsFixture.cs" />
     <Compile Include="Components\Menu\MenuTests.cs" />
     <Compile Include="Controllers\ControllersFixture.cs" />
-    <Compile Include="Controllers\Organisation\OrganisationEditTests.cs" />
+    <Compile Include="Controllers\Workspace\LoadTests.cs" />
+    <Compile Include="Controllers\Organisation\EditTests.cs" />
     <Compile Include="Controllers\ControllersTest.cs" />
     <Compile Include="Domain\Common\CounterTest.cs" />
     <Compile Include="Domain\Common\NamedConstantTest.cs" />

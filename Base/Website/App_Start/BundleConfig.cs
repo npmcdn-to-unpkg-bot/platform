@@ -6,6 +6,7 @@
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            // Mvc bundles
             bundles.Add(new ScriptBundle("~/bundles/js/default/pre").Include(
                         "~/Scripts/modernizr-*",
                         "~/Scripts/jquery-{version}.js"));
@@ -27,9 +28,16 @@
                         "~/Content/jasny-bootstrap.css",
                         "~/Content/site.css"));
 
-            // Used by Identity
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate*"));
+
+            // Angular bundles
+            bundles.Add(new ScriptBundle("$/bundles/angular/app")
+                .Include("~/app/" + "~/app/app.module.js.js")
+                .IncludeDirectory("~/app/", "*.js",  true));
+
+            bundles.Add(new ScriptBundle("$/bundles/angular/allors")
+                .IncludeDirectory("~/allors/client/", "*.js", true));
         }
     }
 }

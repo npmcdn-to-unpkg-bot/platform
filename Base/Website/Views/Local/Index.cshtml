@@ -1,12 +1,20 @@
-﻿@{
-    ViewBag.Title = "Setup";
-}
+﻿@{Layout = null;}<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>Allors</title>
+    <link rel="stylesheet" href="/Content/bootstrap.css">
+</head>
+<body>
 
-<div class="row">
-    <div class="row">
-        @using (@Html.BeginForm("Setup", "Local"))
-        {
-            <input type="submit" value="Setup" class="btn btn-default" />
-        }
+    <div class="container">
+        <div class="row">
+            @using (@Html.BeginForm("Setup", "Local"))
+            {
+                <input type="submit" value="Setup" class="btn btn-default" />
+            }
+        </div>
     </div>
-</div>
+</body>
+
+

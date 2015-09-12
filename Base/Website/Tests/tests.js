@@ -1,40 +1,32 @@
-﻿/// <reference path="../Scripts/lodash.js" />
+﻿"use strict";
 
-/// <reference path="../Allors/Base/Client/Database.js" />
-/// <reference path="../Allors/Base/Client/DatabaseObject.js" />
-/// <reference path="../Allors/Base/Client/WorkspaceObject.js" />
-/// <reference path="../Allors/Base/Client/Workspace.js" />
-/// <reference path="../Allors/Base/Client/ObjectType.js" />
-/// <reference path="../Allors/Base/Client/RoleType.js" />
+/// <reference path="../Scripts/lodash.js" />
 
-/// <reference path="../Allors/Base/Client/Meta/Population.js" />
+/// <reference path="../Allors/Client/Base/Database.js" />
+/// <reference path="../Allors/Client/Base/DatabaseObject.js" />
+/// <reference path="../Allors/Client/Base/WorkspaceObject.js" />
+/// <reference path="../Allors/Client/Base/Workspace.js" />
+/// <reference path="../Allors/Client/Base/ObjectType.js" />
+/// <reference path="../Allors/Client/Base/RoleType.js" />
 
-/// <reference path="../Allors/Base/Client/Data/Response.js" />
-/// <reference path="../Allors/Base/Client/Data/LoadRequest.js" />
-/// <reference path="../Allors/Base/Client/Data/LoadResponse.js" />
-/// <reference path="../Allors/Base/Client/Data/SaveRequest.js" />
+/// <reference path="../Allors/Client/Base/Meta/Population.js" />
 
-/// <reference path="../Generated/meta/meta.g.js" />
-/// <reference path="../Generated/domain/organisation.g.js" />
-/// <reference path="../Generated/domain/person.g.js" />
+/// <reference path="../Allors/Client/Base/Data/Response.js" />
+/// <reference path="../Allors/Client/Base/Data/LoadRequest.js" />
+/// <reference path="../Allors/Client/Base/Data/LoadResponse.js" />
+/// <reference path="../Allors/Client/Base/Data/SaveRequest.js" />
+
+/// <reference path="../Allors/Client/Generated/meta/meta.g.js" />
+/// <reference path="../Allors/Client/Generated/domain/organisation.g.js" />
+/// <reference path="../Allors/Client/Generated/domain/person.g.js" />
 
 /// <reference path="./qunit.js" />
 /// <reference path="./data.js" />
-"use strict";
 
 function arrayEqual(array1, array2)
 {
     return _.isEmpty(_.difference(array1, array2)) && _.isEmpty(_.difference(array2, array1));
 }
-
-/// <reference path="/allors/DatabaseObject.js" />
-/// <reference path="/allors/Database.js" />
-/// <reference path="/allors/ObjectType.js" />
-/// <reference path="/allors/RoleType.js" />
-/// <reference path="/allors/WorkspaceObject.js" />
-/// <reference path="/allors/Workspace.js" />
-/// <reference path="/Generated/meta.g.js" />
-/// <reference path="data.js" />
 
 test("database load", function () {
     var database = new Allors.Database(Allors.Meta.population);

@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -26,6 +28,8 @@
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
     <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +64,10 @@
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -98,8 +106,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Mvc">
+    <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mvc2Futures.2.0.50217.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MvcContrib">
       <HintPath>..\packages\MvcContrib.2.0.95.0\lib\MvcContrib.dll</HintPath>
@@ -129,6 +138,10 @@
     </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -254,6 +267,9 @@
     <Compile Include="App_Start\ModelConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ViewConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AngularController.cs" />
+    <Compile Include="Controllers\MvcController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -266,6 +282,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.module.js" />
+    <Content Include="app\controller\home.js" />
+    <Content Include="app\controller\main.js" />
+    <Content Include="app\controller\organisation.js" />
+    <Content Include="app\controller\person.js" />
+    <Content Include="app\templates\home.html" />
+    <Content Include="app\templates\organisation.html" />
+    <Content Include="app\templates\person.html" />
     <Content Include="bootstrap-maxlength.js" />
     <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -281,10 +305,26 @@
     <Content Include="Content\chosen-sprite.png" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-resource.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular-ui-router.js" />
+    <Content Include="Scripts\angular-ui-router.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap-select.js" />
@@ -414,6 +454,10 @@
     <Content Include="Allors\Server\Tests\Web.config" />
     <Content Include="Allors\Server\Web.config" />
     <Content Include="Allors\Server\_ViewStart.cshtml" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -474,7 +518,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <None Include="app\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
@@ -482,6 +526,9 @@
     <Content Include="Views\Local\Index.cshtml" />
     <Content Include="Settings.StyleCop" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Mvc\Index.cshtml" />
+    <Content Include="Views\Angular\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Allors\Server\Tests\Organisation\EditorTemplates\" />
@@ -530,77 +577,77 @@
     <TypeScriptCompile Include="Allors\Client\Base\Data\SaveRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\WorkspaceObject.ts" />
-    <TypeScriptCompile Include="Generated\domain\AccessControl.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\AccessControlledObject.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Address.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\BadUI.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\C1.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\C2.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\ClassWithoutRoles.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Commentable.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Counter.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Country.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Currency.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Deletable.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Dependee.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Dependent.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\DerivationLogC1.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\DerivationLogC2.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\DerivationLogI12.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Enumeration.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Extender.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\First.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Four.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\From.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Gender.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\HomeAddress.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\I1.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\I12.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\I2.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Image.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Language.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Locale.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Localised.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\LocalisedText.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Login.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\MailboxAddress.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Media.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\MediaContent.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\MediaType.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Object.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\ObjectState.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\One.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Order.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\OrderObjectState.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Organisation.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Period.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Permission.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Person.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Place.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Printable.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\PrintQueue.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Role.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\S1.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Second.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\SecurityToken.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\SecurityTokenOwner.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Shared.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\SimpleJob.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Singleton.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\StatefulCompany.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\StringTemplate.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Subdependee.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Third.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Three.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\To.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Transition.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Transitional.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Two.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\UniquelyIdentifiable.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\Unit.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\User.g.ts" />
-    <TypeScriptCompile Include="Generated\domain\UserGroup.g.ts" />
-    <TypeScriptCompile Include="Generated\meta\meta.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\AccessControl.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\AccessControlledObject.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Address.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\BadUI.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\C2.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\ClassWithoutRoles.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Commentable.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Counter.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Country.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Currency.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Deletable.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Dependee.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Dependent.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\DerivationLogC1.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\DerivationLogC2.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\DerivationLogI12.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Enumeration.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Extender.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\First.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Four.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\From.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Gender.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\HomeAddress.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\I12.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\I2.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Image.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Language.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Locale.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Localised.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\LocalisedText.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Login.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\MailboxAddress.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Media.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\MediaContent.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\MediaType.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Object.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\ObjectState.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\One.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Order.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\OrderObjectState.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Organisation.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Period.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Permission.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Person.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Place.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Printable.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\PrintQueue.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Role.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\S1.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Second.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\SecurityToken.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\SecurityTokenOwner.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Shared.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\SimpleJob.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Singleton.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\StatefulCompany.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\StringTemplate.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Subdependee.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Third.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Three.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\To.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Transition.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Transitional.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Two.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\UniquelyIdentifiable.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Unit.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\UserGroup.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
     <TypeScriptCompile Include="Scripts\typings\lodash\lodash.d.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -659,6 +706,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

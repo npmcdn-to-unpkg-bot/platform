@@ -1,4 +1,4 @@
-namespace Controllers
+namespace Controllers.Organisation
 {
     using System.Web.Mvc;
 
@@ -12,7 +12,7 @@ namespace Controllers
 
     using Areas.Default.Tests.OrganisationMvc;
 
-    public class OrganisationEditTests : ControllersTest
+    public class EditTests : ControllersTest
     {
         [Test]
         public void Edit()
