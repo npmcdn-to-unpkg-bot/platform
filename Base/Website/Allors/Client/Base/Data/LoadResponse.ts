@@ -3,6 +3,8 @@
         i: string;
         v: string;
         t: string;
+
+        roles: string[][];
     }
 
     export class LoadResponse {

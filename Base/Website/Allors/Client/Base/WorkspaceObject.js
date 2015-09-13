@@ -23,7 +23,7 @@ var Allors;
                             save.s = role;
                         }
                         else {
-                            var originalRoleIds = _this.databaseObject[roleTypeName];
+                            var originalRoleIds = _this.databaseObject.roles[roleTypeName];
                             if (originalRoleIds === undefined || originalRoleIds === null || originalRoleIds.length === 0) {
                                 save.s = role;
                             }
@@ -64,7 +64,7 @@ var Allors;
                 value = this.roleByRoleTypeName[roleTypeName];
             }
             if (value === undefined) {
-                value = this.databaseObject[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName];
             }
             return value === undefined ? null : value;
         };
@@ -80,7 +80,7 @@ var Allors;
                 value = this.roleByRoleTypeName[roleTypeName];
             }
             if (value === undefined) {
-                value = this.databaseObject[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName];
             }
             if (value === null || value === undefined) {
                 return null;
@@ -103,7 +103,7 @@ var Allors;
                 value = this.roleByRoleTypeName[roleTypeName];
             }
             if (value === undefined) {
-                value = this.databaseObject[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName];
             }
             if (value === undefined || value === null) {
                 return [];

@@ -26,7 +26,7 @@
                         if (roleType.isOne) {
                             save.s = role;
                         } else {
-                            var originalRoleIds = <string[]>this.databaseObject[roleTypeName];
+                            var originalRoleIds = <string[]>this.databaseObject.roles[roleTypeName];
 
                             if (originalRoleIds === undefined || originalRoleIds === null || originalRoleIds.length === 0) {
                                 save.s = role;
@@ -66,7 +66,7 @@
             }
 
             if (value === undefined) {
-                value = this.databaseObject[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName];
             }
 
             return value === undefined ? null : value;
@@ -88,7 +88,7 @@
             }
 
             if (value === undefined) {
-                value = this.databaseObject[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName];
             }
 
             if (value === null || value === undefined) {
@@ -118,7 +118,7 @@
             }
 
             if (value === undefined) {
-                value = this.databaseObject[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName];
             }
 
             if (value === undefined || value === null) {

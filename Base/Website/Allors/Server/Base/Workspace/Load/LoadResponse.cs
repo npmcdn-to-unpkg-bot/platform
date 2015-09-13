@@ -2,6 +2,6 @@
 {
     public class LoadResponse
     {
-        public LoadObjectResponse[] Objects { get; set; }
+        public LoadResponseObject[] Objects { get; set; }
     }
 }

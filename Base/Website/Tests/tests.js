@@ -37,8 +37,8 @@ test("database load", function () {
     ok(martien.id === "3");
     ok(martien.version === "1003");
     ok(martien.objectType.name === "Person");
-    ok(martien.FirstName === "Martien");
-    ok(martien.LastName === "van Knippenberg");
+    ok(martien.roles.FirstName === "Martien");
+    ok(martien.roles.LastName === "van Knippenberg");
 });
 
 test("workspace unit get", function () {

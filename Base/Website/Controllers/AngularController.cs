@@ -14,13 +14,13 @@ namespace Website.Controllers
         {
             return View();
         }
-
-
+        
         [Authorize]
         [HttpPost]
         public ActionResult Load(LoadRequest loadRequest)
         {
-            return Json(null);
+            var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, loadRequest);
+            return Json(loadResponseBuilder.Build());
         }
 
         [Authorize]

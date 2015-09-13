@@ -244,9 +244,10 @@
     <Compile Include="Allors\Server\Base\Mvc\Views\ViewContextExtensions.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsMembershipProvider.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsRoleProvider.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Load\LoadObjectResponse.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadRequest.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponse.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\ResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Response.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequest.cs" />
