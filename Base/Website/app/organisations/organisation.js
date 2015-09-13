@@ -16,4 +16,3 @@ var App;
             .controller("mainController", MainController);
     })(Main = App.Main || (App.Main = {}));
 })(App || (App = {}));
-//# sourceMappingURL=organisation.js.map

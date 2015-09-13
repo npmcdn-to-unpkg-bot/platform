@@ -37,4 +37,3 @@ var Allors;
     })();
     Allors.DatabaseObject = DatabaseObject;
 })(Allors || (Allors = {}));
-//# sourceMappingURL=DatabaseObject.js.map

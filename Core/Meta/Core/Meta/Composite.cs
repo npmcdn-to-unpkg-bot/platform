@@ -34,6 +34,10 @@ namespace Allors.Meta
         private LazySet<RoleType> derivedRoleTypes;
         private LazySet<MethodType> derivedMethodTypes;
 
+        private Dictionary<string, IList<Interface>> derivedDirectSupertypesByGroup;
+        private Dictionary<string, IList<RoleType>> derivedExclusiveRoleTypesByGroup;
+        private Dictionary<string, IList<RoleType>> derivedRoleTypesByGroup;
+
         protected Composite(MetaPopulation metaPopulation)
             : base(metaPopulation)
         {
@@ -215,6 +219,45 @@ namespace Allors.Meta
             }
         }
 
+        /// <summary>
+        /// Gets the direct supertypes by group.
+        /// </summary>
+        /// <value>The grouped direct supertypes.</value>
+        public Dictionary<string, IList<Interface>> DirectSupertypesByGroup
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.derivedDirectSupertypesByGroup;
+            }
+        }
+
+        /// <summary>
+        /// Gets the exclusive roles by group.
+        /// </summary>
+        /// <value>The grouped exclusive roles.</value>
+        public Dictionary<string, IList<RoleType>> ExclusiveRoleTypesByGroup
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.derivedExclusiveRoleTypesByGroup;
+            }
+        }
+
+        /// <summary>
+        /// Gets the roles by group.
+        /// </summary>
+        /// <value>The grouped roles.</value>
+        public Dictionary<string, IList<RoleType>> RoleTypesByGroup
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.derivedRoleTypesByGroup;
+            }
+        }
+
         public IEnumerable<RoleType> UnitRoleTypes
         {
             get
@@ -368,6 +411,99 @@ namespace Allors.Meta
             }
 
             this.derivedRoleTypes = new LazySet<RoleType>(roleTypes);
+        }
+
+        /// <summary>
+        /// Derive direct supertypes by group.
+        /// </summary>
+        /// <param name="inerfaces">The grouped direct supertypes.</param>
+        internal void DeriveDirectSupertypesByGroup()
+        {
+            var directSupertypesByGroup = new Dictionary<string, IList<Interface>>();
+
+            foreach (var directSupertype in this.DirectSupertypes)
+            {
+                foreach (var group in directSupertype.RoleTypesByGroup.Keys)
+                {
+                    IList<Interface> groupedDiresctSupertypes;
+                    if (!directSupertypesByGroup.TryGetValue(group, out groupedDiresctSupertypes))
+                    {
+                        groupedDiresctSupertypes = new List<Interface>();
+                        directSupertypesByGroup[group] = groupedDiresctSupertypes;
+                    }
+
+                    groupedDiresctSupertypes.Add(directSupertype);
+                }
+            }
+
+            foreach (var group in directSupertypesByGroup.Keys.ToArray())
+            {
+                directSupertypesByGroup[group] = directSupertypesByGroup[group].ToArray();
+            }
+
+            this.derivedDirectSupertypesByGroup = directSupertypesByGroup;
+        }
+
+        /// <summary>
+        /// Derive exclusive role types by group.
+        /// </summary>
+        /// <param name="roleTypes">The exclusive grouped role types.</param>
+        internal void DeriveExclusiveRoleTypesByGroup()
+        {
+            var roleTypesByGroup = new Dictionary<string, IList<RoleType>>();
+
+            foreach (var roleType in this.ExclusiveRoleTypes)
+            {
+                foreach (var group in roleType.RelationType.Groups)
+                {
+                    IList<RoleType> groupedExclusiveRoleTypes;
+                    if (!roleTypesByGroup.TryGetValue(group, out groupedExclusiveRoleTypes))
+                    {
+                        groupedExclusiveRoleTypes = new List<RoleType>();
+                        roleTypesByGroup[group] = groupedExclusiveRoleTypes;
+                    }
+
+                    groupedExclusiveRoleTypes.Add(roleType);
+                }
+            }
+
+            foreach (var group in roleTypesByGroup.Keys.ToArray())
+            {
+                roleTypesByGroup[group] = roleTypesByGroup[group].ToArray();
+            }
+
+            this.derivedExclusiveRoleTypesByGroup = roleTypesByGroup;
+        }
+
+        /// <summary>
+        /// Derive role types by group.
+        /// </summary>
+        /// <param name="roleTypes">The grouped role types.</param>
+        internal void DeriveRoleTypesByGroup()
+        {
+            var roleTypesByGroup = new Dictionary<string, IList<RoleType>>();
+
+            foreach (var roleType in this.RoleTypes)
+            {
+                foreach (var group in roleType.RelationType.Groups)
+                {
+                    IList<RoleType> groupedRoleTypes;
+                    if (!roleTypesByGroup.TryGetValue(group, out groupedRoleTypes))
+                    {
+                        groupedRoleTypes = new List<RoleType>();
+                        roleTypesByGroup[group] = groupedRoleTypes;
+                    }
+
+                    groupedRoleTypes.Add(roleType);
+                }   
+            }
+            
+            foreach (var group in roleTypesByGroup.Keys.ToArray())
+            {
+                roleTypesByGroup[group] = roleTypesByGroup[group].ToArray();
+            }
+
+            this.derivedRoleTypesByGroup = roleTypesByGroup;
         }
 
         /// <summary>

@@ -233,6 +233,11 @@ namespace Allors.Meta
                         relationType.RoleType.AssignedPluralName = pluralAttribute.Value;
                     }
 
+                    foreach (var groupAttribute in Attribute.GetCustomAttributes(relationTypeField, typeof(GroupAttribute)).Cast<GroupAttribute>())
+                    {
+                        relationType.AddGroup(groupAttribute.Value);
+                    }
+
                     relationTypeField.SetValue(composite, relationType);
                 }
             }
@@ -698,7 +703,27 @@ namespace Allors.Meta
                     foreach (var type in this.derivedComposites)
                     {
                         type.DeriveRoleTypes(sharedRoleTypes, roleTypesByAssociationObjectType);
+
                     }
+
+                    // ExclusiveRoleTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveExclusiveRoleTypesByGroup();
+                    }
+
+                    // RoleTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveRoleTypesByGroup();
+                    }
+
+                    // DirectSupertypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveDirectSupertypesByGroup();
+                    }
+
 
                     // AssociationTypes
                     foreach (var type in this.derivedComposites)

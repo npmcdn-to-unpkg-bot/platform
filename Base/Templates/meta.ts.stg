@@ -36,20 +36,22 @@ module Allors.Meta
 	{
 		classes : 
 		[
-$meta.classes:{class|$class(class)$}; separator=",\n"$
+$meta.classes:{class|$class(class)$}$
 		]
     }
 }
 >>
 
 class(class) ::= <<
+$if(class.roleTypesByGroup.Web)$
 			{
 				name: "$class.Name$" ,
 				roleTypes:
 				[
-$class.roleTypes:{roleType|$roleType(roleType)$}; separator=",\n"$
+$class.roleTypesByGroup.Web:{roleType|$roleType(roleType)$}; separator=",\n"$
 				]
 			}
+$endif$
 >>
 
 roleType(roleType) ::= <<

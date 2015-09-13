@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-	using System;
-
 	#region Allors
 	[Id("fefcf1b6-ac8f-47b0-bed5-939207a2833e")]
 	#endregion
@@ -65,7 +63,8 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
-		public RelationType AllorsString;
+        [Group("Web")]
+        public RelationType AllorsString;
 
 		#region Allors
 		[Id("2e85d74a-8d13-4bc0-ae4f-42b305e79373")]

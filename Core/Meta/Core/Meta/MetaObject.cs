@@ -18,6 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Allors.Meta
 {
     using System;
@@ -27,7 +30,11 @@ namespace Allors.Meta
     /// </summary>
     public abstract partial class MetaObject : IMetaObject
     {
+        private static readonly string[] EmptyGroups = { };
+
         private Guid id;
+
+        private string[] groups;
 
         protected MetaObject(MetaPopulation metaPopulation)
         {
@@ -37,6 +44,11 @@ namespace Allors.Meta
             if (idAttribute != null)
             {
                 this.Id = new Guid(idAttribute.Value);
+            }
+
+            foreach (var groupAttribute in Attribute.GetCustomAttributes(this.GetType(), typeof(GroupAttribute)).Cast<GroupAttribute>())
+            {
+                this.AddGroup(groupAttribute.Value);
             }
         }
 
@@ -87,6 +99,45 @@ namespace Allors.Meta
             get { return this.Id.ToString("D").ToLower(); }
         }
         
+        public string[] Groups
+        {
+            get
+            {
+                return this.groups ?? EmptyGroups;
+            }
+
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+
+                this.groups = null;
+                if (value != null)
+                {
+                    this.groups = new HashSet<string>(value).ToArray();
+                }
+
+                this.MetaPopulation.Stale();
+            }
+        }
+
+        public void AddGroup(string @group)
+        {
+            if (@group != null)
+            {
+                this.Groups = new List<string>(this.Groups) { @group }.ToArray();
+            }
+        }
+
+        public void AddGroups(string[] groups)
+        {
+            if (groups != null)
+            {
+                var newTags = new List<string>(this.Groups);
+                newTags.AddRange(groups);
+                this.Groups = newTags.ToArray();
+            }
+        }
+
         /// <summary>
         /// Gets the validation name.
         /// </summary>

@@ -32,4 +32,3 @@ var Allors;
     })();
     Allors.Workspace = Workspace;
 })(Allors || (Allors = {}));
-//# sourceMappingURL=Workspace.js.map

@@ -19,6 +19,9 @@
 // <summary>Defines the RoleType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Allors.Meta
 {
     using System;

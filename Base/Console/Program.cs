@@ -11,7 +11,8 @@
 
         public static void Generate()
         {
-            Development.Repository.Tasks.Generate.Execute("../../../Templates/domain.ts.stg", "../../../Angular/Generated");
+            //Development.Repository.Tasks.Generate.Execute("../../../Templates/meta.ts.stg", "../../../Website/Allors/Client/Generated/meta");
+            Development.Repository.Tasks.Generate.Execute("../../../Templates/domain.ts.stg", "../../../Website/Allors/Client/Generated/domain");
             
             Console.WriteLine("Finished");
             Console.ReadKey();

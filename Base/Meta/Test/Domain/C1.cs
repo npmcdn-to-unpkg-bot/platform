@@ -32,6 +32,7 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
+        [Group("Web")]
 		public RelationType AllorsString;
 
 		#region Allors

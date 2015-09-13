@@ -22,4 +22,3 @@ var Allors;
         Data.SaveRequest = SaveRequest;
     })(Data = Allors.Data || (Allors.Data = {}));
 })(Allors || (Allors = {}));
-//# sourceMappingURL=SaveRequest.js.map
