@@ -133,6 +133,7 @@ namespace Allors.Meta
 		[Indexed]
 		[Type(typeof(MediaClass))]
 		[Multiplicity(Multiplicity.ManyToOne)]
+        [Group(Groups.Workspace)]
 		public RelationType Photo;
 
 		#region Allors

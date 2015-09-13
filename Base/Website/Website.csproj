@@ -286,6 +286,8 @@
     <TypeScriptCompile Include="Allors\Client\Base\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Media.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Person.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\home\home.ts" />

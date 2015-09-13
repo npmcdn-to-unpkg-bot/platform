@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Allors.Meta;
 using Allors.Web.Workspace;
 
 namespace Allors.Web
@@ -8,11 +9,13 @@ namespace Allors.Web
     {
         private readonly ISession session;
         private readonly LoadRequest loadRequest;
-
-        public LoadResponseBuilder(ISession session, LoadRequest loadRequest)
+        private string @group;
+        
+        public LoadResponseBuilder(ISession session, LoadRequest loadRequest, string group)
         {
             this.session = session;
             this.loadRequest = loadRequest;
+            this.group = group;
         }
 
         public LoadResponse Build()
@@ -34,7 +37,11 @@ namespace Allors.Web
         private object[][] GetRoles(IObject obj)
         {
             var roles = new List<object[]>();
-            foreach (var roleType in obj.Strategy.Class.RoleTypes)
+
+            var composite = (Composite)obj.Strategy.Class;
+            var roleTypes = composite.RoleTypesByGroup[@group];
+
+            foreach (var roleType in roleTypes)
             {
                 if (roleType.ObjectType.IsUnit)
                 {

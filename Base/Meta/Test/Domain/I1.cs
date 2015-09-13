@@ -63,7 +63,7 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
-        [Group("Web")]
+        [Group(Groups.Workspace)]
         public RelationType AllorsString;
 
 		#region Allors
@@ -300,15 +300,11 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsUniqueUnit))]
 		public RelationType AllorsUnique;
-
-
-
+        
 		public static I1Interface Instance {get; internal set;}
 
 		internal I1Interface() : base(MetaPopulation.Instance)
         {
         }
-
-
 	}
 }

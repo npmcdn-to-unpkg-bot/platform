@@ -37,6 +37,7 @@ namespace Allors.Meta
         private Dictionary<string, IList<Interface>> derivedDirectSupertypesByGroup;
         private Dictionary<string, IList<RoleType>> derivedExclusiveRoleTypesByGroup;
         private Dictionary<string, IList<RoleType>> derivedRoleTypesByGroup;
+        private Dictionary<string, IList<AssociationType>> derivedAssociationTypesByGroup;
 
         protected Composite(MetaPopulation metaPopulation)
             : base(metaPopulation)
@@ -258,6 +259,19 @@ namespace Allors.Meta
             }
         }
 
+        /// <summary>
+        /// Gets the associations by group.
+        /// </summary>
+        /// <value>The grouped associations.</value>
+        public Dictionary<string, IList<AssociationType>> AssociationTypesByGroup
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.derivedAssociationTypesByGroup;
+            }
+        }
+
         public IEnumerable<RoleType> UnitRoleTypes
         {
             get
@@ -423,7 +437,8 @@ namespace Allors.Meta
 
             foreach (var directSupertype in this.DirectSupertypes)
             {
-                foreach (var group in directSupertype.RoleTypesByGroup.Keys)
+                var groups = directSupertype.RoleTypesByGroup.Keys.Union(directSupertype.AssociationTypesByGroup.Keys);
+                foreach (var group in groups)
                 {
                     IList<Interface> groupedDiresctSupertypes;
                     if (!directSupertypesByGroup.TryGetValue(group, out groupedDiresctSupertypes))
@@ -504,6 +519,37 @@ namespace Allors.Meta
             }
 
             this.derivedRoleTypesByGroup = roleTypesByGroup;
+        }
+
+        /// <summary>
+        /// Derive association types by group.
+        /// </summary>
+        /// <param name="associationTypes">The grouped association types.</param>
+        internal void DeriveAssociationTypesByGroup()
+        {
+            var associationTypesByGroup = new Dictionary<string, IList<AssociationType>>();
+
+            foreach (var associationType in this.AssociationTypes)
+            {
+                foreach (var group in associationType.RelationType.Groups)
+                {
+                    IList<AssociationType> groupedAssociationTypes;
+                    if (!associationTypesByGroup.TryGetValue(group, out groupedAssociationTypes))
+                    {
+                        groupedAssociationTypes = new List<AssociationType>();
+                        associationTypesByGroup[group] = groupedAssociationTypes;
+                    }
+
+                    groupedAssociationTypes.Add(associationType);
+                }
+            }
+
+            foreach (var group in associationTypesByGroup.Keys.ToArray())
+            {
+                associationTypesByGroup[group] = associationTypesByGroup[group].ToArray();
+            }
+
+            this.derivedAssociationTypesByGroup = associationTypesByGroup;
         }
 
         /// <summary>

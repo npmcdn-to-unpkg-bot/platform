@@ -9,6 +9,8 @@ namespace Website.Controllers
 
     public class AngularController : Allors.Web.Mvc.Controller
     {
+        public const string Group = Groups.Workspace;
+
         [Authorize]
         public ActionResult Index()
         {
@@ -19,7 +21,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Load(LoadRequest loadRequest)
         {
-            var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, loadRequest);
+            var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, loadRequest, Group);
             return Json(loadResponseBuilder.Build());
         }
 

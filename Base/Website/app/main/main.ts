@@ -13,7 +13,7 @@
         private refresh(): void{
             this.$http.post('/Angular/Main', {}).then(response => {
                 this.allorsService.load(<Allors.Data.Response>response.data)
-                    .then(context => this.context = context)
+                    .then(context => this.context = context);
             });
         }
 

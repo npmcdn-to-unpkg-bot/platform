@@ -28,7 +28,7 @@ namespace Allors.Domain
 					global::System.Guid? UniqueId {set;}
 
 	}
-	public interface Enumeration  : Object, AccessControlledObject, UniquelyIdentifiable 
+	public interface Enumeration  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					LocalisedText LocalisedNames {set;}
 
@@ -37,7 +37,7 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface I1  : Object, I12, S1 
+	public interface I1  : Object, S1, I12 
 	{
 					I1 I1I1Many2One {set;}
 
@@ -263,7 +263,7 @@ namespace Allors.Domain
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface User  : Object, SecurityTokenOwner, AccessControlledObject, Localised 
+	public interface User  : Object, Localised, SecurityTokenOwner, AccessControlledObject 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -537,7 +537,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface LocalisedText  : Object, Localised, AccessControlledObject 
+	public interface LocalisedText  : Object, AccessControlledObject, Localised 
 	{
 					global::System.String Text {set;}
 
@@ -556,7 +556,7 @@ namespace Allors.Domain
 					global::System.String PoBox {set;}
 
 	}
-	public interface Media  : Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
+	public interface Media  : Object, AccessControlledObject, Deletable, UniquelyIdentifiable 
 	{
 					MediaType MediaType {set;}
 
@@ -577,7 +577,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Person  : Object, Printable, Deletable, AccessControlledObject, UniquelyIdentifiable, User 
+	public interface Person  : Object, UniquelyIdentifiable, Deletable, Printable, User, AccessControlledObject 
 	{
 					Address MainAddress {set;}
 
@@ -681,7 +681,7 @@ namespace Allors.Domain
 					Address MainAddress {set;}
 
 	}
-	public interface Permission  : Object, Deletable, AccessControlledObject 
+	public interface Permission  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Guid OperandTypePointer {set;}
 

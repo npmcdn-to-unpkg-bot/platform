@@ -717,18 +717,23 @@ namespace Allors.Meta
                     {
                         type.DeriveRoleTypesByGroup();
                     }
+                    
+                    // AssociationTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveAssociationTypes(sharedAssociationTypes, associationTypesByRoleObjectType);
+                    }
+
+                    // AssociationTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveAssociationTypesByGroup();
+                    }
 
                     // DirectSupertypesByGroup
                     foreach (var type in this.derivedComposites)
                     {
                         type.DeriveDirectSupertypesByGroup();
-                    }
-
-
-                    // AssociationTypes
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveAssociationTypes(sharedAssociationTypes, associationTypesByRoleObjectType);
                     }
 
                     // RoleType

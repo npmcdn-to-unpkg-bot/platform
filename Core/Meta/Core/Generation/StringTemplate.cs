@@ -43,6 +43,7 @@ namespace Allors.Development.Repository.Generation
 
         private const string TemplateKey = "template";
         private const string MetaKey = "meta";
+        private const string GroupKey = "grp";
         private const string InputKey = "input";
         private const string OutputKey = "output";
         private const string GenerationKey = "generation";
@@ -66,11 +67,11 @@ namespace Allors.Development.Repository.Generation
                 throw new Exception("Template file not found: " + fileInfo.FullName);
             }
             
-            TemplateGroup group = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
+            TemplateGroup templateGroup = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
 
-            this.id = Render(group, TemplateId) != null ? new Guid(Render(group, TemplateId)) : Guid.Empty;
-            this.name = Render(group, TemplateName);
-            this.version = Render(group, TemplateVersion);
+            this.id = Render(templateGroup, TemplateId) != null ? new Guid(Render(templateGroup, TemplateId)) : Guid.Empty;
+            this.name = Render(templateGroup, TemplateName);
+            this.version = Render(templateGroup, TemplateVersion);
 
             if (this.id == Guid.Empty)
             {
@@ -98,7 +99,7 @@ namespace Allors.Development.Repository.Generation
             return this.Name;
         }
 
-        internal void Generate(MetaPopulation metaPopulation, DirectoryInfo outputDirectory, Log log)
+        internal void Generate(MetaPopulation metaPopulation, DirectoryInfo outputDirectory, string group, Log log)
         {
             var validation = metaPopulation.Validate();
             if (validation.ContainsErrors)
@@ -109,12 +110,13 @@ namespace Allors.Development.Repository.Generation
 
             try
             {
-                TemplateGroup group = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
+                TemplateGroup templateGroup = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
 
-                group.ErrorManager = new ErrorManager(new LogAdapter(log));
+                templateGroup.ErrorManager = new ErrorManager(new LogAdapter(log));
                 
-                var configurationTemplate = group.GetInstanceOf(TemplateConfiguration);
+                var configurationTemplate = templateGroup.GetInstanceOf(TemplateConfiguration);
                 configurationTemplate.Add(MetaKey, metaPopulation);
+                configurationTemplate.Add(GroupKey, group);
 
                 var configurationXml = new XmlDocument();
                 configurationXml.LoadXml(configurationTemplate.Render());
@@ -123,10 +125,12 @@ namespace Allors.Development.Repository.Generation
                 foreach (XmlElement generation in configurationXml.DocumentElement.SelectNodes(GenerationKey))
                 {
                     var templateName = generation.GetAttribute(TemplateKey);
-                    var template = group.GetInstanceOf(templateName);
+                    var template = templateGroup.GetInstanceOf(templateName);
                     var output = generation.GetAttribute(OutputKey);
 
                     template.Add(MetaKey, metaPopulation);
+                    template.Add(GroupKey, group);
+
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));

@@ -1,4 +1,6 @@
-﻿namespace Allors
+﻿using Allors.Meta;
+
+namespace Allors
 {
     using System;
 
@@ -11,8 +13,8 @@
 
         public static void Generate()
         {
-            //Development.Repository.Tasks.Generate.Execute("../../../Templates/meta.ts.stg", "../../../Website/Allors/Client/Generated/meta");
-            Development.Repository.Tasks.Generate.Execute("../../../Templates/domain.ts.stg", "../../../Website/Allors/Client/Generated/domain");
+            Development.Repository.Tasks.Generate.Execute("../../../Templates/meta.ts.stg", "../../../Website/Allors/Client/Generated/meta", Groups.Workspace);
+            Development.Repository.Tasks.Generate.Execute("../../../Templates/domain.ts.stg", "../../../Website/Allors/Client/Generated/domain", Groups.Workspace);
             
             Console.WriteLine("Finished");
             Console.ReadKey();

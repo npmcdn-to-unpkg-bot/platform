@@ -127,3 +127,4 @@ var Allors;
     })();
     Allors.WorkspaceObject = WorkspaceObject;
 })(Allors || (Allors = {}));
+//# sourceMappingURL=WorkspaceObject.js.map
