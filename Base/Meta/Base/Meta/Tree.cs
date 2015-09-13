@@ -44,11 +44,21 @@ namespace Allors.Meta
             get { return nodes; }
         }
 
+        public Tree Add(RelationType relationType)
+        {
+            return this.Add(relationType.RoleType);
+        }
+
         public Tree Add(RoleType roleType)
         {
             var tree = new TreeNode(roleType);
             this.nodes.Add(tree);
             return this;
+        }
+
+        public Tree Add(RelationType relationType, Tree tree)
+        {
+            return this.Add(relationType.RoleType, tree);
         }
 
         public Tree Add(RoleType roleType, Tree tree)

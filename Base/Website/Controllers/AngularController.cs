@@ -1,4 +1,5 @@
-﻿using Allors.Meta;
+﻿using Allors.Domain;
+using Allors.Meta;
 using Allors.Web;
 using Allors.Web.Workspace;
 
@@ -27,9 +28,28 @@ namespace Website.Controllers
         public ActionResult Main()
         {
             var responseBuilder = new ResponseBuilder();
-            responseBuilder.Add("root", this.AuthenticatedUser, PersonClass.Instance.HomeTree);
+            responseBuilder.Add("root", this.AuthenticatedUser, PersonClass.Instance.AngularHome);
             return Json(responseBuilder.Build());
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult Employees()
+        {
+            var responseBuilder = new ResponseBuilder();
+            var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
+            responseBuilder.Add("root", organisation, OrganisationClass.Instance.AngularEmployees);
+            return Json(responseBuilder.Build());
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Shareholders()
+        {
+            var responseBuilder = new ResponseBuilder();
+            var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
+            responseBuilder.Add("root", organisation, OrganisationClass.Instance.AngularShareholders);
+            return Json(responseBuilder.Build());
+        }
     }
 }

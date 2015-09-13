@@ -169,16 +169,28 @@ namespace Allors.Meta
         
 		public static OrganisationClass Instance {get; internal set;}
 
-		internal OrganisationClass() : base(MetaPopulation.Instance)
+        public Tree AngularEmployees { get; private set; }
+        public Tree AngularShareholders { get; private set; }
+
+        internal OrganisationClass() : base(MetaPopulation.Instance)
         {
         }
 
-        internal override void BaseExtend()
+        internal override void TestExtend()
         {
             this.Description.RoleType.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
 
             this.Information.RoleType.DisplayAttribute = new DisplayAttribute { Name = "Ik ben het label" };
             this.Information.RoleType.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
+
+            var organisation = this;
+            this.AngularEmployees = new Tree(organisation)
+                .Add(organisation.Employee);
+
+            var person = PersonClass.Instance;
+            this.AngularShareholders = new Tree(organisation)
+                .Add(organisation.Shareholder, new Tree(person)
+                        .Add(person.Photo));
         }
     }
 }
