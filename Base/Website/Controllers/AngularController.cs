@@ -23,7 +23,7 @@ namespace Website.Controllers
         {
             var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
             var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, user, loadRequest, Group);
-            return Json(loadResponseBuilder.Build());
+            return JsonSuccess(loadResponseBuilder.Build());
         }
 
         [Authorize]
@@ -32,7 +32,7 @@ namespace Website.Controllers
         {
             var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
             var saveResponseBuilder = new SaveResponseBuilder(this.AllorsSession, user, saveRequest, Group);
-            return Json(saveResponseBuilder.Build());
+            return JsonSuccess(saveResponseBuilder.Build());
         }
 
         [Authorize]
@@ -41,8 +41,18 @@ namespace Website.Controllers
         {
             var responseBuilder = new ResponseBuilder();
             responseBuilder.Add("root", this.AuthenticatedUser, PersonClass.Instance.AngularHome);
-            return Json(responseBuilder.Build());
+            return JsonSuccess(responseBuilder.Build());
         }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Person()
+        {
+            var responseBuilder = new ResponseBuilder();
+            responseBuilder.Add("root", this.AuthenticatedUser, PersonClass.Instance.AngularPerson);
+            return JsonSuccess(responseBuilder.Build());
+        }
+
 
         [Authorize]
         [HttpPost]
@@ -51,7 +61,7 @@ namespace Website.Controllers
             var responseBuilder = new ResponseBuilder();
             var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
             responseBuilder.Add("root", organisation, OrganisationClass.Instance.AngularEmployees);
-            return Json(responseBuilder.Build());
+            return JsonSuccess(responseBuilder.Build());
         }
 
         [Authorize]
@@ -61,7 +71,7 @@ namespace Website.Controllers
             var responseBuilder = new ResponseBuilder();
             var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
             responseBuilder.Add("root", organisation, OrganisationClass.Instance.AngularShareholders);
-            return Json(responseBuilder.Build());
+            return JsonSuccess(responseBuilder.Build());
         }
     }
 }

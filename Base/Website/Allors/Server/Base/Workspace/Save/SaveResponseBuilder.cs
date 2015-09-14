@@ -26,14 +26,14 @@
         public SaveResponse Build()
         {
             // bulk load all objects
-            var objectIds = saveRequest.Objects.Select(v => v.Id).ToArray();
+            var objectIds = saveRequest.Objects.Select(v => v.I).ToArray();
             this.session.Instantiate(objectIds);
 
             var accessErrorRoleTypesByObject = new Dictionary<IObject, IList<RoleType>>();
 
             foreach (var saveRequestObject in saveRequest.Objects)
             {
-                var obj = this.session.Instantiate(saveRequestObject.Id);
+                var obj = this.session.Instantiate(saveRequestObject.I);
                 var composite = (Composite)obj.Strategy.Class;
                 var roleTypes = composite.RoleTypesByGroup[@group];
 
@@ -41,7 +41,7 @@
 
                 foreach (var saveRequestRole in saveRequestObject.Roles)
                 {
-                    var roleTypeName = saveRequestRole.RoleTypeName;
+                    var roleTypeName = saveRequestRole.T;
                     var roleType = roleTypes.FirstOrDefault(v => v.PropertyName.Equals(roleTypeName));
 
                     if (roleType != null)
@@ -50,14 +50,14 @@
                         {
                             if (roleType.ObjectType.IsUnit)
                             {
-                                var role = saveRequestRole.Set;
+                                var role = saveRequestRole.S;
                                 obj.Strategy.SetUnitRole(roleType, role);
                             }
                             else
                             {
                                 if (roleType.IsOne)
                                 {
-                                    var roleId = (string)saveRequestRole.Set;
+                                    var roleId = (string)saveRequestRole.S;
                                     if (string.IsNullOrEmpty(roleId))
                                     {
                                         obj.Strategy.RemoveCompositeRole(roleType);
@@ -73,9 +73,9 @@
                                 else
                                 {
                                     // Set
-                                    if (saveRequestRole.Set!=null)
+                                    if (saveRequestRole.S!=null)
                                     {
-                                        var roleIds = (string[])saveRequestRole.Set;
+                                        var roleIds = (string[])saveRequestRole.S;
                                         if (roleIds.Length == 0)
                                         {
                                             obj.Strategy.RemoveCompositeRole(roleType);
@@ -89,9 +89,9 @@
                                     }
 
                                     // Add
-                                    if (saveRequestRole.Add != null)
+                                    if (saveRequestRole.A != null)
                                     {
-                                        var roleIds = saveRequestRole.Add;
+                                        var roleIds = saveRequestRole.A;
                                         if (roleIds.Length != 0)
                                         {
                                             var roles = this.session.Instantiate(roleIds);
@@ -106,9 +106,9 @@
                                     }
 
                                     // Remove
-                                    if (saveRequestRole.Remove != null)
+                                    if (saveRequestRole.R != null)
                                     {
-                                        var roleIds = saveRequestRole.Remove;
+                                        var roleIds = saveRequestRole.R;
                                         if (roleIds.Length != 0)
                                         {
                                             var roles = this.session.Instantiate(roleIds);
@@ -212,7 +212,7 @@
 
             return messagesByRoleTypeByObject.Select(kv => new SaveResponseObject
             {
-                Id = kv.Key.Id.ToString(),
+                I = kv.Key.Id.ToString(),
                 Roles = kv.Value.Select(kv2 => new SaveResponseRole
                 {
                     Name = kv2.Key.PropertyName,

@@ -1,4 +1,6 @@
-﻿namespace Website.Controllers
+﻿using Allors.Domain;
+
+namespace Website.Controllers
 {
     using System;
     using System.Configuration;
@@ -96,13 +98,29 @@
             {
                 new Setup(session, new DirectoryInfo(dataPath)).Apply();
 
-                session.Derive();
+                var administrator = new UserGroups(session).Administrators;
+
+                var koen = new PersonBuilder(session)
+                    .WithFirstName("John")
+                    .WithLastName("Doe")
+                    .WithUserName("john@doe.com")
+                    .WithUserPasswordHash("AE9dXDanpvHfD2+eaJi0KSyQ+Awb3m1ixg9ujfK5YJSzZlblxz8+ihVE4aN3QeaIsQ==")  // abc123
+                    .Build();
+
+                administrator.AddMember(koen);
+
+                var acme = new OrganisationBuilder(session)
+                    .WithName("Acme")
+                    .WithOwner(koen)
+                    .WithEmployee(koen)
+                    .Build();
+
+                session.Derive(true);
                 session.Commit();
             }
 
 
             return this.View("Index");
         }
-       
-    }
+}
 }

@@ -35,14 +35,14 @@ namespace Controllers.Workspace
                 Objects = new[] {
                     new SaveRequestObject
                     {
-                        Id = c1a.Id.ToString(),
-                        Version = c1a.Strategy.ObjectVersion.ToString(),
+                        I = c1a.Id.ToString(),
+                        V = c1a.Strategy.ObjectVersion.ToString(),
                         Roles = new List<SaveRequestRole>
                         {
                             new SaveRequestRole
                             {
-                                RoleTypeName = "C1AllorsString",
-                                Set = "new c1"
+                                T = "C1AllorsString",
+                                S = "new c1"
                             }
                         }
                     }
@@ -83,14 +83,14 @@ namespace Controllers.Workspace
                 Objects = new[] {
                     new SaveRequestObject
                     {
-                        Id = c1a.Id.ToString(),
-                        Version = c1a.Strategy.ObjectVersion.ToString(),
+                        I = c1a.Id.ToString(),
+                        V = c1a.Strategy.ObjectVersion.ToString(),
                         Roles = new List<SaveRequestRole>
                         {
                             new SaveRequestRole
                             {
-                                RoleTypeName = "C1AllorsString",
-                                Set = "new c1"
+                                T = "C1AllorsString",
+                                S = "new c1"
                             }   
                         }
                     }
@@ -131,14 +131,14 @@ namespace Controllers.Workspace
                 Objects = new[] {
                     new SaveRequestObject
                     {
-                        Id = c1a.Id.ToString(),
-                        Version = c1a.Strategy.ObjectVersion.ToString(),
+                        I = c1a.Id.ToString(),
+                        V = c1a.Strategy.ObjectVersion.ToString(),
                         Roles = new List<SaveRequestRole>
                         {
                             new SaveRequestRole
                             {
-                                RoleTypeName = "C1C1One2One",
-                                Set = c1b.Id.ToString()
+                                T = "C1C1One2One",
+                                S = c1b.Id.ToString()
                             }
                         }
                     }
@@ -184,14 +184,14 @@ namespace Controllers.Workspace
                 Objects = new[] {
                     new SaveRequestObject
                     {
-                        Id = c1a.Id.ToString(),
-                        Version = c1a.Strategy.ObjectVersion.ToString(),
+                        I = c1a.Id.ToString(),
+                        V = c1a.Strategy.ObjectVersion.ToString(),
                         Roles = new List<SaveRequestRole>
                         {
                             new SaveRequestRole
                             {
-                                RoleTypeName = "C1C1One2Many",
-                                Set = new [] { c1c.Id.ToString() } 
+                                T = "C1C1One2Many",
+                                S = new [] { c1c.Id.ToString() } 
                             }
                         }
                     }
@@ -237,14 +237,14 @@ namespace Controllers.Workspace
                 Objects = new[] {
                     new SaveRequestObject
                     {
-                        Id = c1a.Id.ToString(),
-                        Version = c1a.Strategy.ObjectVersion.ToString(),
+                        I = c1a.Id.ToString(),
+                        V = c1a.Strategy.ObjectVersion.ToString(),
                         Roles = new List<SaveRequestRole>
                         {
                             new SaveRequestRole
                             {
-                                RoleTypeName = "C1C1One2Many",
-                                Add = new [] { c1c.Id.ToString() }
+                                T = "C1C1One2Many",
+                                A = new [] { c1c.Id.ToString() }
                             }
                         }
                     }
@@ -291,14 +291,14 @@ namespace Controllers.Workspace
                 Objects = new[] {
                     new SaveRequestObject
                     {
-                        Id = c1a.Id.ToString(),
-                        Version = c1a.Strategy.ObjectVersion.ToString(),
+                        I = c1a.Id.ToString(),
+                        V = c1a.Strategy.ObjectVersion.ToString(),
                         Roles = new List<SaveRequestRole>
                         {
                             new SaveRequestRole
                             {
-                                RoleTypeName = "C1C1One2Many",
-                                Remove = new [] { c1c.Id.ToString() }
+                                T = "C1C1One2Many",
+                                R = new [] { c1c.Id.ToString() }
                             }
                         }
                     }
@@ -318,6 +318,5 @@ namespace Controllers.Workspace
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new[] { c1b });
         }
-
     }
 }

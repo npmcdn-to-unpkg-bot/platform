@@ -3,7 +3,7 @@
     export class AllorsService {
         database : Allors.Database;
 
-        static $inject = ["$http","$q"];
+        static $inject = ["$http", "$q","$rootScope"];
         constructor(private $http: ng.IHttpService, private $q: ng.IQService) {
             this.database = new Allors.Database(Allors.Meta.population);
         }
@@ -46,6 +46,5 @@
     angular
         .module("app")
         .service("allorsService",
-            AllorsService);
-
+        AllorsService);
 }

@@ -1,22 +1,42 @@
-﻿module App.Organisation {
-    interface IOrganisationModel {
-        title: string;
+﻿module App.Person {
+    interface IPersonModel {
+        root: Allors.Domain.Person;
     }
 
-    interface IOrganisationState extends ng.ui.IState {
+    interface IPersonState extends ng.ui.IState {
     }
 
-    class OrganisationController implements IOrganisationModel {
-        title: string;
+    class PersonController implements IPersonModel {
 
-        static $inject = ["$state", "allorsService"];
-        constructor(private $state: IOrganisationState, private allorsService: App.Common.Services.AllorsService) {
-            this.title = "Organisation";
+        public root: Allors.Domain.Person;
+        private context: Allors.Context;
+
+        static $inject = ["$rootScope", "$scope", "$http", "allorsService"];
+        constructor(private $rootScope: ng.IRootScopeService, private $scope: ng.IScope, private $http: ng.IHttpService, private allorsService: App.Common.Services.AllorsService) {
+            this.refresh();
+            this.$scope.$on("refresh", () => { this.refresh() });
+        }
+
+        public save(): void {
+            var save = this.context.workspace.save();
+            this.$http.post('/Angular/Save', { objects: save.objects}).then(response => {
+                this.$rootScope.$broadcast("refresh");
+            });
+        }
+
+        private refresh(): void {
+            this.$http.post('/Angular/Person', {}).then(response => {
+                this.allorsService.load(<Allors.Data.Response>response.data)
+                    .then(context => {
+                        this.context = context;
+                        this.root = <Allors.Domain.Person>context.objectByName["root"];
+                    });
+            });
         }
     }
     angular
         .module("app")
-        .controller("organisationController",
-            OrganisationController);
+        .controller("personController",
+            PersonController);
 
 }

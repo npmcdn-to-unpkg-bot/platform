@@ -31,9 +31,9 @@
             {
                 Objects = objects.Select(x => new LoadResponseObject
                 {
-                    Id = x.Id.ToString(),
-                    Version = x.Strategy.ObjectVersion.ToString(),
-                    ObjectType = x.Strategy.Class.Name,
+                    I = x.Id.ToString(),
+                    V = x.Strategy.ObjectVersion.ToString(),
+                    T = x.Strategy.Class.Name,
                     Roles = GetRoles(x),
                 }).ToArray() 
             };

@@ -149,7 +149,9 @@ namespace Allors.Meta
 
 	    public Tree AngularHome { get; private set; }
 
-	    internal override void TestExtend()
+        public Tree AngularPerson { get; private set; }
+
+        internal override void TestExtend()
 	    {
 	        var person = this;
 
@@ -158,8 +160,12 @@ namespace Allors.Meta
             this.MiddleName.AddGroup(Groups.Workspace);
 
             this.AngularHome = new Tree(person)
-                .Add(person.Photo.RoleType);
-         
-	    }
-	}
+                .Add(person.Photo);
+
+            this.AngularPerson= new Tree(person)
+                .Add(person.FirstName)
+                .Add(person.LastName);
+
+        }
+    }
 }

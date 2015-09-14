@@ -18,6 +18,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Allors.Domain;
+
 namespace Allors
 {
     public partial class Setup

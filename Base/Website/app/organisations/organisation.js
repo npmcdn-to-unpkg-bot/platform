@@ -1,19 +1,19 @@
 var App;
 (function (App) {
-    var Main;
-    (function (Main) {
-        var MainController = (function () {
-            function MainController($state, allorsService) {
+    var Organisation;
+    (function (Organisation) {
+        var OrganisationController = (function () {
+            function OrganisationController($state, allorsService) {
                 this.$state = $state;
                 this.allorsService = allorsService;
-                this.title = "Main";
+                this.title = "Organisation";
             }
-            MainController.$inject = ["$state", "allorsService"];
-            return MainController;
+            OrganisationController.$inject = ["$state", "allorsService"];
+            return OrganisationController;
         })();
         angular
             .module("app")
-            .controller("mainController", MainController);
-    })(Main = App.Main || (App.Main = {}));
+            .controller("organisationController", OrganisationController);
+    })(Organisation = App.Organisation || (App.Organisation = {}));
 })(App || (App = {}));
 //# sourceMappingURL=organisation.js.map

@@ -12,7 +12,7 @@
  
         static $inject = ["$state", "allorsService"];
 		constructor(private $state: IHomeState, private allorsService: App.Common.Services.AllorsService) {
-			this.title = "Home";
+            this.title = "Home";
         }
     }
     angular

@@ -4,14 +4,20 @@ namespace Allors.Web.Workspace
 {
 public class LoadResponseObject
     {
-        [JsonProperty(PropertyName = "i")]
-        public string Id { get; set; }
+        /// <summary>
+        /// The id.
+        /// </summary>
+        public string I { get; set; }
 
-        [JsonProperty(PropertyName = "v")]
-        public string Version { get; set; }
+        /// <summary>
+        /// The version.
+        /// </summary>
+        public string V { get; set; }
 
-        [JsonProperty(PropertyName = "t")]
-        public string ObjectType { get; set; }
+        /// <summary>
+        /// The object type.
+        /// </summary>
+        public string T { get; set; }
 
         public object[][] Roles { get; set; }
     }

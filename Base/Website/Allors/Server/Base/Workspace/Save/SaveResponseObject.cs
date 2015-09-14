@@ -4,8 +4,10 @@ namespace Allors.Web.Workspace
 {
     public class SaveResponseObject
     {
-        [JsonProperty(PropertyName = "i")]
-        public string Id { get; set; }
+        /// <summary>
+        /// The id.
+        /// </summary>
+        public string I { get; set; }
 
         public SaveResponseRole[] Roles { get; set; }
     }

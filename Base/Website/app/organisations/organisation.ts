@@ -1,22 +1,22 @@
-﻿module App.Main {
-    interface IMainModel {
+﻿module App.Organisation {
+    interface IOrganisationModel {
         title: string;
     }
 
-    interface IMainState extends ng.ui.IState {
+    interface IOrganisationState extends ng.ui.IState {
     }
 
-    class MainController implements IMainModel {
+    class OrganisationController implements IOrganisationModel {
         title: string;
 
         static $inject = ["$state", "allorsService"];
-        constructor(private $state: IMainState, private allorsService: App.Common.Services.AllorsService) {
-            this.title = "Main";
+        constructor(private $state: IOrganisationState, private allorsService: App.Common.Services.AllorsService) {
+            this.title = "Organisation";
         }
     }
     angular
         .module("app")
-        .controller("mainController",
-            MainController);
+        .controller("organisationController",
+            OrganisationController);
 
 }

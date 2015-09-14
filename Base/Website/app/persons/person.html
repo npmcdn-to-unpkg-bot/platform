@@ -1,6 +1,18 @@
 ﻿<div class="container">
     <div class="row">
-        Person
+        
+        <form>
+            <div class="form-group">
+                <label>Firstname</label>
+                <input class="form-control" placeholder="Firstname" ng-model="vm.root.FirstName">
+            </div>
+            <div class="form-group">
+                <label>Lastname</label>
+                <input class="form-control" placeholder="Lastname" ng-model="vm.root.LastName">
+            </div>
+            <input type="button" class="btn btn-success" value="Save" ng-click="vm.save()" />
+        </form>
+
     </div>
 </div>
 

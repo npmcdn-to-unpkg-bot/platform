@@ -4,16 +4,24 @@ namespace Allors.Web.Workspace
 {
     public class SaveRequestRole
     {
-        [JsonProperty(PropertyName = "t")]
-        public string RoleTypeName { get; set; }
+        /// <summary>
+        /// The role type.
+        /// </summary>
+        public string T { get; set; }
 
-        [JsonProperty(PropertyName = "s")]
-        public object Set { get; set; }
+        /// <summary>
+        /// The set role.
+        /// </summary>
+        public object S { get; set; }
 
-        [JsonProperty(PropertyName = "a")]
-        public string[] Add { get; set; }
+        /// <summary>
+        /// The add roles.
+        /// </summary>
+        public string[] A { get; set; }
 
-        [JsonProperty(PropertyName = "r")]
-        public string[] Remove { get; set; }
+        /// <summary>
+        /// The remove roles.
+        /// </summary>
+        public string[] R { get; set; }
     }
 }

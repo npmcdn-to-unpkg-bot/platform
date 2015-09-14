@@ -34,7 +34,7 @@ var App;
                     });
                     return new Allors.Context(workspace, objectByName);
                 };
-                AllorsService.$inject = ["$http", "$q"];
+                AllorsService.$inject = ["$http", "$q", "$rootScope"];
                 return AllorsService;
             })();
             Services.AllorsService = AllorsService;
