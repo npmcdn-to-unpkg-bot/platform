@@ -7,8 +7,7 @@ namespace Allors.Meta
 	#endregion
 	[Inherit(typeof(UniquelyIdentifiableInterface))]
 	[Inherit(typeof(AccessControlledObjectInterface))]
-
-	[Plural("Organisations")]
+    [Plural("Organisations")]
 	public partial class OrganisationClass : Class
 	{
         [Id("CBF9121E-A5E5-45C6-99FE-52FA80DC3220")]

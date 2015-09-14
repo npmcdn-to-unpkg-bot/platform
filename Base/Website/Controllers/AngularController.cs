@@ -28,6 +28,15 @@ namespace Website.Controllers
 
         [Authorize]
         [HttpPost]
+        public ActionResult Save(SaveRequest saveRequest)
+        {
+            var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
+            var saveResponseBuilder = new SaveResponseBuilder(this.AllorsSession, user, saveRequest, Group);
+            return Json(saveResponseBuilder.Build());
+        }
+
+        [Authorize]
+        [HttpPost]
         public ActionResult Main()
         {
             var responseBuilder = new ResponseBuilder();

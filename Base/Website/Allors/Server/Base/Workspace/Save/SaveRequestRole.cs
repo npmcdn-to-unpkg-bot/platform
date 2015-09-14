@@ -8,7 +8,7 @@ namespace Allors.Web.Workspace
         public string RoleTypeName { get; set; }
 
         [JsonProperty(PropertyName = "s")]
-        public string Set { get; set; }
+        public object Set { get; set; }
 
         [JsonProperty(PropertyName = "a")]
         public string[] Add { get; set; }

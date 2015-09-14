@@ -66,7 +66,8 @@ namespace Allors.Meta
 		[Type(typeof(C1Class))]
 		[Plural("C1One2Ones")]
 		[Multiplicity(Multiplicity.OneToOne)]
-		public RelationType C1One2One;
+        [Group(Groups.Workspace)]
+        public RelationType C1One2One;
 
 		#region Allors
 		[Id("7bb216f2-8e9c-4dcd-890b-579130ab0a8b")]
@@ -173,7 +174,8 @@ namespace Allors.Meta
 		[Type(typeof(C1Class))]
 		[Plural("C1One2Manies")]
 		[Multiplicity(Multiplicity.OneToMany)]
-		public RelationType C1One2Many;
+        [Group(Groups.Workspace)]
+        public RelationType C1One2Many;
 
 		#region Allors
 		[Id("a64abd21-dadf-483d-9499-d19aa8e33791")]

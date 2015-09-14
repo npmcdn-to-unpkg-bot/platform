@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Allors.Web.Workspace
 {
@@ -10,6 +11,6 @@ namespace Allors.Web.Workspace
         [JsonProperty(PropertyName = "v")]
         public string Version { get; set; }
 
-        public SaveRequestRole Roles { get; set; }
+        public IList<SaveRequestRole> Roles { get; set; }
     }
 }

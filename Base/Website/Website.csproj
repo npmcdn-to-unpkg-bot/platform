@@ -250,9 +250,14 @@
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\ResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Response.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseBuilder.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponse.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequest.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestRole.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseError.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseRole.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseObject.cs" />
     <Compile Include="Allors\Server\Tests\Organisation\Command.cs" />
     <Compile Include="Allors\Server\Tests\Organisation\Models\Add\Add.cs" />
     <Compile Include="Allors\Server\Tests\Organisation\Models\Edit\Edit.cs" />
@@ -284,6 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Allors\Client\Base\Context.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\SaveResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Media.g.ts" />
@@ -472,6 +478,7 @@
     <Content Include="Allors\Server\Tests\Shared\Error.cshtml" />
     <Content Include="Allors\Server\Tests\Shared\Lockout.cshtml" />
     <Content Include="Allors\Server\_ViewStart.cshtml" />
+    <Content Include="Allors\Server\Base\Workspace\Save\SaveResponseError.cd" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
