@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="C1.cs" company="Allors bvba">
+// <copyright file="C1s.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,34 +20,16 @@
 
 namespace Allors.Domain
 {
-    using global::System.Collections.Generic;
-
-    using Allors;
-
-    public partial class C1
+    public partial class C1s
     {
-        public void TestOnPreDerive(ObjectOnPreDerive method)
+        protected override void TestSecure(Security config)
         {
-            var derivation = method.Derivation;
-            foreach (Object dependency in this.Dependencies)
-            {
-                derivation.AddDependency(this, dependency);
-            }
-        }
+            base.BaseSecure(config);
 
-        public void TestOnDerive(ObjectOnDerive method)
-        {
-            var derivation = method.Derivation;
-            var sequence = (IList<IObject>)derivation["sequence"];
-            if (sequence != null)
-            {
-                sequence.Add(this);
-            }
-        }
+            var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 
-        public void TestsSum(C1Sum method)
-        {
-            method.result = method.a + method.b;
+            config.GrantAdministrator(this.ObjectType, full);
+            config.GrantGuest(this.ObjectType, Operation.Read);
         }
     }
 }

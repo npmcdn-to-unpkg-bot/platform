@@ -153,6 +153,10 @@ namespace Allors.Meta
 	    {
 	        var person = this;
 
+            this.FirstName.AddGroup(Groups.Workspace);
+            this.LastName.AddGroup(Groups.Workspace);
+            this.MiddleName.AddGroup(Groups.Workspace);
+
             this.AngularHome = new Tree(person)
                 .Add(person.Photo.RoleType);
          

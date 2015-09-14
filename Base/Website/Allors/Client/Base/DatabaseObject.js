@@ -9,7 +9,16 @@ var Allors;
             this.t = loadObject.t;
             this.roles = {};
             _.forEach(loadObject.roles, function (role) {
-                _this.roles[role[0]] = role[1];
+                var name = role[0];
+                var access = role[1];
+                var canRead = access.indexOf('r') !== -1;
+                var canWrite = access.indexOf('w') !== -1;
+                _this.roles["CanRead" + name] = canRead;
+                _this.roles["CanWrite" + name] = canWrite;
+                if (canRead) {
+                    var value = role[2];
+                    _this.roles[name] = value;
+                }
             });
         }
         Object.defineProperty(DatabaseObject.prototype, "id", {

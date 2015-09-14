@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class Units
     {
-        protected override void TestsSecure(Security config)
+        protected override void TestSecure(Security config)
         {
-            base.TestsSecure(config);
+            base.TestSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
             config.GrantAdministrator(this.ObjectType, full);

@@ -158,6 +158,7 @@
     <Compile Include="Generated\Unit.g.cs" />
     <Compile Include="Generated\User.g.cs" />
     <Compile Include="Generated\UserGroup.g.cs" />
+    <Compile Include="Test\Combinations\C1s.cs" />
     <Compile Include="Test\Combinations\C1.cs" />
     <Compile Include="Test\Combinations\C2.cs" />
     <Compile Include="Test\Common\Singletons.cs" />

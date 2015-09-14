@@ -22,7 +22,6 @@ namespace Allors.Meta
 		[Indexed]
 		[Type(typeof(AllorsStringUnit))]
 		[Size(-1)]
-		[Plural("Informations")]
 		public RelationType Information;
 
 		#region Allors
@@ -32,9 +31,9 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(PersonClass))]
-		[Plural("Shareholders")]
 		[Multiplicity(Multiplicity.ManyToMany)]
-		public RelationType Shareholder;
+        [Group(Groups.Workspace)]
+        public RelationType Shareholder;
 
 		#region Allors
 		[Id("17e55fcd-2c82-462b-8e31-b4a515acdaa9")]
@@ -54,7 +53,7 @@ namespace Allors.Meta
 		[Indexed]
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
-		[Plural("Names")]
+        [Group(Groups.Workspace)]
 		public RelationType Name;
 
 		#region Allors
@@ -64,7 +63,6 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(-1)]
-		[Plural("Descriptions")]
 		public RelationType Description;
 
 		#region Allors
@@ -73,9 +71,9 @@ namespace Allors.Meta
 		[RoleId("b95c7b34-a295-4600-82c8-826cc2186a00")]
 		#endregion
 		[Type(typeof(PersonClass))]
-		[Plural("Employees")]
 		[Multiplicity(Multiplicity.OneToMany)]
-		public RelationType Employee;
+        [Group(Groups.Workspace)]
+        public RelationType Employee;
 
 		#region Allors
 		[Id("5fa25b53-e2a7-44c8-b6ff-f9575abb911d")]
@@ -83,7 +81,6 @@ namespace Allors.Meta
 		[RoleId("1c3dec18-978c-470a-8857-5210b9267185")]
 		#endregion
 		[Type(typeof(AllorsBooleanUnit))]
-		[Plural("Incorporateds")]
 		public RelationType Incorporated;
 
 		#region Allors
@@ -101,7 +98,6 @@ namespace Allors.Meta
 		[RoleId("c84a6696-a1e9-4794-86c3-50e1f009c845")]
 		#endregion
 		[Type(typeof(AllorsDateTimeUnit))]
-		[Plural("IncorporationDates")]
 		public RelationType IncorporationDate;
 
 		#region Allors
@@ -123,7 +119,8 @@ namespace Allors.Meta
 		[Indexed]
 		[Type(typeof(PersonClass))]
 		[Multiplicity(Multiplicity.OneToOne)]
-		public RelationType Owner;
+        [Group(Groups.Workspace)]
+        public RelationType Owner;
 
         #region Allors
         [Id("DBEF262D-7184-4B98-8F1F-CF04E884BB92")]
@@ -133,6 +130,7 @@ namespace Allors.Meta
         [Indexed]
         [Type(typeof(PersonClass))]
         [Multiplicity(Multiplicity.OneToOne)]
+        [Group(Groups.Workspace)]
         public RelationType Manager;
 
         #region Allors
@@ -142,7 +140,6 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(ImageClass))]
-		[Plural("Logos")]
 		[Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType Logo;
 
@@ -153,7 +150,6 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
-		[Plural("Sizes")]
 		public RelationType Size;
 
 		#region Allors
@@ -163,8 +159,7 @@ namespace Allors.Meta
 		#endregion
 		[Indexed]
 		[Type(typeof(AddressInterface))]
-		[Plural("MainAddresses")]
-		[Multiplicity(Multiplicity.ManyToOne)]
+        [Multiplicity(Multiplicity.ManyToOne)]
 		public RelationType MainAddress;
         
 		public static OrganisationClass Instance {get; internal set;}

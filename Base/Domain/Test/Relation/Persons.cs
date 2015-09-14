@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Persons
     {
-        protected override void TestsPrepare(Setup setup)
+        protected override void TestPrepare(Setup setup)
         {
             setup.AddDependency(Meta.ObjectType, Singletons.Meta.ObjectType);
         }

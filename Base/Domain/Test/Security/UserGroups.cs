@@ -64,9 +64,9 @@ namespace Allors.Domain
             get { return this.Cache.Get(ProcurementId); }
         }
 
-        protected override void TestsSetup(Setup setup)
+        protected override void TestSetup(Setup setup)
         {
-            base.TestsSetup(setup);
+            base.TestSetup(setup);
 
             new UserGroupBuilder(Session).WithName("operations").WithUniqueId(OperationsId).WithRole(new Roles(Session).Operations).Build();
             new UserGroupBuilder(Session).WithName("sales").WithUniqueId(SalesId).WithRole(new Roles(Session).Sales).Build();

@@ -21,7 +21,8 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Load(LoadRequest loadRequest)
         {
-            var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, loadRequest, Group);
+            var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
+            var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, user, loadRequest, Group);
             return Json(loadResponseBuilder.Build());
         }
 

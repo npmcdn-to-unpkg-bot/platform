@@ -60,7 +60,7 @@ namespace Allors.Web.Mvc
         {
             get
             {
-                if (this.authenticatedUser == null)
+                if (this.authenticatedUser == null && this.User != null)
                 {
                     var userName = this.User.Identity.Name;
 

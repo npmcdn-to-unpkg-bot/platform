@@ -7,8 +7,8 @@
                 v: "1001",
                 t: "Person",
                 roles: [
-                    ["FirstName", "Koen"],
-                    ["LastName", "Van Exem"]
+                    ["FirstName","rw" , "Koen"],
+                    ["LastName", "rw", "Van Exem"]
                 ]
             },
             {
@@ -16,8 +16,8 @@
                 v: "1002",
                 t: "Person",
                 roles: [
-                    ["FirstName", "Patrick"],
-                    ["LastName", "De Boeck"]
+                    ["FirstName", "rw", "Patrick"],
+                    ["LastName", "rw", "De Boeck"]
                 ]
             },
             {
@@ -25,8 +25,8 @@
                 v: "1003",
                 t: "Person",
                 roles: [
-                    ["FirstName", "Martien"],
-                    ["LastName", "van Knippenberg"]
+                    ["FirstName", "rw", "Martien"],
+                    ["LastName", "rw", "van Knippenberg"]
                 ]
             },
             {
@@ -34,9 +34,9 @@
                 v: "1101",
                 t: "Organisation",
                 roles: [
-                    ["Name", "Acme"],
-                    ["Owner", "1"],
-                    ["Employees", ["1","2","3"]]
+                    ["Name", "rw", "Acme"],
+                    ["Owner", "rw", "1"],
+                    ["Employees", "rw", ["1", "2", "3"]]
                 ]
             },
             {
@@ -44,9 +44,9 @@
                 v: "1102",
                 t: "Organisation",
                 roles: [
-                    ["Name", "Ocme"],
-                    ["Owner", "2"],
-                    ["Employees", ["1"]]
+                    ["Name", "rw", "Ocme"],
+                    ["Owner", "rw", "2"],
+                    ["Employees", "rw", ["1"]]
                 ]
             },
             {
@@ -54,8 +54,8 @@
                 v: "1103",
                 t: "Organisation",
                 roles: [
-                    ["Name", "icme"],
-                    ["Owner", "3"]
+                    ["Name", "rw", "icme"],
+                    ["Owner", "rw", "3"]
                 ]
             }
         ]

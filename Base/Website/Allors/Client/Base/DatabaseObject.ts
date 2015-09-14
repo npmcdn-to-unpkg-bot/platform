@@ -15,7 +15,19 @@
             this.roles = {};
 
             _.forEach(loadObject.roles, role => {
-                this.roles[role[0]] = role[1];
+                var name = role[0];
+                var access = role[1];
+                var canRead = access.indexOf('r') !== -1;
+                var canWrite = access.indexOf('w') !== -1;
+
+                this.roles["CanRead" + name] = canRead;
+                this.roles["CanWrite" + name] = canWrite;
+
+                if (canRead) {
+                    var value = role[2];
+                    this.roles[name] = value;
+                }
+
             });
         }
 

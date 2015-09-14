@@ -24,15 +24,15 @@ namespace Allors
 
     public abstract partial class ObjectsBase<T> 
     {
-        protected virtual void TestsPrepare(Setup setup)
+        protected virtual void TestPrepare(Setup setup)
         {
         }
 
-        protected virtual void TestsSetup(Setup setup)
+        protected virtual void TestSetup(Setup setup)
         {
         }
 
-        protected virtual void TestsSecure(Security security)
+        protected virtual void TestSecure(Security security)
         {
         }
     }

@@ -1,9 +1,9 @@
 ﻿"use strict";
 
-/// <reference path="../Scripts/lodash.js" />
+/// <reference path="/Scripts/lodash.js" />
 
 /// <reference path="../Allors/Client/Base/Database.js" />
-/// <reference path="../Allors/Client/Base/DatabaseObject.js" />
+/// <reference path="./Allors/Client/Base/DatabaseObject.js" />
 /// <reference path="../Allors/Client/Base/WorkspaceObject.js" />
 /// <reference path="../Allors/Client/Base/Workspace.js" />
 /// <reference path="../Allors/Client/Base/ObjectType.js" />
@@ -17,6 +17,9 @@
 /// <reference path="../Allors/Client/Base/Data/SaveRequest.js" />
 
 /// <reference path="../Allors/Client/Generated/meta/meta.g.js" />
+/// <reference path="../Allors/Client/Generated/domain/c1.g.js" />
+/// <reference path="../Allors/Client/Generated/domain/i1.g.js" />
+/// <reference path="../Allors/Client/Generated/domain/media.g.js" />
 /// <reference path="../Allors/Client/Generated/domain/organisation.g.js" />
 /// <reference path="../Allors/Client/Generated/domain/person.g.js" />
 
