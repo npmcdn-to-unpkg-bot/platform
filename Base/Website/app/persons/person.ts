@@ -18,8 +18,8 @@
         }
 
         public save(): void {
-            var save = this.context.workspace.save();
-            this.$http.post('/Angular/Save', { objects: save.objects}).then(response => {
+            var saveRequest = this.context.workspace.save();
+            this.$http.post('/Angular/Save', { objects: saveRequest.objects}).then(response => {
                 this.$rootScope.$broadcast("refresh");
             });
         }

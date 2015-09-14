@@ -19,6 +19,7 @@ var App;
                         .then(function (context) {
                         _this.context = context;
                         _this.root = context.objectByName["root"];
+                        _this.company = context.objectByName["company"];
                     });
                 });
             };

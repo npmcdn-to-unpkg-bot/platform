@@ -14,8 +14,8 @@ var App;
             }
             PersonController.prototype.save = function () {
                 var _this = this;
-                var save = this.context.workspace.save();
-                this.$http.post('/Angular/Save', { objects: save.objects }).then(function (response) {
+                var saveRequest = this.context.workspace.save();
+                this.$http.post('/Angular/Save', { objects: saveRequest.objects }).then(function (response) {
                     _this.$rootScope.$broadcast("refresh");
                 });
             };

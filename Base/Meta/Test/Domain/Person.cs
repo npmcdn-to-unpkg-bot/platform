@@ -123,7 +123,7 @@ namespace Allors.Meta
 		[Type(typeof(AllorsDecimalUnit))]
 		[Precision(19)]
 		[Scale(2)]
-		public RelationType Weight;
+        public RelationType Weight;
 
 		#region Allors
 		[Id("b3ddd2df-8a5a-4747-bd4f-1f1eb37386b3")]
@@ -134,7 +134,7 @@ namespace Allors.Meta
 		[Type(typeof(MediaClass))]
 		[Multiplicity(Multiplicity.ManyToOne)]
         [Group(Groups.Workspace)]
-		public RelationType Photo;
+        public RelationType Photo;
 
 		#region Allors
 		[Id("e9e7c874-4d94-42ff-a4c9-414d05ff9533")]
@@ -145,7 +145,7 @@ namespace Allors.Meta
 		[Type(typeof(AddressInterface))]
 		[Plural("Addresses")]
 		[Multiplicity(Multiplicity.ManyToMany)]
-		public RelationType Address;
+        public RelationType Address;
 
 	    public Tree AngularHome { get; private set; }
 

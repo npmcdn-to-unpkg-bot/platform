@@ -6,6 +6,7 @@
     class MainController {
 
         public root: Allors.Domain.Person;
+        public company: Allors.Domain.Organisation;
         private context: Allors.Context;
 
         static $inject = ["$rootScope", "$scope", "$http", "allorsService"];
@@ -20,6 +21,7 @@
                     .then(context => {
                         this.context = context;
                         this.root = <Allors.Domain.Person>context.objectByName["root"];
+                        this.company = <Allors.Domain.Organisation>context.objectByName["company"];
                     });
             });
         }
