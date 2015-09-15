@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-
-namespace Allors.Web.Workspace
+﻿namespace Allors.Web.Workspace
 {
-public class LoadResponseObject
+    public class LoadResponseObject
     {
         /// <summary>
         /// The id.

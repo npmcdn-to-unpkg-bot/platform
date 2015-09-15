@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 namespace Allors.Web.Workspace
 {
     public class SaveResponseObject

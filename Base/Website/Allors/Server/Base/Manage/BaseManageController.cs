@@ -11,8 +11,6 @@
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
 
-    using Website.Controllers;
-
     [Authorize]
     public abstract class BaseManageController : Controller
     {
@@ -307,7 +305,7 @@
         public virtual ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, this.Url.Action("LinkLoginCallback", "Manage"), this.User.Identity.GetUserId());
+            return new ChallengeResult(provider, this.Url.Action("LinkLoginCallback", "Manage"), this.User.Identity.GetUserId());
         }
 
         //

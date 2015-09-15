@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Allors.Web.Workspace
+﻿namespace Allors.Web.Workspace
 {
     public class SaveResponse
     {
