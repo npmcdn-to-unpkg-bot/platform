@@ -28,7 +28,7 @@ namespace Allors.Domain
 					global::System.Guid? UniqueId {set;}
 
 	}
-	public interface Enumeration  : Object, UniquelyIdentifiable, AccessControlledObject 
+	public interface Enumeration  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					LocalisedText LocalisedNames {set;}
 
@@ -37,7 +37,7 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface I1  : Object, S1, I12 
+	public interface I1  : Object, I12, S1 
 	{
 					I1 I1I1Many2One {set;}
 
@@ -235,7 +235,7 @@ namespace Allors.Domain
 					global::System.DateTime? ThroughDate {set;}
 
 	}
-	public interface Printable  : Object, UniquelyIdentifiable, AccessControlledObject 
+	public interface Printable  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					global::System.String PrintContent {set;}
 
@@ -263,7 +263,7 @@ namespace Allors.Domain
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface User  : Object, Localised, SecurityTokenOwner, AccessControlledObject 
+	public interface User  : Object, AccessControlledObject, Localised, SecurityTokenOwner 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -274,7 +274,7 @@ namespace Allors.Domain
 					global::System.String UserPasswordHash {set;}
 
 	}
-	public interface AccessControl  : Object, Deletable, AccessControlledObject 
+	public interface AccessControl  : Object, AccessControlledObject, Deletable 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -537,7 +537,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface LocalisedText  : Object, AccessControlledObject, Localised 
+	public interface LocalisedText  : Object, Localised, AccessControlledObject 
 	{
 					global::System.String Text {set;}
 
@@ -556,7 +556,7 @@ namespace Allors.Domain
 					global::System.String PoBox {set;}
 
 	}
-	public interface Media  : Object, AccessControlledObject, Deletable, UniquelyIdentifiable 
+	public interface Media  : Object, Deletable, UniquelyIdentifiable, AccessControlledObject 
 	{
 					MediaType MediaType {set;}
 
@@ -577,7 +577,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Person  : Object, UniquelyIdentifiable, Deletable, Printable, User, AccessControlledObject 
+	public interface Person  : Object, AccessControlledObject, UniquelyIdentifiable, Deletable, User, Printable 
 	{
 					Address MainAddress {set;}
 
@@ -737,7 +737,7 @@ namespace Allors.Domain
 					Person Manager {set;}
 
 	}
-	public interface StringTemplate  : Object, UniquelyIdentifiable, Localised 
+	public interface StringTemplate  : Object, Localised, UniquelyIdentifiable 
 	{
 					global::System.String Body {set;}
 
@@ -797,7 +797,7 @@ namespace Allors.Domain
 					global::System.Decimal? AllorsDecimal {set;}
 
 	}
-	public interface UserGroup  : Object, UniquelyIdentifiable, AccessControlledObject 
+	public interface UserGroup  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					Role Role {set;}
 

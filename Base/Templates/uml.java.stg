@@ -4,13 +4,13 @@ TemplateId() ::= <<2BD69D34-4989-4DE2-93D6-0AF734BAEA06>>
 TemplateName() ::= <<Allors Java Uml>>
 TemplateVersion() ::= <<1.0.5>>
 TemplateAllors() ::= <<1.0>>
-TemplateConfiguration(domain) ::= <<
+TemplateConfiguration(domain, grp) ::= <<
 <generations>
-$domain.compositeObjectTypes:{type|<generation template="compositeObjectType" input="$type.Id $" output="$type.Namespace.SlashSeparatedLowerCaseLongName$/$type.SingularName$.java"/>}$
+$meta.compositeObjectTypes:{type|<generation template="compositeObjectType" input="$type.Id $" output="$type.Namespace.SlashSeparatedLowerCaseLongName$/$type.SingularName$.java"/>}$
 </generations>
 >>
 
-compositeObjectType(domain,objectType) ::= <<
+compositeObjectType(meta, grp, objectType) ::= <<
 package $objectType.Namespace.NameForJava$;
 
 $if(objectType.IsInterface)$

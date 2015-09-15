@@ -4,7 +4,7 @@ TemplateId() ::= <<FA2E53B4-915D-4227-8571-456FC8E04DB0>>
 TemplateName() ::= <<Allors C# Uml>>
 TemplateVersion() ::= <<1.0.23>>
 TemplateAllors() ::= <<1.0>>
-TemplateConfiguration(meta) ::= <<
+TemplateConfiguration(meta, grp) ::= <<
 $! 
 Copyright 2002-2013 Allors bvba.
 
@@ -27,7 +27,7 @@ For more information visit http://www.allors.com/legal
 </generations>
 >>
 
-domain(meta) ::= <<
+domain(meta, grp) ::= <<
 namespace Allors.Domain
 {
 $meta.Composites:{composite|$composite(meta=meta,composite=composite)$}$
