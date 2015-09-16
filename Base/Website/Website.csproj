@@ -290,7 +290,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Allors\Client\Base\Context.ts" />
+    <TypeScriptCompile Include="app\common\services\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Data\SaveResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />
@@ -480,7 +480,7 @@
     <Content Include="Allors\Server\Tests\Shared\Error.cshtml" />
     <Content Include="Allors\Server\Tests\Shared\Lockout.cshtml" />
     <Content Include="Allors\Server\_ViewStart.cshtml" />
-    <Content Include="Allors\Server\Base\Workspace\Save\SaveResponseError.cd" />
+    <Content Include="Allors\Server\Base\Workspace\Save\SaveResponse.cd" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

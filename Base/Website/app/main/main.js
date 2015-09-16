@@ -18,8 +18,7 @@ var App;
                     _this.allorsService.load(response.data)
                         .then(function (context) {
                         _this.context = context;
-                        _this.root = context.objectByName["root"];
-                        _this.company = context.objectByName["company"];
+                        _this.root = context.objects["root"];
                     });
                 });
             };

@@ -145,10 +145,10 @@
 
             var saveResponse = new SaveResponse
             {
-                Objects = GetObjects(derivationLog, accessErrorRoleTypesByObject)
+                Errors = GetObjects(derivationLog, accessErrorRoleTypesByObject)
             };
 
-            if (saveResponse.Objects.Length == 0)
+            if (saveResponse.Errors.Count == 0)
             {
                 this.session.Commit();
             }
@@ -156,7 +156,7 @@
             return saveResponse;
         }
 
-        private SaveResponseObject[] GetObjects(DerivationLog derivationLog, Dictionary<IObject, IList<RoleType>> accessErrorRoleTypesByObject)
+        private Dictionary<string, Dictionary<string, string[]>> GetObjects(DerivationLog derivationLog, Dictionary<IObject, IList<RoleType>> accessErrorRoleTypesByObject)
         {
             var messagesByRoleTypeByObject = new Dictionary<IObject, Dictionary<RoleType, List<string>>>();
 
@@ -208,17 +208,8 @@
                     messages.Add("Access error");
                 }
             }
-
-
-            return messagesByRoleTypeByObject.Select(kv => new SaveResponseObject
-            {
-                I = kv.Key.Id.ToString(),
-                Roles = kv.Value.Select(kv2 => new SaveResponseRole
-                {
-                    Name = kv2.Key.PropertyName,
-                    Messages = kv2.Value
-                }).ToArray()
-            }).ToArray();
+            
+            return messagesByRoleTypeByObject.ToDictionary(kvp => kvp.Key.Id.ToString(), kvp => kvp.Value.ToDictionary(kvp2 => kvp2.Key.PropertyName, kvp2=>kvp2.Value.ToArray()));
         }
     }
 }

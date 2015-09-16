@@ -40,7 +40,7 @@ namespace Website.Controllers
         public ActionResult Main()
         {
             var responseBuilder = new ResponseBuilder();
-            responseBuilder.Add("root", this.AuthenticatedUser, PersonClass.Instance.AngularHome);
+            responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularHome);
             return JsonSuccess(responseBuilder.Build());
         }
 
@@ -49,7 +49,7 @@ namespace Website.Controllers
         public ActionResult Person()
         {
             var responseBuilder = new ResponseBuilder();
-            responseBuilder.Add("root", this.AuthenticatedUser, PersonClass.Instance.AngularPerson);
+            responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularPerson);
             return JsonSuccess(responseBuilder.Build());
         }
 
@@ -60,7 +60,7 @@ namespace Website.Controllers
         {
             var responseBuilder = new ResponseBuilder();
             var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-            responseBuilder.Add("root", organisation, OrganisationClass.Instance.AngularEmployees);
+            responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularEmployees);
             return JsonSuccess(responseBuilder.Build());
         }
 
@@ -70,7 +70,7 @@ namespace Website.Controllers
         {
             var responseBuilder = new ResponseBuilder();
             var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-            responseBuilder.Add("root", organisation, OrganisationClass.Instance.AngularShareholders);
+            responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularShareholders);
             return JsonSuccess(responseBuilder.Build());
         }
     }

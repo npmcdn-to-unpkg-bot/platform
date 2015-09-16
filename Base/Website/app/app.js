@@ -10,7 +10,7 @@ var App;
             url: '/home',
             templateUrl: '/app/home/home.html',
             controller: 'homeController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
         })
             .state('organisation', {
             url: '/organisation',

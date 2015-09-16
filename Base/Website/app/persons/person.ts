@@ -9,6 +9,7 @@
     class PersonController implements IPersonModel {
 
         public root: Allors.Domain.Person;
+
         private context: Allors.Context;
 
         static $inject = ["$rootScope", "$scope", "$http", "allorsService"];
@@ -19,9 +20,13 @@
 
         public save(): void {
             var saveRequest = this.context.workspace.save();
-            this.$http.post('/Angular/Save', { objects: saveRequest.objects}).then(response => {
-                this.$rootScope.$broadcast("refresh");
-            });
+            this.$http.post('/Angular/Save', { objects: saveRequest.objects })
+                .then(saveResponse => {
+                    this.$rootScope.$broadcast("refresh");
+                })
+                .catch(saveResponse => {
+                    var errors = saveResponse;
+                });
         }
 
         private refresh(): void {
@@ -29,7 +34,7 @@
                 this.allorsService.load(<Allors.Data.Response>response.data)
                     .then(context => {
                         this.context = context;
-                        this.root = <Allors.Domain.Person>context.objectByName["root"];
+                        this.root = <Allors.Domain.Person>context.objects["root"];
                     });
             });
         }

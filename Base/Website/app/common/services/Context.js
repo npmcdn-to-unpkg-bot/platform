@@ -1,9 +1,11 @@
 var Allors;
 (function (Allors) {
     var Context = (function () {
-        function Context(workspace, objectByName) {
+        function Context(workspace, objects, collections, values) {
             this.workspace = workspace;
-            this.objectByName = objectByName;
+            this.objects = objects;
+            this.collections = collections;
+            this.values = values;
         }
         return Context;
     })();

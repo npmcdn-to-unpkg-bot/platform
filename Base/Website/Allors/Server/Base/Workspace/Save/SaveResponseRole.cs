@@ -4,7 +4,10 @@ namespace Allors.Web.Workspace
 {
     public class SaveResponseRole
     {
-        public string Name { get; set; }
+        /// <summary>
+        /// The role type;
+        /// </summary>
+        public string T { get; set; }
 
         public List<string> Messages { get; set; }
     }

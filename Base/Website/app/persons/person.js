@@ -15,8 +15,12 @@ var App;
             PersonController.prototype.save = function () {
                 var _this = this;
                 var saveRequest = this.context.workspace.save();
-                this.$http.post('/Angular/Save', { objects: saveRequest.objects }).then(function (response) {
+                this.$http.post('/Angular/Save', { objects: saveRequest.objects })
+                    .then(function (saveResponse) {
                     _this.$rootScope.$broadcast("refresh");
+                })
+                    .catch(function (saveResponse) {
+                    var errors = saveResponse;
                 });
             };
             PersonController.prototype.refresh = function () {
@@ -25,7 +29,7 @@ var App;
                     _this.allorsService.load(response.data)
                         .then(function (context) {
                         _this.context = context;
-                        _this.root = context.objectByName["root"];
+                        _this.root = context.objects["root"];
                     });
                 });
             };

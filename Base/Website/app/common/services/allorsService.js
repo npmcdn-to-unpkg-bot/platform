@@ -28,11 +28,20 @@ var App;
                 };
                 AllorsService.prototype.createContext = function (response) {
                     var workspace = new Allors.Workspace(this.database);
-                    var objectByName = {};
-                    _.map(response.namedObjects, function (v) {
-                        objectByName[v[0]] = workspace.get(v[1]);
+                    var namedObjects = {};
+                    _.map(response.namedObjects, function (v, k) {
+                        namedObjects[k] = workspace.get(v);
                     });
-                    return new Allors.Context(workspace, objectByName);
+                    var namedCollections = {};
+                    _.map(response.namedCollections, function (v, k) {
+                        namedCollections[k] = _.map(v, function (obj) { return workspace.get(obj); });
+                    });
+                    var namedValues = {};
+                    _.map(response.namedValues, function (v, k) {
+                        namedObjects[k] = v;
+                    });
+                    var context = new Allors.Context(workspace, namedObjects, namedCollections, namedValues);
+                    return context;
                 };
                 AllorsService.$inject = ["$http", "$q", "$rootScope"];
                 return AllorsService;

@@ -58,7 +58,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Objects.Length.ShouldEqual(1);
+            saveResponse.Errors.Count.ShouldEqual(1);
 
             c1a.C1AllorsString.ShouldEqual("c1");
         }
@@ -106,7 +106,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Objects.Length.ShouldEqual(0);
+            saveResponse.Errors.Count.ShouldEqual(0);
 
             c1a.C1AllorsString.ShouldEqual("new c1");
         }
@@ -154,7 +154,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Objects.Length.ShouldEqual(0);
+            saveResponse.Errors.Count.ShouldEqual(0);
 
             c1a.C1C1One2One.ShouldEqual(c1b);
         }
@@ -207,7 +207,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Objects.Length.ShouldEqual(0);
+            saveResponse.Errors.Count.ShouldEqual(0);
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new [] { c1c } );
         }
@@ -260,7 +260,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Objects.Length.ShouldEqual(0);
+            saveResponse.Errors.Count.ShouldEqual(0);
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new[] { c1b, c1c });
         }
@@ -314,7 +314,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Objects.Length.ShouldEqual(0);
+            saveResponse.Errors.Count.ShouldEqual(0);
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new[] { c1b });
         }

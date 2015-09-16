@@ -41,12 +41,10 @@ namespace Controllers.Workspace
             obj[0].ShouldEqual(user.Id.ToString());
             obj[1].ShouldEqual(user.Strategy.ObjectVersion.ToString());
 
-            response.NamedObjects.Length.ShouldEqual(1);
+            response.NamedObjects.Count.ShouldEqual(1);
 
-            var namedObject = response.NamedObjects[0];
-            namedObject[0].ShouldEqual("root");
-            namedObject[1].ShouldEqual(user.Id.ToString());
-
+            var namedObject = response.NamedObjects["root"];
+            namedObject.ShouldEqual(user.Id.ToString());
         }
 
         [Test]
@@ -89,12 +87,10 @@ namespace Controllers.Workspace
             var mediaObject = response.Objects.First(v => v[0].Equals(media.Id.ToString()));
             mediaObject[1].ShouldEqual(media.Strategy.ObjectVersion.ToString());
 
-            response.NamedObjects.Length.ShouldEqual(1);
+            response.NamedObjects.Count.ShouldEqual(1);
 
-            var namedObject = response.NamedObjects[0];
-            namedObject[0].ShouldEqual("root");
-            namedObject[1].ShouldEqual(user.Id.ToString());
-
+            var namedObject = response.NamedObjects["root"];
+            namedObject.ShouldEqual(user.Id.ToString());
         }
 
         [Test]
@@ -156,12 +152,10 @@ namespace Controllers.Workspace
             var responseJane = response.Objects.First(v => v[0].Equals(jane.Id.ToString()));
             responseJane[1].ShouldEqual(jane.Strategy.ObjectVersion.ToString());
 
-            response.NamedObjects.Length.ShouldEqual(1);
+            response.NamedObjects.Count.ShouldEqual(1);
 
-            var namedObject = response.NamedObjects[0];
-            namedObject[0].ShouldEqual("root");
-            namedObject[1].ShouldEqual(organisation.Id.ToString());
-
+            var namedObject = response.NamedObjects["root"];
+            namedObject.ShouldEqual(organisation.Id.ToString());
         }
 
         [Test]
@@ -237,11 +231,10 @@ namespace Controllers.Workspace
             var responseJaneMedia = response.Objects.First(v => v[0].Equals(janeMedia.Id.ToString()));
             responseJaneMedia[1].ShouldEqual(janeMedia.Strategy.ObjectVersion.ToString());
             
-            response.NamedObjects.Length.ShouldEqual(1);
+            response.NamedObjects.Count.ShouldEqual(1);
 
-            var namedObject = response.NamedObjects[0];
-            namedObject[0].ShouldEqual("root");
-            namedObject[1].ShouldEqual(organisation.Id.ToString());
+            var namedObject = response.NamedObjects["root"];
+            namedObject.ShouldEqual(organisation.Id.ToString());
         }
     }
 }

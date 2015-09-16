@@ -98,7 +98,7 @@ namespace Website.Controllers
             {
                 new Setup(session, new DirectoryInfo(dataPath)).Apply();
 
-                var administrator = new UserGroups(session).Administrators;
+                var administrators = new UserGroups(session).Administrators;
 
                 var koen = new PersonBuilder(session)
                     .WithFirstName("John")
@@ -107,7 +107,7 @@ namespace Website.Controllers
                     .WithUserPasswordHash("AE9dXDanpvHfD2+eaJi0KSyQ+Awb3m1ixg9ujfK5YJSzZlblxz8+ihVE4aN3QeaIsQ==")  // abc123
                     .Build();
 
-                administrator.AddMember(koen);
+                administrators.AddMember(koen);
 
                 var acme = new OrganisationBuilder(session)
                     .WithName("Acme")
