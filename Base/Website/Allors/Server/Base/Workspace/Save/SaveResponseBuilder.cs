@@ -148,7 +148,9 @@
                 Errors = GetObjects(derivationLog, accessErrorRoleTypesByObject)
             };
 
-            if (saveResponse.Errors.Count == 0)
+            saveResponse.HasErrors = saveResponse.Errors.Count > 0;
+
+            if (saveResponse.HasErrors)
             {
                 this.session.Commit();
             }
