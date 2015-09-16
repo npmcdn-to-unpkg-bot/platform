@@ -150,7 +150,7 @@
 
             saveResponse.HasErrors = saveResponse.Errors.Count > 0;
 
-            if (saveResponse.HasErrors)
+            if (!saveResponse.HasErrors)
             {
                 this.session.Commit();
             }
