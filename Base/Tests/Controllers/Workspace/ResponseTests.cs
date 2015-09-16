@@ -236,5 +236,51 @@ namespace Controllers.Workspace
             var namedObject = response.NamedObjects["root"];
             namedObject.ShouldEqual(organisation.Id.ToString());
         }
+
+        [Test]
+        public void NoTree()
+        {
+            // Arrange
+            var user = new PersonBuilder(this.Session)
+                .WithFirstName("Koen")
+                .WithLastName("Van Exem")
+                .WithUserName("kvex")
+                .WithUserEmail("koen@vanexem.be")
+                .Build();
+
+            var organisation = new OrganisationBuilder(this.Session)
+                .WithName("Acme")
+                .Build();
+
+            this.Session.Derive();
+            this.Session.Commit();
+
+            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = user };
+
+            // Act
+            var jsonResult = (JsonResult)controller.NoTree();
+            var response = (Response)jsonResult.Data;
+
+            // Assert
+            response.Objects.Length.ShouldEqual(2);
+
+            var userArray = response.Objects.First(v=>v[0] == user.Id.ToString());
+            userArray[1].ShouldEqual(user.Strategy.ObjectVersion.ToString());
+
+            var organisationArray = response.Objects.First(v => v[0] == organisation.Id.ToString());
+            organisationArray[1].ShouldEqual(organisation.Strategy.ObjectVersion.ToString());
+
+            response.NamedObjects.Count.ShouldEqual(1);
+
+            var namedObject = response.NamedObjects["object"];
+            namedObject.ShouldEqual(user.Id.ToString());
+
+            response.NamedCollections.Count.ShouldEqual(1);
+
+            var nameCollection = response.NamedCollections["collection"];
+            nameCollection.Length.ShouldEqual(1);
+            nameCollection[0].ShouldEqual(organisation.Id.ToString());
+        }
+
     }
 }

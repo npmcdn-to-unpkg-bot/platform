@@ -10,3 +10,4 @@ var Allors;
         Data.Response = Response;
     })(Data = Allors.Data || (Allors.Data = {}));
 })(Allors || (Allors = {}));
+//# sourceMappingURL=Response.js.map

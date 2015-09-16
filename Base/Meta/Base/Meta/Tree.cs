@@ -72,8 +72,6 @@ namespace Allors.Meta
         {
             if (obj != null)
             {
-                objects.Add(obj);
-
                 foreach (var node in this.Nodes)
                 {
                     node.Resolve(obj, objects);

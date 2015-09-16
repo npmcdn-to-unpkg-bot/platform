@@ -26,11 +26,12 @@ namespace Allors.Web
 
         public void AddObject(string name, IObject namedObject, Tree tree = null)
         {
+            objects.Add(namedObject);
             objectByName.Add(name, namedObject);
             tree?.Resolve(namedObject, this.objects);
         }
 
-        public void AddCollection(string name, IList<IObject> namedObjects, Tree tree = null)
+        public void AddCollection(string name, IEnumerable<IObject> namedObjects, Tree tree = null)
         {
             List<IObject> namedCollection;
             if (!collectionsByName.TryGetValue(name, out namedCollection))
@@ -39,10 +40,12 @@ namespace Allors.Web
                 this.collectionsByName.Add(name, namedCollection);
             }
 
-            namedCollection.AddRange(namedObjects);
+            var namedObjectList = (namedObjects as IList<IObject>) ?? namedObjects.ToArray();
 
-            foreach (var namedObject in namedObjects)
+            namedCollection.AddRange(namedObjectList);
+            foreach (var namedObject in namedObjectList)
             {
+                objects.Add(namedObject);
                 tree?.Resolve(namedObject, this.objects);
             }
         }

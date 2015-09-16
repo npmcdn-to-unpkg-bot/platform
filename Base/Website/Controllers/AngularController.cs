@@ -70,8 +70,7 @@ namespace Website.Controllers
             }
             catch (Exception e) { return JsonError(e.Message); }
         }
-
-
+        
         [Authorize]
         [HttpPost]
         public ActionResult Employees()
@@ -99,5 +98,20 @@ namespace Website.Controllers
             }
             catch (Exception e) { return JsonError(e.Message); }
         }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult NoTree()
+        {
+            try
+            {
+                var responseBuilder = new ResponseBuilder();
+                responseBuilder.AddObject("object", this.AuthenticatedUser);
+                responseBuilder.AddCollection("collection", new Organisations(this.AllorsSession).Extent() );
+                return JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e) { return JsonError(e.Message); }
+        }
+
     }
 }
