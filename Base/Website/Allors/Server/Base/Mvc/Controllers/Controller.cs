@@ -48,7 +48,10 @@ namespace Allors.Web.Mvc
 
         protected StandardJsonResult JsonValidationError()
         {
-            var result = new StandardJsonResult();
+            var result = new StandardJsonResult
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
 
             foreach (var validationError in ModelState.Values.SelectMany(v => v.Errors))
             {
@@ -59,7 +62,10 @@ namespace Allors.Web.Mvc
 
         protected StandardJsonResult JsonError(string errorMessage)
         {
-            var result = new StandardJsonResult();
+            var result = new StandardJsonResult
+            {
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
 
             result.AddError(errorMessage);
 
@@ -68,7 +74,7 @@ namespace Allors.Web.Mvc
 
         protected StandardJsonResult<T> JsonSuccess<T>(T data)
         {
-            return new StandardJsonResult<T> { Data = data };
+            return new StandardJsonResult<T> { Data = data , JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         public ISession AllorsSession
