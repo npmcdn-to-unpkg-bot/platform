@@ -25,6 +25,11 @@
 
         public SaveResponse Build()
         {
+            if (this.saveRequest.Objects == null || this.saveRequest.Objects.Length == 0)
+            {
+                return new SaveResponse { HasErrors = false };
+            }
+
             // bulk load all objects
             var objectIds = saveRequest.Objects.Select(v => v.I).ToArray();
             this.session.Instantiate(objectIds);
