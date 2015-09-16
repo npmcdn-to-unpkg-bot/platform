@@ -15,10 +15,14 @@ var App;
                     var defer = this.$q.defer();
                     var requireLoadIds = this.database.check(response);
                     if (requireLoadIds.objects.length > 0) {
-                        this.$http.post('/Angular/Load', requireLoadIds).then(function (x) {
-                            var loadResponse = x.data;
+                        this.$http.post('/Angular/Load', requireLoadIds)
+                            .then(function (v) {
+                            var loadResponse = v.data;
                             _this.database.load(loadResponse);
                             defer.resolve(_this.createContext(response));
+                        })
+                            .catch(function (v) {
+                            throw v;
                         });
                     }
                     else {
@@ -53,4 +57,3 @@ var App;
         })(Services = Common.Services || (Common.Services = {}));
     })(Common = App.Common || (App.Common = {}));
 })(App || (App = {}));
-//# sourceMappingURL=allorsService.js.map

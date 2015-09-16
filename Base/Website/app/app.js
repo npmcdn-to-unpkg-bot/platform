@@ -1,6 +1,11 @@
 var App;
 (function (App) {
     var app = angular.module("app", ["ui.router"]);
+    app.factory('$exceptionHandler', function () { return function (exception, cause) {
+        var message = "Serious error occured, application will restart.\n\n" + cause + "\n";
+        alert(message);
+        window.location.href = '/';
+    }; });
     app.config(stateConfig);
     stateConfig.$inject = ["$stateProvider", "$urlRouterProvider"];
     function stateConfig($stateProvider, $urlRouterProvider) {
@@ -26,4 +31,3 @@ var App;
         });
     }
 })(App || (App = {}));
-//# sourceMappingURL=app.js.map

@@ -1,4 +1,5 @@
-﻿using Allors.Domain;
+﻿using System;
+using Allors.Domain;
 using Allors.Meta;
 using Allors.Web;
 using Allors.Web.Workspace;
@@ -16,41 +17,58 @@ namespace Website.Controllers
         {
             return View();
         }
-        
+
         [Authorize]
         [HttpPost]
         public ActionResult Load(LoadRequest loadRequest)
         {
-            var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
-            var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, user, loadRequest, Group);
-            return JsonSuccess(loadResponseBuilder.Build());
+            try
+            {
+                var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
+                var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, user, loadRequest, Group);
+                return JsonSuccess(loadResponseBuilder.Build());
+            }
+            catch (Exception e) { return JsonError(e.Message); }
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Save(SaveRequest saveRequest)
         {
-            var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
-            var saveResponseBuilder = new SaveResponseBuilder(this.AllorsSession, user, saveRequest, Group);
-            return JsonSuccess(saveResponseBuilder.Build());
+            try
+            {
+                var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
+                var saveResponseBuilder = new SaveResponseBuilder(this.AllorsSession, user, saveRequest, Group);
+                return JsonSuccess(saveResponseBuilder.Build());
+            }
+            catch (Exception e) { return JsonError(e.Message); }
         }
+
 
         [Authorize]
         [HttpPost]
         public ActionResult Main()
         {
-            var responseBuilder = new ResponseBuilder();
-            responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularHome);
-            return JsonSuccess(responseBuilder.Build());
+            try
+            {
+                var responseBuilder = new ResponseBuilder();
+                responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularHome);
+                return JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e) { return JsonError(e.Message); }
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Person()
         {
-            var responseBuilder = new ResponseBuilder();
-            responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularPerson);
-            return JsonSuccess(responseBuilder.Build());
+            try
+            {
+                var responseBuilder = new ResponseBuilder();
+                responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularPerson);
+                return JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e) { return JsonError(e.Message); }
         }
 
 
@@ -58,20 +76,28 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Employees()
         {
-            var responseBuilder = new ResponseBuilder();
-            var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-            responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularEmployees);
-            return JsonSuccess(responseBuilder.Build());
+            try
+            {
+                var responseBuilder = new ResponseBuilder();
+                var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
+                responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularEmployees);
+                return JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e) { return JsonError(e.Message); }
         }
 
         [Authorize]
         [HttpPost]
         public ActionResult Shareholders()
         {
-            var responseBuilder = new ResponseBuilder();
-            var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-            responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularShareholders);
-            return JsonSuccess(responseBuilder.Build());
+            try
+            {
+                var responseBuilder = new ResponseBuilder();
+                var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
+                responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularShareholders);
+                return JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e) { return JsonError(e.Message); }
         }
     }
 }

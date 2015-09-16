@@ -10,4 +10,3 @@ var Allors;
         Data.SaveResponse = SaveResponse;
     })(Data = Allors.Data || (Allors.Data = {}));
 })(Allors || (Allors = {}));
-//# sourceMappingURL=SaveResponse.js.map

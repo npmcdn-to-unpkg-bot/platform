@@ -15,13 +15,16 @@
             var requireLoadIds = this.database.check(response);
             if (requireLoadIds.objects.length > 0) {
 
-                this.$http.post('/Angular/Load', requireLoadIds).then(
-                    x => {
-                        var loadResponse = <Allors.Data.LoadResponse>x.data;
-                        this.database.load(loadResponse);
+                this.$http.post('/Angular/Load', requireLoadIds)
+                    .then(
+                        v => {
+                            var loadResponse = <Allors.Data.LoadResponse>v.data;
+                            this.database.load(loadResponse);
 
-                        defer.resolve(this.createContext(response));
-
+                            defer.resolve(this.createContext(response));
+                    })
+                    .catch(v => {
+                        throw v;
                     });
 
             } else {

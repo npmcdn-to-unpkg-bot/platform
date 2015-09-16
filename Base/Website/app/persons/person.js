@@ -41,4 +41,3 @@ var App;
             .controller("personController", PersonController);
     })(Person = App.Person || (App.Person = {}));
 })(App || (App = {}));
-//# sourceMappingURL=person.js.map

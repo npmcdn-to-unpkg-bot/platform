@@ -16,4 +16,3 @@ var Allors;
         Data.LoadResponse = LoadResponse;
     })(Data = Allors.Data || (Allors.Data = {}));
 })(Allors || (Allors = {}));
-//# sourceMappingURL=LoadResponse.js.map
