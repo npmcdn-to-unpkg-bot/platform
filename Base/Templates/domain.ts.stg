@@ -78,28 +78,28 @@ $objectType.roleTypesByGroup.(grp):{roleType|$classRoleType()$}; separator="\n"$
 classRoleType() ::= <<
 $if(roleType.ObjectType.IsUnit)$
 			get $roleType.SingularPropertyName$(): $objectType_Name(roleType.ObjectType)$ {
-				return this.getUnit("$roleType.PropertyName$");
+				return this.getUnit("$roleType.SingularPropertyName$");
 			}
 
 			set $roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				this.setUnit("$roleType.PropertyName$", value);
+				this.setUnit("$roleType.SingularPropertyName$", value);
 			}
 $else$
 $if(roleType.IsOne)$
 			get $roleType.SingularPropertyName$(): $objectType_Name(roleType.ObjectType)$ {
-				return this.getOne("$roleType.PropertyName$");
+				return this.getOne("$roleType.SingularPropertyName$");
 			}
 
 			set $roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				this.setOne("$roleType.PropertyName$", value);
+				this.setOne("$roleType.SingularPropertyName$", value);
 			}
 $else$
 			get $roleType.PluralPropertyName$(): $objectType_Name(roleType.ObjectType)$[] {
-				return this.getMany("$roleType.PropertyName$");
+				return this.getMany("$roleType.SingularPropertyName$");
 			}
 
 			set $roleType.PluralPropertyName$(value: $objectType_Name(roleType.ObjectType)$[]) {
-				this.setMany("$roleType.PropertyName$", value);
+				this.setMany("$roleType.SingularPropertyName$", value);
 			}
 $endif$
 $endif$

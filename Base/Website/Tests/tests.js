@@ -330,7 +330,7 @@ test("workspace many save", function () {
     ok(savedAcme.v === "1101");
     ok(savedAcme.roles.length === 1);
 
-    var savedAcmeEmployee = _.find(savedAcme.roles, function (v) { return v.t === "Employees" });
+    var savedAcmeEmployee = _.find(savedAcme.roles, function (v) { return v.t === "Employee" });
 
     ok(arrayEqual(savedAcmeEmployee.s, []));
     ok(savedAcmeEmployee.a === undefined);
@@ -341,7 +341,7 @@ test("workspace many save", function () {
     ok(savedOcme.v === "1102");
     ok(savedOcme.roles.length === 1);
 
-    var savedOcmeEmployee = _.find(savedOcme.roles, function (v) { return v.t === "Employees" });
+    var savedOcmeEmployee = _.find(savedOcme.roles, function (v) { return v.t === "Employee" });
 
     ok(savedOcmeEmployee.s === undefined);
     ok(arrayEqual(savedOcmeEmployee.a, ["2", "3"]));
@@ -352,7 +352,7 @@ test("workspace many save", function () {
     ok(savedIcme.v === "1103");
     ok(savedIcme.roles.length === 1);
 
-    var savedEmployees = _.find(savedIcme.roles, function (v) { return v.t === "Employees" });
+    var savedEmployees = _.find(savedIcme.roles, function (v) { return v.t === "Employee" });
 
     ok(arrayEqual(savedEmployees.s, ["1", "2", "3"]));
     ok(savedEmployees.a === undefined);

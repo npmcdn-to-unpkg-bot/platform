@@ -47,7 +47,7 @@
                 foreach (var saveRequestRole in saveRequestObject.Roles)
                 {
                     var roleTypeName = saveRequestRole.T;
-                    var roleType = roleTypes.FirstOrDefault(v => v.PropertyName.Equals(roleTypeName));
+                    var roleType = roleTypes.FirstOrDefault(v => v.SingularPropertyName.Equals(roleTypeName));
 
                     if (roleType != null)
                     {
@@ -216,7 +216,7 @@
                 }
             }
             
-            return messagesByRoleTypeByObject.ToDictionary(kvp => kvp.Key.Id.ToString(), kvp => kvp.Value.ToDictionary(kvp2 => kvp2.Key.PropertyName, kvp2=>kvp2.Value.ToArray()));
+            return messagesByRoleTypeByObject.ToDictionary(kvp => kvp.Key.Id.ToString(), kvp => kvp.Value.ToDictionary(kvp2 => kvp2.Key.SingularPropertyName, kvp2=>kvp2.Value.ToArray()));
         }
     }
 }

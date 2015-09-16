@@ -36,7 +36,7 @@
                 roles: [
                     ["Name", "rw", "Acme"],
                     ["Owner", "rw", "1"],
-                    ["Employees", "rw", ["1", "2", "3"]]
+                    ["Employee", "rw", ["1", "2", "3"]]
                 ]
             },
             {
@@ -46,7 +46,7 @@
                 roles: [
                     ["Name", "rw", "Ocme"],
                     ["Owner", "rw", "2"],
-                    ["Employees", "rw", ["1"]]
+                    ["Employee", "rw", ["1"]]
                 ]
             },
             {
