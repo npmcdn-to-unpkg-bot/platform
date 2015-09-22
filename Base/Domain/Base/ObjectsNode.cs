@@ -95,6 +95,8 @@ namespace Allors
             }
 
             execute(this.objects);
+
+            this.previousRoot = null;
         }
     }
 }
