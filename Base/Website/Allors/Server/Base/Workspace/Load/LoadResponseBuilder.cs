@@ -42,66 +42,69 @@
         private object[][] GetRoles(IObject obj)
         {
             var composite = (Composite)obj.Strategy.Class;
-            var roleTypes = composite.RoleTypesByGroup[@group];
 
-            if (roleTypes.Count > 0)
+            IList<RoleType> roleTypes;
+            if (composite.RoleTypesByGroup.TryGetValue(@group, out roleTypes))
             {
-                AccessControlList acl = null;
-                if (obj is AccessControlledObject)
+                if (roleTypes.Count > 0)
                 {
-                    acl = new AccessControlList(obj, this.user);
-                }
-
-                var roles = new List<object[]>();
-                foreach (var roleType in roleTypes)
-                {
-                    var propertyName = roleType.SingularPropertyName;
-
-                    var canRead = acl == null || acl.CanRead(roleType);
-                    var canWrite = acl != null && acl.CanWrite(roleType);
-                    var access = ((canRead ? "r" : string.Empty) + (canWrite ? "w" : string.Empty));
-
-                    if (canRead)
+                    AccessControlList acl = null;
+                    if (obj is AccessControlledObject)
                     {
-                        if (roleType.ObjectType.IsUnit)
-                        {
-                            var role = obj.Strategy.GetUnitRole(roleType);
-                            if (role != null)
-                            {
-                                roles.Add(new[] { propertyName, access, role });
-                            }
+                        acl = new AccessControlList(obj, this.user);
+                    }
 
-                        }
-                        else
+                    var roles = new List<object[]>();
+                    foreach (var roleType in roleTypes)
+                    {
+                        var propertyName = roleType.SingularPropertyName;
+
+                        var canRead = acl == null || acl.CanRead(roleType);
+                        var canWrite = acl != null && acl.CanWrite(roleType);
+                        var access = ((canRead ? "r" : string.Empty) + (canWrite ? "w" : string.Empty));
+
+                        if (canRead)
                         {
-                            if (roleType.IsOne)
+                            if (roleType.ObjectType.IsUnit)
                             {
-                                var role = obj.Strategy.GetCompositeRole(roleType);
+                                var role = obj.Strategy.GetUnitRole(roleType);
                                 if (role != null)
                                 {
-                                    roles.Add(new object[] { propertyName, access, role.Id.ToString() });
+                                    roles.Add(new[] { propertyName, access, role });
                                 }
+
                             }
                             else
                             {
-                                var role = obj.Strategy.GetCompositeRoles(roleType);
-                                if (role.Count != 0)
+                                if (roleType.IsOne)
                                 {
-                                    var ids = role.Cast<IObject>().Select(roleObject => roleObject.Id.ToString()).ToList();
-                                    roles.Add(new object[] { propertyName, access, ids });
+                                    var role = obj.Strategy.GetCompositeRole(roleType);
+                                    if (role != null)
+                                    {
+                                        roles.Add(new object[] { propertyName, access, role.Id.ToString() });
+                                    }
                                 }
+                                else
+                                {
+                                    var role = obj.Strategy.GetCompositeRoles(roleType);
+                                    if (role.Count != 0)
+                                    {
+                                        var ids = role.Cast<IObject>().Select(roleObject => roleObject.Id.ToString()).ToList();
+                                        roles.Add(new object[] { propertyName, access, ids });
+                                    }
+                                }
+
                             }
-
                         }
-                    }
-                    else
-                    {
-                        roles.Add(new object[] { propertyName, access });
+                        else
+                        {
+                            roles.Add(new object[] { propertyName, access });
+                        }
+
                     }
 
+                    return roles.ToArray();
                 }
-
-                return roles.ToArray();
             }
 
             return EmptyRoles;

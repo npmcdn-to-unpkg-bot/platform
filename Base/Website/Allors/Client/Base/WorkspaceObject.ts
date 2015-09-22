@@ -1,7 +1,7 @@
 ﻿module Allors {
     export class WorkspaceObject {
-        private workspace : Workspace;
-        private databaseObject: DatabaseObject;
+        public workspace : Workspace;
+        public databaseObject: DatabaseObject;
 
         private roleByRoleTypeName: { [id: string]: any; };
 
@@ -142,6 +142,13 @@
             this.roleByRoleTypeName[roleTypeName] = _.map(value, item => {
                 return (<WorkspaceObject>item).id;
             });
+        }
+
+        reset() {
+            if (this.roleByRoleTypeName)
+            {
+                this.roleByRoleTypeName = {};
+            }
         }
     }
 }

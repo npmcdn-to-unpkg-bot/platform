@@ -28,6 +28,11 @@ var Allors;
             });
             return data;
         };
+        Workspace.prototype.reset = function () {
+            _.forEach(this.workspaceObjectById, function (v) {
+                v.reset();
+            });
+        };
         return Workspace;
     })();
     Allors.Workspace = Workspace;

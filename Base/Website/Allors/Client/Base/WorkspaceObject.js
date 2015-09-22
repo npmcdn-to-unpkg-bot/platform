@@ -123,6 +123,11 @@ var Allors;
                 return item.id;
             });
         };
+        WorkspaceObject.prototype.reset = function () {
+            if (this.roleByRoleTypeName) {
+                this.roleByRoleTypeName = {};
+            }
+        };
         return WorkspaceObject;
     })();
     Allors.WorkspaceObject = WorkspaceObject;

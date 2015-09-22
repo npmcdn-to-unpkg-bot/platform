@@ -1,7 +1,7 @@
 ﻿module Allors {
     export class Workspace {
         private database: Database;
-        private workspaceObjectById: { [id: string]: any; } = {};
+        private workspaceObjectById: { [id: string]: WorkspaceObject; } = {};
 
         constructor(database: Database) {
             this.database = database;
@@ -35,6 +35,12 @@
             });
 
             return data;
+        }
+
+        reset() {
+            _.forEach(this.workspaceObjectById, v => {
+                v.reset();
+            });
         }
     }
 }
