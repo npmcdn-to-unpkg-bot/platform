@@ -8,12 +8,12 @@
 
     public class LoadResponseBuilder
     {
-        private static readonly object[][] EmptyRoles = {};
+        private static readonly object[][] EmptyRoles = { };
 
         private readonly ISession session;
         private readonly LoadRequest loadRequest;
-        private string @group;
-        private User user;
+        private readonly string @group;
+        private readonly User user;
 
         public LoadResponseBuilder(ISession session, User user, LoadRequest loadRequest, string @group)
         {
@@ -25,7 +25,17 @@
 
         public LoadResponse Build()
         {
-            var objects = this.session.Instantiate(loadRequest.Objects);
+            var objects = this.session.Instantiate(this.loadRequest.Objects);
+
+            // Prefetch
+            var objectByClass = objects.ToDictionary(v => v.Strategy.Class, v => v);
+            foreach (var dictionaryEntry in objectByClass)
+            {
+                var prefetchClass = (Class)dictionaryEntry.Key;
+                var prefetchObjects = dictionaryEntry.Value;
+                var prefetcher = prefetchClass.BuildPrefetchPolicy(@group);
+                this.session.Prefetch(prefetcher, prefetchObjects);
+            }
 
             return new LoadResponse
             {
@@ -34,7 +44,7 @@
                     I = x.Id.ToString(),
                     V = x.Strategy.ObjectVersion.ToString(),
                     T = x.Strategy.Class.Name,
-                    Roles = GetRoles(x),
+                    Roles = this.GetRoles(x),
                 }).ToArray() 
             };
         }
@@ -61,7 +71,7 @@
 
                         var canRead = acl == null || acl.CanRead(roleType);
                         var canWrite = acl != null && acl.CanWrite(roleType);
-                        var access = ((canRead ? "r" : string.Empty) + (canWrite ? "w" : string.Empty));
+                        var access = (canRead ? "r" : string.Empty) + (canWrite ? "w" : string.Empty);
 
                         if (canRead)
                         {
@@ -100,7 +110,6 @@
                         {
                             roles.Add(new object[] { propertyName, access });
                         }
-
                     }
 
                     return roles.ToArray();

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Resources;
-using Allors.Domain;
 using Allors.Meta;
 
 namespace Allors.Web
@@ -26,6 +24,14 @@ namespace Allors.Web
 
         public void AddObject(string name, IObject namedObject, Tree tree = null)
         {
+            // Prefetch
+            if(tree != null)
+            {
+                var session = namedObject.Strategy.Session;
+                var prefetcher = tree.BuildPrefetechPolicy();
+                session.Prefetch(prefetcher, namedObject);
+            }
+
             objects.Add(namedObject);
             objectByName.Add(name, namedObject);
             tree?.Resolve(namedObject, this.objects);
@@ -41,6 +47,14 @@ namespace Allors.Web
             }
 
             var namedObjectList = (namedObjects as IList<IObject>) ?? namedObjects.ToArray();
+
+            // Prefetch
+            if (tree != null && namedObjectList.Count >0)
+            {
+                var session = namedObjectList[0].Strategy.Session;
+                var prefetcher = tree.BuildPrefetechPolicy();
+                session.Prefetch(prefetcher, namedObjectList.ToArray());
+            }
 
             namedCollection.AddRange(namedObjectList);
             foreach (var namedObject in namedObjectList)
