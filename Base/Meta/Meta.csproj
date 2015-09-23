@@ -187,6 +187,7 @@
     <Compile Include="Base\Domain\Base.cs" />
     <Compile Include="Base\Meta\Groups.cs" />
     <Compile Include="Base\Meta\Composite.cs" />
+    <Compile Include="Base\Meta\Class.cs" />
     <Compile Include="Base\Meta\Tree.cs" />
     <Compile Include="Base\Meta\RoleType.cs" />
     <Compile Include="Base\Meta\ConcreteRoleType.cs" />

@@ -84,5 +84,15 @@ namespace Allors.Meta
 
 
         }
+
+        public void BuildPrefetchPolicy(PrefetchPolicyBuilder prefetchPolicyBuilder)
+        {
+            prefetchPolicyBuilder.WithRule(this.roleType);
+
+            foreach (var node in this.nodes)
+            {
+                node.BuildPrefetchPolicy(prefetchPolicyBuilder);
+            }
+        }
     }
 }

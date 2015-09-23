@@ -18,30 +18,37 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-
 namespace Allors.Meta
 {
+    using System.Collections.Generic;
+
     public class Tree
     {
-        private readonly Composite composite;
-
         private readonly List<TreeNode> nodes;
 
         public Tree(Composite composite)
         {
-            this.composite = composite;
+            this.Composite = composite;
             this.nodes = new List<TreeNode>();
         }
 
-        public Composite Composite
-        {
-            get { return composite; }
-        }
+        public Composite Composite { get; }
 
         public List<TreeNode> Nodes
         {
             get { return nodes; }
+        }
+
+        public PrefetchPolicy BuildPrefetechPolicy()
+        {
+            var prefetchPolicyBuilder = new PrefetchPolicyBuilder();
+
+            foreach (var node in this.nodes)
+            {
+                node.BuildPrefetchPolicy(prefetchPolicyBuilder);
+            }
+
+            return prefetchPolicyBuilder.Build();
         }
 
         public Tree Add(RelationType relationType)
