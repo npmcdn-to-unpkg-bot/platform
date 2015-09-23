@@ -28,11 +28,11 @@
             var objects = this.session.Instantiate(this.loadRequest.Objects);
 
             // Prefetch
-            var objectByClass = objects.ToDictionary(v => v.Strategy.Class, v => v);
-            foreach (var dictionaryEntry in objectByClass)
+            var objectByClass = objects.GroupBy(v => v.Strategy.Class, v => v);
+            foreach (var groupBy in objectByClass)
             {
-                var prefetchClass = (Class)dictionaryEntry.Key;
-                var prefetchObjects = dictionaryEntry.Value;
+                var prefetchClass = (Class)groupBy.Key;
+                var prefetchObjects = groupBy.ToArray();
                 var prefetcher = prefetchClass.BuildPrefetchPolicy(@group);
                 this.session.Prefetch(prefetcher, prefetchObjects);
             }
