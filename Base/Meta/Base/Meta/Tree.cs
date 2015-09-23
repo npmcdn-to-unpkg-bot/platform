@@ -26,13 +26,21 @@ namespace Allors.Meta
     {
         private readonly List<TreeNode> nodes;
 
+        private readonly Composite composite;
+
         public Tree(Composite composite)
         {
-            this.Composite = composite;
+            this.composite = composite;
             this.nodes = new List<TreeNode>();
         }
 
-        public Composite Composite { get; }
+        public Composite Composite
+        {
+            get
+            {
+                return this.composite;
+            }
+        }
 
         public List<TreeNode> Nodes
         {
