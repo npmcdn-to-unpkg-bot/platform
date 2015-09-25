@@ -112,7 +112,7 @@ $if(objectType.IsBinary)$
 $elseif(objectType.IsBoolean)$
 	boolean
 $elseif(objectType.IsDecimal)$
-	string
+	number
 $elseif(objectType.IsDateTime)$
 	Date
 $elseif(objectType.IsFloat)$
