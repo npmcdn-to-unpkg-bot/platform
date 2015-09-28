@@ -1,12 +1,5 @@
 ﻿module App.Person {
-    interface IPersonModel {
-        root: Allors.Domain.Person;
-    }
-
-    interface IPersonState extends ng.ui.IState {
-    }
-
-    class PersonController implements IPersonModel {
+    class PersonController{
 
         public root: Allors.Domain.Person;
 

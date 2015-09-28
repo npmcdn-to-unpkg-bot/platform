@@ -38,10 +38,10 @@
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Employees" />
-      <Property Name="Manager" />
-      <Property Name="Owner" />
       <Property Name="Shareholders" />
+      <Property Name="Employees" />
+      <Property Name="Owner" />
+      <Property Name="Manager" />
     </ShowAsAssociation>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

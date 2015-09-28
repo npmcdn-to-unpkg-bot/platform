@@ -43,8 +43,7 @@ namespace Website.Controllers
             }
             catch (Exception e) { return JsonError(e.Message); }
         }
-
-
+        
         [Authorize]
         [HttpPost]
         public ActionResult Main()
@@ -65,7 +64,7 @@ namespace Website.Controllers
             try
             {
                 var responseBuilder = new ResponseBuilder();
-                responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularPerson);
+                responseBuilder.AddObject("root", this.AuthenticatedUser);
                 return JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e) { return JsonError(e.Message); }

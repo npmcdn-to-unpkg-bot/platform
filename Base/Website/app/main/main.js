@@ -30,4 +30,3 @@ var App;
             .controller("mainController", MainController);
     })(Main = App.Main || (App.Main = {}));
 })(App || (App = {}));
-//# sourceMappingURL=main.js.map

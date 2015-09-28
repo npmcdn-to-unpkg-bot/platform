@@ -263,7 +263,7 @@ namespace Allors.Domain
 						global::System.Guid UniqueId {set;}
 
 		}
-		public interface User  : Object, AccessControlledObject, Localised, SecurityTokenOwner 
+		public interface User  : Object, SecurityTokenOwner, AccessControlledObject, Localised 
 		{
 						global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -274,7 +274,7 @@ namespace Allors.Domain
 						global::System.String UserPasswordHash {set;}
 
 		}
-		public interface AccessControl  : Object, AccessControlledObject, Deletable 
+		public interface AccessControl  : Object, Deletable, AccessControlledObject 
 		{
 						UserGroup SubjectGroups {set;}
 
@@ -300,7 +300,7 @@ namespace Allors.Domain
 						global::System.String AllorsString {set;}
 
 		}
-		public interface C1  : Object, AccessControlledObject, I1 
+		public interface C1  : Object, I1, AccessControlledObject 
 		{
 						I1 C1I1One2One {set;}
 
@@ -537,7 +537,7 @@ namespace Allors.Domain
 						Country Country {set;}
 
 		}
-		public interface LocalisedText  : Object, Localised, AccessControlledObject 
+		public interface LocalisedText  : Object, AccessControlledObject, Localised 
 		{
 						global::System.String Text {set;}
 
@@ -556,7 +556,7 @@ namespace Allors.Domain
 						global::System.String PoBox {set;}
 
 		}
-		public interface Media  : Object, Deletable, UniquelyIdentifiable, AccessControlledObject 
+		public interface Media  : Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
 		{
 						MediaType MediaType {set;}
 
@@ -577,43 +577,43 @@ namespace Allors.Domain
 						global::System.String Name {set;}
 
 		}
-		public interface Person  : Object, AccessControlledObject, UniquelyIdentifiable, Deletable, User, Printable 
+		public interface Person  : Object, Printable, Deletable, User, AccessControlledObject, UniquelyIdentifiable 
 		{
-						Address MainAddress {set;}
-
-						global::System.String TinyMCEText {set;}
-
-						global::System.String Text {set;}
+						Address Addresses {set;}
 
 						global::System.Int32? Age {set;}
+
+						global::System.DateTime? BirthDate {set;}
+
+						global::System.String CKEditorText {set;}
+
+						global::System.String FullName {set;}
+
+						Gender Gender {set;}
+
+						global::System.Boolean? IsMarried {set;}
 
 						global::System.Boolean? IsStudent {set;}
 
 						MailboxAddress MailboxAddress {set;}
 
-						Gender Gender {set;}
-
-						global::System.String FullName {set;}
-
-						global::System.Int32? ShirtSize {set;}
-
-						global::System.String CKEditorText {set;}
-
-						global::System.Boolean? IsMarried {set;}
-
-						global::System.DateTime? BirthDate {set;}
-
-						global::System.Decimal? Weight {set;}
+						Address MainAddress {set;}
 
 						Media Photo {set;}
 
-						Address Addresses {set;}
+						global::System.Int32? ShirtSize {set;}
+
+						global::System.String Text {set;}
+
+						global::System.String TinyMCEText {set;}
+
+						global::System.Decimal? Weight {set;}
+
+						global::System.String FirstName {set;}
 
 						global::System.String LastName {set;}
 
 						global::System.String MiddleName {set;}
-
-						global::System.String FirstName {set;}
 
 		}
 		public interface Singleton  : Object, AccessControlledObject 
@@ -648,7 +648,7 @@ namespace Allors.Domain
 		public interface OrderObjectState  : Object, ObjectState 
 		{
 		}
-		public interface Organisation  : Object, AccessControlledObject, UniquelyIdentifiable 
+		public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
 		{
 						global::System.String Information {set;}
 
@@ -681,7 +681,7 @@ namespace Allors.Domain
 						Address MainAddress {set;}
 
 		}
-		public interface Permission  : Object, AccessControlledObject, Deletable 
+		public interface Permission  : Object, Deletable, AccessControlledObject 
 		{
 						global::System.Guid OperandTypePointer {set;}
 
@@ -699,7 +699,7 @@ namespace Allors.Domain
 						global::System.String PostalCode {set;}
 
 		}
-		public interface PrintQueue  : Object, UniquelyIdentifiable, AccessControlledObject 
+		public interface PrintQueue  : Object, AccessControlledObject, UniquelyIdentifiable 
 		{
 						Printable Printables {set;}
 
@@ -737,7 +737,7 @@ namespace Allors.Domain
 						Person Manager {set;}
 
 		}
-		public interface StringTemplate  : Object, Localised, UniquelyIdentifiable 
+		public interface StringTemplate  : Object, UniquelyIdentifiable, Localised 
 		{
 						global::System.String Body {set;}
 
@@ -797,7 +797,7 @@ namespace Allors.Domain
 						global::System.Decimal? AllorsDecimal {set;}
 
 		}
-		public interface UserGroup  : Object, AccessControlledObject, UniquelyIdentifiable 
+		public interface UserGroup  : Object, UniquelyIdentifiable, AccessControlledObject 
 		{
 						Role Role {set;}
 

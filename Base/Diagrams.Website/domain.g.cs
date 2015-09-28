@@ -26,13 +26,16 @@ namespace Allors.Domain
 									Media Photo {set;}
 
 
+									global::System.Decimal? Weight {set;}
+
+
+									global::System.String FirstName {set;}
+
+
 									global::System.String LastName {set;}
 
 
 									global::System.String MiddleName {set;}
-
-
-									global::System.String FirstName {set;}
 
 					}
 					public interface Organisation 

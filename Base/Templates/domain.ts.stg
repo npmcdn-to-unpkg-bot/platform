@@ -76,6 +76,25 @@ $objectType.roleTypesByGroup.(grp):{roleType|$classRoleType()$}; separator="\n"$
 >>
 
 classRoleType() ::= <<
+$if(roleType.ObjectType.IsUnit || roleType.IsOne)$
+			get CanRead$roleType.SingularPropertyName$(): boolean {
+				return this.databaseObject.roles.CanRead$roleType.SingularPropertyName$;
+			}
+
+			get CanWrite$roleType.SingularPropertyName$(): boolean {
+				return this.databaseObject.roles.CanWrite$roleType.SingularPropertyName$;
+			}
+$else$
+			get CanRead$roleType.PluralPropertyName$(): boolean {
+				return this.databaseObject.roles.CanRead$roleType.PluralPropertyName$;
+			}
+
+			get CanWrite$roleType.PluralPropertyName$(): boolean {
+				return this.databaseObject.roles.CanWrite$roleType.PluralPropertyName$;
+			}
+
+$endif$
+
 $if(roleType.ObjectType.IsUnit)$
 			get $roleType.SingularPropertyName$(): $objectType_Name(roleType.ObjectType)$ {
 				return this.getUnit("$roleType.SingularPropertyName$");
