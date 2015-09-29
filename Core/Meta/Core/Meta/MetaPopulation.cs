@@ -299,6 +299,16 @@ namespace Allors.Meta
             }
         }
 
+        public IEnumerable<Domain> SortedDomains
+        {
+            get
+            {
+                var sortedDomains = new List<Domain>(this.domains);
+                sortedDomains.Sort((x, y) => x.Superdomains.Contains(y) ? -1 : 1);
+                return sortedDomains.ToArray();
+            }
+        }
+
         IEnumerable<IUnit> IMetaPopulation.Units 
         {
             get

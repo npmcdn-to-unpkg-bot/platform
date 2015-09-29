@@ -34,6 +34,10 @@ module Allors.Meta
 {
 	export var population : Allors.Meta.Population = 
 	{
+		domains : 
+		[
+$meta.SortedDomains:{domain|				"$domain.Name$"}; separator=",\n"$
+		], 
 		classes : 
 		[
 $meta.classes:{class|$class(class, grp)$}$

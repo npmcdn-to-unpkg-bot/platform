@@ -9,6 +9,17 @@ var App;
     app.config(stateConfig);
     stateConfig.$inject = ["$stateProvider", "$urlRouterProvider"];
     function stateConfig($stateProvider, $urlRouterProvider) {
+        function applyMixins(derivedConstructor, baseConstructors) {
+            baseConstructors.forEach(function (baseConstructor) {
+                Object.getOwnPropertyNames(baseConstructor.prototype).forEach(function (name) {
+                    if (name !== 'constructor') {
+                        var propertyDescriptor = Object.getOwnPropertyDescriptor(baseConstructor.prototype, name);
+                        Object.defineProperty(derivedConstructor.prototype, name, propertyDescriptor);
+                    }
+                });
+            });
+        }
+        applyMixins(Allors.Domain.Person, [Allors.Domain.Tests.Person]);
         $urlRouterProvider.otherwise('/home');
         $stateProvider
             .state('home', {
@@ -31,3 +42,4 @@ var App;
         });
     }
 })(App || (App = {}));
+//# sourceMappingURL=app.js.map

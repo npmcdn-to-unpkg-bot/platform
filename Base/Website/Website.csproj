@@ -290,6 +290,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Allors\Client\Tests\Person.ts" />
     <TypeScriptCompile Include="app\common\services\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Data\SaveResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />

@@ -1,5 +1,13 @@
 var Allors;
 (function (Allors) {
+    function applyMixins(derivedConstructor, baseConstructor) {
+        Object.getOwnPropertyNames(baseConstructor.prototype).forEach(function (name) {
+            if (name !== 'constructor') {
+                var propertyDescriptor = Object.getOwnPropertyDescriptor(baseConstructor.prototype, name);
+                Object.defineProperty(derivedConstructor.prototype, name, propertyDescriptor);
+            }
+        });
+    }
     var Database = (function () {
         function Database(data) {
             var _this = this;
@@ -8,6 +16,19 @@ var Allors;
             _.forEach(data.classes, function (objectTypeData) {
                 var objectType = new Allors.ObjectType(objectTypeData);
                 _this.objectTypeByName[objectType.name] = objectType;
+            });
+            data.domains.map(function (domainName) {
+                data.classes.map(function (cls) {
+                    var className = cls.name;
+                    var derivedType = Allors.Domain[className];
+                    var baseNamespace = Allors.Domain[domainName];
+                    if (baseNamespace) {
+                        var baseType = baseNamespace[className];
+                        if (baseType) {
+                            applyMixins(derivedType, baseType);
+                        }
+                    }
+                });
             });
         }
         Database.prototype.load = function (data) {
@@ -38,3 +59,4 @@ var Allors;
     })();
     Allors.Database = Database;
 })(Allors || (Allors = {}));
+//# sourceMappingURL=Database.js.map

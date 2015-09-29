@@ -13,6 +13,19 @@
     stateConfig.$inject = ["$stateProvider", "$urlRouterProvider"];
     function stateConfig($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider): void {
         
+        function applyMixins(derivedConstructor: any, baseConstructors: any[]) {
+            baseConstructors.forEach(baseConstructor => {
+                Object.getOwnPropertyNames(baseConstructor.prototype).forEach(name => {
+                    if (name !== 'constructor') {
+                        var propertyDescriptor = Object.getOwnPropertyDescriptor(baseConstructor.prototype, name);
+                        Object.defineProperty(derivedConstructor.prototype, name, propertyDescriptor);
+                    }
+                });
+            });
+        }
+
+        applyMixins(Allors.Domain.Person, [Allors.Domain.Tests.Person]);
+
         $urlRouterProvider.otherwise('/home');
 
         $stateProvider

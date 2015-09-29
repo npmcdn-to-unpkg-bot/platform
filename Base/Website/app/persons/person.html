@@ -10,6 +10,13 @@
                 <label>Lastname</label>
                 <input class="form-control" placeholder="Lastname" ng-model="vm.root.LastName">
             </div>
+
+            <div class="form-group">
+                FullName: {{vm.root.FullName}} <br/>
+                greeting: {{vm.root.greeting()}} <br />
+                field: {{vm.root.field}} <br />
+            </div>
+
             <input type="button" class="btn btn-success" value="Save" ng-click="vm.save()" />
         </form>
 

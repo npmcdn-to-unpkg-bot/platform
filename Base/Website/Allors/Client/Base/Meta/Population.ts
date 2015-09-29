@@ -11,6 +11,7 @@
     }
 
     export class Population {
+        domains: string[];
         classes: ObjectType[];
     }
 }

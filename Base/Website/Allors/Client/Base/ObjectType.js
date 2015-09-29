@@ -14,3 +14,4 @@ var Allors;
     })();
     Allors.ObjectType = ObjectType;
 })(Allors || (Allors = {}));
+//# sourceMappingURL=ObjectType.js.map

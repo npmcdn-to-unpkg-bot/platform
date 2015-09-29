@@ -1,4 +1,14 @@
 ﻿module Allors {
+
+    function applyMixins(derivedConstructor: any, baseConstructor: any) {
+        Object.getOwnPropertyNames(baseConstructor.prototype).forEach(name => {
+            if (name !== 'constructor') {
+                var propertyDescriptor = Object.getOwnPropertyDescriptor(baseConstructor.prototype, name);
+                Object.defineProperty(derivedConstructor.prototype, name, propertyDescriptor);
+            }
+        });
+    }
+
     export class Database {
         objectTypeByName: { [name: string]: ObjectType; } = {};
         private databaseObjectById: { [id: string]: DatabaseObject; } = {};
@@ -7,6 +17,20 @@
             _.forEach(data.classes, objectTypeData => {
                 var objectType = new ObjectType(objectTypeData);
                 this.objectTypeByName[objectType.name] = objectType;
+            });
+
+            data.domains.map(domainName => {
+                data.classes.map(cls => {
+                    var className = cls.name;
+                    var derivedType = Allors.Domain[className];
+                    var baseNamespace = Allors.Domain[domainName];
+                    if (baseNamespace) {
+                        var baseType = baseNamespace[className];
+                        if (baseType) {
+                            applyMixins(derivedType, baseType);
+                        }
+                    }
+                });
             });
         }
 
