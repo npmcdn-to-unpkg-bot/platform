@@ -7,6 +7,7 @@
 
     export class ObjectType {
         name: string;
+        interfaces: string[];
         roleTypes: RoleType[];
     }
 

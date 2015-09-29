@@ -24,8 +24,6 @@
             });
         }
 
-        applyMixins(Allors.Domain.Person, [Allors.Domain.Tests.Person]);
-
         $urlRouterProvider.otherwise('/home');
 
         $stateProvider

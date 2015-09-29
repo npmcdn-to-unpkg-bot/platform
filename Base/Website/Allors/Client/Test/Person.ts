@@ -1,4 +1,4 @@
-module Allors.Domain.Tests
+module Allors.Domain.Test
 {
 	export class Person extends Allors.Domain.Person
     {

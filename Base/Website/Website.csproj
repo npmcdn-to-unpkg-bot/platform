@@ -260,14 +260,14 @@
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseError.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseRole.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseObject.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\Command.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\Models\Add\Add.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\Models\Edit\Edit.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\Models\IFilter.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\Models\Index\Index.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\Models\Index\Index_Organisation.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\Models\View\View.cs" />
-    <Compile Include="Allors\Server\Tests\Organisation\OrganisationController.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\Command.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\Models\Add\Add.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\Models\Edit\Edit.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\Models\IFilter.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\Models\Index\Index.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\Models\Index\Index_Organisation.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\Models\View\View.cs" />
+    <Compile Include="Allors\Server\Test\Organisation\OrganisationController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MenuConfig.cs" />
@@ -277,7 +277,7 @@
     <Compile Include="App_Start\ViewConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AngularController.cs" />
-    <Compile Include="Allors\Server\Tests\Mvc\MvcController.cs" />
+    <Compile Include="Allors\Server\Test\Mvc\MvcController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -290,7 +290,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Allors\Client\Tests\Person.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\Address.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\HomeAddress.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\MailboxAddress.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Test\User.ts" />
+    <TypeScriptCompile Include="Allors\Client\Test\Person.ts" />
     <TypeScriptCompile Include="app\common\services\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Data\SaveResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
@@ -466,23 +471,23 @@
     <Content Include="Allors\Server\Base\Shared\EditorTemplates\Default\Select.cshtml" />
     <Content Include="Allors\Server\Base\Shared\_NavbarItemPartial.cshtml" />
     <Content Include="Allors\Server\Base\Shared\_NavbarPartial.cshtml" />
-    <Content Include="Allors\Server\Tests\Organisation\Add.cshtml" />
-    <Content Include="Allors\Server\Tests\Organisation\DisplayTemplates\Index_Organisation.cshtml" />
-    <Content Include="Allors\Server\Tests\Organisation\Edit.cshtml" />
-    <Content Include="Allors\Server\Tests\Organisation\Index.cshtml" />
-    <Content Include="Allors\Server\Tests\Organisation\View.cshtml" />
-    <Content Include="Allors\Server\Tests\Organisation\_Filter.cshtml" />
-    <Content Include="Allors\Server\Tests\Web.config" />
+    <Content Include="Allors\Server\Test\Organisation\Add.cshtml" />
+    <Content Include="Allors\Server\Test\Organisation\DisplayTemplates\Index_Organisation.cshtml" />
+    <Content Include="Allors\Server\Test\Organisation\Edit.cshtml" />
+    <Content Include="Allors\Server\Test\Organisation\Index.cshtml" />
+    <Content Include="Allors\Server\Test\Organisation\View.cshtml" />
+    <Content Include="Allors\Server\Test\Organisation\_Filter.cshtml" />
+    <Content Include="Allors\Server\Test\Web.config" />
     <Content Include="Allors\Server\Web.config" />
-    <Content Include="Allors\Server\Tests\_ViewStart.cshtml" />
+    <Content Include="Allors\Server\Test\_ViewStart.cshtml" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-resource.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Allors\Server\Tests\Shared\_Layout.cshtml" />
-    <Content Include="Allors\Server\Tests\Shared\_LoginPartial.cshtml" />
-    <Content Include="Allors\Server\Tests\Shared\Error.cshtml" />
-    <Content Include="Allors\Server\Tests\Shared\Lockout.cshtml" />
+    <Content Include="Allors\Server\Test\Shared\_Layout.cshtml" />
+    <Content Include="Allors\Server\Test\Shared\_LoginPartial.cshtml" />
+    <Content Include="Allors\Server\Test\Shared\Error.cshtml" />
+    <Content Include="Allors\Server\Test\Shared\Lockout.cshtml" />
     <Content Include="Allors\Server\_ViewStart.cshtml" />
     <Content Include="Allors\Server\Base\Workspace\Save\SaveResponse.cd" />
     <Content Include="fonts\ui-grid.woff" />
@@ -558,11 +563,11 @@
     <Content Include="Settings.StyleCop" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Allors\Server\Tests\Mvc\Index.cshtml" />
+    <Content Include="Allors\Server\Test\Mvc\Index.cshtml" />
     <Content Include="Views\Angular\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Allors\Server\Tests\Organisation\EditorTemplates\" />
+    <Folder Include="Allors\Server\Test\Organisation\EditorTemplates\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\tinymce\plugins\image\" />

@@ -12,9 +12,15 @@
             </div>
 
             <div class="form-group">
+                <label>User Email</label>
+                <input class="form-control" placeholder="User Email" ng-model="vm.root.UserEmail">
+            </div>
+
+            <div class="form-group">
                 FullName: {{vm.root.FullName}} <br/>
-                greeting: {{vm.root.greeting()}} <br />
-                field: {{vm.root.field}} <br />
+                Greeting: {{vm.root.greeting()}} <br />
+                Field: {{vm.root.field}} <br/>
+                Mail: {{vm.root.Mail}}
             </div>
 
             <input type="button" class="btn btn-success" value="Save" ng-click="vm.save()" />

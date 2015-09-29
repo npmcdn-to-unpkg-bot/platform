@@ -38,10 +38,12 @@ module Allors.Meta
 		[
 $meta.SortedDomains:{domain|				"$domain.Name$"}; separator=",\n"$
 		], 
+
 		classes : 
 		[
 $meta.classes:{class|$class(class, grp)$}$
 		]
+
     }
 }
 >>
@@ -50,6 +52,14 @@ class(class, grp) ::= <<
 $if(class.roleTypesByGroup.(grp) || class.associationTypesByGroup.(grp))$
 			{
 				name: "$class.Name$" ,
+				interfaces : 
+				[
+$class.supertypes:{interface|
+$if(interface.roleTypesByGroup.(grp) || interface.associationTypesByGroup.(grp))$
+				"$interface.Name$",
+$endif$}$
+				],
+
 				roleTypes:
 				[
 $class.roleTypesByGroup.(grp):{roleType|$roleType(roleType)$}; separator=",\n"$

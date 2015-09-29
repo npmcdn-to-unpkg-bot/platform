@@ -19,12 +19,23 @@
                 this.objectTypeByName[objectType.name] = objectType;
             });
 
+            // Workspace Inheritance
             data.domains.map(domainName => {
                 data.classes.map(cls => {
                     var className = cls.name;
                     var derivedType = Allors.Domain[className];
                     var baseNamespace = Allors.Domain[domainName];
+
                     if (baseNamespace) {
+                        // Interfaces
+                        cls.interfaces.map(iface => {
+                            var baseInterface = baseNamespace[iface];
+                            if (baseInterface) {
+                                applyMixins(derivedType, baseInterface);
+                            }
+                        });
+
+                        // Class
                         var baseType = baseNamespace[className];
                         if (baseType) {
                             applyMixins(derivedType, baseType);

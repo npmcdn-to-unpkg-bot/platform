@@ -269,6 +269,7 @@
     <Compile Include="Base\Domain\User.cs" />
     <Compile Include="Base\Domain\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\Domain\User.cs" />
     <Compile Include="Test\MetaPopulation.v.cs" />
     <Compile Include="Test\Meta\Composite.cs" />
   </ItemGroup>

@@ -17,12 +17,21 @@ var Allors;
                 var objectType = new Allors.ObjectType(objectTypeData);
                 _this.objectTypeByName[objectType.name] = objectType;
             });
+            // Workspace Inheritance
             data.domains.map(function (domainName) {
                 data.classes.map(function (cls) {
                     var className = cls.name;
                     var derivedType = Allors.Domain[className];
                     var baseNamespace = Allors.Domain[domainName];
                     if (baseNamespace) {
+                        // Interfaces
+                        cls.interfaces.map(function (iface) {
+                            var baseInterface = baseNamespace[iface];
+                            if (baseInterface) {
+                                applyMixins(derivedType, baseInterface);
+                            }
+                        });
+                        // Class
                         var baseType = baseNamespace[className];
                         if (baseType) {
                             applyMixins(derivedType, baseType);

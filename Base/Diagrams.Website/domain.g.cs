@@ -5,6 +5,11 @@ namespace Allors.Domain
 									global::System.String I1AllorsString {set;}
 
 					}
+					public interface User 
+					{
+									global::System.String UserEmail {set;}
+
+					}
 
 
 					public interface C1 : I1 
@@ -21,7 +26,7 @@ namespace Allors.Domain
 					public interface Media 
 					{
 					}
-					public interface Person 
+					public interface Person : User 
 					{
 									Media Photo {set;}
 

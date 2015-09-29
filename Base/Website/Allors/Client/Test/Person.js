@@ -7,8 +7,8 @@ var Allors;
 (function (Allors) {
     var Domain;
     (function (Domain) {
-        var Tests;
-        (function (Tests) {
+        var Test;
+        (function (Test) {
             var Person = (function (_super) {
                 __extends(Person, _super);
                 function Person() {
@@ -27,8 +27,8 @@ var Allors;
                 };
                 return Person;
             })(Allors.Domain.Person);
-            Tests.Person = Person;
-        })(Tests = Domain.Tests || (Domain.Tests = {}));
+            Test.Person = Person;
+        })(Test = Domain.Test || (Domain.Test = {}));
     })(Domain = Allors.Domain || (Allors.Domain = {}));
 })(Allors || (Allors = {}));
 //# sourceMappingURL=Person.js.map
