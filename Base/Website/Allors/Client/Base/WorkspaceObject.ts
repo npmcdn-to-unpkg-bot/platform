@@ -1,6 +1,6 @@
 ﻿module Allors {
     export class WorkspaceObject {
-        public workspace : Workspace;
+        public workspace : IWorkspace;
         public databaseObject: DatabaseObject;
 
         private roleByRoleTypeName: { [id: string]: any; };

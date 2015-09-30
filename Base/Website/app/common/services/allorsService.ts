@@ -1,7 +1,7 @@
 ﻿module App.Common.Services
 {
     export class AllorsService {
-        database : Allors.Database;
+        database : Allors.IDatabase;
 
         static $inject = ["$http", "$q","$rootScope"];
         constructor(private $http: ng.IHttpService, private $q: ng.IQService) {

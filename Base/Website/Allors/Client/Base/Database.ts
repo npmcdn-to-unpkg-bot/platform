@@ -9,7 +9,15 @@
         });
     }
 
-    export class Database {
+    export interface IDatabase {
+        objectTypeByName: { [name: string]: ObjectType; };
+
+        load(data: Data.LoadResponse): void;
+        check(data: Data.Response): Data.LoadRequest;
+        get(id: string): DatabaseObject;
+    }
+
+    export class Database implements IDatabase {
         objectTypeByName: { [name: string]: ObjectType; } = {};
         private databaseObjectById: { [id: string]: DatabaseObject; } = {};
 

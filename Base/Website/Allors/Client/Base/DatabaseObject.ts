@@ -1,12 +1,12 @@
 ﻿module Allors {
     export class DatabaseObject {
-        database: Database;
+        database: IDatabase;
         private i: string;
         private v: string;
         private t: string;
         public roles: any;
 
-        constructor(database: Database, loadObject: Data.LoadResponseObject) {
+        constructor(database: IDatabase, loadObject: Data.LoadResponseObject) {
             this.database = database;
             this.i = loadObject.i;
             this.v = loadObject.v;

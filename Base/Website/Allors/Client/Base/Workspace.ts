@@ -1,9 +1,15 @@
 ﻿module Allors {
+    export interface IWorkspace {
+        get(id: string): any;
+        save(): Data.SaveRequest;
+        reset(): void;
+    }
+
     export class Workspace {
-        private database: Database;
+        private database: IDatabase;
         private workspaceObjectById: { [id: string]: WorkspaceObject; } = {};
 
-        constructor(database: Database) {
+        constructor(database: IDatabase) {
             this.database = database;
         }
 
@@ -37,7 +43,7 @@
             return data;
         }
 
-        reset() {
+        reset(): void {
             _.forEach(this.workspaceObjectById, v => {
                 v.reset();
             });
