@@ -13,6 +13,18 @@
             this.database = database;
         }
 
+        get hasChanges(): boolean {
+            var hasChanges = false;
+            _.forEach(this.workspaceObjectById, workspaceObject => {
+                if (workspaceObject.hasChanges) {
+                    hasChanges = true;
+                    return;
+                }
+            });
+
+            return hasChanges;
+        }
+
         get(id: string): any {
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
@@ -42,7 +54,7 @@
 
             return data;
         }
-
+        
         reset(): void {
             _.forEach(this.workspaceObjectById, v => {
                 v.reset();

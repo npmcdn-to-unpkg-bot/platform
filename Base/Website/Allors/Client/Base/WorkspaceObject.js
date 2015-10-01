@@ -3,6 +3,17 @@ var Allors;
     var WorkspaceObject = (function () {
         function WorkspaceObject() {
         }
+        Object.defineProperty(WorkspaceObject.prototype, "hasChanges", {
+            get: function () {
+                var hasChanges = this.roleByRoleTypeName !== undefined;
+                if (hasChanges) {
+                    return hasChanges;
+                }
+                return hasChanges;
+            },
+            enumerable: true,
+            configurable: true
+        });
         WorkspaceObject.prototype.save = function () {
             var _this = this;
             if (this.roleByRoleTypeName !== undefined) {

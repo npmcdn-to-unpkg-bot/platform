@@ -5,6 +5,20 @@ var Allors;
             this.workspaceObjectById = {};
             this.database = database;
         }
+        Object.defineProperty(Workspace.prototype, "hasChanges", {
+            get: function () {
+                var hasChanges = false;
+                _.forEach(this.workspaceObjectById, function (workspaceObject) {
+                    if (workspaceObject.hasChanges) {
+                        hasChanges = true;
+                        return;
+                    }
+                });
+                return hasChanges;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Workspace.prototype.get = function (id) {
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
