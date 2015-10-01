@@ -6,11 +6,7 @@
         private roleByRoleTypeName: { [id: string]: any; };
 
         get hasChanges(): boolean {
-            var hasChanges = this.roleByRoleTypeName !== undefined;
-            if (hasChanges) {
-                return hasChanges;
-            }
-            return hasChanges;
+            return this.roleByRoleTypeName !== undefined;
         }
 
         save() : Data.SaveRequestObject {
@@ -155,7 +151,7 @@
         reset() {
             if (this.roleByRoleTypeName)
             {
-                this.roleByRoleTypeName = {};
+                this.roleByRoleTypeName = undefined;
             }
         }
     }
