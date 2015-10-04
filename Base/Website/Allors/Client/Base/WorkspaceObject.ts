@@ -149,6 +149,7 @@
         }
 
         reset() {
+            this.databaseObject = this.databaseObject.database.get(this.id);
             if (this.roleByRoleTypeName)
             {
                 this.roleByRoleTypeName = undefined;
