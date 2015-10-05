@@ -302,63 +302,63 @@ namespace Allors.Domain
 		}
 		public interface C1  : Object, I1, AccessControlledObject 
 		{
-						I1 C1I1One2One {set;}
-
-						global::System.String C1AllorsString {set;}
-
-						C2 C1C2Many2One {set;}
-
-						I2 C1I2One2One {set;}
-
-						C1 C1C1One2One {set;}
-
-						I1 C1I1Many2One {set;}
-
-						I1 C1I1Many2Manies {set;}
-
-						I2 C1I2One2Manies {set;}
-
-						global::System.Decimal? C1AllorsDecimal {set;}
-
-						C1 C1C1Many2Manies {set;}
-
-						I12 C1I12Many2Manies {set;}
-
 						global::System.Byte[] C1AllorsBinary {set;}
-
-						I12 C1I12One2Manies {set;}
-
-						C2 C1C2One2Manies {set;}
-
-						C1 C1C1One2Manies {set;}
-
-						global::System.String AllorsStringMax {set;}
-
-						C1 C1C1Many2One {set;}
 
 						global::System.Boolean? C1AllorsBoolean {set;}
 
-						I12 C1I12One2One {set;}
-
-						I12 C1I12Many2One {set;}
-
-						I2 C1I2Many2Manies {set;}
-
-						global::System.Guid? C1AllorsUnique {set;}
-
-						I2 C1I2Many2One {set;}
-
-						I1 C1I1One2Manies {set;}
-
-						C2 C1C2One2One {set;}
-
 						global::System.DateTime? C1AllorsDateTime {set;}
+
+						global::System.Decimal? C1AllorsDecimal {set;}
 
 						global::System.Double? C1AllorsDouble {set;}
 
+						global::System.Int32? C1AllorsInteger {set;}
+
+						global::System.String C1AllorsString {set;}
+
+						global::System.String AllorsStringMax {set;}
+
+						global::System.Guid? C1AllorsUnique {set;}
+
+						C1 C1C1Many2Manies {set;}
+
+						C1 C1C1Many2One {set;}
+
+						C1 C1C1One2Manies {set;}
+
+						C1 C1C1One2One {set;}
+
 						C2 C1C2Many2Manies {set;}
 
-						global::System.Int32? C1AllorsInteger {set;}
+						C2 C1C2Many2One {set;}
+
+						C2 C1C2One2Manies {set;}
+
+						C2 C1C2One2One {set;}
+
+						I12 C1I12Many2Manies {set;}
+
+						I12 C1I12Many2One {set;}
+
+						I12 C1I12One2Manies {set;}
+
+						I12 C1I12One2One {set;}
+
+						I1 C1I1Many2Manies {set;}
+
+						I1 C1I1Many2One {set;}
+
+						I1 C1I1One2Manies {set;}
+
+						I1 C1I1One2One {set;}
+
+						I2 C1I2Many2Manies {set;}
+
+						I2 C1I2Many2One {set;}
+
+						I2 C1I2One2Manies {set;}
+
+						I2 C1I2One2One {set;}
 
 		}
 		public interface C2  : Object, I2 

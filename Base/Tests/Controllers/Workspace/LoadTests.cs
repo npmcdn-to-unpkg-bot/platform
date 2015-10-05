@@ -89,12 +89,19 @@ namespace Controllers.Workspace
             responseC1a.Roles.Length.ShouldEqual(2);
 
             var responseC1AllorsString = responseC1a.Roles.First(v => v[0].Equals("C1AllorsString"));
+            responseC1AllorsString.Length.ShouldEqual(2);
             responseC1AllorsString[1].ShouldEqual("rw");
             responseC1AllorsString[2].ShouldEqual("c1");
 
+            var responseC1AllorsBoolean = responseC1a.Roles.First(v => v[0].Equals("C1AllorsBoolean"));
+            responseC1AllorsBoolean.Length.ShouldEqual(2);
+            responseC1AllorsBoolean[1].ShouldEqual("rw");
+
             var responseI1AllorsString = responseC1a.Roles.First(v => v[0].Equals("I1AllorsString"));
+            responseI1AllorsString.Length.ShouldEqual(2);
             responseI1AllorsString[1].ShouldEqual("rw");
             responseI1AllorsString[2].ShouldEqual("i1");
+
         }
 
     }

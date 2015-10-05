@@ -14,13 +14,16 @@ namespace Allors.Domain
 
 					public interface C1 : I1 
 					{
+									global::System.Byte[] C1AllorsBinary {set;}
+
+
 									global::System.String C1AllorsString {set;}
 
 
-									C1 C1C1One2One {set;}
-
-
 									C1 C1C1One2Manies {set;}
+
+
+									C1 C1C1One2One {set;}
 
 					}
 					public interface Media 

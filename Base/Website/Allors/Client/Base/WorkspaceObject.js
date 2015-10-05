@@ -5,11 +5,7 @@ var Allors;
         }
         Object.defineProperty(WorkspaceObject.prototype, "hasChanges", {
             get: function () {
-                var hasChanges = this.roleByRoleTypeName !== undefined;
-                if (hasChanges) {
-                    return hasChanges;
-                }
-                return hasChanges;
+                return this.roleByRoleTypeName !== undefined;
             },
             enumerable: true,
             configurable: true
@@ -135,8 +131,9 @@ var Allors;
             });
         };
         WorkspaceObject.prototype.reset = function () {
+            this.databaseObject = this.databaseObject.database.get(this.id);
             if (this.roleByRoleTypeName) {
-                this.roleByRoleTypeName = {};
+                this.roleByRoleTypeName = undefined;
             }
         };
         return WorkspaceObject;

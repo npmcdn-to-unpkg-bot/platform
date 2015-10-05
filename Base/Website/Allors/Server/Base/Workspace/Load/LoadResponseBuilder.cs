@@ -53,10 +53,6 @@
         {
             var composite = (Composite)obj.Strategy.Class;
 
-            if (obj is RequirementAssessment)
-            {
-            }
-
             IList<RoleType> roleTypes;
             if (composite.RoleTypesByGroup.TryGetValue(@group, out roleTypes))
             {
