@@ -53,6 +53,10 @@
         {
             var composite = (Composite)obj.Strategy.Class;
 
+            if (obj is RequirementAssessment)
+            {
+            }
+
             IList<RoleType> roleTypes;
             if (composite.RoleTypesByGroup.TryGetValue(@group, out roleTypes))
             {
@@ -82,7 +86,10 @@
                                 {
                                     roles.Add(new[] { propertyName, access, role });
                                 }
-
+                                else
+                                {
+                                    roles.Add(new object[] { propertyName, access });
+                                }
                             }
                             else
                             {
@@ -93,6 +100,10 @@
                                     {
                                         roles.Add(new object[] { propertyName, access, role.Id.ToString() });
                                     }
+                                    else
+                                    {
+                                        roles.Add(new object[] { propertyName, access });
+                                    }
                                 }
                                 else
                                 {
@@ -102,8 +113,11 @@
                                         var ids = role.Cast<IObject>().Select(roleObject => roleObject.Id.ToString()).ToList();
                                         roles.Add(new object[] { propertyName, access, ids });
                                     }
+                                    else
+                                    {
+                                        roles.Add(new object[] { propertyName, access });
+                                    }
                                 }
-
                             }
                         }
                         else
