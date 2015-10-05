@@ -9,10 +9,11 @@
     class OrganisationController implements IOrganisationModel {
         title: string;
 
-        static $inject = ["$state", "allorsService"];
-        constructor(private $state: IOrganisationState, private allorsService: App.Common.Services.AllorsService) {
+        static $inject = ["$http", "$state", "allorsService"];
+        constructor(private $http: ng.IHttpService, private $state: IOrganisationState, private allorsService: App.Common.Services.AllorsService) {
             this.title = "Organisation";
         }
+     
     }
     angular
         .module("app")

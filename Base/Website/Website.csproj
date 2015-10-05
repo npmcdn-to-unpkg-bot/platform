@@ -246,6 +246,9 @@
     <Compile Include="Allors\Server\Base\Mvc\Views\ViewContextExtensions.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsMembershipProvider.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsRoleProvider.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Execute\ExecuteRequest.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Execute\ExecuteResponse.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Execute\ExecuteResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadRequest.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponse.cs" />
@@ -290,6 +293,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Allors\Client\Base\Data\MethodRequest.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\MethodResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Address.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\HomeAddress.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\MailboxAddress.g.ts" />
@@ -493,6 +498,7 @@
     <Content Include="fonts\ui-grid.woff" />
     <Content Include="fonts\ui-grid.ttf" />
     <Content Include="fonts\ui-grid.eot" />
+    <Content Include="Allors\Server\Base\Workspace\Execute\SaveResponse.cd" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

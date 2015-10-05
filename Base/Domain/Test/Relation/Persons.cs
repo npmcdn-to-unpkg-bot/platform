@@ -28,9 +28,7 @@ namespace Allors.Domain
         }
 
         protected override void TestSecure(Security config)
-        {
-            base.TestSecure(config);
-
+        { 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
             config.GrantAdministrator(this.ObjectType, full);
         }

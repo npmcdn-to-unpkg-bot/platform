@@ -3,12 +3,13 @@ var App;
     var Organisation;
     (function (Organisation) {
         var OrganisationController = (function () {
-            function OrganisationController($state, allorsService) {
+            function OrganisationController($http, $state, allorsService) {
+                this.$http = $http;
                 this.$state = $state;
                 this.allorsService = allorsService;
                 this.title = "Organisation";
             }
-            OrganisationController.$inject = ["$state", "allorsService"];
+            OrganisationController.$inject = ["$http", "$state", "allorsService"];
             return OrganisationController;
         })();
         angular

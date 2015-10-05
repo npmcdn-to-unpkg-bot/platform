@@ -178,6 +178,12 @@ namespace Allors.Meta
         [Group(Groups.Workspace)]
         public RelationType Weight;
 
+        #region Allors
+        [Id("FC091EAC-05DC-4C09-8B9A-BB142C196708")]
+        #endregion
+        [Group(Groups.Workspace)]
+        public MethodType Method;
+
         public Tree AngularHome { get; private set; }
 
         internal override void TestExtend()

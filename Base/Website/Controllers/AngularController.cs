@@ -43,7 +43,24 @@ namespace Website.Controllers
             }
             catch (Exception e) { return JsonError(e.Message); }
         }
-        
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Execute(ExecuteRequest executeRequest)
+        {
+            try
+            {
+                var user = this.AuthenticatedUser ?? Singleton.Instance(this.AllorsSession).Guest;
+                var executeResponseBuilder = new ExecuteResponseBuilder(this.AllorsSession, user, executeRequest, Group);
+                var executeResponse = executeResponseBuilder.Build();
+                return this.JsonSuccess(executeResponse);
+            }
+            catch (Exception e)
+            {
+                return this.JsonError(e.Message);
+            }
+        }
+
         [Authorize]
         [HttpPost]
         public ActionResult Main()

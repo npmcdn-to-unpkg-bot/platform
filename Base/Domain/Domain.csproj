@@ -133,6 +133,7 @@
     <Compile Include="Generated\Period.g.cs" />
     <Compile Include="Generated\Permission.g.cs" />
     <Compile Include="Generated\Person.g.cs" />
+    <Compile Include="Generated\PersonMethod.g.cs" />
     <Compile Include="Generated\Place.g.cs" />
     <Compile Include="Generated\Printable.g.cs" />
     <Compile Include="Generated\PrintQueue.g.cs" />

@@ -11,6 +11,14 @@
             this.$scope.$on("refresh", () => { this.refresh() });
         }
 
+        public method() {
+            this.$http.post('/Angular/Execute', <Allors.Data.MethodRequest>{ i: this.root.id, v: this.root.version, m: "Method" })
+                .then((response: ng.IHttpPromiseCallbackArg<Allors.Data.MethodResponse>) => {
+                    var executeResponse = response.data;
+                })
+                .catch(e => { throw e; });
+        }
+
         public save(): void {
             var saveRequest = this.context.workspace.save();
             this.$http.post('/Angular/Save', { objects: saveRequest.objects })

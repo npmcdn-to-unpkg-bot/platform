@@ -12,6 +12,13 @@ var App;
                 this.refresh();
                 this.$scope.$on("refresh", function () { _this.refresh(); });
             }
+            PersonController.prototype.method = function () {
+                this.$http.post('/Angular/Execute', { i: this.root.id, v: this.root.version, m: "Method" })
+                    .then(function (response) {
+                    var executeResponse = response.data;
+                })
+                    .catch(function (e) { throw e; });
+            };
             PersonController.prototype.save = function () {
                 var _this = this;
                 var saveRequest = this.context.workspace.save();
