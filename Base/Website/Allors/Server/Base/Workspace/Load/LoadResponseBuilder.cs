@@ -9,6 +9,7 @@
     public class LoadResponseBuilder
     {
         private static readonly object[][] EmptyRoles = { };
+        private static readonly object[][] EmptyMethods = { };
 
         private readonly ISession session;
         private readonly LoadRequest loadRequest;
@@ -45,6 +46,7 @@
                     V = x.Strategy.ObjectVersion.ToString(),
                     T = x.Strategy.Class.Name,
                     Roles = this.GetRoles(x),
+                    Methods = this.GetMethods(x),
                 }).ToArray() 
             };
         }
@@ -127,6 +129,39 @@
             }
 
             return EmptyRoles;
+        }
+
+        private object[][] GetMethods(IObject obj)
+        {
+            var composite = (Composite)obj.Strategy.Class;
+
+            IList<MethodType> methodTypes;
+            if (composite.MethodTypesByGroup.TryGetValue(@group, out methodTypes))
+            {
+                if (methodTypes.Count > 0)
+                {
+                    AccessControlList acl = null;
+                    if (obj is AccessControlledObject)
+                    {
+                        acl = new AccessControlList(obj, this.user);
+                    }
+
+                    var methods = new List<object[]>();
+                    foreach (var methodType in methodTypes)
+                    {
+                        var methodName = methodType.Name;
+
+                        var canExecute = acl == null || acl.CanExecute(methodType);
+                        var access = canExecute ? "x" : string.Empty;
+
+                        methods.Add(new object[] { methodName, access });
+                    }
+
+                    return methods.ToArray();
+                }
+            }
+
+            return EmptyMethods;
         }
     }
 }

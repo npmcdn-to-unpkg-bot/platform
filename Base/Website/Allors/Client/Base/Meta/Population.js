@@ -8,6 +8,12 @@ var Allors;
             return RoleType;
         })();
         Meta.RoleType = RoleType;
+        var MethodType = (function () {
+            function MethodType() {
+            }
+            return MethodType;
+        })();
+        Meta.MethodType = MethodType;
         var ObjectType = (function () {
             function ObjectType() {
             }

@@ -18,5 +18,7 @@
         public string T { get; set; }
 
         public object[][] Roles { get; set; }
+
+        public object[][] Methods { get; set; }
     }
 }

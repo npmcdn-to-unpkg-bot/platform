@@ -650,35 +650,35 @@ namespace Allors.Domain
 		}
 		public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
 		{
-						global::System.String Information {set;}
-
-						Person Shareholders {set;}
-
-						Image Images {set;}
-
-						global::System.String Name {set;}
+						Address Addresses {set;}
 
 						global::System.String Description {set;}
 
 						Person Employees {set;}
 
-						global::System.Boolean? Incorporated {set;}
+						Image Images {set;}
 
-						global::System.Boolean? IsSupplier {set;}
+						global::System.Boolean? Incorporated {set;}
 
 						global::System.DateTime? IncorporationDate {set;}
 
-						Address Addresses {set;}
+						global::System.String Information {set;}
 
-						Person Owner {set;}
-
-						Person Manager {set;}
+						global::System.Boolean? IsSupplier {set;}
 
 						Image Logo {set;}
 
-						global::System.String Size {set;}
-
 						Address MainAddress {set;}
+
+						Person Manager {set;}
+
+						global::System.String Name {set;}
+
+						Person Owner {set;}
+
+						Person Shareholders {set;}
+
+						global::System.String Size {set;}
 
 		}
 		public interface Permission  : Object, Deletable, AccessControlledObject 

@@ -70,6 +70,8 @@ module Allors.Domain
 	export class $objectType.name$ extends WorkspaceObject $if(objectType.directSupertypesByGroup.(grp))$implements $objectType.directSupertypesByGroup.(grp):{directSupertype|$directSupertype.SingularName$}; separator=", "$ $endif$
 	{
 $objectType.roleTypesByGroup.(grp):{roleType|$classRoleType()$}; separator="\n"$
+
+$objectType.methodTypesByGroup.(grp):{methodType|$classMethodType()$}; separator="\n"$
 	}
 }
 
@@ -122,6 +124,12 @@ $else$
 			}
 $endif$
 $endif$
+>>
+
+classMethodType() ::= <<
+			get CanExecute$methodType.Name$(): boolean {
+				return this.databaseObject.methods.CanExecute$methodType.Name$;
+			}
 >>
 
 objectType_Name(objectType) ::= <%

@@ -359,6 +359,22 @@ test("workspace many save", function () {
     ok(savedEmployees.r === undefined);
 });
 
+test("workspace method canExecute", function () {
+    var database = new Allors.Database(Allors.Meta.population);
+    database.load(fixture.loadData);
+
+    var workspace = new Allors.Workspace(database);
+
+    var acme = workspace.get("101");
+    var ocme = workspace.get("102");
+    var icme = workspace.get("102");
+
+    ok(acme.CanExecuteJustDoIt === true);
+    ok(ocme.CanExecuteJustDoIt === false);
+    ok(icme.CanExecuteJustDoIt === false);
+});
+
+
 test("database check versions", function () {
     var database = new Allors.Database(Allors.Meta.population);
     database.load(fixture.loadData);

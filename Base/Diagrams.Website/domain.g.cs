@@ -48,19 +48,19 @@ namespace Allors.Domain
 					}
 					public interface Organisation 
 					{
-									Person Shareholders {set;}
+									Person Employees {set;}
+
+
+									Person Manager {set;}
 
 
 									global::System.String Name {set;}
 
 
-									Person Employees {set;}
-
-
 									Person Owner {set;}
 
 
-									Person Manager {set;}
+									Person Shareholders {set;}
 
 					}
 

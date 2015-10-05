@@ -21,11 +21,15 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public sealed partial class MethodType : OperandType
     {
-        private string name;
+        private static readonly string[] EmptyGroups = { };
 
+        private string[] groups;
+        private string name;
         private Composite objectType;
 
         public MethodType(MetaPopulation metaPopulation, Guid id)
@@ -35,7 +39,7 @@ namespace Allors.Meta
 
             metaPopulation.OnMethodTypeCreated(this);
         }
-
+        
         public string Name
         {
             get
@@ -82,6 +86,55 @@ namespace Allors.Meta
             get
             {
                 return this.name;
+            }
+        }
+
+        public string[] Groups
+        {
+            get
+            {
+                return this.groups ?? EmptyGroups;
+            }
+
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+
+                this.groups = null;
+                if (value != null)
+                {
+                    this.groups = new HashSet<string>(value).ToArray();
+                }
+
+                this.MetaPopulation.Stale();
+            }
+        }
+
+        public void AddGroup(string @group)
+        {
+            if (@group != null)
+            {
+                this.Groups = new List<string>(this.Groups) { @group }.ToArray();
+            }
+        }
+
+        public void AddGroups(string[] groups)
+        {
+            if (groups != null)
+            {
+                var newTags = new List<string>(this.Groups);
+                newTags.AddRange(groups);
+                this.Groups = newTags.ToArray();
+            }
+        }
+
+        public void RemoveGroup(string @group)
+        {
+            if (@group != null)
+            {
+                var newGroup = new List<string>(this.Groups);
+                newGroup.Remove(@group);
+                this.Groups = newGroup.ToArray();
             }
         }
 

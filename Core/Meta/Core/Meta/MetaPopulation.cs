@@ -259,6 +259,11 @@ namespace Allors.Meta
                     methodType.Name = methodTypeField.Name;
                     methodType.ObjectType = composite;
                     methodTypeField.SetValue(composite, methodType);
+                    
+                    foreach (var groupAttribute in Attribute.GetCustomAttributes(methodTypeField, typeof(GroupAttribute)).Cast<GroupAttribute>())
+                    {
+                        methodType.AddGroup(groupAttribute.Value);
+                    }
                 }
             }
 
@@ -771,6 +776,12 @@ namespace Allors.Meta
                     foreach (var type in this.derivedComposites)
                     {
                         type.DeriveMethodTypes(sharedMethodTypeList);
+                    }
+
+                    // MethodTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveMethodTypesByGroup();
                     }
 
                     // ConcreteRoleType

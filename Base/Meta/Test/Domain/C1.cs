@@ -313,6 +313,7 @@ namespace Allors.Meta
         #region Allors
         [Id("44E6A9A3-0E1D-435F-A863-8E8F12580D91")]
         #endregion
+        [Group(Groups.Workspace)]
         public MethodType ClassMethod;
 
         #region Allors

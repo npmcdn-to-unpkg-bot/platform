@@ -8,6 +8,7 @@ var Allors;
             this.v = loadObject.v;
             this.t = loadObject.t;
             this.roles = {};
+            this.methods = {};
             _.forEach(loadObject.roles, function (role) {
                 var name = role[0];
                 var access = role[1];
@@ -19,6 +20,12 @@ var Allors;
                     var value = role[2];
                     _this.roles[name] = value;
                 }
+            });
+            _.forEach(loadObject.methods, function (method) {
+                var name = method[0];
+                var access = method[1];
+                var canExecute = access.indexOf('x') !== -1;
+                _this.methods["CanExecute" + name] = canExecute;
             });
         }
         Object.defineProperty(DatabaseObject.prototype, "id", {

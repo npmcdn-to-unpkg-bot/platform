@@ -5,6 +5,7 @@
         t: string;
 
         roles: string[][];
+        methods: string[][];
     }
 
     export class LoadResponse {

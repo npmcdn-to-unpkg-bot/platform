@@ -49,7 +49,7 @@ $meta.classes:{class|$class(class, grp)$}$
 >>
 
 class(class, grp) ::= <<
-$if(class.roleTypesByGroup.(grp) || class.associationTypesByGroup.(grp))$
+$if(class.roleTypesByGroup.(grp) || class.associationTypesByGroup.(grp) || class.methodTypesByGroup.(grp))$
 			{
 				name: "$class.Name$" ,
 				interfaces : 
@@ -63,6 +63,11 @@ $endif$}$
 				roleTypes:
 				[
 $class.roleTypesByGroup.(grp):{roleType|$roleType(roleType)$}; separator=",\n"$
+				],
+
+				methodTypes:
+				[
+$class.methodTypesByGroup.(grp):{methodType|$methodType(methodType)$}; separator=",\n"$
 				]
 			},
 $endif$
@@ -73,6 +78,12 @@ roleType(roleType) ::= <<
 						name: "$roleType.SingularPropertyName$",
 						isUnit: $boolean(roleType.ObjectType.IsUnit)$,  
 						isOne: $boolean(roleType.IsOne)$  
+					}
+>>
+
+methodType(methodType) ::= <<
+					{ 
+						name: "$methodType.Name$"
 					}
 >>
 

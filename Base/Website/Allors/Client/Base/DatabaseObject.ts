@@ -5,6 +5,7 @@
         private v: string;
         private t: string;
         public roles: any;
+        public methods: any;
 
         constructor(database: IDatabase, loadObject: Data.LoadResponseObject) {
             this.database = database;
@@ -13,6 +14,7 @@
             this.t = loadObject.t;
 
             this.roles = {};
+            this.methods = {};
 
             _.forEach(loadObject.roles, role => {
                 var name = role[0];
@@ -28,6 +30,14 @@
                     this.roles[name] = value;
                 }
 
+            });
+
+            _.forEach(loadObject.methods, method => {
+                var name = method[0];
+                var access = method[1];
+                var canExecute = access.indexOf('x') !== -1;
+
+                this.methods["CanExecute" + name] = canExecute;
             });
         }
 

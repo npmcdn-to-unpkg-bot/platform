@@ -38,6 +38,7 @@ namespace Allors.Meta
         private Dictionary<string, IList<RoleType>> derivedExclusiveRoleTypesByGroup;
         private Dictionary<string, IList<RoleType>> derivedRoleTypesByGroup;
         private Dictionary<string, IList<AssociationType>> derivedAssociationTypesByGroup;
+        private Dictionary<string, IList<MethodType>> derivedMethodTypesByGroup;
 
         protected Composite(MetaPopulation metaPopulation)
             : base(metaPopulation)
@@ -272,6 +273,19 @@ namespace Allors.Meta
             }
         }
 
+        /// <summary>
+        /// Gets the methods by group.
+        /// </summary>
+        /// <value>The grouped methods.</value>
+        public Dictionary<string, IList<MethodType>> MethodTypesByGroup
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.derivedMethodTypesByGroup;
+            }
+        }
+
         public IEnumerable<RoleType> UnitRoleTypes
         {
             get
@@ -398,6 +412,37 @@ namespace Allors.Meta
             }
 
             this.derivedMethodTypes = new LazySet<MethodType>(methodTypes);
+        }
+
+        /// <summary>
+        /// Derive method types by group.
+        /// </summary>
+        /// <param name="methodTypes">The grouped method types.</param>
+        internal void DeriveMethodTypesByGroup()
+        {
+            var methodTypesByGroup = new Dictionary<string, IList<MethodType>>();
+
+            foreach (var methodType in this.MethodTypes)
+            {
+                foreach (var group in methodType.Groups)
+                {
+                    IList<MethodType> groupedMethodTypes;
+                    if (!methodTypesByGroup.TryGetValue(group, out groupedMethodTypes))
+                    {
+                        groupedMethodTypes = new List<MethodType>();
+                        methodTypesByGroup[group] = groupedMethodTypes;
+                    }
+
+                    groupedMethodTypes.Add(methodType);
+                }
+            }
+
+            foreach (var group in methodTypesByGroup.Keys.ToArray())
+            {
+                methodTypesByGroup[group] = methodTypesByGroup[group].ToArray();
+            }
+
+            this.derivedMethodTypesByGroup = methodTypesByGroup;
         }
 
         /// <summary>

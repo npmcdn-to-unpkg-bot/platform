@@ -44,15 +44,40 @@ namespace Controllers.Workspace
 
             var responseC1a = loadResponse.Objects[0];
 
-            responseC1a.Roles.Length.ShouldEqual(2);
+            var roles = responseC1a.Roles;
+            roles.Length.ShouldEqual(5);
 
-            var responseC1AllorsString = responseC1a.Roles.First(v => v[0].Equals("C1AllorsString"));
+            // Roles
+            var responseC1AllorsString = roles.First(v => v[0].Equals("C1AllorsString"));
+            responseC1AllorsString.Length.ShouldEqual(3);
             responseC1AllorsString[1].ShouldEqual("r");
             responseC1AllorsString[2].ShouldEqual("c1");
 
-            var responseI1AllorsString = responseC1a.Roles.First(v => v[0].Equals("I1AllorsString"));
+            var responseI1AllorsString = roles.First(v => v[0].Equals("I1AllorsString"));
+            responseI1AllorsString.Length.ShouldEqual(3);
             responseI1AllorsString[1].ShouldEqual("r");
             responseI1AllorsString[2].ShouldEqual("i1");
+
+            // Null's
+            var responseC1AllorsBoolean = roles.First(v => v[0].Equals("C1AllorsBinary"));
+            responseC1AllorsBoolean.Length.ShouldEqual(2);
+            responseC1AllorsBoolean[1].ShouldEqual("r");
+
+            var responseC1One2One = roles.First(v => v[0].Equals("C1C1One2One"));
+            responseC1One2One.Length.ShouldEqual(2);
+            responseC1One2One[1].ShouldEqual("r");
+
+            var responseC1One2Many = roles.First(v => v[0].Equals("C1C1One2Many"));
+            responseC1One2Many.Length.ShouldEqual(2);
+            responseC1One2Many[1].ShouldEqual("r");
+
+            // Methods
+            var methods = responseC1a.Methods;
+            methods.Length.ShouldEqual(1);
+
+            var responseClassMethod = methods.First(v => v[0].Equals("ClassMethod"));
+            responseClassMethod.Length.ShouldEqual(2);
+            responseClassMethod[1].ShouldEqual(string.Empty);
         }
 
         [Test]
@@ -86,23 +111,40 @@ namespace Controllers.Workspace
 
             var responseC1a = loadResponse.Objects[0];
 
-            responseC1a.Roles.Length.ShouldEqual(2);
+            var roles = responseC1a.Roles;
+            roles.Length.ShouldEqual(5);
 
-            var responseC1AllorsString = responseC1a.Roles.First(v => v[0].Equals("C1AllorsString"));
-            responseC1AllorsString.Length.ShouldEqual(2);
+            // Roles
+            var responseC1AllorsString = roles.First(v => v[0].Equals("C1AllorsString"));
+            responseC1AllorsString.Length.ShouldEqual(3);
             responseC1AllorsString[1].ShouldEqual("rw");
             responseC1AllorsString[2].ShouldEqual("c1");
 
-            var responseC1AllorsBoolean = responseC1a.Roles.First(v => v[0].Equals("C1AllorsBoolean"));
-            responseC1AllorsBoolean.Length.ShouldEqual(2);
-            responseC1AllorsBoolean[1].ShouldEqual("rw");
-
-            var responseI1AllorsString = responseC1a.Roles.First(v => v[0].Equals("I1AllorsString"));
-            responseI1AllorsString.Length.ShouldEqual(2);
+            var responseI1AllorsString = roles.First(v => v[0].Equals("I1AllorsString"));
+            responseI1AllorsString.Length.ShouldEqual(3);
             responseI1AllorsString[1].ShouldEqual("rw");
             responseI1AllorsString[2].ShouldEqual("i1");
 
-        }
+            // Null's
+            var responseC1AllorsBoolean = roles.First(v => v[0].Equals("C1AllorsBinary"));
+            responseC1AllorsBoolean.Length.ShouldEqual(2);
+            responseC1AllorsBoolean[1].ShouldEqual("rw");
 
+            var responseC1One2One = roles.First(v => v[0].Equals("C1C1One2One"));
+            responseC1One2One.Length.ShouldEqual(2);
+            responseC1One2One[1].ShouldEqual("rw");
+
+            var responseC1One2Many = roles.First(v => v[0].Equals("C1C1One2Many"));
+            responseC1One2Many.Length.ShouldEqual(2);
+            responseC1One2Many[1].ShouldEqual("rw");
+
+            // Methods
+            var methods = responseC1a.Methods;
+            methods.Length.ShouldEqual(1);
+
+            var responseClassMethod = methods.First(v => v[0].Equals("ClassMethod"));
+            responseClassMethod.Length.ShouldEqual(2);
+            responseClassMethod[1].ShouldEqual("x");
+        }
     }
 }

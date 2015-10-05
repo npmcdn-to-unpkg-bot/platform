@@ -37,8 +37,11 @@
                     ["Name", "rw", "Acme"],
                     ["Owner", "rw", "1"],
                     ["Employee", "rw", ["1", "2", "3"]]
+                ],
+                methods: [
+                    ["JustDoIt", "x"]
                 ]
-            },
+                },
             {
                 i: "102",
                 v: "1102",
@@ -47,6 +50,9 @@
                     ["Name", "rw", "Ocme"],
                     ["Owner", "rw", "2"],
                     ["Employee", "rw", ["1"]]
+                ],
+                methods: [
+                    ["JustDoIt", ""]
                 ]
             },
             {
@@ -56,6 +62,9 @@
                 roles: [
                     ["Name", "rw", "icme"],
                     ["Owner", "rw", "3"]
+                ],
+                methods: [
+                    ["JustDoIt", ""]
                 ]
             }
         ]
