@@ -13,7 +13,7 @@ var App;
                 this.$scope.$on("refresh", function () { _this.refresh(); });
             }
             PersonController.prototype.method = function () {
-                this.$http.post('/Angular/Execute', { i: this.root.id, v: this.root.version, m: "Method" })
+                this.$http.post('/Angular/Invoke', { i: this.root.id, v: this.root.version, m: "Method" })
                     .then(function (response) {
                     var executeResponse = response.data;
                 })

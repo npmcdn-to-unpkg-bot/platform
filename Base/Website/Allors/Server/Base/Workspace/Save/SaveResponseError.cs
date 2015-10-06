@@ -1,3 +1,0 @@
-namespace Allors.Web.Workspace
-{
-}

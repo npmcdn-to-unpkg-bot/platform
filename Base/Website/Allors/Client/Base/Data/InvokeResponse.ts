@@ -1,5 +1,5 @@
 ﻿module Allors.Data {
-    export class SaveResponse implements ResponseError {
+    export class InvokeResponse implements ResponseError {
         hasErrors: boolean;
         versionErrors: string[];
         accessErrors: string[];

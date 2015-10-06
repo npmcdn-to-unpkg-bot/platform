@@ -1,6 +1,6 @@
 ﻿namespace Allors.Web.Workspace
 {
-    public class ExecuteRequest
+    public class InvokeRequest
     {
         /// <summary>
         /// The id.

@@ -12,8 +12,8 @@
         }
 
         public method() {
-            this.$http.post('/Angular/Execute', <Allors.Data.MethodRequest>{ i: this.root.id, v: this.root.version, m: "Method" })
-                .then((response: ng.IHttpPromiseCallbackArg<Allors.Data.MethodResponse>) => {
+            this.$http.post('/Angular/Invoke', <Allors.Data.InvokeRequest>{ i: this.root.id, v: this.root.version, m: "Method" })
+                .then((response: ng.IHttpPromiseCallbackArg<Allors.Data.InvokeResponse>) => {
                     var executeResponse = response.data;
                 })
                 .catch(e => { throw e; });

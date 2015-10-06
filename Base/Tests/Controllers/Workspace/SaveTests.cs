@@ -1,19 +1,17 @@
-using System.Collections.Generic;
-
 namespace Controllers.Workspace
 {
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     using Allors;
     using Allors.Domain;
     using Allors.Web.Workspace;
 
-    using System.Linq;
-    using Website.Controllers;
-
     using NUnit.Framework;
 
     using Should;
+
+    using Website.Controllers;
 
     public class SaveTests : ControllersTest
     {
@@ -58,7 +56,8 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Errors.Count.ShouldEqual(1);
+            saveResponse.HasErrors.ShouldBeTrue();
+            saveResponse.AccessErrors.Count.ShouldEqual(1);
 
             c1a.C1AllorsString.ShouldEqual("c1");
         }
@@ -106,7 +105,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Errors.Count.ShouldEqual(0);
+            saveResponse.HasErrors.ShouldBeFalse();
 
             c1a.C1AllorsString.ShouldEqual("new c1");
         }
@@ -154,7 +153,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Errors.Count.ShouldEqual(0);
+            saveResponse.HasErrors.ShouldBeFalse();
 
             c1a.C1C1One2One.ShouldEqual(c1b);
         }
@@ -207,7 +206,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Errors.Count.ShouldEqual(0);
+            saveResponse.HasErrors.ShouldBeFalse();
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new [] { c1c } );
         }
@@ -260,7 +259,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Errors.Count.ShouldEqual(0);
+            saveResponse.HasErrors.ShouldBeFalse();
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new[] { c1b, c1c });
         }
@@ -314,7 +313,7 @@ namespace Controllers.Workspace
             // Assert
             this.Session.Rollback();
 
-            saveResponse.Errors.Count.ShouldEqual(0);
+            saveResponse.HasErrors.ShouldBeFalse();
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new[] { c1b });
         }

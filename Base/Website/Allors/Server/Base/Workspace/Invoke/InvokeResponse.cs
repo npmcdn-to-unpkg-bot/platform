@@ -1,6 +1,6 @@
 ﻿namespace Allors.Web.Workspace
 {
-    public class SaveResponse : ResponseError
+    public class InvokeResponse : ResponseError
     {
     }
 }

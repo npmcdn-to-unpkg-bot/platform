@@ -246,13 +246,15 @@
     <Compile Include="Allors\Server\Base\Mvc\Views\ViewContextExtensions.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsMembershipProvider.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsRoleProvider.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Execute\ExecuteRequest.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Execute\ExecuteResponse.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Execute\ExecuteResponseBuilder.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Invoke\InvokeRequest.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Invoke\InvokeResponse.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Invoke\InvokeResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadRequest.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponse.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseBuilder.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Error\ResponseDerivationError.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Error\ResponseError.cs" />
     <Compile Include="Allors\Server\Base\Workspace\ResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Response.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseBuilder.cs" />
@@ -260,7 +262,6 @@
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequest.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestRole.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseError.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseRole.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseObject.cs" />
     <Compile Include="Allors\Server\Test\Organisation\Command.cs" />
@@ -293,8 +294,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Allors\Client\Base\Data\MethodRequest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\MethodResponse.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\InvokeRequest.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseDerivationError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\InvokeResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Address.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\HomeAddress.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\MailboxAddress.g.ts" />
@@ -494,11 +497,10 @@
     <Content Include="Allors\Server\Test\Shared\Error.cshtml" />
     <Content Include="Allors\Server\Test\Shared\Lockout.cshtml" />
     <Content Include="Allors\Server\_ViewStart.cshtml" />
-    <Content Include="Allors\Server\Base\Workspace\Save\SaveResponse.cd" />
+    <Content Include="Allors\Server\Base\Workspace\Error\ResponseError.cd" />
     <Content Include="fonts\ui-grid.woff" />
     <Content Include="fonts\ui-grid.ttf" />
     <Content Include="fonts\ui-grid.eot" />
-    <Content Include="Allors\Server\Base\Workspace\Execute\SaveResponse.cd" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
