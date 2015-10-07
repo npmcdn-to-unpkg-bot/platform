@@ -60,8 +60,12 @@
                                     if (roleType.ObjectType.IsUnit)
                                     {
                                         var unitType = (IUnit)roleType.ObjectType;
-                                        var stringRole = (string)saveRequestRole.S;
-                                        var role = Serialization.ReadString(stringRole, unitType.UnitTag);
+                                        var role = saveRequestRole.S;
+                                        if (role is string)
+                                        {
+                                            role = Serialization.ReadString((string)role, unitType.UnitTag);
+                                        }
+
                                         obj.Strategy.SetUnitRole(roleType, role);
                                     }
                                     else
