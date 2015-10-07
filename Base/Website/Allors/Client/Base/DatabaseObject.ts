@@ -16,6 +16,8 @@
             this.roles = {};
             this.methods = {};
 
+            var objectType = this.database.objectTypeByName[this.t];
+
             _.forEach(loadObject.roles, role => {
                 var name = role[0];
                 var access = role[1];
@@ -24,9 +26,13 @@
 
                 this.roles["CanRead" + name] = canRead;
                 this.roles["CanWrite" + name] = canWrite;
-
+                
                 if (canRead) {
+                    var roleType = objectType.roleTypeByName[name];
                     var value = role[2];
+                    if (value && roleType.isUnit && roleType.objectType === "AllorsDateTime") {
+                        value = new Date(<string>value);
+                    }
                     this.roles[name] = value;
                 }
 

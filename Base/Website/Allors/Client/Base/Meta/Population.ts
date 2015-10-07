@@ -1,6 +1,7 @@
 ﻿module Allors.Meta {
     export class RoleType {
         name: string;
+        objectType: string;
         isUnit: boolean;
         isOne: boolean;
     }

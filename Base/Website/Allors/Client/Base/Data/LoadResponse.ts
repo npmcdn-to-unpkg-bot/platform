@@ -4,7 +4,7 @@
         v: string;
         t: string;
 
-        roles: string[][];
+        roles: any[][];
         methods: string[][];
     }
 

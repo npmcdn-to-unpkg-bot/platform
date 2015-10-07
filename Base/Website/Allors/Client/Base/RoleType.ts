@@ -1,11 +1,13 @@
 ﻿module Allors {
     export class RoleType {
         name: string;
+        objectType: string;
         isUnit: boolean;
         isOne: boolean; 
         
         constructor(data: Meta.RoleType) {
             this.name = data.name;
+            this.objectType = data.objectType;
             this.isUnit = data.isUnit;
             this.isOne = data.isOne;
         }

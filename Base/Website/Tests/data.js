@@ -8,7 +8,8 @@
                 t: "Person",
                 roles: [
                     ["FirstName","rw" , "Koen"],
-                    ["LastName", "rw", "Van Exem"]
+                    ["LastName", "rw", "Van Exem"],
+                    ["BirthDate", "rw", "1973-03-27T18:00:00Z"]
                 ]
             },
             {

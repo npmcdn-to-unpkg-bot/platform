@@ -9,6 +9,7 @@ var Allors;
             this.t = loadObject.t;
             this.roles = {};
             this.methods = {};
+            var objectType = this.database.objectTypeByName[this.t];
             _.forEach(loadObject.roles, function (role) {
                 var name = role[0];
                 var access = role[1];
@@ -17,7 +18,11 @@ var Allors;
                 _this.roles["CanRead" + name] = canRead;
                 _this.roles["CanWrite" + name] = canWrite;
                 if (canRead) {
+                    var roleType = objectType.roleTypeByName[name];
                     var value = role[2];
+                    if (value && roleType.isUnit && roleType.objectType === "AllorsDateTime") {
+                        value = new Date(value);
+                    }
                     _this.roles[name] = value;
                 }
             });

@@ -31,6 +31,9 @@ namespace Allors.Domain
 					}
 					public interface Person : User 
 					{
+									global::System.DateTime? BirthDate {set;}
+
+
 									Media Photo {set;}
 
 

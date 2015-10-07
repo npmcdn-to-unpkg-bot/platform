@@ -35,6 +35,7 @@ namespace Allors.Meta
 
         #endregion
         [Type(typeof(AllorsDateTimeUnit))]
+        [Group(Groups.Workspace)]
         public RelationType BirthDate;
 
         #region Allors

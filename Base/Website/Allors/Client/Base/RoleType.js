@@ -3,6 +3,7 @@ var Allors;
     var RoleType = (function () {
         function RoleType(data) {
             this.name = data.name;
+            this.objectType = data.objectType;
             this.isUnit = data.isUnit;
             this.isOne = data.isOne;
         }
