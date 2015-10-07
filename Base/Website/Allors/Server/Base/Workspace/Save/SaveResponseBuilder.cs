@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Allors.Adapters;
     using Allors.Domain;
     using Allors.Meta;
     using Allors.Web.Workspace;
@@ -57,7 +59,9 @@
                                 {
                                     if (roleType.ObjectType.IsUnit)
                                     {
-                                        var role = saveRequestRole.S;
+                                        var unitType = (IUnit)roleType.ObjectType;
+                                        var stringRole = (string)saveRequestRole.S;
+                                        var role = Serialization.ReadString(stringRole, unitType.UnitTag);
                                         obj.Strategy.SetUnitRole(roleType, role);
                                     }
                                     else
