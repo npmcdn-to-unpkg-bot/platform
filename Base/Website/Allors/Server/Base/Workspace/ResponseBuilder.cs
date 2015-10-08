@@ -24,49 +24,59 @@ namespace Allors.Web
 
         public void AddObject(string name, IObject namedObject, Tree tree = null)
         {
-            // Prefetch
-            if(tree != null)
+            if (namedObject != null)
             {
-                var session = namedObject.Strategy.Session;
-                var prefetcher = tree.BuildPrefetechPolicy();
-                session.Prefetch(prefetcher, namedObject);
+                // Prefetch
+                if (tree != null)
+                {
+                    var session = namedObject.Strategy.Session;
+                    var prefetcher = tree.BuildPrefetechPolicy();
+                    session.Prefetch(prefetcher, namedObject);
+                }
+
+                objects.Add(namedObject);
+                objectByName.Add(name, namedObject);
+                tree?.Resolve(namedObject, this.objects);
             }
 
-            objects.Add(namedObject);
-            objectByName.Add(name, namedObject);
-            tree?.Resolve(namedObject, this.objects);
         }
 
         public void AddCollection(string name, IEnumerable<IObject> namedObjects, Tree tree = null)
         {
-            List<IObject> namedCollection;
-            if (!collectionsByName.TryGetValue(name, out namedCollection))
+            if (namedObjects != null)
             {
-                namedCollection = new List<IObject>();
-                this.collectionsByName.Add(name, namedCollection);
-            }
+                List<IObject> namedCollection;
+                if (!collectionsByName.TryGetValue(name, out namedCollection))
+                {
+                    namedCollection = new List<IObject>();
+                    this.collectionsByName.Add(name, namedCollection);
+                }
 
-            var namedObjectList = (namedObjects as IList<IObject>) ?? namedObjects.ToArray();
+                var namedObjectList = (namedObjects as IList<IObject>) ?? namedObjects.ToArray();
 
-            // Prefetch
-            if (tree != null && namedObjectList.Count >0)
-            {
-                var session = namedObjectList[0].Strategy.Session;
-                var prefetcher = tree.BuildPrefetechPolicy();
-                session.Prefetch(prefetcher, namedObjectList.ToArray());
-            }
+                // Prefetch
+                if (tree != null && namedObjectList.Count > 0)
+                {
+                    var session = namedObjectList[0].Strategy.Session;
+                    var prefetcher = tree.BuildPrefetechPolicy();
+                    session.Prefetch(prefetcher, namedObjectList.ToArray());
+                }
 
-            namedCollection.AddRange(namedObjectList);
-            foreach (var namedObject in namedObjectList)
-            {
-                objects.Add(namedObject);
-                tree?.Resolve(namedObject, this.objects);
+                namedCollection.AddRange(namedObjectList);
+                foreach (var namedObject in namedObjectList)
+                {
+                    objects.Add(namedObject);
+                    tree?.Resolve(namedObject, this.objects);
+                }
             }
         }
 
         public void AddValue(string name, object value)
         {
-            this.valueByName.Add(name, value);
+            if (value != null)
+            {
+                this.valueByName.Add(name, value);
+            }
         }
     }
 }
