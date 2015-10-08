@@ -298,6 +298,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseDerivationError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Data\InvokeResponse.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Method.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Address.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\HomeAddress.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\MailboxAddress.g.ts" />

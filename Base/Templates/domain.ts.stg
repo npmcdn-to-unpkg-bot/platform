@@ -130,6 +130,10 @@ classMethodType() ::= <<
 			get CanExecute$methodType.Name$(): boolean {
 				return this.databaseObject.methods.CanExecute$methodType.Name$;
 			}
+
+			get $methodType.Name$(): Allors.Method {
+				return new Method(this, "$methodType.Name$");
+			}
 >>
 
 objectType_Name(objectType) ::= <%
