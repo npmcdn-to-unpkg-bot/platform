@@ -26,6 +26,10 @@
         }
 
         get(id: string): any {
+            if (id === undefined) {
+                return undefined;
+            }
+
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
                 var databaseObject = this.database.get(id);
