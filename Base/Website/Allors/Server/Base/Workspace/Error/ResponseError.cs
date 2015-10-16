@@ -15,7 +15,9 @@
             this.DerivationErrors = new List<ResponseDerivationError>();            
         }
 
-        public bool HasErrors => this.VersionErrors.Count > 0 || this.AccessErrors.Count > 0 || this.MissingErrors.Count > 0 || this.DerivationErrors.Count > 0;
+        public bool HasErrors => this.VersionErrors.Count > 0 || this.AccessErrors.Count > 0 || this.MissingErrors.Count > 0 || this.DerivationErrors.Count > 0 || !string.IsNullOrWhiteSpace(ErrorMessage);
+
+        public string ErrorMessage { get; set; }
 
         public List<string> VersionErrors { get; set; }
 

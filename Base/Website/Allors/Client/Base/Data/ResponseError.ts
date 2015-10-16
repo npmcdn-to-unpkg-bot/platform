@@ -2,6 +2,8 @@
     export interface ResponseError {
         hasErrors: boolean;
 
+        errorMessage: string;
+
         versionErrors : string[];
 
         accessErrors : string[];
