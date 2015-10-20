@@ -720,35 +720,11 @@ namespace Allors.Meta
                         type.DeriveRoleTypes(sharedRoleTypes, roleTypesByAssociationObjectType);
 
                     }
-
-                    // ExclusiveRoleTypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveExclusiveRoleTypesByGroup();
-                    }
-
-                    // RoleTypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveRoleTypesByGroup();
-                    }
                     
                     // AssociationTypes
                     foreach (var type in this.derivedComposites)
                     {
                         type.DeriveAssociationTypes(sharedAssociationTypes, associationTypesByRoleObjectType);
-                    }
-
-                    // AssociationTypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveAssociationTypesByGroup();
-                    }
-
-                    // DirectSupertypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveDirectSupertypesByGroup();
                     }
 
                     // RoleType
@@ -778,12 +754,6 @@ namespace Allors.Meta
                         type.DeriveMethodTypes(sharedMethodTypeList);
                     }
 
-                    // MethodTypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveMethodTypesByGroup();
-                    }
-
                     // ConcreteRoleType
                     foreach (var @class in this.classes)
                     {
@@ -794,6 +764,36 @@ namespace Allors.Meta
                     foreach (var @class in this.classes)
                     {
                         @class.DeriveConcreteMethodTypes(sharedMethodTypes);
+                    }
+
+                    // DirectSupertypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveDirectSupertypesByGroup();
+                    }
+
+                    // AssociationTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveAssociationTypesByGroup();
+                    }
+
+                    // RoleTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveRoleTypesByGroup();
+                    }
+
+                    // ExclusiveRoleTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveExclusiveRoleTypesByGroup();
+                    }
+
+                    // MethodTypesByGroup
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveMethodTypesByGroup();
                     }
                 }
                 finally
