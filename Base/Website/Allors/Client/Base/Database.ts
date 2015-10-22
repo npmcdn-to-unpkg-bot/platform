@@ -81,7 +81,12 @@
         }
 
         get(id: string): DatabaseObject {
-            return this.databaseObjectById[id];
+            var databaseObject = this.databaseObjectById[id];
+            if (databaseObject === undefined) {
+                throw "Object with id " + id + " is not present.";
+            }
+
+            return databaseObject;
         }
 }
 }
