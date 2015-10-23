@@ -10,7 +10,7 @@
         title: string;
 
         static $inject = ["$http", "$state", "allorsService"];
-        constructor(private $http: ng.IHttpService, private $state: IOrganisationState, private allorsService: App.Common.Services.AllorsService) {
+        constructor(private $http: ng.IHttpService, private $state: IOrganisationState, private allorsService: Allors.Service) {
             this.title = "Organisation";
         }
      

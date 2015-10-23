@@ -6,7 +6,7 @@
         private context: Allors.Context;
 
         static $inject = ["$rootScope", "$scope", "$http", "allorsService"];
-        constructor(private $rootScope: ng.IRootScopeService, private $scope: ng.IScope, private $http: ng.IHttpService, private allorsService: App.Common.Services.AllorsService) {
+        constructor(private $rootScope: ng.IRootScopeService, private $scope: ng.IScope, private $http: ng.IHttpService, private allorsService: Allors.Service) {
             this.refresh();
             this.$scope.$on("refresh", () => { this.refresh() });
         }
@@ -31,13 +31,13 @@
         }
 
         private refresh(): void {
-            this.$http.post('/Angular/Person', {}).then(response => {
-                this.allorsService.load(<Allors.Data.Response>response.data)
-                    .then(context => {
-                        this.context = context;
-                        this.root = <Allors.Domain.Person>context.objects["root"];
-                    });
-            });
+            //this.$http.post('/Angular/Person', {}).then(response => {
+            //    this.allorsService.load(<Allors.Data.Response>response.data)
+            //        .then(context => {
+            //            this.context = context;
+            //            this.root = <Allors.Domain.Person>context.objects["root"];
+            //        });
+            //});
         }
     }
     angular

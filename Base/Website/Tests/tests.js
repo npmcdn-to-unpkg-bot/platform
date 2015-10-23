@@ -185,11 +185,11 @@ test("workspace one set", function () {
     ok(ocme1.Manager === null);
     ok(icme1.Manager === null);
 
-    ok(acme2.Owner === martien2);
+    ok(acme2.Owner === martien2); //x
     ok(ocme2.Owner === null);
     ok(icme2.Owner === martien2);
 
-    ok(acme2.Manager === patrick2);
+    ok(acme2.Manager === patrick2); //x
     ok(ocme2.Manager === null);
     ok(icme2.Manager === null);
 });

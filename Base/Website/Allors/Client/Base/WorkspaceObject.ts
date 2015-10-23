@@ -3,14 +3,15 @@
         public workspace : IWorkspace;
         public databaseObject: DatabaseObject;
 
-        private roleByRoleTypeName: { [id: string]: any; };
+        private changedRoleByRoleTypeName: { [id: string]: any; };
+        private cachedRoleByRoleTypeName: { [id: string]: any; } = {};
 
         get hasChanges(): boolean {
-            return this.roleByRoleTypeName !== undefined;
+            return this.changedRoleByRoleTypeName !== undefined;
         }
 
         save() : Data.SaveRequestObject {
-            if (this.roleByRoleTypeName !== undefined) {
+            if (this.changedRoleByRoleTypeName !== undefined) {
                 var data = new Data.SaveRequestObject();
                 data.i = this.id;
                 data.v  = this.version;
@@ -18,7 +19,7 @@
 
                 var objectType = this.databaseObject.objectType;
 
-                _.forEach(this.roleByRoleTypeName, (role, roleTypeName) => {
+                _.forEach(this.changedRoleByRoleTypeName, (role, roleTypeName) => {
                     var roleType = objectType.roleTypeByName[roleTypeName];
 
                     var save = new Data.SaveRequestRole;
@@ -35,7 +36,7 @@
                             if (originalRoleIds === undefined || originalRoleIds === null || originalRoleIds.length === 0) {
                                 save.s = role;
                             } else {
-                                if (role === undefined || role === null || role.length === 0) {
+                                if (role.length === 0) {
                                     save.s = [];
                                 } else {
                                     save.a = _.difference(role, originalRoleIds);
@@ -63,97 +64,93 @@
         }
 
         getUnit(roleTypeName: string): any {
-            var value;
-
-            if (this.roleByRoleTypeName !== undefined) {
-                value = this.roleByRoleTypeName[roleTypeName];
-            }
+            var value = this.cachedRoleByRoleTypeName[roleTypeName];
 
             if (value === undefined) {
-                value = this.databaseObject.roles[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName] || null;
+                this.cachedRoleByRoleTypeName[roleTypeName] = value;
             }
 
-            return value === undefined ? null : value;
+            return value;
         }
 
         setUnit(roleTypeName: string, value: any) {
-            if (this.roleByRoleTypeName === undefined) {
-                this.roleByRoleTypeName = {};
+            if (this.changedRoleByRoleTypeName === undefined) {
+                this.changedRoleByRoleTypeName = {};
             }
 
-            this.roleByRoleTypeName[roleTypeName] = value;
+            this.cachedRoleByRoleTypeName[roleTypeName] = value;
+            this.changedRoleByRoleTypeName[roleTypeName] = value;
         }
 
         getOne(roleTypeName: string): any {
-            var value;
-
-            if (this.roleByRoleTypeName !== undefined) {
-                value = this.roleByRoleTypeName[roleTypeName];
-            }
+            var value = this.cachedRoleByRoleTypeName[roleTypeName];
 
             if (value === undefined) {
-                value = this.databaseObject.roles[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName] || null;
+
+                if (value) {
+                    value = this.workspace.get(value);
+                }
+
+                this.cachedRoleByRoleTypeName[roleTypeName] = value;
             }
 
-            if (value === null || value === undefined) {
-                return null;
-            }
-
-            return this.workspace.get(value);
+            return value;
         }
 
         setOne(roleTypeName: string, value: any) {
-            if (this.roleByRoleTypeName === undefined) {
-                this.roleByRoleTypeName = {};
+            if (this.changedRoleByRoleTypeName === undefined) {
+                this.changedRoleByRoleTypeName = {};
             }
 
             if (value === undefined) {
-                throw "Setter does not allow undefined, use null instead";
+                value = null;
             }
 
-            this.roleByRoleTypeName[roleTypeName] = value===null ? null : value.id;
+            this.cachedRoleByRoleTypeName[roleTypeName] = value;
+            this.changedRoleByRoleTypeName[roleTypeName] = value ? value.id : null;
         }
 
         getMany(roleTypeName: string): any {
-            var value;
-
-            if (this.roleByRoleTypeName !== undefined) {
-                value = this.roleByRoleTypeName[roleTypeName];
-            }
+            var value = this.cachedRoleByRoleTypeName[roleTypeName];
 
             if (value === undefined) {
-                value = this.databaseObject.roles[roleTypeName];
+                value = this.databaseObject.roles[roleTypeName] || [];
+
+                if (value.length > 0) {
+                    value = _.map(value, item => {
+                        return this.workspace.get(<string>item);
+                    });
+                }
             }
 
-            if (value === undefined || value === null) {
-                return [];
-            }
-
-            return _.map(value, item => {
-                return this.workspace.get(<string>item);
-            });
+            return value;
         }
 
         setMany(roleTypeName: string, value: any) {
-            if (this.roleByRoleTypeName === undefined) {
-                this.roleByRoleTypeName = {};
+            if (this.changedRoleByRoleTypeName === undefined) {
+                this.changedRoleByRoleTypeName = {};
             }
 
-            if (_.isUndefined(value) || _.isNull(value) || _.isEmpty(value)) {
-                this.roleByRoleTypeName[roleTypeName] = null;
+            if (value === undefined || value === null ) {
+                value = [];
             }
 
-            this.roleByRoleTypeName[roleTypeName] = _.map(value, item => {
+            this.cachedRoleByRoleTypeName[roleTypeName] = value;
+            this.changedRoleByRoleTypeName[roleTypeName] = _.map(value, item => {
                 return (<WorkspaceObject>item).id;
             });
         }
 
         reset() {
             this.databaseObject = this.databaseObject.database.get(this.id);
-            if (this.roleByRoleTypeName)
+            if (this.changedRoleByRoleTypeName)
             {
-                this.roleByRoleTypeName = undefined;
+                this.changedRoleByRoleTypeName = undefined;
             }
+
+            this.cachedRoleByRoleTypeName = {};
         }
     }
 }

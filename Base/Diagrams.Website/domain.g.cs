@@ -29,7 +29,7 @@ namespace Allors.Domain
 					public interface Media 
 					{
 					}
-					public interface Person : User 
+					public interface Person 
 					{
 									global::System.DateTime? BirthDate {set;}
 
