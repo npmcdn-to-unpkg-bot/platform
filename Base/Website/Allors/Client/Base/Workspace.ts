@@ -1,6 +1,6 @@
 ﻿module Allors {
     export interface IWorkspace {
-        hashChanges: boolean;
+        hasChanges: boolean;
 
         get(id: string): any;
         save(): Data.SaveRequest;
@@ -15,7 +15,7 @@
             this.database = database;
         }
 
-        get hashChanges(): boolean {
+        get hasChanges(): boolean {
             var hasChanges = false;
             _.forEach(this.workspaceObjectById, workspaceObject => {
                 if (workspaceObject.hasChanges) {
