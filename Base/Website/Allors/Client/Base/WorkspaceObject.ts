@@ -7,7 +7,7 @@
         workspace: IWorkspace;
         databaseObject: IDatabaseObject;
 
-        isChanged: boolean;
+        hasChanges: boolean;
 
         get(roleTypeName: string): any;
         set(roleTypeName: string, value: any) ;
@@ -25,7 +25,7 @@
         private changedRoleByRoleTypeName: { [id: string]: any; };
         private roleByRoleTypeName: { [id: string]: any; } = {};
 
-        get isChanged(): boolean {
+        get hasChanges(): boolean {
             return this.changedRoleByRoleTypeName !== undefined;
         }
  
