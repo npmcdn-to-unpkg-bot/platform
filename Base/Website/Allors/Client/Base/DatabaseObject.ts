@@ -1,11 +1,22 @@
 ﻿module Allors {
-    export class DatabaseObject {
+    export interface IDatabaseObject {
+        id: string;
+        version: string;
+        objectType: ObjectType;
+
         database: IDatabase;
+        roles: any;
+        methods: any;
+    }
+
+    export class DatabaseObject implements IDatabaseObject {
+        database: IDatabase;
+        roles: any;
+        methods: any;
+
         private i: string;
         private v: string;
         private t: string;
-        public roles: any;
-        public methods: any;
 
         constructor(database: IDatabase, loadObject: Data.LoadResponseObject) {
             this.database = database;

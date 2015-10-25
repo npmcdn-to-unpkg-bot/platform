@@ -27,6 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Merge", "Merge\Merge.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagrams.Website", "Diagrams.Website\Diagrams.Website.csproj", "{29AE6C72-CCD6-4737-A8A9-16868F2C7850}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BAFF320B-3C38-4888-B5A7-0FFFDB3F37F1}"
+	ProjectSection(SolutionItems) = preProject
+		Templates\domain.ts.stg = Templates\domain.ts.stg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

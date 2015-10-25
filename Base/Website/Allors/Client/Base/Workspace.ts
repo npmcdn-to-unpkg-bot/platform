@@ -1,8 +1,10 @@
 ﻿module Allors {
     export interface IWorkspace {
+        isChanged: boolean;
+
         get(id: string): any;
         save(): Data.SaveRequest;
-        reset(): void;
+        sync(): void;
     }
 
     export class Workspace {
@@ -13,10 +15,10 @@
             this.database = database;
         }
 
-        get hasChanges(): boolean {
+        get isChanged(): boolean {
             var hasChanges = false;
             _.forEach(this.workspaceObjectById, workspaceObject => {
-                if (workspaceObject.hasChanges) {
+                if (workspaceObject.isChanged) {
                     hasChanges = true;
                     return;
                 }
@@ -59,9 +61,9 @@
             return data;
         }
         
-        reset(): void {
+        sync(): void {
             _.forEach(this.workspaceObjectById, v => {
-                v.reset();
+                v.sync();
             });
         }
     }

@@ -99,28 +99,36 @@ $endif$
 
 $if(roleType.ObjectType.IsUnit)$
 			get $roleType.SingularPropertyName$(): $objectType_Name(roleType.ObjectType)$ {
-				return this.getUnit("$roleType.SingularPropertyName$");
+				return this.get("$roleType.SingularPropertyName$");
 			}
 
 			set $roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				this.setUnit("$roleType.SingularPropertyName$", value);
+				this.set("$roleType.SingularPropertyName$", value);
 			}
 $else$
 $if(roleType.IsOne)$
 			get $roleType.SingularPropertyName$(): $objectType_Name(roleType.ObjectType)$ {
-				return this.getOne("$roleType.SingularPropertyName$");
+				return this.get("$roleType.SingularPropertyName$");
 			}
 
 			set $roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				this.setOne("$roleType.SingularPropertyName$", value);
+				this.set("$roleType.SingularPropertyName$", value);
 			}
 $else$
 			get $roleType.PluralPropertyName$(): $objectType_Name(roleType.ObjectType)$[] {
-				return this.getMany("$roleType.SingularPropertyName$");
+				return this.get("$roleType.SingularPropertyName$");
+			}
+
+			add$roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+				return this.add("$roleType.SingularPropertyName$", value);
+			}
+
+			remove$roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+				return this.remove("$roleType.SingularPropertyName$", value);
 			}
 
 			set $roleType.PluralPropertyName$(value: $objectType_Name(roleType.ObjectType)$[]) {
-				this.setMany("$roleType.SingularPropertyName$", value);
+				this.set("$roleType.SingularPropertyName$", value);
 			}
 $endif$
 $endif$

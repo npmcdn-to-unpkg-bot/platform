@@ -352,11 +352,11 @@ test("workspace many save", function () {
     ok(savedIcme.v === "1103");
     ok(savedIcme.roles.length === 1);
 
-    var savedEmployees = _.find(savedIcme.roles, function (v) { return v.t === "Employee" });
+    var savedIcmeEmployees = _.find(savedIcme.roles, function (v) { return v.t === "Employee" });
 
-    ok(arrayEqual(savedEmployees.s, ["1", "2", "3"]));
-    ok(savedEmployees.a === undefined);
-    ok(savedEmployees.r === undefined);
+    ok(arrayEqual(savedIcmeEmployees.s, ["1", "2", "3"]));
+    ok(savedIcmeEmployees.a === undefined);
+    ok(savedIcmeEmployees.r === undefined);
 });
 
 test("workspace method canExecute", function () {
@@ -373,7 +373,6 @@ test("workspace method canExecute", function () {
     ok(ocme.CanExecuteJustDoIt === false);
     ok(icme.CanExecuteJustDoIt === false);
 });
-
 
 test("database check versions", function () {
     var database = new Allors.Database(Allors.Meta.population);
