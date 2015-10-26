@@ -67,7 +67,7 @@ namespace Controllers.Workspace
             responseC1One2One.Length.ShouldEqual(2);
             responseC1One2One[1].ShouldEqual("r");
 
-            var responseC1One2Many = roles.First(v => v[0].Equals("C1C1One2Many"));
+            var responseC1One2Many = roles.First(v => v[0].Equals("C1C1One2Manies"));
             responseC1One2Many.Length.ShouldEqual(2);
             responseC1One2Many[1].ShouldEqual("r");
 
@@ -134,7 +134,7 @@ namespace Controllers.Workspace
             responseC1One2One.Length.ShouldEqual(2);
             responseC1One2One[1].ShouldEqual("rw");
 
-            var responseC1One2Many = roles.First(v => v[0].Equals("C1C1One2Many"));
+            var responseC1One2Many = roles.First(v => v[0].Equals("C1C1One2Manies"));
             responseC1One2Many.Length.ShouldEqual(2);
             responseC1One2Many[1].ShouldEqual("rw");
 

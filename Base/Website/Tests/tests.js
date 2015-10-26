@@ -330,29 +330,29 @@ test("workspace many save", function () {
     ok(savedAcme.v === "1101");
     ok(savedAcme.roles.length === 1);
 
-    var savedAcmeEmployee = _.find(savedAcme.roles, function (v) { return v.t === "Employee" });
+    var savedAcmeEmployees = _.find(savedAcme.roles, function (v) { return v.t === "Employees" });
 
-    ok(arrayEqual(savedAcmeEmployee.s, []));
-    ok(savedAcmeEmployee.a === undefined);
-    ok(savedAcmeEmployee.r === undefined);
+    ok(arrayEqual(savedAcmeEmployees.s, []));
+    ok(savedAcmeEmployees.a === undefined);
+    ok(savedAcmeEmployees.r === undefined);
 
     var savedOcme = _.find(save.objects, function (v) { return v.i === "102" });
 
     ok(savedOcme.v === "1102");
     ok(savedOcme.roles.length === 1);
 
-    var savedOcmeEmployee = _.find(savedOcme.roles, function (v) { return v.t === "Employee" });
+    var savedOcmeEmployees = _.find(savedOcme.roles, function (v) { return v.t === "Employees" });
 
-    ok(savedOcmeEmployee.s === undefined);
-    ok(arrayEqual(savedOcmeEmployee.a, ["2", "3"]));
-    ok(arrayEqual(savedOcmeEmployee.r, ["1"]));
+    ok(savedOcmeEmployees.s === undefined);
+    ok(arrayEqual(savedOcmeEmployees.a, ["2", "3"]));
+    ok(arrayEqual(savedOcmeEmployees.r, ["1"]));
 
     var savedIcme = _.find(save.objects, function (v) { return v.i === "103" });
 
     ok(savedIcme.v === "1103");
     ok(savedIcme.roles.length === 1);
 
-    var savedIcmeEmployees = _.find(savedIcme.roles, function (v) { return v.t === "Employee" });
+    var savedIcmeEmployees = _.find(savedIcme.roles, function (v) { return v.t === "Employees" });
 
     ok(arrayEqual(savedIcmeEmployees.s, ["1", "2", "3"]));
     ok(savedIcmeEmployees.a === undefined);

@@ -75,7 +75,7 @@ $endif$
 
 roleType(roleType) ::= <<
 					{ 
-						name: "$roleType.SingularPropertyName$",
+						name: "$roleType.PropertyName$",
 						objectType: "$roleType.ObjectType.Name$",
 						isUnit: $boolean(roleType.ObjectType.IsUnit)$,  
 						isOne: $boolean(roleType.IsOne)$  

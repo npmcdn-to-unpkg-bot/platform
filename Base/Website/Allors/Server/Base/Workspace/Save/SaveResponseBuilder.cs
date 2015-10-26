@@ -51,7 +51,7 @@
                         foreach (var saveRequestRole in saveRequestObject.Roles)
                         {
                             var roleTypeName = saveRequestRole.T;
-                            var roleType = roleTypes.FirstOrDefault(v => v.SingularPropertyName.Equals(roleTypeName));
+                            var roleType = roleTypes.FirstOrDefault(v => v.PropertyName.Equals(roleTypeName));
 
                             if (roleType != null)
                             {

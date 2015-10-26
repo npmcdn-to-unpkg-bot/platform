@@ -69,7 +69,7 @@
                     var roles = new List<object[]>();
                     foreach (var roleType in roleTypes)
                     {
-                        var propertyName = roleType.SingularPropertyName;
+                        var propertyName = roleType.PropertyName;
 
                         var canRead = acl == null || acl.CanRead(roleType);
                         var canWrite = acl != null && acl.CanWrite(roleType);

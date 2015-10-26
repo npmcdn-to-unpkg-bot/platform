@@ -52,12 +52,12 @@ $objectType.exclusiveRoleTypesByGroup.(grp):{roleType|$interfaceRoleType()$}; se
 
 interfaceRoleType() ::= <<
 $if(roleType.ObjectType.IsUnit)$
-		 $roleType.SingularPropertyName$ : $objectType_Name(roleType.ObjectType)$;
+		 $roleType.PropertyName$ : $objectType_Name(roleType.ObjectType)$;
 $else$
 $if(roleType.IsOne)$
-		 $roleType.SingularPropertyName$ : $objectType_Name(roleType.ObjectType)$;
+		 $roleType.PropertyName$ : $objectType_Name(roleType.ObjectType)$;
 $else$
-		 $roleType.PluralPropertyName$ : $objectType_Name(roleType.ObjectType)$[];
+		 $roleType.PropertyName$ : $objectType_Name(roleType.ObjectType)$[];
 $endif$
 $endif$
 >>
@@ -78,57 +78,46 @@ $objectType.methodTypesByGroup.(grp):{methodType|$classMethodType()$}; separator
 >>
 
 classRoleType() ::= <<
-$if(roleType.ObjectType.IsUnit || roleType.IsOne)$
-			get CanRead$roleType.SingularPropertyName$(): boolean {
-				return this.databaseObject.roles.CanRead$roleType.SingularPropertyName$;
+			get CanRead$roleType.PropertyName$(): boolean {
+				return this.databaseObject.roles.CanRead$roleType.PropertyName$;
 			}
 
-			get CanWrite$roleType.SingularPropertyName$(): boolean {
-				return this.databaseObject.roles.CanWrite$roleType.SingularPropertyName$;
+			get CanWrite$roleType.PropertyName$(): boolean {
+				return this.databaseObject.roles.CanWrite$roleType.PropertyName$;
 			}
-$else$
-			get CanRead$roleType.PluralPropertyName$(): boolean {
-				return this.databaseObject.roles.CanRead$roleType.PluralPropertyName$;
-			}
-
-			get CanWrite$roleType.PluralPropertyName$(): boolean {
-				return this.databaseObject.roles.CanWrite$roleType.PluralPropertyName$;
-			}
-
-$endif$
 
 $if(roleType.ObjectType.IsUnit)$
-			get $roleType.SingularPropertyName$(): $objectType_Name(roleType.ObjectType)$ {
-				return this.get("$roleType.SingularPropertyName$");
+			get $roleType.PropertyName$(): $objectType_Name(roleType.ObjectType)$ {
+				return this.get("$roleType.PropertyName$");
 			}
 
-			set $roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				this.set("$roleType.SingularPropertyName$", value);
+			set $roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+				this.set("$roleType.PropertyName$", value);
 			}
 $else$
 $if(roleType.IsOne)$
-			get $roleType.SingularPropertyName$(): $objectType_Name(roleType.ObjectType)$ {
-				return this.get("$roleType.SingularPropertyName$");
+			get $roleType.PropertyName$(): $objectType_Name(roleType.ObjectType)$ {
+				return this.get("$roleType.PropertyName$");
 			}
 
-			set $roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				this.set("$roleType.SingularPropertyName$", value);
+			set $roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+				this.set("$roleType.PropertyName$", value);
 			}
 $else$
 			get $roleType.PluralPropertyName$(): $objectType_Name(roleType.ObjectType)$[] {
-				return this.get("$roleType.SingularPropertyName$");
+				return this.get("$roleType.PluralPropertyName$");
 			}
 
-			add$roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				return this.add("$roleType.SingularPropertyName$", value);
+			add$roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+				return this.add("$roleType.PluralPropertyName$", value);
 			}
 
-			remove$roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
-				return this.remove("$roleType.SingularPropertyName$", value);
+			remove$roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+				return this.remove("$roleType.PluralPropertyName$", value);
 			}
 
 			set $roleType.PluralPropertyName$(value: $objectType_Name(roleType.ObjectType)$[]) {
-				this.set("$roleType.SingularPropertyName$", value);
+				this.set("$roleType.PluralPropertyName$", value);
 			}
 $endif$
 $endif$

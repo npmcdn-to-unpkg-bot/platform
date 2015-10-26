@@ -37,7 +37,7 @@
                 roles: [
                     ["Name", "rw", "Acme"],
                     ["Owner", "rw", "1"],
-                    ["Employee", "rw", ["1", "2", "3"]]
+                    ["Employees", "rw", ["1", "2", "3"]]
                 ],
                 methods: [
                     ["JustDoIt", "x"]
@@ -50,7 +50,7 @@
                 roles: [
                     ["Name", "rw", "Ocme"],
                     ["Owner", "rw", "2"],
-                    ["Employee", "rw", ["1"]]
+                    ["Employees", "rw", ["1"]]
                 ],
                 methods: [
                     ["JustDoIt", ""]
