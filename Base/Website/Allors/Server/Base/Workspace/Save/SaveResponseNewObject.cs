@@ -1,12 +1,15 @@
 namespace Allors.Web.Workspace
 {
-    public class SaveResponseObject
+    public class SaveResponseNewObject
     {
         /// <summary>
         /// The id.
         /// </summary>
         public string I { get; set; }
 
-        public SaveResponseRole[] Roles { get; set; }
+        /// <summary>
+        /// The new id.
+        /// </summary>
+        public string NI { get; set; }
     }
 }

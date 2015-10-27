@@ -81,7 +81,6 @@ namespace Allors.Meta
 
         #endregion
         [Type(typeof(AllorsBooleanUnit))]
-        [Plural("AreMarried")]
         public RelationType IsMarried;
 
         #region Allors
@@ -92,7 +91,7 @@ namespace Allors.Meta
 
         #endregion
         [Type(typeof(AllorsBooleanUnit))]
-        [Plural("AreStudent")]
+        [Group(Groups.Workspace)]
         public RelationType IsStudent;
 
         #region Allors

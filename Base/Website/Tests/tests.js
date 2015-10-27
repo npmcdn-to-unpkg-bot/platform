@@ -39,7 +39,10 @@ test("database load", function () {
     ok(martien.version === "1003");
     ok(martien.objectType.name === "Person");
     ok(martien.roles.FirstName === "Martien");
-    ok(martien.roles.LastName === "van Knippenberg");
+    ok(martien.roles.MiddleName === "van");
+    ok(martien.roles.LastName === "Knippenberg");
+    ok(martien.roles.IsStudent === undefined);
+    ok(martien.roles.BirthDate === undefined);
 });
 
 test("workspace unit get", function () {
@@ -48,11 +51,29 @@ test("workspace unit get", function () {
 
     var workspace = new Allors.Workspace(database);
 
+    var koen = workspace.get("1");
+
+    ok(koen.FirstName === "Koen");
+    ok(koen.MiddleName === null);
+    ok(koen.LastName === "Van Exem");
+    ok(koen.BirthDate.toUTCString() === new Date("1973-03-27T18:00:00Z").toUTCString());
+    ok(koen.IsStudent === true);
+    
+    var patrick = workspace.get("2");
+
+    ok(patrick.FirstName === "Patrick");
+    ok(patrick.LastName === "De Boeck");
+    ok(patrick.MiddleName === null);
+    ok(patrick.BirthDate === null);
+    ok(patrick.IsStudent === false);
+
     var martien = workspace.get("3");
 
     ok(martien.FirstName === "Martien");
-    ok(martien.LastName === "van Knippenberg");
-    ok(martien.MiddleName === null);
+    ok(martien.LastName === "Knippenberg");
+    ok(martien.MiddleName === "van");
+    ok(martien.BirthDate === null);
+    ok(martien.IsStudent === null);
 });
 
 test("workspace unit set", function () {
@@ -69,11 +90,11 @@ test("workspace unit set", function () {
     martien2.MiddleName = "X";
 
     ok(martien1.FirstName === "Martien");
-    ok(martien1.LastName === "van Knippenberg");
-    ok(martien1.MiddleName === null);
+    ok(martien1.LastName === "Knippenberg");
+    ok(martien1.MiddleName === "van");
 
     ok(martien2.FirstName === "Martinus");
-    ok(martien2.LastName === "van Knippenberg");
+    ok(martien2.LastName === "Knippenberg");
     ok(martien2.MiddleName === "X");
 });
 

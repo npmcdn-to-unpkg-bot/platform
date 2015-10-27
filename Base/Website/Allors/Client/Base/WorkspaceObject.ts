@@ -15,12 +15,20 @@
         remove(roleTypeName: string, value: any);
 
         save(): Data.SaveRequestObject;
+        saveNew(): Data.SaveRequestNewObject;
         sync();
     }
 
-    export class WorkspaceObject implements IWorkspaceObject {
+    export interface INewWorkspaceObject extends IWorkspaceObject {
+        newId: string;
+    }
+
+    export class WorkspaceObject implements INewWorkspaceObject {
         public workspace : IWorkspace;
         public databaseObject: IDatabaseObject;
+        public objectType: ObjectType;
+
+        public newId: string;
 
         private changedRoleByRoleTypeName: { [id: string]: any; };
         private roleByRoleTypeName: { [id: string]: any; } = {};
@@ -37,25 +45,32 @@
             return this.databaseObject.version;
         }
 
-        get objectType(): ObjectType {
-            return this.databaseObject.objectType;
-        }
-
         get(roleTypeName: string): any {
             var value = this.roleByRoleTypeName[roleTypeName];
 
             if (value === undefined) {
                 var roleType = this.objectType.roleTypeByName[roleTypeName];
-                if (roleType.isUnit) {
-                    value = this.databaseObject.roles[roleTypeName] || null;
-                } else {
-                    if (roleType.isOne) {
-                        var role: string = this.databaseObject.roles[roleTypeName];
-                        value = role ? this.workspace.get(role) : null;
+                if (this.newId === undefined) {
+                    if (roleType.isUnit) {
+                        value = this.databaseObject.roles[roleTypeName];
+                        if (value === undefined) {
+                            value = null;
+                        };
                     } else {
-                        var roles: string[] = this.databaseObject.roles[roleTypeName];
-                        value = roles ? roles.map(role => { return this.workspace.get(role); }) : []; 
+                        if (roleType.isOne) {
+                            var role: string = this.databaseObject.roles[roleTypeName];
+                            value = role ? this.workspace.get(role) : null;
+                        } else {
+                            var roles: string[] = this.databaseObject.roles[roleTypeName];
+                            value = roles ? roles.map(role => { return this.workspace.get(role); }) : [];
+                        }
                     }
+                } else {
+                    if (roleType.isComposite && roleType.isMany) {
+                        value = [];
+                    } else {
+                        value = null;
+                    }                    
                 }
 
                 this.roleByRoleTypeName[roleTypeName] = value;
@@ -108,47 +123,25 @@
                 var data = new Data.SaveRequestObject();
                 data.i = this.id;
                 data.v = this.version;
-                data.roles = [];
-
-                var objectType = this.databaseObject.objectType;
-
-                _.forEach(this.changedRoleByRoleTypeName, (role, roleTypeName) => {
-                    var roleType = objectType.roleTypeByName[roleTypeName];
-
-                    var save = new Data.SaveRequestRole;
-                    save.t = roleType.name;
-
-                    if (roleType.isUnit) {
-                        save.s = role;
-                    } else {
-                        if (roleType.isOne) {
-                            save.s = role ? role.id : null;
-                        } else {
-                            var roleIds = role.map(item => { return (<WorkspaceObject>item).id; });
-
-                            if (roleIds.length === 0) {
-                                save.s = [];
-                            } else {
-                                var originalRoleIds = <string[]>this.databaseObject.roles[roleTypeName];
-                                if (!originalRoleIds) {
-                                    save.s = roleIds;
-                                } else {
-                                    save.a = _.difference(roleIds, originalRoleIds);
-                                    save.r = _.difference(originalRoleIds, roleIds);
-                                }
-                            }
-                        }
-                    }
-
-                    data.roles.push(save);
-                });
-
+                data.roles = this.saveRoles();
                 return data;
             }
 
             return undefined;
         }
 
+        saveNew(): Data.SaveRequestNewObject {
+            if (this.changedRoleByRoleTypeName !== undefined) {
+                var data = new Data.SaveRequestNewObject();
+                data.ni = this.newId;
+                data.t = this.objectType.name;
+                data.roles = this.saveRoles();
+                return data;
+            }
+
+            return undefined;
+        }
+        
         sync() {
             this.databaseObject = this.databaseObject.database.get(this.id);
             if (this.changedRoleByRoleTypeName) {
@@ -156,6 +149,45 @@
             }
 
             this.roleByRoleTypeName = {};
+        }
+
+        private saveRoles(): Data.SaveRequestRole[] {
+            var saveRoles = new Array<Data.SaveRequestRole>();
+
+            var objectType = this.databaseObject.objectType;
+
+            _.forEach(this.changedRoleByRoleTypeName, (role, roleTypeName) => {
+                var roleType = objectType.roleTypeByName[roleTypeName];
+
+                var saveRole = new Data.SaveRequestRole;
+                saveRole.t = roleType.name;
+
+                if (roleType.isUnit) {
+                    saveRole.s = role;
+                } else {
+                    if (roleType.isOne) {
+                        saveRole.s = role ? role.id : null;
+                    } else {
+                        var roleIds = role.map(item => { return (<WorkspaceObject>item).id; });
+
+                        if (roleIds.length === 0) {
+                            saveRole.s = [];
+                        } else {
+                            var originalRoleIds = <string[]>this.databaseObject.roles[roleTypeName];
+                            if (!originalRoleIds) {
+                                saveRole.s = roleIds;
+                            } else {
+                                saveRole.a = _.difference(roleIds, originalRoleIds);
+                                saveRole.r = _.difference(originalRoleIds, roleIds);
+                            }
+                        }
+                    }
+                }
+
+                saveRoles.push(saveRole);
+            });
+
+            return saveRoles;
         }
     }
 }

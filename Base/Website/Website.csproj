@@ -257,13 +257,13 @@
     <Compile Include="Allors\Server\Base\Workspace\Error\ResponseError.cs" />
     <Compile Include="Allors\Server\Base\Workspace\ResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Response.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestNewObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponse.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequest.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestRole.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseRole.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseObject.cs" />
+    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseNewObject.cs" />
     <Compile Include="Allors\Server\Test\Organisation\Command.cs" />
     <Compile Include="Allors\Server\Test\Organisation\Models\Add\Add.cs" />
     <Compile Include="Allors\Server\Test\Organisation\Models\Edit\Edit.cs" />
@@ -500,6 +500,7 @@
     <Content Include="fonts\ui-grid.woff" />
     <Content Include="fonts\ui-grid.ttf" />
     <Content Include="fonts\ui-grid.eot" />
+    <Content Include="Allors\Server\Base\Workspace\Save\Overview.cd" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />

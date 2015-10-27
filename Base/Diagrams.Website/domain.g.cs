@@ -34,6 +34,9 @@ namespace Allors.Domain
 									global::System.DateTime? BirthDate {set;}
 
 
+									global::System.Boolean? IsStudent {set;}
+
+
 									Media Photo {set;}
 
 

@@ -9,7 +9,8 @@
                 roles: [
                     ["FirstName","rw" , "Koen"],
                     ["LastName", "rw", "Van Exem"],
-                    ["BirthDate", "rw", "1973-03-27T18:00:00Z"]
+                    ["BirthDate", "rw", "1973-03-27T18:00:00Z"],
+                    ["IsStudent", "rw", true]
                 ]
             },
             {
@@ -18,7 +19,8 @@
                 t: "Person",
                 roles: [
                     ["FirstName", "rw", "Patrick"],
-                    ["LastName", "rw", "De Boeck"]
+                    ["LastName", "rw", "De Boeck"],
+                    ["IsStudent", "rw", false]
                 ]
             },
             {
@@ -27,7 +29,8 @@
                 t: "Person",
                 roles: [
                     ["FirstName", "rw", "Martien"],
-                    ["LastName", "rw", "van Knippenberg"]
+                    ["MiddleName", "rw", "van"],
+                    ["LastName", "rw", "Knippenberg"],
                 ]
             },
             {

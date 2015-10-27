@@ -12,7 +12,14 @@
         roles: SaveRequestRole[];
     }
 
+    export class SaveRequestNewObject {
+        ni: string;
+        t: string;
+        roles: SaveRequestRole[];
+    }
+
     export class SaveRequest {
+        newObjects: SaveRequestNewObject[];
         objects: SaveRequestObject[];
     }
 }
