@@ -3,6 +3,7 @@
         hasChanges: boolean;
 
         get(id: string): any;
+        create(objectTypeName: string): any;
         save(): Data.SaveRequest;
         onSaved(saveResponse: Data.SaveResponse): void;
         sync(): void;
@@ -101,7 +102,7 @@
                     newWorkspaceObject.id = id;
                     delete(newWorkspaceObject.newId);
 
-                    this.newWorkspaceObjectById[id] = newWorkspaceObject;
+                    this.workspaceObjectById[id] = newWorkspaceObject;
                 });
             }
 
