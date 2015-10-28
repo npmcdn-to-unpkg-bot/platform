@@ -4,11 +4,12 @@
 
         get(id: string): any;
         save(): Data.SaveRequest;
+        onSaved(saveResponse: Data.SaveResponse): void;
         sync(): void;
     }
 
-    export class Workspace {
-        private static idCounter;
+    export class Workspace implements IWorkspace {
+        private static idCounter = 0;
 
         private database: IDatabase;
         private workspaceObjectById: { [id: string]: IWorkspaceObject; } = {};
@@ -57,13 +58,16 @@
             var workspaceObject: INewWorkspaceObject = new type();
             workspaceObject.workspace = this;
             workspaceObject.objectType = this.database.objectTypeByName[objectTypeName];
-            workspaceObject.newId = (++Workspace.idCounter).toString();
+            workspaceObject.newId = (--Workspace.idCounter).toString();
 
-            this.newWorkspaceObjectById[workspaceObject.id] = workspaceObject;
+            this.newWorkspaceObjectById[workspaceObject.newId] = workspaceObject;
+
+            return workspaceObject;
         }
 
         save() : Data.SaveRequest {
             var data = new Data.SaveRequest();
+            data.newObjects = [];
             data.objects = [];
 
             if (this.newWorkspaceObjectById) {
@@ -85,6 +89,27 @@
             return data;
         }
         
+        onSaved(saveResponse: Data.SaveResponse): void {
+            if (saveResponse.newObjects) {
+                _.forEach(saveResponse.newObjects, saveResponseNewObject => {
+                    var newId = saveResponseNewObject.ni;
+                    var id = saveResponseNewObject.i;
+
+                    var newWorkspaceObject = this.newWorkspaceObjectById[newId];
+                    delete (this.newWorkspaceObjectById[newId]);
+
+                    newWorkspaceObject.id = id;
+                    delete(newWorkspaceObject.newId);
+
+                    this.newWorkspaceObjectById[id] = newWorkspaceObject;
+                });
+            }
+
+            if (Object.getOwnPropertyNames(this.newWorkspaceObjectById).length !== 0) {
+                throw "Not all new objects received ids";
+            }
+        }
+
         sync(): void {
             _.forEach(this.workspaceObjectById, v => {
                 v.sync();

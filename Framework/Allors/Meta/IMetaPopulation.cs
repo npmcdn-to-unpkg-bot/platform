@@ -39,6 +39,8 @@ namespace Allors.Meta
 
         IMetaObject Find(Guid metaObjectId);
 
+        IClass FindClassByName(string name);
+
         bool IsValid { get; }
 
         IValidationLog Validate();

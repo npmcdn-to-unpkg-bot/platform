@@ -38,11 +38,11 @@
         }
  
         get id(): string {
-            return this.databaseObject.id;
+            return this.databaseObject ? this.databaseObject.id : undefined;
         }
 
         get version(): string {
-            return this.databaseObject.version;
+            return this.databaseObject ? this.databaseObject.version : undefined;
         }
 
         get(roleTypeName: string): any {
@@ -154,10 +154,8 @@
         private saveRoles(): Data.SaveRequestRole[] {
             var saveRoles = new Array<Data.SaveRequestRole>();
 
-            var objectType = this.databaseObject.objectType;
-
             _.forEach(this.changedRoleByRoleTypeName, (role, roleTypeName) => {
-                var roleType = objectType.roleTypeByName[roleTypeName];
+                var roleType = this.objectType.roleTypeByName[roleTypeName];
 
                 var saveRole = new Data.SaveRequestRole;
                 saveRole.t = roleType.name;
@@ -166,19 +164,23 @@
                     saveRole.s = role;
                 } else {
                     if (roleType.isOne) {
-                        saveRole.s = role ? role.id : null;
+                        saveRole.s = role ? role.id || role.newId : null;
                     } else {
-                        var roleIds = role.map(item => { return (<WorkspaceObject>item).id; });
+                        var roleIds = role.map(item => { return (<WorkspaceObject>item).id || (<WorkspaceObject>item).newId; });
 
                         if (roleIds.length === 0) {
                             saveRole.s = [];
                         } else {
-                            var originalRoleIds = <string[]>this.databaseObject.roles[roleTypeName];
-                            if (!originalRoleIds) {
+                            if (this.newId) {
                                 saveRole.s = roleIds;
                             } else {
-                                saveRole.a = _.difference(roleIds, originalRoleIds);
-                                saveRole.r = _.difference(originalRoleIds, roleIds);
+                                var originalRoleIds = <string[]>this.databaseObject.roles[roleTypeName];
+                                if (!originalRoleIds) {
+                                    saveRole.s = roleIds;
+                                } else {
+                                    saveRole.a = _.difference(roleIds, originalRoleIds);
+                                    saveRole.r = _.difference(originalRoleIds, roleIds);
+                                }
                             }
                         }
                     }

@@ -1,4 +1,6 @@
-﻿namespace Allors.Web
+﻿using Antlr.Runtime;
+
+namespace Allors.Web
 {
     using System;
     using System.Collections.Generic;
@@ -28,6 +30,17 @@
         {
             var saveResponse = new SaveResponse();
 
+            Dictionary<string, IObject> objectByNewId = null;
+
+            if (this.saveRequest.NewObjects != null && this.saveRequest.NewObjects.Length > 0)
+            {
+                objectByNewId = this.saveRequest.NewObjects.ToDictionary(x => x.NI, x =>
+                {
+                    var cls = session.Database.MetaPopulation.FindClassByName(x.T);
+                    return session.Create(cls);
+                });
+            }
+
             if (this.saveRequest.Objects != null && this.saveRequest.Objects.Length > 0)
             {
                 // bulk load all objects
@@ -37,10 +50,6 @@
                 foreach (var saveRequestObject in this.saveRequest.Objects)
                 {
                     var obj = this.session.Instantiate(saveRequestObject.I);
-                    var composite = (Composite)obj.Strategy.Class;
-                    var roleTypes = composite.RoleTypesByGroup[@group];
-
-                    var acl = new AccessControlList(obj, this.user);
 
                     if (!saveRequestObject.V.Equals(obj.Strategy.ObjectVersion.ToString()))
                     {
@@ -48,137 +57,44 @@
                     }
                     else
                     {
-                        foreach (var saveRequestRole in saveRequestObject.Roles)
-                        {
-                            var roleTypeName = saveRequestRole.T;
-                            var roleType = roleTypes.FirstOrDefault(v => v.PropertyName.Equals(roleTypeName));
-
-                            if (roleType != null)
-                            {
-                                if (acl.CanWrite(roleType))
-                                {
-                                    if (roleType.ObjectType.IsUnit)
-                                    {
-                                        var unitType = (IUnit)roleType.ObjectType;
-                                        var role = saveRequestRole.S;
-                                        if (role is string)
-                                        {
-                                            role = Serialization.ReadString((string)role, unitType.UnitTag);
-                                        }
-
-                                        obj.Strategy.SetUnitRole(roleType, role);
-                                    }
-                                    else
-                                    {
-                                        if (roleType.IsOne)
-                                        {
-                                            var roleId = (string)saveRequestRole.S;
-                                            if (string.IsNullOrEmpty(roleId))
-                                            {
-                                                obj.Strategy.RemoveCompositeRole(roleType);
-                                            }
-                                            else
-                                            {
-                                                var role = this.session.Instantiate(roleId);
-                                                if (role == null)
-                                                {
-                                                    saveResponse.AddMissingError(roleId);
-                                                }
-                                                else
-                                                {
-                                                    obj.Strategy.SetCompositeRole(roleType, role);
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            // Set
-                                            if (saveRequestRole.S != null)
-                                            {
-                                                var roleIds = (string[])saveRequestRole.S;
-                                                if (roleIds.Length == 0)
-                                                {
-                                                    obj.Strategy.RemoveCompositeRole(roleType);
-                                                }
-                                                else
-                                                {
-                                                    var roles = this.session.Instantiate(roleIds);
-                                                    if (roles.Length != roleIds.Length)
-                                                    {
-                                                        AddMissingRoles(roles, roleIds, saveResponse);
-                                                    }
-                                                    else
-                                                    {
-                                                        obj.Strategy.SetCompositeRoles(roleType, roles);
-                                                    }
-                                                }
-                                            }
-
-                                            // Add
-                                            if (saveRequestRole.A != null)
-                                            {
-                                                var roleIds = saveRequestRole.A;
-                                                if (roleIds.Length != 0)
-                                                {
-                                                    var roles = this.session.Instantiate(roleIds);
-                                                    if (roles.Length != roleIds.Length)
-                                                    {
-                                                        AddMissingRoles(roles, roleIds, saveResponse);
-                                                    }
-                                                    else
-                                                    {
-                                                        foreach (var role in roles)
-                                                        {
-                                                            obj.Strategy.AddCompositeRole(roleType, role);
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            // Remove
-                                            if (saveRequestRole.R != null)
-                                            {
-                                                var roleIds = saveRequestRole.R;
-                                                if (roleIds.Length != 0)
-                                                {
-                                                    var roles = this.session.Instantiate(roleIds);
-                                                    if (roles.Length != roleIds.Length)
-                                                    {
-                                                        AddMissingRoles(roles, roleIds, saveResponse);
-                                                    }
-                                                    else
-                                                    {
-                                                        foreach (var role in roles)
-                                                        {
-                                                            obj.Strategy.RemoveCompositeRole(roleType, role);
-
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    saveResponse.AddAccessError(obj);
-                                }
-                            }
-                        }
+                        var saveRequestRoles = saveRequestObject.Roles;
+                        SaveRequestRoles(saveRequestRoles, obj, saveResponse, objectByNewId);
                     }
                 }
+            }
 
-                var derivationLog = this.session.Derive();
-
-                if (derivationLog.HasErrors)
+            if (objectByNewId != null)
+            {
+                foreach (var saveRequestNewObject in this.saveRequest.NewObjects)
                 {
-                    saveResponse.AddDerivationErrors(derivationLog);
+                    var obj = objectByNewId[saveRequestNewObject.NI];
+                    var saveRequestRoles = saveRequestNewObject.Roles;
+                    if (saveRequestRoles != null)
+                    {
+                        SaveRequestRoles(saveRequestRoles, obj, saveResponse, objectByNewId);
+                    }
+                }
+            }
+            
+            var derivationLog = this.session.Derive();
+
+            if (derivationLog.HasErrors)
+            {
+                saveResponse.AddDerivationErrors(derivationLog);
+            }
+
+            if (!saveResponse.HasErrors)
+            {
+                if (objectByNewId != null)
+                {
+                    saveResponse.NewObjects = objectByNewId.Select(dictionaryEntry => new SaveResponseNewObject
+                    {
+                        I = dictionaryEntry.Value.Id.ToString(),
+                        NI = dictionaryEntry.Key
+                    }).ToArray();
                 }
 
-                if (!saveResponse.HasErrors)
-                {
-                    this.session.Commit();
-                }
+                this.session.Commit();
             }
 
             return saveResponse;
@@ -192,6 +108,176 @@
             {
                 saveResponse.AddMissingError(missingRoleId);
             }
+        }
+
+        private void SaveRequestRoles(IList<SaveRequestRole> saveRequestRoles, IObject obj, SaveResponse saveResponse, Dictionary<string, IObject> objectByNewId)
+        {
+            foreach (var saveRequestRole in saveRequestRoles)
+            {
+                var composite = (Composite)obj.Strategy.Class;
+                var roleTypes = composite.RoleTypesByGroup[@group];
+                var acl = new AccessControlList(obj, this.user);
+
+                var roleTypeName = saveRequestRole.T;
+                var roleType = roleTypes.FirstOrDefault(v => v.PropertyName.Equals(roleTypeName));
+
+                if (roleType != null)
+                {
+                    if (acl.CanWrite(roleType))
+                    {
+                        if (roleType.ObjectType.IsUnit)
+                        {
+                            var unitType = (IUnit)roleType.ObjectType;
+                            var role = saveRequestRole.S;
+                            if (role is string)
+                            {
+                                role = Serialization.ReadString((string)role, unitType.UnitTag);
+                            }
+
+                            obj.Strategy.SetUnitRole(roleType, role);
+                        }
+                        else
+                        {
+                            if (roleType.IsOne)
+                            {
+                                var roleId = (string)saveRequestRole.S;
+                                if (string.IsNullOrEmpty(roleId))
+                                {
+                                    obj.Strategy.RemoveCompositeRole(roleType);
+                                }
+                                else
+                                {
+                                    var role = GetRole(roleId, objectByNewId);
+                                    if (role == null)
+                                    {
+                                        saveResponse.AddMissingError(roleId);
+                                    }
+                                    else
+                                    {
+                                        obj.Strategy.SetCompositeRole(roleType, role);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Set
+                                if (saveRequestRole.S != null)
+                                {
+                                    var roleIds = (string[])saveRequestRole.S;
+                                    if (roleIds.Length == 0)
+                                    {
+                                        obj.Strategy.RemoveCompositeRole(roleType);
+                                    }
+                                    else
+                                    {
+                                        var roles = GetRoles(roleIds, objectByNewId);
+                                        if (roles.Length != roleIds.Length)
+                                        {
+                                            AddMissingRoles(roles, roleIds, saveResponse);
+                                        }
+                                        else
+                                        {
+                                            obj.Strategy.SetCompositeRoles(roleType, roles);
+                                        }
+                                    }
+                                }
+
+                                // Add
+                                if (saveRequestRole.A != null)
+                                {
+                                    var roleIds = saveRequestRole.A;
+                                    if (roleIds.Length != 0)
+                                    {
+                                        var roles = GetRoles(roleIds, objectByNewId);
+                                        if (roles.Length != roleIds.Length)
+                                        {
+                                            AddMissingRoles(roles, roleIds, saveResponse);
+                                        }
+                                        else
+                                        {
+                                            foreach (var role in roles)
+                                            {
+                                                obj.Strategy.AddCompositeRole(roleType, role);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // Remove
+                                if (saveRequestRole.R != null)
+                                {
+                                    var roleIds = saveRequestRole.R;
+                                    if (roleIds.Length != 0)
+                                    {
+                                        var roles = GetRoles(roleIds, objectByNewId);
+                                        if (roles.Length != roleIds.Length)
+                                        {
+                                            AddMissingRoles(roles, roleIds, saveResponse);
+                                        }
+                                        else
+                                        {
+                                            foreach (var role in roles)
+                                            {
+                                                obj.Strategy.RemoveCompositeRole(roleType, role);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        saveResponse.AddAccessError(obj);
+                    }
+                }
+            }
+        }
+
+        private IObject GetRole(string roleId, Dictionary<string, IObject> objectByNewId)
+        {
+            IObject role;
+            if (objectByNewId == null || !objectByNewId.TryGetValue(roleId, out role))
+            {
+                role = this.session.Instantiate(roleId);
+            }
+            return role;
+        }
+
+        private IObject[] GetRoles(string[] roleIds, Dictionary<string, IObject> objectByNewId)
+        {
+            if (objectByNewId == null)
+            {
+                return this.session.Instantiate(roleIds);
+            }
+
+            var roles = new List<IObject>();
+            List<string> existingRoleIds = null;
+            foreach (var roleId in roleIds)
+            {
+                IObject role;
+                if (objectByNewId.TryGetValue(roleId, out role))
+                {
+                    roles.Add(role);
+                }
+                else
+                {
+                    if (existingRoleIds == null)
+                    {
+                        existingRoleIds = new List<string>();
+                    }
+
+                    existingRoleIds.Add(roleId);
+                }
+            }
+
+            if (existingRoleIds != null)
+            {
+                var existingRoles = this.session.Instantiate(existingRoleIds.ToArray());
+                roles.AddRange(existingRoles);
+            }
+
+            return roles.ToArray();
         }
     }
 }

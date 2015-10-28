@@ -317,5 +317,148 @@ namespace Controllers.Workspace
 
             c1a.C1C1One2Manies.ShouldNotBeSameAs(new[] { c1b });
         }
+
+        [Test]
+        public void AdministratorNew()
+        {
+            // Arrange
+            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+
+            this.Session.Commit();
+
+            var saveRequest = new SaveRequest
+            {
+                 NewObjects = new[] {
+                    new SaveRequestNewObject
+                    {
+                        NI = "-1",
+                        T = "C1",
+                    }
+                }
+            };
+
+            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+
+            // Act
+            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var saveResponse = (SaveResponse)jsonResult.Data;
+
+            // Assert
+            this.Session.Rollback();
+
+            saveResponse.HasErrors.ShouldBeFalse();
+
+            saveResponse.NewObjects.Length.ShouldEqual(1);
+
+            var newObject = saveResponse.NewObjects[0];
+            var newId = newObject.NI;
+            var id = newObject.I;
+
+            newId.ShouldEqual("-1");
+            var c1 = this.Session.Instantiate(id);  
+            c1.ShouldNotBeNull();
+        }
+
+        [Test]
+        public void AdministratorNewSetUnit()
+        {
+            // Arrange
+            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+
+            this.Session.Commit();
+
+            var saveRequest = new SaveRequest
+            {
+                NewObjects = new[] {
+                    new SaveRequestNewObject
+                    {
+                        NI = "-1",
+                        T = "C1",
+                        Roles = new List<SaveRequestRole>
+                        {
+                            new SaveRequestRole
+                            {
+                                T = "C1AllorsString",
+                                S = "new c1"
+                            }
+                        }
+                    }
+                }
+            };
+
+            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+
+            // Act
+            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var saveResponse = (SaveResponse)jsonResult.Data;
+
+            // Assert
+            this.Session.Rollback();
+
+            saveResponse.HasErrors.ShouldBeFalse();
+
+            saveResponse.NewObjects.Length.ShouldEqual(1);
+
+            var newObject = saveResponse.NewObjects[0];
+            var newId = newObject.NI;
+            var id = newObject.I;
+
+            newId.ShouldEqual("-1");
+            var c1 = (C1)this.Session.Instantiate(id);
+            c1.ShouldNotBeNull();
+
+            c1.C1AllorsString = "new C1";
+        }
+
+        [Test]
+        public void AdministratorNewSetNewOne()
+        {
+            // Arrange
+            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+
+            this.Session.Commit();
+
+            var saveRequest = new SaveRequest
+            {
+                NewObjects = new[] {
+                    new SaveRequestNewObject
+                    {
+                        NI = "-1",
+                        T = "C1",
+                        Roles = new List<SaveRequestRole>
+                        {
+                            new SaveRequestRole
+                            {
+                                T = "C1C1One2One",
+                                S = "-1"
+                            }
+                        }
+                    }
+                }
+            };
+
+            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+
+            // Act
+            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var saveResponse = (SaveResponse)jsonResult.Data;
+
+            // Assert
+            this.Session.Rollback();
+
+            saveResponse.HasErrors.ShouldBeFalse();
+
+            saveResponse.NewObjects.Length.ShouldEqual(1);
+
+            var newObject = saveResponse.NewObjects[0];
+            var newId = newObject.NI;
+            var id = newObject.I;
+
+            newId.ShouldEqual("-1");
+            var c1 = (C1)this.Session.Instantiate(id);
+            c1.ShouldNotBeNull();
+
+            c1.C1C1One2One = c1;
+        }
     }
 }

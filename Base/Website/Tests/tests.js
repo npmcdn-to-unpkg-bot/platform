@@ -324,7 +324,7 @@ test("workspace many set", function () {
     ok(arrayEqual(icme2.Employees, [koen2, patrick2, martien2]));
 });
 
-test("workspace many save", function () {
+test("workspace many save with existing objects", function () {
     var database = new Allors.Database(Allors.Meta.population);
     database.load(fixture.loadData);
 
@@ -344,6 +344,7 @@ test("workspace many save", function () {
 
     var save = workspace.save();
 
+    ok(save.newObjects.length === 0);
     ok(save.objects.length === 3);
 
     var savedAcme = _.find(save.objects, function (v) { return v.i === "101" });
@@ -379,6 +380,82 @@ test("workspace many save", function () {
     ok(savedIcmeEmployees.a === undefined);
     ok(savedIcmeEmployees.r === undefined);
 });
+
+test("workspace many save with new objects", function () {
+    var database = new Allors.Database(Allors.Meta.population);
+    database.load(fixture.loadData);
+
+    var workspace = new Allors.Workspace(database);
+
+    var martien = workspace.get("3");
+
+    var mathijs = workspace.create("Person");
+    mathijs.FirstName = "Mathijs";
+    mathijs.LastName = "Verwer";
+
+    var acme2 = workspace.create("Organisation");
+    acme2.Name = "Acme 2";
+    acme2.Manager = mathijs;
+    acme2.AddEmployee(mathijs);
+
+    var acme3 = workspace.create("Organisation");
+    acme3.Name = "Acme 3";
+    acme3.Manager = martien;
+    acme3.AddEmployee(martien);
+
+    var save = workspace.save();
+
+    ok(save.newObjects.length === 3);
+    ok(save.objects.length === 0);
+    {
+        var savedMathijs = _.find(save.newObjects, function(v) { return v.ni === "-1" });
+
+        ok(savedMathijs.t === "Person");
+        ok(savedMathijs.roles.length === 2);
+
+        var savedMathijsFirstName = _.find(savedMathijs.roles, function(v) { return v.t === "FirstName" });
+        ok(savedMathijsFirstName.s === "Mathijs");
+
+        var savedMathijsLastName = _.find(savedMathijs.roles, function(v) { return v.t === "LastName" });
+        ok(savedMathijsLastName.s === "Verwer");
+    }
+
+    {
+        var savedAcme2 = _.find(save.newObjects, function(v) { return v.ni === "-2" });
+
+        ok(savedAcme2.t === "Organisation");
+        ok(savedAcme2.roles.length === 3);
+
+        var savedAcme2Manager = _.find(savedAcme2.roles, function(v) { return v.t === "Manager" });
+
+        ok(savedAcme2Manager.s === "-1");
+
+        var savedAcme2Employees = _.find(savedAcme2.roles, function(v) { return v.t === "Employees" });
+
+        ok(arrayEqual(savedAcme2Employees.s, ["-1"]));
+        ok(savedAcme2Employees.a === undefined);
+        ok(savedAcme2Employees.r === undefined);
+    }
+
+    {
+        var savedAcme3 = _.find(save.newObjects, function (v) { return v.ni === "-3" });
+
+        ok(savedAcme3.t === "Organisation");
+        ok(savedAcme3.roles.length === 3);
+
+        var savedAcme3Manager = _.find(savedAcme3.roles, function (v) { return v.t === "Manager" });
+
+        ok(savedAcme3Manager.s === "3");
+
+        var savedAcme3Employees = _.find(savedAcme3.roles, function (v) { return v.t === "Employees" });
+
+        ok(arrayEqual(savedAcme3Employees.s, ["3"]));
+        ok(savedAcme3Employees.a === undefined);
+        ok(savedAcme3Employees.r === undefined);
+    }
+
+});
+
 
 test("workspace method canExecute", function () {
     var database = new Allors.Database(Allors.Meta.population);

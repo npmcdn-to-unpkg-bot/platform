@@ -2,6 +2,6 @@
 {
     public class SaveResponse : ResponseError
     {
-        private SaveResponseNewObject[] newObjects;
+        public SaveResponseNewObject[] NewObjects { get; set; }
     }
 }

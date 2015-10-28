@@ -280,7 +280,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ViewConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AngularController.cs" />
+    <Compile Include="Allors\Server\Test\Angular\AngularController.cs" />
     <Compile Include="Allors\Server\Test\Mvc\MvcController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
@@ -298,6 +298,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseDerivationError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Data\InvokeResponse.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Data\SaveResponseNewObject.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Method.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />

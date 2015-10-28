@@ -6,7 +6,7 @@
 
         constructor(
             public service: Allors.Service,
-            public workspace: Allors.Workspace,
+            public workspace: Allors.IWorkspace,
             public name: string,
             private $q: ng.IQService) {
         }

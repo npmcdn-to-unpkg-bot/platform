@@ -6,5 +6,7 @@
         accessErrors: string[];
         missingErrors: string[];
         derivationErrors: Allors.Data.ResponseDerivationError[];
+
+        newObjects: Allors.Data.SaveResponseNewObject[];
     }
 }

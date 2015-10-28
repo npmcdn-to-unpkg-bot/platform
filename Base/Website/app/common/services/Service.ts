@@ -66,6 +66,7 @@
                     if (saveResponse.hasErrors) {
                         defer.reject(saveResponse);
                     } else {
+                        context.workspace.onSaved(saveResponse);
                         defer.resolve(saveResponse);
                     }
                 })

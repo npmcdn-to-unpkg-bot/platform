@@ -108,11 +108,11 @@ $else$
 				return this.get("$roleType.PluralPropertyName$");
 			}
 
-			add$roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+			Add$roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
 				return this.add("$roleType.PluralPropertyName$", value);
 			}
 
-			remove$roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
+			Remove$roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
 				return this.remove("$roleType.PluralPropertyName$", value);
 			}
 

@@ -35,6 +35,7 @@ namespace Allors.Meta
 
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
+        private Dictionary<string, Class> derivedClassByLowercaseName;
         private Composite[] derivedComposites;
 
         private bool isBound;
@@ -426,7 +427,7 @@ namespace Allors.Meta
                 return this.derivedComposites;
             }
         }
-
+        
         /// <summary>
         /// Gets a value indicating whether this instance is valid.
         /// </summary>
@@ -465,6 +466,30 @@ namespace Allors.Meta
             this.metaObjectById.TryGetValue(id, out metaObject);
 
             return metaObject;
+        }
+        
+        IClass IMetaPopulation.FindClassByName(string name)
+        {
+            return this.FindByName(name);
+        }
+
+        /// <summary>
+        /// Find a meta object by name.
+        /// </summary>
+        /// <param name="name">
+        /// The meta object id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMetaObject"/>.
+        /// </returns>
+        public Class FindByName(string name)
+        {
+            this.Derive();
+
+            Class cls;
+            this.derivedClassByLowercaseName.TryGetValue(name.ToLowerInvariant(), out cls);
+
+            return cls;
         }
 
         IValidationLog IMetaPopulation.Validate()
@@ -794,6 +819,13 @@ namespace Allors.Meta
                     foreach (var type in this.derivedComposites)
                     {
                         type.DeriveMethodTypesByGroup();
+                    }
+
+                    // MetaPopulation
+                    this.derivedClassByLowercaseName = new Dictionary<string, Class>();
+                    foreach (var cls in this.classes)
+                    {
+                        this.derivedClassByLowercaseName[cls.Name.ToLowerInvariant()] = cls;
                     }
                 }
                 finally
