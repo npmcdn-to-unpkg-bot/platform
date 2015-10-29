@@ -18,9 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-using Allors.Meta;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System.Collections.Generic;
@@ -38,7 +35,7 @@ namespace Allors.Adapters.Object.SqlClient
         internal RoleContainedInEnumerable(ExtentFiltered extent, IRoleType role, IEnumerable<IObject> enumerable)
         {
             extent.CheckRole(role);
-            PredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);
+            PredicateAssertions.ValidateRoleContainedIn(role, enumerable);
             this.role = role;
             this.enumerable = enumerable;
         }
@@ -51,13 +48,13 @@ namespace Allors.Adapters.Object.SqlClient
             foreach (var inObject in this.enumerable)
             {
                 inStatement.Append(",");
-                inStatement.Append(inObject.Id.ToString());
+                inStatement.Append(inObject.Id);
             }
 
             if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveClasses)
             {
                 statement.Append(" (" + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL AND ");
-                statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForAssociation + " IN (");
+                statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IN (");
                 statement.Append(inStatement.ToString());
                 statement.Append(" ))");
             }

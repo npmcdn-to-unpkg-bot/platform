@@ -21,8 +21,7 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Collections.Generic;
-
+    using System.Collections.Concurrent;
     using Allors;
 
     /// <summary>
@@ -32,12 +31,12 @@ namespace Allors.Domain
     {
         private readonly User user;
         private readonly Func<IObject, User, IAccessControlList> factory = (allorsObject, user) => new AccessControlList(allorsObject, user);
-        private readonly Dictionary<IObject, IAccessControlList> accessControlListByObject;
+        private readonly ConcurrentDictionary<IObject, IAccessControlList> accessControlListByObject;
 
         public AccessControlListCache(User user)
         {
             this.user = user;
-            this.accessControlListByObject = new Dictionary<IObject, IAccessControlList>();
+            this.accessControlListByObject = new ConcurrentDictionary<IObject, IAccessControlList>();
         }
 
         public AccessControlListCache(User user, Func<IObject, User, IAccessControlList> factory)

@@ -20,15 +20,15 @@
 
 namespace Allors.Domain
 {
-    using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Linq;
 
     using Allors.Meta;
 
     public static partial class ObjectExtensions
     {
-        private static readonly Dictionary<string, RoleType[]> RequiredRoleTypesByClassName = new Dictionary<string, RoleType[]>();
-        private static readonly Dictionary<string, RoleType[]> UniqueRoleTypesByClassName = new Dictionary<string, RoleType[]>(); 
+        private static readonly ConcurrentDictionary<string, RoleType[]> RequiredRoleTypesByClassName = new ConcurrentDictionary<string, RoleType[]>();
+        private static readonly ConcurrentDictionary<string, RoleType[]> UniqueRoleTypesByClassName = new ConcurrentDictionary<string, RoleType[]>(); 
 
         public static void BaseOnPreDerive(this Object @this, ObjectOnPreDerive method)
         {

@@ -21,6 +21,7 @@
 namespace Allors.Domain
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -34,14 +35,14 @@ namespace Allors.Domain
     public class AccessControlList : IAccessControlList
     {
         private static readonly IList<Operation> EmptyOperations = new List<Operation>();
-        private static readonly Dictionary<Guid, IList<Operation>> EmptyOperationsByOperandTypeId = new Dictionary<Guid, IList<Operation>>();
+        private static readonly ConcurrentDictionary<Guid, IList<Operation>> EmptyOperationsByOperandTypeId = new ConcurrentDictionary<Guid, IList<Operation>>();
 
         private readonly AccessControlledObject accessControlledObject;
         private readonly User user;
         private readonly IObjectType objectType;
         private readonly ISession databaseSession;
 
-        private Dictionary<Guid, IList<Operation>> operationsByOperandId;
+        private ConcurrentDictionary<Guid, IList<Operation>> operationsByOperandId;
 
         private bool hasWriteOperation;
         private bool hasReadOperation;
@@ -88,7 +89,7 @@ namespace Allors.Domain
             }
         }
 
-        private Dictionary<Guid, IList<Operation>> OperationsByOperandTypeId
+        private ConcurrentDictionary<Guid, IList<Operation>> OperationsByOperandTypeId
         {
             get
             {

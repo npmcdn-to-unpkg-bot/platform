@@ -18,9 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Concurrent;
+
 namespace Allors.Adapters.Object.SqlClient.Caching
 {
-    using System.Collections.Generic;
+    using System.Collections.Concurrent;
 
     using Allors.Meta;
 
@@ -28,12 +30,12 @@ namespace Allors.Adapters.Object.SqlClient.Caching
     {
         private readonly long localCacheVersion;
 
-        private readonly Dictionary<IRoleType, object> roleByRoleType;
+        private readonly ConcurrentDictionary<IRoleType, object> roleByRoleType;
 
         internal CachedObject(long localCacheVersion)
         {
             this.localCacheVersion = localCacheVersion;
-            this.roleByRoleType = new Dictionary<IRoleType, object>();
+            this.roleByRoleType = new ConcurrentDictionary<IRoleType, object>();
         }
 
         public long LocalCacheVersion

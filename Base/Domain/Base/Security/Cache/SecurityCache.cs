@@ -17,12 +17,11 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Allors.Domain
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
-
     using Allors;
     using Allors.Meta;
 
@@ -34,17 +33,17 @@ namespace Allors.Domain
         private const string CacheKey = "Allors.Cache.Security";
 
         private readonly IDatabase database;
-        private readonly Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>> operationsByOperandTypeIdByObjectTypeIdByRoleId;
+        private readonly ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, List<Operation>>>> operationsByOperandTypeIdByObjectTypeIdByRoleId;
 
         public SecurityCache(ISession session)
         {
             this.database = session.Database;
             
-            this.operationsByOperandTypeIdByObjectTypeIdByRoleId = (Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>>)this.database[CacheKey];
+            this.operationsByOperandTypeIdByObjectTypeIdByRoleId = (ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, List<Operation>>>>)this.database[CacheKey];
 
             if (this.operationsByOperandTypeIdByObjectTypeIdByRoleId == null)
             {
-                this.operationsByOperandTypeIdByObjectTypeIdByRoleId = new Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>>();
+                this.operationsByOperandTypeIdByObjectTypeIdByRoleId = new ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, List<Operation>>>>();
 
                 foreach (Role role in new Roles(session).Extent())
                 {
@@ -53,7 +52,7 @@ namespace Allors.Domain
                         throw new Exception("Role " + role + " has no unique id");
                     }
 
-                    var operationsByOperandTypeIdByObjectTypeId = new Dictionary<Guid, Dictionary<Guid, List<Operation>>>();
+                    var operationsByOperandTypeIdByObjectTypeId = new ConcurrentDictionary<Guid, ConcurrentDictionary<Guid, List<Operation>>>();
                     this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId] = operationsByOperandTypeIdByObjectTypeId;
 
                     foreach (Permission permission in role.Permissions)
@@ -67,10 +66,10 @@ namespace Allors.Domain
                         var operandTypeId = permission.OperandTypePointer;
                         var operation = permission.Operation;
 
-                        Dictionary<Guid, List<Operation>> operationsByOperandTypeId;
+                        ConcurrentDictionary<Guid, List<Operation>> operationsByOperandTypeId;
                         if (!operationsByOperandTypeIdByObjectTypeId.TryGetValue(concreteClassId, out operationsByOperandTypeId))
                         {
-                            operationsByOperandTypeId = new Dictionary<Guid, List<Operation>>();
+                            operationsByOperandTypeId = new ConcurrentDictionary<Guid, List<Operation>>();
                             operationsByOperandTypeIdByObjectTypeId[concreteClassId] = operationsByOperandTypeId;
                         }
 
@@ -94,9 +93,9 @@ namespace Allors.Domain
             this.database[CacheKey] = null;
         }
 
-        public Dictionary<Guid, IList<Operation>> GetOperationsByOperandTypeId(HashSet<Guid> roleUniqueIds, ObjectType objectType, out bool hasWriteOperation, out bool hasReadOperation)
+        public ConcurrentDictionary<Guid, IList<Operation>> GetOperationsByOperandTypeId(HashSet<Guid> roleUniqueIds, ObjectType objectType, out bool hasWriteOperation, out bool hasReadOperation)
         {
-            var resultOperationsByOperandId = new Dictionary<Guid, IList<Operation>>();
+            var resultOperationsByOperandId = new ConcurrentDictionary<Guid, IList<Operation>>();
 
             hasWriteOperation = false;
             hasReadOperation = false;
@@ -104,7 +103,7 @@ namespace Allors.Domain
             foreach (var roleUniqueId in roleUniqueIds)
             {
                 var roleOperationsByOperandIdByObjectType = this.operationsByOperandTypeIdByObjectTypeIdByRoleId[roleUniqueId];
-                Dictionary<Guid, List<Operation>> roleOperationsByOperandObjectId;
+                ConcurrentDictionary<Guid, List<Operation>> roleOperationsByOperandObjectId;
                 if (roleOperationsByOperandIdByObjectType.TryGetValue(objectType.Id, out roleOperationsByOperandObjectId))
                 {
                     foreach (var dictionaryEntry in roleOperationsByOperandObjectId)

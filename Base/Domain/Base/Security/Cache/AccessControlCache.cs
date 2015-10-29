@@ -16,10 +16,13 @@
 //   The access control cache.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+
 namespace Allors.Domain
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Linq;
 
     /// <summary>
@@ -35,7 +38,7 @@ namespace Allors.Domain
         /// <summary>
         /// The entry by object id.
         /// </summary>
-        private readonly Dictionary<ObjectId, Entry> entryByObjectId;
+        private readonly ConcurrentDictionary<ObjectId, Entry> entryByObjectId;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccessControlCache"/> class.
@@ -46,10 +49,10 @@ namespace Allors.Domain
         public AccessControlCache(ISession session)
         {
             var database = session.Database;
-            this.entryByObjectId = (Dictionary<ObjectId, Entry>)database[CacheKey];
+            this.entryByObjectId = (ConcurrentDictionary<ObjectId, Entry>)database[CacheKey];
             if (this.entryByObjectId == null)
             {
-                this.entryByObjectId = new Dictionary<ObjectId, Entry>();
+                this.entryByObjectId = new ConcurrentDictionary<ObjectId, Entry>();
                 database[CacheKey] = this.entryByObjectId;
             }
         }

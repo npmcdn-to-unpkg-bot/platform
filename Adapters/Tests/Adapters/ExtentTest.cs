@@ -5846,7 +5846,7 @@ namespace Allors.Adapters
         }
 
         [Test]
-        public void NotRoleMany2ManyContainedIn()
+        public void NotRoleMany2ManyContainedInExtent()
         {
             foreach (var init in this.Inits)
             {
@@ -6228,6 +6228,257 @@ namespace Allors.Adapters
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
                 }
+            }
+        }
+
+        [Test]
+        public void NotRoleMany2ManyContainedInArray()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                // Extent over Class
+
+                // RelationType from C1 to C2
+                // ContainedIn Extent over Class
+                // Empty
+                var inExtent = this.LocalExtent(Classes.C2);
+                inExtent.Filter.AddEquals(RoleTypes.C2AllorsString, "Nothing here!");
+
+                var extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C2many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(4, extent.Count);
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Full
+                inExtent = this.LocalExtent(Classes.C2);
+
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C2many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Filtered
+                inExtent = this.LocalExtent(Classes.C2);
+                inExtent.Filter.AddEquals(RoleTypes.C2AllorsString, "Abra");
+               
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C2many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // ContainedIn Extent over Class
+                // Empty
+                inExtent = this.LocalExtent(Interfaces.I12);
+                inExtent.Filter.AddEquals(RoleTypes.I12AllorsString, "Nothing here!");
+                
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C2many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(4, extent.Count);
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Full
+                inExtent = this.LocalExtent(Interfaces.I12);
+              
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C2many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Filtered
+                inExtent = this.LocalExtent(Interfaces.I12);
+                inExtent.Filter.AddEquals(RoleTypes.I12AllorsString, "Abra");
+
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C2many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // RelationType from C1 to C1
+
+                // ContainedIn Extent over Class
+                // Empty
+                inExtent = this.LocalExtent(Classes.C1);
+                inExtent.Filter.AddEquals(RoleTypes.C1AllorsString, "Nothing here!");
+
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C1many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(4, extent.Count);
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Full
+                inExtent = this.LocalExtent(Classes.C1);
+               
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C1many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Filtered
+                inExtent = this.LocalExtent(Classes.C1);
+                inExtent.Filter.AddEquals(RoleTypes.C1AllorsString, "Abra");
+                
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C1many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // ContainedIn Extent over Class
+                // Empty
+                inExtent = this.LocalExtent(Interfaces.I12);
+                inExtent.Filter.AddEquals(RoleTypes.I12AllorsString, "Nothing here!");
+               
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C1many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(4, extent.Count);
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Full
+                inExtent = this.LocalExtent(Interfaces.I12);
+               
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C1many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Filtered
+                inExtent = this.LocalExtent(Interfaces.I12);
+                inExtent.Filter.AddEquals(RoleTypes.I12AllorsString, "Abra");
+                
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1C1many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // RelationType from C1 to I12
+
+                // ContainedIn Extent over Class
+                // Empty
+                inExtent = this.LocalExtent(Classes.C1);
+                inExtent.Filter.AddEquals(RoleTypes.C1AllorsString, "Nothing here!");
+             
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1I12many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(4, extent.Count);
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Full
+                inExtent = this.LocalExtent(Classes.C1);
+              
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1I12many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, true, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Filtered
+                inExtent = this.LocalExtent(Classes.C1);
+                inExtent.Filter.AddEquals(RoleTypes.C1AllorsString, "Abra");
+              
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1I12many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, true, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // ContainedIn Extent over Class
+                // Empty
+                inExtent = this.LocalExtent(Interfaces.I12);
+                inExtent.Filter.AddEquals(RoleTypes.I12AllorsString, "Nothing here!");
+              
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1I12many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(4, extent.Count);
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Full
+                inExtent = this.LocalExtent(Classes.C1);
+              
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1I12many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, true, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // Filtered
+                inExtent = this.LocalExtent(Interfaces.I12);
+                inExtent.Filter.AddEquals(RoleTypes.I12AllorsString, "Abra");
+               
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddNot().AddContainedIn(RoleTypes.C1I12many2many, (IEnumerable<IObject>)inExtent.ToArray());
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
             }
         }
 
@@ -14107,7 +14358,7 @@ namespace Allors.Adapters
         }
 
         [Test]
-        public void RoleOne2OneContainedIn()
+        public void RoleOne2OneContainedInExtent()
         {
             foreach (var init in this.Inits)
             {
@@ -14262,6 +14513,114 @@ namespace Allors.Adapters
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
                 }
+            }
+        }
+
+        [Test]
+        public void RoleOne2OneContainedInArray()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                // Extent over Class
+
+                // RelationType from Class to Class
+
+                // ContainedIn Extent over Class
+                var inExtent = this.LocalExtent(Classes.C1).ToArray();
+
+                var extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddContainedIn(RoleTypes.C1C1one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                inExtent = this.LocalExtent(Classes.C2).ToArray();
+                
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddContainedIn(RoleTypes.C1C2one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                inExtent = this.LocalExtent(Classes.C4).ToArray();
+
+                extent = this.LocalExtent(Classes.C3);
+                extent.Filter.AddContainedIn(RoleTypes.C3C4one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, false, false, false);
+
+                // ContainedIn Extent over Shared Interface
+                inExtent = this.LocalExtent(Interfaces.I12).ToArray();
+               
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddContainedIn(RoleTypes.C1C1one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                inExtent = this.LocalExtent(Interfaces.I12).ToArray();
+
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddContainedIn(RoleTypes.C1C2one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                inExtent = this.LocalExtent(Interfaces.I34).ToArray();
+
+                extent = this.LocalExtent(Classes.C3);
+                extent.Filter.AddContainedIn(RoleTypes.C3C4one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, false, false, false);
+
+                // RelationType from Class to Interface
+
+                // ContainedIn Extent over Class
+                inExtent = this.LocalExtent(Classes.C2).ToArray();
+
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddContainedIn(RoleTypes.C1I12one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(2, extent.Count);
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                // ContainedIn Extent over Shared Interface
+                inExtent = this.LocalExtent(Interfaces.I12);
+
+                extent = this.LocalExtent(Classes.C1);
+                extent.Filter.AddContainedIn(RoleTypes.C1I12one2one, (IEnumerable<IObject>)inExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
             }
         }
 
