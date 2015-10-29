@@ -97,10 +97,25 @@
                     var id = saveResponseNewObject.i;
 
                     var newWorkspaceObject = this.newWorkspaceObjectById[newId];
-                    delete (this.newWorkspaceObjectById[newId]);
 
-                    newWorkspaceObject.id = id;
+                    var loadResponse: Allors.Data.LoadResponse = {
+                        objects: [
+                            {
+                                i: id,
+                                v: "",
+                                t: newWorkspaceObject.objectType.name,
+                                roles: [],
+                                methods: []
+                            }
+                        ]
+                    }
+
+                    delete (this.newWorkspaceObjectById[newId]);
                     delete(newWorkspaceObject.newId);
+
+                    this.database.load(loadResponse);
+                    var databaseObject = this.database.get(id);
+                    newWorkspaceObject.databaseObject = databaseObject;
 
                     this.workspaceObjectById[id] = newWorkspaceObject;
                 });

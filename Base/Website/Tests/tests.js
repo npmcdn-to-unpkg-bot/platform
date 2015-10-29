@@ -456,6 +456,54 @@ test("workspace many save with new objects", function () {
 
 });
 
+test("workspace onsaved", function () {
+    var database = new Allors.Database(Allors.Meta.population);
+    database.load(fixture.loadData);
+
+    var workspace = new Allors.Workspace(database);
+
+    var saveResponse = {
+        hasErrors: false
+    }
+
+    workspace.onSaved(saveResponse);
+
+    var mathijs = workspace.create("Person");
+    mathijs.FirstName = "Mathijs";
+    mathijs.LastName = "Verwer";
+
+    var newId = mathijs.newId;
+
+    saveResponse = {
+        hasErrors: false,
+        newObjects: [
+            {
+                i: "10000",
+                ni: newId
+            }
+        ]
+    }
+
+    workspace.onSaved(saveResponse);
+
+    ok(mathijs.newId === undefined);
+    ok(mathijs.id === "10000");
+    ok(mathijs.objectType.name === "Person");
+
+    mathijs = workspace.get("10000");
+
+    ok(mathijs !== undefined);
+
+    var exceptionThrown = false;
+    try {
+        workspace.get(newId);
+    }
+    catch (e) {
+        exceptionThrown = true;
+    }
+
+    ok(exceptionThrown);
+});
 
 test("workspace method canExecute", function () {
     var database = new Allors.Database(Allors.Meta.population);
