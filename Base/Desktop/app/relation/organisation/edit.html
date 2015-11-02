@@ -1,0 +1,59 @@
+﻿<div class="container animated fadeIn" ng-if="vm.filterOrganisations && !vm.organisation">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Select a Organisation</h1>
+
+            <table class="table table-striped table-bordered">
+                <caption><a class="btn btn-default" ui-sref="organisationAdd">Add</a></caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Owner</th>
+                        <th>Employees</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="organisation in vm.filterOrganisations">
+                        <td>{{organisation.Name}}</td>
+                        <td>{{organisation.Owner.FullName}}</td>
+                        <td><span ng-repeat="employee in organisation.Employees">{{employee.FullName}}, </span></td>
+                        <td><a class="btn btn-default" ng-click="vm.organisation = organisation">Edit</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container animated fadeIn" ng-if="vm.organisation">
+    <div class="row">
+        <div class="col-md-12">
+            <form >
+                <h1>Edit Organisation</h1>
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" placeholder="Name" ng-model="vm.organisation.Name">
+                </div>
+
+                <div class="form-group">
+                    <label>Owner</label>
+                    <to-one obj="vm.organisation" relation="Owner" display="FullName" lookup="vm.getPersonTypeAhead(criteria)"></to-one>
+                </div>
+
+                <div class="form-group">
+                    <label>Employees</label>
+                    <to-many obj="vm.organisation" relation="Employees" display="FullName" lookup="vm.getPersonTypeAhead(criteria)"></to-many>
+                </div>
+
+                <div>
+                    <input id="save" ng-disabled="!vm.hasChanges" type="button" class="btn btn-success btn-sm" value="Save" ng-click="vm.save()" />
+                    <input id="reset" ng-disabled="!vm.hasChanges" type="button" class="btn btn-danger btn-sm" value="Reset" ng-click="vm.reset()" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+

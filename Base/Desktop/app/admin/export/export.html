@@ -1,0 +1,26 @@
+﻿<div class="container animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+            <h1>Export</h1>
+                <div class="form-group">
+                    <label>Export</label>
+                    <select class="form-control" ng-model="vm.exportType">
+                        <option value='Users'>Users</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6">
+                    <p class="text-center">
+                        <a href=""><i class="fa fa-file-excel-o big-icon"></i></a>
+                    </p>
+                </div>
+
+                <div>
+                    <input type="button" class="btn btn-success btn-sm" value="Export" ng-click="vm.export()" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

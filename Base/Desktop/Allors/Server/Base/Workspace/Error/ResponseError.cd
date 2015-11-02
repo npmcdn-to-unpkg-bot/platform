@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Allors.Web.ResponseError">
+    <Position X="1.75" Y="2.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAIAAEAAAQAAAQAAAAAAEBI=</HashCode>
+      <FileName>Allors\Server\Base\Workspace\Error\ResponseError.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="DerivationErrors" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Allors.Web.ResponseDerivationError">
+    <Position X="5.25" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAQA=</HashCode>
+      <FileName>Allors\Server\Base\Workspace\Error\ResponseDerivationError.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

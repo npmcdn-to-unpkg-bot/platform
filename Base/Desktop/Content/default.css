@@ -1,0 +1,16 @@
+#grid {
+    width: 99%;
+    height: 80vh;
+}
+
+.page-heading {
+    padding-top: 1em;
+    padding-bottom: 0;
+    border-bottom: 1px solid #e7eaec;
+}
+
+.page-heading ol.breadcrumb {
+    padding-top: 0.5em;
+    padding-bottom: 1.5em;
+}
+

@@ -9,8 +9,7 @@ namespace Allors.Meta
 	[Inherit(typeof(SecurityTokenOwnerInterface))]
 	[Inherit(typeof(AccessControlledObjectInterface))]
 	[Inherit(typeof(LocalisedInterface))]
-
-  	public partial class UserInterface: Interface
+    public partial class UserInterface: Interface
 	{
 		#region Allors
 		[Id("0b3b650b-fcd4-4475-b5c4-e2ee4f39b0be")]
@@ -18,7 +17,6 @@ namespace Allors.Meta
 		[RoleId("1b1409b8-add7-494c-a895-002fc969ac7b")]
 		#endregion
 		[Type(typeof(AllorsBooleanUnit))]
-		[Plural("UserEmailConfirmeds")]
 		public RelationType UserEmailConfirmed;
 
 		#region Allors
@@ -28,7 +26,6 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
-		[Plural("UserNames")]
 		public RelationType UserName;
 
 		#region Allors
@@ -38,7 +35,6 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
-		[Plural("UserEmails")]
 		public RelationType UserEmail;
 
 		#region Allors
@@ -48,10 +44,7 @@ namespace Allors.Meta
 		#endregion
 		[Type(typeof(AllorsStringUnit))]
 		[Size(256)]
-		[Plural("UserPasswordHashes")]
 		public RelationType UserPasswordHash;
-
-
 
 		public static UserInterface Instance {get; internal set;}
 

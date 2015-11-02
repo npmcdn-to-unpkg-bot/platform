@@ -8,9 +8,9 @@ msbuild Resources/Merge.proj /verbosity:minimal
 msbuild Base.sln /target:Meta:Rebuild /p:Configuration="Debug" /verbosity:minimal
 
 msbuild Domain/Generate.proj /verbosity:minimal
-msbuild Website/Generate.proj /verbosity:minimal
+msbuild Domain.Diagrams/Generate.proj /verbosity:minimal
 
-msbuild Diagrams/Generate.proj /verbosity:minimal
-msbuild Diagrams.Website/Generate.proj /verbosity:minimal
+msbuild Desktop/Generate.proj /verbosity:minimal
+msbuild Desktop.Diagrams/Generate.proj /verbosity:minimal
 
 @pause

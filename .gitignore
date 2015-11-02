@@ -1,4 +1,9 @@
 # Custom
+Base/Desktop/Allors/**/*.js
+Base/Desktop/Allors/**/*.js.map
+Base/Desktop/app/**/*.js
+Base/Desktop/app/**/*.js.map
+
 Base/Website/Allors/**/*.js
 Base/Website/Allors/**/*.js.map
 Base/Website/app/**/*.js

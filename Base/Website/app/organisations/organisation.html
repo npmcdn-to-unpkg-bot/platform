@@ -1,6 +1,17 @@
 ﻿<div class="container">
     <div class="row">
-        Organisation
+
+        <form>
+            <div class="form-group">
+                <label>Employees</label>
+                <input class="form-control" placeholder="Firstname" ng-model="vm.root.FirstName">
+            </div>
+
+            <input type="button" class="btn btn-success" value="Save" ng-click="vm.save()" />
+            <input type="button" class="btn btn-success" value="Method" ng-click="vm.method()" />
+
+        </form>
+
     </div>
 </div>
 
