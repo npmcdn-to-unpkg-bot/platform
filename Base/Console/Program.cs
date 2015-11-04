@@ -251,8 +251,8 @@ namespace Allors
             {
                 get
                 {
-                    var dataPath = new DirectoryInfo(ConfigurationManager.AppSettings["dataPath"]);
-                    return dataPath.Exists ? dataPath : null;
+                    var dataPathString = ConfigurationManager.AppSettings["dataPath"];
+                    return dataPathString != null ? new DirectoryInfo(dataPathString) : null;
                 }
             }
 
