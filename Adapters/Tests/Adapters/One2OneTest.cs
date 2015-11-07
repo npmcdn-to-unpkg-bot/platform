@@ -23,10 +23,8 @@ namespace Allors.Adapters
     using System;
 
     using Allors;
-
     using Allors.Domain;
     using Allors.Meta;
-    using Adapters;
 
     using NUnit.Framework;
 

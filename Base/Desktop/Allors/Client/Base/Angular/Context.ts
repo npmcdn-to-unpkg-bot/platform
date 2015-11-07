@@ -50,7 +50,10 @@
                     refresh()
                         .then(() => {
                             this.invoke(method, refresh)
-                                .then(() => defer.resolve());
+                                .then(() => defer.resolve())
+                                .catch(responseError => {
+                                    defer.reject(responseError);
+                                });
                         });
                 })
                 .catch(responseError => {
