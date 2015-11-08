@@ -16,7 +16,7 @@
 
         save(): Data.SaveRequestObject;
         saveNew(): Data.SaveRequestNewObject;
-        sync();
+        reset();
     }
 
     export interface INewWorkspaceObject extends IWorkspaceObject {
@@ -142,8 +142,11 @@
             return undefined;
         }
         
-        sync() {
-            this.databaseObject = this.databaseObject.database.get(this.id);
+        reset() {
+            if (this.databaseObject) {
+                this.databaseObject = this.databaseObject.database.get(this.id);
+            }
+
             if (this.changedRoleByRoleTypeName) {
                 this.changedRoleByRoleTypeName = undefined;
             }

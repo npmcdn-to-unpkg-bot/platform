@@ -16,7 +16,7 @@
                 .then(response => {
                     return this.service.load(this, response)
                         .then(result => {
-                            this.workspace.sync();
+                            this.workspace.reset();
 
                             this.objects = result.objects;
                             this.collections = result.collections;

@@ -4,3 +4,4 @@ window.onload = function () {
     // Show the test results
     test.showResults(document.getElementById('result'), test.run());
 };
+//# sourceMappingURL=app.js.map

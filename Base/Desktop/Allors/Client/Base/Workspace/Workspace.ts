@@ -6,7 +6,7 @@
         create(objectTypeName: string): any;
         save(): Data.SaveRequest;
         onSaved(saveResponse: Data.SaveResponse): void;
-        sync(): void;
+        reset(): void;
     }
 
     export class Workspace implements IWorkspace {
@@ -126,9 +126,13 @@
             }
         }
 
-        sync(): void {
+        reset(): void {
+            _.forEach(this.newWorkspaceObjectById, v => {
+                v.reset();
+            });
+
             _.forEach(this.workspaceObjectById, v => {
-                v.sync();
+                v.reset();
             });
         }
     }

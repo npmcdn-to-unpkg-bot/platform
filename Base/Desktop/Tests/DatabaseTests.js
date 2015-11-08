@@ -40,3 +40,4 @@ var Tests;
     })(tsUnit.TestClass);
     Tests.DatabaseTests = DatabaseTests;
 })(Tests || (Tests = {}));
+//# sourceMappingURL=DatabaseTests.js.map

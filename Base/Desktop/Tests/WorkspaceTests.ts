@@ -412,6 +412,40 @@ module Tests {
 
         }
 
+        syncWithNewObjects() {
+            var database = new Allors.Database(Allors.Meta.population);
+            database.load(Fixture.loadData);
+
+            var workspace = new Allors.Workspace(database);
+
+            var martien = workspace.get("3");
+
+            var mathijs = <Allors.Domain.Person>workspace.create("Person");
+            mathijs.FirstName = "Mathijs";
+            mathijs.LastName = "Verwer";
+
+            var acme2 = <Allors.Domain.Organisation>workspace.create("Organisation");
+            acme2.Name = "Acme 2";
+            acme2.Owner = martien;
+            acme2.Manager = mathijs;
+            acme2.AddEmployee(martien);
+            acme2.AddEmployee(mathijs);
+
+            workspace.reset();
+
+            this.isTrue(mathijs.id === undefined);
+            this.isTrue(parseInt(mathijs.newId) < 0);
+            this.areIdentical(null, mathijs.FirstName);
+            this.areIdentical(null, mathijs.LastName);
+
+            this.isTrue(acme2.id === undefined);
+            this.isTrue(parseInt(acme2.newId) < 0);
+            this.areIdentical(null, acme2.Owner);
+            this.areIdentical(null, acme2.Manager);
+            this.isTrue(this.arrayEqual([], acme2.Employees));
+        }
+
+
         onsaved() {
             var database = new Allors.Database(Allors.Meta.population);
             database.load(Fixture.loadData);
