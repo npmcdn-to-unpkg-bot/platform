@@ -23,7 +23,7 @@ namespace Allors
 {
     using Allors.Domain;
 
-    public static class ISessionExtensions
+    public static partial class ISessionExtensions
     {
         public static void Derive(this ISession session, bool throwExceptionOnError)
         {
