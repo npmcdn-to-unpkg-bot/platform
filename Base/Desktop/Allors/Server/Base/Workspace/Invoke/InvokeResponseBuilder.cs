@@ -51,7 +51,21 @@
                 if (acl.CanExecute(methodType))
                 {
                     var method = obj.GetType().GetMethod(methodType.Name, new Type[] { });
-                    method.Invoke(obj, null);
+
+                    try
+                    {
+                        method.Invoke(obj, null);
+                    }
+                    catch (Exception e)
+                    {
+                        var innerException = e;
+                        while (innerException.InnerException != null)
+                        {
+                            innerException = innerException.InnerException;
+                        }
+
+                        invokeResponse.ErrorMessage = innerException.Message;
+                    }
 
                     var derivationLog = this.session.Derive();
                     if (!derivationLog.HasErrors)
