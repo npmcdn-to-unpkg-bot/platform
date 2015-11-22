@@ -24,34 +24,21 @@ namespace Allors.Meta
 
     public class Tree
     {
-        private readonly List<TreeNode> nodes;
-
-        private readonly Composite composite;
-
         public Tree(Composite composite)
         {
-            this.composite = composite;
-            this.nodes = new List<TreeNode>();
+            this.Composite = composite;
+            this.Nodes = new List<TreeNode>();
         }
 
-        public Composite Composite
-        {
-            get
-            {
-                return this.composite;
-            }
-        }
+        public Composite Composite { get; }
 
-        public List<TreeNode> Nodes
-        {
-            get { return nodes; }
-        }
+        public List<TreeNode> Nodes { get; }
 
         public PrefetchPolicy BuildPrefetechPolicy()
         {
             var prefetchPolicyBuilder = new PrefetchPolicyBuilder();
 
-            foreach (var node in this.nodes)
+            foreach (var node in this.Nodes)
             {
                 node.BuildPrefetchPolicy(prefetchPolicyBuilder);
             }
@@ -67,7 +54,7 @@ namespace Allors.Meta
         public Tree Add(RoleType roleType)
         {
             var tree = new TreeNode(roleType);
-            this.nodes.Add(tree);
+            this.Nodes.Add(tree);
             return this;
         }
 
@@ -78,8 +65,8 @@ namespace Allors.Meta
 
         public Tree Add(RoleType roleType, Tree tree)
         {
-            var treeNode = new TreeNode(roleType, tree.Nodes);
-            this.nodes.Add(treeNode);
+            var treeNode = new TreeNode(roleType, tree.Composite, tree.Nodes);
+            this.Nodes.Add(treeNode);
             return this;
         }
 
@@ -91,7 +78,6 @@ namespace Allors.Meta
                 {
                     node.Resolve(obj, objects);
                 }
-
             }
         }
     }

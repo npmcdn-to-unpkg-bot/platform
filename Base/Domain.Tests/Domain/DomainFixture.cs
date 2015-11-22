@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Fixture.cs" company="Allors bvba">
+// <copyright file="DomainFixture.cs" company="Allors bvba">
 //   Copyright 2002-2009 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,15 +20,8 @@
 
 namespace Domain
 {
-    using System.Globalization;
-    using System.Threading;
-
     using Allors;
-    using Allors.Adapters.Memory.IntegerId;
-
     using NUnit.Framework;
-
-    using Configuration = Allors.Adapters.Memory.IntegerId.Configuration;
 
     [SetUpFixture]
     public class DomainFixture
@@ -36,10 +29,11 @@ namespace Domain
         [SetUp]
         public void SetUp()
         {
-            var configuration = new Configuration { ObjectFactory = Config.ObjectFactory};
-            Config.Default = new Database(configuration);
+            //var configuration = new Allors.Adapters.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory};
+            //Config.Default = new Allors.Adapters.Memory.IntegerId.Database(configuration);
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            var configuration = new Allors.Adapters.Object.SqlClient.Configuration { ObjectFactory = Config.ObjectFactory };
+            Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
         }
     }
 }

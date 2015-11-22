@@ -18,7 +18,7 @@ namespace Allors.Web
                 Objects = this.objects.Select(x => new[] {x.Id.ToString(), x.Strategy.ObjectVersion.ToString()}).ToArray(),
                 NamedObjects = this.objectByName.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Id.ToString()),
                 NamedCollections = this.collectionsByName.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Select(obj => obj.Id.ToString()).ToArray()),
-                NamedValues = valueByName,
+                NamedValues = this.valueByName,
             };
         }
 
@@ -34,8 +34,8 @@ namespace Allors.Web
                     session.Prefetch(prefetcher, namedObject);
                 }
 
-                objects.Add(namedObject);
-                objectByName.Add(name, namedObject);
+                this.objects.Add(namedObject);
+                this.objectByName.Add(name, namedObject);
                 tree?.Resolve(namedObject, this.objects);
             }
 
@@ -46,7 +46,7 @@ namespace Allors.Web
             if (namedObjects != null)
             {
                 List<IObject> namedCollection;
-                if (!collectionsByName.TryGetValue(name, out namedCollection))
+                if (!this.collectionsByName.TryGetValue(name, out namedCollection))
                 {
                     namedCollection = new List<IObject>();
                     this.collectionsByName.Add(name, namedCollection);
@@ -65,7 +65,7 @@ namespace Allors.Web
                 namedCollection.AddRange(namedObjectList);
                 foreach (var namedObject in namedObjectList)
                 {
-                    objects.Add(namedObject);
+                    this.objects.Add(namedObject);
                     tree?.Resolve(namedObject, this.objects);
                 }
             }

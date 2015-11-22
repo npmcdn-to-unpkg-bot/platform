@@ -24,35 +24,28 @@ namespace Allors.Meta
 {
     public class TreeNode
     {
-        private readonly RoleType roleType;
-
-        private readonly List<TreeNode> nodes;
-
-        public TreeNode(RoleType roleType, List<TreeNode> nodes = null)
+        public TreeNode(RoleType roleType, Composite composite = null, List<TreeNode> nodes = null)
         {
-            this.roleType = roleType;
-            this.nodes = nodes ?? new List<TreeNode>();
+            this.RoleType = roleType;
+            this.Composite = composite;
+            this.Nodes = nodes ?? new List<TreeNode>();
         }
+        
+        public RoleType RoleType { get; }
 
-        public RoleType RoleType
-        {
-            get { return roleType; }
-        }
+        public Composite Composite { get; }
 
-        public List<TreeNode> Nodes
-        {
-            get { return nodes; }
-        }
+        public List<TreeNode> Nodes { get; }
 
         public void Resolve(IObject obj, HashSet<IObject> objects)
         {
             if (obj != null)
             {
-                if (this.roleType.ObjectType.IsComposite)
+                if (this.RoleType.ObjectType.IsComposite)
                 {
-                    if (this.roleType.IsOne)
+                    if (this.RoleType.IsOne)
                     {
-                        var role = obj.Strategy.GetCompositeRole(this.roleType);
+                        var role = obj.Strategy.GetCompositeRole(this.RoleType);
                         if (role != null)
                         {
                             objects.Add(role);
@@ -66,7 +59,7 @@ namespace Allors.Meta
                     }
                     else
                     {
-                        var roles = obj.Strategy.GetCompositeRoles(this.roleType);
+                        var roles = obj.Strategy.GetCompositeRoles(this.RoleType);
                         foreach (IObject role in roles)
                         {
                             objects.Add(role);
@@ -87,9 +80,9 @@ namespace Allors.Meta
 
         public void BuildPrefetchPolicy(PrefetchPolicyBuilder prefetchPolicyBuilder)
         {
-            prefetchPolicyBuilder.WithRule(this.roleType);
+            prefetchPolicyBuilder.WithRule(this.RoleType);
 
-            foreach (var node in this.nodes)
+            foreach (var node in this.Nodes)
             {
                 node.BuildPrefetchPolicy(prefetchPolicyBuilder);
             }

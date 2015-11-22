@@ -159,7 +159,7 @@
     <Compile Include="Domain\Content\ImageTest.cs" />
     <Compile Include="Domain\Content\MediaTest.cs" />
     <Compile Include="Domain\Content\MediatypeTest.cs" />
-    <Compile Include="Domain\Content\PathTests.cs" />
+    <Compile Include="Domain\Meta\PathTests.cs" />
     <Compile Include="Domain\Content\StringTemplateTests.cs" />
     <Compile Include="Domain\Derivations\DefaultDerivationLogTests.cs" />
     <Compile Include="Domain\Derivations\DerivationGraphTest.cs" />
@@ -172,6 +172,7 @@
     <Compile Include="Domain\Localization\LanguageTests.cs" />
     <Compile Include="Domain\Localization\LocaleTests.cs" />
     <Compile Include="Domain\Localization\LocalizedTextTests.cs" />
+    <Compile Include="Domain\Meta\TreeTests.cs" />
     <Compile Include="Domain\Meta\MethodsTests.cs" />
     <Compile Include="Domain\Misc\BuilderTest.cs" />
     <Compile Include="Domain\Misc\CacheTest.cs" />

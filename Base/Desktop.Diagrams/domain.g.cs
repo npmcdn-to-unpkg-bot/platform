@@ -5,6 +5,11 @@ namespace Allors.Domain
 									global::System.String I1AllorsString {set;}
 
 					}
+					public interface ObjectState 
+					{
+									global::System.String Name {set;}
+
+					}
 					public interface User 
 					{
 									global::System.String UserName {set;}
@@ -54,6 +59,9 @@ namespace Allors.Domain
 
 									global::System.String MiddleName {set;}
 
+					}
+					public interface OrderObjectState : ObjectState 
+					{
 					}
 					public interface Organisation 
 					{
