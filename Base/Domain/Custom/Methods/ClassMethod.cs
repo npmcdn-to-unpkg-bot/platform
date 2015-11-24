@@ -33,7 +33,7 @@ namespace Allors.Domain
             method.Value += "C1Base";
         }
 
-        public void CustomlassMethod(C1ClassMethod method)
+        public void CustomClassMethod(C1ClassMethod method)
         {
             method.Value += "C1Custom";
         }

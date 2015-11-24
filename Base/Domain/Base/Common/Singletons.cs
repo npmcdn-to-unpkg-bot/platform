@@ -22,11 +22,28 @@ namespace Allors.Domain
 {
     public partial class Singletons
     {
-        public Singleton Instance
+        public Singleton Instance => Singleton.Instance(this.Session);
+
+        protected override void BaseSecure(Security config)
         {
-            get
+            var defaultSecurityToken = this.Instance.DefaultSecurityToken;
+
+            if (!this.Instance.ExistDefaultAdministratorsAccessControl)
             {
-                return Singleton.Instance(this.Session);
+                this.Instance.DefaultAdministratorsAccessControl = new AccessControlBuilder(this.Session)
+                    .WithRole(new Roles(this.Session).Administrator)
+                    .WithSubjectGroup(new UserGroups(this.Session).Administrators)
+                    .WithObject(defaultSecurityToken)
+                    .Build();
+            }
+
+            if (!this.Instance.ExistDefaultGuestAccessControl)
+            {
+                this.Instance.DefaultGuestAccessControl = new AccessControlBuilder(this.Session)
+                    .WithRole(new Roles(this.Session).Guest)
+                    .WithSubjectGroup(new UserGroups(this.Session).Guests)
+                    .WithObject(defaultSecurityToken)
+                    .Build();
             }
         }
     }

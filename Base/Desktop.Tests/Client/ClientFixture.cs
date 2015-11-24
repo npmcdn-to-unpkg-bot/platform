@@ -86,9 +86,9 @@ namespace Desktop.Tests.Client
 
         private void SetupWebdriver()
         {
-            var seleniumDriver = new FirefoxDriver();
+            //var seleniumDriver = new FirefoxDriver();
 
-            //var seleniumDriver = new ChromeDriver();
+            var seleniumDriver = new ChromeDriver();
             //var seleniumDriver = new InternetExplorerDriver(new InternetExplorerOptions
             //{
             //    EnableNativeEvents = false,

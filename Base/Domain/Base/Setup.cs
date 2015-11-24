@@ -115,7 +115,6 @@ namespace Allors
             var singleton = new SingletonBuilder(this.session).Build();
 
             singleton.DefaultSecurityToken = new SecurityTokenBuilder(this.session).Build();
-            singleton.AdministratorSecurityToken = new SecurityTokenBuilder(this.session).Build();
             singleton.DefaultLocale = new Locales(this.session).DutchBelgium;
         }
 

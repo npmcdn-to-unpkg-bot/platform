@@ -102,7 +102,6 @@
     <Compile Include="Custom\Relation\Organisation.cs" />
     <Compile Include="Custom\Relation\Person.cs" />
     <Compile Include="Custom\Relation\Persons.cs" />
-    <Compile Include="Custom\Security\AccessControls.cs" />
     <Compile Include="Custom\Security\Roles.cs" />
     <Compile Include="Custom\Security\Security.cs" />
     <Compile Include="Custom\Security\UserGroups.cs" />

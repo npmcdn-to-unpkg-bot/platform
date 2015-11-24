@@ -247,6 +247,8 @@ namespace Allors.Domain
 		{
 						SecurityToken OwnerSecurityToken {set;}
 
+						AccessControl OwnerAccessControl {set;}
+
 		}
 		public interface Shared  : Object 
 		{
@@ -620,17 +622,25 @@ namespace Allors.Domain
 		{
 						StringTemplate PersonTemplate {set;}
 
+						AccessControl SalesAccessControl {set;}
+
+						AccessControl OperationsAccessControl {set;}
+
+						AccessControl ProcurementAccessControl {set;}
+
 						PrintQueue DefaultPrintQueue {set;}
 
 						Locale DefaultLocale {set;}
 
 						Locale Locales {set;}
 
-						SecurityToken AdministratorSecurityToken {set;}
-
 						User Guest {set;}
 
 						SecurityToken DefaultSecurityToken {set;}
+
+						AccessControl DefaultGuestAccessControl {set;}
+
+						AccessControl DefaultAdministratorsAccessControl {set;}
 
 		}
 		public interface One  : Object, Shared 

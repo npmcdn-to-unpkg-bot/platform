@@ -24,13 +24,7 @@ namespace Allors.Domain
 
     public partial class Person
     {
-        public bool IsGuest
-        {
-            get
-            {
-                return this.ExistSingletonWhereGuest;
-            }
-        }
+        public bool IsGuest => this.ExistSingletonWhereGuest;
 
         public bool IsAdministrator
         {
@@ -56,44 +50,45 @@ namespace Allors.Domain
 
         public void BaseDelete(DeletableDelete method)
         {
+            if (this.ExistOwnerAccessControl)
+            {
+                this.OwnerAccessControl.Delete();
+            }
+
             if (this.ExistOwnerSecurityToken)
             {
-                foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
-                {
-                    acl.Delete();
-                }
-
                 this.OwnerSecurityToken.Delete();
             }
         }
 
         public void BaseOnBuild(ObjectOnBuild method)
         {
-            var builder = method.Builder;
-
             if (!this.ExistUserEmailConfirmed)
             {
                 this.UserEmailConfirmed = false;
             }
-
-            this.BuildOwnerSecurityToken();
         }
 
-        public void BuildOwnerSecurityToken()
+        public void BaseOnDerive(ObjectOnDerive method)
+        {
+            this.DeriveOwnerSecurity();
+        }
+
+        public void DeriveOwnerSecurity()
         {
             if (!this.ExistOwnerSecurityToken)
             {
-                var mySecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
-                this.OwnerSecurityToken = mySecurityToken;
+                this.OwnerSecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
+            }
 
-                if (!this.ExistAccessControlsWhereSubject)
-                {
-                    new AccessControlBuilder(this.Strategy.Session)
-                        .WithRole(new Roles(this.Strategy.Session).Owner)
+            if (!this.ExistOwnerAccessControl)
+            {
+                var ownerRole = new Roles(this.Strategy.Session).Owner;
+                this.OwnerAccessControl = new AccessControlBuilder(this.Strategy.Session)
+                        .WithRole(ownerRole)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)
                         .Build();
-                }
             }
         }
     }

@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Templates\domain.ts.stg = Templates\domain.ts.stg
 		Templates\meta.ts.stg = Templates\meta.ts.stg
+		upgrades.md = upgrades.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop", "Desktop\Desktop.csproj", "{CF73B788-225B-42AF-BD53-13C4E833B530}"

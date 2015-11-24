@@ -20,9 +20,7 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
-    using global::System;
+    using System;
 
     public partial class Singletons
     {
@@ -39,6 +37,38 @@ namespace Allors.Domain
 Hello $this.UserName$!
 >>")
                                                    .Build();
+        }
+
+        protected override void CustomSecure(Security config)
+        {
+            var defaultSecurityToken = this.Instance.DefaultSecurityToken;
+            
+            if (!this.Instance.ExistSalesAccessControl)
+            {
+                this.Instance.SalesAccessControl = new AccessControlBuilder(this.Session)
+                .WithRole(new Roles(this.Session).Sales)
+                .WithSubjectGroup(new UserGroups(this.Session).Sales)
+                .WithObject(defaultSecurityToken)
+                .Build();
+            }
+
+            if (!this.Instance.ExistOperationsAccessControl)
+            {
+                this.Instance.OperationsAccessControl = new AccessControlBuilder(this.Session)
+                .WithRole(new Roles(this.Session).Operations)
+                .WithSubjectGroup(new UserGroups(this.Session).Operations)
+                .WithObject(defaultSecurityToken)
+                .Build();
+            }
+
+            if (!this.Instance.ExistProcurementAccessControl)
+            {
+                this.Instance.ProcurementAccessControl = new AccessControlBuilder(this.Session)
+                .WithRole(new Roles(this.Session).Procurement)
+                .WithSubjectGroup(new UserGroups(this.Session).Procurement)
+                .WithObject(defaultSecurityToken)
+                .Build();
+            }
         }
     }
 }

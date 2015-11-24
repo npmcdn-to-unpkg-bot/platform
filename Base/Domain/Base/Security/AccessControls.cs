@@ -24,23 +24,6 @@ namespace Allors.Domain
     {
         protected override void BaseSecure(Security config)
         {
-            base.BaseSecure(config);
-
-            var administratorSecurityToken = Singleton.Instance(this.Session).AdministratorSecurityToken;
-            var defaultSecurityToken = Singleton.Instance(this.Session).DefaultSecurityToken;
-
-            new AccessControlBuilder(this.Session)
-                .WithRole(new Roles(this.Session).Administrator)
-                .WithSubjectGroup(new UserGroups(this.Session).Administrators)
-                .WithObject(administratorSecurityToken)
-                .WithObject(defaultSecurityToken)
-                .Build();
-
-            new AccessControlBuilder(this.Session)
-                .WithRole(new Roles(this.Session).Guest)
-                .WithSubjectGroup(new UserGroups(this.Session).Guests)
-                .WithObject(defaultSecurityToken)
-                .Build();
         }
     }
 }

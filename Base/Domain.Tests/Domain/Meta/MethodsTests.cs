@@ -37,7 +37,7 @@ namespace Domain
 
             var classMethod = c1.ClassMethod();
 
-            Assert.AreEqual("C1TestC1BaseC1Core", classMethod.Value);
+            Assert.AreEqual("C1CustomC1BaseC1Core", classMethod.Value);
         }
 
         [Test]
@@ -48,7 +48,7 @@ namespace Domain
 
             var interfaceMethod = c1.InterfaceMethod();
 
-            Assert.AreEqual("I1TestI1BaseI1CoreC1TestC1BaseC1Core", interfaceMethod.Value);
+            Assert.AreEqual("I1CustomI1BaseI1CoreC1CustomC1BaseC1Core", interfaceMethod.Value);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Domain
 
             var interfaceMethod = c1.SuperinterfaceMethod();
 
-            Assert.AreEqual("S1TestS1BaseS1CoreI1TestI1BaseI1CoreC1TestC1BaseC1Core", interfaceMethod.Value);
+            Assert.AreEqual("S1CustomS1BaseS1CoreI1CustomI1BaseI1CoreC1CustomC1BaseC1Core", interfaceMethod.Value);
         }
 
         [Test]
