@@ -67,6 +67,8 @@ namespace Allors.Domain
             {
                 this.UserEmailConfirmed = false;
             }
+
+            this.DeriveOwnerSecurity();
         }
 
         public void BaseOnDerive(ObjectOnDerive method)
