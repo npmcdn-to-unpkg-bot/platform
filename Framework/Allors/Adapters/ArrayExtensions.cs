@@ -32,6 +32,7 @@ namespace Allors.Adapters
                 var destination = new T[source.Length + 1];
                 source.CopyTo(destination, 0);
                 destination[destination.Length - 1] = item;
+                return destination;
             }
 
             return source;
