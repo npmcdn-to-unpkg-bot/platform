@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\ArrayExtensions.cs" />
     <Compile Include="Adapters\Configuration.cs" />
     <Compile Include="Adapters\EmptySet.cs" />
     <Compile Include="Adapters\ObjectVersionLong.cs" />

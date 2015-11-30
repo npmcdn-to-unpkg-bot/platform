@@ -19,21 +19,16 @@
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
     using System.Data.SqlClient;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Text;
 
-    using Adapters.Object.SqlClient.Caching;
     using Allors.Meta;
 
     internal sealed class Session : ISession
@@ -812,10 +807,7 @@ namespace Allors.Adapters.Object.SqlClient
             ObjectId[] associations;
             if (associationsByRole.TryGetValue(role, out associations))
             {
-                var newAssociations = new ObjectId[associations.Length + 1];
-                associations.CopyTo(newAssociations, 0);
-                newAssociations[newAssociations.Length - 1] = association.ObjectId;
-                associationsByRole[role] = newAssociations;
+                associationsByRole[role] = associations.Add(association.ObjectId);
             }
         }
 
@@ -826,10 +818,7 @@ namespace Allors.Adapters.Object.SqlClient
             ObjectId[] associations;
             if (associationsByRole.TryGetValue(role, out associations))
             {
-                var associationList = new List<ObjectId>(associations);
-                associationList.Remove(association.ObjectId);
-                associations = associationList.ToArray();
-                associationsByRole[role] = associations;
+                associationsByRole[role] = associations.Remove(association.ObjectId);
             }
         }
 
@@ -1919,6 +1908,8 @@ namespace Allors.Adapters.Object.SqlClient
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(roles);
             }
 
+            var prefetchedAssociations = new HashSet<ObjectId>();
+
             var prefetchedAssociationByRole = new Dictionary<Reference, List<ObjectId>>();
             using (DbDataReader reader = command.ExecuteReader())
             {
@@ -1936,15 +1927,19 @@ namespace Allors.Adapters.Object.SqlClient
 
                     var associationId = this.Database.ObjectIds.Parse(reader[0].ToString());
                     associations.Add(associationId);
+                    prefetchedAssociations.Add(associationId);
+                }
+            }
 
-                    if (associationType.ObjectType.ExistExclusiveClass)
-                    {
-                        this.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
-                    }
-                    else
-                    {
-                        this.GetOrCreateReferenceForExistingObject(associationId);
-                    }
+            foreach (var associationId in prefetchedAssociations)
+            {
+                if (associationType.ObjectType.ExistExclusiveClass)
+                {
+                    this.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, associationId);
+                }
+                else
+                {
+                    this.GetOrCreateReferenceForExistingObject(associationId);
                 }
             }
 
