@@ -36,7 +36,7 @@ namespace Allors.Meta
         internal override void BaseExtend()
         {
             this.OwnerSecurityToken.RoleType.IsRequired = true;
-            this.OwnerAccessControl.RoleType.IsRequired = true;
+            //this.OwnerAccessControl.RoleType.IsRequired = true;
         }
     }
 }

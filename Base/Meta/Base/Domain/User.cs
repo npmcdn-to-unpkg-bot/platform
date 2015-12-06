@@ -7,7 +7,7 @@ namespace Allors.Meta
 	#endregion
 	[Plural("Users")]
 	[Inherit(typeof(SecurityTokenOwnerInterface))]
-	[Inherit(typeof(AccessControlledObjectInterface))]
+    [Inherit(typeof(AccessControlledObjectInterface))]
 	[Inherit(typeof(LocalisedInterface))]
     public partial class UserInterface: Interface
 	{
