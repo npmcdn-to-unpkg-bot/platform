@@ -20,24 +20,7 @@
 
 namespace Allors.Meta
 {
-    using System.Collections.Generic;
-
-    public partial class Class
+   public partial class Class
     {
-        public PrefetchPolicy BuildPrefetchPolicy(string group)
-        {
-            var prefetchPolicyBuilder = new PrefetchPolicyBuilder();
-
-            IList<RoleType> roleTypes;
-            if (this.RoleTypesByGroup.TryGetValue(group, out roleTypes))
-            {
-                foreach (var roleType in roleTypes)
-                {
-                    prefetchPolicyBuilder.WithRule(roleType);
-                }
-            }
-
-            return prefetchPolicyBuilder.Build();
-        }
     }
 }
