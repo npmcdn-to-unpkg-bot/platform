@@ -24,16 +24,6 @@ namespace Allors.Domain
 
     public partial class AccessControl
     {
-        public void BaseOnPreDerive(ObjectOnPreDerive method)
-        {
-            var derivation = method.Derivation;
-
-            foreach (SecurityToken securityToken in this.SecurityTokens)
-            {
-                derivation.AddDependency(securityToken, this);
-            }
-        }
-
         public void BaseOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
