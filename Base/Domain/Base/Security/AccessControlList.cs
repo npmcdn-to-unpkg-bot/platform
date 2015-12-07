@@ -34,49 +34,32 @@ namespace Allors.Domain
     /// </summary>
     public class AccessControlList : IAccessControlList
     {
-        private static readonly Dictionary<Guid, Operation[]> EmptyOperationsByOperandTypeId = new Dictionary<Guid, Operation[]>();
-        private static readonly Operation[] EmptyOperations = new Operation[0]; 
-
         private readonly AccessControlledObject @object;
         private readonly User user;
-        private readonly Class @class;
         private readonly ISession session;
 
-        private Dictionary<Guid, Operation[]> operationsByOperandId;
-       
+        private AccessControl[] accesControls;
+        private Permission[] deniedPermissions;
+
         public AccessControlList(IObject obj, User user)
         {
             this.user = user;
-            this.@class = (Class)obj.Strategy.Class;
             this.session = this.user.Strategy.Session;
             this.@object = (AccessControlledObject)obj;
         }
 
         public User User => this.user;
 
-        private Dictionary<Guid, Operation[]> OperationsByOperandTypeId
-        {
-            get
-            {
-                this.LazyLoad();
-                return this.operationsByOperandId;
-            }
-        }
-
         public override string ToString()
         {
-            var toString = new StringBuilder();
-            foreach (var objectId in this.OperationsByOperandTypeId.Keys)
-            {
-                var operandType = (OperandType)this.user.Strategy.Session.Database.MetaPopulation.Find(objectId);
-                toString.Append(operandType.DisplayName + ":");
-                foreach (var operation in this.OperationsByOperandTypeId[objectId])
-                {
-                    toString.Append(" ");
-                    toString.Append(Enum.GetName(typeof(Operation), operation));
-                }
+            this.LazyLoad();
 
-                toString.Append("\n");
+            var toString = new StringBuilder();
+            toString.Append("ACL: ");
+            foreach (var accessControl in this.accesControls)
+            {
+                toString.Append(" +");
+                toString.Append(accessControl);
             }
 
             return toString.ToString();
@@ -96,18 +79,7 @@ namespace Allors.Domain
         {
             return this.IsPermitted(methodType, Operation.Execute);
         }
-
-        public Operation[] GetOperations(OperandType operandType)
-        {
-            Operation[] operations;
-            if (!this.OperationsByOperandTypeId.TryGetValue(operandType.Id, out operations))
-            {
-                return EmptyOperations;
-            }
-
-            return operations;
-        }
-
+        
         public bool IsPermitted(OperandType operandType, Operation operation)
         {
             return this.IsPermitted(operandType.Id, operation);
@@ -115,41 +87,31 @@ namespace Allors.Domain
 
         private bool IsPermitted(Guid operandTypeId, Operation operation)
         {
-            if (this.OperationsByOperandTypeId.ContainsKey(operandTypeId))
+            this.LazyLoad();
+
+            if (this.deniedPermissions.Length > 0)
             {
-                var operationsList = this.OperationsByOperandTypeId[operandTypeId];
-                return operationsList.Contains(operation);
+                if (this.deniedPermissions.Any(deniedPermission => deniedPermission.OperandTypePointer.Equals(operandTypeId) && deniedPermission.Operation.Equals(operation)))
+                {
+                    return false;
+                }
             }
 
-            return false;
+            return this.accesControls.Any(accessControl => accessControl.IsPermitted(operandTypeId, operation));
         }
 
         private void LazyLoad()
         {
-            if (this.operationsByOperandId == null)
+            if (this.accesControls == null)
             {
-                this.operationsByOperandId = EmptyOperationsByOperandTypeId;
-
                 SecurityToken[] securityTokens = this.@object.SecurityTokens;
                 if (securityTokens.Length == 0)
                 {
                     securityTokens = new[] { Singleton.Instance(this.session).DefaultSecurityToken };
                 }
 
-                var accesControls = securityTokens.SelectMany(v => v.AccessControls).Where(v=>v.EffectiveUsers.Contains(this.user)).ToArray();
-
-                if (accesControls.Length > 0)
-                {
-                    var permissions = new HashSet<Permission>();
-                    foreach (var accessControl in accesControls)
-                    {
-                        permissions.UnionWith(accessControl.EffectivePermissions);
-                    }
-
-                    permissions.ExceptWith(this.@object.DeniedPermissions);
-
-                    this.operationsByOperandId = permissions.GroupBy(v => v.OperandTypePointer, v => v.Operation).ToDictionary(g => g.Key, g => g.ToArray());
-                }
+                this.accesControls = securityTokens.SelectMany(v => v.AccessControls).Where(v=>v.EffectiveUsers.Contains(this.user)).ToArray();
+                this.deniedPermissions = this.@object.DeniedPermissions.ToArray();
             }
         }
     }
