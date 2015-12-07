@@ -28,6 +28,51 @@ namespace Allors.Domain
 
     public partial class Permission
     {
+        public void BaseOnPreDerive(ObjectOnPreDerive method)
+        {
+            var derivation = method.Derivation;
+
+            foreach (Role role in this.RolesWherePermission)
+            {
+                derivation.AddDependency(role, this);
+            }
+        }
+
+        public void BaseOnDerive(ObjectOnDerive method)
+        {
+            var derivation = method.Derivation;
+
+            switch (this.Operation)
+            {
+                case Operation.Read:
+                    // Read Operations should only be allowed on AssociaitonTypes && RoleTypes
+                    if (!(this.OperandType is RoleType || this.OperandType is AssociationType))
+                    {
+                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyReadForRoleOrAssociationType);
+                    }
+
+                    break;
+
+                case Operation.Write:
+                    // Write Operations should only be allowed on RoleTypes
+                    if (!(this.OperandType is RoleType))
+                    {
+                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyWriteForRoleType);
+                    }
+
+                    break;
+
+                case Operation.Execute:
+                    // Execute Operations should only be allowed on MethodTypes
+                    if (!(this.OperandType is MethodType))
+                    {
+                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyExecuteForMethodType);
+                    }
+
+                    break;
+            }
+        }
+
         public OperandType OperandType
         {
             get
@@ -130,43 +175,6 @@ namespace Allors.Domain
             this.OperandType = operandType;
             this.Operation = operation;
             this.ConcreteClassPointer = concreteClass.Id;
-        }
-
-        public void BaseOnDerive(ObjectOnDerive method)
-        {
-            var derivation = method.Derivation;
-
-            switch (this.Operation)
-            {
-                case Operation.Read:
-                    // Read Operations should only be allowed on AssociaitonTypes && RoleTypes
-                    if (!(this.OperandType is RoleType || this.OperandType is AssociationType))
-                    {
-                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyReadForRoleOrAssociationType);
-                    }
-
-                    break;
-
-                case Operation.Write:
-                    // Write Operations should only be allowed on RoleTypes
-                    if (!(this.OperandType is RoleType))
-                    {
-                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyWriteForRoleType);
-                    }
-
-                    break;
-
-                case Operation.Execute:
-                    // Execute Operations should only be allowed on MethodTypes
-                    if (!(this.OperandType is MethodType))
-                    {
-                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyExecuteForMethodType);
-                    }
-
-                    break;
-            }
-
-            new SecurityCache(this.Strategy.Session).Invalidate();
         }
     }
 }

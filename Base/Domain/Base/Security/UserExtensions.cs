@@ -20,29 +20,7 @@
 
 namespace Allors.Domain
 {
-    using System.Collections.Generic;
-
     public static partial class UserExtensions
     {
-        public static IEnumerable<UserGroup> GetUserGroupHierarchy(this User user)
-        {
-            var userGroupHierarchy = new HashSet<UserGroup>();
-            foreach (UserGroup userGroup in user.UserGroupsWhereMember)
-            {
-                userGroupHierarchy.Add(userGroup);
-                AddParentUserGroups(userGroupHierarchy, userGroup);
-            }
-
-            return userGroupHierarchy;
-        }
-
-        private static void AddParentUserGroups(HashSet<UserGroup> userGroupHierarchy, UserGroup userGroup)
-        {
-            if (userGroup.ExistParent)
-            {
-                userGroupHierarchy.Add(userGroup.Parent);
-                AddParentUserGroups(userGroupHierarchy, userGroup.Parent);
-            }
-        }
     }
 }

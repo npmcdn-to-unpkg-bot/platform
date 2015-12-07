@@ -72,7 +72,7 @@ namespace Allors.Meta
         [Type(typeof(AccessControlClass))]
         [Multiplicity(Multiplicity.OneToOne)]
         public RelationType DefaultAdministratorsAccessControl;
-        
+
         public static SingletonClass Instance { get; internal set; }
 
         internal SingletonClass() : base(MetaPopulation.Instance)

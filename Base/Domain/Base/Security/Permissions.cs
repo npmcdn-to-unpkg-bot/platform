@@ -176,8 +176,6 @@ namespace Allors.Domain
             base.BaseSetup(config);
 
             this.Sync();
-
-            new SecurityCache(this.Session).Invalidate();
         }
     }
 }

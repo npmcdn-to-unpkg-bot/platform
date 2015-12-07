@@ -20,7 +20,12 @@
 
 namespace Allors.Domain
 {
+    using System.Linq;
+
     public partial class SecurityToken
     {
+        public void BaseOnDerive(ObjectOnDerive method)
+        {
+        }
     }
 }

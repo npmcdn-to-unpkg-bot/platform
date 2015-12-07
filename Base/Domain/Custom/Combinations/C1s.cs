@@ -24,8 +24,6 @@ namespace Allors.Domain
     {
         protected override void CustomSecure(Security config)
         {
-            base.BaseSecure(config);
-
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 
             config.GrantAdministrator(this.ObjectType, full);

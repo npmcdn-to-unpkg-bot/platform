@@ -140,8 +140,6 @@ namespace Allors.Domain
                 objects.Secure(this);
             }
 
-            new SecurityCache(this.session).Invalidate();
-
             this.session.Derive(true);
         }
 

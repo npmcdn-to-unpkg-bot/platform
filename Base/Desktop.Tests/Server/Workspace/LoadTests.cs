@@ -2,16 +2,17 @@ using System.Web.Mvc;
 
 namespace Desktop.Tests.Server.Workspace
 {
+    using System.Linq;
+
     using Allors;
     using Allors.Domain;
     using Allors.Web.Workspace;
 
-    using System.Linq;
-    using Website.Controllers;
-
     using NUnit.Framework;
 
     using Should;
+
+    using Website.Controllers;
 
     public class LoadTests : ControllersTest
     {
@@ -30,7 +31,7 @@ namespace Desktop.Tests.Server.Workspace
 
             var loadRequest = new LoadRequest
             {
-                Objects = new []{ c1a.Id.ToString() }
+                Objects = new[] { c1a.Id.ToString() }
             };
 
             var controller = new AngularController { AllorsSession = this.Session };
@@ -85,6 +86,8 @@ namespace Desktop.Tests.Server.Workspace
         {
             // Arrange
             var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+           
+            this.Session.Derive(true);
 
             var c1a = new C1Builder(this.Session)
                .WithC1AllorsString("c1")

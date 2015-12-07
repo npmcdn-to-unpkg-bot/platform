@@ -24,39 +24,18 @@ namespace Allors.Domain
 
     public partial class UserGroup
     {
-        public bool ContainsMember(User user)
-        {
-            foreach (User member in this.Members)
-            {
-                if (member.Equals(user))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        protected void BaseOnPreDerive(ObjectOnDerive method)
+        public void BaseOnPreDerive(ObjectOnPreDerive method)
         {
             var derivation = method.Derivation;
 
-            foreach (Object member in this.Members)
-            {
-                derivation.AddDependency(member, this);
-            }
-        }
-
-        public void BaseOnDerive(ObjectOnDerive method)
-        {
-            if (this.ExistParent)
-            {
-                // TODO: members should be added to ancestor groups
-            }
-
             foreach (AccessControl accessControl in this.AccessControlsWhereSubjectGroup)
             {
-                accessControl.CacheId = Guid.NewGuid();
+                derivation.AddDependency(accessControl, this);
+            }
+
+            foreach (User member in this.Members)
+            {
+                derivation.AddDependency(member, this);
             }
         }
     }

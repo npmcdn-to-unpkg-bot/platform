@@ -63,8 +63,6 @@ namespace Desktop.Tests.Client
             }
 
             this.Session = Config.Default.CreateSession();
-
-            new SecurityCache(this.Session).Invalidate();
         }
     }
 }

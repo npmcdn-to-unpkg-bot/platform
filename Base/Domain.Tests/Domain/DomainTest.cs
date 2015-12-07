@@ -54,8 +54,6 @@ namespace Domain
                 new Setup(this.Session, null).Apply();
                 this.Session.Commit();
             }
-            
-            new SecurityCache(this.Session).Invalidate();
         }
 
         protected IObject[] GetObjects(ISession session, Composite objectType)

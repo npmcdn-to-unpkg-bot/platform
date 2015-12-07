@@ -64,16 +64,12 @@ namespace Domain
         [Test]
         public void GivenAUserAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
-            var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
-
+            var permission = this.FindPermission(Organisations.Meta.Name, Operation.Read);
+            var role = new RoleBuilder(this.Session).WithName("Role").WithPermission(permission).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
+            new AccessControlBuilder(this.Session).WithSubject(person).WithRole(role).Build();
 
             this.Session.Derive(true);
-            this.Session.Commit();
-
-            new AccessControlBuilder(this.Session).WithSubject(person).WithRole(databaseRole).Build();
-
             this.Session.Commit();
 
             var sessions = new ISession[] { this.Session };
@@ -86,9 +82,10 @@ namespace Domain
                 var token = new SecurityTokenBuilder(session).Build();
                 organisation.AddSecurityToken(token);
 
-                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
-                accessControl.AddObject(token);
+                token.AddAccessControl(accessControl);
+
+                this.Session.Derive(true);
 
                 Assert.IsFalse(this.Session.Derive().HasErrors);
 
@@ -103,17 +100,14 @@ namespace Domain
         [Test]
         public void GivenAUserGroupAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
-            var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
-
+            var permission = this.FindPermission(Organisations.Meta.Name, Operation.Read);
+            var role = new RoleBuilder(this.Session).WithName("Role").WithPermission(permission).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
             new UserGroupBuilder(this.Session).WithName("Group").WithMember(person).Build();
 
+            new AccessControlBuilder(this.Session).WithSubject(person).WithRole(role).Build();
+
             this.Session.Derive(true);
-            this.Session.Commit();
-
-            new AccessControlBuilder(this.Session).WithSubject(person).WithRole(databaseRole).Build();
-
             this.Session.Commit();
 
             var sessions = new ISession[] { this.Session };
@@ -126,9 +120,8 @@ namespace Domain
                 var token = new SecurityTokenBuilder(session).Build();
                 organisation.AddSecurityToken(token);
 
-                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
-                accessControl.AddObject(token);
+                token.AddAccessControl(accessControl);
 
                 Assert.IsFalse(this.Session.Derive().HasErrors);
 
@@ -169,7 +162,7 @@ namespace Domain
 
                 var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
-                accessControl.AddObject(token);
+                token.AddAccessControl(accessControl);
 
                 Assert.IsFalse(this.Session.Derive().HasErrors);
 
@@ -210,7 +203,7 @@ namespace Domain
 
                 var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
-                accessControl.AddObject(token);
+                token.AddAccessControl(accessControl);
 
                 Assert.IsFalse(this.Session.Derive().HasErrors);
 
@@ -221,44 +214,16 @@ namespace Domain
                 session.Rollback();
             }
         }
-
-        [Test]
-        public void GivenAnAccessListWithWriteOperationsWhenUsingTheHasWriteOperationBeforeAnyOtherMehodThenHasWriteOperationReturnTrue()
-        {
-            var guest = new PersonBuilder(this.Session).WithUserName("guest").WithLastName("Guest").Build();
-            var administrator = new PersonBuilder(this.Session).WithUserName("admin").WithLastName("Administrator").Build();
-
-            Singleton.Instance(this.Session).Guest = guest;
-            new UserGroups(this.Session).FindBy(UserGroups.Meta.Name, "Administrators").AddMember(administrator);
-
-            this.Session.Derive(true);
-            this.Session.Commit();
-
-            var sessions = new ISession[] { this.Session };
-            foreach (var session in sessions)
-            {
-                session.Commit();
-
-                AccessControlledObject aco = new OrganisationBuilder(session).Build();
-                var accessList = new AccessControlList(aco, administrator);
-
-                Assert.IsTrue(accessList.HasWriteOperation);
-
-                session.Rollback();
-            }
-        }
-
+        
         [Test]
         public void DeniedPermissions()
         {
             var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
             var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
+            new AccessControlBuilder(this.Session).WithRole(databaseRole).WithSubject(person).Build();
 
             this.Session.Derive(true);
-            this.Session.Commit();
-
-            new AccessControlBuilder(this.Session).WithRole(databaseRole).WithSubject(person).Build();
             this.Session.Commit();
 
             var sessions = new ISession[] { this.Session };
@@ -273,7 +238,7 @@ namespace Domain
 
                 var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
-                accessControl.AddObject(token);
+                token.AddAccessControl(accessControl);
 
                 Assert.IsFalse(this.Session.Derive().HasErrors);
 

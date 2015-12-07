@@ -84,8 +84,6 @@ namespace Desktop.Tests.Server
                 new Setup(this.Session, null).Apply();
                 this.Session.Commit();
             }
-
-            new SecurityCache(this.Session).Invalidate();
         }
 
         /// <summary>

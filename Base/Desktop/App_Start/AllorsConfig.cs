@@ -24,34 +24,19 @@ namespace Desktop
 
             if (IsProduction)
             {
-                // Warm up caches
-                var permissionPrefetcher = new PrefetchPolicyBuilder()
-                    .WithRule(Permission.Meta.ConcreteClassPointer)
-                    .Build();
-
-                var rolePrefetch = new PrefetchPolicyBuilder()
-                    .WithRule(Role.Meta.Permissions, permissionPrefetcher)
-                    .WithRule(Role.Meta.Name)
-                    .Build();
-
-                var userGroupsPrefetch = new PrefetchPolicyBuilder()
-                    .WithRule(UserGroup.Meta.Members)
-                    .WithRule(UserGroup.Meta.Name)
-                    .Build();
-
                 var accessControlPrefetch = new PrefetchPolicyBuilder()
-                    .WithRule(AccessControl.Meta.Objects)
-                    .WithRule(AccessControl.Meta.Role, rolePrefetch)
-                    .WithRule(AccessControl.Meta.SubjectGroups, userGroupsPrefetch)
-                    .WithRule(AccessControl.Meta.Subjects)
+                    .WithRule(AccessControl.Meta.EffectiveUsers)
+                    .WithRule(AccessControl.Meta.EffectivePermissions)
+                    .Build();
+
+                var securityTokenPrefetch = new PrefetchPolicyBuilder()
+                    .WithRule(SecurityToken.Meta.AccessControls, accessControlPrefetch)
                     .Build();
 
                 using (var session = Config.Default.CreateSession())
                 {
-                    var securityCache = new SecurityCache(session);
-
-                    var accessControls = new AccessControls(session).Extent().ToArray();
-                    session.Prefetch(accessControlPrefetch, accessControls);
+                    var securityTokens = new SecurityTokens(session).Extent();
+                    session.Prefetch(securityTokenPrefetch, securityTokens);
                 }
             }
         }

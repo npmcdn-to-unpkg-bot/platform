@@ -78,19 +78,20 @@ namespace Allors.Domain
 
         public void DeriveOwnerSecurity()
         {
-            if (!this.ExistOwnerSecurityToken)
-            {
-                this.OwnerSecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
-            }
-
             if (!this.ExistOwnerAccessControl)
             {
                 var ownerRole = new Roles(this.Strategy.Session).Owner;
                 this.OwnerAccessControl = new AccessControlBuilder(this.Strategy.Session)
                         .WithRole(ownerRole)
                         .WithSubject(this)
-                        .WithObject(this.OwnerSecurityToken)
                         .Build();
+            }
+
+            if (!this.ExistOwnerSecurityToken)
+            {
+                this.OwnerSecurityToken = new SecurityTokenBuilder(this.Strategy.Session)
+                    .WithAccessControl(this.OwnerAccessControl)
+                    .Build();
             }
         }
     }

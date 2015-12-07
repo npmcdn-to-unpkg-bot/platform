@@ -51,8 +51,6 @@ namespace Allors.Domain
             new RoleBuilder(Session).WithName("Operations").WithUniqueId(OperationsId).Build();
             new RoleBuilder(Session).WithName("Procurement").WithUniqueId(ProcurementId).Build();
             new RoleBuilder(Session).WithName("Sales").WithUniqueId(SalesId).Build();
-
-            new SecurityCache(this.Session).Invalidate();
         }
     }
 }

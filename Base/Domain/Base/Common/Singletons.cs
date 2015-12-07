@@ -33,8 +33,9 @@ namespace Allors.Domain
                 this.Instance.DefaultAdministratorsAccessControl = new AccessControlBuilder(this.Session)
                     .WithRole(new Roles(this.Session).Administrator)
                     .WithSubjectGroup(new UserGroups(this.Session).Administrators)
-                    .WithObject(defaultSecurityToken)
                     .Build();
+
+                defaultSecurityToken.AddAccessControl(this.Instance.DefaultAdministratorsAccessControl);
             }
 
             if (!this.Instance.ExistDefaultGuestAccessControl)
@@ -42,8 +43,9 @@ namespace Allors.Domain
                 this.Instance.DefaultGuestAccessControl = new AccessControlBuilder(this.Session)
                     .WithRole(new Roles(this.Session).Guest)
                     .WithSubjectGroup(new UserGroups(this.Session).Guests)
-                    .WithObject(defaultSecurityToken)
                     .Build();
+
+                defaultSecurityToken.AddAccessControl(this.Instance.DefaultGuestAccessControl);
             }
         }
     }

@@ -21,29 +21,18 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Collections.Generic;
 
     using Allors.Meta;
 
     public interface IAccessControlList
     {
         User User { get; }
-
-        bool HasReadOperation { get; }
-
-        bool HasWriteOperation { get; }
-
-        int Count { get; }
-
+        
         bool CanRead(PropertyType propertyType);
 
         bool CanWrite(RoleType roleType);
 
         bool CanExecute(MethodType methodType);
-
-        bool CanExecute(Guid methodTypeId);
-
-        IList<Operation> GetOperations(OperandType operandType);
 
         bool IsPermitted(OperandType operandType, Operation operation);
     }

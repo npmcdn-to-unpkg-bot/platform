@@ -71,8 +71,6 @@ namespace Allors.Domain
             new UserGroupBuilder(Session).WithName("operations").WithUniqueId(OperationsId).WithRole(new Roles(Session).Operations).Build();
             new UserGroupBuilder(Session).WithName("sales").WithUniqueId(SalesId).WithRole(new Roles(Session).Sales).Build();
             new UserGroupBuilder(Session).WithName("procurement").WithUniqueId(ProcurementId).WithRole(new Roles(Session).Procurement).Build();
-
-            new SecurityCache(this.Session).Invalidate();
         }
     }
 }

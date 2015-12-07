@@ -39,10 +39,9 @@ namespace Domain
             var userGroup = new UserGroupBuilder(this.Session).WithName("UserGroup").Build();
             var securityToken = new SecurityTokenBuilder(this.Session).Build();
 
-            new AccessControlBuilder(this.Session)
+            securityToken.AddAccessControl(new AccessControlBuilder(this.Session)
                 .WithSubjectGroup(userGroup)
-                .WithObject(securityToken)
-                .Build();
+                .Build());
 
             var derivationLog = this.Session.Derive();
 
@@ -62,10 +61,10 @@ namespace Domain
             var securityToken = new SecurityTokenBuilder(this.Session).Build();
             var role = new RoleBuilder(this.Session).WithName("Role").Build();
 
+            securityToken.AddAccessControl(
             new AccessControlBuilder(this.Session)
-                .WithObject(securityToken)
                 .WithRole(role)
-                .Build();
+                .Build());
 
             var derivationLog = this.Session.Derive();
 
@@ -78,29 +77,6 @@ namespace Domain
             Assert.AreEqual(typeof(DerivationErrorAtLeastOne), derivationError.GetType());
             Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.Subjects));
             Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.SubjectGroups));
-        }
-
-        [Test]
-        public void GivenNoAccessControlWhenCreatingAAccessControlWithoutATokenThenAccessControlIsInvalid()
-        {
-            var role = new RoleBuilder(this.Session).WithName("Role").Build();
-            var user = new PersonBuilder(this.Session).WithUserName("user").WithLastName("Doe").Build();
-
-            new AccessControlBuilder(this.Session)
-                .WithSubject(user)
-                .WithRole(role)
-                .Build();
-
-            var derivationLog = this.Session.Derive();
-
-            Assert.IsTrue(derivationLog.HasErrors);
-            Assert.AreEqual(1, derivationLog.Errors.Length);
-
-            var derivationError = derivationLog.Errors[0];
-
-            Assert.AreEqual(1, derivationError.Relations.Length);
-            Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
-            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.Objects));
         }
     }
 }

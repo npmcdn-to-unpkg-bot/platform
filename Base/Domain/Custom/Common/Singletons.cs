@@ -48,8 +48,9 @@ Hello $this.UserName$!
                 this.Instance.SalesAccessControl = new AccessControlBuilder(this.Session)
                 .WithRole(new Roles(this.Session).Sales)
                 .WithSubjectGroup(new UserGroups(this.Session).Sales)
-                .WithObject(defaultSecurityToken)
                 .Build();
+
+                defaultSecurityToken.AddAccessControl(this.Instance.SalesAccessControl);
             }
 
             if (!this.Instance.ExistOperationsAccessControl)
@@ -57,8 +58,9 @@ Hello $this.UserName$!
                 this.Instance.OperationsAccessControl = new AccessControlBuilder(this.Session)
                 .WithRole(new Roles(this.Session).Operations)
                 .WithSubjectGroup(new UserGroups(this.Session).Operations)
-                .WithObject(defaultSecurityToken)
                 .Build();
+
+                defaultSecurityToken.AddAccessControl(this.Instance.OperationsAccessControl);
             }
 
             if (!this.Instance.ExistProcurementAccessControl)
@@ -66,8 +68,9 @@ Hello $this.UserName$!
                 this.Instance.ProcurementAccessControl = new AccessControlBuilder(this.Session)
                 .WithRole(new Roles(this.Session).Procurement)
                 .WithSubjectGroup(new UserGroups(this.Session).Procurement)
-                .WithObject(defaultSecurityToken)
                 .Build();
+
+                defaultSecurityToken.AddAccessControl(this.Instance.ProcurementAccessControl);
             }
         }
     }

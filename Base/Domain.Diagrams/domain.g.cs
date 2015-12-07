@@ -282,11 +282,11 @@ namespace Allors.Domain
 
 						User Subjects {set;}
 
-						SecurityToken Objects {set;}
-
 						Role Role {set;}
 
-						global::System.Guid CacheId {set;}
+						Permission EffectivePermissions {set;}
+
+						User EffectiveUsers {set;}
 
 		}
 		public interface BadUI  : Object 
@@ -732,6 +732,8 @@ namespace Allors.Domain
 		}
 		public interface SecurityToken  : Object, Deletable 
 		{
+						AccessControl AccessControls {set;}
+
 		}
 		public interface SimpleJob  : Object 
 		{
@@ -812,8 +814,6 @@ namespace Allors.Domain
 						Role Role {set;}
 
 						User Members {set;}
-
-						UserGroup Parent {set;}
 
 						global::System.String Name {set;}
 

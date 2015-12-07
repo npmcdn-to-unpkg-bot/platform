@@ -34,62 +34,27 @@ namespace Allors.Domain
     /// </summary>
     public class AccessControlList : IAccessControlList
     {
-        private static readonly IList<Operation> EmptyOperations = new List<Operation>();
-        private static readonly ConcurrentDictionary<Guid, IList<Operation>> EmptyOperationsByOperandTypeId = new ConcurrentDictionary<Guid, IList<Operation>>();
+        private static readonly Dictionary<Guid, Operation[]> EmptyOperationsByOperandTypeId = new Dictionary<Guid, Operation[]>();
+        private static readonly Operation[] EmptyOperations = new Operation[0]; 
 
-        private readonly AccessControlledObject accessControlledObject;
+        private readonly AccessControlledObject @object;
         private readonly User user;
-        private readonly IObjectType objectType;
-        private readonly ISession databaseSession;
+        private readonly Class @class;
+        private readonly ISession session;
 
-        private ConcurrentDictionary<Guid, IList<Operation>> operationsByOperandId;
-
-        private bool hasWriteOperation;
-        private bool hasReadOperation;
-        
+        private Dictionary<Guid, Operation[]> operationsByOperandId;
+       
         public AccessControlList(IObject obj, User user)
         {
             this.user = user;
-            this.objectType = obj.Strategy.Class;
-            this.databaseSession = this.user.Strategy.Session;
-            this.accessControlledObject = (AccessControlledObject)obj;
+            this.@class = (Class)obj.Strategy.Class;
+            this.session = this.user.Strategy.Session;
+            this.@object = (AccessControlledObject)obj;
         }
 
-        public User User
-        {
-            get
-            {
-                return this.user;
-            }
-        }
+        public User User => this.user;
 
-        public bool HasReadOperation
-        {
-            get
-            {
-                this.LazyLoad();
-                return this.hasReadOperation;
-            }
-        }
-
-        public bool HasWriteOperation
-        {
-            get
-            {
-                this.LazyLoad();
-                return this.hasWriteOperation;
-            }
-        }
-
-        public int Count
-        {
-            get
-            {
-                return this.OperationsByOperandTypeId.Count;
-            }
-        }
-
-        private ConcurrentDictionary<Guid, IList<Operation>> OperationsByOperandTypeId
+        private Dictionary<Guid, Operation[]> OperationsByOperandTypeId
         {
             get
             {
@@ -132,14 +97,9 @@ namespace Allors.Domain
             return this.IsPermitted(methodType, Operation.Execute);
         }
 
-        public bool CanExecute(Guid methodTypeId)
+        public Operation[] GetOperations(OperandType operandType)
         {
-            return this.CanExecute((MethodType)this.objectType.MetaPopulation.Find(methodTypeId));
-        }
-
-        public IList<Operation> GetOperations(OperandType operandType)
-        {
-            IList<Operation> operations;
+            Operation[] operations;
             if (!this.OperationsByOperandTypeId.TryGetValue(operandType.Id, out operations))
             {
                 return EmptyOperations;
@@ -170,75 +130,25 @@ namespace Allors.Domain
             {
                 this.operationsByOperandId = EmptyOperationsByOperandTypeId;
 
-                if (this.accessControlledObject != null)
+                SecurityToken[] securityTokens = this.@object.SecurityTokens;
+                if (securityTokens.Length == 0)
                 {
-                    AccessControl[] accessControls;
+                    securityTokens = new[] { Singleton.Instance(this.session).DefaultSecurityToken };
+                }
 
-                    if (this.accessControlledObject.ExistSecurityTokens)
+                var accesControls = securityTokens.SelectMany(v => v.AccessControls).Where(v=>v.EffectiveUsers.Contains(this.user)).ToArray();
+
+                if (accesControls.Length > 0)
+                {
+                    var permissions = new HashSet<Permission>();
+                    foreach (var accessControl in accesControls)
                     {
-                        var securityTokens = this.accessControlledObject.SecurityTokens;
-                        accessControls = securityTokens.SelectMany(x => x.AccessControlsWhereObject).ToArray();
-                    }
-                    else
-                    {
-                        var singleton = Singleton.Instance(this.databaseSession);
-                        if (singleton != null &&
-                            singleton.ExistDefaultSecurityToken &&
-                            singleton.DefaultSecurityToken.ExistAccessControlsWhereObject)
-                        {
-                            accessControls = singleton.DefaultSecurityToken.AccessControlsWhereObject;
-                        }
-                        else
-                        {
-                            return;
-                        }
+                        permissions.UnionWith(accessControl.EffectivePermissions);
                     }
 
-                    var cache = new AccessControlCache(this.databaseSession);
+                    permissions.ExceptWith(this.@object.DeniedPermissions);
 
-                    HashSet<Guid> roleUniqueIds = null;
-                    foreach (var accessControl in accessControls)
-                    {
-                        var cacheEntry = cache[accessControl];
-                        if (cacheEntry.UserObjectIds.Contains(this.user.Id))
-                        {
-                            if (roleUniqueIds == null)
-                            {
-                                roleUniqueIds = new HashSet<Guid>();
-                            }
-
-                            roleUniqueIds.Add(cacheEntry.RoleUniqueId);
-                        }
-                    }
-
-                    if (roleUniqueIds != null)
-                    {
-                        Permission[] deniedPermissions = this.accessControlledObject.DeniedPermissions;
-
-                        var securityCache = new SecurityCache(this.databaseSession);
-                        this.operationsByOperandId = securityCache.GetOperationsByOperandTypeId(roleUniqueIds, (ObjectType)this.objectType, out this.hasWriteOperation, out this.hasReadOperation);
-
-                        foreach (var deniedPermission in deniedPermissions)
-                        {
-                            if (deniedPermission.ConcreteClassPointer.Equals(this.objectType.Id))
-                            {
-                                if (deniedPermission.ExistOperandTypePointer && deniedPermission.ExistOperation)
-                                {
-                                    IList<Operation> operations;
-                                    if (this.operationsByOperandId.TryGetValue(
-                                        deniedPermission.OperandTypePointer,
-                                        out operations))
-                                    {
-                                        operations.Remove(deniedPermission.Operation);
-                                    }
-                                }
-                                else
-                                {
-                                    throw new Exception("Denied permission " + deniedPermission + " has a missing operand type and/or operation");
-                                }
-                            }
-                        }
-                    }
+                    this.operationsByOperandId = permissions.GroupBy(v => v.OperandTypePointer, v => v.Operation).ToDictionary(g => g.Key, g => g.ToArray());
                 }
             }
         }

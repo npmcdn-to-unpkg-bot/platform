@@ -23,9 +23,14 @@ namespace Allors.Domain
 {
     public partial class Role
     {
-        public void BaseOnDerive(ObjectOnDerive method)
+        public void BaseOnPreDerive(ObjectOnPreDerive method)
         {
-            new SecurityCache(this.Strategy.Session).Invalidate();
+            var derivation = method.Derivation;
+
+            foreach (AccessControl accessControl in this.AccessControlsWhereRole)
+            {
+                derivation.AddDependency(accessControl, this);
+            }
         }
     }
 }

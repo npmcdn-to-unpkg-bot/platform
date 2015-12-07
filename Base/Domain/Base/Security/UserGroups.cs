@@ -64,8 +64,6 @@ namespace Allors.Domain
             // Default Groups
             new UserGroupBuilder(Session).WithName(GuestsName).WithUniqueId(GuestsId).WithRole(new Roles(Session).Guest).Build();
             new UserGroupBuilder(Session).WithName(AdministratorsName).WithUniqueId(AdministratorsId).WithRole(new Roles(Session).Administrator).Build();
-
-            new SecurityCache(this.Session).Invalidate();
         }
 
         protected override void BaseSecure(Security config)

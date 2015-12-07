@@ -73,7 +73,6 @@
     <Compile Include="Base\ObjectOnBuild.cs" />
     <Compile Include="Base\ObjectExtensions.cs" />
     <Compile Include="Base\PrefetchPolicyBuilderExtensions.cs" />
-    <Compile Include="Base\Security\Cache\AccessControlCache.cs" />
     <Compile Include="Base\Unit\DateTimeFactory.cs" />
     <Compile Include="Custom\Combinations\C1s.cs" />
     <Compile Include="Custom\Combinations\C1.cs" />
@@ -191,7 +190,6 @@
     <Compile Include="Base\Security\AccessControlList.cs" />
     <Compile Include="Base\Security\AccessControlListCache.cs" />
     <Compile Include="Base\Security\AccessControls.cs" />
-    <Compile Include="Base\Security\Cache\SecurityCache.cs" />
     <Compile Include="Base\Security\IAccessControlList.cs" />
     <Compile Include="Base\Security\IAccessControlListFactory.cs" />
     <Compile Include="Base\Security\Login.cs" />

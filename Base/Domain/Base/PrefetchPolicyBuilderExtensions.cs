@@ -27,6 +27,15 @@ namespace Allors
 
     public static partial class PrefetchPolicyBuilderExtensions
     {
+        private static readonly PrefetchPolicy SecuritTokenPrefetchPolicy;
+
+        static PrefetchPolicyBuilderExtensions()
+        {
+            SecuritTokenPrefetchPolicy = new PrefetchPolicyBuilder()
+                .WithRule(SecurityTokenClass.Instance.AccessControl.RoleType)
+                .Build();
+        }
+        
         public static void WithGroupRules(this PrefetchPolicyBuilder @this, Class @class, string @group)
         {
             IList<RoleType> roleTypes;
@@ -41,7 +50,7 @@ namespace Allors
 
         public static void WithSecurityRules(this PrefetchPolicyBuilder @this)
         {
-            @this.WithRule(AccessControlledObjectInterface.Instance.SecurityToken.RoleType);
+            @this.WithRule(AccessControlledObjectInterface.Instance.SecurityToken.RoleType, SecuritTokenPrefetchPolicy);
         }
     }
 }
