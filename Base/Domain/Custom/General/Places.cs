@@ -32,7 +32,7 @@ namespace Allors.Domain
 
         protected override void CustomSecure(Security config)
         {
-            var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
+            var full = new[] { Operations.Read, Operations.Write, Operations.Execute };
 
             config.GrantAdministrator(this.ObjectType, full);
         }

@@ -23,7 +23,7 @@ namespace Allors.Domain
 {
     public partial class PermissionBuilder
     {
-        public PermissionBuilder WithOperation(Operation operation)
+        public PermissionBuilder WithOperation(Operations operation)
         {
             this.OperationEnum = (int)operation;
             return this;

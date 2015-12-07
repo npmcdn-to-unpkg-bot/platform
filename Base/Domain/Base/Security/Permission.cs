@@ -44,7 +44,7 @@ namespace Allors.Domain
 
             switch (this.Operation)
             {
-                case Operation.Read:
+                case Operations.Read:
                     // Read Operations should only be allowed on AssociaitonTypes && RoleTypes
                     if (!(this.OperandType is RoleType || this.OperandType is AssociationType))
                     {
@@ -53,7 +53,7 @@ namespace Allors.Domain
 
                     break;
 
-                case Operation.Write:
+                case Operations.Write:
                     // Write Operations should only be allowed on RoleTypes
                     if (!(this.OperandType is RoleType))
                     {
@@ -62,13 +62,17 @@ namespace Allors.Domain
 
                     break;
 
-                case Operation.Execute:
+                case Operations.Execute:
                     // Execute Operations should only be allowed on MethodTypes
                     if (!(this.OperandType is MethodType))
                     {
                         derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyExecuteForMethodType);
                     }
 
+                    break;
+
+                default:
+                    derivation.Log.AddError(this, Meta.OperationEnum, "Illegal enum");
                     break;
             }
         }
@@ -101,11 +105,11 @@ namespace Allors.Domain
             }
         }
 
-        public Operation Operation
+        public Operations Operation
         {
             get
             {
-                return (Operation)this.OperationEnum;
+                return (Operations)this.OperationEnum;
             }
 
             set
@@ -170,7 +174,7 @@ namespace Allors.Domain
             return toString.ToString();
         }
 
-        internal void Sync(ObjectType concreteClass, OperandType operandType, Operation operation)
+        internal void Sync(ObjectType concreteClass, OperandType operandType, Operations operation)
         {
             this.OperandType = operandType;
             this.Operation = operation;

@@ -64,7 +64,7 @@ namespace Domain
         [Test]
         public void GivenAUserAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var permission = this.FindPermission(Organisations.Meta.Name, Operation.Read);
+            var permission = this.FindPermission(Organisations.Meta.Name, Operations.Read);
             var role = new RoleBuilder(this.Session).WithName("Role").WithPermission(permission).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
             new AccessControlBuilder(this.Session).WithSubject(person).WithRole(role).Build();
@@ -100,7 +100,7 @@ namespace Domain
         [Test]
         public void GivenAUserGroupAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var permission = this.FindPermission(Organisations.Meta.Name, Operation.Read);
+            var permission = this.FindPermission(Organisations.Meta.Name, Operations.Read);
             var role = new RoleBuilder(this.Session).WithName("Role").WithPermission(permission).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
             new UserGroupBuilder(this.Session).WithName("Group").WithMember(person).Build();
@@ -136,7 +136,7 @@ namespace Domain
         [Test]
         public void GivenAnotherUserAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
+            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operations.Read);
             var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
 
             Assert.IsFalse(this.Session.Derive().HasErrors);
@@ -177,7 +177,7 @@ namespace Domain
         [Test]
         public void GivenAnotherUserGroupAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
+            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operations.Read);
             var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
 
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
@@ -218,7 +218,7 @@ namespace Domain
         [Test]
         public void DeniedPermissions()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operation.Read);
+            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operations.Read);
             var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
             new AccessControlBuilder(this.Session).WithRole(databaseRole).WithSubject(person).Build();
@@ -256,7 +256,7 @@ namespace Domain
             }
         }
 
-        private Permission FindPermission(ObjectType objectType, RoleType roleType, Operation operation)
+        private Permission FindPermission(ObjectType objectType, RoleType roleType, Operations operation)
         {
             Extent<Permission> permissions = this.Session.Extent<Permission>();
             permissions.Filter.AddEquals(Permissions.Meta.ConcreteClassPointer, objectType.Id);
@@ -265,7 +265,7 @@ namespace Domain
             return permissions.First;
         }
 
-        private Permission FindPermission(RoleType roleType, Operation operation)
+        private Permission FindPermission(RoleType roleType, Operations operation)
         {
             return this.FindPermission(roleType.AssociationType.ObjectType, roleType, operation);
         }

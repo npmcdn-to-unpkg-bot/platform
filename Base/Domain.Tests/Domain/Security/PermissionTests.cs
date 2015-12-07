@@ -87,7 +87,7 @@ namespace Domain
 
             var count = new Permissions(this.Session).Extent().Count;
 
-            var permission = new PermissionBuilder(this.Session).WithConcreteClassPointer(new Guid()).WithOperation(Operation.Execute).WithOperandTypePointer(new Guid()).Build();
+            var permission = new PermissionBuilder(this.Session).WithConcreteClassPointer(new Guid()).WithOperation(Operations.Execute).WithOperandTypePointer(new Guid()).Build();
 
             new Permissions(this.Session).Sync();
 

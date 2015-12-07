@@ -70,7 +70,7 @@ namespace Allors.Domain
         {
             base.BaseSecure(config);
 
-            var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
+            var full = new[] { Domain.Operations.Read, Domain.Operations.Write, Domain.Operations.Execute };
 
             config.GrantAdministrator(this.ObjectType, full);
         }

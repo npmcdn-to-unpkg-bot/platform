@@ -21,21 +21,29 @@
 
 namespace Allors.Domain
 {
-    public enum Operation
+    using System;
+
+    [Flags]
+    public enum Operations
     {
+        /// <summary>
+        /// No operation.
+        /// </summary>
+        None = 0,
+
         /// <summary>
         /// Read a relation (get).
         /// </summary>
-        Read = 0,
+        Read = 1,
 
         /// <summary>
         /// Write a relation (set, add and remove).
         /// </summary>
-        Write = 1,
+        Write = 2,
 
         /// <summary>
         /// Execute a method.
         /// </summary>
-        Execute = 2,
+        Execute = 4,
     }
 }

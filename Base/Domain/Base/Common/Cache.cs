@@ -36,7 +36,6 @@ namespace Allors.Domain
 
         private ConcurrentDictionary<TKey, ObjectId> databaseSessionCache;
         private ConcurrentDictionary<TKey, ObjectId> databaseCache;
-        private ConcurrentDictionary<TKey, ObjectId> workspaceSessionCache;
 
         public Cache(ISession session, RoleType roleType)
         {
@@ -51,24 +50,7 @@ namespace Allors.Domain
             this.database = this.databaseSession.Database;
         }
 
-        public TObject this[TKey key]
-        {
-            get
-            {
-                return this.Get(key);
-            }
-        }
-
-        public void Prefetch()
-        {
-            Extent<TObject> prefetchedObjects = this.databaseSession.Extent<TObject>();
-            prefetchedObjects.Filter.AddExists(this.roleType);
-
-            foreach (TObject prefetchedObject in prefetchedObjects)
-            {
-                this.Add(prefetchedObject);
-            }
-        }
+        public TObject this[TKey key] => this.Get(key);
 
         public TObject Get(TKey key)
         {

@@ -30,7 +30,7 @@ namespace Allors.Domain
     {
         public void Sync()
         {
-            var permissionByOperationByConcreteClassByOperandType = new Dictionary<OperandType, Dictionary<ObjectType, Dictionary<Operation, Permission>>>();
+            var permissionByOperationByConcreteClassByOperandType = new Dictionary<OperandType, Dictionary<ObjectType, Dictionary<Operations, Permission>>>();
 
             foreach (Permission permission in new Permissions(this.Session).Extent())
             {
@@ -40,17 +40,17 @@ namespace Allors.Domain
                     continue;
                 }
 
-                Dictionary<ObjectType, Dictionary<Operation, Permission>> permissionByOperationByConcreteClass;
+                Dictionary<ObjectType, Dictionary<Operations, Permission>> permissionByOperationByConcreteClass;
                 if (!permissionByOperationByConcreteClassByOperandType.TryGetValue(permission.OperandType, out permissionByOperationByConcreteClass))
                 {
-                    permissionByOperationByConcreteClass = new Dictionary<ObjectType, Dictionary<Operation, Permission>>();
+                    permissionByOperationByConcreteClass = new Dictionary<ObjectType, Dictionary<Operations, Permission>>();
                     permissionByOperationByConcreteClassByOperandType[permission.OperandType] = permissionByOperationByConcreteClass;
                 }
 
-                Dictionary<Operation, Permission> permissionByOperation;
+                Dictionary<Operations, Permission> permissionByOperation;
                 if (!permissionByOperationByConcreteClass.TryGetValue(permission.ConcreteClass, out permissionByOperation))
                 {
-                    permissionByOperation = new Dictionary<Operation, Permission>();
+                    permissionByOperation = new Dictionary<Operations, Permission>();
                     permissionByOperationByConcreteClass.Add(permission.ConcreteClass, permissionByOperation);
                 }
 
@@ -63,7 +63,7 @@ namespace Allors.Domain
                 {
                     // AssociationType
                     var associationType = relationType.AssociationType;
-                    Dictionary<ObjectType, Dictionary<Operation, Permission>> permissionByOperationByConcreteClass;
+                    Dictionary<ObjectType, Dictionary<Operations, Permission>> permissionByOperationByConcreteClass;
                     permissionByOperationByConcreteClassByOperandType.TryGetValue(associationType, out permissionByOperationByConcreteClass);
 
                     var composite = associationType.RelationType.RoleType.ObjectType as Composite;
@@ -71,13 +71,13 @@ namespace Allors.Domain
                     {
                         foreach (var concreteClass in composite.Classes)
                         {
-                            Dictionary<Operation, Permission> permissionByOperation = null;
+                            Dictionary<Operations, Permission> permissionByOperation = null;
                             if (permissionByOperationByConcreteClass != null)
                             {
                                 permissionByOperationByConcreteClass.TryGetValue(concreteClass, out permissionByOperation);
                             }
 
-                            Operation[] operations = { Operation.Read };
+                            Operations[] operations = { Operations.Read };
                             foreach (var operation in operations)
                             {
                                 Permission permission = null;
@@ -100,18 +100,18 @@ namespace Allors.Domain
                 {
                     // RoleType
                     var roleType = relationType.RoleType;
-                    Dictionary<ObjectType, Dictionary<Operation, Permission>> permissionByOperationByConcreteClass;
+                    Dictionary<ObjectType, Dictionary<Operations, Permission>> permissionByOperationByConcreteClass;
                     permissionByOperationByConcreteClassByOperandType.TryGetValue(roleType, out permissionByOperationByConcreteClass);
 
                     foreach (var concreteClass in roleType.RelationType.AssociationType.ObjectType.Classes)
                     {
-                        Dictionary<Operation, Permission> permissionByOperation = null;
+                        Dictionary<Operations, Permission> permissionByOperation = null;
                         if (permissionByOperationByConcreteClass != null)
                         {
                             permissionByOperationByConcreteClass.TryGetValue(concreteClass, out permissionByOperation);
                         }
 
-                        var operations = new[] { Operation.Read, Operation.Write };
+                        var operations = new[] { Operations.Read, Operations.Write };
 
                         foreach (var operation in operations)
                         {
@@ -121,7 +121,7 @@ namespace Allors.Domain
                                 permissionByOperation.TryGetValue(operation, out permission);
                             }
 
-                            if (operation == Operation.Write && roleType.RelationType.IsDerived)
+                            if (operation == Operations.Write && roleType.RelationType.IsDerived)
                             {
                                 if (permission != null)
                                 {
@@ -144,12 +144,12 @@ namespace Allors.Domain
 
             foreach (var methodType in domain.MethodTypes)
             {
-                Dictionary<ObjectType, Dictionary<Operation, Permission>> permissionByOperationByConcreteClass;
+                Dictionary<ObjectType, Dictionary<Operations, Permission>> permissionByOperationByConcreteClass;
                 permissionByOperationByConcreteClassByOperandType.TryGetValue(methodType, out permissionByOperationByConcreteClass);
 
                 foreach (var concreteClass in methodType.ObjectType.Classes)
                 {
-                    Dictionary<Operation, Permission> permissionByOperation = null;
+                    Dictionary<Operations, Permission> permissionByOperation = null;
                     if (permissionByOperationByConcreteClass != null)
                     {
                         permissionByOperationByConcreteClass.TryGetValue(concreteClass, out permissionByOperation);
@@ -158,7 +158,7 @@ namespace Allors.Domain
                     Permission permission = null;
                     if (permissionByOperation != null)
                     {
-                        permissionByOperation.TryGetValue(Operation.Execute, out permission);
+                        permissionByOperation.TryGetValue(Operations.Execute, out permission);
                     }
 
                     if (permission == null)
@@ -166,7 +166,7 @@ namespace Allors.Domain
                         permission = new PermissionBuilder(this.Session).Build();
                     }
 
-                    permission.Sync(concreteClass, methodType, Operation.Execute);
+                    permission.Sync(concreteClass, methodType, Operations.Execute);
                 }
             }
         }

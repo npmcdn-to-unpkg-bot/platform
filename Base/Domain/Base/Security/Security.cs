@@ -28,7 +28,7 @@ namespace Allors.Domain
 
     public partial class Security
     {
-        private static readonly Operation[] ReadWriteExecute = { Operation.Read, Operation.Write, Operation.Execute };
+        private static readonly Operations[] ReadWriteExecute = { Operations.Read, Operations.Write, Operations.Execute };
 
         private readonly ISession session;
         private readonly Dictionary<ObjectType, IObjects> objectsByObjectType;
@@ -76,7 +76,7 @@ namespace Allors.Domain
 
                 var objectId = permission.ConcreteClassPointer;
 
-                if (permission.Operation != Operation.Read)
+                if (permission.Operation != Operations.Read)
                 {
                     var operandType = permission.OperandTypePointer;
 
@@ -93,15 +93,15 @@ namespace Allors.Domain
                 Dictionary<Guid, Dictionary<OperandType, Permission>> permissionByOperandTypeByObjectTypeId;
                 switch (permission.Operation)
                 {
-                    case Operation.Read:
+                    case Operations.Read:
                         permissionByOperandTypeByObjectTypeId = this.readPermissionsByObjectTypeId;
                         break;
 
-                    case Operation.Write:
+                    case Operations.Write:
                         permissionByOperandTypeByObjectTypeId = this.writePermissionsByObjectTypeId;
                         break;
 
-                    case Operation.Execute:
+                    case Operations.Execute:
                         permissionByOperandTypeByObjectTypeId = this.executePermissionsByObjectTypeId;
                         break;
 
@@ -143,7 +143,7 @@ namespace Allors.Domain
             this.session.Derive(true);
         }
 
-        public void Deny(ObjectType objectType, ObjectState objectState, params Operation[] operations)
+        public void Deny(ObjectType objectType, ObjectState objectState, params Operations[] operations)
         {
             var actualOperations = operations ?? ReadWriteExecute;
             foreach (var operation in actualOperations)
@@ -151,15 +151,15 @@ namespace Allors.Domain
                 Dictionary<OperandType, Permission> permissionByOperandType;
                 switch (operation)
                 {
-                    case Operation.Read:
+                    case Operations.Read:
                         this.readPermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                         break;
 
-                    case Operation.Write:
+                    case Operations.Write:
                         this.writePermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                         break;
 
-                    case Operation.Execute:
+                    case Operations.Execute:
                         this.executePermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                         break;
 
@@ -193,7 +193,7 @@ namespace Allors.Domain
             }
         }
 
-        public void Grant(Guid roleId, ObjectType objectType, params Operation[] operations)
+        public void Grant(Guid roleId, ObjectType objectType, params Operations[] operations)
         {
             Role role;
             if (this.roleById.TryGetValue(roleId, out role))
@@ -204,15 +204,15 @@ namespace Allors.Domain
                     Dictionary<OperandType, Permission> permissionByOperandType;
                     switch (operation)
                     {
-                        case Operation.Read:
+                        case Operations.Read:
                             this.readPermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                             break;
 
-                        case Operation.Write:
+                        case Operations.Write:
                             this.writePermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                             break;
 
-                        case Operation.Execute:
+                        case Operations.Execute:
                             this.executePermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                             break;
 
@@ -231,7 +231,7 @@ namespace Allors.Domain
             }
         }
 
-        public void Grant(Guid roleId, ObjectType objectType, OperandType operandType, params Operation[] operations)
+        public void Grant(Guid roleId, ObjectType objectType, OperandType operandType, params Operations[] operations)
         {
             Role role;
             if (this.roleById.TryGetValue(roleId, out role))
@@ -242,15 +242,15 @@ namespace Allors.Domain
                     Dictionary<OperandType, Permission> permissionByOperandType;
                     switch (operation)
                     {
-                        case Operation.Read:
+                        case Operations.Read:
                             this.readPermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                             break;
 
-                        case Operation.Write:
+                        case Operations.Write:
                             this.writePermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                             break;
 
-                        case Operation.Execute:
+                        case Operations.Execute:
                             this.executePermissionsByObjectTypeId.TryGetValue(objectType.Id, out permissionByOperandType);
                             break;
 
@@ -270,17 +270,17 @@ namespace Allors.Domain
             }
         }
 
-        public void GrantAdministrator(ObjectType objectType, params Operation[] operations)
+        public void GrantAdministrator(ObjectType objectType, params Operations[] operations)
         {
             this.Grant(Roles.AdministratorId, objectType, operations);
         }
 
-        public void GrantGuest(ObjectType objectType, params Operation[] operations)
+        public void GrantGuest(ObjectType objectType, params Operations[] operations)
         {
             this.Grant(Roles.GuestId, objectType, operations);
         }
 
-        public void GrantOwner(ObjectType objectType, params Operation[] operations)
+        public void GrantOwner(ObjectType objectType, params Operations[] operations)
         {
             this.Grant(Roles.OwnerId, objectType, operations);
         }

@@ -21,8 +21,6 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
@@ -38,6 +36,8 @@ namespace Allors.Domain
         private readonly User user;
         private readonly ISession session;
 
+        private readonly Guid classId;
+
         private AccessControl[] accesControls;
         private Permission[] deniedPermissions;
 
@@ -46,6 +46,7 @@ namespace Allors.Domain
             this.user = user;
             this.session = this.user.Strategy.Session;
             this.@object = (AccessControlledObject)obj;
+            this.classId = obj.Strategy.Class.Id;
         }
 
         public User User => this.user;
@@ -67,25 +68,25 @@ namespace Allors.Domain
 
         public bool CanRead(PropertyType propertyType)
         {
-            return this.IsPermitted(propertyType, Operation.Read);
+            return this.IsPermitted(propertyType, Operations.Read);
         }
 
         public bool CanWrite(RoleType roleType)
         {
-            return this.IsPermitted(roleType, Operation.Write);
+            return this.IsPermitted(roleType, Operations.Write);
         }
 
         public bool CanExecute(MethodType methodType)
         {
-            return this.IsPermitted(methodType, Operation.Execute);
+            return this.IsPermitted(methodType, Operations.Execute);
         }
         
-        public bool IsPermitted(OperandType operandType, Operation operation)
+        public bool IsPermitted(OperandType operandType, Operations operation)
         {
             return this.IsPermitted(operandType.Id, operation);
         }
 
-        private bool IsPermitted(Guid operandTypeId, Operation operation)
+        private bool IsPermitted(Guid operandTypeId, Operations operation)
         {
             this.LazyLoad();
 
@@ -97,7 +98,7 @@ namespace Allors.Domain
                 }
             }
 
-            return this.accesControls.Any(accessControl => accessControl.IsPermitted(operandTypeId, operation));
+            return this.accesControls.Any(accessControl => accessControl.IsPermitted(classId, operandTypeId, operation));
         }
 
         private void LazyLoad()

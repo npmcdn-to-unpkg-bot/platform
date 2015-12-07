@@ -193,7 +193,7 @@
     <Compile Include="Base\Security\IAccessControlList.cs" />
     <Compile Include="Base\Security\IAccessControlListFactory.cs" />
     <Compile Include="Base\Security\Login.cs" />
-    <Compile Include="Base\Security\Operation.cs" />
+    <Compile Include="Base\Security\Operations.cs" />
     <Compile Include="Base\Security\Permission.cs" />
     <Compile Include="Base\Security\PermissionBuilder.cs" />
     <Compile Include="Base\Security\PermissionComparer.cs" />

@@ -34,6 +34,6 @@ namespace Allors.Domain
 
         bool CanExecute(MethodType methodType);
 
-        bool IsPermitted(OperandType operandType, Operation operation);
+        bool IsPermitted(OperandType operandType, Operations operation);
     }
 }
