@@ -72,6 +72,7 @@
     <Compile Include="Base\ObjectOnPostBuild.cs" />
     <Compile Include="Base\ObjectOnBuild.cs" />
     <Compile Include="Base\ObjectExtensions.cs" />
+    <Compile Include="Base\PrefetchPolicyBuilderExtensions.cs" />
     <Compile Include="Base\Security\Cache\AccessControlCache.cs" />
     <Compile Include="Base\Unit\DateTimeFactory.cs" />
     <Compile Include="Custom\Combinations\C1s.cs" />

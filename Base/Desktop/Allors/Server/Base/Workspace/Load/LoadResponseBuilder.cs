@@ -34,7 +34,12 @@
             {
                 var prefetchClass = (Class)groupBy.Key;
                 var prefetchObjects = groupBy.ToArray();
-                var prefetcher = prefetchClass.BuildPrefetchPolicy(@group);
+
+                var prefetchPolicyBuilder = new PrefetchPolicyBuilder();
+                prefetchPolicyBuilder.WithGroupRules(prefetchClass, @group);
+                prefetchPolicyBuilder.WithSecurityRules();
+                var prefetcher = prefetchPolicyBuilder.Build();
+
                 this.session.Prefetch(prefetcher, prefetchObjects);
             }
 
