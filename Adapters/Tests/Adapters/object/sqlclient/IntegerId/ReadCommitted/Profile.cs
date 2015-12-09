@@ -24,19 +24,19 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
     using Allors.Meta;
     using Adapters;
 
-    using Allors.Adapters.Object.SqlClient.Logging;
+    using Allors.Adapters.Object.SqlClient.Debug;
 
     public class Profile : SqlClient.Profile
     {
         private readonly Prefetchers prefetchers = new Prefetchers();
 
-        private readonly LoggedConnectionFactory connectionFactory;
+        private readonly DebugConnectionFactory connectionFactory;
 
         public Profile()
         {
         }
 
-        public Profile(LoggedConnectionFactory connectionFactory)
+        public Profile(DebugConnectionFactory connectionFactory)
         {
             this.connectionFactory = connectionFactory;
         }

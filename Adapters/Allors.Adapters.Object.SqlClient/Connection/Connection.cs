@@ -35,20 +35,20 @@ namespace Allors.Adapters.Object.SqlClient
         {
             if (this.SqlConnection == null)
             {
-                this.OnCreateSqlConnection();
+                this.OnCreatingSqlConnection();
                 this.SqlConnection = new SqlConnection(this.Database.ConnectionString);
                 this.OnCreatedSqlConnection();
 
-                this.OnOpenSqlConnection();
+                this.OnOpeningSqlConnection();
                 this.SqlConnection.Open();
                 this.OnOpenedSqlConnection();
 
-                this.OnCreateSqlTransaction();
+                this.OnCreatingSqlTransaction();
                 this.SqlTransaction = this.SqlConnection.BeginTransaction(this.Database.IsolationLevel);
                 this.OnCreatedSqlTransaction();
             }
 
-            this.OnCreateSqlCommand();
+            this.OnCreatingSqlCommand();
             var sqlCommand = this.SqlConnection.CreateCommand();
             sqlCommand.Transaction = this.SqlTransaction;
             sqlCommand.CommandTimeout = this.Database.CommandTimeout;
@@ -63,7 +63,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (this.SqlTransaction != null)
                 {
-                    this.OnCommit();
+                    this.OnCommitting();
                     this.SqlTransaction.Commit();
                     this.OnCommitted();
                 }
@@ -74,7 +74,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                 if (this.SqlConnection != null)
                 {
-                    this.OnCloseSqlConnection();
+                    this.OnClosingSqlConnection();
                     this.SqlConnection?.Close();
                     this.OnClosedSqlConnection();
                 }
@@ -89,9 +89,9 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (this.SqlTransaction != null)
                 {
-                    this.OnRollback();
+                    this.OnRollingBack();
                     this.SqlTransaction?.Rollback();
-                    this.OnRolledback();
+                    this.OnRolledBack();
                 }
             }
             finally
@@ -100,7 +100,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                 if (this.SqlConnection != null)
                 {
-                    this.OnCloseSqlConnection();
+                    this.OnClosingSqlConnection();
                     this.SqlConnection?.Close();
                     this.OnClosedSqlConnection();
                 }
@@ -113,31 +113,31 @@ namespace Allors.Adapters.Object.SqlClient
 
         #region Events
 
-        protected abstract void OnCreateSqlConnection();
+        protected abstract void OnCreatingSqlConnection();
 
         protected abstract void OnCreatedSqlConnection();
 
-        protected abstract void OnOpenSqlConnection();
+        protected abstract void OnOpeningSqlConnection();
 
         protected abstract void OnOpenedSqlConnection();
 
-        protected abstract void OnCloseSqlConnection();
+        protected abstract void OnClosingSqlConnection();
 
         protected abstract void OnClosedSqlConnection();
 
-        protected abstract void OnCreateSqlTransaction();
+        protected abstract void OnCreatingSqlTransaction();
 
         protected abstract void OnCreatedSqlTransaction();
 
-        protected abstract void OnCommit();
+        protected abstract void OnCommitting();
 
         protected abstract void OnCommitted();
 
-        protected abstract void OnRollback();
+        protected abstract void OnRollingBack();
 
-        protected abstract void OnRolledback();
+        protected abstract void OnRolledBack();
 
-        protected abstract void OnCreateSqlCommand();
+        protected abstract void OnCreatingSqlCommand();
 
         protected abstract void OnCreatedSqlCommand();
 

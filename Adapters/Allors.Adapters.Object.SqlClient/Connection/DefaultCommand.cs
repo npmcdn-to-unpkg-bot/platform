@@ -29,7 +29,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
         }
 
-        protected override void OnExecute()
+        protected override void OnExecuting()
         {
         }
 

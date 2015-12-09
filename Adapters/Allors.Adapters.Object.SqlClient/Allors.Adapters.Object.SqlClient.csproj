@@ -59,6 +59,9 @@
   <ItemGroup>
     <Compile Include="Connection\DefaultConnectionFactory.cs" />
     <Compile Include="Connection\IConnectionFactory.cs" />
+    <Compile Include="Connection\Debug\DebugCommand.cs" />
+    <Compile Include="Connection\Debug\DebugConnection.cs" />
+    <Compile Include="Connection\Debug\DebugConnectionFactory.cs" />
     <Compile Include="DataRecords\VersionedObjectDataRecord.cs" />
     <Compile Include="Connection\DefaultCommand.cs" />
     <Compile Include="Connection\DefaultConnection.cs" />

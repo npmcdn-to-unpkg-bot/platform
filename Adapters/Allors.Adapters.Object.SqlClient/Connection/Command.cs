@@ -111,7 +111,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal object ExecuteScalar()
         {
-            this.OnExecute();
+            this.OnExecuting();
             try
             {
                 return this.SqlCommand.ExecuteScalar();
@@ -124,7 +124,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void ExecuteNonQuery()
         {
-            this.OnExecute();
+            this.OnExecuting();
 
             try
             {
@@ -138,7 +138,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal SqlDataReader ExecuteReader()
         {
-            this.OnExecute();
+            this.OnExecuting();
 
             try
             {
@@ -178,7 +178,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         #region Events
 
-        protected abstract void OnExecute();
+        protected abstract void OnExecuting();
 
         protected abstract void OnExecuted();
 

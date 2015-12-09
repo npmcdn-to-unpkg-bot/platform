@@ -31,7 +31,7 @@ namespace Allors.Adapters.Object.SqlClient
         }
 
         #region Events
-        protected override void OnCreateSqlConnection()
+        protected override void OnCreatingSqlConnection()
         {
         }
 
@@ -39,7 +39,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
         }
 
-        protected override void OnOpenSqlConnection()
+        protected override void OnOpeningSqlConnection()
         {
         }
 
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
         }
 
-        protected override void OnCloseSqlConnection()
+        protected override void OnClosingSqlConnection()
         {
         }
 
@@ -55,7 +55,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
         }
 
-        protected override void OnCreateSqlTransaction()
+        protected override void OnCreatingSqlTransaction()
         {
         }
 
@@ -63,7 +63,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
         }
 
-        protected override void OnCommit()
+        protected override void OnCommitting()
         {
         }
 
@@ -71,15 +71,15 @@ namespace Allors.Adapters.Object.SqlClient
         {
         }
 
-        protected override void OnRollback()
+        protected override void OnRollingBack()
         {
         }
 
-        protected override void OnRolledback()
+        protected override void OnRolledBack()
         {
         }
 
-        protected override void OnCreateSqlCommand()
+        protected override void OnCreatingSqlCommand()
         {
         }
 

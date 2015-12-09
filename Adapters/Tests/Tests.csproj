@@ -92,9 +92,6 @@
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\PerformanceTests.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\Logging\LoggedCommand.cs" />
-    <Compile Include="Adapters\object\sqlclient\Logging\LoggedConnectionFactory.cs" />
-    <Compile Include="Adapters\object\sqlclient\Logging\LoggedConnection.cs" />
     <Compile Include="Adapters\object\sqlclient\Profile.cs" />
     <Compile Include="Adapters\object\sqlclient\SchemaTest.cs" />
     <Compile Include="Adapters\object\sqlclient\PerformanceTests.cs" />

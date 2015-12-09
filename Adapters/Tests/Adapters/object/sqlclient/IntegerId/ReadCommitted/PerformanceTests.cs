@@ -22,7 +22,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
     using Adapters;
 
-    using Allors.Adapters.Object.SqlClient.Logging;
+    using Allors.Adapters.Object.SqlClient.Debug;
     using Allors.Domain;
 
     using NUnit.Framework;
@@ -30,7 +30,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
     [TestFixture]
     public class PerformanceTests : SqlClient.PerformanceTests
     {
-        private LoggedConnectionFactory connectionFactory;
+        private DebugConnectionFactory connectionFactory;
         private Profile profile;
 
         protected override IProfile Profile => this.profile;
@@ -38,7 +38,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
         [SetUp]
         protected void SetUp()
         {
-            this.connectionFactory = new LoggedConnectionFactory();
+            this.connectionFactory = new DebugConnectionFactory();
             this.profile = new Profile(this.connectionFactory);
         }
         

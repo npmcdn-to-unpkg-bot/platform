@@ -18,15 +18,13 @@ namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Linq;
+    using System.Text;
 
     using Adapters;
 
     using Allors;
-    using Allors.Adapters.Object.SqlClient.Logging;
+    using Allors.Adapters.Object.SqlClient.Debug;
     using Allors.Domain;
-    using Allors.Meta;
-
-    using Domain;
 
     using NUnit.Framework;
 
@@ -70,11 +68,103 @@ namespace Allors.Adapters.Object.SqlClient
                 init();
 
                 var database = (Database)this.Session.Database;
-                var connectionFactory = (LoggedConnectionFactory)database.ConnectionFactory;
+                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
 
                 var connection = connectionFactory.Connections.Last();
 
                 connection.Commands.Count.ShouldEqual(0);
+
+                this.Populate();
+                this.Session.Commit();
+            }
+        }
+
+
+        [Test]
+        public void Prefetch()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                this.Populate();
+
+                this.Session.Commit();
+
+                var database = (Database)this.Session.Database;
+                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
+                var connection = connectionFactory.Connections.Last();
+
+                connection.Commands.Clear();
+
+                var c1Prefetcher = new PrefetchPolicyBuilder()
+                    .WithRule(C1.Meta.C1AllorsString)
+                    .Build();
+
+                var extent = this.Session.Extent<C1>();
+                this.Session.Prefetch(c1Prefetcher, extent);
+
+                connection.Commands.Count.ShouldEqual(3);
+                connection.Commands.Count(v=>v.ExecutedTimeStamps.Count != 1).ShouldEqual(0);
+
+                var stringBuilder = new StringBuilder();
+                foreach (C1 c1 in extent)
+                {
+                    stringBuilder.Append(c1.C1AllorsString);
+                }
+
+                connection.Commands.Count.ShouldEqual(3);
+                connection.CommandsByExecutedTimeStamp.Count().ShouldEqual(3);
+
+                this.Populate();
+                this.Session.Commit();
+            }
+        }
+
+
+        [Test]
+        public void Prefetch1Level()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                this.Populate();
+
+                this.Session.Commit();
+
+                var database = (Database)this.Session.Database;
+                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
+                var connection = connectionFactory.Connections.Last();
+
+                connection.Commands.Clear();
+
+                var c2Prefetcher = new PrefetchPolicyBuilder()
+                    .WithRule(C1.Meta.C1AllorsString)
+                    .Build();
+                
+                var c1Prefetcher = new PrefetchPolicyBuilder()
+                    .WithRule(C1.Meta.C1C2one2one, c2Prefetcher)
+                    .WithRule(C1.Meta.C1AllorsString)
+                    .Build();
+
+                var extent = this.Session.Extent<C1>();
+                this.Session.Prefetch(c1Prefetcher, extent);
+
+                connection.Commands.Count.ShouldEqual(5);
+                connection.CommandsByExecutedTimeStamp.Count().ShouldEqual(6);
+
+                var stringBuilder = new StringBuilder();
+                foreach (C1 c1 in extent)
+                {
+                    stringBuilder.Append(c1.C1AllorsString);
+
+                    var c2 = c1.C1C2one2one;
+                    stringBuilder.Append(c2?.C2AllorsString);
+                }
+
+                connection.Commands.Count.ShouldEqual(5);
+                connection.CommandsByExecutedTimeStamp.Count().ShouldEqual(6);
 
                 this.Populate();
                 this.Session.Commit();
