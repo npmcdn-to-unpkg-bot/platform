@@ -22,15 +22,26 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
     using Adapters;
 
+    using Allors.Adapters.Object.SqlClient.Logging;
+    using Allors.Domain;
+
     using NUnit.Framework;
 
     [TestFixture]
     public class PerformanceTests : SqlClient.PerformanceTests
     {
-        private readonly Profile profile = new Profile();
+        private LoggedConnectionFactory connectionFactory;
+        private Profile profile;
 
         protected override IProfile Profile => this.profile;
 
+        [SetUp]
+        protected void SetUp()
+        {
+            this.connectionFactory = new LoggedConnectionFactory();
+            this.profile = new Profile(this.connectionFactory);
+        }
+        
         [TearDown]
         protected void Dispose()
         {

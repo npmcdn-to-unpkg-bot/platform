@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExtentTest.cs" company="Allors bvba">
+// <copyright file="LoggedConnectionFactory.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,23 +18,19 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Object.SqlClient.Logging
 {
-    using Adapters;
+    using System.Collections.Generic;
 
-    using NUnit.Framework;
-
-    [TestFixture]
-    public class ExtentTest : SqlClient.ExtentTest
+    public class LoggedConnectionFactory : IConnectionFactory
     {
-        private readonly Profile profile = new Profile();
+        public List<LoggedConnection> Connections { get; } = new List<LoggedConnection>();
 
-        protected override IProfile Profile => this.profile;
-
-        [TearDown]
-        protected void Dispose()
+        public Connection Create(Database database)
         {
-            this.profile.Dispose();
+            var connection = new LoggedConnection(database);
+            this.Connections.Add(connection);
+            return connection;
         }
     }
 }

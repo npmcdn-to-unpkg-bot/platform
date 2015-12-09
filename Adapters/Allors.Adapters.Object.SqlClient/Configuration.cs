@@ -14,8 +14,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors.Adapters.Object.SqlClient.Caching;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System.Data;
@@ -32,6 +30,10 @@ namespace Allors.Adapters.Object.SqlClient
         }
 
         public ICacheFactory CacheFactory { get; set; }
+
+        public IConnectionFactory ConnectionFactory { get; set; }
+
+        public IConnectionFactory ManagementConnectionFactory { get; set; }
 
         public string ConnectionString { get; set; }
 

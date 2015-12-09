@@ -52,6 +52,10 @@ namespace Allors.Adapters.Object.SqlClient
 
         private string validationMessage;
 
+        private IConnectionFactory connectionFactory;
+
+        private IConnectionFactory managementConnectionFactory;
+
         public Database(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
@@ -60,8 +64,11 @@ namespace Allors.Adapters.Object.SqlClient
                 throw new ArgumentException("Domain is invalid");
             }
 
-            this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
+            this.ConnectionFactory = configuration.ConnectionFactory;
+            this.ManagementConnectionFactory = configuration.ManagementConnectionFactory;
 
+            this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
+            
             this.connectionString = configuration.ConnectionString;
             this.CommandTimeout = configuration.CommandTimeout;
             this.IsolationLevel = configuration.IsolationLevel;
@@ -99,6 +106,32 @@ namespace Allors.Adapters.Object.SqlClient
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
+
+        public IConnectionFactory ConnectionFactory
+        {
+            get
+            {
+                return this.connectionFactory ?? (this.connectionFactory = new DefaultConnectionFactory());
+            }
+
+            set
+            {
+                this.connectionFactory = value;
+            }
+        }
+
+        public IConnectionFactory ManagementConnectionFactory
+        {
+            get
+            {
+                return this.managementConnectionFactory ?? (this.managementConnectionFactory = new DefaultConnectionFactory());
+            }
+
+            set
+            {
+                this.managementConnectionFactory = value;
+            }
+        }
 
         public string Id { get; }
 
@@ -273,7 +306,17 @@ namespace Allors.Adapters.Object.SqlClient
 
         public ISession CreateSession()
         {
-            return this.CreateDatabaseSession();
+            return this.CreateSession(this.ConnectionFactory);
+        }
+
+        public ISession CreateSession(IConnectionFactory connectionFactory)
+        {
+            if (!this.IsValid)
+            {
+                throw new Exception(this.validationMessage);
+            }
+
+            return new Session(this, connectionFactory);
         }
 
         public void Init()
@@ -294,7 +337,8 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.Init();
 
-            var session = new ManagementSession(this);
+            var session = new ManagementSession(this, this.ManagementConnectionFactory);
+
             try
             {
                 var load = this.CreateLoad(this.ObjectNotLoaded, this.RelationNotLoaded, reader);
@@ -311,7 +355,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Save(XmlWriter writer)
         {
-            var session = new ManagementSession(this);
+            var session = new ManagementSession(this, this.ManagementConnectionFactory);
             try
             {
                 var save = this.CreateSave(writer);
@@ -337,7 +381,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         ISession IDatabase.CreateSession()
         {
-            return this.CreateDatabaseSession();
+            return this.CreateSession();
         }
 
         internal bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
@@ -450,16 +494,6 @@ namespace Allors.Adapters.Object.SqlClient
         private void ResetSchema()
         {
             this.mapping = null;
-        }
-
-        private ISession CreateDatabaseSession()
-        {
-            if (!this.IsValid)
-            {
-                throw new Exception(this.validationMessage);
-            }
-
-            return new Session(this);
         }
 
         private Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)

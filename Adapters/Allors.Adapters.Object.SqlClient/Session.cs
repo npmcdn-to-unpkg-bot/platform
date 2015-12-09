@@ -83,10 +83,10 @@ namespace Allors.Adapters.Object.SqlClient
         private Command getObjectType;
         #endregion
 
-        internal Session(Database database)
+        internal Session(Database database, IConnectionFactory connectionFactory)
         {
             this.database = database;
-            this.connection = new Connection(this.Database);
+            this.connection = connectionFactory.Create(database);
 
             this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
             this.referencesWithoutCacheId = new HashSet<Reference>();
@@ -97,31 +97,13 @@ namespace Allors.Adapters.Object.SqlClient
             this.changeSet = new ChangeSet();
         }
 
-        IDatabase ISession.Database
-        {
-            get { return this.database; }
-        }
+        IDatabase ISession.Database => this.database;
 
-        public Database Database
-        {
-            get { return this.database; }
-        }
+        public Database Database => this.database;
 
-        public IDatabase Population
-        {
-            get
-            {
-                return this.Database;
-            }
-        }
+        public IDatabase Population => this.Database;
 
-        internal ChangeSet ChangeSet
-        {
-            get
-            {
-                return this.changeSet;
-            }
-        }
+        internal ChangeSet ChangeSet => this.changeSet;
 
         #region Commands Properties
 
@@ -405,12 +387,7 @@ namespace Allors.Adapters.Object.SqlClient
         public IObject Instantiate(ObjectId objectId)
         {
             var strategy = this.InstantiateStrategy(objectId);
-            if (strategy == null)
-            {
-                return null;
-            }
-
-            return strategy.GetObject();
+            return strategy?.GetObject();
         }
 
         public IStrategy InstantiateStrategy(ObjectId objectId)
@@ -1841,10 +1818,7 @@ namespace Allors.Adapters.Object.SqlClient
                             association = this.GetOrCreateReferenceForExistingObject(associationId);
                         }
 
-                        if (nestedObjectIds != null)
-                        {
-                            nestedObjectIds.Add(associationId);
-                        }
+                        nestedObjectIds?.Add(associationId);
                     }
                     
                     associationByRole[role] = association;
@@ -2109,7 +2083,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id;
             }
 
             var result = command.ExecuteScalar();
@@ -2134,8 +2108,8 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
-                command.Parameters[Mapping.ParamNameForCount].Value = (object)count ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForType].Value = @class.Id;
+                command.Parameters[Mapping.ParamNameForCount].Value = count;
             }
 
             var objectIds = new List<object>();

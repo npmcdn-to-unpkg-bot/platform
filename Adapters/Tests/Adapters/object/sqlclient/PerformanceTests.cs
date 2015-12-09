@@ -17,16 +17,20 @@
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
+    using System.Linq;
 
     using Adapters;
 
     using Allors;
+    using Allors.Adapters.Object.SqlClient.Logging;
     using Allors.Domain;
     using Allors.Meta;
 
     using Domain;
 
     using NUnit.Framework;
+
+    using Should;
 
     [TestFixture]
     public abstract class PerformanceTests
@@ -59,11 +63,22 @@ namespace Allors.Adapters.Object.SqlClient
         protected Action[] Inits => this.Profile.Inits;
 
         [Test]
-        public void Extent()
+        public void NoCommands()
         {
+            foreach (var init in this.Inits)
+            {
+                init();
 
-            this.Populate();
-            this.Session.Commit();
+                var database = (Database)this.Session.Database;
+                var connectionFactory = (LoggedConnectionFactory)database.ConnectionFactory;
+
+                var connection = connectionFactory.Connections.Last();
+
+                connection.Commands.Count.ShouldEqual(0);
+
+                this.Populate();
+                this.Session.Commit();
+            }
         }
 
         protected void Populate()

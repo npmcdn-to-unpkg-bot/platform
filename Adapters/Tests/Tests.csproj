@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -88,6 +92,9 @@
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\PerformanceTests.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\Logging\LoggedCommand.cs" />
+    <Compile Include="Adapters\object\sqlclient\Logging\LoggedConnectionFactory.cs" />
+    <Compile Include="Adapters\object\sqlclient\Logging\LoggedConnection.cs" />
     <Compile Include="Adapters\object\sqlclient\Profile.cs" />
     <Compile Include="Adapters\object\sqlclient\SchemaTest.cs" />
     <Compile Include="Adapters\object\sqlclient\PerformanceTests.cs" />
@@ -190,6 +197,7 @@
       <Name>Meta</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

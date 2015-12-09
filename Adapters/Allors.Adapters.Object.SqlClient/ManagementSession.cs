@@ -25,10 +25,10 @@ namespace Allors.Adapters.Object.SqlClient
 
     internal class ManagementSession : IDisposable
     {
-        internal ManagementSession(Database database)
+        internal ManagementSession(Database database, IConnectionFactory connectionFactory)
         {
             this.Database = database;
-            this.Connection = new Connection(database);
+            this.Connection = connectionFactory.Create(database);
         }
         
         ~ManagementSession()

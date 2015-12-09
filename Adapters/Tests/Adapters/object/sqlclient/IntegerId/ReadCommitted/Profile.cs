@@ -24,9 +24,22 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
     using Allors.Meta;
     using Adapters;
 
+    using Allors.Adapters.Object.SqlClient.Logging;
+
     public class Profile : SqlClient.Profile
     {
         private readonly Prefetchers prefetchers = new Prefetchers();
+
+        private readonly LoggedConnectionFactory connectionFactory;
+
+        public Profile()
+        {
+        }
+
+        public Profile(LoggedConnectionFactory connectionFactory)
+        {
+            this.connectionFactory = connectionFactory;
+        }
 
         public override Action[] Markers
         {
@@ -68,7 +81,8 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
             var configuration = new SqlClient.Configuration
                                     {
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
-                                        ConnectionString = this.ConnectionString
+                                        ConnectionString = this.ConnectionString,
+                                        ConnectionFactory = this.connectionFactory
                                     };
             var database = new Database(configuration);
 
@@ -90,7 +104,8 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
             var configuration = new SqlClient.Configuration
             {
                 ObjectFactory = this.ObjectFactory,
-                ConnectionString = this.ConnectionString
+                ConnectionString = this.ConnectionString,
+                ConnectionFactory = this.connectionFactory
             };
 
             var database = new Database(configuration);

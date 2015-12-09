@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExtentTest.cs" company="Allors bvba">
+// <copyright file="LoggedCommand.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,23 +18,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Object.SqlClient.Logging
 {
-    using Adapters;
+    using System.Data.SqlClient;
 
-    using NUnit.Framework;
-
-    [TestFixture]
-    public class ExtentTest : SqlClient.ExtentTest
+    public class LoggedCommand : Command
     {
-        private readonly Profile profile = new Profile();
-
-        protected override IProfile Profile => this.profile;
-
-        [TearDown]
-        protected void Dispose()
+        public LoggedCommand(Mapping mapping, SqlCommand command)
+            : base(mapping, command)
         {
-            this.profile.Dispose();
+        }
+
+        protected override void OnExecute()
+        {
+        }
+
+        protected override void OnExecuted()
+        {
         }
     }
 }
