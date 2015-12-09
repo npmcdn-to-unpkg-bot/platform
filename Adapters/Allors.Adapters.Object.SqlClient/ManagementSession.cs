@@ -14,33 +14,31 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Data.SqlClient;
 
+    using Allors;
     using Allors.Meta;
 
     internal class ManagementSession : IDisposable
     {
-        private readonly Database database;
-        
-        private SqlTransaction transaction;
-        private SqlConnection connection;
-
         internal ManagementSession(Database database)
         {
-            this.database = database;
+            this.Database = database;
+            this.Connection = new Connection(database);
         }
         
         ~ManagementSession()
         {
             this.Dispose();
         }
+
+        public Database Database { get; }
+
+        public Connection Connection { get; }
 
         public void Dispose()
         {
@@ -50,24 +48,24 @@ namespace Allors.Adapters.Object.SqlClient
         public void LoadObjects(IObjectType objectType, ObjectId[] objectIds)
         {
             var exclusiveRootClass = ((IComposite)objectType).ExclusiveClass;
-            var schema = this.database.Mapping;
+            var schema = this.Database.Mapping;
 
-            var sql = this.database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
-            using (var command = this.CreateSqlCommand(sql))
+            var sql = this.Database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
+            using (var command = this.Connection.CreateCommand(sql))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
                 var objectTypeSqlParameter = command.CreateParameter();
                 objectTypeSqlParameter.ParameterName = Mapping.ParamNameForType;
                 objectTypeSqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
-                objectTypeSqlParameter.Value = (object)objectType.Id ?? DBNull.Value;
+                objectTypeSqlParameter.Value = objectType.Id;
 
                 command.Parameters.Add(objectTypeSqlParameter);
                 var sqlParameter1 = command.CreateParameter();
                 sqlParameter1.SqlDbType = SqlDbType.Structured;
                 sqlParameter1.TypeName = schema.TableTypeNameForObject;
                 sqlParameter1.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter1.Value = database.CreateObjectTable(objectIds);
+                sqlParameter1.Value = this.Database.CreateObjectTable(objectIds);
 
                 command.Parameters.Add(sqlParameter1);
                 command.ExecuteNonQuery();
@@ -82,50 +80,50 @@ namespace Allors.Adapters.Object.SqlClient
             switch (unitTypeTag)
             {
                 case UnitTags.AllorsString:
-                    tableTypeName = this.database.Mapping.TableTypeNameForStringRelation;
+                    tableTypeName = this.Database.Mapping.TableTypeNameForStringRelation;
                     break;
 
                 case UnitTags.AllorsInteger:
-                    tableTypeName = this.database.Mapping.TableTypeNameForIntegerRelation;
+                    tableTypeName = this.Database.Mapping.TableTypeNameForIntegerRelation;
                     break;
 
                 case UnitTags.AllorsFloat:
-                    tableTypeName = this.database.Mapping.TableTypeNameForFloatRelation;
+                    tableTypeName = this.Database.Mapping.TableTypeNameForFloatRelation;
                     break;
 
                 case UnitTags.AllorsBoolean:
-                    tableTypeName = this.database.Mapping.TableTypeNameForBooleanRelation;
+                    tableTypeName = this.Database.Mapping.TableTypeNameForBooleanRelation;
                     break;
 
                 case UnitTags.AllorsDateTime:
-                    tableTypeName = this.database.Mapping.TableTypeNameForDateTimeRelation;
+                    tableTypeName = this.Database.Mapping.TableTypeNameForDateTimeRelation;
                     break;
 
                 case UnitTags.AllorsUnique:
-                    tableTypeName = this.database.Mapping.TableTypeNameForUniqueRelation;
+                    tableTypeName = this.Database.Mapping.TableTypeNameForUniqueRelation;
                     break;
 
                 case UnitTags.AllorsBinary:
-                    tableTypeName = this.database.Mapping.TableTypeNameForBinaryRelation;
+                    tableTypeName = this.Database.Mapping.TableTypeNameForBinaryRelation;
                     break;
 
                 case UnitTags.AllorsDecimal:
-                    tableTypeName = this.database.Mapping.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                    tableTypeName = this.Database.Mapping.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                     break;
 
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
 
-            var sql = this.database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
+            var sql = this.Database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
 
-            var command = this.CreateSqlCommand(sql);
+            var command = this.Connection.CreateCommand(sql);
             command.CommandType = CommandType.StoredProcedure;
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
             sqlParameter.TypeName = tableTypeName;
             sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-            sqlParameter.Value = this.database.CreateRelationTable(roleType, relations);
+            sqlParameter.Value = this.Database.CreateRelationTable(roleType, relations);
 
             command.Parameters.Add(sqlParameter);
 
@@ -141,111 +139,48 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveClasses)
                 {
-                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
                 }
             }
             else
             {
                 if (!roleType.RelationType.ExistExclusiveClasses)
                 {
-                    sql = this.database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }
                 else
                 {
-                    sql = this.database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
+                    sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }
             }
 
-            using (var command = this.CreateSqlCommand(sql))
+            using (var command = this.Connection.CreateCommand(sql))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 var sqlParameter = command.CreateParameter();
                 sqlParameter.SqlDbType = SqlDbType.Structured;
-                sqlParameter.TypeName = database.Mapping.TableTypeNameForCompositeRelation;
+                sqlParameter.TypeName = this.Database.Mapping.TableTypeNameForCompositeRelation;
                 sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter.Value = database.CreateRelationTable(relations);
+                sqlParameter.Value = this.Database.CreateRelationTable(relations);
 
                 command.Parameters.Add(sqlParameter);
 
                 command.ExecuteNonQuery();
             }
         }
-
-        internal Command CreateCommand(string commandText)
-        {
-            var command = this.CreateSqlCommand(commandText);
-            return new Command(this.database.Mapping, command);
-        }
-
-        internal SqlCommand CreateSqlCommand(string sql)
-        {
-            this.LazyConnect();
-            var command = this.connection.CreateCommand();
-            command.Transaction = this.transaction;
-            command.CommandTimeout = this.database.CommandTimeout;
-            command.CommandText = sql;
-            return command;
-        }
-
-
+        
         internal void Commit()
         {
-            try
-            {
-                if (this.transaction != null)
-                {
-                    this.transaction.Commit();
-                }
-            }
-            finally
-            {
-                this.LazyDisconnect();
-            }
+            this.Connection.Commit();
         }
 
         internal void Rollback()
         {
-            try
-            {
-                if (this.transaction != null)
-                {
-                    this.transaction.Rollback();
-                }
-            }
-            finally
-            {
-                this.LazyDisconnect();
-            }
-        }
-
-        private void LazyConnect()
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SqlConnection(this.database.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction();
-            }
-        }
-
-        private void LazyDisconnect()
-        {
-            try
-            {
-                if (this.connection != null)
-                {
-                    this.connection.Close();
-                }
-            }
-            finally
-            {
-                this.connection = null;
-                this.transaction = null;
-            }
+            this.Connection.Rollback();
         }
     }
 }

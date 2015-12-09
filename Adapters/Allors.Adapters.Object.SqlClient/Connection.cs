@@ -21,14 +21,14 @@ namespace Allors.Adapters.Object.SqlClient
 
     public class Connection
     {
-        private readonly Session session;
+        private readonly Database database;
 
         private SqlConnection connection;
         private SqlTransaction transaction;
         
-        public Connection(Session session)
+        public Connection(Database database)
         {
-            this.session = session;
+            this.database = database;
         }
 
         public Command CreateProcedureCommand(string commandText)
@@ -36,12 +36,12 @@ namespace Allors.Adapters.Object.SqlClient
             var command = this.InternalCreateCommand();
             command.CommandText = commandText;
             command.CommandType = CommandType.StoredProcedure;
-            return new Command(this.session.Database.Mapping, command);
+            return new Command(this.database.Mapping, command);
         }
 
         public Command CreateCommand()
         {
-            return new Command(this.session.Database.Mapping, this.InternalCreateCommand());
+            return new Command(this.database.Mapping, this.InternalCreateCommand());
         }
 
         public void Commit()
@@ -78,21 +78,21 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var command = this.InternalCreateCommand();
             command.CommandText = commandText;
-            return new Command(this.session.Database.Mapping, command);
+            return new Command(this.database.Mapping, command);
         }
         
         private SqlCommand InternalCreateCommand()
         {
             if (this.connection == null)
             {
-                this.connection = new SqlConnection(this.session.Database.ConnectionString);
+                this.connection = new SqlConnection(this.database.ConnectionString);
                 this.connection.Open();
-                this.transaction = this.connection.BeginTransaction(this.session.Database.IsolationLevel);
+                this.transaction = this.connection.BeginTransaction(this.database.IsolationLevel);
             }
 
             var command = this.connection.CreateCommand();
             command.Transaction = this.transaction;
-            command.CommandTimeout = this.session.Database.CommandTimeout;
+            command.CommandTimeout = this.database.CommandTimeout;
             return command;
         }
 

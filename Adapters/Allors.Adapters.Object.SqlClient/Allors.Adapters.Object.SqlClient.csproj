@@ -140,7 +140,7 @@
     <Compile Include="Schema\Validation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Schema\Overview.cd" />
+    <None Include="Diagrams\Schema.cd" />
     <None Include="Settings.StyleCop" />
     <None Include="Diagrams\Connection.cd" />
   </ItemGroup>

@@ -14,17 +14,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Data;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Text;
     using System.Xml;
 
-    using Allors.Meta;
     using Adapters;
+
+    using Allors.Meta;
 
     internal class Load
     {
@@ -627,7 +627,7 @@ namespace Allors.Adapters.Object.SqlClient
             sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " ON");
             lock (this)
             {
-                using (var command = session.CreateCommand(sql.ToString()))
+                using (var command = session.Connection.CreateCommand(sql.ToString()))
                 {
                     command.ExecuteNonQuery();
                 }
@@ -644,7 +644,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                     lock (this)
                     {
-                        using (var command = session.CreateCommand(sql.ToString()))
+                        using (var command = session.Connection.CreateCommand(sql.ToString()))
                         {
                             command.ExecuteNonQuery();
                         }
@@ -656,7 +656,7 @@ namespace Allors.Adapters.Object.SqlClient
             sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " OFF");
             lock (this)
             {
-                using (var command = session.CreateCommand(sql.ToString()))
+                using (var command = session.Connection.CreateCommand(sql.ToString()))
                 {
                     command.ExecuteNonQuery();
                 }
@@ -666,15 +666,15 @@ namespace Allors.Adapters.Object.SqlClient
         private void LoadObjectsSetCache(ManagementSession session)
         {
             var sql = this.database.Mapping.ProcedureNameForSetCache;
-            var command = session.CreateSqlCommand(sql);
+            var command = session.Connection.CreateCommand(sql);
 
             command.CommandType = CommandType.StoredProcedure;
 
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
-            sqlParameter.TypeName = database.Mapping.TableTypeNameForVersionedObject;
+            sqlParameter.TypeName = this.database.Mapping.TableTypeNameForVersionedObject;
             sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-            sqlParameter.Value = database.CreateVersionedObjectTable(this.objectVersionByObjectId);
+            sqlParameter.Value = this.database.CreateVersionedObjectTable(this.objectVersionByObjectId);
 
             command.Parameters.Add(sqlParameter);
 

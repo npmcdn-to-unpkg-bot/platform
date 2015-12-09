@@ -294,7 +294,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.Init();
 
-            var session = this.CreateSqlClientManagementSession();
+            var session = new ManagementSession(this);
             try
             {
                 var load = this.CreateLoad(this.ObjectNotLoaded, this.RelationNotLoaded, reader);
@@ -311,7 +311,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Save(XmlWriter writer)
         {
-            var session = this.CreateSqlClientManagementSession();
+            var session = new ManagementSession(this);
             try
             {
                 var save = this.CreateSave(writer);
@@ -445,11 +445,6 @@ namespace Allors.Adapters.Object.SqlClient
                 default:
                     throw new Exception("!UNKNOWN VALUE TYPE!");
             }
-        }
-
-        private ManagementSession CreateSqlClientManagementSession()
-        {
-            return new ManagementSession(this);
         }
 
         private void ResetSchema()
