@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRecords\VersionedObjectDataRecord.cs" />
+    <Compile Include="Connection.cs" />
     <Compile Include="Schema\Initialization.cs" />
     <Compile Include="Prefetcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,7 +142,7 @@
   <ItemGroup>
     <None Include="Schema\Overview.cd" />
     <None Include="Settings.StyleCop" />
-    <None Include="Prefetch.cd" />
+    <None Include="Diagrams\Connection.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">

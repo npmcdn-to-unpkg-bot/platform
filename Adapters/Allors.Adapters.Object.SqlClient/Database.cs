@@ -14,9 +14,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors.Adapters.Object.SqlClient.Caching;
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
@@ -24,12 +21,12 @@ namespace Allors.Adapters.Object.SqlClient
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
-    using System.Text;
     using System.Xml;
 
     using Adapters.Object.SqlClient.Caching;
+
+    using Allors;
     using Allors.Meta;
-    using Adapters;
 
     using Microsoft.SqlServer.Server;
 
@@ -43,21 +40,9 @@ namespace Allors.Adapters.Object.SqlClient
 
         private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
 
-        private readonly string id;
-
         private readonly string connectionString;
 
-        private readonly int commandTimeout;
-
-        private readonly IsolationLevel isolationLevel;
-
         private readonly Dictionary<IObjectType, IRoleType[]> sortedUnitRolesByObjectType;
-
-        private readonly ICache cache;
-
-        private readonly ObjectIds objectIds;
-
-        private readonly string schemaName;
 
         private Mapping mapping;
 
@@ -78,58 +63,46 @@ namespace Allors.Adapters.Object.SqlClient
             this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
 
             this.connectionString = configuration.ConnectionString;
-            this.commandTimeout = configuration.CommandTimeout;
-            this.isolationLevel = configuration.IsolationLevel;
+            this.CommandTimeout = configuration.CommandTimeout;
+            this.IsolationLevel = configuration.IsolationLevel;
 
             this.sortedUnitRolesByObjectType = new Dictionary<IObjectType, IRoleType[]>();
 
-            this.cache = configuration.CacheFactory.CreateCache(this);
+            this.Cache = configuration.CacheFactory.CreateCache(this);
 
             var connectionStringBuilder = new SqlConnectionStringBuilder(this.ConnectionString);
             var applicationName = connectionStringBuilder.ApplicationName.Trim();
             if (!string.IsNullOrWhiteSpace(applicationName))
             {
-                this.id = applicationName;
+                this.Id = applicationName;
             }
             else
             {
                 if (!string.IsNullOrWhiteSpace(connectionStringBuilder.InitialCatalog))
                 {
-                    this.id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
+                    this.Id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
                 }
                 else
                 {
                     using (var connection = new SqlConnection(this.ConnectionString))
                     {
                         connection.Open();
-                        this.id = connection.Database.ToLowerInvariant();
+                        this.Id = connection.Database.ToLowerInvariant();
                     }
                 }
             }
 
-            this.schemaName = (configuration.SchemaName ?? "allors").ToLowerInvariant();
-            this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
+            this.SchemaName = (configuration.SchemaName ?? "allors").ToLowerInvariant();
+            this.ObjectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
 
-        public string Id
-        {
-            get
-            {
-                return this.id;
-            }
-        }
-        
-        public string SchemaName
-        {
-            get
-            {
-                return this.schemaName;
-            }
-        }
+        public string Id { get; }
+
+        public string SchemaName { get; }
 
         public IObjectFactory ObjectFactory
         {
@@ -216,13 +189,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal ICache Cache
-        {
-            get
-            {
-                return this.cache;
-            }
-        }
+        internal ICache Cache { get; }
 
         internal string ConnectionString
         {
@@ -239,26 +206,11 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal int CommandTimeout
-        {
-            get
-            {
-                return this.commandTimeout;
-            }
-        }
+        internal int CommandTimeout { get; }
 
-        internal IsolationLevel IsolationLevel
-        {
-            get
-            {
-                return this.isolationLevel;
-            }
-        }
+        internal IsolationLevel IsolationLevel { get; }
 
-        internal ObjectIds ObjectIds
-        {
-            get { return this.objectIds; }
-        }
+        internal ObjectIds ObjectIds { get; }
 
         internal Mapping Mapping
         {
@@ -342,7 +294,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.Init();
 
-            var session = this.CreateManagementSession();
+            var session = this.CreateSqlClientManagementSession();
             try
             {
                 var load = this.CreateLoad(this.ObjectNotLoaded, this.RelationNotLoaded, reader);
@@ -359,7 +311,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Save(XmlWriter writer)
         {
-            var session = this.CreateManagementSession();
+            var session = this.CreateSqlClientManagementSession();
             try
             {
                 var save = this.CreateSave(writer);
@@ -513,11 +465,6 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             return new Session(this);
-        }
-       
-        private ManagementSession CreateManagementSession()
-        {
-            return this.CreateSqlClientManagementSession();
         }
 
         private Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)

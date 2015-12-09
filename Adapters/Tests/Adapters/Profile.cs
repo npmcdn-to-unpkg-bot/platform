@@ -26,13 +26,11 @@ namespace Allors.Adapters
     using Allors;
     using Allors.Domain;
     using Allors.Meta;
-    using Adapters;
 
     public abstract class Profile : IProfile
     {
         private readonly ObjectFactory objectFactory;
 
-        private int eventCounter;
         private IDatabase database;
         private ISession session;
 
@@ -41,23 +39,11 @@ namespace Allors.Adapters
             this.objectFactory = this.CreateObjectFactory(MetaPopulation.Instance);
         }
 
-        public IObjectFactory ObjectFactory
-        {
-            get
-            {
-                return this.objectFactory;
-            }
-        }
+        public IObjectFactory ObjectFactory => this.objectFactory;
 
-        public ISession Session
-        {
-            get { return this.session; }
-        }
+        public ISession Session => this.session;
 
-        public IDatabase Population
-        {
-            get { return this.database; }
-        }
+        public IDatabase Population => this.database;
 
         public abstract Action[] Markers { get; }
 
@@ -69,11 +55,7 @@ namespace Allors.Adapters
 
                 if (Settings.ExtraInits)
                 {
-                    caches.Add(
-                        () =>
-                        {
-                            this.Init();
-                        });
+                    caches.Add(this.Init);
                 }
 
                 return caches.ToArray();
@@ -90,10 +72,7 @@ namespace Allors.Adapters
 
         public virtual void Dispose()
         {
-            if (this.session != null)
-            {
-                this.session.Rollback();
-            }
+            this.session?.Rollback();
 
             this.session = null;
             this.database = null;
@@ -112,10 +91,7 @@ namespace Allors.Adapters
         {
             try
             {
-                if (this.session != null)
-                {
-                    this.session.Rollback();
-                }
+                this.session?.Rollback();
 
                 this.database = this.CreateDatabase();
                 this.database.Init();

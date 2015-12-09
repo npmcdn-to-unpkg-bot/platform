@@ -18,8 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors.Domain;
-
 namespace Allors.Adapters
 {
     using System;
@@ -27,7 +25,6 @@ namespace Allors.Adapters
 
     using Allors;
     using Allors.Meta;
-    using Adapters;
 
     using Domain;
 
@@ -67,34 +64,13 @@ namespace Allors.Adapters
 
         protected abstract IProfile Profile { get; }
 
-        protected ISession Session
-        {
-            get
-            {
-                return this.Profile.Session;
-            }
-        }
+        protected ISession Session => this.Profile.Session;
 
-        protected Action[] Markers
-        {
-            get
-            {
-                return this.Profile.Markers;
-            }
-        }
+        protected Action[] Markers => this.Profile.Markers;
 
-        protected Action[] Inits
-        {
-            get
-            {
-                return this.Profile.Inits;
-            }
-        }
+        protected Action[] Inits => this.Profile.Inits;
 
-        protected virtual bool[] UseOperator
-        {
-            get { return new[] { false, true }; }
-        }
+        protected virtual bool[] UseOperator => new[] { false, true };
 
         [Test]
         public void AndGreaterThanLessThan()

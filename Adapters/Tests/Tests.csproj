@@ -85,10 +85,12 @@
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SandboxTest.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\PerformanceTests.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
     <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
     <Compile Include="Adapters\object\sqlclient\Profile.cs" />
     <Compile Include="Adapters\object\sqlclient\SchemaTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\PerformanceTests.cs" />
     <Compile Include="Adapters\object\sqlclient\SqlClientTest.cs" />
     <Compile Include="Adapters\object\sqlclient\UnitTest.cs" />
     <Compile Include="Adapters\One2ManyTest.cs" />

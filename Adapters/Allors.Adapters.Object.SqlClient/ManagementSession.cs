@@ -178,7 +178,7 @@ namespace Allors.Adapters.Object.SqlClient
         internal Command CreateCommand(string commandText)
         {
             var command = this.CreateSqlCommand(commandText);
-            return new Command(command);
+            return new Command(this.database.Mapping, command);
         }
 
         internal SqlCommand CreateSqlCommand(string sql)

@@ -104,7 +104,7 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
             
-            this.command = this.Session.CreateCommand(this.sql.ToString());
+            this.command = this.Session.Connection.CreateCommand(this.sql.ToString());
 
             foreach (var paramNameByParamValuePair in this.paramNameByParamValue)
             {

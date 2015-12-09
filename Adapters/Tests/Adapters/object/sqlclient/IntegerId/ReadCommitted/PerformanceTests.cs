@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CacheTest.cs" company="Allors bvba">
+// <copyright file="PrefetchTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,17 +20,16 @@
 
 namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
+    using Adapters;
+
     using NUnit.Framework;
 
     [TestFixture]
-    public class CacheTest : Adapters.CacheTest
+    public class PerformanceTests : SqlClient.PerformanceTests
     {
         private readonly Profile profile = new Profile();
 
-        protected override IDatabase CreateDatabase()
-        {
-            return this.profile.CreateDatabase();
-        }
+        protected override IProfile Profile => this.profile;
 
         [TearDown]
         protected void Dispose()

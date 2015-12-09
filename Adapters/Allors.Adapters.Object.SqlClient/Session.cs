@@ -25,21 +25,18 @@ namespace Allors.Adapters.Object.SqlClient
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
-    using System.Data.SqlClient;
     using System.Linq;
     using System.Text;
 
     using Allors.Meta;
 
-    internal sealed class Session : ISession
+    public sealed class Session : ISession
     {
         private static readonly ObjectId[] EmptyObjectIds = { };
         private static readonly IObject[] EmptyObjects = { };
 
         private readonly Database database;
-
-        private SqlConnection connection;
-        private SqlTransaction transaction;
+        private readonly Connection connection;
 
         private ChangeSet changeSet;
 
@@ -58,37 +55,38 @@ namespace Allors.Adapters.Object.SqlClient
         private Dictionary<string, object> properties;
 
         #region Commands
-        private Dictionary<IClass, SqlCommand> getUnitRolesByClass;
-        private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> setUnitRoleByRoleTypeByClass;
-        private Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>> setUnitRolesByRoleTypeByClass;
-        private Dictionary<IClass, SqlCommand> prefetchUnitRolesByClass;
-        private Dictionary<IRoleType, SqlCommand> getCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> prefetchCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> setCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> getCompositesRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> prefetchCompositesRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> addCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> removeCompositeRoleByRoleType;
-        private Dictionary<IRoleType, SqlCommand> clearCompositeAndCompositesRoleByRoleType;
-        private Dictionary<IAssociationType, SqlCommand> getCompositeAssociationByAssociationType;
-        private Dictionary<IAssociationType, SqlCommand> prefetchCompositeAssociationByAssociationType;
-        private Dictionary<IAssociationType, SqlCommand> getCompositesAssociationByAssociationType;
+        private Dictionary<IClass, Command> getUnitRolesByClass;
+        private Dictionary<IClass, Dictionary<IRoleType, Command>> setUnitRoleByRoleTypeByClass;
+        private Dictionary<IClass, Dictionary<IList<IRoleType>, Command>> setUnitRolesByRoleTypeByClass;
+        private Dictionary<IClass, Command> prefetchUnitRolesByClass;
+        private Dictionary<IRoleType, Command> getCompositeRoleByRoleType;
+        private Dictionary<IRoleType, Command> prefetchCompositeRoleByRoleType;
+        private Dictionary<IRoleType, Command> setCompositeRoleByRoleType;
+        private Dictionary<IRoleType, Command> getCompositesRoleByRoleType;
+        private Dictionary<IRoleType, Command> prefetchCompositesRoleByRoleType;
+        private Dictionary<IRoleType, Command> addCompositeRoleByRoleType;
+        private Dictionary<IRoleType, Command> removeCompositeRoleByRoleType;
+        private Dictionary<IRoleType, Command> clearCompositeAndCompositesRoleByRoleType;
+        private Dictionary<IAssociationType, Command> getCompositeAssociationByAssociationType;
+        private Dictionary<IAssociationType, Command> prefetchCompositeAssociationByAssociationType;
+        private Dictionary<IAssociationType, Command> getCompositesAssociationByAssociationType;
 
-        private SqlCommand instantiateObject;
-        private SqlCommand instantiateObjects;
-        private Dictionary<IClass, SqlCommand> createObjectByClass;
-        private Dictionary<IClass, SqlCommand> createObjectsByClass;
-        private Dictionary<IClass, SqlCommand> deleteObjectByClass;
-        private Dictionary<IClass, SqlCommand> insertObjectByClass;
+        private Command instantiateObject;
+        private Command instantiateObjects;
+        private Dictionary<IClass, Command> createObjectByClass;
+        private Dictionary<IClass, Command> createObjectsByClass;
+        private Dictionary<IClass, Command> deleteObjectByClass;
+        private Dictionary<IClass, Command> insertObjectByClass;
 
-        private SqlCommand getCacheIds;
-        private SqlCommand updateCacheIds;
-        private SqlCommand getObjectType;
+        private Command getCacheIds;
+        private Command updateCacheIds;
+        private Command getObjectType;
         #endregion
 
         internal Session(Database database)
         {
             this.database = database;
+            this.connection = new Connection(this);
 
             this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
             this.referencesWithoutCacheId = new HashSet<Reference>();
@@ -127,155 +125,163 @@ namespace Allors.Adapters.Object.SqlClient
 
         #region Commands Properties
 
-        private Dictionary<IClass, SqlCommand> GetUnitRolesByClass
+        private Dictionary<IClass, Command> GetUnitRolesByClass
         {
             get
             {
-                return this.getUnitRolesByClass ?? (this.getUnitRolesByClass = new Dictionary<IClass, SqlCommand>());
+                return this.getUnitRolesByClass ?? (this.getUnitRolesByClass = new Dictionary<IClass, Command>());
             }
         }
 
-        private Dictionary<IClass, SqlCommand> PrefetchUnitRolesByClass
+        private Dictionary<IClass, Command> PrefetchUnitRolesByClass
         {
             get
             {
-                return this.prefetchUnitRolesByClass ?? (this.prefetchUnitRolesByClass = new Dictionary<IClass, SqlCommand>());
+                return this.prefetchUnitRolesByClass ?? (this.prefetchUnitRolesByClass = new Dictionary<IClass, Command>());
             }
         }
         
-        private Dictionary<IClass, Dictionary<IRoleType, SqlCommand>> SetUnitRoleByRoleTypeByClass
+        private Dictionary<IClass, Dictionary<IRoleType, Command>> SetUnitRoleByRoleTypeByClass
         {
             get
             {
-                return this.setUnitRoleByRoleTypeByClass ?? (this.setUnitRoleByRoleTypeByClass = new Dictionary<IClass, Dictionary<IRoleType, SqlCommand>>());
+                return this.setUnitRoleByRoleTypeByClass ?? (this.setUnitRoleByRoleTypeByClass = new Dictionary<IClass, Dictionary<IRoleType, Command>>());
             }
         }
 
-        private Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>> SetUnitRolesByRoleTypeByClass
+        private Dictionary<IClass, Dictionary<IList<IRoleType>, Command>> SetUnitRolesByRoleTypeByClass
         {
             get
             {
-                return this.setUnitRolesByRoleTypeByClass ?? (this.setUnitRolesByRoleTypeByClass = new Dictionary<IClass, Dictionary<IList<IRoleType>, SqlCommand>>());
+                return this.setUnitRolesByRoleTypeByClass ?? (this.setUnitRolesByRoleTypeByClass = new Dictionary<IClass, Dictionary<IList<IRoleType>, Command>>());
             }
         }
 
-        private Dictionary<IRoleType, SqlCommand> GetCompositeRoleByRoleType
+        private Dictionary<IRoleType, Command> GetCompositeRoleByRoleType
         {
             get
             {
-                return this.getCompositeRoleByRoleType ?? (this.getCompositeRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.getCompositeRoleByRoleType ?? (this.getCompositeRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
 
-        private Dictionary<IRoleType, SqlCommand> PrefetchCompositeRoleByRoleType
+        private Dictionary<IRoleType, Command> PrefetchCompositeRoleByRoleType
         {
             get
             {
-                return this.prefetchCompositeRoleByRoleType ?? (this.prefetchCompositeRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.prefetchCompositeRoleByRoleType ?? (this.prefetchCompositeRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
         
-        private Dictionary<IRoleType, SqlCommand> SetCompositeRoleByRoleType
+        private Dictionary<IRoleType, Command> SetCompositeRoleByRoleType
         {
             get
             {
-                return this.setCompositeRoleByRoleType ?? (this.setCompositeRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.setCompositeRoleByRoleType ?? (this.setCompositeRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
         
-        private Dictionary<IRoleType, SqlCommand> GetCompositesRoleByRoleType
+        private Dictionary<IRoleType, Command> GetCompositesRoleByRoleType
         {
             get
             {
-                return this.getCompositesRoleByRoleType ?? (this.getCompositesRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.getCompositesRoleByRoleType ?? (this.getCompositesRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
         
-        private Dictionary<IRoleType, SqlCommand> PrefetchCompositesRoleByRoleType
+        private Dictionary<IRoleType, Command> PrefetchCompositesRoleByRoleType
         {
             get
             {
-                return this.prefetchCompositesRoleByRoleType ?? (this.prefetchCompositesRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.prefetchCompositesRoleByRoleType ?? (this.prefetchCompositesRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
         
-        private Dictionary<IRoleType, SqlCommand> AddCompositeRoleByRoleType
+        private Dictionary<IRoleType, Command> AddCompositeRoleByRoleType
         {
             get
             {
-                return this.addCompositeRoleByRoleType ?? (this.addCompositeRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.addCompositeRoleByRoleType ?? (this.addCompositeRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
         
-        private Dictionary<IRoleType, SqlCommand> RemoveCompositeRoleByRoleType
+        private Dictionary<IRoleType, Command> RemoveCompositeRoleByRoleType
         {
             get
             {
-                return this.removeCompositeRoleByRoleType ?? (this.removeCompositeRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.removeCompositeRoleByRoleType ?? (this.removeCompositeRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
         
-        private Dictionary<IRoleType, SqlCommand> ClearCompositeAndCompositesRoleByRoleType
+        private Dictionary<IRoleType, Command> ClearCompositeAndCompositesRoleByRoleType
         {
             get
             {
-                return this.clearCompositeAndCompositesRoleByRoleType ?? (this.clearCompositeAndCompositesRoleByRoleType = new Dictionary<IRoleType, SqlCommand>());
+                return this.clearCompositeAndCompositesRoleByRoleType ?? (this.clearCompositeAndCompositesRoleByRoleType = new Dictionary<IRoleType, Command>());
             }
         }
         
-        private Dictionary<IAssociationType, SqlCommand> GetCompositeAssociationByAssociationType
+        private Dictionary<IAssociationType, Command> GetCompositeAssociationByAssociationType
         {
             get
             {
-                return this.getCompositeAssociationByAssociationType ?? (this.getCompositeAssociationByAssociationType = new Dictionary<IAssociationType, SqlCommand>());
+                return this.getCompositeAssociationByAssociationType ?? (this.getCompositeAssociationByAssociationType = new Dictionary<IAssociationType, Command>());
             }
         }
 
-        private Dictionary<IAssociationType, SqlCommand> PrefetchCompositeAssociationByAssociationType
+        private Dictionary<IAssociationType, Command> PrefetchCompositeAssociationByAssociationType
         {
             get
             {
-                return this.prefetchCompositeAssociationByAssociationType ?? (this.prefetchCompositeAssociationByAssociationType = new Dictionary<IAssociationType, SqlCommand>());
+                return this.prefetchCompositeAssociationByAssociationType ?? (this.prefetchCompositeAssociationByAssociationType = new Dictionary<IAssociationType, Command>());
             }
         }
 
-        private Dictionary<IAssociationType, SqlCommand> GetCompositesAssociationByAssociationType
+        private Dictionary<IAssociationType, Command> GetCompositesAssociationByAssociationType
         {
             get
             {
-                return this.getCompositesAssociationByAssociationType ?? (this.getCompositesAssociationByAssociationType = new Dictionary<IAssociationType, SqlCommand>());
+                return this.getCompositesAssociationByAssociationType ?? (this.getCompositesAssociationByAssociationType = new Dictionary<IAssociationType, Command>());
             }
         }
 
-        private Dictionary<IClass, SqlCommand> CreateObjectByClass 
+        private Dictionary<IClass, Command> CreateObjectByClass 
         {
             get
             {
-                return this.createObjectByClass ?? (this.createObjectByClass = new Dictionary<IClass, SqlCommand>());
+                return this.createObjectByClass ?? (this.createObjectByClass = new Dictionary<IClass, Command>());
             }
         }
 
-        private Dictionary<IClass, SqlCommand> CreateObjectsByClass
+        private Dictionary<IClass, Command> CreateObjectsByClass
         {
             get
             {
-                return this.createObjectsByClass ?? (this.createObjectsByClass = new Dictionary<IClass, SqlCommand>());
+                return this.createObjectsByClass ?? (this.createObjectsByClass = new Dictionary<IClass, Command>());
             }
         }
 
-        private Dictionary<IClass, SqlCommand> DeleteObjectByClass
+        private Dictionary<IClass, Command> DeleteObjectByClass
         {
             get
             {
-                return this.deleteObjectByClass ?? (this.deleteObjectByClass = new Dictionary<IClass, SqlCommand>());
+                return this.deleteObjectByClass ?? (this.deleteObjectByClass = new Dictionary<IClass, Command>());
             }
         }
 
-        private Dictionary<IClass, SqlCommand> InsertObjectByClass
+        private Dictionary<IClass, Command> InsertObjectByClass
         {
             get
             {
-                return this.insertObjectByClass ?? (this.insertObjectByClass = new Dictionary<IClass, SqlCommand>());
+                return this.insertObjectByClass ?? (this.insertObjectByClass = new Dictionary<IClass, Command>());
+            }
+        }
+
+        public Connection Connection
+        {
+            get
+            {
+                return this.connection;
             }
         }
 
@@ -623,7 +629,7 @@ namespace Allors.Adapters.Object.SqlClient
                         changed = this.modifiedRolesByReference.Select(dictionaryEntry => dictionaryEntry.Key.ObjectId).ToArray();
                     }
 
-                    this.SqlCommit();
+                    this.connection.Commit();
 
                     this.modifiedRolesByReference = null;
 
@@ -650,7 +656,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                     this.Database.Cache.OnCommit(accessed, changed);
 
-                    this.ResetSqlCommands();
+                    this.ResetCommands();
                 }
                 finally
                 {
@@ -669,7 +675,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                     var accessed = new List<ObjectId>(this.referenceByObjectId.Keys);
 
-                    this.SqlRollback();
+                    this.connection.Rollback();
 
                     var referencesWithStrategy = new HashSet<Reference>();
                     foreach (var reference in this.referenceByObjectId.Values)
@@ -696,7 +702,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                     this.Database.Cache.OnRollback(accessed);
 
-                    this.ResetSqlCommands();
+                    this.ResetCommands();
                 }
                 finally
                 {
@@ -932,20 +938,14 @@ namespace Allors.Adapters.Object.SqlClient
             return references;
         }
 
-        internal Command CreateCommand(string commandText)
-        {
-            var command = this.CreateSqlCommand(commandText);
-            return new Command(command);
-        }
-
         #region Commands
         internal void DeleteObject(Strategy strategy)
         {
-            this.deleteObjectByClass = this.deleteObjectByClass ?? new Dictionary<IClass, SqlCommand>();
+            this.deleteObjectByClass = this.deleteObjectByClass ?? new Dictionary<IClass, Command>();
 
             var @class = strategy.Class;
 
-            SqlCommand command;
+            Command command;
             if (!this.DeleteObjectByClass.TryGetValue(@class, out command))
             {
                 var sql = "BEGIN\n";
@@ -958,8 +958,9 @@ namespace Allors.Adapters.Object.SqlClient
 
                 sql += "END;";
 
-                command = this.CreateSqlCommand(sql);
-                this.AddObjectParameter(command, strategy.ObjectId);
+                command = this.connection.CreateCommand(sql);
+                command.AddObjectParameter(strategy.ObjectId);
+
                 this.deleteObjectByClass[@class] = command;
             }
             else
@@ -975,12 +976,12 @@ namespace Allors.Adapters.Object.SqlClient
             var reference = roles.Reference;
             var @class = reference.Class;
 
-            SqlCommand command;
+            Command command;
             if (!this.GetUnitRolesByClass.TryGetValue(@class, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForGetUnitRolesByClass[@class];
-                command = this.CreateSqlProcedureCommand(sql);
-                this.AddObjectParameter(command, reference.ObjectId);
+                command = this.connection.CreateProcedureCommand(sql);
+                command.AddObjectParameter(reference.ObjectId);
                 this.getUnitRolesByClass[@class] = command;
             }
             else
@@ -1057,11 +1058,11 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchUnitRolesByClass.TryGetValue(@class, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchUnitRolesByClass[@class];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, references);
                 this.prefetchUnitRolesByClass[@class] = command;
             }
@@ -1151,10 +1152,10 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var schema = this.Database.Mapping;
 
-            Dictionary<IRoleType, SqlCommand> commandByRoleType;
+            Dictionary<IRoleType, Command> commandByRoleType;
             if (!this.SetUnitRoleByRoleTypeByClass.TryGetValue(exclusiveRootClass, out commandByRoleType))
             {
-                commandByRoleType = new Dictionary<IRoleType, SqlCommand>();
+                commandByRoleType = new Dictionary<IRoleType, Command>();
                 this.setUnitRoleByRoleTypeByClass.Add(exclusiveRootClass, commandByRoleType);
             }
 
@@ -1199,11 +1200,11 @@ namespace Allors.Adapters.Object.SqlClient
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
 
-            SqlCommand command;
+            Command command;
             if (!commandByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
 
                 var sqlParameter = command.CreateParameter();
                 sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -1225,18 +1226,18 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var exclusiveRootClass = roles.Reference.Class.ExclusiveClass;
 
-            Dictionary<IList<IRoleType>, SqlCommand> setUnitRoleByRoleType;
+            Dictionary<IList<IRoleType>, Command> setUnitRoleByRoleType;
             if (!this.SetUnitRolesByRoleTypeByClass.TryGetValue(exclusiveRootClass, out setUnitRoleByRoleType))
             {
-                setUnitRoleByRoleType = new Dictionary<IList<IRoleType>, SqlCommand>(new SortedRoleTypeComparer());
+                setUnitRoleByRoleType = new Dictionary<IList<IRoleType>, Command>(new SortedRoleTypeComparer());
                 this.setUnitRolesByRoleTypeByClass.Add(exclusiveRootClass, setUnitRoleByRoleType);
             }
 
-            SqlCommand command;
+            Command command;
             if (!setUnitRoleByRoleType.TryGetValue(sortedRoleTypes, out command))
             {
-                command = this.CreateSqlCommand();
-                this.AddObjectParameter(command, roles.Reference.ObjectId);
+                command = this.connection.CreateCommand();
+                command.AddObjectParameter(roles.Reference.ObjectId);
 
                 var sql = new StringBuilder();
                 sql.Append("UPDATE " + this.Database.Mapping.TableNameForObjectByClass[exclusiveRootClass] + " SET\n");
@@ -1288,11 +1289,11 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var reference = roles.Reference;
 
-            SqlCommand command;
+            Command command;
             if (!this.GetCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddAssociationTableParameter(command, reference.ObjectId); 
                 this.getCompositeRoleByRoleType[roleType] = command;
             }
@@ -1322,10 +1323,10 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
-                command = this.CreateSqlProcedureCommand(this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType]);
+                command = this.connection.CreateProcedureCommand(this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType]);
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositeRoleByRoleType[roleType] = command;
             }
@@ -1373,11 +1374,11 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositeRoleByRoleType[roleType] = command;
             }
@@ -1422,7 +1423,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void SetCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
         {
-            SqlCommand command;
+            Command command;
             if (!this.SetCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 string sql;
@@ -1435,7 +1436,7 @@ namespace Allors.Adapters.Object.SqlClient
                     sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }
 
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddCompositeRoleTableParameter(command, relations);
                 this.setCompositeRoleByRoleType[roleType] = command;
             }
@@ -1451,7 +1452,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var reference = roles.Reference;
 
-            SqlCommand command;
+            Command command;
             if (!this.GetCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var associationType = roleType.AssociationType;
@@ -1466,7 +1467,7 @@ namespace Allors.Adapters.Object.SqlClient
                     sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
                 }
 
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddAssociationParameter(command, reference.ObjectId);
                 this.getCompositesRoleByRoleType[roleType] = command;
             }
@@ -1496,11 +1497,11 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositesRoleByRoleType[roleType] = command;
             }
@@ -1561,11 +1562,11 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositesRoleByRoleType[roleType] = command;
             }
@@ -1627,11 +1628,11 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void AddCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
         {
-            SqlCommand command;
+            Command command;
             if (!this.AddCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddCompositeRoleTableParameter(command, relations);
                 this.addCompositeRoleByRoleType[roleType] = command;
             }
@@ -1645,11 +1646,11 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void RemoveCompositeRole(List<CompositeRelation> relations, IRoleType roleType)
         {
-            SqlCommand command;
+            Command command;
             if (!this.RemoveCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddCompositeRoleTableParameter(command, relations);
                 this.removeCompositeRoleByRoleType[roleType] = command;
             }
@@ -1665,10 +1666,10 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var sql = this.database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
             
-            SqlCommand command;
+            Command command;
             if (!this.ClearCompositeAndCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, associations);
                 this.clearCompositeAndCompositesRoleByRoleType[roleType] = command;
             }
@@ -1688,12 +1689,12 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -1748,12 +1749,12 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, roles);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -1814,12 +1815,12 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
 
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, roles);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -1894,12 +1895,12 @@ namespace Allors.Adapters.Object.SqlClient
                 return;
             }
             
-            SqlCommand command;
+            Command command;
             if (!this.PrefetchCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, roles);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -1972,12 +1973,12 @@ namespace Allors.Adapters.Object.SqlClient
         {
             Reference associationObject = null;
 
-            SqlCommand command;
+            Command command;
             if (!this.GetCompositeAssociationByAssociationType.TryGetValue(associationType, out command))
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddCompositeRoleParameter(command, role.ObjectId);
                 this.getCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -2007,12 +2008,12 @@ namespace Allors.Adapters.Object.SqlClient
 
         private ObjectId[] GetCompositesAssociation(Strategy role, IAssociationType associationType)
         {
-            SqlCommand command;
+            Command command;
             if (!this.GetCompositesAssociationByAssociationType.TryGetValue(associationType, out command))
             {
                 var roleType = associationType.RoleType;
                 var sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddCompositeRoleParameter(command, role.ObjectId);
                 this.getCompositesAssociationByAssociationType[associationType] = command;
             }
@@ -2036,11 +2037,11 @@ namespace Allors.Adapters.Object.SqlClient
 
         private Reference CreateObject(IClass @class)
         {
-            SqlCommand command;
+            Command command;
             if (!this.CreateObjectByClass.TryGetValue(@class, out command))
             {
                 var sql = this.database.Mapping.ProcedureNameForCreateObjectByClass[@class];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddTypeParameter(command, @class);
                 this.createObjectByClass[@class] = command;
             }
@@ -2056,11 +2057,11 @@ namespace Allors.Adapters.Object.SqlClient
 
         private IList<Reference> CreateObjects(IClass @class, int count)
         {
-            SqlCommand command;
+            Command command;
             if (!this.CreateObjectsByClass.TryGetValue(@class, out command))
             {
                 var sql = this.database.Mapping.ProcedureNameForCreateObjectsByClass[@class];
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 command.CommandType = CommandType.StoredProcedure;
                 this.AddTypeParameter(command, @class);
                 this.AddCountParameter(command, count);
@@ -2096,7 +2097,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         private Reference InsertObject(IClass @class, ObjectId objectId)
         {
-            SqlCommand command;
+            Command command;
             if (!this.InsertObjectByClass.TryGetValue(@class, out command))
             {
                 var schema = this.Database.Mapping;
@@ -2124,8 +2125,8 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "    SELECT 0;\n";
                 sql += "    END";
 
-                command = this.CreateSqlCommand(sql);
-                this.AddObjectParameter(command, objectId);
+                command = this.connection.CreateCommand(sql);
+                command.AddObjectParameter(objectId);
                 this.AddTypeParameter(command, @class);
 
                 this.insertObjectByClass[@class] = command;
@@ -2159,8 +2160,8 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
 
-                command = this.CreateSqlCommand(sql);
-                this.AddObjectParameter(command, objectId);
+                command = this.connection.CreateCommand(sql);
+                command.AddObjectParameter(objectId);
                 this.instantiateObject = command;
             }
             else
@@ -2195,7 +2196,7 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "WHERE " + Mapping.ColumnNameForObject + " IN\n";
                 sql += "( SELECT " + this.Database.Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParamNameForTableType + " )\n";
 
-                command = this.CreateSqlCommand(sql);
+                command = this.connection.CreateCommand(sql);
                 this.AddObjectTableParameter(command, objectIds);
 
                 this.instantiateObjects = command;
@@ -2232,8 +2233,8 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
 
-                command = this.CreateSqlCommand(sql);
-                this.AddObjectParameter(command, objectId);
+                command = this.connection.CreateCommand(sql);
+                command.AddObjectParameter(objectId);
 
                 this.getObjectType = command;
             }
@@ -2258,7 +2259,7 @@ namespace Allors.Adapters.Object.SqlClient
             if (command == null)
             {
                 var sql = this.Database.Mapping.ProcedureNameForGetCache;
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, references);
                 this.getCacheIds = command;
             }
@@ -2289,7 +2290,7 @@ namespace Allors.Adapters.Object.SqlClient
             if (command == null)
             {
                 var sql = this.Database.Mapping.ProcedureNameForUpdateCache;
-                command = this.CreateSqlProcedureCommand(sql);
+                command = this.connection.CreateProcedureCommand(sql);
                 this.AddObjectTableParameter(command, this.modifiedRolesByReference.Keys);
                 this.updateCacheIds = command;
             }
@@ -2303,7 +2304,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         #endregion
 
-        private void ResetSqlCommands()
+        private void ResetCommands()
         {
             this.getUnitRolesByClass = null;
             this.prefetchUnitRolesByClass = null;
@@ -2594,47 +2595,9 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
         }
+        
 
-        private SqlCommand CreateSqlCommand()
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SqlConnection(this.Database.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
-            }
-
-            var command = this.connection.CreateCommand();
-            command.Transaction = this.transaction;
-            command.CommandTimeout = this.Database.CommandTimeout;
-            return command;
-        }
-
-        private SqlCommand CreateSqlCommand(string commandText)
-        {
-            var command = this.CreateSqlCommand();
-            command.CommandText = commandText;
-            return command;
-        }
-
-        private SqlCommand CreateSqlProcedureCommand(string sql)
-        {
-            var command = this.CreateSqlCommand(sql);
-            command.CommandType = CommandType.StoredProcedure;
-            return command;
-        }
-
-        private void AddObjectParameter(SqlCommand command, ObjectId objectId)
-        {
-            var sqlParameter = command.CreateParameter();
-            sqlParameter.ParameterName = Mapping.ParamNameForObject;
-            sqlParameter.SqlDbType = this.Database.Mapping.SqlDbTypeForObject;
-            sqlParameter.Value = objectId.Value;
-
-            command.Parameters.Add(sqlParameter);
-        }
-
-        private void AddTypeParameter(SqlCommand command, IClass @class)
+        private void AddTypeParameter(Command command, IClass @class)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForType;
@@ -2644,7 +2607,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.Parameters.Add(sqlParameter);
         }
 
-        private void AddCountParameter(SqlCommand command, int count)
+        private void AddCountParameter(Command command, int count)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForCount;
@@ -2654,7 +2617,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.Parameters.Add(sqlParameter);
         }
 
-        private void AddCompositeRoleParameter(SqlCommand command, ObjectId objectId)
+        private void AddCompositeRoleParameter(Command command, ObjectId objectId)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForCompositeRole;
@@ -2664,7 +2627,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.Parameters.Add(sqlParameter);
         }
 
-        private void AddAssociationParameter(SqlCommand command, ObjectId objectId)
+        private void AddAssociationParameter(Command command, ObjectId objectId)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
@@ -2674,7 +2637,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.Parameters.Add(sqlParameter);
         }
 
-        private void AddObjectTableParameter(SqlCommand command, IEnumerable<Reference> references)
+        private void AddObjectTableParameter(Command command, IEnumerable<Reference> references)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -2685,7 +2648,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.Parameters.Add(sqlParameter);
         }
 
-        private void AddObjectTableParameter(SqlCommand command, IEnumerable<ObjectId> objectIds)
+        private void AddObjectTableParameter(Command command, IEnumerable<ObjectId> objectIds)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -2696,7 +2659,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.Parameters.Add(sqlParameter);
         }
 
-        private void AddCompositeRoleTableParameter(SqlCommand command, IEnumerable<CompositeRelation> relations)
+        private void AddCompositeRoleTableParameter(Command command, IEnumerable<CompositeRelation> relations)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -2707,7 +2670,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.Parameters.Add(sqlParameter);
         }
 
-        private void AddAssociationTableParameter(SqlCommand command, ObjectId objectId)
+        private void AddAssociationTableParameter(Command command, ObjectId objectId)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
@@ -2716,49 +2679,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             command.Parameters.Add(sqlParameter);
         }
-
-        private void SqlCommit()
-        {
-            try
-            {
-                if (this.transaction != null)
-                {
-                    this.transaction.Commit();
-                }
-            }
-            finally
-            {
-                this.transaction = null;
-                if (this.connection != null)
-                {
-                    this.connection.Close();
-                }
-
-                this.connection = null;
-            }
-        }
-
-        private void SqlRollback()
-        {
-            try
-            {
-                if (this.transaction != null)
-                {
-                    this.transaction.Rollback();
-                }
-            }
-            finally
-            {
-                this.transaction = null;
-                if (this.connection != null)
-                {
-                    this.connection.Close();
-                }
-
-                this.connection = null;
-            }
-        }
-
+        
         private class SortedRoleTypeComparer : IEqualityComparer<IList<IRoleType>>
         {
             public bool Equals(IList<IRoleType> x, IList<IRoleType> y)

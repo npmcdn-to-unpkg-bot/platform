@@ -26,18 +26,56 @@ namespace Allors.Adapters.Object.SqlClient
 
     using Allors.Meta;
 
-    internal class Command : IDisposable
+    public class Command : IDisposable
     {
+        private readonly Mapping mapping;
         private readonly SqlCommand command;
 
-        internal Command(SqlCommand command)
+        internal Command(Mapping mapping, SqlCommand command)
         {
+            this.mapping = mapping;
             this.command = command;
+        }
+
+        public SqlParameterCollection Parameters => this.command.Parameters;
+
+        public CommandType CommandType {
+            get
+            {
+                return this.command.CommandType;
+            }
+
+            set
+            {
+                this.command.CommandType = value;
+            }
+        }
+
+        public string CommandText {
+            get
+            {
+                return this.command.CommandText;
+            }
+
+            set
+            {
+                this.command.CommandText = value;
+            }
         }
 
         public void Dispose()
         {
             this.command.Dispose();
+        }
+
+        public SqlParameter CreateParameter()
+        {
+            return this.command.CreateParameter();
+        }
+
+        public object ExecuteScalar()
+        {
+            return this.command.ExecuteScalar();
         }
 
         internal object GetValue(SqlDataReader reader, UnitTags unitTypeTag, int i)
@@ -93,6 +131,16 @@ namespace Allors.Adapters.Object.SqlClient
             this.SetParameterValue(parameterName, value);
         }
 
+        internal void AddObjectParameter(ObjectId objectId)
+        {
+            var sqlParameter = this.command.CreateParameter();
+            sqlParameter.ParameterName = Mapping.ParamNameForObject;
+            sqlParameter.SqlDbType = this.mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId.Value;
+
+            this.command.Parameters.Add(sqlParameter);
+        }
+
         private void SetParameterValue(string parameterName, object value)
         {
             if (value == null || value == DBNull.Value)
@@ -104,5 +152,6 @@ namespace Allors.Adapters.Object.SqlClient
                 this.command.Parameters[parameterName].Value = value;
             }
         }
+
     }
 }
