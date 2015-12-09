@@ -89,7 +89,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (this.SqlTransaction != null)
                 {
-                    this.Rollback();
+                    this.OnRollback();
                     this.SqlTransaction?.Rollback();
                     this.OnRolledback();
                 }
