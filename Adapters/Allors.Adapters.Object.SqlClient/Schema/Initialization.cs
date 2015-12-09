@@ -73,7 +73,7 @@ namespace Allors.Adapters.Object.SqlClient
                 try
                 {
                     var cmdText = @"
-alter database " + connection.Database + @"
+alter Database " + connection.Database + @"
 set allow_snapshot_isolation on";
                     using (var command = new SqlCommand(cmdText, connection))
                     {

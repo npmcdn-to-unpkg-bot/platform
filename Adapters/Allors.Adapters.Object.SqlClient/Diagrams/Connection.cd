@@ -15,25 +15,25 @@
       <FileName>Session.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="connection" />
       <Field Name="database" />
+      <Field Name="connection" />
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Adapters.Object.SqlClient.Connection">
-    <Position X="6.75" Y="1.5" Width="2.5" />
+    <Position X="6" Y="1.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAACAAAAABCAAAFAABAAAAAAAAAAAAAAAAAgAA=</HashCode>
-      <FileName>Connection.cs</FileName>
+      <HashCode>AAAgAEAAAEAAAAACAAAEAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SqlClient\Connection.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="database" />
-      <Field Name="connection" />
-      <Field Name="transaction" />
+      <Field Name="Database" />
+      <Field Name="sqlConnection" />
+      <Field Name="sqlTransaction" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Allors.Adapters.Object.SqlClient.Database" Collapsed="true">
-    <Position X="3.75" Y="2.25" Width="1.5" />
+    <Position X="3" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAYCoIAoAQCByBgUCSwBBAEBBABEACgAgDCChCBgQAQ=</HashCode>
       <FileName>Database.cs</FileName>
@@ -52,13 +52,31 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="System.Data.SqlClient.SqlConnection" Collapsed="true">
-    <Position X="11.25" Y="1.5" Width="1.5" />
+    <Position X="10.5" Y="1.5" Width="1.5" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="System.Data.SqlClient.SqlTransaction" Collapsed="true">
-    <Position X="11.75" Y="2.5" Width="1.5" />
+    <Position X="11" Y="2.5" Width="1.5" />
     <TypeIdentifier />
+  </Class>
+  <Class Name="Allors.Adapters.Object.SqlClient.Command">
+    <Position X="8.75" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABQAAAAICAAACSAAQAAAECAAAQAAAABAIAAAQAAAAA=</HashCode>
+      <FileName>SqlClient\Command.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mapping" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Allors.Adapters.Object.SqlClient.Mapping" Collapsed="true">
+    <Position X="12.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAuKBUBDdTAgBBYZRGiAdCREROgzQkBCCACEgiggRU=</HashCode>
+      <FileName>Schema\Mapping.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -40,13 +40,13 @@ namespace Allors.Adapters.Relation
         //    this.CreateDatabase(this.domain.MetaPopulation, true);
             
         //    var relationType = this.CreateDomainWithCompositeRelationType(relationTypeId, Multiplicity.OneToOne);
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    Assert.IsTrue(this.CreateSessionThrowsException(database));
+        //    Assert.IsTrue(this.CreateSessionThrowsException(Database));
 
-        //    database = this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Database = this.CreateDatabase(this.domain.MetaPopulation, true);
 
-        //    Assert.IsFalse(this.CreateSessionThrowsException(database));
+        //    Assert.IsFalse(this.CreateSessionThrowsException(Database));
 
         //    var tableName = "_" + relationType.Id.ToString("n") + "_11";
         //    Assert.IsTrue(this.ExistTable("allors", tableName));
@@ -56,9 +56,9 @@ namespace Allors.Adapters.Relation
 
         //    this.DropTable("allors", tableName);
 
-        //    database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    Assert.IsTrue(this.CreateSessionThrowsException(database));
+        //    Assert.IsTrue(this.CreateSessionThrowsException(Database));
         //}
 
     }

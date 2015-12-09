@@ -90,8 +90,8 @@ namespace Allors.Adapters
 
             //this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-            //var database = this.CreateDatabase(this.domain.MetaPopulation, true);
-            //ISession session = database.CreateSession();
+            //var Database = this.CreateDatabase(this.domain.MetaPopulation, true);
+            //ISession session = Database.CreateSession();
             //session.Rollback();
 
             //var tableName = "_o";
@@ -103,12 +103,12 @@ namespace Allors.Adapters
 
             //this.DropTable("allors", "_o");
 
-            //database = this.CreateDatabase(this.domain.MetaPopulation, false);
+            //Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             //var exceptionThrown = false;
             //try
             //{
-            //    database.CreateSession();
+            //    Database.CreateSession();
             //}
             //catch
             //{
@@ -175,9 +175,9 @@ namespace Allors.Adapters
         //        // Different Size
         //        c1RelationType.RoleType.Size = 300;
 
-        //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //        var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //        var validationErrors = this.GetSchemaValidation(database);
+        //        var validationErrors = this.GetSchemaValidation(Database);
 
         //        var tableErrors = validationErrors.TableErrors;
 
@@ -234,9 +234,9 @@ namespace Allors.Adapters
         //    // Different precision
         //    c1RelationType.RoleType.Precision = 11;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -292,9 +292,9 @@ namespace Allors.Adapters
         //    // Different scale
         //    c1RelationType.RoleType.Scale = 3;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -332,9 +332,9 @@ namespace Allors.Adapters
         //    // Extra class            
         //    this.CreateClass("C2");
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -389,9 +389,9 @@ namespace Allors.Adapters
         //    // Extra inheritance
         //    new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(i12).Build();
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -427,9 +427,9 @@ namespace Allors.Adapters
         //    fromC1ToC2.AssociationType.ObjectType = c1;
         //    fromC1ToC2.RoleType.ObjectType = c2;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErros = validationErrors.TableErrors;
 
@@ -469,9 +469,9 @@ namespace Allors.Adapters
         //    fromC1ToC2.AssociationType.ObjectType = c1;
         //    fromC1ToC2.RoleType.ObjectType = c2;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
         //    var tableErros = validationErrors.TableErrors;
 
         //    Assert.AreEqual(1, tableErros.Length);
@@ -509,9 +509,9 @@ namespace Allors.Adapters
         //    fromC1ToC2.AssociationType.ObjectType = c1;
         //    fromC1ToC2.RoleType.ObjectType = c2;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -550,9 +550,9 @@ namespace Allors.Adapters
         //    fromC1ToC2.AssociationType.ObjectType = c1;
         //    fromC1ToC2.RoleType.ObjectType = c2;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -605,9 +605,9 @@ namespace Allors.Adapters
         //    // Different size
         //    c1RelationType.RoleType.Size = 101;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -666,9 +666,9 @@ namespace Allors.Adapters
         //    c1RelationType.RoleType.Size = null;
         //    c1RelationType.RoleType.ObjectType = c2;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -724,9 +724,9 @@ namespace Allors.Adapters
         //    // Different type
         //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.Unique);
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var validationErrors = this.GetSchemaValidation(Database);
 
         //    var tableErrors = validationErrors.TableErrors;
 
@@ -783,12 +783,12 @@ namespace Allors.Adapters
         //    c1c2.AssociationType.ObjectType = c1;
         //    c1c2.RoleType.ObjectType = c2;
 
-        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var Database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
         //    ISession session = null;
         //    try
         //    {
-        //        session = database.CreateSession();
+        //        session = Database.CreateSession();
         //        Assert.Fail();
         //    }
         //    catch (SchemaValidationException e)

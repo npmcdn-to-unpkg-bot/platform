@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRecords\VersionedObjectDataRecord.cs" />
-    <Compile Include="Connection.cs" />
+    <Compile Include="SqlClient\Connection.cs" />
     <Compile Include="Schema\Initialization.cs" />
     <Compile Include="Prefetcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,7 +69,7 @@
     <Compile Include="Caching\ICachedObject.cs" />
     <Compile Include="Caching\ICacheFactory.cs" />
     <Compile Include="ChangeSet.cs" />
-    <Compile Include="Command.cs" />
+    <Compile Include="SqlClient\Command.cs" />
     <Compile Include="Relations\CompositeRelation.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Database.cs" />

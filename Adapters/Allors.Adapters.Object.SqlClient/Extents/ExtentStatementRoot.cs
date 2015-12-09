@@ -103,8 +103,10 @@ namespace Allors.Adapters.Object.SqlClient
                     this.Sorter.BuildOrder(this, alias);
                 }
             }
-            
-            this.command = this.Session.Connection.CreateCommand(this.sql.ToString());
+
+            var command1 = this.Session.Connection.CreateCommand();
+            command1.CommandText = this.sql.ToString();
+            this.command = command1;
 
             foreach (var paramNameByParamValuePair in this.paramNameByParamValue)
             {

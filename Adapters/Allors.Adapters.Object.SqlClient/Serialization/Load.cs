@@ -122,7 +122,7 @@ namespace Allors.Adapters.Object.SqlClient
                         }
                         else if (reader.Name.Equals(Serialization.Workspace))
                         {
-                            throw new Exception("Can not load workspace objects in a database.");
+                            throw new Exception("Can not load workspace objects in a Database.");
                         }
                         else
                         {
@@ -231,7 +231,7 @@ namespace Allors.Adapters.Object.SqlClient
                         }
                         else if (this.reader.Name.Equals(Serialization.Workspace))
                         {
-                            throw new Exception("Can not load workspace relations in a database.");
+                            throw new Exception("Can not load workspace relations in a Database.");
                         }
                         else
                         {
@@ -627,7 +627,9 @@ namespace Allors.Adapters.Object.SqlClient
             sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " ON");
             lock (this)
             {
-                using (var command = session.Connection.CreateCommand(sql.ToString()))
+                var command1 = session.Connection.CreateCommand();
+                command1.CommandText = sql.ToString();
+                using (var command = command1)
                 {
                     command.ExecuteNonQuery();
                 }
@@ -644,7 +646,9 @@ namespace Allors.Adapters.Object.SqlClient
 
                     lock (this)
                     {
-                        using (var command = session.Connection.CreateCommand(sql.ToString()))
+                        var command1 = session.Connection.CreateCommand();
+                        command1.CommandText = sql.ToString();
+                        using (var command = command1)
                         {
                             command.ExecuteNonQuery();
                         }
@@ -656,7 +660,9 @@ namespace Allors.Adapters.Object.SqlClient
             sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " OFF");
             lock (this)
             {
-                using (var command = session.Connection.CreateCommand(sql.ToString()))
+                var command1 = session.Connection.CreateCommand();
+                command1.CommandText = sql.ToString();
+                using (var command = command1)
                 {
                     command.ExecuteNonQuery();
                 }
@@ -666,7 +672,9 @@ namespace Allors.Adapters.Object.SqlClient
         private void LoadObjectsSetCache(ManagementSession session)
         {
             var sql = this.database.Mapping.ProcedureNameForSetCache;
-            var command = session.Connection.CreateCommand(sql);
+            var command1 = session.Connection.CreateCommand();
+            command1.CommandText = sql;
+            var command = command1;
 
             command.CommandType = CommandType.StoredProcedure;
 

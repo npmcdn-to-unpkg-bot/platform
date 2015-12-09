@@ -80,8 +80,9 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParamNameForType+ "\n";
                 sql += "ORDER BY " + Mapping.ColumnNameForObject;
 
-                using (var command = session.CreateCommand(sql))
+                using (var command = session.Connection.CreateCommand())
                 {
+                    command.CommandText = sql;
                     command.AddInParameter(Mapping.ParamNameForType, type.Id);
 
                     using (var reader = command.ExecuteReader())
@@ -195,8 +196,9 @@ namespace Allors.Adapters.Object.SqlClient
                         }
                     }
 
-                    using (var command = session.CreateCommand(sql))
+                    using (var command = session.Connection.CreateCommand())
                     {
+                        command.CommandText = sql;
                         using (var reader = command.ExecuteReader())
                         {
                             if (roleType.IsMany)

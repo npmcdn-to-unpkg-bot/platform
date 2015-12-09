@@ -51,7 +51,9 @@ namespace Allors.Adapters.Object.SqlClient
             var schema = this.Database.Mapping;
 
             var sql = this.Database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
-            using (var command = this.Connection.CreateCommand(sql))
+            var command1 = this.Connection.CreateCommand();
+            command1.CommandText = sql;
+            using (var command = command1)
             {
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -117,7 +119,9 @@ namespace Allors.Adapters.Object.SqlClient
 
             var sql = this.Database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
 
-            var command = this.Connection.CreateCommand(sql);
+            var command1 = this.Connection.CreateCommand();
+            command1.CommandText = sql;
+            var command = command1;
             command.CommandType = CommandType.StoredProcedure;
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -158,7 +162,9 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
 
-            using (var command = this.Connection.CreateCommand(sql))
+            var command1 = this.Connection.CreateCommand();
+            command1.CommandText = sql;
+            using (var command = command1)
             {
                 command.CommandType = CommandType.StoredProcedure;
                 var sqlParameter = command.CreateParameter();
