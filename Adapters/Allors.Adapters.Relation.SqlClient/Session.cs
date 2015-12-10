@@ -409,15 +409,15 @@ namespace Allors.Adapters.Relation.SqlClient
             // TODO:
         }
 
-        public IObject Insert(IClass objectType, string objectIdString)
+        public IObject Insert(IClass @class, string objectIdString)
         {
              var objectId = this.Database.ObjectIds.Parse(objectIdString);
-             var insertedObject = this.Insert(objectType, objectId);
+             var insertedObject = this.Insert(@class, objectId);
 
             return insertedObject;
         }
 
-        public IObject Insert(IClass objectType, ObjectId objectId)
+        public IObject Insert(IClass @class, ObjectId objectId)
         {
             if (this.flushDeletedObjects != null)
             {
@@ -438,7 +438,7 @@ END
                 command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.Add(Mapping.ParameterNameForObject, mapping.SqlDbTypeForObject).Value = objectId.Value;
-                command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
+                command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = @class.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
 
@@ -453,7 +453,7 @@ END
                 }
 
                 this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
-                this.classByObjectId[objectId] = objectType;
+                this.classByObjectId[objectId] = @class;
 
                 this.ChangeSet.OnCreated(objectId);
                 var strategy = new Strategy(this, objectId);

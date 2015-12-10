@@ -18,16 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-using Allors.Meta;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
 
-    using Meta;
+    using Allors;
+    using Allors.Meta;
 
     internal class ExtentAssociations : Extent
     {
@@ -84,13 +82,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public override IComposite ObjectType
-        {
-            get
-            {
-                return this.strategy.Class;
-            }
-        }
+        public override IComposite ObjectType => this.strategy.Class;
 
         internal override SqlExtent ContainedInExtent
         {

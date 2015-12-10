@@ -46,7 +46,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.session = session;
             this.prefetchPolicy = prefetchPolicy;
-            this.references = session.GetReferences(objectIds);
+            this.references = session.GetReferencesForPrefetching(objectIds);
         }
 
         public void Execute()

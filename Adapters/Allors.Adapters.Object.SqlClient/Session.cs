@@ -45,6 +45,8 @@ namespace Allors.Adapters.Object.SqlClient
         private Dictionary<IAssociationType, HashSet<ObjectId>> triggersFlushRolesByAssociationType;
 
         private Dictionary<ObjectId, Reference> referenceByObjectId;
+
+        private HashSet<ObjectId> existingObjectIdsWithoutReference;
         private HashSet<Reference> referencesWithoutCacheId;
 
         private Dictionary<IAssociationType, Dictionary<Reference, Reference>> associationByRoleByAssociationType;
@@ -78,9 +80,9 @@ namespace Allors.Adapters.Object.SqlClient
         private Dictionary<IClass, Command> deleteObjectByClass;
         private Dictionary<IClass, Command> insertObjectByClass;
 
-        private Command getCacheIds;
+        private Command getClassAndVersion;
+        private Command getVersion;
         private Command updateCacheIds;
-        private Command getObjectType;
         #endregion
 
         internal Session(Database database, Connection connection)
@@ -89,6 +91,8 @@ namespace Allors.Adapters.Object.SqlClient
             this.connection = connection;
 
             this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
+
+            this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
             this.referencesWithoutCacheId = new HashSet<Reference>();
 
             this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
@@ -100,8 +104,6 @@ namespace Allors.Adapters.Object.SqlClient
         IDatabase ISession.Database => this.database;
 
         public Database Database => this.database;
-
-        public IDatabase Population => this.Database;
 
         internal ChangeSet ChangeSet => this.changeSet;
 
@@ -343,17 +345,17 @@ namespace Allors.Adapters.Object.SqlClient
             return domainObjects;
         }
 
-        public IObject Insert(IClass domainType, string objectIdString)
+        public IObject Insert(IClass @class, string objectIdString)
         {
             var objectId = this.Database.ObjectIds.Parse(objectIdString);
-            var insertedObject = this.Insert(domainType, objectId);
+            var insertedObject = this.Insert(@class, objectId);
 
             this.changeSet.OnCreated(objectId);
 
             return insertedObject;
         }
 
-        public IObject Insert(IClass domainType, ObjectId objectId)
+        public IObject Insert(IClass @class, ObjectId objectId)
         {
             if (this.referenceByObjectId.ContainsKey(objectId))
             {
@@ -364,7 +366,7 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
 
-            var reference = this.InsertObject(domainType, objectId);
+            var reference = this.InsertObject(@class, objectId);
             this.referenceByObjectId[objectId] = reference;
             var insertedObject = reference.Strategy.GetObject();
 
@@ -507,7 +509,7 @@ namespace Allors.Adapters.Object.SqlClient
         public void Prefetch(PrefetchPolicy prefetchPolicy, params IObject[] objects)
         {
             var objectIds = objects.Select(x => x.Strategy.ObjectId);
-            var references = this.GetReferences(objectIds);
+            var references = this.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)
             {
@@ -521,7 +523,7 @@ namespace Allors.Adapters.Object.SqlClient
         public void Prefetch(PrefetchPolicy prefetchPolicy, params IStrategy[] strategies)
         {
             var objectIds = strategies.Select(x => x.ObjectId);
-            var references = this.GetReferences(objectIds);
+            var references = this.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)
             {
@@ -532,13 +534,23 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIds)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIdStrings)
         {
+            var objectIds = objectIdStrings.Select(v => this.Database.ObjectIds.Parse(v));
+            var references = this.GetReferencesForPrefetching(objectIds);
+
+            if (references.Count != 0)
+            {
+                this.Flush();
+
+                var prefetcher = new Prefetcher(this, prefetchPolicy, references);
+                prefetcher.Execute();
+            }
         }
 
-        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, params ObjectId[] objectIds)
         {
-            var references = this.GetReferences(objectIds);
+            var references = this.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)
             {
@@ -616,6 +628,7 @@ namespace Allors.Adapters.Object.SqlClient
                         reference.Commit(referencesWithStrategy);
                     }
 
+                    this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
                     this.referencesWithoutCacheId = referencesWithStrategy;
 
                     this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
@@ -660,6 +673,7 @@ namespace Allors.Adapters.Object.SqlClient
                         reference.Rollback(referencesWithStrategy);
                     }
 
+                    this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
                     this.referencesWithoutCacheId = referencesWithStrategy;
 
                     this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
@@ -701,7 +715,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public override string ToString()
         {
-            return "Session[id=" + this.GetHashCode() + "] " + this.Population;
+            return "Session[id=" + this.GetHashCode() + "] " + this.Database;
         }
 
         internal Roles GetOrCreateRoles(Reference reference)
@@ -726,13 +740,17 @@ namespace Allors.Adapters.Object.SqlClient
                 var objectType = this.Database.Cache.GetObjectType(objectId);
                 if (objectType == null)
                 {
-                    objectType = this.GetClass(objectId);
-                    this.Database.Cache.SetObjectType(objectId, objectType);
+                    this.existingObjectIdsWithoutReference.Add(objectId);
+                    this.Instantiate(this.existingObjectIdsWithoutReference.ToArray());
+                    this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
+                    this.referenceByObjectId.TryGetValue(objectId, out reference);
                 }
-
-                reference = new Reference(this, objectType, objectId, false);
-                this.referenceByObjectId[objectId] = reference;
-                this.referencesWithoutCacheId.Add(reference);
+                else
+                {
+                    reference = new Reference(this, objectType, objectId, false);
+                    this.referenceByObjectId[objectId] = reference;
+                    this.referencesWithoutCacheId.Add(reference);
+                }
             }
             else
             {
@@ -879,7 +897,7 @@ namespace Allors.Adapters.Object.SqlClient
             associations.Add(role);
         }
 
-        internal List<Reference> GetReferences(IEnumerable<ObjectId> objectIds)
+        internal List<Reference> GetReferencesForPrefetching(IEnumerable<ObjectId> objectIds)
         {
             var references = new List<Reference>();
 
@@ -935,9 +953,8 @@ namespace Allors.Adapters.Object.SqlClient
 
                 sql += "END;";
 
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
                 command.AddObjectParameter(strategy.ObjectId);
 
                 this.deleteObjectByClass[@class] = command;
@@ -959,10 +976,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.GetUnitRolesByClass.TryGetValue(@class, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForGetUnitRolesByClass[@class];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 command.AddObjectParameter(reference.ObjectId);
                 this.getUnitRolesByClass[@class] = command;
             }
@@ -1044,10 +1060,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.PrefetchUnitRolesByClass.TryGetValue(@class, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchUnitRolesByClass[@class];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, references);
                 this.prefetchUnitRolesByClass[@class] = command;
             }
@@ -1189,10 +1204,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!commandByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[exclusiveRootClass][roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
 
                 var sqlParameter = command.CreateParameter();
                 sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -1281,10 +1295,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.GetCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command  = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddAssociationTableParameter(command, reference.ObjectId); 
                 this.getCompositeRoleByRoleType[roleType] = command;
             }
@@ -1317,10 +1330,9 @@ namespace Allors.Adapters.Object.SqlClient
             Command command;
             if (!this.PrefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositeRoleByRoleType[roleType] = command;
             }
@@ -1372,10 +1384,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.PrefetchCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositeRoleByRoleType[roleType] = command;
             }
@@ -1433,10 +1444,9 @@ namespace Allors.Adapters.Object.SqlClient
                     sql = this.Database.Mapping.ProcedureNameForSetRoleByRelationType[roleType.RelationType];
                 }
 
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddCompositeRoleTableParameter(command, relations);
                 this.setCompositeRoleByRoleType[roleType] = command;
             }
@@ -1467,10 +1477,9 @@ namespace Allors.Adapters.Object.SqlClient
                     sql = this.Database.Mapping.ProcedureNameForGetRoleByRelationType[roleType.RelationType];
                 }
 
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddAssociationParameter(command, reference.ObjectId);
                 this.getCompositesRoleByRoleType[roleType] = command;
             }
@@ -1504,10 +1513,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.PrefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositesRoleByRoleType[roleType] = command;
             }
@@ -1572,10 +1580,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.PrefetchCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchRoleByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositesRoleByRoleType[roleType] = command;
             }
@@ -1641,10 +1648,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.AddCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.database.Mapping.ProcedureNameForAddRoleByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddCompositeRoleTableParameter(command, relations);
                 this.addCompositeRoleByRoleType[roleType] = command;
             }
@@ -1662,10 +1668,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.RemoveCompositeRoleByRoleType.TryGetValue(roleType, out command))
             {
                 var sql = this.Database.Mapping.ProcedureNameForRemoveRoleByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddCompositeRoleTableParameter(command, relations);
                 this.removeCompositeRoleByRoleType[roleType] = command;
             }
@@ -1684,10 +1689,9 @@ namespace Allors.Adapters.Object.SqlClient
             Command command;
             if (!this.ClearCompositeAndCompositesRoleByRoleType.TryGetValue(roleType, out command))
             {
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, associations);
                 this.clearCompositeAndCompositesRoleByRoleType[roleType] = command;
             }
@@ -1712,10 +1716,9 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, references);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -1775,10 +1778,9 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, roles);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -1841,10 +1843,9 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, roles);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -1924,10 +1925,9 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForPrefetchAssociationByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, roles);
                 this.prefetchCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -2005,10 +2005,9 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var roleType = associationType.RoleType;
                 var sql = this.database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddCompositeRoleParameter(command, role.ObjectId);
                 this.getCompositeAssociationByAssociationType[associationType] = command;
             }
@@ -2043,10 +2042,9 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var roleType = associationType.RoleType;
                 var sql = this.Database.Mapping.ProcedureNameForGetAssociationByRelationType[roleType.RelationType];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddCompositeRoleParameter(command, role.ObjectId);
                 this.getCompositesAssociationByAssociationType[associationType] = command;
             }
@@ -2074,10 +2072,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.CreateObjectByClass.TryGetValue(@class, out command))
             {
                 var sql = this.database.Mapping.ProcedureNameForCreateObjectByClass[@class];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddTypeParameter(command, @class);
                 this.createObjectByClass[@class] = command;
             }
@@ -2088,7 +2085,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             var result = command.ExecuteScalar();
             var objectId = this.database.ObjectIds.Parse(result.ToString());
-            return this.CreateAssociationForNewObject(@class, objectId);
+            return this.CreateReferenceForNewObject(@class, objectId);
         }
 
         private IList<Reference> CreateObjects(IClass @class, int count)
@@ -2097,10 +2094,9 @@ namespace Allors.Adapters.Object.SqlClient
             if (!this.CreateObjectsByClass.TryGetValue(@class, out command))
             {
                 var sql = this.database.Mapping.ProcedureNameForCreateObjectsByClass[@class];
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 command.CommandType = CommandType.StoredProcedure;
                 this.AddTypeParameter(command, @class);
                 this.AddCountParameter(command, count);
@@ -2127,7 +2123,7 @@ namespace Allors.Adapters.Object.SqlClient
             foreach (var id in objectIds)
             {
                 var objectId = this.database.ObjectIds.Parse(id.ToString());
-                var strategySql = this.CreateAssociationForNewObject(@class, objectId);
+                var strategySql = this.CreateReferenceForNewObject(@class, objectId);
                 strategies.Add(strategySql);
             }
 
@@ -2164,9 +2160,8 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "    SELECT 0;\n";
                 sql += "    END";
 
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command = command1;
+                var command = this.connection.CreateCommand();
+                command.CommandText = sql;
                 command.AddObjectParameter(objectId);
                 this.AddTypeParameter(command, @class);
 
@@ -2189,7 +2184,7 @@ namespace Allors.Adapters.Object.SqlClient
                 throw new Exception("Duplicate id error");
             }
 
-            return this.CreateAssociationForNewObject(@class, objectId);
+            return this.CreateReferenceForNewObject(@class, objectId);
         }
 
         private Reference InstantiateObject(ObjectId objectId)
@@ -2201,9 +2196,8 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
 
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
                 command.AddObjectParameter(objectId);
                 this.instantiateObject = command;
             }
@@ -2239,9 +2233,8 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "WHERE " + Mapping.ColumnNameForObject + " IN\n";
                 sql += "( SELECT " + this.Database.Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParamNameForTableType + " )\n";
 
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command = command1;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
                 this.AddObjectTableParameter(command, objectIds);
 
                 this.instantiateObjects = command;
@@ -2268,50 +2261,19 @@ namespace Allors.Adapters.Object.SqlClient
 
             return references;
         }
-
-        private IClass GetClass(ObjectId objectId)
-        {
-            var command = this.getObjectType;
-            if (command == null)
-            {
-                var sql = "SELECT " + Mapping.ColumnNameForType + "\n";
-                sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
-                sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
-
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command = command1;
-                command.AddObjectParameter(objectId);
-
-                this.getObjectType = command;
-            }
-            else
-            {
-                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
-            }
-
-            var result = command.ExecuteScalar();
-            if (result == null)
-            {
-                return null;
-            }
-
-            return (IClass)this.Database.ObjectFactory.GetObjectTypeForType((Guid)result);
-        }
-
+        
         private Dictionary<ObjectId, long> GetCacheIds(ISet<Reference> references)
         {
-            var command = this.getCacheIds;
+            var command = this.getVersion;
 
             if (command == null)
             {
-                var sql = this.Database.Mapping.ProcedureNameForGetCache;
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                var sql = this.Database.Mapping.ProcedureNameForGetVersion;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, references);
-                this.getCacheIds = command;
+                this.getVersion = command;
             }
             else
             {
@@ -2339,11 +2301,10 @@ namespace Allors.Adapters.Object.SqlClient
             var command = this.updateCacheIds;
             if (command == null)
             {
-                var sql = this.Database.Mapping.ProcedureNameForUpdateCache;
-                var command1 = this.connection.CreateCommand();
-                command1.CommandText = sql;
-                command1.CommandType = CommandType.StoredProcedure;
-                command = command1;
+                var sql = this.Database.Mapping.ProcedureNameForUpdateVersion;
+                command = this.connection.CreateCommand();
+                command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 this.AddObjectTableParameter(command, this.modifiedRolesByReference.Keys);
                 this.updateCacheIds = command;
             }
@@ -2383,9 +2344,9 @@ namespace Allors.Adapters.Object.SqlClient
             this.insertObjectByClass = null;
             this.deleteObjectByClass = null;
 
-            this.getCacheIds = null;
+            this.getVersion = null;
             this.updateCacheIds = null;
-            this.getObjectType = null;
+            this.getClassAndVersion = null;
         }
 
         private Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId)
@@ -2422,7 +2383,7 @@ namespace Allors.Adapters.Object.SqlClient
             return reference;
         }
 
-        private Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
+        private Reference CreateReferenceForNewObject(IClass objectType, ObjectId objectId)
         {
             var strategyReference = new Reference(this, objectType, objectId, true);
             this.referenceByObjectId[objectId] = strategyReference;
@@ -2649,7 +2610,6 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
         
-
         private void AddTypeParameter(Command command, IClass @class)
         {
             var sqlParameter = command.CreateParameter();

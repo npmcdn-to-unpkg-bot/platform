@@ -86,9 +86,9 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal readonly Dictionary<int, Dictionary<int, string>> TableTypeNameForDecimalRelationByScaleByPrecision;
        
-        internal readonly string ProcedureNameForGetCache;
-        internal readonly string ProcedureNameForSetCache;
-        internal readonly string ProcedureNameForUpdateCache;
+        internal readonly string ProcedureNameForGetVersion;
+        internal readonly string ProcedureNameForSetVersion;
+        internal readonly string ProcedureNameForUpdateVersion;
         
         internal readonly Dictionary<IClass, string> ProcedureNameForLoadObjectByClass;
         internal readonly Dictionary<IClass, string> ProcedureNameForCreateObjectByClass;
@@ -376,20 +376,20 @@ namespace Allors.Adapters.Object.SqlClient
             this.ProcedureNameForPrefetchAssociationByRelationType = new Dictionary<IRelationType, string>();
 
             // Get Cache Ids
-            this.ProcedureNameForGetCache = this.Database.SchemaName + "." + ProcedurePrefixForGetCache;
+            this.ProcedureNameForGetVersion = this.Database.SchemaName + "." + ProcedurePrefixForGetCache;
             var definition =
-@"CREATE PROCEDURE " + this.ProcedureNameForGetCache + @"
+@"CREATE PROCEDURE " + this.ProcedureNameForGetVersion + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 
     SELECT " + ColumnNameForObject + ", " + ColumnNameForCache + @"
     FROM " + this.TableNameForObjects + @"
     WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
-            this.procedureDefinitionByName.Add(this.ProcedureNameForGetCache, definition);
+            this.procedureDefinitionByName.Add(this.ProcedureNameForGetVersion, definition);
 
             // Set Cache Ids
-            this.ProcedureNameForSetCache = this.Database.SchemaName + "." + ProcedurePrefixForSetCache;
+            this.ProcedureNameForSetVersion = this.Database.SchemaName + "." + ProcedurePrefixForSetCache;
             definition = 
-@"CREATE PROCEDURE " + this.ProcedureNameForSetCache + @"
+@"CREATE PROCEDURE " + this.ProcedureNameForSetVersion + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForVersionedObject + @" READONLY
 AS 
     UPDATE " + this.TableNameForObjects + @"
@@ -398,19 +398,19 @@ AS
     INNER JOIN " + ParamNameForTableType + @" AS r
     ON " + ColumnNameForObject + " = r." + this.TableTypeColumnNameForObject + @"
 ";
-            this.procedureDefinitionByName.Add(this.ProcedureNameForSetCache, definition);
+            this.procedureDefinitionByName.Add(this.ProcedureNameForSetVersion, definition);
 
             // Update Cache Ids
-            this.ProcedureNameForUpdateCache = this.Database.SchemaName + "." + ProcedurePrefixForUpdateCache;
+            this.ProcedureNameForUpdateVersion = this.Database.SchemaName + "." + ProcedurePrefixForUpdateCache;
             definition =
-@"CREATE PROCEDURE " + this.ProcedureNameForUpdateCache + @"
+@"CREATE PROCEDURE " + this.ProcedureNameForUpdateVersion + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 
     UPDATE " + this.TableNameForObjects + @"
     SET " + ColumnNameForCache + " = " + ColumnNameForCache + @" + 1
     FROM " + this.TableNameForObjects + @"
     WHERE " + ColumnNameForObject + " IN ( SELECT " + this.TableTypeColumnNameForObject + " FROM " + ParamNameForTableType + ");\n\n";
-            this.procedureDefinitionByName.Add(this.ProcedureNameForUpdateCache, definition);
+            this.procedureDefinitionByName.Add(this.ProcedureNameForUpdateVersion, definition);
 
             foreach (var @class in this.Database.MetaPopulation.Classes)
             {

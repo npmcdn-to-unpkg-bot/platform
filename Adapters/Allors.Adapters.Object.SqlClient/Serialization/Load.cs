@@ -627,9 +627,9 @@ namespace Allors.Adapters.Object.SqlClient
             sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " ON");
             lock (this)
             {
-                var command1 = session.Connection.CreateCommand();
-                command1.CommandText = sql.ToString();
-                using (var command = command1)
+                var command = session.Connection.CreateCommand();
+                command.CommandText = sql.ToString();
+                using (command)
                 {
                     command.ExecuteNonQuery();
                 }
@@ -646,9 +646,9 @@ namespace Allors.Adapters.Object.SqlClient
 
                     lock (this)
                     {
-                        var command1 = session.Connection.CreateCommand();
-                        command1.CommandText = sql.ToString();
-                        using (var command = command1)
+                        var command = session.Connection.CreateCommand();
+                        command.CommandText = sql.ToString();
+                        using (command)
                         {
                             command.ExecuteNonQuery();
                         }
@@ -660,9 +660,9 @@ namespace Allors.Adapters.Object.SqlClient
             sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " OFF");
             lock (this)
             {
-                var command1 = session.Connection.CreateCommand();
-                command1.CommandText = sql.ToString();
-                using (var command = command1)
+                var command = session.Connection.CreateCommand();
+                command.CommandText = sql.ToString();
+                using (command)
                 {
                     command.ExecuteNonQuery();
                 }
@@ -671,11 +671,9 @@ namespace Allors.Adapters.Object.SqlClient
 
         private void LoadObjectsSetCache(ManagementSession session)
         {
-            var sql = this.database.Mapping.ProcedureNameForSetCache;
-            var command1 = session.Connection.CreateCommand();
-            command1.CommandText = sql;
-            var command = command1;
-
+            var sql = this.database.Mapping.ProcedureNameForSetVersion;
+            var command = session.Connection.CreateCommand();
+            command.CommandText = sql;
             command.CommandType = CommandType.StoredProcedure;
 
             var sqlParameter = command.CreateParameter();

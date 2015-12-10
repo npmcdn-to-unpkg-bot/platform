@@ -62,7 +62,7 @@ namespace Allors
         /// <summary>
         /// Creates an Extent for the specified <see cref="IObjectType"/>.
         /// </summary>
-        /// <param name="objectType">The objectType.</param>
+        /// <param name="objectType">The @class.</param>
         /// <returns>The extent.</returns>
         Extent Extent(IComposite objectType);
 
@@ -183,18 +183,18 @@ namespace Allors
         /// <summary>
         /// Inserts an Allors Object with the specified id.
         /// </summary>
-        /// <param name="objectType">The IObjectType.</param>
+        /// <param name="class">The IObjectType.</param>
         /// <param name="objectId">The object id.</param>
         /// <returns>The inserted object.</returns>
-        IObject Insert(IClass objectType, string objectId);
+        IObject Insert(IClass @class, string objectId);
 
         /// <summary>
         /// Inserts an Allors Object with the specified id.
         /// </summary>
-        /// <param name="objectType">The <see cref="IObjectType"/>.</param>
+        /// <param name="class">The <see cref="IObjectType"/>.</param>
         /// <param name="objectId">The object id.</param>
         /// <returns>The inserted object.</returns>
-        IObject Insert(IClass objectType, ObjectId objectId);
+        IObject Insert(IClass @class, ObjectId objectId);
 
         /// <summary>
         /// Instantiate a strategy.

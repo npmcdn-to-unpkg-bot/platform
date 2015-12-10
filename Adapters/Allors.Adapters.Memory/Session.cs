@@ -233,15 +233,15 @@ namespace Allors.Adapters.Memory
             return allorsObjects;
         }
 
-        public IObject Insert(IClass objectType, string objectId)
+        public IObject Insert(IClass @class, string objectId)
         {
             var id = this.ObjectIds.Parse(objectId);
-            return this.Insert(objectType, id);
+            return this.Insert(@class, id);
         }
 
-        public IObject Insert(IClass objectType, ObjectId objectId)
+        public IObject Insert(IClass @class, ObjectId objectId)
         {
-            var strategy = this.InsertStrategy(objectType, objectId, new ObjectVersionLong());
+            var strategy = this.InsertStrategy(@class, objectId, new ObjectVersionLong());
             return strategy.GetObject();
         }
 

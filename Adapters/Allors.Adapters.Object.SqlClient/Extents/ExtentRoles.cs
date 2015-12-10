@@ -18,9 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-using Allors.Meta;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
@@ -86,20 +83,11 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public override IComposite ObjectType
-        {
-            get
-            {
-                return this.strategy.Class;
-            }
-        }
+        public override IComposite ObjectType => this.strategy.Class;
 
         public override void CopyTo(Array array, int index)
         {
-            if (this.upgrade != null)
-            {
-                this.upgrade.CopyTo(array, index);
-            }
+            this.upgrade?.CopyTo(array, index);
 
             this.strategy.ExtentRolesCopyTo(this.roleType, array, index);
         }

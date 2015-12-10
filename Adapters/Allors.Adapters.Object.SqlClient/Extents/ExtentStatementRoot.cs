@@ -18,8 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System.Collections.Generic;
@@ -43,10 +41,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.paramNameByParamValue = new Dictionary<object, string>();
         }
 
-        internal override bool IsRoot
-        {
-            get { return true; }
-        }
+        internal override bool IsRoot => true;
 
         public override string ToString()
         {
@@ -104,9 +99,8 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
 
-            var command1 = this.Session.Connection.CreateCommand();
-            command1.CommandText = this.sql.ToString();
-            this.command = command1;
+            this.command = this.Session.Connection.CreateCommand();
+            this.command.CommandText = this.sql.ToString();
 
             foreach (var paramNameByParamValuePair in this.paramNameByParamValue)
             {

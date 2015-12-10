@@ -51,25 +51,26 @@ namespace Allors.Adapters.Object.SqlClient
             var schema = this.Database.Mapping;
 
             var sql = this.Database.Mapping.ProcedureNameForLoadObjectByClass[exclusiveRootClass];
-            var command1 = this.Connection.CreateCommand();
-            command1.CommandText = sql;
-            using (var command = command1)
+            var command = this.Connection.CreateCommand();
+            command.CommandText = sql;
+            using (command)
             {
                 command.CommandType = CommandType.StoredProcedure;
 
-                var objectTypeSqlParameter = command.CreateParameter();
-                objectTypeSqlParameter.ParameterName = Mapping.ParamNameForType;
-                objectTypeSqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
-                objectTypeSqlParameter.Value = objectType.Id;
+                var classSqlParameter = command.CreateParameter();
+                classSqlParameter.ParameterName = Mapping.ParamNameForType;
+                classSqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                classSqlParameter.Value = objectType.Id;
 
-                command.Parameters.Add(objectTypeSqlParameter);
-                var sqlParameter1 = command.CreateParameter();
-                sqlParameter1.SqlDbType = SqlDbType.Structured;
-                sqlParameter1.TypeName = schema.TableTypeNameForObject;
-                sqlParameter1.ParameterName = Mapping.ParamNameForTableType;
-                sqlParameter1.Value = this.Database.CreateObjectTable(objectIds);
+                command.Parameters.Add(classSqlParameter);
 
-                command.Parameters.Add(sqlParameter1);
+                var objectSqlParameter = command.CreateParameter();
+                objectSqlParameter.SqlDbType = SqlDbType.Structured;
+                objectSqlParameter.TypeName = schema.TableTypeNameForObject;
+                objectSqlParameter.ParameterName = Mapping.ParamNameForTableType;
+                objectSqlParameter.Value = this.Database.CreateObjectTable(objectIds);
+
+                command.Parameters.Add(objectSqlParameter);
                 command.ExecuteNonQuery();
             }
         }
@@ -119,10 +120,10 @@ namespace Allors.Adapters.Object.SqlClient
 
             var sql = this.Database.Mapping.ProcedureNameForSetUnitRoleByRelationTypeByClass[(IClass)exclusiveRootClass][roleType.RelationType];
 
-            var command1 = this.Connection.CreateCommand();
-            command1.CommandText = sql;
-            var command = command1;
+            var command = this.Connection.CreateCommand();
+            command.CommandText = sql;
             command.CommandType = CommandType.StoredProcedure;
+
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
             sqlParameter.TypeName = tableTypeName;
@@ -162,9 +163,9 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
 
-            var command1 = this.Connection.CreateCommand();
-            command1.CommandText = sql;
-            using (var command = command1)
+            var command = this.Connection.CreateCommand();
+            command.CommandText = sql;
+            using (command)
             {
                 command.CommandType = CommandType.StoredProcedure;
                 var sqlParameter = command.CreateParameter();

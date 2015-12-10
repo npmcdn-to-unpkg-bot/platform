@@ -18,14 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-using Allors.Meta;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Meta;
 
@@ -33,55 +31,21 @@ namespace Allors.Adapters.Object.SqlClient
     {
         private IList<ObjectId> objectIds;
 
-        private ExtentSort sorter;
+        internal override SqlExtent ContainedInExtent => this;
 
-        internal override SqlExtent ContainedInExtent
-        {
-            get
-            {
-                return this;
-            }
-        }
+        public override int Count => this.ObjectIds.Count;
 
-        public override int Count
-        {
-            get { return this.ObjectIds.Count; }
-        }
+        public override IObject First => this.ObjectIds.Count > 0 ? this.Session.GetOrCreateReferenceForExistingObject(this.ObjectIds[0]).Strategy.GetObject() : null;
 
-        public override IObject First
-        {
-            get
-            {
-                if (this.ObjectIds.Count > 0)
-                {
-                    return this.Session.GetOrCreateReferenceForExistingObject(this.ObjectIds[0]).Strategy.GetObject();
-                }
-
-                return null;
-            }
-        }
-
-        internal virtual ExtentOperation ParentOperationExtent { get; set; }
+        internal ExtentOperation ParentOperationExtent { get; set; }
 
         internal abstract Session Session { get; }
 
-        internal virtual ExtentSort Sorter
-        {
-            get { return this.sorter; }
-        }
+        internal ExtentSort Sorter { get; private set; }
 
-        private IList<ObjectId> ObjectIds
-        {
-            get
-            {
-                return this.objectIds ?? (this.objectIds = this.GetObjectIds());
-            }
-        }
+        private IList<ObjectId> ObjectIds => this.objectIds ?? (this.objectIds = this.GetObjectIds());
 
-        internal new IObject this[int index]
-        {
-            get { return this.GetItem(index); }
-        }
+        internal new IObject this[int index] => this.GetItem(index);
 
         public override Allors.Extent AddSort(IRoleType roleType)
         {
@@ -92,13 +56,13 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.LazyLoadFilter();
             this.FlushCache();
-            if (this.sorter == null)
+            if (this.Sorter == null)
             {
-                this.sorter = new ExtentSort(this.Session, roleType, direction);
+                this.Sorter = new ExtentSort(this.Session, roleType, direction);
             }
             else
             {
-                this.sorter.AddSort(roleType, direction);
+                this.Sorter.AddSort(roleType, direction);
             }
 
             return this;
@@ -143,25 +107,15 @@ namespace Allors.Adapters.Object.SqlClient
 
         public override IObject[] ToArray(Type type)
         {
-            var array = Array.CreateInstance(type, this.ObjectIds.Count);
-            for (var i = 0; i < this.ObjectIds.Count; i++)
-            {
-                var allorsObject = this.Session.GetOrCreateReferenceForExistingObject(this.ObjectIds[i]).Strategy.GetObject();
-                array.SetValue(allorsObject, i);
-            }
-
-            return (IObject[])array;
+            return this.Session.Instantiate(this.ObjectIds.ToArray());
         }
 
         internal abstract string BuildSql(ExtentStatement statement);
 
-        internal virtual void FlushCache()
+        internal void FlushCache()
         {
             this.objectIds = null;
-            if (this.ParentOperationExtent != null)
-            {
-                this.ParentOperationExtent.FlushCache();
-            }
+            this.ParentOperationExtent?.FlushCache();
         }
 
         internal IObject InternalGetItem(int index)

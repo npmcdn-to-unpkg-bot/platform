@@ -391,15 +391,15 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
             // TODO:
         }
 
-        public IObject Insert(IClass objectType, string objectIdString)
+        public IObject Insert(IClass @class, string objectIdString)
         {
             var objectId = new ObjectIdLong(long.Parse(objectIdString));
-             var insertedObject = this.Insert(objectType, objectId);
+             var insertedObject = this.Insert(@class, objectId);
 
             return insertedObject;
         }
 
-        public IObject Insert(IClass objectType, ObjectId objectId)
+        public IObject Insert(IClass @class, ObjectId objectId)
         {
             if (this.flushDeletedObjects != null)
             {
@@ -414,7 +414,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
             using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId).Value = objectId.Value;
-                command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = objectType.Id;
+                command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = @class.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
 
@@ -428,7 +428,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
                     this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
                 }
 
-                this.classByObjectId[objectId] = objectType;
+                this.classByObjectId[objectId] = @class;
                 this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
 
                 this.ChangeSet.OnCreated(objectId);
