@@ -23,6 +23,7 @@ namespace Allors.Adapters
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Allors;
     using Allors.Domain;
@@ -3710,7 +3711,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                     Assert.AreEqual(run, allorsObjects.Length);
                     for (int i = 0; i < allorsObjects.Length; i++)
                     {
-                        Assert.AreEqual(allorsObjects[i].Id, ids[i]);
+                        Assert.IsTrue(ids.Contains(allorsObjects[i].Id));
                     }
 
                     this.Session.Commit();

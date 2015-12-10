@@ -32,8 +32,8 @@ namespace Allors.Adapters.Object.SqlClient
         public const string ParamFormat = "@{0}";
 
         public const string ColumnNameForObject = "o";
-        public const string ColumnNameForClass = "t";
-        public const string ColumnNameForVersion = "c";
+        public const string ColumnNameForClass = "c";
+        public const string ColumnNameForVersion = "v";
         public const string ColumnNameForAssociation = "a";
         public const string ColumnNameForRole = "r";
 
@@ -109,7 +109,7 @@ namespace Allors.Adapters.Object.SqlClient
         
         private const string ProcedurePrefixForGetVersion = "gv";
         private const string ProcedurePrefixForSetVersion = "sv";
-        private const string ProcedurePrefixForUpdateVersion = "uc";
+        private const string ProcedurePrefixForUpdateVersion = "uv";
 
         private const string ProcedurePrefixForCreateObject = "co_";
         private const string ProcedurePrefixForCreateObjects = "cos_";
@@ -117,12 +117,14 @@ namespace Allors.Adapters.Object.SqlClient
 
         private const string ProcedurePrefixForGetUnits = "gu_";
         private const string ProcedurePrefixForPrefetchUnits = "pu_";
-        private const string ProcedurePrefixForGetRole = "gr_";
-        private const string ProcedurePrefixForPrefetchRole = "pr_";
-        private const string ProcedurePrefixForSetRole = "sr_";
-        private const string ProcedurePrefixForClearRole = "cr_";
-        private const string ProcedurePrefixForAddRole = "ar_";
-        private const string ProcedurePrefixForRemoveRole = "rr_";
+
+        private const string ProcedurePrefixForGetRole = "gc_";
+        private const string ProcedurePrefixForPrefetchRole = "pc_";
+        private const string ProcedurePrefixForSetRole = "sc_";
+        private const string ProcedurePrefixForClearRole = "cc_";
+        private const string ProcedurePrefixForAddRole = "ac_";
+        private const string ProcedurePrefixForRemoveRole = "rc_";
+
         private const string ProcedurePrefixForGetAssociation = "ga_";
         private const string ProcedurePrefixForPrefetchAssociation = "pa_";
 
