@@ -22,7 +22,7 @@ namespace Allors.Adapters
 
     public interface IProfile : IDisposable
     {
-        IDatabase Population { get; }
+        IDatabase Database { get; }
 
         ISession Session { get; }
 

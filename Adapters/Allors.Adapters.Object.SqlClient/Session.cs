@@ -83,10 +83,10 @@ namespace Allors.Adapters.Object.SqlClient
         private Command getObjectType;
         #endregion
 
-        internal Session(Database database, IConnectionFactory connectionFactory)
+        internal Session(Database database, Connection connection)
         {
             this.database = database;
-            this.connection = connectionFactory.Create(database);
+            this.connection = connection;
 
             this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
             this.referencesWithoutCacheId = new HashSet<Reference>();

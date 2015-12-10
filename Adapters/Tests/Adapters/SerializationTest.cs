@@ -69,7 +69,7 @@ namespace Allors.Adapters
         {
             get
             {
-                return this.Profile.Population;
+                return this.Profile.Database;
             }
         }
 

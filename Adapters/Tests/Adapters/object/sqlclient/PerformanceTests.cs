@@ -55,254 +55,371 @@ namespace Allors.Adapters.Object.SqlClient
 
         protected abstract IProfile Profile { get; }
 
-        protected ISession Session => this.Profile.Session;
+        protected Database Database => (Database)this.Profile.Database;
+
+        protected DebugConnectionFactory ConnectionFactory => (DebugConnectionFactory)this.Database.ConnectionFactory;
+
+        protected DebugCache Cache => ((DebugCacheFactory)this.Database.CacheFactory).Cache;
 
         protected Action[] Markers => this.Profile.Markers;
 
         protected Action[] Inits => this.Profile.Inits;
 
         [Test]
-        public void Noop()
+        public void SessionCreation()
         {
             foreach (var init in this.Inits)
             {
                 init();
 
-                var database = (Database)this.Session.Database;
-                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
+                using (var session = this.Database.CreateSession())
+                {
+                    var connectionFactory = (DebugConnectionFactory)this.Database.ConnectionFactory;
 
-                var connection = connectionFactory.Connections.Last();
+                    var connection = connectionFactory.Connections.Last();
 
-                connection.Commands.Count.ShouldEqual(0);
-
-                this.Session.Commit();
+                    connection.Commands.Count.ShouldEqual(0);
+                }
             }
         }
-        
+
+        [Test]
+        public void Extent()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                var connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
+                {
+                    connection.Commands.Clear();
+
+                    var extent = session.Extent<C1>();
+
+                    foreach (C1 c1 in extent)
+                    {
+                        c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
+                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
+                    }
+
+                    connection.Commands.Count.ShouldEqual(2);
+                    connection.Executions.Count().ShouldEqual(2);
+
+                    session.Rollback();
+                    connection.Commands.Clear();
+                    this.Cache.Invalidate();
+                }
+
+                connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
+                {
+                    var extent = session.Extent<C1>();
+
+                    foreach (C1 c1 in extent)
+                    {
+                        c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
+                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
+                    }
+
+                    connection.Commands.Count.ShouldEqual(2);
+                    connection.Executions.Count().ShouldEqual(2);
+                }
+            }
+        }
+
+        [Test]
+        public void GenericExtent()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                this.Cache.Invalidate();
+
+                var connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
+                {
+                    C1[] extent = session.Extent<C1>();
+
+                    foreach (C1 c1 in extent)
+                    {
+                        c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
+                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
+                    }
+
+                    connection.Commands.Count.ShouldEqual(2);
+                    connection.Executions.Count().ShouldEqual(2);
+                }
+                
+                this.Cache.Invalidate();
+
+                connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
+                {
+                    var extent = session.Extent<C1>();
+
+                    foreach (C1 c1 in extent)
+                    {
+                        c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
+                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
+                    }
+
+                    connection.Commands.Count.ShouldEqual(2);
+                    connection.Executions.Count().ShouldEqual(2);
+                }
+            }
+        }
+
+        [Test]
+        public void ExtentRole()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                var connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
+                {
+                    var extent = session.Extent<C1>();
+
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
+                    {
+                        stringBuilder.Append(c1.C1AllorsString);
+                    }
+
+                    connection.Commands.Count.ShouldEqual(3);
+                    connection.Executions.Count().ShouldEqual(6);
+                }
+
+                this.Cache.Invalidate();
+
+                connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
+                {
+                    var extent = session.Extent<C1>();
+
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
+                    {
+                        stringBuilder.Append(c1.C1AllorsString);
+                    }
+
+                    connection.Commands.Count.ShouldEqual(3);
+                    connection.Executions.Count().ShouldEqual(6);
+                }
+            }
+        }
+
         [Test]
         public void Prefetch()
         {
+            var c1Prefetcher = new PrefetchPolicyBuilder().WithRule(C1.Meta.C1AllorsString).Build();
+
             foreach (var init in this.Inits)
             {
                 init();
-
                 this.Populate();
 
-                this.Session.Commit();
-
-                var database = (Database)this.Session.Database;
-                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
-                var connection = connectionFactory.Connections.Last();
-                var cacheFactory = (DebugCacheFactory)database.CacheFactory;
-                var cache = cacheFactory.Cache;
-
-                connection.Commands.Clear();
-
-                var c1Prefetcher = new PrefetchPolicyBuilder()
-                    .WithRule(C1.Meta.C1AllorsString)
-                    .Build();
-
-                var extent = this.Session.Extent<C1>();
-                this.Session.Prefetch(c1Prefetcher, extent);
-
-                connection.Commands.Count.ShouldEqual(3);
-                connection.Commands.Count(v=>v.Executions.Count != 1).ShouldEqual(0);
-
-                var stringBuilder = new StringBuilder();
-                foreach (C1 c1 in extent)
+                var connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
                 {
-                    stringBuilder.Append(c1.C1AllorsString);
+                    var extent = session.Extent<C1>();
+                    session.Prefetch(c1Prefetcher, extent);
+
+                    connection.Commands.Count.ShouldEqual(3);
+                    connection.Executions.Count().ShouldEqual(3);
+
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
+                    {
+                        stringBuilder.Append(c1.C1AllorsString);
+                    }
+
+                    connection.Commands.Count.ShouldEqual(3);
+                    connection.Executions.Count().ShouldEqual(3);
                 }
 
-                connection.Commands.Count.ShouldEqual(3);
-                connection.Executions.Count().ShouldEqual(3);
+                this.Cache.Invalidate();
 
-                this.Session.Commit();
-                cache.Invalidate();
-                connection.Commands.Clear();
-
-                extent = this.Session.Extent<C1>();
-                this.Session.Prefetch(c1Prefetcher, extent);
-
-                stringBuilder = new StringBuilder();
-                foreach (C1 c1 in extent)
+                connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
                 {
-                    stringBuilder.Append(c1.C1AllorsString);
-                }
+                    var extent = session.Extent<C1>();
+                    session.Prefetch(c1Prefetcher, extent);
 
-                connection.Commands.Count.ShouldEqual(3);
-                connection.Executions.Count().ShouldEqual(3);
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
+                    {
+                        stringBuilder.Append(c1.C1AllorsString);
+                    }
+
+                    connection.Commands.Count.ShouldEqual(3);
+                    connection.Executions.Count().ShouldEqual(3);
+                }
             }
         }
         
         [Test]
         public void PrefetchOneClass()
         {
+            var c2Prefetcher = new PrefetchPolicyBuilder().WithRule(C1.Meta.C1AllorsString).Build();
+            var c1Prefetcher =
+                new PrefetchPolicyBuilder().WithRule(C1.Meta.C1C2one2one, c2Prefetcher)
+                    .WithRule(C1.Meta.C1AllorsString)
+                    .Build();
+
             foreach (var init in this.Inits)
             {
                 init();
-
                 this.Populate();
 
-                this.Session.Commit();
-
-                var database = (Database)this.Session.Database;
-                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
-                var connection = connectionFactory.Connections.Last();
-                var cacheFactory = (DebugCacheFactory)database.CacheFactory;
-                var cache = cacheFactory.Cache;
-
-                connection.Commands.Clear();
-
-                var c2Prefetcher = new PrefetchPolicyBuilder()
-                    .WithRule(C1.Meta.C1AllorsString)
-                    .Build();
-                
-                var c1Prefetcher = new PrefetchPolicyBuilder()
-                    .WithRule(C1.Meta.C1C2one2one, c2Prefetcher)
-                    .WithRule(C1.Meta.C1AllorsString)
-                    .Build();
-
-                var extent = this.Session.Extent<C1>();
-                this.Session.Prefetch(c1Prefetcher, extent);
-
-                connection.Commands.Count.ShouldEqual(5);
-                connection.Executions.Count().ShouldEqual(6);
-
-                var stringBuilder = new StringBuilder();
-                foreach (C1 c1 in extent)
+                var connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
                 {
-                    stringBuilder.Append(c1.C1AllorsString);
+                    var extent = session.Extent<C1>();
+                    session.Prefetch(c1Prefetcher, extent);
 
-                    var c2 = c1.C1C2one2one;
-                    stringBuilder.Append(c2?.C2AllorsString);
+                    connection.Commands.Count.ShouldEqual(5);
+                    connection.Executions.Count().ShouldEqual(6);
+
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
+                    {
+                        stringBuilder.Append(c1.C1AllorsString);
+
+                        var c2 = c1.C1C2one2one;
+                        stringBuilder.Append(c2?.C2AllorsString);
+                    }
+
+                    connection.Commands.Count.ShouldEqual(5);
+                    connection.Executions.Count().ShouldEqual(6);
                 }
 
-                connection.Commands.Count.ShouldEqual(5);
-                connection.Executions.Count().ShouldEqual(6);
+                this.Cache.Invalidate();
 
-                this.Session.Commit();
-                cache.Invalidate();
-                connection.Commands.Clear();
-
-                extent = this.Session.Extent<C1>();
-                this.Session.Prefetch(c1Prefetcher, extent);
-
-                stringBuilder = new StringBuilder();
-                foreach (C1 c1 in extent)
+                connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
                 {
-                    stringBuilder.Append(c1.C1AllorsString);
+                    var extent = session.Extent<C1>();
+                    session.Prefetch(c1Prefetcher, extent);
 
-                    var c2 = c1.C1C2one2one;
-                    stringBuilder.Append(c2?.C2AllorsString);
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
+                    {
+                        stringBuilder.Append(c1.C1AllorsString);
+
+                        var c2 = c1.C1C2one2one;
+                        stringBuilder.Append(c2?.C2AllorsString);
+                    }
+
+                    connection.Commands.Count.ShouldEqual(5);
+                    connection.Executions.Count().ShouldEqual(6);
                 }
-
-                connection.Commands.Count.ShouldEqual(5);
-                connection.Executions.Count().ShouldEqual(6);
             }
         }
 
         [Test]
         public void PrefetchManyInterface()
         {
-            foreach (var init in this.Inits)
-            {
-                init();
+            var i12Prefetcher = new PrefetchPolicyBuilder().WithRule(C1.Meta.I12AllorsString).Build();
 
-                this.Populate();
-
-                this.Session.Commit();
-
-                var database = (Database)this.Session.Database;
-                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
-                var connection = connectionFactory.Connections.Last();
-                var cacheFactory = (DebugCacheFactory)database.CacheFactory;
-                var cache = cacheFactory.Cache;
-
-                connection.Commands.Clear();
-
-                var i12Prefetcher = new PrefetchPolicyBuilder()
-                    .WithRule(C1.Meta.I12AllorsString)
-                    .Build();
-
-                var c1Prefetcher = new PrefetchPolicyBuilder()
-                    .WithRule(C1.Meta.C1I12one2manies, i12Prefetcher)
+            var c1Prefetcher =
+                new PrefetchPolicyBuilder().WithRule(C1.Meta.C1I12one2manies, i12Prefetcher)
                     .WithRule(C1.Meta.C1AllorsString)
                     .Build();
 
-                var extent = this.Session.Extent<C1>();
-                this.Session.Prefetch(c1Prefetcher, extent);
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
 
-                connection.Commands.Count.ShouldEqual(5);
-                connection.Executions.Count().ShouldEqual(7);
-
-                var stringBuilder = new StringBuilder();
-                foreach (C1 c1 in extent)
+                var connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
                 {
-                    stringBuilder.Append(c1.C1AllorsString);
+                    var extent = session.Extent<C1>();
+                    session.Prefetch(c1Prefetcher, extent);
 
-                    foreach (I12 i12 in c1.C1I12one2manies)
+                    connection.Commands.Count.ShouldEqual(5);
+                    connection.Executions.Count().ShouldEqual(7);
+
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
                     {
-                        stringBuilder.Append(i12?.I12AllorsString);
+                        stringBuilder.Append(c1.C1AllorsString);
+
+                        foreach (I12 i12 in c1.C1I12one2manies)
+                        {
+                            stringBuilder.Append(i12?.I12AllorsString);
+                        }
                     }
+
+                    connection.Commands.Count.ShouldEqual(5);
+                    connection.Executions.Count().ShouldEqual(7);
                 }
 
-                connection.Commands.Count.ShouldEqual(5);
-                connection.Executions.Count().ShouldEqual(7);
-                
-                this.Session.Commit();
-                cache.Invalidate();
-                connection.Commands.Clear();
+                this.Cache.Invalidate();
 
-                extent = this.Session.Extent<C1>();
-                this.Session.Prefetch(c1Prefetcher, extent);
 
-                stringBuilder = new StringBuilder();
-                foreach (C1 c1 in extent)
+                connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
+                using (var session = this.Database.CreateSession(connection))
                 {
-                    stringBuilder.Append(c1.C1AllorsString);
+                    var extent = session.Extent<C1>();
+                    session.Prefetch(c1Prefetcher, extent);
 
-                    foreach (I12 i12 in c1.C1I12one2manies)
+                    var stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
                     {
-                        stringBuilder.Append(i12?.I12AllorsString);
+                        stringBuilder.Append(c1.C1AllorsString);
+                        foreach (I12 i12 in c1.C1I12one2manies)
+                        {
+                            stringBuilder.Append(i12?.I12AllorsString);
+                        }
                     }
-                }
 
-                connection.Commands.Count.ShouldEqual(5);
-                connection.Executions.Count().ShouldEqual(7);
+                    connection.Commands.Count.ShouldEqual(5);
+                    connection.Executions.Count().ShouldEqual(7);
+                }
             }
         }
-
-
-
+        
         protected void Populate()
         {
-            var population = new TestPopulation(this.Session);
+            using (var session = this.Database.CreateSession())
+            {
+                var population = new TestPopulation(session);
 
-            this.c1A = population.C1A;
-            this.c1B = population.C1B;
-            this.c1C = population.C1C;
-            this.c1D = population.C1D;
+                this.c1A = population.C1A;
+                this.c1B = population.C1B;
+                this.c1C = population.C1C;
+                this.c1D = population.C1D;
 
-            this.c2A = population.C2A;
-            this.c2B = population.C2B;
-            this.c2C = population.C2C;
-            this.c2D = population.C2D;
+                this.c2A = population.C2A;
+                this.c2B = population.C2B;
+                this.c2C = population.C2C;
+                this.c2D = population.C2D;
 
-            this.c3A = population.C3A;
-            this.c3B = population.C3B;
-            this.c3C = population.C3C;
-            this.c3D = population.C3D;
+                this.c3A = population.C3A;
+                this.c3B = population.C3B;
+                this.c3C = population.C3C;
+                this.c3D = population.C3D;
 
-            this.c4A = population.C4A;
-            this.c4B = population.C4B;
-            this.c4C = population.C4C;
-            this.c4D = population.C4D;
+                this.c4A = population.C4A;
+                this.c4B = population.C4B;
+                this.c4C = population.C4C;
+                this.c4D = population.C4D;
+
+                session.Commit();
+            }
         }
 
         protected ISession CreateSession()
         {
-            return this.Profile.Population.CreateSession();
+            return this.Profile.Database.CreateSession();
         }
     }
 }

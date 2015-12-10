@@ -37,7 +37,7 @@ namespace Allors.Adapters.Object.SqlClient.Debug
 
         public override string ToString()
         {
-            return $"{this.Command} {this.Begin}:{this.End}";
+            return $"{this.Begin:hh:mm:ss.ff} {this.Command}";
         }
     }
 }

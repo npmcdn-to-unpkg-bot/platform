@@ -43,7 +43,7 @@ namespace Allors.Adapters
 
         public ISession Session => this.session;
 
-        public IDatabase Population => this.database;
+        public IDatabase Database => this.database;
 
         public abstract Action[] Markers { get; }
 

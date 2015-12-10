@@ -27,10 +27,6 @@ namespace Allors
 
     public sealed class PrefetchRule
     {
-        private readonly IPropertyType propertyType;
-
-        private readonly PrefetchPolicy prefetchPolicy;
-
         public PrefetchRule(IPropertyType propertyType, PrefetchPolicy prefetchPolicy)
         {
             if (propertyType == null)
@@ -47,24 +43,17 @@ namespace Allors
                 }
             }
 
-            this.propertyType = propertyType;
-            this.prefetchPolicy = prefetchPolicy;
+            this.PropertyType = propertyType;
+            this.PrefetchPolicy = prefetchPolicy;
         }
 
-        public IPropertyType PropertyType
-        {
-            get
-            {
-                return this.propertyType;
-            }
-        }
+        public IPropertyType PropertyType { get; private set; }
 
-        public PrefetchPolicy PrefetchPolicy
+        public PrefetchPolicy PrefetchPolicy { get; private set; }
+
+        public override string ToString()
         {
-            get
-            {
-                return this.prefetchPolicy;
-            }
+            return this.PropertyType.ToString();
         }
     }
 }

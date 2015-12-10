@@ -322,17 +322,18 @@ namespace Allors.Adapters.Object.SqlClient
 
         public ISession CreateSession()
         {
-            return this.CreateSession(this.ConnectionFactory);
+            var connection = this.ConnectionFactory.Create(this);
+            return this.CreateSession(connection);
         }
 
-        public ISession CreateSession(IConnectionFactory connectionFactory)
+        public ISession CreateSession(Connection connection)
         {
             if (!this.IsValid)
             {
                 throw new Exception(this.validationMessage);
             }
 
-            return new Session(this, connectionFactory);
+            return new Session(this, connection);
         }
 
         public void Init()

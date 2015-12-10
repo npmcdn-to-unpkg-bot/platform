@@ -91,7 +91,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         protected ISession CreateSession()
         {
-            return this.Profile.Population.CreateSession();
+            return this.Profile.Database.CreateSession();
         }
     }
 }
