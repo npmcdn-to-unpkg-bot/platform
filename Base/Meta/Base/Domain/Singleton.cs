@@ -41,6 +41,7 @@ namespace Allors.Meta
         [AssociationId("c92466b5-55ba-496a-8880-2821f32f8f8e")]
         [RoleId("3a12d798-40c3-40e0-ba9f-9d01b1e39e89")]
         #endregion
+        [Indexed]
         [Type(typeof(UserInterface))]
         [Multiplicity(Multiplicity.OneToOne)]
         public RelationType Guest;
@@ -60,6 +61,7 @@ namespace Allors.Meta
         [AssociationId("CB47A309-ED8F-47D1-879F-478E63B350D8")]
         [RoleId("C955B6EF-57B7-404F-BBA5-FA7AEBF706F6")]
         #endregion
+        [Indexed]
         [Type(typeof(AccessControlClass))]
         [Multiplicity(Multiplicity.OneToOne)]
         public RelationType DefaultGuestAccessControl;
@@ -69,6 +71,7 @@ namespace Allors.Meta
         [AssociationId("56F18F8B-380B-4236-9A85-ED989C1A6E44")]
         [RoleId("A3B765ED-BBF6-4BC4-9551-6338705EF03E")]
         #endregion
+        [Indexed]
         [Type(typeof(AccessControlClass))]
         [Multiplicity(Multiplicity.OneToOne)]
         public RelationType DefaultAdministratorsAccessControl;
