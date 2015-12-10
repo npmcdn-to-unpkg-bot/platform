@@ -2160,7 +2160,7 @@ namespace Allors.Adapters.Object.SqlClient
                 sql += "    SELECT 0;\n";
                 sql += "    END";
 
-                var command = this.connection.CreateCommand();
+                command = this.connection.CreateCommand();
                 command.CommandText = sql;
                 command.AddObjectParameter(objectId);
                 this.AddTypeParameter(command, @class);
