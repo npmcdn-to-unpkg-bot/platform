@@ -98,7 +98,7 @@ namespace Allors.Domain
                 }
             }
 
-            return this.accesControls.Any(accessControl => accessControl.IsPermitted(classId, operandTypeId, operation));
+            return this.accesControls.Any(accessControl => accessControl.IsPermitted(this.classId, operandTypeId, operation));
         }
 
         private void LazyLoad()

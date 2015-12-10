@@ -32,6 +32,7 @@ namespace Allors.Meta
         [AssociationId("ec79e57d-be81-430a-b12f-08ffd1e94af3")]
         [RoleId("370d3d12-3164-4753-8a72-1c604bda1b64")]
         #endregion
+        [Indexed]
         [Type(typeof(RoleClass))]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType Role;

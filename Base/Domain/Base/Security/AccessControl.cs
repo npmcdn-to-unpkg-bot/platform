@@ -32,10 +32,9 @@ namespace Allors.Domain
         {
             get
             {
-                var session = this.strategy.Session;
+                var database = this.strategy.Session.Database;
                 var key = CacheKey + this.strategy.ObjectId;
-                var kvp = (KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>?)session[key];
-
+                var kvp = (KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>?)database[key];
                 if (!kvp.HasValue || !this.strategy.ObjectVersion.Value.Equals(kvp.Value.Key))
                 {
                     var operationsByOperandTypeByClass = new Dictionary<Guid, Dictionary<Guid, Operations>>();
@@ -61,7 +60,7 @@ namespace Allors.Domain
                     }
 
                     kvp = new KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>(this.strategy.ObjectVersion.Value, operationsByOperandTypeByClass);
-                    session[key] = kvp;
+                    database[key] = kvp;
                 }
 
                 return kvp.Value.Value;
@@ -94,6 +93,11 @@ namespace Allors.Domain
             }
 
             return false;
+        }
+
+        public void WarmUp()
+        {
+            var x = this.OperationsByOperandTypeByClass;
         }
     }
 }
