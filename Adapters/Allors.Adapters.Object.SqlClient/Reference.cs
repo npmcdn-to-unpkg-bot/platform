@@ -18,8 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
@@ -28,29 +26,26 @@ namespace Allors.Adapters.Object.SqlClient
 
     using Allors.Meta;
 
-    internal class Reference
+    public class Reference
     {
-        internal const long UnknownCacheId = -1;
-        internal const long InitialCacheId = 0;
+        internal const long InitialVersion = 0;
+        private const long UnknownVersion = -1;
 
         private static readonly int MaskIsNew = BitVector32.CreateMask();
         private static readonly int MaskExists = BitVector32.CreateMask(MaskIsNew);
         private static readonly int MaskExistsKnown = BitVector32.CreateMask(MaskExists);
 
-        private readonly Session session;
-        private readonly IClass @class;
-        private readonly ObjectId objectId;
-        private long cacheId;
+        private long version;
 
         private BitVector32 flags;
 
-        private WeakReference weakReference;
+        private WeakReference<Strategy> weakReference;
 
         internal Reference(Session session, IClass @class, ObjectId objectId, bool isNew)
         {
-            this.session = session;
-            this.@class = @class;
-            this.objectId = objectId;
+            this.Session = session;
+            this.Class = @class;
+            this.ObjectId = objectId;
 
             this.flags[MaskIsNew] = isNew;
             if (isNew)
@@ -60,10 +55,10 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal Reference(Session session, IClass @class, ObjectId objectId, long cacheId)
+        internal Reference(Session session, IClass @class, ObjectId objectId, long version)
             : this(session, @class, objectId, false)
         {
-            this.cacheId = cacheId;
+            this.version = version;
             this.flags[MaskExistsKnown] = true;
             this.flags[MaskExists] = true;
         }
@@ -77,69 +72,45 @@ namespace Allors.Adapters.Object.SqlClient
                 if (strategy == null)
                 {
                     strategy = this.CreateStrategy();
-                    this.weakReference = new WeakReference(strategy);
+                    this.weakReference = new WeakReference<Strategy>(strategy);
                 }
 
                 return strategy;
             }
         }
 
-        internal Session Session
-        {
-            get
-            {
-                return this.session;
-            }
-        }
+        internal Session Session { get; }
 
-        internal IClass Class
-        {
-            get
-            {
-                return this.@class;
-            }
-        }
+        internal IClass Class { get; }
 
-        internal ObjectId ObjectId
-        {
-            get
-            {
-                return this.objectId;
-            }
-        }
+        internal ObjectId ObjectId { get; }
 
-        internal long CacheId
+        internal long VersionId
         {
             get
             {
-                if (!this.IsNew && this.cacheId == UnknownCacheId)
+                if (!this.IsNew && this.version == UnknownVersion)
                 {
-                    this.Session.AddReferenceWithoutCacheIdOrExistsKnown(this);
-                    this.Session.GetCacheIdsAndExists();
+                    this.Session.AddReferenceWithoutVersionOrExistsKnown(this);
+                    this.Session.GetVersionAndExists();
                 }
 
-                return this.cacheId;
+                return this.version;
             }
 
             set
             {
-                this.cacheId = value;
+                this.version = value;
             }
         }
 
-        internal bool IsNew
-        {
-            get
-            {
-                return this.flags[MaskIsNew];
-            }
-        }
+        internal bool IsNew => this.flags[MaskIsNew];
 
-        internal bool IsUnknownCacheId
+        internal bool IsUnknownVersion
         {
             get
             {
-                var isUnknown = this.cacheId == UnknownCacheId; 
+                var isUnknown = this.version == UnknownVersion; 
                 return isUnknown;
             }
         }
@@ -151,8 +122,8 @@ namespace Allors.Adapters.Object.SqlClient
                 var flagsExistsKnown = this.flags[MaskExistsKnown];
                 if (!flagsExistsKnown)
                 {
-                    this.Session.AddReferenceWithoutCacheIdOrExistsKnown(this);
-                    this.Session.GetCacheIdsAndExists();
+                    this.Session.AddReferenceWithoutVersionOrExistsKnown(this);
+                    this.Session.GetVersionAndExists();
                 }
 
                 return this.flags[MaskExists];
@@ -174,35 +145,37 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal Strategy Target
+        private Strategy Target
         {
             get
             {
-                return (this.weakReference == null) ? null : (Strategy)this.weakReference.Target;
+                Strategy strategy = null;
+                this.weakReference?.TryGetTarget(out strategy);
+                return strategy;
             }
         }
 
         public override int GetHashCode()
         {
-            return this.objectId.GetHashCode();
+            return this.ObjectId.GetHashCode();
         }
 
         public override bool Equals(object obj)
         {
             var that = (Reference)obj;
-            return that != null && that.objectId.Equals(this.objectId);
+            return that != null && that.ObjectId.Equals(this.ObjectId);
         }
 
         public override string ToString()
         {
-            return "[" + this.@class + ":" + this.ObjectId + "]";
+            return "[" + this.Class + ":" + this.ObjectId + "]";
         }
 
         internal virtual void Commit(HashSet<Reference> referencesWithStrategy)
         {
             this.flags[MaskExistsKnown] = false;
             this.flags[MaskIsNew] = false;
-            this.cacheId = UnknownCacheId;
+            this.version = UnknownVersion;
 
             var strategy = this.Target;
             if (strategy != null)
@@ -224,7 +197,7 @@ namespace Allors.Adapters.Object.SqlClient
                 this.flags[MaskExistsKnown] = false;
             }
 
-            this.cacheId = UnknownCacheId;
+            this.version = UnknownVersion;
 
             var strategy = this.Target;
             if (strategy != null)
@@ -234,7 +207,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
       
-        protected virtual Strategy CreateStrategy()
+        public virtual Strategy CreateStrategy()
         {
             return new Strategy(this);
         }

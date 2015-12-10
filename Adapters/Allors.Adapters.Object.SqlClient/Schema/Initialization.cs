@@ -262,8 +262,8 @@ CREATE SCHEMA " + this.database.SchemaName;
                         sql.Append("CREATE TABLE " + this.mapping.TableNameForObjects + "\n");
                         sql.Append("(\n");
                         sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " IDENTITY(1,1) PRIMARY KEY,\n");
-                        sql.Append(Mapping.ColumnNameForType + " " + Mapping.SqlTypeForType + ",\n");
-                        sql.Append(Mapping.ColumnNameForCache + " " + Mapping.SqlTypeForCache + "\n");
+                        sql.Append(Mapping.ColumnNameForClass + " " + Mapping.SqlTypeForClass + ",\n");
+                        sql.Append(Mapping.ColumnNameForVersion + " " + Mapping.SqlTypeForVersion + "\n");
                         sql.Append(")\n");
 
                         using (var command = new SqlCommand(sql.ToString(), connection))
@@ -280,7 +280,7 @@ CREATE SCHEMA " + this.database.SchemaName;
                         sql.Append("CREATE TABLE " + tableName + "\n");
                         sql.Append("(\n");
                         sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " PRIMARY KEY,\n");
-                        sql.Append(Mapping.ColumnNameForType + " " + Mapping.SqlTypeForType);
+                        sql.Append(Mapping.ColumnNameForClass + " " + Mapping.SqlTypeForClass);
 
                         foreach (var associationType in @class.AssociationTypes)
                         {

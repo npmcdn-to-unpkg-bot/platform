@@ -33,23 +33,6 @@ namespace Allors.Adapters.Object.SqlClient
 
         private readonly Database database;
 
-        public Connection Connection { get; }
-
-        public SessionCommands Commands { get; }
-
-        private ChangeSet changeSet;
-
-        internal Dictionary<Reference, Roles> modifiedRolesByReference;
-        internal Dictionary<ObjectId, Reference> referenceByObjectId;
-        internal Dictionary<IAssociationType, Dictionary<Reference, Reference>> associationByRoleByAssociationType;
-        internal Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>> associationsByRoleByAssociationType;
-
-        private Dictionary<Reference, Roles> unflushedRolesByReference;
-        private Dictionary<IAssociationType, HashSet<ObjectId>> triggersFlushRolesByAssociationType;
-
-        private HashSet<ObjectId> existingObjectIdsWithoutReference;
-        private HashSet<Reference> referencesWithoutCacheId;
-
         private bool busyCommittingOrRollingBack;
 
         private Dictionary<string, object> properties;
@@ -59,27 +42,23 @@ namespace Allors.Adapters.Object.SqlClient
             this.database = database;
             this.Connection = connection;
 
+            this.State = new State(this.database.ObjectIds);
+
             this.Prefetcher = new Prefetcher(this);
-            this.Commands = new SessionCommands(this, connection);
-
-            this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
-
-            this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
-            this.referencesWithoutCacheId = new HashSet<Reference>();
-
-            this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-            this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
-
-            this.changeSet = new ChangeSet();
+            this.Commands = new Commands(this, connection);
         }
 
-        internal Prefetcher Prefetcher { get; }
+        public Connection Connection { get; }
+
+        public Commands Commands { get; }
+
+        public State State { get; }
+
+        private Prefetcher Prefetcher { get; }
 
         IDatabase ISession.Database => this.database;
 
         public Database Database => this.database;
-
-        internal ChangeSet ChangeSet => this.changeSet;
 
         public object this[string name]
         {
@@ -121,11 +100,11 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             var reference = this.Commands.CreateObject(objectType);
-            this.referenceByObjectId[reference.ObjectId] = reference;
+            this.State.ReferenceByObjectId[reference.ObjectId] = reference;
 
             this.Database.Cache.SetObjectType(reference.ObjectId, objectType);
 
-            this.changeSet.OnCreated(reference.ObjectId);
+            this.State.ChangeSet.OnCreated(reference.ObjectId);
 
             return reference.Strategy.GetObject();
         }
@@ -145,11 +124,11 @@ namespace Allors.Adapters.Object.SqlClient
             for (var i = 0; i < references.Count; i++)
             {
                 var reference = references[i];
-                this.referenceByObjectId[reference.ObjectId] = reference;
+                this.State.ReferenceByObjectId[reference.ObjectId] = reference;
 
                 domainObjects[i] = reference.Strategy.GetObject();
 
-                this.changeSet.OnCreated(reference.ObjectId);
+                this.State.ChangeSet.OnCreated(reference.ObjectId);
             }
 
             return domainObjects;
@@ -157,19 +136,19 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IObject Insert(IClass @class, string objectIdString)
         {
-            var objectId = this.Database.ObjectIds.Parse(objectIdString);
+            var objectId = this.State.GetObjectId(objectIdString);
             var insertedObject = this.Insert(@class, objectId);
 
-            this.changeSet.OnCreated(objectId);
+            this.State.ChangeSet.OnCreated(objectId);
 
             return insertedObject;
         }
 
         public IObject Insert(IClass @class, ObjectId objectId)
         {
-            if (this.referenceByObjectId.ContainsKey(objectId))
+            if (this.State.ReferenceByObjectId.ContainsKey(objectId))
             {
-                var oldStrategy = this.referenceByObjectId[objectId].Strategy;
+                var oldStrategy = this.State.ReferenceByObjectId[objectId].Strategy;
                 if (!oldStrategy.IsDeleted)
                 {
                     throw new Exception("Duplicate object id " + objectId);
@@ -177,10 +156,10 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             var reference = this.Commands.InsertObject(@class, objectId);
-            this.referenceByObjectId[objectId] = reference;
+            this.State.ReferenceByObjectId[objectId] = reference;
             var insertedObject = reference.Strategy.GetObject();
 
-            this.changeSet.OnCreated(objectId);
+            this.State.ChangeSet.OnCreated(objectId);
 
             return insertedObject;
         }
@@ -192,7 +171,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IObject Instantiate(string objectId)
         {
-            var id = this.Database.ObjectIds.Parse(objectId);
+            var id = this.State.GetObjectId(objectId);
             return this.Instantiate(id);
         }
 
@@ -210,12 +189,12 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             Reference reference;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
+            if (!this.State.ReferenceByObjectId.TryGetValue(objectId, out reference))
             {
                 reference = this.Commands.InstantiateObject(objectId);
                 if (reference != null)
                 {
-                    this.referenceByObjectId[objectId] = reference;
+                    this.State.ReferenceByObjectId[objectId] = reference;
                 }
             }
 
@@ -237,7 +216,7 @@ namespace Allors.Adapters.Object.SqlClient
             var objectIds = new ObjectId[objectIdStrings.Length];
             for (var i = 0; i < objectIdStrings.Length; i++)
             {
-                objectIds[i] = this.Database.ObjectIds.Parse(objectIdStrings[i]);
+                objectIds[i] = this.State.GetObjectId(objectIdStrings[i]);
             }
 
             return this.Instantiate(objectIds);
@@ -268,12 +247,17 @@ namespace Allors.Adapters.Object.SqlClient
 
             var references = new List<Reference>(objectIds.Length);
 
-            var nonCachedObjectIds = new List<ObjectId>();
+            List<ObjectId> nonCachedObjectIds = null;
             foreach (var objectId in objectIds)
             {
                 Reference reference;
-                if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
+                if (!this.State.ReferenceByObjectId.TryGetValue(objectId, out reference))
                 {
+                    if (nonCachedObjectIds == null)
+                    {
+                        nonCachedObjectIds = new List<ObjectId>();
+                    }
+
                     nonCachedObjectIds.Add(objectId);
                 }
                 else
@@ -285,35 +269,19 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
 
-            if (nonCachedObjectIds.Count > 0)
+            if (nonCachedObjectIds != null)
             {
-                var nonCachedReferences = this.Commands.InstantiateObjects(nonCachedObjectIds);
+                var nonCachedReferences = this.Commands.InstantiateReferences(nonCachedObjectIds);
                 references.AddRange(nonCachedReferences);
-
-                var objectByObjectId = references.ToDictionary(strategyReference => strategyReference.ObjectId, strategyReference => strategyReference.Strategy.GetObject());
-
-                var allorsObjects = new List<IObject>();
-                foreach (var objectId in objectIds)
-                {
-                    IObject allorsObject;
-                    if (objectByObjectId.TryGetValue(objectId, out allorsObject))
-                    {
-                        allorsObjects.Add(allorsObject);
-                    }
-                }
-
-                return allorsObjects.ToArray();
             }
-            else
+
+            var allorsObjects = new IObject[references.Count];
+            for (var i = 0; i < allorsObjects.Length; i++)
             {
-                var allorsObjects = new IObject[references.Count];
-                for (var i = 0; i < allorsObjects.Length; i++)
-                {
-                    allorsObjects[i] = references[i].Strategy.GetObject();
-                }
-
-                return allorsObjects;
+                allorsObjects[i] = references[i].Strategy.GetObject();
             }
+
+            return allorsObjects;
         }
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, params IObject[] objects)
@@ -346,7 +314,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIdStrings)
         {
-            var objectIds = objectIdStrings.Select(v => this.Database.ObjectIds.Parse(v));
+            var objectIds = objectIdStrings.Select(v => this.State.GetObjectId(v));
             var references = this.Prefetcher.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)
@@ -375,11 +343,11 @@ namespace Allors.Adapters.Object.SqlClient
         {
             try
             {
-                return this.changeSet;
+                return this.State.ChangeSet;
             }
             finally
             {
-                this.changeSet = new ChangeSet();
+                this.State.ChangeSet = new ChangeSet();
             }
         }
 
@@ -416,41 +384,41 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     this.busyCommittingOrRollingBack = true;
 
-                    var accessed = new List<ObjectId>(this.referenceByObjectId.Keys);
+                    var accessed = new List<ObjectId>(this.State.ReferenceByObjectId.Keys);
                     var changed = ObjectId.EmptyObjectIds;
 
                     this.Flush();
 
-                    if (this.modifiedRolesByReference != null)
+                    if (this.State.ModifiedRolesByReference != null)
                     {
-                        this.Commands.UpdateCacheIds();
+                        this.Commands.UpdateVersion();
 
-                        changed = this.modifiedRolesByReference.Select(dictionaryEntry => dictionaryEntry.Key.ObjectId).ToArray();
+                        changed = this.State.ModifiedRolesByReference.Select(dictionaryEntry => dictionaryEntry.Key.ObjectId).ToArray();
                     }
 
                     this.Connection.Commit();
 
-                    this.modifiedRolesByReference = null;
+                    this.State.ModifiedRolesByReference = null;
 
                     var referencesWithStrategy = new HashSet<Reference>();
-                    foreach (var reference in this.referenceByObjectId.Values)
+                    foreach (var reference in this.State.ReferenceByObjectId.Values)
                     {
                         reference.Commit(referencesWithStrategy);
                     }
 
-                    this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
-                    this.referencesWithoutCacheId = referencesWithStrategy;
+                    this.State.ExistingObjectIdsWithoutReference = new HashSet<ObjectId>();
+                    this.State.ReferencesWithoutVersions = referencesWithStrategy;
 
-                    this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
+                    this.State.ReferenceByObjectId = new Dictionary<ObjectId, Reference>();
                     foreach (var reference in referencesWithStrategy)
                     {
-                        this.referenceByObjectId[reference.ObjectId] = reference;
+                        this.State.ReferenceByObjectId[reference.ObjectId] = reference;
                     }
 
-                    this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
+                    this.State.AssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+                    this.State.AssociationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
-                    this.changeSet = new ChangeSet();
+                    this.State.ChangeSet = new ChangeSet();
 
                     this.busyCommittingOrRollingBack = false;
 
@@ -474,33 +442,33 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     this.busyCommittingOrRollingBack = true;
 
-                    var accessed = new List<ObjectId>(this.referenceByObjectId.Keys);
+                    var accessed = new List<ObjectId>(this.State.ReferenceByObjectId.Keys);
 
                     this.Connection.Rollback();
 
                     var referencesWithStrategy = new HashSet<Reference>();
-                    foreach (var reference in this.referenceByObjectId.Values)
+                    foreach (var reference in this.State.ReferenceByObjectId.Values)
                     {
                         reference.Rollback(referencesWithStrategy);
                     }
 
-                    this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
-                    this.referencesWithoutCacheId = referencesWithStrategy;
+                    this.State.ExistingObjectIdsWithoutReference = new HashSet<ObjectId>();
+                    this.State.ReferencesWithoutVersions = referencesWithStrategy;
 
-                    this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
+                    this.State.ReferenceByObjectId = new Dictionary<ObjectId, Reference>();
                     foreach (var reference in referencesWithStrategy)
                     {
-                        this.referenceByObjectId[reference.ObjectId] = reference;
+                        this.State.ReferenceByObjectId[reference.ObjectId] = reference;
                     }
 
-                    this.unflushedRolesByReference = null;
-                    this.modifiedRolesByReference = null;
-                    this.triggersFlushRolesByAssociationType = null;
+                    this.State.UnflushedRolesByReference = null;
+                    this.State.ModifiedRolesByReference = null;
+                    this.State.TriggersFlushRolesByAssociationType = null;
 
-                    this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
+                    this.State.AssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+                    this.State.AssociationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
-                    this.changeSet = new ChangeSet();
+                    this.State.ChangeSet = new ChangeSet();
 
                     this.Database.Cache.OnRollback(accessed);
 
@@ -530,51 +498,9 @@ namespace Allors.Adapters.Object.SqlClient
             return "Session[id=" + this.GetHashCode() + "] " + this.Database;
         }
 
-        internal Roles GetOrCreateRoles(Reference reference)
-        {
-            if (this.modifiedRolesByReference != null)
-            {
-                Roles roles;
-                if (this.modifiedRolesByReference.TryGetValue(reference, out roles))
-                {
-                    return roles;
-                }
-            }
-
-            return new Roles(reference);
-        }
-
-        internal Reference GetOrCreateReferenceForExistingObject(ObjectId objectId)
-        {
-            Reference reference;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
-            {
-                var objectType = this.Database.Cache.GetObjectType(objectId);
-                if (objectType == null)
-                {
-                    this.existingObjectIdsWithoutReference.Add(objectId);
-                    this.Instantiate(this.existingObjectIdsWithoutReference.ToArray());
-                    this.existingObjectIdsWithoutReference = new HashSet<ObjectId>();
-                    this.referenceByObjectId.TryGetValue(objectId, out reference);
-                }
-                else
-                {
-                    reference = new Reference(this, objectType, objectId, false);
-                    this.referenceByObjectId[objectId] = reference;
-                    this.referencesWithoutCacheId.Add(reference);
-                }
-            }
-            else
-            {
-                reference.Exists = true;
-            }
-
-            return reference;
-        }
-
         internal Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
         {
-            var associationByRole = this.GetAssociationByRole(associationType);
+            var associationByRole = this.State.GetAssociationByRole(associationType);
 
             Reference association;
             if (!associationByRole.TryGetValue(roleStrategy.Reference, out association))
@@ -589,18 +515,18 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void SetAssociation(Reference previousAssociation, Strategy roleStrategy, IAssociationType associationType)
         {
-            var associationByRole = this.GetAssociationByRole(associationType);
+            var associationByRole = this.State.GetAssociationByRole(associationType);
             associationByRole[roleStrategy.Reference] = previousAssociation;
         }
 
         internal Reference[] GetOrCreateReferencesForExistingObjects(IEnumerable<ObjectId> objectIds)
         {
-            return objectIds.Select(this.GetOrCreateReferenceForExistingObject).ToArray();
+            return objectIds.Select(objectId => this.State.GetOrCreateReferenceForExistingObject(objectId, this)).ToArray();
         }
 
         internal ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
         {
-            var associationsByRole = this.GetAssociationsByRole(associationType);
+            var associationsByRole = this.State.GetAssociationsByRole(associationType);
 
             ObjectId[] associations;
             if (!associationsByRole.TryGetValue(roleStrategy.Reference, out associations))
@@ -615,7 +541,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void AddAssociation(Reference association, Reference role, IAssociationType associationType)
         {
-            var associationsByRole = this.GetAssociationsByRole(associationType);
+            var associationsByRole = this.State.GetAssociationsByRole(associationType);
 
             ObjectId[] associations;
             if (associationsByRole.TryGetValue(role, out associations))
@@ -626,7 +552,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void RemoveAssociation(Reference association, Reference role, IAssociationType associationType)
         {
-            var associationsByRole = this.GetAssociationsByRole(associationType);
+            var associationsByRole = this.State.GetAssociationsByRole(associationType);
 
             ObjectId[] associations;
             if (associationsByRole.TryGetValue(role, out associations))
@@ -637,32 +563,32 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void Flush()
         {
-            if (this.unflushedRolesByReference != null)
+            if (this.State.UnflushedRolesByReference != null)
             {
-                var flush = new Flush(this, this.unflushedRolesByReference);
+                var flush = new Flush(this, this.State.UnflushedRolesByReference);
                 flush.Execute();
 
-                this.unflushedRolesByReference = null;
-                this.triggersFlushRolesByAssociationType = null;
+                this.State.UnflushedRolesByReference = null;
+                this.State.TriggersFlushRolesByAssociationType = null;
             }
         }
 
-        internal void AddReferenceWithoutCacheIdOrExistsKnown(Reference reference)
+        internal void AddReferenceWithoutVersionOrExistsKnown(Reference reference)
         {
-            this.referencesWithoutCacheId.Add(reference);
+            this.State.ReferencesWithoutVersions.Add(reference);
         }
 
-        internal void GetCacheIdsAndExists()
+        internal void GetVersionAndExists()
         {
-            if (this.referencesWithoutCacheId.Count > 0)
+            if (this.State.ReferencesWithoutVersions.Count > 0)
             {
-                var cacheIdByObjectId = this.Commands.GetCacheIds(this.referencesWithoutCacheId);
-                foreach (var association in this.referencesWithoutCacheId)
+                var versionByObjectId = this.Commands.GetVersions(this.State.ReferencesWithoutVersions);
+                foreach (var association in this.State.ReferencesWithoutVersions)
                 {
-                    long cacheId;
-                    if (cacheIdByObjectId.TryGetValue(association.ObjectId, out cacheId))
+                    long version;
+                    if (versionByObjectId.TryGetValue(association.ObjectId, out version))
                     {
-                        association.CacheId = cacheId;
+                        association.VersionId = version;
                         association.Exists = true;
                     }
                     else
@@ -671,115 +597,50 @@ namespace Allors.Adapters.Object.SqlClient
                     }
                 }
 
-                this.referencesWithoutCacheId = new HashSet<Reference>();
+                this.State.ReferencesWithoutVersions = new HashSet<Reference>();
             }
         }
 
         internal void RequireFlush(Reference association, Roles roles)
         {
-            if (this.unflushedRolesByReference == null)
+            if (this.State.UnflushedRolesByReference == null)
             {
-                this.unflushedRolesByReference = new Dictionary<Reference, Roles>();
+                this.State.UnflushedRolesByReference = new Dictionary<Reference, Roles>();
             }
 
-            this.unflushedRolesByReference[association] = roles;
+            this.State.UnflushedRolesByReference[association] = roles;
 
-            if (this.modifiedRolesByReference == null)
+            if (this.State.ModifiedRolesByReference == null)
             {
-                this.modifiedRolesByReference = new Dictionary<Reference, Roles>();
+                this.State.ModifiedRolesByReference = new Dictionary<Reference, Roles>();
             }
 
-            this.modifiedRolesByReference[association] = roles;
+            this.State.ModifiedRolesByReference[association] = roles;
         }
 
         internal void TriggerFlush(ObjectId role, IAssociationType associationType)
         {
-            if (this.triggersFlushRolesByAssociationType == null)
+            if (this.State.TriggersFlushRolesByAssociationType == null)
             {
-                this.triggersFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();
+                this.State.TriggersFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();
             }
 
             HashSet<ObjectId> associations;
-            if (!this.triggersFlushRolesByAssociationType.TryGetValue(associationType, out associations))
+            if (!this.State.TriggersFlushRolesByAssociationType.TryGetValue(associationType, out associations))
             {
                 associations = new HashSet<ObjectId>();
-                this.triggersFlushRolesByAssociationType[associationType] = associations;
+                this.State.TriggersFlushRolesByAssociationType[associationType] = associations;
             }
 
             associations.Add(role);
         }
 
-        internal Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId)
-        {
-            Reference reference;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
-            {
-                reference = new Reference(this, objectType, objectId, false);
-                this.referenceByObjectId[objectId] = reference;
-                this.referencesWithoutCacheId.Add(reference);
-            }
-            else
-            {
-                reference.Exists = true;
-            }
-
-            return reference;
-        }
-
-        internal Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId, long cacheId)
-        {
-            Reference reference;
-            if (!this.referenceByObjectId.TryGetValue(objectId, out reference))
-            {
-                reference = new Reference(this, objectType, objectId, cacheId);
-                this.referenceByObjectId[objectId] = reference;
-            }
-            else
-            {
-                reference.CacheId = cacheId;
-                reference.Exists = true;
-            }
-
-            return reference;
-        }
-
-        internal Reference CreateReferenceForNewObject(IClass objectType, ObjectId objectId)
-        {
-            var strategyReference = new Reference(this, objectType, objectId, true);
-            this.referenceByObjectId[objectId] = strategyReference;
-            return strategyReference;
-        }
-
-        internal Dictionary<Reference, Reference> GetAssociationByRole(IAssociationType associationType)
-        {
-            Dictionary<Reference, Reference> associationByRole;
-            if (!this.associationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
-            {
-                associationByRole = new Dictionary<Reference, Reference>();
-                this.associationByRoleByAssociationType[associationType] = associationByRole;
-            }
-
-            return associationByRole;
-        }
-
-        internal Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
-        {
-            Dictionary<Reference, ObjectId[]> associationsByRole;
-            if (!this.associationsByRoleByAssociationType.TryGetValue(associationType, out associationsByRole))
-            {
-                associationsByRole = new Dictionary<Reference, ObjectId[]>();
-                this.associationsByRoleByAssociationType[associationType] = associationsByRole;
-            }
-
-            return associationsByRole;
-        }
-        
         internal void FlushConditionally(ObjectId roleId, IAssociationType associationType)
         {
-            if (this.triggersFlushRolesByAssociationType != null)
+            if (this.State.TriggersFlushRolesByAssociationType != null)
             {
                 HashSet<ObjectId> roles;
-                if (this.triggersFlushRolesByAssociationType.TryGetValue(associationType, out roles))
+                if (this.State.TriggersFlushRolesByAssociationType.TryGetValue(associationType, out roles))
                 {
                     if (roles.Contains(roleId))
                     {
@@ -788,6 +649,10 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
         }
-    
+
+        internal void InstantiateReferences(IEnumerable<ObjectId> objectIds)
+        {
+            var forceEvaluation = this.Commands.InstantiateReferences(objectIds).ToArray();
+        }
     }
 }

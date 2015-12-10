@@ -21,9 +21,6 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-using Allors.Meta;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
@@ -33,10 +30,9 @@ namespace Allors.Adapters.Object.SqlClient
 
     using Meta;
 
-    internal class Strategy : IStrategy
+    public class Strategy : IStrategy
     {
         private readonly Reference reference;
-        private readonly ObjectId objectId;
 
         private IObject allorsObject;
         private Roles roles;
@@ -44,18 +40,12 @@ namespace Allors.Adapters.Object.SqlClient
         internal Strategy(Reference reference)
         {
             this.reference = reference;
-            this.objectId = reference.ObjectId;
+            this.ObjectId = reference.ObjectId;
         }
 
-        ISession IStrategy.Session
-        {
-            get { return this.reference.Session; }
-        }
+        ISession IStrategy.Session => this.reference.Session;
 
-        public Session Session
-        {
-            get { return this.reference.Session; }
-        }
+        public Session Session => this.reference.Session;
 
         public IClass Class
         {
@@ -70,49 +60,23 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public ObjectId ObjectId
-        {
-            get { return this.objectId; }
-        }
+        public ObjectId ObjectId { get; }
 
         public ObjectVersion ObjectVersion {
             get
             {
-                return new ObjectVersionLong(this.reference.CacheId);
+                // TODO: Don't create a new object every time
+                return new ObjectVersionLong(this.reference.VersionId);
             }
         }
 
-        public bool IsDeleted
-        {
-            get
-            {
-                return !this.reference.Exists;
-            }
-        }
+        public bool IsDeleted => !this.reference.Exists;
 
-        public bool IsNewInSession
-        {
-            get
-            {
-                return this.reference.IsNew;
-            }
-        }
+        public bool IsNewInSession => this.reference.IsNew;
 
-        internal Roles Roles
-        {
-            get
-            {
-                return this.roles ?? (this.roles = this.reference.Session.GetOrCreateRoles(this.reference));
-            }
-        }
+        internal Roles Roles => this.roles ?? (this.roles = this.reference.Session.State.GetOrCreateRoles(this.reference));
 
-        internal Reference Reference
-        {
-            get
-            {
-                return this.reference;
-            }
-        }
+        internal Reference Reference => this.reference;
 
         public IObject GetObject()
         {
@@ -139,7 +103,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     foreach (var association in this.Session.GetAssociations(this, associationType))
                     {
-                        var associationStrategy = this.Session.GetOrCreateReferenceForExistingObject(association).Strategy;
+                        var associationStrategy = this.Session.State.GetOrCreateReferenceForExistingObject(association, this.Session).Strategy;
                         if (roleType.IsMany)
                         {
                             associationStrategy.RemoveCompositeRole(roleType, this.GetObject()); 
@@ -170,7 +134,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.Session.Commands.DeleteObject(this);
             this.reference.Exists = false;
 
-            this.Session.ChangeSet.OnDeleted(this.ObjectId);
+            this.Session.State.ChangeSet.OnDeleted(this.ObjectId);
         }
 
         public virtual bool ExistRole(IRoleType roleType)
@@ -292,7 +256,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.AssertExist();
             var role = this.Roles.GetCompositeRole(roleType);
-            return (role == null) ? null : this.Session.GetOrCreateReferenceForExistingObject(role).Strategy.GetObject();
+            return (role == null) ? null : this.Session.State.GetOrCreateReferenceForExistingObject(role, this.Session).Strategy.GetObject();
         }
 
         public virtual void SetCompositeRole(IRoleType roleType, IObject newRoleObject)
@@ -395,7 +359,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (!newRoles.Contains(previousRole))
                     {
-                        this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateReferenceForExistingObject(previousRole).Strategy);
+                        this.Roles.RemoveCompositeRole(roleType, this.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Session).Strategy);
                     }
                 }
             }
@@ -411,7 +375,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             foreach (var previousRole in previousRoles)
             {
-                this.Roles.RemoveCompositeRole(roleType, this.Session.GetOrCreateReferenceForExistingObject(previousRole).Strategy);
+                this.Roles.RemoveCompositeRole(roleType, this.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Session).Strategy);
             }
         }
 
@@ -446,7 +410,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             var association = this.Session.GetAssociation(this, associationType);
 
-            return association == null ? null : association.Strategy.GetObject();
+            return association?.Strategy.GetObject();
         }
 
         public virtual bool ExistCompositeAssociations(IAssociationType associationType)
@@ -511,7 +475,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (i == index)
                 {
-                    return this.Session.GetOrCreateReferenceForExistingObject(oid).Strategy.GetObject();
+                    return this.Session.State.GetOrCreateReferenceForExistingObject(oid, this.Session).Strategy.GetObject();
                 }
                 ++i;
             }

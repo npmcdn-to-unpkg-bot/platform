@@ -35,7 +35,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public override int Count => this.ObjectIds.Count;
 
-        public override IObject First => this.ObjectIds.Count > 0 ? this.Session.GetOrCreateReferenceForExistingObject(this.ObjectIds[0]).Strategy.GetObject() : null;
+        public override IObject First => this.ObjectIds.Count > 0 ? this.Session.State.GetOrCreateReferenceForExistingObject(this.ObjectIds[0], this.Session).Strategy.GetObject() : null;
 
         internal ExtentOperation ParentOperationExtent { get; set; }
 
@@ -107,7 +107,10 @@ namespace Allors.Adapters.Object.SqlClient
 
         public override IObject[] ToArray(Type type)
         {
-            return this.Session.Instantiate(this.ObjectIds.ToArray());
+            var objects = this.Session.Instantiate(this.ObjectIds.ToArray());
+            var array = Array.CreateInstance(type, objects.Length);
+            Array.Copy(objects, array, objects.Length);
+            return (IObject[])array;
         }
 
         internal abstract string BuildSql(ExtentStatement statement);
@@ -126,7 +129,7 @@ namespace Allors.Adapters.Object.SqlClient
         protected override IObject GetItem(int index)
         {
             var objectId = this.ObjectIds[index];
-            return this.Session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject();
+            return this.Session.State.GetOrCreateReferenceForExistingObject(objectId, this.Session).Strategy.GetObject();
         }
 
         protected abstract IList<ObjectId> GetObjectIds();

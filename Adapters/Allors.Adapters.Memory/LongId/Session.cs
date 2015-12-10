@@ -21,8 +21,6 @@
 
 namespace Allors.Adapters.Memory.LongId
 {
-    using System;
-
     internal sealed class Session : Memory.Session
     {
         private ObjectIds objectIds;

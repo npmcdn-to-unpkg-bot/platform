@@ -174,7 +174,7 @@ namespace Allors.Adapters.Object.SqlClient
                 this.Append(" WHERE ( ");
                 if (!this.Type.IsInterface)
                 {
-                    this.Append(" " + alias + "." + Mapping.ColumnNameForType + "=" + this.AddParameter(this.Type.Id));
+                    this.Append(" " + alias + "." + Mapping.ColumnNameForClass + "=" + this.AddParameter(this.Type.Id));
                 }
                 else
                 {
@@ -190,7 +190,7 @@ namespace Allors.Adapters.Object.SqlClient
                             this.Append(" OR ");
                         }
 
-                        this.Append(" " + alias + "." + Mapping.ColumnNameForType + "=" + this.AddParameter(subClass.Id));
+                        this.Append(" " + alias + "." + Mapping.ColumnNameForClass + "=" + this.AddParameter(subClass.Id));
                     }
                 }
 

@@ -49,9 +49,9 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Execute()
         {
-            if (this.references.Any(reference => reference.IsUnknownCacheId || !reference.ExistsKnown))
+            if (this.references.Any(reference => reference.IsUnknownVersion || !reference.ExistsKnown))
             {
-                this.session.Session.GetCacheIdsAndExists();
+                this.session.Session.GetVersionAndExists();
             }
 
             var unitRoles = false;

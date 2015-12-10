@@ -75,15 +75,15 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var atLeastOne = false;
 
-                var sql = "SELECT " + Mapping.ColumnNameForObject + ", " + Mapping.ColumnNameForCache + "\n";
+                var sql = "SELECT " + Mapping.ColumnNameForObject + ", " + Mapping.ColumnNameForVersion + "\n";
                 sql += "FROM " + this.database.Mapping.TableNameForObjects + "\n";
-                sql += "WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParamNameForType+ "\n";
+                sql += "WHERE " + Mapping.ColumnNameForClass + "=" + Mapping.ParamNameForClass+ "\n";
                 sql += "ORDER BY " + Mapping.ColumnNameForObject;
 
                 using (var command = session.Connection.CreateCommand())
                 {
                     command.CommandText = sql;
-                    command.AddInParameter(Mapping.ParamNameForType, type.Id);
+                    command.AddInParameter(Mapping.ParamNameForClass, type.Id);
 
                     using (var reader = command.ExecuteReader())
                     {
@@ -102,9 +102,9 @@ namespace Allors.Adapters.Object.SqlClient
                             }
 
                             var objectId = this.database.ObjectIds.Parse(reader[0].ToString());
-                            var cacheId = new ObjectVersionLong(reader[1].ToString());
+                            var version = new ObjectVersionLong(reader[1].ToString());
 
-                            this.writer.WriteString(objectId.Value + Serialization.ObjectSplitter + cacheId.Value);
+                            this.writer.WriteString(objectId.Value + Serialization.ObjectSplitter + version.Value);
                         }
 
                         reader.Close();

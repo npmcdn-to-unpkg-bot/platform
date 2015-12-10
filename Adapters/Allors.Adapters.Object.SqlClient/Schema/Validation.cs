@@ -150,8 +150,8 @@ namespace Allors.Adapters.Object.SqlClient
                 }
 
                 this.ValidateColumn(objectsTable, Mapping.ColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
-                this.ValidateColumn(objectsTable, Mapping.ColumnNameForType, Mapping.SqlTypeForType);
-                this.ValidateColumn(objectsTable, Mapping.ColumnNameForCache, Mapping.SqlTypeForCache);
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForClass, Mapping.SqlTypeForClass);
+                this.ValidateColumn(objectsTable, Mapping.ColumnNameForVersion, Mapping.SqlTypeForVersion);
             }
             
             // Object Tables
@@ -167,7 +167,7 @@ namespace Allors.Adapters.Object.SqlClient
                 else
                 {
                     this.ValidateColumn(table, Mapping.ColumnNameForObject, this.Database.Mapping.SqlTypeForObject);
-                    this.ValidateColumn(table, Mapping.ColumnNameForType, Mapping.SqlTypeForType);
+                    this.ValidateColumn(table, Mapping.ColumnNameForClass, Mapping.SqlTypeForClass);
 
                     foreach (var associationType in @class.AssociationTypes)
                     {

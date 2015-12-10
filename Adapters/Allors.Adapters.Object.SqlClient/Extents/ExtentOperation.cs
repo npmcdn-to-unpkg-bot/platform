@@ -102,7 +102,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     while (reader.Read())
                     {
-                        var objectId = this.Session.Database.ObjectIds.Parse(reader.GetValue(0).ToString());
+                        var objectId = this.Session.State.GetObjectIdForExistingObject(reader.GetValue(0).ToString());
                         objectIds.Add(objectId);
                     }
 

@@ -23,14 +23,12 @@ namespace Allors.Adapters.Object.SqlClient
     using System;
     using System.Collections.Generic;
 
-    using Adapters;
     using Adapters.Object.SqlClient.Caching;
 
     using Allors;
-    using Allors.Adapters.Object.SqlClient.Caching;
     using Allors.Meta;
 
-    internal sealed class Roles
+    public sealed class Roles
     {
         internal readonly Reference Reference;
 
@@ -54,52 +52,24 @@ namespace Allors.Adapters.Object.SqlClient
                 if (this.cachedObject == null && !this.Reference.IsNew)
                 {
                     var cache = this.Reference.Session.Database.Cache;
-                    this.cachedObject = cache.GetOrCreateCachedObject(this.Reference.Class, this.Reference.ObjectId, this.Reference.CacheId);
+                    this.cachedObject = cache.GetOrCreateCachedObject(this.Reference.Class, this.Reference.ObjectId, this.Reference.VersionId);
                 }
 
                 return this.cachedObject;
             }
         }
 
-        internal Dictionary<IRoleType, object> ModifiedRoleByRoleType
-        {
-            get
-            {
-                return this.modifiedRoleByRoleType ?? (this.modifiedRoleByRoleType = new Dictionary<IRoleType, object>());
-            }
-        }
+        internal Dictionary<IRoleType, object> ModifiedRoleByRoleType => 
+            this.modifiedRoleByRoleType ?? (this.modifiedRoleByRoleType = new Dictionary<IRoleType, object>());
 
-        private Dictionary<IRoleType, object> OriginalRoleByRoleType
-        {
-            get
-            {
-                return this.originalRoleByRoleType ?? (this.originalRoleByRoleType = new Dictionary<IRoleType, object>());
-            }
-        }
+        private Dictionary<IRoleType, object> OriginalRoleByRoleType => 
+            this.originalRoleByRoleType ?? (this.originalRoleByRoleType = new Dictionary<IRoleType, object>());
 
-        private HashSet<IRoleType> RequireFlushRoles
-        {
-            get
-            {
-                return this.requireFlushRoles ?? (this.requireFlushRoles = new HashSet<IRoleType>());
-            }
-        }
+        private HashSet<IRoleType> RequireFlushRoles => 
+            this.requireFlushRoles ?? (this.requireFlushRoles = new HashSet<IRoleType>());
 
-        private Dictionary<IRoleType, CompositesRole> ModifiedRolesByRoleType
-        {
-            get
-            {
-                return this.modifiedCompositesRoleByRoleType ?? (this.modifiedCompositesRoleByRoleType = new Dictionary<IRoleType, CompositesRole>());
-            }
-        }
-
-        private ChangeSet ChangeSet
-        {
-            get
-            {
-                return this.Reference.Session.ChangeSet;
-            }
-        }
+        private Dictionary<IRoleType, CompositesRole> ModifiedRolesByRoleType => 
+            this.modifiedCompositesRoleByRoleType ?? (this.modifiedCompositesRoleByRoleType = new Dictionary<IRoleType, CompositesRole>());
 
         internal bool TryGetUnitRole(IRoleType roleType, out object role)
         {
@@ -138,7 +108,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal void SetUnitRole(IRoleType roleType, object role)
         {
-            this.ChangeSet.OnChangingUnitRole(this, roleType);
+            this.Reference.Session.State.ChangeSet.OnChangingUnitRole(this, roleType);
 
             this.SetOriginal(roleType, role);
 
@@ -189,9 +159,9 @@ namespace Allors.Adapters.Object.SqlClient
         internal void SetCompositeRole(IRoleType roleType, Strategy newRoleStrategy)
         {
             var previousRole = this.GetCompositeRole(roleType);
-            var newRole = newRoleStrategy == null ? null : newRoleStrategy.Reference.ObjectId;
+            var newRole = newRoleStrategy?.Reference.ObjectId;
 
-            this.ChangeSet.OnChangingCompositeRole(this, roleType, previousRole, newRole);
+            this.Reference.Session.State.ChangeSet.OnChangingCompositeRole(this, roleType, previousRole, newRole);
 
             if (newRole != null && !newRole.Equals(previousRole))
             {
@@ -199,12 +169,9 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (previousRole != null)
                     {
-                        var previousRoleStrategy = this.Reference.Session.GetOrCreateReferenceForExistingObject(previousRole).Strategy;
+                        var previousRoleStrategy = this.Reference.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Reference.Session).Strategy;
                         var previousAssociation = previousRoleStrategy.GetCompositeAssociation(roleType.AssociationType);
-                        if (previousAssociation != null)
-                        {
-                            previousAssociation.Strategy.RemoveCompositeRole(roleType);
-                        }
+                        previousAssociation?.Strategy.RemoveCompositeRole(roleType);
                     }
 
                     var newRoleAssociation = newRoleStrategy.GetCompositeAssociation(roleType.AssociationType);
@@ -219,7 +186,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (previousRole != null)
                     {
-                        var previousRoleReference = this.Reference.Session.GetOrCreateReferenceForExistingObject(previousRole);
+                        var previousRoleReference = this.Reference.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Reference.Session);
                         this.Reference.Session.RemoveAssociation(this.Reference, previousRoleReference, roleType.AssociationType);
                     }
                 }
@@ -254,9 +221,9 @@ namespace Allors.Adapters.Object.SqlClient
             var currentRole = this.GetCompositeRole(roleType);
             if (currentRole != null)
             {
-                var currentRoleStrategy = this.Reference.Session.GetOrCreateReferenceForExistingObject(currentRole).Strategy;
+                var currentRoleStrategy = this.Reference.Session.State.GetOrCreateReferenceForExistingObject(currentRole, this.Reference.Session).Strategy;
 
-                this.ChangeSet.OnChangingCompositeRole(this, roleType, currentRoleStrategy == null ? null : currentRoleStrategy.ObjectId, null);
+                this.Reference.Session.State.ChangeSet.OnChangingCompositeRole(this, roleType, currentRoleStrategy?.ObjectId, null);
 
                 if (roleType.AssociationType.IsOne)
                 {
@@ -308,7 +275,7 @@ namespace Allors.Adapters.Object.SqlClient
                 this.ModifiedRolesByRoleType[roleType] = compositesRole;
             }
 
-            this.ChangeSet.OnChangingCompositesRole(this, roleType, role);
+            this.Reference.Session.State.ChangeSet.OnChangingCompositesRole(this, roleType, role);
 
             if (!compositesRole.Contains(role.ObjectId))
             {
@@ -317,7 +284,7 @@ namespace Allors.Adapters.Object.SqlClient
                 if (roleType.AssociationType.IsOne)
                 {
                     var previousAssociationObject = role.GetCompositeAssociation(roleType.AssociationType);
-                    var previousAssociation = previousAssociationObject != null ? (Strategy)previousAssociationObject.Strategy : null;
+                    var previousAssociation = (Strategy)previousAssociationObject?.Strategy;
                     if (previousAssociation != null && !previousAssociation.ObjectId.Equals(this.Reference.ObjectId))
                     {
                         previousAssociation.RemoveCompositeRole(roleType, role.GetObject());
@@ -347,7 +314,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (compositesRole.Contains(role.ObjectId))
             {
-                this.ChangeSet.OnChangingCompositesRole(this, roleType, role);
+                this.Reference.Session.State.ChangeSet.OnChangingCompositesRole(this, roleType, role);
 
                 compositesRole.Remove(role.ObjectId);
 
@@ -440,13 +407,13 @@ namespace Allors.Adapters.Object.SqlClient
             if (this.ModifiedRolesByRoleType != null && this.ModifiedRolesByRoleType.TryGetValue(roleType, out compositesRole))
             {
                 var objectId = compositesRole.First;
-                return objectId == null ? null : session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject();
+                return objectId == null ? null : session.State.GetOrCreateReferenceForExistingObject(objectId, session).Strategy.GetObject();
             }
 
             var nonModifiedCompositeRoles = this.GetNonModifiedCompositeRoles(roleType);
             if (nonModifiedCompositeRoles.Length > 0)
             {
-                return session.GetOrCreateReferenceForExistingObject(nonModifiedCompositeRoles[0]).Strategy.GetObject();
+                return session.State.GetOrCreateReferenceForExistingObject(nonModifiedCompositeRoles[0], session).Strategy.GetObject();
             }
 
             return null;
@@ -460,7 +427,7 @@ namespace Allors.Adapters.Object.SqlClient
                 var i = 0;
                 foreach (var objectId in compositesRole.ObjectIds)
                 {
-                    array.SetValue(session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject(), index + i);
+                    array.SetValue(session.State.GetOrCreateReferenceForExistingObject(objectId, session).Strategy.GetObject(), index + i);
                     ++i;
                 }
 
@@ -471,7 +438,7 @@ namespace Allors.Adapters.Object.SqlClient
             for (var i = 0; i < nonModifiedCompositeRoles.Length; i++)
             {
                 var objectId = nonModifiedCompositeRoles[i];
-                array.SetValue(session.GetOrCreateReferenceForExistingObject(objectId).Strategy.GetObject(), index + i);
+                array.SetValue(session.State.GetOrCreateReferenceForExistingObject(objectId, session).Strategy.GetObject(), index + i);
             }
         }
 
@@ -563,8 +530,8 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 get
                 {
-                    var addedCount = this.added == null ? 0 : this.added.Count;
-                    var removedCount = this.removed == null ? 0 : this.removed.Count;
+                    var addedCount = this.added?.Count ?? 0;
+                    var removedCount = this.removed?.Count ?? 0;
 
                     return this.baseline.Count + addedCount - removedCount;
                 }

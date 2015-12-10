@@ -113,8 +113,8 @@ namespace Allors.Adapters.Object.SqlClient
         internal void AddTypeParameter(IClass @class)
         {
             var sqlParameter = this.CreateParameter();
-            sqlParameter.ParameterName = Mapping.ParamNameForType;
-            sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+            sqlParameter.ParameterName = Mapping.ParamNameForClass;
+            sqlParameter.SqlDbType = Mapping.SqlDbTypeForClass;
             sqlParameter.Value = @class.Id;
 
             this.Parameters.Add(sqlParameter);

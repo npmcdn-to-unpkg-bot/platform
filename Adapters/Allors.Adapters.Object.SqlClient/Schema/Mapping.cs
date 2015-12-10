@@ -32,17 +32,17 @@ namespace Allors.Adapters.Object.SqlClient
         public const string ParamFormat = "@{0}";
 
         public const string ColumnNameForObject = "o";
-        public const string ColumnNameForType = "t";
-        public const string ColumnNameForCache = "c";
+        public const string ColumnNameForClass = "t";
+        public const string ColumnNameForVersion = "c";
         public const string ColumnNameForAssociation = "a";
         public const string ColumnNameForRole = "r";
 
-        public const string SqlTypeForType = "uniqueidentifier";
-        public const string SqlTypeForCache = "bigint";
+        public const string SqlTypeForClass = "uniqueidentifier";
+        public const string SqlTypeForVersion = "bigint";
         public const string SqlTypeForCount = "int";
 
-        public const SqlDbType SqlDbTypeForType = SqlDbType.UniqueIdentifier;
-        public const SqlDbType SqlDbTypeForCache = SqlDbType.BigInt;
+        public const SqlDbType SqlDbTypeForClass = SqlDbType.UniqueIdentifier;
+        public const SqlDbType SqlDbTypeForVersion = SqlDbType.BigInt;
         public const SqlDbType SqlDbTypeForCount = SqlDbType.Int;
 
         public readonly string SqlTypeForObject;
@@ -51,8 +51,8 @@ namespace Allors.Adapters.Object.SqlClient
         public readonly Dictionary<IRoleType, string> ParamNameByRoleType;
 
         internal static readonly string ParamNameForObject = string.Format(ParamFormat, ColumnNameForObject);
-        internal static readonly string ParamNameForType = string.Format(ParamFormat, ColumnNameForType);
-        internal static readonly string ParamNameForCache = string.Format(ParamFormat, ColumnNameForCache);
+        internal static readonly string ParamNameForClass = string.Format(ParamFormat, ColumnNameForClass);
+        internal static readonly string ParamNameForVersion = string.Format(ParamFormat, ColumnNameForVersion);
         internal static readonly string ParamNameForAssociation = string.Format(ParamFormat, ColumnNameForAssociation);
         internal static readonly string ParamNameForCompositeRole = string.Format(ParamFormat, ColumnNameForRole);
         internal static readonly string ParamNameForCount = string.Format(ParamFormat, "count");
@@ -68,7 +68,7 @@ namespace Allors.Adapters.Object.SqlClient
         internal readonly string TableTypeNameForVersionedObject;
 
         internal readonly string TableTypeColumnNameForObject;
-        internal readonly string TableTypeColumnNameForCache;
+        internal readonly string TableTypeColumnNameForVersion;
 
         internal readonly string TableTypeNameForCompositeRelation;
         internal readonly string TableTypeNameForStringRelation;
@@ -107,10 +107,10 @@ namespace Allors.Adapters.Object.SqlClient
         internal readonly Dictionary<IRelationType, string> ProcedureNameForGetAssociationByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForPrefetchAssociationByRelationType;
         
-        private const string ProcedurePrefixForGetCache = "gc";
-        private const string ProcedurePrefixForSetCache = "sc";
-        private const string ProcedurePrefixForUpdateCache = "uc";
-        private const string ProcedurePrefixForResetCache = "rc";
+        private const string ProcedurePrefixForGetVersion = "gv";
+        private const string ProcedurePrefixForSetVersion = "sv";
+        private const string ProcedurePrefixForUpdateVersion = "uc";
+
         private const string ProcedurePrefixForCreateObject = "co_";
         private const string ProcedurePrefixForCreateObjects = "cos_";
         private const string ProcedurePrefixForLoad = "l_";
@@ -162,7 +162,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.TableTypeNamePrefixForDecimalRelation = database.SchemaName + "." + "_t_de";
             
             this.TableTypeColumnNameForObject = "_o";
-            this.TableTypeColumnNameForCache = "_c";
+            this.TableTypeColumnNameForVersion = "_c";
             this.TableTypeColumnNameForAssociation = "_a";
             this.TableTypeColumnNameForRole = "_r";
 
@@ -205,7 +205,7 @@ namespace Allors.Adapters.Object.SqlClient
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForVersionedObject + " AS TABLE\n");
                 sql.Append("(" + this.TableTypeColumnNameForObject + " " + this.SqlTypeForObject + ",\n");
-                sql.Append(this.TableTypeColumnNameForCache + " " + SqlTypeForCache + ")\n");
+                sql.Append(this.TableTypeColumnNameForVersion + " " + SqlTypeForVersion + ")\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForVersionedObject, sql.ToString());
             }
@@ -375,39 +375,39 @@ namespace Allors.Adapters.Object.SqlClient
             this.ProcedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
             this.ProcedureNameForPrefetchAssociationByRelationType = new Dictionary<IRelationType, string>();
 
-            // Get Cache Ids
-            this.ProcedureNameForGetVersion = this.Database.SchemaName + "." + ProcedurePrefixForGetCache;
+            // Get Version Ids
+            this.ProcedureNameForGetVersion = this.Database.SchemaName + "." + ProcedurePrefixForGetVersion;
             var definition =
 @"CREATE PROCEDURE " + this.ProcedureNameForGetVersion + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 
-    SELECT " + ColumnNameForObject + ", " + ColumnNameForCache + @"
+    SELECT " + ColumnNameForObject + ", " + ColumnNameForVersion + @"
     FROM " + this.TableNameForObjects + @"
     WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
             this.procedureDefinitionByName.Add(this.ProcedureNameForGetVersion, definition);
 
-            // Set Cache Ids
-            this.ProcedureNameForSetVersion = this.Database.SchemaName + "." + ProcedurePrefixForSetCache;
+            // Set Version Ids
+            this.ProcedureNameForSetVersion = this.Database.SchemaName + "." + ProcedurePrefixForSetVersion;
             definition = 
 @"CREATE PROCEDURE " + this.ProcedureNameForSetVersion + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForVersionedObject + @" READONLY
 AS 
     UPDATE " + this.TableNameForObjects + @"
-    SET " + ColumnNameForCache + " = r." + this.TableTypeColumnNameForCache + @"
+    SET " + ColumnNameForVersion + " = r." + this.TableTypeColumnNameForVersion + @"
     FROM " + this.TableNameForObjects + @"
     INNER JOIN " + ParamNameForTableType + @" AS r
     ON " + ColumnNameForObject + " = r." + this.TableTypeColumnNameForObject + @"
 ";
             this.procedureDefinitionByName.Add(this.ProcedureNameForSetVersion, definition);
 
-            // Update Cache Ids
-            this.ProcedureNameForUpdateVersion = this.Database.SchemaName + "." + ProcedurePrefixForUpdateCache;
+            // Update Version Ids
+            this.ProcedureNameForUpdateVersion = this.Database.SchemaName + "." + ProcedurePrefixForUpdateVersion;
             definition =
 @"CREATE PROCEDURE " + this.ProcedureNameForUpdateVersion + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 
     UPDATE " + this.TableNameForObjects + @"
-    SET " + ColumnNameForCache + " = " + ColumnNameForCache + @" + 1
+    SET " + ColumnNameForVersion + " = " + ColumnNameForVersion + @" + 1
     FROM " + this.TableNameForObjects + @"
     WHERE " + ColumnNameForObject + " IN ( SELECT " + this.TableTypeColumnNameForObject + " FROM " + ParamNameForTableType + ");\n\n";
             this.procedureDefinitionByName.Add(this.ProcedureNameForUpdateVersion, definition);
@@ -420,28 +420,28 @@ AS
                 // Load Objects
                 this.ProcedureNameForLoadObjectByClass.Add(@class, this.Database.SchemaName + "." + ProcedurePrefixForLoad + className);
                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForLoadObjectByClass[@class] + @"
-    " + ParamNameForType + @" " + SqlTypeForType + @",
+    " + ParamNameForClass + @" " + SqlTypeForClass + @",
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS
-    INSERT INTO " + table + " (" + ColumnNameForType + ", " + ColumnNameForObject + @")
-    SELECT " + ParamNameForType + @", " + this.TableTypeColumnNameForObject + @"
+    INSERT INTO " + table + " (" + ColumnNameForClass + ", " + ColumnNameForObject + @")
+    SELECT " + ParamNameForClass + @", " + this.TableTypeColumnNameForObject + @"
     FROM " + ParamNameForTableType + "\n";
                 this.procedureDefinitionByName.Add(this.ProcedureNameForLoadObjectByClass[@class], definition);
 
                 // CreateObject
                 this.ProcedureNameForCreateObjectByClass.Add(@class, this.Database.SchemaName + "." + ProcedurePrefixForCreateObject + className);
                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForCreateObjectByClass[@class] + @"
-" + ParamNameForType + @" " + SqlTypeForType + @"
+" + ParamNameForClass + @" " + SqlTypeForClass + @"
 AS 
 DECLARE  " + ParamNameForObject + " AS " + this.SqlTypeForObject + @"
 
-INSERT INTO " + this.TableNameForObjects + " (" + ColumnNameForType + ", " + ColumnNameForCache + @")
-VALUES (" + ParamNameForType + ", " + Reference.InitialCacheId + @");
+INSERT INTO " + this.TableNameForObjects + " (" + ColumnNameForClass + ", " + ColumnNameForVersion + @")
+VALUES (" + ParamNameForClass + ", " + Reference.InitialVersion + @");
 
 SELECT " + ParamNameForObject + @" = SCOPE_IDENTITY();
 
-INSERT INTO " + table + " (" + ColumnNameForObject + "," + ColumnNameForType + @")
-VALUES (" + ParamNameForObject + "," + ParamNameForType + @");
+INSERT INTO " + table + " (" + ColumnNameForObject + "," + ColumnNameForClass + @")
+VALUES (" + ParamNameForObject + "," + ParamNameForClass + @");
 
 SELECT " + ParamNameForObject + @";";
                 this.procedureDefinitionByName.Add(this.ProcedureNameForCreateObjectByClass[@class], definition);
@@ -449,7 +449,7 @@ SELECT " + ParamNameForObject + @";";
                 // CreateObjects
                 this.ProcedureNameForCreateObjectsByClass.Add(@class, this.Database.SchemaName + "." + ProcedurePrefixForCreateObjects + className);
                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForCreateObjectsByClass[@class] + @"
-" + ParamNameForType + @" " + SqlTypeForType + @",
+" + ParamNameForClass + @" " + SqlTypeForClass + @",
 " + ParamNameForCount + @" " + SqlTypeForCount + @"
 AS 
 BEGIN
@@ -460,8 +460,8 @@ SET @COUNTER = 0
 WHILE @COUNTER < " + ParamNameForCount + @"
     BEGIN
 
-    INSERT INTO " + this.TableNameForObjects + " (" + ColumnNameForType + ", " + ColumnNameForCache + @")
-    VALUES (" + ParamNameForType + ", " + Reference.InitialCacheId + @" );
+    INSERT INTO " + this.TableNameForObjects + " (" + ColumnNameForClass + ", " + ColumnNameForVersion + @")
+    VALUES (" + ParamNameForClass + ", " + Reference.InitialVersion + @" );
 
     INSERT INTO @IDS(id)
     VALUES (SCOPE_IDENTITY());
@@ -469,8 +469,8 @@ WHILE @COUNTER < " + ParamNameForCount + @"
     SET @COUNTER = @COUNTER+1;
     END
 
-INSERT INTO " + this.TableNameForObjectByClass[@class.ExclusiveClass] + " (" + ColumnNameForObject + "," + ColumnNameForType + @")
-SELECT ID," + ParamNameForType + @" FROM @IDS;
+INSERT INTO " + this.TableNameForObjectByClass[@class.ExclusiveClass] + " (" + ColumnNameForObject + "," + ColumnNameForClass + @")
+SELECT ID," + ParamNameForClass + @" FROM @IDS;
 
 SELECT id FROM @IDS;
 END";

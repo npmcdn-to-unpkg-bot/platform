@@ -32,9 +32,9 @@ namespace Allors.Adapters.Object.SqlClient.Caching.Debugging
         {
         }
 
-        protected override CachedObject CreateCachedObject(long localCacheId)
+        protected override CachedObject CreateCachedObject(long version)
         {
-            return new DebugCachedObject(localCacheId);
+            return new DebugCachedObject(version);
         }
     }
 }

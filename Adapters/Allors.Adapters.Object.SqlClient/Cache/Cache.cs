@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DefaultCache.cs" company="Allors bvba">
+// <copyright file="Cache.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -67,25 +67,25 @@ namespace Allors.Adapters.Object.SqlClient.Caching
             this.ObjectTypeByObjectId.Clear();
         }
 
-        public ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, long localCacheId)
+        public ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, long version)
         {
             if (this.ExcludedClasses != null && this.ExcludedClasses.Contains(concreteClass))
             {
-                return this.CreateCachedObject(localCacheId);
+                return this.CreateCachedObject(version);
             }
 
             CachedObject cachedObject;
             if (this.CachedObjectByObjectId.TryGetValue(objectId, out cachedObject))
             {
-                if (!cachedObject.LocalCacheVersion.Equals(localCacheId))
+                if (!cachedObject.LocalCacheVersion.Equals(version))
                 {
-                    cachedObject = this.CreateCachedObject(localCacheId);
+                    cachedObject = this.CreateCachedObject(version);
                     this.CachedObjectByObjectId[objectId] = cachedObject;
                 }
             }
             else
             {
-                cachedObject = this.CreateCachedObject(localCacheId);
+                cachedObject = this.CreateCachedObject(version);
                 this.CachedObjectByObjectId[objectId] = cachedObject;
             }
 
@@ -120,6 +120,6 @@ namespace Allors.Adapters.Object.SqlClient.Caching
         {
         }
 
-        protected abstract CachedObject CreateCachedObject(long localCacheId);
+        protected abstract CachedObject CreateCachedObject(long version);
     }
 }

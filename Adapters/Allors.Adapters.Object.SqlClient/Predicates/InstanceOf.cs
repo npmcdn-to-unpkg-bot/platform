@@ -38,14 +38,14 @@ namespace Allors.Adapters.Object.SqlClient
             var schema = statement.Mapping;
             if (this.instanceClasses.Length == 1)
             {
-                statement.Append(alias + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[0].Id) + " ");
+                statement.Append(alias + "." + Mapping.ColumnNameForClass + "=" + statement.AddParameter(this.instanceClasses[0].Id) + " ");
             }
             else if (this.instanceClasses.Length > 1)
             {
                 statement.Append(" ( ");
                 for (var i = 0; i < this.instanceClasses.Length; i++)
                 {
-                    statement.Append(alias + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[i].Id));
+                    statement.Append(alias + "." + Mapping.ColumnNameForClass + "=" + statement.AddParameter(this.instanceClasses[i].Id));
                     if (i < this.instanceClasses.Length - 1)
                     {
                         statement.Append(" OR ");

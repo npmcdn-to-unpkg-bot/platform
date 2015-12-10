@@ -78,7 +78,7 @@ namespace Allors.Adapters.Object.SqlClient
                     return null;
                 }
 
-                return this.strategy.Session.GetOrCreateReferenceForExistingObject(associations[0]).Strategy.GetObject();
+                return this.strategy.Session.State.GetOrCreateReferenceForExistingObject(associations[0], this.strategy.Session).Strategy.GetObject();
             }
         }
 
@@ -194,7 +194,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             var associations = this.strategy.ExtentGetCompositeAssociations(this.associationType);
-            return this.strategy.Session.GetOrCreateReferenceForExistingObject(associations[index]).Strategy.GetObject();
+            return this.strategy.Session.State.GetOrCreateReferenceForExistingObject(associations[index], this.strategy.Session).Strategy.GetObject();
         }
 
         private void LazyUpgrade()

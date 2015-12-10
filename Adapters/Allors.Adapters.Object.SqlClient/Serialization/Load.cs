@@ -168,7 +168,7 @@ namespace Allors.Adapters.Object.SqlClient
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
 
                                 var objectIds = new ObjectId[objectIdStringArray.Length];
-                                var cacheIds = new ObjectVersion[objectIdStringArray.Length];
+                                var versions = new ObjectVersion[objectIdStringArray.Length];
                                 for (var i = 0; i < objectIds.Length; i++)
                                 {
                                     var objectIdString = objectIdStringArray[i];
@@ -178,13 +178,13 @@ namespace Allors.Adapters.Object.SqlClient
                                         var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
 
                                         var objectId = this.database.ObjectIds.Parse(objectArray[0]);
-                                        var cacheId = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(Reference.InitialCacheId);
+                                        var version = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(Reference.InitialVersion);
 
                                         objectIds[i] = objectId;
-                                        cacheIds[i] = cacheId;
+                                        versions[i] = version;
 
                                         this.objectTypeByObjectId[objectId] = objectType;
-                                        this.objectVersionByObjectId[objectId] = cacheId;
+                                        this.objectVersionByObjectId[objectId] = version;
                                     }
                                     else
                                     {
@@ -640,8 +640,8 @@ namespace Allors.Adapters.Object.SqlClient
                 if (type.IsClass)
                 {
                     sql = new StringBuilder();
-                    sql.Append("INSERT INTO " + this.database.Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + ")\n");
-                    sql.Append("SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ", " + Reference.InitialCacheId + "\n");
+                    sql.Append("INSERT INTO " + this.database.Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + "," + Mapping.ColumnNameForVersion + ")\n");
+                    sql.Append("SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + ", " + Reference.InitialVersion + "\n");
                     sql.Append("FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveClass]);
 
                     lock (this)

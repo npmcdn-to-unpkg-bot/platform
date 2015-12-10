@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="SessionCommands.cs" company="Allors bvba">
+// <copyright file="Commands.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -29,7 +29,7 @@ namespace Allors.Adapters.Object.SqlClient
 
     using Allors.Meta;
 
-    public sealed class SessionCommands
+    public sealed class Commands
     {
         private static readonly ObjectId[] EmptyObjectIds = { };
 
@@ -61,7 +61,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         private Command getClassAndVersion;
         private Command getVersion;
-        private Command updateCacheIds;
+        private Command updateVersions;
         #endregion
 
         #region Properties
@@ -187,7 +187,7 @@ namespace Allors.Adapters.Object.SqlClient
         }
         #endregion
 
-        internal SessionCommands(Session session, Connection connection)
+        internal Commands(Session session, Connection connection)
         {
             this.Session = session;
             this.connection = connection;
@@ -216,7 +216,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.deleteObjectByClass = null;
 
             this.getVersion = null;
-            this.updateCacheIds = null;
+            this.updateVersions = null;
             this.getClassAndVersion = null;
         }
 
@@ -499,7 +499,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                var objectId = this.Database.ObjectIds.Parse(result.ToString());
+                var objectId = this.Session.State.GetObjectIdForExistingObject(result.ToString());
                 // TODO: Should add to objectsToLoad
                 roles.CachedObject.SetValue(roleType, objectId);
             }
@@ -569,7 +569,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    var id = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var id = this.Session.State.GetObjectIdForExistingObject(reader[0].ToString());
                     objectIds.Add(id);
                 }
             }
@@ -662,15 +662,15 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (result != null && result != DBNull.Value)
             {
-                var id = this.Database.ObjectIds.Parse(result.ToString());
+                var id = this.Session.State.GetObjectIdForExistingObject(result.ToString());
 
                 if (associationType.ObjectType.ExistExclusiveClass)
                 {
-                    associationObject = this.Session.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, id);
+                    associationObject = this.Session.State.GetOrCreateReferenceForExistingObject(associationType.ObjectType.ExclusiveClass, id, this.Session);
                 }
                 else
                 {
-                    associationObject = this.Session.GetOrCreateReferenceForExistingObject(id);
+                    associationObject = this.Session.State.GetOrCreateReferenceForExistingObject(id, this.Session);
                 }
             }
 
@@ -700,7 +700,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    var id = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    var id = this.Session.State.GetObjectIdForExistingObject(reader[0].ToString());
                     objectIds.Add(id);
                 }
             }
@@ -722,12 +722,12 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id;
+                command.Parameters[Mapping.ParamNameForClass].Value = (object)@class.Id;
             }
 
             var result = command.ExecuteScalar();
-            var objectId = this.Database.ObjectIds.Parse(result.ToString());
-            return this.Session.CreateReferenceForNewObject(@class, objectId);
+            var objectId = this.Session.State.GetObjectId(result.ToString());
+            return this.Session.State.CreateReferenceForNewObject(@class, objectId, this.Session);
         }
 
         internal IList<Reference> CreateObjects(IClass @class, int count)
@@ -746,7 +746,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForType].Value = @class.Id;
+                command.Parameters[Mapping.ParamNameForClass].Value = @class.Id;
                 command.Parameters[Mapping.ParamNameForCount].Value = count;
             }
 
@@ -755,7 +755,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    object id = this.Database.ObjectIds.Parse(reader[0].ToString());
+                    object id = this.Session.State.GetObjectId(reader[0].ToString());
                     objectIds.Add(id);
                 }
             }
@@ -764,8 +764,8 @@ namespace Allors.Adapters.Object.SqlClient
 
             foreach (var id in objectIds)
             {
-                var objectId = this.Database.ObjectIds.Parse(id.ToString());
-                var strategySql = this.Session.CreateReferenceForNewObject(@class, objectId);
+                var objectId = this.Session.State.GetObjectId(id.ToString());
+                var strategySql = this.Session.State.CreateReferenceForNewObject(@class, objectId, this.Session);
                 strategies.Add(strategySql);
             }
 
@@ -791,13 +791,13 @@ namespace Allors.Adapters.Object.SqlClient
 
                 sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " ON\n";
 
-                sql += "    INSERT INTO " + schema.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + ")\n";
-                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ", " + Reference.InitialCacheId + ");\n";
+                sql += "    INSERT INTO " + schema.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + "," + Mapping.ColumnNameForVersion + ")\n";
+                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForClass + ", " + Reference.InitialVersion + ");\n";
 
                 sql += "    SET IDENTITY_INSERT " + schema.TableNameForObjects + " OFF;\n";
 
-                sql += "    INSERT INTO " + schema.TableNameForObjectByClass[@class.ExclusiveClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + ")\n";
-                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForType + ");\n";
+                sql += "    INSERT INTO " + schema.TableNameForObjectByClass[@class.ExclusiveClass] + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + ")\n";
+                sql += "    VALUES (" + Mapping.ParamNameForObject + "," + Mapping.ParamNameForClass + ");\n";
 
                 sql += "    SELECT 0;\n";
                 sql += "    END";
@@ -812,7 +812,7 @@ namespace Allors.Adapters.Object.SqlClient
             else
             {
                 command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
-                command.Parameters[Mapping.ParamNameForType].Value = (object)@class.Id ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForClass].Value = (object)@class.Id ?? DBNull.Value;
             }
 
             var result = command.ExecuteScalar();
@@ -826,7 +826,7 @@ namespace Allors.Adapters.Object.SqlClient
                 throw new Exception("Duplicate id error");
             }
 
-            return this.Session.CreateReferenceForNewObject(@class, objectId);
+            return this.Session.State.CreateReferenceForNewObject(@class, objectId, this.Session);
         }
 
         internal Reference InstantiateObject(ObjectId objectId)
@@ -834,7 +834,7 @@ namespace Allors.Adapters.Object.SqlClient
             var command = this.instantiateObject;
             if (command == null)
             {
-                var sql = "SELECT " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + "\n";
+                var sql = "SELECT " + Mapping.ColumnNameForClass + ", " + Mapping.ColumnNameForVersion + "\n";
                 sql += "FROM " + this.Database.Mapping.TableNameForObjects + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForObject + "=" + Mapping.ParamNameForObject + "\n";
 
@@ -853,24 +853,22 @@ namespace Allors.Adapters.Object.SqlClient
                 if (reader.Read())
                 {
                     var classId = reader.GetGuid(0);
-                    var cacheId = reader.GetInt64(1);
+                    var version = reader.GetInt64(1);
 
                     var type = (IClass)this.Database.MetaPopulation.Find(classId);
-                    return this.Session.GetOrCreateReferenceForExistingObject(type, objectId, cacheId);
+                    return this.Session.State.GetOrCreateReferenceForExistingObject(type, objectId, version, this.Session);
                 }
 
                 return null;
             }
         }
 
-        internal IEnumerable<Reference> InstantiateObjects(List<ObjectId> objectIds)
+        internal IEnumerable<Reference> InstantiateReferences(IEnumerable<ObjectId> objectIds)
         {
-            var references = new List<Reference>();
-
             var command = this.instantiateObjects;
             if (command == null)
             {
-                var sql = "SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + "\n";
+                var sql = "SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + "," + Mapping.ColumnNameForVersion + "\n";
                 sql += "FROM " + this.Database.Mapping.TableNameForObjects + "\n";
                 sql += "WHERE " + Mapping.ColumnNameForObject + " IN\n";
                 sql += "( SELECT " + this.Database.Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParamNameForTableType + " )\n";
@@ -892,19 +890,18 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     var objectIdString = reader.GetValue(0).ToString();
                     var classId = reader.GetGuid(1);
-                    var cacheId = reader.GetInt64(2);
+                    var version = reader.GetInt64(2);
 
-                    var objectId = this.Database.ObjectIds.Parse(objectIdString);
+                    var objectId = this.Session.State.GetObjectId(objectIdString);
                     var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);
-                    var reference = this.Session.GetOrCreateReferenceForExistingObject(type, objectId, cacheId);
-                    references.Add(reference);
+                    var reference = this.Session.State.GetOrCreateReferenceForExistingObject(type, objectId, version, this.Session);
+
+                    yield return reference;
                 }
             }
-
-            return references;
         }
 
-        internal Dictionary<ObjectId, long> GetCacheIds(ISet<Reference> references)
+        internal Dictionary<ObjectId, long> GetVersions(ISet<Reference> references)
         {
             var command = this.getVersion;
 
@@ -922,37 +919,39 @@ namespace Allors.Adapters.Object.SqlClient
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
             }
 
-            var cacheIdByObjectId = new Dictionary<ObjectId, long>();
+            var versionByObjectId = new Dictionary<ObjectId, long>();
 
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    var objectId = this.Database.ObjectIds.Parse(reader[0].ToString());
-                    var cacheId = reader.GetInt64(1);
+                    var objectId = this.Session.State.GetObjectId(reader[0].ToString());
+                    var version = reader.GetInt64(1);
 
-                    cacheIdByObjectId.Add(objectId, cacheId);
+                    versionByObjectId.Add(objectId, version);
                 }
             }
 
-            return cacheIdByObjectId;
+            return versionByObjectId;
         }
 
-        internal void UpdateCacheIds()
+        internal void UpdateVersion()
         {
-            var command = this.updateCacheIds;
+            var command = this.updateVersions;
             if (command == null)
             {
                 var sql = this.Database.Mapping.ProcedureNameForUpdateVersion;
                 command = this.connection.CreateCommand();
                 command.CommandText = sql;
                 command.CommandType = CommandType.StoredProcedure;
-                command.AddObjectTableParameter(this.Session.modifiedRolesByReference.Keys);
-                this.updateCacheIds = command;
+                // TODO: Remove dependency on State
+                command.AddObjectTableParameter(this.Session.State.ModifiedRolesByReference.Keys);
+                this.updateVersions = command;
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(this.Session.modifiedRolesByReference.Keys);
+                // TODO: Remove dependency on State
+                command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(this.Session.State.ModifiedRolesByReference.Keys);
             }
 
             command.ExecuteNonQuery();

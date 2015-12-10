@@ -88,7 +88,8 @@
     <Compile Include="Relations\CompositeRelation.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="SessionCommands.cs" />
+    <Compile Include="Commands.cs" />
+    <Compile Include="State.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Extents\Extent.cs" />
     <Compile Include="Extents\ExtentAssociations.cs" />
@@ -158,6 +159,7 @@
   <ItemGroup>
     <None Include="Cache\Debugging\Debug.cd" />
     <None Include="Connection\Debugging\Debug.cd" />
+    <None Include="Diagrams\Overview.cd" />
     <None Include="Diagrams\Schema.cd" />
     <None Include="Settings.StyleCop" />
     <None Include="Diagrams\Connection.cd" />

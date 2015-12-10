@@ -58,8 +58,8 @@ namespace Allors.Adapters.Object.SqlClient
                 command.CommandType = CommandType.StoredProcedure;
 
                 var classSqlParameter = command.CreateParameter();
-                classSqlParameter.ParameterName = Mapping.ParamNameForType;
-                classSqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+                classSqlParameter.ParameterName = Mapping.ParamNameForClass;
+                classSqlParameter.SqlDbType = Mapping.SqlDbTypeForClass;
                 classSqlParameter.Value = objectType.Id;
 
                 command.Parameters.Add(classSqlParameter);

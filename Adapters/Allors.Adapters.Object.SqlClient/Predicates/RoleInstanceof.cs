@@ -41,16 +41,16 @@ namespace Allors.Adapters.Object.SqlClient
             var schema = statement.Mapping;
             if (this.instanceClasses.Length == 1)
             {
-                statement.Append(" (" + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForType + " IS NOT NULL AND ");
-                statement.Append(" " + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[0].Id) + ")");
+                statement.Append(" (" + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForClass + " IS NOT NULL AND ");
+                statement.Append(" " + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForClass + "=" + statement.AddParameter(this.instanceClasses[0].Id) + ")");
             }
             else if (this.instanceClasses.Length > 1)
             {
                 statement.Append(" ( ");
                 for (var i = 0; i < this.instanceClasses.Length; i++)
                 {
-                    statement.Append(" (" + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForType + " IS NOT NULL AND ");
-                    statement.Append(" " + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[i].Id) + ")");
+                    statement.Append(" (" + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForClass + " IS NOT NULL AND ");
+                    statement.Append(" " + statement.GetJoinName(this.role) + "." + Mapping.ColumnNameForClass + "=" + statement.AddParameter(this.instanceClasses[i].Id) + ")");
                     if (i < this.instanceClasses.Length - 1)
                     {
                         statement.Append(" OR ");
