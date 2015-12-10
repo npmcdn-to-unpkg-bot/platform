@@ -21,34 +21,23 @@
 namespace Allors.Adapters.Object.SqlClient.Debug
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
 
-    public class DebugCommand : Command
+    public class DebugExecution 
     {
-
-        public DebugCommand(Mapping mapping, SqlCommand command)
-            : base(mapping, command)
+        public DebugExecution(DebugCommand debugCommand)
         {
+            this.Command = debugCommand;
         }
 
-        public List<DateTime> ExecutingTimeStamps { get; } = new List<DateTime>();
+        public DebugCommand Command { get; }
 
-        public List<DateTime> ExecutedTimeStamps { get; } = new List<DateTime>();
+        public DateTime Begin { get; set; }
+
+        public DateTime End { get; set; }
 
         public override string ToString()
         {
-            return $"[{this.ExecutedTimeStamps.Count}x] {this.SqlCommand.CommandText}";
-        }
-
-        protected override void OnExecuting()
-        {
-            this.ExecutingTimeStamps.Add(DateTime.Now);
-        }
-
-        protected override void OnExecuted()
-        {
-            this.ExecutedTimeStamps.Add(DateTime.Now);
+            return $"{this.Command} {this.Begin}:{this.End}";
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Allors.Adapters.Object.SqlClient
     using Adapters;
 
     using Allors;
+    using Allors.Adapters.Object.SqlClient.Caching.Debugging;
     using Allors.Adapters.Object.SqlClient.Debug;
     using Allors.Domain;
 
@@ -61,7 +62,7 @@ namespace Allors.Adapters.Object.SqlClient
         protected Action[] Inits => this.Profile.Inits;
 
         [Test]
-        public void NoCommands()
+        public void Noop()
         {
             foreach (var init in this.Inits)
             {
@@ -74,12 +75,10 @@ namespace Allors.Adapters.Object.SqlClient
 
                 connection.Commands.Count.ShouldEqual(0);
 
-                this.Populate();
                 this.Session.Commit();
             }
         }
-
-
+        
         [Test]
         public void Prefetch()
         {
@@ -94,6 +93,8 @@ namespace Allors.Adapters.Object.SqlClient
                 var database = (Database)this.Session.Database;
                 var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
                 var connection = connectionFactory.Connections.Last();
+                var cacheFactory = (DebugCacheFactory)database.CacheFactory;
+                var cache = cacheFactory.Cache;
 
                 connection.Commands.Clear();
 
@@ -105,7 +106,7 @@ namespace Allors.Adapters.Object.SqlClient
                 this.Session.Prefetch(c1Prefetcher, extent);
 
                 connection.Commands.Count.ShouldEqual(3);
-                connection.Commands.Count(v=>v.ExecutedTimeStamps.Count != 1).ShouldEqual(0);
+                connection.Commands.Count(v=>v.Executions.Count != 1).ShouldEqual(0);
 
                 var stringBuilder = new StringBuilder();
                 foreach (C1 c1 in extent)
@@ -114,16 +115,28 @@ namespace Allors.Adapters.Object.SqlClient
                 }
 
                 connection.Commands.Count.ShouldEqual(3);
-                connection.CommandsByExecutedTimeStamp.Count().ShouldEqual(3);
+                connection.Executions.Count().ShouldEqual(3);
 
-                this.Populate();
                 this.Session.Commit();
+                cache.Invalidate();
+                connection.Commands.Clear();
+
+                extent = this.Session.Extent<C1>();
+                this.Session.Prefetch(c1Prefetcher, extent);
+
+                stringBuilder = new StringBuilder();
+                foreach (C1 c1 in extent)
+                {
+                    stringBuilder.Append(c1.C1AllorsString);
+                }
+
+                connection.Commands.Count.ShouldEqual(3);
+                connection.Executions.Count().ShouldEqual(3);
             }
         }
-
-
+        
         [Test]
-        public void Prefetch1Level()
+        public void PrefetchOneClass()
         {
             foreach (var init in this.Inits)
             {
@@ -136,6 +149,8 @@ namespace Allors.Adapters.Object.SqlClient
                 var database = (Database)this.Session.Database;
                 var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
                 var connection = connectionFactory.Connections.Last();
+                var cacheFactory = (DebugCacheFactory)database.CacheFactory;
+                var cache = cacheFactory.Cache;
 
                 connection.Commands.Clear();
 
@@ -152,7 +167,7 @@ namespace Allors.Adapters.Object.SqlClient
                 this.Session.Prefetch(c1Prefetcher, extent);
 
                 connection.Commands.Count.ShouldEqual(5);
-                connection.CommandsByExecutedTimeStamp.Count().ShouldEqual(6);
+                connection.Executions.Count().ShouldEqual(6);
 
                 var stringBuilder = new StringBuilder();
                 foreach (C1 c1 in extent)
@@ -164,12 +179,101 @@ namespace Allors.Adapters.Object.SqlClient
                 }
 
                 connection.Commands.Count.ShouldEqual(5);
-                connection.CommandsByExecutedTimeStamp.Count().ShouldEqual(6);
+                connection.Executions.Count().ShouldEqual(6);
 
-                this.Populate();
                 this.Session.Commit();
+                cache.Invalidate();
+                connection.Commands.Clear();
+
+                extent = this.Session.Extent<C1>();
+                this.Session.Prefetch(c1Prefetcher, extent);
+
+                stringBuilder = new StringBuilder();
+                foreach (C1 c1 in extent)
+                {
+                    stringBuilder.Append(c1.C1AllorsString);
+
+                    var c2 = c1.C1C2one2one;
+                    stringBuilder.Append(c2?.C2AllorsString);
+                }
+
+                connection.Commands.Count.ShouldEqual(5);
+                connection.Executions.Count().ShouldEqual(6);
             }
         }
+
+        [Test]
+        public void PrefetchManyInterface()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                this.Populate();
+
+                this.Session.Commit();
+
+                var database = (Database)this.Session.Database;
+                var connectionFactory = (DebugConnectionFactory)database.ConnectionFactory;
+                var connection = connectionFactory.Connections.Last();
+                var cacheFactory = (DebugCacheFactory)database.CacheFactory;
+                var cache = cacheFactory.Cache;
+
+                connection.Commands.Clear();
+
+                var i12Prefetcher = new PrefetchPolicyBuilder()
+                    .WithRule(C1.Meta.I12AllorsString)
+                    .Build();
+
+                var c1Prefetcher = new PrefetchPolicyBuilder()
+                    .WithRule(C1.Meta.C1I12one2manies, i12Prefetcher)
+                    .WithRule(C1.Meta.C1AllorsString)
+                    .Build();
+
+                var extent = this.Session.Extent<C1>();
+                this.Session.Prefetch(c1Prefetcher, extent);
+
+                connection.Commands.Count.ShouldEqual(5);
+                connection.Executions.Count().ShouldEqual(7);
+
+                var stringBuilder = new StringBuilder();
+                foreach (C1 c1 in extent)
+                {
+                    stringBuilder.Append(c1.C1AllorsString);
+
+                    foreach (I12 i12 in c1.C1I12one2manies)
+                    {
+                        stringBuilder.Append(i12?.I12AllorsString);
+                    }
+                }
+
+                connection.Commands.Count.ShouldEqual(5);
+                connection.Executions.Count().ShouldEqual(7);
+                
+                this.Session.Commit();
+                cache.Invalidate();
+                connection.Commands.Clear();
+
+                extent = this.Session.Extent<C1>();
+                this.Session.Prefetch(c1Prefetcher, extent);
+
+                stringBuilder = new StringBuilder();
+                foreach (C1 c1 in extent)
+                {
+                    stringBuilder.Append(c1.C1AllorsString);
+
+                    foreach (I12 i12 in c1.C1I12one2manies)
+                    {
+                        stringBuilder.Append(i12?.I12AllorsString);
+                    }
+                }
+
+                connection.Commands.Count.ShouldEqual(5);
+                connection.Executions.Count().ShouldEqual(7);
+            }
+        }
+
+
 
         protected void Populate()
         {

@@ -57,11 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\Debugging\DebugCache.cs" />
+    <Compile Include="Cache\Debugging\DebugCachedObject.cs" />
+    <Compile Include="Cache\Debugging\DebugCacheFactory.cs" />
+    <Compile Include="Cache\DefaultCache.cs" />
+    <Compile Include="Cache\DefaultCachedObject.cs" />
+    <Compile Include="Cache\DefaultCacheFactory.cs" />
     <Compile Include="Connection\DefaultConnectionFactory.cs" />
+    <Compile Include="Connection\Debugging\DebugExecution.cs" />
     <Compile Include="Connection\IConnectionFactory.cs" />
-    <Compile Include="Connection\Extra\DebugCommand.cs" />
-    <Compile Include="Connection\Extra\DebugConnection.cs" />
-    <Compile Include="Connection\Extra\DebugConnectionFactory.cs" />
+    <Compile Include="Connection\Debugging\DebugCommand.cs" />
+    <Compile Include="Connection\Debugging\DebugConnection.cs" />
+    <Compile Include="Connection\Debugging\DebugConnectionFactory.cs" />
     <Compile Include="DataRecords\VersionedObjectDataRecord.cs" />
     <Compile Include="Connection\DefaultCommand.cs" />
     <Compile Include="Connection\DefaultConnection.cs" />
@@ -147,6 +154,8 @@
     <Compile Include="Schema\Validation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Cache\Debugging\Debug.cd" />
+    <None Include="Connection\Debugging\Debug.cd" />
     <None Include="Diagrams\Schema.cd" />
     <None Include="Settings.StyleCop" />
     <None Include="Diagrams\Connection.cd" />

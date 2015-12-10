@@ -24,6 +24,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
     using Allors.Meta;
     using Adapters;
 
+    using Allors.Adapters.Object.SqlClient.Caching.Debugging;
     using Allors.Adapters.Object.SqlClient.Debug;
 
     public class Profile : SqlClient.Profile
@@ -31,14 +32,16 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
         private readonly Prefetchers prefetchers = new Prefetchers();
 
         private readonly DebugConnectionFactory connectionFactory;
+        private readonly DebugCacheFactory cacheFactory;
 
         public Profile()
         {
         }
 
-        public Profile(DebugConnectionFactory connectionFactory)
+        public Profile(DebugConnectionFactory connectionFactory, DebugCacheFactory cacheFactory)
         {
             this.connectionFactory = connectionFactory;
+            this.cacheFactory = cacheFactory;
         }
 
         public override Action[] Markers
@@ -68,13 +71,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
             }
         }
 
-        protected override string ConnectionString
-        {
-            get
-            {
-                return System.Configuration.ConfigurationManager.ConnectionStrings["sqlclientobject"].ConnectionString;
-            }
-        }
+        protected override string ConnectionString => System.Configuration.ConfigurationManager.ConnectionStrings["sqlclientobject"].ConnectionString;
 
         public IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
         {
@@ -82,7 +79,8 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
                                     {
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
                                         ConnectionString = this.ConnectionString,
-                                        ConnectionFactory = this.connectionFactory
+                                        ConnectionFactory = this.connectionFactory,
+                                        CacheFactory = this.cacheFactory
                                     };
             var database = new Database(configuration);
 
@@ -105,7 +103,8 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
             {
                 ObjectFactory = this.ObjectFactory,
                 ConnectionString = this.ConnectionString,
-                ConnectionFactory = this.connectionFactory
+                ConnectionFactory = this.connectionFactory,
+                CacheFactory = this.cacheFactory
             };
 
             var database = new Database(configuration);

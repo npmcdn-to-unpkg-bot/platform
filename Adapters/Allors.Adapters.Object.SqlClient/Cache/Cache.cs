@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Cache.cs" company="Allors bvba">
+// <copyright file="DefaultCache.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,8 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient.Caching
 {
     using System.Collections.Concurrent;
@@ -30,32 +28,32 @@ namespace Allors.Adapters.Object.SqlClient.Caching
     /// <summary>
     /// The Cache holds a CachedObject and/or IObjectType by ObjectId.
     /// </summary>
-    public sealed class Cache : ICache
+    public abstract class Cache : ICache
     {
-        private readonly HashSet<IClass> transientConcreteClasses; 
+        protected readonly HashSet<IClass> ExcludedClasses;
 
-        private readonly ConcurrentDictionary<ObjectId, CachedObject> cachedObjectByObjectId;
-        private readonly ConcurrentDictionary<ObjectId, IClass> objectTypeByObjectId;
+        protected readonly ConcurrentDictionary<ObjectId, CachedObject> CachedObjectByObjectId;
+        protected readonly ConcurrentDictionary<ObjectId, IClass> ObjectTypeByObjectId;
 
-        public Cache(IComposite[] transientObjectTypes)
+        protected Cache(IClass[] excludedClasses)
         {
-            this.cachedObjectByObjectId = new ConcurrentDictionary<ObjectId, CachedObject>();
-            this.objectTypeByObjectId = new ConcurrentDictionary<ObjectId, IClass>();
+            this.CachedObjectByObjectId = new ConcurrentDictionary<ObjectId, CachedObject>();
+            this.ObjectTypeByObjectId = new ConcurrentDictionary<ObjectId, IClass>();
 
-            if (transientObjectTypes != null)
+            if (excludedClasses != null)
             {
-                this.transientConcreteClasses = new HashSet<IClass>();
-                foreach (var transientObjectType in transientObjectTypes)
+                this.ExcludedClasses = new HashSet<IClass>();
+                foreach (var transientObjectType in excludedClasses)
                 {
                     foreach (var transientConcreteClass in transientObjectType.Classes)
                     {
-                        this.transientConcreteClasses.Add(transientConcreteClass);
+                        this.ExcludedClasses.Add(transientConcreteClass);
                     }
                 }
 
-                if (this.transientConcreteClasses.Count == 0)
+                if (this.ExcludedClasses.Count == 0)
                 {
-                    this.transientConcreteClasses = null;
+                    this.ExcludedClasses = null;
                 }
             }
         }
@@ -65,30 +63,30 @@ namespace Allors.Adapters.Object.SqlClient.Caching
         /// </summary>
         public void Invalidate()
         {
-            this.cachedObjectByObjectId.Clear();
-            this.objectTypeByObjectId.Clear();
+            this.CachedObjectByObjectId.Clear();
+            this.ObjectTypeByObjectId.Clear();
         }
 
         public ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, long localCacheId)
         {
-            if (this.transientConcreteClasses != null && this.transientConcreteClasses.Contains(concreteClass))
+            if (this.ExcludedClasses != null && this.ExcludedClasses.Contains(concreteClass))
             {
-                return new CachedObject(localCacheId); 
+                return this.CreateCachedObject(localCacheId);
             }
 
             CachedObject cachedObject;
-            if (this.cachedObjectByObjectId.TryGetValue(objectId, out cachedObject))
+            if (this.CachedObjectByObjectId.TryGetValue(objectId, out cachedObject))
             {
                 if (!cachedObject.LocalCacheVersion.Equals(localCacheId))
                 {
-                    cachedObject = new CachedObject(localCacheId);
-                    this.cachedObjectByObjectId[objectId] = cachedObject;
+                    cachedObject = this.CreateCachedObject(localCacheId);
+                    this.CachedObjectByObjectId[objectId] = cachedObject;
                 }
             }
             else
             {
-                cachedObject = new CachedObject(localCacheId);
-                this.cachedObjectByObjectId[objectId] = cachedObject;
+                cachedObject = this.CreateCachedObject(localCacheId);
+                this.CachedObjectByObjectId[objectId] = cachedObject;
             }
 
             return cachedObject;
@@ -97,13 +95,13 @@ namespace Allors.Adapters.Object.SqlClient.Caching
         public IClass GetObjectType(ObjectId objectId)
         {
             IClass objectType;
-            this.objectTypeByObjectId.TryGetValue(objectId, out objectType);
+            this.ObjectTypeByObjectId.TryGetValue(objectId, out objectType);
             return objectType;
         }
 
         public void SetObjectType(ObjectId objectId, IClass objectType)
         {
-            this.objectTypeByObjectId[objectId] = objectType;
+            this.ObjectTypeByObjectId[objectId] = objectType;
         }
 
         public void OnCommit(IList<ObjectId> accessedObjectIds, IList<ObjectId> changedObjectIds)
@@ -113,7 +111,7 @@ namespace Allors.Adapters.Object.SqlClient.Caching
                 foreach (var changedObjectId in changedObjectIds)
                 {
                     CachedObject removedObject;
-                    this.cachedObjectByObjectId.TryRemove(changedObjectId, out removedObject);
+                    this.CachedObjectByObjectId.TryRemove(changedObjectId, out removedObject);
                 }
             }
         }
@@ -121,5 +119,7 @@ namespace Allors.Adapters.Object.SqlClient.Caching
         public void OnRollback(IList<ObjectId> accessedObjectIds)
         {
         }
+
+        protected abstract CachedObject CreateCachedObject(long localCacheId);
     }
 }

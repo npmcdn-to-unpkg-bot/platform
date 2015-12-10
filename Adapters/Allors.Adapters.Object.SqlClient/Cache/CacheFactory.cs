@@ -18,8 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient.Caching
 {
     using Allors.Meta;
@@ -27,13 +25,15 @@ namespace Allors.Adapters.Object.SqlClient.Caching
     /// <summary>
     /// Factory for default cache.
     /// </summary>
-    public sealed class CacheFactory : ICacheFactory
+    public abstract class CacheFactory : ICacheFactory
     {
-        public IClass[] TransientIObjectTypes { get; set; } 
+        public IClass[] ExcludedClasses { get; set; } 
 
-        public ICache CreateCache(IDatabase database)
+        public ICache CreateCache()
         {
-            return new Cache(this.TransientIObjectTypes);
+            return this.CreateCache(this.ExcludedClasses);
         }
+
+        protected abstract ICache CreateCache(IClass[] excludedClasses);
     }
 }

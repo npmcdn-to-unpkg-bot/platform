@@ -18,15 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Concurrent;
-
 namespace Allors.Adapters.Object.SqlClient.Caching
 {
     using System.Collections.Concurrent;
 
     using Allors.Meta;
 
-    public class CachedObject : ICachedObject
+    public abstract class CachedObject : ICachedObject
     {
         private readonly long localCacheVersion;
 

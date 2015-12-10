@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICacheFactory.cs" company="Allors bvba">
+// <copyright file="DebugCache.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,13 +18,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Object.SqlClient.Caching
+namespace Allors.Adapters.Object.SqlClient.Caching.Debugging
 {
+    using Allors.Meta;
+
     /// <summary>
-    /// The cache factory is a factory for cache objects.
+    /// The Cache holds a CachedObject and/or IObjectType by ObjectId.
     /// </summary>
-    public interface ICacheFactory
+    public sealed class DebugCache : Cache
     {
-        ICache CreateCache();
+        public DebugCache(IClass[] excludedClasses)
+            : base(excludedClasses)
+        {
+        }
+
+        protected override CachedObject CreateCachedObject(long localCacheId)
+        {
+            return new DebugCachedObject(localCacheId);
+        }
     }
 }

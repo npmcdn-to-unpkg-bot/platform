@@ -30,12 +30,14 @@ namespace Allors.Adapters.Object.SqlClient.Debug
     {
         public List<DebugCommand> Commands { get; } = new List<DebugCommand>();
 
-        public IEnumerable<KeyValuePair<DateTime, DebugCommand>> CommandsByExecutedTimeStamp => 
+        public IEnumerable<DebugExecution> Executions => 
             from command in this.Commands
-            from executedTimeStamp in command.ExecutedTimeStamps
-            orderby executedTimeStamp
-            select new KeyValuePair<DateTime, DebugCommand>(executedTimeStamp, command);
-        
+            from execution in command.Executions
+            orderby execution.Begin
+            select execution;
+
+        public List<DebugExecution> ExecutionList => this.Executions.ToList();
+
         public DebugConnection(Database database)
             : base(database)
         {
@@ -43,7 +45,7 @@ namespace Allors.Adapters.Object.SqlClient.Debug
 
         public override string ToString()
         {
-            return $"{this.Commands.Count} commands with a total of {this.CommandsByExecutedTimeStamp.Count()} executions.";
+            return $"{this.Commands.Count} commands with {this.Executions.Count()} executions.";
         }
 
         protected override Command CreateCommand(Mapping mapping, SqlCommand sqlCommand)

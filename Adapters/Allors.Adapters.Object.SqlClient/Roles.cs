@@ -18,17 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors.Adapters.Object.SqlClient.Caching;
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
 
-    using Adapters.Object.SqlClient.Caching;
-    using Allors.Meta;
     using Adapters;
+    using Adapters.Object.SqlClient.Caching;
+
+    using Allors;
+    using Allors.Adapters.Object.SqlClient.Caching;
+    using Allors.Meta;
 
     internal sealed class Roles
     {

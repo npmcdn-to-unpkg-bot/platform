@@ -24,7 +24,6 @@ namespace Allors.Adapters.Object.SqlClient
     {
         public Configuration()
         {
-            this.CacheFactory = new CacheFactory();
             this.CommandTimeout = 30;
             this.IsolationLevel = IsolationLevel.Snapshot;
         }

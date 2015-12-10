@@ -56,6 +56,8 @@ namespace Allors.Adapters.Object.SqlClient
 
         private IConnectionFactory managementConnectionFactory;
 
+        private ICacheFactory cacheFactory;
+
         public Database(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
@@ -75,7 +77,8 @@ namespace Allors.Adapters.Object.SqlClient
 
             this.sortedUnitRolesByObjectType = new Dictionary<IObjectType, IRoleType[]>();
 
-            this.Cache = configuration.CacheFactory.CreateCache(this);
+            this.CacheFactory = configuration.CacheFactory;
+            this.Cache = this.CacheFactory.CreateCache();
 
             var connectionStringBuilder = new SqlConnectionStringBuilder(this.ConnectionString);
             var applicationName = connectionStringBuilder.ApplicationName.Trim();
@@ -130,6 +133,19 @@ namespace Allors.Adapters.Object.SqlClient
             set
             {
                 this.managementConnectionFactory = value;
+            }
+        }
+
+        public ICacheFactory CacheFactory
+        {
+            get
+            {
+                return this.cacheFactory;
+            }
+
+            set
+            {
+                this.cacheFactory = value ?? (this.cacheFactory = new DefaultCacheFactory());
             }
         }
 

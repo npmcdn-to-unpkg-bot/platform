@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICacheFactory.cs" company="Allors bvba">
+// <copyright file="DefaultCacheFactory.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,11 +20,16 @@
 
 namespace Allors.Adapters.Object.SqlClient.Caching
 {
+    using Allors.Meta;
+
     /// <summary>
-    /// The cache factory is a factory for cache objects.
+    /// Factory for default cache.
     /// </summary>
-    public interface ICacheFactory
+    public sealed class DefaultCacheFactory : CacheFactory
     {
-        ICache CreateCache();
+        protected override ICache CreateCache(IClass[] excludedClasses)
+        {
+            return new DefaultCache(excludedClasses);
+        }
     }
 }
