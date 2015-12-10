@@ -21,6 +21,7 @@
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
@@ -109,6 +110,89 @@ namespace Allors.Adapters.Object.SqlClient
             this.SqlCommand.Parameters.Add(sqlParameter);
         }
 
+        internal void AddTypeParameter(IClass @class)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.ParameterName = Mapping.ParamNameForType;
+            sqlParameter.SqlDbType = Mapping.SqlDbTypeForType;
+            sqlParameter.Value = @class.Id;
+
+            this.Parameters.Add(sqlParameter);
+        }
+
+        internal void AddCountParameter(int count)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.ParameterName = Mapping.ParamNameForCount;
+            sqlParameter.SqlDbType = Mapping.SqlDbTypeForCount;
+            sqlParameter.Value = count;
+
+            this.Parameters.Add(sqlParameter);
+        }
+
+        internal void AddCompositeRoleParameter(ObjectId objectId)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.ParameterName = Mapping.ParamNameForCompositeRole;
+            sqlParameter.SqlDbType = this.Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId.Value;
+
+            this.Parameters.Add(sqlParameter);
+        }
+
+        internal void AddAssociationParameter(ObjectId objectId)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
+            sqlParameter.SqlDbType = this.Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId.Value;
+
+            this.Parameters.Add(sqlParameter);
+        }
+
+        internal void AddObjectTableParameter(IEnumerable<Reference> references)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.SqlDbType = SqlDbType.Structured;
+            sqlParameter.TypeName = this.Mapping.TableTypeNameForObject;
+            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+            sqlParameter.Value = new CompositesRoleDataRecords(this.Mapping, references);
+
+            this.Parameters.Add(sqlParameter);
+        }
+
+        internal void AddObjectTableParameter(IEnumerable<ObjectId> objectIds)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.SqlDbType = SqlDbType.Structured;
+            sqlParameter.TypeName = this.Mapping.TableTypeNameForObject;
+            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+            sqlParameter.Value = new ObjectDataRecord(this.Mapping, objectIds);;
+
+            this.Parameters.Add(sqlParameter);
+        }
+
+        internal void AddCompositeRoleTableParameter(IEnumerable<CompositeRelation> relations)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.SqlDbType = SqlDbType.Structured;
+            sqlParameter.TypeName = this.Mapping.TableTypeNameForCompositeRelation;
+            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
+            sqlParameter.Value = new CompositeRoleDataRecords(this.Mapping, relations);
+
+            this.Parameters.Add(sqlParameter);
+        }
+
+        internal void AddAssociationTableParameter(ObjectId objectId)
+        {
+            var sqlParameter = this.CreateParameter();
+            sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
+            sqlParameter.SqlDbType = this.Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId.Value;
+
+            this.Parameters.Add(sqlParameter);
+        }
+        
         internal object ExecuteScalar()
         {
             this.OnExecuting();

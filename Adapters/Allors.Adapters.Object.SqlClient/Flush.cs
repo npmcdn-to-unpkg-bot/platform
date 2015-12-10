@@ -18,11 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System.Collections.Generic;
+
+    using Allors;
     using Allors.Meta;
 
     internal class Flush
@@ -61,7 +61,7 @@ namespace Allors.Adapters.Object.SqlClient
                         var relations = secondDictionaryEntry.Value;
                         if (relations.Count > 0)
                         {
-                            this.session.SetUnitRole(relations, exclusiveRootClass, roleType);
+                            this.session.Commands.SetUnitRole(relations, exclusiveRootClass, roleType);
                         }
                     }
                 }
@@ -77,7 +77,7 @@ namespace Allors.Adapters.Object.SqlClient
                     var relations = dictionaryEntry.Value;
                     if (relations.Count > 0)
                     {
-                        this.session.SetCompositeRole(relations, roleType);
+                        this.session.Commands.SetCompositeRole(relations, roleType);
                     }
                 }
             }
@@ -92,7 +92,7 @@ namespace Allors.Adapters.Object.SqlClient
                     var relations = dictionaryEntry.Value;
                     if (relations.Count > 0)
                     {
-                        this.session.AddCompositeRole(relations, roleType);
+                        this.session.Commands.AddCompositeRole(relations, roleType);
                     }
                 }
             }
@@ -107,7 +107,7 @@ namespace Allors.Adapters.Object.SqlClient
                     var relations = dictionaryEntry.Value;
                     if (relations.Count > 0)
                     {
-                        this.session.RemoveCompositeRole(relations, roleType);
+                        this.session.Commands.RemoveCompositeRole(relations, roleType);
                     }
                 }
             }
@@ -122,7 +122,7 @@ namespace Allors.Adapters.Object.SqlClient
                     var relations = dictionaryEntry.Value;
                     if (relations.Count > 0)
                     {
-                        this.session.ClearCompositeAndCompositesRole(relations, roleType);
+                        this.session.Commands.ClearCompositeAndCompositesRole(relations, roleType);
                     }
                 }
             }
@@ -158,7 +158,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.SetUnitRole(relations, exclusiveClass, roleType);
+                this.session.Commands.SetUnitRole(relations, exclusiveClass, roleType);
                 relations.Clear();
             }
         }
@@ -181,7 +181,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.SetCompositeRole(relations, roleType);
+                this.session.Commands.SetCompositeRole(relations, roleType);
                 relations.Clear();
             }
         }
@@ -207,7 +207,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.AddCompositeRole(relations, roleType);
+                this.session.Commands.AddCompositeRole(relations, roleType);
                 relations.Clear();
             }
         }
@@ -233,7 +233,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.RemoveCompositeRole(relations, roleType);
+                this.session.Commands.RemoveCompositeRole(relations, roleType);
                 relations.Clear();
             }
         }
@@ -256,7 +256,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (relations.Count > BatchSize)
             {
-                this.session.ClearCompositeAndCompositesRole(relations, roleType);
+                this.session.Commands.ClearCompositeAndCompositesRole(relations, roleType);
                 relations.Clear();
             }
         }

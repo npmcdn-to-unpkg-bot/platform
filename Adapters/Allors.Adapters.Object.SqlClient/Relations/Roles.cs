@@ -127,7 +127,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (!this.Reference.IsNew)
                     {
-                        this.Reference.Session.GetUnitRoles(this);
+                        this.Reference.Session.Commands.GetUnitRoles(this);
                         this.cachedObject.TryGetValue(roleType, out role);
                     }
                 }
@@ -177,7 +177,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (!this.Reference.IsNew)
                     {
-                        this.Reference.Session.GetCompositeRole(this, roleType);
+                        this.Reference.Session.Commands.GetCompositeRole(this, roleType);
                         this.cachedObject.TryGetValue(roleType, out role);
                     }
                 }
@@ -413,7 +413,7 @@ namespace Allors.Adapters.Object.SqlClient
             if (unitRoles != null)
             {
                 unitRoles.Sort();
-                this.Reference.Session.SetUnitRoles(this, unitRoles);
+                this.Reference.Session.Commands.SetUnitRoles(this, unitRoles);
             }
             else if (unitRole != null)
             {
@@ -506,7 +506,7 @@ namespace Allors.Adapters.Object.SqlClient
                     return (ObjectId[])roleOut;
                 }
 
-                this.Reference.Session.GetCompositesRole(this, roleType);
+                this.Reference.Session.Commands.GetCompositesRole(this, roleType);
                 this.cachedObject.TryGetValue(roleType, out roleOut);
                 var role = (ObjectId[])roleOut;
                 return role;

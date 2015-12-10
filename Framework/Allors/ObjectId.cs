@@ -44,13 +44,7 @@ namespace Allors
         /// in a <see cref="IDatabase"/> or <see cref="ISession"/>.
         /// </summary>
         /// <value>The value.</value>
-        public string Key
-        {
-            get
-            {
-                return string.Format("Allors[{0}]", this);
-            }
-        }
+        public string Key => $"Allors[{this}]";
 
         /// <summary>
         /// Compares the current instance with another object of the same type.

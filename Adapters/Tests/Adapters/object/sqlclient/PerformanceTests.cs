@@ -172,7 +172,7 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
         }
-
+        
         [Test]
         public void ExtentRole()
         {

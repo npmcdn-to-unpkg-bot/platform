@@ -167,7 +167,7 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
 
-            this.Session.DeleteObject(this);
+            this.Session.Commands.DeleteObject(this);
             this.reference.Exists = false;
 
             this.Session.ChangeSet.OnDeleted(this.ObjectId);
