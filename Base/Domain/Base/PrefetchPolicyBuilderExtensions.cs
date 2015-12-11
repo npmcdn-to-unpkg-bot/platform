@@ -51,6 +51,7 @@ namespace Allors
         public static void WithSecurityRules(this PrefetchPolicyBuilder @this)
         {
             @this.WithRule(AccessControlledObjectInterface.Instance.SecurityToken.RoleType, SecuritTokenPrefetchPolicy);
+            @this.WithRule(AccessControlledObjectInterface.Instance.DeniedPermission.RoleType);
         }
     }
 }
