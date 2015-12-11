@@ -23,6 +23,7 @@ namespace Allors.Adapters.Object.SqlClient
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Policy;
 
     using Allors;
     using Allors.Meta;
@@ -33,36 +34,21 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly PrefetchPolicy prefetchPolicy;
         private readonly HashSet<Reference> references;
 
-        private readonly bool isRoot;
-        private readonly HashSet<long> leafs;
-
         public Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, HashSet<Reference> references)
         {
             this.prefetcher = prefetcher;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
-
-            this.isRoot = true;
-            this.leafs = new HashSet<long>();
-        }
-
-        private Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, IEnumerable<long> objectIds, HashSet<long> leafs)
-        {
-            this.prefetcher = prefetcher;
-            this.prefetchPolicy = prefetchPolicy;
-            this.references = prefetcher.GetReferencesForPrefetching(objectIds);
-
-            this.isRoot = false;
-            this.leafs = leafs;
         }
 
         public void Execute()
         {
-            if (this.references.Any(reference => reference.IsUnknownVersion || !reference.ExistsKnown))
-            {
-                this.prefetcher.Session.GetVersionAndExists();
-            }
+            var leafs = new HashSet<long>();
 
+            var nestedObjectIdsByRoleType = new Dictionary<IRoleType, HashSet<long>>();
+            var nestedObjectIdsByAssociationType = new Dictionary<IAssociationType, HashSet<long>>();
+
+            // Phase 1
             var unitRoles = false;
             foreach (var prefetchRule in this.prefetchPolicy)
             {
@@ -115,6 +101,7 @@ namespace Allors.Adapters.Object.SqlClient
                         var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                         var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
                         var nestedObjectIds = existNestedPrefetchPolicy ? new HashSet<long>() : null;
+                        nestedObjectIdsByRoleType[roleType] = nestedObjectIds;
 
                         var relationType = roleType.RelationType;
                         if (roleType.IsOne)
@@ -140,11 +127,6 @@ namespace Allors.Adapters.Object.SqlClient
                                 this.prefetcher.PrefetchCompositesRoleRelationTable(this.references, roleType, nestedObjectIds, leafs);
                             }
                         }
-
-                        if (existNestedPrefetchPolicy)
-                        {
-                            new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds, this.leafs).Execute();
-                        }
                     }
                 }
                 else
@@ -156,41 +138,87 @@ namespace Allors.Adapters.Object.SqlClient
                     var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                     var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
                     var nestedObjectIds = existNestedPrefetchPolicy ? new HashSet<long>() : null;
+                    nestedObjectIdsByRoleType[roleType] = nestedObjectIds;
 
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                     {
                         if (associationType.IsOne)
                         {
-                            this.prefetcher.PrefetchCompositeAssociationObjectTable(this.references, associationType, nestedObjectIds, this.leafs);
+                            this.prefetcher.PrefetchCompositeAssociationObjectTable(this.references, associationType, nestedObjectIds, leafs);
                         }
                         else
                         {
-                            this.prefetcher.PrefetchCompositesAssociationObjectTable(this.references, associationType, nestedObjectIds, this.leafs);
+                            this.prefetcher.PrefetchCompositesAssociationObjectTable(this.references, associationType, nestedObjectIds, leafs);
                         }
                     }
                     else
                     {
                         if (associationType.IsOne)
                         {
-                            this.prefetcher.PrefetchCompositeAssociationRelationTable(this.references, associationType, nestedObjectIds, this.leafs);
+                            this.prefetcher.PrefetchCompositeAssociationRelationTable(this.references, associationType, nestedObjectIds, leafs);
                         }
                         else
                         {
-                            this.prefetcher.PrefetchCompositesAssociationRelationTable(this.references, associationType, nestedObjectIds, this.leafs);
+                            this.prefetcher.PrefetchCompositesAssociationRelationTable(this.references, associationType, nestedObjectIds, leafs);
                         }
-                    }
-
-                    if (existNestedPrefetchPolicy)
-                    {
-                        new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds, this.leafs).Execute();
                     }
                 }
             }
 
-            if (this.isRoot && this.leafs.Count > 0)
+            var objectIds = new HashSet<long>();
+            if (leafs.Count > 0)
             {
-                this.prefetcher.GetReferencesForPrefetching(this.leafs);
+                objectIds.UnionWith(leafs);
             }
+
+            foreach (var nestedObjectIds in nestedObjectIdsByRoleType.Values)
+            {
+                objectIds.UnionWith(nestedObjectIds);
+            }
+
+            foreach (var nestedObjectIds in nestedObjectIdsByAssociationType.Values)
+            {
+                objectIds.UnionWith(nestedObjectIds);
+            }
+
+            var referenceByObjectId = this.prefetcher.GetReferencesForPrefetching(objectIds).ToDictionary(v => v.ObjectId);
+
+            foreach (var prefetchRule in this.prefetchPolicy)
+            {
+                var propertyType = prefetchRule.PropertyType;
+                if (propertyType is IRoleType)
+                {
+                    var roleType = (IRoleType)propertyType;
+                    var objectType = roleType.ObjectType;
+                    if (!objectType.IsUnit)
+                    {
+                        var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
+                        var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
+                        if (existNestedPrefetchPolicy)
+                        {
+                            var nestedObjectIds = nestedObjectIdsByRoleType[roleType];
+                            var nestedReferenceIds = new HashSet<Reference>(nestedObjectIds.Select(v => referenceByObjectId[v]));
+                            new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedReferenceIds).Execute();
+                        }
+                    }
+                }
+                else
+                {
+                    var associationType = (IAssociationType)propertyType;
+                    var relationType = associationType.RelationType;
+                    var roleType = relationType.RoleType;
+
+                    var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
+                    var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
+                    if (existNestedPrefetchPolicy)
+                    {
+                        var nestedObjectIds = nestedObjectIdsByRoleType[roleType];
+                        var nestedReferenceIds = new HashSet<Reference>(nestedObjectIds.Select(v => referenceByObjectId[v]));
+                        new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedReferenceIds).Execute();
+                    }
+                }
+            }
+
         }
     }
 }

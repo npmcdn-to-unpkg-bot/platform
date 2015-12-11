@@ -341,7 +341,7 @@ namespace Allors.Adapters.Object.SqlClient
                     session.Prefetch(c1Prefetcher, extent);
 
                     connection.Commands.Count.ShouldEqual(5);
-                    connection.Executions.Count().ShouldEqual(7);
+                    connection.Executions.Count().ShouldEqual(6);
 
                     var stringBuilder = new StringBuilder();
                     foreach (C1 c1 in extent)
@@ -355,7 +355,7 @@ namespace Allors.Adapters.Object.SqlClient
                     }
 
                     connection.Commands.Count.ShouldEqual(5);
-                    connection.Executions.Count().ShouldEqual(7);
+                    connection.Executions.Count().ShouldEqual(6);
 
                     session.Prefetch(c1Prefetcher, extent);
 
@@ -371,12 +371,11 @@ namespace Allors.Adapters.Object.SqlClient
                     }
 
                     connection.Commands.Count.ShouldEqual(5);
-                    connection.Executions.Count().ShouldEqual(7);
+                    connection.Executions.Count().ShouldEqual(6);
                 }
 
                 this.Cache.Invalidate();
-
-
+                
                 connection = (DebugConnection)this.ConnectionFactory.Create(this.Database);
                 using (var session = this.Database.CreateSession(connection))
                 {
@@ -394,7 +393,7 @@ namespace Allors.Adapters.Object.SqlClient
                     }
 
                     connection.Commands.Count.ShouldEqual(5);
-                    connection.Executions.Count().ShouldEqual(7);
+                    connection.Executions.Count().ShouldEqual(6);
                 }
             }
         }

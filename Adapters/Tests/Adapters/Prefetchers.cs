@@ -18,12 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters
 {
     using System.Collections.Generic;
 
+    using Allors;
     using Allors.Meta;
 
     public class Prefetchers
