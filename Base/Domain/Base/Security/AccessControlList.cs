@@ -21,8 +21,8 @@
 namespace Allors.Domain
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     using Allors;
     using Allors.Meta;
@@ -38,8 +38,10 @@ namespace Allors.Domain
 
         private readonly Guid classId;
 
-        private AccessControl[] accesControls;
+        private IList<Dictionary<Guid, Operations>> operationsByOperandTypeIds;
         private Permission[] deniedPermissions;
+
+        private bool lazyLoaded;
 
         public AccessControlList(IObject obj, User user)
         {
@@ -47,24 +49,11 @@ namespace Allors.Domain
             this.session = this.user.Strategy.Session;
             this.@object = (AccessControlledObject)obj;
             this.classId = obj.Strategy.Class.Id;
+
+            this.lazyLoaded = false;
         }
 
         public User User => this.user;
-
-        public override string ToString()
-        {
-            this.LazyLoad();
-
-            var toString = new StringBuilder();
-            toString.Append("ACL: ");
-            foreach (var accessControl in this.accesControls)
-            {
-                toString.Append(" +");
-                toString.Append(accessControl);
-            }
-
-            return toString.ToString();
-        }
 
         public bool CanRead(PropertyType propertyType)
         {
@@ -98,21 +87,54 @@ namespace Allors.Domain
                 }
             }
 
-            return this.accesControls.Any(accessControl => accessControl.IsPermitted(this.classId, operandTypeId, operation));
+            if (this.operationsByOperandTypeIds != null)
+            {
+                foreach (var operationsByOperandTypeId in this.operationsByOperandTypeIds)
+                {
+                    Operations operations;
+                    if (operationsByOperandTypeId.TryGetValue(operandTypeId, out operations))
+                    {
+                        if ((operations & operation) == operation)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
 
         private void LazyLoad()
         {
-            if (this.accesControls == null)
+            if (!this.lazyLoaded)
             {
+                this.deniedPermissions = this.@object.DeniedPermissions.ToArray();
+
                 SecurityToken[] securityTokens = this.@object.SecurityTokens;
                 if (securityTokens.Length == 0)
                 {
                     securityTokens = new[] { Singleton.Instance(this.session).DefaultSecurityToken };
                 }
 
-                this.accesControls = securityTokens.SelectMany(v => v.AccessControls).Where(v=>v.EffectiveUsers.Contains(this.user)).ToArray();
-                this.deniedPermissions = this.@object.DeniedPermissions.ToArray();
+                var accessControls = securityTokens.SelectMany(v => v.AccessControls).Where(v => v.EffectiveUsers.Contains(this.user));
+                foreach (var accessControl in accessControls)
+                {
+                    var operationsByOperandTypeIdByClassId = accessControl.OperationsByOperandTypeIdByClassId;
+
+                    Dictionary<Guid, Operations> operationsByClassId;
+                    if (operationsByOperandTypeIdByClassId.TryGetValue(this.classId, out operationsByClassId))
+                    {
+                        if (this.operationsByOperandTypeIds == null)
+                        {
+                            this.operationsByOperandTypeIds = new List<Dictionary<Guid, Operations>>();
+                        }
+
+                        this.operationsByOperandTypeIds.Add(operationsByClassId);
+                    }
+                }
+
+                this.lazyLoaded = true;
             }
         }
     }

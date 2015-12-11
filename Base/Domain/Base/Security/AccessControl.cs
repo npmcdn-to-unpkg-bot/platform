@@ -28,7 +28,7 @@ namespace Allors.Domain
     {
         private const string CacheKey = nameof(AccessControl) + ".";
 
-        private Dictionary<Guid, Dictionary<Guid, Operations>> OperationsByOperandTypeByClass
+        public Dictionary<Guid, Dictionary<Guid, Operations>> OperationsByOperandTypeIdByClassId
         {
             get
             {
@@ -77,27 +77,9 @@ namespace Allors.Domain
             this.EffectivePermissions = this.Role?.Permissions;
         }
 
-        public bool IsPermitted(Guid @class, Guid operandTypeId, Operations operation)
-        {
-            Dictionary<Guid, Operations> operationsByOperandType;
-            if (this.OperationsByOperandTypeByClass.TryGetValue(@class, out operationsByOperandType))
-            {
-                Operations operations;
-                if (operationsByOperandType.TryGetValue(operandTypeId, out operations))
-                {
-                    if ((operations & operation) == operation)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
         public void WarmUp()
         {
-            var x = this.OperationsByOperandTypeByClass;
+            var x = this.OperationsByOperandTypeIdByClassId;
         }
     }
 }
