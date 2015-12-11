@@ -136,7 +136,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IObject Insert(IClass @class, string objectIdString)
         {
-            var objectId = this.State.GetObjectId(objectIdString);
+            var objectId = long.Parse(objectIdString);
             var insertedObject = this.Insert(@class, objectId);
 
             this.State.ChangeSet.OnCreated(objectId);
@@ -171,8 +171,13 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IObject Instantiate(string objectId)
         {
-            var id = this.State.GetObjectId(objectId);
-            return this.Instantiate(id);
+            long id;
+            if (long.TryParse(objectId, out id))
+            {
+                return this.Instantiate(id);
+            };
+
+            return null;
         }
 
         public IObject Instantiate(long objectId)
@@ -183,11 +188,6 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IStrategy InstantiateStrategy(long objectId)
         {
-            if (objectId == null)
-            {
-                return null;
-            }
-
             Reference reference;
             if (!this.State.ReferenceByObjectId.TryGetValue(objectId, out reference))
             {
@@ -216,7 +216,7 @@ namespace Allors.Adapters.Object.SqlClient
             var objectIds = new long[objectIdStrings.Length];
             for (var i = 0; i < objectIdStrings.Length; i++)
             {
-                objectIds[i] = this.State.GetObjectId(objectIdStrings[i]);
+                objectIds[i] = long.Parse(objectIdStrings[i]);
             }
 
             return this.Instantiate(objectIds);
@@ -314,7 +314,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIdStrings)
         {
-            var objectIds = new HashSet<long>(objectIdStrings.Select(v => this.State.GetObjectId(v)));
+            var objectIds = new HashSet<long>(objectIdStrings.Select(v => long.Parse(v)));
             var references = this.Prefetcher.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)

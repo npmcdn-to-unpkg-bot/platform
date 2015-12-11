@@ -31,16 +31,16 @@ namespace Allors.Adapters.Object.SqlClient
     {
         private readonly Prefetcher prefetcher;
         private readonly PrefetchPolicy prefetchPolicy;
-        private readonly List<Reference> references;
+        private readonly HashSet<Reference> references;
 
-        public Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, List<Reference> references)
+        public Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, HashSet<Reference> references)
         {
             this.prefetcher = prefetcher;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
         }
 
-        private Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, HashSet<long> objectIds)
+        private Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, IEnumerable<long> objectIds)
         {
             this.prefetcher = prefetcher;
             this.prefetchPolicy = prefetchPolicy;

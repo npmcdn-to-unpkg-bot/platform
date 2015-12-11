@@ -356,6 +356,22 @@ namespace Allors.Adapters.Object.SqlClient
 
                     connection.Commands.Count.ShouldEqual(5);
                     connection.Executions.Count().ShouldEqual(7);
+
+                    session.Prefetch(c1Prefetcher, extent);
+
+                    stringBuilder = new StringBuilder();
+                    foreach (C1 c1 in extent)
+                    {
+                        stringBuilder.Append(c1.C1AllorsString);
+
+                        foreach (I12 i12 in c1.C1I12one2manies)
+                        {
+                            stringBuilder.Append(i12?.I12AllorsString);
+                        }
+                    }
+
+                    connection.Commands.Count.ShouldEqual(5);
+                    connection.Executions.Count().ShouldEqual(7);
                 }
 
                 this.Cache.Invalidate();

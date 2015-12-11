@@ -18,8 +18,6 @@
 // </copyright>
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
-
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
@@ -84,11 +82,11 @@ namespace Allors.Adapters.Object.SqlClient
         }
         #endregion
         
-        internal List<Reference> GetReferencesForPrefetching(HashSet<long> objectIds)
+        internal HashSet<Reference> GetReferencesForPrefetching(IEnumerable<long> objectIds)
         {
-            var references = new List<Reference>();
+            var references = new HashSet<Reference>();
 
-            List<long> referencesToInstantiate = null;
+            HashSet<long> referencesToInstantiate = null;
             foreach (var objectId in objectIds)
             {
                 Reference reference;
@@ -104,7 +102,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (referencesToInstantiate == null)
                     {
-                        referencesToInstantiate = new List<long>();
+                        referencesToInstantiate = new HashSet<long>();
                     }
 
                     referencesToInstantiate.Add(objectId);
@@ -114,8 +112,8 @@ namespace Allors.Adapters.Object.SqlClient
             if (referencesToInstantiate != null)
             {
                 // TODO: Remove dependency from Prefetcher to Commands
-                var existsUnknownReferences = this.Session.Commands.InstantiateReferences(referencesToInstantiate);
-                references.AddRange(existsUnknownReferences);
+                var newReferences = this.Session.Commands.InstantiateReferences(referencesToInstantiate);
+                references.UnionWith(newReferences);
             }
 
             return references;
@@ -129,7 +127,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.prefetchCompositeAssociationByAssociationType = null;
         }
 
-        internal void PrefetchUnitRoles(IClass @class, List<Reference> associations, IRoleType anyRoleType)
+        internal void PrefetchUnitRoles(IClass @class, HashSet<Reference> associations, IRoleType anyRoleType)
         {
             var references = this.FilterForPrefetchRoles(associations, anyRoleType);
             if (references.Count == 0)
@@ -159,16 +157,16 @@ namespace Allors.Adapters.Object.SqlClient
 
                 while (reader.Read())
                 {
-                    var objectId = this.Session.State.GetObjectIdForExistingObject(reader[0].ToString());
-                    var reference = this.Session.State.ReferenceByObjectId[objectId];
+                    var associatoinId = reader.GetInt64(0);
+                    var associationReference = this.Session.State.ReferenceByObjectId[associatoinId];
 
                     Roles modifiedRoles = null;
                     if (this.Session.State.ModifiedRolesByReference != null)
                     {
-                        this.Session.State.ModifiedRolesByReference.TryGetValue(reference, out modifiedRoles);
+                        this.Session.State.ModifiedRolesByReference.TryGetValue(associationReference, out modifiedRoles);
                     }
 
-                    var cachedObject = cache.GetOrCreateCachedObject(@class, objectId, reference.VersionId);
+                    var cachedObject = cache.GetOrCreateCachedObject(@class, associatoinId, associationReference.VersionId);
 
                     for (var i = 0; i < sortedUnitRoles.Length; i++)
                     {
@@ -229,7 +227,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositeRoleObjectTable(List<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositeRoleObjectTable(HashSet<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
@@ -257,7 +255,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                 while (reader.Read())
                 {
-                    var associationId = this.Session.State.GetObjectIdForExistingObject(reader[0].ToString());
+                    var associationId = reader.GetInt64(0);
                     var associationReference = this.Session.State.ReferenceByObjectId[associationId];
 
                     var cachedObject = cache.GetOrCreateCachedObject(associationReference.Class, associationId, associationReference.VersionId);
@@ -270,16 +268,15 @@ namespace Allors.Adapters.Object.SqlClient
                     }
                     else
                     {
-                        var roleId = this.Session.State.GetObjectIdForExistingObject(roleIdValue.ToString());
+                        var roleId = (long)roleIdValue;
                         cachedObject.SetValue(roleType, roleId);
-
                         nestedObjectIds?.Add(roleId);
                     }
                 }
             }
         }
 
-        internal void PrefetchCompositeRoleRelationTable(List<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositeRoleRelationTable(HashSet<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositeRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
@@ -333,7 +330,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositesRoleObjectTable(List<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositesRoleObjectTable(HashSet<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositesRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
@@ -391,16 +388,16 @@ namespace Allors.Adapters.Object.SqlClient
                 var roles = dictionaryEntry.Value;
 
                 var cachedObject = cache.GetOrCreateCachedObject(association.Class, association.ObjectId, association.VersionId);
-                cachedObject.SetValue(roleType, roles == null ? EmptyObjectIds : roles.ToArray());
+                cachedObject.SetValue(roleType, roles?.ToArray() ?? EmptyObjectIds);
 
-                if (nestedObjectIds != null)
+                if (roles != null)
                 {
-                    nestedObjectIds.UnionWith(roles);
+                    nestedObjectIds?.UnionWith(roles);
                 }
             }
         }
 
-        internal void PrefetchCompositesRoleRelationTable(List<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositesRoleRelationTable(HashSet<Reference> associations, IRoleType roleType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchRoles(associations, roleType) : this.FilterForPrefetchCompositesRoles(associations, roleType, nestedObjectIds);
             if (references.Count == 0)
@@ -471,7 +468,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositeAssociationObjectTable(List<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositeAssociationObjectTable(HashSet<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositeAssociations(roles, associationType, nestedObjectIds);
             if (references.Count == 0)
@@ -530,7 +527,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositeAssociationRelationTable(List<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositeAssociationRelationTable(HashSet<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositesAssociations(roles, associationType, nestedObjectIds);
             if (references.Count == 0)
@@ -595,7 +592,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositesAssociationObjectTable(List<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositesAssociationObjectTable(HashSet<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositeAssociations(roles, associationType, nestedObjectIds);
             if (references.Count == 0)
@@ -677,7 +674,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void PrefetchCompositesAssociationRelationTable(List<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
+        internal void PrefetchCompositesAssociationRelationTable(HashSet<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
         {
             var references = nestedObjectIds == null ? this.FilterForPrefetchAssociations(roles, associationType) : this.FilterForPrefetchCompositeAssociations(roles, associationType, nestedObjectIds);
             if (references.Count == 0)
@@ -761,7 +758,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        private List<Reference> FilterForPrefetchRoles(List<Reference> associations, IRoleType roleType)
+        private List<Reference> FilterForPrefetchRoles(HashSet<Reference> associations, IRoleType roleType)
         {
             var references = new List<Reference>();
 
@@ -797,7 +794,7 @@ namespace Allors.Adapters.Object.SqlClient
             return references;
         }
 
-        private List<Reference> FilterForPrefetchCompositeRoles(List<Reference> associations, IRoleType roleType, HashSet<long> nestedObjects)
+        private List<Reference> FilterForPrefetchCompositeRoles(HashSet<Reference> associations, IRoleType roleType, HashSet<long> nestedObjects)
         {
             var references = new List<Reference>();
 
@@ -844,7 +841,7 @@ namespace Allors.Adapters.Object.SqlClient
             return references;
         }
 
-        private List<Reference> FilterForPrefetchCompositesRoles(List<Reference> associations, IRoleType roleType, HashSet<long> nestedObjects)
+        private List<Reference> FilterForPrefetchCompositesRoles(HashSet<Reference> associations, IRoleType roleType, HashSet<long> nestedObjects)
         {
             var references = new List<Reference>();
 
@@ -883,7 +880,7 @@ namespace Allors.Adapters.Object.SqlClient
             return references;
         }
 
-        private List<Reference> FilterForPrefetchAssociations(List<Reference> roles, IAssociationType associationType)
+        private HashSet<Reference> FilterForPrefetchAssociations(HashSet<Reference> roles, IAssociationType associationType)
         {
             Dictionary<Reference, Reference> associationByRole;
             if (!this.Session.State.AssociationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
@@ -891,10 +888,10 @@ namespace Allors.Adapters.Object.SqlClient
                 return roles;
             }
 
-            return roles.Where(role => !associationByRole.ContainsKey(role)).ToList();
+            return new HashSet<Reference>(roles.Where(role => !associationByRole.ContainsKey(role)));
         }
 
-        private List<Reference> FilterForPrefetchCompositeAssociations(List<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
+        private HashSet<Reference> FilterForPrefetchCompositeAssociations(HashSet<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
         {
             Dictionary<Reference, Reference> associationByRole;
             if (!this.Session.State.AssociationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
@@ -902,7 +899,7 @@ namespace Allors.Adapters.Object.SqlClient
                 return roles;
             }
 
-            var references = new List<Reference>();
+            var references = new HashSet<Reference>();
             foreach (var role in roles)
             {
                 Reference association;
@@ -918,7 +915,7 @@ namespace Allors.Adapters.Object.SqlClient
             return references;
         }
 
-        private List<Reference> FilterForPrefetchCompositesAssociations(List<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
+        private HashSet<Reference> FilterForPrefetchCompositesAssociations(HashSet<Reference> roles, IAssociationType associationType, HashSet<long> nestedObjectIds)
         {
             Dictionary<Reference, long[]> associationByRole;
             if (!this.Session.State.AssociationsByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
@@ -926,7 +923,7 @@ namespace Allors.Adapters.Object.SqlClient
                 return roles;
             }
 
-            var references = new List<Reference>();
+            var references = new HashSet<Reference>();
             foreach (var role in roles)
             {
                 long[] association;

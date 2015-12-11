@@ -726,7 +726,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             var result = command.ExecuteScalar();
-            var objectId = this.Session.State.GetObjectId(result.ToString());
+            var objectId = long.Parse(result.ToString());
             return this.Session.State.CreateReferenceForNewObject(@class, objectId, this.Session);
         }
 
@@ -755,7 +755,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    object id = this.Session.State.GetObjectId(reader[0].ToString());
+                    object id = long.Parse(reader[0].ToString());
                     objectIds.Add(id);
                 }
             }
@@ -764,7 +764,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             foreach (var id in objectIds)
             {
-                var objectId = this.Session.State.GetObjectId(id.ToString());
+                var objectId = long.Parse(id.ToString());
                 var strategySql = this.Session.State.CreateReferenceForNewObject(@class, objectId, this.Session);
                 strategies.Add(strategySql);
             }
@@ -892,7 +892,7 @@ namespace Allors.Adapters.Object.SqlClient
                     var classId = reader.GetGuid(1);
                     var version = reader.GetInt64(2);
 
-                    var objectId = this.Session.State.GetObjectId(objectIdString);
+                    var objectId = long.Parse(objectIdString);
                     var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);
                     var reference = this.Session.State.GetOrCreateReferenceForExistingObject(type, objectId, version, this.Session);
 
@@ -925,7 +925,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    var objectId = this.Session.State.GetObjectId(reader[0].ToString());
+                    var objectId = long.Parse(reader[0].ToString());
                     var version = reader.GetInt64(1);
 
                     versionByObjectId.Add(objectId, version);

@@ -178,10 +178,5 @@ namespace Allors.Adapters.Object.SqlClient
 
             return objectId;
         }
-
-        public long GetObjectId(string objectStringId)
-        {
-            return long.Parse(objectStringId);
-        }
     }
 }
