@@ -2,7 +2,7 @@ delimiters "$", "$"
 
 TemplateId() ::= <<17ED40F8-BDF8-4A7C-9AE9-1C4D2AD6BA2B>>
 TemplateName() ::= <<Allors C# Domain>>
-TemplateVersion() ::= <<1.0.80>>
+TemplateVersion() ::= <<1.0.81>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta, grp) ::= <<
 $!
@@ -195,7 +195,7 @@ namespace Allors.Domain
 			this.strategy = strategy;
 		}
 		
-		public ObjectId Id
+		public long Id
 		{
 			get { return this.strategy.ObjectId; }
 		}

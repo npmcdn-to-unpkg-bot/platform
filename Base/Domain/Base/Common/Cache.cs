@@ -34,8 +34,8 @@ namespace Allors.Domain
         private readonly IDatabase database;
         private readonly RoleType roleType;
 
-        private ConcurrentDictionary<TKey, ObjectId> databaseSessionCache;
-        private ConcurrentDictionary<TKey, ObjectId> databaseCache;
+        private ConcurrentDictionary<TKey, long> databaseSessionCache;
+        private ConcurrentDictionary<TKey, long> databaseCache;
 
         public Cache(ISession session, RoleType roleType)
         {
@@ -56,7 +56,7 @@ namespace Allors.Domain
         {
             this.LazyLoadDatabaseSessionCache();
 
-            ObjectId cachedObjectId;
+            long cachedObjectId;
             if (!this.databaseSessionCache.TryGetValue(key, out cachedObjectId))
             {
                 this.LazyLoadDatabaseCache();
@@ -114,11 +114,11 @@ namespace Allors.Domain
         {
             if (this.databaseSessionCache == null)
             {
-                this.databaseSessionCache = (ConcurrentDictionary<TKey, ObjectId>)this.databaseSession[this.cacheKey];
+                this.databaseSessionCache = (ConcurrentDictionary<TKey, long>)this.databaseSession[this.cacheKey];
                 if (this.databaseSessionCache == null)
                 {
-                    this.databaseSession[this.cacheKey] = new ConcurrentDictionary<TKey, ObjectId>();
-                    this.databaseSessionCache = (ConcurrentDictionary<TKey, ObjectId>)this.databaseSession[this.cacheKey];
+                    this.databaseSession[this.cacheKey] = new ConcurrentDictionary<TKey, long>();
+                    this.databaseSessionCache = (ConcurrentDictionary<TKey, long>)this.databaseSession[this.cacheKey];
                 }
             }
         }
@@ -127,11 +127,11 @@ namespace Allors.Domain
         {
             if (this.databaseCache == null)
             {
-                this.databaseCache = (ConcurrentDictionary<TKey, ObjectId>)this.database[this.cacheKey];
+                this.databaseCache = (ConcurrentDictionary<TKey, long>)this.database[this.cacheKey];
                 if (this.databaseCache == null)
                 {
-                    this.database[this.cacheKey] = new ConcurrentDictionary<TKey, ObjectId>();
-                    this.databaseCache = (ConcurrentDictionary<TKey, ObjectId>)this.database[this.cacheKey];
+                    this.database[this.cacheKey] = new ConcurrentDictionary<TKey, long>();
+                    this.databaseCache = (ConcurrentDictionary<TKey, long>)this.database[this.cacheKey];
                 }
             }
         }

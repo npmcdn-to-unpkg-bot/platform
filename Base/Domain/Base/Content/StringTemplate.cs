@@ -30,9 +30,11 @@ namespace Allors.Domain
 
     public partial class StringTemplate
     {
+        private const string Key = "StringTemplate.";
+
         public void BaseOnDerive(ObjectOnDerive method)
         {
-            this.Strategy.Session[this.Id.Key] = null;
+            this.Strategy.Session[Key + this.Id] = null;
         }
 
         public void Load(Assembly assembly, string resourceName)
@@ -79,13 +81,13 @@ namespace Allors.Domain
             get
             {
                 // TODO: Setting or removing Body should flush caches
-                var templateGroup = (TemplateGroup)this.Strategy.Session[this.Id.Key];
+                var templateGroup = (TemplateGroup)this.Strategy.Session[Key + this.Id];
 
                 if (templateGroup == null)
                 {
                     templateGroup = new TemplateGroupString("allors", this.Body, '$', '$') { Listener = new ErrorTemplateListener() };
                     templateGroup.RegisterRenderer(typeof(string), new StringRenderer());
-                    this.Strategy.Session[this.Id.Key] = templateGroup;
+                    this.Strategy.Session[Key + this.Id] = templateGroup;
                 }
 
                 return templateGroup;
@@ -93,7 +95,7 @@ namespace Allors.Domain
 
             set
             {
-                this.Strategy.Session[this.Id.Key] = value;
+                this.Strategy.Session[Key + this.Id] = value;
             }
         }
 

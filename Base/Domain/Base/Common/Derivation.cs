@@ -50,7 +50,7 @@ namespace Allors.Domain
         private readonly HashSet<Object> derivedObjects;
         private readonly HashSet<IObject> preparedObjects;
         
-        private HashSet<ObjectId> forcedDerivations;
+        private HashSet<long> forcedDerivations;
         private HashSet<IObject> addedDerivables;
 
         private DerivationGraph derivationGraph;
@@ -74,7 +74,7 @@ namespace Allors.Domain
             var user = new Users(session).GetCurrentUser();
         }
 
-        public Derivation(ISession session, IEnumerable<ObjectId> forcedDerivations)
+        public Derivation(ISession session, IEnumerable<long> forcedDerivations)
             : this(session)
         {
             this.ForcedDerivations.UnionWith(forcedDerivations);
@@ -129,11 +129,11 @@ namespace Allors.Domain
             }
         }
 
-        private HashSet<ObjectId> ForcedDerivations
+        private HashSet<long> ForcedDerivations
         {
             get
             {
-                return this.forcedDerivations ?? (this.forcedDerivations = new HashSet<ObjectId>());
+                return this.forcedDerivations ?? (this.forcedDerivations = new HashSet<long>());
             }
         }
 
@@ -179,7 +179,7 @@ namespace Allors.Domain
             }
         }
 
-        public bool IsForced(ObjectId objectId)
+        public bool IsForced(long objectId)
         {
             return this.ForcedDerivations.Contains(objectId);
         }
@@ -240,7 +240,7 @@ namespace Allors.Domain
 
         public DerivationLog Derive()
         {
-            var changedObjectIds = new HashSet<ObjectId>(this.changeSet.Associations);
+            var changedObjectIds = new HashSet<long>(this.changeSet.Associations);
             changedObjectIds.UnionWith(this.changeSet.Roles);
             changedObjectIds.UnionWith(this.changeSet.Created);
 
@@ -322,7 +322,7 @@ namespace Allors.Domain
 
                 this.changeSet = this.Session.Checkpoint();
 
-                changedObjectIds = new HashSet<ObjectId>(this.changeSet.Associations);
+                changedObjectIds = new HashSet<long>(this.changeSet.Associations);
                 changedObjectIds.UnionWith(this.changeSet.Roles);
                 changedObjectIds.UnionWith(this.changeSet.Created);
 

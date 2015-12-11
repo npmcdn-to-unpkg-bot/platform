@@ -39,7 +39,7 @@ namespace Allors.Domain
 
         object this[string name] { get; set; }
 
-        bool IsForced(ObjectId objectId);
+        bool IsForced(long objectId);
 
         ISet<IRoleType> GetChangedRoleTypes(IObject association);
 
