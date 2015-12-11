@@ -33,18 +33,27 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly PrefetchPolicy prefetchPolicy;
         private readonly HashSet<Reference> references;
 
+        private readonly bool isRoot;
+        private readonly HashSet<long> leafs;
+
         public Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, HashSet<Reference> references)
         {
             this.prefetcher = prefetcher;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
+
+            this.isRoot = true;
+            this.leafs = new HashSet<long>();
         }
 
-        private Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, IEnumerable<long> objectIds)
+        private Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, IEnumerable<long> objectIds, HashSet<long> leafs)
         {
             this.prefetcher = prefetcher;
             this.prefetchPolicy = prefetchPolicy;
             this.references = prefetcher.GetReferencesForPrefetching(objectIds);
+
+            this.isRoot = false;
+            this.leafs = leafs;
         }
 
         public void Execute()
@@ -112,11 +121,11 @@ namespace Allors.Adapters.Object.SqlClient
                         {
                             if (relationType.ExistExclusiveClasses)
                             {
-                                this.prefetcher.PrefetchCompositeRoleObjectTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositeRoleObjectTable(this.references, roleType, nestedObjectIds, leafs);
                             }
                             else
                             {
-                                this.prefetcher.PrefetchCompositeRoleRelationTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositeRoleRelationTable(this.references, roleType, nestedObjectIds, leafs);
                             }
                         }
                         else
@@ -124,17 +133,17 @@ namespace Allors.Adapters.Object.SqlClient
                             var associationType = relationType.AssociationType;
                             if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                             {
-                                this.prefetcher.PrefetchCompositesRoleObjectTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositesRoleObjectTable(this.references, roleType, nestedObjectIds, leafs);
                             }
                             else
                             {
-                                this.prefetcher.PrefetchCompositesRoleRelationTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositesRoleRelationTable(this.references, roleType, nestedObjectIds, leafs);
                             }
                         }
 
                         if (existNestedPrefetchPolicy)
                         {
-                            new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds).Execute();
+                            new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds, this.leafs).Execute();
                         }
                     }
                 }
@@ -152,30 +161,35 @@ namespace Allors.Adapters.Object.SqlClient
                     {
                         if (associationType.IsOne)
                         {
-                            this.prefetcher.PrefetchCompositeAssociationObjectTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositeAssociationObjectTable(this.references, associationType, nestedObjectIds, this.leafs);
                         }
                         else
                         {
-                            this.prefetcher.PrefetchCompositesAssociationObjectTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositesAssociationObjectTable(this.references, associationType, nestedObjectIds, this.leafs);
                         }
                     }
                     else
                     {
                         if (associationType.IsOne)
                         {
-                            this.prefetcher.PrefetchCompositeAssociationRelationTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositeAssociationRelationTable(this.references, associationType, nestedObjectIds, this.leafs);
                         }
                         else
                         {
-                            this.prefetcher.PrefetchCompositesAssociationRelationTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositesAssociationRelationTable(this.references, associationType, nestedObjectIds, this.leafs);
                         }
                     }
 
                     if (existNestedPrefetchPolicy)
                     {
-                        new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds).Execute();
+                        new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds, this.leafs).Execute();
                     }
                 }
+            }
+
+            if (this.isRoot && this.leafs.Count > 0)
+            {
+                this.prefetcher.GetReferencesForPrefetching(this.leafs);
             }
         }
     }
