@@ -5144,36 +5144,4 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
             return this.Session.Extent(objectType);
         }
     }
-
-    public abstract class LifeCycleIntegerIdTest : LifeCycleTest
-    {
-        [Test]
-        public void ObjectId()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-
-                C1 c1 = this.Session.Create<C1>();
-
-                Assert.IsTrue(c1.Strategy.ObjectId is int);
-            }
-        }
-    }
-
-    public abstract class LifeCycleLongIdTest : LifeCycleTest
-    {
-        [Test]
-        public void ObjectId()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-
-                C1 c1 = this.Session.Create<C1>();
-
-                Assert.IsTrue(c1.Strategy.ObjectId is long);
-            }
-        }
-    }
 }

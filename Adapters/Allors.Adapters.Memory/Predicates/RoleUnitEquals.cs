@@ -42,7 +42,7 @@ namespace Allors.Adapters.Memory
                 var unitType = roleType.ObjectType as IUnit;
                 if (unitType != null && unitType.IsInteger)
                 {
-                    this.equals = equals;
+                    this.equals = (int)equals;
                 }
                 else 
                 {
@@ -75,7 +75,7 @@ namespace Allors.Adapters.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    equalsValue = RoleTypeExtensions.Normalize(this.roleType, this.@equals);
+                    equalsValue = this.roleType.Normalize(this.@equals);
                 }
             }
 

@@ -26,7 +26,7 @@ namespace Allors.Adapters.Memory
     using NUnit.Framework;
 
     [TestFixture]
-    public class LifeCycleTest : LifeCycleIntegerIdTest
+    public class LifeCycleTest : Adapters.LifeCycleTest
     {
         private readonly Profile profile = new Profile();
 
