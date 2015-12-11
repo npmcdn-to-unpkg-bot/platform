@@ -101,7 +101,10 @@ namespace Allors.Adapters.Object.SqlClient
                         var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                         var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
                         var nestedObjectIds = existNestedPrefetchPolicy ? new HashSet<long>() : null;
-                        nestedObjectIdsByRoleType[roleType] = nestedObjectIds;
+                        if (existNestedPrefetchPolicy)
+                        {
+                            nestedObjectIdsByRoleType[roleType] = nestedObjectIds;
+                        }
 
                         var relationType = roleType.RelationType;
                         if (roleType.IsOne)
@@ -138,7 +141,10 @@ namespace Allors.Adapters.Object.SqlClient
                     var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                     var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
                     var nestedObjectIds = existNestedPrefetchPolicy ? new HashSet<long>() : null;
-                    nestedObjectIdsByRoleType[roleType] = nestedObjectIds;
+                    if (existNestedPrefetchPolicy)
+                    {
+                        nestedObjectIdsByRoleType[roleType] = nestedObjectIds;
+                    }
 
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                     {
