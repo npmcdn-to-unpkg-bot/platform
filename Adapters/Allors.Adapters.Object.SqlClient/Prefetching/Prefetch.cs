@@ -86,7 +86,7 @@ namespace Allors.Adapters.Object.SqlClient
                                 var @class = dictionaryEntry.Key;
                                 var classedReferences = dictionaryEntry.Value;
 
-                                var referencesWithoutCachedRole = new List<Reference>();
+                                var referencesWithoutCachedRole = new HashSet<Reference>();
                                 foreach (var reference in classedReferences)
                                 {
                                     var roles = this.prefetcher.Session.State.GetOrCreateRoles(reference);

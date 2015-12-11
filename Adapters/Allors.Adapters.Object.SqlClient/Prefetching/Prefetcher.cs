@@ -304,7 +304,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 while (reader.Read())
                 {
-                    var associationId = this.Session.State.GetObjectIdForExistingObject(reader[0].ToString());
+                    var associationId = reader.GetInt64(0);
                     var associationReference = this.Session.State.ReferenceByObjectId[associationId];
                     var roleId = this.Session.State.GetObjectIdForExistingObject(reader[1].ToString());
                     roleByAssociation.Add(associationReference, roleId);
@@ -320,7 +320,6 @@ namespace Allors.Adapters.Object.SqlClient
                 if (roleByAssociation.TryGetValue(reference, out roleId))
                 {
                     cachedObject.SetValue(roleType, roleId);
-
                     nestedObjectIds?.Add(roleId);
                 }
                 else
