@@ -35,7 +35,7 @@ namespace Allors.Domain
                 var database = this.strategy.Session.Database;
                 var key = CacheKey + this.strategy.ObjectId;
                 var kvp = (KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>?)database[key];
-                if (!kvp.HasValue || !this.strategy.ObjectVersion.Value.Equals(kvp.Value.Key))
+                if (!kvp.HasValue || !this.strategy.ObjectVersion.Equals(kvp.Value.Key))
                 {
                     var operationsByOperandTypeByClass = new Dictionary<Guid, Dictionary<Guid, Operations>>();
 
@@ -59,7 +59,7 @@ namespace Allors.Domain
                         operationsByOperandType[operandTypeId] = operations;
                     }
 
-                    kvp = new KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>(this.strategy.ObjectVersion.Value, operationsByOperandTypeByClass);
+                    kvp = new KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>(this.strategy.ObjectVersion, operationsByOperandTypeByClass);
                     database[key] = kvp;
                 }
 
