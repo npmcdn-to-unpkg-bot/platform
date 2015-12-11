@@ -35,8 +35,8 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly RelationNotLoadedEventHandler relationNotLoaded;
         private readonly XmlReader reader;
 
-        private readonly Dictionary<ObjectId, IObjectType> objectTypeByObjectId;
-        private readonly Dictionary<ObjectId, ObjectVersion> objectVersionByObjectId;
+        private readonly Dictionary<long, IObjectType> objectTypeByObjectId;
+        private readonly Dictionary<long, ObjectVersion> objectVersionByObjectId;
 
         internal void Execute(ManagementSession session)
         {
@@ -167,7 +167,7 @@ namespace Allors.Adapters.Object.SqlClient
                                 var objectIdsString = this.reader.ReadString();
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
 
-                                var objectIds = new ObjectId[objectIdStringArray.Length];
+                                var objectIds = new long[objectIdStringArray.Length];
                                 var versions = new ObjectVersion[objectIdStringArray.Length];
                                 for (var i = 0; i < objectIds.Length; i++)
                                 {
@@ -177,7 +177,7 @@ namespace Allors.Adapters.Object.SqlClient
                                     {
                                         var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
 
-                                        var objectId = this.database.ObjectIds.Parse(objectArray[0]);
+                                        var objectId = long.Parse(objectArray[0]);
                                         var version = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(Reference.InitialVersion);
 
                                         objectIds[i] = objectId;
@@ -344,7 +344,7 @@ namespace Allors.Adapters.Object.SqlClient
                                 throw new Exception("Association id is missing");
                             }
 
-                            var associationId = this.database.ObjectIds.Parse(associationIdString);
+                            var associationId = long.Parse(associationIdString);
                             IObjectType associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(associationId, out associationConcreteClass);
 
@@ -467,7 +467,7 @@ namespace Allors.Adapters.Object.SqlClient
                                 throw new Exception("Role is missing");
                             }
 
-                            var association = this.database.ObjectIds.Parse(associationIdString);
+                            var association = long.Parse(associationIdString);
                             IObjectType associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(association, out associationConcreteClass);
 
@@ -487,7 +487,7 @@ namespace Allors.Adapters.Object.SqlClient
                             {
                                 foreach (var r in rs)
                                 {
-                                    var role = this.database.ObjectIds.Parse(r);
+                                    var role = long.Parse(r);
                                     IObjectType roleConcreteClass;
                                     this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
 
@@ -616,8 +616,8 @@ namespace Allors.Adapters.Object.SqlClient
             this.relationNotLoaded = relationNotLoaded;
             this.reader = reader;
 
-            this.objectTypeByObjectId = new Dictionary<ObjectId, IObjectType>();
-            this.objectVersionByObjectId = new Dictionary<ObjectId, ObjectVersion>();
+            this.objectTypeByObjectId = new Dictionary<long, IObjectType>();
+            this.objectVersionByObjectId = new Dictionary<long, ObjectVersion>();
         }
 
         private void LoadObjectsPostProcess(ManagementSession session)

@@ -60,7 +60,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public ObjectId ObjectId { get; }
+        public long ObjectId { get; }
 
         public ObjectVersion ObjectVersion {
             get
@@ -256,7 +256,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.AssertExist();
             var role = this.Roles.GetCompositeRole(roleType);
-            return (role == null) ? null : this.Session.State.GetOrCreateReferenceForExistingObject(role, this.Session).Strategy.GetObject();
+            return (role == null) ? null : this.Session.State.GetOrCreateReferenceForExistingObject(role.Value, this.Session).Strategy.GetObject();
         }
 
         public virtual void SetCompositeRole(IRoleType roleType, IObject newRoleObject)
@@ -336,8 +336,8 @@ namespace Allors.Adapters.Object.SqlClient
                 this.AssertExist();
                 
                 // TODO: use CompositeRoles
-                var previousRoles = new List<ObjectId>(this.Roles.GetCompositesRole(roleType));
-                var newRoles = new HashSet<ObjectId>();
+                var previousRoles = new List<long>(this.Roles.GetCompositesRole(roleType));
+                var newRoles = new HashSet<long>();
 
                 foreach (IObject roleObject in roleObjects)
                 {
@@ -488,7 +488,7 @@ namespace Allors.Adapters.Object.SqlClient
             return this.Roles.ExtentContains(roleType, value.Id);
         }
 
-        internal virtual ObjectId[] ExtentGetCompositeAssociations(IAssociationType associationType)
+        internal virtual long[] ExtentGetCompositeAssociations(IAssociationType associationType)
         {
             this.AssertExist();
 

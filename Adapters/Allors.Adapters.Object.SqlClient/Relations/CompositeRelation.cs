@@ -24,10 +24,10 @@ namespace Allors.Adapters.Object.SqlClient
 {
     internal class CompositeRelation
     {
-        internal readonly ObjectId Association;
-        internal readonly ObjectId Role;
+        internal readonly long Association;
+        internal readonly long Role;
 
-        internal CompositeRelation(ObjectId association, ObjectId role)
+        internal CompositeRelation(long association, long role)
         {
             this.Association = association;
             this.Role = role;

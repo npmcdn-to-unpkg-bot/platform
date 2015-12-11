@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PropertiesTest.cs" company="Allors bvba">
+// <copyright file="LifeCycleTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,14 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory.IntegerId
+namespace Allors.Adapters.Memory
 {
+    using Allors;
     using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class PropertiesTest : Adapters.PropertiesTest
+    public class LifeCycleTest : LifeCycleIntegerIdTest
     {
         private readonly Profile profile = new Profile();
 
@@ -37,10 +38,29 @@ namespace Allors.Adapters.Memory.IntegerId
             }
         }
 
+        [Test]
+        public override void DifferentSessions()
+        {
+        }
+
         [TearDown]
         protected void Dispose()
         {
             this.profile.Dispose();
+        }
+
+        protected override void SwitchDatabase()
+        {
+        }
+
+        protected override IDatabase CreatePopulation()
+        {
+            return this.profile.CreateDatabase();
+        }
+
+        protected override ISession CreateSession()
+        {
+            return this.profile.CreateSession();
         }
     }
 }

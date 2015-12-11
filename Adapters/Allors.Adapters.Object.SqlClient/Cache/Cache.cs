@@ -32,13 +32,13 @@ namespace Allors.Adapters.Object.SqlClient.Caching
     {
         protected readonly HashSet<IClass> ExcludedClasses;
 
-        protected readonly ConcurrentDictionary<ObjectId, CachedObject> CachedObjectByObjectId;
-        protected readonly ConcurrentDictionary<ObjectId, IClass> ObjectTypeByObjectId;
+        protected readonly ConcurrentDictionary<long, CachedObject> CachedObjectByObjectId;
+        protected readonly ConcurrentDictionary<long, IClass> ObjectTypeByObjectId;
 
         protected Cache(IClass[] excludedClasses)
         {
-            this.CachedObjectByObjectId = new ConcurrentDictionary<ObjectId, CachedObject>();
-            this.ObjectTypeByObjectId = new ConcurrentDictionary<ObjectId, IClass>();
+            this.CachedObjectByObjectId = new ConcurrentDictionary<long, CachedObject>();
+            this.ObjectTypeByObjectId = new ConcurrentDictionary<long, IClass>();
 
             if (excludedClasses != null)
             {
@@ -67,7 +67,7 @@ namespace Allors.Adapters.Object.SqlClient.Caching
             this.ObjectTypeByObjectId.Clear();
         }
 
-        public ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, long version)
+        public ICachedObject GetOrCreateCachedObject(IClass concreteClass, long objectId, long version)
         {
             if (this.ExcludedClasses != null && this.ExcludedClasses.Contains(concreteClass))
             {
@@ -92,19 +92,19 @@ namespace Allors.Adapters.Object.SqlClient.Caching
             return cachedObject;
         }
 
-        public IClass GetObjectType(ObjectId objectId)
+        public IClass GetObjectType(long objectId)
         {
             IClass objectType;
             this.ObjectTypeByObjectId.TryGetValue(objectId, out objectType);
             return objectType;
         }
 
-        public void SetObjectType(ObjectId objectId, IClass objectType)
+        public void SetObjectType(long objectId, IClass objectType)
         {
             this.ObjectTypeByObjectId[objectId] = objectType;
         }
 
-        public void OnCommit(IList<ObjectId> accessedObjectIds, IList<ObjectId> changedObjectIds)
+        public void OnCommit(IList<long> accessedObjectIds, IList<long> changedObjectIds)
         {
             if (changedObjectIds.Count > 0)
             {
@@ -116,7 +116,7 @@ namespace Allors.Adapters.Object.SqlClient.Caching
             }
         }
 
-        public void OnRollback(IList<ObjectId> accessedObjectIds)
+        public void OnRollback(IList<long> accessedObjectIds)
         {
         }
 

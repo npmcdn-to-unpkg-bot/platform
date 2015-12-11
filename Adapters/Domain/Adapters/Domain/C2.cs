@@ -34,7 +34,7 @@ namespace Allors.Domain
             return (C2[])session.Create(Meta.ObjectType, count);
         }
 
-        public static C2 Instantiate(ISession session, ObjectId id)
+        public static C2 Instantiate(ISession session, long id)
         {
             return (C2)session.Instantiate(id);
         }

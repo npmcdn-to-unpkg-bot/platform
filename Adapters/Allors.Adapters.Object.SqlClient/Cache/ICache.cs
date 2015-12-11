@@ -29,15 +29,15 @@ namespace Allors.Adapters.Object.SqlClient.Caching
     /// </summary>
     public interface ICache
     {
-        ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, long version);
+        ICachedObject GetOrCreateCachedObject(IClass concreteClass, long objectId, long version);
 
-        IClass GetObjectType(ObjectId objectId);
+        IClass GetObjectType(long objectId);
 
-        void SetObjectType(ObjectId objectId, IClass objectType);
+        void SetObjectType(long objectId, IClass objectType);
 
-        void OnCommit(IList<ObjectId> accessedObjectIds, IList<ObjectId> changedObjectIds);
+        void OnCommit(IList<long> accessedObjectIds, IList<long> changedObjectIds);
 
-        void OnRollback(IList<ObjectId> accessedObjectIds);
+        void OnRollback(IList<long> accessedObjectIds);
 
         /// <summary>
         /// Invalidates the Cache.

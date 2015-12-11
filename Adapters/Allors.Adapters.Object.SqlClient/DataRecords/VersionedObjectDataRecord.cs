@@ -31,9 +31,9 @@ namespace Allors.Adapters.Object.SqlClient
     internal class VersionedObjectDataRecord : IEnumerable<SqlDataRecord>
     {
         private readonly Mapping mapping;
-        private readonly Dictionary<ObjectId, ObjectVersion> versionedObjects;
+        private readonly Dictionary<long, ObjectVersion> versionedObjects;
 
-        internal VersionedObjectDataRecord(Mapping mapping, Dictionary<ObjectId, ObjectVersion> versionedObjects)
+        internal VersionedObjectDataRecord(Mapping mapping, Dictionary<long, ObjectVersion> versionedObjects)
         {
             this.mapping = mapping;
             this.versionedObjects = versionedObjects;
@@ -41,45 +41,22 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            if (this.mapping.IsObjectIdInteger)
+            var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
+            var metaData = new SqlMetaData[]
             {
-                var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
-                var metaData = new SqlMetaData[]
-                {
-                    new SqlMetaData(objectArrayElement, SqlDbType.Int),
-                    new SqlMetaData(objectArrayElement, SqlDbType.BigInt)
-                };
-                var sqlDataRecord = new SqlDataRecord(metaData);
+                new SqlMetaData(objectArrayElement, SqlDbType.BigInt),
+                new SqlMetaData(objectArrayElement, SqlDbType.BigInt)
+            };
+            var sqlDataRecord = new SqlDataRecord(metaData);
 
-                foreach (var dictionaryEntry in this.versionedObjects)
-                {
-                    var objectId = dictionaryEntry.Key;
-                    var objectVersion = dictionaryEntry.Value;
-
-                    sqlDataRecord.SetInt32(0, (int)objectId.Value);
-                    sqlDataRecord.SetInt64(1, (long)objectVersion.Value);
-                    yield return sqlDataRecord;
-                }
-            }
-            else
+            foreach (var dictionaryEntry in this.versionedObjects)
             {
-                var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
-                var metaData = new SqlMetaData[]
-                {
-                    new SqlMetaData(objectArrayElement, SqlDbType.BigInt),
-                    new SqlMetaData(objectArrayElement, SqlDbType.BigInt)
-                };
-                var sqlDataRecord = new SqlDataRecord(metaData);
+                var objectId = dictionaryEntry.Key;
+                var objectVersion = dictionaryEntry.Value;
 
-                foreach (var dictionaryEntry in this.versionedObjects)
-                {
-                    var objectId = dictionaryEntry.Key;
-                    var objectVersion = dictionaryEntry.Value;
-
-                    sqlDataRecord.SetInt64(0, (long)objectId.Value);
-                    sqlDataRecord.SetInt64(1, (long)objectVersion.Value);
-                    yield return sqlDataRecord;
-                }
+                sqlDataRecord.SetInt64(0, objectId);
+                sqlDataRecord.SetInt64(1, (long)objectVersion.Value);
+                yield return sqlDataRecord;
             }
         }
 

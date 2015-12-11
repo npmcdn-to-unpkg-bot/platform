@@ -100,12 +100,12 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void AddObjectParameter(ObjectId objectId)
+        internal void AddObjectParameter(long objectId)
         {
             var sqlParameter = this.SqlCommand.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForObject;
-            sqlParameter.SqlDbType = this.Mapping.SqlDbTypeForObject;
-            sqlParameter.Value = objectId.Value;
+            sqlParameter.SqlDbType = Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId;
 
             this.SqlCommand.Parameters.Add(sqlParameter);
         }
@@ -130,22 +130,22 @@ namespace Allors.Adapters.Object.SqlClient
             this.Parameters.Add(sqlParameter);
         }
 
-        internal void AddCompositeRoleParameter(ObjectId objectId)
+        internal void AddCompositeRoleParameter(long objectId)
         {
             var sqlParameter = this.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForCompositeRole;
-            sqlParameter.SqlDbType = this.Mapping.SqlDbTypeForObject;
-            sqlParameter.Value = objectId.Value;
+            sqlParameter.SqlDbType = Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId;
 
             this.Parameters.Add(sqlParameter);
         }
 
-        internal void AddAssociationParameter(ObjectId objectId)
+        internal void AddAssociationParameter(long objectId)
         {
             var sqlParameter = this.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
-            sqlParameter.SqlDbType = this.Mapping.SqlDbTypeForObject;
-            sqlParameter.Value = objectId.Value;
+            sqlParameter.SqlDbType = Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId;
 
             this.Parameters.Add(sqlParameter);
         }
@@ -161,7 +161,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.Parameters.Add(sqlParameter);
         }
 
-        internal void AddObjectTableParameter(IEnumerable<ObjectId> objectIds)
+        internal void AddObjectTableParameter(IEnumerable<long> objectIds)
         {
             var sqlParameter = this.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -183,12 +183,12 @@ namespace Allors.Adapters.Object.SqlClient
             this.Parameters.Add(sqlParameter);
         }
 
-        internal void AddAssociationTableParameter(ObjectId objectId)
+        internal void AddAssociationTableParameter(long objectId)
         {
             var sqlParameter = this.CreateParameter();
             sqlParameter.ParameterName = Mapping.ParamNameForAssociation;
-            sqlParameter.SqlDbType = this.Mapping.SqlDbTypeForObject;
-            sqlParameter.Value = objectId.Value;
+            sqlParameter.SqlDbType = Mapping.SqlDbTypeForObject;
+            sqlParameter.Value = objectId;
 
             this.Parameters.Add(sqlParameter);
         }

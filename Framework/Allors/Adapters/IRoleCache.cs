@@ -26,20 +26,20 @@ namespace Allors.Adapters
 
     public interface IRoleCache
     {
-        bool TryGetUnit(ObjectId association, object cacheId, IRoleType roleType, out object role);
+        bool TryGetUnit(long associationId, object cacheId, IRoleType roleType, out object role);
        
-        void SetUnit(ObjectId association, object cacheId, IRoleType roleType, object role);
+        void SetUnit(long associationId, object cacheId, IRoleType roleType, object role);
 
-        bool TryGetComposite(ObjectId association, object cacheId, IRoleType roleType, out ObjectId role);
+        bool TryGetComposite(long associationId, object cacheId, IRoleType roleType, out long? roleId);
 
-        void SetComposite(ObjectId association, object cacheId, IRoleType roleType, ObjectId role);
+        void SetComposite(long associationId, object cacheId, IRoleType roleType, long roleId);
 
-        bool TryGetComposites(ObjectId association, object cacheId, IRoleType roleType, out ObjectId[] role);
+        bool TryGetComposites(long associationId, object cacheId, IRoleType roleType, out long[] roleIds);
 
-        void SetComposites(ObjectId association, object cacheId, IRoleType roleType, ObjectId[] role);
+        void SetComposites(long associationId, object cacheId, IRoleType roleType, long[] roleIds);
 
         void Invalidate();
 
-        void Invalidate(ObjectId[] objectsToInvalidate);
+        void Invalidate(long[] objectsToInvalidate);
     }
 }

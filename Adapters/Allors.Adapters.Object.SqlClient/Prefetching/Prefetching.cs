@@ -40,7 +40,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.prefetchPolicy = prefetchPolicy;
         }
 
-        private Prefetching(Prefetcher session, PrefetchPolicy prefetchPolicy, IEnumerable<ObjectId> objectIds)
+        private Prefetching(Prefetcher session, PrefetchPolicy prefetchPolicy, IEnumerable<long> objectIds)
         {
             this.session = session;
             this.prefetchPolicy = prefetchPolicy;
@@ -94,7 +94,7 @@ namespace Allors.Adapters.Object.SqlClient
                     {
                         var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                         var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
-                        var nestedObjectIds = existNestedPrefetchPolicy ? new List<ObjectId>() : null;
+                        var nestedObjectIds = existNestedPrefetchPolicy ? new List<long>() : null;
 
                         var relationType = roleType.RelationType;
                         if (roleType.IsOne)
@@ -135,7 +135,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                     var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                     var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
-                    var nestedObjectIds = existNestedPrefetchPolicy ? new List<ObjectId>() : null;
+                    var nestedObjectIds = existNestedPrefetchPolicy ? new List<long>() : null;
 
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                     {

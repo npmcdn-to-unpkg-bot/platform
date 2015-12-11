@@ -16,7 +16,7 @@
 
 namespace Allors.Adapters.Memory
 {
-    public abstract class Configuration : Adapters.Configuration
+    public class Configuration : Adapters.Configuration
     {
         public string Id { get; set; }
     }

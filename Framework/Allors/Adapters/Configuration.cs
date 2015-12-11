@@ -18,15 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters
 {
     public abstract class Configuration
     {
         public IObjectFactory ObjectFactory { get; set; }
-
-        public ObjectIds ObjectIds { get; set; }
 
         public IRoleCache RoleCache { get; set; }
 

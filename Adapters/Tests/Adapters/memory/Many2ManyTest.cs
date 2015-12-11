@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RelationExtentTest.cs" company="Allors bvba">
+// <copyright file="Many2ManyTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,16 +16,19 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>
+//   Defines the Default type.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.LongId
+namespace Allors.Adapters.Memory
 {
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class RelationExtentTest : Databases.RelationExtentTest
+    public class Many2ManyTest : Adapters.Many2ManyTest
     {
         private readonly Profile profile = new Profile();
 
@@ -38,7 +41,7 @@ namespace Allors.Databases.Memory.LongId
         }
 
         [TearDown]
-        protected void Dispose()
+        public void Dispose()
         {
             this.profile.Dispose();
         }

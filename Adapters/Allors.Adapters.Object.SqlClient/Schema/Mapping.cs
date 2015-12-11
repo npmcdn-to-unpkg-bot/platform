@@ -38,15 +38,15 @@ namespace Allors.Adapters.Object.SqlClient
         public const string ColumnNameForRole = "r";
 
         public const string SqlTypeForClass = "uniqueidentifier";
+        public const string SqlTypeForObject = "bigint";
         public const string SqlTypeForVersion = "bigint";
         public const string SqlTypeForCount = "int";
 
         public const SqlDbType SqlDbTypeForClass = SqlDbType.UniqueIdentifier;
+        public const SqlDbType SqlDbTypeForObject = SqlDbType.BigInt;
         public const SqlDbType SqlDbTypeForVersion = SqlDbType.BigInt;
         public const SqlDbType SqlDbTypeForCount = SqlDbType.Int;
 
-        public readonly string SqlTypeForObject;
-        public readonly SqlDbType SqlDbTypeForObject;
 
         public readonly Dictionary<IRoleType, string> ParamNameByRoleType;
 
@@ -133,21 +133,9 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly Dictionary<string, string> procedureDefinitionByName;
         private readonly Dictionary<string, string> tableTypeDefinitionByName;
 
-        public Mapping(Database database, bool isObjectIdInteger)
+        public Mapping(Database database)
         {
             this.database = database;
-            this.IsObjectIdInteger = isObjectIdInteger;
-
-            if (this.IsObjectIdInteger)
-            {
-                this.SqlTypeForObject = "int";
-                this.SqlDbTypeForObject = SqlDbType.Int;
-            }
-            else
-            {
-                this.SqlTypeForObject = "bigint";
-                this.SqlDbTypeForObject = SqlDbType.BigInt;
-            }
 
             // TableTypes
             // ----------
@@ -198,7 +186,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForObject + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForObject + " " + this.SqlTypeForObject + ")\n");
+                sql.Append("(" + this.TableTypeColumnNameForObject + " " + SqlTypeForObject + ")\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForObject, sql.ToString()); 
             }
@@ -206,7 +194,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForVersionedObject + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForObject + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForObject + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForVersion + " " + SqlTypeForVersion + ")\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForVersionedObject, sql.ToString());
@@ -215,8 +203,8 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForCompositeRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
-                sql.Append(this.TableTypeColumnNameForRole + " " + this.SqlTypeForObject + ")\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
+                sql.Append(this.TableTypeColumnNameForRole + " " + SqlTypeForObject + ")\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForCompositeRelation, sql.ToString());
             }
@@ -224,7 +212,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForStringRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForRole + " nvarchar(max))\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForStringRelation, sql.ToString());
@@ -233,7 +221,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForIntegerRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForRole + " int)\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForIntegerRelation, sql.ToString());
@@ -242,7 +230,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForFloatRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForRole + " float)\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForFloatRelation, sql.ToString());
@@ -251,7 +239,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForDateTimeRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForRole + " datetime2)\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForDateTimeRelation, sql.ToString());
@@ -260,7 +248,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForBooleanRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForRole + " bit)\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForBooleanRelation, sql.ToString());
@@ -269,7 +257,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForUniqueRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForRole + " uniqueidentifier)\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForUniqueRelation, sql.ToString());
@@ -278,7 +266,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 var sql = new StringBuilder();
                 sql.Append("CREATE TYPE " + this.TableTypeNameForBinaryRelation + " AS TABLE\n");
-                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                 sql.Append(this.TableTypeColumnNameForRole + " varbinary(max))\n");
 
                 this.tableTypeDefinitionByName.Add(this.TableTypeNameForBinaryRelation, sql.ToString());
@@ -294,13 +282,12 @@ namespace Allors.Adapters.Object.SqlClient
 
                     var sql = new StringBuilder();
                     sql.Append("CREATE TYPE " + decimalRelationTable + " AS TABLE\n");
-                    sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + this.SqlTypeForObject + ",\n");
+                    sql.Append("(" + this.TableTypeColumnNameForAssociation + " " + SqlTypeForObject + ",\n");
                     sql.Append(this.TableTypeColumnNameForRole + " DECIMAL(" + precision + "," + scale + ") )\n");
 
                     this.tableTypeDefinitionByName.Add(decimalRelationTable, sql.ToString());
                 }
             }
-
 
             // Tables
             // ------
@@ -354,7 +341,6 @@ namespace Allors.Adapters.Object.SqlClient
                     this.TableNameForRelationByRelationType.Add(relationType, this.database.SchemaName + "." + this.NormalizeName(relationType.RoleType.SingularFullName));
                 }
             }
-
 
             // Procedures
             // ----------
@@ -435,7 +421,7 @@ AS
                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForCreateObjectByClass[@class] + @"
 " + ParamNameForClass + @" " + SqlTypeForClass + @"
 AS 
-DECLARE  " + ParamNameForObject + " AS " + this.SqlTypeForObject + @"
+DECLARE  " + ParamNameForObject + " AS " + SqlTypeForObject + @"
 
 INSERT INTO " + this.TableNameForObjects + " (" + ColumnNameForClass + ", " + ColumnNameForVersion + @")
 VALUES (" + ParamNameForClass + ", " + Reference.InitialVersion + @");
@@ -485,7 +471,7 @@ END";
                         // Get Unit Roles
                         this.ProcedureNameForGetUnitRolesByClass.Add(@class, this.Database.SchemaName + "." + ProcedurePrefixForGetUnits + className);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetUnitRolesByClass[@class] + @"
-" + ParamNameForObject + " AS " + this.SqlTypeForObject + @"
+" + ParamNameForObject + " AS " + SqlTypeForObject + @"
 AS 
     SELECT ";
                         var first = true;
@@ -549,7 +535,7 @@ WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObje
                         // Get Composites Role (1-*) [object table]
                         this.ProcedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + relationTypeName);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetRoleByRelationType[relationType] + @"
-    " + ParamNameForAssociation + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForAssociation + @" " + SqlTypeForObject + @"
 AS
     SELECT " + ColumnNameForObject + @"
     FROM " + table + @"
@@ -572,7 +558,7 @@ AS
                             // Get Composite Association (1-*) [object table]
                             this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
                             definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + SqlTypeForObject + @"
 AS
     SELECT " + this.ColumnNameByRelationType[relationType] + @"
     FROM " + table + @"
@@ -765,7 +751,7 @@ AS
                             // Get Composite Role (1-1 and *-1) [object table]
                             this.ProcedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + relationTypeName);
                             definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetRoleByRelationType[relationType] + @"
-    " + ParamNameForAssociation + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForAssociation + @" " + SqlTypeForObject + @"
 AS 
     SELECT " + this.ColumnNameByRelationType[relationType] + @"
     FROM " + table + @"
@@ -787,7 +773,7 @@ AS
                                 // Get Composite Association (1-1) [object table]
                                 this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
                                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + SqlTypeForObject + @"
 AS 
     SELECT " + ColumnNameForObject + @"
     FROM " + table + @"
@@ -809,7 +795,7 @@ AS
                                 // Get Composite Association (*-1) [object table]
                                 this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + className + "_" + relationTypeName);
                                 definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + SqlTypeForObject + @"
 AS 
     SELECT " + ColumnNameForObject + @"
     FROM " + table + @"
@@ -874,7 +860,7 @@ AS
                         // Get Composites Role (1-* and *-*) [relation table]
                         this.ProcedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + relationTypeName);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetRoleByRelationType[relationType] + @"
-    " + ParamNameForAssociation + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForAssociation + @" " + SqlTypeForObject + @"
 AS
     SELECT " + ColumnNameForRole + @"
     FROM " + table + @"
@@ -918,7 +904,7 @@ AS
                         // Get Composite Role (1-1 and *-1) [relation table]
                         this.ProcedureNameForGetRoleByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetRole + relationTypeName);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetRoleByRelationType[relationType] + @"
-    " + ParamNameForAssociation + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForAssociation + @" " + SqlTypeForObject + @"
 AS
     SELECT " + ColumnNameForRole + @"
     FROM " + table + @"
@@ -958,7 +944,7 @@ AS
                         // Get Composite Association (1-1) [relation table]
                         this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + relationTypeName);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + SqlTypeForObject + @"
 AS
     SELECT " + ColumnNameForAssociation + @"
     FROM " + table + @"
@@ -979,7 +965,7 @@ AS
                         // Get Composite Association (*-1) [relation table]
                         this.ProcedureNameForGetAssociationByRelationType.Add(relationType, this.Database.SchemaName + "." + ProcedurePrefixForGetAssociation + relationTypeName);
                         definition = @"CREATE PROCEDURE " + this.ProcedureNameForGetAssociationByRelationType[relationType] + @"
-    " + ParamNameForCompositeRole + @" " + this.SqlTypeForObject + @"
+    " + ParamNameForCompositeRole + @" " + SqlTypeForObject + @"
 AS
     SELECT " + ColumnNameForAssociation + @"
     FROM " + table + @"
@@ -1008,29 +994,12 @@ AS
                 }
             }
         }
-
-        public bool IsObjectIdInteger { get; private set; }
         
-        public Dictionary<string, string> ProcedureDefinitionByName
-        {
-            get
-            {
-                return this.procedureDefinitionByName;
-            }
-        }
+        public Dictionary<string, string> ProcedureDefinitionByName => this.procedureDefinitionByName;
 
-        public Dictionary<string, string> TableTypeDefinitionByName
-        {
-            get
-            {
-                return this.tableTypeDefinitionByName;
-            }
-        }
+        public Dictionary<string, string> TableTypeDefinitionByName => this.tableTypeDefinitionByName;
 
-        protected internal Database Database
-        {
-            get { return this.database; }
-        }
+        protected internal Database Database => this.database;
 
         internal string NormalizeName(string name)
         {

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExtentTest.cs" company="Allors bvba">
+// <copyright file="RelationExtentTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory.IntegerId
+namespace Allors.Adapters.Memory
 {
     using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class ExtentTest : Adapters.ExtentTest
+    public class RelationExtentTest : Adapters.RelationExtentTest
     {
         private readonly Profile profile = new Profile();
 

@@ -31,7 +31,7 @@ namespace Allors.Adapters.Object.SqlClient
 
     public sealed class Commands
     {
-        private static readonly ObjectId[] EmptyObjectIds = { };
+        private static readonly long[] EmptyObjectIds = { };
 
         private readonly Session Session;
 
@@ -247,7 +247,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForObject].Value = strategy.ObjectId.Value;
+                command.Parameters[Mapping.ParamNameForObject].Value = strategy.ObjectId;
             }
 
             command.ExecuteNonQuery();
@@ -270,7 +270,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForObject].Value = reference.ObjectId.Value;
+                command.Parameters[Mapping.ParamNameForObject].Value = reference.ObjectId;
             }
 
             using (DbDataReader reader = command.ExecuteReader())
@@ -461,7 +461,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForObject].Value = roles.Reference.ObjectId.Value ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForObject].Value = roles.Reference.ObjectId;
 
                 foreach (var roleType in sortedRoleTypes)
                 {
@@ -489,7 +489,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value;
+                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId;
             }
 
             var result = command.ExecuteScalar();
@@ -561,10 +561,10 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId.Value;
+                command.Parameters[Mapping.ParamNameForAssociation].Value = reference.ObjectId;
             }
 
-            var objectIds = new List<ObjectId>();
+            var objectIds = new List<long>();
             using (DbDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -617,7 +617,7 @@ namespace Allors.Adapters.Object.SqlClient
             command.ExecuteNonQuery();
         }
 
-        internal void ClearCompositeAndCompositesRole(IList<ObjectId> associations, IRoleType roleType)
+        internal void ClearCompositeAndCompositesRole(IList<long> associations, IRoleType roleType)
         {
             var sql = this.Database.Mapping.ProcedureNameForClearRoleByRelationType[roleType.RelationType];
 
@@ -655,7 +655,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForCompositeRole].Value = role.ObjectId.Value ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForCompositeRole].Value = role.ObjectId;
             }
 
             object result = command.ExecuteScalar();
@@ -677,7 +677,7 @@ namespace Allors.Adapters.Object.SqlClient
             return associationObject;
         }
 
-        internal ObjectId[] GetCompositesAssociation(Strategy role, IAssociationType associationType)
+        internal long[] GetCompositesAssociation(Strategy role, IAssociationType associationType)
         {
             Command command;
             if (!this.GetCompositesAssociationByAssociationType.TryGetValue(associationType, out command))
@@ -692,10 +692,10 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForCompositeRole].Value = role.ObjectId.Value;
+                command.Parameters[Mapping.ParamNameForCompositeRole].Value = role.ObjectId;
             }
 
-            var objectIds = new List<ObjectId>();
+            var objectIds = new List<long>();
             using (var reader = command.ExecuteReader())
             {
                 while (reader.Read())
@@ -772,7 +772,7 @@ namespace Allors.Adapters.Object.SqlClient
             return strategies;
         }
 
-        internal Reference InsertObject(IClass @class, ObjectId objectId)
+        internal Reference InsertObject(IClass @class, long objectId)
         {
             Command command;
             if (!this.InsertObjectByClass.TryGetValue(@class, out command))
@@ -811,7 +811,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForObject].Value = objectId;
                 command.Parameters[Mapping.ParamNameForClass].Value = (object)@class.Id ?? DBNull.Value;
             }
 
@@ -829,7 +829,7 @@ namespace Allors.Adapters.Object.SqlClient
             return this.Session.State.CreateReferenceForNewObject(@class, objectId, this.Session);
         }
 
-        internal Reference InstantiateObject(ObjectId objectId)
+        internal Reference InstantiateObject(long objectId)
         {
             var command = this.instantiateObject;
             if (command == null)
@@ -845,7 +845,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
             else
             {
-                command.Parameters[Mapping.ParamNameForObject].Value = objectId.Value ?? DBNull.Value;
+                command.Parameters[Mapping.ParamNameForObject].Value = objectId;
             }
 
             using (var reader = command.ExecuteReader())
@@ -863,7 +863,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal IEnumerable<Reference> InstantiateReferences(IEnumerable<ObjectId> objectIds)
+        internal IEnumerable<Reference> InstantiateReferences(IEnumerable<long> objectIds)
         {
             var command = this.instantiateObjects;
             if (command == null)
@@ -901,7 +901,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal Dictionary<ObjectId, long> GetVersions(ISet<Reference> references)
+        internal Dictionary<long, long> GetVersions(ISet<Reference> references)
         {
             var command = this.getVersion;
 
@@ -919,7 +919,7 @@ namespace Allors.Adapters.Object.SqlClient
                 command.Parameters[Mapping.ParamNameForTableType].Value = this.Database.CreateObjectTable(references);
             }
 
-            var versionByObjectId = new Dictionary<ObjectId, long>();
+            var versionByObjectId = new Dictionary<long, long>();
 
             using (var reader = command.ExecuteReader())
             {

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ChangesTest.cs" company="Allors bvba">
+// <copyright file="PropertiesTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,15 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.LongId
+namespace Allors.Adapters.Memory
 {
-    using Allors;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class ChangesTest : Databases.ChangesTest
+    public class PropertiesTest : Adapters.PropertiesTest
     {
         private readonly Profile profile = new Profile();
 

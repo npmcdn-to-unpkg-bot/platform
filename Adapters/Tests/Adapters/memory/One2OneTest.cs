@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Configuration.cs" company="Allors bvba">
-//   Copyright 2002-2013 Allors bvba.
+// <copyright file="One2OneTest.cs" company="Allors bvba">
+//   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -18,9 +18,29 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory.IntegerId
+namespace Allors.Adapters.Memory
 {
-    public class Configuration : Memory.Configuration
+    using Adapters;
+
+    using NUnit.Framework;
+
+    [TestFixture]
+    public class One2OneTest : Adapters.One2OneTest
     {
+        private readonly Profile profile = new Profile();
+
+        protected override IProfile Profile
+        {
+            get
+            {
+                return this.profile;
+            }
+        }
+
+        [TearDown]
+        protected void Dispose()
+        {
+            this.profile.Dispose();
+        }
     }
 }

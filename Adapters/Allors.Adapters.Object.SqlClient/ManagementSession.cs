@@ -45,7 +45,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.Rollback();
         }
 
-        public void LoadObjects(IObjectType objectType, ObjectId[] objectIds)
+        public void LoadObjects(IObjectType objectType, long[] objectIds)
         {
             var exclusiveRootClass = ((IComposite)objectType).ExclusiveClass;
             var schema = this.Database.Mapping;

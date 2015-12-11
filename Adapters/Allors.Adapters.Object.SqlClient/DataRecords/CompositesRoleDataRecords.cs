@@ -39,28 +39,13 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            // TODO: See Relation.SqlClient
-            if (this.mapping.IsObjectIdInteger)
+            var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
+            var metaData = new SqlMetaData(objectArrayElement, SqlDbType.BigInt);
+            var sqlDataRecord = new SqlDataRecord(metaData);
+            foreach (var strategy in this.strategies)
             {
-                var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
-                var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
-                var sqlDataRecord = new SqlDataRecord(metaData);
-                foreach (var strategy in this.strategies)
-                {
-                    sqlDataRecord.SetInt32(0, (int)strategy.ObjectId.Value);
-                    yield return sqlDataRecord;
-                }
-            }
-            else
-            {
-                var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
-                var metaData = new SqlMetaData(objectArrayElement, SqlDbType.BigInt);
-                var sqlDataRecord = new SqlDataRecord(metaData);
-                foreach (var strategy in this.strategies)
-                {
-                    sqlDataRecord.SetInt64(0, (int)strategy.ObjectId.Value);
-                    yield return sqlDataRecord;
-                }
+                sqlDataRecord.SetInt64(0, strategy.ObjectId);
+                yield return sqlDataRecord;
             }
         }
 

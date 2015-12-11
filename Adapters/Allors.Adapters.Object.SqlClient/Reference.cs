@@ -41,7 +41,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         private WeakReference<Strategy> weakReference;
 
-        internal Reference(Session session, IClass @class, ObjectId objectId, bool isNew)
+        internal Reference(Session session, IClass @class, long objectId, bool isNew)
         {
             this.Session = session;
             this.Class = @class;
@@ -55,7 +55,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal Reference(Session session, IClass @class, ObjectId objectId, long version)
+        internal Reference(Session session, IClass @class, long objectId, long version)
             : this(session, @class, objectId, false)
         {
             this.version = version;
@@ -83,7 +83,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal IClass Class { get; }
 
-        internal ObjectId ObjectId { get; }
+        internal long ObjectId { get; }
 
         internal long VersionId
         {

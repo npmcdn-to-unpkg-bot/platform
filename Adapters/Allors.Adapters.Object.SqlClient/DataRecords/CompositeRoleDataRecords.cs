@@ -39,38 +39,18 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            // TODO: See Relation.SqlClient
-            if (this.mapping.IsObjectIdInteger)
+            var metaData = new[]
             {
-                var metaData = new[]
-                                   {
-                                       new SqlMetaData(this.mapping.TableTypeColumnNameForAssociation, SqlDbType.Int),
-                                       new SqlMetaData(this.mapping.TableTypeColumnNameForRole, SqlDbType.Int)
-                                   };
-                var sqlDataRecord = new SqlDataRecord(metaData);
+                new SqlMetaData(this.mapping.TableTypeColumnNameForAssociation, SqlDbType.BigInt), 
+                new SqlMetaData(this.mapping.TableTypeColumnNameForRole, SqlDbType.BigInt)
+            };
+            var sqlDataRecord = new SqlDataRecord(metaData);
 
-                foreach (var relation in this.relations)
-                {
-                    sqlDataRecord.SetInt32(0, (int)relation.Association.Value);
-                    sqlDataRecord.SetInt32(1, (int)relation.Role.Value);
-                    yield return sqlDataRecord;
-                }
-            }
-            else
+            foreach (var relation in this.relations)
             {
-                var metaData = new[]
-                {
-                    new SqlMetaData(this.mapping.TableTypeColumnNameForAssociation, SqlDbType.BigInt), 
-                    new SqlMetaData(this.mapping.TableTypeColumnNameForRole, SqlDbType.BigInt)
-                };
-                var sqlDataRecord = new SqlDataRecord(metaData);
-
-                foreach (var relation in this.relations)
-                {
-                    sqlDataRecord.SetInt64(0, (int)relation.Association.Value);
-                    sqlDataRecord.SetInt64(1, (int)relation.Role.Value);
-                    yield return sqlDataRecord;
-                }
+                sqlDataRecord.SetInt64(0, relation.Association);
+                sqlDataRecord.SetInt64(1, relation.Role);
+                yield return sqlDataRecord;
             }
         }
 

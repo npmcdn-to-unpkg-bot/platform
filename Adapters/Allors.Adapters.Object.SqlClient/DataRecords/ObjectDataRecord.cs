@@ -31,9 +31,9 @@ namespace Allors.Adapters.Object.SqlClient
     internal class ObjectDataRecord : IEnumerable<SqlDataRecord>
     {
         private readonly Mapping mapping;
-        private readonly IEnumerable<ObjectId> objectIds;
+        private readonly IEnumerable<long> objectIds;
 
-        internal ObjectDataRecord(Mapping mapping, IEnumerable<ObjectId> objectIds)
+        internal ObjectDataRecord(Mapping mapping, IEnumerable<long> objectIds)
         {
             this.mapping = mapping;
             this.objectIds = objectIds;
@@ -42,26 +42,15 @@ namespace Allors.Adapters.Object.SqlClient
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
             var objectArrayElement = this.mapping.TableTypeColumnNameForObject;
-            var metaData = new SqlMetaData(objectArrayElement, SqlDbType.Int);
+            var metaData = new SqlMetaData(objectArrayElement, SqlDbType.BigInt);
             var sqlDataRecord = new SqlDataRecord(metaData);
 
-            if (this.mapping.IsObjectIdInteger)
+            foreach (var objectId in this.objectIds)
             {
-                foreach (var objectId in this.objectIds)
-                {
-                    sqlDataRecord.SetInt32(0, (int)objectId.Value);
-                    yield return sqlDataRecord;
-                }
+                sqlDataRecord.SetInt64(0, objectId);
+                yield return sqlDataRecord;
             }
-            else
-            {
-                foreach (var objectId in this.objectIds)
-                {
-                    sqlDataRecord.SetInt64(0, (long)objectId.Value);
-                    yield return sqlDataRecord;
-                }
-            }
-        }
+    }
 
         IEnumerator IEnumerable.GetEnumerator()
         {

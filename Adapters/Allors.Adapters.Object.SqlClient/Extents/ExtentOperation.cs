@@ -88,14 +88,14 @@ namespace Allors.Adapters.Object.SqlClient
             return null;
         }
 
-        protected override IList<ObjectId> GetObjectIds()
+        protected override IList<long> GetObjectIds()
         {
             this.Session.Flush();
 
             var statement = new ExtentStatementRoot(this);
             var alias = this.BuildSql(statement);
 
-            var objectIds = new List<ObjectId>();
+            var objectIds = new List<long>();
             using (var command = statement.CreateDbCommand(alias))
             {
                 using (var reader = command.ExecuteReader())

@@ -60,38 +60,38 @@
     <Compile Include="Adapters\LifeCycleTest.cs" />
     <Compile Include="Adapters\Many2ManyTest.cs" />
     <Compile Include="Adapters\Many2OneTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\ChangesTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\ExtentTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\LifeCycleTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\Many2ManyTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\Many2OneTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\One2ManyTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\One2OneTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\Profile.cs" />
-    <Compile Include="Adapters\memory\IntegerId\PropertiesTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\RelationExtentTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\SandboxTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\SerializationTest.cs" />
-    <Compile Include="Adapters\memory\IntegerId\UnitTest.cs" />
+    <Compile Include="Adapters\memory\ChangesTest.cs" />
+    <Compile Include="Adapters\memory\ExtentTest.cs" />
+    <Compile Include="Adapters\memory\LifeCycleTest.cs" />
+    <Compile Include="Adapters\memory\Many2ManyTest.cs" />
+    <Compile Include="Adapters\memory\Many2OneTest.cs" />
+    <Compile Include="Adapters\memory\One2ManyTest.cs" />
+    <Compile Include="Adapters\memory\One2OneTest.cs" />
+    <Compile Include="Adapters\memory\Profile.cs" />
+    <Compile Include="Adapters\memory\PropertiesTest.cs" />
+    <Compile Include="Adapters\memory\RelationExtentTest.cs" />
+    <Compile Include="Adapters\memory\SandboxTest.cs" />
+    <Compile Include="Adapters\memory\SerializationTest.cs" />
+    <Compile Include="Adapters\memory\UnitTest.cs" />
     <Compile Include="Adapters\object\SchemaTest.cs" />
     <Compile Include="Adapters\object\sqlclient\ExtentTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\ExtentTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\LifeCycleTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\Many2ManyTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\Many2OneTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\One2ManyTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\One2OneTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\Profile.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\PropertiesTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\RelationExtentTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SandboxTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\PerformanceTests.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\CacheTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\ChangesTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\ExtentTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\LifeCycleTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\Many2ManyTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\Many2OneTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\One2ManyTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\One2OneTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\Profile.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\PropertiesTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\RelationExtentTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\SandboxTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\SchemaTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\PerformanceTests.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\SqlClientTest.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\UnitTest.cs" />
     <Compile Include="Adapters\object\sqlclient\Profile.cs" />
     <Compile Include="Adapters\object\sqlclient\SchemaTest.cs" />
     <Compile Include="Adapters\object\sqlclient\PerformanceTests.cs" />
@@ -132,14 +132,6 @@
     <ProjectReference Include="..\Allors.Adapters.Object.SqlClient\Allors.Adapters.Object.SqlClient.csproj">
       <Project>{06bc1665-8fe8-4f04-9e80-ec2d54404ba7}</Project>
       <Name>Allors.Adapters.Object.SqlClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Allors.Adapters.Relation.SqlClient\Allors.Adapters.Relation.SqlClient.csproj">
-      <Project>{91356b87-6321-45c3-88cc-d3deae2dc16c}</Project>
-      <Name>Allors.Adapters.Relation.SqlClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Allors.Adapters.Relation.SQLite\Allors.Adapters.Relation.SQLite.csproj">
-      <Project>{ec88ff02-135b-459d-b53e-5fad2dbeaf2e}</Project>
-      <Name>Allors.Adapters.Relation.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{50ed5307-33e3-4fda-8268-d844b77981c8}</Project>

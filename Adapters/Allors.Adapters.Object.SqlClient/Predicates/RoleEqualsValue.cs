@@ -41,7 +41,7 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (((IUnit)roleType.ObjectType).IsInteger)
                 {
-                    this.obj = (int)obj;
+                    this.obj = obj;
                 }
                 else
                 {

@@ -18,15 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.LongId
+namespace Allors.Adapters.Memory
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.Populations;
-    using Allors.Workspaces.Memory.LongId;
+    using Adapters;
 
-    public class Profile : Databases.Profile
+    public class Profile : Adapters.Profile
     {
         public override Action[] Markers
         {
@@ -43,7 +42,6 @@ namespace Allors.Databases.Memory.LongId
                     markers.Add(
                         () =>
                         {
-                            this.Session.Commit();
                             this.Session.Checkpoint();
                         });
                 }
@@ -52,7 +50,7 @@ namespace Allors.Databases.Memory.LongId
             }
         }
 
-        public override IPopulation CreatePopulation()
+        public override IDatabase CreatePopulation()
         {
             return this.CreateDatabase();
         }
@@ -60,12 +58,6 @@ namespace Allors.Databases.Memory.LongId
         public override IDatabase CreateDatabase()
         {
             return new Database(new Configuration { ObjectFactory = this.ObjectFactory });
-        }
-
-        public override IWorkspace CreateWorkspace(IDatabase database)
-        {
-            var configuration = new Workspaces.Memory.LongId.Configuration { Database = database };
-            return new Workspace(configuration);
         }
     }
 }

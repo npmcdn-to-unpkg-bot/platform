@@ -111,7 +111,7 @@ namespace Allors.Adapters
 
                     this.Session.Commit();
 
-                    allorsObjects = this.Session.Instantiate((ObjectId[])ids.ToArray(typeof(ObjectId)));
+                    allorsObjects = this.Session.Instantiate((long[])ids.ToArray(typeof(long)));
                     foreach (C1 allorsObject in allorsObjects)
                     {
                         Assert.AreEqual(Classes.C1, allorsObject.Strategy.Class);
@@ -3117,7 +3117,7 @@ namespace Allors.Adapters
                 C1 proxy = C1.Instantiate(this.Session, id);
 
                 C1 anotherObject = C1.Create(this.Session);
-                ObjectId anotherId = anotherObject.Strategy.ObjectId;
+                long anotherId = anotherObject.Strategy.ObjectId;
                 C1 anotherProxy = C1.Instantiate(this.Session, anotherId);
 
                 Assert.AreEqual(anObject, proxy);
@@ -3196,8 +3196,8 @@ namespace Allors.Adapters
                     Assert.AreNotEqual(a.Strategy.ObjectId, c.Strategy.ObjectId);
                     Assert.AreNotEqual(c.Strategy.ObjectId, b.Strategy.ObjectId);
 
-                    ObjectId[] ids = { a.Strategy.ObjectId, b.Strategy.ObjectId, c.Strategy.ObjectId };
-                    foreach (ObjectId id in ids)
+                    long[] ids = { a.Strategy.ObjectId, b.Strategy.ObjectId, c.Strategy.ObjectId };
+                    foreach (long id in ids)
                     {
                         var exceptionThrown = false;
                         try
@@ -3339,8 +3339,8 @@ namespace Allors.Adapters
 
                 C1 fromProxy = C1.Create(this.Session);
                 C1 toProxy = C1.Create(this.Session);
-                ObjectId fromId = fromProxy.Strategy.ObjectId;
-                ObjectId toId = toProxy.Strategy.ObjectId;
+                long fromId = fromProxy.Strategy.ObjectId;
+                long toId = toProxy.Strategy.ObjectId;
                 this.Session.Commit();
 
                 C1 from = C1.Instantiate(this.Session, fromId);
@@ -3590,7 +3590,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 foreach (int run in runs)
                 {
                     // Empty arrays
-                    ObjectId[] nullObjectIdArray = null;
+                    long[] nullObjectIdArray = null;
                     var allorsObjects = this.Session.Instantiate(nullObjectIdArray);
                     Assert.AreEqual(0, allorsObjects.Length);
 
@@ -3604,7 +3604,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                     var objects = new IObject[run];
                     var idStrings = new string[run];
-                    var ids = new ObjectId[run];
+                    var ids = new long[run];
                     for (int i = 0; i < run; i++)
                     {
                         C1 anObject = C1.Create(this.Session);
@@ -3703,7 +3703,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                     // Caching in Sql
                     this.SwitchDatabase();
-                    var minusOne = new List<ObjectId>(ids);
+                    var minusOne = new List<long>(ids);
                     minusOne.RemoveAt(0);
                     allorsObjects = this.Session.Instantiate(minusOne.ToArray());
 
@@ -3724,7 +3724,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                     this.Session.Commit();
 
-                    Assert.IsEmpty(this.Session.Instantiate(new ObjectId[0]));
+                    Assert.IsEmpty(this.Session.Instantiate(new long[0]));
 
                     this.Session.Commit();
 
@@ -4127,7 +4127,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 this.SwitchDatabase();
 
-                ObjectId[] objectIds = { c1A.Id, c2A.Id };
+                long[] objectIds = { c1A.Id, c2A.Id };
                 var switchC1aC2a = this.Session.Instantiate(objectIds);
 
                 Assert.AreEqual(2, switchC1aC2a.Length);
@@ -5156,7 +5156,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 C1 c1 = this.Session.Create<C1>();
 
-                Assert.IsTrue(c1.Strategy.ObjectId.Value is int);
+                Assert.IsTrue(c1.Strategy.ObjectId is int);
             }
         }
     }
@@ -5172,7 +5172,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 C1 c1 = this.Session.Create<C1>();
 
-                Assert.IsTrue(c1.Strategy.ObjectId.Value is long);
+                Assert.IsTrue(c1.Strategy.ObjectId is long);
             }
         }
     }

@@ -94,7 +94,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 
         public override IDatabase CreatePopulation()
         {
-            return new Memory.IntegerId.Database(new Memory.IntegerId.Configuration { ObjectFactory = this.ObjectFactory });
+            return new Memory.Database(new Memory.Configuration { ObjectFactory = this.ObjectFactory });
         }
 
         public override IDatabase CreateDatabase()

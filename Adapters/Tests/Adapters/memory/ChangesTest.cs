@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SandboxTest.cs" company="Allors bvba">
+// <copyright file="ChangesTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,14 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.LongId
+namespace Allors.Adapters.Memory
 {
-    using Allors.Populations;
+    using Allors;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class SandboxTest : Databases.SandboxTest
+    public class ChangesTest : Adapters.ChangesTest
     {
         private readonly Profile profile = new Profile();
 

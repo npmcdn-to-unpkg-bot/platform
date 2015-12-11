@@ -34,7 +34,7 @@ namespace Allors.Adapters.Object.SqlClient
         private Dictionary<IRoleType, List<CompositeRelation>> setCompositeRoleRelationsByRoleType;
         private Dictionary<IRoleType, List<CompositeRelation>> addCompositeRoleRelationsByRoleType;
         private Dictionary<IRoleType, List<CompositeRelation>> removeCompositeRoleRelationsByRoleType;
-        private Dictionary<IRoleType, IList<ObjectId>> clearCompositeAndCompositesRoleRelationsByRoleType;
+        private Dictionary<IRoleType, IList<long>> clearCompositeAndCompositesRoleRelationsByRoleType;
 
         internal Flush(Session session, Dictionary<Reference, Roles> unsyncedRolesByReference)
         {
@@ -163,7 +163,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void SetCompositeRole(Reference association, IRoleType roleType, ObjectId role)
+        internal void SetCompositeRole(Reference association, IRoleType roleType, long role)
         {
             if (this.setCompositeRoleRelationsByRoleType == null)
             {
@@ -186,7 +186,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void AddCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> added)
+        internal void AddCompositeRole(Reference association, IRoleType roleType, HashSet<long> added)
         {
             if (this.addCompositeRoleRelationsByRoleType == null)
             {
@@ -212,7 +212,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        internal void RemoveCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> removed)
+        internal void RemoveCompositeRole(Reference association, IRoleType roleType, HashSet<long> removed)
         {
             if (this.removeCompositeRoleRelationsByRoleType == null)
             {
@@ -242,13 +242,13 @@ namespace Allors.Adapters.Object.SqlClient
         {
             if (this.clearCompositeAndCompositesRoleRelationsByRoleType == null)
             {
-                this.clearCompositeAndCompositesRoleRelationsByRoleType = new Dictionary<IRoleType, IList<ObjectId>>();
+                this.clearCompositeAndCompositesRoleRelationsByRoleType = new Dictionary<IRoleType, IList<long>>();
             }
 
-            IList<ObjectId> relations;
+            IList<long> relations;
             if (!this.clearCompositeAndCompositesRoleRelationsByRoleType.TryGetValue(roleType, out relations))
             {
-                relations = new List<ObjectId>();
+                relations = new List<long>();
                 this.clearCompositeAndCompositesRoleRelationsByRoleType[roleType] = relations;
             }
 

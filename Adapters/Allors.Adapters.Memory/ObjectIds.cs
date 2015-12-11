@@ -24,11 +24,11 @@ namespace Allors.Adapters.Memory
 {
     internal abstract class ObjectIds
     {
-        internal abstract void AdjustCurrentId(ObjectId id);
+        internal abstract void AdjustCurrentId(long id);
 
-        internal abstract ObjectId Next();
+        internal abstract long Next();
 
-        internal abstract ObjectId Parse(string idString);
+        internal abstract long Parse(string idString);
 
         internal abstract void Reset();
     }

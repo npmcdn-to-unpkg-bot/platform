@@ -24,10 +24,10 @@ namespace Allors.Adapters.Object.SqlClient
 {
     internal class UnitRelation
     {
-        internal readonly ObjectId Association;
+        internal readonly long Association;
         internal readonly object Role;
 
-        internal UnitRelation(ObjectId association, object role)
+        internal UnitRelation(long association, object role)
         {
             this.Association = association;
             this.Role = role;

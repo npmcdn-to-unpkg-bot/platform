@@ -29,7 +29,7 @@ namespace Allors.Adapters.Memory
 
     using Allors.Meta;
 
-    public abstract class Session : ISession
+    public class Session : ISession
     {
         private static readonly HashSet<Strategy> EmptyStrategies = new HashSet<Strategy>();
         private static readonly IObject[] EmptyObjects = { };
@@ -42,12 +42,14 @@ namespace Allors.Adapters.Memory
 
         private bool busyCommittingOrRollingBack;
 
-        private Dictionary<ObjectId, Strategy> strategyByObjectId;
+        private Dictionary<long, Strategy> strategyByObjectId;
         private Dictionary<IObjectType, HashSet<Strategy>> strategiesByObjectType;
 
         private Dictionary<string, object> properties;
 
-        protected Session(Database database)
+        private long currentId;
+
+        internal Session(Database database)
         {
             this.database = database;
             this.busyCommittingOrRollingBack = false;
@@ -55,40 +57,19 @@ namespace Allors.Adapters.Memory
             this.concreteClassesByObjectType = new Dictionary<IObjectType, IObjectType[]>();
 
             this.changeSet = new ChangeSet();
+
+            this.Reset();
         }
 
-        public IDatabase Population
-        {
-            get { return this.database; }
-        }
+        public IDatabase Population => this.database;
 
-        public IDatabase Database
-        {
-            get { return this.database; }
-        }
+        public IDatabase Database => this.database;
 
-        public bool IsProfilingEnabled
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsProfilingEnabled => false;
 
-        internal ChangeSet MemoryChangeSet
-        {
-            get
-            {
-                return this.changeSet;
-            }
-        }
+        internal ChangeSet MemoryChangeSet => this.changeSet;
 
-        internal Database MemoryDatabase
-        {
-            get { return this.database; }
-        }
-
-        internal abstract ObjectIds ObjectIds { get; }
+        internal Database MemoryDatabase => this.database;
 
         public object this[string name]
         {
@@ -235,11 +216,11 @@ namespace Allors.Adapters.Memory
 
         public IObject Insert(IClass @class, string objectId)
         {
-            var id = this.ObjectIds.Parse(objectId);
+            var id = long.Parse(objectId);
             return this.Insert(@class, id);
         }
 
-        public IObject Insert(IClass @class, ObjectId objectId)
+        public IObject Insert(IClass @class, long objectId)
         {
             var strategy = this.InsertStrategy(@class, objectId, new ObjectVersionLong());
             return strategy.GetObject();
@@ -252,7 +233,7 @@ namespace Allors.Adapters.Memory
                 return null;
             }
 
-            var id = this.ObjectIds.Parse(objectIdString);
+            var id = long.Parse(objectIdString);
             return this.Instantiate(id);
         }
 
@@ -266,7 +247,7 @@ namespace Allors.Adapters.Memory
             return this.Instantiate(obj.Strategy.ObjectId);
         }
 
-        public IObject Instantiate(ObjectId objectId)
+        public IObject Instantiate(long objectId)
         {
             if (objectId == null)
             {
@@ -282,7 +263,7 @@ namespace Allors.Adapters.Memory
             return null;
         }
 
-        public IStrategy InstantiateStrategy(ObjectId objectId)
+        public IStrategy InstantiateStrategy(long objectId)
         {
             if (objectId == null)
             {
@@ -296,10 +277,10 @@ namespace Allors.Adapters.Memory
         {
             if (objectIdStrings != null)
             {
-                var objectIds = new ObjectId[objectIdStrings.Length];
+                var objectIds = new long[objectIdStrings.Length];
                 for (var i = 0; i < objectIdStrings.Length; i++)
                 {
-                    objectIds[i] = this.ObjectIds.Parse(objectIdStrings[i]);
+                    objectIds[i] = long.Parse(objectIdStrings[i]);
                 }
 
                 return this.Instantiate(objectIds);
@@ -315,7 +296,7 @@ namespace Allors.Adapters.Memory
                 return EmptyObjects;
             }
 
-            var objectIds = new ObjectId[objects.Length];
+            var objectIds = new long[objects.Length];
             for (var i = 0; i < objects.Length; i++)
             {
                 objectIds[i] = objects[i].Id;
@@ -324,7 +305,7 @@ namespace Allors.Adapters.Memory
             return this.Instantiate(objectIds);
         }
 
-        public IObject[] Instantiate(ObjectId[] objectIds)
+        public IObject[] Instantiate(long[] objectIds)
         {
             if (objectIds == null || objectIds.Length == 0)
             {
@@ -350,7 +331,7 @@ namespace Allors.Adapters.Memory
             // nop
         }
 
-        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, long[] objectIds)
         {
             // nop
         }
@@ -420,7 +401,7 @@ namespace Allors.Adapters.Memory
 
         public virtual IObject Create(IClass objectType)
         {
-            var strategy = new Strategy(this, objectType, this.ObjectIds.Next(), new ObjectVersionLong(0));
+            var strategy = new Strategy(this, objectType, ++this.currentId, new ObjectVersionLong(0));
             this.AddStrategy(strategy);
 
             this.changeSet.OnCreated(strategy);
@@ -438,7 +419,7 @@ namespace Allors.Adapters.Memory
             return this.database.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        internal virtual Strategy InsertStrategy(IClass objectType, ObjectId objectId, ObjectVersion objectVersion)
+        internal virtual Strategy InsertStrategy(IClass objectType, long objectId, ObjectVersion objectVersion)
         {
             var strategy = this.GetStrategy(objectId);
             if (strategy != null)
@@ -446,7 +427,11 @@ namespace Allors.Adapters.Memory
                 throw new Exception("Duplicate id error");
             }
 
-            this.ObjectIds.AdjustCurrentId(objectId);
+            if (this.currentId < objectId)
+            {
+                this.currentId = objectId;
+            }
+
             strategy = new Strategy(this, objectType, objectId, objectVersion);
             this.AddStrategy(strategy);
 
@@ -455,16 +440,16 @@ namespace Allors.Adapters.Memory
             return strategy;
         }
 
-        internal virtual void Reset()
+        private void Reset()
         {
             // Strategies
-            this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
+            this.strategyByObjectId = new Dictionary<long, Strategy>();
             this.strategiesByObjectType = new Dictionary<IObjectType, HashSet<Strategy>>();
 
             this.properties = null;
         }
 
-        internal virtual Strategy InstantiateMemoryStrategy(ObjectId objectId)
+        internal virtual Strategy InstantiateMemoryStrategy(long objectId)
         {
             return this.GetStrategy(objectId);
         }
@@ -479,7 +464,7 @@ namespace Allors.Adapters.Memory
             return this.GetStrategy(obj.Id);
         }
 
-        internal Strategy GetStrategy(ObjectId objectId)
+        internal Strategy GetStrategy(long objectId)
         {
             Strategy strategy;
             if (!this.strategyByObjectId.TryGetValue(objectId, out strategy))

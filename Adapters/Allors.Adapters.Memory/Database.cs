@@ -24,16 +24,18 @@ namespace Allors.Adapters.Memory
 
     using Allors.Meta;
 
-    public abstract class Database : IDatabase
+    public class Database : IDatabase
     {
         private readonly IObjectFactory objectFactory;
         private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
 
         private readonly string id;
         
-        protected Dictionary<string, object> Properties;
+        public Dictionary<string, object> Properties;
 
-        protected Database(Configuration configuration)
+        private Session session;
+
+        public Database(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
             if (this.objectFactory == null)
@@ -97,7 +99,10 @@ namespace Allors.Adapters.Memory
 
         internal bool IsLoading { get; private set; }
 
-        protected abstract Session Session { get; }
+        protected virtual Memory.Session Session
+        {
+            get { return this.session ?? (this.session = new Session(this)); }
+        }
 
         public object this[string name]
         {
@@ -130,8 +135,6 @@ namespace Allors.Adapters.Memory
                 }
             }
         }
-
-        public abstract void Init();
 
         public ISession CreateSession()
         {
@@ -291,6 +294,14 @@ namespace Allors.Adapters.Memory
                     throw new ArgumentException(role.Strategy.Class + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
             }
+        }
+
+        public virtual void Init()
+        {
+            this.Session.Init();
+
+            this.session = null;
+            this.Properties = null;
         }
     }
 }

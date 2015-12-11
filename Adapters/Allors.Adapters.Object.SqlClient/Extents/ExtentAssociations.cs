@@ -123,7 +123,7 @@ namespace Allors.Adapters.Object.SqlClient
                 return this.upgrade.IndexOf(value);
             }
 
-            var associations = (IList<ObjectId>)this.strategy.ExtentGetCompositeAssociations(this.associationType);
+            var associations = (IList<long>)this.strategy.ExtentGetCompositeAssociations(this.associationType);
             return associations.IndexOf(((IObject)value).Id);
         }
 
@@ -182,7 +182,7 @@ namespace Allors.Adapters.Object.SqlClient
                 return this.upgrade.Contains(value);
             }
 
-            var associations = (IList<ObjectId>)this.strategy.ExtentGetCompositeAssociations(this.associationType);
+            var associations = (IList<long>)this.strategy.ExtentGetCompositeAssociations(this.associationType);
             return associations.Contains(((IObject)value).Id);
         }
 

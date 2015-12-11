@@ -27,22 +27,22 @@ namespace Allors.Adapters
 
     public class RoleCache : IRoleCache
     {
-        private Dictionary<IRoleType, Dictionary<ObjectId, CachedUnitRole>> cachedUnitRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<long, CachedUnitRole>> cachedUnitRoleByAssociationByRoleType;
 
-        private Dictionary<IRoleType, Dictionary<ObjectId, CachedCompositeRole>> cachedCompositeRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<long, CachedCompositeRole>> cachedCompositeRoleByAssociationByRoleType;
 
-        private Dictionary<IRoleType, Dictionary<ObjectId, CachedCompositesRole>> cachedCompositesRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<long, CachedCompositesRole>> cachedCompositesRoleByAssociationByRoleType;
 
         public RoleCache()
         {
-            this.cachedUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, CachedUnitRole>>();
-            this.cachedCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, CachedCompositeRole>>();
-            this.cachedCompositesRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, CachedCompositesRole>>();
+            this.cachedUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, CachedUnitRole>>();
+            this.cachedCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, CachedCompositeRole>>();
+            this.cachedCompositesRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, CachedCompositesRole>>();
         }
 
-        public bool TryGetUnit(ObjectId association, object cacheId, IRoleType roleType, out object role)
+        public bool TryGetUnit(long association, object cacheId, IRoleType roleType, out object role)
         {
-            Dictionary<ObjectId, CachedUnitRole> entryByAssociation;
+            Dictionary<long, CachedUnitRole> entryByAssociation;
             if (this.cachedUnitRoleByAssociationByRoleType.TryGetValue(roleType, out entryByAssociation))
             {
                 CachedUnitRole cachedUnitRole;
@@ -60,21 +60,21 @@ namespace Allors.Adapters
             return false;
         }
 
-        public void SetUnit(ObjectId association, object cacheId, IRoleType roleType, object role)
+        public void SetUnit(long association, object cacheId, IRoleType roleType, object role)
         {
-            Dictionary<ObjectId, CachedUnitRole> entryByAssociation;
+            Dictionary<long, CachedUnitRole> entryByAssociation;
             if (!this.cachedUnitRoleByAssociationByRoleType.TryGetValue(roleType, out entryByAssociation))
             {
-                entryByAssociation = new Dictionary<ObjectId, CachedUnitRole>();
+                entryByAssociation = new Dictionary<long, CachedUnitRole>();
                 this.cachedUnitRoleByAssociationByRoleType[roleType] = entryByAssociation;
             }
 
             entryByAssociation[association] = new CachedUnitRole(cacheId, role);
         }
 
-        public bool TryGetComposite(ObjectId association, object cacheId, IRoleType roleType, out ObjectId role)
+        public bool TryGetComposite(long association, object cacheId, IRoleType roleType, out long? role)
         {
-            Dictionary<ObjectId, CachedCompositeRole> entryByAssociation;
+            Dictionary<long, CachedCompositeRole> entryByAssociation;
             if (this.cachedCompositeRoleByAssociationByRoleType.TryGetValue(roleType, out entryByAssociation))
             {
                 CachedCompositeRole cachedCompositeRole;
@@ -92,21 +92,21 @@ namespace Allors.Adapters
             return false;
         }
 
-        public void SetComposite(ObjectId association, object cacheId, IRoleType roleType, ObjectId role)
+        public void SetComposite(long association, object cacheId, IRoleType roleType, long role)
         {
-            Dictionary<ObjectId, CachedCompositeRole> entryByAssociation;
+            Dictionary<long, CachedCompositeRole> entryByAssociation;
             if (!this.cachedCompositeRoleByAssociationByRoleType.TryGetValue(roleType, out entryByAssociation))
             {
-                entryByAssociation = new Dictionary<ObjectId, CachedCompositeRole>();
+                entryByAssociation = new Dictionary<long, CachedCompositeRole>();
                 this.cachedCompositeRoleByAssociationByRoleType[roleType] = entryByAssociation;
             }
 
             entryByAssociation[association] = new CachedCompositeRole(cacheId, role);
         }
 
-        public bool TryGetComposites(ObjectId association, object cacheId, IRoleType roleType, out ObjectId[] role)
+        public bool TryGetComposites(long association, object cacheId, IRoleType roleType, out long[] role)
         {
-            Dictionary<ObjectId, CachedCompositesRole> entryByAssociation;
+            Dictionary<long, CachedCompositesRole> entryByAssociation;
             if (this.cachedCompositesRoleByAssociationByRoleType.TryGetValue(roleType, out entryByAssociation))
             {
                 CachedCompositesRole cachedCompositesRole;
@@ -124,12 +124,12 @@ namespace Allors.Adapters
             return false;
         }
 
-        public void SetComposites(ObjectId association, object cacheId, IRoleType roleType, ObjectId[] role)
+        public void SetComposites(long association, object cacheId, IRoleType roleType, long[] role)
         {
-            Dictionary<ObjectId, CachedCompositesRole> entryByAssociation;
+            Dictionary<long, CachedCompositesRole> entryByAssociation;
             if (!this.cachedCompositesRoleByAssociationByRoleType.TryGetValue(roleType, out entryByAssociation))
             {
-                entryByAssociation = new Dictionary<ObjectId, CachedCompositesRole>();
+                entryByAssociation = new Dictionary<long, CachedCompositesRole>();
                 this.cachedCompositesRoleByAssociationByRoleType[roleType] = entryByAssociation;
             }
 
@@ -138,12 +138,12 @@ namespace Allors.Adapters
 
         public void Invalidate()
         {
-            this.cachedUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, CachedUnitRole>>();
-            this.cachedCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, CachedCompositeRole>>();
-            this.cachedCompositesRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, CachedCompositesRole>>();
+            this.cachedUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, CachedUnitRole>>();
+            this.cachedCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, CachedCompositeRole>>();
+            this.cachedCompositesRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, CachedCompositesRole>>();
         }
 
-        public void Invalidate(ObjectId[] objectsToInvalidate)
+        public void Invalidate(long[] objectsToInvalidate)
         {
             foreach (var roleByAssociationEntry in this.cachedCompositeRoleByAssociationByRoleType)
             {
@@ -175,86 +175,41 @@ namespace Allors.Adapters
 
         private class CachedUnitRole
         {
-            private readonly object cacheId;
-            private readonly object role; 
-
             internal CachedUnitRole(object cacheId, object role)
             {
-                this.cacheId = cacheId;
-                this.role = role;
+                this.CacheId = cacheId;
+                this.Role = role;
             }
 
-            public object CacheId
-            {
-                get
-                {
-                    return this.cacheId;
-                }
-            }
+            public object CacheId { get; }
 
-            public object Role
-            {
-                get
-                {
-                    return this.role;
-                }
-            }
+            public object Role { get; }
         }
 
         private class CachedCompositeRole
         {
-            private readonly object cacheId;
-            private readonly ObjectId role;
-
-            internal CachedCompositeRole(object cacheId, ObjectId role)
+            internal CachedCompositeRole(object cacheId, long role)
             {
-                this.cacheId = cacheId;
-                this.role = role;
+                this.CacheId = cacheId;
+                this.Role = role;
             }
 
-            public object CacheId
-            {
-                get
-                {
-                    return this.cacheId;
-                }
-            }
+            public object CacheId { get; }
 
-            public ObjectId Role
-            {
-                get
-                {
-                    return this.role;
-                }
-            }
+            public long Role { get; }
         }
 
         private class CachedCompositesRole
         {
-            private readonly object cacheId;
-            private readonly ObjectId[] role;
-
-            internal CachedCompositesRole(object cacheId, ObjectId[] role)
+            internal CachedCompositesRole(object cacheId, long[] role)
             {
-                this.cacheId = cacheId;
-                this.role = role;
+                this.CacheId = cacheId;
+                this.Role = role;
             }
 
-            public object CacheId
-            {
-                get
-                {
-                    return this.cacheId;
-                }
-            }
+            public object CacheId { get; }
 
-            public ObjectId[] Role
-            {
-                get
-                {
-                    return this.role;
-                }
-            }
+            public long[] Role { get; }
         }
     }
 }

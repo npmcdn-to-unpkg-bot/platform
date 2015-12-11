@@ -26,12 +26,12 @@ namespace Allors.Adapters
 
     public interface IClassCache
     {
-        bool TryGet(ObjectId @object, out IClass @class);
+        bool TryGet(long objectId, out IClass @class);
        
-        void Set(ObjectId @object, IClass @class);
+        void Set(long objectId, IClass @class);
 
         void Invalidate();
 
-        void Invalidate(ObjectId[] objectsToInvalidate);
+        void Invalidate(long[] objectsToInvalidate);
     }
 }

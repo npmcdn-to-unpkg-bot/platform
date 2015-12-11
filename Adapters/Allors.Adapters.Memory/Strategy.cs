@@ -18,8 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Memory
 {
     using System;
@@ -28,8 +26,10 @@ namespace Allors.Adapters.Memory
     using System.Linq;
     using System.Xml;
 
-    using Allors.Meta;
     using Adapters;
+
+    using Allors;
+    using Allors.Meta;
 
     public sealed class Strategy : IStrategy
     {
@@ -57,7 +57,7 @@ namespace Allors.Adapters.Memory
 
         private ObjectVersion version;
 
-        internal Strategy(Session session, IClass objectType, ObjectId objectId, ObjectVersion version)
+        internal Strategy(Session session, IClass objectType, long objectId, ObjectVersion version)
         {
             this.session = session;
             this.objectType = objectType;
@@ -95,7 +95,7 @@ namespace Allors.Adapters.Memory
             }
         }
 
-        public ObjectId ObjectId { get; internal set; }
+        public long ObjectId { get; internal set; }
 
         public ObjectVersion ObjectVersion {
             get

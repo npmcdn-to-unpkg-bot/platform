@@ -36,27 +36,27 @@ namespace Allors
         /// <summary>
         /// Gets the created objects.
         /// </summary>
-        ISet<ObjectId> Created { get; }
+        ISet<long> Created { get; }
 
         /// <summary>
         /// Gets the deleted objects.
         /// </summary>
-        ISet<ObjectId> Deleted { get; }
+        ISet<long> Deleted { get; }
 
         /// <summary>
         /// Gets the changed associations.
         /// </summary>
-        ISet<ObjectId> Associations { get; }
+        ISet<long> Associations { get; }
 
         /// <summary>
         /// Gets the changed roles.
         /// </summary>
-        ISet<ObjectId> Roles { get; }
+        ISet<long> Roles { get; }
 
         /// <summary>
         /// Gets the changed role types by association.
         /// </summary>
-        IDictionary<ObjectId, ISet<IRoleType>> RoleTypesByAssociation { get; }
+        IDictionary<long, ISet<IRoleType>> RoleTypesByAssociation { get; }
 
         /// <summary>
         /// Get the changed role types for the association.
@@ -67,6 +67,6 @@ namespace Allors
         /// <returns>
         /// The role types.
         /// </returns>
-        ISet<IRoleType> GetRoleTypes(ObjectId association);
+        ISet<IRoleType> GetRoleTypes(long association);
     }
 }

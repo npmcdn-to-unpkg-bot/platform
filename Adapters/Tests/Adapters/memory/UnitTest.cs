@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Many2OneTest.cs" company="Allors bvba">
+// <copyright file="UnitTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,16 +16,19 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>
+//   Defines the Default type.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory.IntegerId
+namespace Allors.Adapters.Memory
 {
     using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class Many2OneTest : Adapters.Many2OneTest
+    public class UnitTest : Adapters.UnitTest
     {
         private readonly Profile profile = new Profile();
 

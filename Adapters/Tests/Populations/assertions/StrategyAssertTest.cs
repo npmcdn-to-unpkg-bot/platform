@@ -21,7 +21,7 @@
 namespace Allors.Adapters
 {
     using Allors;
-    using Adapters.Memory.IntegerId;
+    using Adapters.Memory;
     using Allors.Domain;
     using Allors.Meta;
 
@@ -35,7 +35,7 @@ namespace Allors.Adapters
         [SetUp]
         protected void Init()
         {
-            var configuration = new Adapters.Memory.IntegerId.Configuration { ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(C1).Assembly, "Allors.Domain") };
+            var configuration = new Memory.Configuration { ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(C1).Assembly, "Allors.Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

@@ -144,7 +144,7 @@ namespace Allors
         /// </summary>
         /// <param name="objectId">The object id.</param>
         /// <returns>The instantiated object.</returns>
-        IObject Instantiate(ObjectId objectId);
+        IObject Instantiate(long objectId);
 
         /// <summary>
         /// Instantiates an array of Allors Objects.
@@ -165,11 +165,11 @@ namespace Allors
         /// </summary>
         /// <param name="objectIds">The object ids.</param>
         /// <returns>The instantiated objects.</returns>
-        IObject[] Instantiate(ObjectId[] objectIds);
+        IObject[] Instantiate(long[] objectIds);
 
         void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIds);
 
-        void Prefetch(PrefetchPolicy prefetchPolicy, params ObjectId[] objectIds);
+        void Prefetch(PrefetchPolicy prefetchPolicy, params long[] objectIds);
 
         void Prefetch(PrefetchPolicy prefetchPolicy, params IStrategy[] strategies);
 
@@ -194,7 +194,7 @@ namespace Allors
         /// <param name="class">The <see cref="IObjectType"/>.</param>
         /// <param name="objectId">The object id.</param>
         /// <returns>The inserted object.</returns>
-        IObject Insert(IClass @class, ObjectId objectId);
+        IObject Insert(IClass @class, long objectId);
 
         /// <summary>
         /// Instantiate a strategy.
@@ -206,6 +206,6 @@ namespace Allors
         /// <returns>
         /// The <see cref="IStrategy"/>.
         /// </returns>
-        IStrategy InstantiateStrategy(ObjectId objectId);
+        IStrategy InstantiateStrategy(long objectId);
     }
 }

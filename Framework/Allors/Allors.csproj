@@ -110,12 +110,6 @@
     <Compile Include="Meta\UnitTags.cs" />
     <Compile Include="ObjectFactory.cs" />
     <Compile Include="ObjectVersion.cs" />
-    <Compile Include="ObjectId.cs" />
-    <Compile Include="Adapters\ObjectIdInteger.cs" />
-    <Compile Include="Adapters\ObjectIdLong.cs" />
-    <Compile Include="Adapters\ObjectIds.cs" />
-    <Compile Include="Adapters\ObjectIdsInteger.cs" />
-    <Compile Include="Adapters\ObjectIdsLong.cs" />
     <Compile Include="ObjectNotLoadedEventArgs.cs" />
     <Compile Include="Prefetch\PrefetchPolicyBuilder.cs" />
     <Compile Include="Prefetch\PrefetchRule.cs" />

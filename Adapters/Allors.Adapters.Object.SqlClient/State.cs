@@ -28,41 +28,38 @@ namespace Allors.Adapters.Object.SqlClient
 
     public sealed class State
     {
-        private readonly ObjectIds objectIds;
-
-        public State(ObjectIds objectIds)
+        public State()
         {
-            this.objectIds = objectIds;
-            this.ReferenceByObjectId = new Dictionary<ObjectId, Reference>();
+            this.ReferenceByObjectId = new Dictionary<long, Reference>();
 
-            this.ExistingObjectIdsWithoutReference = new HashSet<ObjectId>();
+            this.ExistingObjectIdsWithoutReference = new HashSet<long>();
             this.ReferencesWithoutVersions = new HashSet<Reference>();
 
             this.AssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
-            this.AssociationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
+            this.AssociationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, long[]>>();
 
             this.ChangeSet = new ChangeSet();
         }
 
         internal ChangeSet ChangeSet { get; set; }
 
-        internal Dictionary<ObjectId, Reference> ReferenceByObjectId { get; set; }
+        internal Dictionary<long, Reference> ReferenceByObjectId { get; set; }
 
         internal Dictionary<Reference, Roles> ModifiedRolesByReference { get; set; }
 
         internal Dictionary<IAssociationType, Dictionary<Reference, Reference>> AssociationByRoleByAssociationType { get; set; }
 
-        internal Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>> AssociationsByRoleByAssociationType { get; set; }
+        internal Dictionary<IAssociationType, Dictionary<Reference, long[]>> AssociationsByRoleByAssociationType { get; set; }
 
         internal Dictionary<Reference, Roles> UnflushedRolesByReference { get; set; }
 
-        internal Dictionary<IAssociationType, HashSet<ObjectId>> TriggersFlushRolesByAssociationType { get; set; }
+        internal Dictionary<IAssociationType, HashSet<long>> TriggersFlushRolesByAssociationType { get; set; }
 
-        internal HashSet<ObjectId> ExistingObjectIdsWithoutReference { get; set; }
+        internal HashSet<long> ExistingObjectIdsWithoutReference { get; set; }
 
         internal HashSet<Reference> ReferencesWithoutVersions { get; set; }
 
-        public Reference GetOrCreateReferenceForExistingObject(ObjectId objectId, Session session)
+        public Reference GetOrCreateReferenceForExistingObject(long objectId, Session session)
         {
             Reference reference;
             if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
@@ -74,7 +71,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                     session.InstantiateReferences(this.ExistingObjectIdsWithoutReference);
 
-                    this.ExistingObjectIdsWithoutReference = new HashSet<ObjectId>();
+                    this.ExistingObjectIdsWithoutReference = new HashSet<long>();
                     this.ReferenceByObjectId.TryGetValue(objectId, out reference);
                 }
                 else
@@ -92,7 +89,7 @@ namespace Allors.Adapters.Object.SqlClient
             return reference;
         }
 
-        public Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId, Session session)
+        public Reference GetOrCreateReferenceForExistingObject(IClass objectType, long objectId, Session session)
         {
             Reference reference;
             if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
@@ -109,7 +106,7 @@ namespace Allors.Adapters.Object.SqlClient
             return reference;
         }
 
-        public Reference GetOrCreateReferenceForExistingObject(IClass objectType, ObjectId objectId, long version, Session session)
+        public Reference GetOrCreateReferenceForExistingObject(IClass objectType, long objectId, long version, Session session)
         {
             Reference reference;
             if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
@@ -126,7 +123,7 @@ namespace Allors.Adapters.Object.SqlClient
             return reference;
         }
 
-        public Reference CreateReferenceForNewObject(IClass objectType, ObjectId objectId, Session session)
+        public Reference CreateReferenceForNewObject(IClass objectType, long objectId, Session session)
         {
             var strategyReference = new Reference(session, objectType, objectId, true);
             this.ReferenceByObjectId[objectId] = strategyReference;
@@ -159,21 +156,21 @@ namespace Allors.Adapters.Object.SqlClient
             return associationByRole;
         }
 
-        public Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
+        public Dictionary<Reference, long[]> GetAssociationsByRole(IAssociationType associationType)
         {
-            Dictionary<Reference, ObjectId[]> associationsByRole;
+            Dictionary<Reference, long[]> associationsByRole;
             if (!this.AssociationsByRoleByAssociationType.TryGetValue(associationType, out associationsByRole))
             {
-                associationsByRole = new Dictionary<Reference, ObjectId[]>();
+                associationsByRole = new Dictionary<Reference, long[]>();
                 this.AssociationsByRoleByAssociationType[associationType] = associationsByRole;
             }
 
             return associationsByRole;
         }
 
-        public ObjectId GetObjectIdForExistingObject(string objectStringId)
+        public long GetObjectIdForExistingObject(string objectStringId)
         {
-            var objectId = this.objectIds.Parse(objectStringId);
+            var objectId = long.Parse(objectStringId);
             if (!this.ReferenceByObjectId.ContainsKey(objectId))
             {
                 this.ExistingObjectIdsWithoutReference.Add(objectId);
@@ -182,9 +179,9 @@ namespace Allors.Adapters.Object.SqlClient
             return objectId;
         }
 
-        public ObjectId GetObjectId(string objectStringId)
+        public long GetObjectId(string objectStringId)
         {
-            return this.objectIds.Parse(objectStringId);
+            return long.Parse(objectStringId);
         }
     }
 }

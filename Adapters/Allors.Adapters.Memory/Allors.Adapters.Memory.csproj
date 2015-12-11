@@ -64,15 +64,7 @@
     <Compile Include="ExtentOperationType.cs" />
     <Compile Include="ExtentSort.cs" />
     <Compile Include="ExtentSwitch.cs" />
-    <Compile Include="IntegerId\Configuration.cs" />
-    <Compile Include="IntegerId\Database.cs" />
-    <Compile Include="IntegerId\ObjectIds.cs" />
-    <Compile Include="IntegerId\Session.cs" />
     <Compile Include="Load.cs" />
-    <Compile Include="LongId\Configuration.cs" />
-    <Compile Include="LongId\Database.cs" />
-    <Compile Include="LongId\ObjectIds.cs" />
-    <Compile Include="LongId\Session.cs" />
     <Compile Include="ObjectIds.cs" />
     <Compile Include="Predicates\And.cs" />
     <Compile Include="Predicates\AssociationContainedInEnumerable.cs" />

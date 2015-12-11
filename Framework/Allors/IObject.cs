@@ -42,6 +42,6 @@ namespace Allors
         /// Gets the Object Id.
         /// </summary>
         /// <value>The object id.</value>
-        ObjectId Id { get; }
+        long Id { get; }
     }
 }

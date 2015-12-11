@@ -160,7 +160,7 @@ namespace Allors.Adapters.Memory
                                 {
                                     var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
 
-                                    var objectId = this.session.ObjectIds.Parse(objectArray[0]);
+                                    var objectId = long.Parse(objectArray[0]);
                                     var objectVersion = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(); 
 
                                     if (objectType is IClass)
@@ -303,7 +303,7 @@ namespace Allors.Adapters.Memory
                         if (this.reader.Name.Equals(Serialization.Relation))
                         {
                             var associationIdString = this.reader.GetAttribute(Serialization.Association);
-                            var associationId = this.session.ObjectIds.Parse(associationIdString);
+                            var associationId = long.Parse(associationIdString);
                             var strategy = this.LoadInstantiateStrategy(associationId);
 
                             var value = string.Empty;
@@ -376,7 +376,7 @@ namespace Allors.Adapters.Memory
                     case XmlNodeType.Element:
                         if (this.reader.Name.Equals(Serialization.Relation))
                         {
-                            var associationId = this.session.ObjectIds.Parse(this.reader.GetAttribute(Serialization.Association));
+                            var associationId = long.Parse(this.reader.GetAttribute(Serialization.Association));
                             var association = this.LoadInstantiateStrategy(associationId);
 
                             var value = string.Empty;
@@ -403,7 +403,7 @@ namespace Allors.Adapters.Memory
                                 {
                                     if (relationType.RoleType.IsOne)
                                     {
-                                        var roleIdString = this.session.ObjectIds.Parse(roleIdStringArray[0]);
+                                        var roleIdString = long.Parse(roleIdStringArray[0]);
                                         var role = this.LoadInstantiateStrategy(roleIdString);
                                         if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.UncheckedObjectType))
                                         {
@@ -426,7 +426,7 @@ namespace Allors.Adapters.Memory
                                         var roleStrategies = new HashSet<Strategy>();
                                         foreach (var roleIdString in roleIdStringArray)
                                         {
-                                            var roleId = this.session.ObjectIds.Parse(roleIdString);
+                                            var roleId = long.Parse(roleIdString);
                                             var role = this.LoadInstantiateStrategy(roleId);
                                             if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.UncheckedObjectType))
                                             {
@@ -467,7 +467,7 @@ namespace Allors.Adapters.Memory
             }
         }
 
-        private Strategy LoadInstantiateStrategy(ObjectId id)
+        private Strategy LoadInstantiateStrategy(long id)
         {
             return this.session.GetStrategy(id);
         }

@@ -29,7 +29,7 @@ namespace Allors.Adapters.Object.SqlClient
 
     internal abstract class SqlExtent : Extent
     {
-        private IList<ObjectId> objectIds;
+        private IList<long> objectIds;
 
         internal override SqlExtent ContainedInExtent => this;
 
@@ -43,7 +43,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal ExtentSort Sorter { get; private set; }
 
-        private IList<ObjectId> ObjectIds => this.objectIds ?? (this.objectIds = this.GetObjectIds());
+        private IList<long> ObjectIds => this.objectIds ?? (this.objectIds = this.GetObjectIds());
 
         internal new IObject this[int index] => this.GetItem(index);
 
@@ -132,7 +132,7 @@ namespace Allors.Adapters.Object.SqlClient
             return this.Session.State.GetOrCreateReferenceForExistingObject(objectId, this.Session).Strategy.GetObject();
         }
 
-        protected abstract IList<ObjectId> GetObjectIds();
+        protected abstract IList<long> GetObjectIds();
 
         protected abstract void LazyLoadFilter();
     }

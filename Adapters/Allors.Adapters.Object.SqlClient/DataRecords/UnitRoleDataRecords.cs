@@ -44,56 +44,27 @@ namespace Allors.Adapters.Object.SqlClient
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            // TODO: See Relation.SqlClient
-            if (this.database.Mapping.IsObjectIdInteger)
+            var metaData = new[]
+                                {
+                                    new SqlMetaData(this.database.Mapping.TableTypeColumnNameForAssociation, SqlDbType.BigInt),
+                                    this.database.GetSqlMetaData(this.database.Mapping.TableTypeColumnNameForRole, this.roleType)
+                                };
+            var sqlDataRecord = new SqlDataRecord(metaData);
+
+            foreach (var relation in this.relations)
             {
-                var metaData = new[]
-                                   {
-                                       new SqlMetaData(this.database.Mapping.TableTypeColumnNameForAssociation, SqlDbType.Int),
-                                       this.database.GetSqlMetaData(this.database.Mapping.TableTypeColumnNameForRole, this.roleType)
-                                   };
-                var sqlDataRecord = new SqlDataRecord(metaData);
+                sqlDataRecord.SetInt64(0, relation.Association);
 
-                foreach (var relation in this.relations)
+                if (relation.Role == null)
                 {
-                    sqlDataRecord.SetInt32(0, (int)relation.Association.Value);
-
-                    if (relation.Role == null)
-                    {
-                        sqlDataRecord.SetValue(1, DBNull.Value);
-                    }
-                    else
-                    {
-                        sqlDataRecord.SetValue(1, relation.Role);
-                    }
-
-                    yield return sqlDataRecord;
+                    sqlDataRecord.SetValue(1, DBNull.Value);
                 }
-            }
-            else
-            {
-                var metaData = new[]
-                                   {
-                                       new SqlMetaData(this.database.Mapping.TableTypeColumnNameForAssociation, SqlDbType.BigInt),
-                                       this.database.GetSqlMetaData(this.database.Mapping.TableTypeColumnNameForRole, this.roleType)
-                                   };
-                var sqlDataRecord = new SqlDataRecord(metaData);
-
-                foreach (var relation in this.relations)
+                else
                 {
-                    sqlDataRecord.SetInt64(0, (int)relation.Association.Value);
-
-                    if (relation.Role == null)
-                    {
-                        sqlDataRecord.SetValue(1, DBNull.Value);
-                    }
-                    else
-                    {
-                        sqlDataRecord.SetValue(1, relation.Role);
-                    }
-
-                    yield return sqlDataRecord;
+                    sqlDataRecord.SetValue(1, relation.Role);
                 }
+
+                yield return sqlDataRecord;
             }
         }
 

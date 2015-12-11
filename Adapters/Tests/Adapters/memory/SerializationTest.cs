@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExtentTest.cs" company="Allors bvba">
+// <copyright file="SerializationTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,15 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.Memory.LongId
+namespace Allors.Adapters.Memory
 {
     using Allors;
-    using Allors.Populations;
+    using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class ExtentTest : Databases.ExtentTest
+    public class SerializationTest : Adapters.SerializationTest
     {
         private readonly Profile profile = new Profile();
 
@@ -36,6 +36,11 @@ namespace Allors.Databases.Memory.LongId
             {
                 return this.profile;
             }
+        }
+
+        protected override IDatabase CreatePopulation()
+        {
+            return this.profile.CreatePopulation();
         }
 
         [TearDown]

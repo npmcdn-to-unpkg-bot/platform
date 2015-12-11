@@ -122,7 +122,7 @@ namespace Allors.Adapters.Object.SqlClient
         }
 
 
-        protected override IList<ObjectId> GetObjectIds()
+        protected override IList<long> GetObjectIds()
         {
             if (this.Strategy != null)
             {
@@ -132,7 +132,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.session.Flush();
 
             var statement = new ExtentStatementRoot(this);
-            var objectIds = new List<ObjectId>();
+            var objectIds = new List<long>();
 
             var alias = this.BuildSql(statement);
             
@@ -180,18 +180,12 @@ namespace Allors.Adapters.Object.SqlClient
             if (statement.IsRoot)
             {
                 statement.Append("SELECT DISTINCT " + alias + "." + Mapping.ColumnNameForObject);
-                if (statement.Sorter != null)
-                {
-                    statement.Sorter.BuildSelect(statement, alias);
-                }
+                statement.Sorter?.BuildSelect(statement, alias);
 
                 statement.Append(" FROM " + this.Mapping.TableNameForObjectByClass[rootClass] + " " + alias);
                 statement.AddJoins(rootClass, alias);
                 statement.AddWhere(rootClass, alias);
-                if (this.filter != null)
-                {
-                    this.filter.BuildWhere(statement, alias);
-                }
+                this.filter?.BuildWhere(statement, alias);
             }
             else
             {

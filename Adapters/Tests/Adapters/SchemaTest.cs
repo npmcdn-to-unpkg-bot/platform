@@ -18,16 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using IDatabase = Allors.IDatabase;
 
 namespace Allors.Adapters
 {
     using System;
 
     using Allors;
-    using Adapters.Relation.SqlClient;
     using Allors.Meta;
-    using Adapters;
 
     using NUnit.Framework;
 

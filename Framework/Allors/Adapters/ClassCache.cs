@@ -25,29 +25,29 @@ namespace Allors.Adapters
 
     public class ClassCache : IClassCache
     {
-        private Dictionary<ObjectId, IClass> classByObject;
+        private Dictionary<long, IClass> classByObject;
 
         public ClassCache()
         {
-            this.classByObject = new Dictionary<ObjectId, IClass>();
+            this.classByObject = new Dictionary<long, IClass>();
         }
 
-        public bool TryGet(ObjectId @object, out IClass @class)
+        public bool TryGet(long objectId, out IClass @class)
         {
-            return this.classByObject.TryGetValue(@object, out @class);
+            return this.classByObject.TryGetValue(objectId, out @class);
         }
 
-        public void Set(ObjectId @object, IClass @class)
+        public void Set(long objectId, IClass @class)
         {
-            this.classByObject[@object] = @class;
+            this.classByObject[objectId] = @class;
         }
 
         public void Invalidate()
         {
-            this.classByObject = new Dictionary<ObjectId, IClass>();
+            this.classByObject = new Dictionary<long, IClass>();
         }
 
-        public void Invalidate(ObjectId[] objectsToInvalidate)
+        public void Invalidate(long[] objectsToInvalidate)
         {
             foreach (var objectToInvalidate in objectsToInvalidate)
             {

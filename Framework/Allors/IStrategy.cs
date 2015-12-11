@@ -44,7 +44,7 @@ namespace Allors
         /// Gets the <see cref="Allors.ObjectId"/>.
         /// </summary>
         /// <value>The object id.</value>
-        ObjectId ObjectId { get; }
+        long ObjectId { get; }
         
         /// <summary>
         /// Gets the <see cref="Allors.ObjectId"/>.

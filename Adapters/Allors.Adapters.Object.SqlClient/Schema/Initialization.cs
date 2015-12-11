@@ -261,7 +261,7 @@ CREATE SCHEMA " + this.database.SchemaName;
                         var sql = new StringBuilder();
                         sql.Append("CREATE TABLE " + this.mapping.TableNameForObjects + "\n");
                         sql.Append("(\n");
-                        sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " IDENTITY(1,1) PRIMARY KEY,\n");
+                        sql.Append(Mapping.ColumnNameForObject + " " + Mapping.SqlTypeForObject + " IDENTITY(1,1) PRIMARY KEY,\n");
                         sql.Append(Mapping.ColumnNameForClass + " " + Mapping.SqlTypeForClass + ",\n");
                         sql.Append(Mapping.ColumnNameForVersion + " " + Mapping.SqlTypeForVersion + "\n");
                         sql.Append(")\n");
@@ -279,7 +279,7 @@ CREATE SCHEMA " + this.database.SchemaName;
                         var sql = new StringBuilder();
                         sql.Append("CREATE TABLE " + tableName + "\n");
                         sql.Append("(\n");
-                        sql.Append(Mapping.ColumnNameForObject + " " + this.mapping.SqlTypeForObject + " PRIMARY KEY,\n");
+                        sql.Append(Mapping.ColumnNameForObject + " " + Mapping.SqlTypeForObject + " PRIMARY KEY,\n");
                         sql.Append(Mapping.ColumnNameForClass + " " + Mapping.SqlTypeForClass);
 
                         foreach (var associationType in @class.AssociationTypes)
@@ -288,7 +288,7 @@ CREATE SCHEMA " + this.database.SchemaName;
                             var roleType = relationType.RoleType;
                             if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                             {
-                                sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.SqlTypeForObject);
+                                sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + Mapping.SqlTypeForObject);
                             }
                         }
 
@@ -304,7 +304,7 @@ CREATE SCHEMA " + this.database.SchemaName;
                             {
                                 if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
                                 {
-                                    sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + this.mapping.SqlTypeForObject);
+                                    sql.Append(",\n" + this.mapping.ColumnNameByRelationType[relationType] + " " + Mapping.SqlTypeForObject);
                                 }
                             }
                         }
@@ -331,8 +331,8 @@ CREATE SCHEMA " + this.database.SchemaName;
                             var sql = new StringBuilder();
                             sql.Append("CREATE TABLE " + tableName + "\n");
                             sql.Append("(\n");
-                            sql.Append(Mapping.ColumnNameForAssociation + " " + this.mapping.SqlTypeForObject + ",\n");
-                            sql.Append(Mapping.ColumnNameForRole + " " + this.mapping.SqlTypeForObject + ",\n");
+                            sql.Append(Mapping.ColumnNameForAssociation + " " + Mapping.SqlTypeForObject + ",\n");
+                            sql.Append(Mapping.ColumnNameForRole + " " + Mapping.SqlTypeForObject + ",\n");
                             sql.Append("CONSTRAINT " + primaryKeyName + " PRIMARY KEY (" + Mapping.ColumnNameForAssociation + ", " + Mapping.ColumnNameForRole + ")\n");
                             sql.Append(")\n");
 

@@ -34,6 +34,8 @@ namespace Allors.Adapters.Object.SqlClient
     {
         private const string ConnectionStringsKey = "allors";
 
+        public static readonly long[] EmptyObjectIds = { };
+
         private readonly object lockObject = new object();
 
         private readonly IObjectFactory objectFactory;
@@ -103,7 +105,6 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             this.SchemaName = (configuration.SchemaName ?? "allors").ToLowerInvariant();
-            this.ObjectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
@@ -259,8 +260,6 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal IsolationLevel IsolationLevel { get; }
 
-        internal ObjectIds ObjectIds { get; }
-
         internal Mapping Mapping
         {
             get
@@ -269,18 +268,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (this.mapping == null)
                     {
-                        if (this.ObjectIds is ObjectIdsInteger)
-                        {
-                            this.mapping = new Mapping(this, true);
-                        }
-                        else if (this.ObjectIds is ObjectIdsLong)
-                        {
-                            this.mapping = new Mapping(this, false);
-                        }
-                        else
-                        {
-                            throw new NotSupportedException("ObjectIds of type " + this.ObjectIds.GetType() + " are not supported.");
-                        }
+                        this.mapping = new Mapping(this);
                     }
                 }
 
@@ -427,12 +415,12 @@ namespace Allors.Adapters.Object.SqlClient
             return concreteClasses.Contains(concreteClass);
         }
 
-        internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<ObjectId> objectids)
+        internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<long> objectids)
         {
             return new ObjectDataRecord(this.mapping, objectids);
         }
 
-        internal IEnumerable<SqlDataRecord> CreateVersionedObjectTable(Dictionary<ObjectId, ObjectVersion> versionedObjects)
+        internal IEnumerable<SqlDataRecord> CreateVersionedObjectTable(Dictionary<long, ObjectVersion> versionedObjects)
         {
             return new VersionedObjectDataRecord(this.mapping, versionedObjects);
         }
