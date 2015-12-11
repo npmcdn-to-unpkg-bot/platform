@@ -868,15 +868,11 @@ namespace Allors.Adapters.Object.SqlClient
             var command = this.instantiateObjects;
             if (command == null)
             {
-                var sql = "SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + "," + Mapping.ColumnNameForVersion + "\n";
-                sql += "FROM " + this.Database.Mapping.TableNameForObjects + "\n";
-                sql += "WHERE " + Mapping.ColumnNameForObject + " IN\n";
-                sql += "( SELECT " + this.Database.Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParamNameForTableType + " )\n";
-
+                var sql = this.Database.Mapping.ProcedureNameForInstantiate;
                 command = this.connection.CreateCommand();
                 command.CommandText = sql;
+                command.CommandType = CommandType.StoredProcedure;
                 command.AddObjectTableParameter(objectIds);
-
                 this.instantiateObjects = command;
             }
             else

@@ -24,46 +24,61 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Linq;
 
+    public class AccessControlCache
+    {
+        public long ObjectVersion { get; }
+
+        public HashSet<long> EffectiveUserIds { get; }
+
+        public Dictionary<Guid, Dictionary<Guid, Operations>> OperationsByOperandTypeIdByClassId { get; }
+
+        internal AccessControlCache(AccessControl accessControl)
+        {
+            this.ObjectVersion = accessControl.Strategy.ObjectVersion;
+
+            this.EffectiveUserIds = new HashSet<long>(accessControl.EffectiveUsers.Select(v => v.Id));
+
+            this.OperationsByOperandTypeIdByClassId = new Dictionary<Guid, Dictionary<Guid, Operations>>();
+            foreach (Permission permission in accessControl.EffectivePermissions)
+            {
+                var classId = permission.ConcreteClassPointer;
+                Dictionary<Guid, Operations> operationsByOperandType;
+                if (!OperationsByOperandTypeIdByClassId.TryGetValue(classId, out operationsByOperandType))
+                {
+                    operationsByOperandType = new Dictionary<Guid, Operations>();
+                    OperationsByOperandTypeIdByClassId.Add(classId, operationsByOperandType);
+                }
+
+                var operandTypeId = permission.OperandTypePointer;
+                var operation = permission.Operation;
+
+                Operations operations;
+                operationsByOperandType.TryGetValue(operandTypeId, out operations);
+                operations = operations | operation;
+
+                operationsByOperandType[operandTypeId] = operations;
+            }
+        }
+    }
+
     public partial class AccessControl
     {
-        private const string CacheKey = nameof(AccessControl) + ".";
+        private string CacheKey => $"{nameof(AccessControl)}[{this.Id}].Cache";
 
-        public Dictionary<Guid, Dictionary<Guid, Operations>> OperationsByOperandTypeIdByClassId
+        public AccessControlCache Cache
         {
             get
             {
                 var database = this.strategy.Session.Database;
-                var key = CacheKey + this.strategy.ObjectId;
-                var kvp = (KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>?)database[key];
-                if (!kvp.HasValue || !this.strategy.ObjectVersion.Equals(kvp.Value.Key))
+                var key = this.CacheKey;
+                var cache = (AccessControlCache)database[key];
+                if (cache == null || !this.strategy.ObjectVersion.Equals(cache.ObjectVersion))
                 {
-                    var operationsByOperandTypeByClass = new Dictionary<Guid, Dictionary<Guid, Operations>>();
-
-                    foreach (Permission permission in this.EffectivePermissions)
-                    {
-                        var classId = permission.ConcreteClassPointer;
-                        Dictionary<Guid, Operations> operationsByOperandType;
-                        if (!operationsByOperandTypeByClass.TryGetValue(classId, out operationsByOperandType))
-                        {
-                            operationsByOperandType = new Dictionary<Guid, Operations>();
-                            operationsByOperandTypeByClass.Add(classId, operationsByOperandType);
-                        }
-
-                        var operandTypeId = permission.OperandTypePointer;
-                        var operation = permission.Operation;
-
-                        Operations operations;
-                        operationsByOperandType.TryGetValue(operandTypeId, out operations);
-                        operations = operations | operation;
-
-                        operationsByOperandType[operandTypeId] = operations;
-                    }
-
-                    kvp = new KeyValuePair<object, Dictionary<Guid, Dictionary<Guid, Operations>>>(this.strategy.ObjectVersion, operationsByOperandTypeByClass);
-                    database[key] = kvp;
+                    cache = new AccessControlCache(this);
+                    database[key] = cache;
                 }
 
-                return kvp.Value.Value;
+                return cache;
             }
         }
 
@@ -79,7 +94,8 @@ namespace Allors.Domain
 
         public void WarmUp()
         {
-            var x = this.OperationsByOperandTypeIdByClassId;
+            var database = this.strategy.Session.Database;
+            database[this.CacheKey] = new AccessControlCache(this);
         }
     }
 }

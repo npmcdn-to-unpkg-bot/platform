@@ -85,7 +85,9 @@ namespace Allors.Adapters.Object.SqlClient
         internal readonly string TableTypeColumnNameForRole;
 
         internal readonly Dictionary<int, Dictionary<int, string>> TableTypeNameForDecimalRelationByScaleByPrecision;
-       
+
+        internal readonly string ProcedureNameForInstantiate;
+
         internal readonly string ProcedureNameForGetVersion;
         internal readonly string ProcedureNameForSetVersion;
         internal readonly string ProcedureNameForUpdateVersion;
@@ -106,7 +108,9 @@ namespace Allors.Adapters.Object.SqlClient
         internal readonly Dictionary<IRelationType, string> ProcedureNameForClearRoleByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForGetAssociationByRelationType;
         internal readonly Dictionary<IRelationType, string> ProcedureNameForPrefetchAssociationByRelationType;
-        
+
+        private const string ProcedurePrefixForInstantiate = "i";
+
         private const string ProcedurePrefixForGetVersion = "gv";
         private const string ProcedurePrefixForSetVersion = "sv";
         private const string ProcedurePrefixForUpdateVersion = "uv";
@@ -363,9 +367,20 @@ namespace Allors.Adapters.Object.SqlClient
             this.ProcedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
             this.ProcedureNameForPrefetchAssociationByRelationType = new Dictionary<IRelationType, string>();
 
+            // Instantiate
+            this.ProcedureNameForInstantiate = this.Database.SchemaName + "." + ProcedurePrefixForInstantiate;
+            var definition =
+@"CREATE PROCEDURE " + this.ProcedureNameForInstantiate + @"
+    " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
+AS 
+    SELECT " + ColumnNameForObject + ", " + ColumnNameForClass + ", " + ColumnNameForVersion + @"
+    FROM " + this.TableNameForObjects + @"
+    WHERE " + ColumnNameForObject + " IN (SELECT " + this.TableTypeColumnNameForObject + @" FROM " + ParamNameForTableType + ")";
+            this.procedureDefinitionByName.Add(this.ProcedureNameForInstantiate, definition);
+
             // Get Version Ids
             this.ProcedureNameForGetVersion = this.Database.SchemaName + "." + ProcedurePrefixForGetVersion;
-            var definition =
+            definition =
 @"CREATE PROCEDURE " + this.ProcedureNameForGetVersion + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForObject + @" READONLY
 AS 

@@ -117,10 +117,10 @@ namespace Allors.Domain
                     securityTokens = new[] { Singleton.Instance(this.session).DefaultSecurityToken };
                 }
 
-                var accessControls = securityTokens.SelectMany(v => v.AccessControls).Where(v => v.EffectiveUsers.Contains(this.user));
-                foreach (var accessControl in accessControls)
+                var caches = securityTokens.SelectMany(v => v.AccessControls).Select(v=>v.Cache).Where(v => v.EffectiveUserIds.Contains(this.user.Id));
+                foreach (var cache in caches)
                 {
-                    var operationsByOperandTypeIdByClassId = accessControl.OperationsByOperandTypeIdByClassId;
+                    var operationsByOperandTypeIdByClassId = cache.OperationsByOperandTypeIdByClassId;
 
                     Dictionary<Guid, Operations> operationsByClassId;
                     if (operationsByOperandTypeIdByClassId.TryGetValue(this.classId, out operationsByClassId))
