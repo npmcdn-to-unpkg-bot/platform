@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Prefetcher.cs" company="Allors bvba">
+// <copyright file="Prefetch.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -27,31 +27,31 @@ namespace Allors.Adapters.Object.SqlClient
     using Allors;
     using Allors.Meta;
 
-    internal class Prefetching
+    internal class Prefetch
     {
-        private readonly Prefetcher session;
+        private readonly Prefetcher prefetcher;
         private readonly PrefetchPolicy prefetchPolicy;
         private readonly List<Reference> references;
 
-        public Prefetching(Prefetcher session, PrefetchPolicy prefetchPolicy, List<Reference> references)
+        public Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, List<Reference> references)
         {
-            this.session = session;
+            this.prefetcher = prefetcher;
             this.references = references;
             this.prefetchPolicy = prefetchPolicy;
         }
 
-        private Prefetching(Prefetcher session, PrefetchPolicy prefetchPolicy, IEnumerable<long> objectIds)
+        private Prefetch(Prefetcher prefetcher, PrefetchPolicy prefetchPolicy, HashSet<long> objectIds)
         {
-            this.session = session;
+            this.prefetcher = prefetcher;
             this.prefetchPolicy = prefetchPolicy;
-            this.references = session.GetReferencesForPrefetching(objectIds);
+            this.references = prefetcher.GetReferencesForPrefetching(objectIds);
         }
 
         public void Execute()
         {
             if (this.references.Any(reference => reference.IsUnknownVersion || !reference.ExistsKnown))
             {
-                this.session.Session.GetVersionAndExists();
+                this.prefetcher.Session.GetVersionAndExists();
             }
 
             var unitRoles = false;
@@ -71,22 +71,33 @@ namespace Allors.Adapters.Object.SqlClient
                             var referencesByClass = new Dictionary<IClass, List<Reference>>();
                             foreach (var reference in this.references)
                             {
-                                List<Reference> classBasedReferences;
-                                if (!referencesByClass.TryGetValue(reference.Class, out classBasedReferences))
+                                List<Reference> classedReferences;
+                                if (!referencesByClass.TryGetValue(reference.Class, out classedReferences))
                                 {
-                                    classBasedReferences = new List<Reference>();
-                                    referencesByClass.Add(reference.Class, classBasedReferences);
+                                    classedReferences = new List<Reference>();
+                                    referencesByClass.Add(reference.Class, classedReferences);
                                 }
 
-                                classBasedReferences.Add(reference);
+                                classedReferences.Add(reference);
                             }
 
                             foreach (var dictionaryEntry in referencesByClass)
                             {
                                 var @class = dictionaryEntry.Key;
-                                var classBasedReferences = dictionaryEntry.Value;
+                                var classedReferences = dictionaryEntry.Value;
 
-                                this.session.PrefetchUnitRoles(@class, classBasedReferences, roleType);
+                                var referencesWithoutCachedRole = new List<Reference>();
+                                foreach (var reference in classedReferences)
+                                {
+                                    var roles = this.prefetcher.Session.State.GetOrCreateRoles(reference);
+                                    object role;
+                                    if (!roles.TryGetUnitRole(roleType, out role))
+                                    {
+                                        referencesWithoutCachedRole.Add(reference);
+                                    }
+                                }
+
+                                this.prefetcher.PrefetchUnitRoles(@class, referencesWithoutCachedRole, roleType);
                             }
                         }
                     }
@@ -94,18 +105,18 @@ namespace Allors.Adapters.Object.SqlClient
                     {
                         var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                         var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
-                        var nestedObjectIds = existNestedPrefetchPolicy ? new List<long>() : null;
+                        var nestedObjectIds = existNestedPrefetchPolicy ? new HashSet<long>() : null;
 
                         var relationType = roleType.RelationType;
                         if (roleType.IsOne)
                         {
                             if (relationType.ExistExclusiveClasses)
                             {
-                                this.session.PrefetchCompositeRoleObjectTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositeRoleObjectTable(this.references, roleType, nestedObjectIds);
                             }
                             else
                             {
-                                this.session.PrefetchCompositeRoleRelationTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositeRoleRelationTable(this.references, roleType, nestedObjectIds);
                             }
                         }
                         else
@@ -113,17 +124,17 @@ namespace Allors.Adapters.Object.SqlClient
                             var associationType = relationType.AssociationType;
                             if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                             {
-                                this.session.PrefetchCompositesRoleObjectTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositesRoleObjectTable(this.references, roleType, nestedObjectIds);
                             }
                             else
                             {
-                                this.session.PrefetchCompositesRoleRelationTable(this.references, roleType, nestedObjectIds);
+                                this.prefetcher.PrefetchCompositesRoleRelationTable(this.references, roleType, nestedObjectIds);
                             }
                         }
 
                         if (existNestedPrefetchPolicy)
                         {
-                            new Prefetching(this.session, nestedPrefetchPolicy, nestedObjectIds).Execute();
+                            new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds).Execute();
                         }
                     }
                 }
@@ -135,34 +146,34 @@ namespace Allors.Adapters.Object.SqlClient
 
                     var nestedPrefetchPolicy = prefetchRule.PrefetchPolicy;
                     var existNestedPrefetchPolicy = nestedPrefetchPolicy != null;
-                    var nestedObjectIds = existNestedPrefetchPolicy ? new List<long>() : null;
+                    var nestedObjectIds = existNestedPrefetchPolicy ? new HashSet<long>() : null;
 
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses)
                     {
                         if (associationType.IsOne)
                         {
-                            this.session.PrefetchCompositeAssociationObjectTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositeAssociationObjectTable(this.references, associationType, nestedObjectIds);
                         }
                         else
                         {
-                            this.session.PrefetchCompositesAssociationObjectTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositesAssociationObjectTable(this.references, associationType, nestedObjectIds);
                         }
                     }
                     else
                     {
                         if (associationType.IsOne)
                         {
-                            this.session.PrefetchCompositeAssociationRelationTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositeAssociationRelationTable(this.references, associationType, nestedObjectIds);
                         }
                         else
                         {
-                            this.session.PrefetchCompositesAssociationRelationTable(this.references, associationType, nestedObjectIds);
+                            this.prefetcher.PrefetchCompositesAssociationRelationTable(this.references, associationType, nestedObjectIds);
                         }
                     }
 
                     if (existNestedPrefetchPolicy)
                     {
-                        new Prefetching(this.session, nestedPrefetchPolicy, nestedObjectIds).Execute();
+                        new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedObjectIds).Execute();
                     }
                 }
             }

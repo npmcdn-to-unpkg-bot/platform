@@ -286,55 +286,55 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, params IObject[] objects)
         {
-            var objectIds = objects.Select(x => x.Strategy.ObjectId);
+            var objectIds = new HashSet<long>(objects.Select(x => x.Strategy.ObjectId));
             var references = this.Prefetcher.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)
             {
                 this.Flush();
 
-                var prefetcher = new Prefetching(this.Prefetcher, prefetchPolicy, references);
+                var prefetcher = new Prefetch(this.Prefetcher, prefetchPolicy, references);
                 prefetcher.Execute();
             }
         }
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, params IStrategy[] strategies)
         {
-            var objectIds = strategies.Select(x => x.ObjectId);
+            var objectIds = new HashSet<long>(strategies.Select(x => x.ObjectId));
             var references = this.Prefetcher.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)
             {
                 this.Flush();
 
-                var prefetcher = new Prefetching(this.Prefetcher, prefetchPolicy, references);
+                var prefetcher = new Prefetch(this.Prefetcher, prefetchPolicy, references);
                 prefetcher.Execute();
             }
         }
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, params string[] objectIdStrings)
         {
-            var objectIds = objectIdStrings.Select(v => this.State.GetObjectId(v));
+            var objectIds = new HashSet<long>(objectIdStrings.Select(v => this.State.GetObjectId(v)));
             var references = this.Prefetcher.GetReferencesForPrefetching(objectIds);
 
             if (references.Count != 0)
             {
                 this.Flush();
 
-                var prefetcher = new Prefetching(this.Prefetcher, prefetchPolicy, references);
+                var prefetcher = new Prefetch(this.Prefetcher, prefetchPolicy, references);
                 prefetcher.Execute();
             }
         }
 
         public void Prefetch(PrefetchPolicy prefetchPolicy, params long[] objectIds)
         {
-            var references = this.Prefetcher.GetReferencesForPrefetching(objectIds);
+            var references = this.Prefetcher.GetReferencesForPrefetching(new HashSet<long>(objectIds));
 
             if (references.Count != 0)
             {
                 this.Flush();
 
-                var prefetcher = new Prefetching(this.Prefetcher, prefetchPolicy, references);
+                var prefetcher = new Prefetch(this.Prefetcher, prefetchPolicy, references);
                 prefetcher.Execute();
             }
         }
