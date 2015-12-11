@@ -24,13 +24,13 @@ namespace Desktop.Tests.Server
     using System.Threading;
 
     using Allors;
-    using Allors.Adapters.Memory.IntegerId;
+    using Allors.Adapters.Memory;
     using Allors.Domain;
     using Allors.Meta;
 
     using NUnit.Framework;
 
-    using Configuration = Allors.Adapters.Memory.IntegerId.Configuration;
+    using Configuration = Allors.Adapters.Memory.Configuration;
 
     /// <summary>
     /// The controller test.

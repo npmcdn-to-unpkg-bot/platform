@@ -29,11 +29,11 @@ namespace Domain
         [SetUp]
         public void SetUp()
         {
-            //var configuration = new Allors.Adapters.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory};
-            //Config.Default = new Allors.Adapters.Memory.IntegerId.Database(configuration);
+            var configuration = new Allors.Adapters.Memory.Configuration { ObjectFactory = Config.ObjectFactory };
+            Config.Default = new Allors.Adapters.Memory.Database(configuration);
 
-            var configuration = new Allors.Adapters.Object.SqlClient.Configuration { ObjectFactory = Config.ObjectFactory };
-            Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
+            //var configuration = new Allors.Adapters.Object.SqlClient.Configuration { ObjectFactory = Config.ObjectFactory };
+            //Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
         }
     }
 }

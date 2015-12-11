@@ -24,11 +24,11 @@ namespace Desktop.Tests.Server
     using System.Threading;
 
     using Allors;
-    using Allors.Adapters.Memory.IntegerId;
+    using Allors.Adapters.Memory;
 
     using NUnit.Framework;
 
-    using Configuration = Allors.Adapters.Memory.IntegerId.Configuration;
+    using Configuration = Allors.Adapters.Memory.Configuration;
 
     [SetUpFixture]
     public class ServerFixture
