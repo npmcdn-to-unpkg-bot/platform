@@ -420,7 +420,7 @@ namespace Allors.Adapters.Object.SqlClient
             return new ObjectDataRecord(this.mapping, objectids);
         }
 
-        internal IEnumerable<SqlDataRecord> CreateVersionedObjectTable(Dictionary<long, ObjectVersion> versionedObjects)
+        internal IEnumerable<SqlDataRecord> CreateVersionedObjectTable(Dictionary<long, long> versionedObjects)
         {
             return new VersionedObjectDataRecord(this.mapping, versionedObjects);
         }

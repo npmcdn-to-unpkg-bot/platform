@@ -50,7 +50,7 @@ namespace Allors
         /// Gets the <see cref="Allors.ObjectId"/>.
         /// </summary>
         /// <value>The object id.</value>
-        ObjectVersion ObjectVersion { get; }
+        long ObjectVersion { get; }
         
         /// <summary>
         /// Gets a value indicating whether this instance is deleted.

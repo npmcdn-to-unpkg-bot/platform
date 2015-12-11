@@ -62,13 +62,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         public long ObjectId { get; }
 
-        public ObjectVersion ObjectVersion {
-            get
-            {
-                // TODO: Don't create a new object every time
-                return new ObjectVersionLong(this.reference.VersionId);
-            }
-        }
+        public long ObjectVersion => this.reference.VersionId;
 
         public bool IsDeleted => !this.reference.Exists;
 

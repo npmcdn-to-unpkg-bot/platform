@@ -57,9 +57,6 @@
     <Compile Include="Adapters\ArrayExtensions.cs" />
     <Compile Include="Adapters\Configuration.cs" />
     <Compile Include="Adapters\EmptySet.cs" />
-    <Compile Include="Adapters\ObjectVersionLong.cs" />
-    <Compile Include="Adapters\ObjectVersions.cs" />
-    <Compile Include="Adapters\ObjectVersionsLong.cs" />
     <Compile Include="Adapters\PredicateAssertions.cs" />
     <Compile Include="Adapters\RoleAssertions.cs" />
     <Compile Include="Adapters\RoleTypeExtensions.cs" />
@@ -109,7 +106,6 @@
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />
     <Compile Include="ObjectFactory.cs" />
-    <Compile Include="ObjectVersion.cs" />
     <Compile Include="ObjectNotLoadedEventArgs.cs" />
     <Compile Include="Prefetch\PrefetchPolicyBuilder.cs" />
     <Compile Include="Prefetch\PrefetchRule.cs" />

@@ -36,7 +36,7 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly XmlReader reader;
 
         private readonly Dictionary<long, IObjectType> objectTypeByObjectId;
-        private readonly Dictionary<long, ObjectVersion> objectVersionByObjectId;
+        private readonly Dictionary<long, long> objectVersionByObjectId;
 
         internal void Execute(ManagementSession session)
         {
@@ -168,7 +168,7 @@ namespace Allors.Adapters.Object.SqlClient
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
 
                                 var objectIds = new long[objectIdStringArray.Length];
-                                var versions = new ObjectVersion[objectIdStringArray.Length];
+                                var versions = new long[objectIdStringArray.Length];
                                 for (var i = 0; i < objectIds.Length; i++)
                                 {
                                     var objectIdString = objectIdStringArray[i];
@@ -178,7 +178,7 @@ namespace Allors.Adapters.Object.SqlClient
                                         var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
 
                                         var objectId = long.Parse(objectArray[0]);
-                                        var version = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(Reference.InitialVersion);
+                                        var version = objectArray.Length > 1 ? long.Parse(objectArray[1]) : Reference.InitialVersion;
 
                                         objectIds[i] = objectId;
                                         versions[i] = version;
@@ -617,7 +617,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.reader = reader;
 
             this.objectTypeByObjectId = new Dictionary<long, IObjectType>();
-            this.objectVersionByObjectId = new Dictionary<long, ObjectVersion>();
+            this.objectVersionByObjectId = new Dictionary<long, long>();
         }
 
         private void LoadObjectsPostProcess(ManagementSession session)

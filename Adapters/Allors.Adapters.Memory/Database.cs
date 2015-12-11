@@ -26,6 +26,8 @@ namespace Allors.Adapters.Memory
 
     public class Database : IDatabase
     {
+        public const long IntialVersion = 0;
+
         private readonly IObjectFactory objectFactory;
         private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
 

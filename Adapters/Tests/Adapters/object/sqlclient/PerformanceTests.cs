@@ -101,7 +101,6 @@ namespace Allors.Adapters.Object.SqlClient
                     foreach (C1 c1 in extent)
                     {
                         c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
-                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
                     }
 
                     connection.Commands.Count.ShouldEqual(2);
@@ -120,7 +119,6 @@ namespace Allors.Adapters.Object.SqlClient
                     foreach (C1 c1 in extent)
                     {
                         c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
-                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
                     }
 
                     connection.Commands.Count.ShouldEqual(2);
@@ -147,7 +145,6 @@ namespace Allors.Adapters.Object.SqlClient
                     foreach (C1 c1 in extent)
                     {
                         c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
-                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
                     }
 
                     connection.Commands.Count.ShouldEqual(2);
@@ -164,7 +161,6 @@ namespace Allors.Adapters.Object.SqlClient
                     foreach (C1 c1 in extent)
                     {
                         c1.Strategy.Class.ShouldEqual(C1.Meta.ObjectType);
-                        c1.Strategy.ObjectVersion.ShouldNotBeNull();
                     }
 
                     connection.Commands.Count.ShouldEqual(2);

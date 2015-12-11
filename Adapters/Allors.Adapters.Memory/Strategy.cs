@@ -55,9 +55,9 @@ namespace Allors.Adapters.Memory
 
         private WeakReference allorizedObjectWeakReference;
 
-        private ObjectVersion version;
+        private long version;
 
-        internal Strategy(Session session, IClass objectType, long objectId, ObjectVersion version)
+        internal Strategy(Session session, IClass objectType, long objectId, long version)
         {
             this.session = session;
             this.objectType = objectType;
@@ -97,7 +97,7 @@ namespace Allors.Adapters.Memory
 
         public long ObjectId { get; internal set; }
 
-        public ObjectVersion ObjectVersion {
+        public long ObjectVersion {
             get
             {
                 return version;
@@ -649,7 +649,7 @@ namespace Allors.Adapters.Memory
                     this.rollbackCompositeRoleByRoleType != null ||
                     this.rollbackCompositeRoleByRoleType != null)
                 {
-                    this.version = version.Next();
+                    ++this.version;
                 }
             }
             

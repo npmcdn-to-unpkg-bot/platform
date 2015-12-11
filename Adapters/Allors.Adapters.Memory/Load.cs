@@ -161,7 +161,7 @@ namespace Allors.Adapters.Memory
                                     var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
 
                                     var objectId = long.Parse(objectArray[0]);
-                                    var objectVersion = objectArray.Length > 1 ? new ObjectVersionLong(objectArray[1]) : new ObjectVersionLong(); 
+                                    var objectVersion = objectArray.Length > 1 ? long.Parse(objectArray[1]) : Database.IntialVersion; 
 
                                     if (objectType is IClass)
                                     {

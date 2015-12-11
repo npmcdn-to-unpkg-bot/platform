@@ -102,9 +102,9 @@ namespace Allors.Adapters.Object.SqlClient
                             }
 
                             var objectId = long.Parse(reader[0].ToString());
-                            var version = new ObjectVersionLong(reader[1].ToString());
+                            var version = reader[1].ToString();
 
-                            this.writer.WriteString(objectId + Serialization.ObjectSplitter + version.Value);
+                            this.writer.WriteString(objectId + Serialization.ObjectSplitter + version);
                         }
 
                         reader.Close();

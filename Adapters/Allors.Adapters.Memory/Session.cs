@@ -222,7 +222,7 @@ namespace Allors.Adapters.Memory
 
         public IObject Insert(IClass @class, long objectId)
         {
-            var strategy = this.InsertStrategy(@class, objectId, new ObjectVersionLong());
+            var strategy = this.InsertStrategy(@class, objectId, Memory.Database.IntialVersion);
             return strategy.GetObject();
         }
 
@@ -401,7 +401,7 @@ namespace Allors.Adapters.Memory
 
         public virtual IObject Create(IClass objectType)
         {
-            var strategy = new Strategy(this, objectType, ++this.currentId, new ObjectVersionLong(0));
+            var strategy = new Strategy(this, objectType, ++this.currentId, Memory.Database.IntialVersion);
             this.AddStrategy(strategy);
 
             this.changeSet.OnCreated(strategy);
@@ -419,7 +419,7 @@ namespace Allors.Adapters.Memory
             return this.database.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        internal virtual Strategy InsertStrategy(IClass objectType, long objectId, ObjectVersion objectVersion)
+        internal virtual Strategy InsertStrategy(IClass objectType, long objectId, long objectVersion)
         {
             var strategy = this.GetStrategy(objectId);
             if (strategy != null)

@@ -31,9 +31,9 @@ namespace Allors.Adapters.Object.SqlClient
     internal class VersionedObjectDataRecord : IEnumerable<SqlDataRecord>
     {
         private readonly Mapping mapping;
-        private readonly Dictionary<long, ObjectVersion> versionedObjects;
+        private readonly Dictionary<long, long> versionedObjects;
 
-        internal VersionedObjectDataRecord(Mapping mapping, Dictionary<long, ObjectVersion> versionedObjects)
+        internal VersionedObjectDataRecord(Mapping mapping, Dictionary<long, long> versionedObjects)
         {
             this.mapping = mapping;
             this.versionedObjects = versionedObjects;
@@ -55,7 +55,7 @@ namespace Allors.Adapters.Object.SqlClient
                 var objectVersion = dictionaryEntry.Value;
 
                 sqlDataRecord.SetInt64(0, objectId);
-                sqlDataRecord.SetInt64(1, (long)objectVersion.Value);
+                sqlDataRecord.SetInt64(1, objectVersion);
                 yield return sqlDataRecord;
             }
         }
