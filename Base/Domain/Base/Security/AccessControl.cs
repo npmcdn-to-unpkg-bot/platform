@@ -84,6 +84,9 @@ namespace Allors.Domain
 
         public void BaseOnDerive(ObjectOnDerive method)
         {
+            var database = this.strategy.Session.Database;
+            database[this.CacheKey] = null;
+
             var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
