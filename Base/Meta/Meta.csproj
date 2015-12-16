@@ -184,6 +184,8 @@
     <Compile Include="..\..\Core\Meta\Core\Meta\ValidationLog.cs">
       <Link>Core\Meta\ValidationLog.cs</Link>
     </Compile>
+    <Compile Include="Base\Domain\AsyncDerivable.cs" />
+    <Compile Include="Base\Domain\AsyncDerivation.cs" />
     <Compile Include="Base\Domain\Base.cs" />
     <Compile Include="Base\Meta\Groups.cs" />
     <Compile Include="Base\Meta\Composite.cs" />

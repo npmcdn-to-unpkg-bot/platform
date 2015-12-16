@@ -3,6 +3,9 @@ namespace Allors.Domain
 		public interface Object 
 		{
 		}
+		public interface AsyncDerivable  : Object 
+		{
+		}
 		public interface AccessControlledObject  : Object 
 		{
 						Permission DeniedPermissions {set;}
@@ -274,6 +277,11 @@ namespace Allors.Domain
 						global::System.String UserEmail {set;}
 
 						global::System.String UserPasswordHash {set;}
+
+		}
+		public interface AsyncDerivation  : Object, Deletable 
+		{
+						AsyncDerivable AsyncDerivable {set;}
 
 		}
 		public interface AccessControl  : Object, Deletable, AccessControlledObject 
