@@ -203,7 +203,7 @@ namespace Allors.Adapters.Object.SqlClient
                         if (existNestedPrefetchPolicy)
                         {
                             var nestedObjectIds = nestedObjectIdsByRoleType[roleType];
-                            var nestedReferenceIds = new HashSet<Reference>(nestedObjectIds.Select(v => referenceByObjectId[v]));
+                            var nestedReferenceIds = new HashSet<Reference>(nestedObjectIds.Where(v => referenceByObjectId.ContainsKey(v)).Select(v => referenceByObjectId[v]));
                             new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedReferenceIds).Execute();
                         }
                     }
@@ -219,7 +219,7 @@ namespace Allors.Adapters.Object.SqlClient
                     if (existNestedPrefetchPolicy)
                     {
                         var nestedObjectIds = nestedObjectIdsByRoleType[roleType];
-                        var nestedReferenceIds = new HashSet<Reference>(nestedObjectIds.Select(v => referenceByObjectId[v]));
+                        var nestedReferenceIds = new HashSet<Reference>(nestedObjectIds.Where(v => referenceByObjectId.ContainsKey(v)).Select(v => referenceByObjectId[v]));
                         new Prefetch(this.prefetcher, nestedPrefetchPolicy, nestedReferenceIds).Execute();
                     }
                 }
