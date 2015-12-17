@@ -18,14 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-using Allors.Domain;
-
 namespace Allors.Adapters.Object.SqlClient
 {
+    using Allors;
+    using Allors.Domain;
     using Allors.Meta;
-
-    using Domain;
 
     using NUnit.Framework;
 

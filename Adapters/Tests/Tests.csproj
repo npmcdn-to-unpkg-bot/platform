@@ -89,12 +89,12 @@
     <Compile Include="Adapters\object\sqlclient\ReadCommitted\SandboxTest.cs" />
     <Compile Include="Adapters\object\sqlclient\ReadCommitted\SchemaTest.cs" />
     <Compile Include="Adapters\object\sqlclient\ReadCommitted\SerializationTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\ReadCommitted\PerformanceTests.cs" />
+    <Compile Include="Adapters\object\sqlclient\ReadCommitted\DebugTests.cs" />
     <Compile Include="Adapters\object\sqlclient\ReadCommitted\SqlClientTest.cs" />
     <Compile Include="Adapters\object\sqlclient\ReadCommitted\UnitTest.cs" />
     <Compile Include="Adapters\object\sqlclient\Profile.cs" />
     <Compile Include="Adapters\object\sqlclient\SchemaTest.cs" />
-    <Compile Include="Adapters\object\sqlclient\PerformanceTests.cs" />
+    <Compile Include="Adapters\object\sqlclient\DebugTests.cs" />
     <Compile Include="Adapters\object\sqlclient\SqlClientTest.cs" />
     <Compile Include="Adapters\object\sqlclient\UnitTest.cs" />
     <Compile Include="Adapters\One2ManyTest.cs" />

@@ -32,7 +32,7 @@ namespace Allors.Adapters.Object.SqlClient
     using Should;
 
     [TestFixture]
-    public abstract class PerformanceTests
+    public abstract class DebugTests
     {
         #region Population
         protected C1 c1A;

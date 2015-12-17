@@ -28,7 +28,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
     using NUnit.Framework;
 
     [TestFixture]
-    public class PerformanceTests : SqlClient.PerformanceTests
+    public class DebugTests : SqlClient.DebugTests
     {
         private DebugConnectionFactory connectionFactory;
         private DebugCacheFactory cacheFactory;
