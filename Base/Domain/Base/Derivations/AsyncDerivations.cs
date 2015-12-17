@@ -24,40 +24,46 @@ namespace Allors.Domain
 
     public partial class AsyncDerivations
     {
-        public void AsyncDerive()
+        public static readonly string IsAsyncDerivationKey = $"{nameof(AsyncDerivations)}.IsAsyncDerivationKey";
+
+        public static void AsyncDerive(IDatabase database)
         {
-            this.Session.Rollback();
-
-            while (true)
+            using (var session = database.CreateSession())
             {
-                var asyncDerivationsByAsyncDerivable = this.Extent()
-                    .GroupBy(v => v.AsyncDerivable)
-                    .ToDictionary(g => g.Key, g => g.ToList());
-
-                var asyncDerivables = asyncDerivationsByAsyncDerivable.Keys.ToList();
-
-                foreach (var asyncDerivable in asyncDerivables)
+                try
                 {
-                    var asyncDerivations = asyncDerivationsByAsyncDerivable[asyncDerivable];
+                    session[IsAsyncDerivationKey] = true;
 
-                    try
-                    {
-                        asyncDerivable.AsyncDerive();
+                    var asyncDerivationsByAsyncDerivable =
+                        session.Extent<AsyncDerivation>()
+                            .GroupBy(v => v.AsyncDerivable)
+                            .ToDictionary(g => g.Key, g => g.ToList());
 
-                        asyncDerivations.ForEach(asyncDerivation => asyncDerivation.Delete());
-                        this.Session.Commit();
-                    }
-                    catch
-                    {
-                        this.Session.Rollback();
+                    var asyncDerivables = asyncDerivationsByAsyncDerivable.Keys.ToList();
 
-                        asyncDerivations.ForEach(asyncDerivation => asyncDerivation.Delete());
-                        this.Session.Commit();
-                    }
-                    finally
+                    foreach (var asyncDerivable in asyncDerivables)
                     {
-                        this.Session.Rollback();
+                        var asyncDerivations = asyncDerivationsByAsyncDerivable[asyncDerivable];
+
+                        try
+                        {
+                            asyncDerivable.AsyncDerive();
+
+                            asyncDerivations.ForEach(asyncDerivation => asyncDerivation.Delete());
+                            session.Commit();
+                        }
+                        catch
+                        {
+                            session.Rollback();
+
+                            asyncDerivations.ForEach(asyncDerivation => asyncDerivation.Delete());
+                            session.Commit();
+                        }
                     }
+                }
+                finally
+                {
+                    session[IsAsyncDerivationKey] = false;
                 }
             }
         }

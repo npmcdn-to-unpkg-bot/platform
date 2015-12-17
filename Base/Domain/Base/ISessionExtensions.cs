@@ -40,5 +40,10 @@ namespace Allors
             var derivation = new Derivation(session);
             return derivation.Derive();
         }
+
+        public static bool IsAsyncDerivation(this ISession session)
+        {
+            return (bool?)session[AsyncDerivations.IsAsyncDerivationKey] ?? false;
+        }
     }
 }
