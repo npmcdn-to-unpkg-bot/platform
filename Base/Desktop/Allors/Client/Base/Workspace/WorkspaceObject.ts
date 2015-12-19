@@ -62,7 +62,20 @@
                             value = role ? this.workspace.get(role) : null;
                         } else {
                             var roles: string[] = this.databaseObject.roles[roleTypeName];
-                            value = roles ? roles.map(role => { return this.workspace.get(role); }) : [];
+                            value = roles ? roles.map(role => {
+                                try {
+                                    return this.workspace.get(role);
+                                }
+                                catch (e) {
+                                    var value = "N/A";
+                                    try {
+                                        value = this.toString();
+                                    }
+                                    catch (e2) { };
+
+                                    throw "Could not get role " + roleTypeName + " from [id: " + this.id + ", value: " + value + "]";
+                                }
+                            }) : [];
                         }
                     }
                 } else {
