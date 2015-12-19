@@ -26,12 +26,14 @@ namespace Allors
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using Allors.Meta;
 
     public sealed class PrefetchPolicy : IEnumerable<PrefetchRule>
     {
         private readonly PrefetchRule[] prefetchRules;
+
         private readonly Guid id;
 
         internal PrefetchPolicy(PrefetchRule[] rules)
@@ -89,6 +91,33 @@ namespace Allors
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.prefetchRules.GetEnumerator();
+        }
+
+        public string DebugView
+        {
+            get
+            {
+                var toString = new StringBuilder();
+                this.DebugRuleView(toString, this.PrefetchRules, 1);
+                return toString.ToString();
+            }
+        }
+
+        private void DebugRuleView(StringBuilder toString, PrefetchRule[] rules, int level)
+        {
+            if (rules != null)
+            {
+                foreach (var rule in rules)
+                {
+                    var indent = new string(' ', level * 2);
+                    toString.Append(indent + "- " + rule.PropertyType + "\n");
+
+                    if (rule.PrefetchPolicy != null)
+                    {
+                        this.DebugRuleView(toString, rule.PrefetchPolicy.PrefetchRules, level + 1);
+                    }
+                }
+            }
         }
     }
 }

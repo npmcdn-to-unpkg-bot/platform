@@ -68,7 +68,6 @@ namespace Allors.Meta
                             {
                                 node.Resolve(role, objects);
                             }
-
                         }
                     }
                 }
@@ -80,11 +79,20 @@ namespace Allors.Meta
 
         public void BuildPrefetchPolicy(PrefetchPolicyBuilder prefetchPolicyBuilder)
         {
-            prefetchPolicyBuilder.WithRule(this.RoleType);
-
-            foreach (var node in this.Nodes)
+            if (this.Nodes.Count == 0)
             {
-                node.BuildPrefetchPolicy(prefetchPolicyBuilder);
+                prefetchPolicyBuilder.WithRule(this.RoleType);
+            }
+            else
+            {
+                var nestedPrefetchPolicyBuilder = new PrefetchPolicyBuilder();
+                foreach (var node in this.Nodes)
+                {
+                    node.BuildPrefetchPolicy(nestedPrefetchPolicyBuilder);
+                }
+
+                var nestedPrefetchPolicy = nestedPrefetchPolicyBuilder.Build();
+                prefetchPolicyBuilder.WithRule(this.RoleType, nestedPrefetchPolicy);
             }
         }
     }

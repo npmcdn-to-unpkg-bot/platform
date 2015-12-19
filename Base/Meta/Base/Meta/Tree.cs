@@ -20,7 +20,9 @@
 
 namespace Allors.Meta
 {
+    using System;
     using System.Collections.Generic;
+    using System.Text;
 
     public class Tree
     {
@@ -78,6 +80,27 @@ namespace Allors.Meta
                 {
                     node.Resolve(obj, objects);
                 }
+            }
+        }
+
+        public string DebugView
+        {
+            get
+            {
+                var toString = new StringBuilder();
+                toString.Append(this.Composite.Name + "\n");
+                this.DebugNodeView(toString, this.Nodes, 1);
+                return toString.ToString();
+            }
+        }
+
+        private void DebugNodeView(StringBuilder toString, List<TreeNode> nodes, int level)
+        {
+            foreach (var node in nodes)
+            {
+                var indent = new string(' ', level * 2);
+                toString.Append(indent + "- " + node.RoleType.Name + "\n");
+                this.DebugNodeView(toString, node.Nodes, level + 1);
             }
         }
     }

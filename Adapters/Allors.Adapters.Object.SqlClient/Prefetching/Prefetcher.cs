@@ -138,6 +138,11 @@ namespace Allors.Adapters.Object.SqlClient
             Command command;
             if (!this.PrefetchUnitRolesByClass.TryGetValue(@class, out command))
             {
+                if (!this.Database.Mapping.ProcedureNameForPrefetchUnitRolesByClass.ContainsKey(@class))
+                {
+                    Console.WriteLine(0);
+                }
+
                 var sql = this.Database.Mapping.ProcedureNameForPrefetchUnitRolesByClass[@class];
                 command = this.Session.Connection.CreateCommand();
                 command.CommandText = sql;
