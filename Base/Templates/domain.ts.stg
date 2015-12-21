@@ -2,7 +2,7 @@ delimiters "$", "$"
 
 TemplateId() ::= <<17ED40F8-BDF8-4A7C-9AE9-1C4D2AD6BA2B>>
 TemplateName() ::= <<Allors TypeScript Domain>>
-TemplateVersion() ::= <<1.0.0>>
+TemplateVersion() ::= <<1.0.1>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta, grp) ::= <<
 $!
@@ -82,32 +82,39 @@ classRoleType() ::= <<
 				return this.databaseObject.roles.CanRead$roleType.PropertyName$;
 			}
 
+$if(!roleType.RelationType.IsDerived)$
 			get CanWrite$roleType.PropertyName$(): boolean {
 				return this.databaseObject.roles.CanWrite$roleType.PropertyName$;
 			}
+$endif$
 
 $if(roleType.ObjectType.IsUnit)$
 			get $roleType.PropertyName$(): $objectType_Name(roleType.ObjectType)$ {
 				return this.get("$roleType.PropertyName$");
 			}
 
+$if(!roleType.RelationType.IsDerived)$
 			set $roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
 				this.set("$roleType.PropertyName$", value);
 			}
+$endif$
 $else$
 $if(roleType.IsOne)$
 			get $roleType.PropertyName$(): $objectType_Name(roleType.ObjectType)$ {
 				return this.get("$roleType.PropertyName$");
 			}
 
+$if(!roleType.RelationType.IsDerived)$
 			set $roleType.PropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
 				this.set("$roleType.PropertyName$", value);
 			}
+$endif$
 $else$
 			get $roleType.PluralPropertyName$(): $objectType_Name(roleType.ObjectType)$[] {
 				return this.get("$roleType.PluralPropertyName$");
 			}
 
+$if(!roleType.RelationType.IsDerived)$
 			Add$roleType.SingularPropertyName$(value: $objectType_Name(roleType.ObjectType)$) {
 				return this.add("$roleType.PluralPropertyName$", value);
 			}
@@ -119,6 +126,7 @@ $else$
 			set $roleType.PluralPropertyName$(value: $objectType_Name(roleType.ObjectType)$[]) {
 				this.set("$roleType.PluralPropertyName$", value);
 			}
+$endif$
 $endif$
 $endif$
 >>
