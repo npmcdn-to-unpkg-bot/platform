@@ -2,9 +2,9 @@ group AllorsCSharpRepository;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Meta>>
-TemplateVersion() ::= <<1.0.11>>
+TemplateVersion() ::= <<1.0.0>>
 TemplateAllors() ::= <<1.0>>
-TemplateConfiguration(domain, settings) ::= <<
+TemplateConfiguration(repository) ::= <<
 $! 
 Copyright 2002-2015 Allors bvba.
 
@@ -23,164 +23,64 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
-	<generation template="meta" output="Meta.cs"/> 
-$domain.compositeObjectTypes:{objectType|
-	<generation template="objectType" input="$objectType.Id$" output="$objectType.SingularName$.cs"/>
-}$
+	<generation template="meta" output="meta.g.cs"/> 
 </generations>
 >>
 
-meta(domain, settings) ::= <<
+meta(repository) ::= <<
 namespace Allors.Meta
 {
-	using System;
-$domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$$superDomain(domain=superDomain)$$endif$}$
-
-	#region Allors
-	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$	[Inherit(typeof($superDomain.Name$Domain))]$endif$
-}$
-	[Id("$domain.IdAsString$")]
-	#endregion
-	public partial class $domain.Name$Domain : Domain
+	public sealed partial class MetaPopulation : IMetaPopulation
 	{
-		public static $domain.Name$Domain Instance { get; internal set; }
+		static MetaPopulation()
+		{
+			Instance = new MetaPopulation();
 
-		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
-        {
-        }
+$repository.Assemblies:{assembly|$assemblyCreation(assembly)$}; separator="\n"$
+
+		}
 	}
+
+	#region Domains
+$repository.Assemblies:{assembly|$assembly(assembly)$}; separator="\n"$
+	#endregion
+
+	#region Interfaces
+$repository.Interfaces:{interface|$interface(interface)$}; separator="\n"$
+	#endregion
+
 }
 >>
 
-superDomain(domain) ::= <<
-	#region Allors
-	$domain.DirectSuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$		[Inherit(typeof($superDomain.Name$Domain))]$endif$
-}$
-	[Id("$domain.IdAsString$")]
-	#endregion
-	public partial class $domain.Name$Domain : Domain
-	{
-		public static $domain.Name$Domain Instance { get; internal set; }
+assemblyCreation(assembly) ::= <<
+			$assembly.Name$Domain.Instance = new $assembly.Name$Domain(Instance);
+>>
 
-		private $domain.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
+assembly(assembly) ::= <<
+	public partial class $assembly.Name$Domain : Domain
+	{
+		public static $assembly.Name$Domain Instance { get; internal set; }
+
+		internal $assembly.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
         {
+			this.Name = "$assembly.Name$";
+			// TODO: Remove Id
+			this.Id = System.Guid.NewGuid();
         }
 	}
 >>
 
-objectType(domain, objectType, settings) ::= <<$if(objectType.IsInterface)$$interface()$$else$$class()$$endif$
->>
-
-interface() ::= <<
-namespace Allors.Meta
-{
-	using System;
-
-	#region Allors
-	[Id("$objectType.IdAsString$")]
-	#endregion
-	[Plural("$objectType.PluralName$")]
-$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
-}$
-  	public partial class $objectType.SingularName$Interface: Interface
+interface(interface) ::= <<
+	public partial class $interface.Name$Interface : Interface
 	{
-$objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$
+		public static $interface.Name$Interface Instance { get; internal set; }
 
-}$
-
-		public static $objectType.SingularName$Interface Instance {get; internal set;}
-
-		internal $objectType.SingularName$Interface() : base(MetaPopulation.Instance)
+		internal $interface.Name$Interface(MetaPopulation metaPopulation) : base(metaPopulation)
         {
+			this.SingularName = "$interface.Name$Interface";
+			this.Id = new System.Guid("$interface.AttributeByName.Id.Value$");
         }
 	}
-}
 >>
-
-class() ::= <<
-namespace Allors.Meta
-{
-	using System;
-
-	#region Allors
-	[Id("$objectType.IdAsString$")]
-	#endregion
-$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
-}$
-	[Plural("$objectType.PluralName$")]
-	public partial class $objectType.SingularName$Class : Class
-	{
-$objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$
-
-		}$
-
-		public static $objectType.SingularName$Class Instance {get; internal set;}
-
-		internal $objectType.SingularName$Class() : base(MetaPopulation.Instance)
-        {
-        }
-	}
-}
->>
-
-relationType(relationType) ::= <<
-
-		#region Allors
-		[Id("$relationType.IdAsString$")]
-		[AssociationId("$relationType.AssociationType.IdAsString$")]
-		[RoleId("$relationType.RoleType.IdAsString$")]
-		#endregion
-$if(relationType.IsDerived)$
-		[Derived]
-$endif$
-$if(relationType.IsIndexed)$
-		[Indexed]
-$endif$
-		[Type(typeof($newObjectType(relationType.RoleType.ObjectType)$))]
-$if(!relationType.RoleType.IsPrecisionDefault)$
-		[Precision($relationType.RoleType.Precision$)]
-$endif$
-$if(!relationType.RoleType.IsScaleDefault)$
-		[Scale($relationType.RoleType.Scale$)]
-$endif$
-$if(!relationType.RoleType.IsSizeDefault)$
-		[Size($relationType.RoleType.Size$)]
-$endif$
-$if(relationType.RoleType.ExistAssignedPluralName)$
-		[Plural("$relationType.RoleType.AssignedPluralName$")]
-$endif$
-$if(!relationType.RoleType.ObjectType.IsUnit)$
-		[Multiplicity($multiplicity()$)]
-$endif$
-		public RelationType $relationType.RoleType.SingularName$;
->>
-
-inheritanceInit(inheritance) ::= <<
-	[Inherit(typeof($inheritance.Supertype.Name$Interface))]
->>
-
-newObjectType(objectType) ::= <%
-$if(objectType.IsDouble)$
-AllorsFloatUnit
-$else$
-$objectType.Name$$if(objectType.IsUnit)$Unit$else$$if(objectType.IsInterface)$Interface$else$Class$endif$$endif$
-$endif$
-%>
-
-multiplicity() ::= <%
-$if(relationType.AssociationType.IsMany)$
-$if(relationType.RoleType.IsMany)$
-Multiplicity.ManyToMany
-$else$
-Multiplicity.ManyToOne
-$endif$
-$else$
-$if(relationType.RoleType.IsMany)$
-Multiplicity.OneToMany
-$else$
-Multiplicity.OneToOne
-$endif$
-$endif$
-%>
 
 boolean(value) ::= "$if(value)$true$else$false$endif$"

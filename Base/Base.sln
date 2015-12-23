@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meta", "Meta\Meta.csproj", "{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}"
 EndProject
@@ -37,6 +37,14 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate", "Generate\Generate.csproj", "{535369EE-1572-4A34-888F-FC0ED4938089}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.Tests", "Desktop.Tests\Desktop.Tests.csproj", "{B6C3E754-1228-4DA6-8630-8BC3AF8B2AA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{35602680-968F-43BA-B56E-4ABCC9576CCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Tools", "..\Tools\Allors.Tools\Allors.Tools.csproj", "{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Tools.Cmd", "..\Tools\Allors.Tools.Cmd\Allors.Tools.Cmd.csproj", "{C1145745-DCCC-4BE3-9311-18853655FB92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meta.Orig", "Meta.Orig\Meta.Orig.csproj", "{F5648379-418C-4A2C-AA9F-724287B0B705}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -158,6 +166,38 @@ Global
 		{B6C3E754-1228-4DA6-8630-8BC3AF8B2AA9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B6C3E754-1228-4DA6-8630-8BC3AF8B2AA9}.Release|x64.ActiveCfg = Release|Any CPU
 		{B6C3E754-1228-4DA6-8630-8BC3AF8B2AA9}.Release|x64.Build.0 = Release|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Debug|x64.Build.0 = Debug|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Release|x64.ActiveCfg = Release|Any CPU
+		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Release|x64.Build.0 = Release|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Debug|x64.Build.0 = Debug|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Release|x64.ActiveCfg = Release|Any CPU
+		{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}.Release|x64.Build.0 = Release|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Debug|x64.Build.0 = Debug|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1145745-DCCC-4BE3-9311-18853655FB92}.Release|x64.Build.0 = Release|Any CPU
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Debug|x64.ActiveCfg = Debug|x64
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Debug|x64.Build.0 = Debug|x64
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Release|x64.ActiveCfg = Release|x64
+		{F5648379-418C-4A2C-AA9F-724287B0B705}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

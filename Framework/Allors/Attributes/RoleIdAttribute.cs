@@ -23,7 +23,7 @@ using System;
 
 namespace Allors
 {
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public class RoleIdAttribute : MetaAttribute
     {
         public RoleIdAttribute(string value)

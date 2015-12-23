@@ -1,0 +1,64 @@
+namespace Allors.Repository.Domain
+{
+    using System;
+
+    #region Allors
+    [Id("60065f5d-a3c2-4418-880d-1026ab607319")]
+	#endregion
+    public partial class UserGroup :  Object, UniquelyIdentifiable, AccessControlledObject 
+    {
+        #region inherited properties
+        public Guid UniqueId { get; set; }
+
+        public Permission[] DeniedPermissions { get; set; }
+
+        public SecurityToken[] SecurityTokens { get; set; }
+
+        #endregion
+
+        #region Allors
+        [Id("2f8cf270-a153-4e0d-b844-991d577222d4")]
+        [AssociationId("46f531f2-b211-4f2a-902d-7198cda9c50d")]
+        [RoleId("a1b92c88-79d9-4a4f-bb99-0fde4e251a28")]
+        [Multiplicity(Multiplicity.OneToOne)]
+        [Indexed]
+        #endregion
+        public Role Role { get; set; }
+        #region Allors
+        [Id("585bb5cf-9ba4-4865-9027-3667185abc4f")]
+        [AssociationId("1e2d1e31-ed80-4435-8850-7663d9c5f41d")]
+        [RoleId("c552f0b7-95ce-4d45-aaea-56bc8365eee4")]
+        [Multiplicity(Multiplicity.ManyToMany)]
+        [Indexed]
+        #endregion
+        public User[] Members { get; set; }
+        #region Allors
+        [Id("e94e7f05-78bd-4291-923f-38f82d00e3f4")]
+        [AssociationId("75859e2c-c1a3-4f4c-bb37-4064d0aa81d0")]
+        [RoleId("9d3c1eec-bf10-4a79-a37f-bc6a20ff2a79")]
+        [Indexed]
+        [Required]
+        [Unique]
+        [Size(256)]
+        #endregion
+        public string Name { get; set; }
+
+
+        #region inherited methods
+
+
+        public void OnBuild(){}
+
+        public void OnPostBuild(){}
+
+        public void OnPreDerive(){}
+
+        public void OnDerive(){}
+
+        public void OnPostDerive(){}
+
+
+        #endregion
+
+    }
+}

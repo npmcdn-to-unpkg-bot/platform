@@ -1,0 +1,19 @@
+namespace Allors.Repository.Domain
+{
+    using System;
+
+    #region Allors
+    [Id("e1008840-6d7c-4d44-b2ad-1545d23f90d8")]
+    #endregion
+    public partial class ClassWithoutRoles : Object 
+    {
+
+
+        public void OnBuild(){}
+        public void OnPostBuild(){}
+        public void OnPreDerive(){}
+        public void OnDerive(){}
+        public void OnPostDerive(){}
+
+    }
+}

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors</RootNamespace>
     <AssemblyName>Allors</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -102,7 +102,7 @@
     <Compile Include="Meta\IRoleType.cs" />
     <Compile Include="Meta\IUnit.cs" />
     <Compile Include="Meta\IValidationLog.cs" />
-    <Compile Include="Meta\Multiplicity.cs" />
+    <Compile Include="Multiplicity.cs" />
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />
     <Compile Include="ObjectFactory.cs" />
@@ -112,6 +112,28 @@
     <Compile Include="Prefetch\PrefetchPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationNotLoadedEventArgs.cs" />
+    <Compile Include="Repository\DerivedAttribute.cs" />
+    <Compile Include="Repository\Domain\IAssembly.cs" />
+    <Compile Include="Repository\Domain\IClass.cs" />
+    <Compile Include="Repository\Domain\IInterface.cs" />
+    <Compile Include="Repository\Domain\IMethod.cs" />
+    <Compile Include="Repository\Domain\IPartialClass.cs" />
+    <Compile Include="Repository\Domain\IPartialInterface.cs" />
+    <Compile Include="Repository\Domain\IPartialType.cs" />
+    <Compile Include="Repository\Domain\IProperty.cs" />
+    <Compile Include="Repository\Domain\IRepository.cs" />
+    <Compile Include="Repository\Domain\IType.cs" />
+    <Compile Include="Repository\ExtendsAttribute.cs" />
+    <Compile Include="Repository\GroupAttribute.cs" />
+    <Compile Include="Repository\IdAttribute.cs" />
+    <Compile Include="Repository\IndexedAttribute.cs" />
+    <Compile Include="Repository\MultiplicityAttribute.cs" />
+    <Compile Include="Repository\PrecisionAttribute.cs" />
+    <Compile Include="Repository\RepositoryAttribute.cs" />
+    <Compile Include="Repository\RequiredAttribute.cs" />
+    <Compile Include="Repository\ScaleAttribute.cs" />
+    <Compile Include="Repository\SizeAttribute.cs" />
+    <Compile Include="Repository\UniqueAttribute.cs" />
     <Compile Include="SessionCommittedEventArgs.cs" />
     <Compile Include="SessionCommittingEventArgs.cs" />
     <Compile Include="SessionRolledBackEventArgs.cs" />

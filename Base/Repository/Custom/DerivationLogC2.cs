@@ -1,0 +1,22 @@
+namespace Allors.Repository.Domain
+{
+    using System;
+
+    #region Allors
+    [Id("c7563dd3-77b2-43ff-92f9-a4f98db36acf")]
+    #endregion
+    public partial class DerivationLogC2 : Object, DerivationLogI12 
+    {
+        public Guid UniqueId { get; set; }
+
+
+
+        public void OnBuild(){}
+        public void OnPostBuild(){}
+        public void OnPreDerive(){}
+        public void OnDerive(){}
+        public void OnPostDerive(){}
+
+
+    }
+}
