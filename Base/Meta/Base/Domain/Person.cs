@@ -1,10 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-
-    [Id("c799ca62-a554-467d-9aa2-1663293bb37f")]
-
-    #endregion
     [Inherit(typeof(UserInterface))]
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Inherit(typeof(UniquelyIdentifiableInterface))]
@@ -42,12 +37,5 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(256)]
         public RelationType MiddleName;
-
-        internal PersonClass()
-            : base(MetaPopulation.Instance)
-        {
-        }
-
-        public static PersonClass Instance { get; internal set; }
     }
 }

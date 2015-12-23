@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("af6fe5f4-e5bc-4099-bcd1-97528af6505d")]
-	#endregion
+    #endregion
     public partial class Role :  Object, AccessControlledObject, UniquelyIdentifiable 
     {
         #region inherited properties

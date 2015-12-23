@@ -46,6 +46,7 @@
     </Compile>
     <Compile Include="Base\AccessControl.cs" />
     <Compile Include="Base\AccessControlledObject.cs" />
+    <Compile Include="Base\AssemblyInfo.cs" />
     <Compile Include="Base\AsyncDerivable.cs" />
     <Compile Include="Base\AsyncDerivation.cs" />
     <Compile Include="Base\Commentable.cs" />

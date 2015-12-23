@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("0568354f-e3d9-439e-baac-b7dce31b956a")]
-    #endregion
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class CounterClass : Class
     {
@@ -13,12 +10,6 @@ namespace Allors.Meta
         #endregion
         [Type(typeof(AllorsIntegerUnit))]
         public RelationType Value;
-
-        public static CounterClass Instance { get; internal set; }
-
-        internal CounterClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("b45705e3-0dc6-4296-824a-76bb6af223d3")]
-	#endregion
+    #endregion
     public partial class PrintQueue :  Object, AccessControlledObject, UniquelyIdentifiable 
     {
         #region inherited properties

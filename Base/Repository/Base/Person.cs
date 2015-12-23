@@ -4,8 +4,8 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("c799ca62-a554-467d-9aa2-1663293bb37f")]
-	#endregion
-    public partial class Person :  Object, User, AccessControlledObject, UniquelyIdentifiable 
+    #endregion
+    public partial class Person :  Object, User, AccessControlledObject, UniquelyIdentifiable, Printable, Deletable 
     {
         #region inherited properties
         public bool UserEmailConfirmed { get; set; }
@@ -27,7 +27,6 @@ namespace Allors.Repository.Domain
         public Locale Locale { get; set; }
 
         public Guid UniqueId { get; set; }
-
         #endregion
 
         #region Allors
@@ -51,11 +50,9 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string MiddleName { get; set; }
-
-
+       
         #region inherited methods
-
-
+        
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -66,11 +63,6 @@ namespace Allors.Repository.Domain
 
         public void OnPostDerive(){}
 
-
-
-
-
         #endregion
-
     }
 }

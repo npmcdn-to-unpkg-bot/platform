@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("aa7d61f8-6618-47a0-9cf2-e75dd81dbd5b")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class MediaTypeClass : Class
     {
@@ -23,12 +20,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(256)]
         public RelationType Name;
-
-        public static MediaTypeClass Instance { get; internal set; }
-
-        internal MediaTypeClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

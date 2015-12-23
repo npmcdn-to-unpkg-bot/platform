@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("b7bcc22f-03f0-46fd-b738-4e035921d445")]
+    #endregion
 	public partial interface Enumeration :  Object, AccessControlledObject, UniquelyIdentifiable 
-	{
+    {
 
 
         #region Allors
@@ -13,7 +16,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.OneToMany)]
         [Indexed]
         #endregion
-		LocalisedText[] LocalisedNames { get; set; }
+        LocalisedText[] LocalisedNames { get; set; }
 
 
         #region Allors
@@ -24,7 +27,7 @@ namespace Allors.Repository.Domain
         [Required]
         [Size(256)]
         #endregion
-		string Name { get; set; }
+        string Name { get; set; }
 
 
         #region Allors
@@ -34,7 +37,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         [Required]
         #endregion
-		bool IsActive { get; set; }
+        bool IsActive { get; set; }
 
-	}
+    }
 }

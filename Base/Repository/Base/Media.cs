@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("da5b86a3-4f33-4c0d-965d-f4fbc1179374")]
-	#endregion
+    #endregion
     public partial class Media :  Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
     {
         #region inherited properties

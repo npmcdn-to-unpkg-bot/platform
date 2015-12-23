@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("c4d93d5e-34c3-4731-9d37-47a8e801d9a8")]
-    #endregion
     [Inherit(typeof(DeletableInterface))]
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class AccessControlClass : Class
@@ -58,12 +55,6 @@ namespace Allors.Meta
         [Type(typeof(UserInterface))]
         [Multiplicity(Multiplicity.ManyToMany)]
         public RelationType EffectiveUser;
-
-        public static AccessControlClass Instance { get; internal set; }
-
-        internal AccessControlClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

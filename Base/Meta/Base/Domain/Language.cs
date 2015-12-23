@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("4a0eca4b-281f-488d-9c7e-497de882c044")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class LanguageClass : Class
     {
@@ -34,12 +31,6 @@ namespace Allors.Meta
         [Type(typeof(LocalisedTextClass))]
         [Multiplicity(Multiplicity.OneToMany)]
         public RelationType LocalisedName;
-
-        public static LanguageClass Instance { get; internal set; }
-
-        internal LanguageClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

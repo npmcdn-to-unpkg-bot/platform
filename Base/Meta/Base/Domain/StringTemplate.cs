@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("0c50c02a-cc9c-4617-8530-15a24d4ac969")]
-    #endregion
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     [Inherit(typeof(LocalisedInterface))]
     public partial class StringTemplateClass : Class
@@ -25,12 +22,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(256)]
         public RelationType Name;
-
-        public static StringTemplateClass Instance { get; internal set; }
-
-        internal StringTemplateClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

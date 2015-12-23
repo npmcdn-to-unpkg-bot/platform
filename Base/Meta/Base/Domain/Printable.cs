@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("61207a42-3199-4249-baa4-9dd11dc0f5b1")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class PrintableInterface : Interface
@@ -16,12 +13,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(-1)]
         public RelationType PrintContent;
-
-        public static PrintableInterface Instance { get; internal set; }
-
-        internal PrintableInterface() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

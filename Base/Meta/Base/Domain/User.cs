@@ -1,11 +1,5 @@
 namespace Allors.Meta
 {
-    using System;
-
-    #region Allors
-    [Id("a0309c3b-6f80-4777-983e-6e69800df5be")]
-    #endregion
-    [Plural("Users")]
     [Inherit(typeof(SecurityTokenOwnerInterface))]
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Inherit(typeof(LocalisedInterface))]
@@ -45,11 +39,5 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(256)]
         public RelationType UserPasswordHash;
-
-        public static UserInterface Instance { get; internal set; }
-
-        internal UserInterface() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

@@ -5,7 +5,7 @@ namespace Allors.Repository.Domain
     public partial class Person :  Object, User, AccessControlledObject, UniquelyIdentifiable, Printable, Deletable 
     {
         #region inherited properties
-
+       
         public string PrintContent { get; set; }
 
         #endregion
@@ -125,9 +125,9 @@ namespace Allors.Repository.Domain
 
         #region inherited methods
 
-
         public void Delete(){}
         #endregion
+
 
 
         public void Method(){}

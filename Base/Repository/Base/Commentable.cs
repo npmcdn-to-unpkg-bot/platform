@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("fdd52472-e863-4e91-bb01-1dada2acc8f6")]
+    #endregion
 	public partial interface Commentable :  Object 
-	{
+    {
 
 
         #region Allors
@@ -12,7 +15,7 @@ namespace Allors.Repository.Domain
         [RoleId("8b41d441-cd12-49d0-823c-b8a3163baadc")]
         [Size(-1)]
         #endregion
-		string Comment { get; set; }
+        string Comment { get; set; }
 
-	}
+    }
 }

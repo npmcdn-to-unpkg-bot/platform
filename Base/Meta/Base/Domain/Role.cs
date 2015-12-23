@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("af6fe5f4-e5bc-4099-bcd1-97528af6505d")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class RoleClass : Class
@@ -25,12 +22,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(256)]
         public RelationType Name;
-
-        public static RoleClass Instance { get; internal set; }
-
-        internal RoleClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

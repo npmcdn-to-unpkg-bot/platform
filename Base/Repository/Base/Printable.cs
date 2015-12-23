@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("61207a42-3199-4249-baa4-9dd11dc0f5b1")]
+    #endregion
 	public partial interface Printable :  Object, AccessControlledObject, UniquelyIdentifiable 
-	{
+    {
 
 
         #region Allors
@@ -14,7 +17,7 @@ namespace Allors.Repository.Domain
         [Required]
         [Size(-1)]
         #endregion
-		string PrintContent { get; set; }
+        string PrintContent { get; set; }
 
-	}
+    }
 }

@@ -21,12 +21,15 @@
 
 namespace Allors.Tools.Repository
 {
+    using System;
     using System.Collections.Generic;
 
     using Allors.Repository.Domain;
 
     public class Assembly : IAssembly
     {
+        public Guid Id { get; set; }
+
         public string Name { get; }
 
         public Dictionary<string, PartialInterface> PartialInterfaceByName { get; }

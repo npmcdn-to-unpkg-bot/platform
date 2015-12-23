@@ -1,5 +1,6 @@
 ﻿namespace Allors.Tools.Repository
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Allors.Repository.Domain;
@@ -11,6 +12,10 @@
         public IEnumerable<IAssembly> Assemblies => this.AssemblyByName.Values;
 
         public IEnumerable<IInterface> Interfaces => this.InterfaceByName.Values;
+
+        public IEnumerable<IClass> Classes => this.ClassByName.Values;
+
+        public IEnumerable<IType> Types => this.ClassByName.Values;
 
         public Dictionary<string, Assembly> AssemblyByName { get; }
 
@@ -98,6 +103,18 @@
                                 var attribute = attributeList.Attributes[0];
                                 var symbol = semanticModel.GetSymbolInfo(attribute).Symbol;
                                 var attributeType = symbol.ContainingType;
+
+                                if (attributeType.Equals(projectInfo.DomainAttributeType))
+                                {
+                                    var idString = attribute.ArgumentList.Arguments[0].Expression.GetFirstToken().Value.ToString();
+                                    var id = Guid.Parse(idString);
+
+                                    if (!string.IsNullOrWhiteSpace(idString))
+                                    {
+                                        var assembly = this.AssemblyByName[assemblyName];
+                                        assembly.Id = id;
+                                    }
+                                }
 
                                 if (attributeType.Equals(projectInfo.ExtendAttributeType))
                                 {

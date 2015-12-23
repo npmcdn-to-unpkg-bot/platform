@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("a0309c3b-6f80-4777-983e-6e69800df5be")]
+    #endregion
 	public partial interface User :  Object, SecurityTokenOwner, AccessControlledObject, Localised 
-	{
+    {
 
 
         #region Allors
@@ -11,7 +14,7 @@ namespace Allors.Repository.Domain
         [AssociationId("c89a8e3f-6f76-41ac-b4dc-839f9080d917")]
         [RoleId("1b1409b8-add7-494c-a895-002fc969ac7b")]
         #endregion
-		bool UserEmailConfirmed { get; set; }
+        bool UserEmailConfirmed { get; set; }
 
 
         #region Allors
@@ -20,7 +23,7 @@ namespace Allors.Repository.Domain
         [RoleId("3b7d40a0-18ea-4018-b797-6417723e1890")]
         [Size(256)]
         #endregion
-		string UserName { get; set; }
+        string UserName { get; set; }
 
 
         #region Allors
@@ -29,7 +32,7 @@ namespace Allors.Repository.Domain
         [RoleId("58e35754-91a9-4956-aa66-ca48d05c7042")]
         [Size(256)]
         #endregion
-		string UserEmail { get; set; }
+        string UserEmail { get; set; }
 
 
         #region Allors
@@ -38,7 +41,7 @@ namespace Allors.Repository.Domain
         [RoleId("75ee3ec2-02bb-4666-a6f0-bac84c844dfa")]
         [Size(256)]
         #endregion
-		string UserPasswordHash { get; set; }
+        string UserPasswordHash { get; set; }
 
-	}
+    }
 }

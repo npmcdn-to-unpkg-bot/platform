@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("a69cad9c-c2f1-463f-9af1-873ce65aeea6")]
-    #endregion
     public partial class SecurityTokenOwnerInterface : Interface
     {
         #region Allors
@@ -26,12 +23,6 @@ namespace Allors.Meta
         [Type(typeof(AccessControlClass))]
         [Multiplicity(Multiplicity.OneToOne)]
         public RelationType OwnerAccessControl;
-
-        public static SecurityTokenOwnerInterface Instance { get; internal set; }
-
-        internal SecurityTokenOwnerInterface() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("a7e490c0-ce29-4298-97c4-519904bb755a")]
-    #endregion
     public partial class TransitionClass : Class
     {
         #region Allors
@@ -24,11 +21,5 @@ namespace Allors.Meta
         [Type(typeof(ObjectStateInterface))]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType ToState;
-
-        public static TransitionClass Instance { get; internal set; }
-
-        internal TransitionClass() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

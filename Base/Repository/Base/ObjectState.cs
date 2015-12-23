@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("f991813f-3146-4431-96d0-554aa2186887")]
+    #endregion
 	public partial interface ObjectState :  Object, UniquelyIdentifiable 
-	{
+    {
 
 
         #region Allors
@@ -13,7 +16,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.ManyToMany)]
         [Indexed]
         #endregion
-		Permission[] DeniedPermissions { get; set; }
+        Permission[] DeniedPermissions { get; set; }
 
 
         #region Allors
@@ -24,7 +27,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         [Group("Workspace")]
         #endregion
-		string Name { get; set; }
+        string Name { get; set; }
 
-	}
+    }
 }

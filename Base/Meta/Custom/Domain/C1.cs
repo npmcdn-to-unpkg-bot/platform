@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("7041c691-d896-4628-8f50-1c24f5d03414")]
-    #endregion
     [Inherit(typeof(I1Interface))]
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class C1Class : Class
@@ -320,12 +317,5 @@ namespace Allors.Meta
         [Id("8AF21FFB-7E5C-4AD4-A2A6-8BDDA7F28510")]
         #endregion
         public MethodType Sum;
-
-        internal C1Class()
-            : base(MetaPopulation.Instance)
-        {
-        }
-
-        public static C1Class Instance { get; internal set; }
     }
 }

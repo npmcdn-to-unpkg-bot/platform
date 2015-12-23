@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("b45705e3-0dc6-4296-824a-76bb6af223d3")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class PrintQueueClass : Class
@@ -26,11 +23,5 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(256)]
         public RelationType Name;
-
-        public static PrintQueueClass Instance { get; internal set; }
-
-        internal PrintQueueClass() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

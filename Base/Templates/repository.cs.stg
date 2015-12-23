@@ -33,7 +33,10 @@ namespace Allors.Repository.Domain
 {
     using System;
 
-    public partial interface $objectType.name$ : $if(objectType.existDirectSupertypes)$ $objectType.directSupertypes:{directSupertype|$directSupertype.SingularName$}; separator=", "$ $endif$
+    #region Allors
+    [Id("$objectType.id$")]
+    #endregion
+	public partial interface $objectType.name$ : $if(objectType.existDirectSupertypes)$ $objectType.directSupertypes:{directSupertype|$directSupertype.SingularName$}; separator=", "$ $endif$
     {
 $objectType.exclusiveRoleTypes:{roleType|$interfaceExclusiveRoleType()$}$
 $objectType.exclusiveMethodTypes:{methodType|$interfaceExclusiveMethodType()$}$

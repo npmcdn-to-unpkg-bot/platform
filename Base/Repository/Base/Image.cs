@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("caa2a2de-9454-4812-a69f-9d3728706345")]
-	#endregion
+    #endregion
     public partial class Image :  Object, Deletable 
     {
         #region inherited properties

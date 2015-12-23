@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("60065f5d-a3c2-4418-880d-1026ab607319")]
-    #endregion
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class UserGroupClass : Class
@@ -36,12 +33,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(256)]
         public RelationType Name;
-
-        public static UserGroupClass Instance { get; internal set; }
-
-        internal UserGroupClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

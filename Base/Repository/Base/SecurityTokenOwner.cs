@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("a69cad9c-c2f1-463f-9af1-873ce65aeea6")]
+    #endregion
 	public partial interface SecurityTokenOwner :  Object 
-	{
+    {
 
 
         #region Allors
@@ -15,7 +18,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         [Required]
         #endregion
-		SecurityToken OwnerSecurityToken { get; set; }
+        SecurityToken OwnerSecurityToken { get; set; }
 
 
         #region Allors
@@ -26,7 +29,7 @@ namespace Allors.Repository.Domain
         [Derived]
         [Indexed]
         #endregion
-		AccessControl OwnerAccessControl { get; set; }
+        AccessControl OwnerAccessControl { get; set; }
 
-	}
+    }
 }

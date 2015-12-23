@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("ad7277a8-eda4-4128-a990-b47fe43d120a")]
-    #endregion
     [Inherit(typeof(DeletableInterface))]
     public partial class LoginClass : Class
     {
@@ -35,11 +32,5 @@ namespace Allors.Meta
         [Type(typeof(UserInterface))]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType User;
-
-        public static LoginClass Instance { get; internal set; }
-
-        internal LoginClass() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

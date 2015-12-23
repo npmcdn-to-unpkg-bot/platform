@@ -23,62 +23,76 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
-	<generation template="meta" output="meta.g.cs"/> 
+	<generation template="domains" output="domains.g.cs"/> 
+	<generation template="interfaces" output="interfaces.g.cs"/> 
+	<generation template="classes" output="classes.g.cs"/> 
 </generations>
 >>
 
-meta(repository) ::= <<
+domains(repository) ::= <<
 namespace Allors.Meta
 {
-	public sealed partial class MetaPopulation : IMetaPopulation
-	{
-		static MetaPopulation()
-		{
-			Instance = new MetaPopulation();
-
-$repository.Assemblies:{assembly|$assemblyCreation(assembly)$}; separator="\n"$
-
-		}
-	}
-
-	#region Domains
-$repository.Assemblies:{assembly|$assembly(assembly)$}; separator="\n"$
-	#endregion
-
-	#region Interfaces
-$repository.Interfaces:{interface|$interface(interface)$}; separator="\n"$
-	#endregion
-
+$repository.Assemblies:{assembly|$domain(assembly)$}; separator="\n"$
 }
 >>
 
-assemblyCreation(assembly) ::= <<
-			$assembly.Name$Domain.Instance = new $assembly.Name$Domain(Instance);
+domain(assembly) ::= <<
+    #region Allors
+    [Id("$assembly.Id$")]
+$assembly.Bases:{base|    [Inherit(typeof($base.Name$Domain))]}; separator="\n"$
+	[Inherit(typeof(CoreDomain))]
+    #endregion
+    public partial class $assembly.Name$Domain : Domain
+    {
+        public static $assembly.Name$Domain Instance { get; internal set;}
+
+        internal $assembly.Name$Domain(MetaPopulation metaPopulation)
+            : base(metaPopulation)
+        {
+        }
+    }
 >>
 
-assembly(assembly) ::= <<
-	public partial class $assembly.Name$Domain : Domain
-	{
-		public static $assembly.Name$Domain Instance { get; internal set; }
-
-		internal $assembly.Name$Domain(MetaPopulation metaPopulation) : base(metaPopulation)
-        {
-			this.Name = "$assembly.Name$";
-			// TODO: Remove Id
-			this.Id = System.Guid.NewGuid();
-        }
-	}
+interfaces(repository) ::= <<
+namespace Allors.Meta
+{
+$repository.Interfaces:{interface|$interface(interface)$}; separator="\n"$
+}
 >>
 
 interface(interface) ::= <<
-	public partial class $interface.Name$Interface : Interface
+    #region Allors
+    [Id("$interface.AttributeByName.Id.Value$")]
+    #endregion
+    public partial class $interface.Name$Interface : Interface
 	{
+
 		public static $interface.Name$Interface Instance { get; internal set; }
 
 		internal $interface.Name$Interface(MetaPopulation metaPopulation) : base(metaPopulation)
         {
-			this.SingularName = "$interface.Name$Interface";
-			this.Id = new System.Guid("$interface.AttributeByName.Id.Value$");
+        }
+	}
+>>
+
+classes(repository) ::= <<
+namespace Allors.Meta
+{
+$repository.Classes:{class|$class(class)$}; separator="\n"$
+}
+>>
+
+class(class) ::= <<
+    #region Allors
+    [Id("$class.AttributeByName.Id.Value$")]
+    #endregion
+    public partial class $class.Name$Class : Class
+	{
+
+		public static $class.Name$Class Instance { get; internal set; }
+
+		internal $class.Name$Class(MetaPopulation metaPopulation) : base(metaPopulation)
+        {
         }
 	}
 >>

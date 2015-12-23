@@ -21,6 +21,8 @@
 
         public Dictionary<SyntaxTree, Document> DocumentBySyntaxTree { get; }
 
+        public INamedTypeSymbol DomainAttributeType { get; }
+
         public INamedTypeSymbol ExtendAttributeType { get; }
 
         public System.Reflection.Assembly Assembly { get; set; }
@@ -34,8 +36,8 @@
             this.SemanticModelBySyntaxTree = this.Compilation.SyntaxTrees.ToDictionary(v => v, v => this.Compilation.GetSemanticModel(v));
             this.DocumentBySyntaxTree = this.Compilation.SyntaxTrees.ToDictionary(v => v, v => this.Solution.GetDocument(v));
 
+            this.DomainAttributeType = this.Compilation.GetTypeByMetadataName(typeof(Allors.Repository.DomainAttribute).FullName);
             this.ExtendAttributeType = this.Compilation.GetTypeByMetadataName(typeof(Allors.Repository.ExtendsAttribute).FullName);
-
 
             using (var ms = new MemoryStream())
             {

@@ -2,7 +2,10 @@ namespace Allors.Repository.Domain
 {
     using System;
 
-    public partial interface DerivationLogI12 :  Object 
+    #region Allors
+    [Id("d61872ee-3778-47e8-8931-003f3f48cbc5")]
+    #endregion
+	public partial interface DerivationLogI12 :  Object 
     {
 
 

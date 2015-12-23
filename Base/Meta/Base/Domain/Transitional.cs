@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("ab2179ad-9eac-4b61-8d84-81cd777c4926")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class TransitionalInterface : Interface
     {
@@ -27,11 +24,5 @@ namespace Allors.Meta
         [Type(typeof(ObjectStateInterface))]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType LastObjectState;
-
-        public static TransitionalInterface Instance { get; internal set; }
-
-        internal TransitionalInterface() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

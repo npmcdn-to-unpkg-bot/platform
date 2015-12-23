@@ -125,6 +125,7 @@
     <Compile Include="Repository\Domain\IType.cs" />
     <Compile Include="Repository\ExtendsAttribute.cs" />
     <Compile Include="Repository\GroupAttribute.cs" />
+    <Compile Include="Repository\DomainAttribute.cs" />
     <Compile Include="Repository\IdAttribute.cs" />
     <Compile Include="Repository\IndexedAttribute.cs" />
     <Compile Include="Repository\MultiplicityAttribute.cs" />

@@ -2,7 +2,10 @@ namespace Allors.Repository.Domain
 {
     using System;
 
-    public partial interface Address :  Object 
+    #region Allors
+    [Id("130aa2ff-4f14-4ad7-8a27-f80e8aebfa00")]
+    #endregion
+	public partial interface Address :  Object 
     {
 
 

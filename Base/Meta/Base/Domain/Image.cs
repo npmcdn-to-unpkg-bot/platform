@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("caa2a2de-9454-4812-a69f-9d3728706345")]
-    #endregion
     [Inherit(typeof(DeletableInterface))]
     public partial class ImageClass : Class
     {
@@ -58,11 +55,5 @@ namespace Allors.Meta
         [Plural("Thumbnails")]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType Thumbnail;
-
-        public static ImageClass Instance { get; internal set; }
-
-        internal ImageClass() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

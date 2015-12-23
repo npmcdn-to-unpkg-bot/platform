@@ -2,12 +2,8 @@ namespace Allors.Meta
 {
     using System.ComponentModel.DataAnnotations;
 
-    #region Allors
-    [Id("3a5dcec7-308f-48c7-afee-35d38415aa0b")]
-    #endregion
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     [Inherit(typeof(AccessControlledObjectInterface))]
-    [Plural("Organisations")]
     public partial class OrganisationClass : Class
     {
         #region Allors
@@ -170,13 +166,6 @@ namespace Allors.Meta
         public Tree AngularEmployees { get; private set; }
 
         public Tree AngularShareholders { get; private set; }
-
-        internal OrganisationClass()
-            : base(MetaPopulation.Instance)
-        {
-        }
-
-        public static OrganisationClass Instance { get; internal set; }
 
         internal override void CustomExtend()
         {

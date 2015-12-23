@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("7979a17c-0829-46df-a0d4-1b01775cfaac")]
-    #endregion
     public partial class LocalisedInterface : Interface
     {
         #region Allors
@@ -14,11 +11,5 @@ namespace Allors.Meta
         [Type(typeof(LocaleClass))]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType Locale;
-
-        public static LocalisedInterface Instance { get; internal set; }
-
-        internal LocalisedInterface() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("eb0ff756-3e3d-4cf9-8935-8802a73d2df2")]
+    #endregion
 	public partial interface AccessControlledObject :  Object 
-	{
+    {
 
 
         #region Allors
@@ -13,7 +16,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.ManyToMany)]
         [Indexed]
         #endregion
-		Permission[] DeniedPermissions { get; set; }
+        Permission[] DeniedPermissions { get; set; }
 
 
         #region Allors
@@ -23,7 +26,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.ManyToMany)]
         [Indexed]
         #endregion
-		SecurityToken[] SecurityTokens { get; set; }
+        SecurityToken[] SecurityTokens { get; set; }
 
-	}
+    }
 }

@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("fdd52472-e863-4e91-bb01-1dada2acc8f6")]
-    #endregion
     public partial class CommentableInterface : Interface
     {
         #region Allors
@@ -13,11 +10,5 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(-1)]
         public RelationType Comment;
-
-        public static CommentableInterface Instance { get; internal set; }
-
-        internal CommentableInterface() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

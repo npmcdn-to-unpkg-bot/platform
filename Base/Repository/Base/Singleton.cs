@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("313b97a5-328c-4600-9dd2-b5bc146fb13b")]
-	#endregion
+    #endregion
     public partial class Singleton :  Object, AccessControlledObject 
     {
         #region inherited properties
@@ -70,11 +70,9 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public AccessControl DefaultAdministratorsAccessControl { get; set; }
-
-
+    
         #region inherited methods
-
-
+        
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -86,6 +84,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

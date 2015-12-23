@@ -38,8 +38,7 @@ namespace Allors.Tools.Repository.Tasks
             var solution = workspace.OpenSolutionAsync(solutionPath).Result;
             var project = solution.Projects.SingleOrDefault(v => v.Name.Equals(projectName));
             var repository = new Repository(project);
-
-
+            
             var templateFileInfo = new FileInfo(template);
             var stringTemplate = new StringTemplate(templateFileInfo);
             var outputDirectoryInfo = new DirectoryInfo(output);

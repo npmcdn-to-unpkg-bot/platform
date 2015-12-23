@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("b7bcc22f-03f0-46fd-b738-4e035921d445")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class EnumerationInterface : Interface
@@ -36,12 +33,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsBooleanUnit))]
         [Plural("AreActive")]
         public RelationType IsActive;
-
-        public static EnumerationInterface Instance { get; internal set; }
-
-        internal EnumerationInterface() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

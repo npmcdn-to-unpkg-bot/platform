@@ -23,7 +23,7 @@ using System;
 
 namespace Allors.Repository
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Property | AttributeTargets.Method )]
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Property | AttributeTargets.Method)]
     public class IdAttribute : RepositoryAttribute
     {
         public IdAttribute(string value)

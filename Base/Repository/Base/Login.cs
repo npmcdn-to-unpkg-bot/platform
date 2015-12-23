@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("ad7277a8-eda4-4128-a990-b47fe43d120a")]
-	#endregion
+    #endregion
     public partial class Login :  Object, Deletable 
     {
         #region inherited properties

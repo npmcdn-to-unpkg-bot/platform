@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("80adbbfd-952e-46f3-a744-78e0ce42bc80")]
-    #endregion
     [Plural("Periods")]
     public partial class PeriodInterface : Interface
     {
@@ -23,12 +20,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsDateTimeUnit))]
         [Plural("ThroughDates")]
         public RelationType ThroughDate;
-
-        public static PeriodInterface Instance { get; internal set; }
-
-        internal PeriodInterface() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

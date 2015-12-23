@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("020f5d4d-4a59-4d7b-865a-d72fc70e4d97")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Inherit(typeof(LocalisedInterface))]
     public partial class LocalisedTextClass : Class
@@ -15,12 +12,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(-1)]
         public RelationType Text;
-
-        public static LocalisedTextClass Instance { get; internal set; }
-
-        internal LocalisedTextClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("c22bf60e-6428-4d10-8194-94f7be396f28")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Plural("Countries")]
     public partial class CountryClass : Class
@@ -46,12 +43,6 @@ namespace Allors.Meta
         [Type(typeof(AllorsStringUnit))]
         [Size(2)]
         public RelationType IsoCode;
-
-        public static CountryClass Instance { get; internal set; }
-
-        internal CountryClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

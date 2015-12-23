@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("7CA39473-BBA1-49AF-A343-F3CC7ABE14D5")]
-    #endregion
     [Inherit(typeof(DeletableInterface))]
     public partial class AsyncDerivationClass : Class
     {
@@ -15,12 +12,6 @@ namespace Allors.Meta
         [Type(typeof(AsyncDerivableInterface))]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType AsyncDerivable;
-
-        public static AsyncDerivationClass Instance { get; internal set; }
-
-        internal AsyncDerivationClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

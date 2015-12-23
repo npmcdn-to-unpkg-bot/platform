@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("a53f1aed-0e3f-4c3c-9600-dc579cccf893")]
-	#endregion
+    #endregion
     public partial class SecurityToken :  Object, Deletable 
     {
         #region inherited properties

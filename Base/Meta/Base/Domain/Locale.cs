@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("45033ae6-85b5-4ced-87ce-02518e6c27fd")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class LocaleClass : Class
     {
@@ -35,12 +32,6 @@ namespace Allors.Meta
         [Plural("Countries")]
         [Multiplicity(Multiplicity.ManyToOne)]
         public RelationType Country;
-
-        public static LocaleClass Instance { get; internal set; }
-
-        internal LocaleClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

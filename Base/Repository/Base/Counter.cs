@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("0568354f-e3d9-439e-baac-b7dce31b956a")]
-	#endregion
+    #endregion
     public partial class Counter :  Object, UniquelyIdentifiable 
     {
         #region inherited properties

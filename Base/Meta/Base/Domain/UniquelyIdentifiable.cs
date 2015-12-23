@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("122ccfe1-f902-44c1-9d6c-6f6a0afa9469")]
-    #endregion
     public partial class UniquelyIdentifiableInterface : Interface
     {
         #region Allors
@@ -13,12 +10,6 @@ namespace Allors.Meta
         [Indexed]
         [Type(typeof(AllorsUniqueUnit))]
         public RelationType UniqueId;
-
-        public static UniquelyIdentifiableInterface Instance { get; internal set; }
-
-        internal UniquelyIdentifiableInterface() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

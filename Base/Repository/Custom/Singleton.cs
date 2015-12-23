@@ -4,6 +4,9 @@ namespace Allors.Repository.Domain
 
     public partial class Singleton :  Object, AccessControlledObject 
     {
+        #region inherited properties
+        #endregion
+
         #region Allors
         [Id("9ce2ef9b-2376-474d-9aa2-d23fbe1ed236")]
         [AssociationId("04bc6904-bd6e-4401-9720-088ebf1fb392")]
@@ -33,5 +36,9 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.OneToOne)]
         #endregion
         public AccessControl ProcurementAccessControl { get; set; }
+
+
+        #region inherited methods
+        #endregion
     }
 }

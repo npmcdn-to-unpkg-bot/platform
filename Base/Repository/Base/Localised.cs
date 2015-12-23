@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("7979a17c-0829-46df-a0d4-1b01775cfaac")]
+    #endregion
 	public partial interface Localised :  Object 
-	{
+    {
 
 
         #region Allors
@@ -13,7 +16,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.ManyToOne)]
         [Indexed]
         #endregion
-		Locale Locale { get; set; }
+        Locale Locale { get; set; }
 
-	}
+    }
 }

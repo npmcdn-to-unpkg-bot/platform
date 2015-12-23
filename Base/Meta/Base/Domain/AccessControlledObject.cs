@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("eb0ff756-3e3d-4cf9-8935-8802a73d2df2")]
-    #endregion
     public partial class AccessControlledObjectInterface : Interface
     {
         #region Allors
@@ -24,11 +21,5 @@ namespace Allors.Meta
         [Type(typeof(SecurityTokenClass))]
         [Multiplicity(Multiplicity.ManyToMany)]
         public RelationType SecurityToken;
-
-        public static AccessControlledObjectInterface Instance { get; internal set; }
-
-        internal AccessControlledObjectInterface() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

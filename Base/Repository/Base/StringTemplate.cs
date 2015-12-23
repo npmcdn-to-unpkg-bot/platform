@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("0c50c02a-cc9c-4617-8530-15a24d4ac969")]
-	#endregion
+    #endregion
     public partial class StringTemplate :  Object, UniquelyIdentifiable, Localised 
     {
         #region inherited properties

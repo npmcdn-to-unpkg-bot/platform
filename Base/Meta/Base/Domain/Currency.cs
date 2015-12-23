@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("fd397adf-40b4-4ef8-b449-dd5a24273df3")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     [Plural("Currencies")]
     public partial class CurrencyClass : Class
@@ -44,12 +41,6 @@ namespace Allors.Meta
         [Type(typeof(LocalisedTextClass))]
         [Multiplicity(Multiplicity.OneToMany)]
         public RelationType LocalisedName;
-
-        public static CurrencyClass Instance { get; internal set; }
-
-        internal CurrencyClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

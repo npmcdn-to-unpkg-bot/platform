@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("6c20422e-cb3e-4402-bb40-dacaf584405e")]
-    #endregion
     [Inherit(typeof(DeletableInterface))]
     public partial class MediaContentClass : Class
     {
@@ -26,12 +23,6 @@ namespace Allors.Meta
         [Size(1024)]
         [Plural("Hashes")]
         public RelationType Hash;
-
-        public static MediaContentClass Instance { get; internal set; }
-
-        internal MediaContentClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

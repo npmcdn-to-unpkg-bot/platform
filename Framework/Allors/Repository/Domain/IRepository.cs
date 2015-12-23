@@ -28,5 +28,9 @@ namespace Allors.Repository.Domain
         IEnumerable<IAssembly> Assemblies { get; }
 
         IEnumerable<IInterface> Interfaces { get; }
+
+        IEnumerable<IClass> Classes { get; }
+
+        IEnumerable<IType> Types { get; }
     }
 }

@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("313b97a5-328c-4600-9dd2-b5bc146fb13b")]
-    #endregion
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class SingletonClass : Class
     {
@@ -75,11 +72,5 @@ namespace Allors.Meta
         [Type(typeof(AccessControlClass))]
         [Multiplicity(Multiplicity.OneToOne)]
         public RelationType DefaultAdministratorsAccessControl;
-
-        public static SingletonClass Instance { get; internal set; }
-
-        internal SingletonClass() : base(MetaPopulation.Instance)
-        {
-        }
     }
 }

@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("7fded183-3337-4196-afb0-3266377944bc")]
-    #endregion
     [Inherit(typeof(DeletableInterface))]
     [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class PermissionClass : Class
@@ -33,12 +30,6 @@ namespace Allors.Meta
         [Indexed]
         [Type(typeof(AllorsIntegerUnit))]
         public RelationType OperationEnum;
-
-        public static PermissionClass Instance { get; internal set; }
-
-        internal PermissionClass() : base(MetaPopulation.Instance)
-        {
-        }
 
         internal override void BaseExtend()
         {

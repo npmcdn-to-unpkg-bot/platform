@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("122ccfe1-f902-44c1-9d6c-6f6a0afa9469")]
+    #endregion
 	public partial interface UniquelyIdentifiable :  Object 
-	{
+    {
 
 
         #region Allors
@@ -13,7 +16,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         [Required]
         #endregion
-		Guid UniqueId { get; set; }
+        Guid UniqueId { get; set; }
 
-	}
+    }
 }

@@ -4,7 +4,7 @@ namespace Allors.Repository.Domain
 
     #region Allors
     [Id("7ca39473-bba1-49af-a343-f3cc7abe14d5")]
-	#endregion
+    #endregion
     public partial class AsyncDerivation :  Object, Deletable 
     {
         #region inherited properties

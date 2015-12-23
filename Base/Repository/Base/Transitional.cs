@@ -1,9 +1,12 @@
 namespace Allors.Repository.Domain
 {
-	using System;
+    using System;
 
+    #region Allors
+    [Id("ab2179ad-9eac-4b61-8d84-81cd777c4926")]
+    #endregion
 	public partial interface Transitional :  Object, AccessControlledObject 
-	{
+    {
 
 
         #region Allors
@@ -14,7 +17,7 @@ namespace Allors.Repository.Domain
         [Derived]
         [Indexed]
         #endregion
-		ObjectState PreviousObjectState { get; set; }
+        ObjectState PreviousObjectState { get; set; }
 
 
         #region Allors
@@ -25,7 +28,7 @@ namespace Allors.Repository.Domain
         [Derived]
         [Indexed]
         #endregion
-		ObjectState LastObjectState { get; set; }
+        ObjectState LastObjectState { get; set; }
 
-	}
+    }
 }
