@@ -64,6 +64,8 @@ namespace Allors.Meta
             }
         }
 
+        public bool ExistAssignedPluralName => !string.IsNullOrEmpty(this.PluralName) && !this.PluralName.Equals(this.SingularName + "s");
+
         /// <summary>
         /// Gets the name.
         /// </summary>

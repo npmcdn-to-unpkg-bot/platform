@@ -64,6 +64,8 @@ namespace Allors.Meta
             }
         }
 
+        public bool ExistAssignedPluralName => !string.IsNullOrEmpty(this.PluralName) && !this.PluralName.Equals(this.SingularName + "s");
+
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -122,11 +124,11 @@ namespace Allors.Meta
                 {
                     return "object type " + this.SingularName;
                 }
-                
+
                 return "object type " + this.Id;
             }
         }
-        
+
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Allors.Meta
 
             return -1;
         }
-        
+
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>

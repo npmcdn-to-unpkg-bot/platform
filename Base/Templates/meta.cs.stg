@@ -64,7 +64,8 @@ interface(interface) ::= <<
     #region Allors
     [Id("$interface.AttributeByName.Id.Value$")]
     #endregion
-$interface.ImplementedInterfaces:{implementedInterface|    [Inherit(typeof($implementedInterface.Name$Interface))]}; separator="\n"$
+$interface.ImplementedInterfaces:{implementedInterface|     [Inherit(typeof($implementedInterface.Name$Interface))]}; separator="\n"$
+$if(interface.AttributeByName.Plural)$    [Plural("$interface.AttributeByName.Plural$")]$endif$
     public partial class $interface.Name$Interface : Interface
 	{
 

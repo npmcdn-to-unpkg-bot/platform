@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Plural("Addresses")]
     public partial class AddressInterface : Interface
     {
         #region Allors

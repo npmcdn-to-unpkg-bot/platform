@@ -23,7 +23,7 @@ using System;
 
 namespace Allors
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Field)]
     public class PluralAttribute : MetaAttribute
     {
         public PluralAttribute(string value)
