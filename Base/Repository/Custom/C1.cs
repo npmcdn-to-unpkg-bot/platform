@@ -5,7 +5,7 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("7041c691-d896-4628-8f50-1c24f5d03414")]
     #endregion
-    public partial class C1 :  Object, I1, AccessControlledObject 
+    public partial class C1 : I1, AccessControlledObject 
     {
         #region inherited properties
         public I1 I1I1Many2One { get; set; }

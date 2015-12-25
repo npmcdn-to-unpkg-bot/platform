@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(DeletableInterface))]
-    [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class PermissionClass : Class
     {
         #region Allors

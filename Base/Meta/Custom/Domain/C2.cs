@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(I2Interface))]
     public partial class C2Class : Class
     {
         #region Allors

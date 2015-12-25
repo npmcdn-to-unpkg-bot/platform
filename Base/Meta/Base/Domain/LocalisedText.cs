@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(AccessControlledObjectInterface))]
-    [Inherit(typeof(LocalisedInterface))]
     public partial class LocalisedTextClass : Class
     {
         #region Allors

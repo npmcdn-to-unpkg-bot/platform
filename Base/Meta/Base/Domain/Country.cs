@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(AccessControlledObjectInterface))]
     [Plural("Countries")]
     public partial class CountryClass : Class
     {

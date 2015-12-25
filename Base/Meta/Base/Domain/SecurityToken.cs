@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(DeletableInterface))]
     public partial class SecurityTokenClass : Class
     {
         #region Allors

@@ -64,6 +64,7 @@ interface(interface) ::= <<
     #region Allors
     [Id("$interface.AttributeByName.Id.Value$")]
     #endregion
+$interface.ImplementedInterfaces:{implementedInterface|    [Inherit(typeof($implementedInterface.Name$Interface))]}; separator="\n"$
     public partial class $interface.Name$Interface : Interface
 	{
 
@@ -86,6 +87,7 @@ class(class) ::= <<
     #region Allors
     [Id("$class.AttributeByName.Id.Value$")]
     #endregion
+$class.ImplementedInterfaces:{implementedInterface|     [Inherit(typeof($implementedInterface.Name$Interface))]}; separator="\n"$
     public partial class $class.Name$Class : Class
 	{
 

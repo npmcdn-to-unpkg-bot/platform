@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(TransitionalInterface))]
     public partial class OrderClass : Class
     {
         #region Allors

@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(SecurityTokenOwnerInterface))]
-    [Inherit(typeof(AccessControlledObjectInterface))]
-    [Inherit(typeof(LocalisedInterface))]
     public partial class UserInterface : Interface
     {
         #region Allors

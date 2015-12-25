@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(UniquelyIdentifiableInterface))]
-    [Inherit(typeof(AccessControlledObjectInterface))]
-    [Inherit(typeof(DeletableInterface))]
     public partial class MediaClass : Class
     {
         #region Allors

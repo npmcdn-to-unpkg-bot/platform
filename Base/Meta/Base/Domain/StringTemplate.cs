@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(UniquelyIdentifiableInterface))]
-    [Inherit(typeof(LocalisedInterface))]
     public partial class StringTemplateClass : Class
     {
         #region Allors

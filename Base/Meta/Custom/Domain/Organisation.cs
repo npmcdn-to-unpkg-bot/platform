@@ -1,9 +1,5 @@
 namespace Allors.Meta
 {
-    using System.ComponentModel.DataAnnotations;
-
-    [Inherit(typeof(UniquelyIdentifiableInterface))]
-    [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class OrganisationClass : Class
     {
         #region Allors
@@ -169,11 +165,6 @@ namespace Allors.Meta
 
         internal override void CustomExtend()
         {
-            this.Description.RoleType.DataTypeAttribute = new DataTypeAttribute(DataType.MultilineText);
-
-            this.Information.RoleType.DisplayAttribute = new DisplayAttribute { Name = "Ik ben het label" };
-            this.Information.RoleType.DataTypeAttribute = new DataTypeAttribute(DataType.Html);
-
             var organisation = this;
             var person = PersonClass.Instance;
 

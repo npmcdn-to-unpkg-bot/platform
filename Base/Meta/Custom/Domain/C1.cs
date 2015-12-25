@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(I1Interface))]
-    [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class C1Class : Class
     {
         #region Allors

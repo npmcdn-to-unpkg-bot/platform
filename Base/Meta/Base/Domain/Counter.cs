@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class CounterClass : Class
     {
         #region Allors

@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(AddressInterface))]
     [Plural("MailboxAddresses")]
     public partial class MailboxAddressClass : Class
     {

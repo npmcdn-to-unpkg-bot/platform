@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(AccessControlledObjectInterface))]
     [Plural("Currencies")]
     public partial class CurrencyClass : Class
     {

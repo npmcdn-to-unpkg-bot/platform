@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(AccessControlledObjectInterface))]
     public partial class MediaTypeClass : Class
     {
         #region Allors

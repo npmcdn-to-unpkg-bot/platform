@@ -1,7 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(PrintableInterface))]
-    [Inherit(typeof(DeletableInterface))]
     public partial class PersonClass : Class
     {
         #region Allors

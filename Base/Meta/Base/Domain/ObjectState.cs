@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class ObjectStateInterface : Interface
     {
         #region Allors

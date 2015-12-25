@@ -254,6 +254,14 @@
                 var definedType = definedTypeByName[type.Name];
                 var attributesByTypeName = definedType.GetCustomAttributes(false).Cast<System.Attribute>().GroupBy(v => v.GetType().Name);
 
+                var allInterfaces = definedType.GetInterfaces();
+                var directInterfaces = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces()));
+                foreach (var definedImplementedInterface in directInterfaces)
+                {
+                    var implementedInterface = this.TypeByName[definedImplementedInterface.Name];
+                    type.ImplementedInterfaces.Add(implementedInterface);
+                }
+
                 foreach (var group in attributesByTypeName)
                 {
                     var typeName = group.Key;

@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Plural("StatefulCompanies")]
     public partial class StatefulCompanyClass : Class
     {
         #region Allors

@@ -30,11 +30,14 @@ namespace Allors.Tools.Repository
     {
         protected Type(string name)
         {
+            this.ImplementedInterfaces = new List<Type>();
             this.Name = name;
         }
 
         public abstract Dictionary<string, Attribute> AttributeByName { get; }
 
         public string Name { get; }
+
+        public IList<Type> ImplementedInterfaces { get; }
     }
 }

@@ -1,6 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(SharedInterface))]
     public partial class OneClass : Class
     {
         #region Allors

@@ -1,8 +1,5 @@
 namespace Allors.Meta
 {
-    [Inherit(typeof(UserInterface))]
-    [Inherit(typeof(AccessControlledObjectInterface))]
-    [Inherit(typeof(UniquelyIdentifiableInterface))]
     public partial class PersonClass : Class
     {
         #region Allors
