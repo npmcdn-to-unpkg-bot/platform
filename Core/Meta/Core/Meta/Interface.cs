@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public abstract partial class Interface : Composite, IInterface
+    public sealed partial class Interface : Composite, IInterface
     {
         private LazySet<Composite> derivedDirectSubtypes;
 

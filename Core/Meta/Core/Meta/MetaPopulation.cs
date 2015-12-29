@@ -33,7 +33,7 @@ namespace Allors.Meta
 
         public static readonly MetaPopulation Instance;
 
-        private readonly Dictionary<Guid, MetaObject> metaObjectById;
+        private readonly Dictionary<Guid, MetaObjectBase> metaObjectById;
 
         private Dictionary<string, Class> derivedClassByLowercaseName;
         private Composite[] derivedComposites;
@@ -53,225 +53,7 @@ namespace Allors.Meta
         private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
 
-        static MetaPopulation()
-        {
-            Instance = new MetaPopulation();
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var classes = new List<Type>(assembly.GetTypes().Where(type => type.IsClass && !type.IsAbstract));
-
-            // Domains
-            foreach (var domainType in classes.Where(type => type.GetInterfaces().Contains(typeof(IDomain))))
-            {
-                var constructor = domainType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new []{Instance.GetType()}, null);
-                var domain = (Domain)constructor.Invoke(new object[] { Instance });
-
-                domain.Name = domainType.Name.Substring(0, domainType.Name.Length-"Domain".Length);
-
-                var instanceProperty = domainType.GetProperty("Instance");
-                instanceProperty.SetMethod.Invoke(null, new[] { domain });
-            }
-
-            // Domain Inheritance
-            foreach (var domain in Instance.Domains)
-            {
-                var type = domain.GetType();
-
-                // Always inherit from Object
-                if (!domain.Equals(CoreDomain.Instance))
-                {
-                    domain.AddDirectSuperdomain(CoreDomain.Instance);
-                }
-
-                // Create Inheritance objects
-                foreach (var attribute in type.GetCustomAttributes(typeof(InheritAttribute)))
-                {
-                    var inheritanceAttribute = (InheritAttribute)attribute;
-                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(inheritanceAttribute.Value, typeof(IdAttribute));
-                    var id = new Guid(idAttribute.Value);
-                    var superdomain = (Domain)Instance.Find(id);
-
-                    domain.AddDirectSuperdomain(superdomain);
-                }
-            }
-
-            // ObjectTypes
-            foreach (var objectType in classes.Where(type => type.GetInterfaces().Contains(typeof(IUnit)) || type.GetInterfaces().Contains(typeof(IInterface)) || type.GetInterfaces().Contains(typeof(IClass))))
-            {
-                var constructor = objectType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
-                var instance = (ObjectType)constructor.Invoke(null);
-
-                if (instance is IUnit)
-                {
-                    instance.SingularName = objectType.Name.Substring(0, objectType.Name.Length - "Unit".Length);
-                }
-                else if (instance is IClass)
-                {
-                    instance.SingularName = objectType.Name.Substring(0, objectType.Name.Length - "Class".Length);
-                }
-                else if (instance is IInterface)
-                {
-                    instance.SingularName = objectType.Name.Substring(0, objectType.Name.Length - "Interface".Length);
-                }
-
-                var pluralAttribute = (PluralAttribute)Attribute.GetCustomAttribute(objectType, typeof(PluralAttribute));
-                if (pluralAttribute != null)
-                {
-                    instance.PluralName = pluralAttribute.Value;
-                }
-                else
-                {
-                    instance.PluralName = instance.SingularName + "s";
-                }
-
-
-                var instanceProperty = objectType.GetProperty("Instance");
-                instanceProperty.SetMethod.Invoke(null, new[] { instance });
-            }
-
-            // ObjectType Inheritance
-            foreach (var composite in Instance.Composites)
-            {
-                var type = composite.GetType();
-
-                // Always inherit from Object
-                if (!composite.Equals(ObjectInterface.Instance))
-                {
-                    new Inheritance(Instance)
-                    {
-                        Subtype = composite,
-                        Supertype = ObjectInterface.Instance
-                    };
-                }
-
-                // Create Inheritance objects
-                foreach (var attribute in type.GetCustomAttributes(typeof(InheritAttribute)))
-                {
-                    var inheritanceAttribute = (InheritAttribute)attribute;
-                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(inheritanceAttribute.Value, typeof(IdAttribute));
-                    var id = new Guid(idAttribute.Value);
-                    var supertype = (Interface)Instance.Find(id);
-
-                    new Inheritance(Instance)
-                    {
-                        Subtype = composite,
-                        Supertype = supertype
-                    };
-                }
-            }
-            
-            foreach (var composite in Instance.Composites)
-            {
-                var type = composite.GetType();
-
-                // Create RelationType objects
-                var relationTypeFields = type
-                    .GetFields()
-                    .Where(field => field.FieldType == typeof(RelationType));
-
-                foreach (var relationTypeField in relationTypeFields)
-                {
-                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(IdAttribute));
-                    var associationIdAttribute = (AssociationIdAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(AssociationIdAttribute));
-                    var roleIdAttribute = (RoleIdAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(RoleIdAttribute));
-                    var id = new Guid(idAttribute.Value);
-                    var associationId = new Guid(associationIdAttribute.Value);
-                    var roleId = new Guid(roleIdAttribute.Value);
-                    var relationType = (RelationType)Activator.CreateInstance(typeof(RelationType), new object[] { Instance, id , associationId, roleId });
-
-                    relationType.AssociationType.ObjectType = composite;
-
-                    var multiplicityTypeAttribute = (MultiplicityAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(MultiplicityAttribute));
-                    if (multiplicityTypeAttribute != null)
-                    {
-                        relationType.AssignedMultiplicity = multiplicityTypeAttribute.Value;
-                    }
-
-                    var derivedAttribute = (DerivedAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(DerivedAttribute));
-                    if (derivedAttribute != null)
-                    {
-                        relationType.IsDerived = derivedAttribute.Value;
-                    }
-
-                    var indexedAttribute = (IndexedAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(IndexedAttribute));
-                    if (indexedAttribute != null)
-                    {
-                        relationType.IsIndexed = indexedAttribute.Value;
-                    }
-
-                    relationType.AssociationType.ObjectType = composite;
-
-                    relationType.RoleType.AssignedSingularName = relationTypeField.Name;
-
-                    var roleTypeAttribute = (TypeAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(TypeAttribute));
-                    var roleTypeIdAttribute = (IdAttribute)Attribute.GetCustomAttribute(roleTypeAttribute.Value, typeof(IdAttribute));
-                    var roleTypeId = new Guid(roleTypeIdAttribute.Value);
-                    var roleType = (ObjectType)Instance.Find(roleTypeId);
-
-                    relationType.RoleType.ObjectType = roleType;
-
-                    var scaleAttribute = (ScaleAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(ScaleAttribute));
-                    if (scaleAttribute != null)
-                    {
-                        relationType.RoleType.Scale = scaleAttribute.Value;
-                    }
-
-                    var precisionAttribute = (PrecisionAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(PrecisionAttribute));
-                    if (precisionAttribute != null)
-                    {
-                        relationType.RoleType.Precision = precisionAttribute.Value;
-                    }
-
-                    var sizeAttribute = (SizeAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(SizeAttribute));
-                    if (sizeAttribute != null)
-                    {
-                        relationType.RoleType.Size = sizeAttribute.Value;
-                    }
-
-                    var pluralAttribute = (PluralAttribute)Attribute.GetCustomAttribute(relationTypeField, typeof(PluralAttribute));
-                    if (pluralAttribute != null)
-                    {
-                        relationType.RoleType.AssignedPluralName = pluralAttribute.Value;
-                    }
-
-                    foreach (var groupAttribute in Attribute.GetCustomAttributes(relationTypeField, typeof(GroupAttribute)).Cast<GroupAttribute>())
-                    {
-                        relationType.AddGroup(groupAttribute.Value);
-                    }
-
-                    relationTypeField.SetValue(composite, relationType);
-                }
-            }
-
-            foreach (var composite in Instance.Composites)
-            {
-                var type = composite.GetType();
-
-                // Create MethodType objects
-                var methodTypeFields = type
-                    .GetFields()
-                    .Where(field => field.FieldType == typeof(MethodType));
-
-                foreach (var methodTypeField in methodTypeFields)
-                {
-                    var idAttribute = (IdAttribute)Attribute.GetCustomAttribute(methodTypeField, typeof(IdAttribute));
-                    var id = new Guid(idAttribute.Value);
-                    var methodType = (MethodType)Activator.CreateInstance(typeof(MethodType), new object[] { Instance, id });
-                    methodType.Name = methodTypeField.Name;
-                    methodType.ObjectType = composite;
-                    methodTypeField.SetValue(composite, methodType);
-                    
-                    foreach (var groupAttribute in Attribute.GetCustomAttributes(methodTypeField, typeof(GroupAttribute)).Cast<GroupAttribute>())
-                    {
-                        methodType.AddGroup(groupAttribute.Value);
-                    }
-                }
-            }
-
-            Instance.Extend();
-        }
-
-        private MetaPopulation()
+        public MetaPopulation()
         {
             this.isStale = true;
             this.isDeriving = false;
@@ -286,24 +68,12 @@ namespace Allors.Meta
             this.roleTypes = new List<RoleType>();
             this.methodTypes = new List<MethodType>();
 
-            this.metaObjectById = new Dictionary<Guid, MetaObject>();
+            this.metaObjectById = new Dictionary<Guid, MetaObjectBase>();
         }
 
-        public bool IsBound
-        {
-            get
-            {
-                return this.isBound;
-            }
-        }
+        public bool IsBound => this.isBound;
 
-        public IEnumerable<Domain> Domains
-        {
-            get
-            {
-                return this.domains;
-            }
-        }
+        public IEnumerable<Domain> Domains => this.domains;
 
         public IEnumerable<Domain> SortedDomains
         {
@@ -315,109 +85,31 @@ namespace Allors.Meta
             }
         }
 
-        IEnumerable<IUnit> IMetaPopulation.Units 
-        {
-            get
-            {
-                return this.Units;
-            }
-        }
+        IEnumerable<IUnit> IMetaPopulation.Units => this.Units;
 
-        public IEnumerable<Unit> Units
-        {
-            get
-            {
-                return this.units;
-            }
-        }
+        public IEnumerable<Unit> Units => this.units;
 
-        IEnumerable<IInterface> IMetaPopulation.Interfaces
-        {
-            get
-            {
-                return this.Interfaces;
-            }
-        }
+        IEnumerable<IInterface> IMetaPopulation.Interfaces => this.Interfaces;
 
-        public IEnumerable<Interface> Interfaces
-        {
-            get
-            {
-                return this.interfaces;
-            }
-        }
+        public IEnumerable<Interface> Interfaces => this.interfaces;
 
-        IEnumerable<IClass> IMetaPopulation.Classes
-        {
-            get
-            {
-                return this.Classes;
-            }
-        }
+        IEnumerable<IClass> IMetaPopulation.Classes => this.Classes;
 
-        public IEnumerable<Class> Classes
-        {
-            get
-            {
-                return this.classes;
-            }
-        }
+        public IEnumerable<Class> Classes => this.classes;
 
-        public IEnumerable<Inheritance> Inheritances
-        {
-            get
-            {
-                return this.inheritances;
-            }
-        }
+        public IEnumerable<Inheritance> Inheritances => this.inheritances;
 
-        IEnumerable<IRelationType> IMetaPopulation.RelationTypes
-        {
-            get
-            {
-                return this.RelationTypes;
-            }
-        }
+        IEnumerable<IRelationType> IMetaPopulation.RelationTypes => this.RelationTypes;
 
-        public IEnumerable<RelationType> RelationTypes
-        {
-            get
-            {
-                return this.relationTypes;
-            }
-        }
+        public IEnumerable<RelationType> RelationTypes => this.relationTypes;
 
-        public IEnumerable<AssociationType> AssociationTypes
-        {
-            get
-            {
-                return this.associationTypes;
-            }
-        }
+        public IEnumerable<AssociationType> AssociationTypes => this.associationTypes;
 
-        public IEnumerable<RoleType> RoleTypes
-        {
-            get
-            {
-                return this.roleTypes;
-            }
-        }
+        public IEnumerable<RoleType> RoleTypes => this.roleTypes;
 
-        public IEnumerable<MethodType> MethodTypes
-        {
-            get
-            {
-                return this.methodTypes;
-            }
-        }
+        public IEnumerable<MethodType> MethodTypes => this.methodTypes;
 
-        IEnumerable<IComposite> IMetaPopulation.Composites
-        {
-            get
-            {
-                return this.Composites;
-            }
-        }
+        IEnumerable<IComposite> IMetaPopulation.Composites => this.Composites;
 
         public IEnumerable<Composite> Composites
         {
@@ -460,9 +152,9 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="IMetaObject"/>.
         /// </returns>
-        public MetaObject Find(Guid id)
+        public MetaObjectBase Find(Guid id)
         {
-            MetaObject metaObject;
+            MetaObjectBase metaObject;
             this.metaObjectById.TryGetValue(id, out metaObject);
 
             return metaObject;

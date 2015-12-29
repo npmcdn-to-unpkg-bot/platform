@@ -21,23 +21,17 @@
 
 namespace Allors.Tools.Repository
 {
-    using System;
     using System.Collections.Generic;
 
-    using Allors.Repository.Domain;
-
-    public class Interface : Type, IInterface
+    public class Interface : Type
     {
         public Interface(string name)
             : base(name)
         {
-            this.AttributeByName = new Dictionary<string, Attribute>();
             this.PartialByAssemblyName = new Dictionary<string, PartialInterface>();
         }
 
         public Dictionary<string, PartialInterface> PartialByAssemblyName { get; }
-
-        public override Dictionary<string, Attribute> AttributeByName { get; }
 
         public override string ToString()
         {

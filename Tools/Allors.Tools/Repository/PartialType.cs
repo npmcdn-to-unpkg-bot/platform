@@ -21,12 +21,9 @@
 
 namespace Allors.Tools.Repository
 {
-    using System;
     using System.Collections.Generic;
 
-    using Allors.Repository.Domain;
-
-    public abstract class PartialType : IPartialType
+    public abstract class PartialType
     {
         protected PartialType(string name)
         {

@@ -21,7 +21,6 @@
 
 namespace Allors.Meta
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     
@@ -101,13 +100,7 @@ namespace Allors.Meta
             }
         }
 
-        IClass IComposite.ExclusiveClass
-        {
-            get
-            {
-                return this.ExclusiveSubclass;
-            }
-        }
+        IClass IComposite.ExclusiveClass => this.ExclusiveSubclass;
 
         /// <summary>
         /// Gets the exclusive concrete subclass.
@@ -115,13 +108,7 @@ namespace Allors.Meta
         /// <value>The exclusive concrete subclass.</value>
         public abstract Class ExclusiveSubclass { get; }
 
-        IEnumerable<IClass> IComposite.Classes
-        {
-            get
-            {
-                return this.Classes;
-            }
-        } 
+        IEnumerable<IClass> IComposite.Classes => this.Classes;
 
         /// <summary>
         /// Gets the root classes.
@@ -129,13 +116,7 @@ namespace Allors.Meta
         /// <value>The root classes.</value>
         public abstract IEnumerable<Class> Classes { get; }
 
-        IEnumerable<IInterface> IComposite.DirectSupertypes
-        {
-            get
-            {
-                return this.DirectSupertypes;
-            }
-        }
+        IEnumerable<IInterface> IComposite.DirectSupertypes => this.DirectSupertypes;
 
         /// <summary>
         /// Gets the direct super types.
@@ -150,13 +131,7 @@ namespace Allors.Meta
             }
         }
 
-        IEnumerable<IInterface> IComposite.Supertypes
-        {
-            get
-            {
-                return this.Supertypes;
-            }
-        }
+        IEnumerable<IInterface> IComposite.Supertypes => this.Supertypes;
 
         /// <summary>
         /// Gets the super types.
@@ -171,13 +146,7 @@ namespace Allors.Meta
             }
         }
         
-        IEnumerable<IAssociationType> IComposite.AssociationTypes 
-        {
-            get
-            {
-                return this.AssociationTypes;
-            }
-        }
+        IEnumerable<IAssociationType> IComposite.AssociationTypes => this.AssociationTypes;
 
         /// <summary>
         /// Gets the associations.
@@ -200,13 +169,7 @@ namespace Allors.Meta
             }
         }
 
-        IEnumerable<IRoleType> IComposite.RoleTypes
-        {
-            get
-            {
-                return this.RoleTypes;
-            }
-        }
+        IEnumerable<IRoleType> IComposite.RoleTypes => this.RoleTypes;
 
         /// <summary>
         /// Gets the roles.
@@ -286,29 +249,11 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RoleType> UnitRoleTypes
-        {
-            get
-            {
-                return this.RoleTypes.Where(roleType => roleType.ObjectType.IsUnit).ToArray();
-            }
-        }
+        public IEnumerable<RoleType> UnitRoleTypes => this.RoleTypes.Where(roleType => roleType.ObjectType.IsUnit).ToArray();
 
-        public IEnumerable<RoleType> CompositeRoleTypes
-        {
-            get
-            {
-                return this.RoleTypes.Where(roleType => roleType.ObjectType.IsComposite).ToArray();
-            }
-        }
+        public IEnumerable<RoleType> CompositeRoleTypes => this.RoleTypes.Where(roleType => roleType.ObjectType.IsComposite).ToArray();
 
-        public IEnumerable<RoleType> ExclusiveRoleTypes
-        {
-            get
-            {
-                return this.RoleTypes.Where(roleType => this.Equals(roleType.AssociationType.ObjectType)).ToArray();
-            }
-        }
+        public IEnumerable<RoleType> ExclusiveRoleTypes => this.RoleTypes.Where(roleType => this.Equals(roleType.AssociationType.ObjectType)).ToArray();
 
         /// <summary>
         /// Gets the method types.
@@ -323,13 +268,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<MethodType> ExclusiveMethodTypes
-        {
-            get
-            {
-                return this.MethodTypes.Where(methodType => this.Equals(methodType.ObjectType)).ToArray();
-            }
-        }
+        public IEnumerable<MethodType> ExclusiveMethodTypes => this.MethodTypes.Where(methodType => this.Equals(methodType.ObjectType)).ToArray();
 
         public bool ExistSupertype(IInterface @interface)
         {
@@ -417,7 +356,6 @@ namespace Allors.Meta
         /// <summary>
         /// Derive method types by group.
         /// </summary>
-        /// <param name="methodTypes">The grouped method types.</param>
         internal void DeriveMethodTypesByGroup()
         {
             var methodTypesByGroup = new Dictionary<string, IList<MethodType>>();
@@ -475,7 +413,6 @@ namespace Allors.Meta
         /// <summary>
         /// Derive direct supertypes by group.
         /// </summary>
-        /// <param name="inerfaces">The grouped direct supertypes.</param>
         internal void DeriveDirectSupertypesByGroup()
         {
             var directSupertypesByGroup = new Dictionary<string, IList<Interface>>();
@@ -507,7 +444,6 @@ namespace Allors.Meta
         /// <summary>
         /// Derive exclusive role types by group.
         /// </summary>
-        /// <param name="roleTypes">The exclusive grouped role types.</param>
         internal void DeriveExclusiveRoleTypesByGroup()
         {
             var roleTypesByGroup = new Dictionary<string, IList<RoleType>>();
@@ -538,7 +474,6 @@ namespace Allors.Meta
         /// <summary>
         /// Derive role types by group.
         /// </summary>
-        /// <param name="roleTypes">The grouped role types.</param>
         internal void DeriveRoleTypesByGroup()
         {
             var roleTypesByGroup = new Dictionary<string, IList<RoleType>>();
@@ -569,7 +504,6 @@ namespace Allors.Meta
         /// <summary>
         /// Derive association types by group.
         /// </summary>
-        /// <param name="associationTypes">The grouped association types.</param>
         internal void DeriveAssociationTypesByGroup()
         {
             var associationTypesByGroup = new Dictionary<string, IList<AssociationType>>();

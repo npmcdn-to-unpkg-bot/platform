@@ -265,12 +265,12 @@
     <Compile Include="Custom\Domain\Unit.cs" />
     <Compile Include="Base\Domain\User.cs" />
     <Compile Include="Base\Domain\UserGroup.cs" />
+    <Compile Include="Generated\builder.g.cs" />
     <Compile Include="Generated\classes.g.cs" />
     <Compile Include="Generated\domains.g.cs" />
     <Compile Include="Generated\interfaces.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Custom\Domain\User.cs" />
-    <Compile Include="Custom\MetaPopulation.v.cs" />
     <Compile Include="Custom\Meta\Composite.cs" />
   </ItemGroup>
   <ItemGroup>

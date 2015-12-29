@@ -110,37 +110,13 @@ namespace Allors.Meta
             }
         }
 
-        IAssociationType IRelationType.AssociationType
-        {
-            get
-            {
-                return this.AssociationType;
-            }
-        }
+        IAssociationType IRelationType.AssociationType => this.AssociationType;
 
-        public AssociationType AssociationType
-        {
-            get
-            {
-                return this.associationType;
-            }
-        }
+        public AssociationType AssociationType => this.associationType;
 
-        IRoleType IRelationType.RoleType
-        {
-            get
-            {
-                return this.RoleType;
-            }
-        }
+        IRoleType IRelationType.RoleType => this.RoleType;
 
-        public RoleType RoleType
-        {
-            get
-            {
-                return this.roleType;
-            }
-        }
+        public RoleType RoleType => this.roleType;
 
         /// <summary>
         /// Gets a value indicating whether there exist exclusive classes.
@@ -169,10 +145,7 @@ namespace Allors.Meta
         /// <value>
         ///  <c>true</c> if this instance is many to many; otherwise, <c>false</c>.
         /// </value>
-        public bool IsManyToMany
-        {
-            get { return this.AssociationType.IsMany && this.RoleType.IsMany; }
-        }
+        public bool IsManyToMany => this.AssociationType.IsMany && this.RoleType.IsMany;
 
         /// <summary>
         /// Gets a value indicating whether this instance is many to one.
@@ -180,10 +153,7 @@ namespace Allors.Meta
         /// <value>
         ///  <c>true</c> if this instance is many to one; otherwise, <c>false</c>.
         /// </value>
-        public bool IsManyToOne
-        {
-            get { return this.AssociationType.IsMany && !this.RoleType.IsMany; }
-        }
+        public bool IsManyToOne => this.AssociationType.IsMany && !this.RoleType.IsMany;
 
         /// <summary>
         /// Gets a value indicating whether this instance is one to many.
@@ -191,10 +161,7 @@ namespace Allors.Meta
         /// <value>
         ///  <c>true</c> if this instance is one to many; otherwise, <c>false</c>.
         /// </value>
-        public bool IsOneToMany
-        {
-            get { return this.AssociationType.IsOne && this.RoleType.IsMany; }
-        }
+        public bool IsOneToMany => this.AssociationType.IsOne && this.RoleType.IsMany;
 
         /// <summary>
         /// Gets a value indicating whether this instance is one to one.
@@ -202,34 +169,19 @@ namespace Allors.Meta
         /// <value>
         ///  <c>true</c> if this instance is one to one; otherwise, <c>false</c>.
         /// </value>
-        public bool IsOneToOne
-        {
-            get { return this.AssociationType.IsOne && !this.RoleType.IsMany; }
-        }
+        public bool IsOneToOne => this.AssociationType.IsOne && !this.RoleType.IsMany;
 
         /// <summary>
         /// Gets the name.
         /// </summary>
         /// <value>The name  .</value>
-        public string Name
-        {
-            get
-            {
-                return this.AssociationType.SingularName + this.RoleType.SingularName;
-            }
-        }
+        public string Name => this.AssociationType.SingularName + this.RoleType.SingularName;
 
         /// <summary>
         /// Gets the name of the reverse.
         /// </summary>
         /// <value>The name of the reverse.</value>
-        public string ReverseName
-        {
-            get
-            {
-                return this.RoleType.SingularName + this.AssociationType.SingularName;
-            }
-        }
+        public string ReverseName => this.RoleType.SingularName + this.AssociationType.SingularName;
 
         public string[] Groups
         {
@@ -284,10 +236,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
-        protected internal override string ValidationName
-        {
-            get { return "relation type" + this.Name; }
-        }
+        protected internal override string ValidationName => "relation type" + this.Name;
 
         /// <summary>
         /// Compares the current instance with another object of the same type.
@@ -324,7 +273,7 @@ namespace Allors.Meta
 
         internal void DeriveMultiplicity()
         {
-            if (this.RoleType != null && this.RoleType.ObjectType !=null && this.RoleType.ObjectType.IsUnit)
+            if (this.RoleType?.ObjectType != null && this.RoleType.ObjectType.IsUnit)
             {
                 this.multiplicity = Multiplicity.OneToOne;
             }
@@ -390,15 +339,9 @@ namespace Allors.Meta
                 }
             }
 
-            if (this.AssociationType != null)
-            {
-                this.AssociationType.Validate(validationLog);
-            }
+            this.AssociationType?.Validate(validationLog);
 
-            if (this.RoleType != null)
-            {
-                this.RoleType.Validate(validationLog);
-            }
+            this.RoleType?.Validate(validationLog);
         }
     }
 }

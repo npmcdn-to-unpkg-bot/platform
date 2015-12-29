@@ -70,45 +70,15 @@ namespace Allors.Meta
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
-        public string Name
-        {
-            get
-            {
-                return this.SingularName;
-            }
-        }
+        public string Name => this.SingularName;
 
-        public bool IsUnit
-        {
-            get
-            {
-                return this is IUnit;
-            }
-        }
+        public bool IsUnit => this is IUnit;
 
-        public bool IsComposite
-        {
-            get
-            {
-                return this is IComposite;
-            }
-        }
+        public bool IsComposite => this is IComposite;
 
-        public bool IsInterface
-        {
-            get
-            {
-                return this is IInterface;
-            }
-        }
+        public bool IsInterface => this is IInterface;
 
-        public bool IsClass
-        {
-            get
-            {
-                return this is IClass;
-            }
-        }
+        public bool IsClass => this is IClass;
 
         public abstract Type ClrType { get; }
 

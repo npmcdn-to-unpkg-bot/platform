@@ -3,19 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Allors.Repository.Domain;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-    public class Repository : IRepository
+    public class Repository
     {
-        public IEnumerable<IAssembly> Assemblies => this.AssemblyByName.Values;
+        public IEnumerable<Assembly> Assemblies => this.AssemblyByName.Values;
 
-        public IEnumerable<IInterface> Interfaces => this.InterfaceByName.Values;
+        public IEnumerable<Interface> Interfaces => this.InterfaceByName.Values;
 
-        public IEnumerable<IClass> Classes => this.ClassByName.Values;
+        public IEnumerable<Class> Classes => this.ClassByName.Values;
 
-        public IEnumerable<IType> Types => this.ClassByName.Values;
+        public IEnumerable<Type> Types => this.ClassByName.Values.Cast<Type>().Union(this.InterfaceByName.Values);
 
         public Dictionary<string, Assembly> AssemblyByName { get; }
 
@@ -36,10 +35,12 @@
 
             this.CreateAssemblies(projectInfo);
             this.CreateAssemblyExtensions(projectInfo);
+
             this.CreateTypes(projectInfo);
+            this.CreateHierarchy(projectInfo);
             this.CreateMembers(projectInfo);
-            
-            this.AddAttributes(projectInfo);
+
+            this.FromReflection(projectInfo);
         }
 
         private void CreateAssemblies(ProjectInfo projectInfo)
@@ -197,6 +198,24 @@
             }
         }
 
+        private void CreateHierarchy(ProjectInfo projectInfo)
+        {
+            var definedTypeByName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
+
+            foreach (var type in this.TypeByName.Values)
+            {
+                var definedType = definedTypeByName[type.Name];
+
+                var allInterfaces = definedType.GetInterfaces();
+                var directInterfaces = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces()));
+                foreach (var definedImplementedInterface in directInterfaces)
+                {
+                    var implementedInterface = this.TypeByName[definedImplementedInterface.Name];
+                    type.ImplementedInterfaces.Add(implementedInterface);
+                }
+            }
+        }
+
         private void CreateMembers(ProjectInfo projectInfo)
         {
             foreach (var syntaxTree in projectInfo.DocumentBySyntaxTree.Keys)
@@ -218,15 +237,17 @@
                         {
                             var typeSymbol = semanticModel.GetDeclaredSymbol(typeDeclaration);
                             var typeName = typeSymbol.Name;
-                            var type = assembly.PartialTypeByName[typeName];
+                            var partialType = assembly.PartialTypeByName[typeName];
+                            var type = this.TypeByName[typeName];
 
                             var propertyDeclarations = typeDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>();
                             foreach (var propertyDeclaration in propertyDeclarations)
                             {
                                 var propertySymbol = semanticModel.GetDeclaredSymbol(propertyDeclaration);
                                 var propertyName = propertySymbol.Name;
-                                
+
                                 var property = new Property(propertyName);
+                                partialType.PropertyByName[propertyName] = property;
                                 type.PropertyByName[propertyName] = property;
                             }
 
@@ -237,6 +258,7 @@
                                 var methodName = methodSymbol.Name;
 
                                 var method = new Method(methodName);
+                                partialType.MethodByName[methodName] = method;
                                 type.MethodByName[methodName] = method;
                             }
                         }
@@ -245,24 +267,16 @@
             }
         }
 
-        private void AddAttributes(ProjectInfo projectInfo)
+        private void FromReflection(ProjectInfo projectInfo)
         {
-            var definedTypeByName = projectInfo.Assembly.DefinedTypes.Where(v=>"Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
+            var declaredTypeByName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
 
             foreach (var type in this.TypeByName.Values)
             {
-                var definedType = definedTypeByName[type.Name];
-                var attributesByTypeName = definedType.GetCustomAttributes(false).Cast<System.Attribute>().GroupBy(v => v.GetType().Name);
+                var reflectedType = declaredTypeByName[type.Name];
+                var typeAttributesByTypeName = reflectedType.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
 
-                var allInterfaces = definedType.GetInterfaces();
-                var directInterfaces = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces()));
-                foreach (var definedImplementedInterface in directInterfaces)
-                {
-                    var implementedInterface = this.TypeByName[definedImplementedInterface.Name];
-                    type.ImplementedInterfaces.Add(implementedInterface);
-                }
-
-                foreach (var group in attributesByTypeName)
+                foreach (var group in typeAttributesByTypeName)
                 {
                     var typeName = group.Key;
                     if (typeName.ToLowerInvariant().EndsWith("attribute"))
@@ -271,6 +285,42 @@
                     }
 
                     type.AttributeByName[typeName] = group.First();
+                }
+
+                foreach (var property in type.Properties)
+                {
+                    var reflectedProperty = reflectedType.GetProperty(property.Name);
+                    var propertyAttributesByTypeName = reflectedProperty.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
+
+                    property.TypeName = reflectedProperty.PropertyType.Name;
+
+                    foreach (var group in propertyAttributesByTypeName)
+                    {
+                        var typeName = group.Key;
+                        if (typeName.ToLowerInvariant().EndsWith("attribute"))
+                        {
+                            typeName = typeName.Substring(0, typeName.Length - "attribute".Length);
+                        }
+
+                        property.AttributeByName[typeName] = group.First();
+                    }
+                }
+
+                foreach (var method in type.Methods)
+                {
+                    var reflectedMethod = reflectedType.GetMethod(method.Name);
+                    var methodAttributesByTypeName = reflectedMethod.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
+
+                    foreach (var group in methodAttributesByTypeName)
+                    {
+                        var typeName = group.Key;
+                        if (typeName.ToLowerInvariant().EndsWith("attribute"))
+                        {
+                            typeName = typeName.Substring(0, typeName.Length - "attribute".Length);
+                        }
+
+                        method.AttributeByName[typeName] = group.First();
+                    }
                 }
             }
         }

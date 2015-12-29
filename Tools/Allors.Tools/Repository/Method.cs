@@ -21,14 +21,19 @@
 
 namespace Allors.Tools.Repository
 {
-    using Allors.Repository.Domain;
+    using System;
+    using System.Collections.Generic;
 
-    public class Method : IMethod
+    public class Method
     {
         public string Name { get; }
 
+        public Dictionary<string, Attribute> AttributeByName { get; }
+
         public Method(string name)
         {
+            this.AttributeByName = new Dictionary<string, Attribute>();
+
             this.Name = name;
         }
     }

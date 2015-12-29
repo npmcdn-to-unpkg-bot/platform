@@ -26,7 +26,7 @@ namespace Allors.Meta
     using System.Linq;
     using System.Reflection;
 
-    public abstract partial class Domain : MetaObject, IDomain
+    public sealed partial class Domain : MetaObjectBase, IDomain
     {
         private string name;
 

@@ -113,16 +113,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationNotLoadedEventArgs.cs" />
     <Compile Include="Repository\DerivedAttribute.cs" />
-    <Compile Include="Repository\Domain\IAssembly.cs" />
-    <Compile Include="Repository\Domain\IClass.cs" />
-    <Compile Include="Repository\Domain\IInterface.cs" />
-    <Compile Include="Repository\Domain\IMethod.cs" />
-    <Compile Include="Repository\Domain\IPartialClass.cs" />
-    <Compile Include="Repository\Domain\IPartialInterface.cs" />
-    <Compile Include="Repository\Domain\IPartialType.cs" />
-    <Compile Include="Repository\Domain\IProperty.cs" />
-    <Compile Include="Repository\Domain\IRepository.cs" />
-    <Compile Include="Repository\Domain\IType.cs" />
     <Compile Include="Repository\ExtendsAttribute.cs" />
     <Compile Include="Repository\GroupAttribute.cs" />
     <Compile Include="Repository\DomainAttribute.cs" />

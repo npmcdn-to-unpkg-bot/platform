@@ -18,8 +18,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Linq;
-
 namespace Allors.Meta
 {
     using System;
@@ -27,11 +25,11 @@ namespace Allors.Meta
     /// <summary>
     /// Base class for Meta objects.
     /// </summary>
-    public abstract partial class MetaObject : IMetaObject
+    public abstract partial class MetaObjectBase : IMetaObject
     {
         private Guid id;
 
-        protected MetaObject(MetaPopulation metaPopulation)
+        protected MetaObjectBase(MetaPopulation metaPopulation)
         {
             this.MetaPopulation = metaPopulation;
 
@@ -42,13 +40,7 @@ namespace Allors.Meta
             }
         }
 
-        IMetaPopulation IMetaObject.MetaPopulation
-        {
-            get
-            {
-                return this.MetaPopulation;
-            }
-        }
+        IMetaPopulation IMetaObject.MetaPopulation => this.MetaPopulation;
 
         public MetaPopulation MetaPopulation { get; private set; }
 
@@ -75,20 +67,14 @@ namespace Allors.Meta
         /// Gets the id as a number only string.
         /// </summary>
         /// <value>The id as a number only string.</value>
-        public string IdAsNumberString
-        {
-            get { return this.Id.ToString("N").ToLower(); }
-        }
+        public string IdAsNumberString => this.Id.ToString("N").ToLower();
 
         /// <summary>
         /// Gets the id as a string.
         /// </summary>
         /// <value>The id as a string.</value>
-        public string IdAsString
-        {
-            get { return this.Id.ToString("D").ToLower(); }
-        }
-    
+        public string IdAsString => this.Id.ToString("D").ToLower();
+
         /// <summary>
         /// Gets the validation name.
         /// </summary>

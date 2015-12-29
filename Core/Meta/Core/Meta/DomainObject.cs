@@ -21,7 +21,7 @@
 
 namespace Allors.Meta
 {
-    public abstract partial class DomainObject : MetaObject
+    public abstract partial class DomainObject : MetaObjectBase
     {
         protected DomainObject(MetaPopulation metaPopulation)
             : base(metaPopulation)

@@ -24,20 +24,30 @@ namespace Allors.Tools.Repository
     using System;
     using System.Collections.Generic;
 
-    using Allors.Repository.Domain;
-
-    public abstract class Type : IType
+    public abstract class Type
     {
         protected Type(string name)
         {
+            this.AttributeByName = new Dictionary<string, Attribute>();
             this.ImplementedInterfaces = new List<Type>();
+            this.PropertyByName = new Dictionary<string, Property>();
+            this.MethodByName = new Dictionary<string, Method>();
+
             this.Name = name;
         }
 
-        public abstract Dictionary<string, Attribute> AttributeByName { get; }
-
-        public string Name { get; }
+        public Dictionary<string, Attribute> AttributeByName { get; }
 
         public IList<Type> ImplementedInterfaces { get; }
+
+        public Dictionary<string, Property> PropertyByName { get; }
+
+        public Dictionary<string, Method> MethodByName { get; }
+        
+        public IEnumerable<Property> Properties => this.PropertyByName.Values;
+
+        public IEnumerable<Method> Methods => this.MethodByName.Values;
+
+        public string Name { get; }
     }
 }

@@ -2,7 +2,7 @@ group AllorsCSharpRepository;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Meta>>
-TemplateVersion() ::= <<1.0.1>>
+TemplateVersion() ::= <<1.0.2>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(repository) ::= <<
 $! 
@@ -23,30 +23,78 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
+	<generation template="builder" output="builder.g.cs"/> 
 	<generation template="domains" output="domains.g.cs"/> 
 	<generation template="interfaces" output="interfaces.g.cs"/> 
 	<generation template="classes" output="classes.g.cs"/> 
 </generations>
 >>
 
+builder(repository) ::= <<
+namespace Allors.Meta
+{
+	internal class MetaBuilder
+	{
+	    private readonly MetaPopulation metaPopulation;
+
+        internal MetaBuilder(MetaPopulation metaPopulation)
+		{
+			this.metaPopulation = metaPopulation;
+		}
+
+		internal void Build()
+		{
+			// Domains
+$repository.Assemblies:{assembly|             Meta$assembly.Name$.Instance = new Meta$assembly.Name$(this.metaPopulation);}; separator="\n"$
+
+			// Domain Inheritance
+$repository.Assemblies:{assembly|$domain_inheritance(assembly)$}; separator="\n"$
+
+			// Interfaces
+$repository.Interfaces:{interface|             Meta$interface.Name$.Instance = new Meta$interface.Name$(this.metaPopulation);}; separator="\n"$
+
+			// Classes
+$repository.Classes:{class|             Meta$class.Name$.Instance = new Meta$class.Name$(this.metaPopulation);}; separator="\n"$
+
+			// Inheritance
+$repository.Types:{type|$inheritance(type)$}; separator="\n"$
+
+			// Relations
+$repository.Types:{type|$relations(type)$}; separator="\n"$
+
+		}
+	}
+}
+>>
+
+domain_inheritance(assembly) ::= <<$assembly.Bases:{base|             Meta$assembly.Name$.Instance.Domain.AddDirectSuperdomain(Meta$base.Name$.Instance.Domain);}; separator="\n"$>>
+inheritance(type) ::= <<$type.ImplementedInterfaces:{implementedInterface|$inheritance_implentedInterface(type, implementedInterface)$}; separator="\n"$>>
+inheritance_implentedInterface(type, implementedInterface) ::= <<            new Inheritance(this.metaPopulation){ Subtype = (Composite)Meta$type.Name$.Instance.ObjectType, Supertype = Meta$implementedInterface.Name$.Instance.Interface};>>
+
+relations(type) ::= <<$type.Properties:{property|$relation(property)$}; separator="\n"$>>
+relation(property) ::= <<            Meta$type.Name$.$property.Name$ = new RelationType(this.metaPopulation){ Id = new System.Guid("$property.AttributeByName.Id$"), Meta$type.name$.Instance.ObjectType.Id, XXX } >>
+
 domains(repository) ::= <<
 namespace Allors.Meta
 {
-$repository.Assemblies:{assembly|$domain(assembly)$}; separator="\n"$
+$repository.Assemblies:{assembly|$domain(assembly)$}; separator="\n\n"$
 }
 >>
 
 domain(assembly) ::= <<
-    #region Allors
-    [Id("$assembly.Id$")]
-$assembly.Bases:{base|    [Inherit(typeof($base.Name$Domain))]}; separator="\n"$
-    #endregion
-    public partial class $assembly.Name$Domain : Domain
+    public partial class Meta$assembly.Name$
     {
-        public static $assembly.Name$Domain Instance { get; internal set;}
+        public static Meta$assembly.Name$ Instance { get; internal set;}
 
-        internal $assembly.Name$Domain() : base(MetaPopulation.Instance)
+		public readonly Domain Domain;
+
+        internal Meta$assembly.Name$(MetaPopulation metaPopulation)
         {
+			this.Domain = new Domain(metaPopulation)
+			{
+				Id = new System.Guid("$assembly.Id$"),
+				Name = "$assembly.Name$"
+			};
         }
     }
 >>
@@ -54,23 +102,27 @@ $assembly.Bases:{base|    [Inherit(typeof($base.Name$Domain))]}; separator="\n"$
 interfaces(repository) ::= <<
 namespace Allors.Meta
 {
-$repository.Interfaces:{interface|$interface(interface)$}; separator="\n"$
+$repository.Interfaces:{interface|$interface(interface)$}; separator="\n\n"$
 }
 >>
 
 interface(interface) ::= <<
-    #region Allors
-    [Id("$interface.AttributeByName.Id.Value$")]
-    #endregion
-$interface.ImplementedInterfaces:{implementedInterface|     [Inherit(typeof($implementedInterface.Name$Interface))]}; separator="\n"$
-$if(interface.AttributeByName.Plural)$    [Plural("$interface.AttributeByName.Plural$")]$endif$
-    public partial class $interface.Name$Interface : Interface
+    public partial class Meta$interface.Name$
 	{
+	    public static Meta$interface.Name$ Instance { get; internal set;}
 
-		public static $interface.Name$Interface Instance { get; internal set; }
+		public readonly Interface Interface;
 
-		internal $interface.Name$Interface() : base(MetaPopulation.Instance)
+		public ObjectType ObjectType => this.Interface;
+
+		internal Meta$interface.Name$(MetaPopulation metaPopulation)
         {
+			this.Interface = new Interface(metaPopulation)
+			{
+				Id = new System.Guid("$interface.AttributeByName.Id.Value$"),
+				SingularName = "$interface.Name$",
+				$if(interface.AttributeByName.Plural)$    PluralName = "$interface.AttributeByName.Plural$"$endif$
+			};
         }
 	}
 >>
@@ -78,22 +130,27 @@ $if(interface.AttributeByName.Plural)$    [Plural("$interface.AttributeByName.Pl
 classes(repository) ::= <<
 namespace Allors.Meta
 {
-$repository.Classes:{class|$class(class)$}; separator="\n"$
+$repository.Classes:{class|$class(class)$}; separator="\n\n"$
 }
 >>
 
 class(class) ::= <<
-    #region Allors
-    [Id("$class.AttributeByName.Id.Value$")]
-    #endregion
-$class.ImplementedInterfaces:{implementedInterface|     [Inherit(typeof($implementedInterface.Name$Interface))]}; separator="\n"$
-    public partial class $class.Name$Class : Class
+    public partial class Meta$class.Name$
 	{
+	    public static Meta$class.Name$ Instance { get; internal set;}
 
-		public static $class.Name$Class Instance { get; internal set; }
+		public readonly Class Class;
 
-		internal $class.Name$Class(MetaPopulation metaPopulation) : base(metaPopulation)
+		public ObjectType ObjectType => this.Class;
+
+		internal Meta$class.Name$(MetaPopulation metaPopulation)
         {
+			this.Class = new Class(metaPopulation)
+			{
+				Id = new System.Guid("$class.AttributeByName.Id.Value$"),
+				SingularName = "$class.Name$",
+				$if(class.AttributeByName.Plural)$    PluralName = "$class.AttributeByName.Plural$"$endif$
+			};
         }
 	}
 >>

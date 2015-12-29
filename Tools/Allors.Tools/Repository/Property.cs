@@ -21,14 +21,21 @@
 
 namespace Allors.Tools.Repository
 {
-    using Allors.Repository.Domain;
+    using System;
+    using System.Collections.Generic;
 
-    public class Property : IProperty
+    public class Property
     {
         public string Name { get; }
 
+        public string TypeName { get; internal set; }
+
+        public Dictionary<string, Attribute> AttributeByName { get; }
+
         public Property(string name)
         {
+            this.AttributeByName = new Dictionary<string, Attribute>();
+
             this.Name = name;
         }
     }

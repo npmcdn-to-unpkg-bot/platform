@@ -21,22 +21,16 @@
 
 namespace Allors.Tools.Repository
 {
-    using System;
     using System.Collections.Generic;
 
-    using Allors.Repository.Domain;
-
-    public class Class : Type, IClass
+    public class Class : Type
     {
         public Class(string name)
             : base(name)
         {
-            this.AttributeByName = new Dictionary<string, Attribute>();
             this.PartialByAssemblyName = new Dictionary<string, PartialClass>();
         }
 
         public Dictionary<string, PartialClass> PartialByAssemblyName { get; }
-
-        public override Dictionary<string, Attribute> AttributeByName { get; }
     }
 }

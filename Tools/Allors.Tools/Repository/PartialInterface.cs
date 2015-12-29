@@ -21,9 +21,7 @@
 
 namespace Allors.Tools.Repository
 {
-    using Allors.Repository.Domain;
-
-    public class PartialInterface : PartialType, IPartialInterface
+    public class PartialInterface : PartialType
     {
         public PartialInterface(string name)
             : base(name)

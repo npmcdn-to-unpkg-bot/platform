@@ -24,9 +24,7 @@ namespace Allors.Tools.Repository
     using System;
     using System.Collections.Generic;
 
-    using Allors.Repository.Domain;
-
-    public class Assembly : IAssembly
+    public class Assembly
     {
         public Guid Id { get; set; }
 
