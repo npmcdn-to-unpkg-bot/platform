@@ -1,6 +1,7 @@
 ﻿namespace Allors.Tools.Cmd
 {
     using System;
+    using System.IO;
 
     using Allors.Tools.Repository.Tasks;
 
@@ -10,7 +11,6 @@
         {
             try
             {
-
                 if (args.Length < 2)
                 {
                     Console.WriteLine("Error: missing required arguments");
@@ -61,15 +61,16 @@
             var template = args[4];
             var output = args[5];
 
+            var fileInfo = new FileInfo(solutionPath);
+
             try
             {
-                var log = Generate.Execute(solutionPath, projectName, template, output);
+                var log = Generate.Execute(fileInfo.FullName, projectName, template, output);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.InnerException?.Message ?? e.Message);
             }
         }
-
     }
 }

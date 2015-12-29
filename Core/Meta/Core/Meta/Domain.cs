@@ -94,7 +94,7 @@ namespace Allors.Meta
         {
             if (superdomain.Equals(this) || superdomain.Superdomains.Contains(this))
             {
-                throw new Exception("Cyclic in domain inheritance");
+                throw new Exception("Cycle in domain inheritance");
             }
 
             this.directSuperdomains.Add(superdomain);

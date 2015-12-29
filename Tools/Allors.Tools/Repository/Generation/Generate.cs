@@ -19,11 +19,9 @@
 // -------------------------------------------------------------------------------------------------
 namespace Allors.Tools.Repository.Tasks
 {
-    using System;
     using System.IO;
     using System.Linq;
 
-    using Allors.Meta;
     using Allors.Tools.Repository.Generation;
 
     using Microsoft.CodeAnalysis.MSBuild;
@@ -36,7 +34,7 @@ namespace Allors.Tools.Repository.Tasks
 
             var workspace = MSBuildWorkspace.Create();
             var solution = workspace.OpenSolutionAsync(solutionPath).Result;
-            var project = solution.Projects.SingleOrDefault(v => v.Name.Equals(projectName));
+            var project = solution.Projects.First(v => v.Name.ToLowerInvariant().Equals(projectName.ToLowerInvariant()));
             var repository = new Repository(project);
             
             var templateFileInfo = new FileInfo(template);

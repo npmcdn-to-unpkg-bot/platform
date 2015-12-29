@@ -2,7 +2,7 @@ group AllorsCSharpRepository;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Meta>>
-TemplateVersion() ::= <<1.0.0>>
+TemplateVersion() ::= <<1.0.1>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(repository) ::= <<
 $! 
@@ -40,14 +40,12 @@ domain(assembly) ::= <<
     #region Allors
     [Id("$assembly.Id$")]
 $assembly.Bases:{base|    [Inherit(typeof($base.Name$Domain))]}; separator="\n"$
-	[Inherit(typeof(CoreDomain))]
     #endregion
     public partial class $assembly.Name$Domain : Domain
     {
         public static $assembly.Name$Domain Instance { get; internal set;}
 
-        internal $assembly.Name$Domain(MetaPopulation metaPopulation)
-            : base(metaPopulation)
+        internal $assembly.Name$Domain() : base(MetaPopulation.Instance)
         {
         }
     }
@@ -71,7 +69,7 @@ $if(interface.AttributeByName.Plural)$    [Plural("$interface.AttributeByName.Pl
 
 		public static $interface.Name$Interface Instance { get; internal set; }
 
-		internal $interface.Name$Interface(MetaPopulation metaPopulation) : base(metaPopulation)
+		internal $interface.Name$Interface() : base(MetaPopulation.Instance)
         {
         }
 	}
