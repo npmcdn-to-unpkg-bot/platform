@@ -289,19 +289,19 @@ namespace Allors.Adapters.Object.SqlClient
                             var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
                             switch (unitTypeTag)
                             {
-                                case UnitTags.AllorsString:
+                                case UnitTags.String:
                                     unit = reader.GetString(i);
                                     break;
-                                case UnitTags.AllorsInteger:
+                                case UnitTags.Integer:
                                     unit = reader.GetInt32(i);
                                     break;
-                                case UnitTags.AllorsFloat:
+                                case UnitTags.Float:
                                     unit = reader.GetDouble(i);
                                     break;
-                                case UnitTags.AllorsDecimal:
+                                case UnitTags.Decimal:
                                     unit = reader.GetDecimal(i);
                                     break;
-                                case UnitTags.AllorsDateTime:
+                                case UnitTags.DateTime:
                                     var dateTime = reader.GetDateTime(i);
                                     if (dateTime == DateTime.MaxValue || dateTime == DateTime.MinValue)
                                     {
@@ -313,13 +313,13 @@ namespace Allors.Adapters.Object.SqlClient
                                     }
 
                                     break;
-                                case UnitTags.AllorsBoolean:
+                                case UnitTags.Boolean:
                                     unit = reader.GetBoolean(i);
                                     break;
-                                case UnitTags.AllorsUnique:
+                                case UnitTags.Unique:
                                     unit = reader.GetGuid(i);
                                     break;
-                                case UnitTags.AllorsBinary:
+                                case UnitTags.Binary:
                                     var byteArray = (byte[])reader.GetValue(i);
                                     unit = byteArray;
                                     break;
@@ -350,35 +350,35 @@ namespace Allors.Adapters.Object.SqlClient
             var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
             switch (unitTypeTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     tableTypeName = schema.TableTypeNameForStringRelation;
                     break;
 
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     tableTypeName = schema.TableTypeNameForIntegerRelation;
                     break;
 
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     tableTypeName = schema.TableTypeNameForFloatRelation;
                     break;
 
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     tableTypeName = schema.TableTypeNameForBooleanRelation;
                     break;
 
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     tableTypeName = schema.TableTypeNameForDateTimeRelation;
                     break;
 
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     tableTypeName = schema.TableTypeNameForUniqueRelation;
                     break;
 
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     tableTypeName = schema.TableTypeNameForBinaryRelation;
                     break;
 
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     tableTypeName = schema.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                     break;
 

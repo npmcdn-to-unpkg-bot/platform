@@ -184,19 +184,19 @@ namespace Allors.Adapters.Object.SqlClient
                             var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
                             switch (unitTypeTag)
                             {
-                                case UnitTags.AllorsString:
+                                case UnitTags.String:
                                     unit = reader.GetString(index);
                                     break;
-                                case UnitTags.AllorsInteger:
+                                case UnitTags.Integer:
                                     unit = reader.GetInt32(index);
                                     break;
-                                case UnitTags.AllorsFloat:
+                                case UnitTags.Float:
                                     unit = reader.GetDouble(index);
                                     break;
-                                case UnitTags.AllorsDecimal:
+                                case UnitTags.Decimal:
                                     unit = reader.GetDecimal(index);
                                     break;
-                                case UnitTags.AllorsDateTime:
+                                case UnitTags.DateTime:
                                     var dateTime = reader.GetDateTime(index);
                                     if (dateTime == DateTime.MaxValue || dateTime == DateTime.MinValue)
                                     {
@@ -208,13 +208,13 @@ namespace Allors.Adapters.Object.SqlClient
                                     }
 
                                     break;
-                                case UnitTags.AllorsBoolean:
+                                case UnitTags.Boolean:
                                     unit = reader.GetBoolean(index);
                                     break;
-                                case UnitTags.AllorsUnique:
+                                case UnitTags.Unique:
                                     unit = reader.GetGuid(index);
                                     break;
-                                case UnitTags.AllorsBinary:
+                                case UnitTags.Binary:
                                     var byteArray = (byte[])reader.GetValue(index);
                                     unit = byteArray;
                                     break;

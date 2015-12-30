@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="CoreDomain.cs" company="Allors bvba">
+// <copyright file="Class.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,20 +16,16 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the IObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+namespace Allors.Tools.Repository
 {
-    [Id("c28e515b-cae8-4d6b-95bf-062aec8042fc")]
-    public partial class AllorsBinaryUnit : Unit
+    public class Composite : Type
     {
-        public static AllorsBinaryUnit Instance { get; internal set; }
-
-        internal AllorsBinaryUnit()
-            : base(MetaPopulation.Instance)
+        public Composite(string name)
+            : base(name)
         {
-            this.UnitTag = UnitTags.AllorsBinary;
         }
     }
 }

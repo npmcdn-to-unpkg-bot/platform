@@ -28,7 +28,9 @@ namespace Allors.Tools.Repository
     {
         public string Name { get; }
 
-        public string TypeName { get; internal set; }
+        public Type Type { get; internal set; }
+
+        public Property DefiningProperty { get; internal set; }
 
         public Dictionary<string, Attribute> AttributeByName { get; }
 

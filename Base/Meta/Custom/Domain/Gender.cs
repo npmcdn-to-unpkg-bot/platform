@@ -1,6 +1,6 @@
 namespace Allors.Meta
 {
-    public partial class GenderClass : Class
+    public partial class MetaGender
     {
     }
 }

@@ -23,7 +23,7 @@ namespace Allors.Tools.Repository
 {
     using System.Collections.Generic;
 
-    public class Class : Type
+    public class Class : Composite
     {
         public Class(string name)
             : base(name)
@@ -32,5 +32,33 @@ namespace Allors.Tools.Repository
         }
 
         public Dictionary<string, PartialClass> PartialByAssemblyName { get; }
+
+        public Property GetImplementedProperty(Property property)
+        {
+            foreach (var @interface in this.ImplementedInterfaces)
+            {
+                var implementedProperty = @interface.GetImplementedProperty(property);
+                if (implementedProperty != null)
+                {
+                    return implementedProperty;
+                }
+            }
+
+            return null;
+        }
+
+        public Method GetImplementedMethod(Method method)
+        {
+            foreach (var @interface in this.ImplementedInterfaces)
+            {
+                var implementedProperty = @interface.GetImplementedMethod(method);
+                if (implementedProperty != null)
+                {
+                    return implementedProperty;
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -18,7 +18,7 @@
         <Point X="5.5" Y="4.5" />
         <Point X="5.5" Y="3.529" />
         <Point X="6.448" Y="3.529" Type="JumpStart" />
-        <Point X="6.615" Y="3.529" Type="JumpEnd" />
+        <Point X="6.614" Y="3.529" Type="JumpEnd" />
         <Point X="8.25" Y="3.529" />
       </Path>
     </AssociationLine>
@@ -37,38 +37,22 @@
     <Position X="0.5" Y="1" Width="1.75" />
     <AssociationLine Name="AssemblyByName" Type="Allors.Tools.Repository.Assembly" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="1.375" Y="4.286" />
-        <Point X="1.375" Y="5.062" />
+        <Point X="1.375" Y="5.632" />
+        <Point X="1.375" Y="5.882" />
+        <Point X="2.5" Y="5.882" />
+        <Point X="2.5" Y="5.062" />
         <Point X="3.042" Y="5.062" Type="JumpStart" />
         <Point X="3.208" Y="5.062" Type="JumpEnd" />
         <Point X="4.25" Y="5.062" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="InterfaceByName" Type="Allors.Tools.Repository.Interface" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="2.25" Y="1.295" />
-        <Point X="5.167" Y="1.295" Type="JumpStart" />
-        <Point X="5.333" Y="1.295" Type="JumpEnd" />
-        <Point X="6.938" Y="1.295" />
-        <Point X="6.938" Y="2" />
-      </Path>
-    </AssociationLine>
-    <AssociationLine Name="TypeByName" Type="Allors.Tools.Repository.Type" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="1.688" Y="1" />
-        <Point X="1.688" Y="0.75" />
-        <Point X="4.5" Y="0.75" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AgACAAAAAAUAAAABAQBAAAgAgAAAAEAAAAAAIAAACAQ=</HashCode>
+      <HashCode>IgECAAAAAAUAAAABEQBAAAgCgAAAAEAAEAAgIAAACAQ=</HashCode>
       <FileName>Repository\Repository.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="AssemblyByName" />
       <Property Name="ClassByName" />
-      <Property Name="InterfaceByName" />
-      <Property Name="TypeByName" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Allors.Tools.Repository.PartialClass">
@@ -99,14 +83,14 @@
   <Class Name="Allors.Tools.Repository.Method">
     <Position X="11.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAMAAAAAAAA=</HashCode>
       <FileName>Repository\Method.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Tools.Repository.Property">
     <Position X="14" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAABAAAAEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAQAAAAAAAAAAQEAAAAAAAA=</HashCode>
       <FileName>Repository\Property.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -122,7 +106,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAEAgAAAA=</HashCode>
       <FileName>Repository\Class.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -140,7 +124,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAEAgAAAA=</HashCode>
       <FileName>Repository\Interface.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -149,13 +133,6 @@
   </Class>
   <Class Name="Allors.Tools.Repository.Type" Collapsed="true">
     <Position X="4.5" Y="0.5" Width="1.5" />
-    <AssociationLine Name="MethodByName" Type="Allors.Tools.Repository.Method" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="6" Y="0.812" />
-        <Point X="12.25" Y="0.812" />
-        <Point X="12.25" Y="1.25" />
-      </Path>
-    </AssociationLine>
     <AssociationLine Name="PropertyByName" Type="Allors.Tools.Repository.Property" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="6" Y="0.625" />
@@ -163,13 +140,21 @@
         <Point X="14.75" Y="1.25" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="MethodByName" Type="Allors.Tools.Repository.Method" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="0.812" />
+        <Point X="12.25" Y="0.812" />
+        <Point X="12.25" Y="1.25" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAACAAQAAAAAAAAIAAEAAAACAEA=</HashCode>
+      <HashCode>AAAAAAAAQIAIEAAAgAACAAQAAAAAAAAIAAEAAAACAEA=</HashCode>
       <FileName>Repository\Type.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="MethodByName" />
       <Property Name="PropertyByName" />
+      <Property Name="MethodByName" />
+      <Property Name="ImplementedInterfaces" />
     </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />

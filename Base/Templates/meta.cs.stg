@@ -25,6 +25,7 @@ For more information visit http://www.allors.com/legal
 <generations>
 	<generation template="builder" output="builder.g.cs"/> 
 	<generation template="domains" output="domains.g.cs"/> 
+	<generation template="units" output="units.g.cs"/> 
 	<generation template="interfaces" output="interfaces.g.cs"/> 
 	<generation template="classes" output="classes.g.cs"/> 
 </generations>
@@ -50,6 +51,9 @@ $repository.Assemblies:{assembly|             Meta$assembly.Name$.Instance = new
 			// Domain Inheritance
 $repository.Assemblies:{assembly|$domain_inheritance(assembly)$}; separator="\n"$
 
+			// Units
+$repository.Units:{unit|             Meta$unit.Name$.Instance = new Meta$unit.Name$(this.metaPopulation);}; separator="\n"$
+
 			// Interfaces
 $repository.Interfaces:{interface|             Meta$interface.Name$.Instance = new Meta$interface.Name$(this.metaPopulation);}; separator="\n"$
 
@@ -71,8 +75,8 @@ domain_inheritance(assembly) ::= <<$assembly.Bases:{base|             Meta$assem
 inheritance(type) ::= <<$type.ImplementedInterfaces:{implementedInterface|$inheritance_implentedInterface(type, implementedInterface)$}; separator="\n"$>>
 inheritance_implentedInterface(type, implementedInterface) ::= <<            new Inheritance(this.metaPopulation){ Subtype = (Composite)Meta$type.Name$.Instance.ObjectType, Supertype = Meta$implementedInterface.Name$.Instance.Interface};>>
 
-relations(type) ::= <<$type.Properties:{property|$relation(property)$}; separator="\n"$>>
-relation(property) ::= <<            Meta$type.Name$.$property.Name$ = new RelationType(this.metaPopulation){ Id = new System.Guid("$property.AttributeByName.Id$"), Meta$type.name$.Instance.ObjectType.Id, XXX } >>
+relations(type) ::= <<$type.DefinedProperties:{property|$relation(property)$}; separator="\n"$>>
+relation(property) ::= <<            Meta$type.Name$.Instance.$property.Name$ = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), Meta$type.name$.Instance.ObjectType.Id, Meta$property.Type.Name$.Instance.ObjectType.Id);>>
 
 domains(repository) ::= <<
 namespace Allors.Meta
@@ -99,6 +103,35 @@ domain(assembly) ::= <<
     }
 >>
 
+units(repository) ::= <<
+namespace Allors.Meta
+{
+$repository.Units:{unit|$unit(unit)$}; separator="\n\n"$
+}
+>>
+
+unit(unit) ::= <<
+    public partial class Meta$unit.Name$ : MetaUnit
+	{
+	    public static Meta$unit.Name$ Instance { get; internal set;}
+
+		public readonly Unit Unit;
+
+		public override ObjectType ObjectType => this.Unit;
+
+		internal Meta$unit.Name$(MetaPopulation metaPopulation)
+        {
+			this.Unit = new Unit(metaPopulation)
+			{
+				Id = UnitIds.$unit.Name$,
+				Tag = UnitTags.$unit.Name$,
+				SingularName = UnitNames.$unit.Name$
+			};
+        }
+	}
+>>
+
+
 interfaces(repository) ::= <<
 namespace Allors.Meta
 {
@@ -107,13 +140,15 @@ $repository.Interfaces:{interface|$interface(interface)$}; separator="\n\n"$
 >>
 
 interface(interface) ::= <<
-    public partial class Meta$interface.Name$
+    public partial class Meta$interface.Name$ : MetaInterface
 	{
 	    public static Meta$interface.Name$ Instance { get; internal set;}
 
 		public readonly Interface Interface;
 
-		public ObjectType ObjectType => this.Interface;
+		public override ObjectType ObjectType => this.Interface;
+
+$interface.DefinedProperties:{property|         public RelationType $property.Name$;}; separator="\n"$
 
 		internal Meta$interface.Name$(MetaPopulation metaPopulation)
         {
@@ -135,13 +170,15 @@ $repository.Classes:{class|$class(class)$}; separator="\n\n"$
 >>
 
 class(class) ::= <<
-    public partial class Meta$class.Name$
+    public partial class Meta$class.Name$ : MetaClass
 	{
 	    public static Meta$class.Name$ Instance { get; internal set;}
 
 		public readonly Class Class;
 
-		public ObjectType ObjectType => this.Class;
+		public override ObjectType ObjectType => this.Class;
+
+$class.DefinedProperties:{property|         public RelationType $property.Name$;}; separator="\n"$
 
 		internal Meta$class.Name$(MetaPopulation metaPopulation)
         {

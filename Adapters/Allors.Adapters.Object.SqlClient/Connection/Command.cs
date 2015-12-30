@@ -239,21 +239,21 @@ namespace Allors.Adapters.Object.SqlClient
         {
             switch (unitTypeTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     return reader.GetString(i);
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     return reader.GetInt32(i);
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     return reader.GetDouble(i);
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     return reader.GetDecimal(i);
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     return reader.GetBoolean(i);
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     return reader.GetDateTime(i);
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     return reader.GetGuid(i);
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     return reader.GetValue(i);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="CoreDomain.cs" company="Allors bvba">
+// <copyright file="MetaClass.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,20 +16,18 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the AssociationType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    [Id("c4c09343-61d3-418c-ade2-fe6fd588f128")]
-    public partial class AllorsDateTimeUnit : Unit
+    public abstract partial class MetaClass
     {
-        public static AllorsDateTimeUnit Instance { get; internal set; }
+        public abstract ObjectType ObjectType { get; }
 
-        internal AllorsDateTimeUnit()
-            : base(MetaPopulation.Instance)
+        public static implicit operator ObjectType(MetaClass metaClass)
         {
-            this.UnitTag = UnitTags.AllorsDateTime;
+            return metaClass.ObjectType;
         }
     }
 }

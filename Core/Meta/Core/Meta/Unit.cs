@@ -23,7 +23,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class Unit : ObjectType, IUnit
+    public sealed partial class Unit : ObjectType, IUnit
     {
         private UnitTags unitTag;
 
@@ -54,10 +54,7 @@ namespace Allors.Meta
         /// Gets a value indicating whether this instance is a binary.
         /// </summary>
         /// <value><c>true</c> if this instance is a binary; otherwise, <c>false</c>.</value>
-        public bool IsBinary
-        {
-            get { return this.Id.Equals(UnitIds.BinaryId); }
-        }
+        public bool IsBinary => this.Id.Equals(UnitIds.Binary);
 
         /// <summary>
         /// Gets a value indicating whether this instance is a boolean.
@@ -65,10 +62,7 @@ namespace Allors.Meta
         /// <value>
         /// <c>true</c> if this instance is a boolean; otherwise, <c>false</c>.
         /// </value>
-        public bool IsBoolean
-        {
-            get { return this.Id.Equals(UnitIds.BooleanId); }
-        }
+        public bool IsBoolean => this.Id.Equals(UnitIds.Boolean);
 
         /// <summary>
         /// Gets a value indicating whether this instance is a date time.
@@ -76,10 +70,7 @@ namespace Allors.Meta
         /// <value>
         /// <c>true</c> if this instance is a date time; otherwise, <c>false</c>.
         /// </value>
-        public bool IsDateTime
-        {
-            get { return this.Id.Equals(UnitIds.DateTimeId); }
-        }
+        public bool IsDateTime => this.Id.Equals(UnitIds.DateTime);
 
         /// <summary>
         /// Gets a value indicating whether this instance is a decimal.
@@ -87,19 +78,13 @@ namespace Allors.Meta
         /// <value>
         ///  <c>true</c> if this instance is a decimal; otherwise, <c>false</c>.
         /// </value>
-        public bool IsDecimal
-        {
-            get { return this.Id.Equals(UnitIds.DecimalId); }
-        }
+        public bool IsDecimal => this.Id.Equals(UnitIds.Decimal);
 
         /// <summary>
         /// Gets a value indicating whether this instance is a float.
         /// </summary>
         /// <value><c>true</c> if this instance is a float; otherwise, <c>false</c>.</value>
-        public bool IsFloat
-        {
-            get { return this.Id.Equals(UnitIds.FloatId); }
-        }
+        public bool IsFloat => this.Id.Equals(UnitIds.Float);
 
         /// <summary>
         /// Gets a value indicating whether this instance is an integer.
@@ -107,70 +92,55 @@ namespace Allors.Meta
         /// <value>
         ///  <c>true</c> if this instance is an integer; otherwise, <c>false</c>.
         /// </value>
-        public bool IsInteger
-        {
-            get { return this.Id.Equals(UnitIds.IntegerId); }
-        }
+        public bool IsInteger => this.Id.Equals(UnitIds.Integer);
 
         /// <summary>
         /// Gets a value indicating whether this instance is a string.
         /// </summary>
         /// <value><c>true</c> if this instance is a string; otherwise, <c>false</c>.</value>
-        public bool IsString
-        {
-            get { return this.Id.Equals(UnitIds.StringId); }
-        }
+        public bool IsString => this.Id.Equals(UnitIds.String);
 
         /// <summary>
         /// Gets a value indicating whether this instance is a unique.
         /// </summary>
         /// <value><c>true</c> if this instance is a unique; otherwise, <c>false</c>.</value>
-        public bool IsUnique
-        {
-            get { return this.Id.Equals(UnitIds.UniqueId); }
-        }
+        public bool IsUnique => this.Id.Equals(UnitIds.Unique);
 
-        public override Type ClrType
-        {
-            get
-            {
-                return this.clrType;
-            }
-        }
+        public override Type ClrType => this.clrType;
 
         internal void Bind()
         {
             switch (this.UnitTag)
             {
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     this.clrType = typeof(byte[]);
                     break;
 
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     this.clrType = typeof(bool);
                     break;
 
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     this.clrType = typeof(DateTime);
                     break;
 
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     this.clrType = typeof(decimal);
                     break;
 
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     this.clrType = typeof(double);
                     break;
 
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     this.clrType = typeof(int);
                     break;
 
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     this.clrType = typeof(string);
                     break;
 
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     this.clrType = typeof(Guid);
                     break;
             }

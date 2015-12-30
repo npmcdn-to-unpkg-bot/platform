@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="UnitTags.cs" company="Allors bvba">
-// Copyright 2002-2014 Allors bvba.
+// <copyright file="UnitNames.cs" company="Allors bvba">
+// Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -16,53 +16,56 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>Defines the UnitTypeTags type.</summary>
 //-------------------------------------------------------------------------------------------------
+
 namespace Allors.Meta
 {
+    using System;
+
     /// <summary>
-    /// The tags for units.
-    /// Do not use tags for long term persistence, UnitTypeIds should be used for that purpose.
+    /// The names for unit ObjectTypes.
     /// </summary>
-    public enum UnitTags
+    public static class UnitNames
     {
         /// <summary>
-        /// The tag for the binary <see cref="IObjectType"/>.
+        /// The name of the binary type.
         /// </summary>
-        Binary,
+        public static readonly string Binary = "Binary";
 
         /// <summary>
-        /// The tag for the boolean <see cref="IObjectType"/>.
+        /// The name of the boolean type.
         /// </summary>
-        Boolean,
+        public static readonly string Boolean = "Boolean";
 
         /// <summary>
-        /// The tag for the date time <see cref="IObjectType"/>.
+        /// The name of the date time type.
         /// </summary>
-        DateTime,
+        public static readonly string DateTime = "DateTime";
 
         /// <summary>
-        /// The tag for the decimal <see cref="IObjectType"/>.
+        /// The name of the decimal type.
         /// </summary>
-        Decimal,
+        public static readonly string Decimal = "Decimal";
 
         /// <summary>
-        /// The tag for the float <see cref="IObjectType"/>.
+        /// The name of the float type.
         /// </summary>
-        Float,
+        public static readonly string Float = "Float";
 
         /// <summary>
-        /// The tag for the integer <see cref="IObjectType"/>.
+        /// The name of the integer type.
         /// </summary>
-        Integer,
+        public static readonly string Integer = "Integer";
 
         /// <summary>
-        /// The tag for the string <see cref="IObjectType"/>.
+        /// The name of the string type.
         /// </summary>
-        String,
+        public static readonly string String = "String";
 
         /// <summary>
-        /// The tag for the unique <see cref="IObjectType"/>.
+        /// The name of the unique type.
         /// </summary>
-        Unique,
+        public static readonly string Unique = "Unique";
     }
 }

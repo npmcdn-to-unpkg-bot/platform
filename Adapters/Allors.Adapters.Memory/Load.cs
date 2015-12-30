@@ -326,10 +326,10 @@ namespace Allors.Adapters.Memory
                                         var unitType = (IUnit)relationType.RoleType.ObjectType;
                                         switch (unitType.UnitTag)
                                         {
-                                            case UnitTags.AllorsString:
+                                            case UnitTags.String:
                                                 strategy.SetUnitRole(relationType.RoleType, string.Empty);
                                                 break;
-                                            case UnitTags.AllorsBinary:
+                                            case UnitTags.Binary:
                                                 strategy.SetUnitRole(relationType.RoleType, emptyByteArray);
                                                 break;
                                         }

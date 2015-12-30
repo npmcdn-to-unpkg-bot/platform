@@ -465,26 +465,26 @@ namespace Allors.Adapters.Object.SqlClient
             var unit = (IUnit)roleType.ObjectType;
             switch (unit.UnitTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     if (roleType.Size == -1 || roleType.Size > 4000)
                     {
                         return new SqlMetaData(name, SqlDbType.NVarChar, -1);
                     }
 
                     return new SqlMetaData(name, SqlDbType.NVarChar, roleType.Size.Value);
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     return new SqlMetaData(name, SqlDbType.Int);
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     return new SqlMetaData(name, SqlDbType.Decimal, (byte)roleType.Precision.Value, (byte)roleType.Scale.Value);
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     return new SqlMetaData(name, SqlDbType.Float);
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     return new SqlMetaData(name, SqlDbType.Bit);
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     return new SqlMetaData(name, SqlDbType.DateTime2);
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     return new SqlMetaData(name, SqlDbType.UniqueIdentifier);
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     if (roleType.Size == -1 || roleType.Size > 8000)
                     {
                         return new SqlMetaData(name, SqlDbType.VarBinary, -1);

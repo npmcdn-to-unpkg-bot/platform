@@ -28,6 +28,8 @@ namespace Allors.Tools.Repository
     {
         public string Name { get; }
 
+        public Method DefiningMethod { get; internal set; }
+
         public Dictionary<string, Attribute> AttributeByName { get; }
 
         public Method(string name)

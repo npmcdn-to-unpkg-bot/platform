@@ -3,12 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using Allors.Meta;
+
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     public class Repository
     {
         public IEnumerable<Assembly> Assemblies => this.AssemblyByName.Values;
+
+        public IEnumerable<Unit> Units => this.UnitByName.Values;
 
         public IEnumerable<Interface> Interfaces => this.InterfaceByName.Values;
 
@@ -18,20 +23,28 @@
 
         public Dictionary<string, Assembly> AssemblyByName { get; }
 
+        public Dictionary<string, Unit> UnitByName { get; }
+
         public Dictionary<string, Interface> InterfaceByName { get; }
 
         public Dictionary<string, Class> ClassByName { get; }
 
         public Dictionary<string, Type> TypeByName { get; }
 
+        public Dictionary<string, Composite> CompositeByName { get; }
+
         public Repository(Project project)
         {
             this.AssemblyByName = new Dictionary<string, Assembly>();
+            this.UnitByName = new Dictionary<string, Unit>();
             this.InterfaceByName = new Dictionary<string, Interface>();
             this.ClassByName = new Dictionary<string, Class>();
+            this.CompositeByName = new Dictionary<string, Composite>();
             this.TypeByName = new Dictionary<string, Type>();
 
             var projectInfo = new ProjectInfo(project);
+
+            this.CreateUnits();
 
             this.CreateAssemblies(projectInfo);
             this.CreateAssemblyExtensions(projectInfo);
@@ -41,6 +54,43 @@
             this.CreateMembers(projectInfo);
 
             this.FromReflection(projectInfo);
+
+            this.LinkImplementations();
+        }
+
+        private void CreateUnits()
+        {
+            var binary = new Unit(UnitNames.Binary, UnitIds.Binary);
+            this.UnitByName[binary.Name] = binary;
+            this.TypeByName[binary.Name] = binary;
+
+            var boolean = new Unit(UnitNames.Boolean, UnitIds.Boolean);
+            this.UnitByName[boolean.Name] = boolean;
+            this.TypeByName[boolean.Name] = boolean;
+
+            var datetime = new Unit(UnitNames.DateTime, UnitIds.DateTime);
+            this.UnitByName[datetime.Name] = datetime;
+            this.TypeByName[datetime.Name] = datetime;
+
+            var @decimal = new Unit(UnitNames.Decimal, UnitIds.Decimal);
+            this.UnitByName[@decimal.Name] = @decimal;
+            this.TypeByName[@decimal.Name] = @decimal;
+
+            var @float = new Unit(UnitNames.Float, UnitIds.Float);
+            this.UnitByName[@float.Name] = @float;
+            this.TypeByName[@float.Name] = @float;
+
+            var integer = new Unit(UnitNames.Integer, UnitIds.Integer);
+            this.UnitByName[integer.Name] = integer;
+            this.TypeByName[integer.Name] = integer;
+
+            var @string = new Unit(UnitNames.String, UnitIds.String);
+            this.UnitByName[@string.Name] = @string;
+            this.TypeByName[@string.Name] = @string;
+
+            var unique = new Unit(UnitNames.Unique, UnitIds.Unique);
+            this.UnitByName[unique.Name] = unique;
+            this.TypeByName[unique.Name] = unique;
         }
 
         private void CreateAssemblies(ProjectInfo projectInfo)
@@ -167,6 +217,7 @@
                             {
                                 @interface = new Interface(interfaceName);
                                 this.InterfaceByName[interfaceName] = @interface;
+                                this.CompositeByName[interfaceName] = @interface;
                                 this.TypeByName[interfaceName] = @interface;
                             }
 
@@ -188,6 +239,7 @@
                             {
                                 @class = new Class(className);
                                 this.ClassByName[className] = @class;
+                                this.CompositeByName[className] = @class;
                                 this.TypeByName[className] = @class;
                             }
 
@@ -202,16 +254,16 @@
         {
             var definedTypeByName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
 
-            foreach (var type in this.TypeByName.Values)
+            foreach (var composite in this.CompositeByName.Values)
             {
-                var definedType = definedTypeByName[type.Name];
+                var definedType = definedTypeByName[composite.Name];
 
                 var allInterfaces = definedType.GetInterfaces();
                 var directInterfaces = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces()));
                 foreach (var definedImplementedInterface in directInterfaces)
                 {
-                    var implementedInterface = this.TypeByName[definedImplementedInterface.Name];
-                    type.ImplementedInterfaces.Add(implementedInterface);
+                    var implementedInterface = this.InterfaceByName[definedImplementedInterface.Name];
+                    composite.ImplementedInterfaces.Add(implementedInterface);
                 }
             }
         }
@@ -271,9 +323,9 @@
         {
             var declaredTypeByName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
 
-            foreach (var type in this.TypeByName.Values)
+            foreach (var composite in this.CompositeByName.Values)
             {
-                var reflectedType = declaredTypeByName[type.Name];
+                var reflectedType = declaredTypeByName[composite.Name];
                 var typeAttributesByTypeName = reflectedType.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
 
                 foreach (var group in typeAttributesByTypeName)
@@ -284,29 +336,36 @@
                         typeName = typeName.Substring(0, typeName.Length - "attribute".Length);
                     }
 
-                    type.AttributeByName[typeName] = group.First();
+                    composite.AttributeByName[typeName] = group.First();
                 }
 
-                foreach (var property in type.Properties)
+                foreach (var property in composite.Properties)
                 {
                     var reflectedProperty = reflectedType.GetProperty(property.Name);
-                    var propertyAttributesByTypeName = reflectedProperty.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
+                    var propertyAttributesByTypeName =
+                        reflectedProperty.GetCustomAttributes(false)
+                            .Cast<Attribute>()
+                            .GroupBy(v => v.GetType().Name);
 
-                    property.TypeName = reflectedProperty.PropertyType.Name;
+                    var reflectedPropertyType = reflectedProperty.PropertyType;
+                    var typeName = this.GetTypeName(reflectedPropertyType);
+                    property.Type = this.TypeByName[typeName];
 
                     foreach (var group in propertyAttributesByTypeName)
                     {
-                        var typeName = group.Key;
-                        if (typeName.ToLowerInvariant().EndsWith("attribute"))
+                        var attributeTypeName = group.Key;
+                        if (attributeTypeName.ToLowerInvariant().EndsWith("attribute"))
                         {
-                            typeName = typeName.Substring(0, typeName.Length - "attribute".Length);
+                            attributeTypeName = attributeTypeName.Substring(
+                                0,
+                                attributeTypeName.Length - "attribute".Length);
                         }
 
-                        property.AttributeByName[typeName] = group.First();
+                        property.AttributeByName[attributeTypeName] = group.First();
                     }
                 }
 
-                foreach (var method in type.Methods)
+                foreach (var method in composite.Methods)
                 {
                     var reflectedMethod = reflectedType.GetMethod(method.Name);
                     var methodAttributesByTypeName = reflectedMethod.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
@@ -323,6 +382,68 @@
                     }
                 }
             }
+        }
+
+        private void LinkImplementations()
+        {
+            foreach (var @class in this.Classes)
+            {
+                foreach (var property in @class.Properties)
+                {
+                    property.DefiningProperty = @class.GetImplementedProperty(property);
+                }
+
+                foreach (var method in @class.Methods)
+                {
+                    method.DefiningMethod = @class.GetImplementedMethod(method);
+                }
+            }
+        }
+
+        private string GetTypeName(System.Type type)
+        {
+            var typeName = type.Name;
+            if (typeName.EndsWith("[]"))
+            {
+                typeName = typeName.Substring(0, typeName.Length - "[]".Length);
+            }
+
+            switch (typeName)
+            {
+                case "Byte":
+                case "byte":
+                    return "Binary";
+
+                case "Boolean":
+                case "bool":
+                    return "Boolean";
+
+                case "Decimal":
+                case "decimal":
+                    return "Decimal";
+
+                case "DateTime":
+                    return "DateTime";
+
+                case "Double":
+                case "double":
+                    return "Float";
+
+                case "Int32":
+                case "int":
+                    return "Integer";
+
+                case "String":
+                case "string":
+                    return "String";
+
+                case "Guid":
+                    return "Unique";
+
+                default:
+                    return typeName;
+            }
+
         }
     }
 }

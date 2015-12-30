@@ -61,32 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBinaryUnit.cs">
-      <Link>Core\Domain\AllorsBinaryUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\MetaClass.cs">
+      <Link>Core\Domain\MetaClass.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBooleanUnit.cs">
-      <Link>Core\Domain\AllorsBooleanUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\MetaInterface.cs">
+      <Link>Core\Domain\MetaInterface.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDateTimeUnit.cs">
-      <Link>Core\Domain\AllorsDateTimeUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDecimalUnit.cs">
-      <Link>Core\Domain\AllorsDecimalUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsFloatUnit.cs">
-      <Link>Core\Domain\AllorsFloatUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsIntegerUnit.cs">
-      <Link>Core\Domain\AllorsIntegerUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsStringUnit.cs">
-      <Link>Core\Domain\AllorsStringUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsUniqueUnit.cs">
-      <Link>Core\Domain\AllorsUniqueUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ObjectInterface.cs">
-      <Link>Core\Domain\ObjectInterface.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\MetaUnit.cs">
+      <Link>Core\Domain\MetaUnit.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\Generation\Generate.cs">
       <Link>Core\Generation\Generate.cs</Link>
@@ -262,13 +244,13 @@
     <Compile Include="Base\Domain\Transitional.cs" />
     <Compile Include="Custom\Domain\Two.cs" />
     <Compile Include="Base\Domain\UniquelyIdentifiable.cs" />
-    <Compile Include="Custom\Domain\Unit.cs" />
     <Compile Include="Base\Domain\User.cs" />
     <Compile Include="Base\Domain\UserGroup.cs" />
     <Compile Include="Generated\builder.g.cs" />
     <Compile Include="Generated\classes.g.cs" />
     <Compile Include="Generated\domains.g.cs" />
     <Compile Include="Generated\interfaces.g.cs" />
+    <Compile Include="Generated\units.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Custom\Domain\User.cs" />
     <Compile Include="Custom\Meta\Composite.cs" />

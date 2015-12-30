@@ -47,7 +47,7 @@ namespace Allors.Adapters
 
             switch (unitTypeTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     if (!(unit is string))
                     {
                         throw new ArgumentException("RoleType is not a String.");
@@ -61,14 +61,14 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     if (!(unit is int))
                     {
                         throw new ArgumentException("RoleType is not an Integer.");
                     }
 
                     break;
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     if (unit is DateTime)
                     {
                         var dateTime = (DateTime)normalizedUnit;
@@ -92,7 +92,7 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     if (unit is int || unit is long || unit is float || unit is double)
                     {
                         normalizedUnit = Convert.ToDecimal(unit);
@@ -103,7 +103,7 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     if (unit is int || unit is long || unit is float)
                     {
                         normalizedUnit = Convert.ToDouble(unit);
@@ -114,21 +114,21 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     if (!(unit is bool))
                     {
                         throw new ArgumentException("RoleType is not a Boolean.");
                     }
 
                     break;
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     if (!(unit is Guid))
                     {
                         throw new ArgumentException("RoleType is not a Boolean.");
                     }
 
                     break;
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     if (!(unit is byte[]))
                     {
                         throw new ArgumentException("RoleType is not a Boolean.");

@@ -360,7 +360,7 @@ namespace Allors.Adapters.Object.SqlClient
                                     var exclusiveRootClass = associationConcreteClass;
                                     switch (((IUnit)relationType.RoleType.ObjectType).UnitTag)
                                     {
-                                        case UnitTags.AllorsString:
+                                        case UnitTags.String:
                                             {
                                                 List<UnitRelation> relations;
                                                 if (
@@ -376,7 +376,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                                             break;
 
-                                        case UnitTags.AllorsBinary:
+                                        case UnitTags.Binary:
                                             {
                                                 List<UnitRelation> relations;
                                                 if (!relationsByExclusiveRootClass.TryGetValue(associationConcreteClass, out relations))

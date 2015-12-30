@@ -1,6 +1,6 @@
 namespace Allors.Meta
 {
-    public partial class OrderObjectStateClass : Class
+    public partial class MetaOrderObjectState
     {
     }
 }

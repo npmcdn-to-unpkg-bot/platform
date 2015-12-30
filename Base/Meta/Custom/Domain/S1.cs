@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-    public partial class S1Interface : Interface
+    public partial class MetaS1
     {
-        [Id("709F5C76-D6C6-4F96-9C24-1E85956D5491")]
-        public MethodType SuperinterfaceMethod;
     }
 }

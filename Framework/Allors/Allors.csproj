@@ -102,6 +102,7 @@
     <Compile Include="Meta\IRoleType.cs" />
     <Compile Include="Meta\IUnit.cs" />
     <Compile Include="Meta\IValidationLog.cs" />
+    <Compile Include="Meta\UnitNames.cs" />
     <Compile Include="Multiplicity.cs" />
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />

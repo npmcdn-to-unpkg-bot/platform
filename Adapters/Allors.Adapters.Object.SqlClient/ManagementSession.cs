@@ -82,35 +82,35 @@ namespace Allors.Adapters.Object.SqlClient
             var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
             switch (unitTypeTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     tableTypeName = this.Database.Mapping.TableTypeNameForStringRelation;
                     break;
 
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     tableTypeName = this.Database.Mapping.TableTypeNameForIntegerRelation;
                     break;
 
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     tableTypeName = this.Database.Mapping.TableTypeNameForFloatRelation;
                     break;
 
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     tableTypeName = this.Database.Mapping.TableTypeNameForBooleanRelation;
                     break;
 
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     tableTypeName = this.Database.Mapping.TableTypeNameForDateTimeRelation;
                     break;
 
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     tableTypeName = this.Database.Mapping.TableTypeNameForUniqueRelation;
                     break;
 
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     tableTypeName = this.Database.Mapping.TableTypeNameForBinaryRelation;
                     break;
 
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     tableTypeName = this.Database.Mapping.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                     break;
 

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="CoreDomain.cs" company="Allors bvba">
+// <copyright file="MetaUnit.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,21 +16,18 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the AssociationType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    #region Allors
-    [Id("FC9BAD0E-D70D-4F93-BCA7-0C7944EF1ABB")]
-    #endregion
-    public partial class CoreDomain : Domain
+    public abstract partial class MetaUnit 
     {
-        public static CoreDomain Instance { get; internal set;}
+        public abstract ObjectType ObjectType { get; }
 
-        internal CoreDomain(MetaPopulation metaPopulation)
-            : base(metaPopulation)
+        public static implicit operator ObjectType(MetaUnit metaUnit)
         {
+            return metaUnit.ObjectType;
         }
     }
 }

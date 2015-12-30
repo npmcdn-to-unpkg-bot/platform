@@ -1,6 +1,6 @@
 namespace Allors.Meta
 {
-    public partial class UserInterface
+    public partial class MetaUser
     {
         internal override void CustomExtend()
         {

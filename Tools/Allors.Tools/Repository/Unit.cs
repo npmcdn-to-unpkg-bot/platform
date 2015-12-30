@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="ObjectInterface.cs" company="Allors bvba">
+// <copyright file="Unit.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,11 +16,19 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>Defines the IObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+namespace Allors.Tools.Repository
 {
-    public partial class ObjectInterface: Interface
+    using System;
+
+    public class Unit : Type
     {
+        public Unit(string name, Guid id)
+            : base(name)
+        {
+            this.AttributeByName["Id"] = new IdAttribute(id.ToString()) ;
+        }
     }
 }

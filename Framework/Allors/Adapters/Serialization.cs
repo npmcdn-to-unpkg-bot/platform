@@ -184,21 +184,21 @@ namespace Allors.Adapters
         {
             switch (unitTypeTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     return value;
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     return XmlConvert.ToInt32(value);
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     return XmlConvert.ToDecimal(value);
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     return XmlConvert.ToDouble(value);
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     return XmlConvert.ToBoolean(value);
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     return XmlConvert.ToDateTime(value, XmlDateTimeSerializationMode.Utc);
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     return Guid.Parse(value);
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     return Convert.FromBase64String(value);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
@@ -215,21 +215,21 @@ namespace Allors.Adapters
         {
             switch (unitTypeTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     return (string)unit;
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     return XmlConvert.ToString((int)unit);
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     return XmlConvert.ToString((decimal)unit);
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     return XmlConvert.ToString((double)unit);
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     return XmlConvert.ToString((bool)unit);
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     return XmlConvert.ToString((DateTime)unit, XmlDateTimeSerializationMode.Utc);
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     return XmlConvert.ToString((Guid)unit);
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     return Convert.ToBase64String((byte[])unit);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);

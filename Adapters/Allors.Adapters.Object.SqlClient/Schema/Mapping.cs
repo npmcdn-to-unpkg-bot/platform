@@ -647,7 +647,7 @@ AS
                         var unitTypeTag = ((IUnit)relationType.RoleType.ObjectType).UnitTag;
                         switch (unitTypeTag)
                         {
-                            case UnitTags.AllorsString:
+                            case UnitTags.String:
                                 // Set String Role
                                 definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForStringRelation + @" READONLY
@@ -660,7 +660,7 @@ AS
 ";
                                 break;
 
-                            case UnitTags.AllorsInteger:
+                            case UnitTags.Integer:
                                 // Set Integer Role
 definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForIntegerRelation + @" READONLY
@@ -673,7 +673,7 @@ AS
 ";
                                 break;
 
-                            case UnitTags.AllorsFloat:
+                            case UnitTags.Float:
                                 // Set Double Role
                                 definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForFloatRelation + @" READONLY
@@ -686,7 +686,7 @@ AS
 ";
                                 break;
 
-                            case UnitTags.AllorsDecimal:
+                            case UnitTags.Decimal:
                                 // Set Decimal Role
                                 var decimalRelationTable = this.TableTypeNameForDecimalRelationByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
 
@@ -701,7 +701,7 @@ ON " + ColumnNameForObject + " = r." + this.TableTypeColumnNameForAssociation + 
 ";
                                 break;
 
-                            case UnitTags.AllorsBoolean:
+                            case UnitTags.Boolean:
                                 // Set Boolean Role
                                 definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForBooleanRelation + @" READONLY
@@ -714,7 +714,7 @@ AS
 ";
                                 break;
 
-                            case UnitTags.AllorsDateTime:
+                            case UnitTags.DateTime:
                                 // Set DateTime Role
                                 definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForDateTimeRelation + @" READONLY
@@ -727,7 +727,7 @@ AS
 ";
                                 break;
 
-                            case UnitTags.AllorsUnique:
+                            case UnitTags.Unique:
                                 // Set Unique Role
                                 definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForUniqueRelation + @" READONLY
@@ -740,7 +740,7 @@ AS
 ";
                                 break;
 
-                            case UnitTags.AllorsBinary:
+                            case UnitTags.Binary:
                                 // Set Binary Role
                                 definition = "CREATE PROCEDURE " + procedureNameForSetUnitRoleByRelationType[relationType] + @"
     " + ParamNameForTableType + @" " + this.TableTypeNameForBinaryRelation + @" READONLY
@@ -1032,26 +1032,26 @@ AS
             var unit = (IUnit)roleType.ObjectType;
             switch (unit.UnitTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     if (roleType.Size == -1 || roleType.Size > 4000)
                     {
                         return "nvarchar(max)";
                     }
 
                     return "nvarchar(" + roleType.Size + ")";
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     return "int";
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     return "decimal(" + roleType.Precision + "," + roleType.Scale + ")";
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     return "float";
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     return "bit";
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     return "datetime2";
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     return "uniqueidentifier";
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     if (roleType.Size == -1 || roleType.Size > 8000)
                     {
                         return "varbinary(max)";
@@ -1068,21 +1068,21 @@ AS
             var unit = (IUnit)roleType.ObjectType;
             switch (unit.UnitTag)
             {
-                case UnitTags.AllorsString:
+                case UnitTags.String:
                     return SqlDbType.NVarChar;
-                case UnitTags.AllorsInteger:
+                case UnitTags.Integer:
                     return SqlDbType.Int;
-                case UnitTags.AllorsDecimal:
+                case UnitTags.Decimal:
                     return SqlDbType.Decimal;
-                case UnitTags.AllorsFloat:
+                case UnitTags.Float:
                     return SqlDbType.Float;
-                case UnitTags.AllorsBoolean:
+                case UnitTags.Boolean:
                     return SqlDbType.Bit;
-                case UnitTags.AllorsDateTime:
+                case UnitTags.DateTime:
                     return SqlDbType.DateTime2;
-                case UnitTags.AllorsUnique:
+                case UnitTags.Unique:
                     return SqlDbType.UniqueIdentifier;
-                case UnitTags.AllorsBinary:
+                case UnitTags.Binary:
                     return SqlDbType.VarBinary;
                 default:
                     throw new Exception("Unknown Unit Type");

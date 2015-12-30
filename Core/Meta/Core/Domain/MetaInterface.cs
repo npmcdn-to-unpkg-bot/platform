@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="CoreDomain.cs" company="Allors bvba">
+// <copyright file="MetaInterface.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,20 +16,18 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the AssociationType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    [Id("ffcabd07-f35f-4083-bef6-f6c47970ca5d")]
-    public partial class AllorsFloatUnit : Unit
+    public abstract partial class MetaInterface 
     {
-        public static AllorsFloatUnit Instance { get; internal set; }
+        public abstract ObjectType ObjectType { get; }
 
-        private AllorsFloatUnit()
-            : base(MetaPopulation.Instance)
+        public static implicit operator ObjectType(MetaInterface metaInterface)
         {
-            this.UnitTag = UnitTags.AllorsFloat;
+            return metaInterface.ObjectType;
         }
     }
 }

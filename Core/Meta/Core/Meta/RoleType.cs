@@ -453,7 +453,7 @@ namespace Allors.Meta
             {
                 switch (unitType.UnitTag)
                 {
-                    case UnitTags.AllorsString:
+                    case UnitTags.String:
                         if (!this.Size.HasValue)
                         {
                             this.Size = 256;
@@ -463,7 +463,7 @@ namespace Allors.Meta
                         this.Precision = null;
 
                         break;
-                    case UnitTags.AllorsBinary:
+                    case UnitTags.Binary:
                         if (!this.Size.HasValue)
                         {
                             this.Size = MaximumSize;
@@ -473,7 +473,7 @@ namespace Allors.Meta
                         this.Precision = null;
 
                         break;
-                    case UnitTags.AllorsDecimal:
+                    case UnitTags.Decimal:
                         if (!this.Precision.HasValue)
                         {
                             this.Precision = 19;

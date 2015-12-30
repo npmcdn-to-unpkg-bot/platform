@@ -60,16 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Domain\AllorsBinaryUnit.cs" />
-    <Compile Include="Core\Domain\AllorsBooleanUnit.cs" />
-    <Compile Include="Core\Domain\AllorsDateTimeUnit.cs" />
-    <Compile Include="Core\Domain\AllorsDecimalUnit.cs" />
-    <Compile Include="Core\Domain\AllorsFloatUnit.cs" />
-    <Compile Include="Core\Domain\AllorsIntegerUnit.cs" />
-    <Compile Include="Core\Domain\AllorsStringUnit.cs" />
-    <Compile Include="Core\Domain\AllorsUniqueUnit.cs" />
-    <Compile Include="Core\Domain\CoreDomain.cs" />
-    <Compile Include="Core\Domain\ObjectInterface.cs" />
+    <Compile Include="Core\Domain\MetaClass.cs" />
+    <Compile Include="Core\Domain\MetaInterface.cs" />
+    <Compile Include="Core\Domain\MetaUnit.cs" />
     <Compile Include="Core\Meta\AssociationType.cs" />
     <Compile Include="Core\Meta\ConcreteMethodType.cs" />
     <Compile Include="Core\Meta\ConcreteRoleType.cs" />

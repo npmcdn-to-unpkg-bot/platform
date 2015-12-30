@@ -1,6 +1,6 @@
 namespace Allors.Meta
 {
-    public partial class FourClass : Class
+    public partial class MetaFour
     {
     }
 }
