@@ -4,10 +4,9 @@ namespace Allors.Meta
     {
         internal override void BaseExtend()
         {
-            this.Name.RoleType.IsRequired = true;
+            this.Name.IsRequired = true;
 
-            var locale = this.ConcreteRoleTypeByRoleType[LocalisedInterface.Instance.Locale.RoleType];
-            locale.IsRequiredOverride = true;
+            this.Locale.IsRequiredOverride = true;
         }
     }
 }

@@ -249,27 +249,12 @@ namespace Allors.Adapters.Memory
 
         public IObject Instantiate(long objectId)
         {
-            if (objectId == null)
-            {
-                return null;
-            }
-
             var strategy = this.InstantiateMemoryStrategy(objectId);
-            if (strategy != null)
-            {
-                return strategy.GetObject();
-            }
-
-            return null;
+            return strategy?.GetObject();
         }
 
         public IStrategy InstantiateStrategy(long objectId)
         {
-            if (objectId == null)
-            {
-                return null;
-            }
-
             return this.InstantiateMemoryStrategy(objectId);
         }
 

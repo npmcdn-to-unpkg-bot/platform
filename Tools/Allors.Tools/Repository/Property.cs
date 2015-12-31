@@ -28,16 +28,19 @@ namespace Allors.Tools.Repository
     {
         public string Name { get; }
 
+        public Type DefinigType { get; internal set; }
+
         public Type Type { get; internal set; }
 
         public Property DefiningProperty { get; internal set; }
 
         public Dictionary<string, Attribute> AttributeByName { get; }
 
-        public Property(string name)
+        public Property(Type definingType, string name)
         {
             this.AttributeByName = new Dictionary<string, Attribute>();
 
+            this.DefinigType = definingType;
             this.Name = name;
         }
     }

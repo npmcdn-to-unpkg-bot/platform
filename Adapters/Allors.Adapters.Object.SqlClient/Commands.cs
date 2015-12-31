@@ -59,7 +59,6 @@ namespace Allors.Adapters.Object.SqlClient
         private Dictionary<IClass, Command> deleteObjectByClass;
         private Dictionary<IClass, Command> insertObjectByClass;
 
-        private Command getClassAndVersion;
         private Command getVersion;
         private Command updateVersions;
         #endregion
@@ -217,7 +216,6 @@ namespace Allors.Adapters.Object.SqlClient
 
             this.getVersion = null;
             this.updateVersions = null;
-            this.getClassAndVersion = null;
         }
 
         internal void DeleteObject(Strategy strategy)

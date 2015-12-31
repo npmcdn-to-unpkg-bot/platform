@@ -570,8 +570,10 @@ namespace Allors.Meta
         /// Validates the instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
-        protected internal void Validate(ValidationLog validationLog)
+        protected internal override void Validate(ValidationLog validationLog)
         {
+            base.Validate(validationLog);
+
             if (this.ObjectType == null)
             {
                 var message = this.ValidationName + " has no IObjectType";

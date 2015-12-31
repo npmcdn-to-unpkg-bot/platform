@@ -4,8 +4,8 @@ namespace Allors.Meta
     {
         internal override void BaseExtend()
         {
-            this.MediaType.RoleType.IsRequired = true;
-            this.MediaContent.RoleType.IsRequired = true;
+            this.MediaType.IsRequired = true;
+            this.MediaContent.IsRequired = true;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Allors.Meta
     {
         internal override void BaseExtend()
         {
-            this.Name.AddGroup(Groups.Workspace);
+            this.Name.RelationType.AddGroup(Groups.Workspace);
         }
     }
 }

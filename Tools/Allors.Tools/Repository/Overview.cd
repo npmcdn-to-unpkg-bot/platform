@@ -35,19 +35,8 @@
   </Class>
   <Class Name="Allors.Tools.Repository.Repository">
     <Position X="0.5" Y="1" Width="1.75" />
-    <AssociationLine Name="AssemblyByName" Type="Allors.Tools.Repository.Assembly" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="1.375" Y="5.632" />
-        <Point X="1.375" Y="5.882" />
-        <Point X="2.5" Y="5.882" />
-        <Point X="2.5" Y="5.062" />
-        <Point X="3.042" Y="5.062" Type="JumpStart" />
-        <Point X="3.208" Y="5.062" Type="JumpEnd" />
-        <Point X="4.25" Y="5.062" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>IgECAAAAAAUAAAABEQBAAAgCgAAAAEAAEAAgIAAACAQ=</HashCode>
+      <HashCode>IgECAAAAAAUAAAABEQBAAAgCgAAAgEAAEAAgIAAACAQ=</HashCode>
       <FileName>Repository\Repository.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -90,7 +79,7 @@
   <Class Name="Allors.Tools.Repository.Property">
     <Position X="14" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAAAAAAAAQAAAAAAAAAAQEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAAEAAAAAAAAAAAAAQAAAAAAAAAAQEAAAAAAAA=</HashCode>
       <FileName>Repository\Property.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -152,9 +141,9 @@
       <FileName>Repository\Type.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
+      <Property Name="ImplementedInterfaces" />
       <Property Name="PropertyByName" />
       <Property Name="MethodByName" />
-      <Property Name="ImplementedInterfaces" />
     </ShowAsCollectionAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />

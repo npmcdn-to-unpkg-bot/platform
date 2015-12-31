@@ -12,9 +12,9 @@ namespace Allors.Meta
         {
             var person = this;
 
-            this.FirstName.AddGroup(Groups.Workspace);
-            this.LastName.AddGroup(Groups.Workspace);
-            this.MiddleName.AddGroup(Groups.Workspace);
+            this.FirstName.RelationType.AddGroup(Groups.Workspace);
+            this.LastName.RelationType.AddGroup(Groups.Workspace);
+            this.MiddleName.RelationType.AddGroup(Groups.Workspace);
 
             this.AngularHome = new Tree(person)
                     .Add(person.Photo);

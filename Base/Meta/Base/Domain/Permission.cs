@@ -4,9 +4,9 @@ namespace Allors.Meta
     {
         internal override void BaseExtend()
         {
-            this.OperandTypePointer.RoleType.IsRequired = true;
-            this.ConcreteClassPointer.RoleType.IsRequired = true;
-            this.OperationEnum.RoleType.IsRequired = true;
+            this.OperandTypePointer.IsRequired = true;
+            this.ConcreteClassPointer.IsRequired = true;
+            this.OperationEnum.IsRequired = true;
         }
     }
 }

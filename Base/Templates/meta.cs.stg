@@ -23,12 +23,38 @@ GNU General Public License for more details.
 For more information visit http://www.allors.com/legal
 !$
 <generations>
+	<generation template="meta" output="meta.g.cs"/> 
 	<generation template="builder" output="builder.g.cs"/> 
 	<generation template="domains" output="domains.g.cs"/> 
 	<generation template="units" output="units.g.cs"/> 
 	<generation template="interfaces" output="interfaces.g.cs"/> 
 	<generation template="classes" output="classes.g.cs"/> 
 </generations>
+>>
+
+meta(repository) ::= <<
+namespace Allors.Meta
+{
+	public partial class MetaInterface 
+	{
+		public void Extend()
+		{
+			$repository.SortedAssemblies:{assembly|this.$assembly.Name$Extend();}; separator="\n"$
+		}
+
+$repository.SortedAssemblies:{assembly|        internal virtual void $assembly.Name$Extend() {\}}; separator="\n"$
+	}
+
+	public partial class MetaClass 
+	{
+		public void Extend()
+		{
+			$repository.SortedAssemblies:{assembly|this.$assembly.Name$Extend();}; separator="\n"$
+		}
+
+$repository.SortedAssemblies:{assembly|        internal virtual void $assembly.Name$Extend() {\}}; separator="\n"$
+	}
+}
 >>
 
 builder(repository) ::= <<
@@ -66,6 +92,13 @@ $repository.Types:{type|$inheritance(type)$}; separator="\n"$
 			// Relations
 $repository.Types:{type|$relations(type)$}; separator="\n"$
 
+			// Implemented Roles
+$repository.Classes:{class|$implementedRoles(class)$}; separator="\n"$
+
+			// Extend
+            $repository.Interfaces:{interface|Meta$interface.Name$.Instance.Extend();}; separator="\n"$
+
+            $repository.Classes:{class|Meta$class.Name$.Instance.Extend();}; separator="\n"$
 		}
 	}
 }
@@ -76,7 +109,10 @@ inheritance(type) ::= <<$type.ImplementedInterfaces:{implementedInterface|$inher
 inheritance_implentedInterface(type, implementedInterface) ::= <<            new Inheritance(this.metaPopulation){ Subtype = (Composite)Meta$type.Name$.Instance.ObjectType, Supertype = Meta$implementedInterface.Name$.Instance.Interface};>>
 
 relations(type) ::= <<$type.DefinedProperties:{property|$relation(property)$}; separator="\n"$>>
-relation(property) ::= <<            Meta$type.Name$.Instance.$property.Name$ = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), Meta$type.name$.Instance.ObjectType.Id, Meta$property.Type.Name$.Instance.ObjectType.Id);>>
+relation(property) ::= <<            Meta$type.Name$.Instance.$property.Name$ = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), Meta$type.name$.Instance.ObjectType.Id, Meta$property.Type.Name$.Instance.ObjectType.Id).RoleType;>>
+
+implementedRoles(class) ::= <<$class.ImplementedProperties:{property|$implementedRole(property)$}; separator="\n"$>>
+implementedRole(property) ::= <<            Meta$class.Name$.Instance.$property.Name$ = Meta$class.Name$.Instance.Class.ConcreteRoleTypeByRoleType[Meta$property.DefiningProperty.DefinigType.Name$.Instance.$property.Name$];>>
 
 domains(repository) ::= <<
 namespace Allors.Meta
@@ -115,16 +151,14 @@ unit(unit) ::= <<
 	{
 	    public static Meta$unit.Name$ Instance { get; internal set;}
 
-		public readonly Unit Unit;
-
-		public override ObjectType ObjectType => this.Unit;
+		public override Unit Unit { get; }
 
 		internal Meta$unit.Name$(MetaPopulation metaPopulation)
         {
 			this.Unit = new Unit(metaPopulation)
 			{
 				Id = UnitIds.$unit.Name$,
-				Tag = UnitTags.$unit.Name$,
+				UnitTag = UnitTags.$unit.Name$,
 				SingularName = UnitNames.$unit.Name$
 			};
         }
@@ -144,11 +178,13 @@ interface(interface) ::= <<
 	{
 	    public static Meta$interface.Name$ Instance { get; internal set;}
 
-		public readonly Interface Interface;
+		public override Interface Interface { get; }
+		
+		// Defined
+$interface.DefinedProperties:{property|         public RoleType $property.Name$;}; separator="\n"$
 
-		public override ObjectType ObjectType => this.Interface;
-
-$interface.DefinedProperties:{property|         public RelationType $property.Name$;}; separator="\n"$
+		// Implemented
+$interface.ImplementedProperties:{property|         public ConcreteRoleType $property.Name$;}; separator="\n"$
 
 		internal Meta$interface.Name$(MetaPopulation metaPopulation)
         {
@@ -156,7 +192,7 @@ $interface.DefinedProperties:{property|         public RelationType $property.Na
 			{
 				Id = new System.Guid("$interface.AttributeByName.Id.Value$"),
 				SingularName = "$interface.Name$",
-				$if(interface.AttributeByName.Plural)$    PluralName = "$interface.AttributeByName.Plural$"$endif$
+				$if(interface.AttributeByName.Plural)$PluralName = "$interface.AttributeByName.Plural.Value$"$endif$
 			};
         }
 	}
@@ -174,11 +210,13 @@ class(class) ::= <<
 	{
 	    public static Meta$class.Name$ Instance { get; internal set;}
 
-		public readonly Class Class;
+		public override Class Class { get; }
 
-		public override ObjectType ObjectType => this.Class;
+		// Defined
+$class.DefinedProperties:{property|         public RoleType $property.Name$;}; separator="\n"$
 
-$class.DefinedProperties:{property|         public RelationType $property.Name$;}; separator="\n"$
+		// Implemented
+$class.ImplementedProperties:{property|         public ConcreteRoleType $property.Name$;}; separator="\n"$
 
 		internal Meta$class.Name$(MetaPopulation metaPopulation)
         {
@@ -186,7 +224,7 @@ $class.DefinedProperties:{property|         public RelationType $property.Name$;
 			{
 				Id = new System.Guid("$class.AttributeByName.Id.Value$"),
 				SingularName = "$class.Name$",
-				$if(class.AttributeByName.Plural)$    PluralName = "$class.AttributeByName.Plural$"$endif$
+				$if(class.AttributeByName.Plural)$PluralName = "$class.AttributeByName.Plural.Value$"$endif$
 			};
         }
 	}

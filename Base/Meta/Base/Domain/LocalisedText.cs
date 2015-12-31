@@ -4,7 +4,7 @@ namespace Allors.Meta
     {
         internal override void BaseExtend()
         {
-            this.Text.RoleType.IsRequired = true;
+            this.Text.IsRequired = true;
         }
     }
 }

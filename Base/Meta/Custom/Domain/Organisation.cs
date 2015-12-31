@@ -12,21 +12,21 @@ namespace Allors.Meta
         internal override void CustomExtend()
         {
             var organisation = this;
-            var person = PersonClass.Instance;
+            var person = MetaPerson.Instance;
 
             this.FilterResponse = new Tree(organisation)
                 .Add(organisation.Owner)
-                .Add(organisation.Employee);
+                .Add(organisation.Employees);
 
             this.EditResponse = new Tree(organisation)
                 .Add(organisation.Owner)
-                .Add(organisation.Employee);
+                .Add(organisation.Employees);
             
             this.AngularEmployees = new Tree(organisation)
-                .Add(organisation.Employee);
+                .Add(organisation.Employees);
 
             this.AngularShareholders = new Tree(organisation)
-                .Add(organisation.Shareholder,
+                .Add(organisation.Shareholders,
                     new Tree(person)
                         .Add(person.Photo));
         }

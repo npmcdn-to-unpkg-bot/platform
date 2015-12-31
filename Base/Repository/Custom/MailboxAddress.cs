@@ -5,6 +5,7 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("7ee3b00b-4e63-4774-b744-3add2c6035ab")]
     #endregion
+    [Plural("MailboxAddresses")]
     public partial class MailboxAddress :  Object, Address 
     {
         #region inherited properties

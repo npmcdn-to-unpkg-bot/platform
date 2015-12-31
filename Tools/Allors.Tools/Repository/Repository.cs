@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Immutable;
     using System.Linq;
 
     using Allors.Meta;
@@ -32,6 +33,16 @@
         public Dictionary<string, Type> TypeByName { get; }
 
         public Dictionary<string, Composite> CompositeByName { get; }
+
+        public Assembly[] SortedAssemblies
+        {
+            get
+            {
+                var assemblies = this.Assemblies.ToList();
+                assemblies.Sort( (x,y) => x.Bases.Contains(y) ? 1 : -1);
+                return assemblies.ToArray();
+            }
+        }
 
         public Repository(Project project)
         {
@@ -298,7 +309,7 @@
                                 var propertySymbol = semanticModel.GetDeclaredSymbol(propertyDeclaration);
                                 var propertyName = propertySymbol.Name;
 
-                                var property = new Property(propertyName);
+                                var property = new Property(type, propertyName);
                                 partialType.PropertyByName[propertyName] = property;
                                 type.PropertyByName[propertyName] = property;
                             }

@@ -23,11 +23,13 @@ namespace Allors.Meta
 {
     public abstract partial class MetaUnit 
     {
-        public abstract ObjectType ObjectType { get; }
+        public abstract Unit Unit { get; }
+
+        public ObjectType ObjectType => this.Unit;
 
         public static implicit operator ObjectType(MetaUnit metaUnit)
         {
-            return metaUnit.ObjectType;
+            return metaUnit.Unit;
         }
     }
 }

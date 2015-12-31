@@ -23,11 +23,18 @@ namespace Allors.Meta
 {
     public abstract partial class MetaInterface 
     {
-        public abstract ObjectType ObjectType { get; }
+        public abstract Interface Interface { get; }
+
+        public ObjectType ObjectType => this.Interface;
+
+        public static implicit operator Composite(MetaInterface metaInterface)
+        {
+            return metaInterface.Interface;
+        }
 
         public static implicit operator ObjectType(MetaInterface metaInterface)
         {
-            return metaInterface.ObjectType;
+            return metaInterface.Interface;
         }
     }
 }
