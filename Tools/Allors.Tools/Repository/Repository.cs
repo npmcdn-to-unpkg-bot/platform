@@ -20,7 +20,9 @@
 
         public IEnumerable<Class> Classes => this.ClassByName.Values;
 
-        public IEnumerable<Type> Types => this.ClassByName.Values.Cast<Type>().Union(this.InterfaceByName.Values);
+        public IEnumerable<Type> Types => this.Composites.Cast<Type>().Union(this.Units);
+
+        public IEnumerable<Composite> Composites => this.ClassByName.Values.Cast<Composite>().Union(this.InterfaceByName.Values);
 
         public Dictionary<string, Assembly> AssemblyByName { get; }
 
@@ -67,6 +69,8 @@
             this.FromReflection(projectInfo);
 
             this.LinkImplementations();
+
+            this.CreateReverseProperties();
         }
 
         private void CreateUnits()
@@ -301,7 +305,7 @@
                             var typeSymbol = semanticModel.GetDeclaredSymbol(typeDeclaration);
                             var typeName = typeSymbol.Name;
                             var partialType = assembly.PartialTypeByName[typeName];
-                            var type = this.TypeByName[typeName];
+                            var composite = this.CompositeByName[typeName];
 
                             var propertyDeclarations = typeDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>();
                             foreach (var propertyDeclaration in propertyDeclarations)
@@ -309,9 +313,9 @@
                                 var propertySymbol = semanticModel.GetDeclaredSymbol(propertyDeclaration);
                                 var propertyName = propertySymbol.Name;
 
-                                var property = new Property(type, propertyName);
+                                var property = new Property(composite, propertyName);
                                 partialType.PropertyByName[propertyName] = property;
-                                type.PropertyByName[propertyName] = property;
+                                composite.PropertyByName[propertyName] = property;
                             }
 
                             var methodDeclarations = typeDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>();
@@ -322,7 +326,7 @@
 
                                 var method = new Method(methodName);
                                 partialType.MethodByName[methodName] = method;
-                                type.MethodByName[methodName] = method;
+                                composite.MethodByName[methodName] = method;
                             }
                         }
                     }
@@ -455,6 +459,33 @@
                     return typeName;
             }
 
+        }
+
+        private void CreateReverseProperties()
+        {
+            foreach (var composite in this.Composites)
+            {
+                foreach (var property in composite.DefinedProperties)
+                {
+                    var reverseType = property.Type;
+                    var reverseComposite = reverseType as Composite;
+                    if (reverseComposite != null)
+                    {
+                        reverseComposite.DefinedReversePropertyByName[property.Name] = property;
+                    }
+                }
+            }
+
+            foreach (var composite in this.Composites)
+            {
+                foreach (var supertype in composite.Interfaces)
+                {
+                    foreach (var property in supertype.DefinedReverseProperties)
+                    {
+                        composite.ImplementedReversePropertyByName[property.Name] = property;
+                    }
+                }
+            }
         }
     }
 }

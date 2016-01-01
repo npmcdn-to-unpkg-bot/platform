@@ -21,6 +21,7 @@
 
 namespace Allors.Tools.Repository
 {
+    using System;
     using System.Collections.Generic;
 
     public class Interface : Composite
@@ -31,13 +32,35 @@ namespace Allors.Tools.Repository
             this.PartialByAssemblyName = new Dictionary<string, PartialInterface>();
         }
 
+        public override IEnumerable<Interface> Interfaces
+        {
+            get
+            {
+                var interfaces = new HashSet<Interface>(this.ImplementedInterfaces);
+                foreach (var implementedInterface in this.ImplementedInterfaces)
+                {
+                    implementedInterface.AddInterfaces(interfaces);
+                }
+
+                return interfaces;
+            }
+        }
+
+        private void AddInterfaces(ISet<Interface> interfaces)
+        {
+            interfaces.UnionWith(this.ImplementedInterfaces);
+            foreach (var implementedInterface in this.ImplementedInterfaces)
+            {
+                implementedInterface.AddInterfaces(interfaces);
+            }
+        }
+
         public Dictionary<string, PartialInterface> PartialByAssemblyName { get; }
 
         public override string ToString()
         {
             return this.Name;
         }
-
 
         public Property GetImplementedProperty(Property property)
         {

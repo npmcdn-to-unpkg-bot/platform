@@ -21,11 +21,53 @@
 
 namespace Allors.Tools.Repository
 {
-    public class Composite : Type
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public abstract class Composite : Type
     {
-        public Composite(string name)
+        protected Composite(string name)
             : base(name)
         {
+            this.AttributeByName = new Dictionary<string, Attribute>();
+            this.ImplementedInterfaces = new List<Interface>();
+            this.PropertyByName = new Dictionary<string, Property>();
+            this.DefinedReversePropertyByName = new Dictionary<string, Property>();
+            this.ImplementedReversePropertyByName = new Dictionary<string, Property>();
+            this.MethodByName = new Dictionary<string, Method>();
         }
+
+        public abstract IEnumerable<Interface> Interfaces { get; }
+
+        public override string Id => ((IdAttribute)this.AttributeByName["Id"]).Value;
+
+        public Dictionary<string, Attribute> AttributeByName { get; }
+
+        public IList<Interface> ImplementedInterfaces { get; }
+
+        public Dictionary<string, Property> PropertyByName { get; }
+
+        public Dictionary<string, Property> DefinedReversePropertyByName { get; }
+
+        public Dictionary<string, Property> ImplementedReversePropertyByName { get; }
+
+        public Dictionary<string, Method> MethodByName { get; }
+
+        public IEnumerable<Property> Properties => this.PropertyByName.Values;
+
+        public IEnumerable<Property> DefinedProperties => this.PropertyByName.Values.Where(v => v.DefiningProperty == null);
+
+        public IEnumerable<Property> ImplementedProperties => this.PropertyByName.Values.Where(v => v.DefiningProperty != null);
+
+        public IEnumerable<Property> DefinedReverseProperties => this.DefinedReversePropertyByName.Values;
+
+        public IEnumerable<Property> ImplementedReverseProperties => this.ImplementedReversePropertyByName.Values;
+
+        public IEnumerable<Method> Methods => this.MethodByName.Values;
+
+        public IEnumerable<Method> DefinedMethods => this.MethodByName.Values.Where(v => v.DefiningMethod == null);
+
+        public IEnumerable<Method> ImplementedMethods => this.MethodByName.Values.Where(v => v.DefiningMethod != null);
     }
 }

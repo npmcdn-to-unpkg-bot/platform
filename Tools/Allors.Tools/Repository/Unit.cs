@@ -28,7 +28,8 @@ namespace Allors.Tools.Repository
         public Unit(string name, Guid id)
             : base(name)
         {
-            this.AttributeByName["Id"] = new IdAttribute(id.ToString()) ;
         }
+
+        public override string Id { get; }
     }
 }

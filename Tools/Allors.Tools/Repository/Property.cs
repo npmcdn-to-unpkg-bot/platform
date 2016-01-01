@@ -28,7 +28,7 @@ namespace Allors.Tools.Repository
     {
         public string Name { get; }
 
-        public Type DefinigType { get; internal set; }
+        public Type DefiningType { get; internal set; }
 
         public Type Type { get; internal set; }
 
@@ -40,7 +40,7 @@ namespace Allors.Tools.Repository
         {
             this.AttributeByName = new Dictionary<string, Attribute>();
 
-            this.DefinigType = definingType;
+            this.DefiningType = definingType;
             this.Name = name;
         }
     }

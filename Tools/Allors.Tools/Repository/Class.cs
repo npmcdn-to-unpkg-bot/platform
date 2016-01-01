@@ -33,6 +33,20 @@ namespace Allors.Tools.Repository
 
         public Dictionary<string, PartialClass> PartialByAssemblyName { get; }
 
+        public override IEnumerable<Interface> Interfaces
+        {
+            get
+            {
+                var interfaces = new HashSet<Interface>(this.ImplementedInterfaces);
+                foreach (var implementedInterface in this.ImplementedInterfaces)
+                {
+                    interfaces.UnionWith(implementedInterface.Interfaces);
+                }
+
+                return interfaces;
+            }
+        }
+
         public Property GetImplementedProperty(Property property)
         {
             foreach (var @interface in this.ImplementedInterfaces)

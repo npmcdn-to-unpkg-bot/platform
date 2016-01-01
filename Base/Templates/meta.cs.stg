@@ -87,13 +87,19 @@ $repository.Interfaces:{interface|             Meta$interface.Name$.Instance = n
 $repository.Classes:{class|             Meta$class.Name$.Instance = new Meta$class.Name$(this.metaPopulation);}; separator="\n"$
 
 			// Inheritance
-$repository.Types:{type|$inheritance(type)$}; separator="\n"$
+$repository.Composites:{composite|$inheritance(composite)$}; separator="\n"$
 
-			// Relations
-$repository.Types:{type|$relations(type)$}; separator="\n"$
+			// Roles
+$repository.Composites:{composite|$relations(composite)$}; separator="\n"$
 
-			// Implemented Roles
+			// Inherited Roles
 $repository.Classes:{class|$implementedRoles(class)$}; separator="\n"$
+
+			// Associations
+$repository.Composites:{composite|$associations(composite)$}; separator="\n"$
+
+			// InheritedAssociations
+$repository.Composites:{composite|$inherited_associations(composite)$}; separator="\n"$
 
 			// Extend
             $repository.Interfaces:{interface|Meta$interface.Name$.Instance.Extend();}; separator="\n"$
@@ -105,14 +111,21 @@ $repository.Classes:{class|$implementedRoles(class)$}; separator="\n"$
 >>
 
 domain_inheritance(assembly) ::= <<$assembly.Bases:{base|             Meta$assembly.Name$.Instance.Domain.AddDirectSuperdomain(Meta$base.Name$.Instance.Domain);}; separator="\n"$>>
-inheritance(type) ::= <<$type.ImplementedInterfaces:{implementedInterface|$inheritance_implentedInterface(type, implementedInterface)$}; separator="\n"$>>
-inheritance_implentedInterface(type, implementedInterface) ::= <<            new Inheritance(this.metaPopulation){ Subtype = (Composite)Meta$type.Name$.Instance.ObjectType, Supertype = Meta$implementedInterface.Name$.Instance.Interface};>>
+inheritance(composite) ::= <<$composite.ImplementedInterfaces:{implementedInterface|$inheritance_implentedInterface(composite, implementedInterface)$}; separator="\n"$>>
+inheritance_implentedInterface(composite, implementedInterface) ::= <<            new Inheritance(this.metaPopulation){ Subtype = (Composite)Meta$composite.Name$.Instance.ObjectType, Supertype = Meta$implementedInterface.Name$.Instance.Interface};>>
 
-relations(type) ::= <<$type.DefinedProperties:{property|$relation(property)$}; separator="\n"$>>
-relation(property) ::= <<            Meta$type.Name$.Instance.$property.Name$ = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), Meta$type.name$.Instance.ObjectType.Id, Meta$property.Type.Name$.Instance.ObjectType.Id).RoleType;>>
+relations(composite) ::= <<$composite.DefinedProperties:{property|$relation(property)$}; separator="\n"$>>
+relation(property) ::= <<            Meta$composite.Name$.Instance.$property.Name$ = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), Meta$composite.name$.Instance.ObjectType.Id, Meta$property.Type.Name$.Instance.ObjectType.Id).RoleType;>>
 
 implementedRoles(class) ::= <<$class.ImplementedProperties:{property|$implementedRole(property)$}; separator="\n"$>>
-implementedRole(property) ::= <<            Meta$class.Name$.Instance.$property.Name$ = Meta$class.Name$.Instance.Class.ConcreteRoleTypeByRoleType[Meta$property.DefiningProperty.DefinigType.Name$.Instance.$property.Name$];>>
+implementedRole(property) ::= <<            Meta$class.Name$.Instance.$property.Name$ = Meta$class.Name$.Instance.Class.ConcreteRoleTypeByRoleType[Meta$property.DefiningProperty.DefiningType.Name$.Instance.$property.Name$];>>
+
+associations(composite) ::= <<$composite.DefinedReverseProperties:{property|$association(property)$}; separator="\n"$>>
+association(property) ::= <<            Meta$composite.Name$.Instance.$property.DefiningType.Name$Where$property.Name$ = Meta$property.DefiningType.Name$.Instance.$property.Name$.AssociationType;>>
+
+inherited_associations(composite) ::= <<$composite.ImplementedReverseProperties:{property|$inherited_association(property)$}; separator="\n"$>>
+inherited_association(property) ::= <<            Meta$composite.Name$.Instance.$property.DefiningType.Name$Where$property.Name$ = Meta$property.DefiningType.Name$.Instance.$property.Name$.AssociationType;>>
+
 
 domains(repository) ::= <<
 namespace Allors.Meta
@@ -180,11 +193,17 @@ interface(interface) ::= <<
 
 		public override Interface Interface { get; }
 		
-		// Defined
+		// Defined Roles
 $interface.DefinedProperties:{property|         public RoleType $property.Name$;}; separator="\n"$
 
-		// Implemented
+		// Inherited Roles
 $interface.ImplementedProperties:{property|         public ConcreteRoleType $property.Name$;}; separator="\n"$
+
+		// Defined Associations
+$interface.DefinedReverseProperties:{property|         public AssociationType $property.DefiningType.Name$Where$property.Name$;}; separator="\n"$
+
+		// Inherited Associations
+$interface.ImplementedReverseProperties:{property|         public AssociationType $property.DefiningType.Name$Where$property.Name$;}; separator="\n"$
 
 		internal Meta$interface.Name$(MetaPopulation metaPopulation)
         {
@@ -212,11 +231,18 @@ class(class) ::= <<
 
 		public override Class Class { get; }
 
-		// Defined
+		// Defined Roles
 $class.DefinedProperties:{property|         public RoleType $property.Name$;}; separator="\n"$
 
-		// Implemented
+		// Inherited Roles
 $class.ImplementedProperties:{property|         public ConcreteRoleType $property.Name$;}; separator="\n"$
+
+		// Defined Associations
+$class.DefinedReverseProperties:{property|         public AssociationType $property.DefiningType.Name$Where$property.Name$;}; separator="\n"$
+
+		// Inherited Associations
+$class.ImplementedReverseProperties:{property|         public AssociationType $property.DefiningType.Name$Where$property.Name$;}; separator="\n"$
+
 
 		internal Meta$class.Name$(MetaPopulation metaPopulation)
         {
