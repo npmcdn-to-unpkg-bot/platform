@@ -34,7 +34,7 @@ namespace Allors.Tools.Repository
             this.ImplementedInterfaces = new List<Interface>();
             this.PropertyByName = new Dictionary<string, Property>();
             this.DefinedReversePropertyByName = new Dictionary<string, Property>();
-            this.ImplementedReversePropertyByName = new Dictionary<string, Property>();
+            this.InheritedReversePropertyByName = new Dictionary<string, Property>();
             this.MethodByName = new Dictionary<string, Method>();
         }
 
@@ -50,7 +50,7 @@ namespace Allors.Tools.Repository
 
         public Dictionary<string, Property> DefinedReversePropertyByName { get; }
 
-        public Dictionary<string, Property> ImplementedReversePropertyByName { get; }
+        public Dictionary<string, Property> InheritedReversePropertyByName { get; }
 
         public Dictionary<string, Method> MethodByName { get; }
 
@@ -62,7 +62,7 @@ namespace Allors.Tools.Repository
 
         public IEnumerable<Property> DefinedReverseProperties => this.DefinedReversePropertyByName.Values;
 
-        public IEnumerable<Property> ImplementedReverseProperties => this.ImplementedReversePropertyByName.Values;
+        public IEnumerable<Property> ImplementedReverseProperties => this.InheritedReversePropertyByName.Values;
 
         public IEnumerable<Method> Methods => this.MethodByName.Values;
 

@@ -30,6 +30,7 @@ namespace Allors.Tools.Repository
             : base(name)
         {
             this.PartialByAssemblyName = new Dictionary<string, PartialInterface>();
+            this.InheritedPropertyByName = new Dictionary<string, Property>();
         }
 
         public override IEnumerable<Interface> Interfaces
@@ -56,6 +57,10 @@ namespace Allors.Tools.Repository
         }
 
         public Dictionary<string, PartialInterface> PartialByAssemblyName { get; }
+
+        public Dictionary<string, Property> InheritedPropertyByName { get; }
+
+        public IEnumerable<Property> InheritedProperties => this.InheritedPropertyByName.Values;
 
         public override string ToString()
         {

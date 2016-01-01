@@ -93,6 +93,9 @@ $repository.Composites:{composite|$inheritance(composite)$}; separator="\n"$
 $repository.Composites:{composite|$relations(composite)$}; separator="\n"$
 
 			// Inherited Roles
+$repository.Interfaces:{interface|$inheritedRoles(interface)$}; separator="\n"$
+
+			// Implemented Roles
 $repository.Classes:{class|$implementedRoles(class)$}; separator="\n"$
 
 			// Associations
@@ -116,6 +119,9 @@ inheritance_implentedInterface(composite, implementedInterface) ::= <<          
 
 relations(composite) ::= <<$composite.DefinedProperties:{property|$relation(property)$}; separator="\n"$>>
 relation(property) ::= <<            Meta$composite.Name$.Instance.$property.Name$ = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), Meta$composite.name$.Instance.ObjectType.Id, Meta$property.Type.Name$.Instance.ObjectType.Id).RoleType;>>
+
+inheritedRoles(interface) ::= <<$interface.InheritedProperties:{property|$inheritedRole(property)$}; separator="\n"$>>
+inheritedRole(property) ::= <<            Meta$interface.Name$.Instance.$property.Name$ = Meta$property.DefiningType.Name$.Instance.$property.Name$;>>
 
 implementedRoles(class) ::= <<$class.ImplementedProperties:{property|$implementedRole(property)$}; separator="\n"$>>
 implementedRole(property) ::= <<            Meta$class.Name$.Instance.$property.Name$ = Meta$class.Name$.Instance.Class.ConcreteRoleTypeByRoleType[Meta$property.DefiningProperty.DefiningType.Name$.Instance.$property.Name$];>>
@@ -197,7 +203,7 @@ interface(interface) ::= <<
 $interface.DefinedProperties:{property|         public RoleType $property.Name$;}; separator="\n"$
 
 		// Inherited Roles
-$interface.ImplementedProperties:{property|         public ConcreteRoleType $property.Name$;}; separator="\n"$
+$interface.InheritedProperties:{property|         public RoleType $property.Name$;}; separator="\n"$
 
 		// Defined Associations
 $interface.DefinedReverseProperties:{property|         public AssociationType $property.DefiningType.Name$Where$property.Name$;}; separator="\n"$

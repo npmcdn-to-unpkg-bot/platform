@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.Immutable;
     using System.Linq;
 
     using Allors.Meta;
@@ -70,6 +69,7 @@
 
             this.LinkImplementations();
 
+            this.CreateInheritedProperties();
             this.CreateReverseProperties();
         }
 
@@ -461,6 +461,33 @@
 
         }
 
+        private void CreateInheritedProperties()
+        {
+            foreach (var composite in this.Composites)
+            {
+                foreach (var property in composite.DefinedProperties)
+                {
+                    var reverseType = property.Type;
+                    var reverseComposite = reverseType as Composite;
+                    if (reverseComposite != null)
+                    {
+                        reverseComposite.DefinedReversePropertyByName[property.Name] = property;
+                    }
+                }
+            }
+
+            foreach (var @interface in this.Interfaces)
+            {
+                foreach (var supertype in @interface.Interfaces)
+                {
+                    foreach (var property in supertype.DefinedProperties)
+                    {
+                        @interface.InheritedPropertyByName[property.Name] = property;
+                    }
+                }
+            }
+        }
+
         private void CreateReverseProperties()
         {
             foreach (var composite in this.Composites)
@@ -482,7 +509,7 @@
                 {
                     foreach (var property in supertype.DefinedReverseProperties)
                     {
-                        composite.ImplementedReversePropertyByName[property.Name] = property;
+                        composite.InheritedReversePropertyByName[property.Name] = property;
                     }
                 }
             }
