@@ -151,7 +151,7 @@ namespace Allors.Repository.Domain
         #endregion
 
 
-
+        [Id("1869873F-F2F0-4D03-A0F9-7DC73491C117")]
         public void JustDoIt(){}
     }
 }

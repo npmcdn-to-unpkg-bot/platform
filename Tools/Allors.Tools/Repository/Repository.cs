@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
+    using System.Reflection;
 
     using Allors.Meta;
 
@@ -13,25 +15,25 @@
     {
         public IEnumerable<Assembly> Assemblies => this.AssemblyByName.Values;
 
-        public IEnumerable<Unit> Units => this.UnitByName.Values;
+        public IEnumerable<Unit> Units => this.UnitBySingularName.Values;
 
-        public IEnumerable<Interface> Interfaces => this.InterfaceByName.Values;
+        public IEnumerable<Interface> Interfaces => this.InterfaceBySingularName.Values;
 
-        public IEnumerable<Class> Classes => this.ClassByName.Values;
+        public IEnumerable<Class> Classes => this.ClassBySingularName.Values;
 
         public IEnumerable<Type> Types => this.Composites.Cast<Type>().Union(this.Units);
 
-        public IEnumerable<Composite> Composites => this.ClassByName.Values.Cast<Composite>().Union(this.InterfaceByName.Values);
+        public IEnumerable<Composite> Composites => this.ClassBySingularName.Values.Cast<Composite>().Union(this.InterfaceBySingularName.Values);
 
         public Dictionary<string, Assembly> AssemblyByName { get; }
 
-        public Dictionary<string, Unit> UnitByName { get; }
+        public Dictionary<string, Unit> UnitBySingularName { get; }
 
-        public Dictionary<string, Interface> InterfaceByName { get; }
+        public Dictionary<string, Interface> InterfaceBySingularName { get; }
 
-        public Dictionary<string, Class> ClassByName { get; }
+        public Dictionary<string, Class> ClassBySingularName { get; }
 
-        public Dictionary<string, Type> TypeByName { get; }
+        public Dictionary<string, Type> TypeBySingularName { get; }
 
         public Dictionary<string, Composite> CompositeByName { get; }
 
@@ -45,14 +47,18 @@
             }
         }
 
+        private readonly Inflector.Inflector inflector;
+
         public Repository(Project project)
         {
+            this.inflector = new Inflector.Inflector(new CultureInfo("en"));
+            
             this.AssemblyByName = new Dictionary<string, Assembly>();
-            this.UnitByName = new Dictionary<string, Unit>();
-            this.InterfaceByName = new Dictionary<string, Interface>();
-            this.ClassByName = new Dictionary<string, Class>();
+            this.UnitBySingularName = new Dictionary<string, Unit>();
+            this.InterfaceBySingularName = new Dictionary<string, Interface>();
+            this.ClassBySingularName = new Dictionary<string, Class>();
             this.CompositeByName = new Dictionary<string, Composite>();
-            this.TypeByName = new Dictionary<string, Type>();
+            this.TypeBySingularName = new Dictionary<string, Type>();
 
             var projectInfo = new ProjectInfo(project);
 
@@ -76,36 +82,36 @@
         private void CreateUnits()
         {
             var binary = new Unit(UnitNames.Binary, UnitIds.Binary);
-            this.UnitByName[binary.Name] = binary;
-            this.TypeByName[binary.Name] = binary;
+            this.UnitBySingularName.Add(binary.SingularName, binary);
+            this.TypeBySingularName.Add(binary.SingularName, binary);
 
             var boolean = new Unit(UnitNames.Boolean, UnitIds.Boolean);
-            this.UnitByName[boolean.Name] = boolean;
-            this.TypeByName[boolean.Name] = boolean;
+            this.UnitBySingularName.Add(boolean.SingularName, boolean);
+            this.TypeBySingularName.Add(boolean.SingularName, boolean);
 
             var datetime = new Unit(UnitNames.DateTime, UnitIds.DateTime);
-            this.UnitByName[datetime.Name] = datetime;
-            this.TypeByName[datetime.Name] = datetime;
+            this.UnitBySingularName.Add(datetime.SingularName, datetime);
+            this.TypeBySingularName.Add(datetime.SingularName, datetime);
 
             var @decimal = new Unit(UnitNames.Decimal, UnitIds.Decimal);
-            this.UnitByName[@decimal.Name] = @decimal;
-            this.TypeByName[@decimal.Name] = @decimal;
+            this.UnitBySingularName.Add(@decimal.SingularName, @decimal);
+            this.TypeBySingularName.Add(@decimal.SingularName, @decimal);
 
             var @float = new Unit(UnitNames.Float, UnitIds.Float);
-            this.UnitByName[@float.Name] = @float;
-            this.TypeByName[@float.Name] = @float;
+            this.UnitBySingularName.Add(@float.SingularName, @float);
+            this.TypeBySingularName.Add(@float.SingularName, @float);
 
             var integer = new Unit(UnitNames.Integer, UnitIds.Integer);
-            this.UnitByName[integer.Name] = integer;
-            this.TypeByName[integer.Name] = integer;
+            this.UnitBySingularName.Add(integer.SingularName, integer);
+            this.TypeBySingularName.Add(integer.SingularName, integer);
 
             var @string = new Unit(UnitNames.String, UnitIds.String);
-            this.UnitByName[@string.Name] = @string;
-            this.TypeByName[@string.Name] = @string;
+            this.UnitBySingularName.Add(@string.SingularName, @string);
+            this.TypeBySingularName.Add(@string.SingularName, @string);
 
             var unique = new Unit(UnitNames.Unique, UnitIds.Unique);
-            this.UnitByName[unique.Name] = unique;
-            this.TypeByName[unique.Name] = unique;
+            this.UnitBySingularName.Add(unique.SingularName, unique);
+            this.TypeBySingularName.Add(unique.SingularName, unique);
         }
 
         private void CreateAssemblies(ProjectInfo projectInfo)
@@ -135,7 +141,7 @@
 
                                 if (attributeType.Equals(projectInfo.ExtendAttributeType))
                                 {
-                                    this.AssemblyByName[assemblyName] = new Assembly(assemblyName);
+                                    this.AssemblyByName.Add(assemblyName, new Assembly(assemblyName));
                                 }
                             }
                         }
@@ -221,44 +227,44 @@
                         if (interfaceDeclaration != null)
                         {
                             var symbol = semanticModel.GetDeclaredSymbol(interfaceDeclaration);
-                            var interfaceName = symbol.Name;
+                            var interfaceSingularName = symbol.Name;
 
-                            var partialInterface = new PartialInterface(interfaceName);
-                            assembly.PartialInterfaceByName[interfaceName] = partialInterface;
-                            assembly.PartialTypeByName[interfaceName] = partialInterface;
+                            var partialInterface = new PartialInterface(interfaceSingularName);
+                            assembly.PartialInterfaceByName.Add(interfaceSingularName, partialInterface);
+                            assembly.PartialTypeBySingularName.Add(interfaceSingularName, partialInterface);
 
                             Interface @interface;
-                            if (!this.InterfaceByName.TryGetValue(interfaceName, out @interface))
+                            if (!this.InterfaceBySingularName.TryGetValue(interfaceSingularName, out @interface))
                             {
-                                @interface = new Interface(interfaceName);
-                                this.InterfaceByName[interfaceName] = @interface;
-                                this.CompositeByName[interfaceName] = @interface;
-                                this.TypeByName[interfaceName] = @interface;
+                                @interface = new Interface(this.inflector, interfaceSingularName);
+                                this.InterfaceBySingularName.Add(interfaceSingularName,  @interface);
+                                this.CompositeByName.Add(interfaceSingularName, @interface);
+                                this.TypeBySingularName.Add(interfaceSingularName, @interface);
                             }
 
-                            @interface.PartialByAssemblyName[assemblyName] = partialInterface;
+                            @interface.PartialByAssemblyName.Add(assemblyName, partialInterface);
                         }
 
                         var classDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>().SingleOrDefault();
                         if (classDeclaration != null)
                         {
                             var symbol = semanticModel.GetDeclaredSymbol(classDeclaration);
-                            var className = symbol.Name;
+                            var classSingularName = symbol.Name;
 
-                            var partialClass = new PartialClass(className);
-                            assembly.PartialClassByName[className] = partialClass;
-                            assembly.PartialTypeByName[className] = partialClass;
+                            var partialClass = new PartialClass(classSingularName);
+                            assembly.PartialClassBySingularName.Add(classSingularName, partialClass);
+                            assembly.PartialTypeBySingularName.Add(classSingularName, partialClass);
                             
                             Class @class;
-                            if (!this.ClassByName.TryGetValue(className, out @class))
+                            if (!this.ClassBySingularName.TryGetValue(classSingularName, out @class))
                             {
-                                @class = new Class(className);
-                                this.ClassByName[className] = @class;
-                                this.CompositeByName[className] = @class;
-                                this.TypeByName[className] = @class;
+                                @class = new Class(this.inflector, classSingularName);
+                                this.ClassBySingularName.Add(classSingularName, @class);
+                                this.CompositeByName.Add(classSingularName, @class);
+                                this.TypeBySingularName.Add(classSingularName, @class);
                             }
 
-                            @class.PartialByAssemblyName[assemblyName] = partialClass;
+                            @class.PartialByAssemblyName.Add(assemblyName, partialClass);
                         }
                     }
                 }
@@ -267,17 +273,17 @@
 
         private void CreateHierarchy(ProjectInfo projectInfo)
         {
-            var definedTypeByName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
+            var definedTypeBySingularName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
 
             foreach (var composite in this.CompositeByName.Values)
             {
-                var definedType = definedTypeByName[composite.Name];
+                var definedType = definedTypeBySingularName[composite.SingularName];
 
                 var allInterfaces = definedType.GetInterfaces();
                 var directInterfaces = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces()));
                 foreach (var definedImplementedInterface in directInterfaces)
                 {
-                    var implementedInterface = this.InterfaceByName[definedImplementedInterface.Name];
+                    var implementedInterface = this.InterfaceBySingularName[definedImplementedInterface.Name];
                     composite.ImplementedInterfaces.Add(implementedInterface);
                 }
             }
@@ -304,18 +310,18 @@
                         {
                             var typeSymbol = semanticModel.GetDeclaredSymbol(typeDeclaration);
                             var typeName = typeSymbol.Name;
-                            var partialType = assembly.PartialTypeByName[typeName];
+                            var partialType = assembly.PartialTypeBySingularName[typeName];
                             var composite = this.CompositeByName[typeName];
 
                             var propertyDeclarations = typeDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>();
                             foreach (var propertyDeclaration in propertyDeclarations)
                             {
                                 var propertySymbol = semanticModel.GetDeclaredSymbol(propertyDeclaration);
-                                var propertyName = propertySymbol.Name;
+                                var propertyRoleName = propertySymbol.Name;
 
-                                var property = new Property(composite, propertyName);
-                                partialType.PropertyByName[propertyName] = property;
-                                composite.PropertyByName[propertyName] = property;
+                                var property = new Property(this.inflector, composite, propertyRoleName);
+                                partialType.PropertyByName.Add(propertyRoleName, property);
+                                composite.PropertyByRoleName.Add(propertyRoleName, property);
                             }
 
                             var methodDeclarations = typeDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>();
@@ -324,9 +330,9 @@
                                 var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
                                 var methodName = methodSymbol.Name;
 
-                                var method = new Method(methodName);
-                                partialType.MethodByName[methodName] = method;
-                                composite.MethodByName[methodName] = method;
+                                var method = new Method(composite, methodName);
+                                partialType.MethodByName.Add(methodName, method);
+                                composite.MethodByName.Add(methodName, method);
                             }
                         }
                     }
@@ -336,47 +342,68 @@
 
         private void FromReflection(ProjectInfo projectInfo)
         {
-            var declaredTypeByName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
+            var declaredTypeBySingularName = projectInfo.Assembly.DefinedTypes.Where(v => "Allors.Repository.Domain".Equals(v.Namespace)).ToDictionary(v => v.Name);
 
             foreach (var composite in this.CompositeByName.Values)
             {
-                var reflectedType = declaredTypeByName[composite.Name];
-                var typeAttributesByTypeName = reflectedType.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
+                var reflectedType = declaredTypeBySingularName[composite.SingularName];
 
-                foreach (var group in typeAttributesByTypeName)
+                // Type attributes
                 {
-                    var typeName = group.Key;
-                    if (typeName.ToLowerInvariant().EndsWith("attribute"))
-                    {
-                        typeName = typeName.Substring(0, typeName.Length - "attribute".Length);
-                    }
+                    var typeAttributesByTypeName = reflectedType.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType());
 
-                    composite.AttributeByName[typeName] = group.First();
+                    foreach (var group in typeAttributesByTypeName)
+                    {
+                        var type = group.Key;
+                        var typeName = type.Name;
+                        if (typeName.ToLowerInvariant().EndsWith("attribute"))
+                        {
+                            typeName = typeName.Substring(0, typeName.Length - "attribute".Length);
+                        }
+
+                        var attributeUsage = type.GetCustomAttributes<AttributeUsageAttribute>().FirstOrDefault();
+                        if (attributeUsage != null && attributeUsage.AllowMultiple)
+                        {
+                            composite.AttributesByName[typeName] = group.ToArray();
+                        }
+                        else
+                        {
+                            composite.AttributeByName[typeName] = group.First();
+                        }
+                    }
                 }
 
+                // Property attributes
                 foreach (var property in composite.Properties)
                 {
-                    var reflectedProperty = reflectedType.GetProperty(property.Name);
+                    var reflectedProperty = reflectedType.GetProperty(property.RoleName);
                     var propertyAttributesByTypeName =
                         reflectedProperty.GetCustomAttributes(false)
                             .Cast<Attribute>()
-                            .GroupBy(v => v.GetType().Name);
+                            .GroupBy(v => v.GetType());
 
                     var reflectedPropertyType = reflectedProperty.PropertyType;
                     var typeName = this.GetTypeName(reflectedPropertyType);
-                    property.Type = this.TypeByName[typeName];
+                    property.Type = this.TypeBySingularName[typeName];
 
                     foreach (var group in propertyAttributesByTypeName)
                     {
-                        var attributeTypeName = group.Key;
+                        var attributeType = group.Key;
+                        var attributeTypeName = attributeType.Name;
                         if (attributeTypeName.ToLowerInvariant().EndsWith("attribute"))
                         {
-                            attributeTypeName = attributeTypeName.Substring(
-                                0,
-                                attributeTypeName.Length - "attribute".Length);
+                            attributeTypeName = attributeTypeName.Substring(0, attributeTypeName.Length - "attribute".Length);
                         }
 
-                        property.AttributeByName[attributeTypeName] = group.First();
+                        var attributeUsage = attributeType.GetCustomAttributes<AttributeUsageAttribute>().FirstOrDefault();
+                        if (attributeUsage != null && attributeUsage.AllowMultiple)
+                        {
+                            property.AttributesByName.Add(attributeTypeName, group.ToArray());
+                        }
+                        else
+                        {
+                            property.AttributeByName.Add(attributeTypeName, group.First());
+                        }
                     }
                 }
 
@@ -463,26 +490,13 @@
 
         private void CreateInheritedProperties()
         {
-            foreach (var composite in this.Composites)
-            {
-                foreach (var property in composite.DefinedProperties)
-                {
-                    var reverseType = property.Type;
-                    var reverseComposite = reverseType as Composite;
-                    if (reverseComposite != null)
-                    {
-                        reverseComposite.DefinedReversePropertyByName[property.Name] = property;
-                    }
-                }
-            }
-
             foreach (var @interface in this.Interfaces)
             {
                 foreach (var supertype in @interface.Interfaces)
                 {
                     foreach (var property in supertype.DefinedProperties)
                     {
-                        @interface.InheritedPropertyByName[property.Name] = property;
+                        @interface.InheritedPropertyByRoleName.Add(property.RoleName, property);
                     }
                 }
             }
@@ -496,10 +510,7 @@
                 {
                     var reverseType = property.Type;
                     var reverseComposite = reverseType as Composite;
-                    if (reverseComposite != null)
-                    {
-                        reverseComposite.DefinedReversePropertyByName[property.Name] = property;
-                    }
+                    reverseComposite?.DefinedReversePropertyByAssociationName.Add(property.AssociationName, property);
                 }
             }
 
@@ -509,7 +520,7 @@
                 {
                     foreach (var property in supertype.DefinedReverseProperties)
                     {
-                        composite.InheritedReversePropertyByName[property.Name] = property;
+                        composite.InheritedReversePropertyByAssociationName.Add(property.AssociationName, property);
                     }
                 }
             }

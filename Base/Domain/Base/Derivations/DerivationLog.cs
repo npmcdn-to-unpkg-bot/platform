@@ -37,22 +37,10 @@ namespace Allors.Domain
 
         public Derivation Derivation { get; private set; }
 
-        public bool HasErrors
-        {
-            get
-            {
-                return this.errors.Count > 0;
-            }
-        }
+        public bool HasErrors => this.errors.Count > 0;
 
-        public IDerivationError[] Errors
-        {
-            get
-            {
-                return this.errors.ToArray();
-            }
-        }
-        
+        public IDerivationError[] Errors => this.errors.ToArray();
+
         public void AddError(IDerivationError derivationError)
         {
             this.errors.Add(derivationError);
@@ -66,7 +54,7 @@ namespace Allors.Domain
 
         public void AssertExists(IObject association, RoleType roleType)
         {
-            if (!association.Strategy.ExistRole(roleType))
+            if (!association.Strategy.ExistRole(roleType.RelationType))
             {
                 this.AddError(new DerivationErrorRequired(this, association, roleType));
             }
@@ -74,7 +62,7 @@ namespace Allors.Domain
 
         public void AssertNotExists(IObject association, RoleType roleType)
         {
-            if (association.Strategy.ExistRole(roleType))
+            if (association.Strategy.ExistRole(roleType.RelationType))
             {
                 this.AddError(new DerivationErrorNotAllowed(this, association, roleType));
             }
@@ -82,9 +70,9 @@ namespace Allors.Domain
 
         public void AssertNonEmptyString(IObject association, RoleType roleType)
         {
-            if (association.Strategy.ExistRole(roleType))
+            if (association.Strategy.ExistRole(roleType.RelationType))
             {
-                if (association.Strategy.GetUnitRole(roleType).Equals(string.Empty))
+                if (association.Strategy.GetUnitRole(roleType.RelationType).Equals(string.Empty))
                 {
                     this.AddError(new DerivationErrorRequired(this, association, roleType));
                 }
@@ -105,7 +93,7 @@ namespace Allors.Domain
                 if (roleTypes.Contains(roleType))
                 {
                     var objectType = roleType.AssociationType.ObjectType;
-                    var role = association.Strategy.GetRole(roleType);
+                    var role = association.Strategy.GetRole(roleType.RelationType);
 
                     if (role != null)
                     {
@@ -125,7 +113,7 @@ namespace Allors.Domain
         {
             foreach (var roleType in roleTypes)
             {
-                if (association.Strategy.ExistRole(roleType))
+                if (association.Strategy.ExistRole(roleType.RelationType))
                 {
                     return;
                 }
@@ -139,7 +127,7 @@ namespace Allors.Domain
             var count = 0;
             foreach (var roleType in roleTypes)
             {
-                if (association.Strategy.ExistRole(roleType))
+                if (association.Strategy.ExistRole(roleType.RelationType))
                 {
                     ++count;
                 }
@@ -153,8 +141,8 @@ namespace Allors.Domain
 
         public void AssertAreEqual(IObject association, RoleType roleType, RoleType otherRoleType)
         {
-            var value = association.Strategy.GetRole(roleType);
-            var otherValue = association.Strategy.GetRole(otherRoleType);
+            var value = association.Strategy.GetRole(roleType.RelationType);
+            var otherValue = association.Strategy.GetRole(otherRoleType.RelationType);
 
             bool equal;
             if (value == null)

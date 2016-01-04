@@ -85,13 +85,14 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (roleType.ObjectType.IsComposite)
                 {
-                    this.RemoveRole(roleType);
+                    this.RemoveRole(roleType.RelationType);
                 }
             }
 
             foreach (var associationType in this.Class.AssociationTypes)
             {
-                var roleType = associationType.RoleType;
+                var relationType = associationType.RelationType;
+                var roleType = relationType.RoleType;
 
                 if (associationType.IsMany)
                 {
@@ -100,26 +101,26 @@ namespace Allors.Adapters.Object.SqlClient
                         var associationStrategy = this.Session.State.GetOrCreateReferenceForExistingObject(association, this.Session).Strategy;
                         if (roleType.IsMany)
                         {
-                            associationStrategy.RemoveCompositeRole(roleType, this.GetObject()); 
+                            associationStrategy.RemoveCompositeRole(relationType, this.GetObject()); 
                         }
                         else
                         {
-                            associationStrategy.RemoveCompositeRole(roleType);
+                            associationStrategy.RemoveCompositeRole(relationType);
                         }
                     }
                 }
                 else
                 {
-                    var association = this.GetCompositeAssociation(associationType);
+                    var association = this.GetCompositeAssociation(relationType);
                     if (association != null)
                     {
                         if (roleType.IsMany)
                         {
-                            association.Strategy.RemoveCompositeRole(roleType, this.GetObject());
+                            association.Strategy.RemoveCompositeRole(roleType.RelationType, this.GetObject());
                         }
                         else
                         {
-                            association.Strategy.RemoveCompositeRole(roleType);
+                            association.Strategy.RemoveCompositeRole(roleType.RelationType);
                         }
                     }
                 }
@@ -131,41 +132,47 @@ namespace Allors.Adapters.Object.SqlClient
             this.Session.State.ChangeSet.OnDeleted(this.ObjectId);
         }
 
-        public virtual bool ExistRole(IRoleType roleType)
+        public virtual bool ExistRole(IRelationType relationType)
         {
+            var roleType = relationType.RoleType;
+
             if (roleType.ObjectType.IsUnit)
             {
-                return this.ExistUnitRole(roleType);
+                return this.ExistUnitRole(relationType);
             }
 
             if (roleType.IsMany)
             {
-                return this.ExistCompositeRoles(roleType);
+                return this.ExistCompositeRoles(relationType);
             }
 
-            return this.ExistCompositeRole(roleType);
+            return this.ExistCompositeRole(relationType);
         }
 
-        public virtual object GetRole(IRoleType roleType)
+        public virtual object GetRole(IRelationType relationType)
         {
+            var roleType = relationType.RoleType;
+
             if (roleType.ObjectType.IsUnit)
             {
-                return this.GetUnitRole(roleType);
+                return this.GetUnitRole(relationType);
             }
 
             if (roleType.IsMany)
             {
-                return this.GetCompositeRoles(roleType);
+                return this.GetCompositeRoles(relationType);
             }
 
-            return this.GetCompositeRole(roleType);
+            return this.GetCompositeRole(relationType);
         }
 
-        public virtual void SetRole(IRoleType roleType, object value)
+        public virtual void SetRole(IRelationType relationType, object value)
         {
+            var roleType = relationType.RoleType;
+
             if (roleType.ObjectType.IsUnit)
             {
-                this.SetUnitRole(roleType, value);
+                this.SetUnitRole(relationType, value);
             }
             else
             {
@@ -178,49 +185,54 @@ namespace Allors.Adapters.Object.SqlClient
                         roleExtent = (IObject[])roleList.ToArray(typeof(IObject));
                     }
 
-                    this.SetCompositeRoles(roleType, roleExtent);
+                    this.SetCompositeRoles(relationType, roleExtent);
                 }
                 else
                 {
-                    this.SetCompositeRole(roleType, (IObject)value);
+                    this.SetCompositeRole(relationType, (IObject)value);
                 }
             }
         }
 
-        public virtual void RemoveRole(IRoleType roleType)
+        public virtual void RemoveRole(IRelationType relationType)
         {
+            var roleType = relationType.RoleType;
+
             if (roleType.ObjectType.IsUnit)
             {
-                this.RemoveUnitRole(roleType);
+                this.RemoveUnitRole(relationType);
             }
             else
             {
                 if (roleType.IsMany)
                 {
-                    this.RemoveCompositeRoles(roleType);
+                    this.RemoveCompositeRoles(relationType);
                 }
                 else
                 {
-                    this.RemoveCompositeRole(roleType);
+                    this.RemoveCompositeRole(relationType);
                 }
             }
         }
 
-        public virtual bool ExistUnitRole(IRoleType roleType)
+        public virtual bool ExistUnitRole(IRelationType relationType)
         {
-            return this.GetUnitRole(roleType) != null;
+            return this.GetUnitRole(relationType) != null;
         }
 
-        public virtual object GetUnitRole(IRoleType roleType)
+        public virtual object GetUnitRole(IRelationType relationType)
         {
             this.AssertExist();
 
+            var roleType = relationType.RoleType;
             return this.Roles.GetUnitRole(roleType);
         }
 
-        public virtual void SetUnitRole(IRoleType roleType, object role)
+        public virtual void SetUnitRole(IRelationType relationType, object role)
         {
             this.AssertExist();
+
+            var roleType = relationType.RoleType;
 
             RoleAssertions.UnitRoleChecks(this, roleType);
 
@@ -229,106 +241,113 @@ namespace Allors.Adapters.Object.SqlClient
                 role = roleType.Normalize(role);
             }
 
-            var oldUnit = this.GetUnitRole(roleType);
+            var oldUnit = this.GetUnitRole(relationType);
             if (!Equals(oldUnit, role))
             {
                 this.Roles.SetUnitRole(roleType, role);
             }
         }
 
-        public virtual void RemoveUnitRole(IRoleType roleType)
+        public virtual void RemoveUnitRole(IRelationType relationType)
         {
-            this.SetUnitRole(roleType, null);
+            this.SetUnitRole(relationType, null);
         }
 
-        public virtual bool ExistCompositeRole(IRoleType roleType)
+        public virtual bool ExistCompositeRole(IRelationType relationType)
         {
-            return this.GetCompositeRole(roleType) != null;
+            return this.GetCompositeRole(relationType) != null;
         }
 
-        public virtual IObject GetCompositeRole(IRoleType roleType)
+        public virtual IObject GetCompositeRole(IRelationType relationType)
         {
             this.AssertExist();
+
+            var roleType = relationType.RoleType;
+
             var role = this.Roles.GetCompositeRole(roleType);
             return (role == null) ? null : this.Session.State.GetOrCreateReferenceForExistingObject(role.Value, this.Session).Strategy.GetObject();
         }
 
-        public virtual void SetCompositeRole(IRoleType roleType, IObject newRoleObject)
+        public virtual void SetCompositeRole(IRelationType relationType, IObject newRoleObject)
         {
             if (newRoleObject == null)
             {
-                this.RemoveCompositeRole(roleType);
+                this.RemoveCompositeRole(relationType);
                 return;
             }
 
             this.AssertExist();
 
+            var roleType = relationType.RoleType;
             RoleAssertions.CompositeRoleChecks(this, roleType, newRoleObject);
 
             var newRoleObjectId = (Strategy)newRoleObject.Strategy;
-
             this.Roles.SetCompositeRole(roleType, newRoleObjectId);
         }
 
-        public virtual void RemoveCompositeRole(IRoleType roleType)
+        public virtual void RemoveCompositeRole(IRelationType relationType)
         {
             this.AssertExist();
 
+            var roleType = relationType.RoleType;
             RoleAssertions.CompositeRoleChecks(this, roleType);
 
             this.Roles.RemoveCompositeRole(roleType);
         }
 
-        public virtual bool ExistCompositeRoles(IRoleType roleType)
+        public virtual bool ExistCompositeRoles(IRelationType relationType)
         {
-            return this.GetCompositeRoles(roleType).Count != 0;
+            return this.GetCompositeRoles(relationType).Count != 0;
         }
 
-        public virtual Allors.Extent GetCompositeRoles(IRoleType roleType)
+        public virtual Allors.Extent GetCompositeRoles(IRelationType relationType)
         {
             this.AssertExist();
 
+            var roleType = relationType.RoleType;
             return new ExtentRoles(this, roleType);
         }
 
-        public virtual void AddCompositeRole(IRoleType roleType, IObject roleObject)
+        public virtual void AddCompositeRole(IRelationType relationType, IObject roleObject)
         {
             this.AssertExist();
 
             if (roleObject != null)
             {
+                var roleType = relationType.RoleType;
                 RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
 
                 var role = (Strategy)roleObject.Strategy;
-                
                 this.Roles.AddCompositeRole(roleType, role);
             }
         }
 
-        public virtual void RemoveCompositeRole(IRoleType roleType, IObject roleObject)
+        public virtual void RemoveCompositeRole(IRelationType relationType, IObject roleObject)
         {
             this.AssertExist();
             
             if (roleObject != null)
             {
+                var roleType = relationType.RoleType;
                 RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
                 
                 var role = (Strategy)roleObject.Strategy;
-
                 this.Roles.RemoveCompositeRole(roleType, role);
             }
         }
 
-        public virtual void SetCompositeRoles(IRoleType roleType, Allors.Extent roleObjects)
+        public virtual void SetCompositeRoles(IRelationType relationType, Allors.Extent roleObjects)
         {
             if (roleObjects == null || roleObjects.Count == 0)
             {
-                this.RemoveCompositeRoles(roleType);
+                this.RemoveCompositeRoles(relationType);
             }
             else
             {
                 this.AssertExist();
-                
+
+                var roleType = relationType.RoleType;
+
                 // TODO: use CompositeRoles
                 var previousRoles = new List<long>(this.Roles.GetCompositesRole(roleType));
                 var newRoles = new HashSet<long>();
@@ -359,10 +378,11 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public virtual void RemoveCompositeRoles(IRoleType roleType)
+        public virtual void RemoveCompositeRoles(IRelationType relationType)
         {
             this.AssertExist();
 
+            var roleType = relationType.RoleType;
             RoleAssertions.CompositeRoleChecks(this, roleType);
 
             var previousRoles = this.Roles.GetCompositesRole(roleType);
@@ -373,49 +393,39 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        public virtual bool ExistAssociation(IAssociationType associationType)
+        public virtual bool ExistAssociation(IRelationType relationType)
         {
-            if (associationType.IsMany)
-            {
-                return this.ExistCompositeAssociations(associationType);
-            }
-
-            return this.ExistCompositeAssociation(associationType);
+            return relationType.AssociationType.IsMany ? this.ExistCompositeAssociations(relationType) : this.ExistCompositeAssociation(relationType);
         }
 
-        public virtual object GetAssociation(IAssociationType associationType)
+        public virtual object GetAssociation(IRelationType relationType)
         {
-            if (associationType.IsMany)
-            {
-                return this.GetCompositeAssociations(associationType);
-            }
-
-            return this.GetCompositeAssociation(associationType);
+            return relationType.AssociationType.IsMany ? (object)this.GetCompositeAssociations(relationType) : this.GetCompositeAssociation(relationType);
         }
 
-        public virtual bool ExistCompositeAssociation(IAssociationType associationType)
+        public virtual bool ExistCompositeAssociation(IRelationType relationType)
         {
-            return this.GetCompositeAssociation(associationType) != null;
+            return this.GetCompositeAssociation(relationType) != null;
         }
 
-        public virtual IObject GetCompositeAssociation(IAssociationType associationType)
+        public virtual IObject GetCompositeAssociation(IRelationType relationType)
         {
             this.AssertExist();
 
-            var association = this.Session.GetAssociation(this, associationType);
+            var association = this.Session.GetAssociation(this, relationType.AssociationType);
 
             return association?.Strategy.GetObject();
         }
 
-        public virtual bool ExistCompositeAssociations(IAssociationType associationType)
+        public virtual bool ExistCompositeAssociations(IRelationType relationType)
         {
-            return this.GetCompositeAssociations(associationType).Count != 0;
+            return this.GetCompositeAssociations(relationType).Count != 0;
         }
 
-        public virtual Allors.Extent GetCompositeAssociations(IAssociationType associationType)
+        public virtual Allors.Extent GetCompositeAssociations(IRelationType relationType)
         {
             this.AssertExist();
-            return new ExtentAssociations(this, associationType);
+            return new ExtentAssociations(this, relationType.AssociationType);
         }
 
         public override string ToString()

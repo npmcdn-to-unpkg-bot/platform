@@ -170,14 +170,14 @@ namespace Allors.Adapters.Object.SqlClient
                     if (previousRole != null)
                     {
                         var previousRoleStrategy = this.Reference.Session.State.GetOrCreateReferenceForExistingObject(previousRole.Value, this.Reference.Session).Strategy;
-                        var previousAssociation = previousRoleStrategy.GetCompositeAssociation(roleType.AssociationType);
-                        previousAssociation?.Strategy.RemoveCompositeRole(roleType);
+                        var previousAssociation = previousRoleStrategy.GetCompositeAssociation(roleType.RelationType);
+                        previousAssociation?.Strategy.RemoveCompositeRole(roleType.RelationType);
                     }
 
-                    var newRoleAssociation = newRoleStrategy.GetCompositeAssociation(roleType.AssociationType);
+                    var newRoleAssociation = newRoleStrategy.GetCompositeAssociation(roleType.RelationType);
                     if (newRoleAssociation != null && !newRoleAssociation.Id.Equals(this.Reference.ObjectId))
                     {
-                        newRoleAssociation.Strategy.RemoveCompositeRole(roleType);
+                        newRoleAssociation.Strategy.RemoveCompositeRole(roleType.RelationType);
                     }
 
                     this.Reference.Session.SetAssociation(this.Reference, newRoleStrategy, roleType.AssociationType);
@@ -283,11 +283,11 @@ namespace Allors.Adapters.Object.SqlClient
 
                 if (roleType.AssociationType.IsOne)
                 {
-                    var previousAssociationObject = role.GetCompositeAssociation(roleType.AssociationType);
+                    var previousAssociationObject = role.GetCompositeAssociation(roleType.RelationType);
                     var previousAssociation = (Strategy)previousAssociationObject?.Strategy;
                     if (previousAssociation != null && !previousAssociation.ObjectId.Equals(this.Reference.ObjectId))
                     {
-                        previousAssociation.RemoveCompositeRole(roleType, role.GetObject());
+                        previousAssociation.RemoveCompositeRole(roleType.RelationType, role.GetObject());
                     }
 
                     this.Reference.Session.SetAssociation(this.Reference, role, roleType.AssociationType);

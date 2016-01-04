@@ -22,6 +22,8 @@ namespace Allors.Meta
 {
     using System;
 
+    using Allors.Repository;
+
     /// <summary>
     /// Base class for Meta objects.
     /// </summary>

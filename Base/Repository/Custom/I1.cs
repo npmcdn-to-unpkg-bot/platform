@@ -276,9 +276,8 @@ namespace Allors.Repository.Domain
         [RoleId("5ebf419f-1c7f-46f2-844c-0f54321888ee")]
         #endregion
         Guid I1AllorsUnique { get; set; }
-
-
-
+        
+        [Id("A360CF09-7B55-421B-A45D-D100BAF3D0D6")]
         void InterfaceMethod();
     }
 }

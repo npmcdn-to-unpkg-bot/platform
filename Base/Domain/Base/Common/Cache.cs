@@ -93,9 +93,9 @@ namespace Allors.Domain
         {
             if (cachedObject != null)
             {
-                if (cachedObject.Strategy.ExistUnitRole(this.roleType))
+                if (cachedObject.Strategy.ExistUnitRole(this.roleType.RelationType))
                 {
-                    var key = (TKey)cachedObject.Strategy.GetUnitRole(this.roleType);
+                    var key = (TKey)cachedObject.Strategy.GetUnitRole(this.roleType.RelationType);
 
                     this.LazyLoadDatabaseSessionCache();
 

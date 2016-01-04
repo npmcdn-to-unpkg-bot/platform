@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="DomainAttribute.cs" company="Allors bvba">
+// <copyright file="AssociationIdAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,16 +21,16 @@
 
 using System;
 
-namespace Allors
+namespace Allors.Repository
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
-    public class DomainAttribute : MetaAttribute
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+    public class AssociationIdAttribute : RepositoryAttribute
     {
-        public DomainAttribute(Type value)
+        public AssociationIdAttribute(string value)
         {
             this.Value = value;
         }
         
-        public Type Value { get; set; }
+        public string Value { get; set; }
     }
 }

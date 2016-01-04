@@ -25,8 +25,8 @@ namespace Allors.Tools.Repository
 
     public class Class : Composite
     {
-        public Class(string name)
-            : base(name)
+        public Class(Inflector.Inflector inflector, string name)
+            : base(inflector, name)
         {
             this.PartialByAssemblyName = new Dictionary<string, PartialClass>();
         }

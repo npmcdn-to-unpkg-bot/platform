@@ -30,11 +30,7 @@ namespace Allors.Meta
     /// </summary>
     public interface IAssociationType : IPropertyType
     {
-        string SingularName { get; }
-
-        string SingularPropertyName { get; }
-
-        string SingularFullName { get; }
+        string PropertyName { get; }
 
         bool IsMany { get; }
 
@@ -45,6 +41,5 @@ namespace Allors.Meta
         bool IsOne { get; }
 
         IRoleType RoleType { get; }
-
     }
 }

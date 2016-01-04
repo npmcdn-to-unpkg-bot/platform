@@ -25,7 +25,7 @@ namespace Allors.Meta
     {
         public abstract Unit Unit { get; }
 
-        public ObjectType ObjectType => this.Unit;
+        public Unit ObjectType => this.Unit;
 
         public static implicit operator ObjectType(MetaUnit metaUnit)
         {

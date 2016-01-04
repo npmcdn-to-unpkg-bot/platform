@@ -24,11 +24,15 @@ namespace Allors.Tools.Repository
     using System;
     using System.Collections.Generic;
 
+    using Allors.Repository;
+
     public class Property
     {
-        public string Name { get; }
+        private readonly Inflector.Inflector inflector;
 
-        public Type DefiningType { get; internal set; }
+        private string name;
+
+        public Composite DefiningType { get; }
 
         public Type Type { get; internal set; }
 
@@ -36,12 +40,120 @@ namespace Allors.Tools.Repository
 
         public Dictionary<string, Attribute> AttributeByName { get; }
 
-        public Property(Type definingType, string name)
+        public Dictionary<string, Attribute[]> AttributesByName { get; }
+
+        public Multiplicity Multiplicity
+        {
+            get
+            {
+                if (this.Type is Unit)
+                {
+                    return Multiplicity.OneToOne;
+                }
+
+                Attribute attribute;
+                return this.AttributeByName.TryGetValue("Multiplicity", out attribute) ? ((MultiplicityAttribute)attribute).Value : Multiplicity.ManyToOne;
+            }
+        }
+
+        public bool IsRoleOne => !this.IsRoleMany;
+
+        public bool IsRoleMany
+        {
+            get
+            {
+                switch (this.Multiplicity)
+                {
+                    case Multiplicity.OneToMany:
+                    case Multiplicity.ManyToMany:
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        public bool IsAssociationOne => !this.IsAssociationMany;
+
+        public bool IsAssociationMany
+        {
+            get
+            {
+                switch (this.Multiplicity)
+                {
+                    case Multiplicity.ManyToOne:
+                    case Multiplicity.ManyToMany:
+                        return true;
+
+                    default:
+                        return false;
+                }
+            }
+        }
+
+        public Property(Inflector.Inflector inflector, Composite definingType, string name)
         {
             this.AttributeByName = new Dictionary<string, Attribute>();
+            this.AttributesByName = new Dictionary<string, Attribute[]>();
 
             this.DefiningType = definingType;
-            this.Name = name;
+            this.inflector = inflector;
+            this.name = name;
+        }
+
+        public string RoleName => this.name;
+       
+        public string RoleSingularName 
+        {
+            get
+            {
+                if (this.IsRoleOne)
+                {
+                    return this.name;
+                }
+                else
+                {
+                    Attribute attribute;
+                    return this.AttributeByName.TryGetValue("Singular", out attribute) ? ((SingularAttribute)attribute).Value : this.inflector.Singularize(this.name);
+                }
+            }
+        }
+
+        public string RolePluralName
+        {
+            get
+            {
+                if (this.IsRoleMany)
+                {
+                    return this.name;
+                }
+                else
+                {
+                    Attribute attribute;
+                    return this.AttributeByName.TryGetValue("Plural", out attribute) ? ((PluralAttribute)attribute).Value : this.inflector.Pluralize(this.name);
+                }
+            }
+        }
+
+        public string AssociationName
+        {
+            get
+            {
+                if (this.IsAssociationMany)
+                {
+                    return this.DefiningType.PluralName + "Where" + this.RoleSingularName;
+                }
+                else
+                {
+                    return this.DefiningType.SingularName + "Where" + this.RoleSingularName;
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            return this.name;
         }
     }
 }

@@ -25,17 +25,32 @@ namespace Allors.Tools.Repository
     using System.Collections.Generic;
     using System.Linq;
 
+    using Allors.Repository;
+
     public abstract class Composite : Type
     {
-        protected Composite(string name)
+        private readonly Inflector.Inflector inflector;
+
+        protected Composite(Inflector.Inflector inflector, string name)
             : base(name)
         {
+            this.inflector = inflector;
             this.AttributeByName = new Dictionary<string, Attribute>();
+            this.AttributesByName = new Dictionary<string, Attribute[]>();
             this.ImplementedInterfaces = new List<Interface>();
-            this.PropertyByName = new Dictionary<string, Property>();
-            this.DefinedReversePropertyByName = new Dictionary<string, Property>();
-            this.InheritedReversePropertyByName = new Dictionary<string, Property>();
+            this.PropertyByRoleName = new Dictionary<string, Property>();
+            this.DefinedReversePropertyByAssociationName = new Dictionary<string, Property>();
+            this.InheritedReversePropertyByAssociationName = new Dictionary<string, Property>();
             this.MethodByName = new Dictionary<string, Method>();
+        }
+
+        public string PluralName
+        {
+            get
+            {
+                Attribute attribute;
+                return this.AttributeByName.TryGetValue("Plural", out attribute) ? ((PluralAttribute)attribute).Value : this.inflector.Pluralize(this.SingularName);
+            }
         }
 
         public abstract IEnumerable<Interface> Interfaces { get; }
@@ -44,30 +59,32 @@ namespace Allors.Tools.Repository
 
         public Dictionary<string, Attribute> AttributeByName { get; }
 
+        public Dictionary<string, Attribute[]> AttributesByName { get; }
+
         public IList<Interface> ImplementedInterfaces { get; }
 
-        public Dictionary<string, Property> PropertyByName { get; }
+        public Dictionary<string, Property> PropertyByRoleName { get; }
 
-        public Dictionary<string, Property> DefinedReversePropertyByName { get; }
+        public Dictionary<string, Property> DefinedReversePropertyByAssociationName { get; }
 
-        public Dictionary<string, Property> InheritedReversePropertyByName { get; }
+        public Dictionary<string, Property> InheritedReversePropertyByAssociationName { get; }
 
         public Dictionary<string, Method> MethodByName { get; }
 
-        public IEnumerable<Property> Properties => this.PropertyByName.Values;
+        public IEnumerable<Property> Properties => this.PropertyByRoleName.Values;
 
-        public IEnumerable<Property> DefinedProperties => this.PropertyByName.Values.Where(v => v.DefiningProperty == null);
+        public IEnumerable<Property> DefinedProperties => this.PropertyByRoleName.Values.Where(v => v.DefiningProperty == null);
 
-        public IEnumerable<Property> ImplementedProperties => this.PropertyByName.Values.Where(v => v.DefiningProperty != null);
+        public IEnumerable<Property> ImplementedProperties => this.PropertyByRoleName.Values.Where(v => v.DefiningProperty != null);
 
-        public IEnumerable<Property> DefinedReverseProperties => this.DefinedReversePropertyByName.Values;
+        public IEnumerable<Property> DefinedReverseProperties => this.DefinedReversePropertyByAssociationName.Values;
 
-        public IEnumerable<Property> ImplementedReverseProperties => this.InheritedReversePropertyByName.Values;
+        public IEnumerable<Property> InheritedReverseProperties => this.InheritedReversePropertyByAssociationName.Values;
 
         public IEnumerable<Method> Methods => this.MethodByName.Values;
 
         public IEnumerable<Method> DefinedMethods => this.MethodByName.Values.Where(v => v.DefiningMethod == null);
 
-        public IEnumerable<Method> ImplementedMethods => this.MethodByName.Values.Where(v => v.DefiningMethod != null);
+        public IEnumerable<Method> InheritedMethods => this.MethodByName.Values.Where(v => v.DefiningMethod != null);
     }
 }

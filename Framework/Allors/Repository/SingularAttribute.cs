@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MultiplicityAttribute.cs" company="Allors bvba">
+// <copyright file="PluralAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -7,7 +7,7 @@
 //   b) the Allors License
 // 
 // The LGPL License is included in the file lgpl.txt.
-// The Allors License is an addendum to your contract.
+// The Allors License is an addendum to your contract.B
 // 
 // Allors Platform is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,18 +20,17 @@
 //-------------------------------------------------------------------------------------------------
 
 using System;
-using Allors.Meta;
 
-namespace Allors
+namespace Allors.Repository
 {
-    [AttributeUsage(AttributeTargets.Field)]
-    public class MultiplicityAttribute : MetaAttribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public class SingularAttribute : RepositoryAttribute
     {
-        public MultiplicityAttribute(Multiplicity value)
+        public SingularAttribute(string value)
         {
             this.Value = value;
         }
         
-        public Multiplicity Value { get; set; }
+        public string Value { get; set; }
     }
 }

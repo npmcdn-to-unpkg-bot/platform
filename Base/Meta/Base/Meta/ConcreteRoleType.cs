@@ -25,43 +25,19 @@ namespace Allors.Meta
 
     public partial class ConcreteRoleType
     {
-        public bool IsRequired
-        {
-            get
-            {
-                return this.IsRequiredOverride ?? this.roleType.IsRequired;
-            }
-        }
+        public bool IsRequired => this.IsRequiredOverride ?? this.roleType.IsRequired;
 
         public bool? IsRequiredOverride { get; set; }
 
-        public bool IsUnique
-        {
-            get
-            {
-                return this.IsUniqueOverride ?? this.roleType.IsUnique;
-            }
-        }
+        public bool IsUnique => this.IsUniqueOverride ?? this.roleType.IsUnique;
 
         public bool? IsUniqueOverride { get; set; }
 
-        public DataTypeAttribute DataTypeAttribute
-        {
-            get
-            {
-                return this.DataTypeAttributeOverride ?? this.roleType.DataTypeAttribute;
-            }
-        }
+        public DataTypeAttribute DataTypeAttribute => this.DataTypeAttributeOverride ?? this.roleType.DataTypeAttribute;
 
         public DataTypeAttribute DataTypeAttributeOverride { get; set; }
         
-        public DisplayAttribute DisplayAttribute
-        {
-            get
-            {
-                return this.DisplayAttributeOverride ?? this.roleType.DisplayAttribute;
-            }
-        }
+        public DisplayAttribute DisplayAttribute => this.DisplayAttributeOverride ?? this.roleType.DisplayAttribute;
 
         public DisplayAttribute DisplayAttributeOverride { get; set; }
     }

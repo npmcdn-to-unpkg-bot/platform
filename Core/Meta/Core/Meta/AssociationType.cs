@@ -53,10 +53,7 @@ namespace Allors.Meta
         /// Gets a value indicating whether this instance has a multiplicity of one.
         /// </summary>
         /// <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
-        public bool IsOne
-        {
-            get { return !this.IsMany; }
-        }
+        public bool IsOne => !this.IsMany;
 
         public bool IsMany
         {
@@ -74,13 +71,7 @@ namespace Allors.Meta
             }
         }
 
-        IComposite IAssociationType.ObjectType
-        {
-            get
-            {
-                return this.ObjectType;
-            }
-        }
+        IComposite IAssociationType.ObjectType => this.ObjectType;
 
         public Composite ObjectType
         {
@@ -97,89 +88,45 @@ namespace Allors.Meta
             }
         }
 
-        IRelationType IAssociationType.RelationType
-        {
-            get
-            {
-                return this.RelationType;
-            }
-        }
+        IRelationType IAssociationType.RelationType => this.RelationType;
 
-        public RelationType RelationType
-        {
-            get
-            {
-                return this.relationType;
-            }
-        }
+        public RelationType RelationType => this.relationType;
 
         /// <summary>
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
-        public override string Name
-        {
-            get
-            {
-                return this.FullName;
-            }
-        }
+        public override string Name => this.FullName;
 
         /// <summary>
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string SingularName
-        {
-            get
-            {
-                return this.ObjectType != null ? this.ObjectType.SingularName : this.IdAsString;
-            }
-        }
+        public string SingularName => this.ObjectType != null ? this.ObjectType.SingularName : this.IdAsString;
 
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string PluralName
-        {
-            get { return this.ObjectType != null ? this.ObjectType.PluralName : this.IdAsString; }
-        }
+        public string PluralName => this.ObjectType != null ? this.ObjectType.PluralName : this.IdAsString;
 
         /// <summary>
         /// Gets the full name.
         /// </summary>
         /// <value>The full name</value>
-        public string FullName
-        {
-            get
-            {
-                if (this.IsMany)
-                {
-                    return this.PluralFullName;
-                }
-
-                return this.SingularFullName;
-            }
-        }
+        public string FullName => this.IsMany ? this.PluralFullName : this.SingularFullName;
 
         /// <summary>
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string SingularFullName
-        {
-            get { return this.ObjectType != null ? this.RelationType.RoleType.SingularName + this.ObjectType.SingularName : this.IdAsString; }
-        }
+        public string SingularFullName => this.ObjectType != null ? this.RelationType.RoleType.SingularName + this.ObjectType.SingularName : this.IdAsString;
 
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string PluralFullName
-        {
-            get { return this.ObjectType != null ? this.RelationType.RoleType.SingularName + this.ObjectType.PluralName : this.IdAsString; }
-        }
+        public string PluralFullName => this.ObjectType != null ? this.RelationType.RoleType.SingularName + this.ObjectType.PluralName : this.IdAsString;
 
         /// <summary>
         /// Gets the property name.
@@ -202,30 +149,18 @@ namespace Allors.Meta
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string SingularPropertyName
-        {
-            get { return this.ObjectType != null ? this.ObjectType.SingularName + Where + this.RelationType.RoleType.SingularName : this.IdAsNumberString; }
-        }
+        public string SingularPropertyName => this.ObjectType != null ? this.ObjectType.SingularName + Where + this.RelationType.RoleType.SingularName : this.IdAsNumberString;
 
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string PluralPropertyName
-        {
-            get { return this.ObjectType != null ? this.ObjectType.PluralName + Where + this.RelationType.RoleType.SingularName : this.IdAsNumberString; }
-        }
+        public string PluralPropertyName => this.ObjectType != null ? this.ObjectType.PluralName + Where + this.RelationType.RoleType.SingularName : this.IdAsNumberString;
 
         /// <summary>
         /// Gets the display name.
         /// </summary>
-        public override string DisplayName
-        {
-            get
-            {
-                return this.PropertyName;
-            }
-        }
+        public override string DisplayName => this.PropertyName;
 
         /// <summary>
         /// Get the value of the association on this object.
@@ -238,37 +173,22 @@ namespace Allors.Meta
         /// </returns>
         public override object Get(IStrategy strategy)
         {
-            return strategy.GetAssociation(this);
+            return strategy.GetAssociation(this.RelationType);
         }
 
-        IRoleType IAssociationType.RoleType
-        {
-            get
-            {
-                return this.RoleType;
-            }
-        }
+        IRoleType IAssociationType.RoleType => this.RoleType;
 
         /// <summary>
         /// Gets the role.
         /// </summary>
         /// <value>The role .</value>
-        public RoleType RoleType
-        {
-            get { return RelationType.RoleType; }
-        }
+        public RoleType RoleType => this.RelationType.RoleType;
 
         /// <summary>
         /// Gets the validation name.
         /// </summary>
         /// <value>The name of the validation.</value>
-        protected internal override string ValidationName
-        {
-            get
-            {
-                return "association type " + RelationType.Name;
-            }
-        }
+        protected internal override string ValidationName => "association type " + this.RelationType.Name;
 
         /// <summary>
         /// Compares the current instance with another object of the same type.

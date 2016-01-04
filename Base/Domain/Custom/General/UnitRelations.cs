@@ -20,7 +20,7 @@
 
 namespace Allors.Domain
 {
-    public partial class Units
+    public partial class UnitRelations
     {
         protected override void CustomSecure(Security config)
         {

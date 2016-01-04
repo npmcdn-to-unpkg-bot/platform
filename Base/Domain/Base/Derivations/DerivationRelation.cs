@@ -36,20 +36,11 @@ namespace Allors.Domain
             this.roleType = roleType;
         }
 
-        public IObject Association
-        {
-            get { return this.association; }
-        }
+        public IObject Association => this.association;
 
-        public RoleType RoleType
-        {
-            get { return this.roleType; }
-        }
+        public RoleType RoleType => this.roleType;
 
-        public object Role
-        {
-            get { return this.association.Strategy.GetRole(this.roleType); }
-        }
+        public object Role => this.association.Strategy.GetRole(this.roleType.RelationType);
 
         public static DerivationRelation[] Create(IObject association, params RoleType[] roleTypes)
         {

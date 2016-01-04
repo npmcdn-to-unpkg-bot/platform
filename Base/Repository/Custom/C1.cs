@@ -353,7 +353,6 @@ namespace Allors.Repository.Domain
         #endregion
         public I2 C1I2One2One { get; set; }
 
-
         #region inherited methods
 
 
@@ -375,12 +374,11 @@ namespace Allors.Repository.Domain
         public void SuperinterfaceMethod(){}
 
         #endregion
-
-
-
+        
+        [Id("09A6A387-A1B5-4038-B074-3A01C81CBDA2")]
         public void ClassMethod(){}
-
-
+        
+        [Id("26FE4FD7-68C3-4DDA-8A44-87857B35B000")]
         public void Sum(){}
     }
 }

@@ -36,11 +36,11 @@ namespace Allors.Meta
 
         IObjectType ObjectType { get; }
 
-        bool IsMany { get; }
-
         IAssociationType AssociationType { get; }
 
         IRelationType RelationType { get; }
+
+        bool IsMany { get; }
 
         bool IsOne { get; }
 

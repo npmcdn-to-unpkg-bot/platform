@@ -37,7 +37,7 @@ namespace Allors.Adapters.Memory
 
         internal override ThreeValuedLogic Evaluate(Strategy strategy)
         {
-            return strategy.ExistRole(this.roleType) ? ThreeValuedLogic.True : ThreeValuedLogic.False;
+            return strategy.ExistRole(this.roleType.RelationType) ? ThreeValuedLogic.True : ThreeValuedLogic.False;
         }
     }
 }

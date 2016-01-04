@@ -22,13 +22,15 @@ namespace Allors.Domain
 {
     using System;
 
+    using Allors.Meta;
+
     public static partial class UniquelyIdentifiableExtension
     {
         public static void BaseOnBuild(this UniquelyIdentifiable @this, ObjectOnBuild method)
         {
             if (!@this.ExistUniqueId)
             {
-                @this.Strategy.SetUnitRole(UniquelyIdentifiables.Meta.UniqueId, Guid.NewGuid());
+                @this.Strategy.SetUnitRole(MetaUniquelyIdentifiable.Instance.UniqueId.RelationType, Guid.NewGuid());
             }
         }
     }

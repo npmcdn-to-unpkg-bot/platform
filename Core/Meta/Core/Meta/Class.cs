@@ -39,9 +39,11 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Class(MetaPopulation metaPopulation)
+        internal Class(MetaPopulation metaPopulation, Guid id)
             : base(metaPopulation)
         {
+            this.Id = id;
+
             this.concreteRoleTypeByRoleType = new Dictionary<RoleType, ConcreteRoleType>();
             this.concreteMethodTypeByMethodType = new Dictionary<MethodType, ConcreteMethodType>();
 
@@ -86,29 +88,11 @@ namespace Allors.Meta
             }
         }
 
-        public override IEnumerable<Class> Classes
-        {
-            get
-            {
-                return this.classes;
-            }
-        }
+        public override IEnumerable<Class> Classes => this.classes;
 
-        public override bool ExistClass
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool ExistClass => true;
 
-        public override Class ExclusiveSubclass
-        {
-            get
-            {
-                return this;
-            }
-        }
+        public override Class ExclusiveSubclass => this;
 
         public override bool IsAssignableFrom(IClass objectType)
         {
@@ -167,13 +151,7 @@ namespace Allors.Meta
             this.concreteMethodTypes = this.concreteMethodTypeByMethodType.Values.ToArray();
         }
 
-        public override Type ClrType
-        {
-            get
-            {
-                return this.clrType;
-            }
-        }
+        public override Type ClrType => this.clrType;
 
         internal void Bind(Dictionary<string, Type> typeByTypeName)
         {

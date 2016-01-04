@@ -25,11 +25,16 @@ namespace Allors.Tools.Repository
     {
         protected Type(string name)
         {
-            this.Name = name;
+            this.SingularName = name;
         }
-
-        public string Name { get; }
+        
+        public string SingularName { get; }
 
         public abstract string Id { get; }
+
+        public override string ToString()
+        {
+            return this.SingularName;
+        }
     }
 }

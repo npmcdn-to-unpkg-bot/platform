@@ -111,31 +111,31 @@ namespace Allors.Domain
                     var unit = (Meta.Unit)objectType;
                     switch ((UnitTags)unit.UnitTag)
                     {
-                        case UnitTags.AllorsString:
+                        case UnitTags.String:
                             stringValue = (string)value;
                             break;
 
-                        case UnitTags.AllorsInteger:
+                        case UnitTags.Integer:
                             stringValue = ((int)value).ToString(formatProvider);
                             break;
 
-                        case UnitTags.AllorsDecimal:
+                        case UnitTags.Decimal:
                             stringValue = ((decimal)value).ToString(formatProvider);
                             break;
 
-                        case UnitTags.AllorsFloat:
+                        case UnitTags.Float:
                             stringValue = ((double)value).ToString(formatProvider);
                             break;
 
-                        case UnitTags.AllorsBoolean:
+                        case UnitTags.Boolean:
                             stringValue = ((bool)value).ToString(formatProvider);
                             break;
 
-                        case UnitTags.AllorsUnique:
+                        case UnitTags.Unique:
                             stringValue = ((Guid)value).ToString();
                             break;
 
-                        case UnitTags.AllorsBinary:
+                        case UnitTags.Binary:
                             stringValue = Convert.ToBase64String((byte[])value);
                             break;
 

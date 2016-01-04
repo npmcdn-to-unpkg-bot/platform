@@ -37,25 +37,25 @@ namespace Allors
                 var unitTypeTag = unit.UnitTag;
                 switch (unitTypeTag)
                 {
-                    case UnitTags.AllorsString:
+                    case UnitTags.String:
                         return string.Empty;
 
-                    case UnitTags.AllorsInteger:
+                    case UnitTags.Integer:
                         return 0;
 
-                    case UnitTags.AllorsDecimal:
+                    case UnitTags.Decimal:
                         return 0m;
 
-                    case UnitTags.AllorsFloat:
+                    case UnitTags.Float:
                         return 0d;
 
-                    case UnitTags.AllorsBoolean:
+                    case UnitTags.Boolean:
                         return false;
 
-                    case UnitTags.AllorsBinary:
+                    case UnitTags.Binary:
                         return new byte[0];
 
-                    case UnitTags.AllorsUnique:
+                    case UnitTags.Unique:
                         return Guid.NewGuid();
 
                     default:

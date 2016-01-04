@@ -42,18 +42,9 @@ namespace Allors
             }
         }
 
-        protected ISession Session
-        {
-            get { return this.session; }
-        }
+        protected ISession Session => this.session;
 
-        protected ISession DatabaseSession
-        {
-            get
-            {
-                return this.session;
-            }
-        }
+        protected ISession DatabaseSession => this.session;
 
         public override void Dispose()
         {

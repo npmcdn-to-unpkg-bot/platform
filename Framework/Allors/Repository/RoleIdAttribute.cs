@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="PrecisionAttribute.cs" company="Allors bvba">
+// <copyright file="RoleIdAttribute.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,16 +21,16 @@
 
 using System;
 
-namespace Allors
+namespace Allors.Repository
 {
-    [AttributeUsage(AttributeTargets.Field)]
-    public class PrecisionAttribute : MetaAttribute
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+    public class RoleIdAttribute : RepositoryAttribute
     {
-        public PrecisionAttribute(int value)
+        public RoleIdAttribute(string value)
         {
             this.Value = value;
         }
         
-        public int Value { get; set; }
+        public string Value { get; set; }
     }
 }

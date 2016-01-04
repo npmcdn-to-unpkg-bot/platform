@@ -45,7 +45,7 @@ namespace Allors.Adapters.Memory
         {
             var containing = new HashSet<IObject>(this.containingEnumerable);
 
-            var roles = strategy.GetCompositeRoles(this.roleType);
+            var roles = strategy.GetCompositeRoles(this.roleType.RelationType);
 
             if (roles.Count == 0)
             {

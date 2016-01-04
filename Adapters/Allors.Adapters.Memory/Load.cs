@@ -327,10 +327,10 @@ namespace Allors.Adapters.Memory
                                         switch (unitType.UnitTag)
                                         {
                                             case UnitTags.String:
-                                                strategy.SetUnitRole(relationType.RoleType, string.Empty);
+                                                strategy.SetUnitRole(relationType, string.Empty);
                                                 break;
                                             case UnitTags.Binary:
-                                                strategy.SetUnitRole(relationType.RoleType, emptyByteArray);
+                                                strategy.SetUnitRole(relationType, emptyByteArray);
                                                 break;
                                         }
                                     }
@@ -340,7 +340,7 @@ namespace Allors.Adapters.Memory
                                         var unitTypeTag = unitType.UnitTag;
 
                                         var unit = Serialization.ReadString(value, unitTypeTag);
-                                        strategy.SetUnitRole(relationType.RoleType, unit);
+                                        strategy.SetUnitRole(relationType, unit);
                                     }
                                 }
                                 catch

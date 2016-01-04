@@ -34,9 +34,11 @@ namespace Allors.Meta
 
         private IList<Domain> derivedSuperdomains;
 
-        internal Domain(MetaPopulation metaPopulation)
+        internal Domain(MetaPopulation metaPopulation, Guid id)
             : base(metaPopulation)
         {
+            this.Id = id;
+
             this.directSuperdomains = new List<Domain>();
 
             this.MetaPopulation.OnDomainCreated(this);

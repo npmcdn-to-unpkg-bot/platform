@@ -41,7 +41,7 @@ namespace Allors.Adapters.Memory
 
         internal override ThreeValuedLogic Evaluate(Strategy strategy)
         {
-            var roles = strategy.GetCompositeRoles(this.roleType);
+            var roles = strategy.GetCompositeRoles(this.roleType.RelationType);
             if (roles != null)
             {
                 return roles.Contains(this.containedObject) ? ThreeValuedLogic.True : ThreeValuedLogic.False;

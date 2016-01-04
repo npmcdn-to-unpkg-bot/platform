@@ -29,9 +29,10 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Unit(MetaPopulation metaPopulation)
+        internal Unit(MetaPopulation metaPopulation, Guid id)
             : base(metaPopulation)
         {
+            this.Id = id;
             metaPopulation.OnUnitCreated(this);
         }
 

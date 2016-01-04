@@ -21,6 +21,8 @@
 
 namespace Allors.Meta
 {
+    using System;
+
     public sealed partial class ConcreteRoleType
     {
         private readonly RoleType roleType;
@@ -33,6 +35,13 @@ namespace Allors.Meta
 
         public RoleType RoleType => this.roleType;
 
+        public RelationType RelationType => this.roleType.RelationType;
+
         public Class Class { get; }
+        
+        public static implicit operator RoleType(ConcreteRoleType concreteRoleType)
+        {
+            return concreteRoleType.RoleType;
+        }
     }
 }

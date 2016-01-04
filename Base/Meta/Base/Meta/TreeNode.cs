@@ -45,7 +45,7 @@ namespace Allors.Meta
                 {
                     if (this.RoleType.IsOne)
                     {
-                        var role = obj.Strategy.GetCompositeRole(this.RoleType);
+                        var role = obj.Strategy.GetCompositeRole(this.RoleType.RelationType);
                         if (role != null)
                         {
                             objects.Add(role);
@@ -59,7 +59,7 @@ namespace Allors.Meta
                     }
                     else
                     {
-                        var roles = obj.Strategy.GetCompositeRoles(this.RoleType);
+                        var roles = obj.Strategy.GetCompositeRoles(this.RoleType.RelationType);
                         foreach (IObject role in roles)
                         {
                             objects.Add(role);

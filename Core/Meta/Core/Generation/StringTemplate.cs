@@ -53,9 +53,6 @@ namespace Allors.Development.Repository.Generation
         private const string MethodTypeKey = "methodType";
         
         private readonly FileInfo fileInfo;
-        private readonly Guid id;
-        private readonly string name;
-        private readonly string version;
 
         internal StringTemplate(FileInfo fileInfo)
         {
@@ -69,30 +66,21 @@ namespace Allors.Development.Repository.Generation
             
             TemplateGroup templateGroup = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
 
-            this.id = Render(templateGroup, TemplateId) != null ? new Guid(Render(templateGroup, TemplateId)) : Guid.Empty;
-            this.name = Render(templateGroup, TemplateName);
-            this.version = Render(templateGroup, TemplateVersion);
+            this.Id = Render(templateGroup, TemplateId) != null ? new Guid(Render(templateGroup, TemplateId)) : Guid.Empty;
+            this.Name = Render(templateGroup, TemplateName);
+            this.Version = Render(templateGroup, TemplateVersion);
 
-            if (this.id == Guid.Empty)
+            if (this.Id == Guid.Empty)
             {
                 throw new Exception("Template has no id");
             }
         }
 
-        public Guid Id
-        {
-            get { return this.id; }
-        }
+        public Guid Id { get; }
 
-        public string Name
-        {
-            get { return this.name; }
-        }
+        public string Name { get; }
 
-        public string Version
-        {
-            get { return this.version; }
-        }
+        public string Version { get; }
 
         public override string ToString()
         {

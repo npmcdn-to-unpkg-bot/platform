@@ -31,8 +31,6 @@ namespace Allors.Meta
     {
         private const string NamespaceName = "Allors.Domain";
 
-        public static readonly MetaPopulation Instance;
-
         private readonly Dictionary<Guid, MetaObjectBase> metaObjectById;
 
         private Dictionary<string, Class> derivedClassByLowercaseName;
@@ -483,10 +481,10 @@ namespace Allors.Meta
                         @class.DeriveConcreteMethodTypes(sharedMethodTypes);
                     }
 
-                    // DirectSupertypesByGroup
+                    // RoleTypesByGroup
                     foreach (var type in this.derivedComposites)
                     {
-                        type.DeriveDirectSupertypesByGroup();
+                        type.DeriveRoleTypesByGroup();
                     }
 
                     // AssociationTypesByGroup
@@ -495,10 +493,10 @@ namespace Allors.Meta
                         type.DeriveAssociationTypesByGroup();
                     }
 
-                    // RoleTypesByGroup
+                    // DirectSupertypesByGroup
                     foreach (var type in this.derivedComposites)
                     {
-                        type.DeriveRoleTypesByGroup();
+                        type.DeriveDirectSupertypesByGroup();
                     }
 
                     // ExclusiveRoleTypesByGroup

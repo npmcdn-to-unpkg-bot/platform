@@ -34,26 +34,26 @@ namespace Allors
             {
                 if (concreteRoleType.IsRequired)
                 {
-                    var roleType = concreteRoleType.RoleType;
-                    var unit = roleType.ObjectType as IUnit;
-                    if (unit != null && !@this.Strategy.ExistRole(roleType))
+                    var relationType = concreteRoleType.RelationType;
+                    var unit = relationType.RoleType.ObjectType as IUnit;
+                    if (unit != null && !@this.Strategy.ExistRole(relationType))
                     {
                         switch (unit.UnitTag)
                         {
-                            case UnitTags.AllorsBoolean:
-                                @this.Strategy.SetUnitRole(roleType, false);
+                            case UnitTags.Boolean:
+                                @this.Strategy.SetUnitRole(relationType, false);
                                 break;
-                            case UnitTags.AllorsDecimal:
-                                @this.Strategy.SetUnitRole(roleType, 0m);
+                            case UnitTags.Decimal:
+                                @this.Strategy.SetUnitRole(relationType, 0m);
                                 break;
-                            case UnitTags.AllorsFloat:
-                                @this.Strategy.SetUnitRole(roleType, 0d);
+                            case UnitTags.Float:
+                                @this.Strategy.SetUnitRole(relationType, 0d);
                                 break;
-                            case UnitTags.AllorsInteger:
-                                @this.Strategy.SetUnitRole(roleType, 0);
+                            case UnitTags.Integer:
+                                @this.Strategy.SetUnitRole(relationType, 0);
                                 break;
-                            case UnitTags.AllorsUnique:
-                                @this.Strategy.SetUnitRole(roleType, Guid.NewGuid());
+                            case UnitTags.Unique:
+                                @this.Strategy.SetUnitRole(relationType, Guid.NewGuid());
                                 break;
                         }
                     }

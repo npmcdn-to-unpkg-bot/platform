@@ -39,7 +39,7 @@ namespace Allors.Adapters.Memory
 
         internal override ThreeValuedLogic Evaluate(Strategy strategy)
         {
-            var role = strategy.GetCompositeRole(this.roleType);
+            var role = strategy.GetCompositeRole(this.roleType.RelationType);
 
             if (role == null)
             {

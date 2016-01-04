@@ -63,13 +63,7 @@ namespace Allors.Meta
             relationType.MetaPopulation.OnRoleTypeCreated(this);
         }
 
-        IObjectType IRoleType.ObjectType
-        {
-            get
-            {
-                return this.ObjectType;
-            }
-        }
+        IObjectType IRoleType.ObjectType => this.ObjectType;
 
         public ObjectType ObjectType
         {
@@ -149,13 +143,7 @@ namespace Allors.Meta
             }
         }
 
-        public RelationType RelationType
-        {
-            get
-            {
-                return this.relationType;
-            }
-        }
+        public RelationType RelationType => this.relationType;
 
         /// <summary>
         /// Gets the display name.
@@ -172,18 +160,7 @@ namespace Allors.Meta
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
-        public override string Name
-        {
-            get
-            {
-                if (this.IsMany)
-                {
-                    return this.PluralName;
-                }
-
-                return this.SingularName;
-            }
-        }
+        public override string Name => this.IsMany ? this.PluralName : this.SingularName;
 
         /// <summary>
         /// Gets the singular name.
@@ -240,36 +217,19 @@ namespace Allors.Meta
         /// Gets the full singular name.
         /// </summary>
         /// <value>The full singular name.</value>
-        public string SingularFullName
-        {
-            get { return this.RelationType.AssociationType.SingularName + this.SingularName; }
-        }
+        public string SingularFullName => this.RelationType.AssociationType.SingularName + this.SingularName;
 
         /// <summary>
         /// Gets the full plural name.
         /// </summary>
         /// <value>The full plural name.</value>
-        public string PluralFullName
-        {
-            get { return this.RelationType.AssociationType.SingularName + this.PluralName; }
-        }
+        public string PluralFullName => this.RelationType.AssociationType.SingularName + this.PluralName;
 
         /// <summary>
         /// Gets the property name.
         /// </summary>
         /// <value>The full name</value>
-        public string PropertyName
-        {
-            get
-            {
-                if (this.IsMany)
-                {
-                    return this.PluralPropertyName;
-                }
-
-                return this.SingularPropertyName;
-            }
-        }
+        public string PropertyName => this.IsMany ? this.PluralPropertyName : this.SingularPropertyName;
 
         public string SingularPropertyName
         {
@@ -289,13 +249,7 @@ namespace Allors.Meta
             }
         }
 
-        IAssociationType IRoleType.AssociationType
-        {
-            get
-            {
-                return this.AssociationType;
-            }
-        }
+        IAssociationType IRoleType.AssociationType => this.AssociationType;
 
         /// <summary>
         /// Gets the association.
@@ -358,13 +312,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
-        protected internal override string ValidationName
-        {
-            get
-            {
-                return "role type " + RelationType.Name;
-            }
-        }
+        protected internal override string ValidationName => "RoleType: " + this.RelationType.Name;
 
         /// <summary>
         /// Compares the current instance with another object of the same type.
@@ -397,7 +345,7 @@ namespace Allors.Meta
         /// </returns>
         public override object Get(IStrategy strategy)
         {
-            return strategy.GetRole(this);
+            return strategy.GetRole(this.RelationType);
         }
 
         /// <summary>
@@ -411,7 +359,7 @@ namespace Allors.Meta
         /// </param>
         public void Set(IStrategy strategy, object value)
         {
-            strategy.SetRole(this, value);
+            strategy.SetRole(this.RelationType, value);
         }
 
         /// <summary>

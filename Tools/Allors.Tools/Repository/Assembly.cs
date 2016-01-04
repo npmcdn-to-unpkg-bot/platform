@@ -32,9 +32,9 @@ namespace Allors.Tools.Repository
 
         public Dictionary<string, PartialInterface> PartialInterfaceByName { get; }
 
-        public Dictionary<string, PartialClass> PartialClassByName { get; }
+        public Dictionary<string, PartialClass> PartialClassBySingularName { get; }
 
-        public Dictionary<string, PartialType> PartialTypeByName { get; }
+        public Dictionary<string, PartialType> PartialTypeBySingularName { get; }
 
         public HashSet<Assembly> Bases { get; set; }
 
@@ -43,8 +43,8 @@ namespace Allors.Tools.Repository
             this.Name = name;
             this.Bases = new HashSet<Assembly>();
             this.PartialInterfaceByName = new Dictionary<string, PartialInterface>();
-            this.PartialClassByName = new Dictionary<string, PartialClass>();
-            this.PartialTypeByName = new Dictionary<string, PartialType>();
+            this.PartialClassBySingularName = new Dictionary<string, PartialClass>();
+            this.PartialTypeBySingularName = new Dictionary<string, PartialType>();
         }
 
         public void Extend(Assembly baseAssembly)

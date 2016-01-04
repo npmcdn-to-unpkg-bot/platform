@@ -53,7 +53,12 @@ namespace Allors.Meta
         {
             get
             {
-                return this.pluralName;
+                if (!string.IsNullOrEmpty(this.pluralName))
+                {
+                    return this.pluralName;
+                }
+
+                return this.SingularName + RoleType.PluralSuffix;
             }
 
             set
@@ -219,10 +224,6 @@ namespace Allors.Meta
                 {
                     validationLog.AddObjectTypeName(this.PluralName);
                 }
-            }
-            else
-            {
-                validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, "IObjectType.PluralName");
             }
         }
     }

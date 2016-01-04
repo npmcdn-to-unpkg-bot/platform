@@ -41,8 +41,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public Media Thumbnail { get; set; }
-
-
+        
         #region inherited methods
 
 
@@ -59,12 +58,11 @@ namespace Allors.Repository.Domain
 
         public void Delete(){}
         #endregion
-
-
-
+        
+        [Id("C3C245F4-3081-4F2D-A34F-ADE5077702F9")]
         public void CreateResponsive(){}
 
-
+        [Id("A7157173-01F9-475B-B82A-1257C2BDFEAE")]
         public void CreateThumbnail(){}
     }
 }

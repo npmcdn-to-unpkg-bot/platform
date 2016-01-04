@@ -37,9 +37,11 @@ namespace Allors.Meta
 
         private Type clrType;
 
-        internal Interface(MetaPopulation metaPopulation)
+        internal Interface(MetaPopulation metaPopulation, Guid id)
             : base(metaPopulation)
         {
+            this.Id = id;
+
             metaPopulation.OnInterfaceCreated(this);
         }
 

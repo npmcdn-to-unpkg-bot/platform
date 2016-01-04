@@ -21,16 +21,15 @@
 
 namespace Allors.Tools.Repository
 {
-    using System;
     using System.Collections.Generic;
 
     public class Interface : Composite
     {
-        public Interface(string name)
-            : base(name)
+        public Interface(Inflector.Inflector inflector, string name)
+            : base(inflector, name)
         {
             this.PartialByAssemblyName = new Dictionary<string, PartialInterface>();
-            this.InheritedPropertyByName = new Dictionary<string, Property>();
+            this.InheritedPropertyByRoleName = new Dictionary<string, Property>();
         }
 
         public override IEnumerable<Interface> Interfaces
@@ -58,19 +57,19 @@ namespace Allors.Tools.Repository
 
         public Dictionary<string, PartialInterface> PartialByAssemblyName { get; }
 
-        public Dictionary<string, Property> InheritedPropertyByName { get; }
+        public Dictionary<string, Property> InheritedPropertyByRoleName { get; }
 
-        public IEnumerable<Property> InheritedProperties => this.InheritedPropertyByName.Values;
+        public IEnumerable<Property> InheritedProperties => this.InheritedPropertyByRoleName.Values;
 
         public override string ToString()
         {
-            return this.Name;
+            return this.SingularName;
         }
 
         public Property GetImplementedProperty(Property property)
         {
             Property implementedProperty;
-            if (this.PropertyByName.TryGetValue(property.Name, out implementedProperty))
+            if (this.PropertyByRoleName.TryGetValue(property.RoleName, out implementedProperty))
             {
                 return implementedProperty;
             }

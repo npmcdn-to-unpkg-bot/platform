@@ -32,7 +32,7 @@ namespace Allors
         static PrefetchPolicyBuilderExtensions()
         {
             SecuritTokenPrefetchPolicy = new PrefetchPolicyBuilder()
-                .WithRule(SecurityTokenClass.Instance.AccessControl.RoleType)
+                .WithRule(MetaSecurityToken.Instance.AccessControls)
                 .Build();
         }
         
@@ -50,8 +50,8 @@ namespace Allors
 
         public static void WithSecurityRules(this PrefetchPolicyBuilder @this)
         {
-            @this.WithRule(AccessControlledObjectInterface.Instance.SecurityToken.RoleType, SecuritTokenPrefetchPolicy);
-            @this.WithRule(AccessControlledObjectInterface.Instance.DeniedPermission.RoleType);
+            @this.WithRule(MetaAccessControlledObject.Instance.SecurityTokens, SecuritTokenPrefetchPolicy);
+            @this.WithRule(MetaAccessControlledObject.Instance.DeniedPermissions);
         }
     }
 }

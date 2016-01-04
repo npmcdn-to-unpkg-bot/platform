@@ -129,7 +129,7 @@ namespace Allors.Repository.Domain
         #endregion
 
 
-
+        [Id("FAF120ED-09D1-4E42-86A6-F0D9FF75E03C")]
         public void Method(){}
     }
 }

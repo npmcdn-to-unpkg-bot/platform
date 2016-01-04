@@ -18,6 +18,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.ManyToOne)]
         [Indexed]
         #endregion
+        [Plural("Employees")]
         public Person Employee { get; set; }
         #region Allors
         [Id("6e429d87-ea80-465e-9aa6-0f7d546b6bb3")]
