@@ -256,11 +256,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
                         }
 
                         Assert.AreEqual(0, extent.Count);
@@ -282,11 +282,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
                         }
 
                         Assert.AreEqual(3, extent.Count);
@@ -311,11 +311,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
                         }
 
                         Assert.AreEqual(1, extent.Count);
@@ -341,11 +341,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
                         }
 
                         Assert.AreEqual(0, extent.Count);
@@ -367,11 +367,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
                         }
 
                         Assert.AreEqual(3, extent.Count);
@@ -396,11 +396,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
                         }
 
                         Assert.AreEqual(1, extent.Count);
@@ -428,11 +428,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
                         }
 
                         Assert.AreEqual(0, extent.Count);
@@ -454,11 +454,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
                         }
 
                         Assert.AreEqual(3, extent.Count);
@@ -483,11 +483,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
                         }
 
                         Assert.AreEqual(1, extent.Count);
@@ -513,11 +513,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
                         }
 
                         Assert.AreEqual(0, extent.Count);
@@ -539,11 +539,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
                         }
 
                         Assert.AreEqual(3, extent.Count);
@@ -568,11 +568,11 @@ namespace Allors.Adapters
                         if (useEnumerable)
                         {
                             var enumerable = (IEnumerable<IObject>)((Extent<IObject>)inExtent);
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, enumerable);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, enumerable);
                         }
                         else
                         {
-                            extent.Filter.AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                            extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
                         }
 
                         Assert.AreEqual(1, extent.Count);
@@ -595,7 +595,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.C1C2many2many, this.c1C);
+                extent.Filter.AddContains(MetaC2.Instance.C1sWhereC1C2many2many, this.c1C);
 
                 Assert.AreEqual(2, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -616,8 +616,8 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.C1C2many2many, this.c1C);
-                extent.Filter.AddContains(AssociationTypes.C1C2many2many, this.c1D);
+                extent.Filter.AddContains(MetaC2.Instance.C1sWhereC1C2many2many, this.c1C);
+                extent.Filter.AddContains(MetaC2.Instance.C1sWhereC1C2many2many, this.c1D);
 
                 Assert.AreEqual(2, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -639,7 +639,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.C1I12many2many, this.c1C);
+                extent.Filter.AddContains(MetaI12.Instance.C1sWhereC1I12many2many, this.c1C);
 
                 Assert.AreEqual(2, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -661,7 +661,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.S1234S1234many2many, this.c1B);
+                extent.Filter.AddContains(MetaS1234.Instance.S1234sWhereS1234many2many, this.c1B);
 
                 Assert.AreEqual(2, extent.Count);
                 Assert.IsTrue(extent.Contains(this.c1A));
@@ -693,7 +693,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.C1C2many2many);
+                extent.Filter.AddExists(MetaC2.Instance.C1sWhereC1C2many2many);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -715,7 +715,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.I1I2many2many);
+                extent.Filter.AddExists(MetaI2.Instance.I1sWhereI1I2many2many);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -737,7 +737,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.S1234S1234many2many);
+                extent.Filter.AddExists(MetaS1234.Instance.S1234sWhereS1234many2many);
 
                 Assert.AreEqual(10, extent.Count);
                 Assert.IsTrue(extent.Contains(this.c1A));
@@ -763,7 +763,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.C1C1many2many);
+                    extent.Filter.AddExists(MetaC1.Instance.C1sWhereC1C1many2many);
                 }
                 catch
                 {
@@ -778,7 +778,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.I12I34many2many);
+                    extent.Filter.AddExists(MetaI34.Instance.I12sWhereI12I34many2many);
                 }
                 catch
                 {
@@ -793,7 +793,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.S1234S1234many2many);
+                    extent.Filter.AddExists(MetaS1234.Instance.S1234sWhereS1234many2many);
                 }
                 catch
                 {
@@ -832,7 +832,7 @@ namespace Allors.Adapters
                     }
 
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -850,7 +850,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -871,7 +871,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -893,7 +893,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -911,7 +911,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -932,7 +932,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -956,7 +956,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -974,7 +974,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -995,7 +995,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1017,7 +1017,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1035,7 +1035,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1056,7 +1056,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1077,7 +1077,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.C1C1many2one, this.c1C);
+                extent.Filter.AddContains(MetaC1.Instance.C1sWhereC1C1many2one, this.c1C);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1098,7 +1098,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.C1C2many2one, this.c1C);
+                extent.Filter.AddContains(MetaC2.Instance.C1sWhereC1C2many2one, this.c1C);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1119,7 +1119,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.C3C4many2one, this.c3C);
+                extent.Filter.AddContains(MetaC4.Instance.C3sWhereC3C4many2one, this.c3C);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1141,7 +1141,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                extent.Filter.AddContains(AssociationTypes.C1I12many2one, this.c1C);
+                extent.Filter.AddContains(MetaI12.Instance.C1sWhereC1I12many2one, this.c1C);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1193,7 +1193,7 @@ namespace Allors.Adapters
                     }
 
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1211,7 +1211,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1232,7 +1232,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1254,7 +1254,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1272,7 +1272,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1293,7 +1293,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1317,7 +1317,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1335,7 +1335,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1356,7 +1356,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1378,7 +1378,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1396,7 +1396,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1417,7 +1417,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1438,7 +1438,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.C1C2one2many, this.c1B);
+                extent.Filter.AddEquals(MetaC2.Instance.C1WhereC1C2one2many, this.c1B);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -1447,7 +1447,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.C1C2one2many, this.c1C);
+                extent.Filter.AddEquals(MetaC2.Instance.C1WhereC1C2one2many, this.c1C);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -1457,7 +1457,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.I1I2one2many, this.c1B);
+                extent.Filter.AddEquals(MetaI2.Instance.I1WhereI1I2one2many, this.c1B);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -1466,7 +1466,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.I1I2one2many, this.c1C);
+                extent.Filter.AddEquals(MetaI2.Instance.I1WhereI1I2one2many, this.c1C);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -1476,7 +1476,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.S1234S1234one2many, this.c1B);
+                extent.Filter.AddEquals(MetaS1234.Instance.S1234WhereS1234one2many, this.c1B);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -1485,7 +1485,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.S1234S1234one2many, this.c3C);
+                extent.Filter.AddEquals(MetaS1234.Instance.S1234WhereS1234one2many, this.c3C);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, false, true, true);
@@ -1499,7 +1499,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(AssociationTypes.C3C2one2many, this.c2A);
+                    extent.Filter.AddEquals(MetaC2.Instance.C3WhereC3C2one2many, this.c2A);
                 }
                 catch
                 {
@@ -1514,7 +1514,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(AssociationTypes.C3C2one2many, this.c2A);
+                    extent.Filter.AddEquals(MetaC2.Instance.C3WhereC3C2one2many, this.c2A);
                 }
                 catch
                 {
@@ -1529,7 +1529,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(AssociationTypes.C3C2one2many, this.c2A);
+                    extent.Filter.AddEquals(MetaC2.Instance.C3WhereC3C2one2many, this.c2A);
                 }
                 catch
                 {
@@ -1550,7 +1550,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.C1C2one2many);
+                extent.Filter.AddExists(MetaC2.Instance.C1WhereC1C2one2many);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1572,7 +1572,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.I1I2one2many);
+                extent.Filter.AddExists(MetaI2.Instance.I1WhereI1I2one2many);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1594,7 +1594,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.S1234S1234one2many);
+                extent.Filter.AddExists(MetaS1234.Instance.S1234WhereS1234one2many);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1620,7 +1620,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.C3C2one2many);
+                    extent.Filter.AddExists(MetaC2.Instance.C3WhereC3C2one2many);
                 }
                 catch
                 {
@@ -1635,7 +1635,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.C3C2one2many);
+                    extent.Filter.AddExists(MetaC2.Instance.C3WhereC3C2one2many);
                 }
                 catch
                 {
@@ -1650,7 +1650,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.C3C2one2many);
+                    extent.Filter.AddExists(MetaC2.Instance.C3WhereC3C2one2many);
                 }
                 catch
                 {
@@ -1671,7 +1671,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1C2one2many, MetaC1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaC2.Instance.C1WhereC1C2one2many, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1693,7 +1693,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1I12one2many, MetaC1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaI12.Instance.C1WhereC1I12one2many, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1715,7 +1715,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.S1234S1234one2many, MetaC1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaS1234.Instance.S1234WhereS1234one2many, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1762,7 +1762,7 @@ namespace Allors.Adapters
                     }
 
                     var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C1one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC1.Instance.C1WhereC1C1one2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     Assert.IsFalse(extent.Contains(this.c1A));
@@ -1783,7 +1783,7 @@ namespace Allors.Adapters
                     Assert.IsFalse(extent.Contains(this.c4D));
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     Assert.IsFalse(extent.Contains(this.c1A));
@@ -1812,7 +1812,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C3C4one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC4.Instance.C3WhereC3C4one2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     Assert.IsFalse(extent.Contains(this.c1A));
@@ -1842,7 +1842,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C1one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC1.Instance.C1WhereC1C1one2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     Assert.IsFalse(extent.Contains(this.c1A));
@@ -1863,7 +1863,7 @@ namespace Allors.Adapters
                     Assert.IsFalse(extent.Contains(this.c4D));
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1C2one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     Assert.IsFalse(extent.Contains(this.c1A));
@@ -1892,7 +1892,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C3C4one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC4.Instance.C3WhereC3C4one2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     Assert.IsFalse(extent.Contains(this.c1A));
@@ -1924,7 +1924,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.I12C2one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.I12WhereI12C2one2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     Assert.IsFalse(extent.Contains(this.c1A));
@@ -1954,7 +1954,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.I12C2one2one, inExtent);
+                    extent.Filter.AddContainedIn(MetaC2.Instance.I12WhereI12C2one2one, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -1975,7 +1975,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.C1C1one2one, this.c1B);
+                extent.Filter.AddEquals(MetaC1.Instance.C1WhereC1C1one2one, this.c1B);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -1996,7 +1996,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.C1C2one2one, this.c1B);
+                extent.Filter.AddEquals(MetaC2.Instance.C1WhereC1C2one2one, this.c1B);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2017,7 +2017,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.C3C4one2one, this.c3B);
+                extent.Filter.AddEquals(MetaC4.Instance.C3WhereC3C4one2one, this.c3B);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2039,7 +2039,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.I1I2one2one, this.c1B);
+                extent.Filter.AddEquals(MetaI2.Instance.I1WhereI1I2one2one, this.c1B);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2061,7 +2061,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddEquals(AssociationTypes.S1234S1234one2one, this.c1C);
+                extent.Filter.AddEquals(MetaS1234.Instance.S1234WhereS1234one2one, this.c1C);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2087,7 +2087,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(AssociationTypes.C3C2one2one, this.c2A);
+                    extent.Filter.AddEquals(MetaC2.Instance.C3WhereC3C2one2one, this.c2A);
                 }
                 catch
                 {
@@ -2102,7 +2102,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(AssociationTypes.C3C2one2one, this.c2A);
+                    extent.Filter.AddEquals(MetaC2.Instance.C3WhereC3C2one2one, this.c2A);
                 }
                 catch
                 {
@@ -2117,7 +2117,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddEquals(AssociationTypes.C3C2one2one, this.c2A);
+                    extent.Filter.AddEquals(MetaC2.Instance.C3WhereC3C2one2one, this.c2A);
                 }
                 catch
                 {
@@ -2138,7 +2138,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.C1C1one2one);
+                extent.Filter.AddExists(MetaC1.Instance.C1WhereC1C1one2one);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2159,7 +2159,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.C1C2one2one);
+                extent.Filter.AddExists(MetaC2.Instance.C1WhereC1C2one2one);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2180,7 +2180,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.C3C4one2one);
+                extent.Filter.AddExists(MetaC4.Instance.C3WhereC3C4one2one);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2202,7 +2202,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.I1I2one2one);
+                extent.Filter.AddExists(MetaI2.Instance.I1WhereI1I2one2one);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2224,7 +2224,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddExists(AssociationTypes.S1234S1234one2one);
+                extent.Filter.AddExists(MetaS1234.Instance.S1234WhereS1234one2one);
 
                 Assert.AreEqual(9, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2250,7 +2250,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.C3C2one2one);
+                    extent.Filter.AddExists(MetaC2.Instance.C3WhereC3C2one2one);
                 }
                 catch
                 {
@@ -2265,7 +2265,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.C3C2one2one);
+                    extent.Filter.AddExists(MetaC2.Instance.C3WhereC3C2one2one);
                 }
                 catch
                 {
@@ -2280,7 +2280,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddExists(AssociationTypes.C3C2one2one);
+                    extent.Filter.AddExists(MetaC2.Instance.C3WhereC3C2one2one);
                 }
                 catch
                 {
@@ -2303,7 +2303,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1C1one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaC1.Instance.C1WhereC1C1one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2324,7 +2324,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1C2one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaC2.Instance.C1WhereC1C2one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2345,7 +2345,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C3C4one2one, MetaC3.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaC4.Instance.C3WhereC3C4one2one, MetaC3.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2367,7 +2367,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1I12one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaI12.Instance.C1WhereC1I12one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2389,7 +2389,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.S1234S1234one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaS1234.Instance.S1234WhereS1234one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2413,7 +2413,7 @@ namespace Allors.Adapters
 
                 // Class
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1C1one2one, MetaI1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaC1.Instance.C1WhereC1C1one2one, MetaI1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2434,7 +2434,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1C2one2one, MetaI1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaC2.Instance.C1WhereC1C2one2one, MetaI1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2455,7 +2455,7 @@ namespace Allors.Adapters
                 Assert.IsFalse(extent.Contains(this.c4D));
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C3C4one2one, MetaI3.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaC4.Instance.C3WhereC3C4one2one, MetaI3.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2477,7 +2477,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.C1I12one2one, MetaI1.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaI12.Instance.C1WhereC1I12one2one, MetaI1.Instance.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2499,7 +2499,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddInstanceof(AssociationTypes.S1234S1234one2one, MetaS1234.Instance.ObjectType);
+                extent.Filter.AddInstanceof(MetaS1234.Instance.S1234WhereS1234one2one, MetaS1234.Instance.ObjectType);
 
                 Assert.AreEqual(9, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2615,7 +2615,7 @@ namespace Allors.Adapters
                 inExtent = this.Session.Except(firstExtent, secondExtent);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                extent.Filter.AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -3393,7 +3393,7 @@ namespace Allors.Adapters
                     }
 
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3411,7 +3411,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3432,7 +3432,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3454,7 +3454,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3472,7 +3472,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3493,7 +3493,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3517,7 +3517,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3535,7 +3535,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3556,7 +3556,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3578,7 +3578,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3596,7 +3596,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3617,7 +3617,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3638,7 +3638,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.C1C2many2many);
+                extent.Filter.AddNot().AddExists(MetaC2.Instance.C1sWhereC1C2many2many);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -3648,7 +3648,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.I1I2many2many);
+                extent.Filter.AddNot().AddExists(MetaI2.Instance.I1sWhereI1I2many2many);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -3658,7 +3658,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.S1234S1234many2many);
+                extent.Filter.AddNot().AddExists(MetaS1234.Instance.S1234sWhereS1234many2many);
 
                 Assert.AreEqual(6, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -3672,7 +3672,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.C1C1many2many);
+                    extent.Filter.AddNot().AddExists(MetaC1.Instance.C1sWhereC1C1many2many);
                 }
                 catch
                 {
@@ -3687,7 +3687,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.I12I34many2many);
+                    extent.Filter.AddNot().AddExists(MetaI34.Instance.I12sWhereI12I34many2many);
                 }
                 catch
                 {
@@ -3702,7 +3702,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.S1234S1234many2many);
+                    extent.Filter.AddNot().AddExists(MetaS1234.Instance.S1234sWhereS1234many2many);
                 }
                 catch
                 {
@@ -3741,7 +3741,7 @@ namespace Allors.Adapters
                     }
 
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3759,7 +3759,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3780,7 +3780,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3802,7 +3802,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3820,7 +3820,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3841,7 +3841,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1sWhereC1C2many2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3865,7 +3865,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3883,7 +3883,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3904,7 +3904,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3926,7 +3926,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3944,7 +3944,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -3965,7 +3965,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12many2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1sWhereC1I12many2one, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4004,7 +4004,7 @@ namespace Allors.Adapters
                     }
 
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4022,7 +4022,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4043,7 +4043,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4065,7 +4065,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4083,7 +4083,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4104,7 +4104,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2many, inExtent);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4128,7 +4128,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4146,7 +4146,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4167,7 +4167,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4189,7 +4189,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4207,7 +4207,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4228,7 +4228,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2many, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2many, inExtent);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4249,7 +4249,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.C1C1one2many, this.c1B);
+                extent.Filter.AddNot().AddEquals(MetaC1.Instance.C1WhereC1C1one2many, this.c1B);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, true, false, true, true);
@@ -4258,7 +4258,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.C1C1one2many, this.c1C);
+                extent.Filter.AddNot().AddEquals(MetaC1.Instance.C1WhereC1C1one2many, this.c1C);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, true, true, false, false);
@@ -4267,7 +4267,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.C1C2one2many, this.c1B);
+                extent.Filter.AddNot().AddEquals(MetaC2.Instance.C1WhereC1C2one2many, this.c1B);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4276,7 +4276,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.C1C2one2many, this.c1C);
+                extent.Filter.AddNot().AddEquals(MetaC2.Instance.C1WhereC1C2one2many, this.c1C);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4286,7 +4286,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.I1I2one2many, this.c1B);
+                extent.Filter.AddNot().AddEquals(MetaI2.Instance.I1WhereI1I2one2many, this.c1B);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4295,7 +4295,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.I1I2one2many, this.c1C);
+                extent.Filter.AddNot().AddEquals(MetaI2.Instance.I1WhereI1I2one2many, this.c1C);
 
                 Assert.AreEqual(2, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4305,7 +4305,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.S1234S1234one2many, this.c1B);
+                extent.Filter.AddNot().AddEquals(MetaS1234.Instance.S1234WhereS1234one2many, this.c1B);
 
                 Assert.AreEqual(15, extent.Count);
                 this.AssertC1(extent, true, false, true, true);
@@ -4314,7 +4314,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, true, true, true, true);
 
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.S1234S1234one2many, this.c3C);
+                extent.Filter.AddNot().AddEquals(MetaS1234.Instance.S1234WhereS1234one2many, this.c3C);
 
                 Assert.AreEqual(14, extent.Count);
                 this.AssertC1(extent, true, true, false, false);
@@ -4328,7 +4328,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddEquals(AssociationTypes.C3C2one2many, this.c2A);
+                    extent.Filter.AddNot().AddEquals(MetaC2.Instance.C3WhereC3C2one2many, this.c2A);
                 }
                 catch
                 {
@@ -4343,7 +4343,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddEquals(AssociationTypes.C3C2one2many, this.c2A);
+                    extent.Filter.AddNot().AddEquals(MetaC2.Instance.C3WhereC3C2one2many, this.c2A);
                 }
                 catch
                 {
@@ -4358,7 +4358,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddEquals(AssociationTypes.C3C2one2many, this.c2A);
+                    extent.Filter.AddNot().AddEquals(MetaC2.Instance.C3WhereC3C2one2many, this.c2A);
                 }
                 catch
                 {
@@ -4379,7 +4379,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.C1C2one2many);
+                extent.Filter.AddNot().AddExists(MetaC2.Instance.C1WhereC1C2one2many);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4389,7 +4389,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.I1I2one2many);
+                extent.Filter.AddNot().AddExists(MetaI2.Instance.I1WhereI1I2one2many);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4399,7 +4399,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.S1234S1234one2many);
+                extent.Filter.AddNot().AddExists(MetaS1234.Instance.S1234WhereS1234one2many);
 
                 Assert.AreEqual(13, extent.Count);
                 this.AssertC1(extent, true, false, false, false);
@@ -4413,7 +4413,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.C3C2one2many);
+                    extent.Filter.AddNot().AddExists(MetaC2.Instance.C3WhereC3C2one2many);
                 }
                 catch
                 {
@@ -4428,7 +4428,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.C3C2one2many);
+                    extent.Filter.AddNot().AddExists(MetaC2.Instance.C3WhereC3C2one2many);
                 }
                 catch
                 {
@@ -4443,7 +4443,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.C3C2one2many);
+                    extent.Filter.AddNot().AddExists(MetaC2.Instance.C3WhereC3C2one2many);
                 }
                 catch
                 {
@@ -4478,7 +4478,7 @@ namespace Allors.Adapters
                     }
 
                     var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C1one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC1.Instance.C1WhereC1C1one2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, true, false, false, false);
@@ -4496,7 +4496,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C1one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC1.Instance.C1WhereC1C1one2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, true, false, false, false);
@@ -4516,7 +4516,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4534,7 +4534,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1C2one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.C1WhereC1C2one2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4554,7 +4554,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C3C4one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC4.Instance.C3WhereC3C4one2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4572,7 +4572,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C3C4one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC4.Instance.C3WhereC3C4one2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4592,7 +4592,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.I12C2one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.I12WhereI12C2one2one, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4610,7 +4610,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.I12C2one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaC2.Instance.I12WhereI12C2one2one, inExtent);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -4632,7 +4632,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2one, inExtent);
 
                     Assert.AreEqual(5, extent.Count);
                     this.AssertC1(extent, true, false, true, true);
@@ -4650,7 +4650,7 @@ namespace Allors.Adapters
                     }
 
                     extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                    extent.Filter.AddNot().AddContainedIn(AssociationTypes.C1I12one2one, inExtent);
+                    extent.Filter.AddNot().AddContainedIn(MetaI12.Instance.C1WhereC1I12one2one, inExtent);
 
                     Assert.AreEqual(5, extent.Count);
                     this.AssertC1(extent, true, false, true, true);
@@ -4671,7 +4671,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.C1C1one2one, this.c1B);
+                extent.Filter.AddNot().AddEquals(MetaC1.Instance.C1WhereC1C1one2one, this.c1B);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, true, false, true, true);
@@ -4680,7 +4680,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.C1C2one2one, this.c1B);
+                extent.Filter.AddNot().AddEquals(MetaC2.Instance.C1WhereC1C2one2one, this.c1B);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4689,7 +4689,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.C3C4one2one, this.c3B);
+                extent.Filter.AddNot().AddEquals(MetaC4.Instance.C3WhereC3C4one2one, this.c3B);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4699,7 +4699,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.I1I2one2one, this.c1B);
+                extent.Filter.AddNot().AddEquals(MetaI2.Instance.I1WhereI1I2one2one, this.c1B);
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4709,7 +4709,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddEquals(AssociationTypes.S1234S1234one2one, this.c1C);
+                extent.Filter.AddNot().AddEquals(MetaS1234.Instance.S1234WhereS1234one2one, this.c1C);
 
                 Assert.AreEqual(15, extent.Count);
                 this.AssertC1(extent, true, true, true, true);
@@ -4723,7 +4723,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddEquals(AssociationTypes.C3C2one2one, this.c2A);
+                    extent.Filter.AddNot().AddEquals(MetaC2.Instance.C3WhereC3C2one2one, this.c2A);
                 }
                 catch
                 {
@@ -4738,7 +4738,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddEquals(AssociationTypes.C3C2one2one, this.c2A);
+                    extent.Filter.AddNot().AddEquals(MetaC2.Instance.C3WhereC3C2one2one, this.c2A);
                 }
                 catch
                 {
@@ -4753,7 +4753,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddEquals(AssociationTypes.C3C2one2one, this.c2A);
+                    extent.Filter.AddNot().AddEquals(MetaC2.Instance.C3WhereC3C2one2one, this.c2A);
                 }
                 catch
                 {
@@ -4774,7 +4774,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.C1C1one2one);
+                extent.Filter.AddNot().AddExists(MetaC1.Instance.C1WhereC1C1one2one);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, true, false, false, false);
@@ -4783,7 +4783,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.C1C2one2one);
+                extent.Filter.AddNot().AddExists(MetaC2.Instance.C1WhereC1C2one2one);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4792,7 +4792,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.C1C2one2one);
+                extent.Filter.AddNot().AddExists(MetaC2.Instance.C1WhereC1C2one2one);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4801,7 +4801,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.C3C4one2one);
+                extent.Filter.AddNot().AddExists(MetaC4.Instance.C3WhereC3C4one2one);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4811,7 +4811,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI2.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.I1I2one2one);
+                extent.Filter.AddNot().AddExists(MetaI2.Instance.I1WhereI1I2one2one);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4821,7 +4821,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddExists(AssociationTypes.S1234S1234one2one);
+                extent.Filter.AddNot().AddExists(MetaS1234.Instance.S1234WhereS1234one2one);
 
                 Assert.AreEqual(7, extent.Count);
                 this.AssertC1(extent, true, false, false, false);
@@ -4835,7 +4835,7 @@ namespace Allors.Adapters
                 var exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.C3C2one2one);
+                    extent.Filter.AddNot().AddExists(MetaC2.Instance.C3WhereC3C2one2one);
                 }
                 catch
                 {
@@ -4850,7 +4850,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.C3C2one2one);
+                    extent.Filter.AddNot().AddExists(MetaC2.Instance.C3WhereC3C2one2one);
                 }
                 catch
                 {
@@ -4865,7 +4865,7 @@ namespace Allors.Adapters
                 exception = false;
                 try
                 {
-                    extent.Filter.AddNot().AddExists(AssociationTypes.C3C2one2one);
+                    extent.Filter.AddNot().AddExists(MetaC2.Instance.C3WhereC3C2one2one);
                 }
                 catch
                 {
@@ -4888,7 +4888,7 @@ namespace Allors.Adapters
 
                 // Class
                 var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C1C1one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaC1.Instance.C1WhereC1C1one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, true, false, false, false);
@@ -4897,7 +4897,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C1C2one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaC2.Instance.C1WhereC1C2one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4906,7 +4906,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C3C4one2one, MetaC3.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaC4.Instance.C3WhereC3C4one2one, MetaC3.Instance.ObjectType);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4916,7 +4916,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C1I12one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaI12.Instance.C1WhereC1I12one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(5, extent.Count);
                 this.AssertC1(extent, true, false, true, true);
@@ -4926,7 +4926,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.S1234S1234one2one, MetaC1.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaS1234.Instance.S1234WhereS1234one2one, MetaC1.Instance.ObjectType);
 
                 Assert.AreEqual(13, extent.Count);
                 this.AssertC1(extent, true, false, true, true);
@@ -4938,7 +4938,7 @@ namespace Allors.Adapters
 
                 // Class
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C1C1one2one, MetaI1.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaC1.Instance.C1WhereC1C1one2one, MetaI1.Instance.ObjectType);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, true, false, false, false);
@@ -4947,7 +4947,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C1C2one2one, MetaI1.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaC2.Instance.C1WhereC1C2one2one, MetaI1.Instance.ObjectType);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4956,7 +4956,7 @@ namespace Allors.Adapters
                 this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(MetaC4.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C3C4one2one, MetaI3.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaC4.Instance.C3WhereC3C4one2one, MetaI3.Instance.ObjectType);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, false, false, false);
@@ -4966,7 +4966,7 @@ namespace Allors.Adapters
 
                 // Interface
                 extent = this.LocalExtent(MetaI12.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.C1I12one2one, MetaI1.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaI12.Instance.C1WhereC1I12one2one, MetaI1.Instance.ObjectType);
 
                 Assert.AreEqual(5, extent.Count);
                 this.AssertC1(extent, true, false, true, true);
@@ -4976,7 +4976,7 @@ namespace Allors.Adapters
 
                 // Super Interface
                 extent = this.LocalExtent(MetaS1234.Instance.ObjectType);
-                extent.Filter.AddNot().AddInstanceof(AssociationTypes.S1234S1234one2one, MetaS1234.Instance.ObjectType);
+                extent.Filter.AddNot().AddInstanceof(MetaS1234.Instance.S1234WhereS1234one2one, MetaS1234.Instance.ObjectType);
 
                 Assert.AreEqual(7, extent.Count);
                 this.AssertC1(extent, true, false, false, false);
@@ -8293,7 +8293,7 @@ namespace Allors.Adapters
                 Extent<Company> parents = this.LocalExtent(MetaCompany.Instance.ObjectType);
 
                 Extent<Company> children = this.LocalExtent(MetaCompany.Instance.ObjectType);
-                children.Filter.AddContainedIn(AssociationTypes.CompanyChild, (Extent)parents);
+                children.Filter.AddContainedIn(MetaCompany.Instance.CompanyWhereChild, (Extent)parents);
 
                 Extent<Person> persons = this.LocalExtent(MetaPerson.Instance.ObjectType);
                 var or = persons.Filter.AddOr();
@@ -16056,7 +16056,7 @@ namespace Allors.Adapters
                 Extent<Company> parents = this.LocalExtent(MetaCompany.Instance.ObjectType);
 
                 Extent<Company> children = this.LocalExtent(MetaCompany.Instance.ObjectType);
-                children.Filter.AddContainedIn(AssociationTypes.CompanyChild, (Extent)parents);
+                children.Filter.AddContainedIn(MetaCompany.Instance.CompanyWhereChild, (Extent)parents);
 
                 Extent<Company> allCompanies = this.Session.Union(parents, children);
 
@@ -16082,7 +16082,7 @@ namespace Allors.Adapters
                     var inExtent = this.LocalExtent(MetaC1.Instance.ObjectType);
 
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContainedIn(AssociationTypes.C1AllorsBoolean, inExtent);
+                    extent.Filter.AddContainedIn(MetaC1.Instance.I12AllorsBoolean.RelationType.AssociationType, inExtent);
                     extent.ToArray();
                 }
                 catch (ArgumentException)
@@ -16107,7 +16107,7 @@ namespace Allors.Adapters
                 try
                 {
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContains(AssociationTypes.C1C2one2many, this.c1C);
+                    extent.Filter.AddContains(MetaC2.Instance.C1WhereC1C2one2many, this.c1C);
                 }
                 catch (ArgumentException)
                 {
@@ -16120,7 +16120,7 @@ namespace Allors.Adapters
                 try
                 {
                     var extent = this.LocalExtent(MetaC2.Instance.ObjectType);
-                    extent.Filter.AddContains(AssociationTypes.C1C2one2one, this.c1C);
+                    extent.Filter.AddContains(MetaC2.Instance.C1WhereC1C2one2one, this.c1C);
                 }
                 catch (ArgumentException)
                 {
@@ -16144,7 +16144,7 @@ namespace Allors.Adapters
                 try
                 {
                     var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                    extent.Filter.AddEquals(AssociationTypes.C1C1many2many, this.c1B);
+                    extent.Filter.AddEquals(MetaC1.Instance.C1sWhereC1C1many2many, this.c1B);
                 }
                 catch (ArgumentException)
                 {
@@ -16157,7 +16157,7 @@ namespace Allors.Adapters
                 try
                 {
                     var extent = this.LocalExtent(MetaC1.Instance.ObjectType);
-                    extent.Filter.AddEquals(AssociationTypes.C1C1many2one, this.c1B);
+                    extent.Filter.AddEquals(MetaC1.Instance.C1sWhereC1C1many2one, this.c1B);
                 }
                 catch (ArgumentException)
                 {
@@ -16489,7 +16489,7 @@ namespace Allors.Adapters
                 c1.C1C2many2one = c2;
 
                 var c2s = this.LocalExtent(MetaC2.Instance.ObjectType);
-                c2s.Filter.AddContains(AssociationTypes.C3C2many2many, c3);
+                c2s.Filter.AddContains(MetaC2.Instance.C3sWhereC3C2many2many, c3);
 
                 Extent<C1> c1s = this.LocalExtent(MetaC1.Instance.ObjectType);
                 c1s.Filter.AddContainedIn(MetaC1.Instance.C1C2many2one, (Extent)c2s);
