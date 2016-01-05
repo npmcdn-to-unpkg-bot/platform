@@ -32,7 +32,7 @@ namespace Allors.Domain
     {
         public static Extent<Person> ExtentByLastName(ISession session)
         {
-            return session.Extent<Person>().AddSort(Persons.Meta.LastName);
+            return session.Extent<Person>().AddSort(People.Meta.LastName);
         }
 
         public override string ToString()
@@ -62,7 +62,7 @@ namespace Allors.Domain
 
             if (!Users.GuestUserName.Equals(this.UserName) && !Users.AdministratorUserName.Equals(this.UserName))
             {
-                derivation.Log.AssertExists(this, Persons.Meta.LastName);
+                derivation.Log.AssertExists(this, People.Meta.LastName);
             }
 
             if (this.ExistFirstName && this.ExistLastName)

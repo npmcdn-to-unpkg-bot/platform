@@ -69,8 +69,8 @@ namespace Allors.Adapters.Object.SqlClient
 
                 using (var session = this.CreateSession())
                 {
-                    var c1s = (Extent<C1>)session.Create(Classes.C1, count);
-                    var c2s = (Extent<C2>)session.Create(Classes.C2, count);
+                    var c1s = (Extent<C1>)session.Create(MetaC1.Instance.ObjectType, count);
+                    var c2s = (Extent<C2>)session.Create(MetaC2.Instance.ObjectType, count);
 
                     for (var i = 0; i < count; i++)
                     {

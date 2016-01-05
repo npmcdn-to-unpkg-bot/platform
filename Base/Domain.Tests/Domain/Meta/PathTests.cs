@@ -90,8 +90,7 @@ namespace Domain
 
             this.Session.Derive(true);
 
-            var metaPopulation = MetaPopulation.Instance;
-            var path = new Path(C1Meta.Instance.C1C2One2Manies, C2Meta.Instance.C2AllorsString);
+            var path = new Path(MetaC1.Instance.C1C2One2Manies, MetaC2.Instance.C2AllorsString);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);

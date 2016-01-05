@@ -550,8 +550,8 @@ namespace Allors.Adapters
                         Assert.AreEqual(null, to.C1WhereC1one2one);
 
                         // 1-1
-                        from.Strategy.SetRole(RoleTypes.C1C1one2one, to);
-                        from.Strategy.SetRole(RoleTypes.C1C1one2one, to);
+                        from.Strategy.SetRole(MetaC1.Instance.C1C1one2one, to);
+                        from.Strategy.SetRole(MetaC1.Instance.C1C1one2one, to);
 
                         mark();
                         Assert.AreEqual(to, from.C1C1one2one);
@@ -562,9 +562,9 @@ namespace Allors.Adapters
                         // 0-0        
                         from.RemoveC1C1one2one();
                         from.RemoveC1C1one2one();
-                        from.Strategy.SetRole(RoleTypes.C1C1one2one, to);
-                        from.Strategy.SetRole(RoleTypes.C1C1one2one, null);
-                        from.Strategy.SetRole(RoleTypes.C1C1one2one, null);
+                        from.Strategy.SetRole(MetaC1.Instance.C1C1one2one, to);
+                        from.Strategy.SetRole(MetaC1.Instance.C1C1one2one, null);
+                        from.Strategy.SetRole(MetaC1.Instance.C1C1one2one, null);
                         mark();
                         Assert.AreEqual(null, from.C1C1one2one);
                         Assert.AreEqual(null, from.C1C1one2one);
@@ -2847,7 +2847,7 @@ namespace Allors.Adapters
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(RoleTypes.C1C2one2one, c1b);
+                        c1a.Strategy.SetCompositeRole(MetaC1.Instance.C1C2one2one, c1b);
                     }
                     catch
                     {
@@ -2913,7 +2913,7 @@ namespace Allors.Adapters
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(RoleTypes.C1AllorsString, c1b);
+                        c1a.Strategy.SetCompositeRole(MetaC1.Instance.C1AllorsString, c1b);
                     }
                     catch
                     {
@@ -2926,7 +2926,7 @@ namespace Allors.Adapters
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(RoleTypes.C1C2one2many, c2b);
+                        c1a.Strategy.SetCompositeRole(MetaC1.Instance.C1C2one2manies, c2b);
                     }
                     catch
                     {

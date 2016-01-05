@@ -40,11 +40,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Core\Repository\Core\AssemblyInfo.cs">
+      <Link>Core\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Repository\Core\Object.cs">
+      <Link>Core\Object.cs</Link>
+    </Compile>
+    <Compile Include="Adapters\C1.cs" />
+    <Compile Include="Adapters\C2.cs" />
+    <Compile Include="Adapters\C3.cs" />
+    <Compile Include="Adapters\C4.cs" />
+    <Compile Include="Adapters\ClassWithoutRoles.cs" />
+    <Compile Include="Adapters\ClassWithoutUnitRoles.cs" />
+    <Compile Include="Adapters\Company.cs" />
+    <Compile Include="Adapters\GT32.cs" />
+    <Compile Include="Adapters\GT32UnitLT32Composite.cs" />
+    <Compile Include="Adapters\I1.cs" />
+    <Compile Include="Adapters\I12.cs" />
+    <Compile Include="Adapters\I2.cs" />
+    <Compile Include="Adapters\I23.cs" />
+    <Compile Include="Adapters\I3.cs" />
+    <Compile Include="Adapters\I34.cs" />
+    <Compile Include="Adapters\I4.cs" />
+    <Compile Include="Adapters\IGT32Composite.cs" />
+    <Compile Include="Adapters\IGT32Unit.cs" />
+    <Compile Include="Adapters\ILT32Composite.cs" />
+    <Compile Include="Adapters\ILT32Unit.cs" />
+    <Compile Include="Adapters\InterfaceWithoutConcreteClass.cs" />
+    <Compile Include="Adapters\ISandbox.cs" />
+    <Compile Include="Adapters\LT32.cs" />
+    <Compile Include="Adapters\LT32UnitGT32Composite.cs" />
+    <Compile Include="Adapters\Named.cs" />
+    <Compile Include="Adapters\Person.cs" />
+    <Compile Include="Adapters\S1.cs" />
+    <Compile Include="Adapters\S12.cs" />
+    <Compile Include="Adapters\S1234.cs" />
+    <Compile Include="Adapters\S2.cs" />
+    <Compile Include="Adapters\S3.cs" />
+    <Compile Include="Adapters\S4.cs" />
+    <Compile Include="Adapters\Sandbox.cs" />
+    <Compile Include="Adapters\SingleUnit.cs" />
+    <Compile Include="Adapters\User.cs" />
+    <Compile Include="Adapters\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Generate.cmd" />
     <None Include="Generate.proj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
+      <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
+      <Name>Allors</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

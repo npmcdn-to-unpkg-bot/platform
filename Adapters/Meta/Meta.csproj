@@ -43,35 +43,14 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBinaryUnit.cs">
-      <Link>Core\Domain\AllorsBinaryUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\MetaClass.cs">
+      <Link>Core\Domain\MetaClass.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsBooleanUnit.cs">
-      <Link>Core\Domain\AllorsBooleanUnit.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\MetaInterface.cs">
+      <Link>Core\Domain\MetaInterface.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDateTimeUnit.cs">
-      <Link>Core\Domain\AllorsDateTimeUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsDecimalUnit.cs">
-      <Link>Core\Domain\AllorsDecimalUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsFloatUnit.cs">
-      <Link>Core\Domain\AllorsFloatUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsIntegerUnit.cs">
-      <Link>Core\Domain\AllorsIntegerUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsStringUnit.cs">
-      <Link>Core\Domain\AllorsStringUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\AllorsUniqueUnit.cs">
-      <Link>Core\Domain\AllorsUniqueUnit.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\CoreDomain.cs">
-      <Link>Core\Domain\CoreDomain.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Domain\ObjectInterface.cs">
-      <Link>Core\Domain\ObjectInterface.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\Domain\MetaUnit.cs">
+      <Link>Core\Domain\MetaUnit.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\Generation\Generate.cs">
       <Link>Core\Generation\Generate.cs</Link>
@@ -166,57 +145,24 @@
     <Compile Include="..\..\Core\Meta\Core\Meta\ValidationLog.cs">
       <Link>Core\Meta\ValidationLog.cs</Link>
     </Compile>
-    <Compile Include="Adapters\Meta\Composite.cs" />
-    <Compile Include="Adapters\MetaPopulation.v.cs" />
-    <Compile Include="Adapters\Domain\C1.cs" />
-    <Compile Include="Adapters\Domain\C2.cs" />
-    <Compile Include="Adapters\Domain\C3.cs" />
-    <Compile Include="Adapters\Domain\C4.cs" />
-    <Compile Include="Adapters\Domain\ClassWithoutRoles.cs" />
-    <Compile Include="Adapters\Domain\ClassWithoutUnitRoles.cs" />
-    <Compile Include="Adapters\Domain\Company.cs" />
-    <Compile Include="Adapters\Domain\GT32.cs" />
-    <Compile Include="Adapters\Domain\GT32UnitLT32Composite.cs" />
-    <Compile Include="Adapters\Domain\I1.cs" />
-    <Compile Include="Adapters\Domain\I12.cs" />
-    <Compile Include="Adapters\Domain\I2.cs" />
-    <Compile Include="Adapters\Domain\I23.cs" />
-    <Compile Include="Adapters\Domain\I3.cs" />
-    <Compile Include="Adapters\Domain\I34.cs" />
-    <Compile Include="Adapters\Domain\I4.cs" />
-    <Compile Include="Adapters\Domain\IGT32Composite.cs" />
-    <Compile Include="Adapters\Domain\IGT32Unit.cs" />
-    <Compile Include="Adapters\Domain\ILT32Composite.cs" />
-    <Compile Include="Adapters\Domain\ILT32Unit.cs" />
-    <Compile Include="Adapters\Domain\InterfaceWithoutConcreteClass.cs" />
-    <Compile Include="Adapters\Domain\ISandbox.cs" />
-    <Compile Include="Adapters\Domain\LT32.cs" />
-    <Compile Include="Adapters\Domain\LT32UnitGT32Composite.cs" />
-    <Compile Include="Adapters\Domain\Adapters.cs" />
-    <Compile Include="Adapters\Domain\Named.cs" />
-    <Compile Include="Adapters\Domain\Person.cs" />
-    <Compile Include="Adapters\Domain\S1.cs" />
-    <Compile Include="Adapters\Domain\S12.cs" />
-    <Compile Include="Adapters\Domain\S1234.cs" />
-    <Compile Include="Adapters\Domain\S2.cs" />
-    <Compile Include="Adapters\Domain\S3.cs" />
-    <Compile Include="Adapters\Domain\S4.cs" />
-    <Compile Include="Adapters\Domain\Sandbox.cs" />
-    <Compile Include="Adapters\Domain\SingleUnit.cs" />
-    <Compile Include="Adapters\Domain\User.cs" />
+    <Compile Include="generated\builder.g.cs" />
+    <Compile Include="generated\classes.g.cs" />
+    <Compile Include="generated\domains.g.cs" />
+    <Compile Include="generated\interfaces.g.cs" />
+    <Compile Include="generated\meta.g.cs" />
+    <Compile Include="generated\units.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Core\Meta\Core\Generate.proj">
-      <Link>Core\Generate.proj</Link>
-    </None>
     <None Include="..\..\Core\Meta\Core\Overview.cd">
       <Link>Core\Overview.cd</Link>
     </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Adapters\Domain\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
       <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>

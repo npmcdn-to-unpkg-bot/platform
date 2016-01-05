@@ -30,7 +30,11 @@ namespace Allors.Meta
     /// </summary>
     public interface IAssociationType : IPropertyType
     {
-        string PropertyName { get; }
+        string SingularName { get; }
+
+        string SingularPropertyName { get; }
+
+        string SingularFullName { get; }
 
         bool IsMany { get; }
 

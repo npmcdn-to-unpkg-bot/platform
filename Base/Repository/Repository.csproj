@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Core\Repository\Core\AssemblyInfo.cs">
+      <Link>Core\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Repository\Core\Object.cs">
       <Link>Core\Object.cs</Link>
     </Compile>
@@ -81,7 +84,6 @@
     <Compile Include="Base\UniquelyIdentifiable.cs" />
     <Compile Include="Base\User.cs" />
     <Compile Include="Base\UserGroup.cs" />
-    <Compile Include="Core\AssemblyInfo.cs" />
     <Compile Include="Custom\AssemblyInfo.cs" />
     <Compile Include="Custom\Address.cs" />
     <Compile Include="Custom\BadUI.cs" />
