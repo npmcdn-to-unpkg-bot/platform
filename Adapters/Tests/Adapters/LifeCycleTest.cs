@@ -1284,9 +1284,9 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC1c.Strategy.IsDeleted);
                 Assert.IsFalse(toC1d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(fromC1a, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(1, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(fromC1a, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(fromC1a, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(1, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(1, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(1, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -1377,11 +1377,11 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC2c.Strategy.IsDeleted);
                 Assert.IsFalse(toC2d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(fromC1a, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(1, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(fromC1a, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(fromC1a, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(1, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Cached
 
@@ -1621,9 +1621,9 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC1c.Strategy.IsDeleted);
                 Assert.IsFalse(toC1d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(fromC1a, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(1, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(fromC1a, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(fromC1a, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(1, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(1, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(1, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -1862,11 +1862,11 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC2c.Strategy.IsDeleted);
                 Assert.IsFalse(toC2d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(fromC1a, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(1, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(fromC1a, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(fromC1a, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(1, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Association
 
@@ -1911,9 +1911,9 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
                 Assert.IsFalse(toC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(null, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(0, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(null, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(null, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(0, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(0, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(0, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -1958,11 +1958,11 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
                 Assert.IsFalse(toC2a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(null, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(0, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(null, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(null, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(0, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Commit
 
@@ -2000,9 +2000,9 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(null, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(0, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(null, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(null, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(0, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(0, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(0, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -2040,11 +2040,11 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(null, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(0, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(null, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(null, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(0, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Rollback
 
@@ -2147,9 +2147,9 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC1c.Strategy.IsDeleted);
                 Assert.IsFalse(toC1d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(fromC1a, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(1, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(fromC1a, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(fromC1a, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(1, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(1, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(1, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -2252,11 +2252,11 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC2c.Strategy.IsDeleted);
                 Assert.IsFalse(toC2d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(fromC1a, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(1, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(fromC1a, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(fromC1a, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(1, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Cached
 
@@ -2290,7 +2290,7 @@ namespace Allors.Adapters
                 fromC1a.Strategy.Delete();
                 fromC1b.Strategy.Delete();
 
-                Assert.AreEqual(0, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(0, toC1a.C1sWhereC1C1many2one.Count);
 
                 StrategyAssert.RoleExistHasException(fromC1a, MetaC1.Instance.C1C1one2one);
                 StrategyAssert.RoleExistHasException(fromC1a, MetaC1.Instance.C1C1one2manies);
@@ -2306,9 +2306,9 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
                 Assert.IsFalse(toC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(null, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(0, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(null, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(null, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(0, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(0, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(0, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -2349,9 +2349,9 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(null, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(0, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(null, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(null, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(0, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(0, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(0, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -2461,9 +2461,9 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC1c.Strategy.IsDeleted);
                 Assert.IsFalse(toC1d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC1a.C1WhereC1one2one);
-                Assert.AreEqual(fromC1a, toC1b.C1WhereC1one2many);
-                Assert.AreEqual(1, toC1a.C1sWhereC1many2one.Count);
+                Assert.AreEqual(fromC1a, toC1a.C1WhereC1C1one2one);
+                Assert.AreEqual(fromC1a, toC1b.C1WhereC1C1one2many);
+                Assert.AreEqual(1, toC1a.C1sWhereC1C1many2one.Count);
                 Assert.AreEqual(1, toC1a.C1sWhereC1C1many2many.Count);
                 Assert.AreEqual(1, toC1b.C1sWhereC1C1many2many.Count);
 
@@ -2497,7 +2497,7 @@ namespace Allors.Adapters
                 fromC1a.Strategy.Delete();
                 fromC1b.Strategy.Delete();
 
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2one.Count);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2one.Count);
 
                 StrategyAssert.RoleExistHasException(fromC1a, MetaC1.Instance.C1C2one2one);
                 StrategyAssert.RoleExistHasException(fromC1a, MetaC1.Instance.C1C2one2manies);
@@ -2513,11 +2513,11 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
                 Assert.IsFalse(toC2a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(null, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(0, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(null, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(null, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(0, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Commit
 
@@ -2556,11 +2556,11 @@ namespace Allors.Adapters
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2b.Strategy.IsDeleted);
-                Assert.AreEqual(null, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(null, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(0, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(0, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(null, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(null, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(0, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(0, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Rollback
 
@@ -2668,11 +2668,11 @@ namespace Allors.Adapters
                 Assert.IsFalse(toC2c.Strategy.IsDeleted);
                 Assert.IsFalse(toC2d.Strategy.IsDeleted);
 
-                Assert.AreEqual(fromC1a, toC2a.C1WhereC2one2one);
-                Assert.AreEqual(fromC1a, toC2b.C1WhereC2one2many);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2one.Count);
-                Assert.AreEqual(1, toC2a.C1sWhereC2many2many.Count);
-                Assert.AreEqual(1, toC2b.C1sWhereC2many2many.Count);
+                Assert.AreEqual(fromC1a, toC2a.C1WhereC1C2one2one);
+                Assert.AreEqual(fromC1a, toC2b.C1WhereC1C2one2many);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2one.Count);
+                Assert.AreEqual(1, toC2a.C1sWhereC1C2many2many.Count);
+                Assert.AreEqual(1, toC2b.C1sWhereC1C2many2many.Count);
 
                 //// Assignment
 
@@ -3372,9 +3372,9 @@ namespace Allors.Adapters
                 Assert.Contains(toProxy, (C1[])fromProxy.C1C1one2manies);
                 Assert.Contains(toProxy, (C1[])fromProxy.C1C1many2manies);
 
-                Assert.AreEqual(fromProxy, toProxy.C1WhereC1one2one);
-                Assert.Contains(fromProxy, (C1[])toProxy.C1sWhereC1many2one);
-                Assert.AreEqual(fromProxy, toProxy.C1WhereC1one2many);
+                Assert.AreEqual(fromProxy, toProxy.C1WhereC1C1one2one);
+                Assert.Contains(fromProxy, (C1[])toProxy.C1sWhereC1C1many2one);
+                Assert.AreEqual(fromProxy, toProxy.C1WhereC1C1one2many);
                 Assert.Contains(fromProxy, (C1[])toProxy.C1sWhereC1C1many2many);
 
                 from.C1AllorsString = null;
@@ -3546,9 +3546,9 @@ namespace Allors.Adapters
                 Assert.Contains(toProxy, (C1[])fromProxy.C1C1one2manies);
                 Assert.Contains(toProxy, (C1[])fromProxy.C1C1many2manies);
 
-                Assert.AreEqual(fromProxy, toProxy.C1WhereC1one2one);
-                Assert.Contains(fromProxy, (C1[])toProxy.C1sWhereC1many2one);
-                Assert.AreEqual(fromProxy, toProxy.C1WhereC1one2many);
+                Assert.AreEqual(fromProxy, toProxy.C1WhereC1C1one2one);
+                Assert.Contains(fromProxy, (C1[])toProxy.C1sWhereC1C1many2one);
+                Assert.AreEqual(fromProxy, toProxy.C1WhereC1C1one2many);
                 Assert.Contains(fromProxy, (C1[])toProxy.C1sWhereC1C1many2many);
 
                 this.Session.Rollback();
@@ -4162,28 +4162,28 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                     {
                         c2A = (C2)session2.Instantiate(c2AObjectId);
 
-                        Assert.IsTrue(c2A.ExistC1WhereC2one2one);
+                        Assert.IsTrue(c2A.ExistC1WhereC1C2one2one);
                     }
 
                     using (var session2 = this.CreateSession())
                     {
                         c2A = (C2)session2.Instantiate(c2AObjectId);
 
-                        Assert.IsTrue(c2A.ExistC1sWhereC2many2one);
+                        Assert.IsTrue(c2A.ExistC1sWhereC1C2many2one);
                     }
 
                     using (var session2 = this.CreateSession())
                     {
                         c2A = (C2)session2.Instantiate(c2AObjectId);
 
-                        Assert.IsTrue(c2A.ExistC1WhereC2one2many);
+                        Assert.IsTrue(c2A.ExistC1WhereC1C2one2many);
                     }
 
                     using (var session2 = this.CreateSession())
                     {
                         c2A = (C2)session2.Instantiate(c2AObjectId);
 
-                        Assert.IsTrue(c2A.ExistC1sWhereC2many2many);
+                        Assert.IsTrue(c2A.ExistC1sWhereC1C2many2many);
                     }
 
                     using (var session2 = this.CreateSession())
@@ -4807,49 +4807,49 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                     var c2a = C2.Create(this.Session);
                     c1a.C1C2one2one = c2a;
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, new[] { c2a.Strategy.ObjectId });
 
-                    Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
-
-                    this.Session.Commit();
-
-                    Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+                    Assert.AreEqual(c1a, c2a.C1WhereC1C2one2one);
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
+                    Assert.AreEqual(c1a, c2a.C1WhereC1C2one2one);
+
+                    this.Session.Commit();
+
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, new[] { c2a.Strategy.ObjectId });
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, new[] { c2a.Strategy.ObjectId });
                     }
 
-                    Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+                    Assert.AreEqual(c1a, c2a.C1WhereC1C2one2one);
 
                     this.Session.Commit();
 
                     c1b.C1C2one2one = c2a;
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, new[] { c2a.Strategy.ObjectId });
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, new[] { c2a.Strategy.ObjectId });
                     }
 
-                    Assert.AreEqual(c1b, c2a.C1WhereC2one2one);
+                    Assert.AreEqual(c1b, c2a.C1WhereC1C2one2one);
 
                     this.Session.Rollback();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, new[] { c2a.Strategy.ObjectId });
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, new[] { c2a.Strategy.ObjectId });
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, new[] { c2a.Strategy.ObjectId });
                     }
 
-                    Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+                    Assert.AreEqual(c1a, c2a.C1WhereC1C2one2one);
 
                     this.Session.Rollback();
 
-                    Assert.AreEqual(c1a, c2a.C1WhereC2one2one);
+                    Assert.AreEqual(c1a, c2a.C1WhereC1C2one2one);
                 }
             }
         }
@@ -4867,23 +4867,23 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one}, c2A);
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one}, c2A);
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, c2A);
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, c2A);
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, c2A);
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC2one2one }, c2A);
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1WhereC1C2one2one }, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
                 }
             }
         }
@@ -4891,7 +4891,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
         [Test]
         public void PrefetchAssociationOne2OneEmptyAndUnit()
         {
-            var prefetchPolicy = new PrefetchPolicyBuilder().WithRule(C2.Meta.C1WhereC2one2one, new IPropertyType[] { C1.Meta.C1AllorsString }).Build();
+            var prefetchPolicy = new PrefetchPolicyBuilder().WithRule(C2.Meta.C1WhereC1C2one2one, new IPropertyType[] { C1.Meta.C1AllorsString }).Build();
             foreach (var twice in TrueFalse)
             {
                 foreach (var init in this.Inits)
@@ -4908,7 +4908,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                         this.Session.Prefetch(prefetchPolicy, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
 
                     this.Session.Commit();
 
@@ -4918,7 +4918,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                         this.Session.Prefetch(prefetchPolicy, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
                 }
             }
         }
@@ -4937,57 +4937,57 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                     var c2a = C2.Create(this.Session);
                     c1a.AddC1C2many2many(c2a);
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     }
 
-                    Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+                    Assert.Contains(c1a, c2a.C1sWhereC1C2many2many);
 
                     this.Session.Commit();
 
-                    Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+                    Assert.Contains(c1a, c2a.C1sWhereC1C2many2many);
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     }
                     
-                    Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+                    Assert.Contains(c1a, c2a.C1sWhereC1C2many2many);
 
                     this.Session.Commit();
 
                     c1a.RemoveC1C2many2many(c2a);
                     c1b.AddC1C2many2many(c2a);
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     }
 
                     var b = c1b.Strategy.ObjectId;
-                    var assoc = c2a.C1sWhereC2many2many[0].Strategy.ObjectId;
+                    var assoc = c2a.C1sWhereC1C2many2many[0].Strategy.ObjectId;
 
-                    Assert.Contains(c1b, c2a.C1sWhereC2many2many);
+                    Assert.Contains(c1b, c2a.C1sWhereC1C2many2many);
 
                     this.Session.Rollback();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, new[] { c2a.Strategy.ObjectId });
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, new[] { c2a.Strategy.ObjectId });
                     }
 
-                    Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+                    Assert.Contains(c1a, c2a.C1sWhereC1C2many2many);
 
                     this.Session.Rollback();
 
-                    Assert.Contains(c1a, c2a.C1sWhereC2many2many);
+                    Assert.Contains(c1a, c2a.C1sWhereC1C2many2many);
                 }
             }
         }
@@ -5005,23 +5005,23 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, c2A);
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, c2A);
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, c2A);
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, c2A);
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, c2A);
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2many }, c2A);
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2many }, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
                 }
             }
         }
@@ -5029,7 +5029,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
         [Test]
         public void PrefetchAssociationMany2ManyEmptyAndUnit()
         {
-            var prefetchPolicy = new PrefetchPolicyBuilder().WithRule(C2.Meta.C1sWhereC2many2many, new IPropertyType[] { C1.Meta.C1AllorsString }).Build();
+            var prefetchPolicy = new PrefetchPolicyBuilder().WithRule(C2.Meta.C1sWhereC1C2many2many, new IPropertyType[] { C1.Meta.C1AllorsString }).Build();
             foreach (var twice in TrueFalse)
             {
                 foreach (var init in this.Inits)
@@ -5046,7 +5046,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                         this.Session.Prefetch(prefetchPolicy, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
 
                     this.Session.Commit();
 
@@ -5056,7 +5056,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                         this.Session.Prefetch(prefetchPolicy, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2many.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2many.Count);
                 }
             }
         }
@@ -5074,23 +5074,23 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2one }, c2A);
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2one }, c2A);
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2one }, c2A);
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2one }, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2one.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2one.Count);
 
                     this.Session.Commit();
 
-                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2one }, c2A);
+                    this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2one }, c2A);
                     if (twice)
                     {
-                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC2many2one }, c2A);
+                        this.Session.Prefetch(new IPropertyType[] { C2.Meta.C1sWhereC1C2many2one }, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2one.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2one.Count);
                 }
             }
         }
@@ -5099,7 +5099,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
         public void PrefetchAssociationMany2OneEmptyAndUnit()
         {
             var prefetchPolicy = new PrefetchPolicyBuilder()
-                .WithRule(C2.Meta.C1sWhereC2many2one, new IPropertyType[] { C1.Meta.C1AllorsString })
+                .WithRule(C2.Meta.C1sWhereC1C2many2one, new IPropertyType[] { C1.Meta.C1AllorsString })
                 .Build();
 
             foreach (var twice in TrueFalse)
@@ -5118,7 +5118,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                         this.Session.Prefetch(prefetchPolicy, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2one.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2one.Count);
 
                     this.Session.Commit();
 
@@ -5128,7 +5128,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                         this.Session.Prefetch(prefetchPolicy, c2A);
                     }
 
-                    Assert.AreEqual(0, c2A.C1sWhereC2many2one.Count);
+                    Assert.AreEqual(0, c2A.C1sWhereC1C2many2one.Count);
                 }
             }
         }

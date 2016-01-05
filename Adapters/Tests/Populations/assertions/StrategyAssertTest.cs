@@ -35,7 +35,11 @@ namespace Allors.Adapters
         [SetUp]
         protected void Init()
         {
-            var configuration = new Memory.Configuration { ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(C1).Assembly, "Allors.Domain") };
+            var metaPopulation = new MetaPopulation();
+            var metaBuilder = new MetaBuilder(metaPopulation);
+            metaBuilder.Build();
+
+            var configuration = new Memory.Configuration { ObjectFactory = new ObjectFactory(metaPopulation, typeof(C1).Assembly, "Allors.Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

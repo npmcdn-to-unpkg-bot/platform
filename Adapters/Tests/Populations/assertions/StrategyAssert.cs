@@ -34,7 +34,7 @@ namespace Allors.Adapters
             bool exceptionOccured = false;
             try
             {
-                object o = allorsObject.Strategy.GetAssociation(associationType);
+                object o = allorsObject.Strategy.GetAssociation(associationType.RelationType);
             }
             catch
             {
@@ -52,7 +52,7 @@ namespace Allors.Adapters
             bool exceptionOccured = false;
             try
             {
-                object o = allorsObject.Strategy.GetAssociation(associationType);
+                object o = allorsObject.Strategy.GetAssociation(associationType.RelationType);
             }
             catch
             {
@@ -79,16 +79,16 @@ namespace Allors.Adapters
             {
                 if (Array.IndexOf(associationTypes, associationType) >= 0)
                 {
-                    if (!allorsObject.Strategy.ExistAssociation(associationType))
+                    if (!allorsObject.Strategy.ExistAssociation(associationType.RelationType))
                     {
                         Assert.Fail();
                     }
                 }
                 else
                 {
-                    if (allorsObject.Strategy.ExistAssociation(associationType))
+                    if (allorsObject.Strategy.ExistAssociation(associationType.RelationType))
                     {
-                        if (allorsObject.Strategy.ExistAssociation(associationType))
+                        if (allorsObject.Strategy.ExistAssociation(associationType.RelationType))
                         {
                             Assert.Fail();
                         }
@@ -102,7 +102,7 @@ namespace Allors.Adapters
             bool exceptionOccured = false;
             try
             {
-                object o = allorsObject.Strategy.ExistRole(roleType);
+                object o = allorsObject.Strategy.ExistRole(roleType.RelationType);
             }
             catch
             {
@@ -120,7 +120,7 @@ namespace Allors.Adapters
             bool exceptionOccured = false;
             try
             {
-                object o = allorsObject.Strategy.GetRole(roleType);
+                object o = allorsObject.Strategy.GetRole(roleType.RelationType);
             }
             catch
             {
@@ -147,14 +147,14 @@ namespace Allors.Adapters
             {
                 if (Array.IndexOf(roleTypes, roleType) >= 0)
                 {
-                    if (!allorsObject.Strategy.ExistRole(roleType))
+                    if (!allorsObject.Strategy.ExistRole(roleType.RelationType))
                     {
                         Assert.Fail();
                     }
                 }
                 else
                 {
-                    if (allorsObject.Strategy.ExistRole(roleType))
+                    if (allorsObject.Strategy.ExistRole(roleType.RelationType))
                     {
                         Assert.Fail();
                     }

@@ -112,12 +112,12 @@ namespace Allors.Adapters
                 var c1B = C1.Create(this.Session);
                 c1A.C1C1many2one = c1B;
 
-                foreach (C1 c in c1B.C1sWhereC1many2one)
+                foreach (C1 c in c1B.C1sWhereC1C1many2one)
                 {
                     c.Strategy.Delete();
                 }
 
-                Assert.IsFalse(c1B.ExistC1sWhereC1many2one);
+                Assert.IsFalse(c1B.ExistC1sWhereC1C1many2one);
             }
         }
     }

@@ -49,36 +49,15 @@ namespace Allors.Adapters
     {
         protected Domain domain;
 
-        protected virtual bool DetectBinarySizedDifferences
-        {
-            get { return true; }
-        }
+        protected virtual bool DetectBinarySizedDifferences => true;
 
         protected abstract IProfile Profile { get; }
 
-        protected ISession Session
-        {
-            get
-            {
-                return this.Profile.Session;
-            }
-        }
+        protected ISession Session => this.Profile.Session;
 
-        protected Action[] Markers
-        {
-            get
-            {
-                return this.Profile.Markers;
-            }
-        }
+        protected Action[] Markers => this.Profile.Markers;
 
-        protected Action[] Inits
-        {
-            get
-            {
-                return this.Profile.Inits;
-            }
-        }
+        protected Action[] Inits => this.Profile.Inits;
 
         [Test]
         public void Objects()

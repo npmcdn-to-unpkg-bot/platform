@@ -16386,7 +16386,7 @@ namespace Allors.Adapters
 
                 // Sortcut
                 // Shortcut
-                var extent = this.c1B.Strategy.GetCompositeRoles(MetaC1.Instance.C1C1one2manies);
+                var extent = this.c1B.Strategy.GetCompositeRoles(MetaC1.Instance.C1C1one2manies.RelationType);
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
@@ -16396,7 +16396,7 @@ namespace Allors.Adapters
 
                 // With Filter
                 // Shortcut
-                extent = this.c1B.Strategy.GetCompositeRoles(MetaC1.Instance.C1C1one2manies);
+                extent = this.c1B.Strategy.GetCompositeRoles(MetaC1.Instance.C1C1one2manies.RelationType);
                 extent.Filter.AddEquals(MetaC1.Instance.C1AllorsString, "Abracadabra");
 
                 Assert.AreEqual(0, extent.Count);
@@ -16407,7 +16407,7 @@ namespace Allors.Adapters
 
                 // With Sort
                 // Shortcut
-                extent = this.c1B.Strategy.GetCompositeRoles(MetaC1.Instance.C1C1one2manies);
+                extent = this.c1B.Strategy.GetCompositeRoles(MetaC1.Instance.C1C1one2manies.RelationType);
                 extent.AddSort(MetaC1.Instance.C1AllorsInteger);
 
                 Assert.AreEqual(1, extent.Count);
@@ -16533,7 +16533,7 @@ namespace Allors.Adapters
 
         private static Unit GetAllorsString(IObjectType objectType)
         {
-            return (Unit)objectType.MetaPopulation.Find(UnitIds.StringId);
+            return (Unit)objectType.MetaPopulation.Find(UnitIds.String);
         }
 
         private void AssertC1(Extent extent, bool assert0, bool assert1, bool assert2, bool assert3)

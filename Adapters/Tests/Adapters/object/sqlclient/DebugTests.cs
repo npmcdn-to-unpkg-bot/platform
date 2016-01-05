@@ -322,7 +322,7 @@ namespace Allors.Adapters.Object.SqlClient
         [Test]
         public void PrefetchManyInterface()
         {
-            var i12Prefetcher = new PrefetchPolicyBuilder().WithRule(C1.Meta.I12AllorsString).Build();
+            var i12Prefetcher = new PrefetchPolicyBuilder().WithRule(C1.Meta.I12AllorsString.RoleType).Build();
 
             var c1Prefetcher =
                 new PrefetchPolicyBuilder().WithRule(C1.Meta.C1I12one2manies, i12Prefetcher)

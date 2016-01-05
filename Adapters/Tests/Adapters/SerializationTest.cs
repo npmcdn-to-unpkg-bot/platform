@@ -814,17 +814,17 @@ namespace Allors.Adapters
             Assert.AreEqual(this.c1B.C1AllorsBinary, new byte[] { 0, 1, 2, 3 });
             Assert.AreEqual(this.c1C.C1AllorsBinary, null);
 
-            Assert.AreEqual("a1", c2ACopy.C1WhereC2one2one.C1AllorsString);
-            Assert.AreEqual("a1", c2ACopy.C1WhereC2one2many.C1AllorsString);
-            Assert.AreEqual("a1", c2BCopy.C1WhereC2one2many.C1AllorsString);
+            Assert.AreEqual("a1", c2ACopy.C1WhereC1C2one2one.C1AllorsString);
+            Assert.AreEqual("a1", c2ACopy.C1WhereC1C2one2many.C1AllorsString);
+            Assert.AreEqual("a1", c2BCopy.C1WhereC1C2one2many.C1AllorsString);
 
             Assert.AreEqual("c3a", c3ACopy.I34AllorsString);
             Assert.AreEqual("c4a", c4ACopy.I34AllorsString);
 
-            Assert.AreEqual(2, c2ACopy.C1sWhereC2many2one.Count);
-            Assert.AreEqual(0, c2BCopy.C1sWhereC2many2one.Count);
-            Assert.AreEqual(1, c2ACopy.C1sWhereC2many2many.Count);
-            Assert.AreEqual(1, c2BCopy.C1sWhereC2many2many.Count);
+            Assert.AreEqual(2, c2ACopy.C1sWhereC1C2many2one.Count);
+            Assert.AreEqual(0, c2BCopy.C1sWhereC1C2many2one.Count);
+            Assert.AreEqual(1, c2ACopy.C1sWhereC1C2many2many.Count);
+            Assert.AreEqual(1, c2BCopy.C1sWhereC1C2many2many.Count);
 
             foreach (S1234 allorsObject in everyObject)
             {
