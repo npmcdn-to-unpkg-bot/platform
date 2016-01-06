@@ -6251,8 +6251,8 @@ namespace Allors.Adapters
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
                 extent.Filter.AddNot().AddContainedIn(MetaC1.Instance.C1C2many2manies, (IEnumerable<IObject>)inExtent.ToArray());
 
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, true, false, true, true);
                 this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
@@ -6290,8 +6290,8 @@ namespace Allors.Adapters
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
                 extent.Filter.AddNot().AddContainedIn(MetaC1.Instance.C1C2many2manies, (IEnumerable<IObject>)inExtent.ToArray());
 
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, true, false, true, true);
                 this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
@@ -6331,8 +6331,8 @@ namespace Allors.Adapters
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
                 extent.Filter.AddNot().AddContainedIn(MetaC1.Instance.C1C1many2manies, (IEnumerable<IObject>)inExtent.ToArray());
 
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, true, false, true, true);
                 this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
@@ -6370,8 +6370,8 @@ namespace Allors.Adapters
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
                 extent.Filter.AddNot().AddContainedIn(MetaC1.Instance.C1C1many2manies, (IEnumerable<IObject>)inExtent.ToArray());
 
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, true, false, true, true);
                 this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
@@ -6397,6 +6397,8 @@ namespace Allors.Adapters
               
                 extent = this.LocalExtent(MetaC1.Instance.ObjectType);
                 extent.Filter.AddNot().AddContainedIn(MetaC1.Instance.C1I12many2manies, (IEnumerable<IObject>)inExtent.ToArray());
+
+                this.Session.Commit();
 
                 Assert.AreEqual(3, extent.Count);
                 this.AssertC1(extent, true, false, true, true);
