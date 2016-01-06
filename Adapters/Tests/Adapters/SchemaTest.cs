@@ -618,8 +618,8 @@ namespace Allors.Adapters
         //    c1RelationType.AssociationType.ObjectType = c1;
         //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
         //    c1RelationType.RoleType.Size = 100;
-        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
-        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    c1RelationType.RoleType.SingularName = "RelationType";
+        //    c1RelationType.RoleType.PluralName = "RelationTypes";
 
         //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
@@ -635,8 +635,8 @@ namespace Allors.Adapters
         //    c1RelationType.AssociationType.ObjectType = c1;
         //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
         //    c1RelationType.RoleType.Size = 100;
-        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
-        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    c1RelationType.RoleType.SingularName = "RelationType";
+        //    c1RelationType.RoleType.PluralName = "RelationTypes";
 
         //    // From string to one2one
         //    c1RelationType.RoleType.Size = null;
@@ -678,8 +678,8 @@ namespace Allors.Adapters
         //    var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
         //    c1RelationType.AssociationType.ObjectType = c1;
         //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
-        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
-        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    c1RelationType.RoleType.SingularName = "RelationType";
+        //    c1RelationType.RoleType.PluralName = "RelationTypes";
 
         //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
@@ -694,8 +694,8 @@ namespace Allors.Adapters
         //    c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
         //    c1RelationType.AssociationType.ObjectType = c1;
         //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
-        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
-        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    c1RelationType.RoleType.SingularName = "RelationType";
+        //    c1RelationType.RoleType.PluralName = "RelationTypes";
 
         //    // Different type
         //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.Unique);

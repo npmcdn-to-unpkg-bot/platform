@@ -51,7 +51,16 @@ namespace Allors.Meta
         private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
 
-        public MetaPopulation()
+        public static readonly MetaPopulation Instance;
+
+        static MetaPopulation()
+        {
+            Instance = new MetaPopulation();
+            var metaBuilder = new MetaBuilder(Instance);
+            metaBuilder.Build();
+        }
+
+        private MetaPopulation()
         {
             this.isStale = true;
             this.isDeriving = false;
@@ -446,13 +455,6 @@ namespace Allors.Meta
                     foreach (var relationType in this.RelationTypes)
                     {
                         relationType.RoleType.DeriveScaleAndSize();
-                    }
-
-                    // RoleType Property Names
-                    foreach (var relationType in this.RelationTypes)
-                    {
-                        relationType.RoleType.DeriveSingularPropertyName();
-                        relationType.RoleType.DerivePluralPropertyName();
                     }
 
                     // RelationType Multiplicity

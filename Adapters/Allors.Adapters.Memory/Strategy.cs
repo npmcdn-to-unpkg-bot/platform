@@ -397,7 +397,7 @@ namespace Allors.Adapters.Memory
 
         public bool ExistAssociation(IRelationType relationType)
         {
-            return relationType.RoleType.IsMany ? this.ExistCompositeAssociations(relationType) : this.ExistCompositeAssociation(relationType);
+            return relationType.AssociationType.IsMany ? this.ExistCompositeAssociations(relationType) : this.ExistCompositeAssociation(relationType);
         }
 
         public IObject GetCompositeAssociation(IRelationType relationType)
@@ -1143,6 +1143,7 @@ namespace Allors.Adapters.Memory
             this.ChangeSet.OnChangingCompositesRole(this, roleType, roleStrategy);
 
             // Remove role
+            this.Backup(roleType);
             roleStrategies.Remove(roleStrategy);
             if (roleStrategies.Count == 0)
             {

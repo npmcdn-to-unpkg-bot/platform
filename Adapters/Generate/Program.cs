@@ -1,6 +1,4 @@
-﻿using Allors.Meta;
-
-namespace Allors
+﻿namespace Allors
 {
     using System;
 

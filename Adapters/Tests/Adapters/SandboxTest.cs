@@ -27,43 +27,21 @@ namespace Allors.Adapters
     using Allors.Domain;
     using Adapters;
 
+    using Allors.Meta;
+
     using NUnit.Framework;
 
     public abstract class SandboxTest
     {
         protected abstract IProfile Profile { get; }
 
-        protected IDatabase Population
-        {
-            get
-            {
-                return this.Profile.Database;
-            }
-        }
+        protected IDatabase Population => this.Profile.Database;
 
-        protected ISession Session
-        {
-            get
-            {
-                return this.Profile.Session;
-            }
-        }
+        protected ISession Session => this.Profile.Session;
 
-        protected Action[] Markers
-        {
-            get
-            {
-                return this.Profile.Markers;
-            }
-        }
+        protected Action[] Markers => this.Profile.Markers;
 
-        protected Action[] Inits
-        {
-            get
-            {
-                return this.Profile.Inits;
-            }
-        }
+        protected Action[] Inits => this.Profile.Inits;
 
         [Test]
         public void SqlReservedWords()

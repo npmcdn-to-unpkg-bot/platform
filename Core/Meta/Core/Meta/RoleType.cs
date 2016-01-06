@@ -43,9 +43,9 @@ namespace Allors.Meta
 
         private string derivedPluralPropertyName;
 
-        private string assignedSingularName;
+        private string singularName;
 
-        private string assignedPluralName;
+        private string pluralName;
 
         private int? scale;
 
@@ -80,32 +80,32 @@ namespace Allors.Meta
             }
         }
 
-        public string AssignedSingularName
+        public string SingularName
         {
             get
             {
-                return this.assignedSingularName;
+                return this.singularName;
             }
 
             set
             {
                 this.MetaPopulation.AssertUnlocked();
-                this.assignedSingularName = value;
+                this.singularName = value;
                 this.MetaPopulation.Stale();
             }
         }
 
-        public string AssignedPluralName
+        public string PluralName
         {
             get
             {
-                return this.assignedPluralName;
+                return this.pluralName;
             }
 
             set
             {
                 this.MetaPopulation.AssertUnlocked();
-                this.assignedPluralName = value;
+                this.pluralName = value;
                 this.MetaPopulation.Stale();
             }
         }
@@ -160,39 +160,16 @@ namespace Allors.Meta
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
-        public override string Name => this.IsMany ? this.PluralName : this.SingularName;
-
-        /// <summary>
-        /// Gets the singular name.
-        /// </summary>
-        /// <value>The singular name.</value>
-        public string SingularName
+        public override string Name
         {
             get
             {
-                if (!string.IsNullOrEmpty(this.AssignedSingularName))
+                if (this.IsMany)
                 {
-                    return this.AssignedSingularName;
+                    return this.PluralName;
                 }
 
-                return this.ObjectType != null ? this.ObjectType.SingularName : this.IdAsString;
-            }
-        }
-
-        /// <summary>
-        /// Gets the plural name.
-        /// </summary>
-        /// <value>The plural name.</value>
-        public string PluralName
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(this.AssignedPluralName))
-                {
-                    return this.AssignedPluralName;
-                }
-
-                return this.AssignedSingularName != null ? this.AssignedSingularName + PluralSuffix : this.IdAsString;
+                return this.SingularName;
             }
         }
 
@@ -200,18 +177,7 @@ namespace Allors.Meta
         /// Gets the full name.
         /// </summary>
         /// <value>The full name.</value>
-        public string FullName
-        {
-            get
-            {
-                if (this.IsMany)
-                {
-                    return this.PluralFullName;
-                }
-
-                return this.SingularFullName;
-            }
-        }
+        public string FullName => this.IsMany ? this.PluralFullName : this.SingularFullName;
 
         /// <summary>
         /// Gets the full singular name.
@@ -231,23 +197,9 @@ namespace Allors.Meta
         /// <value>The full name</value>
         public string PropertyName => this.IsMany ? this.PluralPropertyName : this.SingularPropertyName;
 
-        public string SingularPropertyName
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedSingularPropertyName;
-            }
-        }
+        public string SingularPropertyName => this.SingularName;
 
-        public string PluralPropertyName
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedPluralPropertyName;
-            }
-        }
+        public string PluralPropertyName => this.PluralName;
 
         IAssociationType IRoleType.AssociationType => this.AssociationType;
 
@@ -452,68 +404,6 @@ namespace Allors.Meta
             }
         }
 
-        internal void DeriveSingularPropertyName()
-        {
-            this.derivedSingularPropertyName = null;
-
-            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
-            {
-                this.derivedSingularPropertyName = this.SingularName;
-
-                if (this.AssociationType.ObjectType.ExistClass)
-                {
-                    foreach (var @class in this.AssociationType.ObjectType.Classes)
-                    {
-                        foreach (var otherRole in @class.RoleTypes)
-                        {
-                            if (!Equals(otherRole))
-                            {
-                                if (otherRole.ObjectType != null)
-                                {
-                                    if (otherRole.SingularName.Equals(this.SingularName))
-                                    {
-                                        this.derivedSingularPropertyName = this.SingularFullName;
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        internal void DerivePluralPropertyName()
-        {
-            this.derivedPluralPropertyName = null;
-
-            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
-            {
-                this.derivedPluralPropertyName = this.PluralName;
-
-                if (this.AssociationType.ObjectType.ExistClass)
-                {
-                    foreach (var @class in this.AssociationType.ObjectType.Classes)
-                    {
-                        foreach (var otherRole in @class.RoleTypes)
-                        {
-                            if (!Equals(otherRole))
-                            {
-                                if (otherRole.ObjectType != null)
-                                {
-                                    if (otherRole.PluralName.Equals(this.PluralName))
-                                    {
-                                        this.derivedPluralPropertyName = this.PluralFullName;
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Validates the instance.
         /// </summary>
@@ -528,16 +418,16 @@ namespace Allors.Meta
                 validationLog.AddError(message, this, ValidationKind.Required, "RoleType.IObjectType");
             }
 
-            if (!string.IsNullOrEmpty(this.AssignedSingularName) && this.AssignedSingularName.Length < 2)
+            if (!string.IsNullOrEmpty(this.SingularName) && this.SingularName.Length < 2)
             {
                 var message = this.ValidationName + " should have an assigned singular name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.AssignedSingularName");
+                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.SingularName");
             }
 
-            if (!string.IsNullOrEmpty(this.AssignedPluralName) && this.AssignedPluralName.Length < 2)
+            if (!string.IsNullOrEmpty(this.PluralName) && this.PluralName.Length < 2)
             {
                 var message = this.ValidationName + " should have an assigned plural role name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.AssignedPluralName");
+                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.PluralName");
             }
         }
     }

@@ -3337,14 +3337,14 @@ namespace Allors.Adapters
 
                 //// IComposite
 
-                C1 fromProxy = C1.Create(this.Session);
-                C1 toProxy = C1.Create(this.Session);
-                long fromId = fromProxy.Strategy.ObjectId;
-                long toId = toProxy.Strategy.ObjectId;
+                var fromProxy = C1.Create(this.Session);
+                var toProxy = C1.Create(this.Session);
+                var fromId = fromProxy.Strategy.ObjectId;
+                var toId = toProxy.Strategy.ObjectId;
                 this.Session.Commit();
 
-                C1 from = C1.Instantiate(this.Session, fromId);
-                C1 to = C1.Instantiate(this.Session, toId);
+                var from = C1.Instantiate(this.Session, fromId);
+                var to = C1.Instantiate(this.Session, toId);
                 from.C1AllorsString = "a";
                 from.C1C1one2one = to;
                 from.C1C1many2one = to;
@@ -3358,7 +3358,7 @@ namespace Allors.Adapters
                     MetaC1.Instance.C1C1many2one,
                     MetaC1.Instance.C1C1one2manies,
                     MetaC1.Instance.C1C1many2manies);
-
+            
                 StrategyAssert.AssociationsExistExclusive(
                     toProxy,
                     MetaC1.Instance.C1WhereC1C1one2one,

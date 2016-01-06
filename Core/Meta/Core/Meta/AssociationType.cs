@@ -96,19 +96,25 @@ namespace Allors.Meta
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
-        public override string Name => this.FullName;
+        public override string Name
+        {
+            get
+            {
+                return this.FullName;
+            }
+        }
 
         /// <summary>
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string SingularName => this.ObjectType != null ? this.ObjectType.SingularName : this.IdAsString;
+        public string SingularName => this.ObjectType.SingularName;
 
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string PluralName => this.ObjectType != null ? this.ObjectType.PluralName : this.IdAsString;
+        public string PluralName => this.ObjectType.PluralName;
 
         /// <summary>
         /// Gets the full name.
@@ -120,42 +126,31 @@ namespace Allors.Meta
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string SingularFullName => this.ObjectType != null ? this.RelationType.RoleType.SingularName + this.ObjectType.SingularName : this.IdAsString;
+        public string SingularFullName => this.RoleType.SingularName + this.SingularName;
 
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string PluralFullName => this.ObjectType != null ? this.RelationType.RoleType.SingularName + this.ObjectType.PluralName : this.IdAsString;
+        public string PluralFullName => this.RoleType.SingularName + this.PluralName;
 
         /// <summary>
         /// Gets the property name.
         /// </summary>
         /// <value>The full name</value>
-        public string PropertyName
-        {
-            get
-            {
-                if (this.IsMany)
-                {
-                    return this.PluralPropertyName;
-                }
-
-                return this.SingularPropertyName;
-            }
-        }
+        public string PropertyName => this.IsMany ? this.PluralPropertyName : this.SingularPropertyName;
 
         /// <summary>
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string SingularPropertyName => this.ObjectType != null ? this.ObjectType.SingularName + Where + this.RelationType.RoleType.SingularName : this.IdAsNumberString;
+        public string SingularPropertyName => this.ObjectType.SingularName + Where + this.RoleType.SingularName;
 
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string PluralPropertyName => this.ObjectType != null ? this.ObjectType.PluralName + Where + this.RelationType.RoleType.SingularName : this.IdAsNumberString;
+        public string PluralPropertyName => this.ObjectType.PluralName + Where + this.RoleType.SingularName;
 
         /// <summary>
         /// Gets the display name.

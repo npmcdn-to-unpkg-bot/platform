@@ -48,11 +48,7 @@ namespace Allors.Development.Repository.Tasks
             var stringTemplate = new StringTemplate(templateFileInfo);
             var outputDirectoryInfo = new DirectoryInfo(output);
 
-            var metaPopulation = new MetaPopulation();
-            var metaBuilder = new MetaBuilder(metaPopulation);
-            metaBuilder.Build();
-
-            stringTemplate.Generate(metaPopulation, outputDirectoryInfo, group, log);
+            stringTemplate.Generate(MetaPopulation.Instance, outputDirectoryInfo, group, log);
 
             return log;
         }

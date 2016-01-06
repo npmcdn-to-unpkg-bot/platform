@@ -1883,11 +1883,11 @@ namespace Allors.Adapters
                     Assert.IsFalse(extent.Contains(this.c4C));
                     Assert.IsFalse(extent.Contains(this.c4D));
 
-                    inExtent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                    inExtent = this.LocalExtent(MetaI34.Instance.ObjectType);
                     if (useOperator)
                     {
-                        var inExtentA = this.LocalExtent(MetaI3.Instance.ObjectType);
-                        var inExtentB = this.LocalExtent(MetaI3.Instance.ObjectType);
+                        var inExtentA = this.LocalExtent(MetaI34.Instance.ObjectType);
+                        var inExtentB = this.LocalExtent(MetaI34.Instance.ObjectType);
                         inExtent = this.Session.Union(inExtentA, inExtentB);
                     }
 
@@ -4563,11 +4563,11 @@ namespace Allors.Adapters
                     this.AssertC4(extent, true, false, false, false);
 
                     // ContainedIn Extent over Interface
-                    inExtent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                    inExtent = this.LocalExtent(MetaI34.Instance.ObjectType);
                     if (useOperator)
                     {
-                        var inExtentA = this.LocalExtent(MetaI3.Instance.ObjectType);
-                        var inExtentB = this.LocalExtent(MetaI3.Instance.ObjectType);
+                        var inExtentA = this.LocalExtent(MetaI34.Instance.ObjectType);
+                        var inExtentB = this.LocalExtent(MetaI34.Instance.ObjectType);
                         inExtent = this.Session.Union(inExtentA, inExtentB);
                     }
 
@@ -6687,11 +6687,11 @@ namespace Allors.Adapters
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
 
-                    inExtent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                    inExtent = this.LocalExtent(MetaI34.Instance.ObjectType);
                     if (useOperator)
                     {
-                        var inExtentA = this.LocalExtent(MetaI3.Instance.ObjectType);
-                        var inExtentB = this.LocalExtent(MetaI3.Instance.ObjectType);
+                        var inExtentA = this.LocalExtent(MetaI34.Instance.ObjectType);
+                        var inExtentB = this.LocalExtent(MetaI34.Instance.ObjectType);
                         inExtent = this.Session.Union(inExtentA, inExtentB);
                     }
 
@@ -6973,11 +6973,11 @@ namespace Allors.Adapters
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
 
-                    inExtent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                    inExtent = this.LocalExtent(MetaI34.Instance.ObjectType);
                     if (useOperator)
                     {
-                        var inExtentA = this.LocalExtent(MetaI3.Instance.ObjectType);
-                        var inExtentB = this.LocalExtent(MetaI3.Instance.ObjectType);
+                        var inExtentA = this.LocalExtent(MetaI34.Instance.ObjectType);
+                        var inExtentB = this.LocalExtent(MetaI34.Instance.ObjectType);
                         inExtent = this.Session.Union(inExtentA, inExtentB);
                     }
 
@@ -7451,7 +7451,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI34.Instance.ObjectType);
                 extent.Filter.AddNot().AddEquals(MetaI34.Instance.I34AllorsString, string.Empty);
 
                 Assert.AreEqual(6, extent.Count);
@@ -7479,7 +7479,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI2.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI23.Instance.ObjectType);
                 extent.Filter.AddNot().AddEquals(MetaI23.Instance.I23AllorsString, "Abra");
 
                 Assert.AreEqual(4, extent.Count);
@@ -7506,7 +7506,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, true, true);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI34.Instance.ObjectType);
                 extent.Filter.AddNot().AddEquals(MetaI34.Instance.I34AllorsString, "Abra");
 
                 Assert.AreEqual(4, extent.Count);
@@ -7543,7 +7543,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI34.Instance.ObjectType);
                 extent.Filter.AddNot().AddEquals(MetaI34.Instance.I34AllorsString, "Abracadabra");
 
                 Assert.AreEqual(2, extent.Count);
@@ -14148,11 +14148,11 @@ namespace Allors.Adapters
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
 
-                    inExtent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                    inExtent = this.LocalExtent(MetaI34.Instance.ObjectType);
                     if (useOperator)
                     {
-                        var inExtentA = this.LocalExtent(MetaI3.Instance.ObjectType);
-                        var inExtentB = this.LocalExtent(MetaI3.Instance.ObjectType);
+                        var inExtentA = this.LocalExtent(MetaI34.Instance.ObjectType);
+                        var inExtentB = this.LocalExtent(MetaI34.Instance.ObjectType);
                         inExtent = this.Session.Union(inExtentA, inExtentB);
                     }
 
@@ -14434,11 +14434,11 @@ namespace Allors.Adapters
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
 
-                    inExtent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                    inExtent = this.LocalExtent(MetaI34.Instance.ObjectType);
                     if (useOperator)
                     {
-                        var inExtentA = this.LocalExtent(MetaI3.Instance.ObjectType);
-                        var inExtentB = this.LocalExtent(MetaI3.Instance.ObjectType);
+                        var inExtentA = this.LocalExtent(MetaI34.Instance.ObjectType);
+                        var inExtentB = this.LocalExtent(MetaI34.Instance.ObjectType);
                         inExtent = this.Session.Union(inExtentA, inExtentB);
                     }
 
@@ -14561,7 +14561,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                inExtent = this.LocalExtent(MetaI3.Instance.ObjectType).ToArray();
+                inExtent = this.LocalExtent(MetaI34.Instance.ObjectType).ToArray();
 
                 extent = this.LocalExtent(MetaC3.Instance.ObjectType);
                 extent.Filter.AddContainedIn(MetaC3.Instance.C3C4one2one, (IEnumerable<IObject>)inExtent);
@@ -14672,11 +14672,11 @@ namespace Allors.Adapters
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
 
-                    inExtent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                    inExtent = this.LocalExtent(MetaI34.Instance.ObjectType);
                     if (useOperator)
                     {
-                        var inExtentA = this.LocalExtent(MetaI3.Instance.ObjectType);
-                        var inExtentB = this.LocalExtent(MetaI3.Instance.ObjectType);
+                        var inExtentA = this.LocalExtent(MetaI34.Instance.ObjectType);
+                        var inExtentB = this.LocalExtent(MetaI34.Instance.ObjectType);
                         inExtent = this.Session.Union(inExtentA, inExtentB);
                     }
 
@@ -15181,7 +15181,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI34.Instance.ObjectType);
                 extent.Filter.AddEquals(MetaI34.Instance.I34AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
@@ -15209,7 +15209,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI2.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI23.Instance.ObjectType);
                 extent.Filter.AddEquals(MetaI23.Instance.I23AllorsString, "Abra");
 
                 Assert.AreEqual(2, extent.Count);
@@ -15236,7 +15236,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, true, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI34.Instance.ObjectType);
                 extent.Filter.AddEquals(MetaI34.Instance.I34AllorsString, "Abra");
 
                 Assert.AreEqual(2, extent.Count);
@@ -15273,7 +15273,7 @@ namespace Allors.Adapters
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                extent = this.LocalExtent(MetaI3.Instance.ObjectType);
+                extent = this.LocalExtent(MetaI34.Instance.ObjectType);
                 extent.Filter.AddEquals(MetaI34.Instance.I34AllorsString, "Abracadabra");
 
                 Assert.AreEqual(4, extent.Count);

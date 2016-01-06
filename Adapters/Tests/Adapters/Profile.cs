@@ -36,11 +36,7 @@ namespace Allors.Adapters
 
         protected Profile()
         {
-            var metaPopulation = new MetaPopulation();
-            var metaBuilder = new MetaBuilder(metaPopulation);
-            metaBuilder.Build();
-
-            this.objectFactory = this.CreateObjectFactory(metaPopulation);
+            this.objectFactory = this.CreateObjectFactory(MetaPopulation.Instance);
         }
 
         public IObjectFactory ObjectFactory => this.objectFactory;

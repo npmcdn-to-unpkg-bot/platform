@@ -33,21 +33,6 @@ namespace Allors
     public class ObjectFactory : IObjectFactory
     {
         /// <summary>
-        /// The domain.
-        /// </summary>
-        private readonly IMetaPopulation metaPopulation;
-
-        /// <summary>
-        ///  The assembly.
-        /// </summary>
-        private readonly Assembly assembly;
-
-        /// <summary>
-        /// The namespace.
-        /// </summary>
-        private readonly string ns;
-
-        /// <summary>
         /// <see cref="Type"/> by <see cref="IObjectType"/> cache.
         /// </summary>
         private readonly Dictionary<IObjectType, Type> typeByObjectType;
@@ -70,8 +55,8 @@ namespace Allors
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectFactory"/> class.
         /// </summary>
-        /// <param name="environment">
-        /// The domain.
+        /// <param name="metaPopulation">
+        /// The meta population.
         /// </param>
         /// <param name="assembly">
         /// The assembly.
@@ -81,9 +66,9 @@ namespace Allors
         /// </param>
         public ObjectFactory(IMetaPopulation metaPopulation, Assembly assembly, string @namespace)
         {
-            this.metaPopulation = metaPopulation;
-            this.assembly = assembly;
-            this.ns = @namespace;
+            this.MetaPopulation = metaPopulation;
+            this.Assembly = assembly;
+            this.Namespace = @namespace;
 
             var validationLog = metaPopulation.Validate();
             if (validationLog.ContainsErrors)
@@ -130,35 +115,17 @@ namespace Allors
         /// <summary>
         /// Gets the namespace.
         /// </summary>
-        public string Namespace 
-        {
-            get
-            {
-                return this.ns;
-            }
-        }
+        public string Namespace { get; }
 
         /// <summary>
         /// Gets the assembly.
         /// </summary>
-        public Assembly Assembly
-        {
-            get
-            {
-                return this.assembly;
-            }
-        }
+        public Assembly Assembly { get; }
 
         /// <summary>
         /// Gets the domain.
         /// </summary>
-        public IMetaPopulation MetaPopulation 
-        {
-            get
-            {
-                return this.metaPopulation;
-            }
-        }
+        public IMetaPopulation MetaPopulation { get; }
 
         /// <summary>
         /// Creates a new <see cref="IObject"/> given the <see cref="IStrategy"/>.
@@ -170,7 +137,7 @@ namespace Allors
             var objectType = strategy.Class;
             var constructor = this.contructorInfoByObjectType[objectType];
             object[] parameters = { strategy };
-            
+
             return (IObject)constructor.Invoke(parameters);
         }
 

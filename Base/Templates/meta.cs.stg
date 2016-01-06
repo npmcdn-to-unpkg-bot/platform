@@ -62,16 +62,16 @@ $repository.SortedAssemblies:{assembly|        internal virtual void $assembly.N
 builder(repository) ::= <<
 namespace Allors.Meta
 {
-	public class MetaBuilder
+	internal class MetaBuilder
 	{
 	    private readonly MetaPopulation metaPopulation;
 
-        public MetaBuilder(MetaPopulation metaPopulation)
+        internal MetaBuilder(MetaPopulation metaPopulation)
 		{
 			this.metaPopulation = metaPopulation;
 		}
 
-		public void Build()
+		internal void Build()
 		{
 			// Domains
 $repository.Assemblies:{assembly|             Meta$assembly.Name$.Instance = new Meta$assembly.Name$(this.metaPopulation);}; separator="\n"$
@@ -136,8 +136,8 @@ $if(property.AttributeByName.Multiplicity)$		relationType.AssignedMultiplicity =
 $if(property.AttributeByName.Derived)$		relationType.IsDerived = $property.AttributeByName.Derived.Value$;$endif$
 $if(property.AttributeByName.Indexed)$		relationType.IsIndexed = $property.AttributeByName.Indexed.Value$;$endif$
 		relationType.RoleType.ObjectType = Meta$property.Type.SingularName$.Instance;
-		relationType.RoleType.AssignedSingularName = "$property.RoleSingularName$";
-		relationType.RoleType.AssignedPluralName = "$property.RolePluralName$";
+		relationType.RoleType.SingularName = "$property.RoleSingularName$";
+		relationType.RoleType.PluralName = "$property.RolePluralName$";
 $if(property.AttributeByName.Singular)$		relationType.RoleType.AssignedSingularName = "$property.AttributeByName.Singular.Value$";$endif$
 $if(property.AttributeByName.Plural)$		relationType.RoleType.AssignedPluralName = "$property.AttributeByName.Plural.Value$";$endif$
 $if(property.AttributeByName.Required)$		relationType.RoleType.IsRequired = $property.AttributeByName.Required.Value$;$endif$

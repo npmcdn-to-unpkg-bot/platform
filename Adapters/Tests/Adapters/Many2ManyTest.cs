@@ -1820,13 +1820,17 @@ namespace Allors.Adapters
                         this.Session.Commit();
 
                         from1.RemoveC1C1many2many(to1);
-                        from1.AddC1C1many2many(to2);
-
-                        Assert.Contains(to2, from1.C1C1many2manies);
-
+                       
                         this.Session.Rollback();
 
                         Assert.Contains(to1, from1.C1C1many2manies);
+
+                        this.Session.Rollback();
+
+                        from1.RemoveC1C1many2many(to1);
+                        from1.AddC1C1many2many(to2);
+
+                        Assert.Contains(to2, from1.C1C1many2manies);
 
                         this.Session.Rollback();
 
