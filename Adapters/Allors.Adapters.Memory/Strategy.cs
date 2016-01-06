@@ -392,7 +392,7 @@ namespace Allors.Adapters.Memory
 
         public object GetAssociation(IRelationType relationType)
         {
-            return relationType.RoleType.IsMany ? (object)this.GetCompositeAssociations(relationType) : this.GetCompositeAssociation(relationType);
+            return relationType.AssociationType.IsMany ? (object)this.GetCompositeAssociations(relationType) : this.GetCompositeAssociation(relationType);
         }
 
         public bool ExistAssociation(IRelationType relationType)

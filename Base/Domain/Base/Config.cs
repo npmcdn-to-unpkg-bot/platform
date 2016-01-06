@@ -33,11 +33,7 @@ namespace Allors
 
         static Config()
         {
-            var metaPopulation = new MetaPopulation();
-            var metaBuilder = new MetaBuilder(metaPopulation);
-            metaBuilder.Build();
-
-            ObjectFactory = new ObjectFactory(metaPopulation, typeof(Config).Assembly, typeof(Singleton).Namespace);
+            ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(Config).Assembly, typeof(Singleton).Namespace);
         }
     }
 }

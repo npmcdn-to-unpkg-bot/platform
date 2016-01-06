@@ -134,49 +134,37 @@ namespace Allors.Adapters.Object.SqlClient
 
         public virtual bool ExistRole(IRelationType relationType)
         {
-            var roleType = relationType.RoleType;
-
-            if (roleType.ObjectType.IsUnit)
+            if (relationType.RoleType.ObjectType.IsUnit)
             {
                 return this.ExistUnitRole(relationType);
             }
 
-            if (roleType.IsMany)
-            {
-                return this.ExistCompositeRoles(relationType);
-            }
-
-            return this.ExistCompositeRole(relationType);
+            return relationType.RoleType.IsMany 
+                ? this.ExistCompositeRoles(relationType) 
+                : this.ExistCompositeRole(relationType);
         }
 
         public virtual object GetRole(IRelationType relationType)
         {
-            var roleType = relationType.RoleType;
-
-            if (roleType.ObjectType.IsUnit)
+            if (relationType.RoleType.ObjectType.IsUnit)
             {
                 return this.GetUnitRole(relationType);
             }
 
-            if (roleType.IsMany)
-            {
-                return this.GetCompositeRoles(relationType);
-            }
-
-            return this.GetCompositeRole(relationType);
+            return relationType.RoleType.IsMany
+                       ? (object)this.GetCompositeRoles(relationType)
+                       : this.GetCompositeRole(relationType);
         }
 
         public virtual void SetRole(IRelationType relationType, object value)
         {
-            var roleType = relationType.RoleType;
-
-            if (roleType.ObjectType.IsUnit)
+            if (relationType.RoleType.ObjectType.IsUnit)
             {
                 this.SetUnitRole(relationType, value);
             }
             else
             {
-                if (roleType.IsMany)
+                if (relationType.RoleType.IsMany)
                 {
                     var roleExtent = value as Allors.Extent;
                     if (roleExtent == null)
@@ -196,15 +184,13 @@ namespace Allors.Adapters.Object.SqlClient
 
         public virtual void RemoveRole(IRelationType relationType)
         {
-            var roleType = relationType.RoleType;
-
-            if (roleType.ObjectType.IsUnit)
+            if (relationType.RoleType.ObjectType.IsUnit)
             {
                 this.RemoveUnitRole(relationType);
             }
             else
             {
-                if (roleType.IsMany)
+                if (relationType.RoleType.IsMany)
                 {
                     this.RemoveCompositeRoles(relationType);
                 }
@@ -232,19 +218,17 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.AssertExist();
 
-            var roleType = relationType.RoleType;
-
-            RoleAssertions.UnitRoleChecks(this, roleType);
+            RoleAssertions.UnitRoleChecks(this, relationType.RoleType);
 
             if (role != null)
             {
-                role = roleType.Normalize(role);
+                role = relationType.RoleType.Normalize(role);
             }
 
             var oldUnit = this.GetUnitRole(relationType);
             if (!Equals(oldUnit, role))
             {
-                this.Roles.SetUnitRole(roleType, role);
+                this.Roles.SetUnitRole(relationType.RoleType, role);
             }
         }
 
@@ -262,9 +246,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.AssertExist();
 
-            var roleType = relationType.RoleType;
-
-            var role = this.Roles.GetCompositeRole(roleType);
+            var role = this.Roles.GetCompositeRole(relationType.RoleType);
             return (role == null) ? null : this.Session.State.GetOrCreateReferenceForExistingObject(role.Value, this.Session).Strategy.GetObject();
         }
 
@@ -278,21 +260,19 @@ namespace Allors.Adapters.Object.SqlClient
 
             this.AssertExist();
 
-            var roleType = relationType.RoleType;
-            RoleAssertions.CompositeRoleChecks(this, roleType, newRoleObject);
+            RoleAssertions.CompositeRoleChecks(this, relationType.RoleType, newRoleObject);
 
             var newRoleObjectId = (Strategy)newRoleObject.Strategy;
-            this.Roles.SetCompositeRole(roleType, newRoleObjectId);
+            this.Roles.SetCompositeRole(relationType.RoleType, newRoleObjectId);
         }
 
         public virtual void RemoveCompositeRole(IRelationType relationType)
         {
             this.AssertExist();
 
-            var roleType = relationType.RoleType;
-            RoleAssertions.CompositeRoleChecks(this, roleType);
+            RoleAssertions.CompositeRoleChecks(this, relationType.RoleType);
 
-            this.Roles.RemoveCompositeRole(roleType);
+            this.Roles.RemoveCompositeRole(relationType.RoleType);
         }
 
         public virtual bool ExistCompositeRoles(IRelationType relationType)
@@ -304,8 +284,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.AssertExist();
 
-            var roleType = relationType.RoleType;
-            return new ExtentRoles(this, roleType);
+            return new ExtentRoles(this, relationType.RoleType);
         }
 
         public virtual void AddCompositeRole(IRelationType relationType, IObject roleObject)
@@ -314,11 +293,10 @@ namespace Allors.Adapters.Object.SqlClient
 
             if (roleObject != null)
             {
-                var roleType = relationType.RoleType;
-                RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
+                RoleAssertions.CompositeRolesChecks(this, relationType.RoleType, roleObject);
 
                 var role = (Strategy)roleObject.Strategy;
-                this.Roles.AddCompositeRole(roleType, role);
+                this.Roles.AddCompositeRole(relationType.RoleType, role);
             }
         }
 
@@ -328,11 +306,10 @@ namespace Allors.Adapters.Object.SqlClient
             
             if (roleObject != null)
             {
-                var roleType = relationType.RoleType;
-                RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
+                RoleAssertions.CompositeRolesChecks(this, relationType.RoleType, roleObject);
                 
                 var role = (Strategy)roleObject.Strategy;
-                this.Roles.RemoveCompositeRole(roleType, role);
+                this.Roles.RemoveCompositeRole(relationType.RoleType, role);
             }
         }
 
@@ -346,22 +323,20 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 this.AssertExist();
 
-                var roleType = relationType.RoleType;
-
                 // TODO: use CompositeRoles
-                var previousRoles = new List<long>(this.Roles.GetCompositesRole(roleType));
+                var previousRoles = new List<long>(this.Roles.GetCompositesRole(relationType.RoleType));
                 var newRoles = new HashSet<long>();
 
                 foreach (IObject roleObject in roleObjects)
                 {
                     if (roleObject != null)
                     {
-                        RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
+                        RoleAssertions.CompositeRolesChecks(this, relationType.RoleType, roleObject);
                         var role = (Strategy)roleObject.Strategy;
 
                         if (!previousRoles.Contains(role.ObjectId))
                         {
-                            this.Roles.AddCompositeRole(roleType, role);
+                            this.Roles.AddCompositeRole(relationType.RoleType, role);
                         }
 
                         newRoles.Add(role.ObjectId);
@@ -372,7 +347,7 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     if (!newRoles.Contains(previousRole))
                     {
-                        this.Roles.RemoveCompositeRole(roleType, this.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Session).Strategy);
+                        this.Roles.RemoveCompositeRole(relationType.RoleType, this.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Session).Strategy);
                     }
                 }
             }
@@ -382,14 +357,13 @@ namespace Allors.Adapters.Object.SqlClient
         {
             this.AssertExist();
 
-            var roleType = relationType.RoleType;
-            RoleAssertions.CompositeRoleChecks(this, roleType);
+            RoleAssertions.CompositeRoleChecks(this, relationType.RoleType);
 
-            var previousRoles = this.Roles.GetCompositesRole(roleType);
+            var previousRoles = this.Roles.GetCompositesRole(relationType.RoleType);
 
             foreach (var previousRole in previousRoles)
             {
-                this.Roles.RemoveCompositeRole(roleType, this.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Session).Strategy);
+                this.Roles.RemoveCompositeRole(relationType.RoleType, this.Session.State.GetOrCreateReferenceForExistingObject(previousRole, this.Session).Strategy);
             }
         }
 

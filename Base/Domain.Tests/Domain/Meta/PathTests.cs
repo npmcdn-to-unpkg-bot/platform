@@ -127,7 +127,7 @@ namespace Domain
             this.Session.Derive(true);
 
             Path path;
-            Path.TryParse(C2.Meta.ObjectType, "C2One2ManyC1", out path);
+            Path.TryParse(C2.Meta.ObjectType, "C1WhereC1C2One2Many", out path);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);
