@@ -20,11 +20,13 @@
 
 namespace Allors.Domain
 {
+    using Allors.Meta;
+
     public partial class People
     {
         protected override void BasePrepare(Setup setup)
         {
-            setup.AddDependency(Meta.ObjectType, Roles.Meta.ObjectType);
+            setup.AddDependency(Meta.ObjectType, M.Role.ObjectType);
         }
 
         protected override void BaseSetup(Setup config)

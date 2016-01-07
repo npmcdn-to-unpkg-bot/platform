@@ -20,13 +20,15 @@
 
 namespace Allors.Domain
 {
+    using Allors.Meta;
+
     public partial class DerivationLogC2
     {
         public void CustomOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertIsUnique(this, DerivationLogC1s.Meta.UniqueId);
+            derivation.Log.AssertIsUnique(this, M.DerivationLogC1.UniqueId);
         }
     }
 }

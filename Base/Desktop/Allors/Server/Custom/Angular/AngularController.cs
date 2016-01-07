@@ -76,8 +76,8 @@
 
                 var persons = new People(this.AllorsSession).Extent();
                 var or = persons.Filter.AddOr();
-                or.AddLike(People.Meta.LastName, criteria + "%");
-                or.AddLike(People.Meta.FirstName, criteria + "%");
+                or.AddLike(M.Person.LastName, criteria + "%");
+                or.AddLike(M.Person.FirstName, criteria + "%");
 
                 responseBuilder.AddCollection("results", persons.Take(100));
 
@@ -232,8 +232,8 @@
             try
             {
                 var responseBuilder = new ResponseBuilder();
-                var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-                responseBuilder.AddObject("root", organisation, Organisations.Meta.AngularEmployees);
+                var organisation = new Organisations(this.AllorsSession).FindBy(M.Organisation.Owner, this.AuthenticatedUser);
+                responseBuilder.AddObject("root", organisation, M.Organisation.AngularEmployees);
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
@@ -249,8 +249,8 @@
             try
             {
                 var responseBuilder = new ResponseBuilder();
-                var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-                responseBuilder.AddObject("root", organisation, Organisations.Meta.AngularShareholders);
+                var organisation = new Organisations(this.AllorsSession).FindBy(M.Organisation.Owner, this.AuthenticatedUser);
+                responseBuilder.AddObject("root", organisation, M.Organisation.AngularShareholders);
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
@@ -266,7 +266,7 @@
             try
             {
                 var responseBuilder = new ResponseBuilder();
-                responseBuilder.AddObject("root", this.AuthenticatedUser, People.Meta.AngularHome);
+                responseBuilder.AddObject("root", this.AuthenticatedUser, M.Person.AngularHome);
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)

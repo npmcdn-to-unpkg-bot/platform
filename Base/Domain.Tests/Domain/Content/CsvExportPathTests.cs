@@ -42,14 +42,14 @@ namespace Domain
             this.Session.Derive(true);
 
             var csvFile = new CsvExport("Test");
-            csvFile.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsString));
-            csvFile.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsDecimal));
+            csvFile.Columns.Add(new CsvExportPath(M.C1.C1AllorsString));
+            csvFile.Columns.Add(new CsvExportPath(M.C1.C1AllorsDecimal));
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);
             var acls = new AccessControlListCache(null, (allorsObject, user) => aclMock.Object);
 
-            var extent = this.Session.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
+            var extent = this.Session.Extent(M.C1.ObjectType).AddSort(M.C1.C1AllorsString);
             var csv = csvFile.Write(extent, dutchBelgium, acls);
 
             Assert.AreEqual(
@@ -70,10 +70,10 @@ namespace Domain
             this.Session.Derive(true);
 
             var csvFile = new CsvExport("Test");
-            csvFile.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsString));
-            csvFile.Columns.Add(new CsvExportPath(new Path(C1s.Meta.C1C2One2One, C2s.Meta.C2AllorsString)));
+            csvFile.Columns.Add(new CsvExportPath(M.C1.C1AllorsString));
+            csvFile.Columns.Add(new CsvExportPath(new Path(M.C1.C1C2One2One, M.C2.C2AllorsString)));
 
-            var extent = this.Session.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
+            var extent = this.Session.Extent(M.C1.ObjectType).AddSort(M.C1.C1AllorsString);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);
@@ -99,14 +99,14 @@ namespace Domain
 
             this.Session.Derive(true);
 
-            var column1 = new CsvExportPath(C1s.Meta.C1AllorsString);
-            var column2 = new CsvExportPath(C1s.Meta.C1AllorsDecimal);
+            var column1 = new CsvExportPath(M.C1.C1AllorsString);
+            var column2 = new CsvExportPath(M.C1.C1AllorsDecimal);
 
             var export = new CsvExport("Test");
             export.Columns.Add(column1);
             export.Columns.Add(column2);
 
-            var extent = this.Session.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
+            var extent = this.Session.Extent(M.C1.ObjectType).AddSort(M.C1.C1AllorsString);
 
             var user = new Users(this.Session).GetCurrentUser();
             var acls = new AccessControlListCache(user);
@@ -136,10 +136,10 @@ namespace Domain
             this.Session.Derive(true);
 
             var export = new CsvExport("Test");
-            export.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsString));
-            export.Columns.Add(new CsvExportPath(new Path(C1s.Meta.C1C2One2Manies, C2s.Meta.C2AllorsString)));
+            export.Columns.Add(new CsvExportPath(M.C1.C1AllorsString));
+            export.Columns.Add(new CsvExportPath(new Path(M.C1.C1C2One2Manies, M.C2.C2AllorsString)));
 
-            var extent = this.Session.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
+            var extent = this.Session.Extent(M.C1.ObjectType).AddSort(M.C1.C1AllorsString);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);

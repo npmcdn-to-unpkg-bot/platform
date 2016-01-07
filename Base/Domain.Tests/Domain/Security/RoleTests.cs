@@ -44,7 +44,7 @@ namespace Domain
 
             Assert.AreEqual(1, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
-            Assert.AreEqual((RoleType)Roles.Meta.Name, derivationError.Relations[0].RoleType);
+            Assert.AreEqual((RoleType)M.Role.Name, derivationError.Relations[0].RoleType);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace Domain
             {
                 Assert.AreEqual(1, derivationError.Relations.Length);
                 Assert.AreEqual(typeof(DerivationErrorUnique), derivationError.GetType());
-                Assert.AreEqual((RoleType)Roles.Meta.Name, derivationError.Relations[0].RoleType);
+                Assert.AreEqual((RoleType)M.Role.Name, derivationError.Relations[0].RoleType);
             }
         }
 

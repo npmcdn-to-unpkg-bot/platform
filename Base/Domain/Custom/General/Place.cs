@@ -21,6 +21,8 @@
 
 namespace Allors.Domain
 {
+    using Allors.Meta;
+
     /// <summary>
     /// A Place is a fysical location somewhere on earth, defined as a postalcode/city and a country
     /// </summary>
@@ -30,10 +32,10 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Places.Meta.PostalCode);
-            derivation.Log.AssertNonEmptyString(this, Places.Meta.PostalCode);
-            derivation.Log.AssertExists(this, Places.Meta.City);
-            derivation.Log.AssertNonEmptyString(this, Places.Meta.City);
+            derivation.Log.AssertExists(this, M.Place.PostalCode);
+            derivation.Log.AssertNonEmptyString(this, M.Place.PostalCode);
+            derivation.Log.AssertExists(this, M.Place.City);
+            derivation.Log.AssertNonEmptyString(this, M.Place.City);
         }
     }
 }

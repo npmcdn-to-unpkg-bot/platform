@@ -28,6 +28,7 @@ namespace Allors.Web.Mvc
     using System.Web.Routing;
 
     using Allors.Domain;
+    using Allors.Meta;
 
     public abstract partial class Controller : System.Web.Mvc.Controller
     {
@@ -104,7 +105,7 @@ namespace Allors.Web.Mvc
 
                     if (userName != null)
                     {
-                        this.authenticatedUser = new Users(this.allorsSession).FindBy(Users.Meta.UserName, userName);
+                        this.authenticatedUser = new Users(this.allorsSession).FindBy(M.User.UserName, userName);
                     }
                 }
 

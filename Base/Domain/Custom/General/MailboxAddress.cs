@@ -21,7 +21,7 @@
 
 namespace Allors.Domain
 {
-    using global::System.Text;
+    using Allors.Meta;
 
     /// <summary>
     /// A MailboxAddress is a address in a mailbox in the postoffice
@@ -32,10 +32,10 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, MailboxAddresses.Meta.PoBox);
-            derivation.Log.AssertNonEmptyString(this, MailboxAddresses.Meta.PoBox);
+            derivation.Log.AssertExists(this, M.MailboxAddress.PoBox);
+            derivation.Log.AssertNonEmptyString(this, M.MailboxAddress.PoBox);
 
-            derivation.Log.AssertExists(this, MailboxAddresses.Meta.Place);
+            derivation.Log.AssertExists(this, M.MailboxAddress.Place);
         }
     }
 }

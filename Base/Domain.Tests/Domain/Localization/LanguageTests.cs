@@ -22,6 +22,7 @@ namespace Domain
 {
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -40,7 +41,7 @@ namespace Domain
 
             Assert.IsTrue(this.Session.Derive().HasErrors);
 
-            builder.WithLocalisedName(new LocalisedTextBuilder(this.Session).WithLocale(new Locales(this.Session).FindBy(Locales.Meta.Name, Locales.EnglishGreatBritainName)).WithText("XXX)").Build());
+            builder.WithLocalisedName(new LocalisedTextBuilder(this.Session).WithLocale(new Locales(this.Session).FindBy(M.Locale.Name, Locales.EnglishGreatBritainName)).WithText("XXX)").Build());
         
             Assert.IsFalse(this.Session.Derive().HasErrors);
         }

@@ -37,7 +37,7 @@ namespace Domain
         //    var domain = (Domain)this.DatabaseSession.Population.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
          
         //    var methodType = new MethodTypeBuilder(domain, Guid.NewGuid()).Build();
-        //    methodType.ObjectType = Organisations.Meta.ObjectType;
+        //    methodType.ObjectType = M.Organisation.ObjectType;
         //    methodType.Name = "Method";
 
         //    var count = new Permissions(this.DatabaseSession).Extent().Count;
@@ -46,7 +46,7 @@ namespace Domain
 
         //    Assert.AreEqual(count + 1, new Permissions(this.DatabaseSession).Extent().Count);
 
-        //    var methodPermission = new Permissions(this.DatabaseSession).FindBy(Permissions.Meta.OperandTypePointer, methodType.Id);
+        //    var methodPermission = new Permissions(this.DatabaseSession).FindBy(M.Permission.OperandTypePointer, methodType.Id);
         //    Assert.IsNotNull(methodPermission);
         //    Assert.AreEqual(Operation.Execute, methodPermission.Operation);
         //}
@@ -60,7 +60,7 @@ namespace Domain
 
         //    var relationType = new RelationTypeBuilder(domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
 
-        //    relationType.AssociationType.ObjectType = Organisations.Meta.ObjectType;
+        //    relationType.AssociationType.ObjectType = M.Organisation.ObjectType;
         //    relationType.RoleType.ObjectType = Persons.Meta.ObjectType;
         //    relationType.RoleType.AssignedSingularName = "Relation";
         //    relationType.RoleType.AssignedPluralName = "Relations";
@@ -72,11 +72,11 @@ namespace Domain
         //    Assert.AreEqual(count + 3, new Permissions(this.DatabaseSession).Extent().Count);
 
         //    var roleTypePermissions = new Permissions(this.DatabaseSession).Extent();
-        //    roleTypePermissions.Filter.AddEquals(Permissions.Meta.OperandTypePointer, relationType.RoleType.Id);
+        //    roleTypePermissions.Filter.AddEquals(M.Permission.OperandTypePointer, relationType.RoleType.Id);
         //    Assert.AreEqual(2, roleTypePermissions.Count);
 
         //    var associationTypePermissions = new Permissions(this.DatabaseSession).Extent();
-        //    associationTypePermissions.Filter.AddEquals(Permissions.Meta.OperandTypePointer, relationType.AssociationType.Id);
+        //    associationTypePermissions.Filter.AddEquals(M.Permission.OperandTypePointer, relationType.AssociationType.Id);
         //    Assert.AreEqual(1, associationTypePermissions.Count);
         //}
 
@@ -120,7 +120,7 @@ namespace Domain
 
             //Assert.AreEqual(1, derivationError.Relations.Length);
             //Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
-            //Assert.AreEqual((RoleType)Permissions.Meta.OperationEnum, derivationError.Relations[0].RoleType);
+            //Assert.AreEqual((RoleType)M.Permission.OperationEnum, derivationError.Relations[0].RoleType);
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace Domain
 
             //Assert.AreEqual(1, derivationError.Relations.Length);
             //Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
-            //Assert.AreEqual((RoleType)Permissions.Meta.OperandTypePointer, derivationError.Relations[0].RoleType);
+            //Assert.AreEqual((RoleType)M.Permission.OperandTypePointer, derivationError.Relations[0].RoleType);
         }
     }
 }

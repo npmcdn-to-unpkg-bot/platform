@@ -6,6 +6,7 @@ namespace Desktop.Tests.Server.Workspace
 
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
     using Allors.Web.Workspace;
 
     using NUnit.Framework;
@@ -85,7 +86,7 @@ namespace Desktop.Tests.Server.Workspace
         public void Administrator()
         {
             // Arrange
-            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(M.Person.UserName, Users.AdministratorUserName);
            
             this.Session.Derive(true);
 

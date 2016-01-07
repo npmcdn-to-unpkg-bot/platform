@@ -52,7 +52,7 @@ namespace Domain
 
             Assert.AreEqual(1, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
-            Assert.AreEqual((RoleType)AccessControls.Meta.Role, derivationError.Relations[0].RoleType);
+            Assert.AreEqual(M.AccessControl.Role, derivationError.Relations[0].RoleType);
         }
 
         [Test]
@@ -75,8 +75,8 @@ namespace Domain
 
             Assert.AreEqual(2, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorAtLeastOne), derivationError.GetType());
-            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.Subjects));
-            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.SubjectGroups));
+            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)M.AccessControl.Subjects));
+            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)M.AccessControl.SubjectGroups));
         }
     }
 }

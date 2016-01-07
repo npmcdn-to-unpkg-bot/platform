@@ -24,6 +24,7 @@ namespace Allors.Web.Security
 
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     public class AllorsRoleProvider : RoleProvider
     {
@@ -69,7 +70,7 @@ namespace Allors.Web.Security
 
                 using (ISession session = database.CreateSession())
                 {
-                    var user = new Users(session).FindBy(Users.Meta.UserName, username);
+                    var user = new Users(session).FindBy(M.User.UserName, username);
                     if (user != null)
                     {
                         foreach (UserGroup userGroup in user.UserGroupsWhereMember)
@@ -95,7 +96,7 @@ namespace Allors.Web.Security
             var userIds = new ArrayList();
             using (ISession session = database.CreateSession())
             {
-                var userGroup = new UserGroups(session).FindBy(UserGroups.Meta.Name, roleName);
+                var userGroup = new UserGroups(session).FindBy(M.UserGroup.Name, roleName);
                 if (userGroup != null)
                 {
                     foreach (User user in userGroup.Members)

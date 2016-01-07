@@ -22,6 +22,7 @@ namespace Domain
 {
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -38,14 +39,14 @@ namespace Domain
 
             this.Session.Rollback();
 
-            builder.WithLanguage(new Languages(this.Session).FindBy(Languages.Meta.IsoCode, "en"));
+            builder.WithLanguage(new Languages(this.Session).FindBy(M.Language.IsoCode, "en"));
             builder.Build();
 
             Assert.IsTrue(this.Session.Derive().HasErrors);
 
             this.Session.Rollback();
 
-            builder.WithCountry(new Countries(this.Session).FindBy(Countries.Meta.IsoCode, "BE"));
+            builder.WithCountry(new Countries(this.Session).FindBy(M.Country.IsoCode, "BE"));
             builder.Build();
 
             Assert.IsFalse(this.Session.Derive().HasErrors);
@@ -55,8 +56,8 @@ namespace Domain
         public void GivenLocale_WhenDeriving_ThenNameIsSet()
         {
             var locale = new LocaleBuilder(this.Session)
-                .WithLanguage(new Languages(this.Session).FindBy(Languages.Meta.IsoCode, "en"))
-                .WithCountry(new Countries(this.Session).FindBy(Countries.Meta.IsoCode, "BE"))
+                .WithLanguage(new Languages(this.Session).FindBy(M.Language.IsoCode, "en"))
+                .WithCountry(new Countries(this.Session).FindBy(M.Country.IsoCode, "BE"))
                 .Build();
 
             this.Session.Derive(true);
@@ -87,7 +88,7 @@ namespace Domain
         [Test]
         public void GivenLocaleWhenValidatingThenNameIsSet()
         {
-            var locale = new Locales(this.Session).FindBy(Locales.Meta.Name, Locales.DutchNetherlandsName);
+            var locale = new Locales(this.Session).FindBy(M.Locale.Name, Locales.DutchNetherlandsName);
 
             Assert.AreEqual("nl-NL", locale.Name);
         }

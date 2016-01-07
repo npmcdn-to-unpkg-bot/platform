@@ -21,6 +21,8 @@
 
 namespace Allors.Domain
 {
+    using Allors.Meta;
+
     using global::System.Text;
 
     /// <summary>
@@ -32,8 +34,8 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             
-            derivation.Log.AssertExists(this, HomeAddresses.Meta.Street);
-            derivation.Log.AssertNonEmptyString(this, HomeAddresses.Meta.Street);
+            derivation.Log.AssertExists(this, M.HomeAddress.Street);
+            derivation.Log.AssertNonEmptyString(this, M.HomeAddress.Street);
         }
     }
 }

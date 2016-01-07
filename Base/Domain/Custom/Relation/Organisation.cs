@@ -23,13 +23,15 @@ using System;
 
 namespace Allors.Domain
 {
+    using Allors.Meta;
+
     public partial class Organisation
     {
         public void CustomOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Organisations.Meta.Name);
+            derivation.Log.AssertExists(this, M.Organisation.Name);
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Domain
 
             this.Session.Derive(true);
 
-            var path = new Path(C1s.Meta.C1C2One2Manies, C2s.Meta.C2AllorsString);
+            var path = new Path(M.C1.C1C2One2Manies, M.C2.C2AllorsString);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);

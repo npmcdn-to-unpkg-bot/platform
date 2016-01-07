@@ -38,7 +38,7 @@ namespace Domain
             var user = new PersonBuilder(this.Session).WithUserName("user").WithLastName("User").Build();
 
             Singleton.Instance(this.Session).Guest = guest;
-            new UserGroups(this.Session).FindBy(UserGroups.Meta.Name, "Administrators").AddMember(administrator);
+            new UserGroups(this.Session).FindBy(M.UserGroup.Name, "Administrators").AddMember(administrator);
 
             this.Session.Derive(true);
             this.Session.Commit();
@@ -48,13 +48,13 @@ namespace Domain
             {
                 session.Commit();
 
-                foreach (AccessControlledObject aco in this.GetObjects(session, Organisations.Meta.ObjectType))
+                foreach (AccessControlledObject aco in this.GetObjects(session, M.Organisation.ObjectType))
                 {
                     // When
                     var accessList = new AccessControlList(aco, guest);
 
                     // Then
-                    Assert.IsFalse(accessList.CanExecute(Organisations.Meta.JustDoIt));
+                    Assert.IsFalse(accessList.CanExecute(M.Organisation.JustDoIt));
                 }
 
                 session.Rollback();
@@ -64,7 +64,7 @@ namespace Domain
         [Test]
         public void GivenAUserAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var permission = this.FindPermission(Organisations.Meta.Name, Operations.Read);
+            var permission = this.FindPermission(M.Organisation.Name, Operations.Read);
             var role = new RoleBuilder(this.Session).WithName("Role").WithPermission(permission).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
             new AccessControlBuilder(this.Session).WithSubject(person).WithRole(role).Build();
@@ -91,7 +91,7 @@ namespace Domain
 
                 var accessList = new AccessControlList(organisation, person);
 
-                Assert.IsTrue(accessList.CanRead(Organisations.Meta.Name));
+                Assert.IsTrue(accessList.CanRead(M.Organisation.Name));
 
                 session.Rollback();
             }
@@ -100,7 +100,7 @@ namespace Domain
         [Test]
         public void GivenAUserGroupAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var permission = this.FindPermission(Organisations.Meta.Name, Operations.Read);
+            var permission = this.FindPermission(M.Organisation.Name, Operations.Read);
             var role = new RoleBuilder(this.Session).WithName("Role").WithPermission(permission).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
             new UserGroupBuilder(this.Session).WithName("Group").WithMember(person).Build();
@@ -127,7 +127,7 @@ namespace Domain
 
                 var accessList = new AccessControlList(organisation, person);
 
-                Assert.IsTrue(accessList.CanRead(Organisations.Meta.Name));
+                Assert.IsTrue(accessList.CanRead(M.Organisation.Name));
 
                 session.Rollback();
             }
@@ -136,7 +136,7 @@ namespace Domain
         [Test]
         public void GivenAnotherUserAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operations.Read);
+            var readOrganisationName = this.FindPermission(M.Organisation.Name, Operations.Read);
             var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
 
             Assert.IsFalse(this.Session.Derive().HasErrors);
@@ -160,7 +160,7 @@ namespace Domain
                 var token = new SecurityTokenBuilder(session).Build();
                 organisation.AddSecurityToken(token);
 
-                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
+                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(M.Role.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
                 token.AddAccessControl(accessControl);
 
@@ -168,7 +168,7 @@ namespace Domain
 
                 var accessList = new AccessControlList(organisation, person);
 
-                Assert.IsFalse(accessList.CanRead(Organisations.Meta.Name));
+                Assert.IsFalse(accessList.CanRead(M.Organisation.Name));
 
                 session.Rollback();
             }
@@ -177,7 +177,7 @@ namespace Domain
         [Test]
         public void GivenAnotherUserGroupAndAnAccessControlledObjectWhenGettingTheAccessListThenUserHasAccessToThePermissionsInTheRole()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operations.Read);
+            var readOrganisationName = this.FindPermission(M.Organisation.Name, Operations.Read);
             var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
 
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
@@ -201,7 +201,7 @@ namespace Domain
                 var token = new SecurityTokenBuilder(session).Build();
                 organisation.AddSecurityToken(token);
 
-                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
+                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(M.Role.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
                 token.AddAccessControl(accessControl);
 
@@ -209,7 +209,7 @@ namespace Domain
 
                 var accessList = new AccessControlList(organisation, person);
 
-                Assert.IsFalse(accessList.CanRead(Organisations.Meta.Name));
+                Assert.IsFalse(accessList.CanRead(M.Organisation.Name));
 
                 session.Rollback();
             }
@@ -218,7 +218,7 @@ namespace Domain
         [Test]
         public void DeniedPermissions()
         {
-            var readOrganisationName = this.FindPermission(Organisations.Meta.Name, Operations.Read);
+            var readOrganisationName = this.FindPermission(M.Organisation.Name, Operations.Read);
             var databaseRole = new RoleBuilder(this.Session).WithName("Role").WithPermission(readOrganisationName).Build();
             var person = new PersonBuilder(this.Session).WithFirstName("John").WithLastName("Doe").Build();
             new AccessControlBuilder(this.Session).WithRole(databaseRole).WithSubject(person).Build();
@@ -236,7 +236,7 @@ namespace Domain
                 var token = new SecurityTokenBuilder(session).Build();
                 organisation.AddSecurityToken(token);
 
-                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(Roles.Meta.Name, "Role"));
+                var role = (Role)session.Instantiate(new Roles(this.Session).FindBy(M.Role.Name, "Role"));
                 var accessControl = (AccessControl)session.Instantiate(role.AccessControlsWhereRole.First);
                 token.AddAccessControl(accessControl);
 
@@ -244,13 +244,13 @@ namespace Domain
 
                 var accessList = new AccessControlList(organisation, person);
 
-                Assert.IsTrue(accessList.CanRead(Organisations.Meta.Name));
+                Assert.IsTrue(accessList.CanRead(M.Organisation.Name));
 
                 organisation.AddDeniedPermission(readOrganisationName);
 
                 accessList = new AccessControlList(organisation, person);
 
-                Assert.IsFalse(accessList.CanRead(Organisations.Meta.Name));
+                Assert.IsFalse(accessList.CanRead(M.Organisation.Name));
 
                 session.Rollback();
             }
@@ -259,9 +259,9 @@ namespace Domain
         private Permission FindPermission(ObjectType objectType, RoleType roleType, Operations operation)
         {
             Extent<Permission> permissions = this.Session.Extent<Permission>();
-            permissions.Filter.AddEquals(Permissions.Meta.ConcreteClassPointer, objectType.Id);
-            permissions.Filter.AddEquals(Permissions.Meta.OperandTypePointer, roleType.Id);
-            permissions.Filter.AddEquals(Permissions.Meta.OperationEnum, operation);
+            permissions.Filter.AddEquals(M.Permission.ConcreteClassPointer, objectType.Id);
+            permissions.Filter.AddEquals(M.Permission.OperandTypePointer, roleType.Id);
+            permissions.Filter.AddEquals(M.Permission.OperationEnum, operation);
             return permissions.First;
         }
 

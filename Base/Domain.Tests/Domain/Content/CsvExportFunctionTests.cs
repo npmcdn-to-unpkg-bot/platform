@@ -46,10 +46,10 @@ namespace Domain
             var acls = new AccessControlListCache(null, (allorsObject, user) => aclMock.Object);
 
             var export = new CsvExport("Test");
-            export.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsString));
+            export.Columns.Add(new CsvExportPath(M.C1.C1AllorsString));
             export.Columns.Add(new CsvExportFunction<C1>("Function", (c1, aclFactory) => CsvExport.Escape("Hello " + c1.C1AllorsString)));
 
-            var extent = this.Session.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
+            var extent = this.Session.Extent(M.C1.ObjectType).AddSort(M.C1.C1AllorsString);
             var csv = export.Write(extent, dutchBelgium, acls);
 
             Assert.AreEqual(
@@ -71,7 +71,7 @@ namespace Domain
             this.Session.Derive(true);
 
             var csvFile = new CsvExport("Test");
-            csvFile.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsString));
+            csvFile.Columns.Add(new CsvExportPath(M.C1.C1AllorsString));
             csvFile.Columns.Add(new CsvExportFunction<C1>(
                 "Function",
                 (c1, acl, cultureInfo) =>
@@ -84,7 +84,7 @@ namespace Domain
                         return string.Empty;
                     }));
 
-            var extent = this.Session.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
+            var extent = this.Session.Extent(M.C1.ObjectType).AddSort(M.C1.C1AllorsString);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);

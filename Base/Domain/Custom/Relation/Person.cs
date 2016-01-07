@@ -24,6 +24,7 @@ namespace Allors.Domain
     using global::System.Collections.Generic;
 
     using Allors;
+    using Allors.Meta;
 
     /// <summary>
     /// A living human being.
@@ -32,7 +33,7 @@ namespace Allors.Domain
     {
         public static Extent<Person> ExtentByLastName(ISession session)
         {
-            return session.Extent<Person>().AddSort(People.Meta.LastName);
+            return session.Extent<Person>().AddSort(M.Person.LastName);
         }
 
         public override string ToString()
@@ -62,7 +63,7 @@ namespace Allors.Domain
 
             if (!Users.GuestUserName.Equals(this.UserName) && !Users.AdministratorUserName.Equals(this.UserName))
             {
-                derivation.Log.AssertExists(this, People.Meta.LastName);
+                derivation.Log.AssertExists(this, M.Person.LastName);
             }
 
             if (this.ExistFirstName && this.ExistLastName)
