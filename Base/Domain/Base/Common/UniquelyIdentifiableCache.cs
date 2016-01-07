@@ -23,12 +23,13 @@ namespace Allors.Domain
     using System;
 
     using Allors;
+    using Allors.Meta;
 
     public class UniquelyIdentifiableCache<TObject> : Cache<Guid, TObject>
         where TObject : class, IObject
     {
         public UniquelyIdentifiableCache(ISession session)
-            : base(session, UniquelyIdentifiables.Meta.UniqueId)
+            : base(session, M.UniquelyIdentifiable.UniqueId)
         {
         }
     }

@@ -21,6 +21,7 @@
 namespace Allors.Domain
 {
     using Allors;
+    using Allors.Meta;
 
     public partial class Countries
     {
@@ -31,13 +32,13 @@ namespace Allors.Domain
             get
             {
                 return this.countryByIsoCode
-                       ?? (this.countryByIsoCode = new Cache<string, Country>(this.Session, Countries.Meta.IsoCode));
+                       ?? (this.countryByIsoCode = new Cache<string, Country>(this.Session, M.Country.IsoCode));
             }
         }
 
         public static Extent<Country> ExtentByCode(ISession session)
         {
-            return session.Extent(Countries.Meta.ObjectType).AddSort(Countries.Meta.IsoCode);
+            return session.Extent(M.Country.ObjectType).AddSort(M.Country.IsoCode);
         }
 
         protected override void BaseSecure(Security config)

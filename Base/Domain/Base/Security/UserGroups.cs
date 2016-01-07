@@ -24,6 +24,7 @@ namespace Allors.Domain
     using System;
 
     using Allors;
+    using Allors.Meta;
 
     public partial class UserGroups
     {
@@ -54,7 +55,7 @@ namespace Allors.Domain
         {
             base.BasePrepare(config);
 
-            config.AddDependency(this.ObjectType, Roles.Meta.ObjectType);
+            config.AddDependency(this.ObjectType, M.Role.ObjectType);
         }
 
         protected override void BaseSetup(Setup config)
@@ -70,7 +71,7 @@ namespace Allors.Domain
         {
             base.BaseSecure(config);
 
-            var full = new[] { Domain.Operations.Read, Domain.Operations.Write, Domain.Operations.Execute };
+            var full = new[] { Allors.Domain.Operations.Read, Allors.Domain.Operations.Write, Allors.Domain.Operations.Execute };
 
             config.GrantAdministrator(this.ObjectType, full);
         }

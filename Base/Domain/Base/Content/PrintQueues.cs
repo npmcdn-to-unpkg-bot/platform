@@ -22,17 +22,13 @@ namespace Allors.Domain
 {
     using System;
 
+    using Allors.Meta;
+
     public partial class PrintQueues
     {
         public static readonly Guid DefaultPrintQueueId = new Guid("0B1920EA-DE2E-4962-A7C5-996306390ED7");
 
-        public PrintQueue DefaultPrintQueue
-        {
-            get
-            {
-                return this.FindBy(UniquelyIdentifiables.Meta.UniqueId, DefaultPrintQueueId);
-            }
-        }
+        public PrintQueue DefaultPrintQueue => this.FindBy(M.UniquelyIdentifiable.UniqueId, DefaultPrintQueueId);
 
         protected override void BaseSetup(Setup setup)
         {
