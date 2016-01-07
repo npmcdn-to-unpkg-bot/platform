@@ -3,6 +3,8 @@ Base/Desktop/Allors/**/*.js
 Base/Desktop/Allors/**/*.js.map
 Base/Desktop/app/**/*.js
 Base/Desktop/app/**/*.js.map
+Base/Desktop/Tests/**/*.js
+Base/Desktop/Tests/**/*.js.map
 
 Base/Website/Allors/**/*.js
 Base/Website/Allors/**/*.js.map
