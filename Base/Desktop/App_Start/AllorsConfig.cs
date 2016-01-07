@@ -25,12 +25,12 @@ namespace Desktop
             if (IsProduction)
             {
                 var accessControlPrefetch = new PrefetchPolicyBuilder()
-                    .WithRule(AccessControl.Meta.EffectiveUsers)
-                    .WithRule(AccessControl.Meta.EffectivePermissions)
+                    .WithRule(M.AccessControl.EffectiveUsers)
+                    .WithRule(M.AccessControl.EffectivePermissions)
                     .Build();
 
                 var securityTokenPrefetch = new PrefetchPolicyBuilder()
-                    .WithRule(SecurityToken.Meta.AccessControls, accessControlPrefetch)
+                    .WithRule(M.SecurityToken.AccessControls, accessControlPrefetch)
                     .Build();
 
                 using (var session = Config.Default.CreateSession())

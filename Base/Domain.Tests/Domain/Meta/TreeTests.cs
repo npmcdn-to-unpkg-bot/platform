@@ -56,8 +56,8 @@ namespace Domain
 
             this.Session.Derive(true); 
             
-            var tree = new Tree(C1.Meta.ObjectType)
-                    .Add(C1.Meta.C1C2One2Manies);
+            var tree = new Tree(M.C1.ObjectType)
+                    .Add(M.C1.C1C2One2Manies);
 
             var resolved = new HashSet<IObject>();
             tree.Resolve(c1A, resolved);
@@ -101,11 +101,11 @@ namespace Domain
             this.Session.Commit();
             
             var tree =
-                new Tree(C1.Meta.ObjectType)
-                    .Add(C1.Meta.C1I12One2Manies,
-                        new Tree(C1.Meta.ObjectType).Add(C1.Meta.C1C1One2Manies))
-                    .Add(C1.Meta.C1I12One2Manies,
-                        new Tree(C2.Meta.ObjectType).Add(C2.Meta.C2C2One2Manies));
+                new Tree(M.C1.ObjectType)
+                    .Add(M.C1.C1I12One2Manies,
+                        new Tree(M.C1.ObjectType).Add(M.C1.C1C1One2Manies))
+                    .Add(M.C1.C1I12One2Manies,
+                        new Tree(M.C2.ObjectType).Add(M.C2.C2C2One2Manies));
 
             var prefetchPolicy = tree.BuildPrefetechPolicy();
 

@@ -35,6 +35,25 @@ For more information visit http://www.allors.com/legal
 meta(repository) ::= <<
 namespace Allors.Meta
 {
+	public static class M
+	{
+		// Interfaces
+$repository.Interfaces:{interface|         public static readonly Meta$interface.SingularName$ $interface.SingularName$;}; separator="\n"$
+
+		// Classes
+$repository.Classes:{class|         public static readonly Meta$class.SingularName$ $class.SingularName$;}; separator="\n"$
+
+
+		static M()
+		{
+		    // Interfaces
+$repository.Interfaces:{interface|             $interface.SingularName$ = Meta$interface.SingularName$.Instance;}; separator="\n"$
+
+		    // Classes
+$repository.Classes:{class|             $class.SingularName$ = Meta$class.SingularName$.Instance;}; separator="\n"$
+		}
+	}
+
 	public partial class MetaInterface 
 	{
 		public void Extend()

@@ -494,17 +494,23 @@ $endif$
 objectType_Plural() ::= <<
 	public partial class $objectType.pluralName$ : global::Allors.ObjectsBase<$objectType.singularName$>
 	{
-		public static readonly Allors.Meta.Meta$objectType.name$ Meta = Allors.Meta.Meta$objectType.name$.Instance;
-
 		public $objectType.pluralName$(Allors.ISession session) : base(session)
 		{
+		}
+
+		public Allors.Meta.Meta$class.name$ Meta
+		{
+			get
+			{
+				return Allors.Meta.Meta$class.SingularName$.Instance;
+			}
 		}
 
 		public override Allors.Meta.Composite ObjectType
 		{
 			get
 			{
-				return Meta;
+				return Meta.ObjectType;
 			}
 		}
 	}
