@@ -145,6 +145,9 @@ $if(property.AttributeByName.Scale)$		relationType.RoleType.Scale = $property.At
 		Meta$composite.SingularName$.Instance.$property.RoleName$ = relationType.RoleType; 
 	}
 >>
+roleGroup(grp) ::= <<
+			relationType.AddGroup("$grp.Value$");
+>>
 
 definedMethods(composite) ::= <<$composite.DefinedMethods:{method|$definedMethod(method)$}; separator="\n"$>>
 definedMethod(method) ::= <<
@@ -152,16 +155,18 @@ definedMethod(method) ::= <<
 				var method = new MethodType(this.metaPopulation, new System.Guid("$method.AttributeByName.Id.Value$"));
 				method.ObjectType = Meta$method.DefiningType.SingularName$.Instance;
 				method.Name = "$method.Name$";
+$if(method.AttributesByName.Group)$$method.AttributesByName.Group:{grp|$methodGroup(grp)$}; separator="\n"$$endif$
 				Meta$composite.SingularName$.Instance.$method.Name$ = method; 
 			}
+>>
+
+methodGroup(grp) ::= <<
+			method.AddGroup("$grp.Value$");
 >>
 
 inheritedMethods(composite) ::= <<$composite.InheritedMethods:{method|$inheritedMethod(method)$}; separator="\n"$>>
 inheritedMethod(method) ::= <<				Meta$composite.SingularName$.Instance.$method.Name$ = Meta$method.DefiningMethod.DefiningType.SingularName$.Instance.$method.Name$;>>
 
-roleGroup(grp) ::= <<
-			relationType.AddGroup("$grp.Value$");
->>
 
 inheritedRoles(interface) ::= <<$interface.InheritedProperties:{property|$inheritedRole(property)$}; separator="\n"$>>
 inheritedRole(property) ::= <<            Meta$interface.SingularName$.Instance.$property.RoleName$ = Meta$property.DefiningType.SingularName$.Instance.$property.RoleName$;>>

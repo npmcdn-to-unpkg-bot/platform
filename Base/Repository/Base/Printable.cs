@@ -8,7 +8,6 @@ namespace Allors.Repository.Domain
 	public partial interface Printable :  Object, AccessControlledObject, UniquelyIdentifiable 
     {
 
-
         #region Allors
         [Id("c75d4e4c-d47c-4757-bcb0-25b6daedec9e")]
         [AssociationId("480b7df7-b463-4038-a48d-35b8a8af899e")]
@@ -18,6 +17,5 @@ namespace Allors.Repository.Domain
         [Size(-1)]
         #endregion
         string PrintContent { get; set; }
-
     }
 }
