@@ -28,8 +28,6 @@ namespace Allors.Repository.Domain
 
         public Guid UniqueId { get; set; }
 
-        public string PrintContent { get; set; }
-
         #endregion
 
         #region Allors
