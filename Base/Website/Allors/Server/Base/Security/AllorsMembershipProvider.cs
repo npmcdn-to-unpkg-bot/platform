@@ -21,6 +21,7 @@ namespace Allors.Web.Security
 
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     using Microsoft.AspNet.Identity;
 
@@ -35,7 +36,7 @@ namespace Allors.Web.Security
             var database = Config.Default;
             using (ISession session = database.CreateSession())
             {
-                var user = new Users(session).FindBy(Users.Meta.UserName, userId);
+                var user = new Users(session).FindBy(M.User.UserName, userId);
                 if (user != null)
                 {
                     if (user.ExistUserPasswordHash)
@@ -73,7 +74,7 @@ namespace Allors.Web.Security
             var database = Config.Default;
             using (ISession session = database.CreateSession())
             {
-                var user = new Users(session).FindBy(Users.Meta.UserName, userId);
+                var user = new Users(session).FindBy(M.User.UserName, userId);
                 if (user != null)
                 {
                     return this.CreateMembershipUser(user);

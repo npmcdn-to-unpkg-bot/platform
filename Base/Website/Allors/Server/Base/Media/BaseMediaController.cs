@@ -26,6 +26,7 @@ namespace Allors.Web.Media
 
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     public abstract partial class BaseMediaController : Controller
     {
@@ -36,7 +37,7 @@ namespace Allors.Web.Media
             {
                 using (var session = Config.Default.CreateSession())
                 {
-                    var media = new Medias(session).FindBy(UniquelyIdentifiables.Meta.UniqueId, uniqueId);
+                    var media = new Medias(session).FindBy(M.UniquelyIdentifiable.UniqueId, uniqueId);
                     if (media != null)
                     {
                         this.Response.Cache.SetCacheability(HttpCacheability.Public);

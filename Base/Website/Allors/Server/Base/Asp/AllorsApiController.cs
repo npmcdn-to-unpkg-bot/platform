@@ -4,6 +4,7 @@
 
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     public class AllorsApiController : ApiController
     {
@@ -31,7 +32,7 @@
 
                     if (userName != null)
                     {
-                        this.authenticatedUser = new Users(this.AllorsSession).FindBy(Users.Meta.UserName, userName);
+                        this.authenticatedUser = new Users(this.AllorsSession).FindBy(M.User.UserName, userName);
                     }
                 }
 
