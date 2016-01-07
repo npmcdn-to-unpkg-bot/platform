@@ -34,9 +34,12 @@ namespace Allors.Tools.Repository
 
         public Dictionary<string, Attribute> AttributeByName { get; }
 
+        public Dictionary<string, Attribute[]> AttributesByName { get; }
+
         public Method(Type definingType, string name)
         {
             this.AttributeByName = new Dictionary<string, Attribute>();
+            this.AttributesByName = new Dictionary<string, Attribute[]>();
 
             this.DefiningType = definingType;
             this.Name = name;

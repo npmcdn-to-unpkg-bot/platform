@@ -410,17 +410,26 @@
                 foreach (var method in composite.Methods)
                 {
                     var reflectedMethod = reflectedType.GetMethod(method.Name);
-                    var methodAttributesByTypeName = reflectedMethod.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType().Name);
+                    var methodAttributesByType = reflectedMethod.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType());
 
-                    foreach (var group in methodAttributesByTypeName)
+                    foreach (var group in methodAttributesByType)
                     {
-                        var typeName = group.Key;
-                        if (typeName.ToLowerInvariant().EndsWith("attribute"))
+                        var attributeType = group.Key;
+                        var attributeTypeName = attributeType.Name;
+                        if (attributeTypeName.ToLowerInvariant().EndsWith("attribute"))
                         {
-                            typeName = typeName.Substring(0, typeName.Length - "attribute".Length);
+                            attributeTypeName = attributeTypeName.Substring(0, attributeTypeName.Length - "attribute".Length);
                         }
 
-                        method.AttributeByName[typeName] = group.First();
+                        var attributeUsage = attributeType.GetCustomAttributes<AttributeUsageAttribute>().FirstOrDefault();
+                        if (attributeUsage != null && attributeUsage.AllowMultiple)
+                        {
+                            method.AttributesByName.Add(attributeTypeName, group.ToArray());
+                        }
+                        else
+                        {
+                            method.AttributeByName.Add(attributeTypeName, group.First());
+                        }
                     }
                 }
             }

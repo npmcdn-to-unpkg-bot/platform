@@ -74,10 +74,10 @@
             {
                 var responseBuilder = new ResponseBuilder();
 
-                var persons = new Persons(this.AllorsSession).Extent();
+                var persons = new People(this.AllorsSession).Extent();
                 var or = persons.Filter.AddOr();
-                or.AddLike(Persons.Meta.LastName, criteria + "%");
-                or.AddLike(Persons.Meta.FirstName, criteria + "%");
+                or.AddLike(People.Meta.LastName, criteria + "%");
+                or.AddLike(People.Meta.FirstName, criteria + "%");
 
                 responseBuilder.AddCollection("results", persons.Take(100));
 
@@ -98,7 +98,7 @@
             try
             {
                 var responseBuilder = new ResponseBuilder();
-                responseBuilder.AddObject("person", this.AuthenticatedUser, PersonClass.Instance.MainResponse);
+                responseBuilder.AddObject("person", this.AuthenticatedUser, MetaPerson.Instance.MainResponse);
                 return JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
@@ -114,7 +114,7 @@
             try
             {
                 var responseBuilder = new ResponseBuilder();
-                responseBuilder.AddObject("person", this.AuthenticatedUser, PersonClass.Instance.SettingsResponse);
+                responseBuilder.AddObject("person", this.AuthenticatedUser, MetaPerson.Instance.SettingsResponse);
 
                 return this.JsonSuccess(responseBuilder.Build());
             }
@@ -137,7 +137,7 @@
                 var responseBuilder = new ResponseBuilder();
 
                 var filterOrganisations = new Organisations(this.AllorsSession).Extent();
-                responseBuilder.AddCollection("filterOrganisations", filterOrganisations, OrganisationClass.Instance.FilterResponse);
+                responseBuilder.AddCollection("filterOrganisations", filterOrganisations, MetaOrganisation.Instance.FilterResponse);
 
                 return JsonSuccess(responseBuilder.Build());
             }
@@ -156,7 +156,7 @@
                 var responseBuilder = new ResponseBuilder();
 
                 var filterOrganisations = new Organisations(this.AllorsSession).Extent();
-                responseBuilder.AddCollection("filterOrganisations", filterOrganisations, OrganisationClass.Instance.FilterResponse);
+                responseBuilder.AddCollection("filterOrganisations", filterOrganisations, MetaOrganisation.Instance.FilterResponse);
 
                 return JsonSuccess(responseBuilder.Build());
             }
@@ -233,7 +233,7 @@
             {
                 var responseBuilder = new ResponseBuilder();
                 var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-                responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularEmployees);
+                responseBuilder.AddObject("root", organisation, Organisations.Meta.AngularEmployees);
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
@@ -250,7 +250,7 @@
             {
                 var responseBuilder = new ResponseBuilder();
                 var organisation = new Organisations(this.AllorsSession).FindBy(Organisations.Meta.Owner, this.AuthenticatedUser);
-                responseBuilder.AddObject("root", organisation, OrganisationClass.Instance.AngularShareholders);
+                responseBuilder.AddObject("root", organisation, Organisations.Meta.AngularShareholders);
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
@@ -266,7 +266,7 @@
             try
             {
                 var responseBuilder = new ResponseBuilder();
-                responseBuilder.AddObject("root", this.AuthenticatedUser, PersonClass.Instance.AngularHome);
+                responseBuilder.AddObject("root", this.AuthenticatedUser, People.Meta.AngularHome);
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)

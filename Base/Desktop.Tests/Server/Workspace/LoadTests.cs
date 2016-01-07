@@ -85,7 +85,7 @@ namespace Desktop.Tests.Server.Workspace
         public void Administrator()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
            
             this.Session.Derive(true);
 

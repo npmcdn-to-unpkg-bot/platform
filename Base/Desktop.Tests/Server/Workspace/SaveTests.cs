@@ -66,7 +66,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorSetUnit()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             var c1a = new C1Builder(this.Session)
                .WithC1AllorsString("c1")
@@ -114,7 +114,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorSetOne()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             var c1a = new C1Builder(this.Session)
                .Build();
@@ -162,7 +162,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorSetMany()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             var c1a = new C1Builder(this.Session)
                .Build();
@@ -215,7 +215,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorAddMany()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             var c1a = new C1Builder(this.Session)
                .Build();
@@ -268,7 +268,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorRemoveMany()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             var c1a = new C1Builder(this.Session)
                .Build();
@@ -322,7 +322,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorNew()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             this.Session.Commit();
 
@@ -363,7 +363,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorNewSetUnit()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             this.Session.Commit();
 
@@ -414,7 +414,7 @@ namespace Desktop.Tests.Server.Workspace
         public void AdministratorNewSetNewOne()
         {
             // Arrange
-            var administrator = new Persons(this.Session).FindBy(Persons.Meta.UserName, Users.AdministratorUserName);
+            var administrator = new People(this.Session).FindBy(People.Meta.UserName, Users.AdministratorUserName);
 
             this.Session.Commit();
 

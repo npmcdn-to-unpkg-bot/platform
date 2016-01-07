@@ -2,6 +2,7 @@ namespace Desktop.Tests.Client
 {
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     public class Population
     {
@@ -14,7 +15,7 @@ namespace Desktop.Tests.Client
             this.session = session;
 
             // Persons
-            this.Administrator = new Persons(this.session).FindBy(Persons.Meta.UserName, @"administrator");
+            this.Administrator = new People(this.session).FindBy(MetaPerson.Instance.UserName, @"administrator");
 
             this.session.Derive(true);
             this.session.Commit();

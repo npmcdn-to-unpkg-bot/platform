@@ -84,7 +84,7 @@
                         {
                             if (roleType.ObjectType.IsUnit)
                             {
-                                var role = obj.Strategy.GetUnitRole(roleType);
+                                var role = obj.Strategy.GetUnitRole(roleType.RelationType);
                                 if (role != null)
                                 {
                                     roles.Add(new[] { propertyName, access, role });
@@ -98,7 +98,7 @@
                             {
                                 if (roleType.IsOne)
                                 {
-                                    var role = obj.Strategy.GetCompositeRole(roleType);
+                                    var role = obj.Strategy.GetCompositeRole(roleType.RelationType);
                                     if (role != null)
                                     {
                                         roles.Add(new object[] { propertyName, access, role.Id.ToString() });
@@ -110,7 +110,7 @@
                                 }
                                 else
                                 {
-                                    var role = obj.Strategy.GetCompositeRoles(roleType);
+                                    var role = obj.Strategy.GetCompositeRoles(roleType.RelationType);
                                     if (role.Count != 0)
                                     {
                                         var ids = role.Cast<IObject>().Select(roleObject => roleObject.Id.ToString()).ToList();

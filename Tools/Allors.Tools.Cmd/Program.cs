@@ -35,7 +35,6 @@
             }
 
             Console.WriteLine("Finished");
-            Console.ReadKey();
         }
 
         private static void Repository(string[] args)

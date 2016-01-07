@@ -134,7 +134,7 @@ namespace Allors.Web
                                 role = Serialization.ReadString((string)role, unitType.UnitTag);
                             }
 
-                            obj.Strategy.SetUnitRole(roleType, role);
+                            obj.Strategy.SetUnitRole(roleType.RelationType, role);
                         }
                         else
                         {
@@ -143,7 +143,7 @@ namespace Allors.Web
                                 var roleId = (string)saveRequestRole.S;
                                 if (string.IsNullOrEmpty(roleId))
                                 {
-                                    obj.Strategy.RemoveCompositeRole(roleType);
+                                    obj.Strategy.RemoveCompositeRole(roleType.RelationType);
                                 }
                                 else
                                 {
@@ -154,7 +154,7 @@ namespace Allors.Web
                                     }
                                     else
                                     {
-                                        obj.Strategy.SetCompositeRole(roleType, role);
+                                        obj.Strategy.SetCompositeRole(roleType.RelationType, role);
                                     }
                                 }
                             }
@@ -175,7 +175,7 @@ namespace Allors.Web
                                         {
                                             foreach (var role in roles)
                                             {
-                                                obj.Strategy.AddCompositeRole(roleType, role);
+                                                obj.Strategy.AddCompositeRole(roleType.RelationType, role);
                                             }
                                         }
                                     }
@@ -196,7 +196,7 @@ namespace Allors.Web
                                         {
                                             foreach (var role in roles)
                                             {
-                                                obj.Strategy.RemoveCompositeRole(roleType, role);
+                                                obj.Strategy.RemoveCompositeRole(roleType.RelationType, role);
                                             }
                                         }
                                     }

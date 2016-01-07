@@ -39,7 +39,7 @@
         {
             var worksheet = package.Workbook.Worksheets.Add("Users");
            
-            var users = new Persons(this.AllorsSession).Extent();
+            var users = new People(this.AllorsSession).Extent();
 
             var data = users.Select(x => new []
             {
