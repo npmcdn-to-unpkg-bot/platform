@@ -41,7 +41,7 @@
                 if (canRead) {
                     var roleType = objectType.roleTypeByName[name];
                     var value = role[2];
-                    if (value && roleType.isUnit && roleType.objectType === "AllorsDateTime") {
+                    if (value && roleType.isUnit && roleType.objectType === "DateTime") {
                         value = new Date(<string>value);
                     }
                     this.roles[name] = value;
