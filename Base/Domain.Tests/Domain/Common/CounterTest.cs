@@ -60,12 +60,15 @@ namespace Domain
 
             try
             {
-                var metaPopulation = MetaPopulation.Instance;
+                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString;
+                var objectFactory = Config.ObjectFactory;
+
                 var configuration = new Allors.Adapters.Object.SqlClient.Configuration
                 {
-                    ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
-                    ObjectFactory = Config.ObjectFactory,
+                    ConnectionString = connectionString,
+                    ObjectFactory = objectFactory,
                 };
+
                 Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
                 Config.Serializable = null;
 
@@ -95,12 +98,15 @@ namespace Domain
 
             try
             {
-                var metaPopulation = MetaPopulation.Instance;
+                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString;
+                var objectFactory = Config.ObjectFactory;
+
                 var configuration = new Allors.Adapters.Object.SqlClient.Configuration
-                                        {
-                                            ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
-                                            ObjectFactory = Config.ObjectFactory,
-                                        };
+                {
+                    ConnectionString = connectionString,
+                    ObjectFactory = objectFactory,
+                };
+                
                 Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
                 Config.Serializable = null;
 
@@ -130,18 +136,20 @@ namespace Domain
 
             try
             {
-                var metaPopulation = MetaPopulation.Instance;
+                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString;
+                var objectFactory = Config.ObjectFactory;
+
                 Config.Default = new Allors.Adapters.Object.SqlClient.Database(new Allors.Adapters.Object.SqlClient.Configuration
-                                                                                                    {
-                                                                                                        ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
-                                                                                                        ObjectFactory = Config.ObjectFactory
-                                                                                                    });
+                {
+                    ConnectionString = connectionString,
+                    ObjectFactory = objectFactory
+                });
                 Config.Serializable = new Allors.Adapters.Object.SqlClient.Database(new Allors.Adapters.Object.SqlClient.Configuration
-                                                                                                {
-                                                                                                    ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
-                                                                                                    ObjectFactory = Config.ObjectFactory,
-                                                                                                    IsolationLevel = IsolationLevel.Serializable
-                                                                                                });
+                {
+                    ConnectionString = connectionString,
+                    ObjectFactory = objectFactory,
+                    IsolationLevel = IsolationLevel.Serializable
+                });
 
                 this.SetUp(true);
 
