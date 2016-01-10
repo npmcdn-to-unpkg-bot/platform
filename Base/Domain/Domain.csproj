@@ -255,7 +255,6 @@
     <Compile Include="Generated\Media.g.cs" />
     <Compile Include="Generated\MediaContent.g.cs" />
     <Compile Include="Generated\MediaType.g.cs" />
-    <Compile Include="Generated\Meta.g.cs" />
     <Compile Include="Generated\Object.g.cs" />
     <Compile Include="Generated\ObjectOnBuild.g.cs" />
     <Compile Include="Generated\ObjectOnDerive.g.cs" />
