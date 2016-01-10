@@ -141,7 +141,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Resources\orientation\LICENSE" />
     <None Include="Resources\orientation\README.markdown" />
