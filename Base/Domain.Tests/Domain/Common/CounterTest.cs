@@ -35,6 +35,10 @@ namespace Domain
     [TestFixture]
     public class CounterTest : DomainTest
     {
+        // Teamcity doesn't pick up connection string from app.config,
+        // that's why it's here.
+        private const string ConnectionString = "server=(local);database=base;Integrated Security=SSPI";
+
         private IDatabase previousDatabase;
         private IDatabase previousSerializableDatabase;
 
@@ -60,13 +64,10 @@ namespace Domain
 
             try
             {
-                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString;
-                var objectFactory = Config.ObjectFactory;
-
                 var configuration = new Allors.Adapters.Object.SqlClient.Configuration
                 {
-                    ConnectionString = connectionString,
-                    ObjectFactory = objectFactory,
+                    ConnectionString = ConnectionString,
+                    ObjectFactory = Config.ObjectFactory,
                 };
 
                 Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
@@ -98,13 +99,10 @@ namespace Domain
 
             try
             {
-                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString;
-                var objectFactory = Config.ObjectFactory;
-
                 var configuration = new Allors.Adapters.Object.SqlClient.Configuration
                 {
-                    ConnectionString = connectionString,
-                    ObjectFactory = objectFactory,
+                    ConnectionString = ConnectionString,
+                    ObjectFactory = Config.ObjectFactory,
                 };
                 
                 Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
@@ -136,18 +134,15 @@ namespace Domain
 
             try
             {
-                var connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString;
-                var objectFactory = Config.ObjectFactory;
-
                 Config.Default = new Allors.Adapters.Object.SqlClient.Database(new Allors.Adapters.Object.SqlClient.Configuration
                 {
-                    ConnectionString = connectionString,
-                    ObjectFactory = objectFactory
+                    ConnectionString = ConnectionString,
+                    ObjectFactory = Config.ObjectFactory
                 });
                 Config.Serializable = new Allors.Adapters.Object.SqlClient.Database(new Allors.Adapters.Object.SqlClient.Configuration
                 {
-                    ConnectionString = connectionString,
-                    ObjectFactory = objectFactory,
+                    ConnectionString = ConnectionString,
+                    ObjectFactory = Config.ObjectFactory,
                     IsolationLevel = IsolationLevel.Serializable
                 });
 
