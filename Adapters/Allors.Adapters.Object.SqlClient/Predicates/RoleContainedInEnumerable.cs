@@ -53,6 +53,7 @@ namespace Allors.Adapters.Object.SqlClient
             
             if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveClasses)
             {
+                // TODO: in combination with NOT gives error
                 statement.Append(" (" + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL AND ");
                 statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IN (");
                 statement.Append(inStatement.ToString());

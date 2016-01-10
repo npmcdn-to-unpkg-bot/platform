@@ -28,6 +28,7 @@ namespace Domain
 
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -59,6 +60,7 @@ namespace Domain
 
             try
             {
+                var metaPopulation = MetaPopulation.Instance;
                 var configuration = new Allors.Adapters.Object.SqlClient.Configuration
                 {
                     ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
@@ -93,6 +95,7 @@ namespace Domain
 
             try
             {
+                var metaPopulation = MetaPopulation.Instance;
                 var configuration = new Allors.Adapters.Object.SqlClient.Configuration
                                         {
                                             ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
@@ -127,6 +130,7 @@ namespace Domain
 
             try
             {
+                var metaPopulation = MetaPopulation.Instance;
                 Config.Default = new Allors.Adapters.Object.SqlClient.Database(new Allors.Adapters.Object.SqlClient.Configuration
                                                                                                     {
                                                                                                         ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
