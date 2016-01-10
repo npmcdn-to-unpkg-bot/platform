@@ -3,6 +3,6 @@
 msbuild Base.sln /target:Clean /verbosity:minimal
 msbuild Base.sln /target:Allors_Tools_Cmd:Rebuild /p:Configuration="Debug" /verbosity:minimal
 
-..\Tools\Allors.Tools.Cmd\bin\debug\Allors.Tools.Cmd.exe repository generate base.sln repository templates/meta.cs.stg meta/generated
+..\Tools\dist\Allors.Tools.Cmd.exe repository generate base.sln repository templates/meta.cs.stg meta/generated
 
 @pause
