@@ -25,6 +25,7 @@ namespace Allors.Web.Identity
     using System.Threading.Tasks;
 
     using Allors.Domain;
+    using Allors.Meta;
 
     using Microsoft.AspNet.Identity;
 
@@ -140,8 +141,8 @@ namespace Allors.Web.Identity
 
             using (var session = this.Database.CreateSession())
             {
-                var persons = new Persons(session).Extent();
-                persons.Filter.AddEquals(Persons.Meta.UserName, userName);
+                var persons = new People(session).Extent();
+                persons.Filter.AddEquals(M.Person.UserName.RoleType, userName);
                 switch (persons.Count)
                 {
                     case 0:
@@ -210,8 +211,8 @@ namespace Allors.Web.Identity
 
             using (var session = this.Database.CreateSession())
             {
-                var persons = new Persons(session).Extent();
-                persons.Filter.AddEquals(Persons.Meta.UserEmail, email);
+                var persons = new People(session).Extent();
+                persons.Filter.AddEquals(M.Person.UserEmail.RoleType, email);
                 switch (persons.Count)
                 {
                     case 0:
@@ -437,8 +438,8 @@ namespace Allors.Web.Identity
             using (var session = this.Database.CreateSession())
             {
                 var logins = session.Extent<Login>();
-                logins.Filter.AddEquals(Logins.Meta.Provider, loginInfo.LoginProvider);
-                logins.Filter.AddEquals(Logins.Meta.Key, loginInfo.ProviderKey);
+                logins.Filter.AddEquals(M.Login.Provider, loginInfo.LoginProvider);
+                logins.Filter.AddEquals(M.Login.Key, loginInfo.ProviderKey);
 
                 switch (logins.Count)
                 {

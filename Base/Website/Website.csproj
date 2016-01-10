@@ -16,7 +16,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Website</RootNamespace>
     <AssemblyName>Website</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -27,7 +27,7 @@
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -119,7 +119,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -132,7 +131,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -185,7 +183,6 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -246,32 +243,6 @@
     <Compile Include="Allors\Server\Base\Mvc\Views\ViewContextExtensions.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsMembershipProvider.cs" />
     <Compile Include="Allors\Server\Base\Security\AllorsRoleProvider.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Invoke\InvokeRequest.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Invoke\InvokeResponse.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Invoke\InvokeResponseBuilder.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Load\LoadRequest.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseObject.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponse.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Load\LoadResponseBuilder.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Error\ResponseDerivationError.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Error\ResponseError.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\ResponseBuilder.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Response.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestNewObject.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseBuilder.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponse.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequest.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestObject.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestRole.cs" />
-    <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseNewObject.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\Command.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\Models\Add\Add.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\Models\Edit\Edit.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\Models\IFilter.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\Models\Index\Index.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\Models\Index\Index_Organisation.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\Models\View\View.cs" />
-    <Compile Include="Allors\Server\Test\Organisation\OrganisationController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MenuConfig.cs" />
@@ -280,7 +251,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ViewConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Allors\Server\Test\Angular\AngularController.cs" />
     <Compile Include="Allors\Server\Test\Mvc\MvcController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
@@ -294,32 +264,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Allors\Client\Base\Data\InvokeRequest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseDerivationError.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\ResponseError.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\InvokeResponse.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\SaveResponseNewObject.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Method.ts" />
-    <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
-    <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />
-    <TypeScriptCompile Include="Allors\Client\Generated\domain\Media.g.ts" />
-    <TypeScriptCompile Include="Allors\Client\Generated\domain\Organisation.g.ts" />
-    <TypeScriptCompile Include="Allors\Client\Generated\domain\Person.g.ts" />
-    <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
-    <TypeScriptCompile Include="Allors\Client\Test\Person.ts" />
-    <TypeScriptCompile Include="app\common\services\Context.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\SaveResponse.ts" />
-    <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
-    <TypeScriptCompile Include="app\app.ts" />
-    <TypeScriptCompile Include="app\common\services\Result.ts" />
-    <TypeScriptCompile Include="app\common\services\Service.ts" />
-    <TypeScriptCompile Include="app\home\home.ts" />
-    <TypeScriptCompile Include="app\main\main.ts" />
-    <TypeScriptCompile Include="app\persons\person.ts" />
-    <TypeScriptCompile Include="app\organisations\organisation.ts" />
-    <Content Include="app\home\home.html" />
-    <Content Include="app\organisations\organisation.html" />
-    <Content Include="app\persons\person.html" />
     <Content Include="bootstrap-maxlength.js" />
     <Content Include="Content\bootstrap-chosen.css" />
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -478,12 +422,6 @@
     <Content Include="Allors\Server\Base\Shared\EditorTemplates\Default\Select.cshtml" />
     <Content Include="Allors\Server\Base\Shared\_NavbarItemPartial.cshtml" />
     <Content Include="Allors\Server\Base\Shared\_NavbarPartial.cshtml" />
-    <Content Include="Allors\Server\Test\Organisation\Add.cshtml" />
-    <Content Include="Allors\Server\Test\Organisation\DisplayTemplates\Index_Organisation.cshtml" />
-    <Content Include="Allors\Server\Test\Organisation\Edit.cshtml" />
-    <Content Include="Allors\Server\Test\Organisation\Index.cshtml" />
-    <Content Include="Allors\Server\Test\Organisation\View.cshtml" />
-    <Content Include="Allors\Server\Test\Organisation\_Filter.cshtml" />
     <Content Include="Allors\Server\Test\Web.config" />
     <Content Include="Allors\Server\Web.config" />
     <Content Include="Allors\Server\Test\_ViewStart.cshtml" />
@@ -496,11 +434,9 @@
     <Content Include="Allors\Server\Test\Shared\Error.cshtml" />
     <Content Include="Allors\Server\Test\Shared\Lockout.cshtml" />
     <Content Include="Allors\Server\_ViewStart.cshtml" />
-    <Content Include="Allors\Server\Base\Workspace\Error\ResponseError.cd" />
     <Content Include="fonts\ui-grid.woff" />
     <Content Include="fonts\ui-grid.ttf" />
     <Content Include="fonts\ui-grid.eot" />
-    <Content Include="Allors\Server\Base\Workspace\Save\Overview.cd" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -548,11 +484,6 @@
     <Content Include="Scripts\ui-grid.js" />
     <Content Include="Scripts\ui-grid.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Tests\data.js" />
-    <Content Include="Tests\qunit.css" />
-    <Content Include="Tests\qunit.js" />
-    <Content Include="Tests\test.html" />
-    <Content Include="Tests\tests.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -575,7 +506,6 @@
     <Content Include="Views\Angular\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Allors\Server\Test\Organisation\EditorTemplates\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\tinymce\plugins\image\" />
@@ -610,17 +540,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Allors\Client\Base\Database.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\DatabaseObject.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Meta\Population.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\ObjectType.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\RoleType.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\LoadRequest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\LoadResponse.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\Response.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Data\SaveRequest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\WorkspaceObject.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-router\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

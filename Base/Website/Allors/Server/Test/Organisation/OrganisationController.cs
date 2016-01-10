@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Allors;
     using Allors.Domain;
+    using Allors.Meta;
     using Allors.Web.Content;
     using Allors.Web.Mvc.Models;
     using Allors.Web.Mvc.Views;
@@ -307,7 +308,7 @@
             var filter = filterOrganisations.Filter;
             if (!string.IsNullOrWhiteSpace(filterName))
             {
-                filter.AddLike(Organisations.Meta.Name, "%" + filterName + "%");
+                filter.AddLike(M.Organisation.Name, "%" + filterName + "%");
             }
         }
     }
