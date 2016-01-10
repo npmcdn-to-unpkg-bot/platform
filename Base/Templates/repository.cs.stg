@@ -36,7 +36,6 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("$objectType.id$")]
     #endregion
-$if(objectType.ExistAssignedPluralName)$    [Plural("$objectType.PluralName$")]$endif$
 	public partial interface $objectType.name$ : $if(objectType.existDirectSupertypes)$ $objectType.directSupertypes:{directSupertype|$directSupertype.SingularName$}; separator=", "$ $endif$
     {
 $objectType.exclusiveRoleTypes:{roleType|$interfaceExclusiveRoleType()$}$
@@ -61,6 +60,7 @@ $endif$
 
 interfaceExclusiveMethodType() ::= <<
 $\n$
+$methodType.Groups:{group|         [Group("$group$")]}; separator="\n"$
         void $methodType.Name$();
 >>
 
@@ -121,6 +121,7 @@ $\n$
 
 classExclusiveMethodType() ::= <<
 $\n$
+$methodType.Groups:{group|         [Group("$group$")]}; separator="\n"$
         public void $methodType.Name$(){}
 >>
 
