@@ -67,9 +67,9 @@ composite(meta,composite) ::= <<
 roleType(roleType) ::= <<
 $if(!roleType.RelationType.IsDerived)$
 $if(roleType.IsOne)$
-			$nullableName(roleType)$ $roleType.SingularPropertyName$ {set;}
+			$if(!roleType.RelationType.IsSynced)$new$endif$ $nullableName(roleType)$ $roleType.SingularPropertyName$ {set;}
 $else$
-			$nullableName(roleType)$ $roleType.PluralPropertyName$ {set;}
+			$if(!roleType.RelationType.IsSynced)$new$endif$ $nullableName(roleType)$ $roleType.PluralPropertyName$ {set;}
 $endif$
 $endif$
 >>
