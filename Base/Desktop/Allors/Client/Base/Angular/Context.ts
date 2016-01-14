@@ -14,7 +14,7 @@
         refresh(params?: any): ng.IPromise<any> {
             return this.service.query(this.name, params)
                 .then(response => {
-                    return this.service.load(this, response)
+                    return this.service.load(this, <Data.Response>response)
                         .then(result => {
                             this.workspace.reset();
 
@@ -28,7 +28,7 @@
         query(service: string, params: any): ng.IPromise<Result> {
             return this.service.query(service, params)
                 .then(response => {
-                    return this.service.load(this, response);
+                    return this.service.load(this, <Data.Response>response);
                 });
         }
 
