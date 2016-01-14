@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------- 
 // <copyright file="RoleType.cs" company="Allors bvba">
-// Copyright 2002-2013 Allors bvba.
+// Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -19,9 +19,6 @@
 // <summary>Defines the RoleType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Allors.Meta
 {
     using System;
@@ -38,10 +35,6 @@ namespace Allors.Meta
         private readonly RelationType relationType;
 
         private ObjectType objectType;
-
-        private string derivedSingularPropertyName;
-
-        private string derivedPluralPropertyName;
 
         private string singularName;
 
@@ -114,10 +107,7 @@ namespace Allors.Meta
         /// Gets a value indicating whether this instance has a multiplicity of one.
         /// </summary>
         /// <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
-        public bool IsOne
-        {
-            get { return !this.IsMany; }
-        }
+        public bool IsOne => !this.IsMany;
 
         public bool IsMany
         {
@@ -135,26 +125,14 @@ namespace Allors.Meta
             }
         }
 
-        IRelationType IRoleType.RelationType
-        {
-            get
-            {
-                return this.RelationType;
-            }
-        }
+        IRelationType IRoleType.RelationType => this.RelationType;
 
         public RelationType RelationType => this.relationType;
 
         /// <summary>
         /// Gets the display name.
         /// </summary>
-        public override string DisplayName
-        {
-            get
-            {
-                return this.PropertyName;
-            }
-        }
+        public override string DisplayName => this.PropertyName;
 
         /// <summary>
         /// Gets the name.
@@ -207,11 +185,8 @@ namespace Allors.Meta
         /// Gets the association.
         /// </summary>
         /// <value>The association.</value>
-        public AssociationType AssociationType
-        {
-            get { return this.RelationType.AssociationType; }
-        }
-        
+        public AssociationType AssociationType => this.RelationType.AssociationType;
+
         public int? Scale
         {
             get

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IdAttribute.cs" company="Allors bvba">
-// Copyright 2002-2013 Allors bvba.
+// <copyright file="DomainAttribute.cs" company="Allors bvba">
+// Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)

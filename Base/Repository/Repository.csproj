@@ -84,6 +84,9 @@
     <Compile Include="Base\UniquelyIdentifiable.cs" />
     <Compile Include="Base\User.cs" />
     <Compile Include="Base\UserGroup.cs" />
+    <Compile Include="Custom\SyncDepth2.cs" />
+    <Compile Include="Custom\SyncDepth1.cs" />
+    <Compile Include="Custom\SyncRoot.cs" />
     <Compile Include="Custom\AssemblyInfo.cs" />
     <Compile Include="Custom\Address.cs" />
     <Compile Include="Custom\BadUI.cs" />

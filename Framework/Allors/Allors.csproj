@@ -66,6 +66,7 @@
     <Compile Include="Adapters\IRoleCache.cs" />
     <Compile Include="Adapters\RoleCache.cs" />
     <Compile Include="Repository\AssociationIdAttribute.cs" />
+    <Compile Include="Repository\SyncedAttribute.cs" />
     <Compile Include="Repository\SingularAttribute.cs" />
     <Compile Include="Repository\PluralAttribute.cs" />
     <Compile Include="Repository\RoleIdAttribute.cs" />

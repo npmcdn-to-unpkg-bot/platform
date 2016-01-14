@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------- 
 // <copyright file="RelationType.cs" company="Allors bvba">
-// Copyright 2002-2013 Allors bvba.
+// Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -34,13 +34,11 @@ namespace Allors.Meta
     {
         private static readonly string[] EmptyGroups = { };
 
-        private readonly AssociationType associationType;
-        private readonly RoleType roleType;
-
         private Multiplicity assignedMultiplicity;
         private Multiplicity multiplicity;
 
         private bool isDerived;
+        private bool isSynced;
         private bool isIndexed;
 
         private string[] groups;
@@ -50,8 +48,8 @@ namespace Allors.Meta
         {
             this.Id = id;
 
-            this.associationType = new AssociationType(this, associationTypeId);
-            this.roleType = new RoleType(this, roleTypdId);
+            this.AssociationType = new AssociationType(this, associationTypeId);
+            this.RoleType = new RoleType(this, roleTypdId);
 
             metaPopulation.OnRelationTypeCreated(this);
         }
@@ -67,6 +65,21 @@ namespace Allors.Meta
             {
                 this.MetaPopulation.AssertUnlocked();
                 this.isDerived = value;
+                this.MetaPopulation.Stale();
+            }
+        }
+        
+        public bool IsSynced
+        {
+            get
+            {
+                return this.isSynced;
+            }
+
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+                this.isSynced = value;
                 this.MetaPopulation.Stale();
             }
         }
@@ -112,11 +125,11 @@ namespace Allors.Meta
 
         IAssociationType IRelationType.AssociationType => this.AssociationType;
 
-        public AssociationType AssociationType => this.associationType;
+        public AssociationType AssociationType { get; }
 
         IRoleType IRelationType.RoleType => this.RoleType;
 
-        public RoleType RoleType => this.roleType;
+        public RoleType RoleType { get; }
 
         /// <summary>
         /// Gets a value indicating whether there exist exclusive classes.
@@ -128,8 +141,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.AssociationType != null && this.AssociationType.ObjectType != null &&
-                    this.RoleType != null && this.RoleType.ObjectType != null)
+                if (this.AssociationType?.ObjectType != null && this.RoleType?.ObjectType != null)
                 {
                     var roleCompositeType = this.RoleType.ObjectType as Composite;
                     return this.AssociationType.ObjectType.ExistExclusiveClass && roleCompositeType != null && roleCompositeType.ExistExclusiveClass;
@@ -212,12 +224,12 @@ namespace Allors.Meta
             }
         }
 
-        public void AddGroups(string[] groups)
+        public void AddGroups(string[] newGroups)
         {
-            if (groups != null)
+            if (newGroups != null)
             {
                 var newTags = new List<string>(this.Groups);
-                newTags.AddRange(groups);
+                newTags.AddRange(newGroups);
                 this.Groups = newTags.ToArray();
             }
         }

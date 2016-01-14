@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BootstrapHtmlHelper.cs" company="Allors bvba">
-//   Copyright 2002-2013 Allors bvba.
+//   Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the General Public Licence v3 (GPL)

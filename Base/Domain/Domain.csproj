@@ -286,6 +286,9 @@
     <Compile Include="Generated\StatefulCompany.g.cs" />
     <Compile Include="Generated\StringTemplate.g.cs" />
     <Compile Include="Generated\Subdependee.g.cs" />
+    <Compile Include="Generated\SyncDepth1.g.cs" />
+    <Compile Include="Generated\SyncDepth2.g.cs" />
+    <Compile Include="Generated\SyncRoot.g.cs" />
     <Compile Include="Generated\Third.g.cs" />
     <Compile Include="Generated\Three.g.cs" />
     <Compile Include="Generated\To.g.cs" />
