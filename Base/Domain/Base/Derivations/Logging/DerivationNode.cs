@@ -18,33 +18,41 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Domain.NonLogging
+namespace Allors.Domain.Logging
 {
     public class DerivationNode : DerivationNodeBase
     {
-        public DerivationNode(Object derivable)
+        private readonly IDerivationLog derivationLog;
+
+        public DerivationNode(Object derivable, IDerivationLog derivationLog)
             : base(derivable)
         {
+            this.derivationLog = derivationLog;
         }
 
         protected override void OnCycle(Object root, Object derivable)
         {
+            this.derivationLog.Cycle(root, derivable);
         }
 
         protected override void OnDeriving(Object derivable)
         {
+            this.derivationLog.Deriving(derivable);
         }
 
         protected override void OnDerived(Object derivable)
         {
+            this.derivationLog.Derived(derivable);
         }
 
         protected override void OnPostDeriving(Object derivable)
         {
+            this.derivationLog.PostDeriving(derivable);
         }
 
         protected override void OnPostDerived(Object derivable)
         {
+            this.derivationLog.PostDerived(derivable);
         }
     }
 }

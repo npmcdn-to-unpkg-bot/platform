@@ -20,73 +20,85 @@
 
 namespace Allors.Domain.Logging
 {
-    using System;
+    using System.Collections.Generic;
 
     using Object = Allors.Domain.Object;
 
-    public sealed class ConsoleDerivationLog : IDerivationLog
+    public sealed class ListDerivationLog : IDerivationLog
     {
+        public List<string> List { get; }
+
+        public ListDerivationLog()
+        {
+            this.List = new List<string>();
+        }
+
+        public override string ToString()
+        {
+            return string.Join("\n", this.List);
+        }
+
         // Derivation
         public void StartedGeneration(int generation)
         {
-            Console.WriteLine($"Started Generation #{generation}");
+            this.List.Add($"Started Generation #{generation}");
         }
 
         public void StartedPreparation(int preparationRun)
         {
-            Console.WriteLine($"Started Preparation #{preparationRun}");
+            this.List.Add($"Started Preparation #{preparationRun}");
         }
 
         public void PreDeriving(Object derivable)
         {
-            Console.WriteLine($"Preparing #{derivable}");
+            this.List.Add($"Preparing #{derivable}");
         }
 
         public void PreDerived(Object derivable)
         {
-            Console.WriteLine($"PreDerived [{derivable.Id}] {derivable}");
+            this.List.Add($"PreDerived [{derivable.Id}] {derivable}");
         }
 
         public void AddedDerivable(Object derivable)
         {
-            Console.WriteLine($"Added Derivable [{derivable.Id}] {derivable}");
+            this.List.Add($"Added Derivable [{derivable.Id}] {derivable}");
         }
 
         public void AddedDependency(Object dependent, Object dependee)
         {
-            Console.WriteLine($"Added Dependency [{dependent.Id}] {dependent} -> [{dependee.Id}] {dependee}");
+            this.List.Add($"Added Dependency [{dependent.Id}] {dependent} -> [{dependee.Id}] {dependee}");
         }
 
         // Validation
         public void AddedError(IDerivationError derivationError)
         {
-            Console.WriteLine($"Error {derivationError}");
+            this.List.Add($"Error {derivationError}");
         }
 
         // DerivationNode
         public void Cycle(Object root, Object derivable)
         {
-            Console.WriteLine($"Cycle root: {root}, object: {derivable}");
+            this.List.Add($"Cycle root: {root}, object: {derivable}");
         }
 
         public void Deriving(Object derivable)
         {
-            Console.WriteLine($"Deriving {derivable}");
+            this.List.Add($"Deriving {derivable}");
         }
 
         public void Derived(Object derivable)
         {
-            Console.WriteLine($"Derived {derivable}");
+            this.List.Add($"Derived {derivable}");
         }
 
         public void PostDeriving(Object derivable)
         {
-            Console.WriteLine($"Post Deriving {derivable}");
+            this.List.Add($"Post Deriving {derivable}");
         }
 
         public void PostDerived(Object derivable)
         {
-            Console.WriteLine($"Post Derived {derivable}");
+            this.List.Add($"Post Derived {derivable}");
         }
     }
 }

@@ -71,12 +71,15 @@ namespace Allors.Domain
             return this.derivable.ToString();
         }
 
+        protected abstract void OnCycle(Object root, Object derivable);
+
         private void TopologicalDerive(DerivationBase derivation, DerivationNodeBase root)
         {
             if (this.visited)
             {
                 if (root.Equals(this.currentRoot))
                 {
+                    this.OnCycle(root.derivable, this.derivable);
                     throw new Exception("This derivation has a cycle. (" + this.currentRoot + " -> " + this + ")");
                 }
 
@@ -96,13 +99,26 @@ namespace Allors.Domain
 
             if (!this.derivable.Strategy.IsDeleted)
             {
+                this.OnDeriving(this.derivable);
                 this.derivable.OnDerive(x => x.WithDerivation(derivation));
+                this.OnDerived(this.derivable);
+
+                this.OnPostDeriving(this.derivable);
                 this.derivable.OnPostDerive(x => x.WithDerivation(derivation));
+                this.OnPostDerived(this.derivable);
             }
 
             derivation.AddDerivedObject(this.derivable);
 
             this.currentRoot = null;
         }
+
+        protected abstract void OnDeriving(Object derivable);
+
+        protected abstract void OnDerived(Object derivable);
+
+        protected abstract void OnPostDeriving(Object derivable);
+
+        protected abstract void OnPostDerived(Object derivable);
     }
 }

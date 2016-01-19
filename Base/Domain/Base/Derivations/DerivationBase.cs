@@ -253,9 +253,11 @@ namespace Allors.Domain
 
                     if (derivable != null)
                     {
-                        this.OnPreparing(derivable);
+                        this.OnPreDeriving(derivable);
 
                         derivable.OnPreDerive(x => x.WithDerivation(this));
+
+                        this.OnPreDerived(derivable);
 
                         this.preparedObjects.Add(derivable);
                     }
@@ -273,10 +275,12 @@ namespace Allors.Domain
 
                     foreach (Object dependencyObject in dependencyObjectsToPrepare)
                     {
-                        this.OnPreparing(dependencyObject);
+                        this.OnPreDeriving(dependencyObject);
 
                         dependencyObject.OnPreDerive(x => x.WithDerivation(this));
-                        
+
+                        this.OnPreDerived(dependencyObject);
+
                         this.preparedObjects.Add(dependencyObject);
                     }
                 }
@@ -308,16 +312,18 @@ namespace Allors.Domain
             this.derivedObjects.Add(derivable);
         }
 
+        protected abstract DerivationGraphBase CreateDerivationGraph(DerivationBase derivation);
+
         protected abstract void OnAddedDerivable(Object derivable);
 
         protected abstract void OnAddedDependency(Object dependent, Object dependee);
 
-        protected abstract void OnStartedPreparation(int preparationRun);
-
         protected abstract void OnStartedGeneration(int generation);
 
-        protected abstract void OnPreparing(Object derivable);
+        protected abstract void OnStartedPreparation(int preparationRun);
 
-        protected abstract DerivationGraphBase CreateDerivationGraph(DerivationBase derivation);
+        protected abstract void OnPreDeriving(Object derivable);
+
+        protected abstract void OnPreDerived(Object derivable);
     }
 }

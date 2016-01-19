@@ -22,5 +22,31 @@ namespace Allors.Domain.Logging
 {
     public interface IDerivationLog
     {
+        // Derivation
+        void StartedGeneration(int generation);
+
+        void StartedPreparation(int preparationRun);
+
+        void PreDeriving(Object derivable);
+
+        void PreDerived(Object derivable);
+
+        void AddedDerivable(Object derivable);
+
+        void AddedDependency(Object dependent, Object dependee);
+
+        // Validation
+        void AddedError(IDerivationError derivationError);
+
+        // DerivationNode
+        void Cycle(Object root, Object derivable);
+
+        void Deriving(Object derivable);
+
+        void Derived(Object derivable);
+
+        void PostDeriving(Object derivable);
+
+        void PostDerived(Object derivable);
     }
 }

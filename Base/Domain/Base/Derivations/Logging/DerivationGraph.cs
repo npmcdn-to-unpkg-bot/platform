@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Validation.cs" company="Allors bvba">
+// <copyright file="DerivationGraph.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 //
 // Dual Licensed under
@@ -18,17 +18,21 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Domain.NonLogging
+namespace Allors.Domain.Logging
 {
-    public sealed partial class Validation : ValidationBase
+    public class DerivationGraph : DerivationGraphBase
     {
-        public Validation(IDerivation derivation)
+        private readonly IDerivationLog derivationLog;
+
+        public DerivationGraph(DerivationBase derivation, IDerivationLog derivationLog)
             : base(derivation)
         {
+            this.derivationLog = derivationLog;
         }
 
-        protected override void OnAddedError(IDerivationError derivationError)
+        protected override DerivationNodeBase CreateDerivationNode(Object derivable)
         {
+            return new DerivationNode(derivable, this.derivationLog);
         }
     }
 }

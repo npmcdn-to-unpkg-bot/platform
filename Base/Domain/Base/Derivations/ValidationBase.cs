@@ -44,6 +44,7 @@ namespace Allors.Domain
         public void AddError(IDerivationError derivationError)
         {
             this.errors.Add(derivationError);
+            this.OnAddedError(derivationError);
         }
 
         public void AddError(IObject association, RoleType roleType, string errorMessage, params object[] messageParam)
@@ -159,5 +160,7 @@ namespace Allors.Domain
                 this.AddError(new DerivationErrorEquals(this, DerivationRelation.Create(association, roleType, otherRoleType)));
             }
         }
+
+        protected abstract void OnAddedError(IDerivationError derivationError);
     }
 }

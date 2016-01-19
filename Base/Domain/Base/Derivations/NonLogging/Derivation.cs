@@ -55,15 +55,19 @@ namespace Allors.Domain.NonLogging
         {
         }
 
-        protected override void OnStartedPreparation(int preparationRun)
-        {
-        }
-
         protected override void OnStartedGeneration(int generation)
         {
         }
 
-        protected override void OnPreparing(Domain.Object derivable)
+        protected override void OnStartedPreparation(int preparationRun)
+        {
+        }
+
+        protected override void OnPreDeriving(Domain.Object derivable)
+        {
+        }
+
+        protected override void OnPreDerived(Object derivable)
         {
         }
     }

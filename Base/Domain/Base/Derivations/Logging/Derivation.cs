@@ -22,8 +22,6 @@ namespace Allors.Domain.Logging
 {
     using System.Collections.Generic;
 
-    using Allors.Domain.NonLogging;
-
     public sealed class Derivation : DerivationBase
     {
         private readonly IDerivationLog derivationLog;
@@ -51,28 +49,37 @@ namespace Allors.Domain.Logging
 
         protected override DerivationGraphBase CreateDerivationGraph(DerivationBase derivation)
         {
-            return new DerivationGraph(derivation);
+            return new DerivationGraph(derivation, this.derivationLog);
         }
 
         protected override void OnAddedDerivable(Object derivable)
         {
+            this.derivationLog.AddedDerivable(derivable);
         }
 
         protected override void OnAddedDependency(Object dependent, Object dependee)
         {
-        }
-
-        protected override void OnStartedPreparation(int preparationRun)
-        {
+            this.derivationLog.AddedDependency(dependent, dependee);
         }
 
         protected override void OnStartedGeneration(int generation)
         {
+            this.derivationLog.StartedGeneration(generation);
         }
 
-        protected override void OnPreparing(Object derivable)
+        protected override void OnStartedPreparation(int preparationRun)
         {
+            this.derivationLog.StartedPreparation(preparationRun);
         }
 
+        protected override void OnPreDeriving(Object derivable)
+        {
+            this.derivationLog.PreDeriving(derivable);
+        }
+
+        protected override void OnPreDerived(Object derivable)
+        {
+            this.derivationLog.PreDerived(derivable);
+        }
     }
 }

@@ -28,5 +28,10 @@ namespace Allors.Domain.Logging
         {
             this.derivationLog = derivationLog;
         }
+
+        protected override void OnAddedError(IDerivationError derivationError)
+        {
+            this.derivationLog.AddedError(derivationError);
+        }
     }
 }
