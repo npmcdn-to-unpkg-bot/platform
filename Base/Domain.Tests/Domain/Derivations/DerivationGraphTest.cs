@@ -27,6 +27,7 @@ namespace Domain
 
     using Allors;
     using Allors.Domain;
+    using Allors.Domain.NonLogging;
 
     using NUnit.Framework;
 

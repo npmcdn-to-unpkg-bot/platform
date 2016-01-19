@@ -76,11 +76,11 @@ namespace Allors.Web
                 }
             }
             
-            var derivationLog = this.session.Derive();
+            var validation = this.session.Derive();
 
-            if (derivationLog.HasErrors)
+            if (validation.HasErrors)
             {
-                saveResponse.AddDerivationErrors(derivationLog);
+                saveResponse.AddDerivationErrors(validation);
             }
 
             if (!saveResponse.HasErrors)

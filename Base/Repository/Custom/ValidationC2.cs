@@ -5,13 +5,12 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("c7563dd3-77b2-43ff-92f9-a4f98db36acf")]
     #endregion
-    public partial class DerivationLogC2 :  Object, DerivationLogI12 
+    public partial class ValidationC2 :  Object, ValidationI12 
     {
         #region inherited properties
         public Guid UniqueId { get; set; }
 
         #endregion
-
 
         #region inherited methods
 
@@ -27,6 +26,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

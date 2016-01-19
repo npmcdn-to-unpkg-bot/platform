@@ -67,14 +67,14 @@
                         invokeResponse.ErrorMessage = innerException.Message;
                     }
 
-                    var derivationLog = this.session.Derive();
-                    if (!derivationLog.HasErrors)
+                    var validation = this.session.Derive();
+                    if (!validation.HasErrors)
                     {
                         this.session.Commit();
                     }
                     else
                     {
-                        invokeResponse.AddDerivationErrors(derivationLog);
+                        invokeResponse.AddDerivationErrors(validation);
                     }
                 }
                 else

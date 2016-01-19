@@ -63,7 +63,7 @@ namespace Allors.Domain
 
             if (!Users.GuestUserName.Equals(this.UserName) && !Users.AdministratorUserName.Equals(this.UserName))
             {
-                derivation.Log.AssertExists(this, M.Person.LastName);
+                derivation.Validation.AssertExists(this, M.Person.LastName);
             }
 
             if (this.ExistFirstName && this.ExistLastName)

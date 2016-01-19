@@ -67,11 +67,14 @@
     <Compile Include="Base\Content\ImageCreateThumbnail.cs" />
     <Compile Include="Base\Content\ImageCreateResponsive.cs" />
     <Compile Include="Base\Derivations\AsyncDerivations.cs" />
-    <Compile Include="Base\Derivations\Debug\DebugLog.cs" />
-    <Compile Include="Base\Derivations\Debug\DebugDerivation.cs" />
-    <Compile Include="Base\Derivations\Debug\DebugValidation.cs" />
+    <Compile Include="Base\Derivations\Logging\IDerivationLog.cs" />
+    <Compile Include="Base\Derivations\Logging\ConsoleDerivationLog.cs" />
+    <Compile Include="Base\Derivations\Logging\Derivation.cs" />
+    <Compile Include="Base\Derivations\Logging\Validation.cs" />
     <Compile Include="Base\Derivations\IValidation.cs" />
     <Compile Include="Base\Derivations\DerivationBase.cs" />
+    <Compile Include="Base\Derivations\NonLogging\DerivationGraph.cs" />
+    <Compile Include="Base\Derivations\NonLogging\DerivationNode.cs" />
     <Compile Include="Base\Derivations\ValidationBase.cs" />
     <Compile Include="Base\IObjectBase.cs" />
     <Compile Include="Base\Object.cs" />
@@ -114,9 +117,9 @@
     <Compile Include="Custom\Security\UserGroups.cs" />
     <Compile Include="Custom\Setup.cs" />
     <Compile Include="Custom\Setup.v.cs" />
-    <Compile Include="Custom\Special\DerivationLogC1.cs" />
-    <Compile Include="Custom\Special\DerivationLogC2.cs" />
-    <Compile Include="Custom\Special\DerivationLogI12.cs" />
+    <Compile Include="Custom\Special\ValidationC1.cs" />
+    <Compile Include="Custom\Special\ValidationC2.cs" />
+    <Compile Include="Custom\Special\ValidationI12.cs" />
     <Compile Include="Custom\Special\Four.cs" />
     <Compile Include="Custom\Special\One.cs" />
     <Compile Include="Custom\Special\Shared.cs" />
@@ -125,7 +128,7 @@
     <Compile Include="Base\Common\Cache.cs" />
     <Compile Include="Base\Common\Counters.cs" />
     <Compile Include="Base\Common\Object.cs" />
-    <Compile Include="Base\Derivations\Derivation.cs" />
+    <Compile Include="Base\Derivations\NonLogging\Derivation.cs" />
     <Compile Include="Base\Derivations\Errors\DerivationError.cs" />
     <Compile Include="Base\Derivations\Errors\DerivationErrorAtLeastOne.cs" />
     <Compile Include="Base\Derivations\Errors\DerivationErrorAtMostOne.cs" />
@@ -136,9 +139,9 @@
     <Compile Include="Base\Derivations\Errors\DerivationErrorRequired.cs" />
     <Compile Include="Base\Derivations\Errors\DerivationErrorUnique.cs" />
     <Compile Include="Base\Derivations\DerivationException.cs" />
-    <Compile Include="Base\Derivations\DerivationGraph.cs" />
-    <Compile Include="Base\Derivations\Validation.cs" />
-    <Compile Include="Base\Derivations\DerivationNode.cs" />
+    <Compile Include="Base\Derivations\DerivationGraphBase.cs" />
+    <Compile Include="Base\Derivations\NonLogging\Validation.cs" />
+    <Compile Include="Base\Derivations\DerivationNodeBase.cs" />
     <Compile Include="Base\Derivations\DerivationRelation.cs" />
     <Compile Include="Base\Common\Enumeration.cs" />
     <Compile Include="Base\Derivations\IDerivation.cs" />
@@ -235,9 +238,6 @@
     <Compile Include="Generated\DeletableDelete.g.cs" />
     <Compile Include="Generated\Dependee.g.cs" />
     <Compile Include="Generated\Dependent.g.cs" />
-    <Compile Include="Generated\DerivationLogC1.g.cs" />
-    <Compile Include="Generated\DerivationLogC2.g.cs" />
-    <Compile Include="Generated\DerivationLogI12.g.cs" />
     <Compile Include="Generated\Enumeration.g.cs" />
     <Compile Include="Generated\Extender.g.cs" />
     <Compile Include="Generated\First.g.cs" />
@@ -305,6 +305,9 @@
     <Compile Include="Generated\UnitRelation.g.cs" />
     <Compile Include="Generated\User.g.cs" />
     <Compile Include="Generated\UserGroup.g.cs" />
+    <Compile Include="Generated\ValidationC1.g.cs" />
+    <Compile Include="Generated\ValidationC2.g.cs" />
+    <Compile Include="Generated\ValidationI12.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -322,7 +325,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Base\Derivations\Debug\Debug.cd" />
+    <None Include="Base\Derivations\Logging\Logging.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

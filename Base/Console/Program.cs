@@ -228,10 +228,10 @@ namespace Allors
                     {
                         new Setup(session, DataPath).Apply();
 
-                        var derivationLog = session.Derive();
-                        if (derivationLog.HasErrors)
+                        var validation = session.Derive();
+                        if (validation.HasErrors)
                         {
-                            foreach (var error in derivationLog.Errors)
+                            foreach (var error in validation.Errors)
                             {
                                 Console.WriteLine(error.ToString());
                             }

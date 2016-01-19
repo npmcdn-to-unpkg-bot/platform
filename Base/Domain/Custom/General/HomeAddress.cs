@@ -34,8 +34,8 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             
-            derivation.Log.AssertExists(this, M.HomeAddress.Street);
-            derivation.Log.AssertNonEmptyString(this, M.HomeAddress.Street);
+            derivation.Validation.AssertExists(this, M.HomeAddress.Street);
+            derivation.Validation.AssertNonEmptyString(this, M.HomeAddress.Street);
         }
     }
 }

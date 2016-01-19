@@ -18,38 +18,40 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Domain
+namespace Allors.Domain.NonLogging
 {
-    using System;
     using System.Collections.Generic;
 
     public sealed class Derivation : DerivationBase
     {
-        private static readonly Func<IDerivation, Validation> DerivationLogFactory = v => new Validation(v);
-
         public Derivation(ISession session)
             : base(session)
         {
-            this.Log = new Validation(this);
+            this.Validation = new Validation(this);
         }
 
         public Derivation(ISession session, IEnumerable<long> forcedDerivations)
             : base(session, forcedDerivations)
         {
-            this.Log = new Validation(this);
+            this.Validation = new Validation(this);
         }
 
         public Derivation(ISession session, IEnumerable<IObject> forcedObjects)
             : base(session, forcedObjects)
         {
-            this.Log = new Validation(this);
+            this.Validation = new Validation(this);
         }
 
-        protected override void OnAddedDerivable(Object derivable)
+        protected override DerivationGraphBase CreateDerivationGraph(DerivationBase derivation)
+        {
+            return new DerivationGraph(derivation);
+        }
+
+        protected override void OnAddedDerivable(Domain.Object derivable)
         {
         }
 
-        protected override void OnAddedDependency(Object dependent, Object dependee)
+        protected override void OnAddedDependency(Domain.Object dependent, Domain.Object dependee)
         {
         }
 
@@ -61,7 +63,7 @@ namespace Allors.Domain
         {
         }
 
-        protected override void OnPreparing(Object derivable)
+        protected override void OnPreparing(Domain.Object derivable)
         {
         }
     }

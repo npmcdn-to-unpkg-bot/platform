@@ -62,7 +62,7 @@ namespace Allors.Domain
 
             foreach (var roleType in requiredRoleTypes)
             {
-                derivation.Log.AssertExists(@this, roleType);
+                derivation.Validation.AssertExists(@this, roleType);
             }
 
             // Unique
@@ -79,7 +79,7 @@ namespace Allors.Domain
 
             foreach (var roleType in uniqueRoleTypes)
             {
-                derivation.Log.AssertIsUnique(@this, roleType);
+                derivation.Validation.AssertIsUnique(@this, roleType);
             }
         }
     }

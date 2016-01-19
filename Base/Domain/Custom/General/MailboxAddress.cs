@@ -32,10 +32,10 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, M.MailboxAddress.PoBox);
-            derivation.Log.AssertNonEmptyString(this, M.MailboxAddress.PoBox);
+            derivation.Validation.AssertExists(this, M.MailboxAddress.PoBox);
+            derivation.Validation.AssertNonEmptyString(this, M.MailboxAddress.PoBox);
 
-            derivation.Log.AssertExists(this, M.MailboxAddress.Place);
+            derivation.Validation.AssertExists(this, M.MailboxAddress.Place);
         }
     }
 }

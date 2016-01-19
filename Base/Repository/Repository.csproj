@@ -95,9 +95,9 @@
     <Compile Include="Custom\ClassWithoutRoles.cs" />
     <Compile Include="Custom\Dependee.cs" />
     <Compile Include="Custom\Dependent.cs" />
-    <Compile Include="Custom\DerivationLogC1.cs" />
-    <Compile Include="Custom\DerivationLogC2.cs" />
-    <Compile Include="Custom\DerivationLogI12.cs" />
+    <Compile Include="Custom\ValidationC1.cs" />
+    <Compile Include="Custom\ValidationC2.cs" />
+    <Compile Include="Custom\ValidationI12.cs" />
     <Compile Include="Custom\Extender.cs" />
     <Compile Include="Custom\First.cs" />
     <Compile Include="Custom\Four.cs" />

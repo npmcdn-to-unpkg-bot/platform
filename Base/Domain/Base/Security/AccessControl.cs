@@ -89,7 +89,7 @@ namespace Allors.Domain
 
             var derivation = method.Derivation;
 
-            derivation.Log.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
+            derivation.Validation.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
 
             this.EffectiveUsers = this.SubjectGroups.SelectMany(v => v.Members).Union(this.Subjects).ToArray();
             this.EffectivePermissions = this.Role?.Permissions;

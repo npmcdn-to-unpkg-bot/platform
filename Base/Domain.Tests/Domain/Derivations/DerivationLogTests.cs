@@ -36,8 +36,8 @@ namespace Domain
         [Test]
         public void AssertIsUniqueTest()
         {
-            var c1 = new DerivationLogC1Builder(this.Session).Build();
-            var c2 = new DerivationLogC2Builder(this.Session).Build();
+            var c1 = new ValidationC1Builder(this.Session).Build();
+            var c2 = new ValidationC2Builder(this.Session).Build();
 
             Assert.IsFalse(this.Session.Derive().HasErrors);
 

@@ -29,7 +29,7 @@ namespace Allors.Domain
     {
         ISession Session { get; }
 
-        IValidation Log { get; }
+        IValidation Validation { get; }
 
         IChangeSet ChangeSet { get; }
 

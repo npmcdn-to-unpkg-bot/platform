@@ -35,12 +35,12 @@ namespace Allors.Domain
         private readonly HashSet<IObject> preparedObjects;
 
         private readonly ISession session;
-        private IValidation log;
+        private IValidation validation;
         
         private HashSet<long> forcedDerivations;
         private HashSet<IObject> addedDerivables;
 
-        private DerivationGraph derivationGraph;
+        private DerivationGraphBase derivationGraph;
         private Dictionary<string, object> properties;
 
         private IChangeSet changeSet;
@@ -81,16 +81,16 @@ namespace Allors.Domain
             }
         }
 
-        public IValidation Log
+        public IValidation Validation
         {
             get
             {
-                return this.log;
+                return this.validation;
             }
 
             protected set
             {
-                this.log = value;
+                this.validation = value;
             }
         }
 
@@ -246,7 +246,7 @@ namespace Allors.Domain
                 
                 this.OnStartedPreparation(preparationRun);
 
-                this.derivationGraph = new DerivationGraph(this);
+                this.derivationGraph = this.CreateDerivationGraph(this);
                 foreach (var changedObject in changedObjects)
                 {
                     var derivable = this.Session.Instantiate(changedObject) as Object;
@@ -300,9 +300,8 @@ namespace Allors.Domain
                 this.derivationGraph = null;
             }
 
-            return this.log;
+            return this.validation;
         }
-
 
         internal void AddDerivedObject(Object derivable)
         {
@@ -318,5 +317,7 @@ namespace Allors.Domain
         protected abstract void OnStartedGeneration(int generation);
 
         protected abstract void OnPreparing(Object derivable);
+
+        protected abstract DerivationGraphBase CreateDerivationGraph(DerivationBase derivation);
     }
 }

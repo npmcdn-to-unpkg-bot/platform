@@ -1,6 +1,6 @@
-//------------------------------------------------------------------------------------------------- 
-// <copyright file="Organisation.cs" company="Allors bvba">
-// Copyright 2002-2016 Allors bvba.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ValidationC2.cs" company="Allors bvba">
+//   Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the General Public Licence v3 (GPL)
@@ -16,22 +16,19 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Person type.</summary>
-//-------------------------------------------------------------------------------------------------
-
-using System;
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Allors.Domain
 {
     using Allors.Meta;
 
-    public partial class Organisation
+    public partial class ValidationC2
     {
         public void CustomOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            derivation.Validation.AssertExists(this, M.Organisation.Name);
+            derivation.Validation.AssertIsUnique(this, M.ValidationC1.UniqueId);
         }
     }
 }

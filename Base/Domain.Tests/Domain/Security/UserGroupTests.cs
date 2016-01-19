@@ -38,12 +38,12 @@ namespace Domain
         {
             new UserGroupBuilder(this.Session).Build();
 
-            var derivationLog = this.Session.Derive();
+            var validation = this.Session.Derive();
 
-            Assert.IsTrue(derivationLog.HasErrors);
-            Assert.AreEqual(1, derivationLog.Errors.Length);
+            Assert.IsTrue(validation.HasErrors);
+            Assert.AreEqual(1, validation.Errors.Length);
 
-            var derivationError = derivationLog.Errors[0];
+            var derivationError = validation.Errors[0];
 
             Assert.AreEqual(1, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
@@ -56,12 +56,12 @@ namespace Domain
             new UserGroupBuilder(this.Session).WithName("Same").Build();
             new UserGroupBuilder(this.Session).WithName("Same").Build();
 
-            var derivationLog = this.Session.Derive();
+            var validation = this.Session.Derive();
 
-            Assert.IsTrue(derivationLog.HasErrors);
-            Assert.AreEqual(2, derivationLog.Errors.Length);
+            Assert.IsTrue(validation.HasErrors);
+            Assert.AreEqual(2, validation.Errors.Length);
 
-            foreach (var derivationError in derivationLog.Errors)
+            foreach (var derivationError in validation.Errors)
             {
                 Assert.AreEqual(1, derivationError.Relations.Length);
                 Assert.AreEqual(typeof(DerivationErrorUnique), derivationError.GetType());

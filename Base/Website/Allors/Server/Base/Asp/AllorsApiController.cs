@@ -4,6 +4,7 @@
 
     using Allors;
     using Allors.Domain;
+    using Allors.Domain.NonLogging;
     using Allors.Meta;
 
     public class AllorsApiController : ApiController

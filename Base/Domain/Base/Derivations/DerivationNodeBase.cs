@@ -22,17 +22,16 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
-    using System.Security.Cryptography.X509Certificates;
 
-    public class DerivationNode : IEquatable<DerivationNode>
+    public abstract class DerivationNodeBase : IEquatable<DerivationNodeBase>
     {
         private readonly Object derivable;
 
         private bool visited;
-        private DerivationNode currentRoot;
-        private HashSet<DerivationNode> dependencies;
+        private DerivationNodeBase currentRoot;
+        private HashSet<DerivationNodeBase> dependencies;
 
-        public DerivationNode(Object derivable)
+        protected DerivationNodeBase(Object derivable)
         {
             this.derivable = derivable;
         }
@@ -42,24 +41,24 @@ namespace Allors.Domain
             this.TopologicalDerive(derivation, this);
         }
 
-        public void AddDependency(DerivationNode derivationNode)
+        public void AddDependency(DerivationNodeBase derivationNode)
         {
             if (this.dependencies == null)
             {
-                this.dependencies = new HashSet<DerivationNode>();
+                this.dependencies = new HashSet<DerivationNodeBase>();
             }
 
             this.dependencies.Add(derivationNode);
         }
 
-        public bool Equals(DerivationNode other)
+        public bool Equals(DerivationNodeBase other)
         {
             return other != null && this.derivable.Equals(other.derivable);
         }
 
         public override bool Equals(object obj)
         {
-            return this.Equals((DerivationNode)obj);
+            return this.Equals((DerivationNodeBase)obj);
         }
 
         public override int GetHashCode()
@@ -72,7 +71,7 @@ namespace Allors.Domain
             return this.derivable.ToString();
         }
 
-        private void TopologicalDerive(DerivationBase derivation, DerivationNode root)
+        private void TopologicalDerive(DerivationBase derivation, DerivationNodeBase root)
         {
             if (this.visited)
             {

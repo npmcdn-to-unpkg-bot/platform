@@ -43,12 +43,12 @@ namespace Domain
                 .WithSubjectGroup(userGroup)
                 .Build());
 
-            var derivationLog = this.Session.Derive();
+            var validation = this.Session.Derive();
 
-            Assert.IsTrue(derivationLog.HasErrors);
-            Assert.AreEqual(1, derivationLog.Errors.Length);
+            Assert.IsTrue(validation.HasErrors);
+            Assert.AreEqual(1, validation.Errors.Length);
 
-            var derivationError = derivationLog.Errors[0];
+            var derivationError = validation.Errors[0];
 
             Assert.AreEqual(1, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
@@ -66,12 +66,12 @@ namespace Domain
                 .WithRole(role)
                 .Build());
 
-            var derivationLog = this.Session.Derive();
+            var validation = this.Session.Derive();
 
-            Assert.IsTrue(derivationLog.HasErrors);
-            Assert.AreEqual(1, derivationLog.Errors.Length);
+            Assert.IsTrue(validation.HasErrors);
+            Assert.AreEqual(1, validation.Errors.Length);
 
-            var derivationError = derivationLog.Errors[0];
+            var derivationError = validation.Errors[0];
 
             Assert.AreEqual(2, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorAtLeastOne), derivationError.GetType());

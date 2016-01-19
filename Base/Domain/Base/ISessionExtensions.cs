@@ -22,16 +22,17 @@
 namespace Allors
 {
     using Allors.Domain;
+    using Allors.Domain.NonLogging;
 
     public static partial class ISessionExtensions
     {
         public static void Derive(this ISession session, bool throwExceptionOnError)
         {
             var derivation = new Derivation(session);
-            var derivationLog = derivation.Derive();
-            if (throwExceptionOnError && derivationLog.HasErrors)
+            var validation = derivation.Derive();
+            if (throwExceptionOnError && validation.HasErrors)
             {
-                throw new DerivationException(derivationLog);
+                throw new DerivationException(validation);
             }
         }
 

@@ -22,17 +22,17 @@ namespace Allors.Domain
 {
     using System.Collections.Generic;
 
-    public class DerivationGraph
+    public abstract class DerivationGraphBase
     {
         private readonly DerivationBase derivation;
-        private readonly Dictionary<Object, DerivationNode> derivationNodeByDerivable = new Dictionary<Object, DerivationNode>();
+        private readonly Dictionary<Object, DerivationNodeBase> derivationNodeByDerivable = new Dictionary<Object, DerivationNodeBase>();
 
-        public DerivationGraph(DerivationBase derivation)
+        protected DerivationGraphBase(DerivationBase derivation)
         {
             this.derivation = derivation;
         }
 
-        public Dictionary<Object, DerivationNode> DerivationNodeByDerivable => this.derivationNodeByDerivable;
+        public Dictionary<Object, DerivationNodeBase> DerivationNodeByDerivable => this.derivationNodeByDerivable;
 
         public int Count => this.derivationNodeByDerivable.Count;
 
@@ -45,12 +45,12 @@ namespace Allors.Domain
             }
         }
 
-        public DerivationNode Add(Object derivable)
+        public DerivationNodeBase Add(Object derivable)
         {
-            DerivationNode derivationNode;
+            DerivationNodeBase derivationNode;
             if (!this.DerivationNodeByDerivable.TryGetValue(derivable, out derivationNode))
             {
-                derivationNode = new DerivationNode(derivable);
+                derivationNode = this.CreateDerivationNode(derivable);
                 this.DerivationNodeByDerivable.Add(derivable, derivationNode);
             }
 
@@ -63,5 +63,7 @@ namespace Allors.Domain
             var dependencyNode = this.Add(dependee);
             derivationNode.AddDependency(dependencyNode);
         }
+
+        protected abstract DerivationNodeBase CreateDerivationNode(Object derivable);
     }
 }

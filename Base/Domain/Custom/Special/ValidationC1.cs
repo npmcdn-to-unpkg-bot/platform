@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DerivationLogC2.cs" company="Allors bvba">
+// <copyright file="ValidationC1.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,13 +22,13 @@ namespace Allors.Domain
 {
     using Allors.Meta;
 
-    public partial class DerivationLogC2
+    public partial class ValidationC1
     {
         public void CustomOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertIsUnique(this, M.DerivationLogC1.UniqueId);
+            derivation.Validation.AssertIsUnique(this, M.ValidationC1.UniqueId);
         }
     }
 }
