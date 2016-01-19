@@ -26,19 +26,17 @@ namespace Allors.Domain
 
     public abstract class DerivationError : IDerivationError
     {
-        private readonly DerivationLog derivationLog;
-        private readonly DerivationRelation[] relations;
         private readonly string message;
 
-        protected DerivationError(DerivationLog derivationLog, DerivationRelation[] relations, string errorMessage)
-            : this(derivationLog, relations, errorMessage, new object[] { DerivationRelation.ToString(relations) })
+        protected DerivationError(IValidation validation, DerivationRelation[] relations, string errorMessage)
+            : this(validation, relations, errorMessage, new object[] { DerivationRelation.ToString(relations) })
         {
         }
 
-        protected DerivationError(DerivationLog derivationLog, DerivationRelation[] relations, string errorMessage, object[] errorMessageParameters)
+        protected DerivationError(IValidation validation, DerivationRelation[] relations, string errorMessage, object[] errorMessageParameters)
         {
-            this.derivationLog = derivationLog;
-            this.relations = relations;
+            this.Validation = validation;
+            this.Relations = relations;
 
             try
             {
@@ -53,25 +51,13 @@ namespace Allors.Domain
             }
             catch
             {
-                this.message = this.GetType() + ": " + DerivationRelation.ToString(this.relations);
+                this.message = this.GetType() + ": " + DerivationRelation.ToString(this.Relations);
             }
         }
 
-        public DerivationLog DerivationLog
-        {
-            get
-            {
-                return this.derivationLog;
-            }
-        }
+        public IValidation Validation { get; }
 
-        public DerivationRelation[] Relations
-        {
-            get
-            {
-                return this.relations;
-            }
-        }
+        public DerivationRelation[] Relations { get; }
 
         public RoleType[] RoleTypes
         {
@@ -91,13 +77,7 @@ namespace Allors.Domain
             }
         }
 
-        public virtual string Message
-        {
-            get
-            {
-                return this.message;
-            }
-        }
+        public virtual string Message => this.message;
 
         public override string ToString()
         {

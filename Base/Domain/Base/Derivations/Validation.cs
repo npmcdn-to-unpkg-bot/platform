@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DerivationException.cs" company="Allors bvba">
+// <copyright file="Validation.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 //
 // Dual Licensed under
@@ -20,32 +20,11 @@
 
 namespace Allors.Domain
 {
-    using System;
-    using System.Text;
-
-    public class DerivationException : Exception
+    public sealed partial class Validation : ValidationBase
     {
-        private readonly IValidation validation;
-
-        public DerivationException(IValidation validation)
+        public Validation(IDerivation derivation)
+            : base(derivation)
         {
-            this.validation = validation;
-        }
-
-        public IValidation Validation => this.validation;
-
-        public override string Message
-        {
-            get
-            {
-                var message = new StringBuilder();
-                foreach (var error in this.validation.Errors)
-                {
-                    message.Append(error.Message + "\n");
-                }
-
-                return message.ToString();
-            }
         }
     }
 }

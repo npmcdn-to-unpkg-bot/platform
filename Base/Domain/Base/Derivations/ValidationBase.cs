@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DerivationLog.cs" company="Allors bvba">
+// <copyright file="ValidationBase.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 //
 // Dual Licensed under
@@ -25,17 +25,17 @@ namespace Allors.Domain
     using Allors;
     using Allors.Meta;
 
-    public partial class DerivationLog
+    public abstract partial class ValidationBase : IValidation
     {
         private readonly List<IDerivationError> errors;
 
-        public DerivationLog(Derivation derivation)
+        protected ValidationBase(IDerivation derivation)
         {
             this.Derivation = derivation;
             this.errors = new List<IDerivationError>();
         }
 
-        public Derivation Derivation { get; private set; }
+        public IDerivation Derivation { get; private set; }
 
         public bool HasErrors => this.errors.Count > 0;
 

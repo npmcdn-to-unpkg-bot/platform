@@ -37,7 +37,7 @@ namespace Allors.Domain
             this.derivable = derivable;
         }
 
-        public void TopologicalDerive(Derivation derivation)
+        public void TopologicalDerive(DerivationBase derivation)
         {
             this.TopologicalDerive(derivation, this);
         }
@@ -72,7 +72,7 @@ namespace Allors.Domain
             return this.derivable.ToString();
         }
 
-        private void TopologicalDerive(Derivation derivation, DerivationNode root)
+        private void TopologicalDerive(DerivationBase derivation, DerivationNode root)
         {
             if (this.visited)
             {

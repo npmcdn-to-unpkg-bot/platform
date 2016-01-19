@@ -111,12 +111,12 @@ namespace Domain
             //var permission = (Permission)this.DatabaseSession.Extent<Permission>().First;
             //permission.RemoveOperationEnum();
 
-            //var derivationLog = this.DatabaseSession.Derive();
+            //var validation = this.DatabaseSession.Derive();
 
-            //Assert.IsTrue(derivationLog.HasErrors);
-            //Assert.AreEqual(1, derivationLog.Errors.Length);
+            //Assert.IsTrue(validation.HasErrors);
+            //Assert.AreEqual(1, validation.Errors.Length);
 
-            //var derivationError = derivationLog.Errors[0];
+            //var derivationError = validation.Errors[0];
 
             //Assert.AreEqual(1, derivationError.Relations.Length);
             //Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
@@ -130,12 +130,12 @@ namespace Domain
             //var permission = this.DatabaseSession.Extent<Permission>().First;
             //permission.RemoveOperandTypePointer();
 
-            //var derivationLog = this.DatabaseSession.Derive();
+            //var validation = this.DatabaseSession.Derive();
 
-            //Assert.IsTrue(derivationLog.HasErrors);
-            //Assert.AreEqual(1, derivationLog.Errors.Length);
+            //Assert.IsTrue(validation.HasErrors);
+            //Assert.AreEqual(1, validation.Errors.Length);
 
-            //var derivationError = derivationLog.Errors[0];
+            //var derivationError = validation.Errors[0];
 
             //Assert.AreEqual(1, derivationError.Relations.Length);
             //Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());

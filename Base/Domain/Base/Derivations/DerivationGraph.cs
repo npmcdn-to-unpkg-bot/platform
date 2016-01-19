@@ -24,29 +24,17 @@ namespace Allors.Domain
 
     public class DerivationGraph
     {
-        private readonly Derivation derivation;
+        private readonly DerivationBase derivation;
         private readonly Dictionary<Object, DerivationNode> derivationNodeByDerivable = new Dictionary<Object, DerivationNode>();
 
-        public DerivationGraph(Derivation derivation)
+        public DerivationGraph(DerivationBase derivation)
         {
             this.derivation = derivation;
         }
 
-        public Dictionary<Object, DerivationNode> DerivationNodeByDerivable
-        {
-            get
-            {
-                return this.derivationNodeByDerivable;
-            }
-        }
+        public Dictionary<Object, DerivationNode> DerivationNodeByDerivable => this.derivationNodeByDerivable;
 
-        public int Count
-        {
-            get
-            {
-                return this.derivationNodeByDerivable.Count;
-            }
-        }
+        public int Count => this.derivationNodeByDerivable.Count;
 
         public void Derive()
         {

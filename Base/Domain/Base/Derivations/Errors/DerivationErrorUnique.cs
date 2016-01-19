@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DerivationErrorGeneric.cs" company="Allors bvba">
+// <copyright file="DerivationErrorUnique.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 //
 // Dual Licensed under
@@ -23,20 +23,17 @@ namespace Allors.Domain
     using Allors;
     using Allors.Meta;
 
-    public class DerivationErrorGeneric : DerivationError
+    using Resources;
+
+    public class DerivationErrorUnique : DerivationError
     {
-        public DerivationErrorGeneric(DerivationLog derivationLog, DerivationRelation[] relations, string message, params object[] messageParam)
-            : base(derivationLog, relations, message, messageParam)
+        public DerivationErrorUnique(IValidation validation, DerivationRelation relation)
+            : base(validation, new[] { relation }, ErrorMessages.DerivationErrorUnique)
         {
         }
 
-        public DerivationErrorGeneric(DerivationLog derivationLog, DerivationRelation relation, string message, params object[] messageParam)
-            : this(derivationLog, new[] { relation }, message, messageParam)
-        {
-        }
-
-        public DerivationErrorGeneric(DerivationLog derivationLog, IObject association, RoleType roleType, string message, params object[] messageParam)
-            : this(derivationLog, new DerivationRelation(association, roleType), message, messageParam)
+        public DerivationErrorUnique(IValidation validation, IObject association, RoleType roleType) :
+            this(validation, new DerivationRelation(association, roleType))
         {
         }
     }

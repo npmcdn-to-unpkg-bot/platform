@@ -30,13 +30,13 @@ namespace Allors.Domain
 
     public class DerivationErrorNotAllowed : DerivationError
     {
-        public DerivationErrorNotAllowed(DerivationLog derivationLog, DerivationRelation relation)
-            : base(derivationLog, new[] { relation }, ErrorMessages.DerivationErrorNotAllowed)
+        public DerivationErrorNotAllowed(IValidation validation, DerivationRelation relation)
+            : base(validation, new[] { relation }, ErrorMessages.DerivationErrorNotAllowed)
         {
         }
 
-        public DerivationErrorNotAllowed(DerivationLog derivationLog, IObject association, RoleType roleType) :
-            this(derivationLog, new DerivationRelation(association, roleType))
+        public DerivationErrorNotAllowed(IValidation validation, IObject association, RoleType roleType) :
+            this(validation, new DerivationRelation(association, roleType))
         {
         }
     }

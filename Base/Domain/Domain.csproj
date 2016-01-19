@@ -67,6 +67,12 @@
     <Compile Include="Base\Content\ImageCreateThumbnail.cs" />
     <Compile Include="Base\Content\ImageCreateResponsive.cs" />
     <Compile Include="Base\Derivations\AsyncDerivations.cs" />
+    <Compile Include="Base\Derivations\Debug\DebugLog.cs" />
+    <Compile Include="Base\Derivations\Debug\DebugDerivation.cs" />
+    <Compile Include="Base\Derivations\Debug\DebugValidation.cs" />
+    <Compile Include="Base\Derivations\IValidation.cs" />
+    <Compile Include="Base\Derivations\DerivationBase.cs" />
+    <Compile Include="Base\Derivations\ValidationBase.cs" />
     <Compile Include="Base\IObjectBase.cs" />
     <Compile Include="Base\Object.cs" />
     <Compile Include="Base\ObjectBuilder`1.cs" />
@@ -120,18 +126,18 @@
     <Compile Include="Base\Common\Counters.cs" />
     <Compile Include="Base\Common\Object.cs" />
     <Compile Include="Base\Derivations\Derivation.cs" />
-    <Compile Include="Base\Derivations\DerivationError.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorAtLeastOne.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorAtMostOne.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorConflict.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorEquals.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorGeneric.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorNotAllowed.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorRequired.cs" />
-    <Compile Include="Base\Derivations\DerivationErrorUnique.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationError.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorAtLeastOne.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorAtMostOne.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorConflict.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorEquals.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorGeneric.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorNotAllowed.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorRequired.cs" />
+    <Compile Include="Base\Derivations\Errors\DerivationErrorUnique.cs" />
     <Compile Include="Base\Derivations\DerivationException.cs" />
     <Compile Include="Base\Derivations\DerivationGraph.cs" />
-    <Compile Include="Base\Derivations\DerivationLog.cs" />
+    <Compile Include="Base\Derivations\Validation.cs" />
     <Compile Include="Base\Derivations\DerivationNode.cs" />
     <Compile Include="Base\Derivations\DerivationRelation.cs" />
     <Compile Include="Base\Common\Enumeration.cs" />
@@ -316,6 +322,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Base\Derivations\Debug\Debug.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

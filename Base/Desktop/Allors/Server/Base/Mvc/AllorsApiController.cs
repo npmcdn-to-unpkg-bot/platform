@@ -43,9 +43,9 @@
             
         }
 
-        protected void AddModelErrors(DerivationLog derivationLog)
+        protected void AddModelErrors(Validation validation)
         {
-            foreach (var error in derivationLog.Errors)
+            foreach (var error in validation.Errors)
             {
                 this.ModelState.AddModelError(string.Empty, error.Message);
             }

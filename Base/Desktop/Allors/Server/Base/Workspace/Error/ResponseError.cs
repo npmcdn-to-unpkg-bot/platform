@@ -42,9 +42,9 @@
             this.AccessErrors.Add(id);
         }
 
-        public void AddDerivationErrors(DerivationLog derivationLog)
+        public void AddDerivationErrors(IValidation validation)
         {
-            foreach (IDerivationError derivationError in derivationLog.Errors)
+            foreach (IDerivationError derivationError in validation.Errors)
             {
                 this.DerivationErrors.Add(new ResponseDerivationError
                                               {

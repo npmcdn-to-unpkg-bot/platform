@@ -35,7 +35,7 @@ namespace Allors
             }
         }
 
-        public static DerivationLog Derive(this ISession session)
+        public static IValidation Derive(this ISession session)
         {
             var derivation = new Derivation(session);
             return derivation.Derive();

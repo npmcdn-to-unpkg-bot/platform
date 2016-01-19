@@ -263,11 +263,11 @@ namespace Allors
                 using (var session = database.CreateSession())
                 {
                     //var derivation = new Derivation(session, persons);
-                    //var derivationLog = derivation.Derive();
+                    //var validation = derivation.Derive();
 
-                    //if (derivationLog.HasErrors)
+                    //if (validation.HasErrors)
                     //{
-                    //    foreach (var error in derivationLog.Errors)
+                    //    foreach (var error in validation.Errors)
                     //    {
                     //        Console.WriteLine(error.Message);
                     //    }

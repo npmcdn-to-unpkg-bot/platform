@@ -29,7 +29,7 @@ namespace Allors.Domain
     {
         ISession Session { get; }
 
-        DerivationLog Log { get; }
+        IValidation Log { get; }
 
         IChangeSet ChangeSet { get; }
 
@@ -54,6 +54,6 @@ namespace Allors.Domain
         /// <param name="dependee"></param>
         void AddDependency(Object dependent, Object dependee);
 
-        DerivationLog Derive();
+        IValidation Derive();
     }
 }

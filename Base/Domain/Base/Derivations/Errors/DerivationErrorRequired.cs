@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DerivationErrorConflict.cs" company="Allors bvba">
+// <copyright file="DerivationErrorRequired.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 //
 // Dual Licensed under
@@ -16,6 +16,9 @@
 //
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>
+//
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace Allors.Domain
@@ -25,15 +28,15 @@ namespace Allors.Domain
 
     using Resources;
 
-    public class DerivationErrorConflict : DerivationError
+    public class DerivationErrorRequired : DerivationError
     {
-        public DerivationErrorConflict(DerivationLog derivationLog, DerivationRelation relation)
-            : base(derivationLog, new[] { relation }, ErrorMessages.DerivationErrorConflict)
+        public DerivationErrorRequired(IValidation validation, DerivationRelation relation)
+            : base(validation, new[] { relation }, ErrorMessages.DerivationErrorRequired)
         {
         }
 
-        public DerivationErrorConflict(DerivationLog derivationLog, IObject association, RoleType roleType) :
-            this(derivationLog, new DerivationRelation(association, roleType))
+        public DerivationErrorRequired(IValidation validation, IObject association, RoleType roleType) :
+            this(validation, new DerivationRelation(association, roleType))
         {
         }
     }

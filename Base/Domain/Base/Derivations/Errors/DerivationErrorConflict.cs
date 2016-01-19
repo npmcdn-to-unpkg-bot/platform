@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DerivationErrorEquals.cs" company="Allors bvba">
+// <copyright file="DerivationErrorConflict.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 //
 // Dual Licensed under
@@ -20,12 +20,20 @@
 
 namespace Allors.Domain
 {
+    using Allors;
+    using Allors.Meta;
+
     using Resources;
 
-    public class DerivationErrorEquals : DerivationError
+    public class DerivationErrorConflict : DerivationError
     {
-        public DerivationErrorEquals(DerivationLog derivationLog, DerivationRelation[] derivationRelations)
-            : base(derivationLog, derivationRelations, ErrorMessages.DerivationErrorEquals)
+        public DerivationErrorConflict(IValidation validation, DerivationRelation relation)
+            : base(validation, new[] { relation }, ErrorMessages.DerivationErrorConflict)
+        {
+        }
+
+        public DerivationErrorConflict(IValidation validation, IObject association, RoleType roleType) :
+            this(validation, new DerivationRelation(association, roleType))
         {
         }
     }
