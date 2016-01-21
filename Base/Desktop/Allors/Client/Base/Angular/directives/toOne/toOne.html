@@ -1,0 +1,16 @@
+﻿<div ng-if="!edit">
+    <input type="text" ng-model="obj[relation][display]" class="form-control" ng-focus="startEdit()">
+</div>
+
+<div ng-if="edit">
+    <input ng-model="typed" class="form-control" focus autocomplete="off"
+           uib-typeahead="x as x[display] for x in lookup($viewValue)"
+           typeahead-editable="false"
+           typeahead-select-on-exact="true"
+           typeahead-select-on-blur="true"
+           typeahead-on-select="select($item)"
+           ng-blur="stopEdit()"/>
+    <div ng-show="noResults">
+        <i class="glyphicon glyphicon-remove"></i> No Results Found
+    </div>
+</div>
