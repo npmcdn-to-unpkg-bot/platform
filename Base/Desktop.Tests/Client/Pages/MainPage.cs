@@ -4,6 +4,7 @@ namespace Desktop.Tests.Client.Pages
     using System.Threading;
 
     using Allors;
+    using Allors.Domain;
 
     using OpenQA.Selenium;
 
@@ -24,6 +25,13 @@ namespace Desktop.Tests.Client.Pages
 
         #endregion
 
+        public MainPage Login(Person person)
+        {
+            var url = Test.LoginUrl + "?user=" + Uri.EscapeDataString(person.UserName);
+            this.Driver.Navigate().GoToUrl(url);
+            return this;
+        }
+
         public bool SaveSuccessful
         {
             get
@@ -36,6 +44,8 @@ namespace Desktop.Tests.Client.Pages
         protected NgWebDriver Driver { get; }
 
         #region Links
+        private NgWebElement HomeLink => this.Driver.FindElement(By.Id("nav-home"));
+
         private NgWebElement RelationLink => this.Driver.FindElement(By.Id("nav-relation"));
 
         private NgWebElement OrganisationLink => this.Driver.FindElement(By.Id("nav-relation-organisation"));
@@ -43,7 +53,14 @@ namespace Desktop.Tests.Client.Pages
         #endregion
 
         #region Navigation
-        
+
+        public HomePage GoToHome()
+        {
+            this.HomeLink.Click();
+
+            return new HomePage(this.Driver);
+        }
+
         public OrganisationEditPage GoToOrganisation()
         {
             this.RelationLink.Click();

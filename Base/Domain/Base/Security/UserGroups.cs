@@ -36,20 +36,11 @@ namespace Allors.Domain
 
         private UniquelyIdentifiableCache<UserGroup> cache;
 
-        public UserGroup Administrators
-        {
-            get { return this.Cache.Get(AdministratorsId); }
-        }
+        public UserGroup Administrators => this.Cache.Get(AdministratorsId);
 
-        public UserGroup Guests
-        {
-            get { return this.Cache.Get(GuestsId); }
-        }
+        public UserGroup Guests => this.Cache.Get(GuestsId);
 
-        private UniquelyIdentifiableCache<UserGroup> Cache
-        {
-            get { return this.cache ?? (this.cache = new UniquelyIdentifiableCache<UserGroup>(this.Session)); }
-        }
+        private UniquelyIdentifiableCache<UserGroup> Cache => this.cache ?? (this.cache = new UniquelyIdentifiableCache<UserGroup>(this.Session));
 
         protected override void BasePrepare(Setup config)
         {
@@ -63,8 +54,8 @@ namespace Allors.Domain
             base.BaseSetup(config);
 
             // Default Groups
-            new UserGroupBuilder(Session).WithName(GuestsName).WithUniqueId(GuestsId).WithRole(new Roles(Session).Guest).Build();
-            new UserGroupBuilder(Session).WithName(AdministratorsName).WithUniqueId(AdministratorsId).WithRole(new Roles(Session).Administrator).Build();
+            new UserGroupBuilder(this.Session).WithName(GuestsName).WithUniqueId(GuestsId).WithRole(new Roles(this.Session).Guest).Build();
+            new UserGroupBuilder(this.Session).WithName(AdministratorsName).WithUniqueId(AdministratorsId).WithRole(new Roles(this.Session).Administrator).Build();
         }
 
         protected override void BaseSecure(Security config)

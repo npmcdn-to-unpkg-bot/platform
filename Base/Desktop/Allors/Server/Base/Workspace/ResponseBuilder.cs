@@ -4,22 +4,56 @@ using Allors.Meta;
 
 namespace Allors.Web
 {
+    using System.Security.Cryptography;
+    using System.Text;
+
+    using Allors.Domain;
+
     public class ResponseBuilder
     {
+        private readonly User user;
+
         private readonly HashSet<IObject> objects = new HashSet<IObject>();
         private readonly Dictionary<string, IObject> objectByName = new Dictionary<string, IObject>();
         private readonly Dictionary<string, List<IObject>> collectionsByName = new Dictionary<string, List<IObject>>();
         private readonly Dictionary<string, object> valueByName = new Dictionary<string, object>();
 
+        public ResponseBuilder(User user)
+        {
+            this.user = user;
+        }
+
         public Response Build()
         {
             return new Response
             {
+                UserSecurityHash = this.UserSecurityHash,
                 Objects = this.objects.Select(x => new[] {x.Id.ToString(), x.Strategy.ObjectVersion.ToString()}).ToArray(),
                 NamedObjects = this.objectByName.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Id.ToString()),
                 NamedCollections = this.collectionsByName.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Select(obj => obj.Id.ToString()).ToArray()),
                 NamedValues = this.valueByName,
             };
+        }
+
+        public string UserSecurityHash
+        {
+            get
+            {
+                var accessControls = this.user.AccessControlsWhereEffectiveUser;
+
+                // TODO: Append a Salt 
+                var idsWithVersion = string.Join(":", accessControls.OrderBy(v=>v.Id).Select(v=>v.Id + v.Strategy.ObjectVersion));
+
+                var crypt = new SHA256Managed();
+                var hash = new StringBuilder();
+                var crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(idsWithVersion), 0, Encoding.UTF8.GetByteCount(idsWithVersion));
+                foreach (var theByte in crypto)
+                {
+                    hash.Append(theByte.ToString("x2"));
+                }
+
+                return hash.ToString();
+            }
         }
 
         public void AddObject(string name, IObject namedObject, Tree tree = null)

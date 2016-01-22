@@ -24,6 +24,7 @@ module Tests {
 
             var required =
                 {
+                    userSecurityHash: "#",
                     objects: [
                         ["1", "1001"],
                         ["2", "1002"],

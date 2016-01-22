@@ -120,29 +120,23 @@ namespace Allors.Web.Mvc
 
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            if (this.AuthenticatedUser != null)
+            var locale = this.AuthenticatedUser?.Locale;
+            var cultureInfo = locale?.CultureInfo;
+
+            if (cultureInfo != null)
             {
-                var locale = this.AuthenticatedUser.Locale;
-                if (locale != null)
+                var originalCurrentCulture = Thread.CurrentThread.CurrentCulture;
+                var originalCurrentUICulture = Thread.CurrentThread.CurrentUICulture;
+
+                try
                 {
-                    var cultureInfo = locale.CultureInfo;
-
-                    if (cultureInfo != null)
-                    {
-                        var originalCurrentCulture = Thread.CurrentThread.CurrentCulture;
-                        var originalCurrentUICulture = Thread.CurrentThread.CurrentUICulture;
-
-                        try
-                        {
-                            Thread.CurrentThread.CurrentCulture = cultureInfo;
-                            Thread.CurrentThread.CurrentUICulture = cultureInfo;
-                        }
-                        catch
-                        {
-                            Thread.CurrentThread.CurrentCulture = originalCurrentCulture;
-                            Thread.CurrentThread.CurrentUICulture = originalCurrentUICulture;
-                        }
-                    }
+                    Thread.CurrentThread.CurrentCulture = cultureInfo;
+                    Thread.CurrentThread.CurrentUICulture = cultureInfo;
+                }
+                catch
+                {
+                    Thread.CurrentThread.CurrentCulture = originalCurrentCulture;
+                    Thread.CurrentThread.CurrentUICulture = originalCurrentUICulture;
                 }
             }
 

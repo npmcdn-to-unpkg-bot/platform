@@ -12,7 +12,7 @@ namespace Desktop.Tests.Client
         public void Status()
         {
             var wrappedDriver = this.Driver.WrappedDriver;
-            wrappedDriver.Navigate().GoToUrl(Test.TSUnitUrl);
+            wrappedDriver.Navigate().GoToUrl(Test.TsUnitUrl);
 
             var resultDiv = wrappedDriver.FindElement(By.Id("result"));
             var bad = resultDiv.FindElement(By.ClassName("bad"));

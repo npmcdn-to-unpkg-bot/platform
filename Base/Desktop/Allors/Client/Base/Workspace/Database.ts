@@ -19,6 +19,8 @@
 
     export class Database implements IDatabase {
         objectTypeByName: { [name: string]: ObjectType; } = {};
+
+        private userSecurityHash: string;
         private databaseObjectById: { [id: string]: DatabaseObject; } = {};
 
         constructor(data: Meta.Population) {
@@ -61,6 +63,11 @@
         }
 
         check(data: Data.Response): Data.LoadRequest {
+            if (data.userSecurityHash !== this.userSecurityHash) {
+                this.userSecurityHash = data.userSecurityHash;
+
+                this.databaseObjectById = {};
+            }
 
             var requireLoadIdsWithVersion = _.filter(data.objects, idAndVersion => {
                 var id = idAndVersion[0];

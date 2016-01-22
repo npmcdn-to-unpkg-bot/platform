@@ -24,13 +24,7 @@ namespace Allors.Domain
     {
         private UniquelyIdentifiableCache<Organisation> organisationCache;
 
-        public UniquelyIdentifiableCache<Organisation> Cache
-        {
-            get
-            {
-                return this.organisationCache ?? (this.organisationCache = new UniquelyIdentifiableCache<Organisation>(this.Session));
-            }
-        }
+        public UniquelyIdentifiableCache<Organisation> Cache => this.organisationCache ?? (this.organisationCache = new UniquelyIdentifiableCache<Organisation>(this.Session));
 
         protected override void CustomSecure(Security config)
         {
@@ -38,6 +32,8 @@ namespace Allors.Domain
 
             var full = new[] { Operations.Read, Operations.Write, Operations.Execute };
             config.GrantAdministrator(this.ObjectType, full);
+
+            config.GrantGuest(this.ObjectType, Operations.Read);
         }
     }
 }

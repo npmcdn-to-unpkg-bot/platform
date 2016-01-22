@@ -72,7 +72,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
 
                 var persons = new People(this.AllorsSession).Extent();
                 var or = persons.Filter.AddOr();
@@ -97,13 +97,13 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
                 responseBuilder.AddObject("person", this.AuthenticatedUser, MetaPerson.Instance.MainResponse);
-                return JsonSuccess(responseBuilder.Build());
+                return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
             {
-                return JsonError(e.Message);
+                return this.JsonError(e.Message);
             }
         }
 
@@ -113,14 +113,14 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
                 responseBuilder.AddObject("person", this.AuthenticatedUser, MetaPerson.Instance.SettingsResponse);
 
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
             {
-                return JsonError(e.Message);
+                return this.JsonError(e.Message);
             }
         }
         
@@ -134,7 +134,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
 
                 var filterOrganisations = new Organisations(this.AllorsSession).Extent();
                 responseBuilder.AddCollection("filterOrganisations", filterOrganisations, MetaOrganisation.Instance.FilterResponse);
@@ -153,16 +153,16 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
 
                 var filterOrganisations = new Organisations(this.AllorsSession).Extent();
                 responseBuilder.AddCollection("filterOrganisations", filterOrganisations, MetaOrganisation.Instance.FilterResponse);
 
-                return JsonSuccess(responseBuilder.Build());
+                return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
             {
-                return JsonError(e.Message);
+                return this.JsonError(e.Message);
             }
         }
         #endregion
@@ -172,7 +172,7 @@
         [HttpPost]
         public ActionResult Export()
         {
-            var responseBuilder = new ResponseBuilder();
+            var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
             try
             {
                 var response = responseBuilder.Build();
@@ -198,13 +198,12 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
-
-                return JsonSuccess(responseBuilder.Build());
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
+                return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
             {
-                return JsonError(e.Message);
+                return this.JsonError(e.Message);
             }
         }
 
@@ -214,7 +213,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
                 responseBuilder.AddObject("object", this.AuthenticatedUser);
                 responseBuilder.AddCollection("collection", new Organisations(this.AllorsSession).Extent());
                 return this.JsonSuccess(responseBuilder.Build());
@@ -231,7 +230,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
                 var organisation = new Organisations(this.AllorsSession).FindBy(M.Organisation.Owner, this.AuthenticatedUser);
                 responseBuilder.AddObject("root", organisation, M.Organisation.AngularEmployees);
                 return this.JsonSuccess(responseBuilder.Build());
@@ -248,7 +247,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
                 var organisation = new Organisations(this.AllorsSession).FindBy(M.Organisation.Owner, this.AuthenticatedUser);
                 responseBuilder.AddObject("root", organisation, M.Organisation.AngularShareholders);
                 return this.JsonSuccess(responseBuilder.Build());
@@ -265,7 +264,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder();
+                var responseBuilder = new ResponseBuilder(this.AuthenticatedUser);
                 responseBuilder.AddObject("root", this.AuthenticatedUser, M.Person.AngularHome);
                 return this.JsonSuccess(responseBuilder.Build());
             }

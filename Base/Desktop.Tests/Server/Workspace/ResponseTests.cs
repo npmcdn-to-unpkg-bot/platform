@@ -1,19 +1,45 @@
 namespace Desktop.Tests.Server.Workspace
 {
-    using System.Web.Mvc;
     using System.Linq;
-    using Allors.Web;
-    using Website.Controllers;
+    using System.Web.Mvc;
 
     using Allors;
     using Allors.Domain;
+    using Allors.Web;
 
     using NUnit.Framework;
 
     using Should;
 
+    using Website.Controllers;
+
     public class ResponseTests : ControllersTest
     {
+        [Test]
+        public void UserSecurityHash()
+        {
+            // Arrange
+            var user = new PersonBuilder(this.Session)
+                .WithFirstName("Koen")
+                .WithLastName("Van Exem")
+                .WithUserName("kvex")
+                .WithUserEmail("koen@vanexem.be")
+                .Build();
+
+            this.Session.Derive();
+            this.Session.Commit();
+
+            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = user };
+
+            // Act
+            var jsonResult = (JsonResult)controller.Main();
+            var response = (Response)jsonResult.Data;
+
+            // Assert
+            response.UserSecurityHash.ShouldNotBeEmpty();
+        }
+
+
         [Test]
         public void NoRoles()
         {
@@ -33,7 +59,7 @@ namespace Desktop.Tests.Server.Workspace
             // Act
             var jsonResult = (JsonResult)controller.Main();
             var response = (Response)jsonResult.Data;
-            
+
             // Assert
             response.Objects.Length.ShouldEqual(1);
 

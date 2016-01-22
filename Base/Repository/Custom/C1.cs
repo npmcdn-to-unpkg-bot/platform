@@ -376,6 +376,7 @@ namespace Allors.Repository.Domain
         #endregion
         
         [Id("09A6A387-A1B5-4038-B074-3A01C81CBDA2")]
+        [Group("Workspace")]
         public void ClassMethod(){}
         
         [Id("26FE4FD7-68C3-4DDA-8A44-87857B35B000")]

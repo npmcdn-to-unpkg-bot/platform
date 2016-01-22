@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace Allors.Web
+﻿namespace Allors.Web
 {
+    using System.Collections.Generic;
+
     public class Response
     {
+        public string UserSecurityHash { get; set; }
+
         public string[][] Objects { get; set; }
 
         public Dictionary<string, string> NamedObjects { get; set; }

@@ -444,8 +444,7 @@ module Tests {
             this.areIdentical(null, acme2.Manager);
             this.isTrue(this.arrayEqual([], acme2.Employees));
         }
-
-
+        
         onsaved() {
             var database = new Allors.Database(Allors.Meta.population);
             database.load(Fixture.loadData);
@@ -501,9 +500,9 @@ module Tests {
 
             var workspace = new Allors.Workspace(database);
 
-            var acme = workspace.get("101");
-            var ocme = workspace.get("102");
-            var icme = workspace.get("102");
+            var acme = <Allors.Domain.Organisation>workspace.get("101");
+            var ocme = <Allors.Domain.Organisation>workspace.get("102");
+            var icme = <Allors.Domain.Organisation>workspace.get("102");
 
             this.isTrue(acme.CanExecuteJustDoIt);
             this.isFalse(ocme.CanExecuteJustDoIt);

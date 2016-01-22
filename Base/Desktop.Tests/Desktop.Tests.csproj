@@ -95,6 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\ClientFixture.cs" />
+    <Compile Include="Client\Pages\HomePage.cs" />
+    <Compile Include="Client\SecurityTests..cs" />
     <Compile Include="Server\ServerFixture.cs" />
     <Compile Include="Server\ControllersTest.cs" />
     <Compile Include="Server\Workspace\LoadTests.cs" />

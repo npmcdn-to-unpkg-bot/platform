@@ -19,8 +19,6 @@
 // <summary>Defines the Person type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using System;
-
 namespace Allors.Domain
 {
     using Allors.Meta;

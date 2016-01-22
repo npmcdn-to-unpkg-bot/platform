@@ -16,7 +16,8 @@ namespace Desktop.Tests.Client
     public class Test
     {
         public const string AppUrl = "http://localhost:64738";
-        public const string TSUnitUrl = "http://localhost:64738/test";
+        public const string LoginUrl = "http://localhost:64738/Local/Login";
+        public const string TsUnitUrl = "http://localhost:64738/test";
 
         public NgWebDriver Driver { get; private set; }
 
