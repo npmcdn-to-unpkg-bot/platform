@@ -19,8 +19,8 @@
 
     export class Database implements IDatabase {
         objectTypeByName: { [name: string]: ObjectType; } = {};
+        userSecurityHash: string;
 
-        private userSecurityHash: string;
         private databaseObjectById: { [id: string]: DatabaseObject; } = {};
 
         constructor(data: Meta.Population) {

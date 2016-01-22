@@ -21,13 +21,10 @@
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
             var cultureName = DefaultCultureName;
-            if (this.AuthenticatedUser != null)
+            var locale = this.AllorsUser?.Locale;
+            if (!string.IsNullOrWhiteSpace(locale?.Name))
             {
-                var locale = this.AuthenticatedUser.Locale;
-                if (locale != null && !string.IsNullOrWhiteSpace(locale.Name))
-                {
-                    cultureName = locale.Name;
-                }
+                cultureName = locale.Name;
             }
 
             try
@@ -42,7 +39,7 @@
             }
 
             this.ViewBag.Locale = cultureName;
-            this.ViewBag.Class = IsProduction ? "production" : "test";
+            this.ViewBag.Class = this.IsProduction ? "production" : "test";
 
             return base.BeginExecuteCore(callback, state);
         }

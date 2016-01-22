@@ -33,7 +33,7 @@ namespace Allors.Web.Mvc
     public abstract partial class Controller : System.Web.Mvc.Controller
     {
         private ISession allorsSession;
-        private User authenticatedUser;
+        private User allorsUser;
 
         ~Controller()
         {
@@ -95,32 +95,37 @@ namespace Allors.Web.Mvc
             }
         }
 
-        public virtual User AuthenticatedUser
+        public virtual User AllorsUser
         {
             get
             {
-                if (this.authenticatedUser == null && this.User != null)
+                if (this.allorsUser == null && this.User != null)
                 {
                     var userName = this.User.Identity.Name;
 
-                    if (userName != null)
+                    if (!string.IsNullOrWhiteSpace(userName))
                     {
-                        this.authenticatedUser = new Users(this.allorsSession).FindBy(M.User.UserName, userName);
+                        this.allorsUser = new Users(this.allorsSession).FindBy(M.User.UserName, userName);
+                    }
+
+                    if (this.allorsUser == null)
+                    {
+                        this.allorsUser = Singleton.Instance(this.AllorsSession).Guest;
                     }
                 }
 
-                return this.authenticatedUser;
+                return this.allorsUser;
             }
 
             set
             {
-                this.authenticatedUser = value;
+                this.allorsUser = value;
             }
         }
 
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            var locale = this.AuthenticatedUser?.Locale;
+            var locale = this.AllorsUser?.Locale;
             var cultureInfo = locale?.CultureInfo;
 
             if (cultureInfo != null)

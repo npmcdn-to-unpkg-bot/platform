@@ -20,6 +20,7 @@ module Tests {
 
         checkVersions() {
             var database = new Allors.Database(Allors.Meta.population);
+            database.userSecurityHash = "#";
             database.load(Fixture.loadData);
 
             var required =
@@ -35,6 +36,26 @@ module Tests {
             var requireLoad = database.check(required);
 
             this.areIdentical(1, requireLoad.objects.length);
+        }
+
+        checkVersionsUserSecurityHash() {
+            var database = new Allors.Database(Allors.Meta.population);
+            database.userSecurityHash = "abc";
+            database.load(Fixture.loadData);
+
+            var required =
+                {
+                    userSecurityHash: "def",
+                    objects: [
+                        ["1", "1001"],
+                        ["2", "1002"],
+                        ["3", "1004"]
+                    ]
+                }
+
+            var requireLoad = database.check(required);
+
+            this.areIdentical(3, requireLoad.objects.length);
         }
     }
 }

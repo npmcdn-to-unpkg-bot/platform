@@ -29,7 +29,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = user };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = user };
 
             // Act
             var jsonResult = (JsonResult)controller.Main();
@@ -54,7 +54,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var controller = new AngularController { AllorsSession = this.Session , AuthenticatedUser = user};
+            var controller = new AngularController { AllorsSession = this.Session , AllorsUser = user};
 
             // Act
             var jsonResult = (JsonResult)controller.Main();
@@ -98,7 +98,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Commit();
 
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = user };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = user };
 
             // Act
             var jsonResult = (JsonResult)controller.Home();
@@ -160,7 +160,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
             
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = koen };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = koen };
 
             // Act
             var jsonResult = (JsonResult)controller.Employees();
@@ -233,7 +233,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = koen };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = koen };
 
             // Act
             var jsonResult = (JsonResult)controller.Shareholders();
@@ -281,7 +281,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = user };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = user };
 
             // Act
             var jsonResult = (JsonResult)controller.NoTree();

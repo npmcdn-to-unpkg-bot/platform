@@ -97,7 +97,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session,AuthenticatedUser = administrator};
+            var controller = new AngularController { AllorsSession = this.Session,AllorsUser = administrator};
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
@@ -145,7 +145,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
@@ -198,7 +198,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
@@ -251,7 +251,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
@@ -305,7 +305,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
@@ -338,7 +338,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
@@ -387,7 +387,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
@@ -438,7 +438,7 @@ namespace Desktop.Tests.Server.Workspace
                 }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator };
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);

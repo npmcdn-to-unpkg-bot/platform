@@ -104,7 +104,7 @@ namespace Desktop.Tests.Server.Workspace
                 Objects = new[] { c1a.Id.ToString() }
             };
 
-            var controller = new AngularController { AllorsSession = this.Session, AuthenticatedUser = administrator};
+            var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator};
 
             // Act
             var jsonResult = (JsonResult)controller.Load(loadRequest);
