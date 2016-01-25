@@ -244,6 +244,7 @@
                             }
 
                             @interface.PartialByAssemblyName.Add(assemblyName, partialInterface);
+                            @interface.XmlDoc = symbol.GetDocumentationCommentXml();
                         }
 
                         var classDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>().SingleOrDefault();
@@ -266,6 +267,7 @@
                             }
 
                             @class.PartialByAssemblyName.Add(assemblyName, partialClass);
+                            @class.XmlDoc = symbol.GetDocumentationCommentXml();
                         }
                     }
                 }
@@ -328,6 +330,8 @@
                                 var propertyRoleName = propertySymbol.Name;
 
                                 var property = new Property(this.inflector, composite, propertyRoleName);
+                                property.XmlDoc = propertySymbol.GetDocumentationCommentXml();
+
                                 partialType.PropertyByName.Add(propertyRoleName, property);
                                 composite.PropertyByRoleName.Add(propertyRoleName, property);
                             }
@@ -339,6 +343,8 @@
                                 var methodName = methodSymbol.Name;
 
                                 var method = new Method(composite, methodName);
+                                method.XmlDoc = methodSymbol.GetDocumentationCommentXml();
+
                                 partialType.MethodByName.Add(methodName, method);
                                 composite.MethodByName.Add(methodName, method);
                             }

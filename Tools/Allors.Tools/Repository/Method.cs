@@ -26,7 +26,24 @@ namespace Allors.Tools.Repository
 
     public class Method
     {
+        private string xmlDoc;
+
         public string Name { get; }
+
+        public string XmlDoc
+        {
+            get
+            {
+                return this.xmlDoc;
+            }
+
+            set
+            {
+                this.xmlDoc = !string.IsNullOrWhiteSpace(value) ? value : null;
+            }
+        }
+
+        public string VerbatimXmlDoc => this.xmlDoc?.Replace("\"", "\"\"");
 
         public Method DefiningMethod { get; internal set; }
         
