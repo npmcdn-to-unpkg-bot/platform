@@ -34,7 +34,7 @@
                     this.toaster.info("Successfully saved.");
                     this.$rootScope.$broadcast("refresh", this.context.name);
                 })
-                .catch(responseError => this.error(responseError));
+                .catch(responseError => this.error(<Allors.Data.ResponseError>responseError));
         }
 
         private refresh(init: boolean): ng.IPromise<any> {

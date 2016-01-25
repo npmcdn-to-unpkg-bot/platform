@@ -57,17 +57,13 @@
 
         load(data: Data.LoadResponse): void {
             _.forEach(data.objects, objectData => {
-                var databaseObject = new DatabaseObject(this, objectData);
+                var databaseObject = new DatabaseObject(this, data, objectData);
                 this.databaseObjectById[databaseObject.id] = databaseObject;
             });
         }
 
         check(data: Data.Response): Data.LoadRequest {
-            if (data.userSecurityHash !== this.userSecurityHash) {
-                this.userSecurityHash = data.userSecurityHash;
-
-                this.databaseObjectById = {};
-            }
+            var userSecurityHash = data.userSecurityHash;
 
             var requireLoadIdsWithVersion = _.filter(data.objects, idAndVersion => {
                 var id = idAndVersion[0];
@@ -75,7 +71,7 @@
 
                 var databaseObject = this.databaseObjectById[id];
 
-                return (databaseObject === undefined) || (databaseObject === null) || (databaseObject.version !== version);
+                return (databaseObject === undefined) || (databaseObject === null) || (databaseObject.version !== version) || (databaseObject.userSecurityHash !== userSecurityHash);
             });
 
             var requireLoadIds = new Data.LoadRequest();

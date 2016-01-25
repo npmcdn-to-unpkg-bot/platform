@@ -60,12 +60,12 @@
 
             var saveRequest = context.workspace.save();
             this.$http.post('/Angular/Save', saveRequest)
-                .then((response: ng.IHttpPromiseCallbackArg<Allors.Data.SaveResponse>) => {
+                .then((response: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
                     var saveResponse = response.data;
                     if (saveResponse.hasErrors) {
                         defer.reject(saveResponse);
                     } else {
-                        context.workspace.onSaved(saveResponse);
+                        context.workspace.onSaved(<Data.SaveResponse>saveResponse);
                         defer.resolve(saveResponse);
                     }
                 })

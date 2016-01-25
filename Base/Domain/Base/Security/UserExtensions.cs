@@ -20,7 +20,28 @@
 
 namespace Allors.Domain
 {
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+
     public static partial class UserExtensions
     {
+        public static string SecurityHash(this User user)
+        {
+            var accessControls = user.AccessControlsWhereEffectiveUser;
+
+            // TODO: Append a Salt 
+            var idsWithVersion = string.Join(":", accessControls.OrderBy(v => v.Id).Select(v => v.Id + v.Strategy.ObjectVersion));
+
+            var crypt = new SHA256Managed();
+            var hash = new StringBuilder();
+            var crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(idsWithVersion), 0, Encoding.UTF8.GetByteCount(idsWithVersion));
+            foreach (var theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+
+            return hash.ToString();
+        }
     }
 }

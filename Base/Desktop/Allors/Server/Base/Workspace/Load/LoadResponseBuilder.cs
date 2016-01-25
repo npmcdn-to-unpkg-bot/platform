@@ -45,6 +45,7 @@
 
             return new LoadResponse
             {
+                UserSecurityHash = this.user.SecurityHash(),
                 Objects = objects.Select(x => new LoadResponseObject
                 {
                     I = x.Id.ToString(),

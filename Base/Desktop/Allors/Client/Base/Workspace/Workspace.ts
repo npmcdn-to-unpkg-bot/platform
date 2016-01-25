@@ -99,6 +99,7 @@
                     var newWorkspaceObject = this.newWorkspaceObjectById[newId];
 
                     var loadResponse: Allors.Data.LoadResponse = {
+                        userSecurityHash: "#", // This should trigger a load on next check
                         objects: [
                             {
                                 i: id,

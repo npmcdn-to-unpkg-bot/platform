@@ -251,7 +251,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ViewConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Allors\Server\Test\Mvc\MvcController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -502,7 +501,6 @@
     <Content Include="Settings.StyleCop" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Allors\Server\Test\Mvc\Index.cshtml" />
     <Content Include="Views\Angular\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

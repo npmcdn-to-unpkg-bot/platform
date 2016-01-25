@@ -2,6 +2,7 @@
     export interface IDatabaseObject {
         id: string;
         version: string;
+        userSecurityHash: string;
         objectType: ObjectType;
 
         database: IDatabase;
@@ -16,12 +17,14 @@
 
         private i: string;
         private v: string;
+        private u: string;
         private t: string;
 
-        constructor(database: IDatabase, loadObject: Data.LoadResponseObject) {
+        constructor(database: IDatabase, loadResponse: Data.LoadResponse, loadObject: Data.LoadResponseObject) {
             this.database = database;
             this.i = loadObject.i;
             this.v = loadObject.v;
+            this.u = loadResponse.userSecurityHash;
             this.t = loadObject.t;
 
             this.roles = {};
@@ -64,6 +67,10 @@
 
         get version(): string {
             return this.v;
+        }
+
+        get userSecurityHash(): string {
+            return this.u;
         }
 
         get objectType(): ObjectType {

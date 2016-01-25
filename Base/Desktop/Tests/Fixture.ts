@@ -1,6 +1,7 @@
 ﻿module Tests {
     export class Fixture {
         static loadData: Allors.Data.LoadResponse = {
+            userSecurityHash: "#",
             objects: [
                 {
                     i: "1",

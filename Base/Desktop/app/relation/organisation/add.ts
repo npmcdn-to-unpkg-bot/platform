@@ -33,7 +33,7 @@
                     this.notificationService.info("Successfully saved.");
                     this.$rootScope.$broadcast("refresh", this.context.name);
                 })
-                .catch(responseError => this.error(responseError));
+                .catch(responseError => this.error(<Allors.Data.ResponseError>responseError));
         }
 
         cancel(): void {

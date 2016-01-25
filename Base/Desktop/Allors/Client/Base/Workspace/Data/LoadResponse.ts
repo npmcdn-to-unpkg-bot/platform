@@ -9,6 +9,8 @@
     }
 
     export interface LoadResponse {
+        userSecurityHash: string;
+
         objects: LoadResponseObject[];
     }
 }
