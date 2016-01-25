@@ -32,6 +32,8 @@ namespace Allors.Meta
         private string name;
         private Composite objectType;
 
+        private string xmlDoc;
+
         public MethodType(MetaPopulation metaPopulation, Guid id)
             : base(metaPopulation)
         {
@@ -39,7 +41,34 @@ namespace Allors.Meta
 
             metaPopulation.OnMethodTypeCreated(this);
         }
-        
+
+        public string XmlDoc
+        {
+            get
+            {
+                return this.xmlDoc;
+            }
+
+            set
+            {
+                this.xmlDoc = !string.IsNullOrWhiteSpace(value) ? value : null;
+            }
+        }
+
+        public string XmlDocComment
+        {
+            get
+            {
+                var lines = this.xmlDoc?.Split('\n').Select(v => "   /// " + v).ToArray();
+                if (lines != null && lines.Any())
+                {
+                    return string.Join("\n", lines);
+                }
+
+                return null;
+            }
+        }
+
         public string Name
         {
             get

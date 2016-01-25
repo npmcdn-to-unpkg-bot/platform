@@ -150,7 +150,7 @@ relation(property) ::= <<
 	{
 		var relationType = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), new System.Guid("$property.AttributeByName.AssociationId.Value$"), new System.Guid("$property.AttributeByName.RoleId.Value$"));
 		relationType.AssociationType.ObjectType = Meta$property.DefiningType.SingularName$.Instance;
-$if(property.VerbatimXmlDoc)$		relationType.XmlDoc = @"$property.VerbatimXmlDoc$";$endif$
+$if(property.XmlDoc)$		relationType.XmlDoc = @"$property.XmlDoc.VerbatimValue$";$endif$
 $if(property.AttributesByName.Group)$$property.AttributesByName.Group:{grp|$roleGroup(grp)$}; separator="\n"$$endif$
 $if(property.AttributeByName.Multiplicity)$		relationType.AssignedMultiplicity = Allors.Multiplicity.$property.AttributeByName.Multiplicity.Value$;$endif$
 $if(property.AttributeByName.Derived)$		relationType.IsDerived = $property.AttributeByName.Derived.Value$;$endif$
@@ -177,7 +177,7 @@ definedMethod(method) ::= <<
 				method.ObjectType = Meta$method.DefiningType.SingularName$.Instance;
 				method.Name = "$method.Name$";
 $if(method.AttributesByName.Group)$$method.AttributesByName.Group:{grp|$methodGroup(grp)$}; separator="\n"$$endif$
-$if(method.VerbatimXmlDoc)$		method.XmlDoc = @"$method.VerbatimXmlDoc$";$endif$
+$if(method.XmlDoc)$		method.XmlDoc = @"$method.XmlDoc.VerbatimValue$";$endif$
 				Meta$composite.SingularName$.Instance.$method.Name$ = method; 
 			}
 >>
@@ -290,7 +290,7 @@ $interface.InheritedReverseProperties:{property|         public AssociationType 
 			{
 				SingularName = "$interface.SingularName$",
 				$if(interface.AttributeByName.Plural)$PluralName = "$interface.AttributeByName.Plural.Value$",$endif$
-$if(interface.VerbatimXmlDoc)$		XmlDoc = @"$interface.VerbatimXmlDoc$"$endif$
+$if(interface.XmlDoc)$		XmlDoc = @"$interface.XmlDoc.VerbatimValue$"$endif$
 			};
         }
 	}
@@ -335,7 +335,7 @@ $class.InheritedReverseProperties:{property|         public AssociationType $pro
 			{
 				SingularName = "$class.SingularName$",
 				PluralName = "$class.PluralName$",
-$if(class.VerbatimXmlDoc)$		XmlDoc = @"$class.VerbatimXmlDoc$"$endif$
+$if(class.XmlDoc)$		XmlDoc = @"$class.XmlDoc.VerbatimValue$"$endif$
 			};
         }
 

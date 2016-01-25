@@ -20,6 +20,8 @@
 
 namespace Allors.Meta
 {
+    using System.Linq;
+
     public abstract partial class Method
     {
         private readonly IObject @object;
@@ -45,7 +47,19 @@ namespace Allors.Meta
             }
         }
 
-        public string VerbatimXmlDoc => this.xmlDoc?.Replace("\"", "\"\"");
+        public string XmlDocComment
+        {
+            get
+            {
+                var lines = this.xmlDoc?.Split('\n').Select(v => "   /// " + v).ToArray();
+                if (lines != null && lines.Any())
+                {
+                    return string.Join("\n", lines);
+                }
+
+                return null;
+            }
+        }
 
         public abstract MethodInvocation MethodInvocation { get; }
 
