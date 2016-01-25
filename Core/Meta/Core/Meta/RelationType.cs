@@ -43,6 +43,8 @@ namespace Allors.Meta
 
         private string[] groups;
 
+        private string xmlDoc;
+
         public RelationType(MetaPopulation metaPopulation, Guid id, Guid associationTypeId, Guid roleTypdId)
             : base(metaPopulation)
         {
@@ -53,6 +55,21 @@ namespace Allors.Meta
 
             metaPopulation.OnRelationTypeCreated(this);
         }
+
+        public string XmlDoc
+        {
+            get
+            {
+                return this.xmlDoc;
+            }
+
+            set
+            {
+                this.xmlDoc = !string.IsNullOrWhiteSpace(value) ? value : null;
+            }
+        }
+
+        public string VerbatimXmlDoc => this.xmlDoc?.Replace("\"", "\"\"");
 
         public bool IsDerived
         {

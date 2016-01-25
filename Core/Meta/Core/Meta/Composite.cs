@@ -39,6 +39,23 @@ namespace Allors.Meta
         private Dictionary<string, IList<AssociationType>> derivedAssociationTypesByGroup;
         private Dictionary<string, IList<MethodType>> derivedMethodTypesByGroup;
 
+        private string xmlDoc;
+
+        public string XmlDoc
+        {
+            get
+            {
+                return this.xmlDoc;
+            }
+
+            set
+            {
+                this.xmlDoc = !string.IsNullOrWhiteSpace(value) ? value : null;
+            }
+        }
+
+        public string VerbatimXmlDoc => this.xmlDoc?.Replace("\"", "\"\"");
+
         protected Composite(MetaPopulation metaPopulation)
             : base(metaPopulation)
         {

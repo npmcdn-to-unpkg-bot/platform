@@ -23,22 +23,33 @@ namespace Allors.Meta
     public abstract partial class Method
     {
         private readonly IObject @object;
-        
+
+        private string xmlDoc;
+
         protected Method(IObject @object)
         {
             this.Executed = false;
             this.@object = @object;
         }
-
-        public abstract MethodInvocation MethodInvocation { get; }
-
-        public IObject Object
+        
+        public string XmlDoc
         {
             get
             {
-                return this.@object;
+                return this.xmlDoc;
+            }
+
+            set
+            {
+                this.xmlDoc = !string.IsNullOrWhiteSpace(value) ? value : null;
             }
         }
+
+        public string VerbatimXmlDoc => this.xmlDoc?.Replace("\"", "\"\"");
+
+        public abstract MethodInvocation MethodInvocation { get; }
+
+        public IObject Object => this.@object;
 
         public bool Executed { get; set; }
 

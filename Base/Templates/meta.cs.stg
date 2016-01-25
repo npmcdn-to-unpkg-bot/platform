@@ -150,6 +150,7 @@ relation(property) ::= <<
 	{
 		var relationType = new RelationType(this.metaPopulation, new System.Guid("$property.AttributeByName.Id.Value$"), new System.Guid("$property.AttributeByName.AssociationId.Value$"), new System.Guid("$property.AttributeByName.RoleId.Value$"));
 		relationType.AssociationType.ObjectType = Meta$property.DefiningType.SingularName$.Instance;
+$if(property.VerbatimXmlDoc)$		relationType.XmlDoc = @"$property.VerbatimXmlDoc$";$endif$
 $if(property.AttributesByName.Group)$$property.AttributesByName.Group:{grp|$roleGroup(grp)$}; separator="\n"$$endif$
 $if(property.AttributeByName.Multiplicity)$		relationType.AssignedMultiplicity = Allors.Multiplicity.$property.AttributeByName.Multiplicity.Value$;$endif$
 $if(property.AttributeByName.Derived)$		relationType.IsDerived = $property.AttributeByName.Derived.Value$;$endif$
@@ -176,6 +177,7 @@ definedMethod(method) ::= <<
 				method.ObjectType = Meta$method.DefiningType.SingularName$.Instance;
 				method.Name = "$method.Name$";
 $if(method.AttributesByName.Group)$$method.AttributesByName.Group:{grp|$methodGroup(grp)$}; separator="\n"$$endif$
+$if(method.VerbatimXmlDoc)$		method.XmlDoc = @"$method.VerbatimXmlDoc$";$endif$
 				Meta$composite.SingularName$.Instance.$method.Name$ = method; 
 			}
 >>
@@ -287,7 +289,8 @@ $interface.InheritedReverseProperties:{property|         public AssociationType 
 			this.Interface = new Interface(metaPopulation, new System.Guid("$interface.AttributeByName.Id.Value$"))
 			{
 				SingularName = "$interface.SingularName$",
-				$if(interface.AttributeByName.Plural)$PluralName = "$interface.AttributeByName.Plural.Value$"$endif$
+				$if(interface.AttributeByName.Plural)$PluralName = "$interface.AttributeByName.Plural.Value$",$endif$
+$if(interface.VerbatimXmlDoc)$		XmlDoc = @"$interface.VerbatimXmlDoc$"$endif$
 			};
         }
 	}
@@ -331,7 +334,8 @@ $class.InheritedReverseProperties:{property|         public AssociationType $pro
 			this.Class = new Class(metaPopulation, new System.Guid("$class.AttributeByName.Id.Value$"))
 			{
 				SingularName = "$class.SingularName$",
-				PluralName = "$class.PluralName$"
+				PluralName = "$class.PluralName$",
+$if(class.VerbatimXmlDoc)$		XmlDoc = @"$class.VerbatimXmlDoc$"$endif$
 			};
         }
 
