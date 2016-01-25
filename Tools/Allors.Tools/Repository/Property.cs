@@ -32,23 +32,8 @@ namespace Allors.Tools.Repository
 
         private string name;
 
-        private string xmlDoc;
-
-        public string XmlDoc
-        {
-            get
-            {
-                return this.xmlDoc;
-            }
-
-            set
-            {
-                this.xmlDoc = !string.IsNullOrWhiteSpace(value) ? value : null;
-            }
-        }
-
-        public string VerbatimXmlDoc => this.xmlDoc?.Replace("\"","\"\"");
-
+        public XmlDoc XmlDoc { get; set; }
+        
         public Composite DefiningType { get; }
 
         public Type Type { get; internal set; }

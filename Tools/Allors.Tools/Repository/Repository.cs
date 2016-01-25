@@ -244,7 +244,8 @@
                             }
 
                             @interface.PartialByAssemblyName.Add(assemblyName, partialInterface);
-                            @interface.XmlDoc = symbol.GetDocumentationCommentXml();
+                            var xmlDoc = symbol.GetDocumentationCommentXml(null, true);
+                            @interface.XmlDoc = !string.IsNullOrWhiteSpace(xmlDoc) ? new XmlDoc(xmlDoc) : null;
                         }
 
                         var classDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>().SingleOrDefault();
@@ -267,7 +268,9 @@
                             }
 
                             @class.PartialByAssemblyName.Add(assemblyName, partialClass);
-                            @class.XmlDoc = symbol.GetDocumentationCommentXml();
+
+                            var xmlDoc = symbol.GetDocumentationCommentXml(null, true);
+                            @class.XmlDoc = !string.IsNullOrWhiteSpace(xmlDoc) ? new XmlDoc(xmlDoc) : null;
                         }
                     }
                 }
@@ -329,8 +332,13 @@
                                 var propertySymbol = semanticModel.GetDeclaredSymbol(propertyDeclaration);
                                 var propertyRoleName = propertySymbol.Name;
 
-                                var property = new Property(this.inflector, composite, propertyRoleName);
-                                property.XmlDoc = propertySymbol.GetDocumentationCommentXml();
+                                var xmlDocString = propertySymbol.GetDocumentationCommentXml(null, true);
+                                var xmlDoc = !string.IsNullOrWhiteSpace(xmlDocString) ? new XmlDoc(xmlDocString) : null;
+
+                                var property = new Property(this.inflector, composite, propertyRoleName)
+                                                   {
+                                                       XmlDoc = xmlDoc
+                                };
 
                                 partialType.PropertyByName.Add(propertyRoleName, property);
                                 composite.PropertyByRoleName.Add(propertyRoleName, property);
@@ -342,8 +350,13 @@
                                 var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
                                 var methodName = methodSymbol.Name;
 
-                                var method = new Method(composite, methodName);
-                                method.XmlDoc = methodSymbol.GetDocumentationCommentXml();
+                                var xmlDocString = methodSymbol.GetDocumentationCommentXml(null, true);
+                                var xmlDoc = !string.IsNullOrWhiteSpace(xmlDocString) ? new XmlDoc(xmlDocString) : null;
+
+                                var method = new Method(composite, methodName)
+                                                 {
+                                                     XmlDoc = xmlDoc
+                                };
 
                                 partialType.MethodByName.Add(methodName, method);
                                 composite.MethodByName.Add(methodName, method);

@@ -31,8 +31,6 @@ namespace Allors.Tools.Repository
     {
         private readonly Inflector.Inflector inflector;
 
-        private string xmlDoc;
-
         protected Composite(Inflector.Inflector inflector, string name)
             : base(name)
         {
@@ -46,20 +44,7 @@ namespace Allors.Tools.Repository
             this.MethodByName = new Dictionary<string, Method>();
         }
 
-        public string XmlDoc
-        {
-            get
-            {
-                return this.xmlDoc;
-            }
-
-            set
-            {
-                this.xmlDoc = !string.IsNullOrWhiteSpace(value) ? value : null;
-            }
-        }
-
-        public string VerbatimXmlDoc => this.xmlDoc?.Replace("\"", "\"\"");
+        public XmlDoc XmlDoc { get; set; }
 
         public string PluralName
         {

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Method.cs" company="Allors bvba">
+// <copyright file="XmlDoc.cs" company="Allors bvba">
 // Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,29 +22,32 @@
 namespace Allors.Tools.Repository
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml.Linq;
 
-    public class Method
+    public class XmlDoc
     {
-        public string Name { get; }
+        public string FullValue { get; }
 
-        public XmlDoc XmlDoc { get; set; }
+        public string VerbatimFullValue => this.FullValue?.Replace("\"", "\"\"");
 
-        public Method DefiningMethod { get; internal set; }
-        
-        public Type DefiningType { get; internal set; }
+        public string Value { get; }
 
-        public Dictionary<string, Attribute> AttributeByName { get; }
+        public string VerbatimValue => this.Value?.Replace("\"", "\"\"");
 
-        public Dictionary<string, Attribute[]> AttributesByName { get; }
-
-        public Method(Type definingType, string name)
+        public XmlDoc(string value)
         {
-            this.AttributeByName = new Dictionary<string, Attribute>();
-            this.AttributesByName = new Dictionary<string, Attribute[]>();
+            this.FullValue = value;
 
-            this.DefiningType = definingType;
-            this.Name = name;
+            try
+            {
+                var element = XElement.Parse(value);
+                this.Value = element.Elements().First().ToString();
+            }
+            catch
+            {
+                throw new Exception("Could not parse XmlDoc: \n" + this.FullValue);
+            }
         }
     }
 }

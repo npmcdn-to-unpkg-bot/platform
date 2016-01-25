@@ -98,6 +98,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Repository\Assembly.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Repository\Generation\Storage\Location.cs" />
     <Compile Include="Repository\Generation\StringTemplate.cs" />
     <Compile Include="Repository\Class.cs" />
+    <Compile Include="Repository\XmlDoc.cs" />
     <Compile Include="Repository\Unit.cs" />
     <Compile Include="Repository\Interface.cs" />
     <Compile Include="Repository\Type.cs" />
