@@ -119,7 +119,7 @@
             foreach (var syntaxTree in projectInfo.DocumentBySyntaxTree.Keys)
             {
                 var document = projectInfo.DocumentBySyntaxTree[syntaxTree];
-                if (document.Folders.Count == 1)
+                if (document.Folders.Count >= 1)
                 {
                     var attributeLists =
                         syntaxTree.GetRoot()
@@ -155,7 +155,7 @@
             foreach (var syntaxTree in projectInfo.DocumentBySyntaxTree.Keys)
             {
                 var document = projectInfo.DocumentBySyntaxTree[syntaxTree];
-                if (document.Folders.Count == 1)
+                if (document.Folders.Count >= 1)
                 {
                     var attributeLists =
                         syntaxTree.GetRoot()
@@ -212,7 +212,8 @@
             foreach (var syntaxTree in projectInfo.DocumentBySyntaxTree.Keys)
             {
                 var document = projectInfo.DocumentBySyntaxTree[syntaxTree];
-                if (document.Folders.Count == 1)
+
+                if (document.Folders.Count >= 1)
                 {
                     var semanticModel = projectInfo.SemanticModelBySyntaxTree[syntaxTree];
 
@@ -283,8 +284,15 @@
                 var directInterfaces = allInterfaces.Except(allInterfaces.SelectMany(t => t.GetInterfaces()));
                 foreach (var definedImplementedInterface in directInterfaces)
                 {
-                    var implementedInterface = this.InterfaceBySingularName[definedImplementedInterface.Name];
-                    composite.ImplementedInterfaces.Add(implementedInterface);
+                    Interface implementedInterface;
+                    if (this.InterfaceBySingularName.TryGetValue(definedImplementedInterface.Name, out implementedInterface))
+                    {
+                        composite.ImplementedInterfaces.Add(implementedInterface);
+                    }
+                    else
+                    {
+                        throw new Exception("Can not find implemented interface " + definedImplementedInterface.Name + " on " + composite.SingularName);
+                    }
                 }
             }
         }
@@ -294,7 +302,7 @@
             foreach (var syntaxTree in projectInfo.DocumentBySyntaxTree.Keys)
             {
                 var document = projectInfo.DocumentBySyntaxTree[syntaxTree];
-                if (document.Folders.Count == 1)
+                if (document.Folders.Count >= 1)
                 {
                     var semanticModel = projectInfo.SemanticModelBySyntaxTree[syntaxTree];
 
