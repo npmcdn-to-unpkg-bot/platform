@@ -299,7 +299,7 @@ namespace Allors.Adapters.Object.SqlClient
                         }
                         else
                         {
-                            statement.Append(alias + "." + inAssociation.RoleType.SingularFullName + " IS NOT NULL ");
+                            statement.Append(alias + "." + this.Mapping.ColumnNameByRelationType[inAssociation.RelationType] + " IS NOT NULL ");
                         }
                     }
                 }

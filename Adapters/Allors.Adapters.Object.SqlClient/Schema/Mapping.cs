@@ -320,14 +320,14 @@ namespace Allors.Adapters.Object.SqlClient
                     var associationType3 = relationType.AssociationType;
                     if (roleType.ObjectType.IsUnit)
                     {
-                        this.ColumnNameByRelationType[relationType] = this.NormalizeName(roleType.SingularFullName);
+                        this.ColumnNameByRelationType[relationType] = this.NormalizeName(roleType.SingularName);
                         this.ParamNameByRoleType[roleType] = string.Format(ParamFormat, roleType.SingularFullName);
                     }
                     else
                     {
                         if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
                         {
-                            this.ColumnNameByRelationType[relationType] = this.NormalizeName(roleType.SingularFullName);
+                            this.ColumnNameByRelationType[relationType] = this.NormalizeName(roleType.SingularName);
                         }
                     }
                 }
