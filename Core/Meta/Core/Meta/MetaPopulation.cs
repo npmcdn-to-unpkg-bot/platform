@@ -127,6 +127,8 @@ namespace Allors.Meta
             }
         }
         
+        public IEnumerable<Composite> SortedComposites => this.Composites.OrderBy(v => v.Name);
+
         /// <summary>
         /// Gets a value indicating whether this instance is valid.
         /// </summary>

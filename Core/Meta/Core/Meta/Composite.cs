@@ -284,6 +284,8 @@ namespace Allors.Meta
 
         public IEnumerable<RoleType> ExclusiveRoleTypes => this.RoleTypes.Where(roleType => this.Equals(roleType.AssociationType.ObjectType)).ToArray();
 
+        public IEnumerable<RoleType> SortedExclusiveRoleTypes => this.ExclusiveRoleTypes.OrderBy(v => v.Name);
+
         /// <summary>
         /// Gets the method types.
         /// </summary>
