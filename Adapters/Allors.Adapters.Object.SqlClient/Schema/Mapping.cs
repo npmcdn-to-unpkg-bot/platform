@@ -310,7 +310,7 @@ namespace Allors.Adapters.Object.SqlClient
                     var roleType = relationType.RoleType;
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                     {
-                        this.ColumnNameByRelationType[relationType] = this.NormalizeName(associationType.SingularFullName);
+                        this.ColumnNameByRelationType[relationType] = this.NormalizeName(associationType.SingularPropertyName);
                     }
                 }
 
