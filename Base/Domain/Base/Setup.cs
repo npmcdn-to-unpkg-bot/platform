@@ -50,13 +50,7 @@ namespace Allors
 
         public DirectoryInfo DataPath { get; private set; }
 
-        public bool ExistDataPath 
-        {
-            get
-            {
-                return this.DataPath != null;
-            }
-        }
+        public bool ExistDataPath => this.DataPath != null;
 
         public void Apply()
         {
