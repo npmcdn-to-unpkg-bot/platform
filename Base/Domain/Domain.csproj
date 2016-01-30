@@ -67,6 +67,7 @@
     <Compile Include="Base\Content\ImageCreateThumbnail.cs" />
     <Compile Include="Base\Content\ImageCreateResponsive.cs" />
     <Compile Include="Base\Derivations\AsyncDerivations.cs" />
+    <Compile Include="Base\Derivations\Logging\DerivationLogFormatter.cs" />
     <Compile Include="Base\Derivations\Logging\ListDerivationLog.cs" />
     <Compile Include="Base\Derivations\Logging\DerivationGraph.cs" />
     <Compile Include="Base\Derivations\Logging\DerivationNode.cs" />
