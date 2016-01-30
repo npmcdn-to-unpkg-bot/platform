@@ -33,72 +33,86 @@ namespace Allors.Domain.Logging
             this.List = new List<string>();
         }
 
+        public string Text => string.Join("\n", this.List);
+
         public override string ToString()
         {
-            return string.Join("\n", this.List);
+            return this.Text;
         }
 
         // Derivation
         public void StartedGeneration(int generation)
         {
-            this.List.Add($"Started Generation #{generation}");
+            var message = DerivationLogFormatter.FormatStartedGeneration(generation);
+            this.List.Add(message);
         }
 
         public void StartedPreparation(int preparationRun)
         {
-            this.List.Add($"Started Preparation #{preparationRun}");
+            var message = DerivationLogFormatter.FormatStartedPreparation(preparationRun);
+            this.List.Add(message);
         }
 
         public void PreDeriving(Object derivable)
         {
-            this.List.Add($"Preparing #{derivable}");
+            var message = DerivationLogFormatter.FormatPreDeriving(derivable);
+            this.List.Add(message);
         }
 
         public void PreDerived(Object derivable)
         {
-            this.List.Add($"PreDerived [{derivable.Id}] {derivable}");
+            var message = DerivationLogFormatter.FormatPreDerived(derivable);
+            this.List.Add(message);
         }
 
         public void AddedDerivable(Object derivable)
         {
-            this.List.Add($"Added Derivable [{derivable.Id}] {derivable}");
+            var message = DerivationLogFormatter.FormatAddedDerivable(derivable);
+            this.List.Add(message);
         }
 
         public void AddedDependency(Object dependent, Object dependee)
         {
-            this.List.Add($"Added Dependency [{dependent.Id}] {dependent} -> [{dependee.Id}] {dependee}");
+            var message = DerivationLogFormatter.FormatAddedDependency(dependent, dependee);
+            this.List.Add(message);
         }
 
         // Validation
         public void AddedError(IDerivationError derivationError)
         {
-            this.List.Add($"Error {derivationError}");
+            var message = DerivationLogFormatter.FormatAddedError(derivationError);
+            this.List.Add(message);
         }
 
         // DerivationNode
         public void Cycle(Object root, Object derivable)
         {
-            this.List.Add($"Cycle root: {root}, object: {derivable}");
+            var message = DerivationLogFormatter.FormatCycle(root, derivable);
+            this.List.Add(message);
         }
 
         public void Deriving(Object derivable)
         {
-            this.List.Add($"Deriving {derivable}");
+            var message = DerivationLogFormatter.FormatDeriving(derivable);
+            this.List.Add(message);
         }
 
         public void Derived(Object derivable)
         {
-            this.List.Add($"Derived {derivable}");
+            var message = DerivationLogFormatter.FormatDerived(derivable);
+            this.List.Add(message);
         }
 
         public void PostDeriving(Object derivable)
         {
-            this.List.Add($"Post Deriving {derivable}");
+            var message = DerivationLogFormatter.FormatPostDeriving(derivable);
+            this.List.Add(message);
         }
 
         public void PostDerived(Object derivable)
         {
-            this.List.Add($"Post Derived {derivable}");
+            var message = DerivationLogFormatter.FormatPostDerived(derivable);
+            this.List.Add(message);
         }
     }
 }

@@ -30,14 +30,14 @@ namespace Allors.Domain.NonLogging
             this.Validation = new Validation(this);
         }
 
-        public Derivation(ISession session, IEnumerable<long> forcedDerivations)
-            : base(session, forcedDerivations)
+        public Derivation(ISession session, IEnumerable<long> forcedDerivables)
+            : base(session, forcedDerivables)
         {
             this.Validation = new Validation(this);
         }
 
-        public Derivation(ISession session, IEnumerable<IObject> forcedObjects)
-            : base(session, forcedObjects)
+        public Derivation(ISession session, IEnumerable<IObject> forcedDerivables)
+            : base(session, forcedDerivables)
         {
             this.Validation = new Validation(this);
         }

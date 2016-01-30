@@ -33,15 +33,15 @@ namespace Allors.Domain.Logging
             this.Validation = new Validation(this, this.derivationLog);
         }
 
-        public Derivation(ISession session, IDerivationLog derivationLog, IEnumerable<long> forcedDerivations)
-            : base(session, forcedDerivations)
+        public Derivation(ISession session, IDerivationLog derivationLog, IEnumerable<long> forcedDerivables)
+            : base(session, forcedDerivables)
         {
             this.derivationLog = derivationLog;
             this.Validation = new Validation(this, this.derivationLog);
         }
 
-        public Derivation(ISession session, IDerivationLog derivationLog, IEnumerable<IObject> forcedObjects)
-            : base(session, forcedObjects)
+        public Derivation(ISession session, IDerivationLog derivationLog, IEnumerable<IObject> forcedDerivables)
+            : base(session, forcedDerivables)
         {
             this.derivationLog = derivationLog;
             this.Validation = new Validation(this, this.derivationLog);
