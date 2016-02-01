@@ -20,11 +20,12 @@
 
 namespace Allors.Domain.Logging
 {
+    using System;
     using System.Collections.Generic;
 
     using Object = Allors.Domain.Object;
 
-    public sealed class ListDerivationLog : IDerivationLog
+    public class ListDerivationLog : IDerivationLog
     {
         public List<string> List { get; }
 
@@ -40,76 +41,84 @@ namespace Allors.Domain.Logging
             return this.Text;
         }
 
+        public void Filter(Predicate<string> func)
+        {
+            this.List.RemoveAll(func);
+        }
+
         // Derivation
-        public void StartedGeneration(int generation)
+        public virtual void StartedGeneration(int generation)
         {
             var message = DerivationLogFormatter.FormatStartedGeneration(generation);
             this.List.Add(message);
         }
 
-        public void StartedPreparation(int preparationRun)
+        public virtual void StartedPreparation(int preparationRun)
         {
             var message = DerivationLogFormatter.FormatStartedPreparation(preparationRun);
             this.List.Add(message);
         }
 
-        public void PreDeriving(Object derivable)
+        public virtual void PreDeriving(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPreDeriving(derivable);
             this.List.Add(message);
         }
 
-        public void PreDerived(Object derivable)
+        public virtual void PreDerived(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPreDerived(derivable);
             this.List.Add(message);
         }
 
-        public void AddedDerivable(Object derivable)
+        public virtual void AddedDerivable(Object derivable)
         {
             var message = DerivationLogFormatter.FormatAddedDerivable(derivable);
             this.List.Add(message);
         }
 
-        public void AddedDependency(Object dependent, Object dependee)
+        /// <summary>
+        /// The dependee is derived before the dependent object;
+        /// </summary>
+        public virtual void AddedDependency(Object dependent, Object dependee)
         {
             var message = DerivationLogFormatter.FormatAddedDependency(dependent, dependee);
             this.List.Add(message);
         }
 
         // Validation
-        public void AddedError(IDerivationError derivationError)
+        public virtual void AddedError(IDerivationError derivationError)
         {
             var message = DerivationLogFormatter.FormatAddedError(derivationError);
             this.List.Add(message);
         }
 
         // DerivationNode
-        public void Cycle(Object root, Object derivable)
+        public virtual void Cycle(Object root, Object derivable)
         {
             var message = DerivationLogFormatter.FormatCycle(root, derivable);
             this.List.Add(message);
         }
 
-        public void Deriving(Object derivable)
+        public virtual void Deriving(Object derivable)
         {
             var message = DerivationLogFormatter.FormatDeriving(derivable);
             this.List.Add(message);
         }
 
-        public void Derived(Object derivable)
+        public virtual void Derived(Object derivable)
         {
             var message = DerivationLogFormatter.FormatDerived(derivable);
             this.List.Add(message);
         }
 
-        public void PostDeriving(Object derivable)
+        public virtual void PostDeriving(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPostDeriving(derivable);
             this.List.Add(message);
         }
 
-        public void PostDerived(Object derivable)
+        public virtual void PostDerived(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPostDerived(derivable);
             this.List.Add(message);

@@ -24,78 +24,78 @@ namespace Allors.Domain.Logging
 
     using Object = Allors.Domain.Object;
 
-    public sealed class ConsoleDerivationLog : IDerivationLog
+    public class ConsoleDerivationLog : IDerivationLog
     {
         // Derivation
-        public void StartedGeneration(int generation)
+        public virtual void StartedGeneration(int generation)
         {
             var message = DerivationLogFormatter.FormatStartedGeneration(generation);
             Console.WriteLine(message);
         }
 
-        public void StartedPreparation(int preparationRun)
+        public virtual void StartedPreparation(int preparationRun)
         {
             var message = DerivationLogFormatter.FormatStartedPreparation(preparationRun);
             Console.WriteLine(message);
         }
 
-        public void PreDeriving(Object derivable)
+        public virtual void PreDeriving(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPreDeriving(derivable);
             Console.WriteLine(message);
         }
 
-        public void PreDerived(Object derivable)
+        public virtual void PreDerived(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPreDerived(derivable);
             Console.WriteLine(message);
         }
 
-        public void AddedDerivable(Object derivable)
+        public virtual void AddedDerivable(Object derivable)
         {
             var message = DerivationLogFormatter.FormatAddedDerivable(derivable);
             Console.WriteLine(message);
         }
 
-        public void AddedDependency(Object dependent, Object dependee)
+        public virtual void AddedDependency(Object dependent, Object dependee)
         {
             var message = DerivationLogFormatter.FormatAddedDependency(dependent, dependee);
             Console.WriteLine(message);
         }
 
         // Validation
-        public void AddedError(IDerivationError derivationError)
+        public virtual void AddedError(IDerivationError derivationError)
         {
             var message = DerivationLogFormatter.FormatAddedError(derivationError);
             Console.WriteLine(message);
         }
 
         // DerivationNode
-        public void Cycle(Object root, Object derivable)
+        public virtual void Cycle(Object root, Object derivable)
         {
             var message = DerivationLogFormatter.FormatCycle(root, derivable);
             Console.WriteLine(message);
         }
 
-        public void Deriving(Object derivable)
+        public virtual void Deriving(Object derivable)
         {
             var message = DerivationLogFormatter.FormatDeriving(derivable);
             Console.WriteLine(message);
         }
 
-        public void Derived(Object derivable)
+        public virtual void Derived(Object derivable)
         {
             var message = DerivationLogFormatter.FormatDerived(derivable);
             Console.WriteLine(message);
         }
 
-        public void PostDeriving(Object derivable)
+        public virtual void PostDeriving(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPostDeriving(derivable);
             Console.WriteLine(message);
         }
 
-        public void PostDerived(Object derivable)
+        public virtual void PostDerived(Object derivable)
         {
             var message = DerivationLogFormatter.FormatPostDerived(derivable);
             Console.WriteLine(message);

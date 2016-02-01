@@ -33,6 +33,9 @@ namespace Allors.Domain.Logging
 
         void AddedDerivable(Object derivable);
 
+        /// <summary>
+        /// The dependee is derived before the dependent object;
+        /// </summary>
         void AddedDependency(Object dependent, Object dependee);
 
         // Validation

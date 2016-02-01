@@ -36,22 +36,22 @@ namespace Allors.Domain.Logging
 
         public static string FormatPreDeriving(Object derivable)
         {
-            return $"{"Preparing",-TabWith} " + FormatDerivable(derivable);
+            return $"{"PreDerive",-TabWith} " + FormatDerivable(derivable);
         }
 
         public static string FormatPreDerived(Object derivable)
         {
-            return $"{"PreDerived",-TabWith} " + FormatDerivable(derivable);
+            return $"{"PreDerive¶",-TabWith} " + FormatDerivable(derivable);
         }
 
         public static string FormatAddedDerivable(Object derivable)
         {
-            return $"{"AddedDerivable",-TabWith} " + FormatDerivable(derivable);
+            return $"{"Add",-TabWith} " + FormatDerivable(derivable);
         }
 
         public static string FormatAddedDependency(Object dependent, Object dependee)
         {
-            return $"{"AddedDependency",-TabWith} " + FormatDerivable(dependent) + " -> " + FormatDerivable(dependee);
+            return $"{"Dependency",-TabWith} " + FormatDerivable(dependent) + " -> " + FormatDerivable(dependee);
         }
 
         public static string FormatAddedError(IDerivationError derivationError)
@@ -66,22 +66,22 @@ namespace Allors.Domain.Logging
 
         public static string FormatDeriving(Object derivable)
         {
-            return $"{"Deriving",-TabWith} " + FormatDerivable(derivable);
+            return $"{"Derive",-TabWith} " + FormatDerivable(derivable);
         }
 
         public static string FormatDerived(Object derivable)
         {
-            return $"{"Derived",-TabWith} " + FormatDerivable(derivable);
+            return $"{"Derive¶",-TabWith} " + FormatDerivable(derivable);
         }
 
         public static string FormatPostDeriving(Object derivable)
         {
-            return $"{"PostDeriving",-TabWith} " + FormatDerivable(derivable);
+            return $"{"PostDerive",-TabWith} " + FormatDerivable(derivable);
         }
 
         public static string FormatPostDerived(Object derivable)
         {
-            return $"{"PostDerived",-TabWith} " + FormatDerivable(derivable);
+            return $"{"PostDerive¶",-TabWith} " + FormatDerivable(derivable);
         }
 
         private static object FormatDerivable(Object derivable)
