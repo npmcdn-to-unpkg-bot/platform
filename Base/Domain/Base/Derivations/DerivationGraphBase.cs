@@ -25,16 +25,16 @@ namespace Allors.Domain
     public abstract class DerivationGraphBase
     {
         private readonly DerivationBase derivation;
-        private readonly Dictionary<Object, DerivationNodeBase> derivationNodeByDerivable = new Dictionary<Object, DerivationNodeBase>();
 
         protected DerivationGraphBase(DerivationBase derivation)
         {
             this.derivation = derivation;
+            this.DerivationNodeByDerivable = new Dictionary<Object, DerivationNodeBase>();
         }
 
-        public Dictionary<Object, DerivationNodeBase> DerivationNodeByDerivable => this.derivationNodeByDerivable;
+        public Dictionary<Object, DerivationNodeBase> DerivationNodeByDerivable { get; }
 
-        public int Count => this.derivationNodeByDerivable.Count;
+        public int Count => this.DerivationNodeByDerivable.Count;
 
         public void Derive()
         {
@@ -59,9 +59,9 @@ namespace Allors.Domain
 
         public void AddDependency(Object dependent, Object dependee)
         {
-            var derivationNode = this.Add(dependent);
-            var dependencyNode = this.Add(dependee);
-            derivationNode.AddDependency(dependencyNode);
+            var dependentNode = this.Add(dependent);
+            var dependeeeNode = this.Add(dependee);
+            dependentNode.AddDependency(dependeeeNode);
         }
 
         protected abstract DerivationNodeBase CreateDerivationNode(Object derivable);

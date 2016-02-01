@@ -23,7 +23,6 @@ namespace Allors.Domain
     using System.Collections.Generic;
 
     using Allors;
-    using Allors.Meta;
 
     public interface IDerivation
     {
@@ -39,13 +38,7 @@ namespace Allors.Domain
 
         object this[string name] { get; set; }
 
-        bool IsForced(long objectId);
-
-        bool IsAdded(Object @object);
-
-        bool IsChanged(Object @object);
-
-        ISet<IRoleType> GetChangedRoleTypes(IObject association);
+        IValidation Derive();
 
         void AddDerivable(Object derivable);
 
@@ -58,6 +51,8 @@ namespace Allors.Domain
         /// <param name="dependee"></param>
         void AddDependency(Object dependent, Object dependee);
 
-        IValidation Derive();
+        void MarkAsModified(Object derivable);
+
+        bool IsModified(Object derivable);
     }
 }

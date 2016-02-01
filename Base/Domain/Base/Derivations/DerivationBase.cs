@@ -29,45 +29,40 @@ namespace Allors.Domain
 
     public abstract class DerivationBase : IDerivation
     {
-        private HashSet<long> forcedDerivables;
-        private HashSet<IObject> addedDerivables;
-
+        private readonly HashSet<long> markedAsModified;
         private readonly HashSet<Object> derivedObjects;
-        private readonly HashSet<IObject> preparedObjects;
 
-        private IValidation validation;
-       
-        private DerivationGraphBase derivationGraph;
         private Dictionary<string, object> properties;
 
-        private IChangeSet changeSet;
+        private IValidation validation;
 
         private int generation;
+        private DerivationGraphBase derivationGraph;
+        private HashSet<IObject> addedDerivables;
+        private IChangeSet changeSet;
         
         protected DerivationBase(ISession session)
         {
             this.Session = session;
 
+            this.markedAsModified = new HashSet<long>();
             this.derivedObjects = new HashSet<Object>();
-            this.preparedObjects = new HashSet<IObject>();
+
             this.changeSet = session.Checkpoint();
 
             this.generation = 0;
         }
 
-        protected DerivationBase(ISession session, IEnumerable<long> forcedDerivables)
+        protected DerivationBase(ISession session, IEnumerable<long> markedAsModified)
             : this(session)
         {
-            this.ForcedDerivables.UnionWith(forcedDerivables);
+            this.markedAsModified.UnionWith(markedAsModified);
         }
 
-        protected DerivationBase(ISession session, IEnumerable<IObject> forcedDerivables)
+        protected DerivationBase(ISession session, IEnumerable<IObject> markedAsModified)
             : this(session)
         {
-            foreach (var obj in forcedDerivables)
-            {
-                this.ForcedDerivables.Add(obj.Id);
-            }
+            this.markedAsModified.UnionWith(markedAsModified.Where(v=>v!=null).Select(v=>v.Id));
         }
 
         public ISession Session { get; }
@@ -90,8 +85,6 @@ namespace Allors.Domain
         public ISet<Object> DerivedObjects => this.derivedObjects;
 
         public int Generation => this.generation;
-
-        private HashSet<long> ForcedDerivables => this.forcedDerivables ?? (this.forcedDerivables = new HashSet<long>());
 
         public object this[string name]
         {
@@ -135,24 +128,15 @@ namespace Allors.Domain
             }
         }
 
-        public bool IsForced(long objectId)
+        public void MarkAsModified(Object derivable)
         {
-            return this.ForcedDerivables.Contains(objectId);
+            this.markedAsModified.Add(derivable.Id);
         }
 
-        public bool IsAdded(Object @object)
+        public bool IsModified(Object @object)
         {
-            return this.addedDerivables?.Contains(@object) ?? false;
-        }
-
-        public bool IsChanged(Object @object)
-        {
-            return this.ChangeSet.Associations.Contains(@object.Id);
-        }
-
-        public ISet<IRoleType> GetChangedRoleTypes(IObject association)
-        {
-            return this.changeSet.GetRoleTypes(association.Id);
+            var id = @object.Id;
+            return this.markedAsModified.Contains(id) || this.ChangeSet.Associations.Contains(id) || this.ChangeSet.Created.Contains(id);
         }
 
         public void AddDerivable(Object derivable)
@@ -203,12 +187,9 @@ namespace Allors.Domain
             var changedObjectIds = new HashSet<long>(this.changeSet.Associations);
             changedObjectIds.UnionWith(this.changeSet.Roles);
             changedObjectIds.UnionWith(this.changeSet.Created);
+            changedObjectIds.UnionWith(this.markedAsModified);
 
-            if (this.ForcedDerivables != null)
-            {
-                changedObjectIds.UnionWith(this.ForcedDerivables);
-            }
-
+            var preparedObjects = new HashSet<IObject>();
             var changedObjects = new HashSet<IObject>(this.Session.Instantiate(changedObjectIds.ToArray()));
 
             while (changedObjects.Count > 0)
@@ -236,7 +217,7 @@ namespace Allors.Domain
 
                         this.OnPreDerived(derivable);
 
-                        this.preparedObjects.Add(derivable);
+                        preparedObjects.Add(derivable);
                     }
                 }
 
@@ -246,7 +227,7 @@ namespace Allors.Domain
                     this.OnStartedPreparation(preparationRun);
  
                     var dependencyObjectsToPrepare = new HashSet<IObject>(this.addedDerivables);
-                    dependencyObjectsToPrepare.ExceptWith(this.preparedObjects);
+                    dependencyObjectsToPrepare.ExceptWith(preparedObjects);
 
                     this.addedDerivables = new HashSet<IObject>();
 
@@ -258,7 +239,7 @@ namespace Allors.Domain
 
                         this.OnPreDerived(dependencyObject);
 
-                        this.preparedObjects.Add(dependencyObject);
+                        preparedObjects.Add(dependencyObject);
                     }
                 }
 

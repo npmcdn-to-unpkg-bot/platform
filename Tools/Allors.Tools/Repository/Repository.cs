@@ -403,34 +403,42 @@
                 // Property attributes
                 foreach (var property in composite.Properties)
                 {
-                    var reflectedProperty = reflectedType.GetProperty(property.RoleName);
-                    var propertyAttributesByTypeName =
-                        reflectedProperty.GetCustomAttributes(false)
-                            .Cast<Attribute>()
-                            .GroupBy(v => v.GetType());
-
-                    var reflectedPropertyType = reflectedProperty.PropertyType;
-                    var typeName = this.GetTypeName(reflectedPropertyType);
-                    property.Type = this.TypeBySingularName[typeName];
-
-                    foreach (var group in propertyAttributesByTypeName)
+                    try
                     {
-                        var attributeType = group.Key;
-                        var attributeTypeName = attributeType.Name;
-                        if (attributeTypeName.ToLowerInvariant().EndsWith("attribute"))
-                        {
-                            attributeTypeName = attributeTypeName.Substring(0, attributeTypeName.Length - "attribute".Length);
-                        }
+                        var reflectedProperty = reflectedType.GetProperty(property.RoleName);
+                        var propertyAttributesByTypeName =
+                            reflectedProperty.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType());
 
-                        var attributeUsage = attributeType.GetCustomAttributes<AttributeUsageAttribute>().FirstOrDefault();
-                        if (attributeUsage != null && attributeUsage.AllowMultiple)
+                        var reflectedPropertyType = reflectedProperty.PropertyType;
+                        var typeName = this.GetTypeName(reflectedPropertyType);
+                        property.Type = this.TypeBySingularName[typeName];
+
+                        foreach (var group in propertyAttributesByTypeName)
                         {
-                            property.AttributesByName.Add(attributeTypeName, group.ToArray());
+                            var attributeType = group.Key;
+                            var attributeTypeName = attributeType.Name;
+                            if (attributeTypeName.ToLowerInvariant().EndsWith("attribute"))
+                            {
+                                attributeTypeName = attributeTypeName.Substring(
+                                    0,
+                                    attributeTypeName.Length - "attribute".Length);
+                            }
+
+                            var attributeUsage =
+                                attributeType.GetCustomAttributes<AttributeUsageAttribute>().FirstOrDefault();
+                            if (attributeUsage != null && attributeUsage.AllowMultiple)
+                            {
+                                property.AttributesByName.Add(attributeTypeName, group.ToArray());
+                            }
+                            else
+                            {
+                                property.AttributeByName.Add(attributeTypeName, group.First());
+                            }
                         }
-                        else
-                        {
-                            property.AttributeByName.Add(attributeTypeName, group.First());
-                        }
+                    }
+                    catch (Exception e)
+                    {
+                        
                     }
                 }
 

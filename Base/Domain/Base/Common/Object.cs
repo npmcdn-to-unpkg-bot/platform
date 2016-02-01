@@ -34,7 +34,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             var changeSet = derivation.ChangeSet;
-            if (derivation.IsForced(@this.Id) || changeSet.Associations.Contains(@this.Id) || changeSet.Created.Contains(@this.Id))
+            if (derivation.IsModified(@this))
             {
                 if (!derivation.DerivedObjects.Contains(@this))
                 {

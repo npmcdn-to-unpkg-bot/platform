@@ -68,7 +68,9 @@
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.InnerException?.Message ?? e.Message);
+                var exception = e.InnerException ?? e;
+                Console.WriteLine(exception.Message);
+                Console.WriteLine(exception.StackTrace);
             }
         }
     }
