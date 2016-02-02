@@ -403,42 +403,40 @@
                 // Property attributes
                 foreach (var property in composite.Properties)
                 {
-                    try
+                    var reflectedProperty = reflectedType.GetProperty(property.RoleName);
+                    if (reflectedProperty == null)
                     {
-                        var reflectedProperty = reflectedType.GetProperty(property.RoleName);
-                        var propertyAttributesByTypeName =
-                            reflectedProperty.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType());
-
-                        var reflectedPropertyType = reflectedProperty.PropertyType;
-                        var typeName = this.GetTypeName(reflectedPropertyType);
-                        property.Type = this.TypeBySingularName[typeName];
-
-                        foreach (var group in propertyAttributesByTypeName)
-                        {
-                            var attributeType = group.Key;
-                            var attributeTypeName = attributeType.Name;
-                            if (attributeTypeName.ToLowerInvariant().EndsWith("attribute"))
-                            {
-                                attributeTypeName = attributeTypeName.Substring(
-                                    0,
-                                    attributeTypeName.Length - "attribute".Length);
-                            }
-
-                            var attributeUsage =
-                                attributeType.GetCustomAttributes<AttributeUsageAttribute>().FirstOrDefault();
-                            if (attributeUsage != null && attributeUsage.AllowMultiple)
-                            {
-                                property.AttributesByName.Add(attributeTypeName, group.ToArray());
-                            }
-                            else
-                            {
-                                property.AttributeByName.Add(attributeTypeName, group.First());
-                            }
-                        }
+                        throw new RepositoryException(reflectedType.Name + "." + property.RoleName + " should be public");
                     }
-                    catch (Exception e)
+
+                    var propertyAttributesByTypeName =
+                        reflectedProperty.GetCustomAttributes(false).Cast<Attribute>().GroupBy(v => v.GetType());
+
+                    var reflectedPropertyType = reflectedProperty.PropertyType;
+                    var typeName = this.GetTypeName(reflectedPropertyType);
+                    property.Type = this.TypeBySingularName[typeName];
+
+                    foreach (var group in propertyAttributesByTypeName)
                     {
-                        
+                        var attributeType = group.Key;
+                        var attributeTypeName = attributeType.Name;
+                        if (attributeTypeName.ToLowerInvariant().EndsWith("attribute"))
+                        {
+                            attributeTypeName = attributeTypeName.Substring(
+                                0,
+                                attributeTypeName.Length - "attribute".Length);
+                        }
+
+                        var attributeUsage =
+                            attributeType.GetCustomAttributes<AttributeUsageAttribute>().FirstOrDefault();
+                        if (attributeUsage != null && attributeUsage.AllowMultiple)
+                        {
+                            property.AttributesByName.Add(attributeTypeName, group.ToArray());
+                        }
+                        else
+                        {
+                            property.AttributeByName.Add(attributeTypeName, group.First());
+                        }
                     }
                 }
 

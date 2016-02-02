@@ -22,16 +22,14 @@ namespace Allors.Tools.Repository.Tasks
     using System.IO;
     using System.Linq;
 
-    using Allors.Tools.Repository.Generation;
+    using Generation;
 
     using Microsoft.CodeAnalysis.MSBuild;
 
     public class Generate
     {
-        public static Log Execute(string solutionPath, string projectName, string template, string output)
+        public static void Execute(string solutionPath, string projectName, string template, string output)
         {
-            var log = new GenerateLog();
-
             var workspace = MSBuildWorkspace.Create();
             var solution = workspace.OpenSolutionAsync(solutionPath).Result;
             var project = solution.Projects.First(v => v.Name.ToLowerInvariant().Equals(projectName.ToLowerInvariant()));
@@ -41,9 +39,7 @@ namespace Allors.Tools.Repository.Tasks
             var stringTemplate = new StringTemplate(templateFileInfo);
             var outputDirectoryInfo = new DirectoryInfo(output);
 
-            stringTemplate.Generate(repository, outputDirectoryInfo, log);
-
-            return log;
+            stringTemplate.Generate(repository, outputDirectoryInfo);
         }
     }
 }

@@ -3,17 +3,22 @@
     using System;
     using System.IO;
 
-    using Allors.Tools.Repository.Tasks;
+    using NLog;
 
-    class Program
+    using Repository;
+    using Repository.Tasks;
+
+    public class Program
     {
-        static void Main(string[] args)
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public static int Main(string[] args)
         {
             try
             {
                 if (args.Length < 2)
                 {
-                    Console.WriteLine("Error: missing required arguments");
+                    Logger.Error("missing required arguments");
                 }
 
                 var context = args[0];
@@ -25,16 +30,19 @@
                         break;
 
                     default:
-                        Console.WriteLine("Error: unknown context");
+                        Logger.Error("unknown context");
                         break;
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger.Error(e);
+                Logger.Info("Finished with errors");
+                return 1;
             }
 
-            Console.WriteLine("Finished");
+            Logger.Info("Finished");
+            return 0;
         }
 
         private static void Repository(string[] args)
@@ -48,7 +56,7 @@
                     break;
 
                 default:
-                    Console.WriteLine("Error: unknown context");
+                    Logger.Error("unknown command");
                     break;
             }
         }
@@ -62,16 +70,8 @@
 
             var fileInfo = new FileInfo(solutionPath);
 
-            try
-            {
-                var log = Generate.Execute(fileInfo.FullName, projectName, template, output);
-            }
-            catch (Exception e)
-            {
-                var exception = e.InnerException ?? e;
-                Console.WriteLine(exception.Message);
-                Console.WriteLine(exception.StackTrace);
-            }
+            Logger.Info("Generate " + fileInfo.FullName);
+            Generate.Execute(fileInfo.FullName, projectName, template, output);
         }
     }
 }

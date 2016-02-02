@@ -27,10 +27,10 @@ namespace Allors.Tools.Repository.Generation
     using System.IO;
     using System.Xml;
 
-    using Allors.Meta;
-
     using Antlr4.StringTemplate;
     using Antlr4.StringTemplate.Misc;
+
+    using NLog;
 
     using Storage;
 
@@ -46,11 +46,10 @@ namespace Allors.Tools.Repository.Generation
         private const string InputKey = "input";
         private const string OutputKey = "output";
         private const string GenerationKey = "generation";
-        
+
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly FileInfo fileInfo;
-        private readonly Guid id;
-        private readonly string name;
-        private readonly string version;
 
         internal StringTemplate(FileInfo fileInfo)
         {
@@ -64,104 +63,88 @@ namespace Allors.Tools.Repository.Generation
             
             TemplateGroup templateGroup = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
 
-            this.id = Render(templateGroup, TemplateId) != null ? new Guid(Render(templateGroup, TemplateId)) : Guid.Empty;
-            this.name = Render(templateGroup, TemplateName);
-            this.version = Render(templateGroup, TemplateVersion);
+            this.Id = Render(templateGroup, TemplateId) != null ? new Guid(Render(templateGroup, TemplateId)) : Guid.Empty;
+            this.Name = Render(templateGroup, TemplateName);
+            this.Version = Render(templateGroup, TemplateVersion);
 
-            if (this.id == Guid.Empty)
+            if (this.Id == Guid.Empty)
             {
                 throw new Exception("Template has no id");
             }
         }
 
-        public Guid Id
-        {
-            get { return this.id; }
-        }
+        public Guid Id { get; }
 
-        public string Name
-        {
-            get { return this.name; }
-        }
+        public string Name { get; }
 
-        public string Version
-        {
-            get { return this.version; }
-        }
+        public string Version { get; }
 
         public override string ToString()
         {
             return this.Name;
         }
 
-        internal void Generate(Repository repository, DirectoryInfo outputDirectory, Log log)
+        internal void Generate(Repository repository, DirectoryInfo outputDirectory)
         {
-            try
-            {
-                TemplateGroup templateGroup = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
+            TemplateGroup templateGroup = new TemplateGroupFile(this.fileInfo.FullName, '$', '$');
 
-                templateGroup.ErrorManager = new ErrorManager(new LogAdapter(log));
+            templateGroup.ErrorManager = new ErrorManager(new LogAdapter());
                 
-                var configurationTemplate = templateGroup.GetInstanceOf(TemplateConfiguration);
-                configurationTemplate.Add(RepositoryKey, repository);
+            var configurationTemplate = templateGroup.GetInstanceOf(TemplateConfiguration);
+            configurationTemplate.Add(RepositoryKey, repository);
 
-                var configurationXml = new XmlDocument();
-                configurationXml.LoadXml(configurationTemplate.Render());
+            var configurationXml = new XmlDocument();
+            configurationXml.LoadXml(configurationTemplate.Render());
 
-                var location = new Location(outputDirectory);
-                foreach (XmlElement generation in configurationXml.DocumentElement.SelectNodes(GenerationKey))
-                {
-                    var templateName = generation.GetAttribute(TemplateKey);
-                    var template = templateGroup.GetInstanceOf(templateName);
-                    var output = generation.GetAttribute(OutputKey);
-
-                    template.Add(RepositoryKey, repository);
-
-                    if (generation.HasAttribute(InputKey))
-                    {
-                        //var input = new Guid(generation.GetAttribute(InputKey));
-                        //var objectType = repository.Find(input) as IObjectType;
-                        //if (objectType != null)
-                        //{
-                        //    template.Add(ObjectTypeKey, objectType);
-                        //}
-                        //else
-                        //{
-                        //    var relationType = repository.Find(input) as RelationType;
-                        //    if (relationType != null)
-                        //    {
-                        //        template.Add(RelationTypeKey, relationType);
-                        //    }
-                        //    else
-                        //    {
-                        //        var inheritance = repository.Find(input) as Inheritance;
-                        //        if (inheritance != null)
-                        //        {
-                        //            template.Add(InheritanceKey, inheritance);
-                        //        }
-                        //        else
-                        //        {
-                        //            var methodType = repository.Find(input) as MethodType;
-                        //            if (methodType != null)
-                        //            {
-                        //                template.Add(MethodTypeKey, methodType);
-                        //            }
-                        //            else
-                        //            {
-                        //                throw new ArgumentException(input + " was not found");
-                        //            }
-                        //        }
-                        //    }
-                        //}
-                    }
-
-                    var result = template.Render();
-                    location.Save(output, result);
-                }
-            }
-            catch (Exception e)
+            var location = new Location(outputDirectory);
+            foreach (XmlElement generation in configurationXml.DocumentElement.SelectNodes(GenerationKey))
             {
-                log.Error(this, "Generation error : " + e.Message + "\n" + e.StackTrace);
+                var templateName = generation.GetAttribute(TemplateKey);
+                var template = templateGroup.GetInstanceOf(templateName);
+                var output = generation.GetAttribute(OutputKey);
+
+                template.Add(RepositoryKey, repository);
+
+                if (generation.HasAttribute(InputKey))
+                {
+                    //var input = new Guid(generation.GetAttribute(InputKey));
+                    //var objectType = repository.Find(input) as IObjectType;
+                    //if (objectType != null)
+                    //{
+                    //    template.Add(ObjectTypeKey, objectType);
+                    //}
+                    //else
+                    //{
+                    //    var relationType = repository.Find(input) as RelationType;
+                    //    if (relationType != null)
+                    //    {
+                    //        template.Add(RelationTypeKey, relationType);
+                    //    }
+                    //    else
+                    //    {
+                    //        var inheritance = repository.Find(input) as Inheritance;
+                    //        if (inheritance != null)
+                    //        {
+                    //            template.Add(InheritanceKey, inheritance);
+                    //        }
+                    //        else
+                    //        {
+                    //            var methodType = repository.Find(input) as MethodType;
+                    //            if (methodType != null)
+                    //            {
+                    //                template.Add(MethodTypeKey, methodType);
+                    //            }
+                    //            else
+                    //            {
+                    //                throw new ArgumentException(input + " was not found");
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                }
+
+                var result = template.Render();
+                location.Save(output, result);
             }
         }
 
@@ -178,31 +161,26 @@ namespace Allors.Tools.Repository.Generation
 
         private class LogAdapter : ITemplateErrorListener
         {
-            private readonly Log log;
-
-            public LogAdapter(Log log)
-            {
-                this.log = log;
-            }
+            private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
             public void CompiletimeError(TemplateMessage msg)
             {
-                this.log.Error(msg, msg.ToString());
+                Logger.Error(msg.ToString());
             }
 
             public void RuntimeError(TemplateMessage msg)
             {
-                this.log.Error(msg, msg.ToString());
+                Logger.Error(msg.ToString());
             }
 
             public void IOError(TemplateMessage msg)
             {
-                this.log.Error(msg, msg.ToString());
+                Logger.Error(msg.ToString());
             }
 
             public void InternalError(TemplateMessage msg)
             {
-                this.log.Error(msg, msg.ToString());
+                Logger.Error(msg.ToString());
             }
         }
     }
