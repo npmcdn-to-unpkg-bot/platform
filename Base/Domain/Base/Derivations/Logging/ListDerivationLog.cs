@@ -22,6 +22,7 @@ namespace Allors.Domain.Logging
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Object = Allors.Domain.Object;
 
@@ -39,11 +40,6 @@ namespace Allors.Domain.Logging
         public override string ToString()
         {
             return this.Text;
-        }
-
-        public void Filter(Predicate<string> func)
-        {
-            this.List.RemoveAll(func);
         }
 
         // Derivation
