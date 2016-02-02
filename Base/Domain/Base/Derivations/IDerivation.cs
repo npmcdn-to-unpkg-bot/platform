@@ -23,6 +23,7 @@ namespace Allors.Domain
     using System.Collections.Generic;
 
     using Allors;
+    using Allors.Meta;
 
     public interface IDerivation
     {
@@ -51,8 +52,27 @@ namespace Allors.Domain
         /// <param name="dependee"></param>
         void AddDependency(Object dependent, Object dependee);
 
-        void MarkAsModified(Object derivable);
-
+        /// <summary>
+        /// Gets or sets a value indicating if this derivable object is modified. 
+        /// The object is considered modified if
+        /// <ul>
+        /// <li>it has been created</li>
+        /// <li>it has changed roles</li>
+        /// <li>it is marked as modified</li>
+        /// </ul>
+        /// </summary>
+        /// <param name="derivable">The derivable object.</param>
+        /// <returns>a value indicating if this derivable object is modified</returns>
         bool IsModified(Object derivable);
+
+        bool IsCreated(Object derivable);
+
+        bool IsMarkedAsModified(Object derivable);
+
+        bool HasChangedRole(Object derivable, RoleType roleType);
+
+        bool HasChangedRoles(Object derivable, params RoleType[] roleTypes);
+
+        void MarkAsModified(Object derivable);
     }
 }

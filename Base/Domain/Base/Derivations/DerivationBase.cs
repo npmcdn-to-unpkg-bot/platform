@@ -39,8 +39,7 @@ namespace Allors.Domain
         private int generation;
         private DerivationGraphBase derivationGraph;
         private HashSet<IObject> addedDerivables;
-        private IChangeSet changeSet;
-        
+
         protected DerivationBase(ISession session)
         {
             this.Session = session;
@@ -48,7 +47,7 @@ namespace Allors.Domain
             this.markedAsModified = new HashSet<long>();
             this.derivedObjects = new HashSet<Object>();
 
-            this.changeSet = session.Checkpoint();
+            this.ChangeSet = session.Checkpoint();
 
             this.generation = 0;
         }
@@ -80,7 +79,7 @@ namespace Allors.Domain
             }
         }
 
-        public IChangeSet ChangeSet => this.changeSet;
+        public IChangeSet ChangeSet { get; private set; }
 
         public ISet<Object> DerivedObjects => this.derivedObjects;
 
@@ -128,15 +127,47 @@ namespace Allors.Domain
             }
         }
 
-        public void MarkAsModified(Object derivable)
-        {
-            this.markedAsModified.Add(derivable.Id);
-        }
-
         public bool IsModified(Object @object)
         {
             var id = @object.Id;
             return this.markedAsModified.Contains(id) || this.ChangeSet.Associations.Contains(id) || this.ChangeSet.Created.Contains(id);
+        }
+
+        public bool IsCreated(Object derivable)
+        {
+            return this.ChangeSet.Created.Contains(derivable.Id);
+        }
+
+        public bool HasChangedRole(Object derivable, RoleType roleType)
+        {
+            ISet<IRoleType> changedRoleTypes;
+            this.ChangeSet.RoleTypesByAssociation.TryGetValue(derivable.Id, out changedRoleTypes);
+            return changedRoleTypes?.Contains(roleType) ?? false;
+        }
+
+        public bool HasChangedRoles(Object derivable, params RoleType[] roleTypes)
+        {
+            ISet<IRoleType> changedRoleTypes;
+            this.ChangeSet.RoleTypesByAssociation.TryGetValue(derivable.Id, out changedRoleTypes);
+            if (changedRoleTypes != null)
+            {
+                if (roleTypes.Any(roleType => changedRoleTypes.Contains(roleType)))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsMarkedAsModified(Object derivable)
+        {
+            return this.markedAsModified.Contains(derivable.Id);
+        }
+
+        public void MarkAsModified(Object derivable)
+        {
+            this.markedAsModified.Add(derivable.Id);
         }
 
         public void AddDerivable(Object derivable)
@@ -184,9 +215,9 @@ namespace Allors.Domain
 
         public IValidation Derive()
         {
-            var changedObjectIds = new HashSet<long>(this.changeSet.Associations);
-            changedObjectIds.UnionWith(this.changeSet.Roles);
-            changedObjectIds.UnionWith(this.changeSet.Created);
+            var changedObjectIds = new HashSet<long>(this.ChangeSet.Associations);
+            changedObjectIds.UnionWith(this.ChangeSet.Roles);
+            changedObjectIds.UnionWith(this.ChangeSet.Created);
             changedObjectIds.UnionWith(this.markedAsModified);
 
             var preparedObjects = new HashSet<IObject>();
@@ -250,11 +281,11 @@ namespace Allors.Domain
 
                 this.derivationGraph.Derive();
 
-                this.changeSet = this.Session.Checkpoint();
+                this.ChangeSet = this.Session.Checkpoint();
 
-                changedObjectIds = new HashSet<long>(this.changeSet.Associations);
-                changedObjectIds.UnionWith(this.changeSet.Roles);
-                changedObjectIds.UnionWith(this.changeSet.Created);
+                changedObjectIds = new HashSet<long>(this.ChangeSet.Associations);
+                changedObjectIds.UnionWith(this.ChangeSet.Roles);
+                changedObjectIds.UnionWith(this.ChangeSet.Created);
 
                 changedObjects = new HashSet<IObject>(this.Session.Instantiate(changedObjectIds.ToArray()));
                 changedObjects.ExceptWith(this.derivedObjects);
