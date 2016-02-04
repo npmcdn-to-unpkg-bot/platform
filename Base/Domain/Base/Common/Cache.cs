@@ -81,12 +81,7 @@ namespace Allors.Domain
                 }
             }
 
-            if (cachedObjectId != null)
-            {
-                return (TObject)this.databaseSession.Instantiate(cachedObjectId);
-            }
-
-            return null;
+            return (TObject)this.databaseSession.Instantiate(cachedObjectId);
         }
 
         public void Add(TObject cachedObject)
