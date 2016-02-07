@@ -60,8 +60,6 @@ namespace Allors.Domain
 
         protected override void BaseSecure(Security config)
         {
-            base.BaseSecure(config);
-
             var full = new[] { Allors.Domain.Operations.Read, Allors.Domain.Operations.Write, Allors.Domain.Operations.Execute };
 
             config.GrantAdministrator(this.ObjectType, full);
