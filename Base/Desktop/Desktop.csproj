@@ -47,14 +47,6 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EPPlus, Version=4.0.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.0.5\lib\net20\EPPlus.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Humanizer, Version=2.0.1.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Humanizer.Core.2.0.1\lib\dotnet\Humanizer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -154,8 +146,6 @@
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseNewObject.cs" />
     <Compile Include="Allors\Server\Custom\Angular\AngularController.cs" />
     <Compile Include="Allors\Server\Custom\Error\Model.cs" />
-    <Compile Include="Allors\Server\Custom\Export\ExportController.cs" />
-    <Compile Include="Allors\Server\Custom\Export\Model.cs" />
     <Compile Include="Allors\Server\Custom\Error\ErrorController.cs" />
     <Compile Include="Allors\Server\Custom\CustomApiController.cs" />
     <Compile Include="Allors\Server\Custom\Test\TestController.cs" />
@@ -201,8 +191,6 @@
     <Content Include="app\relation\organisation\edit.html" />
     <Content Include="Content\angular-toastr.css" />
     <Content Include="Content\angular-toastr.min.css" />
-    <Content Include="Content\animate.css" />
-    <Content Include="Content\animate.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -379,6 +367,8 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toMany\ToMany.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toOne\ToOne.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Allors.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\WorskspaceService.ts" />
     <TypeScriptCompile Include="app\common\directives\tinymce.ts" />
     <Content Include="app\common\directives\toMany\toMany.html" />
     <TypeScriptCompile Include="app\common\directives\focus.ts" />
@@ -386,7 +376,6 @@
     <Content Include="app\general\home\home.html" />
     <Content Include="app\layout\layout.html" />
     <Content Include="app\layout\navigation.html" />
-    <Content Include="app\admin\export\export.html" />
     <Content Include="app\general\settings\settings.html" />
     <Content Include="Content\angular-toggle-switch-bootstrap.css" />
     <Content Include="Content\angular-toggle-switch.css" />
@@ -398,10 +387,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="lib\angular-chart\angular-chart.css" />
-    <Content Include="lib\angular-chart\angular-chart.js" />
-    <Content Include="lib\angular-chart\angular-chart.min.css" />
-    <Content Include="lib\angular-chart\angular-chart.min.js" />
     <Content Include="Scripts\angular-toastr.js" />
     <Content Include="Scripts\angular-toastr.min.js" />
     <Content Include="Scripts\angular-toastr.tpls.js" />
@@ -416,8 +401,6 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Chart.js" />
-    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\FileAPI.flash.swf" />
     <Content Include="Scripts\FileAPI.js" />
     <Content Include="Scripts\FileAPI.min.js" />
@@ -478,8 +461,6 @@
     <Content Include="Content\ui-grid.woff" />
     <Content Include="Allors\Server\Custom\Test\Index.cshtml" />
     <Content Include="Allors\Server\Base\Workspace\Error\ResponseError.cd" />
-    <Content Include="lib\angular-chart\angular-chart.min.css.map" />
-    <Content Include="lib\angular-chart\angular-chart.min.js.map" />
     <Content Include="Allors\Server\Custom\Error\Index.cshtml" />
     <Content Include="Content\awesome-bootstrap-checkbox.scss" />
     <Content Include="Content\awesome-bootstrap-checkbox.less" />
@@ -522,7 +503,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <TypeScriptCompile Include="app\admin\export\export.ts" />
     <TypeScriptCompile Include="Scripts\tsUnit\tsUnit.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-file-upload\angular-file-upload.d.ts" />
     <TypeScriptCompile Include="Tests\app.ts" />
@@ -564,7 +544,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Session.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\SessionObject.ts" />
     <TypeScriptCompile Include="app\app.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Service.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\DatabaseService.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="app\general\home\home.ts" />
     <TypeScriptCompile Include="app\layout\layout.ts" />

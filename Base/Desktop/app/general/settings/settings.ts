@@ -6,9 +6,18 @@
 
         private context: Allors.Context;
 
-        static $inject = ["$rootScope", "$scope", "$http", "notificationService", "profileService", "allorsService"];
-        constructor(private $rootScope: ng.IRootScopeService, private $scope: ng.IScope, private $http: ng.IHttpService, private toaster: NotificationService, private profileService: ProfileService, private service: Allors.Service) {
-            this.context = service.createContext("Settings");
+        static $inject = ["$rootScope", "$scope", "$http", "notificationService", "profileService", "databaseService", "workspaceService"];
+        constructor(
+            private $rootScope: ng.IRootScopeService,
+            private $scope: ng.IScope,
+            private $http: ng.IHttpService,
+            private notificationService: NotificationService,
+            profileService: ProfileService,
+            databaseService: Allors.DatabaseService,
+            workspaceService: Allors.WorkspaceService) {
+
+            this.context = new Allors.Context("Settings", databaseService, workspaceService);
+           
             this.profile = profileService.profile;
             this.filter = new Filter(this.context, this.profile);
 
@@ -31,7 +40,7 @@
         save(): void {
             this.context.save()
                 .then(() => {
-                    this.toaster.info("Successfully saved.");
+                    this.notificationService.info("Successfully saved.");
                     this.$rootScope.$broadcast("refresh", this.context.name);
                 })
                 .catch(responseError => this.error(<Allors.Data.ResponseError>responseError));
@@ -45,7 +54,7 @@
         }
 
         private error(responseError: Allors.Data.ResponseError): void {
-            this.toaster.responseError(responseError);
+            this.notificationService.responseError(responseError);
         }
     }
     angular

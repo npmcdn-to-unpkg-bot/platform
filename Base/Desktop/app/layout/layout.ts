@@ -13,9 +13,16 @@
             return false;
         }
 
-        static $inject = ["$rootScope", "$scope", "$http", "$log", "allorsService"];
-        constructor(private $rootScope: ng.IRootScopeService, private $scope: ng.IScope, private $http: ng.IHttpService, private $log: ng.ILogService, private service: Allors.Service) {
-            this.context = service.createContext("Main");
+        static $inject = ["$rootScope", "$scope", "$http", "$log", "databaseService", "workspaceService"];
+        constructor(
+            private $rootScope: ng.IRootScopeService,
+            private $scope: ng.IScope,
+            private $http: ng.IHttpService,
+            private $log: ng.ILogService,
+            databaseService: Allors.DatabaseService,
+            workspaceService: Allors.WorkspaceService) {
+
+            this.context = new Allors.Context("Main", databaseService, workspaceService);
 
             this.refresh(true)
                 .then(() => {

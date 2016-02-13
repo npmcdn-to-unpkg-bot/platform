@@ -9,9 +9,18 @@
 
         private context: Allors.Context;
 
-        static $inject = ["$rootScope", "$scope", "$http", "notificationService", "profileService", "allorsService"];
-        constructor(private $rootScope: ng.IRootScopeService, private $scope: ng.IScope, private $http: ng.IHttpService, private notificationService: NotificationService, private profileService: ProfileService, private allorsService: Allors.Service) {
-            this.context = allorsService.createContext("OrganisationAdd");
+        static $inject = ["$rootScope", "$scope", "$http", "notificationService", "profileService", "databaseService", "workspaceService"];
+        constructor(
+            private $rootScope: ng.IRootScopeService,
+            private $scope: ng.IScope,
+            private $http: ng.IHttpService,
+            private notificationService: NotificationService,
+            private profileService: ProfileService,
+            databaseService: Allors.DatabaseService,
+            workspaceService: Allors.WorkspaceService) {
+
+            this.context = new Allors.Context("OrganisationAdd", databaseService, workspaceService);
+
             this.profile = profileService.profile;
             this.filter = new Filter(this.context, this.profile);
 

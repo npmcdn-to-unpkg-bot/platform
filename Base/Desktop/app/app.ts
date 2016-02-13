@@ -1,6 +1,6 @@
 ﻿module App
 {
-    var app = angular.module("app", ["allors", "ngSanitize", "ngAnimate", "ui.router", "ui.bootstrap", "ui.tinymce", 'angular-loading-bar', 'toastr', 'chart.js', 'ngFileUpload', 'toggle-switch']);
+    var app = angular.module("app", ["allors", "ngSanitize", "ngAnimate", "ui.router", "ui.bootstrap", "ui.tinymce", "angular-loading-bar", "toastr", "ngFileUpload", "toggle-switch"]);
 
     app.factory('$exceptionHandler', () => (exception, cause) => {
         var message = {
@@ -11,7 +11,8 @@
         var jsonMessage = angular.toJson(message);
         var uriEncodedMessage = encodeURIComponent(jsonMessage);
 
-        window.location.href = "/Error?error=" +uriEncodedMessage;
+        alert(exception)
+        //window.location.href = "/Error?error=" +uriEncodedMessage;
     });
 
     app.config(stateConfig);

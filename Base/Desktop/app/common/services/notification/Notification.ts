@@ -2,8 +2,8 @@
 {
     export class NotificationService {
 
-        static $inject = ["toastr", "allorsService"];
-        constructor(private toastr, private allorsService: Allors.Service) {
+        static $inject = ["toastr"];
+        constructor(private toastr) {
         }
 
         info(message: string, title?: string) {
@@ -59,5 +59,5 @@
     angular
         .module("app")
         .service("notificationService",
-        App.NotificationService);
+        NotificationService);
 }

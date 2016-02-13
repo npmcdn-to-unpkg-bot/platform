@@ -4,11 +4,13 @@
         
         private context: Allors.Context;
         
-        static $inject = ["allorsService"];
-        constructor(private allorsService: Allors.Service) {
-            this.context = allorsService.createContext("Home");
-        }
+        static $inject = ["databaseService", "workspaceService"];
+        constructor(
+            databaseService: Allors.DatabaseService,
+            workspaceService: Allors.WorkspaceService) {
 
+            this.context = new Allors.Context("Home", databaseService, workspaceService);
+        }
     }
     angular
         .module("app")

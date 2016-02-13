@@ -3,9 +3,13 @@
     class TestController {
         private context: Allors.Context;
         
-        static $inject = ["$scope", "allorsService"];
-        constructor(private $scope: ng.IScope, private allorsService: Allors.Service) {
-            this.context = allorsService.createContext("Test");
+        static $inject = ["$scope", "databaseService", "workspaceService"];
+        constructor(
+            private $scope: ng.IScope,
+            databaseService: Allors.DatabaseService,
+            workspaceService: Allors.WorkspaceService) {
+
+            this.context = new Allors.Context("Test", databaseService, workspaceService);
 
             this.refresh(true)
                 .then(() => {
