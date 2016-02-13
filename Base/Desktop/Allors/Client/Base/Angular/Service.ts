@@ -1,18 +1,18 @@
 ﻿namespace Allors {
     export class Service {
-        workspace: Allors.Workspace;
+        workspace: Workspace;
 
         static $inject = ["$http", "$q", "$rootScope"];
         constructor(private $http: ng.IHttpService, private $q: ng.IQService) {
-            this.workspace = new Allors.Workspace(Allors.Meta.population);
+            this.workspace = new Workspace(Data.metaPopulation);
         }
 
-        createContext(name: string): Allors.Context {
-            const session = new Allors.Session(this.workspace);
-            return new Allors.Context(this, session, name, this.$q);
+        createContext(name: string): Context {
+            const session = new Session(this.workspace);
+            return new Context(this, session, name, this.$q);
         }
 
-        query(name: string, params: any): ng.IPromise<Allors.Data.Response> {
+        sync(name: string, params: any): ng.IPromise<Allors.Data.Response> {
             var defer = this.$q.defer();
 
             const serviceName = '/Angular/' + name;
@@ -28,16 +28,16 @@
             return defer.promise;
         }
 
-        load(context: Allors.Context, response: Allors.Data.Response): ng.IPromise<Result> {
+        load(context: Context, response: Data.Response): ng.IPromise<Result> {
 
             var defer: ng.IDeferred<Result> = this.$q.defer();
 
-            const requireLoadIds = this.workspace.check(response);
+            const requireLoadIds = this.workspace.diff(response);
             if (requireLoadIds.objects.length > 0) {
 
                 this.$http.post('/Angular/Load', requireLoadIds)
                     .then(r => {
-                        var loadResponse = <Allors.Data.LoadResponse>r.data;
+                        var loadResponse = <Data.LoadResponse>r.data;
                         this.workspace.load(loadResponse);
                         var result = this.buildResult(context, response);
                         defer.resolve(result);
@@ -47,18 +47,18 @@
                     });
 
             } else {
-                var result = this.buildResult(context, response);
+                const result = this.buildResult(context, response);
                 defer.resolve(result);
             }
 
             return defer.promise;
         }
 
-        save(context: Allors.Context): ng.IPromise<Allors.Data.SaveResponse> {
+        save(context: Context): ng.IPromise<Allors.Data.SaveResponse> {
 
             var defer = this.$q.defer();
 
-            var saveRequest = context.session.save();
+            const saveRequest = context.session.save();
             this.$http.post('/Angular/Save', saveRequest)
                 .then((response: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
                     var saveResponse = response.data;
@@ -74,11 +74,11 @@
             return defer.promise;
         }
 
-        invoke(method: Allors.Method): ng.IPromise<Allors.Data.SaveResponse> {
+        invoke(method: Method): ng.IPromise<Data.SaveResponse> {
             var defer = this.$q.defer();
-            var invokeRequest: Allors.Data.InvokeRequest = { i: method.object.id, v: method.object.version, m: method.name };
+            const invokeRequest: Data.InvokeRequest = { i: method.object.id, v: method.object.version, m: method.name };
             this.$http.post('/Angular/Invoke', invokeRequest)
-                .then((response: ng.IHttpPromiseCallbackArg<Allors.Data.SaveResponse>) => {
+                .then((response: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
                     var invokeResponse = response.data;
                     if (invokeResponse.hasErrors) {
                         defer.reject(invokeResponse);
@@ -91,10 +91,10 @@
             return defer.promise;
         }
 
-        call(service: string, args: any): ng.IPromise<Allors.Data.SaveResponse> {
+        invokeCustom(service: string, args: any): ng.IPromise<Data.SaveResponse> {
             var defer = this.$q.defer();
-            this.$http.post('/Angular/' + service, args)
-                .then((response: ng.IHttpPromiseCallbackArg<Allors.Data.ResponseError>) => {
+            this.$http.post(`/Angular/${service}`, args)
+                .then((response: ng.IHttpPromiseCallbackArg<Data.ResponseError>) => {
                     var responseError = response.data;
                     if (responseError.hasErrors) {
                         defer.reject(responseError);
@@ -107,7 +107,7 @@
             return defer.promise;
         }
 
-        private buildResult(context: Allors.Context, response: Allors.Data.Response): Result {
+        private buildResult(context: Context, response: Data.Response): Result {
             var session = context.session;
 
             var result = new Result();

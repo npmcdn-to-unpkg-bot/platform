@@ -1,7 +1,8 @@
-﻿namespace Allors {
+﻿namespace Allors
+{
     export class Method {
         constructor(
-            public object: Allors.SessionObject,
+            public object: SessionObject,
             public name: string) {
         }
     }

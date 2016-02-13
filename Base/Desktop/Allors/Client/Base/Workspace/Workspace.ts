@@ -2,7 +2,7 @@
 
     function applyMixins(derivedConstructor: any, baseConstructor: any) {
         Object.getOwnPropertyNames(baseConstructor.prototype).forEach(name => {
-            if (name !== 'constructor') {
+            if (name !== "constructor") {
                 const propertyDescriptor = Object.getOwnPropertyDescriptor(baseConstructor.prototype, name);
                 Object.defineProperty(derivedConstructor.prototype, name, propertyDescriptor);
             }
@@ -10,31 +10,31 @@
     }
 
     export interface IWorkspace {
-        objectTypeByName: { [name: string]: ObjectType; };
+        objectTypeByName: { [name: string]: Meta.ObjectType; };
 
+        diff(data: Data.Response): Data.LoadRequest;
         load(data: Data.LoadResponse): void;
-        check(data: Data.Response): Data.LoadRequest;
         get(id: string): WorkspaceObject;
     }
 
     export class Workspace implements IWorkspace {
-        objectTypeByName: { [name: string]: ObjectType; } = {};
+        objectTypeByName: { [name: string]: Meta.ObjectType; } = {};
         userSecurityHash: string;
 
         private workspaceObjectById: { [id: string]: WorkspaceObject; } = {};
 
-        constructor(data: Meta.Population) {
-            _.forEach(data.classes, objectTypeData => {
-                var objectType = new ObjectType(objectTypeData);
+        constructor(metaPopulationData: Data.MetaPopulation) {
+            _.forEach(metaPopulationData.classes, classData => {
+                var objectType = new Meta.ObjectType(classData);
                 this.objectTypeByName[objectType.name] = objectType;
             });
-
+            
             // Workspace Inheritance
-            data.domains.map(domainName => {
-                data.classes.map(cls => {
+            metaPopulationData.domains.map(domainName => {
+                metaPopulationData.classes.map(cls => {
                     var className = cls.name;
-                    var derivedType = Allors.Domain[className];
-                    var baseNamespace = Allors.Domain[domainName];
+                    var derivedType = Domain[className];
+                    var baseNamespace = Domain[domainName];
 
                     if (baseNamespace) {
                         // Interfaces
@@ -46,7 +46,7 @@
                         });
 
                         // Class
-                        var baseType = baseNamespace[className];
+                        const baseType = baseNamespace[className];
                         if (baseType) {
                             applyMixins(derivedType, baseType);
                         }
@@ -55,38 +55,36 @@
             });
         }
 
-        load(data: Data.LoadResponse): void {
-            _.forEach(data.objects, objectData => {
-                var workspaceObject = new WorkspaceObject(this, data, objectData);
-                this.workspaceObjectById[workspaceObject.id] = workspaceObject;
-            });
-        }
+        diff(response: Data.Response): Data.LoadRequest {
+            var userSecurityHash = response.userSecurityHash;
 
-        check(data: Data.Response): Data.LoadRequest {
-            var userSecurityHash = data.userSecurityHash;
+            const requireLoadIdsWithVersion = _.filter(response.objects, idAndVersion => {
 
-            var requireLoadIdsWithVersion = _.filter(data.objects, idAndVersion => {
-                var id = idAndVersion[0];
-                var version = idAndVersion[1];
-
+                var [id, version] = idAndVersion;
                 var workspaceObject = this.workspaceObjectById[id];
 
                 return (workspaceObject === undefined) || (workspaceObject === null) || (workspaceObject.version !== version) || (workspaceObject.userSecurityHash !== userSecurityHash);
             });
 
-            var requireLoadIds = new Data.LoadRequest();
-            requireLoadIds.objects = _.map(requireLoadIdsWithVersion, idWithVersion =>
-            {
+            const requireLoadIds = new Data.LoadRequest();
+            requireLoadIds.objects = _.map(requireLoadIdsWithVersion, idWithVersion => {
                 return idWithVersion[0];
             });
 
             return requireLoadIds;
         }
 
+        load(loadResponse: Data.LoadResponse): void {
+            _.forEach(loadResponse.objects, objectData => {
+                var workspaceObject = new WorkspaceObject(this, loadResponse, objectData);
+                this.workspaceObjectById[workspaceObject.id] = workspaceObject;
+            });
+        }
+
         get(id: string): WorkspaceObject {
-            var workspaceObject = this.workspaceObjectById[id];
+            const workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
-                throw "Object with id " + id + " is not present.";
+                throw `Object with id ${id} is not present.`;
             }
 
             return workspaceObject;

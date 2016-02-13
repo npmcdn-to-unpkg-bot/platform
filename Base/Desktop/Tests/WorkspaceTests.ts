@@ -3,7 +3,7 @@ namespace Tests {
     export class WorkspaceTests extends tsUnit.TestClass {
 
         load() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var martien = workspace.get("3");
@@ -19,7 +19,7 @@ namespace Tests {
         }
 
         checkVersions() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.userSecurityHash = "#";
             workspace.load(Fixture.loadData);
 
@@ -33,13 +33,13 @@ namespace Tests {
                     ]
                 }
 
-            var requireLoad = workspace.check(required);
+            var requireLoad = workspace.diff(required);
 
             this.areIdentical(1, requireLoad.objects.length);
         }
 
         checkVersionsUserSecurityHash() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.userSecurityHash = "abc";
             workspace.load(Fixture.loadData);
 
@@ -53,7 +53,7 @@ namespace Tests {
                     ]
                 }
 
-            var requireLoad = workspace.check(required);
+            var requireLoad = workspace.diff(required);
 
             this.areIdentical(3, requireLoad.objects.length);
         }

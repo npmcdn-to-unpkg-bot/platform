@@ -3,7 +3,7 @@
         id: string;
         version: string;
         userSecurityHash: string;
-        objectType: ObjectType;
+        objectType: Meta.ObjectType;
 
         workspace: IWorkspace;
         roles: any;
@@ -33,19 +33,18 @@
             var objectType = this.workspace.objectTypeByName[this.t];
 
             _.forEach(loadObject.roles, role => {
-                var name = role[0];
-                var access = role[1];
-                var canRead = access.indexOf('r') !== -1;
-                var canWrite = access.indexOf('w') !== -1;
+                var [name, access] = role;
+                var canRead = access.indexOf("r") !== -1;
+                var canWrite = access.indexOf("w") !== -1;
 
-                this.roles["CanRead" + name] = canRead;
-                this.roles["CanWrite" + name] = canWrite;
+                this.roles[`CanRead${name}`] = canRead;
+                this.roles[`CanWrite${name}`] = canWrite;
                 
                 if (canRead) {
-                    var roleType = objectType.roleTypeByName[name];
-                    var value = role[2];
+                    const roleType = objectType.roleTypeByName[name];
+                    let value = role[2];
                     if (value && roleType.isUnit && roleType.objectType === "DateTime") {
-                        value = new Date(<string>value);
+                        value = new Date(value as string);
                     }
                     this.roles[name] = value;
                 }
@@ -53,11 +52,10 @@
             });
 
             _.forEach(loadObject.methods, method => {
-                var name = method[0];
-                var access = method[1];
-                var canExecute = access.indexOf('x') !== -1;
+                var [name, access] = method;
+                var canExecute = access.indexOf("x") !== -1;
 
-                this.methods["CanExecute" + name] = canExecute;
+                this.methods[`CanExecute${name}`] = canExecute;
             });
         }
 
@@ -73,7 +71,7 @@
             return this.u;
         }
 
-        get objectType(): ObjectType {
+        get objectType(): Meta.ObjectType {
             return this.workspace.objectTypeByName[this.t];
         }
     }

@@ -51,6 +51,6 @@
     }
 
     angular
-        .module('app')
+        .module('allors')
         .directive('toOne', toOne);
 }

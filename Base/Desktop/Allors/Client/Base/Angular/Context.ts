@@ -1,18 +1,18 @@
 ﻿namespace Allors {
     export class Context {
-        objects: { [name: string]: Allors.SessionObject; } = {};
-        collections: { [name: string]: Allors.SessionObject[]; } = {};
+        objects: { [name: string]: SessionObject; } = {};
+        collections: { [name: string]: SessionObject[]; } = {};
         values: { [name: string]: any; } = {};
 
         constructor(
-            public service: Allors.Service,
-            public session: Allors.ISession,
+            public service: Service,
+            public session: ISession,
             public name: string,
             private $q: ng.IQService) {
         }
 
         refresh(params?: any): ng.IPromise<any> {
-            return this.service.query(this.name, params)
+            return this.service.sync(this.name, params)
                 .then(response => {
                     return this.service.load(this, <Data.Response>response)
                         .then(result => {
@@ -26,7 +26,7 @@
         }
 
         query(service: string, params: any): ng.IPromise<Result> {
-            return this.service.query(service, params)
+            return this.service.sync(service, params)
                 .then(response => {
                     return this.service.load(this, <Data.Response>response);
                 });
@@ -38,11 +38,11 @@
             });
         }
 
-        save(): ng.IPromise<Allors.Data.SaveResponse> {
+        save(): ng.IPromise<Data.SaveResponse> {
             return this.service.save(this);
         }
 
-        invokeWithSave(method: Allors.Method, refresh: () => angular.IPromise<any>): ng.IPromise<Allors.Data.ResponseError> {
+        invokeWithSave(method: Method, refresh: () => angular.IPromise<any>): ng.IPromise<Data.ResponseError> {
             var defer = this.$q.defer();
 
             this.save()
@@ -63,7 +63,7 @@
             return defer.promise;
         }
 
-        invoke(method: Allors.Method, refresh?: () => angular.IPromise<any>): ng.IPromise<Allors.Data.ResponseError> {
+        invoke(method: Method, refresh?: () => angular.IPromise<any>): ng.IPromise<Data.ResponseError> {
             var defer = this.$q.defer();
 
             this.service.invoke(method)

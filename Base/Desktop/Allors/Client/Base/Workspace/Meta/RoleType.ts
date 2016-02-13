@@ -1,15 +1,15 @@
-﻿namespace Allors {
+﻿namespace Allors.Meta {
     export class RoleType {
         name: string;
         objectType: string;
         isUnit: boolean;
         isOne: boolean; 
         
-        constructor(data: Meta.RoleType) {
-            this.name = data.name;
-            this.objectType = data.objectType;
-            this.isUnit = data.isUnit;
-            this.isOne = data.isOne;
+        constructor(roleTypeData: Data.RoleType) {
+            this.name = roleTypeData.name;
+            this.objectType = roleTypeData.objectType;
+            this.isUnit = roleTypeData.isUnit;
+            this.isOne = roleTypeData.isOne;
         }
 
         get isComposite() { return !this.isUnit}

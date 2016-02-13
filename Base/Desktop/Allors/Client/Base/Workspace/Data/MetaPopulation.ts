@@ -1,4 +1,4 @@
-﻿namespace Allors.Meta {
+﻿namespace Allors.Data {
     export class RoleType {
         name: string;
         objectType: string;
@@ -17,7 +17,7 @@
         methodTypes: MethodType[];
     }
 
-    export class Population {
+    export class MetaPopulation {
         domains: string[];
         classes: ObjectType[];
     }

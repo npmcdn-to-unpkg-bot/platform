@@ -1,4 +1,4 @@
-angular.module("app").directive('focus', $timeout => {
+angular.module("allors").directive('focus', $timeout => {
     return {
         restrict: 'A',
         link($scope, $element) {

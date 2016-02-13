@@ -2,7 +2,7 @@
     export interface ISessionObject {
         id: string;
         version: string;
-        objectType: ObjectType;
+        objectType: Meta.ObjectType;
 
         session: ISession;
         workspaceObject: IWorkspaceObject;
@@ -24,11 +24,11 @@
     }
 
     export class SessionObject implements INewSessionObject {
-        public session : ISession;
-        public workspaceObject: IWorkspaceObject;
-        public objectType: ObjectType;
+        session : ISession;
+        workspaceObject: IWorkspaceObject;
+        objectType: Meta.ObjectType;
 
-        public newId: string;
+        newId: string;
 
         private changedRoleByRoleTypeName: { [id: string]: any; };
         private roleByRoleTypeName: { [id: string]: any; } = {};
@@ -46,10 +46,9 @@
         }
 
         get(roleTypeName: string): any {
-            var value = this.roleByRoleTypeName[roleTypeName];
-
+            let value = this.roleByRoleTypeName[roleTypeName];
             if (value === undefined) {
-                var roleType = this.objectType.roleTypeByName[roleTypeName];
+                const roleType = this.objectType.roleTypeByName[roleTypeName];
                 if (this.newId === undefined) {
                     if (roleType.isUnit) {
                         value = this.workspaceObject.roles[roleTypeName];
@@ -58,22 +57,22 @@
                         };
                     } else {
                         if (roleType.isOne) {
-                            var role: string = this.workspaceObject.roles[roleTypeName];
+                            const role: string = this.workspaceObject.roles[roleTypeName];
                             value = role ? this.session.get(role) : null;
                         } else {
-                            var roles: string[] = this.workspaceObject.roles[roleTypeName];
+                            const roles: string[] = this.workspaceObject.roles[roleTypeName];
                             value = roles ? roles.map(role => {
                                 try {
                                     return this.session.get(role);
                                 }
                                 catch (e) {
-                                    var value = "N/A";
+                                    let value = "N/A";
                                     try {
                                         value = this.toString();
                                     }
                                     catch (e2) { };
 
-                                    throw "Could not get role " + roleTypeName + " from [id: " + this.id + ", value: " + value + "]";
+                                    throw `Could not get role ${roleTypeName} from [id: ${this.id}, value: ${value}]`;
                                 }
                             }) : [];
                         }
@@ -102,7 +101,7 @@
             }
 
             if (value === null) {
-                var roleType = this.objectType.roleTypeByName[roleTypeName];
+                const roleType = this.objectType.roleTypeByName[roleTypeName];
                 if (roleType.isComposite && roleType.isMany) {
                     value = [];
                 }
@@ -113,7 +112,7 @@
         }
 
         add(roleTypeName: string, value: any) {
-            var roles = this.get(roleTypeName);
+            const roles = this.get(roleTypeName);
             if (roles.indexOf(value) < 0) {
                 roles.push(value);
             }
@@ -122,8 +121,8 @@
         }
 
         remove(roleTypeName: string, value: any) {
-            var roles = this.get(roleTypeName);
-            var index = roles.indexOf(value);
+            const roles = this.get(roleTypeName);
+            const index = roles.indexOf(value);
             if (index >= 0) {
                 roles.splice(index, 1);
             }
@@ -133,7 +132,7 @@
 
         save(): Data.SaveRequestObject {
             if (this.changedRoleByRoleTypeName !== undefined) {
-                var data = new Data.SaveRequestObject();
+                const data = new Data.SaveRequestObject();
                 data.i = this.id;
                 data.v = this.version;
                 data.roles = this.saveRoles();
@@ -145,7 +144,7 @@
 
         saveNew(): Data.SaveRequestNewObject {
             if (this.changedRoleByRoleTypeName !== undefined) {
-                var data = new Data.SaveRequestNewObject();
+                const data = new Data.SaveRequestNewObject();
                 data.ni = this.newId;
                 data.t = this.objectType.name;
                 data.roles = this.saveRoles();
@@ -182,12 +181,11 @@
                     if (roleType.isOne) {
                         saveRole.s = role ? role.id || role.newId : null;
                     } else {
-                        var roleIds = role.map(item => { return (<SessionObject>item).id || (<SessionObject>item).newId; });
-
+                        const roleIds = role.map(item => { return (<SessionObject>item).id || (<SessionObject>item).newId; });
                         if (this.newId) {
                             saveRole.a = roleIds;
                         } else {
-                            var originalRoleIds = <string[]>this.workspaceObject.roles[roleTypeName];
+                            const originalRoleIds = <string[]>this.workspaceObject.roles[roleTypeName];
                             if (!originalRoleIds) {
                                 saveRole.a = roleIds;
                             } else {

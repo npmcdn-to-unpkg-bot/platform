@@ -1,7 +1,7 @@
 ﻿namespace Allors {
     export class Result {
-        objects: { [name: string]: Allors.SessionObject; } = {};
-        collections: { [name: string]: Allors.SessionObject[]; } = {};
+        objects: { [name: string]: SessionObject; } = {};
+        collections: { [name: string]: SessionObject[]; } = {};
         values: { [name: string]: any; } = {};
     }
 }

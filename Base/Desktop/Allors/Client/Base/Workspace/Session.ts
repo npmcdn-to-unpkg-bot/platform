@@ -3,7 +3,9 @@
         hasChanges: boolean;
 
         get(id: string): any;
+
         create(objectTypeName: string): any;
+
         save(): Data.SaveRequest;
         onSaved(saveResponse: Data.SaveResponse): void;
         reset(): void;
@@ -37,7 +39,7 @@
                 return undefined;
             }
 
-            var sessionObject = this.sessionObjectById[id];
+            let sessionObject = this.sessionObjectById[id];
             if (sessionObject === undefined) {
                 const workspaceObject = this.workspace.get(id);
 
@@ -54,9 +56,8 @@
         }
 
         create(objectTypeName: string): any {
-            var type = Domain[objectTypeName];
-
-            var newSessionObject: INewSessionObject = new type();
+            const type = Domain[objectTypeName];
+            const newSessionObject: INewSessionObject = new type();
             newSessionObject.session = this;
             newSessionObject.objectType = this.workspace.objectTypeByName[objectTypeName];
             newSessionObject.newId = (--Session.idCounter).toString();
@@ -98,7 +99,7 @@
 
                     var newSessionObject = this.newSessionObjectById[newId];
 
-                    var loadResponse: Allors.Data.LoadResponse = {
+                    var loadResponse: Data.LoadResponse = {
                         userSecurityHash: "#", // This should trigger a load on next check
                         objects: [
                             {

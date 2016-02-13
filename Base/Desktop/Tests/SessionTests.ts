@@ -2,7 +2,7 @@ namespace Tests {
 
     export class SessionTests extends tsUnit.TestClass {
         unitGet() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -33,7 +33,7 @@ namespace Tests {
         }
 
         unitSet() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session1 = new Allors.Session(workspace);
@@ -55,7 +55,7 @@ namespace Tests {
         }
 
         unitSave() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -104,7 +104,7 @@ namespace Tests {
         }
 
         oneGet() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -127,7 +127,7 @@ namespace Tests {
         }
 
         oneSet() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session1 = new Allors.Session(workspace);
@@ -172,7 +172,7 @@ namespace Tests {
         }
 
         oneSave() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -222,7 +222,7 @@ namespace Tests {
         }
 
         manyGet() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -245,7 +245,7 @@ namespace Tests {
         }
 
         manySet() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session1 = new Allors.Session(workspace);
@@ -281,7 +281,7 @@ namespace Tests {
         }
 
         manySaveWithExistingObjects() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -338,7 +338,7 @@ namespace Tests {
         }
 
         manySaveWithNewObjects() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -413,7 +413,7 @@ namespace Tests {
         }
 
         syncWithNewObjects() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -446,7 +446,7 @@ namespace Tests {
         }
         
         onsaved() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
@@ -495,7 +495,7 @@ namespace Tests {
         }
 
         methodCanExecute() {
-            const workspace = new Allors.Workspace(Allors.Meta.population);
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);

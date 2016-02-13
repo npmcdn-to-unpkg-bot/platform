@@ -558,9 +558,9 @@
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\Response.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponse.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\Population.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\ObjectType.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\RoleType.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\MetaPopulation.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\ObjectType.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\RoleType.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Session.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\SessionObject.ts" />
     <TypeScriptCompile Include="app\app.ts" />

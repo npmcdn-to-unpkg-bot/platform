@@ -1,9 +1,9 @@
-﻿namespace Allors {
+﻿namespace Allors.Meta {
     export class ObjectType {
-        roleTypeByName: { [name: string]: RoleType; } = {};
         name: string;
+        roleTypeByName: { [name: string]: RoleType; } = {};
 
-        constructor(data: Meta.ObjectType) {
+        constructor(data: Data.ObjectType) {
             this.name = data.name;
             _.forEach(data.roleTypes, roleTypeData => {
                 var roleType = new RoleType(roleTypeData);
