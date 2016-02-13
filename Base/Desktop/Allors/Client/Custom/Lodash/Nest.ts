@@ -1,4 +1,4 @@
-module Allors.Domain.Custom
+namespace Allors.Domain.Custom
 {
     export function nest(collection: any, iteratees: any)
     {

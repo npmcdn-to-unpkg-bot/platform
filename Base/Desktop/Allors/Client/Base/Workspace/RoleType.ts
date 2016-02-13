@@ -1,4 +1,4 @@
-﻿module Allors {
+﻿namespace Allors {
     export class RoleType {
         name: string;
         objectType: string;

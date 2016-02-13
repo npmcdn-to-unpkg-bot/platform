@@ -1,12 +1,12 @@
-module Tests {
+namespace Tests {
 
     export class PersonTests extends tsUnit.TestClass {
 
         fullName() {
-            var database = new Allors.Database(Allors.Meta.population);
-            var workspace = new Allors.Workspace(database);
+            var workspace = new Allors.Workspace(Allors.Meta.population);
+            var session = new Allors.Session(workspace);
 
-            var person = <Allors.Domain.Custom.Person>workspace.create("Person");
+            var person = <Allors.Domain.Custom.Person>session.create("Person");
 
             this.areIdentical("N/A", person.FullName);
 

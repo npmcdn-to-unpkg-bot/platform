@@ -47,7 +47,7 @@
                         this.filterOrganisations = <Allors.Domain.Organisation[]>this.context.collections["filterOrganisations"];
                         this.filter.enabled = true;
 
-                        this.organisation = this.context.workspace.create("Organisation");
+                        this.organisation = this.context.session.create("Organisation");
                     }
 
                 });

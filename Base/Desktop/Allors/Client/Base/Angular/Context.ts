@@ -1,12 +1,12 @@
-﻿module Allors {
+﻿namespace Allors {
     export class Context {
-        objects: { [name: string]: Allors.WorkspaceObject; } = {};
-        collections: { [name: string]: Allors.WorkspaceObject[]; } = {};
+        objects: { [name: string]: Allors.SessionObject; } = {};
+        collections: { [name: string]: Allors.SessionObject[]; } = {};
         values: { [name: string]: any; } = {};
 
         constructor(
             public service: Allors.Service,
-            public workspace: Allors.IWorkspace,
+            public session: Allors.ISession,
             public name: string,
             private $q: ng.IQService) {
         }
@@ -16,7 +16,7 @@
                 .then(response => {
                     return this.service.load(this, <Data.Response>response)
                         .then(result => {
-                            this.workspace.reset();
+                            this.session.reset();
 
                             this.objects = result.objects;
                             this.collections = result.collections;

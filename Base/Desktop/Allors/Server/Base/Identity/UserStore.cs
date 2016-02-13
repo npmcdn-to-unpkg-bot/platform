@@ -41,14 +41,8 @@ namespace Allors.Web.Identity
                              IUserTwoFactorStore<IdentityUser, string>,
                              IUserPhoneNumberStore<IdentityUser>
     {
-        private IDatabase Database 
-        {
-            get
-            {
-                return Config.Default;
-            }
-        }
-       
+        private IDatabase Database => Config.Default;
+
         public void Dispose()
         {
         }
@@ -57,12 +51,12 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             if (!string.IsNullOrWhiteSpace(identityUser.Id))
             {
-                throw new ArgumentException("user");
+                throw new ArgumentException(nameof(identityUser));
             }
 
             this.CreateUser(identityUser);
@@ -74,7 +68,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             this.UpdateUser(identityUser);
@@ -86,7 +80,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             using (var session = this.Database.CreateSession())
@@ -107,7 +101,7 @@ namespace Allors.Web.Identity
         {
             if (string.IsNullOrWhiteSpace(userId))
             {
-                throw new ArgumentException("userId");
+                throw new ArgumentException(nameof(userId));
             }
 
             try
@@ -160,7 +154,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             return Task.FromResult(identityUser.Email);
@@ -170,7 +164,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             identityUser.Email = email;
@@ -183,7 +177,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             return Task.FromResult(identityUser.EmailConfirmed);
@@ -193,7 +187,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             identityUser.EmailConfirmed = confirmed;
@@ -206,7 +200,7 @@ namespace Allors.Web.Identity
         {
             if (string.IsNullOrWhiteSpace(email))
             {
-                throw new ArgumentException("email");
+                throw new ArgumentException(nameof(email));
             }
 
             using (var session = this.Database.CreateSession())
@@ -218,7 +212,7 @@ namespace Allors.Web.Identity
                     case 0:
                         return Task.FromResult<IdentityUser>(null);
                     case 1:
-                        return Task.FromResult<IdentityUser>(new IdentityUser().MapFrom(persons.First));
+                        return Task.FromResult(new IdentityUser().MapFrom(persons.First));
                     default:
                         throw new Exception("Found multiple users with email " + email);
                 }
@@ -229,7 +223,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             return Task.FromResult(identityUser.PasswordHash);
@@ -239,7 +233,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             identityUser.PasswordHash = passwordHash;
@@ -252,7 +246,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             return Task.FromResult(!string.IsNullOrWhiteSpace(identityUser.PasswordHash));
@@ -272,7 +266,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             if (!string.IsNullOrWhiteSpace(identityUser.Id))
@@ -300,7 +294,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             if (!string.IsNullOrWhiteSpace(identityUser.Id))
@@ -329,12 +323,12 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             if (loginInfo == null)
             {
-                throw new ArgumentNullException("loginInfo");
+                throw new ArgumentNullException(nameof(loginInfo));
             }
 
             using (var session = this.Database.CreateSession())
@@ -355,12 +349,12 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             if (loginInfo == null)
             {
-                throw new ArgumentNullException("loginInfo");
+                throw new ArgumentNullException(nameof(loginInfo));
             }
 
             var provider = loginInfo.LoginProvider;
@@ -392,7 +386,7 @@ namespace Allors.Web.Identity
         {
             if (identityUser == null)
             {
-                throw new ArgumentNullException("identityUser");
+                throw new ArgumentNullException(nameof(identityUser));
             }
 
             if (string.IsNullOrWhiteSpace(identityUser.Id))
@@ -422,7 +416,7 @@ namespace Allors.Web.Identity
         {
             if (loginInfo == null)
             {
-                throw new ArgumentNullException("loginInfo");
+                throw new ArgumentNullException(nameof(loginInfo));
             }
 
             if (string.IsNullOrWhiteSpace(loginInfo.LoginProvider))

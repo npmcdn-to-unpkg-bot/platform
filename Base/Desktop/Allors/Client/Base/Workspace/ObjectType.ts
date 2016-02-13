@@ -1,4 +1,4 @@
-﻿module Allors {
+﻿namespace Allors {
     export class ObjectType {
         roleTypeByName: { [name: string]: RoleType; } = {};
         name: string;

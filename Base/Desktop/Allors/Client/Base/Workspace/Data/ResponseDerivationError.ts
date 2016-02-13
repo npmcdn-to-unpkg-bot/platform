@@ -1,4 +1,4 @@
-﻿module Allors.Data {
+﻿namespace Allors.Data {
     export interface ResponseDerivationError {
         m: string;
 

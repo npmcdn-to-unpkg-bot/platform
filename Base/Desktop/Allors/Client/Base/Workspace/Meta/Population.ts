@@ -1,4 +1,4 @@
-﻿module Allors.Meta {
+﻿namespace Allors.Meta {
     export class RoleType {
         name: string;
         objectType: string;

@@ -1,4 +1,4 @@
-﻿module Tests {
+﻿namespace Tests {
     export class Fixture {
         static loadData: Allors.Data.LoadResponse = {
             userSecurityHash: "#",

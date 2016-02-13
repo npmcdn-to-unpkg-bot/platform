@@ -28,7 +28,7 @@
         }
         
         get hasChanges() {
-            return this.context && this.context.workspace.hasChanges;
+            return this.context && this.context.session.hasChanges;
         }
         
         save(): void {

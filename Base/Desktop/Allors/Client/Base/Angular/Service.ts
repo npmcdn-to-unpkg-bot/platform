@@ -1,21 +1,21 @@
-﻿module Allors {
+﻿namespace Allors {
     export class Service {
-        database: Allors.Database;
+        workspace: Allors.Workspace;
 
         static $inject = ["$http", "$q", "$rootScope"];
         constructor(private $http: ng.IHttpService, private $q: ng.IQService) {
-            this.database = new Allors.Database(Allors.Meta.population);
+            this.workspace = new Allors.Workspace(Allors.Meta.population);
         }
 
         createContext(name: string): Allors.Context {
-            var workspace = new Allors.Workspace(this.database);
-            return new Allors.Context(this, workspace, name, this.$q);
+            const session = new Allors.Session(this.workspace);
+            return new Allors.Context(this, session, name, this.$q);
         }
 
         query(name: string, params: any): ng.IPromise<Allors.Data.Response> {
             var defer = this.$q.defer();
 
-            var serviceName = '/Angular/' + name;
+            const serviceName = '/Angular/' + name;
             this.$http.post(serviceName, params)
                 .then((response: ng.IHttpPromiseCallbackArg<Allors.Data.Response>) => {
                     var saveResponse = response.data;
@@ -32,13 +32,13 @@
 
             var defer: ng.IDeferred<Result> = this.$q.defer();
 
-            var requireLoadIds = this.database.check(response);
+            const requireLoadIds = this.workspace.check(response);
             if (requireLoadIds.objects.length > 0) {
 
                 this.$http.post('/Angular/Load', requireLoadIds)
                     .then(r => {
                         var loadResponse = <Allors.Data.LoadResponse>r.data;
-                        this.database.load(loadResponse);
+                        this.workspace.load(loadResponse);
                         var result = this.buildResult(context, response);
                         defer.resolve(result);
                     })
@@ -58,14 +58,14 @@
 
             var defer = this.$q.defer();
 
-            var saveRequest = context.workspace.save();
+            var saveRequest = context.session.save();
             this.$http.post('/Angular/Save', saveRequest)
                 .then((response: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
                     var saveResponse = response.data;
                     if (saveResponse.hasErrors) {
                         defer.reject(saveResponse);
                     } else {
-                        context.workspace.onSaved(<Data.SaveResponse>saveResponse);
+                        context.session.onSaved(<Data.SaveResponse>saveResponse);
                         defer.resolve(saveResponse);
                     }
                 })
@@ -108,16 +108,16 @@
         }
 
         private buildResult(context: Allors.Context, response: Allors.Data.Response): Result {
-            var workspace = context.workspace;
+            var session = context.session;
 
             var result = new Result();
 
             _.map(response.namedObjects, (v, k) => {
-                result.objects[k] = workspace.get(v);
+                result.objects[k] = session.get(v);
             });
 
             _.map(response.namedCollections, (v, k) => {
-                result.collections[k] = _.map(v, (obj) => { return workspace.get(obj) });
+                result.collections[k] = _.map(v, (obj) => { return session.get(obj) });
             });
 
             _.map(response.namedValues, (v, k) => {

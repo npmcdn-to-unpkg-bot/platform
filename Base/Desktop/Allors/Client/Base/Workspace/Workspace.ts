@@ -1,140 +1,95 @@
-﻿module Allors {
-    export interface IWorkspace {
-        hasChanges: boolean;
+﻿namespace Allors {
 
-        get(id: string): any;
-        create(objectTypeName: string): any;
-        save(): Data.SaveRequest;
-        onSaved(saveResponse: Data.SaveResponse): void;
-        reset(): void;
+    function applyMixins(derivedConstructor: any, baseConstructor: any) {
+        Object.getOwnPropertyNames(baseConstructor.prototype).forEach(name => {
+            if (name !== 'constructor') {
+                const propertyDescriptor = Object.getOwnPropertyDescriptor(baseConstructor.prototype, name);
+                Object.defineProperty(derivedConstructor.prototype, name, propertyDescriptor);
+            }
+        });
+    }
+
+    export interface IWorkspace {
+        objectTypeByName: { [name: string]: ObjectType; };
+
+        load(data: Data.LoadResponse): void;
+        check(data: Data.Response): Data.LoadRequest;
+        get(id: string): WorkspaceObject;
     }
 
     export class Workspace implements IWorkspace {
-        private static idCounter = 0;
+        objectTypeByName: { [name: string]: ObjectType; } = {};
+        userSecurityHash: string;
 
-        private database: IDatabase;
-        private workspaceObjectById: { [id: string]: IWorkspaceObject; } = {};
-        private newWorkspaceObjectById: { [id: string]: INewWorkspaceObject; } = {};
+        private workspaceObjectById: { [id: string]: WorkspaceObject; } = {};
 
-        constructor(database: IDatabase) {
-            this.database = database;
-        }
-
-        get hasChanges(): boolean {
-            var hasChanges = false;
-            _.forEach(this.workspaceObjectById, workspaceObject => {
-                if (workspaceObject.hasChanges) {
-                    hasChanges = true;
-                    return;
-                }
+        constructor(data: Meta.Population) {
+            _.forEach(data.classes, objectTypeData => {
+                var objectType = new ObjectType(objectTypeData);
+                this.objectTypeByName[objectType.name] = objectType;
             });
 
-            return hasChanges;
+            // Workspace Inheritance
+            data.domains.map(domainName => {
+                data.classes.map(cls => {
+                    var className = cls.name;
+                    var derivedType = Allors.Domain[className];
+                    var baseNamespace = Allors.Domain[domainName];
+
+                    if (baseNamespace) {
+                        // Interfaces
+                        cls.interfaces.map(iface => {
+                            var baseInterface = baseNamespace[iface];
+                            if (baseInterface) {
+                                applyMixins(derivedType, baseInterface);
+                            }
+                        });
+
+                        // Class
+                        var baseType = baseNamespace[className];
+                        if (baseType) {
+                            applyMixins(derivedType, baseType);
+                        }
+                    }
+                });
+            });
         }
 
-        get(id: string): any {
-            if (id === undefined) {
-                return undefined;
-            }
+        load(data: Data.LoadResponse): void {
+            _.forEach(data.objects, objectData => {
+                var workspaceObject = new WorkspaceObject(this, data, objectData);
+                this.workspaceObjectById[workspaceObject.id] = workspaceObject;
+            });
+        }
 
+        check(data: Data.Response): Data.LoadRequest {
+            var userSecurityHash = data.userSecurityHash;
+
+            var requireLoadIdsWithVersion = _.filter(data.objects, idAndVersion => {
+                var id = idAndVersion[0];
+                var version = idAndVersion[1];
+
+                var workspaceObject = this.workspaceObjectById[id];
+
+                return (workspaceObject === undefined) || (workspaceObject === null) || (workspaceObject.version !== version) || (workspaceObject.userSecurityHash !== userSecurityHash);
+            });
+
+            var requireLoadIds = new Data.LoadRequest();
+            requireLoadIds.objects = _.map(requireLoadIdsWithVersion, idWithVersion =>
+            {
+                return idWithVersion[0];
+            });
+
+            return requireLoadIds;
+        }
+
+        get(id: string): WorkspaceObject {
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
-                var databaseObject = this.database.get(id);
-
-                var type = Domain[databaseObject.objectType.name];
-                workspaceObject = new type();
-                workspaceObject.workspace = this;
-                workspaceObject.databaseObject = databaseObject;
-                workspaceObject.objectType = databaseObject.objectType;
-
-                this.workspaceObjectById[workspaceObject.id] = workspaceObject;
+                throw "Object with id " + id + " is not present.";
             }
 
             return workspaceObject;
-        }
-
-        create(objectTypeName: string): any {
-            var type = Domain[objectTypeName];
-
-            var workspaceObject: INewWorkspaceObject = new type();
-            workspaceObject.workspace = this;
-            workspaceObject.objectType = this.database.objectTypeByName[objectTypeName];
-            workspaceObject.newId = (--Workspace.idCounter).toString();
-
-            this.newWorkspaceObjectById[workspaceObject.newId] = workspaceObject;
-
-            return workspaceObject;
-        }
-
-        save() : Data.SaveRequest {
-            var data = new Data.SaveRequest();
-            data.newObjects = [];
-            data.objects = [];
-
-            if (this.newWorkspaceObjectById) {
-                _.forEach(this.newWorkspaceObjectById, newWorkspaceObject => {
-                    var objectData = newWorkspaceObject.saveNew();
-                    if (objectData !== undefined) {
-                        data.newObjects.push(objectData);
-                    }
-                });
-            }
-
-            _.forEach(this.workspaceObjectById, workspaceObject => {
-                var objectData = workspaceObject.save();
-                if (objectData !== undefined) {
-                    data.objects.push(objectData);
-                }
-            });
-
-            return data;
-        }
-        
-        onSaved(saveResponse: Data.SaveResponse): void {
-            if (saveResponse.newObjects) {
-                _.forEach(saveResponse.newObjects, saveResponseNewObject => {
-                    var newId = saveResponseNewObject.ni;
-                    var id = saveResponseNewObject.i;
-
-                    var newWorkspaceObject = this.newWorkspaceObjectById[newId];
-
-                    var loadResponse: Allors.Data.LoadResponse = {
-                        userSecurityHash: "#", // This should trigger a load on next check
-                        objects: [
-                            {
-                                i: id,
-                                v: "",
-                                t: newWorkspaceObject.objectType.name,
-                                roles: [],
-                                methods: []
-                            }
-                        ]
-                    }
-
-                    delete (this.newWorkspaceObjectById[newId]);
-                    delete(newWorkspaceObject.newId);
-
-                    this.database.load(loadResponse);
-                    var databaseObject = this.database.get(id);
-                    newWorkspaceObject.databaseObject = databaseObject;
-
-                    this.workspaceObjectById[id] = newWorkspaceObject;
-                });
-            }
-
-            if (Object.getOwnPropertyNames(this.newWorkspaceObjectById).length !== 0) {
-                throw "Not all new objects received ids";
-            }
-        }
-
-        reset(): void {
-            _.forEach(this.newWorkspaceObjectById, v => {
-                v.reset();
-            });
-
-            _.forEach(this.workspaceObjectById, v => {
-                v.reset();
-            });
         }
     }
 }

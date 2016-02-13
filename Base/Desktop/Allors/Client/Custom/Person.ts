@@ -1,4 +1,4 @@
-module Allors.Domain.Custom
+namespace Allors.Domain.Custom
 {
 	export class Person extends Allors.Domain.Person
     {

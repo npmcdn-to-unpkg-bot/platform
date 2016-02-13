@@ -1,7 +1,7 @@
-﻿module Allors {
+﻿namespace Allors {
     export class Method {
         constructor(
-            public object: Allors.WorkspaceObject,
+            public object: Allors.SessionObject,
             public name: string) {
         }
     }

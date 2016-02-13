@@ -1,4 +1,4 @@
-﻿module Allors.Data {
+﻿namespace Allors.Data {
     export interface SaveResponse extends ResponseError {
         hasErrors: boolean;
         errorMessage?: string;
