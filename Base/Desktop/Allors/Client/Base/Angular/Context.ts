@@ -34,6 +34,7 @@
 
                                 this.workspace.load(loadResponse);
                                 this.update(response);
+                                this.session.reset();
                                 defer.resolve();
                             })
                             .catch(e => {
@@ -41,6 +42,7 @@
                             });
                     } else {
                         this.update(response);
+                        this.session.reset();
                         defer.resolve();
                     }
                 })
@@ -84,12 +86,6 @@
             return defer.promise;
         }
 
-        queryResults(service: string, params: any): ng.IPromise<any> {
-            return this.query(service, params).then(response => {
-                return response.collections["results"];
-            });
-        }
-
         save(): ng.IPromise<Data.SaveResponse> {
             var defer = this.$q.defer();
 
@@ -107,27 +103,6 @@
                 })
                 .catch(e => {
                     throw Error(String(e));
-                });
-
-            return defer.promise;
-        }
-
-        invokeWithSave(method: Method, refresh: () => angular.IPromise<any>): ng.IPromise<Data.ResponseError> {
-            var defer = this.$q.defer();
-
-            this.save()
-                .then(() => {
-                    refresh()
-                        .then(() => {
-                            this.invoke(method, refresh)
-                                .then(() => defer.resolve())
-                                .catch(responseError => {
-                                    defer.reject(responseError);
-                                });
-                        });
-                })
-                .catch(responseError => {
-                    defer.reject(responseError);
                 });
 
             return defer.promise;

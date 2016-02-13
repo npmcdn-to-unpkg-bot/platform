@@ -185,6 +185,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Allors\Client\Base\Angular\components\form\form.html" />
+    <Content Include="Allors\Client\Base\Angular\components\field\field.html" />
     <Content Include="Allors\Client\Base\Angular\directives\toMany\toMany.html" />
     <Content Include="Allors\Client\Base\Angular\directives\toOne\toOne.html" />
     <Content Include="app\relation\organisation\add.html" />
@@ -364,14 +366,14 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\form\form.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\field\field.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\focus.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toMany\ToMany.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toOne\ToOne.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Allors.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\WorskspaceService.ts" />
     <TypeScriptCompile Include="app\common\directives\tinymce.ts" />
-    <Content Include="app\common\directives\toMany\toMany.html" />
-    <TypeScriptCompile Include="app\common\directives\focus.ts" />
     <Content Include="app\general\test\test.html" />
     <Content Include="app\general\home\home.html" />
     <Content Include="app\layout\layout.html" />
@@ -444,10 +446,7 @@
     <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Person.ts" />
-    <Content Include="app\common\directives\toOne\toOne.html" />
     <TypeScriptCompile Include="Allors\Client\Custom\Lodash\Nest.ts" />
-    <TypeScriptCompile Include="app\common\directives\toMany\ToMany.ts" />
-    <TypeScriptCompile Include="app\common\directives\toOne\ToOne.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
     <TypeScriptCompile Include="app\common\services\notification\Notification.ts" />
     <TypeScriptCompile Include="app\common\services\profile\Profile.ts" />

@@ -20,7 +20,11 @@
         }
 
         getPersonTypeAhead(criteria: string) {
-            return this.context.queryResults("PersonTypeAhead", { criteria: criteria });
+            return this.context
+                .query("PersonTypeAhead", { criteria: criteria })
+                .then( result => {
+                    return result.collections["results"];
+                });
         }
 
         private refresh(init: boolean): ng.IPromise<any> {

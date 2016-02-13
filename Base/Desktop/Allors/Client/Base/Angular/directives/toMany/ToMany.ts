@@ -46,7 +46,7 @@
 
         return <ng.IDirective>{
             restrict: "E",
-            templateUrl: "app/common/directives/toMany/toMany.html",
+            templateUrl: "allors/client/base/angular/directives/toMany/toMany.html",
             link: link,
             scope: {
                 obj: "=",

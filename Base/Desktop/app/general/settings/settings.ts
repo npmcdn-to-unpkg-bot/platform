@@ -2,7 +2,7 @@
    class SettingsController{
         profile: Profile;
         filter: Filter;
-        user: Allors.Domain.Person;
+        person: Allors.Domain.Person;
 
         private context: Allors.Context;
 
@@ -43,13 +43,13 @@
                     this.notificationService.info("Successfully saved.");
                     this.$rootScope.$broadcast("refresh", this.context.name);
                 })
-                .catch(responseError => this.error(<Allors.Data.ResponseError>responseError));
+                .catch(responseError => this.error(responseError as Allors.Data.ResponseError));
         }
 
         private refresh(init: boolean): ng.IPromise<any> {
             return this.context.refresh()
                 .then(() => {
-                    this.user = <Allors.Domain.Person>this.context.objects["user"];
+                    this.person = <Allors.Domain.Person>this.context.objects["person"];
                 });
         }
 
