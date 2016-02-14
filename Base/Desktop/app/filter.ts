@@ -1,4 +1,4 @@
-﻿module App {
+﻿namespace App {
     export class Filter {
         get year(): number {
             return this.profile.filterYear;
@@ -16,7 +16,7 @@
         
         enabled: boolean;
 
-        constructor(private context: Allors.Context, private profile: App.Profile) {
+        constructor(private context: Allors.Context, private profile: Profile) {
         }
     }
 }

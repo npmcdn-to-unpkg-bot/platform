@@ -1,6 +1,6 @@
-angular.module("allors").directive('focus', $timeout => {
+angular.module("allors").directive("focus", $timeout => {
     return {
-        restrict: 'A',
+        restrict: "A",
         link($scope, $element) {
             $timeout(() => {
                 $element[0].focus();

@@ -5,10 +5,10 @@
             <h3>Change your settings</h3>
             <form name="settings" novalidate>
                 
-                <allors-field o="vm.person" r="FirstName"/>
-                <allors-field o="vm.person" r="LastName" />
-                <allors-field o="vm.person" r="UserEmail" />
-                <allors-field o="vm.person" r="Locale" />
+                <a-field o="vm.person" r="FirstName"/>
+                <a-field o="vm.person" r="LastName" />
+                <a-field o="vm.person" r="UserEmail" />
+                <a-field o="vm.person" r="Locale" />
                 
                 <div class="form-group">
                     <input ng-disabled="!vm.hasChanges" id="save" type="button" class="btn btn-success btn-sm" value="Save" ng-click="vm.save()"/>

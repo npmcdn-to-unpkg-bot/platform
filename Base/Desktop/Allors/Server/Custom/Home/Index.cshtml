@@ -23,9 +23,12 @@
     <!-- Layout -->
     <div id="wrapper" ng-include="'app/layout/layout.html'"></div>
 
+    @Html.Raw(JSNLog.JavascriptLogging.Configure())
+
     <script src="/Scripts/jquery-2.2.0.js"></script>
     <script src="/Scripts/tinymce/tinymce.js"></script>
     <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/angular-cookies.js"></script>
     <script src="/Scripts/angular-sanitize.js"></script>
     <script src="/Scripts/angular-animate.js"></script>
     <script src="/Scripts/angular-ui-router.js"></script>

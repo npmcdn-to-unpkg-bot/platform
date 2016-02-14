@@ -1,5 +1,4 @@
 ﻿module App {
-
     class FieldController {
         form: ng.IFormController;
         object: Allors.WorkspaceObject;
@@ -28,12 +27,9 @@
 
     angular
         .module("allors")
-        .component("allorsField", {
+        .component("aField", {
             controller: FieldController,
-            template: ($element, $attrs) => 
-`<div class="form-group">
-<label>{{$ctrl.label }}</label> <input placeholder="{{$ctrl.placeholder}}" class="form-control" ng-model="$ctrl.role">
-</div>`,
+            template: ["$element", "$attrs", "templateService", ($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes, templateService: Allors.TemplateService) => templateService.get($element, $attrs)],
             require: {
                  form: "^form"
             },
