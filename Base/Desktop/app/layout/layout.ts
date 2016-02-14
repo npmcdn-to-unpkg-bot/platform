@@ -1,12 +1,12 @@
 ﻿module App.Layout {
     class LayoutController {
 
-        public user: Allors.Domain.Person;
+        person: Allors.Domain.Person;
 
         private context: Allors.Context;
 
         get showTest(): boolean {
-            if (this.user && this.user.UserName.toLowerCase() === "administrator") {
+            if (this.person && this.person.UserName.toLowerCase() === "administrator") {
                 return true;
             }
 
@@ -24,21 +24,21 @@
 
             this.context = new Allors.Context("Main", databaseService, workspaceService);
 
-            this.refresh(true)
+            this.refresh()
                 .then(() => {
-                    this.$scope.$on("refresh", (event, args) => {
-                        this.refresh(args !== this.context.name);
+                    this.$scope.$on("refresh", () => {
+                        this.refresh();
                     });
                 });
         }
         
-        private refresh(init: boolean): ng.IPromise<any> {
-            return this.context.refresh()
-                .then(() => {
-                    this.user = <Allors.Domain.Person>this.context.objects["user"];
-                });
+        private refresh(): ng.IPromise<any> {
+            return this.context.finalize(
+                this.context.refresh()
+                    .then(() => {
+                        this.person = this.context.objects["person"] as Allors.Domain.Person;
+                }));
         }
-
     }
     angular
         .module("app")

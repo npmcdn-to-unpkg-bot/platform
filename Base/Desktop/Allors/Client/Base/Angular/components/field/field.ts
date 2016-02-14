@@ -1,6 +1,7 @@
 ﻿module App {
 
     class FieldController {
+        form: ng.IFormController;
         object: Allors.WorkspaceObject;
         roleTypeName: string;
 
@@ -9,7 +10,7 @@
         }
 
         get role(): any {
-            return this.object[this.roleTypeName];
+            return this.object && this.object[this.roleTypeName];
         }
 
         set role(value: any) {
@@ -27,12 +28,18 @@
 
     angular
         .module("allors")
-        .component("aField", {
+        .component("allorsField", {
             controller: FieldController,
-            templateUrl: "allors/client/base/angular/components/field/field.html",
+            template: ($element, $attrs) => 
+`<div class="form-group">
+<label>{{$ctrl.label }}</label> <input placeholder="{{$ctrl.placeholder}}" class="form-control" ng-model="$ctrl.role">
+</div>`,
+            require: {
+                 form: "^form"
+            },
             bindings: {
                 object: "<o",
                 roleTypeName: "@r"
             }
-        });
+        } as any);
 }

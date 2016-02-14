@@ -54,6 +54,13 @@
         });
         }
 
+        saveResponse(saveResponse: Allors.Data.SaveResponse ) {
+            if (!saveResponse.hasErrors) {
+                this.info("Successfully saved.");
+            } else {
+                this.responseError(saveResponse);
+            }
+        }
     }
 
     angular

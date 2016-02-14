@@ -2,6 +2,8 @@
     export class Context {
         $q: ng.IQService;
 
+        busy: boolean;
+
         workspace: IWorkspace;
         session: ISession;
 
@@ -11,16 +13,20 @@
 
         constructor(
             public name: string,
-            private databaseService: DatabaseService,
-            private workspaceService: WorkspaceService) {
+            public databaseService: DatabaseService,
+            workspaceService: WorkspaceService) {
 
             this.$q = this.databaseService.$q;
 
             this.workspace = workspaceService.workspace;
             this.session = new Session(this.workspace);
+
+            this.busy = false;
         }
 
         refresh(params?: any): ng.IPromise<any> {
+            this.assertNotBusy();
+
             const defer: ng.IDeferred<any> = this.$q.defer();
 
             this.databaseService.sync(this.name, params)
@@ -29,16 +35,12 @@
 
                     if (requireLoadIds.objects.length > 0) {
                         this.databaseService.load(requireLoadIds)
-                            .then(u => {
-                                var loadResponse = u as Data.LoadResponse;
+                            .then((loadResponse: Data.LoadResponse) => {
 
                                 this.workspace.load(loadResponse);
                                 this.update(response);
                                 this.session.reset();
                                 defer.resolve();
-                            })
-                            .catch(e => {
-                                throw Error(String(e));
                             });
                     } else {
                         this.update(response);
@@ -47,13 +49,15 @@
                     }
                 })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;
         }
 
         query(service: string, params: any): ng.IPromise<Result> {
+            this.assertNotBusy();
+            
             const defer: ng.IDeferred<any> = this.$q.defer();
 
             this.databaseService.sync(this.name, params)
@@ -70,9 +74,6 @@
 
                                 const result = new Result(this.session, response);
                                 defer.resolve(result);
-                            })
-                            .catch(e => {
-                                throw Error(String(e));
                             });
                     } else {
                         const result = new Result(this.session, response);
@@ -80,50 +81,77 @@
                     }
                 })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;
         }
 
         save(): ng.IPromise<Data.SaveResponse> {
-            var defer = this.$q.defer();
+            this.assertNotBusy();
 
-            const saveRequest = this.session.save();
+            const defer = this.$q.defer();
+
+            const saveRequest = this.session.saveRequest();
             this.databaseService.save(saveRequest)
                 .then((saveResponse: Data.SaveResponse) => {
-                    if (saveResponse.hasErrors) {
-                        defer.reject(saveResponse);
+                    if (!saveResponse.hasErrors) {
+                        this.session.saveResponse(saveResponse as Data.SaveResponse);
                     }
-                    else
-                    {
-                        this.session.onSaved(saveResponse as Data.SaveResponse);
-                        defer.resolve(saveResponse);
-                    }
-                })
+
+                    defer.resolve(saveResponse);
+               })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;
         }
 
-        invoke(method: Method, refresh?: () => angular.IPromise<any>): ng.IPromise<Data.ResponseError> {
-            var defer = this.$q.defer();
+        invoke(method: Method): ng.IPromise<Data.ResponseError> {
+            this.assertNotBusy();
+
+            const defer = this.$q.defer();
 
             this.databaseService.invoke(method)
-                .then(() => {
-                    if (refresh) {
-                        refresh()
-                            .then(() => {
-                                defer.resolve();
-                            });
-                    } else {
-                        defer.resolve();
-                    }
+                .then((invokeResponse: Data.InvokeResponse) => {
+                    defer.resolve(invokeResponse);
                 })
-                .catch(responseError => {
-                    defer.reject(responseError);
+                .catch(e => {
+                    throw new Error(String(e));
+                });
+
+            return defer.promise;
+        }
+
+        invokeCustom(service: string, args?: any): ng.IPromise<Data.ResponseError> {
+            this.assertNotBusy();
+
+            const defer = this.$q.defer();
+
+            this.databaseService.invokeCustom(service, args)
+                .then((invokeResponse: Data.InvokeResponse) => {
+                    defer.resolve(invokeResponse);
+                })
+                .catch(e => {
+                    throw new Error(String(e));
+                });
+
+            return defer.promise;
+        }
+
+        finalize(promise: ng.IPromise<any>): ng.IPromise<any> {
+            this.busy = true;
+
+            const defer = this.$q.defer();
+
+            promise
+                .then((success) => {
+                    this.busy = false;
+                    defer.resolve(success);
+                }, (error) => {
+                    this.busy = false;
+                    defer.reject(error);
                 });
 
             return defer.promise;
@@ -142,6 +170,12 @@
             _.map(response.namedValues, (v, k) => {
                 this.values[k] = v;
             });
+        }
+
+        private assertNotBusy() {
+            if (this.busy) {
+                throw new Error("Context is busy");
+            }
         }
     }
 }

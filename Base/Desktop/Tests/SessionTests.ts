@@ -68,7 +68,7 @@ namespace Tests {
             martien.FirstName = "Martinus";
             martien.MiddleName = "X";
 
-            var save = session.save();
+            var save = session.saveRequest();
 
             this.areIdentical(2, save.objects.length);
 
@@ -190,7 +190,7 @@ namespace Tests {
 
             acme.Manager = patrick;
 
-            var save = session.save();
+            var save = session.saveRequest();
 
             this.areIdentical(2, save.objects.length);
 
@@ -298,7 +298,7 @@ namespace Tests {
             ocme.Employees = [martien, patrick];
             icme.Employees = [koen, patrick, martien];
 
-            var save = session.save();
+            var save = session.saveRequest();
 
             this.areIdentical(0, save.newObjects.length);
             this.areIdentical(3, save.objects.length);
@@ -359,7 +359,7 @@ namespace Tests {
             acme3.Manager = martien;
             acme3.AddEmployee(martien);
 
-            var save = session.save();
+            var save = session.saveRequest();
 
             this.areIdentical(3, save.newObjects.length);
             this.areIdentical(0, save.objects.length);
@@ -455,7 +455,7 @@ namespace Tests {
                 hasErrors: false
             }
 
-            session.onSaved(saveResponse);
+            session.saveResponse(saveResponse);
 
             var mathijs = session.create("Person");
             mathijs.FirstName = "Mathijs";
@@ -473,7 +473,7 @@ namespace Tests {
                 ]
             }
 
-            session.onSaved(saveResponse);
+            session.saveResponse(saveResponse);
 
             this.areIdentical(undefined, mathijs.newId);
             this.areIdentical("10000", mathijs.id);

@@ -6,8 +6,8 @@
 
         create(objectTypeName: string): any;
 
-        save(): Data.SaveRequest;
-        onSaved(saveResponse: Data.SaveResponse): void;
+        saveRequest(): Data.SaveRequest;
+        saveResponse(saveResponse: Data.SaveResponse): void;
         reset(): void;
     }
 
@@ -35,7 +35,7 @@
         }
 
         get(id: string): any {
-            if (id === undefined) {
+            if (id === undefined || id === null) {
                 return undefined;
             }
 
@@ -67,7 +67,17 @@
             return newSessionObject;
         }
 
-        save() : Data.SaveRequest {
+        reset(): void {
+            _.forEach(this.newSessionObjectById, v => {
+                v.reset();
+            });
+
+            _.forEach(this.sessionObjectById, v => {
+                v.reset();
+            });
+        }
+
+        saveRequest(): Data.SaveRequest {
             var data = new Data.SaveRequest();
             data.newObjects = [];
             data.objects = [];
@@ -91,7 +101,7 @@
             return data;
         }
         
-        onSaved(saveResponse: Data.SaveResponse): void {
+        saveResponse(saveResponse: Data.SaveResponse): void {
             if (saveResponse.newObjects) {
                 _.forEach(saveResponse.newObjects, saveResponseNewObject => {
                     var newId = saveResponseNewObject.ni;
@@ -126,16 +136,6 @@
             if (Object.getOwnPropertyNames(this.newSessionObjectById).length !== 0) {
                 throw "Not all new objects received ids";
             }
-        }
-
-        reset(): void {
-            _.forEach(this.newSessionObjectById, v => {
-                v.reset();
-            });
-
-            _.forEach(this.sessionObjectById, v => {
-                v.reset();
-            });
         }
     }
 }

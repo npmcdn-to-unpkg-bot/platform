@@ -11,12 +11,12 @@
 
             const serviceName =  this.prefix + name;
             this.$http.post(serviceName, params)
-                .then((response: ng.IHttpPromiseCallbackArg<Data.Response>) => {
-                    var saveResponse = response.data;
-                    defer.resolve(saveResponse);
+                .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.Response>) => {
+                    var response = callbackArg.data;
+                    defer.resolve(response);
                 })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;
@@ -27,12 +27,12 @@
             const defer: ng.IDeferred<Data.LoadResponse> = this.$q.defer();
 
             this.$http.post(`${this.prefix}Load`, loadRequest)
-                .then(r => {
-                    var loadResponse = r.data as Data.LoadResponse;
+                .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.LoadResponse>) => {
+                    var loadResponse = callbackArg.data;
                     defer.resolve(loadResponse);
                 })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;
@@ -43,49 +43,41 @@
             const defer: ng.IDeferred<Data.SaveResponse> = this.$q.defer();
 
             this.$http.post(`${this.prefix}Save`, saveRequest)
-                .then((response: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
-                    var saveResponse = response.data;
-                    defer.resolve(saveResponse);
+                .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
+                    var saveRespons = callbackArg.data;
+                    defer.resolve(saveRespons);
                 })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;
         }
 
-        invoke(method: Method): ng.IPromise<Data.SaveResponse> {
+        invoke(method: Method): ng.IPromise<Data.InvokeResponse> {
             var defer = this.$q.defer();
             const invokeRequest: Data.InvokeRequest = { i: method.object.id, v: method.object.version, m: method.name };
             this.$http.post(`${this.prefix}Invoke`, invokeRequest)
-                .then((response: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
-                    var invokeResponse = response.data;
-                    if (invokeResponse.hasErrors) {
-                        defer.reject(invokeResponse);
-                    } else {
-                        defer.resolve(invokeResponse);
-                    }
+                .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
+                    var invokeResponse = callbackArg.data;
+                    defer.resolve(invokeResponse);
                 })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;
         }
 
-        invokeCustom(service: string, args: any): ng.IPromise<Data.SaveResponse> {
+        invokeCustom(service: string, args?: any): ng.IPromise<Data.InvokeResponse> {
             var defer = this.$q.defer();
             this.$http.post(`${this.prefix}${service}`, args)
-                .then((response: ng.IHttpPromiseCallbackArg<Data.ResponseError>) => {
-                    var responseError = response.data;
-                    if (responseError.hasErrors) {
-                        defer.reject(responseError);
-                    } else {
-                        defer.resolve(responseError);
-                    }
+                .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
+                    var invokeResponse = callbackArg.data;
+                    defer.resolve(invokeResponse);
                 })
                 .catch(e => {
-                    throw Error(String(e));
+                    throw new Error(String(e));
                 });
 
             return defer.promise;

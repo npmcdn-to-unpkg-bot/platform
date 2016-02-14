@@ -3,19 +3,19 @@
         <div class="col-md-12">
             <h1>User profile</h1>
             <h3>Change your settings</h3>
-            <a-form>
+            <form name="settings" novalidate>
                 
-                <a-field o="vm.person" r="FirstName"/>
-                <a-field o="vm.person" r="LastName" />
-                <a-field o="vm.person" r="UserEmail" />
-                <a-field o="vm.person" r="Locale" />
+                <allors-field o="vm.person" r="FirstName"/>
+                <allors-field o="vm.person" r="LastName" />
+                <allors-field o="vm.person" r="UserEmail" />
+                <allors-field o="vm.person" r="Locale" />
                 
                 <div class="form-group">
                     <input ng-disabled="!vm.hasChanges" id="save" type="button" class="btn btn-success btn-sm" value="Save" ng-click="vm.save()"/>
                     <input ng-disabled="!vm.hasChanges" id="reset" type="button" class="btn btn-danger btn-sm" value="Reset" ng-click="vm.reset()"/>
                 </div>
 
-            </a-form>
+            </form>
         </div>
     </div>
 </div>

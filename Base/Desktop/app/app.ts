@@ -11,7 +11,7 @@
         var jsonMessage = angular.toJson(message);
         var uriEncodedMessage = encodeURIComponent(jsonMessage);
 
-        alert(exception)
+        alert(exception);
         //window.location.href = "/Error?error=" +uriEncodedMessage;
     });
 

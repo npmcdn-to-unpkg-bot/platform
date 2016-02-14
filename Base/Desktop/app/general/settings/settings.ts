@@ -21,10 +21,10 @@
             this.profile = profileService.profile;
             this.filter = new Filter(this.context, this.profile);
 
-            this.refresh(true)
+            this.refresh()
                 .then(() => {
-                    this.$scope.$on("refresh", (event, args) => {
-                        this.refresh(args !== this.context.name);
+                    this.$scope.$on("refresh", () => {
+                        this.refresh();
                     });
                 });
         }
@@ -34,27 +34,28 @@
         }
 
         reset(): void {
-            this.refresh(true).then(() => {});
+            this.refresh();
         }
 
-        save(): void {
-            this.context.save()
+        save(): ng.IPromise<any> {
+            return this.context.finalize(
+                this.context.save()
+                    .then((saveResponse: Allors.Data.SaveResponse) => {
+                        this.notificationService.saveResponse(saveResponse);
+                    }))
                 .then(() => {
-                    this.notificationService.info("Successfully saved.");
                     this.$rootScope.$broadcast("refresh", this.context.name);
-                })
-                .catch(responseError => this.error(responseError as Allors.Data.ResponseError));
+                }, e => {
+                    throw new Error(String(e));
+                });;
         }
 
-        private refresh(init: boolean): ng.IPromise<any> {
-            return this.context.refresh()
-                .then(() => {
-                    this.person = <Allors.Domain.Person>this.context.objects["person"];
-                });
-        }
-
-        private error(responseError: Allors.Data.ResponseError): void {
-            this.notificationService.responseError(responseError);
+        private refresh(): ng.IPromise<any> {
+            return this.context.finalize(
+                this.context.refresh()
+                    .then(() => {
+                        this.person = this.context.objects["person"] as Allors.Domain.Person;
+                    }));
         }
     }
     angular
