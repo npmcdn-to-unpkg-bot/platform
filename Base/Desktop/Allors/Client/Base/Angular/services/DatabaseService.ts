@@ -60,6 +60,7 @@
             this.$http.post(`${this.prefix}Invoke`, invokeRequest)
                 .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
                     var invokeResponse = callbackArg.data;
+
                     defer.resolve(invokeResponse);
                 })
                 .catch(e => {
