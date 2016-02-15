@@ -1,6 +1,5 @@
-﻿namespace Website
+﻿namespace Web
 {
-    using System;
     using System.Globalization;
     using System.Threading;
     using System.Web.Configuration;

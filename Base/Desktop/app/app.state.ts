@@ -26,38 +26,36 @@
         //////////////////////////
         $stateProvider
 
-
-            // General
             .state("home", {
                 url: "/",
-                templateUrl: "/app/general/home/home.html",
+                templateUrl: "/app/pages/general/home/home.html",
                 controller: "homeController",
                 controllerAs: "vm"
             })
-            .state("settings", {
-                url: "/settings",
-                templateUrl: "/app/general/settings/settings.html",
-                controller: "settingsController",
-                controllerAs: "vm"
-            })
-            .state("test", {
-                url: "/test",
-                templateUrl: "/app/general/test/test.html",
-                controller: "testController",
-                controllerAs: "vm"
-            })
-
             // Relation
-            .state("organisation", {
-                url: "/relation/organisation",
-                templateUrl: "/app/relation/organisation/edit.html",
-                controller: "organisationEditController",
+            .state("relation", {
+                url: "/relation",
+                abstract: true,
+                templateUrl: "/app/pages/relation/relation.html",
+                controller: "relationController",
                 controllerAs: "vm"
             })
-            .state("organisationAdd", {
-                url: "/relation/add/organisation",
-                templateUrl: "/app/relation/organisation/add.html",
-                controller: "organisationAddController",
+            .state("relation.people", {
+                url: "/people",
+                templateUrl: "/app/pages/relation/person/people.html",
+                controller: "relationPeopleController",
+                controllerAs: "vm"
+            })
+            .state("relation.addPerson", {
+                url: "/addPerson",
+                templateUrl: "/app/pages/relation/person/addPerson.html",
+                controller: "relationAddPersonController",
+                controllerAs: "vm"
+            })
+            .state("relation.editPerson", {
+                url: "/editPerson/:id",
+                templateUrl: "/app/pages/relation/person/editPerson.html",
+                controller: "relationEditPersonController",
                 controllerAs: "vm"
             });
     }

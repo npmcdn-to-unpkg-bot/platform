@@ -1,0 +1,52 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home">Home</a>
+            </li>
+            <li class="active">
+                <strong>People</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-11">
+                        <input type="text" placeholder="Filter" class="form-control">
+                    </div>
+                    <div class="col-md-1">
+                        <a ui-sref="relation.addPerson" class="btn btn-default"><i class="fa fa-plus-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+           <div class="panel-body">
+                <table class="table">
+                    <tbody>
+                        <tr ng-repeat="person in vm.people">
+                            <td>
+                                <span class="label label-primary">Active</span>
+                            </td>
+                            <td class="person-title">
+                                {{::person.Title}}
+                            </td>
+                            <td class="person-description">
+                                <span ng-bind-html="person.Description"></span>
+                            </td>
+                            <td class="actions">
+                                <a ui-sref="relation.editPerson({id:person.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                <a ng-click="vm.delete(person)" class="btn btn-white btn-sm"><i class="fa fa-times"></i> Delete </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+

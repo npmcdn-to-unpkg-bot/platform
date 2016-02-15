@@ -1,0 +1,68 @@
+﻿<div class="row wrapper white-bg page-heading animated fadeIn">
+    <div class="col-md-12">
+        <ol class="breadcrumb pull-left" style="padding-top: 0.5em">
+            <li>
+                <a ui-sref="home">Home</a>
+            </li>
+            <li class="active">
+                <strong>User Profile</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>User profile <small>Change your settings</small></h5>
+                    <div class="ibox-tools">
+                        <a class="close-link" title="reset" ng-click="vm.reset()">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-6 b-r">
+                            <h3 class="m-t-none m-b">Personal</h3>
+                            <p>Personal information.</p>
+                            <div>
+                                <div class="form-group">
+                                    <label>Firstname</label> <input placeholder="Enter firstname" class="form-control" ng-model="vm.user.FirstName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Lastname</label> <input placeholder="Enter lastname" class="form-control" ng-model="vm.user.LastName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h3 class="m-t-none m-b">Communication</h3>
+                            <p>Communication information</p>
+                            <div>
+                                <div class="form-group">
+                                    <label>E-mail Adress</label> <input placeholder="Enter email address" class="form-control" type="email" ng-model="vm.user.UserEmail">
+                                </div>
+                                <div class="form-group">
+                                    <label>Locale</label> <input placeholder="Enter locale" class="form-control" type="email" ng-model="vm.user.Locale">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="footer fixed">
+    <div class="pull-right">
+        <input ng-disabled="!vm.hasChanges" id="save" type="button" class="btn btn-success btn-sm" value="Save" ng-click="vm.save()" />
+        <input ng-disabled="!vm.hasChanges" id="reset" type="button" class="btn btn-danger btn-sm" value="Reset" ng-click="vm.reset()" />
+    </div>
+    <div>
+    </div>
+</div>

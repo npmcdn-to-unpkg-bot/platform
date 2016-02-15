@@ -92,6 +92,7 @@
     <Compile Include="Custom\Combinations\C1.cs" />
     <Compile Include="Custom\Combinations\C2.cs" />
     <Compile Include="Custom\Common\Singletons.cs" />
+    <Compile Include="Custom\Config.cs" />
     <Compile Include="Custom\Databases.v.cs" />
     <Compile Include="Custom\Derivations\Dependee.cs" />
     <Compile Include="Custom\Derivations\Dependent.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Custom\General\OrderObjectStates.cs" />
     <Compile Include="Custom\General\HomeAddress.cs" />
     <Compile Include="Custom\General\MailboxAddress.cs" />
+    <Compile Include="Custom\ISessionExtensions.cs" />
     <Compile Include="Custom\Methods\SuperinterfaceMethod.cs" />
     <Compile Include="Custom\Methods\InterfaceMethod.cs" />
     <Compile Include="Custom\Combinations\C1Sum.cs" />

@@ -1,4 +1,4 @@
-﻿namespace Website
+﻿namespace Web
 {
     using System.Web.Optimization;
 
@@ -18,7 +18,6 @@
             // Angular App
             bundles.Add(new ScriptBundle("~/bundles/angular/app")
                 .Include("~/app/app.js")
-                .IncludeDirectory("~/app/common/", "*.js", true)
                 .IncludeDirectory("~/app/", "*.js",  true));
 
             // Angular Tests

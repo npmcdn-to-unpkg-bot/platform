@@ -4,7 +4,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Allors;
 using Allors.Web.Mvc;
-using Website;
+using Web;
 
 namespace Desktop
 {

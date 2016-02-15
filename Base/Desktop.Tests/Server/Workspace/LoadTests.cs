@@ -13,7 +13,7 @@ namespace Desktop.Tests.Server.Workspace
 
     using Should;
 
-    using Website.Controllers;
+    using Web.Controllers;
 
     public class LoadTests : ControllersTest
     {

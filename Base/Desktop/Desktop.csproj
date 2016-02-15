@@ -173,7 +173,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Allors\Server\Custom\Api\" />
+    <Folder Include="app\components\" />
     <Folder Include="App_Data\Templates\" />
   </ItemGroup>
   <ItemGroup>
@@ -191,14 +191,8 @@
     <Compile Include="Allors\Server\Base\Workspace\Invoke\InvokeResponseBuilder.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveRequestNewObject.cs" />
     <Compile Include="Allors\Server\Base\Workspace\Save\SaveResponseNewObject.cs" />
-    <Compile Include="Allors\Server\Custom\Angular\AngularController.cs" />
-    <Compile Include="Allors\Server\Custom\Error\Model.cs" />
-    <Compile Include="Allors\Server\Custom\Error\ErrorController.cs" />
     <Compile Include="Allors\Server\Custom\CustomApiController.cs" />
-    <Compile Include="Allors\Server\Custom\Test\TestController.cs" />
-    <Compile Include="Allors\Server\Custom\Local\LocalController.cs" />
     <Compile Include="Allors\Server\Custom\CustomController.cs" />
-    <Compile Include="Allors\Server\Custom\Home\HomeController.cs" />
     <Compile Include="Allors\Server\Base\Mvc\AllorsApiController.cs" />
     <Compile Include="Allors\Server\Base\Content\HttpPostedFileBaseExtension.cs" />
     <Compile Include="Allors\Server\Base\Content\ImageModel.cs" />
@@ -227,22 +221,54 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\ViewConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AngularController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocalController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Allors\Client\Base\Angular\directives\toMany\toMany.html" />
     <Content Include="Allors\Client\Base\Angular\directives\toOne\toOne.html" />
-    <Content Include="app\relation\organisation\add.html" />
-    <Content Include="app\relation\organisation\edit.html" />
+    <Content Include="Allors\Client\Base\Workspace\Data\InvokeRequest.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\InvokeResponse.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\LoadRequest.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\LoadResponse.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\MetaPopulation.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\Response.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\ResponseDerivationError.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\ResponseError.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\SaveRequest.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponse.js" />
+    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.js" />
+    <Content Include="Allors\Client\Base\Workspace\Meta\ObjectType.js" />
+    <Content Include="Allors\Client\Base\Workspace\Meta\RoleType.js" />
+    <Content Include="Allors\Client\Base\Workspace\Method.js" />
+    <Content Include="Allors\Client\Base\Workspace\Session.js" />
+    <Content Include="Allors\Client\Base\Workspace\SessionObject.js" />
+    <Content Include="Allors\Client\Base\Workspace\Workspace.js" />
+    <Content Include="Allors\Client\Base\Workspace\WorkspaceObject.js" />
+    <Content Include="app\main\navigation.html" />
+    <Content Include="app\pages\relation\relation.html" />
+    <Content Include="app\pages\relation\person\addPerson.html" />
+    <Content Include="app\pages\relation\person\editPerson.html" />
+    <Content Include="app\pages\relation\person\people.html" />
+    <Content Include="app\pages\general\home\home.html" />
+    <Content Include="app\pages\general\settings\settings.html" />
     <Content Include="Content\angular-toastr.css" />
     <Content Include="Content\angular-toastr.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\default.css" />
+    <Content Include="Content\css\signin.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
@@ -426,24 +452,45 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Scripts\jsnlog.js.map" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\TemplateService.ts" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Allors.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Commands.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\field\field.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\TemplateService.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toMany\ToMany.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toOne\ToOne.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Allors.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\WorskspaceService.ts" />
-    <TypeScriptCompile Include="app\app.goto.ts" />
-    <TypeScriptCompile Include="app\app.loading.ts" />
-    <TypeScriptCompile Include="app\app.logging.ts" />
-    <TypeScriptCompile Include="app\app.state.ts" />
-    <TypeScriptCompile Include="app\app.ts" />
-    <TypeScriptCompile Include="app\common\directives\tinymce.ts" />
-    <Content Include="app\general\test\test.html" />
-    <Content Include="app\general\home\home.html" />
-    <Content Include="app\layout\layout.html" />
-    <Content Include="app\layout\navigation.html" />
-    <Content Include="app\general\settings\settings.html" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\ICommandNotifier.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\AllorsServices.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\DatabaseService.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\EventService.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\WorskspaceService.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeRequest.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeResponse.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\LoadRequest.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\LoadResponse.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\MetaPopulation.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\Response.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\ResponseDerivationError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\ResponseError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveRequest.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponse.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\ObjectType.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\RoleType.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Method.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Session.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\SessionObject.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Workspace.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\WorkspaceObject.ts" />
     <Content Include="Content\angular-toggle-switch-bootstrap.css" />
     <Content Include="Content\angular-toggle-switch.css" />
     <Content Include="Content\awesome-bootstrap-checkbox.css" />
@@ -474,10 +521,29 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Allors\Client\Base\Workspace\Data\InvokeRequest.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\InvokeResponse.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\LoadRequest.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\LoadResponse.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\MetaPopulation.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\Response.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\ResponseDerivationError.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\ResponseError.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\SaveRequest.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponse.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Meta\ObjectType.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Meta\RoleType.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Method.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Session.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\SessionObject.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\Workspace.js.map" />
+    <Content Include="Allors\Client\Base\Workspace\WorkspaceObject.js.map" />
+    <Content Include="app\Web.config" />
+    <Content Include="Scripts\angular-cookies.min.js.map" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Scripts\angular-cookies.min.js.map" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.0.js" />
     <Content Include="Scripts\jquery-2.2.0.min.js" />
@@ -494,36 +560,21 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Settings.StyleCop" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Workspace.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeRequest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeResponse.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\ResponseDerivationError.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\ResponseError.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Method.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Media.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\ObjectState.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\OrderObjectState.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Organisation.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Person.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Person.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Lodash\Nest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
-    <TypeScriptCompile Include="app\common\services\notification\Notification.ts" />
-    <TypeScriptCompile Include="app\common\services\profile\Profile.ts" />
-    <TypeScriptCompile Include="app\general\test\test.ts" />
-    <TypeScriptCompile Include="app\filter.ts" />
-    <Content Include="app\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\ui-grid.eot" />
     <Content Include="Content\ui-grid.ttf" />
     <Content Include="Content\ui-grid.woff" />
-    <Content Include="Allors\Server\Custom\Test\Index.cshtml" />
     <Content Include="Allors\Server\Base\Workspace\Error\ResponseError.cd" />
-    <Content Include="Allors\Server\Custom\Error\Index.cshtml" />
     <Content Include="Content\awesome-bootstrap-checkbox.scss" />
     <Content Include="Content\awesome-bootstrap-checkbox.less" />
     <Content Include="fonts\FontAwesome.otf" />
@@ -542,9 +593,23 @@
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lodash.min.js" />
     <Content Include="Tests\app.css" />
-    <TypeScriptCompile Include="app\relation\organisation\add.ts" />
-    <TypeScriptCompile Include="app\relation\organisation\edit.ts" />
+    <TypeScriptCompile Include="app\app.goto.ts" />
+    <TypeScriptCompile Include="app\app.loading.ts" />
+    <TypeScriptCompile Include="app\app.logging.ts" />
+    <TypeScriptCompile Include="app\app.state.ts" />
+    <TypeScriptCompile Include="app\app.templates.ts" />
+    <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\main\main.ts" />
+    <TypeScriptCompile Include="app\directives\tinymce.ts" />
+    <TypeScriptCompile Include="app\pages\relation\relation.ts" />
+    <TypeScriptCompile Include="app\pages\relation\person\addPerson.ts" />
+    <TypeScriptCompile Include="app\pages\relation\person\editPerson.ts" />
+    <TypeScriptCompile Include="app\pages\relation\person\people.ts" />
+    <TypeScriptCompile Include="app\pages\general\home\home.ts" />
+    <TypeScriptCompile Include="app\pages\general\settings\settings.ts" />
+    <TypeScriptCompile Include="app\services\Notification.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-loading-bar\angular-loading-bar.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
@@ -580,39 +645,9 @@
     <Content Include="Allors\Server\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Allors\Server\Custom\Home\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Allors\Server\Custom\Local\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Allors\Server\Custom\Shared\_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Allors\Server\Custom\Shared\Lockout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Allors\Server\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\WorkspaceObject.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\LoadRequest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\LoadResponse.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\Response.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveRequest.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponse.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\MetaPopulation.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\ObjectType.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\RoleType.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Session.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\SessionObject.ts" />
-    <TypeScriptCompile Include="app\app.templates.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\DatabaseService.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
-    <TypeScriptCompile Include="app\general\home\home.ts" />
-    <TypeScriptCompile Include="app\layout\layout.ts" />
-    <TypeScriptCompile Include="app\general\settings\settings.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-sortable.d.ts" />
   </ItemGroup>
