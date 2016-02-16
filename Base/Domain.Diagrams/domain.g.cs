@@ -730,7 +730,7 @@ namespace Allors.Domain
 		public interface OrderObjectState  : ObjectState 
 		{
 		}
-		public interface Organisation  : UniquelyIdentifiable, AccessControlledObject 
+		public interface Organisation  : Deletable, UniquelyIdentifiable, AccessControlledObject 
 		{
 						Address Addresses {set;}
 

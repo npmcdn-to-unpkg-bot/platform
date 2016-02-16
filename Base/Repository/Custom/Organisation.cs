@@ -5,7 +5,7 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("3a5dcec7-308f-48c7-afee-35d38415aa0b")]
     #endregion
-    public partial class Organisation :  Object, UniquelyIdentifiable, AccessControlledObject 
+    public partial class Organisation :  Object, Deletable, UniquelyIdentifiable, AccessControlledObject 
     {
         #region inherited properties
         public Guid UniqueId { get; set; }
@@ -160,6 +160,9 @@ namespace Allors.Repository.Domain
 
         public void OnPostDerive(){}
 
+        public void Delete()
+        {
+        }
 
         #endregion
         

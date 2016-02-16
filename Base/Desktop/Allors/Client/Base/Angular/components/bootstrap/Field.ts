@@ -1,6 +1,6 @@
-﻿namespace Allors.Form {
+﻿namespace Allors.Bootstrap {
     export abstract class FieldController {
-        formManager: Form.FormManagerController;
+        form: Bootstrap.FormController;
         object: WorkspaceObject;
         roleTypeName: string;
         

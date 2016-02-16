@@ -1,7 +1,9 @@
-﻿namespace App.Settings {
-   class SettingsController{
+﻿namespace App.Profile {
+    import Person = Allors.Domain.Custom.Person;
 
-       user: Allors.Domain.Person;
+   class ProfileController{
+
+       person: Person;
 
        context: Allors.Context;
        events: Allors.Events;
@@ -39,13 +41,13 @@
         private refresh(): ng.IPromise<any> {
             return this.context.refresh()
                 .then(() => {
-                    this.user = this.context.objects["user"] as Allors.Domain.Person;
+                    this.person = this.context.objects["person"] as Person;
                 });
         }
     }
     angular
         .module("app")
-        .controller("settingsController",
-            SettingsController);
+        .controller("profileController",
+            ProfileController);
 
 }

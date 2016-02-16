@@ -3,8 +3,8 @@
     templates.$inject = ["$templateCache"];
     function templates($templateCache: ng.ITemplateCacheService): void {
 
-        Allors.Form.FormManagerTemplates.register($templateCache);
-        Allors.Form.TextTemplates.register($templateCache);
+        Allors.Bootstrap.FormTemplates.register($templateCache);
+        Allors.Bootstrap.TextTemplates.register($templateCache);
 
     }
 

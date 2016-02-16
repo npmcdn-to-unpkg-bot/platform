@@ -1,4 +1,4 @@
-﻿namespace Allors.Form {
+﻿namespace Allors.Bootstrap {
     export class TextTemplates {
 
         static bootstrap = 
@@ -7,7 +7,7 @@
 </div>`;
 
         static register(templateCache: ng.ITemplateCacheService) {
-            templateCache.put("allors/form/text/bootstrap", TextTemplates.bootstrap);
+            templateCache.put("allors/bootstrap/text", TextTemplates.bootstrap);
         }
     }
 
@@ -20,11 +20,11 @@
 
     angular
         .module("allors")
-        .component("text", {
+        .component("bText", {
             controller: TextController,
-            templateUrl: ["$element", "$attrs", "templateService", ($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes, templateService: TemplateService) => templateService.getUrl($element, $attrs)],
+            templateUrl: ["$element", "$attrs", ($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes) => "allors/bootstrap/text"],
             require: {
-                formManager: "^formManager"
+                form: "^bForm"
             },
             bindings: {
                 object: "<o",

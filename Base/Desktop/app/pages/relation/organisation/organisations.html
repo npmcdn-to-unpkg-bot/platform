@@ -6,7 +6,7 @@
                     <a ui-sref="home">Home</a>
                 </li>
                 <li class="active">
-                    <strong>People</strong>
+                    <strong>Organisations</strong>
                 </li>
             </ol>
         </div>
@@ -21,24 +21,24 @@
                             <input type="text" placeholder="Filter" class="form-control">
                         </div>
                         <div class="col-md-1">
-                            <a ui-sref="relation.people.add" class="btn btn-default"><i class="fa fa-plus-circle"></i></a>
+                            <a ui-sref="relation.organisation.add" class="btn btn-default"><i class="fa fa-plus-circle"></i></a>
                         </div>
                     </div>
                 </div>
-               <div class="panel-body">
+                <div class="panel-body">
                     <table class="table">
                         <tbody>
-                            <tr ng-repeat="person in vm.people">
+                            <tr ng-repeat="organisation in vm.organisations">
                                 <td>
                                     <span class="label label-primary">Active</span>
                                 </td>
                                 <td>
-                                    <span ng-bind-html="person.DisplayName"></span>
+                                    {{::organisation.Name}}
                                 </td>
                                 <td class="actions clearfix">
                                     <div class="pull-right text-nowrap">
-                                        <a ui-sref="relation.people.edit({id:person.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                        <a ng-click="vm.delete(person)" class="btn btn-white btn-sm"><i class="fa fa-times"></i> Delete </a>
+                                        <a ui-sref="relation.organisations.edit({id:organisation.id})" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                        <a ng-click="vm.delete(organisation)" class="btn btn-white btn-sm"><i class="fa fa-times"></i> Delete </a>
                                     </div>
                                 </td>
                             </tr>

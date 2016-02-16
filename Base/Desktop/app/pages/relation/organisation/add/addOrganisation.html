@@ -5,10 +5,10 @@
                 <a ui-sref="home">Home</a>
             </li>
             <li>
-                <a ui-sref="relation.people">People</a>
+                <a ui-sref="relation.organisations">Organisations</a>
             </li>
             <li class="active">
-                <strong>Add a Person</strong>
+                <strong>Add a Organisation</strong>
             </li>
         </ol>
     </div>
@@ -25,18 +25,15 @@
                 </div>
 
                 <h3 class="panel-title">
-                    Add a Person
+                    Add a Organisation
                 </h3>
             </div>
             <div class="panel-body">
                 <form name="form" class="form">
                     <!-- ReSharper disable Html.TagNotResolved -->
-                    <form-manager>
-
-                        <text o="vm.person" r="FirstName"></text>
-                        <text o="vm.person" r="LastName"></text>
-
-                    </form-manager>
+                    <b-form orientation="horizontal">
+                        <b-text o="vm.organisation" r="Name"></b-text>
+                    </b-form>
                 </form>
             </div>
 

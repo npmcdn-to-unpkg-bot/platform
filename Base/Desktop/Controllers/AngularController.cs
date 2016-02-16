@@ -160,8 +160,7 @@
                 return this.JsonError(e.Message);
             }
         }
-
-
+        
         [Authorize]
         [HttpPost]
         public ActionResult People()
@@ -209,6 +208,62 @@
             {
                 var responseBuilder = new ResponseBuilder(this.AllorsUser);
                 
+                return this.JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e)
+            {
+                this.log.Error(e);
+                return this.JsonError(e.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Organisations()
+        {
+            try
+            {
+                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var organisations = new Organisations(this.AllorsSession).Extent();
+                responseBuilder.AddCollection("organisations", organisations);
+
+                return this.JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e)
+            {
+                this.log.Error(e);
+                return this.JsonError(e.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditOrganisation(string id)
+        {
+            try
+            {
+                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+
+                var organisation = this.AllorsSession.Instantiate(id);
+                responseBuilder.AddObject("organisation", organisation);
+
+                return this.JsonSuccess(responseBuilder.Build());
+            }
+            catch (Exception e)
+            {
+                this.log.Error(e);
+                return this.JsonError(e.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddOrganisation()
+        {
+            try
+            {
+                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)

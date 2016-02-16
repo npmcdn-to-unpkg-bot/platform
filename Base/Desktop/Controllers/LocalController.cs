@@ -38,7 +38,8 @@
 
             if (string.IsNullOrWhiteSpace(user))
             {
-                user = @"admin@allors.com";
+                //user = @"guest";
+                user = @"administrator";
             }
 
             FormsAuthentication.SetAuthCookie(user, false);
