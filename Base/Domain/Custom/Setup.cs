@@ -20,6 +20,8 @@
 
 namespace Allors
 {
+    using Allors.Domain;
+
     public partial class Setup
     {
         private void CustomOnPrePrepare()
@@ -36,6 +38,21 @@ namespace Allors
 
         private void CustomOnPostSetup()
         {
+        }
+
+        public void ApplyDemo()
+        {
+            var john = new PersonBuilder(this.session).WithFirstName("John").WithLastName("Doe").Build();
+            var jane = new PersonBuilder(this.session).WithFirstName("Jane").WithLastName("Doe").Build();
+            var jenny = new PersonBuilder(this.session).WithFirstName("Jenny").WithLastName("Doe").Build();
+            var jude = new PersonBuilder(this.session).WithFirstName("Jude").WithLastName("Doe").Build();
+
+            var acme = new OrganisationBuilder(this.session)
+                .WithName("Acme")
+                .WithOwner(jane)
+                .WithEmployee(john)
+                .WithEmployee(jenny)
+                .Build();
         }
     }
 }
