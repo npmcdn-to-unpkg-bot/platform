@@ -1,22 +1,27 @@
 namespace Tests {
+    import Person = Allors.Domain.Custom.Person;
 
     export class PersonTests extends tsUnit.TestClass {
 
-        fullName() {
-            var workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            var session = new Allors.Session(workspace);
+        displayName() {
+            const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
+            const session = new Allors.Session(workspace);
 
-            var person = <Allors.Domain.Custom.Person>session.create("Person");
+            const person = session.create("Person") as Person;
 
-            this.areIdentical("N/A", person.FullName);
+            this.areIdentical("N/A", person.DisplayName);
+
+            person.UserName = "john@doe.com";
+
+            this.areIdentical("john@doe.com", person.DisplayName);
 
             person.LastName = "Doe";
 
-            this.areIdentical("Doe", person.FullName);
+            this.areIdentical("Doe", person.DisplayName);
 
             person.FirstName = "John";
 
-            this.areIdentical("John Doe", person.FullName);
+            this.areIdentical("John Doe", person.DisplayName);
         }
     }
 }

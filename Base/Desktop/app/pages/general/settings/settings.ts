@@ -3,25 +3,25 @@
 
        user: Allors.Domain.Person;
 
-        private context: Allors.Context;
+       context: Allors.Context;
+       events: Allors.Events;
+       commands: Allors.Commands;
 
-        static $inject = ["$rootScope", "$scope", "$http", "notificationService", "profileService", "databaseService", "workspaceService"];
+        static $inject = ["$scope", "notificationService", "allorsService"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
             private $scope: ng.IScope,
-            private $http: ng.IHttpService,
-            private toaster: NotificationService,
-            databaseService: Allors.DatabaseService,
-            workspaceService: Allors.WorkspaceService) {
+            private notificationService: NotificationService,
+            allorsServices: Allors.AllorsServices) {
 
-            this.context = new Allors.Context("Settings", databaseService, workspaceService);
+            this.context = new Allors.Context("Settings", allorsServices.databaseService, allorsServices.workspaceService);
+            this.events = new Allors.Events(this.context, allorsServices.eventService, $scope);
+            this.commands = new Allors.Commands(this.context, this.events, notificationService);
 
-            this.refresh()
-                .then(() => {
-                    this.$scope.$on("refresh", () => {
-                        this.refresh();
-                    });
-                });
+            this.events.onRefresh(() => {
+                this.refresh();
+            });
+
+            this.refresh();
         }
 
         get hasChanges() {
@@ -32,12 +32,8 @@
             this.refresh();
         }
 
-        save(): void {
-            this.context.save()
-                .then(() => {
-                    this.toaster.info("Successfully saved.");
-                    this.$rootScope.$broadcast("refresh", this.context.name);
-                });
+        save(): ng.IPromise<any> {
+            return this.commands.save();
         }
 
         private refresh(): ng.IPromise<any> {
@@ -45,10 +41,6 @@
                 .then(() => {
                     this.user = this.context.objects["user"] as Allors.Domain.Person;
                 });
-        }
-
-        private error(responseError: Allors.Data.ResponseError): void {
-            this.toaster.responseError(responseError);
         }
     }
     angular

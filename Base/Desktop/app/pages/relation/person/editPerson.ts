@@ -1,20 +1,21 @@
 ﻿namespace App.Relation.Person {
-    interface PersonAddParams {
+    interface IEditPersonParams {
         id: string;
     }
 
     class EditPersonController {
+
         person: Allors.Domain.Person;
 
-        private context: Allors.Context;
-        private events: Allors.Events;
-        private commands: Allors.Commands;
+        context: Allors.Context;
+        events: Allors.Events;
+        commands: Allors.Commands;
       
         static $inject = ["$scope", "$state", "$stateParams", "notificationService", "allorsService"];
         constructor(
             private $scope: ng.IScope,
             private $state: ng.ui.IStateService,
-            private params: PersonAddParams,
+            private params: IEditPersonParams,
             private notificationService: NotificationService,
             allorsServices: Allors.AllorsServices) {
 
@@ -42,7 +43,7 @@
         }
 
         cancel(): void {
-            this.$state.go("relation.peoples");
+            this.$state.go("relation.people");
         }
 
         save(): ng.IPromise<any> {
@@ -51,15 +52,11 @@
 
         private refresh(): ng.IPromise<any> {
             return this.context.refresh({
-                    personId: this.params.id
+                    id: this.params.id
                 })
                 .then(() => {
                     this.person = this.context.objects["person"] as Allors.Domain.Person;
                 });
-        }
-
-        private error(responseError: Allors.Data.ResponseError): void {
-            this.notificationService.responseError(responseError);
         }
     }
     angular

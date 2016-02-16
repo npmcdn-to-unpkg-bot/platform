@@ -183,16 +183,16 @@
 
         [Authorize]
         [HttpPost]
-        public ActionResult PersonEdit()
+        public ActionResult EditPerson(string id)
         {
             try
             {
                 var responseBuilder = new ResponseBuilder(this.AllorsUser);
 
-                var filterPeople = new People(this.AllorsSession).Extent();
-                responseBuilder.AddCollection("people", filterPeople);
+                var person = this.AllorsSession.Instantiate(id);
+                responseBuilder.AddObject("person", person);
 
-                return JsonSuccess(responseBuilder.Build());
+                return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
             {
@@ -203,15 +203,12 @@
 
         [Authorize]
         [HttpPost]
-        public ActionResult PersonAdd()
+        public ActionResult AddPerson()
         {
             try
             {
                 var responseBuilder = new ResponseBuilder(this.AllorsUser);
-
-                var filterPeople = new People(this.AllorsSession).Extent();
-                responseBuilder.AddCollection("filterPeople", filterPeople);
-
+                
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)

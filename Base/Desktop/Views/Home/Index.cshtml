@@ -21,9 +21,7 @@
 
 <body ng-controller="mainController as main">
 
-    <nav ng-include="'app/main/navigation.html'" class="navbar navbar-inverse navbar-fixed-top"></nav>
-
-    <div ui-view></div>
+    <ng-include src="'app/shell/main.html'"></ng-include>
 
     @Html.Raw(JSNLog.JavascriptLogging.Configure())
 

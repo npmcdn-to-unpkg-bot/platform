@@ -1,11 +1,16 @@
 ﻿namespace Allors {
     export class TemplateService {
-        templateByName: { [name: string]: string; } = {};
+        static framework = "bootstrap";
 
-        get($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes) {
-            const element: HTMLElement = $element[0];
+        static $inject = ["$log"];
+        constructor(private $log: angular.ILogService) {
+        }
+
+        getUrl($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes) {
+            const element = $element[0];
             const name = element.nodeName.toLowerCase();
-            return this.templateByName[name];
+            const url = `allors/form/${name}/${TemplateService.framework}`;
+            return url;
         }
     }
 

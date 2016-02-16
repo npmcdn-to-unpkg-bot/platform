@@ -2,28 +2,29 @@
     class AddPersonController {
      
         person: Allors.Domain.Person;
+     
+        context: Allors.Context;
+        events: Allors.Events;
+        commands: Allors.Commands;
 
-        private context: Allors.Context;
-      
-        static $inject = ["$rootScope", "$scope", "$http", "$state", "notificationService", "profileService", "databaseService", "workspaceService"];
+        static $inject = ["$scope", "$state", "notificationService", "allorsService"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
             private $scope: ng.IScope,
-            private $http: ng.IHttpService,
             private $state: ng.ui.IStateService,
             private notificationService: NotificationService,
-            databaseService: Allors.DatabaseService,
-            workspaceService: Allors.WorkspaceService) {
+            allorsServices: Allors.AllorsServices) {
 
-            this.context = new Allors.Context("AddPerson", databaseService, workspaceService);
+            this.context = new Allors.Context("AddPerson", allorsServices.databaseService, allorsServices.workspaceService);
+            this.events = new Allors.Events(this.context, allorsServices.eventService, $scope);
+            this.commands = new Allors.Commands(this.context, this.events, notificationService);
 
-            this.person = this.context.session.create("Person");
+            this.events.onRefresh(() => {
+                this.refresh();
+            });
             
             this.refresh()
                 .then(() => {
-                    this.$scope.$on("refresh", () => {
-                        this.refresh();
-                    });
+                    this.person = this.context.session.create("Person");
                 });
         }
         
@@ -36,30 +37,17 @@
         }
 
         cancel(): void {
-            this.return();
+            this.$state.go("relation.people");
         }
 
-        save(): void {
-            this.context.save()
-                .then(() => {
-                    this.notificationService.info("Successfully saved.");
-                    this.$rootScope.$broadcast("refresh", this.context.name);
-                    this.return();
-                });
+        save(): ng.IPromise<any> {
+            return this.commands.save();
         }
 
         private refresh(): ng.IPromise<any> {
             return this.context.refresh()
                 .then(() => {
                 });
-        }
-        
-        private return() {
-            this.$state.go("persons");
-        }
-
-        private error(responseError: Allors.Data.ResponseError): void {
-            this.notificationService.responseError(responseError);
         }
     }
     angular

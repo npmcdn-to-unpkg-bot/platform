@@ -174,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\components\" />
-    <Folder Include="App_Data\Templates\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Allors\Server\Base\Identity\EmailService.cs" />
@@ -254,7 +253,8 @@
     <Content Include="Allors\Client\Base\Workspace\SessionObject.js" />
     <Content Include="Allors\Client\Base\Workspace\Workspace.js" />
     <Content Include="Allors\Client\Base\Workspace\WorkspaceObject.js" />
-    <Content Include="app\main\navigation.html" />
+    <Content Include="app\shell\main.html" />
+    <Content Include="app\shell\navigation.html" />
     <Content Include="app\pages\relation\relation.html" />
     <Content Include="app\pages\relation\person\addPerson.html" />
     <Content Include="app\pages\relation\person\editPerson.html" />
@@ -460,7 +460,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Allors.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Commands.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\field\field.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\form\Field.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\form\FormManager.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\form\Text.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\TemplateService.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
@@ -599,7 +601,7 @@
     <TypeScriptCompile Include="app\app.state.ts" />
     <TypeScriptCompile Include="app\app.templates.ts" />
     <TypeScriptCompile Include="app\app.ts" />
-    <TypeScriptCompile Include="app\main\main.ts" />
+    <TypeScriptCompile Include="app\shell\main.ts" />
     <TypeScriptCompile Include="app\directives\tinymce.ts" />
     <TypeScriptCompile Include="app\pages\relation\relation.ts" />
     <TypeScriptCompile Include="app\pages\relation\person\addPerson.ts" />

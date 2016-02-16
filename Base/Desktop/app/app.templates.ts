@@ -1,14 +1,10 @@
 ﻿namespace App {
 
-    templates.$inject = ["templateService"];
-    function templates(templateService: Allors.TemplateService): void {
+    templates.$inject = ["$templateCache"];
+    function templates($templateCache: ng.ITemplateCacheService): void {
 
-        const templateByName = templateService.templateByName;
-
-        templateByName["a-field"] =
-            `<div class="form-group">
-<label>{{$ctrl.label }}</label> <input placeholder="{{$ctrl.placeholder}}" class="form-control" ng-model="$ctrl.role">
-</div>`;
+        Allors.Form.FormManagerTemplates.register($templateCache);
+        Allors.Form.TextTemplates.register($templateCache);
 
     }
 
