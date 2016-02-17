@@ -32,7 +32,9 @@
                 <!-- ReSharper disable Html.TagNotResolved -->
                 <b-form orientation="horizontal">
                     <b-text o="vm.organisation" r="Name"></b-text>
-                </b-form>
+                    <b-select-one o="vm.organisation" r="Owner" d="DisplayName" l="vm.personTypeAhead(criteria)"></b-select-one>
+                    <b-select-many o="vm.organisation" r="Employees" d="DisplayName" l="vm.personTypeAhead(criteria)"></b-select-many>
+               </b-form>
             </div>
 
             <div class="panel-footer clearfix">

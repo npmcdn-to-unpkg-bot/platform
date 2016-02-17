@@ -235,24 +235,6 @@
   <ItemGroup>
     <Content Include="Allors\Client\Base\Angular\directives\toMany\toMany.html" />
     <Content Include="Allors\Client\Base\Angular\directives\toOne\toOne.html" />
-    <Content Include="Allors\Client\Base\Workspace\Data\InvokeRequest.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\InvokeResponse.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\LoadRequest.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\LoadResponse.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\MetaPopulation.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\Response.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\ResponseDerivationError.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\ResponseError.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\SaveRequest.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponse.js" />
-    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.js" />
-    <Content Include="Allors\Client\Base\Workspace\Meta\ObjectType.js" />
-    <Content Include="Allors\Client\Base\Workspace\Meta\RoleType.js" />
-    <Content Include="Allors\Client\Base\Workspace\Method.js" />
-    <Content Include="Allors\Client\Base\Workspace\Session.js" />
-    <Content Include="Allors\Client\Base\Workspace\SessionObject.js" />
-    <Content Include="Allors\Client\Base\Workspace\Workspace.js" />
-    <Content Include="Allors\Client\Base\Workspace\WorkspaceObject.js" />
     <Content Include="app\pages\relation\organisation\add\addOrganisation.html" />
     <Content Include="app\pages\relation\organisation\edit\editOrganisation.html" />
     <Content Include="app\pages\relation\organisation\organisations.html" />
@@ -469,6 +451,10 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Commands.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Form.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Group.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectMany.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectOne.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Label.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Text.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
@@ -529,24 +515,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Allors\Client\Base\Workspace\Data\InvokeRequest.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\InvokeResponse.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\LoadRequest.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\LoadResponse.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\MetaPopulation.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\Response.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\ResponseDerivationError.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\ResponseError.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\SaveRequest.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponse.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Meta\ObjectType.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Meta\RoleType.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Method.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Session.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\SessionObject.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\Workspace.js.map" />
-    <Content Include="Allors\Client\Base\Workspace\WorkspaceObject.js.map" />
     <Content Include="app\Web.config" />
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <None Include="NLog.xsd">

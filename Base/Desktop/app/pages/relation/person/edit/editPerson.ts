@@ -34,14 +34,6 @@
             return this.context && this.context.session.hasChanges;
         }
 
-        getTopicTypeAhead(criteria: string) {
-            //return this.context.queryResults("TopicTypeAhead", { criteria: criteria });
-        }
-
-        getLanguageTypeAhead(criteria: string) {
-            //return this.context.queryResults("LanguageTypeAhead", { criteria: criteria });
-        }
-
         cancel(): void {
             this.$state.go("relation.people");
         }

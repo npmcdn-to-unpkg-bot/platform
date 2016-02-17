@@ -87,12 +87,12 @@
             {
                 var responseBuilder = new ResponseBuilder(this.AllorsUser);
 
-                var persons = new People(this.AllorsSession).Extent();
-                var or = persons.Filter.AddOr();
+                var people = new People(this.AllorsSession).Extent();
+                var or = people.Filter.AddOr();
                 or.AddLike(M.Person.LastName, criteria + "%");
                 or.AddLike(M.Person.FirstName, criteria + "%");
 
-                responseBuilder.AddCollection("results", persons.Take(100));
+                responseBuilder.AddCollection("results", people.Take(100));
 
                 return this.JsonSuccess(responseBuilder.Build());
             }
@@ -245,7 +245,7 @@
                 var responseBuilder = new ResponseBuilder(this.AllorsUser);
 
                 var organisation = this.AllorsSession.Instantiate(id);
-                responseBuilder.AddObject("organisation", organisation);
+                responseBuilder.AddObject("organisation", organisation, M.Organisation.EditResponse);
 
                 return this.JsonSuccess(responseBuilder.Build());
             }

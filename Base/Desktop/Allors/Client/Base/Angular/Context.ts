@@ -45,7 +45,7 @@
 
         query(service: string, params: any): ng.IPromise<Result> {
             return this.$q((resolve, reject) => {
-                this.databaseService.sync(this.name, params)
+                this.databaseService.sync(service, params)
                     .then(v => {
                         const response = v as Data.Response;
                         const requireLoadIds = this.workspace.diff(response);

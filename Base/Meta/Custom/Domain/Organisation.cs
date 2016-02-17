@@ -2,9 +2,8 @@ namespace Allors.Meta
 {
     public partial class MetaOrganisation
     {
-        public Tree FilterResponse;
-
         public Tree EditResponse;
+
         public Tree AngularEmployees { get; private set; }
 
         public Tree AngularShareholders { get; private set; }
@@ -13,10 +12,6 @@ namespace Allors.Meta
         {
             var organisation = this;
             var person = MetaPerson.Instance;
-
-            this.FilterResponse = new Tree(organisation)
-                .Add(organisation.Owner)
-                .Add(organisation.Employees);
 
             this.EditResponse = new Tree(organisation)
                 .Add(organisation.Owner)

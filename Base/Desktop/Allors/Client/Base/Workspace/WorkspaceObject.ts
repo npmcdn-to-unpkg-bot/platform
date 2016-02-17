@@ -8,6 +8,9 @@
         workspace: IWorkspace;
         roles: any;
         methods: any;
+
+        canRead(roleTypeName: string): boolean;
+        canWrite(roleTypeName: string): boolean;
     }
 
     export class WorkspaceObject implements IWorkspaceObject {
@@ -73,6 +76,14 @@
 
         get objectType(): Meta.ObjectType {
             return this.workspace.objectTypeByName[this.t];
+        }
+
+        canRead(roleTypeName: string): boolean {
+            return this.roles[`CanRead${roleTypeName}`];
+        }
+
+        canWrite(roleTypeName: string): boolean {
+            return this.roles[`CanWrite${roleTypeName}`];
         }
     }
 }

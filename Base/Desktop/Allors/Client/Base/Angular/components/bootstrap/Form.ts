@@ -1,5 +1,5 @@
 ﻿namespace Allors.Bootstrap {
-    export class FormTemplates {
+    export class FormTemplate {
 
         static form =
 `<form>
@@ -8,7 +8,7 @@
 </form>`;
 
         static register(templateCache: ng.ITemplateCacheService) {
-            templateCache.put("allors/bootstrap/form", FormTemplates.form);
+            templateCache.put("allors/bootstrap/form", FormTemplate.form);
         }
     }
 

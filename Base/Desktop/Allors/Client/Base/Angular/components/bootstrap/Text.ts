@@ -1,17 +1,24 @@
 ﻿namespace Allors.Bootstrap {
-    export class TextTemplates {
+    export class TextTemplate {
+        static name = "allors/bootstrap/text";
 
         static bootstrap = 
-`<div class="form-group">
-<label>{{$ctrl.label }}</label> <input placeholder="{{$ctrl.placeholder}}" class="form-control" ng-model="$ctrl.role">
-</div>`;
+`
+<b-group f="$ctrl">
+    <b-label f="$ctrl"/> 
+    <input placeholder="{{$ctrl.placeholder}}" class="form-control"
+           ng-model="$ctrl.role"
+           ng-disabled="!$ctrl.canWrite"
+           ng-required="$ctrl.roleType.isRequired">
+</b-group>
+`;
 
         static register(templateCache: ng.ITemplateCacheService) {
-            templateCache.put("allors/bootstrap/text", TextTemplates.bootstrap);
+            templateCache.put(TextTemplate.name, TextTemplate.bootstrap);
         }
     }
 
-    class TextController extends FieldController {
+    class TextController extends Bootstrap.Field {
         static $inject = ["$log"];
         constructor($log: angular.ILogService) {
             super($log);
@@ -22,7 +29,7 @@
         .module("allors")
         .component("bText", {
             controller: TextController,
-            templateUrl: ["$element", "$attrs", ($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes) => "allors/bootstrap/text"],
+            templateUrl: ["$element", "$attrs", () => TextTemplate.name],
             require: {
                 form: "^bForm"
             },

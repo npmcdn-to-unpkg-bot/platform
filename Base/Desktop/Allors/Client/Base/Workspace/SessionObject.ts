@@ -9,6 +9,9 @@
 
         hasChanges: boolean;
 
+        canRead(roleTypeName: string): boolean;
+        canWrite(roleTypeName: string): boolean;
+
         get(roleTypeName: string): any;
         set(roleTypeName: string, value: any) ;
         add(roleTypeName: string, value: any);
@@ -43,6 +46,14 @@
 
         get version(): string {
             return this.workspaceObject ? this.workspaceObject.version : undefined;
+        }
+        
+        canRead(roleTypeName: string): boolean {
+            return this.workspaceObject.canRead(roleTypeName);
+        }
+
+        canWrite(roleTypeName: string): boolean {
+            return this.workspaceObject.canWrite(roleTypeName);
         }
 
         get(roleTypeName: string): any {

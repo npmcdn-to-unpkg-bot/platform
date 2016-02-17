@@ -26,7 +26,7 @@ namespace Allors.Domain
     {
         protected override void CustomPrepare(Setup setup)
         {
-            setup.AddDependency(Meta.ObjectType, M.Singleton.ObjectType);
+            setup.AddDependency(this.Meta.ObjectType, M.Singleton.ObjectType);
         }
 
         protected override void CustomSecure(Security config)

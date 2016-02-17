@@ -47,5 +47,13 @@ namespace Allors
                 .finally(() => this.events.broadcastRefresh())
                 .catch((e) => { throw new Error(String(e)) });
         }
+
+        results(query: string, args: any): ng.IPromise<any> {
+            return this.context.query(query, args)
+                .then(result => {
+                    var results = result.collections["results"]; 
+                    return results;
+                });
+        }
     }
 }

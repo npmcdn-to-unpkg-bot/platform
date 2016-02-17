@@ -4,6 +4,7 @@
         objectType: string;
         isUnit: boolean;
         isOne: boolean;
+        isRequired: boolean;
     }
 
     export class MethodType {

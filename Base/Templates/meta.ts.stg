@@ -78,7 +78,8 @@ roleType(roleType) ::= <<
 						name: "$roleType.PropertyName$",
 						objectType: "$roleType.ObjectType.Name$",
 						isUnit: $boolean(roleType.ObjectType.IsUnit)$,  
-						isOne: $boolean(roleType.IsOne)$  
+						isOne: $boolean(roleType.IsOne)$,
+						isRequired: $boolean(roleType.IsRequired)$  
 					}
 >>
 
