@@ -28,7 +28,7 @@ namespace Allors.Domain
     public class DerivationErrorUnique : DerivationError
     {
         public DerivationErrorUnique(IValidation validation, DerivationRelation relation)
-            : base(validation, new[] { relation }, ErrorMessages.DerivationErrorUnique)
+            : base(validation, new[] { relation }, DomainErrors.DerivationErrorUnique)
         {
         }
 

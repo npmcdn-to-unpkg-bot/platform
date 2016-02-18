@@ -19,9 +19,9 @@
     }
 
     class TextController extends Bootstrap.Field {
-        static $inject = ["$log"];
-        constructor($log: angular.ILogService) {
-            super($log);
+        static $inject = ["$log", "$translate"];
+        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
+            super($log, $translate);
         }
     }
 

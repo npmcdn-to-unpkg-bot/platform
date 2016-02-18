@@ -26,7 +26,7 @@ namespace Allors.Domain
     public class DerivationErrorAtMostOne : DerivationError
     {
         public DerivationErrorAtMostOne(IValidation validation, DerivationRelation[] relations)
-            : base(validation, relations, ErrorMessages.DerivationErrorAtMostOne)
+            : base(validation, relations, DomainErrors.DerivationErrorAtMostOne)
         {
         }
     }

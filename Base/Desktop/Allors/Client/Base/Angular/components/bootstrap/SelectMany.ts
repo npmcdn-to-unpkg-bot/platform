@@ -38,9 +38,9 @@
         noResulst: boolean;
         typed: string;
 
-        static $inject = ["$log"];
-        constructor($log: angular.ILogService) {
-            super($log);
+        static $inject = ["$log", "$translate"];
+        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
+            super($log, $translate);
         }
       
         startEdit() {
@@ -51,8 +51,8 @@
             this.edit = false;
         }
         
-        lookup = criteria => {
-            return (this as any).l({ criteria: criteria });
+        lookup(criteria) {
+            return this.boundLookup({ criteria: criteria });
         }
 
         select(item: any) {
@@ -78,7 +78,7 @@
                 object: "<o",
                 roleTypeName: "@r",
                 displayName: "@d",
-                l: "&l"
+                boundLookup: "&l"
             }
         } as any);
 }

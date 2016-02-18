@@ -10,6 +10,9 @@ namespace Allors.Meta
 
         internal override void CustomExtend()
         {
+            this.Name.IsRequired = true;
+            this.Owner.IsRequired = true;
+
             var organisation = this;
             var person = MetaPerson.Instance;
 

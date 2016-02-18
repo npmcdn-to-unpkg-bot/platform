@@ -7,11 +7,14 @@
 `
 <b-group f="$ctrl">
     <b-label f="$ctrl"/> 
-    <div ng-if="!$ctrl.edit">
+    <div ng-if="!$ctrl.edit" class="input-group">
         <input type="text" autocomplete="off" class="form-control"
                ng-model="$ctrl.display"
                ng-disabled="!$ctrl.canWrite" 
                ng-focus="$ctrl.startEdit()" >
+        <span class="input-group-btn">
+            <button ng-click="$ctrl.remove()" class="btn btn-default" type="button"><span class="fa fa-close"></span></button>
+        </span>
     </div>
 
     <div ng-if="$ctrl.edit">
@@ -23,7 +26,7 @@
                typeahead-select-on-blur="true"
                typeahead-on-select="$ctrl.select($item)"
                ng-blur="$ctrl.stopEdit()" />
-        <button ng-show="$ctrl.noResults" class="btn btn-defualt" ng-click="$ctrl.stopEdit()">
+        <button ng-if="$ctrl.noResults" class="btn btn-defualt" ng-click="$ctrl.stopEdit()">
             <i class="fa fa-exclamation-circle"></i> No Results
         </button>
     </div>
@@ -40,9 +43,9 @@
         noResulst: boolean;
         typed: string;
 
-        static $inject = ["$log"];
-        constructor($log: angular.ILogService) {
-            super($log);
+        static $inject = ["$log", "$translate"];
+        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
+            super($log, $translate);
         }
       
         startEdit() {
@@ -53,13 +56,17 @@
             this.edit = false;
         }
         
-        lookup = criteria => {
-            return (this as any).l({ criteria: criteria });
+        lookup(criteria) {
+            return this.boundLookup({ criteria: criteria });
         }
 
         select(item: any) {
             this.role = item;
             this.stopEdit();
+        }
+
+        remove() {
+            this.role = null;
         }
     }
 
@@ -75,7 +82,7 @@
                 object: "<o",
                 roleTypeName: "@r",
                 displayName: "@d",
-                l: "&l"
+                boundLookup: "&l"
             }
         } as any);
 }

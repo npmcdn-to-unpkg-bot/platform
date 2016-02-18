@@ -1,6 +1,8 @@
 ﻿namespace Web.Controllers
 {
     using System;
+    using System.Collections;
+    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
     using Allors.Domain;
@@ -69,6 +71,27 @@
                 var invokeResponseBuilder = new InvokeResponseBuilder(this.AllorsSession, user, invokeRequest, Group);
                 var invokeResponse = invokeResponseBuilder.Build();
                 return this.JsonSuccess(invokeResponse);
+            }
+            catch (Exception e)
+            {
+                this.log.Error(e);
+                return this.JsonError(e.Message);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Translate(string lang)
+        {
+            try
+            {
+                var cultureInfo = new CultureInfo(lang);
+
+                var resources = Resources.WorkspaceMeta.ResourceManager.GetResourceSet(cultureInfo, true, true);
+                var resourceDict = resources
+                    .Cast<DictionaryEntry>()
+                    .ToDictionary(entry => "meta_" + entry.Key.ToString().Replace(".", "_"), entry => entry.Value.ToString());
+
+                return this.JsonSuccess(resourceDict);
             }
             catch (Exception e)
             {

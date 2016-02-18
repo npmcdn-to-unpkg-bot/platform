@@ -31,7 +31,7 @@ namespace Allors.Domain
     public class DerivationErrorNotAllowed : DerivationError
     {
         public DerivationErrorNotAllowed(IValidation validation, DerivationRelation relation)
-            : base(validation, new[] { relation }, ErrorMessages.DerivationErrorNotAllowed)
+            : base(validation, new[] { relation }, DomainErrors.DerivationErrorNotAllowed)
         {
         }
 

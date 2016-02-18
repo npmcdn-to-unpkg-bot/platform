@@ -25,7 +25,7 @@ namespace Allors.Domain
     public class DerivationErrorEquals : DerivationError
     {
         public DerivationErrorEquals(IValidation validation, DerivationRelation[] derivationRelations)
-            : base(validation, derivationRelations, ErrorMessages.DerivationErrorEquals)
+            : base(validation, derivationRelations, DomainErrors.DerivationErrorEquals)
         {
         }
     }

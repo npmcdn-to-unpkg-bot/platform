@@ -29,8 +29,6 @@ namespace Allors.Meta
 
         public bool IsUnique { get; set; }
 
-        public DataTypeAttribute DataTypeAttribute { get; set; }
-
-        public DisplayAttribute DisplayAttribute { get; set; }
+        public string TextType { get; set; }
     }
 }

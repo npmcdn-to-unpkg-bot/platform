@@ -3,7 +3,12 @@
         static name = "allors/bootstrap/label";
 
         static bootstrap = 
-`<label>{{$ctrl.field.label}}</label>`;
+`<label>{{$ctrl.field.label}}
+    <span ng-if="$ctrl.field.help" class="fa fa-question-circle"
+          uib-tooltip="{{$ctrl.field.help}}"
+          tooltip-placement="right">
+    </span>
+</label>`;
 
         static register(templateCache: ng.ITemplateCacheService) {
             templateCache.put(LabelTemplate.name, LabelTemplate.bootstrap);

@@ -5,7 +5,7 @@
   <Target Name="Merge">
     <ItemGroup>
       <InputDirectories Include="Base"/>
-      <InputDirectories Include="Test"/>
+      <InputDirectories Include="Custom"/>
     </ItemGroup>
 
     <Merge InputDirectories="@(InputDirectories)" OutputDirectory="."/>

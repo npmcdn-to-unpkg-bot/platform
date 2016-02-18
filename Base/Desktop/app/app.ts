@@ -9,5 +9,5 @@
         "ui.router", "ui.bootstrap", "ui.tinymce", "ui.select",
 
         // Third Party
-        "angular-loading-bar", "toastr", "ngFileUpload", "toggle-switch"]);
+        "pascalprecht.translate", "angular-loading-bar", "toastr", "ngFileUpload", "toggle-switch"]);
 }

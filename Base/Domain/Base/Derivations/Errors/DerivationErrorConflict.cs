@@ -28,7 +28,7 @@ namespace Allors.Domain
     public class DerivationErrorConflict : DerivationError
     {
         public DerivationErrorConflict(IValidation validation, DerivationRelation relation)
-            : base(validation, new[] { relation }, ErrorMessages.DerivationErrorConflict)
+            : base(validation, new[] { relation }, DomainErrors.DerivationErrorConflict)
         {
         }
 
