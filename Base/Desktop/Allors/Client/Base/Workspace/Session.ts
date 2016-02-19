@@ -2,9 +2,9 @@
     export interface ISession {
         hasChanges: boolean;
 
-        get(id: string): any;
+        get(id: string): ISessionObject;
 
-        create(objectTypeName: string): any;
+        create(objectTypeName: string): ISessionObject;
 
         saveRequest(): Data.SaveRequest;
         saveResponse(saveResponse: Data.SaveResponse): void;
@@ -34,7 +34,7 @@
             return hasChanges;
         }
 
-        get(id: string): any {
+        get(id: string): ISessionObject {
             if (id === undefined || id === null) {
                 return undefined;
             }
@@ -55,7 +55,7 @@
             return sessionObject;
         }
 
-        create(objectTypeName: string): any {
+        create(objectTypeName: string): ISessionObject {
             const type = Domain[objectTypeName];
             const newSessionObject: INewSessionObject = new type();
             newSessionObject.session = this;

@@ -1,9 +1,28 @@
 ﻿namespace Allors {
     export interface IAllors {
-        
+        // Context
+        objects: { [name: string]: ISessionObject; };
+        collections: { [name: string]: ISessionObject[]; };
+        values: { [name: string]: any; };
+        hasChanges: boolean ;
+
+        create(objectTypeName: string): ISessionObject;
+ 
+        // Events
+        onRefresh(handler: () => void);
+
+        // Commands
+        refresh(params ?: any): ng.IPromise<any>;
+        save(): ng.IPromise<any>;
+        invoke(method: Method): ng.IPromise<any>;
+        invokeWithSave(method: Method): ng.IPromise<any>;
+        invokeCustom(service: string, args ?: any): ng.IPromise<any>;
+        invokeCustomWithSave(service: string, args ?: any): ng.IPromise<any>;
+        query(query: string, args: any): ng.IPromise<any>;
+        queryResults(query: string, args: any): ng.IPromise<any>;
     }
 
-    class A  {
+    class A implements IAllors {
         constructor(public context: Context, public events: Events, public commands: Commands) {
         }
 
@@ -22,6 +41,14 @@
 
         get hasChanges(): boolean {
             return this.context.session.hasChanges;
+        }
+
+        get(id: string): ISessionObject {
+            return this.context.session.get(id);
+        }
+
+        create(objectTypeName: string): ISessionObject {
+            return this.context.session.create(objectTypeName);
         }
 
         // Events
@@ -54,12 +81,16 @@
             return this.commands.invokeCustomWithSave(service, args);
         }
 
-        results(query: string, args: any): ng.IPromise<any> {
-            return this.commands.results(query, args);
+        query(query: string, args: any): ng.IPromise<any> {
+            return this.commands.query(query, args);
+        }
+
+        queryResults(query: string, args: any): ng.IPromise<any> {
+            return this.commands.queryResults(query, args);
         }
     }
 
-    export class AllorsServices {
+    export class AllorsService {
         static $inject = ["databaseService", "workspaceService", "eventService"];
         constructor(
             public databaseService: DatabaseService,
@@ -77,5 +108,5 @@
 
     angular.module("allors")
         .service("allorsService",
-        AllorsServices);
+        AllorsService);
 }

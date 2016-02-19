@@ -48,10 +48,14 @@ namespace Allors
                 .catch((e) => { throw new Error(String(e)) });
         }
 
-        results(query: string, args: any): ng.IPromise<any> {
+        query(query: string, args: any): ng.IPromise<any> {
+            return this.context.query(query, args);
+        }
+
+        queryResults(query: string, args: any): ng.IPromise<any> {
             return this.context.query(query, args)
                 .then(result => {
-                    var results = result.collections["results"]; 
+                    var results = result.collections["results"];
                     return results;
                 });
         }
