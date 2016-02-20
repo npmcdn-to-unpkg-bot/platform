@@ -6,14 +6,16 @@ namespace Allors
         }
 
         save(): ng.IPromise<any> {
-            return this.context.save()
+            return this.context
+                .save()
                 .then((response) => this.commandNotifier.save(response as Data.SaveResponse))
                 .finally(() => this.events.broadcastRefresh())
                 .catch((e) => { throw new Error(String(e)) });
         }
 
         invoke(method: Method): ng.IPromise<any> {
-            return this.context.invoke(method)
+            return this.context
+                .invoke(method)
                 .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
                 .finally(() => this.events.broadcastRefresh())
                 .catch((e) => {
@@ -22,7 +24,8 @@ namespace Allors
         }
 
         invokeWithSave(method: Method): ng.IPromise<any> {
-            return this.context.save()
+            return this.context
+                .save()
                 .then((response) => this.commandNotifier.save(response as Data.SaveResponse))
                 .then(() => this.context.invoke(method))
                 .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
@@ -31,7 +34,8 @@ namespace Allors
         }
 
         invokeCustom(service: string, args?: any): ng.IPromise<any> {
-            return this.context.invokeCustom(service, args)
+            return this.context
+                .invokeCustom(service, args)
                 .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
                 .finally(() => this.events.broadcastRefresh())
                 .catch((e) => {
@@ -40,7 +44,8 @@ namespace Allors
         }
 
         invokeCustomWithSave(service: string, args?: any): ng.IPromise<any> {
-            return this.context.save()
+            return this.context
+                .save()
                 .then((response) => this.commandNotifier.save(response as Data.SaveResponse))
                 .then(() => this.context.invokeCustom(service, args))
                 .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
@@ -49,11 +54,13 @@ namespace Allors
         }
 
         query(query: string, args: any): ng.IPromise<any> {
-            return this.context.query(query, args);
+            return this.context
+                .query(query, args);
         }
 
         queryResults(query: string, args: any): ng.IPromise<any> {
-            return this.context.query(query, args)
+            return this.context
+                .query(query, args)
                 .then(result => {
                     var results = result.collections["results"];
                     return results;

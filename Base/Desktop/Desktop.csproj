@@ -533,6 +533,9 @@
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Errors\ResponseError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Errors\InvokeError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Errors\SaveError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\ObjectType.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\RoleType.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Method.ts" />
