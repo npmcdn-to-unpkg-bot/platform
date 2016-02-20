@@ -2,7 +2,6 @@
     export class Context {
         $q: ng.IQService;
 
-        workspace: IWorkspace;
         session: ISession;
 
         objects: { [name: string]: ISessionObject; } = {};
@@ -11,25 +10,24 @@
 
         constructor(
             public name: string,
-            public databaseService: DatabaseService,
-            workspaceService: WorkspaceService) {
+            public database: Database,
+            public workspace: Workspace) {
 
-            this.$q = this.databaseService.$q;
+            this.$q = this.database.$q;
 
-            this.workspace = workspaceService.workspace;
             this.session = new Session(this.workspace);
         }
 
         refresh(params?: any): ng.IPromise<any> {
             return this.$q((resolve, reject) => {
 
-                return this.databaseService.sync(this.name, params)
+                return this.database.sync(this.name, params)
                     .then((response: Data.Response) => {
                         try {
                             const requireLoadIds = this.workspace.diff(response);
 
                             if (requireLoadIds.objects.length > 0) {
-                                this.databaseService.load(requireLoadIds)
+                                this.database.load(requireLoadIds)
                                     .then((loadResponse: Data.LoadResponse) => {
                                         this.workspace.load(loadResponse);
                                         this.update(response);
@@ -54,14 +52,14 @@
         query(service: string, params: any): ng.IPromise<Result> {
             return this.$q((resolve, reject) => {
 
-                this.databaseService.sync(service, params)
+                this.database.sync(service, params)
                     .then(v => {
                         try {
                             const response = v as Data.Response;
                             const requireLoadIds = this.workspace.diff(response);
 
                             if (requireLoadIds.objects.length > 0) {
-                                this.databaseService.load(requireLoadIds)
+                                this.database.load(requireLoadIds)
                                     .then(u => {
                                         var loadResponse = u as Data.LoadResponse;
                                         this.workspace.load(loadResponse);
@@ -87,7 +85,7 @@
 
                 try {
                     const saveRequest = this.session.saveRequest();
-                    this.databaseService.save(saveRequest)
+                    this.database.save(saveRequest)
                         .then((saveResponse: Data.SaveResponse) => {
                             resolve(saveResponse);
                         })
@@ -99,12 +97,14 @@
             });
         }
 
-        invoke(method: Method): ng.IPromise<Data.InvokeResponse> {
-            return this.databaseService.invoke(method);
-        }
-
-        invokeCustom(service: string, args?: any): ng.IPromise<Data.InvokeResponse> {
-            return this.databaseService.invokeCustom(service, args);
+        invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
+        invoke(service: string, args?: any): ng.IPromise<Data.InvokeResponse>;
+        invoke(methodOrService: Method | string, args?: any): ng.IPromise<Data.InvokeResponse> {
+            if (methodOrService instanceof Method) {
+                return this.database.invoke(methodOrService);
+            } else {
+                return this.database.invoke(methodOrService as string, args);
+            }
         }
         
         private update(response: Data.Response): void {

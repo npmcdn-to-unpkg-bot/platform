@@ -6,11 +6,7 @@
         private allors: Allors.IAllors;
 
         static $inject = ["$scope", "$state", "notificationService", "allorsService"];
-        constructor(
-            private $scope: ng.IScope,
-            private $state: ng.ui.IStateService,
-            private notificationService: NotificationService,
-            allorsService: Allors.AllorsService) {
+        constructor(private $scope: ng.IScope, private $state: ng.ui.IStateService, private notificationService: NotificationService, allorsService: AllorsService) {
 
             this.allors = allorsService.create("AddPerson", $scope, notificationService);
             this.allors.onRefresh(() => this.refresh());
@@ -37,5 +33,4 @@
         .module("app")
         .controller("relationAddPersonController",
             AddPersonController);
-
 }

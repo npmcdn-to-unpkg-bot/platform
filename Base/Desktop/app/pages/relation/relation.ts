@@ -9,10 +9,7 @@
         private allors: Allors.IAllors;
 
         static $inject = ["$scope", "notificationService", "allorsService"];
-        constructor(
-            private $scope: ng.IScope,
-            notificationService: NotificationService,
-            allorsService: Allors.AllorsService) {
+        constructor(private $scope: ng.IScope, notificationService: NotificationService, allorsService: AllorsService) {
 
             this.allors = allorsService.create("Relation", $scope, notificationService);
             this.allors.onRefresh(() => this.refresh());

@@ -1,11 +1,8 @@
 ﻿namespace Allors {
     export class Events {
-        private static refreshEventName = "refresh";
+        private static refreshEventName = "allors.refresh";
 
-        rootScope: angular.IRootScopeService;
-
-        constructor(public context: Context, public eventService: EventService, public scope: ng.IScope) {
-            this.rootScope = eventService.$rootScope;
+        constructor(public context: Context, public $rootScope: angular.IRootScopeService, public scope: ng.IScope) {
         }
 
         on(eventName: string, handler: () => void) {
@@ -17,7 +14,7 @@
         }
 
         broadcast(eventName: string) {
-            this.rootScope.$broadcast(eventName, this.context.name);
+            this.$rootScope.$broadcast(eventName, this.context.name);
         }
 
         broadcastRefresh() {

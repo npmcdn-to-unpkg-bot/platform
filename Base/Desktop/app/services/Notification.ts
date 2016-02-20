@@ -1,6 +1,6 @@
 ﻿module App
 {
-    export class NotificationService implements Allors.ICommandNotifier {
+    export class NotificationService {
 
         static $inject = ["toastr"];
         constructor(private toastr) {
@@ -52,20 +52,6 @@
                 closeButton: true,
                 timeOut: 0
         });
-        }
-
-        invoke(invokeResponse: Allors.Data.InvokeResponse) {
-            if (invokeResponse.hasErrors) {
-                this.responseError(invokeResponse);            
-            }
-        }
-
-        save(invokeResponse: Allors.Data.SaveResponse) {
-            if (invokeResponse.hasErrors) {
-                this.responseError(invokeResponse);
-            } else {
-                this.info("successfully saved");
-            }
         }
     }
 

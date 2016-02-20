@@ -1,61 +1,56 @@
-namespace Allors
-{
-	export class Commands 
+namespace Allors {
+    export class Commands 
     {
-        constructor(public context: Context, public events: Events, public commandNotifier: ICommandNotifier) {
+        constructor(public context: Context, public events: Events) {
         }
 
         save(): ng.IPromise<any> {
             return this.context
                 .save()
-                .then((response) => this.commandNotifier.save(response as Data.SaveResponse))
                 .finally(() => this.events.broadcastRefresh())
-                .catch((e) => { throw new Error(String(e)) });
+                .catch((e) => this.handleError(e));
         }
 
-        invoke(method: Method): ng.IPromise<any> {
-            return this.context
-                .invoke(method)
-                .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
-                .finally(() => this.events.broadcastRefresh())
-                .catch((e) => {
-                    throw new Error(String(e));
-                });
+        invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
+        invoke(service: string, args?: any): ng.IPromise<any>;
+        invoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
+            
+            if (methodOrService instanceof Method) {
+                return this.context
+                    .invoke(methodOrService)
+                    .finally(() => this.events.broadcastRefresh())
+                    .catch((e) => this.handleError(e));
+            } else {
+                return this.context
+                    .invoke(methodOrService as string, args)
+                    .finally(() => this.events.broadcastRefresh())
+                    .catch((e) => this.handleError(e));
+            }
         }
 
-        invokeWithSave(method: Method): ng.IPromise<any> {
-            return this.context
-                .save()
-                .then((response) => this.commandNotifier.save(response as Data.SaveResponse))
-                .then(() => this.context.invoke(method))
-                .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
-                .finally(() => this.events.broadcastRefresh())
-                .catch((e) => { throw new Error(String(e)) });
-        }
+        saveAndInvoke(method: Method): ng.IPromise<Data.InvokeResponse>;
+        saveAndInvoke(service: string, args?: any): ng.IPromise<any>;
+        saveAndInvoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
 
-        invokeCustom(service: string, args?: any): ng.IPromise<any> {
-            return this.context
-                .invokeCustom(service, args)
-                .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
-                .finally(() => this.events.broadcastRefresh())
-                .catch((e) => {
-                    throw new Error(String(e));
-                });
-        }
-
-        invokeCustomWithSave(service: string, args?: any): ng.IPromise<any> {
-            return this.context
-                .save()
-                .then((response) => this.commandNotifier.save(response as Data.SaveResponse))
-                .then(() => this.context.invokeCustom(service, args))
-                .then((response) => this.commandNotifier.invoke(response as Data.InvokeResponse))
-                .finally(() => this.events.broadcastRefresh())
-                .catch((e) => { throw new Error(String(e)) });
+            if (methodOrService instanceof Method) {
+                return this.context
+                    .save()
+                    .then(() => this.context.invoke(methodOrService))
+                    .finally(() => this.events.broadcastRefresh())
+                    .catch((e) => this.handleError(e));
+            } else {
+                return this.context
+                    .save()
+                    .then(() => this.context.invoke(methodOrService as string, args))
+                    .finally(() => this.events.broadcastRefresh())
+                    .catch((e) => this.handleError(e));
+            }
         }
 
         query(query: string, args: any): ng.IPromise<any> {
             return this.context
-                .query(query, args);
+                .query(query, args)
+                .catch((e) => { throw e; });
         }
 
         queryResults(query: string, args: any): ng.IPromise<any> {
@@ -64,7 +59,16 @@ namespace Allors
                 .then(result => {
                     var results = result.collections["results"];
                     return results;
-                });
+                })
+                .catch((e) => { throw e; });
+        }
+
+        private handleError(e: any): any {
+            if (e.hasErrors) {
+                return e;
+            } else {
+                throw e;
+            }
         }
     }
 }

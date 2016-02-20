@@ -6,15 +6,10 @@
         private allors: Allors.IAllors;
 
         static $inject = ["$state", "$scope", "notificationService", "allorsService"];
-        constructor(
-            private $state: ng.ui.IStateService,
-            private $scope: ng.IScope,
-            notificationService: NotificationService,
-            allorsService: Allors.AllorsService) {
+        constructor(private $state: ng.ui.IStateService, private $scope: ng.IScope, notificationService: NotificationService, allorsService: AllorsService) {
 
             this.allors = allorsService.create("AddOrganisation", $scope, notificationService);
             this.allors.onRefresh(() => this.refresh());
-
             this.refresh()
                 .then(() => {
                     this.organisation = this.allors.create("Organisation") as Organisation;

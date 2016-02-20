@@ -503,6 +503,7 @@
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Settings.StyleCop" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Allors.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Commands.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Form.ts" />
@@ -516,12 +517,9 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toMany\ToMany.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toOne\ToOne.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\ICommandNotifier.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\AllorsService.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\DatabaseService.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\EventService.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\services\WorskspaceService.ts" />
+    <TypeScriptCompile Include="app\app.allors.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Database.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\LoadRequest.ts" />
@@ -533,9 +531,6 @@
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SaveResponseNewObject.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Errors\ResponseError.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Errors\InvokeError.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Errors\SaveError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\ObjectType.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Meta\RoleType.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Method.ts" />
