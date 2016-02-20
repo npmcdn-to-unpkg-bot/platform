@@ -1,39 +1,24 @@
-﻿namespace App.Relation.Organisation {
+﻿namespace App.Relation.AddOrganisation {
     class AddOrganisationController {
      
-        organisation: Allors.Domain.Organisation;
+        organisation: Organisation;
      
-        context: Allors.Context;
-        events: Allors.Events;
-        commands: Allors.Commands;
+        private allors: Allors.IAllors;
 
-        static $inject = ["$scope", "$state", "notificationService", "allorsService"];
+        static $inject = ["$state", "$scope", "notificationService", "allorsService"];
         constructor(
-            private $scope: ng.IScope,
             private $state: ng.ui.IStateService,
-            private notificationService: NotificationService,
-            allorsServices: Allors.AllorsServices) {
+            private $scope: ng.IScope,
+            notificationService: NotificationService,
+            allorsService: Allors.AllorsService) {
 
-            this.context = new Allors.Context("AddOrganisation", allorsServices.databaseService, allorsServices.workspaceService);
-            this.events = new Allors.Events(this.context, allorsServices.eventService, $scope);
-            this.commands = new Allors.Commands(this.context, this.events, notificationService);
+            this.allors = allorsService.create("AddOrganisation", $scope, notificationService);
+            this.allors.onRefresh(() => this.refresh());
 
-            this.events.onRefresh(() => {
-                this.refresh();
-            });
-            
             this.refresh()
                 .then(() => {
-                    this.organisation = this.context.session.create("Organisation");
+                    this.organisation = this.allors.create("Organisation") as Organisation;
                 });
-        }
-        
-        getTopicTypeAhead(criteria: string) {
-            //return this.context.queryResults("TopicTypeAhead", { criteria: criteria });
-        }
-
-        getLanguageTypeAhead(criteria: string) {
-            //return this.context.queryResults("LanguageTypeAhead", { criteria: criteria });
         }
 
         cancel(): void {
@@ -41,13 +26,11 @@
         }
 
         save(): ng.IPromise<any> {
-            return this.commands.save();
+            return this.allors.save();
         }
 
         private refresh(): ng.IPromise<any> {
-            return this.context.refresh()
-                .then(() => {
-                });
+            return this.allors.refresh();
         }
     }
     angular

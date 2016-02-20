@@ -1,4 +1,6 @@
 namespace Tests {
+    import Person = Allors.Domain.Custom.Person;
+    import Organisation = Allors.Domain.Organisation;
 
     export class SessionTests extends tsUnit.TestClass {
         unitGet() {
@@ -7,7 +9,7 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var koen = session.get("1");
+            var koen = session.get("1") as Person;
 
             this.areIdentical("Koen", koen.FirstName);
             this.areIdentical(null, koen.MiddleName);
@@ -15,7 +17,7 @@ namespace Tests {
             this.areIdentical(new Date("1973-03-27T18:00:00Z").toUTCString(), koen.BirthDate.toUTCString());
             this.areIdentical(true, koen.IsStudent);
 
-            var patrick = session.get("2");
+            var patrick = session.get("2") as Person;
 
             this.areIdentical("Patrick", patrick.FirstName);
             this.areIdentical("De Boeck", patrick.LastName);
@@ -23,7 +25,7 @@ namespace Tests {
             this.areIdentical(null, patrick.BirthDate);
             this.areIdentical(false, patrick.IsStudent);
 
-            var martien = session.get("3");
+            var martien = session.get("3") as Person;
 
             this.areIdentical("Martien", martien.FirstName);
             this.areIdentical("Knippenberg", martien.LastName);
@@ -37,10 +39,10 @@ namespace Tests {
             workspace.load(Fixture.loadData);
 
             var session1 = new Allors.Session(workspace);
-            var martien1 = session1.get("3");
+            var martien1 = session1.get("3") as Person;
 
             var session2 = new Allors.Session(workspace);
-            var martien2 = session2.get("3");
+            var martien2 = session2.get("3") as Person;
 
             martien2.FirstName = "Martinus";
             martien2.MiddleName = "X";
@@ -59,9 +61,9 @@ namespace Tests {
             workspace.load(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
-            var koen = session.get("1");
-            var patrick = session.get("2");
-            var martien = session.get("3");
+            var koen = session.get("1") as Person;
+            var patrick = session.get("2") as Person;
+            var martien = session.get("3") as Person;
 
             koen.FirstName = "K";
             koen.LastName = "VE";
@@ -109,13 +111,13 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var koen = session.get("1");
-            var patrick = session.get("2");
-            var martien = session.get("3");
+            var koen = session.get("1") as Person;
+            var patrick = session.get("2") as Person;
+            var martien = session.get("3") as Person;
 
-            var acme = session.get("101");
-            var ocme = session.get("102");
-            var icme = session.get("103");
+            var acme = session.get("101") as Organisation;
+            var ocme = session.get("102") as Organisation;
+            var icme = session.get("103") as Organisation;
 
             this.areIdentical(koen, acme.Owner);
             this.areIdentical(patrick, ocme.Owner);
@@ -134,21 +136,21 @@ namespace Tests {
 
             var session2 = new Allors.Session(workspace);
 
-            var koen1 = session1.get("1");
-            var patrick1 = session1.get("2");
-            var martien1 = session1.get("3");
+            var koen1 = session1.get("1") as Person;
+            var patrick1 = session1.get("2") as Person;
+            var martien1 = session1.get("3") as Person;
 
-            var acme1 = session1.get("101");
-            var ocme1 = session1.get("102");
-            var icme1 = session1.get("103");
+            var acme1 = session1.get("101") as Organisation;
+            var ocme1 = session1.get("102") as Organisation;
+            var icme1 = session1.get("103") as Organisation;
 
-            var koen2 = session2.get("1");
-            var patrick2 = session2.get("2");
-            var martien2 = session2.get("3");
+            var koen2 = session2.get("1") as Person;
+            var patrick2 = session2.get("2") as Person;
+            var martien2 = session2.get("3") as Person;
 
-            var acme2 = session2.get("101");
-            var ocme2 = session2.get("102");
-            var icme2 = session2.get("103");
+            var acme2 = session2.get("101") as Organisation;
+            var ocme2 = session2.get("102") as Organisation;
+            var icme2 = session2.get("103") as Organisation;
 
             acme2.Owner = martien2;
             ocme2.Owner = null;
@@ -177,13 +179,13 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var koen = session.get("1");
-            var patrick = session.get("2");
-            var martien = session.get("3");
+            var koen = session.get("1") as Person;
+            var patrick = session.get("2") as Person;
+            var martien = session.get("3") as Person;
 
-            var acme = session.get("101");
-            var ocme = session.get("102");
-            var icme = session.get("103");
+            var acme = session.get("101") as Organisation;
+            var ocme = session.get("102") as Organisation;
+            var icme = session.get("103") as Organisation;
 
             acme.Owner = martien;
             ocme.Owner = null;
@@ -227,13 +229,13 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var koen = session.get("1");
-            var patrick = session.get("2");
-            var martien = session.get("3");
+            var koen = session.get("1") as Person;
+            var patrick = session.get("2") as Person;
+            var martien = session.get("3") as Person;
 
-            var acme = session.get("101");
-            var ocme = session.get("102");
-            var icme = session.get("103");
+            var acme = session.get("101") as Organisation;
+            var ocme = session.get("102") as Organisation;
+            var icme = session.get("103") as Organisation;
 
             this.isTrue(this.arrayEqual([koen, patrick, martien], acme.Employees));
             this.isTrue(this.arrayEqual([koen], ocme.Employees));
@@ -252,21 +254,21 @@ namespace Tests {
 
             var session2 = new Allors.Session(workspace);
 
-            var koen1 = session1.get("1");
-            var patrick1 = session1.get("2");
-            var martien1 = session1.get("3");
+            var koen1 = session1.get("1") as Person;
+            var patrick1 = session1.get("2") as Person;
+            var martien1 = session1.get("3") as Person;
 
-            var acme1 = session1.get("101");
-            var ocme1 = session1.get("102");
-            var icme1 = session1.get("103");
+            var acme1 = session1.get("101") as Organisation;
+            var ocme1 = session1.get("102") as Organisation;
+            var icme1 = session1.get("103") as Organisation;
 
-            var koen2 = session2.get("1");
-            var patrick2 = session2.get("2");
-            var martien2 = session2.get("3");
+            var koen2 = session2.get("1") as Person;
+            var patrick2 = session2.get("2") as Person;
+            var martien2 = session2.get("3") as Person;
 
-            var acme2 = session2.get("101");
-            var ocme2 = session2.get("102");
-            var icme2 = session2.get("103");
+            var acme2 = session2.get("101") as Organisation;
+            var ocme2 = session2.get("102") as Organisation;
+            var icme2 = session2.get("103") as Organisation;
 
             acme2.Employees = null;
             icme2.Employees = [koen2, patrick2, martien2];
@@ -286,13 +288,13 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var koen = session.get("1");
-            var patrick = session.get("2");
-            var martien = session.get("3");
+            var koen = session.get("1") as Person;
+            var patrick = session.get("2") as Person;
+            var martien = session.get("3") as Person;
 
-            var acme = session.get("101");
-            var ocme = session.get("102");
-            var icme = session.get("103");
+            var acme = session.get("101") as Organisation;
+            var ocme = session.get("102") as Organisation;
+            var icme = session.get("103") as Organisation;
 
             acme.Employees = null;
             ocme.Employees = [martien, patrick];
@@ -343,18 +345,18 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var martien = session.get("3");
+            var martien = session.get("3") as Person;
 
-            var mathijs = session.create("Person");
+            var mathijs = session.create("Person") as Person;
             mathijs.FirstName = "Mathijs";
             mathijs.LastName = "Verwer";
 
-            var acme2 = session.create("Organisation");
+            var acme2 = session.create("Organisation") as Organisation;
             acme2.Name = "Acme 2";
             acme2.Manager = mathijs;
             acme2.AddEmployee(mathijs);
 
-            var acme3 = session.create("Organisation");
+            var acme3 = session.create("Organisation") as Organisation;
             acme3.Name = "Acme 3";
             acme3.Manager = martien;
             acme3.AddEmployee(martien);
@@ -418,13 +420,13 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var martien = session.get("3");
+            var martien = session.get("3") as Person;
 
-            var mathijs = <Allors.Domain.Person>session.create("Person");
+            var mathijs = <Allors.Domain.Person>session.create("Person") as Person;
             mathijs.FirstName = "Mathijs";
             mathijs.LastName = "Verwer";
 
-            var acme2 = <Allors.Domain.Organisation>session.create("Organisation");
+            var acme2 = <Allors.Domain.Organisation>session.create("Organisation") as Organisation;
             acme2.Name = "Acme 2";
             acme2.Owner = martien;
             acme2.Manager = mathijs;
@@ -457,7 +459,7 @@ namespace Tests {
 
             session.saveResponse(saveResponse);
 
-            var mathijs = session.create("Person");
+            var mathijs = session.create("Person") as Person;
             mathijs.FirstName = "Mathijs";
             mathijs.LastName = "Verwer";
 
@@ -479,7 +481,7 @@ namespace Tests {
             this.areIdentical("10000", mathijs.id);
             this.areIdentical("Person", mathijs.objectType.name);
 
-            mathijs = session.get("10000");
+            mathijs = session.get("10000") as Person;
 
             this.areNotIdentical(undefined, mathijs);
 
@@ -500,9 +502,9 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var acme = <Allors.Domain.Organisation>session.get("101");
-            var ocme = <Allors.Domain.Organisation>session.get("102");
-            var icme = <Allors.Domain.Organisation>session.get("102");
+            var acme = session.get("101") as Organisation;
+            var ocme = session.get("102") as Organisation;
+            var icme = session.get("102") as Organisation;
 
             this.isTrue(acme.CanExecuteJustDoIt);
             this.isFalse(ocme.CanExecuteJustDoIt);

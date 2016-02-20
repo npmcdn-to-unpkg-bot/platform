@@ -7,9 +7,7 @@
 
         person: Allors.Domain.Person;
 
-        context: Allors.Context;
-        events: Allors.Events;
-        commands: Allors.Commands;
+        private allors: Allors.IAllors;
       
         static $inject = ["$scope", "$state", "$stateParams", "notificationService", "allorsService"];
         constructor(
@@ -17,21 +15,15 @@
             private $state: ng.ui.IStateService,
             private params: IEditPersonParams,
             private notificationService: NotificationService,
-            allorsServices: Allors.AllorsServices) {
+            allorsService: Allors.AllorsService) {
 
-            this.context = new Allors.Context("EditPerson", allorsServices.databaseService, allorsServices.workspaceService);
-            this.events = new Allors.Events(this.context, allorsServices.eventService, $scope);
-            this.commands = new Allors.Commands(this.context, this.events, notificationService);
-
-            this.events.onRefresh(() => {
-                this.refresh();
-            });
-
+            this.allors = allorsService.create("EditPerson", $scope, notificationService);
+            this.allors.onRefresh(() => this.refresh());
             this.refresh();
         }
         
         get hasChanges() {
-            return this.context && this.context.session.hasChanges;
+            return this.allors && this.allors.hasChanges;
         }
 
         cancel(): void {
@@ -39,15 +31,15 @@
         }
 
         save(): ng.IPromise<any> {
-            return this.commands.save();
+            return this.allors.save();
         }
 
         private refresh(): ng.IPromise<any> {
-            return this.context.refresh({
+            return this.allors.refresh({
                     id: this.params.id
                 })
                 .then(() => {
-                    this.person = this.context.objects["person"] as Allors.Domain.Person;
+                    this.person = this.allors.objects["person"] as Allors.Domain.Person;
                 });
         }
     }

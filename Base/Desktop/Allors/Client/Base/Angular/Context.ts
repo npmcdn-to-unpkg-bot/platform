@@ -5,8 +5,8 @@
         workspace: IWorkspace;
         session: ISession;
 
-        objects: { [name: string]: SessionObject; } = {};
-        collections: { [name: string]: SessionObject[]; } = {};
+        objects: { [name: string]: ISessionObject; } = {};
+        collections: { [name: string]: ISessionObject[]; } = {};
         values: { [name: string]: any; } = {};
 
         constructor(

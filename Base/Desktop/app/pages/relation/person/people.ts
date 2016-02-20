@@ -5,36 +5,27 @@
       
         people: Person[];
 
-        private context: Allors.Context;
-        private events: Allors.Events;
-        private commands: Allors.Commands;
+        private allors: Allors.IAllors;
       
         static $inject = ["$scope", "notificationService", "allorsService"];
         constructor(
-            $scope: ng.IScope,
+            private $scope: ng.IScope,
             notificationService: NotificationService,
-            allorsServices: Allors.AllorsServices) {
+            allorsService: Allors.AllorsService) {
 
-            this.context = new Allors.Context("People", allorsServices.databaseService, allorsServices.workspaceService);
-            this.events = new Allors.Events(this.context, allorsServices.eventService, $scope);
-            this.commands = new Allors.Commands(this.context, this.events, notificationService);
-            
-            this.events.onRefresh(() => {
-                this.refresh();
-            });
-
+            this.allors = allorsService.create("People", $scope, notificationService);
+            this.allors.onRefresh(() => this.refresh());
             this.refresh();
         }
 
         delete(person: Allors.Domain.Person) {
-            this.commands.invoke(person.Delete);
+            this.allors.invoke(person.Delete);
         }
         
         refresh(): ng.IPromise<any> {
-            return this.context.refresh()
-                .then(() => {
-                    this.people = this.context.collections["people"] as Person[];
-                });
+            return this.allors.refresh().then(() => {
+                this.people = this.allors.collections["people"] as Person[];
+            });;
         }
     }
     angular

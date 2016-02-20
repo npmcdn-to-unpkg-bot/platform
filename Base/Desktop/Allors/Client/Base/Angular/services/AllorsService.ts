@@ -27,11 +27,11 @@
         }
 
         // Context
-        get objects(): { [name: string]: SessionObject; } {
+        get objects(): { [name: string]: ISessionObject; } {
             return this.context.objects;
         }
 
-        get collections(): { [name: string]: SessionObject[]; } {
+        get collections(): { [name: string]: ISessionObject[]; } {
             return this.context.collections;
         }
 
@@ -99,7 +99,7 @@
         }
 
         create(name, $scope, commandNotifier) {
-            const context = new Context("Settings", this.databaseService, this.workspaceService);
+            const context = new Context(name, this.databaseService, this.workspaceService);
             const events = new Events(context, this.eventService, $scope);
             const commands = new Commands(context, events, commandNotifier);
             return new A(context, events, commands);

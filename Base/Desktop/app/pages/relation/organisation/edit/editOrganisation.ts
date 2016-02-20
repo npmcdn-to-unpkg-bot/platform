@@ -5,11 +5,9 @@
 
     class EditOrganisationController {
 
-        organisation: Allors.Domain.Organisation;
+        organisation: Organisation;
 
-        context: Allors.Context;
-        events: Allors.Events;
-        commands: Allors.Commands;
+        private allors: Allors.IAllors;
       
         static $inject = ["$scope", "$state", "$stateParams", "notificationService", "allorsService"];
         constructor(
@@ -17,25 +15,19 @@
             private $state: ng.ui.IStateService,
             private params: IEditOrganisationParams,
             private notificationService: NotificationService,
-            allorsServices: Allors.AllorsServices) {
+            allorsService: Allors.AllorsService) {
 
-            this.context = new Allors.Context("EditOrganisation", allorsServices.databaseService, allorsServices.workspaceService);
-            this.events = new Allors.Events(this.context, allorsServices.eventService, $scope);
-            this.commands = new Allors.Commands(this.context, this.events, notificationService);
-
-            this.events.onRefresh(() => {
-                this.refresh();
-            });
-
+            this.allors = allorsService.create("EditOrganisation", $scope, notificationService);
+            this.allors.onRefresh(() => this.refresh());
             this.refresh();
         }
         
         get hasChanges() {
-            return this.context && this.context.session.hasChanges;
+            return this.allors && this.allors.hasChanges;
         }
 
         personTypeAhead(criteria: string) {
-            return this.commands.results("PersonTypeAhead", {criteria: criteria});
+            return this.allors.queryResults("PersonTypeAhead", {criteria: criteria});
         }
 
         cancel(): void {
@@ -43,15 +35,15 @@
         }
 
         save(): ng.IPromise<any> {
-            return this.commands.save();
+            return this.allors.save();
         }
 
         private refresh(): ng.IPromise<any> {
-            return this.context.refresh({
+            return this.allors.refresh({
                     id: this.params.id
                 })
                 .then(() => {
-                    this.organisation = this.context.objects["organisation"] as Allors.Domain.Organisation;
+                    this.organisation = this.allors.objects["organisation"] as Organisation;
                 });
         }
     }

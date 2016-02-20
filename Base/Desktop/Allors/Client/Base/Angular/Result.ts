@@ -1,11 +1,11 @@
 ﻿namespace Allors {
     export class Result {
 
-        objects: { [name: string]: SessionObject; } = {};
-        collections: { [name: string]: SessionObject[]; } = {};
+        objects: { [name: string]: ISessionObject; } = {};
+        collections: { [name: string]: ISessionObject[]; } = {};
         values: { [name: string]: any; } = {};
 
-        constructor(session: ISession, response: Allors.Data.Response) {
+        constructor(session: ISession, response: Data.Response) {
             _.map(response.namedObjects, (v, k) => {
                 this.objects[k] = session.get(v);
             });
