@@ -1,27 +1,22 @@
 ﻿namespace App.Relation.Person {
-    import Person = Allors.Domain.Person;
-
-    class PeopleController {
+    class PeopleController extends Control {
       
         people: Person[];
 
-        private allors: Allors.IAllors;
-      
-        static $inject = ["$scope", "notificationService", "allorsService"];
-        constructor(private $scope: ng.IScope, notificationService: NotificationService, allorsService: AllorsService) {
+        static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
+        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
+            super("People", allors, $scope);
 
-            this.allors = allorsService.create("People", $scope, notificationService);
-            this.allors.onRefresh(() => this.refresh());
             this.refresh();
         }
 
         delete(person: Allors.Domain.Person) {
-            this.allors.invoke(person.Delete);
+            this.invoke(person.Delete);
         }
         
         refresh(): ng.IPromise<any> {
-            return this.allors.refresh().then(() => {
-                this.people = this.allors.collections["people"] as Person[];
+            return this.load().then(() => {
+                this.people = this.collections["people"] as Person[];
             });;
         }
     }

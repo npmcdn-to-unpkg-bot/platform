@@ -1,26 +1,33 @@
-﻿module App
-{
-    export class NotificationService {
+﻿namespace App {
+    export abstract class Control extends Allors.Control {
 
-        static $inject = ["toastr"];
-        constructor(private toastr) {
+        toastr: angular.toastr.IToastrService;
+
+        constructor(name: string, allors: AllorsService, $scope: ng.IScope) {
+            super(name, allors.database, allors.workspace, allors.$rootScope, $scope);
+
+            this.toastr = allors.toastr;
         }
 
-        info(message: string, title?: string) {
-            this.toastr.info(message, title);
+        save(): ng.IPromise<any> {
+            return super.save()
+                .then(saveResponse => {
+                    this.toastr.info("successfully saved");
+                    return saveResponse;
+                })
+                .catch(saveResponse => {
+                    this.responseError(saveResponse);
+                    return saveResponse;
+                });
         }
 
-        error(message: string, title?: string) {
-            this.toastr.error(message, title);
-        }
-
-        responseError(error: Allors.Data.ResponseError) {
-            var title;
+        private responseError(error: Allors.Data.ResponseError) {
+            let title: string;
             var message = "<div class=\"response-errors\">";
 
             if (error.errorMessage && error.errorMessage.length > 0) {
                 title = "General Error";
-                message += "<p>"+ error.errorMessage +"</p>";
+                message += `<p>${error.errorMessage}</p>`;
             }
 
             if ((error.versionErrors && error.versionErrors.length > 0) ||
@@ -39,7 +46,7 @@
 
                 message += "<ul>";
                 error.derivationErrors.map(derivationError => {
-                    message += "<li>" + derivationError.m + "</li>";
+                    message += `<li>${derivationError.m}</li>`;
                 });
 
                 message += "</ul>";
@@ -51,12 +58,8 @@
                 allowHtml: true,
                 closeButton: true,
                 timeOut: 0
-        });
+            });
         }
-    }
 
-    angular
-        .module("app")
-        .service("notificationService",
-        App.NotificationService);
+    }
 }

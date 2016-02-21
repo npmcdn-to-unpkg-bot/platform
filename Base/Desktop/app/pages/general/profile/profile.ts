@@ -1,36 +1,23 @@
 ﻿namespace App.Profile {
-    import Person = Allors.Domain.Custom.Person;
+    class ProfileController extends Control {
 
-   class ProfileController{
+        person: Person;
 
-       person: Person;
+        static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
+        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
+            super("Settings", allors, $scope);
 
-       private allors: Allors.IAllors;
-
-        static $inject = ["$scope", "notificationService", "allorsService"];
-        constructor(private $scope: ng.IScope, notificationService: NotificationService, allorsService: AllorsService) {
-
-            this.allors = allorsService.create("Settings", $scope, notificationService);
-            this.allors.onRefresh(() => this.refresh());
             this.refresh();
-        }
-
-        get hasChanges() {
-            return this.allors && this.allors.hasChanges;
         }
 
         reset(): void {
             this.refresh();
         }
 
-        save(): ng.IPromise<any> {
-            return this.allors.save();
-        }
-
-        private refresh(): ng.IPromise<any> {
-            return this.allors.refresh()
+        protected refresh(): ng.IPromise<any> {
+            return this.load()
                 .then(() => {
-                    this.person = this.allors.objects["person"] as Person;
+                    this.person = this.objects["person"] as Person;
                 });
         }
     }

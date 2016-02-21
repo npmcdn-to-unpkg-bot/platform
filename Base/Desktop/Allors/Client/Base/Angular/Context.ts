@@ -18,7 +18,7 @@
             this.session = new Session(this.workspace);
         }
 
-        refresh(params?: any): ng.IPromise<any> {
+        load(params?: any): ng.IPromise<any> {
             return this.$q((resolve, reject) => {
 
                 return this.database.sync(this.name, params)

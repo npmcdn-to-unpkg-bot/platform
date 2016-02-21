@@ -21,7 +21,7 @@
         public AngularController()
         {
             // obtain logger instance 
-            this.log = LogManager.GetCurrentClassLogger();
+            this.log = LogManager.GetLogger<AngularController>();
         }
 
         #region Allors
@@ -52,6 +52,9 @@
                 var user = this.AllorsUser ?? Singleton.Instance(this.AllorsSession).Guest;
                 var saveResponseBuilder = new SaveResponseBuilder(this.AllorsSession, user, saveRequest, Group);
                 var saveResponse = saveResponseBuilder.Build();
+
+                saveResponse.AddAccessError(user);
+
                 return this.JsonSuccess(saveResponse);
             }
             catch (Exception e)

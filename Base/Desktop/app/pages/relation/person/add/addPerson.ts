@@ -1,32 +1,24 @@
-﻿namespace App.Relation.Person {
-    class AddPersonController {
-     
+﻿namespace App.Relation.AddPerson {
+    class AddPersonController extends Control {
+
         person: Person;
      
-        private allors: Allors.IAllors;
+        static $inject = ["allorsService", "$scope", "$state"];
+        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService) {
+            super("AddPerson", allors, $scope);
 
-        static $inject = ["$scope", "$state", "notificationService", "allorsService"];
-        constructor(private $scope: ng.IScope, private $state: ng.ui.IStateService, private notificationService: NotificationService, allorsService: AllorsService) {
-
-            this.allors = allorsService.create("AddPerson", $scope, notificationService);
-            this.allors.onRefresh(() => this.refresh());
-            this.refresh();            
             this.refresh()
                 .then(() => {
-                    this.person = this.allors.create("Person") as Person;
+                    this.person = this.create("Person") as Person;
                 });
         }
        
         cancel(): void {
             this.$state.go("relation.people");
         }
-
-        save(): ng.IPromise<any> {
-            return this.allors.save();
-        }
-
-        private refresh(): ng.IPromise<any> {
-            return this.allors.refresh();
+        
+        protected refresh(): ng.IPromise<any> {
+            return this.load();
         }
     }
     angular

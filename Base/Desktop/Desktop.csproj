@@ -502,9 +502,7 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Settings.StyleCop" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Allors.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Commands.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Form.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Group.ts" />
@@ -518,7 +516,9 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toOne\ToOne.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
-    <TypeScriptCompile Include="app\app.allors.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Control.ts" />
+    <TypeScriptCompile Include="app\allors\Control.ts" />
+    <TypeScriptCompile Include="app\allors\Allors.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Database.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeResponse.ts" />
@@ -538,7 +538,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\SessionObject.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Workspace.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\WorkspaceObject.ts" />
-    <TypeScriptCompile Include="Allors\Client\workspace.d.ts" />
+    <TypeScriptCompile Include="Allors\Client\Custom\workspace.d.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\I1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Media.g.ts" />
@@ -549,7 +549,7 @@
     <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Person.ts" />
-    <TypeScriptCompile Include="Allors\Client\Custom\Lodash\Nest.ts" />
+    <TypeScriptCompile Include="app\allors\Nest.ts" />
     <Content Include="Content\ui-grid.eot" />
     <Content Include="Content\ui-grid.ttf" />
     <Content Include="Content\ui-grid.woff" />
@@ -590,8 +590,8 @@
     <TypeScriptCompile Include="app\pages\relation\person\people.ts" />
     <TypeScriptCompile Include="app\pages\general\home\home.ts" />
     <TypeScriptCompile Include="app\pages\general\profile\profile.ts" />
-    <TypeScriptCompile Include="app\services\Notification.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-loading-bar\angular-loading-bar.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular-toastr\angular-toastr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />

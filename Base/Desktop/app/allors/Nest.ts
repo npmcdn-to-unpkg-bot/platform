@@ -5,12 +5,9 @@ namespace Allors.Domain.Custom
         if (!iteratees.length) {
             return collection;
         }
-
-        var first = iteratees[0];
+        const first = iteratees[0];
         var rest = iteratees.slice(1);
-
-        var group = _.groupBy(collection, first);
-
+        const group = _.groupBy(collection, first);
         return _.mapValues(group, value => nest(value, rest));
     };
 

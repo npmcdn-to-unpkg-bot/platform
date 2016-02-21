@@ -1,7 +1,39 @@
-namespace Allors {
-    export class Commands 
-    {
-        constructor(public context: Context, public events: Events) {
+﻿namespace Allors {
+    export abstract class Control {
+        context: Context;
+        events: Events;
+
+        constructor(name: string, database: Database, workspace: Workspace, $rootScope: ng.IRootScopeService, protected $scope: ng.IScope) {
+            this.context = new Context(name, database, workspace);
+            this.events = new Events(this.context, $rootScope, $scope);
+
+            this.events.onRefresh(() => this.refresh());
+        }
+
+        // Context
+        get objects(): { [name: string]: ISessionObject; } {
+            return this.context.objects;
+        }
+
+        get collections(): { [name: string]: ISessionObject[]; } {
+            return this.context.collections;
+        }
+
+        get values(): { [name: string]: any; } {
+            return this.context.values;
+        }
+
+        get hasChanges(): boolean {
+            return this.context.session.hasChanges;
+        }
+
+        create(objectTypeName: string) {
+            return this.context.session.create(objectTypeName);
+        }
+        
+        // Commands
+        load(params?: any): ng.IPromise<any> {
+            return this.context.load(params);
         }
 
         save(): ng.IPromise<any> {
@@ -14,7 +46,7 @@ namespace Allors {
         invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
         invoke(service: string, args?: any): ng.IPromise<any>;
         invoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
-            
+
             if (methodOrService instanceof Method) {
                 return this.context
                     .invoke(methodOrService)
@@ -62,6 +94,8 @@ namespace Allors {
                 })
                 .catch((e) => { throw e; });
         }
+
+        protected abstract refresh(): ng.IPromise<any>;
 
         private handleError(e: any): any {
             if (e.hasErrors) {

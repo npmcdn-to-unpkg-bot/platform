@@ -1,28 +1,23 @@
 ﻿namespace App.Relation.Organisation {
-    import Organisation = Allors.Domain.Organisation;
-
-    class OrganisationsController {
+    class OrganisationsController extends Control {
       
         organisations: Organisation[];
 
-        private allors: Allors.IAllors;
-      
-        static $inject = ["$scope", "notificationService", "allorsService"];
-        constructor($scope: ng.IScope, notificationService: NotificationService, allorsService: AllorsService) {
+        static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
+        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
+            super("Organisations", allors, $scope);
 
-            this.allors = allorsService.create("Organisations", $scope, notificationService);
-            this.allors.onRefresh(() => this.refresh());
             this.refresh();
         }
 
-        delete(organisation: Allors.Domain.Organisation) {
-            this.allors.invoke(organisation.Delete);
+        delete(organisation: Organisation) {
+            this.invoke(organisation.Delete);
         }
         
         refresh(): ng.IPromise<any> {
-            return this.allors.refresh()
+            return this.load()
                 .then(() => {
-                    this.organisations = this.allors.collections["organisations"] as Organisation[];
+                    this.organisations = this.collections["organisations"] as Organisation[];
                 });
         }
     }

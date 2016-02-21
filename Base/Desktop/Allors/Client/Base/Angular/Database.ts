@@ -1,4 +1,5 @@
-﻿namespace Allors {
+﻿// TODO: rename to push pull and sync
+namespace Allors {
     export class Database {
         constructor(private $http: ng.IHttpService, public $q: ng.IQService, public prefix: string) {
         }
@@ -40,7 +41,11 @@
                 this.$http.post(`${this.prefix}Save`, saveRequest)
                     .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
                         var saveResponse = callbackArg.data;
-                        resolve(saveResponse);
+                        if (saveResponse.hasErrors) {
+                            reject(saveResponse);
+                        } else {
+                            resolve(saveResponse);
+                        }
                     })
                     .catch(e => {
                         reject(e);
@@ -60,7 +65,11 @@
                     this.$http.post(`${this.prefix}Invoke`, invokeRequest)
                         .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
                             var invokeResponse = callbackArg.data;
-                            resolve(invokeResponse);
+                            if (invokeResponse.hasErrors) {
+                                reject(invokeResponse);
+                            } else {
+                                resolve(invokeResponse);
+                            }
                         })
                         .catch(e => {
                             reject(e);
