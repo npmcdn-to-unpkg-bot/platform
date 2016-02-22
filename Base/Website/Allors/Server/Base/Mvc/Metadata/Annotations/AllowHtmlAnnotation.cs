@@ -32,11 +32,11 @@ namespace Allors.Web.Mvc.Models.Annotations
             var path = modelMetadata.GetPath();
             if (path != null)
             {
-                var roleType = path.End.PropertyType as RoleType;
-                if (roleType != null && roleType.DataTypeAttribute != null && roleType.DataTypeAttribute.DataType == DataType.Html)
-                {
-                    modelMetadata.RequestValidationEnabled = false;
-                }
+                //var roleType = path.End.PropertyType as RoleType;
+                //if (roleType != null && roleType.DataTypeAttribute != null && roleType.DataTypeAttribute.DataType == DataType.Html)
+                //{
+                //    modelMetadata.RequestValidationEnabled = false;
+                //}
             }
         }
     }

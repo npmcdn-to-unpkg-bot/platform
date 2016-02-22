@@ -125,23 +125,23 @@ namespace Allors.Web.Mvc.Models
                             var roleType = path.End.PropertyType as RoleType;
                             if (roleType != null)
                             {
-                                if (!attributes.Any(x => x is DisplayAttribute))
-                                {
-                                    var displayAttribute = roleType.DisplayAttribute;
-                                    if (displayAttribute != null)
-                                    {
-                                        attributes.Add(displayAttribute);
-                                    }
-                                }
+                                //if (!attributes.Any(x => x is DisplayAttribute))
+                                //{
+                                //    var displayAttribute = roleType.DisplayAttribute;
+                                //    if (displayAttribute != null)
+                                //    {
+                                //        attributes.Add(displayAttribute);
+                                //    }
+                                //}
 
-                                if (!attributes.Any(x => x is DataTypeAttribute))
-                                {
-                                    var dataTypeAttribute = roleType.DataTypeAttribute;
-                                    if (dataTypeAttribute != null)
-                                    {
-                                        attributes.Add(dataTypeAttribute);
-                                    }
-                                }
+                                //if (!attributes.Any(x => x is DataTypeAttribute))
+                                //{
+                                //    var dataTypeAttribute = roleType.DataTypeAttribute;
+                                //    if (dataTypeAttribute != null)
+                                //    {
+                                //        attributes.Add(dataTypeAttribute);
+                                //    }
+                                //}
                             }
                         }
                     }
