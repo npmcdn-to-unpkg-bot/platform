@@ -4,21 +4,23 @@
         toastr: angular.toastr.IToastrService;
 
         constructor(name: string, allors: AllorsService, $scope: ng.IScope) {
-            super(name, allors.database, allors.workspace, allors.$rootScope, $scope);
+            super(name, allors.database, allors.workspace, allors.$rootScope, $scope, allors.$q);
 
             this.toastr = allors.toastr;
         }
 
         save(): ng.IPromise<any> {
-            return super.save()
-                .then(saveResponse => {
-                    this.toastr.info("successfully saved");
-                    return saveResponse;
-                })
-                .catch(saveResponse => {
-                    this.responseError(saveResponse);
-                    return saveResponse;
-                });
+            return this.$q((resolve, reject) => {
+                super.save()
+                    .then( (saveResponse: Allors.Data.SaveResponse) => {
+                        this.toastr.info("successfully saved");
+                        resolve(saveResponse);
+                    })
+                    .catch( (e: Allors.DatabaseError) => {
+                        this.responseError(e.reponseError);
+                        reject(e);
+                    });
+            });
         }
 
         private responseError(error: Allors.Data.ResponseError) {

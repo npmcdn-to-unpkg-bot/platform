@@ -514,6 +514,10 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toMany\ToMany.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toOne\ToOne.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\DatabaseError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\AllorsError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\InvokeError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\SaveError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Control.ts" />

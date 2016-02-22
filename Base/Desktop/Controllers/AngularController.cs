@@ -53,8 +53,6 @@
                 var saveResponseBuilder = new SaveResponseBuilder(this.AllorsSession, user, saveRequest, Group);
                 var saveResponse = saveResponseBuilder.Build();
 
-                saveResponse.AddAccessError(user);
-
                 return this.JsonSuccess(saveResponse);
             }
             catch (Exception e)

@@ -88,8 +88,7 @@
                     this.database.save(saveRequest)
                         .then((saveResponse: Data.SaveResponse) => {
                             resolve(saveResponse);
-                        })
-                        .catch((e2) => reject(e2));
+                        });
                 } catch (e) {
                     reject(e);
                 }
@@ -100,6 +99,7 @@
         invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
         invoke(service: string, args?: any): ng.IPromise<Data.InvokeResponse>;
         invoke(methodOrService: Method | string, args?: any): ng.IPromise<Data.InvokeResponse> {
+
             if (methodOrService instanceof Method) {
                 return this.database.invoke(methodOrService);
             } else {

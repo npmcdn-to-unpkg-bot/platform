@@ -41,12 +41,8 @@ namespace Allors {
                 this.$http.post(`${this.prefix}Save`, saveRequest)
                     .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
                         var saveResponse = callbackArg.data;
-                        if (saveResponse.hasErrors) {
-                            reject(saveResponse);
-                        } else {
-                            resolve(saveResponse);
-                        }
-                    })
+                        resolve(saveResponse);
+                })
                     .catch(e => {
                         reject(e);
                     });
@@ -65,11 +61,7 @@ namespace Allors {
                     this.$http.post(`${this.prefix}Invoke`, invokeRequest)
                         .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
                             var invokeResponse = callbackArg.data;
-                            if (invokeResponse.hasErrors) {
-                                reject(invokeResponse);
-                            } else {
-                                resolve(invokeResponse);
-                            }
+                            resolve(invokeResponse);
                         })
                         .catch(e => {
                             reject(e);
