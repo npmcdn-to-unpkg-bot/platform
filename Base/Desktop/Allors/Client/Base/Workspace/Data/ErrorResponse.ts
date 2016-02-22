@@ -1,12 +1,15 @@
 ﻿namespace Allors.Data {
-    export interface SaveResponse extends ResponseError {
+    export interface ErrorResponse {
         hasErrors: boolean;
-        errorMessage?: string;
-        versionErrors?: string[];
-        accessErrors?: string[];
-        missingErrors?: string[];
-        derivationErrors?: Allors.Data.ResponseDerivationError[];
 
-        newObjects?: Allors.Data.SaveResponseNewObject[];
+        errorMessage?: string;
+
+        versionErrors?: string[];
+
+        accessErrors?: string[];
+
+        missingErrors?: string[];
+
+        derivationErrors?: Allors.Data.PullResponseDerivationError[];
     }
 }

@@ -21,14 +21,14 @@
         load(params?: any): ng.IPromise<any> {
             return this.$q((resolve, reject) => {
 
-                return this.database.sync(this.name, params)
-                    .then((response: Data.Response) => {
+                return this.database.pull(this.name, params)
+                    .then((response: Data.PullResponse) => {
                         try {
                             const requireLoadIds = this.workspace.diff(response);
 
                             if (requireLoadIds.objects.length > 0) {
-                                this.database.load(requireLoadIds)
-                                    .then((loadResponse: Data.LoadResponse) => {
+                                this.database.sync(requireLoadIds)
+                                    .then((loadResponse: Data.SyncResponse) => {
                                         this.workspace.load(loadResponse);
                                         this.update(response);
                                         this.session.reset();
@@ -52,16 +52,16 @@
         query(service: string, params: any): ng.IPromise<Result> {
             return this.$q((resolve, reject) => {
 
-                this.database.sync(service, params)
+                this.database.pull(service, params)
                     .then(v => {
                         try {
-                            const response = v as Data.Response;
+                            const response = v as Data.PullResponse;
                             const requireLoadIds = this.workspace.diff(response);
 
                             if (requireLoadIds.objects.length > 0) {
-                                this.database.load(requireLoadIds)
+                                this.database.sync(requireLoadIds)
                                     .then(u => {
-                                        var loadResponse = u as Data.LoadResponse;
+                                        var loadResponse = u as Data.SyncResponse;
                                         this.workspace.load(loadResponse);
                                         const result = new Result(this.session, response);
                                         resolve(result);
@@ -80,13 +80,13 @@
             });
         }
 
-        save(): ng.IPromise<Data.SaveResponse> {
+        save(): ng.IPromise<Data.PushResponse> {
             return this.$q((resolve, reject) => {
 
                 try {
                     const saveRequest = this.session.saveRequest();
-                    this.database.save(saveRequest)
-                        .then((saveResponse: Data.SaveResponse) => {
+                    this.database.push(saveRequest)
+                        .then((saveResponse: Data.PushResponse) => {
                             resolve(saveResponse);
                         });
                 } catch (e) {
@@ -107,7 +107,7 @@
             }
         }
         
-        private update(response: Data.Response): void {
+        private update(response: Data.PullResponse): void {
 
             _.map(response.namedObjects, (v, k) => {
                 this.objects[k] = this.session.get(v);

@@ -453,7 +453,7 @@ namespace Tests {
 
             var session = new Allors.Session(workspace);
 
-            var saveResponse: Allors.Data.SaveResponse = {
+            var saveResponse: Allors.Data.PushResponse = {
                 hasErrors: false
             }
 

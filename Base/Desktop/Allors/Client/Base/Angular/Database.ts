@@ -4,12 +4,12 @@ namespace Allors {
         constructor(private $http: ng.IHttpService, public $q: ng.IQService, public prefix: string) {
         }
 
-        sync(name: string, params?: any): ng.IPromise<Data.Response> {
+        pull(name: string, params?: any): ng.IPromise<Data.PullResponse> {
             return this.$q((resolve, reject) => {
 
                 const serviceName = this.prefix + name;
                 this.$http.post(serviceName, params)
-                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.Response>) => {
+                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.PullResponse>) => {
                         var response = callbackArg.data;
                         resolve(response);
                     })
@@ -20,11 +20,11 @@ namespace Allors {
             });
         }
 
-        load(loadRequest: Data.LoadRequest): ng.IPromise<Data.LoadResponse> {
+        sync(syncRequest: Data.SyncRequest): ng.IPromise<Data.SyncResponse> {
             return this.$q((resolve, reject) => {
 
-                this.$http.post(`${this.prefix}Load`, loadRequest)
-                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.LoadResponse>) => {
+                this.$http.post(`${this.prefix}Sync`, syncRequest)
+                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.SyncResponse>) => {
                         var loadResponse = callbackArg.data;
                         resolve(loadResponse);
                     })
@@ -35,11 +35,11 @@ namespace Allors {
             });
         }
 
-        save(saveRequest: Data.SaveRequest): ng.IPromise<Data.SaveResponse> {
+        push(pushRequest: Data.PushRequest): ng.IPromise<Data.PushResponse> {
             return this.$q((resolve, reject) => {
 
-                this.$http.post(`${this.prefix}Save`, saveRequest)
-                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.SaveResponse>) => {
+                this.$http.post(`${this.prefix}Push`, pushRequest)
+                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.PushResponse>) => {
                         var saveResponse = callbackArg.data;
                         resolve(saveResponse);
                 })

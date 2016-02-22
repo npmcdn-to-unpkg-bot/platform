@@ -1,5 +1,5 @@
 ﻿namespace Allors.Data {
-    export interface ResponseDerivationError {
+    export interface PullResponseDerivationError {
         m: string;
 
         r: string[][];

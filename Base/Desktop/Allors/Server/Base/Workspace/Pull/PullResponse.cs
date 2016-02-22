@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Response
+    public class PullResponse
     {
         public string UserSecurityHash { get; set; }
 

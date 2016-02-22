@@ -1,5 +1,5 @@
 ﻿namespace Allors.Data {
-    export interface Response {
+    export interface PullResponse {
         userSecurityHash: string;
 
         objects?: string[][];

@@ -29,16 +29,16 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 Objects = new[] {
-                    new SaveRequestObject
+                    new PushRequestObject
                     {
                         I = c1a.Id.ToString(),
                         V = c1a.Strategy.ObjectVersion.ToString(),
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1AllorsString",
                                 S = "new c1"
@@ -52,7 +52,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -78,16 +78,16 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 Objects = new[] {
-                    new SaveRequestObject
+                    new PushRequestObject
                     {
                         I = c1a.Id.ToString(),
                         V = c1a.Strategy.ObjectVersion.ToString(),
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1AllorsString",
                                 S = "new c1"
@@ -101,7 +101,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -126,16 +126,16 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 Objects = new[] {
-                    new SaveRequestObject
+                    new PushRequestObject
                     {
                         I = c1a.Id.ToString(),
                         V = c1a.Strategy.ObjectVersion.ToString(),
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1C1One2One",
                                 S = c1b.Id.ToString()
@@ -149,7 +149,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -179,16 +179,16 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 Objects = new[] {
-                    new SaveRequestObject
+                    new PushRequestObject
                     {
                         I = c1a.Id.ToString(),
                         V = c1a.Strategy.ObjectVersion.ToString(),
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1C1One2Many",
                                 S = new [] { c1c.Id.ToString() } 
@@ -202,7 +202,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -232,16 +232,16 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 Objects = new[] {
-                    new SaveRequestObject
+                    new PushRequestObject
                     {
                         I = c1a.Id.ToString(),
                         V = c1a.Strategy.ObjectVersion.ToString(),
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1C1One2Many",
                                 A = new [] { c1c.Id.ToString() }
@@ -255,7 +255,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -286,16 +286,16 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 Objects = new[] {
-                    new SaveRequestObject
+                    new PushRequestObject
                     {
                         I = c1a.Id.ToString(),
                         V = c1a.Strategy.ObjectVersion.ToString(),
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1C1One2Many",
                                 R = new [] { c1c.Id.ToString() }
@@ -309,7 +309,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -327,10 +327,10 @@ namespace Desktop.Tests.Server.Workspace
 
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                  NewObjects = new[] {
-                    new SaveRequestNewObject
+                    new PushRequestNewObject
                     {
                         NI = "-1",
                         T = "C1",
@@ -342,7 +342,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -368,16 +368,16 @@ namespace Desktop.Tests.Server.Workspace
 
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 NewObjects = new[] {
-                    new SaveRequestNewObject
+                    new PushRequestNewObject
                     {
                         NI = "-1",
                         T = "C1",
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1AllorsString",
                                 S = "new c1"
@@ -391,7 +391,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
@@ -419,16 +419,16 @@ namespace Desktop.Tests.Server.Workspace
 
             this.Session.Commit();
 
-            var saveRequest = new SaveRequest
+            var saveRequest = new PushRequest
             {
                 NewObjects = new[] {
-                    new SaveRequestNewObject
+                    new PushRequestNewObject
                     {
                         NI = "-1",
                         T = "C1",
-                        Roles = new List<SaveRequestRole>
+                        Roles = new List<PushRequestRole>
                         {
-                            new SaveRequestRole
+                            new PushRequestRole
                             {
                                 T = "C1C1One2One",
                                 S = "-1"
@@ -442,7 +442,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (SaveResponse)jsonResult.Data;
+            var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();

@@ -23,7 +23,7 @@
         private u: string;
         private t: string;
 
-        constructor(workspace: IWorkspace, loadResponse: Data.LoadResponse, loadObject: Data.LoadResponseObject) {
+        constructor(workspace: IWorkspace, loadResponse: Data.SyncResponse, loadObject: Data.SyncResponseObject) {
             this.workspace = workspace;
             this.i = loadObject.i;
             this.v = loadObject.v;

@@ -6,8 +6,8 @@
 
         create(objectTypeName: string): ISessionObject;
 
-        saveRequest(): Data.SaveRequest;
-        saveResponse(saveResponse: Data.SaveResponse): void;
+        saveRequest(): Data.PushRequest;
+        saveResponse(saveResponse: Data.PushResponse): void;
         reset(): void;
     }
 
@@ -23,7 +23,14 @@
         }
 
         get hasChanges(): boolean {
+            for (let newSessionObject in this.newSessionObjectById) {
+                if (this.newSessionObjectById.hasOwnProperty(newSessionObject)) {
+                    return true;
+                }
+            }
+
             var hasChanges = false;
+
             _.forEach(this.sessionObjectById, sessionObject => {
                 if (sessionObject.hasChanges) {
                     hasChanges = true;
@@ -77,8 +84,8 @@
             });
         }
 
-        saveRequest(): Data.SaveRequest {
-            var data = new Data.SaveRequest();
+        saveRequest(): Data.PushRequest {
+            var data = new Data.PushRequest();
             data.newObjects = [];
             data.objects = [];
 
@@ -101,7 +108,7 @@
             return data;
         }
         
-        saveResponse(saveResponse: Data.SaveResponse): void {
+        saveResponse(saveResponse: Data.PushResponse): void {
             if (saveResponse.newObjects) {
                 _.forEach(saveResponse.newObjects, saveResponseNewObject => {
                     var newId = saveResponseNewObject.ni;
@@ -109,7 +116,7 @@
 
                     var newSessionObject = this.newSessionObjectById[newId];
 
-                    var loadResponse: Data.LoadResponse = {
+                    var loadResponse: Data.SyncResponse = {
                         userSecurityHash: "#", // This should trigger a load on next check
                         objects: [
                             {

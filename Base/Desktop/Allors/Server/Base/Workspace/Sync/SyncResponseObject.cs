@@ -1,6 +1,6 @@
 ﻿namespace Allors.Web.Workspace
 {
-    public class LoadResponseObject
+    public class SyncResponseObject
     {
         /// <summary>
         /// The id.

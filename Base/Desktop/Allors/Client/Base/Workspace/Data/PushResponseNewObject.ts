@@ -1,5 +1,5 @@
 ﻿namespace Allors.Data {
-    export class SaveResponseNewObject  {
+    export class PushResponseNewObject  {
         i: string;
         ni: string;
     }

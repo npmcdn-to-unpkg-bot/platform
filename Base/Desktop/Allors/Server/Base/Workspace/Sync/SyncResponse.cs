@@ -1,9 +1,9 @@
 ﻿namespace Allors.Web.Workspace
 {
-    public class LoadResponse
+    public class SyncResponse
     {
         public string UserSecurityHash { get; set; }
 
-        public LoadResponseObject[] Objects { get; set; }
+        public SyncResponseObject[] Objects { get; set; }
     }
 }

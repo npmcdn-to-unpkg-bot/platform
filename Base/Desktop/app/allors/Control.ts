@@ -12,7 +12,7 @@
         save(): ng.IPromise<any> {
             return this.$q((resolve, reject) => {
                 super.save()
-                    .then( (saveResponse: Allors.Data.SaveResponse) => {
+                    .then( (saveResponse: Allors.Data.PushResponse) => {
                         this.toastr.info("successfully saved");
                         resolve(saveResponse);
                     })
@@ -23,7 +23,7 @@
             });
         }
 
-        private responseError(error: Allors.Data.ResponseError) {
+        private responseError(error: Allors.Data.ErrorResponse) {
             let title: string;
             var message = "<div class=\"response-errors\">";
 

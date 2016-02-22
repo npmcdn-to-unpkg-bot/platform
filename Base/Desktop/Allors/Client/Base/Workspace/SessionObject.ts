@@ -17,8 +17,8 @@
         add(roleTypeName: string, value: any);
         remove(roleTypeName: string, value: any);
 
-        save(): Data.SaveRequestObject;
-        saveNew(): Data.SaveRequestNewObject;
+        save(): Data.PushRequestObject;
+        saveNew(): Data.PushRequestNewObject;
         reset();
     }
 
@@ -37,6 +37,10 @@
         private roleByRoleTypeName: { [id: string]: any; } = {};
 
         get hasChanges(): boolean {
+            if (this.newId) {
+                return true;
+            }
+
             return this.changedRoleByRoleTypeName !== undefined;
         }
  
@@ -49,10 +53,18 @@
         }
         
         canRead(roleTypeName: string): boolean {
+            if (this.newId) {
+                return true;
+            }
+
             return this.workspaceObject.canRead(roleTypeName);
         }
 
         canWrite(roleTypeName: string): boolean {
+            if (this.newId) {
+                return true;
+            }
+
             return this.workspaceObject.canWrite(roleTypeName);
         }
 
@@ -141,9 +153,9 @@
             this.set(roleTypeName, roles);
         }
 
-        save(): Data.SaveRequestObject {
+        save(): Data.PushRequestObject {
             if (this.changedRoleByRoleTypeName !== undefined) {
-                const data = new Data.SaveRequestObject();
+                const data = new Data.PushRequestObject();
                 data.i = this.id;
                 data.v = this.version;
                 data.roles = this.saveRoles();
@@ -153,9 +165,9 @@
             return undefined;
         }
 
-        saveNew(): Data.SaveRequestNewObject {
+        saveNew(): Data.PushRequestNewObject {
             if (this.changedRoleByRoleTypeName !== undefined) {
-                const data = new Data.SaveRequestNewObject();
+                const data = new Data.PushRequestNewObject();
                 data.ni = this.newId;
                 data.t = this.objectType.name;
                 data.roles = this.saveRoles();
@@ -177,13 +189,13 @@
             this.roleByRoleTypeName = {};
         }
 
-        private saveRoles(): Data.SaveRequestRole[] {
-            var saveRoles = new Array<Data.SaveRequestRole>();
+        private saveRoles(): Data.PushRequestRole[] {
+            var saveRoles = new Array<Data.PushRequestRole>();
 
             _.forEach(this.changedRoleByRoleTypeName, (role, roleTypeName) => {
                 var roleType = this.objectType.roleTypeByName[roleTypeName];
 
-                var saveRole = new Data.SaveRequestRole;
+                var saveRole = new Data.PushRequestRole;
                 saveRole.t = roleType.name;
 
                 if (roleType.isUnit) {

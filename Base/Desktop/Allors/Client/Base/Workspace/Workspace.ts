@@ -12,8 +12,8 @@
     export interface IWorkspace {
         objectTypeByName: { [name: string]: Meta.ObjectType; };
 
-        diff(data: Data.Response): Data.LoadRequest;
-        load(data: Data.LoadResponse): void;
+        diff(data: Data.PullResponse): Data.SyncRequest;
+        load(data: Data.SyncResponse): void;
         get(id: string): WorkspaceObject;
     }
 
@@ -55,7 +55,7 @@
             });
         }
 
-        diff(response: Data.Response): Data.LoadRequest {
+        diff(response: Data.PullResponse): Data.SyncRequest {
             var userSecurityHash = response.userSecurityHash;
 
             const requireLoadIdsWithVersion = _.filter(response.objects, idAndVersion => {
@@ -66,7 +66,7 @@
                 return (workspaceObject === undefined) || (workspaceObject === null) || (workspaceObject.version !== version) || (workspaceObject.userSecurityHash !== userSecurityHash);
             });
 
-            const requireLoadIds = new Data.LoadRequest();
+            const requireLoadIds = new Data.SyncRequest();
             requireLoadIds.objects = _.map(requireLoadIdsWithVersion, idWithVersion => {
                 return idWithVersion[0];
             });
@@ -74,7 +74,7 @@
             return requireLoadIds;
         }
 
-        load(loadResponse: Data.LoadResponse): void {
+        load(loadResponse: Data.SyncResponse): void {
             _.forEach(loadResponse.objects, objectData => {
                 var workspaceObject = new WorkspaceObject(this, loadResponse, objectData);
                 this.workspaceObjectById[workspaceObject.id] = workspaceObject;

@@ -1,5 +1,5 @@
 ﻿namespace Allors.Data {
-    export interface LoadResponseObject {
+    export interface SyncResponseObject {
         i: string;
         v: string;
         t: string;
@@ -8,9 +8,9 @@
         methods?: string[][];
     }
 
-    export interface LoadResponse {
+    export interface SyncResponse {
         userSecurityHash: string;
 
-        objects: LoadResponseObject[];
+        objects: SyncResponseObject[];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Allors.Web.Workspace
 {
-    public class SaveRequestNewObject
+    public class PushRequestNewObject
     {
         /// <summary>
         /// The new id.
@@ -14,6 +14,6 @@ namespace Allors.Web.Workspace
         /// </summary>
         public string T { get; set; }
 
-        public IList<SaveRequestRole> Roles { get; set; }
+        public IList<PushRequestRole> Roles { get; set; }
     }
 }

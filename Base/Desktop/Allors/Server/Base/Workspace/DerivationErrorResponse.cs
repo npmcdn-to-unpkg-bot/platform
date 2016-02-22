@@ -1,6 +1,6 @@
 ﻿namespace Allors.Web
 {
-    public class ResponseDerivationError
+    public class DerivationErrorResponse
     {
         /// <summary>
         /// The error message.

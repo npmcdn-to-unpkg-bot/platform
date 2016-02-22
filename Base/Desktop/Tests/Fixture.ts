@@ -1,6 +1,6 @@
 ﻿namespace Tests {
     export class Fixture {
-        static loadData: Allors.Data.LoadResponse = {
+        static loadData: Allors.Data.SyncResponse = {
             userSecurityHash: "#",
             objects: [
                 {

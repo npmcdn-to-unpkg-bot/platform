@@ -1,6 +1,6 @@
 ﻿namespace Allors.Web.Workspace
 {
-    public class SaveRequestRole
+    public class PushRequestRole
     {
         /// <summary>
         /// The role type.

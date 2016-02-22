@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
 namespace Allors.Web.Workspace
 {
-    public class SaveRequestObject
+    public class PushResponseNewObject
     {
         /// <summary>
         /// The id.
@@ -10,10 +8,8 @@ namespace Allors.Web.Workspace
         public string I { get; set; }
 
         /// <summary>
-        /// The version.
+        /// The new id.
         /// </summary>
-        public string V { get; set; }
-
-        public IList<SaveRequestRole> Roles { get; set; }
+        public string NI { get; set; }
     }
 }

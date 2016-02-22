@@ -1,6 +1,6 @@
 ﻿namespace Allors.Web.Workspace
 {
-    public class LoadRequest
+    public class SyncRequest
     {
         public string[] Objects { get; set; }
 }

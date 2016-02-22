@@ -30,7 +30,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var loadRequest = new LoadRequest
+            var loadRequest = new SyncRequest
             {
                 Objects = new[] { c1a.Id.ToString() }
             };
@@ -39,7 +39,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Load(loadRequest);
-            var loadResponse = (LoadResponse)jsonResult.Data;
+            var loadResponse = (SyncResponse)jsonResult.Data;
             
             // Assert
             loadResponse.Objects.Length.ShouldEqual(1);
@@ -99,7 +99,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var loadRequest = new LoadRequest
+            var loadRequest = new SyncRequest
             {
                 Objects = new[] { c1a.Id.ToString() }
             };
@@ -108,7 +108,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Load(loadRequest);
-            var loadResponse = (LoadResponse)jsonResult.Data;
+            var loadResponse = (SyncResponse)jsonResult.Data;
 
             // Assert
             loadResponse.Objects.Length.ShouldEqual(1);

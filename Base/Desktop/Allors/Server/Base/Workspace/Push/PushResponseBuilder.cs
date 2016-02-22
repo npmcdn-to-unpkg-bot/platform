@@ -1,8 +1,5 @@
-﻿using Antlr.Runtime;
-
-namespace Allors.Web
+﻿namespace Allors.Web
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -11,43 +8,43 @@ namespace Allors.Web
     using Allors.Meta;
     using Allors.Web.Workspace;
 
-    public class SaveResponseBuilder
+    public class PushResponseBuilder
     {
         private readonly ISession session;
-        private readonly SaveRequest saveRequest;
+        private readonly PushRequest pushRequest;
         private readonly string @group;
         private readonly User user;
 
-        public SaveResponseBuilder(ISession session, User user, SaveRequest saveRequest, string @group)
+        public PushResponseBuilder(ISession session, User user, PushRequest pushRequest, string @group)
         {
             this.session = session;
             this.user = user;
-            this.saveRequest = saveRequest;
+            this.pushRequest = pushRequest;
             this.group = group;
         }
 
-        public SaveResponse Build()
+        public PushResponse Build()
         {
-            var saveResponse = new SaveResponse();
+            var saveResponse = new PushResponse();
 
             Dictionary<string, IObject> objectByNewId = null;
 
-            if (this.saveRequest.NewObjects != null && this.saveRequest.NewObjects.Length > 0)
+            if (this.pushRequest.NewObjects != null && this.pushRequest.NewObjects.Length > 0)
             {
-                objectByNewId = this.saveRequest.NewObjects.ToDictionary(x => x.NI, x =>
+                objectByNewId = this.pushRequest.NewObjects.ToDictionary(x => x.NI, x =>
                 {
                     var cls = session.Database.MetaPopulation.FindClassByName(x.T);
                     return (IObject)Allors.ObjectBuilder.Build(session,cls);
                 });
             }
 
-            if (this.saveRequest.Objects != null && this.saveRequest.Objects.Length > 0)
+            if (this.pushRequest.Objects != null && this.pushRequest.Objects.Length > 0)
             {
                 // bulk load all objects
-                var objectIds = this.saveRequest.Objects.Select(v => v.I).ToArray();
+                var objectIds = this.pushRequest.Objects.Select(v => v.I).ToArray();
                 this.session.Instantiate(objectIds);
 
-                foreach (var saveRequestObject in this.saveRequest.Objects)
+                foreach (var saveRequestObject in this.pushRequest.Objects)
                 {
                     var obj = this.session.Instantiate(saveRequestObject.I);
 
@@ -65,7 +62,7 @@ namespace Allors.Web
 
             if (objectByNewId != null)
             {
-                foreach (var saveRequestNewObject in this.saveRequest.NewObjects)
+                foreach (var saveRequestNewObject in this.pushRequest.NewObjects)
                 {
                     var obj = objectByNewId[saveRequestNewObject.NI];
                     var saveRequestRoles = saveRequestNewObject.Roles;
@@ -87,7 +84,7 @@ namespace Allors.Web
             {
                 if (objectByNewId != null)
                 {
-                    saveResponse.NewObjects = objectByNewId.Select(dictionaryEntry => new SaveResponseNewObject
+                    saveResponse.NewObjects = objectByNewId.Select(dictionaryEntry => new PushResponseNewObject
                     {
                         I = dictionaryEntry.Value.Id.ToString(),
                         NI = dictionaryEntry.Key
@@ -100,17 +97,17 @@ namespace Allors.Web
             return saveResponse;
         }
 
-        private static void AddMissingRoles(IObject[] actualRoles, string[] requestedRoleIds, SaveResponse saveResponse)
+        private static void AddMissingRoles(IObject[] actualRoles, string[] requestedRoleIds, PushResponse pushResponse)
         {
             var actualRoleIds = actualRoles.Select(x => x.Id.ToString());
             var missingRoleIds = requestedRoleIds.Except(actualRoleIds);
             foreach (var missingRoleId in missingRoleIds)
             {
-                saveResponse.AddMissingError(missingRoleId);
+                pushResponse.AddMissingError(missingRoleId);
             }
         }
 
-        private void SaveRequestRoles(IList<SaveRequestRole> saveRequestRoles, IObject obj, SaveResponse saveResponse, Dictionary<string, IObject> objectByNewId)
+        private void SaveRequestRoles(IList<PushRequestRole> saveRequestRoles, IObject obj, PushResponse pushResponse, Dictionary<string, IObject> objectByNewId)
         {
             foreach (var saveRequestRole in saveRequestRoles)
             {
@@ -150,7 +147,7 @@ namespace Allors.Web
                                     var role = GetRole(roleId, objectByNewId);
                                     if (role == null)
                                     {
-                                        saveResponse.AddMissingError(roleId);
+                                        pushResponse.AddMissingError(roleId);
                                     }
                                     else
                                     {
@@ -169,7 +166,7 @@ namespace Allors.Web
                                         var roles = GetRoles(roleIds, objectByNewId);
                                         if (roles.Length != roleIds.Length)
                                         {
-                                            AddMissingRoles(roles, roleIds, saveResponse);
+                                            AddMissingRoles(roles, roleIds, pushResponse);
                                         }
                                         else
                                         {
@@ -190,7 +187,7 @@ namespace Allors.Web
                                         var roles = GetRoles(roleIds, objectByNewId);
                                         if (roles.Length != roleIds.Length)
                                         {
-                                            AddMissingRoles(roles, roleIds, saveResponse);
+                                            AddMissingRoles(roles, roleIds, pushResponse);
                                         }
                                         else
                                         {
@@ -206,7 +203,7 @@ namespace Allors.Web
                     }
                     else
                     {
-                        saveResponse.AddAccessError(obj);
+                        pushResponse.AddAccessError(obj);
                     }
                 }
             }

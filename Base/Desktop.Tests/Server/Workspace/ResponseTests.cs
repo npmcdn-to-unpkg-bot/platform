@@ -33,7 +33,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Main();
-            var response = (Response)jsonResult.Data;
+            var response = (PullResponse)jsonResult.Data;
 
             // Assert
             response.UserSecurityHash.ShouldNotBeEmpty();
@@ -58,7 +58,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Main();
-            var response = (Response)jsonResult.Data;
+            var response = (PullResponse)jsonResult.Data;
 
             // Assert
             response.Objects.Length.ShouldEqual(1);
@@ -102,7 +102,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Home();
-            var response = (Response)jsonResult.Data;
+            var response = (PullResponse)jsonResult.Data;
 
             // Assert
             response.Objects.Length.ShouldEqual(2);
@@ -164,7 +164,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Employees();
-            var response = (Response)jsonResult.Data;
+            var response = (PullResponse)jsonResult.Data;
 
             // Assert
             response.Objects.Length.ShouldEqual(3);
@@ -237,7 +237,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.Shareholders();
-            var response = (Response)jsonResult.Data;
+            var response = (PullResponse)jsonResult.Data;
 
             // Assert
             response.Objects.Length.ShouldEqual(5);
@@ -285,7 +285,7 @@ namespace Desktop.Tests.Server.Workspace
 
             // Act
             var jsonResult = (JsonResult)controller.NoTree();
-            var response = (Response)jsonResult.Data;
+            var response = (PullResponse)jsonResult.Data;
 
             // Assert
             response.Objects.Length.ShouldEqual(2);

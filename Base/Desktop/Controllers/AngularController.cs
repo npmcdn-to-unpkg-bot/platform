@@ -27,13 +27,13 @@
         #region Allors
         [Authorize]
         [HttpPost]
-        public ActionResult Load(LoadRequest loadRequest)
+        public ActionResult Sync(SyncRequest syncRequest)
         {
             try
             {
                 var user = this.AllorsUser ?? Singleton.Instance(this.AllorsSession).Guest;
-                var loadResponseBuilder = new LoadResponseBuilder(this.AllorsSession, user, loadRequest, Group);
-                var response = loadResponseBuilder.Build();
+                var responseBuilder = new SyncResponseBuilder(this.AllorsSession, user, syncRequest, Group);
+                var response = responseBuilder.Build();
                 return this.JsonSuccess(response);
             }
             catch (Exception e)
@@ -45,15 +45,15 @@
 
         [Authorize]
         [HttpPost]
-        public ActionResult Save(SaveRequest saveRequest)
+        public ActionResult Push(PushRequest pushRequest)
         {
             try
             {
                 var user = this.AllorsUser ?? Singleton.Instance(this.AllorsSession).Guest;
-                var saveResponseBuilder = new SaveResponseBuilder(this.AllorsSession, user, saveRequest, Group);
-                var saveResponse = saveResponseBuilder.Build();
+                var responseBuilder = new PushResponseBuilder(this.AllorsSession, user, pushRequest, Group);
+                var response = responseBuilder.Build();
 
-                return this.JsonSuccess(saveResponse);
+                return this.JsonSuccess(response);
             }
             catch (Exception e)
             {
@@ -69,9 +69,9 @@
             try
             {
                 var user = this.AllorsUser ?? Singleton.Instance(this.AllorsSession).Guest;
-                var invokeResponseBuilder = new InvokeResponseBuilder(this.AllorsSession, user, invokeRequest, Group);
-                var invokeResponse = invokeResponseBuilder.Build();
-                return this.JsonSuccess(invokeResponse);
+                var responseBuilder = new InvokeResponseBuilder(this.AllorsSession, user, invokeRequest, Group);
+                var response = responseBuilder.Build();
+                return this.JsonSuccess(response);
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
 
                 var people = new People(this.AllorsSession).Extent();
                 var or = people.Filter.AddOr();
@@ -135,7 +135,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 responseBuilder.AddObject("person", this.AllorsUser);
                 return this.JsonSuccess(responseBuilder.Build());
             }
@@ -152,7 +152,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 responseBuilder.AddObject("person", this.AllorsUser);
 
                 return this.JsonSuccess(responseBuilder.Build());
@@ -174,7 +174,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 responseBuilder.AddObject("person", this.AllorsUser);
                 return this.JsonSuccess(responseBuilder.Build());
             }
@@ -191,7 +191,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 var people = new People(this.AllorsSession).Extent();
                 responseBuilder.AddCollection("people", people);
 
@@ -210,7 +210,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
 
                 var person = this.AllorsSession.Instantiate(id);
                 responseBuilder.AddObject("person", person);
@@ -230,7 +230,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 
                 return this.JsonSuccess(responseBuilder.Build());
             }
@@ -247,7 +247,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 var organisations = new Organisations(this.AllorsSession).Extent();
                 responseBuilder.AddCollection("organisations", organisations);
 
@@ -266,7 +266,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
 
                 var organisation = this.AllorsSession.Instantiate(id);
                 responseBuilder.AddObject("organisation", organisation, M.Organisation.EditResponse);
@@ -286,7 +286,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
 
                 return this.JsonSuccess(responseBuilder.Build());
             }
@@ -310,7 +310,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 return this.JsonSuccess(responseBuilder.Build());
             }
             catch (Exception e)
@@ -325,7 +325,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 responseBuilder.AddObject("object", this.AllorsUser);
                 responseBuilder.AddCollection("collection", new Organisations(this.AllorsSession).Extent());
                 return this.JsonSuccess(responseBuilder.Build());
@@ -342,7 +342,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 var organisation = new Organisations(this.AllorsSession).FindBy(M.Organisation.Owner, this.AllorsUser);
                 responseBuilder.AddObject("root", organisation, M.Organisation.AngularEmployees);
                 return this.JsonSuccess(responseBuilder.Build());
@@ -359,7 +359,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 var organisation = new Organisations(this.AllorsSession).FindBy(M.Organisation.Owner, this.AllorsUser);
                 responseBuilder.AddObject("root", organisation, M.Organisation.AngularShareholders);
                 return this.JsonSuccess(responseBuilder.Build());
@@ -376,7 +376,7 @@
         {
             try
             {
-                var responseBuilder = new ResponseBuilder(this.AllorsUser);
+                var responseBuilder = new PullResponseBuilder(this.AllorsUser);
                 responseBuilder.AddObject("root", this.AllorsUser, M.Person.AngularHome);
                 return this.JsonSuccess(responseBuilder.Build());
             }

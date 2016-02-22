@@ -5,14 +5,14 @@
 
     using Allors.Domain;
 
-    public abstract class ResponseError
+    public abstract class ErrorResponse
     {
-        protected ResponseError()
+        protected ErrorResponse()
         {
             this.VersionErrors = new List<string>();
             this.AccessErrors = new List<string>();
             this.MissingErrors = new List<string>();
-            this.DerivationErrors = new List<ResponseDerivationError>();            
+            this.DerivationErrors = new List<DerivationErrorResponse>();            
         }
 
         public bool HasErrors => this.VersionErrors.Count > 0 || this.AccessErrors.Count > 0 || this.MissingErrors.Count > 0 || this.DerivationErrors.Count > 0 || !string.IsNullOrWhiteSpace(ErrorMessage);
@@ -25,7 +25,7 @@
 
         public List<string> MissingErrors { get; set; }
 
-        public List<ResponseDerivationError> DerivationErrors { get; set; }
+        public List<DerivationErrorResponse> DerivationErrors { get; set; }
 
         public void AddVersionError(IObject obj)
         {
@@ -46,7 +46,7 @@
         {
             foreach (IDerivationError derivationError in validation.Errors)
             {
-                this.DerivationErrors.Add(new ResponseDerivationError
+                this.DerivationErrors.Add(new DerivationErrorResponse
                                               {
                                                   M = derivationError.Message,  
                                                   R = derivationError.Relations.Select(x => new string[] { x.Association.Id.ToString(), x.RoleType.Name }).ToArray()

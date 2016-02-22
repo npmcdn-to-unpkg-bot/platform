@@ -1,5 +1,5 @@
 ﻿namespace Allors.Data {
-    export class LoadRequest {
+    export class SyncRequest {
         objects: string[];
     }
 }

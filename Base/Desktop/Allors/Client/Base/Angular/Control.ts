@@ -41,7 +41,7 @@
 
                 this.context
                     .save()
-                    .then((saveResponse: Data.SaveResponse) => {
+                    .then((saveResponse: Data.PushResponse) => {
                         if (saveResponse.hasErrors) {
                             reject(new SaveError(this.context, saveResponse));
                         } else {
@@ -98,7 +98,7 @@
 
                 var save = this.context
                     .save()
-                    .then((saveResponse: Data.SaveResponse) => {
+                    .then((saveResponse: Data.PushResponse) => {
                         if (saveResponse.hasErrors) {
                             reject(new SaveError(this.context, saveResponse));
                         } else {

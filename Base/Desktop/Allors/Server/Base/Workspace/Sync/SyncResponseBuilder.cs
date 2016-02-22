@@ -6,27 +6,27 @@
     using Allors.Meta;
     using Allors.Web.Workspace;
 
-    public class LoadResponseBuilder
+    public class SyncResponseBuilder
     {
         private static readonly object[][] EmptyRoles = { };
         private static readonly object[][] EmptyMethods = { };
 
         private readonly ISession session;
-        private readonly LoadRequest loadRequest;
+        private readonly SyncRequest syncRequest;
         private readonly string @group;
         private readonly User user;
 
-        public LoadResponseBuilder(ISession session, User user, LoadRequest loadRequest, string @group)
+        public SyncResponseBuilder(ISession session, User user, SyncRequest syncRequest, string @group)
         {
             this.session = session;
             this.user = user;
-            this.loadRequest = loadRequest;
+            this.syncRequest = syncRequest;
             this.group = group;
         }
 
-        public LoadResponse Build()
+        public SyncResponse Build()
         {
-            var objects = this.session.Instantiate(this.loadRequest.Objects);
+            var objects = this.session.Instantiate(this.syncRequest.Objects);
 
             // Prefetch
             var objectByClass = objects.GroupBy(v => v.Strategy.Class, v => v);
@@ -43,10 +43,10 @@
                 this.session.Prefetch(prefetcher, prefetchObjects);
             }
 
-            return new LoadResponse
+            return new SyncResponse
             {
                 UserSecurityHash = this.user.SecurityHash(),
-                Objects = objects.Select(x => new LoadResponseObject
+                Objects = objects.Select(x => new SyncResponseObject
                 {
                     I = x.Id.ToString(),
                     V = x.Strategy.ObjectVersion.ToString(),

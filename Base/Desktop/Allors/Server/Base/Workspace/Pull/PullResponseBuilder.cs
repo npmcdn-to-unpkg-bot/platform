@@ -4,12 +4,9 @@ using Allors.Meta;
 
 namespace Allors.Web
 {
-    using System.Security.Cryptography;
-    using System.Text;
-
     using Allors.Domain;
 
-    public class ResponseBuilder
+    public class PullResponseBuilder
     {
         private readonly User user;
 
@@ -18,14 +15,14 @@ namespace Allors.Web
         private readonly Dictionary<string, List<IObject>> collectionsByName = new Dictionary<string, List<IObject>>();
         private readonly Dictionary<string, object> valueByName = new Dictionary<string, object>();
 
-        public ResponseBuilder(User user)
+        public PullResponseBuilder(User user)
         {
             this.user = user;
         }
 
-        public Response Build()
+        public PullResponse Build()
         {
-            return new Response
+            return new PullResponse
             {
                 UserSecurityHash = this.user.SecurityHash(),
                 Objects = this.objects.Select(x => new[] {x.Id.ToString(), x.Strategy.ObjectVersion.ToString()}).ToArray(),
