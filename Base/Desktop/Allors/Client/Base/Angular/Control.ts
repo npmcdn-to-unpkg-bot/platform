@@ -2,10 +2,13 @@
     export abstract class Control {
         context: Context;
         events: Events;
+        session: ISession;
 
         constructor(name: string, database: Database, workspace: Workspace, $rootScope: ng.IRootScopeService, protected $scope: ng.IScope, protected $q: ng.IQService) {
             this.context = new Context(name, database, workspace);
             this.events = new Events(this.context, $rootScope, $scope);
+
+            this.session = this.context.session;
 
             this.events.onRefresh(() => this.refresh());
         }
@@ -27,10 +30,6 @@
             return this.context.session.hasChanges;
         }
 
-        create(objectTypeName: string) {
-            return this.context.session.create(objectTypeName);
-        }
-        
         // Commands
         load(params?: any): ng.IPromise<any> {
             return this.context.load(params);
