@@ -1,5 +1,5 @@
 ﻿namespace App.Relation.AddOrganisation {
-    class AddOrganisationController extends Control {
+    class AddOrganisationController extends Page {
      
         organisation: Organisation;
      
@@ -9,7 +9,7 @@
 
             this.refresh()
                 .then(() => {
-                    this.organisation = this.create("Organisation") as Organisation;
+                    this.organisation = this.session.create("Organisation") as Organisation;
                 });
         }
 

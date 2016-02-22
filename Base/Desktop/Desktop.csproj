@@ -520,8 +520,8 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Control.ts" />
-    <TypeScriptCompile Include="app\allors\Control.ts" />
-    <TypeScriptCompile Include="app\allors\Allors.ts" />
+    <TypeScriptCompile Include="app\pages\Page.ts" />
+    <TypeScriptCompile Include="app\services\Allors.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Database.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeResponse.ts" />
@@ -552,7 +552,7 @@
     <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Person.ts" />
-    <TypeScriptCompile Include="app\allors\Nest.ts" />
+    <TypeScriptCompile Include="app\functions\Nest.ts" />
     <Content Include="Content\ui-grid.eot" />
     <Content Include="Content\ui-grid.ttf" />
     <Content Include="Content\ui-grid.woff" />

@@ -1,5 +1,5 @@
 ﻿namespace App.Relation.AddPerson {
-    class AddPersonController extends Control {
+    class AddPersonController extends Page {
 
         person: Person;
      
@@ -9,7 +9,7 @@
 
             this.refresh()
                 .then(() => {
-                    this.person = this.create("Person") as Person;
+                    this.person = this.session.create("Person") as Person;
                 });
         }
        

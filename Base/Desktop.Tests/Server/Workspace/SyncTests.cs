@@ -1,8 +1,7 @@
-using System.Web.Mvc;
-
 namespace Desktop.Tests.Server.Workspace
 {
     using System.Linq;
+    using System.Web.Mvc;
 
     using Allors;
     using Allors.Domain;
@@ -15,7 +14,7 @@ namespace Desktop.Tests.Server.Workspace
 
     using Web.Controllers;
 
-    public class LoadTests : ControllersTest
+    public class SyncTests : ControllersTest
     {
         [Test]
         public void Guest()
@@ -30,7 +29,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var loadRequest = new SyncRequest
+            var syncRequest = new SyncRequest
             {
                 Objects = new[] { c1a.Id.ToString() }
             };
@@ -38,13 +37,13 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session };
 
             // Act
-            var jsonResult = (JsonResult)controller.Load(loadRequest);
-            var loadResponse = (SyncResponse)jsonResult.Data;
+            var jsonResult = (JsonResult)controller.Sync(syncRequest);
+            var syncResponse = (SyncResponse)jsonResult.Data;
             
             // Assert
-            loadResponse.Objects.Length.ShouldEqual(1);
+            syncResponse.Objects.Length.ShouldEqual(1);
 
-            var responseC1a = loadResponse.Objects[0];
+            var responseC1a = syncResponse.Objects[0];
 
             var roles = responseC1a.Roles;
             roles.Length.ShouldEqual(5);
@@ -99,7 +98,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var loadRequest = new SyncRequest
+            var syncRequest = new SyncRequest
             {
                 Objects = new[] { c1a.Id.ToString() }
             };
@@ -107,13 +106,13 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator};
 
             // Act
-            var jsonResult = (JsonResult)controller.Load(loadRequest);
-            var loadResponse = (SyncResponse)jsonResult.Data;
+            var jsonResult = (JsonResult)controller.Sync(syncRequest);
+            var syncResponse = (SyncResponse)jsonResult.Data;
 
             // Assert
-            loadResponse.Objects.Length.ShouldEqual(1);
+            syncResponse.Objects.Length.ShouldEqual(1);
 
-            var responseC1a = loadResponse.Objects[0];
+            var responseC1a = syncResponse.Objects[0];
 
             var roles = responseC1a.Roles;
             roles.Length.ShouldEqual(5);

@@ -1,5 +1,5 @@
 ﻿namespace App {
-    export abstract class Control extends Allors.Control {
+    export abstract class Page extends Allors.Control {
 
         toastr: angular.toastr.IToastrService;
 

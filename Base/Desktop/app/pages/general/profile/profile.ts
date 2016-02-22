@@ -1,5 +1,5 @@
 ﻿namespace App.Profile {
-    class ProfileController extends Control {
+    class ProfileController extends Page {
 
         person: Person;
 

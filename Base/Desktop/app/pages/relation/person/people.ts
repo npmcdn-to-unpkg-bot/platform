@@ -1,5 +1,5 @@
 ﻿namespace App.Relation.Person {
-    class PeopleController extends Control {
+    class PeopleController extends Page {
       
         people: Person[];
 

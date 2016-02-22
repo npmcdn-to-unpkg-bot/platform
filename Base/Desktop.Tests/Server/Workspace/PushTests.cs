@@ -14,7 +14,7 @@ namespace Desktop.Tests.Server.Workspace
 
     using Web.Controllers;
 
-    public class SaveTests : ControllersTest
+    public class PushTests : ControllersTest
     {
         [Test]
         public void GuestSetUnit()
@@ -29,7 +29,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new PushRequest
+            var pushRequest = new PushRequest
             {
                 Objects = new[] {
                     new PushRequestObject
@@ -51,14 +51,14 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (PushResponse)jsonResult.Data;
+            var jsonResult = (JsonResult)controller.Push(pushRequest);
+            var pushResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
 
-            saveResponse.HasErrors.ShouldBeTrue();
-            saveResponse.AccessErrors.Count.ShouldEqual(1);
+            pushResponse.HasErrors.ShouldBeTrue();
+            pushResponse.AccessErrors.Count.ShouldEqual(1);
 
             c1a.C1AllorsString.ShouldEqual("c1");
         }
@@ -78,7 +78,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new PushRequest
+            var pushRequest = new PushRequest
             {
                 Objects = new[] {
                     new PushRequestObject
@@ -100,13 +100,13 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session,AllorsUser = administrator};
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (PushResponse)jsonResult.Data;
+            var jsonResult = (JsonResult)controller.Push(pushRequest);
+            var pushResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
 
-            saveResponse.HasErrors.ShouldBeFalse();
+            pushResponse.HasErrors.ShouldBeFalse();
 
             c1a.C1AllorsString.ShouldEqual("new c1");
         }
@@ -126,7 +126,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new PushRequest
+            var pushRequest = new PushRequest
             {
                 Objects = new[] {
                     new PushRequestObject
@@ -148,13 +148,13 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
-            var saveResponse = (PushResponse)jsonResult.Data;
+            var jsonResult = (JsonResult)controller.Push(pushRequest);
+            var pushResponse = (PushResponse)jsonResult.Data;
 
             // Assert
             this.Session.Rollback();
 
-            saveResponse.HasErrors.ShouldBeFalse();
+            pushResponse.HasErrors.ShouldBeFalse();
 
             c1a.C1C1One2One.ShouldEqual(c1b);
         }
@@ -179,7 +179,7 @@ namespace Desktop.Tests.Server.Workspace
             this.Session.Derive();
             this.Session.Commit();
 
-            var saveRequest = new PushRequest
+            var pushRequest = new PushRequest
             {
                 Objects = new[] {
                     new PushRequestObject
@@ -201,7 +201,7 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var jsonResult = (JsonResult)controller.Push(pushRequest);
             var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
@@ -254,7 +254,7 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var jsonResult = (JsonResult)controller.Push(saveRequest);
             var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
@@ -308,7 +308,7 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var jsonResult = (JsonResult)controller.Push(saveRequest);
             var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
@@ -341,7 +341,7 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var jsonResult = (JsonResult)controller.Push(saveRequest);
             var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
@@ -390,7 +390,7 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var jsonResult = (JsonResult)controller.Push(saveRequest);
             var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert
@@ -441,7 +441,7 @@ namespace Desktop.Tests.Server.Workspace
             var controller = new AngularController { AllorsSession = this.Session, AllorsUser = administrator };
 
             // Act
-            var jsonResult = (JsonResult)controller.Save(saveRequest);
+            var jsonResult = (JsonResult)controller.Push(saveRequest);
             var saveResponse = (PushResponse)jsonResult.Data;
 
             // Assert

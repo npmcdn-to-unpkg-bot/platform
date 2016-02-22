@@ -1,6 +1,6 @@
 ﻿namespace App.Home
 {
-    class RelationController extends Control {
+    class RelationController extends Page {
 
         person: Person;
 

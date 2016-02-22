@@ -1,5 +1,5 @@
 ﻿namespace App.Relation.Organisation {
-    class EditOrganisationController extends Control {
+    class EditOrganisationController extends Page {
 
         organisation: Organisation;
 

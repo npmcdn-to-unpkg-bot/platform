@@ -1,5 +1,5 @@
 ﻿namespace App.Relation.Person {
-    class EditPersonController extends Control {
+    class EditPersonController extends Page {
 
         person: Allors.Domain.Person;
 

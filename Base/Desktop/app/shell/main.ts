@@ -1,5 +1,5 @@
 ﻿namespace App.Layout {
-    class MainController extends Control {
+    class MainController extends Page {
 
         person: Person;
         
