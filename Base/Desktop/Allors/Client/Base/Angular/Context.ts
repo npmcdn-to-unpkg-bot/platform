@@ -34,7 +34,9 @@
                                         this.session.reset();
                                         resolve();
                                     })
-                                    .catch(e2 => reject(e2));
+                                    .catch(e2 => {
+                                        reject(e2);
+                                    });
                             } else {
                                 this.update(response);
                                 this.session.reset();
@@ -44,7 +46,9 @@
                             reject(e);
                         }
                     })
-                    .catch(e => reject(e));
+                    .catch(e => {
+                        reject(e);
+                    });
 
             });
         }

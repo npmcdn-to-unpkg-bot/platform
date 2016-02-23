@@ -32,7 +32,9 @@
 
         // Commands
         load(params?: any): ng.IPromise<any> {
-            return this.context.load(params);
+            
+            return this.context.load(params)
+                    .catch((e) => { throw e });
         }
 
         save(): ng.IPromise<any> {
