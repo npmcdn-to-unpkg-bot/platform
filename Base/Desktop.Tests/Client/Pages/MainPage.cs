@@ -48,7 +48,7 @@ namespace Desktop.Tests.Client.Pages
 
         private NgWebElement RelationLink => this.Driver.FindElement(By.Id("nav-relation"));
 
-        private NgWebElement OrganisationLink => this.Driver.FindElement(By.Id("nav-relation-organisation"));
+        private NgWebElement OrganisationLink => this.Driver.FindElement(By.Id("nav-relation-organisations"));
 
         #endregion
 
@@ -61,7 +61,7 @@ namespace Desktop.Tests.Client.Pages
             return new HomePage(this.Driver);
         }
 
-        public OrganisationEditPage GoToOrganisation()
+        public OrganisationEditPage GoToOrganisations()
         {
             this.RelationLink.Click();
 

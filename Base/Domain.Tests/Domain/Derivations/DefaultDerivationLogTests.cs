@@ -32,7 +32,7 @@ namespace Domain
         public void DeletedUserinterfaceable()
         {
             var organisation = new OrganisationBuilder(this.Session).Build();
-
+            
             var validation = this.Session.Derive();
             Assert.AreEqual(1, validation.Errors.Length);
 

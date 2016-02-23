@@ -21,15 +21,7 @@
 
 namespace Allors.Domain
 {
-    using Allors.Meta;
-
     public partial class Organisation
     {
-        public void CustomOnDerive(ObjectOnDerive method)
-        {
-            var derivation = method.Derivation;
-
-            derivation.Validation.AssertExists(this, M.Organisation.Name);
-        }
     }
 }

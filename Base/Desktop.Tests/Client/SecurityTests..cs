@@ -64,8 +64,12 @@ namespace Desktop.Tests.Client
             this.Session.Commit();
 
             this.Page
-                .GoToOrganisation()
-                .Edit(this.organisation)
+                .GoToOrganisations();
+
+            this.Page
+                .Edit(this.organisation);
+
+            this.Page
                 .EnterName("Acme 2")
                 .Save()
                 .SaveSuccessful.ShouldBeFalse();
@@ -81,7 +85,7 @@ namespace Desktop.Tests.Client
             this.Session.Commit();
 
             this.Page
-                .GoToOrganisation()
+                .GoToOrganisations()
                 .Edit(this.organisation)
                 .EnterName("Acme 2")
                 .Save();

@@ -13,7 +13,7 @@ namespace Desktop.Tests.Client.Pages
         }
 
         #region Controls
-        public IEnumerable<NgWebElement> FilterOrganisationsField => this.Driver.FindElements(NgBy.Repeater("organisation in vm.filterOrganisations"));
+        public IEnumerable<NgWebElement> OrganisationsField => this.Driver.FindElements(NgBy.Repeater("organisation in vm.organisations"));
 
         private NgWebElement NameField => this.Driver.FindElement(NgBy.Model("vm.organisation.Name"));
 
@@ -31,7 +31,7 @@ namespace Desktop.Tests.Client.Pages
         
         public OrganisationEditPage Edit(Organisation organisation)
         {
-            foreach (var filterOrganisationField in this.FilterOrganisationsField)
+            foreach (var filterOrganisationField in this.OrganisationsField)
             {
                 var nameElement = filterOrganisationField.FindElement(NgBy.Binding("organisation.Name"));
                 if (nameElement.Text.Equals(organisation.Name))

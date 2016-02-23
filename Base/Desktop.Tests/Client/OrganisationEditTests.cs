@@ -45,7 +45,7 @@ namespace Desktop.Tests.Client
         [Test]
         public void Navigate()
         {
-            this.Page.GoToOrganisation();
+            this.Page.GoToOrganisations();
             this.Page.IsOrganisationPage.ShouldBeTrue();
         }
 
@@ -60,7 +60,7 @@ namespace Desktop.Tests.Client
             this.Session.Commit();
 
             this.Page
-                .GoToOrganisation()
+                .GoToOrganisations()
                 .Edit(organisation)
                 .EnterName("Acme 2")
                 .AddEmployees(this.johnDoe, this.janeDoe)

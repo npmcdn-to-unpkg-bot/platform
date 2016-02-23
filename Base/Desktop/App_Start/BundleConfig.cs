@@ -22,7 +22,7 @@
 
             // Angular Tests
             bundles.Add(new ScriptBundle("~/bundles/angular/tests")
-                .Include("~/Tets/app.js")
+                .Include("~/Tests/app.js")
                 .IncludeDirectory("~/Tests/", "*.js", true));
         }
     }
