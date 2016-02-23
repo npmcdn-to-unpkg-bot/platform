@@ -10,7 +10,7 @@
         private d;
         private l: (any) => void;
 
-        constructor(public $log: angular.ILogService, public $translate: angular.translate.ITranslateService) {
+        constructor(public $log: ng.ILogService, public $translate: ng.translate.ITranslateService) {
         }
 
         get form(): Bootstrap.FormController {

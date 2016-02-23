@@ -2,7 +2,7 @@
     export class Events {
         private static refreshEventName = "allors.refresh";
 
-        constructor(public context: Context, public $rootScope: angular.IRootScopeService, public scope: ng.IScope) {
+        constructor(public context: Context, public $rootScope: ng.IRootScopeService, public scope: ng.IScope) {
         }
 
         on(eventName: string, handler: () => void) {

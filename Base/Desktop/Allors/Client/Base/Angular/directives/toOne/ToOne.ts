@@ -1,4 +1,4 @@
-﻿module App {
+﻿namespace App {
 
     interface IToOneScope extends ng.IScope {
         lookup: (criteria:string) => ng.IPromise<any>;

@@ -44,7 +44,7 @@
         typed: string;
 
         static $inject = ["$log", "$translate"];
-        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
+        constructor($log: ng.ILogService, $translate: ng.translate.ITranslateService) {
             super($log, $translate);
         }
       

@@ -17,7 +17,7 @@
         horizontal: boolean;
 
         static $inject = ["$log"];
-        constructor(private $log: angular.ILogService) {
+        constructor(private $log: ng.ILogService) {
         }
     }
 

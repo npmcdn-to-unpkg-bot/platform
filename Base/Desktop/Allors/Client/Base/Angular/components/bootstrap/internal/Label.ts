@@ -19,7 +19,7 @@
         field: Bootstrap.Field;
 
         static $inject = ["$log"];
-        constructor($log: angular.ILogService) {
+        constructor($log: ng.ILogService) {
         }
     }
 
