@@ -57,8 +57,8 @@
         }
 
         invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
-        invoke(service: string, args?: any): ng.IPromise<any>;
-        invoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
+        invoke(service: string, args?: any): ng.IPromise<Data.InvokeResponse>;
+        invoke(methodOrService: Method | string, args?: any): ng.IPromise<Data.InvokeResponse> {
             return this.$q((resolve, reject) => {
 
                 if (methodOrService instanceof Method) {
