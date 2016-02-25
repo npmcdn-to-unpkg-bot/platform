@@ -79,25 +79,25 @@
                             value = null;
                         };
                     } else {
-                        if (roleType.isOne) {
-                            const role: string = this.workspaceObject.roles[roleTypeName];
-                            value = role ? this.session.get(role) : null;
-                        } else {
-                            const roles: string[] = this.workspaceObject.roles[roleTypeName];
-                            value = roles ? roles.map(role => {
-                                try {
-                                    return this.session.get(role);
-                                }
-                                catch (e) {
-                                    let value = "N/A";
-                                    try {
-                                        value = this.toString();
-                                    }
-                                    catch (e2) { };
+                        try {
+                            if (roleType.isOne) {
+                                const role: string = this.workspaceObject.roles[roleTypeName];
+                                value = role ? this.session.get(role) : null;
+                            } else {
+                                const roles: string[] = this.workspaceObject.roles[roleTypeName];
+                                value = roles ? roles.map(role => {
+                                        return this.session.get(role);
+                                }) : [];
+                            }
+                        }
+                        catch (e) {
+                            let value = "N/A";
+                            try {
+                                value = this.toString();
+                            }
+                            catch (e2) { };
 
-                                    throw `Could not get role ${roleTypeName} from [id: ${this.id}, value: ${value}]`;
-                                }
-                            }) : [];
+                            throw `Could not get role ${roleTypeName} from [objectType: ${this.objectType.name}, id: ${this.id}, value: '${value}']`;
                         }
                     }
                 } else {
