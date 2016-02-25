@@ -141,7 +141,7 @@
             }
 
             if (Object.getOwnPropertyNames(this.newSessionObjectById).length !== 0) {
-                throw "Not all new objects received ids";
+                throw new Error("Not all new objects received ids");
             }
         }
     }

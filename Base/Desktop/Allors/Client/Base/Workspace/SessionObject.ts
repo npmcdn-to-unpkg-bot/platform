@@ -97,7 +97,7 @@
                             }
                             catch (e2) { };
 
-                            throw `Could not get role ${roleTypeName} from [objectType: ${this.objectType.name}, id: ${this.id}, value: '${value}']`;
+                            throw new Error(`Could not get role ${roleTypeName} from [objectType: ${this.objectType.name}, id: ${this.id}, value: '${value}']`);
                         }
                     }
                 } else {

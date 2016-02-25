@@ -84,7 +84,7 @@
         get(id: string): WorkspaceObject {
             const workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject === undefined) {
-                throw `Object with id ${id} is not present.`;
+                throw new Error(`Object with id ${id} is not present.`);
             }
 
             return workspaceObject;

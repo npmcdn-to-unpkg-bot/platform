@@ -10,7 +10,7 @@
             this.refresh();
         }
 
-        delete(person: Allors.Domain.Person) {
+        delete(person: Person) {
             this.invoke(person.Delete);
         }
         

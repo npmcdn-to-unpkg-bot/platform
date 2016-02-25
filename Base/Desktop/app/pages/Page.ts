@@ -1,4 +1,7 @@
 ﻿namespace App {
+    import Method = Allors.Method;
+    import Data = Allors.Data;
+
     export abstract class Page extends Allors.Control {
 
         toastr: angular.toastr.IToastrService;
@@ -13,17 +16,66 @@
             return this.$q((resolve, reject) => {
                 super.save()
                     .then( (saveResponse: Allors.Data.PushResponse) => {
-                        this.toastr.info("successfully saved");
+                        this.toastr.info("Successfully saved.");
                         resolve(saveResponse);
                     })
                     .catch( (e: Allors.DatabaseError) => {
-                        this.responseError(e.reponseError);
+                        this.errorResponse(e.reponseError);
                         reject(e);
                     });
             });
         }
 
-        private responseError(error: Allors.Data.ErrorResponse) {
+        invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
+        invoke(service: string, args?: any): ng.IPromise<any>;
+        invoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
+            return this.$q((resolve, reject) => {
+
+                var superInvoke: angular.IPromise<Allors.Data.InvokeResponse>;
+                if (methodOrService instanceof Method) {
+                    superInvoke = super.invoke(methodOrService);
+
+                } else {
+                    superInvoke = super.invoke(methodOrService as string, args);
+                }
+
+                superInvoke.then((invokeResponse: Allors.Data.InvokeResponse) => {
+                    this.toastr.info("Successfully executed.");
+                    resolve(invokeResponse);
+                })
+                .catch((e: Allors.DatabaseError) => {
+                    this.errorResponse(e.reponseError);
+                    reject(e);
+                });
+
+            });
+        }
+
+        saveAndInvoke(method: Method): ng.IPromise<Data.InvokeResponse>;
+        saveAndInvoke(service: string, args?: any): ng.IPromise<any>;
+        saveAndInvoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
+            return this.$q((resolve, reject) => {
+
+                var superSaveAndInvoke: angular.IPromise<Allors.Data.InvokeResponse>;
+                if (methodOrService instanceof Method) {
+                    superSaveAndInvoke = super.saveAndInvoke(methodOrService);
+                } else {
+                    superSaveAndInvoke = super.saveAndInvoke(methodOrService as string, args);
+                }
+
+                superSaveAndInvoke.then((invokeResponse: Allors.Data.InvokeResponse) => {
+                    this.toastr.info("Successfully executed.");
+                    resolve(invokeResponse);
+                })
+                .catch((e: Allors.DatabaseError) => {
+                    this.errorResponse(e.reponseError);
+                    reject(e);
+                });
+
+            });
+        }
+
+        protected errorResponse(error: Allors.Data.ErrorResponse) {
             let title: string;
             var message = "<div class=\"response-errors\">";
 
@@ -62,6 +114,5 @@
                 timeOut: 0
             });
         }
-
     }
 }
