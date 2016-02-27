@@ -7,7 +7,7 @@
         toastr: angular.toastr.IToastrService;
 
         constructor(name: string, allors: AllorsService, $scope: ng.IScope) {
-            super(name, allors.database, allors.workspace, allors.$rootScope, $scope, allors.$q);
+            super(name, allors.database, allors.workspace, allors.$rootScope, $scope, allors.$q, allors.$log);
 
             this.toastr = allors.toastr;
         }
