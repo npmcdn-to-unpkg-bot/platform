@@ -1,10 +1,11 @@
 ﻿namespace Allors {
     export abstract class Control {
+
         context: Context;
         events: Events;
         session: ISession;
 
-        constructor(name: string, database: Database, workspace: Workspace, $rootScope: ng.IRootScopeService, protected $scope: ng.IScope, protected $q: ng.IQService) {
+        constructor(name: string, database: Database, workspace: Workspace, $rootScope: ng.IRootScopeService, protected $scope: ng.IScope, protected $q: ng.IQService, protected $log: ng.ILogService) {
             this.context = new Context(name, database, workspace);
             this.events = new Events(this.context, $rootScope, $scope);
 
@@ -97,48 +98,46 @@
         saveAndInvoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
             return this.$q((resolve, reject) => {
 
-                var save = this.context
+                return this.context
                     .save()
                     .then((saveResponse: Data.PushResponse) => {
-                        if (saveResponse.hasErrors) {
-                            reject(new SaveError(this.context, saveResponse));
-                        } else {
-                            resolve(saveResponse);
-                        }
+                            if (saveResponse.hasErrors) {
+                                reject(new SaveError(this.context, saveResponse));
+                            } else {
+                                this.refresh()
+                                    .then(() => {
+                                        if (methodOrService instanceof Method) {
+                                            this.context.invoke(methodOrService)
+                                                .then((invokeResponse: Data.InvokeResponse) => {
+                                                    if (invokeResponse.hasErrors) {
+                                                        reject(new InvokeError(this.context, invokeResponse));
+                                                    } else {
+                                                        resolve(invokeResponse);
+                                                    }
+                                                }, (e) => {
+                                                    throw e;
+                                                })
+                                                .finally(() => this.events.broadcastRefresh());
+                                        } else {
+                                            this.context.invoke(methodOrService as string, args)
+                                                .then((invokeResponse: Data.InvokeResponse) => {
+                                                    if (invokeResponse.hasErrors) {
+                                                        reject(new InvokeError(this.context, invokeResponse));
+                                                    } else {
+                                                        resolve(invokeResponse);
+                                                    }
+                                                }, (e) => {
+                                                    throw e;
+                                                })
+                                                .finally(() => this.events.broadcastRefresh());
+                                        }
+                                    }, (e) => {
+                                        throw e;
+                                    });
+                            }
                     }, (e) => {
                         throw e;
                     });
-
-                if (methodOrService instanceof Method) {
-                    return save
-                        .then(() => this.context.invoke(methodOrService)
-                            .then((invokeResponse: Data.InvokeResponse) => {
-                                if (invokeResponse.hasErrors) {
-                                    reject(new InvokeError(this.context, invokeResponse));
-                                } else {
-                                    resolve(invokeResponse);
-                                }
-                            }, (e) => {
-                                throw e;
-                            })
-                        )
-                        .finally(() => this.events.broadcastRefresh());
-                } else {
-                    return save
-                        .then(() => this.context.invoke(methodOrService as string, args)
-                            .then((invokeResponse: Data.InvokeResponse) => {
-                                if (invokeResponse.hasErrors) {
-                                    reject(new InvokeError(this.context, invokeResponse));
-                                } else {
-                                    resolve(invokeResponse);
-                                }
-                            }, (e) => {
-                                throw e;
-                            })
-                        )
-                        .finally(() => this.events.broadcastRefresh());
-                }
-
             });
         }
 
