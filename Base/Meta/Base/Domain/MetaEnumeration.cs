@@ -4,8 +4,6 @@ namespace Allors.Meta
     {
         internal override void BaseExtend()
         {
-            this.Name.IsRequired = true;
-            this.IsActive.IsRequired = true;
         }
     }
 }
