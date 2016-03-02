@@ -22,6 +22,7 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     public class Tree
@@ -48,6 +49,17 @@ namespace Allors.Meta
             return prefetchPolicyBuilder.Build();
         }
 
+        public Tree Add(IEnumerable<RelationType> relationTypes)
+        {
+            return this.Add(relationTypes.Select(v => v.RoleType));
+        }
+
+        public Tree Add(IEnumerable<RoleType> roleTypes)
+        {
+            new List<RoleType>(roleTypes).ForEach(v => this.Add(v));
+            return this;
+        }
+
         public Tree Add(RelationType relationType)
         {
             return this.Add(relationType.RoleType);
@@ -55,8 +67,8 @@ namespace Allors.Meta
 
         public Tree Add(RoleType roleType)
         {
-            var tree = new TreeNode(roleType);
-            this.Nodes.Add(tree);
+            var treeNode = new TreeNode(roleType);
+            this.Nodes.Add(treeNode);
             return this;
         }
 
