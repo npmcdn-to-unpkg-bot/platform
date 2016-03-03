@@ -113,6 +113,10 @@
         
         private update(response: Data.PullResponse): void {
 
+            this.objects = { };
+            this.collections  = { };
+            this.values = { };
+
             _.map(response.namedObjects, (v, k) => {
                 this.objects[k] = this.session.get(v);
             });

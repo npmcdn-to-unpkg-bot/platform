@@ -1,9 +1,11 @@
-﻿<div ng-if="!edit" class="form-control-static">
-    <span class="label label-default" ng-repeat="x in obj[relation]" style="padding: 6px; margin-right: 3px">
-        &nbsp;{{x[display]}}<a class="btn-link btn-sm" ng-click="remove(x)"><span class="fa fa-close"></span></a>
-    </span>
+﻿<div ng-if="!edit" class="row">
     <div class="pull-right">
-        <button class="btn btn-link btn-sm" ng-click="startEdit()"><span class="fa fa-plus"></span></button>
+        <button class="btn btn-link btn-sm" ng-disabled="!obj['CanWrite' + relation]" ng-click="startEdit()"><span class="fa fa-plus"></span></button>
+    </div>
+    <div>
+        <span class="btn btn-default btn-sm" ng-repeat="x in obj[relation]" style="margin-right: 5px; margin-bottom: 5px;">
+            {{x[display]}} <a class="btn-link btn-xs" ng-click="remove(x)" ng-if="obj['CanWrite' + relation]"><span class="fa fa-close"></span></a>
+        </span>
     </div>
 </div>
 
@@ -14,7 +16,7 @@
            typeahead-select-on-exact="true"
            typeahead-select-on-blur="true"
            typeahead-on-select="select($item)"
-           ng-blur="stopEdit()"/>
+           ng-blur="endEdit()"/>
     <div ng-show="noResults">
         <i class="glyphicon glyphicon-remove"></i> No Results Found
     </div>

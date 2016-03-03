@@ -1,4 +1,4 @@
-﻿namespace App {
+﻿module App {
 
     interface IToOneScope extends ng.IScope {
         lookup: (criteria:string) => ng.IPromise<any>;
@@ -39,7 +39,7 @@
 
         return <ng.IDirective>{
             restrict: "E",
-            templateUrl: "allors/client/base/angular/directives/toOne/toOne.html",
+            templateUrl: "app/common/directives/toOne/toOne.html",
             link: link,
             scope: {
                 obj: "=",
@@ -51,6 +51,6 @@
     }
 
     angular
-        .module('allors')
+        .module('app')
         .directive('toOne', toOne);
 }

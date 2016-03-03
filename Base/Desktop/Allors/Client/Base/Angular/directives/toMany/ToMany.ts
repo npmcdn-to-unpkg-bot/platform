@@ -1,4 +1,4 @@
-﻿namespace App {
+﻿module App {
 
     interface IToManyScope extends ng.IScope {
         lookup: (criteria:string) => ng.IPromise<any>;
@@ -46,7 +46,7 @@
 
         return <ng.IDirective>{
             restrict: "E",
-            templateUrl: "allors/client/base/angular/directives/toMany/toMany.html",
+            templateUrl: "app/common/directives/toMany/toMany.html",
             link: link,
             scope: {
                 obj: "=",
@@ -58,6 +58,6 @@
     }
 
     angular
-        .module('allors')
+        .module('app')
         .directive('toMany', toMany);
 }
