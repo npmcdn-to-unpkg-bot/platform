@@ -58,6 +58,6 @@
     }
 
     angular
-        .module('app')
+        .module('allors')
         .directive('toMany', toMany);
 }
