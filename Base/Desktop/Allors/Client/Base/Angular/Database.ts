@@ -1,13 +1,12 @@
-﻿// TODO: rename to push pull and sync
-namespace Allors {
+﻿namespace Allors {
     export class Database {
-        constructor(private $http: ng.IHttpService, public $q: ng.IQService, public prefix: string) {
+        constructor(private $http: ng.IHttpService, public $q: ng.IQService, public prefix: string, public postfix: string) {
         }
 
         pull(name: string, params?: any): ng.IPromise<Data.PullResponse> {
             return this.$q((resolve, reject) => {
 
-                const serviceName = this.prefix + name;
+                const serviceName = name + this.postfix;
                 this.$http.post(serviceName, params)
                     .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.PullResponse>) => {
                         var response = callbackArg.data;
