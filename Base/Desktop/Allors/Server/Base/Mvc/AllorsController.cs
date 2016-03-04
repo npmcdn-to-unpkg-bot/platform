@@ -30,12 +30,12 @@ namespace Allors.Web.Mvc
     using Allors.Domain;
     using Allors.Meta;
 
-    public abstract partial class Controller : System.Web.Mvc.Controller
+    public abstract partial class AllorsController : System.Web.Mvc.Controller
     {
         private ISession allorsSession;
         private User allorsUser;
 
-        ~Controller()
+        ~AllorsController()
         {
             this.DisposeAllorsSession();
         }

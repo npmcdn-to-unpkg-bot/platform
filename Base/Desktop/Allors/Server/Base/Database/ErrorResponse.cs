@@ -1,4 +1,4 @@
-﻿namespace Allors.Web
+﻿namespace Allors.Web.Database
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -15,7 +15,7 @@
             this.DerivationErrors = new List<DerivationErrorResponse>();            
         }
 
-        public bool HasErrors => this.VersionErrors.Count > 0 || this.AccessErrors.Count > 0 || this.MissingErrors.Count > 0 || this.DerivationErrors.Count > 0 || !string.IsNullOrWhiteSpace(ErrorMessage);
+        public bool HasErrors => this.VersionErrors.Count > 0 || this.AccessErrors.Count > 0 || this.MissingErrors.Count > 0 || this.DerivationErrors.Count > 0 || !string.IsNullOrWhiteSpace(this.ErrorMessage);
 
         public string ErrorMessage { get; set; }
 

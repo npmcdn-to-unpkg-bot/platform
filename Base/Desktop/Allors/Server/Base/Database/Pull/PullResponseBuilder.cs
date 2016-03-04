@@ -2,7 +2,7 @@
 using System.Linq;
 using Allors.Meta;
 
-namespace Allors.Web
+namespace Allors.Web.Database
 {
     using Allors.Domain;
 

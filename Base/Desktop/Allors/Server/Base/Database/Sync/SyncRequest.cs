@@ -1,4 +1,4 @@
-﻿namespace Allors.Web.Workspace
+﻿namespace Allors.Web.Database
 {
     public class SyncRequest
     {

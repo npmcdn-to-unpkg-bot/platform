@@ -1,4 +1,4 @@
-﻿namespace Allors.Api
+﻿namespace Allors.Web.Mvc
 {
     using System.Web.Http;
 

@@ -1,4 +1,4 @@
-﻿namespace Allors.Web
+﻿namespace Allors.Web.Database
 {
     public class DerivationErrorResponse
     {

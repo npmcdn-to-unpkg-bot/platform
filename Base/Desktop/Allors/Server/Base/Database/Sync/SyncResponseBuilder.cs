@@ -1,10 +1,9 @@
-﻿namespace Allors.Web
+﻿namespace Allors.Web.Database
 {
     using System.Collections.Generic;
     using System.Linq;
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.Web.Workspace;
 
     public class SyncResponseBuilder
     {
@@ -36,7 +35,7 @@
                 var prefetchObjects = groupBy.ToArray();
 
                 var prefetchPolicyBuilder = new PrefetchPolicyBuilder();
-                prefetchPolicyBuilder.WithGroupRules(prefetchClass, @group);
+                prefetchPolicyBuilder.WithGroupRules(prefetchClass, this.@group);
                 prefetchPolicyBuilder.WithSecurityRules();
                 var prefetcher = prefetchPolicyBuilder.Build();
 
@@ -62,7 +61,7 @@
             var composite = (Composite)obj.Strategy.Class;
 
             IList<RoleType> roleTypes;
-            if (composite.RoleTypesByGroup.TryGetValue(@group, out roleTypes))
+            if (composite.RoleTypesByGroup.TryGetValue(this.@group, out roleTypes))
             {
                 if (roleTypes.Count > 0)
                 {
@@ -142,7 +141,7 @@
             var composite = (Composite)obj.Strategy.Class;
 
             IList<MethodType> methodTypes;
-            if (composite.MethodTypesByGroup.TryGetValue(@group, out methodTypes))
+            if (composite.MethodTypesByGroup.TryGetValue(this.@group, out methodTypes))
             {
                 if (methodTypes.Count > 0)
                 {

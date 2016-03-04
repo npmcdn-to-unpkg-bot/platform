@@ -1,4 +1,4 @@
-﻿namespace Allors.Web
+﻿namespace Allors.Web.Database
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -6,7 +6,6 @@
     using Allors.Adapters;
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.Web.Workspace;
 
     public class PushResponseBuilder
     {
@@ -33,8 +32,8 @@
             {
                 objectByNewId = this.pushRequest.NewObjects.ToDictionary(x => x.NI, x =>
                 {
-                    var cls = session.Database.MetaPopulation.FindClassByName(x.T);
-                    return (IObject)Allors.ObjectBuilder.Build(session,cls);
+                    var cls = this.session.Database.MetaPopulation.FindClassByName(x.T);
+                    return (IObject)Allors.ObjectBuilder.Build(this.session,cls);
                 });
             }
 
@@ -55,7 +54,7 @@
                     else
                     {
                         var saveRequestRoles = saveRequestObject.Roles;
-                        SaveRequestRoles(saveRequestRoles, obj, saveResponse, objectByNewId);
+                        this.SaveRequestRoles(saveRequestRoles, obj, saveResponse, objectByNewId);
                     }
                 }
             }
@@ -68,7 +67,7 @@
                     var saveRequestRoles = saveRequestNewObject.Roles;
                     if (saveRequestRoles != null)
                     {
-                        SaveRequestRoles(saveRequestRoles, obj, saveResponse, objectByNewId);
+                        this.SaveRequestRoles(saveRequestRoles, obj, saveResponse, objectByNewId);
                     }
                 }
             }
@@ -112,7 +111,7 @@
             foreach (var saveRequestRole in saveRequestRoles)
             {
                 var composite = (Composite)obj.Strategy.Class;
-                var roleTypes = composite.RoleTypesByGroup[@group];
+                var roleTypes = composite.RoleTypesByGroup[this.@group];
                 var acl = new AccessControlList(obj, this.user);
 
                 var roleTypeName = saveRequestRole.T;
@@ -144,7 +143,7 @@
                                 }
                                 else
                                 {
-                                    var role = GetRole(roleId, objectByNewId);
+                                    var role = this.GetRole(roleId, objectByNewId);
                                     if (role == null)
                                     {
                                         pushResponse.AddMissingError(roleId);
@@ -163,7 +162,7 @@
                                     var roleIds = saveRequestRole.A;
                                     if (roleIds.Length != 0)
                                     {
-                                        var roles = GetRoles(roleIds, objectByNewId);
+                                        var roles = this.GetRoles(roleIds, objectByNewId);
                                         if (roles.Length != roleIds.Length)
                                         {
                                             AddMissingRoles(roles, roleIds, pushResponse);
@@ -184,7 +183,7 @@
                                     var roleIds = saveRequestRole.R;
                                     if (roleIds.Length != 0)
                                     {
-                                        var roles = GetRoles(roleIds, objectByNewId);
+                                        var roles = this.GetRoles(roleIds, objectByNewId);
                                         if (roles.Length != roleIds.Length)
                                         {
                                             AddMissingRoles(roles, roleIds, pushResponse);

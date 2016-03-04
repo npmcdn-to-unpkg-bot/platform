@@ -1,6 +1,6 @@
-﻿namespace Allors.Web.Workspace
+﻿namespace Allors.Web.Database
 {
-    public class SyncResponseObject
+    public class InvokeRequest
     {
         /// <summary>
         /// The id.
@@ -13,12 +13,8 @@
         public string V { get; set; }
 
         /// <summary>
-        /// The object type.
+        /// The method.
         /// </summary>
-        public string T { get; set; }
-
-        public object[][] Roles { get; set; }
-
-        public object[][] Methods { get; set; }
+        public string M { get; set; }
     }
 }

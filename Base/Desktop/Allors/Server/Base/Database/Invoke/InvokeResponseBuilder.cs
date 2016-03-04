@@ -1,11 +1,10 @@
-﻿namespace Allors.Web
+﻿namespace Allors.Web.Database
 {
     using System;
     using System.Linq;
 
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.Web.Workspace;
 
     public class InvokeResponseBuilder
     {
@@ -31,7 +30,7 @@
 
             var obj = this.session.Instantiate(this.invokeRequest.I);
             var composite = (Composite)obj.Strategy.Class;
-            var methodTypes = composite.MethodTypesByGroup[@group];
+            var methodTypes = composite.MethodTypesByGroup[this.@group];
             var methodType = methodTypes.FirstOrDefault(x => x.Name.Equals(this.invokeRequest.M));
 
             if (methodType == null)

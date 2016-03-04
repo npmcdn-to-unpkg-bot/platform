@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Allors.Web.Workspace
+namespace Allors.Web.Database
 {
     public class PushRequestNewObject
     {
