@@ -69,13 +69,23 @@
       <DependentUpon>WorkspaceMeta.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkspaceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkspaceResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Base\WorkspaceResources.resx" />
     <EmbeddedResource Include="Base\WorkspaceMeta.resx" />
     <EmbeddedResource Include="Base\DomainErrors.resx" />
     <EmbeddedResource Include="DomainErrors.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DomainErrors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorkspaceResources.resx">
+      <LastGenOutput>WorkspaceResources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="WorkspaceMeta.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

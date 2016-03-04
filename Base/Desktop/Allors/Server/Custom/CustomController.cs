@@ -5,10 +5,14 @@
     using System.Threading;
     using System.Web.Configuration;
 
-    public class CustomController : Allors.Web.Mvc.Controller
+    using Common.Logging;
+
+    public class CustomController : Allors.Web.Mvc.AllorsController
     {
         private const string DefaultCultureName = "en-US";
-        
+
+      
+
         public bool IsProduction
         {
             get

@@ -99,9 +99,9 @@
     <Compile Include="Client\SecurityTests..cs" />
     <Compile Include="Server\ServerFixture.cs" />
     <Compile Include="Server\ControllersTest.cs" />
-    <Compile Include="Server\Workspace\SyncTests.cs" />
-    <Compile Include="Server\Workspace\ResponseTests.cs" />
-    <Compile Include="Server\Workspace\PushTests.cs" />
+    <Compile Include="Server\Database\SyncTests.cs" />
+    <Compile Include="Server\Database\ResponseTests.cs" />
+    <Compile Include="Server\Database\PushTests.cs" />
     <Compile Include="Client\Pages\OrganisationEditPage.cs" />
     <Compile Include="Client\OrganisationEditTests.cs" />
     <Compile Include="Client\TypescriptUnitTests.cs" />

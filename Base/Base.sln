@@ -45,8 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Tools", "..\Tools\Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Tools.Cmd", "..\Tools\Allors.Tools.Cmd\Allors.Tools.Cmd.csproj", "{C1145745-DCCC-4BE3-9311-18853655FB92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Diagrams", "Domain.Diagrams\Domain.Diagrams.csproj", "{86E451C8-D3BE-4FF8-887A-5F0574E892D9}"
 EndProject
 Global
@@ -185,14 +183,6 @@ Global
 		{C1145745-DCCC-4BE3-9311-18853655FB92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1145745-DCCC-4BE3-9311-18853655FB92}.Release|x64.ActiveCfg = Release|Any CPU
 		{C1145745-DCCC-4BE3-9311-18853655FB92}.Release|x64.Build.0 = Release|Any CPU
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Debug|x64.ActiveCfg = Debug|x64
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Debug|x64.Build.0 = Debug|x64
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Release|x64.ActiveCfg = Release|x64
-		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Release|x64.Build.0 = Release|x64
 		{86E451C8-D3BE-4FF8-887A-5F0574E892D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{86E451C8-D3BE-4FF8-887A-5F0574E892D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86E451C8-D3BE-4FF8-887A-5F0574E892D9}.Debug|x64.ActiveCfg = Debug|Any CPU

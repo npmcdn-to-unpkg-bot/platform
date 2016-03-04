@@ -1,13 +1,14 @@
-﻿using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using Allors;
-using Allors.Web.Mvc;
-using Web;
-
-namespace Desktop
+﻿namespace Desktop
 {
+    using System.Web.Http;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+
+    using Allors;
+
+    using Web;
+
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -21,6 +22,7 @@ namespace Desktop
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AllorsConfig.Register();

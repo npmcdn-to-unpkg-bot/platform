@@ -6,7 +6,7 @@
     config.$inject = ["$translateProvider"];
     function config($translateProvider: angular.translate.ITranslateProvider): void {
 
-        $translateProvider.useUrlLoader("/angular/translate");
+        $translateProvider.useUrlLoader("/database/translate");
 
         $translateProvider.preferredLanguage("en");
         $translateProvider.fallbackLanguage("en");

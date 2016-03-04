@@ -5,12 +5,21 @@
     using System.Web.Configuration;
     using System.Web.Http.Controllers;
 
-    using Allors.Api;
+    using Allors.Web.Mvc;
+
+    using Common.Logging;
 
     public class CustomApiController : AllorsApiController
     {
         private const string DefaultCultureName = "en-US";
-        
+
+        protected readonly ILog log;
+
+        public CustomApiController()
+        {
+            this.log = LogManager.GetLogger(this.GetType());
+        }
+
         public bool IsProduction
         {
             get
@@ -19,7 +28,7 @@
                 return string.IsNullOrWhiteSpace(production) || bool.Parse(production);
             }
         }
-
+        
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);

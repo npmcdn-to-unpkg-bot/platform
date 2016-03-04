@@ -1,8 +1,0 @@
-@model bool?
-
-<label class="radio-inline">
-    <input type="radio" name="@Html.NameForModel()" value="true" checked="@(Model.HasValue && Model.Value)"/> true
-</label>
-<label class="radio-inline">
-    <input type="radio" name="@Html.NameForModel()" value="false" checked="@(Model.HasValue && !Model.Value)" /> false
-</label>
