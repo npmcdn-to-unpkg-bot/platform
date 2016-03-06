@@ -5,7 +5,7 @@
         events: Events;
         session: ISession;
 
-        constructor(name: string, database: Database, workspace: Workspace, $rootScope: ng.IRootScopeService, protected $scope: ng.IScope, protected $q: ng.IQService, protected $log: ng.ILogService) {
+        constructor(name: string, database: Database, workspace: Workspace, $rootScope: angular.IRootScopeService, protected $scope: angular.IScope, protected $q: angular.IQService, protected $log: angular.ILogService) {
             this.context = new Context(name, database, workspace);
             this.events = new Events(this.context, $rootScope, $scope);
 
@@ -32,13 +32,13 @@
         }
 
         // Commands
-        load(params?: any): ng.IPromise<any> {
+        load(params?: any): angular.IPromise<any> {
             
             return this.context.load(params)
                     .catch((e) => { throw e });
         }
 
-        save(): ng.IPromise<any> {
+        save(): angular.IPromise<any> {
             return this.$q((resolve, reject) => {
 
                 this.context
@@ -57,9 +57,9 @@
             });
         }
 
-        invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
-        invoke(service: string, args?: any): ng.IPromise<Data.InvokeResponse>;
-        invoke(methodOrService: Method | string, args?: any): ng.IPromise<Data.InvokeResponse> {
+        invoke(method: Method): angular.IPromise<Data.InvokeResponse>;
+        invoke(service: string, args?: any): angular.IPromise<Data.InvokeResponse>;
+        invoke(methodOrService: Method | string, args?: any): angular.IPromise<Data.InvokeResponse> {
             return this.$q((resolve, reject) => {
 
                 if (methodOrService instanceof Method) {
@@ -93,9 +93,9 @@
             });
         }
 
-        saveAndInvoke(method: Method): ng.IPromise<Data.InvokeResponse>;
-        saveAndInvoke(service: string, args?: any): ng.IPromise<any>;
-        saveAndInvoke(methodOrService: Method | string, args?: any): ng.IPromise<any> {
+        saveAndInvoke(method: Method): angular.IPromise<Data.InvokeResponse>;
+        saveAndInvoke(service: string, args?: any): angular.IPromise<any>;
+        saveAndInvoke(methodOrService: Method | string, args?: any): angular.IPromise<any> {
             return this.$q((resolve, reject) => {
 
                 return this.context
@@ -141,13 +141,13 @@
             });
         }
 
-        query(query: string, args: any): ng.IPromise<any> {
+        query(query: string, args: any): angular.IPromise<any> {
             return this.context
                 .query(query, args)
                 .catch((e) => { throw e; });
         }
 
-        queryResults(query: string, args: any): ng.IPromise<any> {
+        queryResults(query: string, args: any): angular.IPromise<any> {
             return this.context
                 .query(query, args)
                 .then(result => {
@@ -157,7 +157,7 @@
                 .catch((e) => { throw e; });
         }
 
-        protected abstract refresh(): ng.IPromise<any>;
+        protected abstract refresh(): angular.IPromise<any>;
 
         private handleError(e: any): any {
             if (e.hasErrors) {

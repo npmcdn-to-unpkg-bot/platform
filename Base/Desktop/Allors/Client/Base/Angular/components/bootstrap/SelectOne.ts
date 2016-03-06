@@ -33,7 +33,7 @@
 </b-group>
 `;
 
-        static register(templateCache: ng.ITemplateCacheService) {
+        static register(templateCache: angular.ITemplateCacheService) {
             templateCache.put(SelectOneTemplate.name, SelectOneTemplate.bootstrap);
         }
     }
@@ -44,7 +44,7 @@
         typed: string;
 
         static $inject = ["$log", "$translate"];
-        constructor($log: ng.ILogService, $translate: ng.translate.ITranslateService) {
+        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
         }
       
@@ -74,7 +74,7 @@
         .module("allors")
         .component("bSelectOne", {
             controller: UiSelectOneController,
-            templateUrl: ["$element", "$attrs", ($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes) => SelectOneTemplate.name],
+            templateUrl: ["$element", "$attrs", ($element: angular.IAugmentedJQuery, $attrs: angular.IAttributes) => SelectOneTemplate.name],
             require: {
                 form: "^bForm"
             },

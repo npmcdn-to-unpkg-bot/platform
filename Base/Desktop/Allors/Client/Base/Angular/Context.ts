@@ -1,6 +1,6 @@
 ﻿namespace Allors {
     export class Context {
-        $q: ng.IQService;
+        $q: angular.IQService;
 
         session: ISession;
 
@@ -18,7 +18,7 @@
             this.session = new Session(this.workspace);
         }
 
-        load(params?: any): ng.IPromise<any> {
+        load(params?: any): angular.IPromise<any> {
             return this.$q((resolve, reject) => {
 
                 return this.database.pull(this.name, params)
@@ -53,7 +53,7 @@
             });
         }
 
-        query(service: string, params: any): ng.IPromise<Result> {
+        query(service: string, params: any): angular.IPromise<Result> {
             return this.$q((resolve, reject) => {
 
                 this.database.pull(service, params)
@@ -84,7 +84,7 @@
             });
         }
 
-        save(): ng.IPromise<Data.PushResponse> {
+        save(): angular.IPromise<Data.PushResponse> {
             return this.$q((resolve, reject) => {
 
                 try {
@@ -100,9 +100,9 @@
             });
         }
 
-        invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
-        invoke(service: string, args?: any): ng.IPromise<Data.InvokeResponse>;
-        invoke(methodOrService: Method | string, args?: any): ng.IPromise<Data.InvokeResponse> {
+        invoke(method: Method): angular.IPromise<Data.InvokeResponse>;
+        invoke(service: string, args?: any): angular.IPromise<Data.InvokeResponse>;
+        invoke(methodOrService: Method | string, args?: any): angular.IPromise<Data.InvokeResponse> {
 
             if (methodOrService instanceof Method) {
                 return this.database.invoke(methodOrService);

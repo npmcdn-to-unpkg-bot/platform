@@ -13,14 +13,14 @@
 </b-group>
 `;
 
-        static register(templateCache: ng.ITemplateCacheService) {
+        static register(templateCache: angular.ITemplateCacheService) {
             templateCache.put(TextTemplate.name, TextTemplate.bootstrap);
         }
     }
 
     class TextController extends Bootstrap.Field {
         static $inject = ["$log", "$translate"];
-        constructor($log: ng.ILogService, $translate: ng.translate.ITranslateService) {
+        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
         }
     }

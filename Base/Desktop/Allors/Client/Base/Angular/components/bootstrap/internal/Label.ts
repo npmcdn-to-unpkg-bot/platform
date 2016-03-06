@@ -10,7 +10,7 @@
     </span>
 </label>`;
 
-        static register(templateCache: ng.ITemplateCacheService) {
+        static register(templateCache: angular.ITemplateCacheService) {
             templateCache.put(LabelTemplate.name, LabelTemplate.bootstrap);
         }
     }
@@ -19,7 +19,7 @@
         field: Bootstrap.Field;
 
         static $inject = ["$log"];
-        constructor($log: ng.ILogService) {
+        constructor($log: angular.ILogService) {
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿module App {
 
-    interface IToManyScope extends ng.IScope {
-        lookup: (criteria:string) => ng.IPromise<any>;
+    interface IToManyScope extends angular.IScope {
+        lookup: (criteria:string) => angular.IPromise<any>;
 
         select: (item: any) => void;
         startEdit: () => void;
@@ -16,9 +16,9 @@
     }
 
     //one.$inject = [''];
-    function toMany(): ng.IDirective {
+    function toMany(): angular.IDirective {
 
-        function link(scope: IToManyScope, element: ng.IAugmentedJQuery): void {
+        function link(scope: IToManyScope, element: angular.IAugmentedJQuery): void {
             scope.lookup = criteria => {
                 return scope["parentLookup"]({ criteria: criteria });
             }

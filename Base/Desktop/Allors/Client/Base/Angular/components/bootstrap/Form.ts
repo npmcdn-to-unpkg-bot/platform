@@ -7,7 +7,7 @@
 <ng-transclude />
 </form>`;
 
-        static register(templateCache: ng.ITemplateCacheService) {
+        static register(templateCache: angular.ITemplateCacheService) {
             templateCache.put("allors/bootstrap/form", FormTemplate.form);
         }
     }
@@ -17,7 +17,7 @@
         horizontal: boolean;
 
         static $inject = ["$log"];
-        constructor(private $log: ng.ILogService) {
+        constructor(private $log: angular.ILogService) {
         }
     }
 
@@ -26,7 +26,7 @@
         .component("bForm", {
             controller: FormController,
             transclude: true,
-            templateUrl: ["$element", "$attrs", ($element: ng.IAugmentedJQuery, $attrs: ng.IAttributes) => "allors/bootstrap/form"],
+            templateUrl: ["$element", "$attrs", ($element: angular.IAugmentedJQuery, $attrs: angular.IAttributes) => "allors/bootstrap/form"],
             bindings: {
                 horizontal: "<"
             }

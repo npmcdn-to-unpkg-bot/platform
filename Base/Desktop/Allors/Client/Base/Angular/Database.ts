@@ -1,14 +1,14 @@
 ﻿namespace Allors {
     export class Database {
-        constructor(private $http: ng.IHttpService, public $q: ng.IQService, public prefix: string, public postfix: string) {
+        constructor(private $http: angular.IHttpService, public $q: angular.IQService, public prefix: string, public postfix: string) {
         }
 
-        pull(name: string, params?: any): ng.IPromise<Data.PullResponse> {
+        pull(name: string, params?: any): angular.IPromise<Data.PullResponse> {
             return this.$q((resolve, reject) => {
 
                 const serviceName = name + this.postfix;
                 this.$http.post(serviceName, params)
-                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.PullResponse>) => {
+                    .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.PullResponse>) => {
                         var response = callbackArg.data;
                         resolve(response);
                     })
@@ -19,11 +19,11 @@
             });
         }
 
-        sync(syncRequest: Data.SyncRequest): ng.IPromise<Data.SyncResponse> {
+        sync(syncRequest: Data.SyncRequest): angular.IPromise<Data.SyncResponse> {
             return this.$q((resolve, reject) => {
 
                 this.$http.post(`${this.prefix}Sync`, syncRequest)
-                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.SyncResponse>) => {
+                    .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.SyncResponse>) => {
                         var loadResponse = callbackArg.data;
                         resolve(loadResponse);
                     })
@@ -34,11 +34,11 @@
             });
         }
 
-        push(pushRequest: Data.PushRequest): ng.IPromise<Data.PushResponse> {
+        push(pushRequest: Data.PushRequest): angular.IPromise<Data.PushResponse> {
             return this.$q((resolve, reject) => {
 
                 this.$http.post(`${this.prefix}Push`, pushRequest)
-                    .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.PushResponse>) => {
+                    .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.PushResponse>) => {
                         var saveResponse = callbackArg.data;
                         resolve(saveResponse);
                 })
@@ -49,16 +49,16 @@
             });
         }
 
-        invoke(method: Method): ng.IPromise<Data.InvokeResponse>;
-        invoke(service: string, args?: any): ng.IPromise<Data.InvokeResponse>;
-        invoke(methodOrService: Method | string, args?: any): ng.IPromise<Data.InvokeResponse> {
+        invoke(method: Method): angular.IPromise<Data.InvokeResponse>;
+        invoke(service: string, args?: any): angular.IPromise<Data.InvokeResponse>;
+        invoke(methodOrService: Method | string, args?: any): angular.IPromise<Data.InvokeResponse> {
             return this.$q((resolve, reject) => {
 
                 if (methodOrService instanceof Method) {
                     const method = methodOrService;
                     const invokeRequest: Data.InvokeRequest = { i: method.object.id, v: method.object.version, m: method.name };
                     this.$http.post(`${this.prefix}Invoke`, invokeRequest)
-                        .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
+                        .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
                             var invokeResponse = callbackArg.data;
                             resolve(invokeResponse);
                         })
@@ -67,9 +67,9 @@
                         });
                 }
                 else {
-                    const service = methodOrService;
-                    this.$http.post(`${this.prefix}${service}`, args)
-                        .then((callbackArg: ng.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
+                    const service = methodOrService + this.postfix;
+                    this.$http.post(service, args)
+                        .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
                             var invokeResponse = callbackArg.data;
                             resolve(invokeResponse);
                         })
