@@ -87,7 +87,6 @@
     <Compile Include="Domain\Content\MediaTest.cs" />
     <Compile Include="Domain\Content\MediatypeTest.cs" />
     <Compile Include="Domain\Meta\PathTests.cs" />
-    <Compile Include="Domain\Content\StringTemplateTests.cs" />
     <Compile Include="Domain\Derivations\DefaultDerivationLogTests.cs" />
     <Compile Include="Domain\Derivations\DerivationGraphTest.cs" />
     <Compile Include="Domain\Derivations\DerivationLogTests.cs" />

@@ -13,11 +13,6 @@ namespace Allors.Domain
 		public interface AsyncDerivable  : Object 
 		{
 		}
-		public interface Commentable  : Object 
-		{
-						global::System.String Comment {set;}
-
-		}
 		public interface Deletable  : Object 
 		{
 		}
@@ -40,18 +35,6 @@ namespace Allors.Domain
 						Permission DeniedPermissions {set;}
 
 						global::System.String Name {set;}
-
-		}
-		public interface Period  : Object 
-		{
-						global::System.DateTime FromDate {set;}
-
-						global::System.DateTime? ThroughDate {set;}
-
-		}
-		public interface Printable  : AccessControlledObject, UniquelyIdentifiable 
-		{
-						global::System.String PrintContent {set;}
 
 		}
 		public interface SecurityTokenOwner  : Object 
@@ -410,7 +393,7 @@ namespace Allors.Domain
 						global::System.Int32 OperationEnum {set;}
 
 		}
-		public interface Person  : User, Printable, Deletable 
+		public interface Person  : User, UniquelyIdentifiable, Deletable 
 		{
 						global::System.String FirstName {set;}
 
@@ -449,13 +432,6 @@ namespace Allors.Domain
 						global::System.Decimal? Weight {set;}
 
 		}
-		public interface PrintQueue  : AccessControlledObject, UniquelyIdentifiable 
-		{
-						Printable Printables {set;}
-
-						global::System.String Name {set;}
-
-		}
 		public interface Role  : AccessControlledObject, UniquelyIdentifiable 
 		{
 						Permission Permissions {set;}
@@ -470,8 +446,6 @@ namespace Allors.Domain
 		}
 		public interface Singleton  : AccessControlledObject 
 		{
-						PrintQueue DefaultPrintQueue {set;}
-
 						Locale DefaultLocale {set;}
 
 						Locale Locales {set;}
@@ -484,27 +458,11 @@ namespace Allors.Domain
 
 						AccessControl DefaultAdministratorsAccessControl {set;}
 
-						StringTemplate PersonTemplate {set;}
-
 						AccessControl SalesAccessControl {set;}
 
 						AccessControl OperationsAccessControl {set;}
 
 						AccessControl ProcurementAccessControl {set;}
-
-		}
-		public interface StringTemplate  : UniquelyIdentifiable, Localised 
-		{
-						global::System.String Body {set;}
-
-						global::System.String Name {set;}
-
-		}
-		public interface Transition  : Object 
-		{
-						ObjectState FromStates {set;}
-
-						ObjectState ToState {set;}
 
 		}
 		public interface UserGroup  : UniquelyIdentifiable, AccessControlledObject 

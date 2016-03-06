@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("6c20422e-cb3e-4402-bb40-dacaf584405e")]
     #endregion
@@ -18,6 +16,7 @@ namespace Allors.Repository.Domain
         [Size(-1)]
         #endregion
         public byte[] Value { get; set; }
+
         #region Allors
         [Id("890598a9-0be4-49ee-8dd8-3581ee9355e6")]
         [AssociationId("3cf7f10e-dc56-4a50-95a5-fe7fae0be291")]
@@ -27,8 +26,7 @@ namespace Allors.Repository.Domain
         [Size(1024)]
         #endregion
         public string Hash { get; set; }
-
-
+        
         #region inherited methods
 
 
@@ -45,6 +43,5 @@ namespace Allors.Repository.Domain
 
         public void Delete(){}
         #endregion
-
     }
 }

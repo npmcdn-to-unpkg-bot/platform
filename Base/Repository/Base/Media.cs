@@ -5,7 +5,7 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("da5b86a3-4f33-4c0d-965d-f4fbc1179374")]
     #endregion
-    public partial class Media :  Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
+    public partial class Media : UniquelyIdentifiable, AccessControlledObject, Deletable 
     {
         #region inherited properties
         public Guid UniqueId { get; set; }
@@ -25,6 +25,7 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public MediaType MediaType { get; set; }
+
         #region Allors
         [Id("67082a51-1502-490b-b8db-537799e550bd")]
         [AssociationId("e8537dcf-1bd7-46c4-a37c-077bee6a78a1")]
@@ -35,8 +36,7 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public MediaContent MediaContent { get; set; }
-
-
+        
         #region inherited methods
 
 
@@ -55,6 +55,5 @@ namespace Allors.Repository.Domain
 
         public void Delete(){}
         #endregion
-
     }
 }

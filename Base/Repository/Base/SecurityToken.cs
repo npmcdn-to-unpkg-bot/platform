@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("a53f1aed-0e3f-4c3c-9600-dc579cccf893")]
     #endregion
@@ -19,7 +17,6 @@ namespace Allors.Repository.Domain
         #endregion
         public AccessControl[] AccessControls { get; set; }
 
-
         #region inherited methods
 
 
@@ -36,6 +33,5 @@ namespace Allors.Repository.Domain
 
         public void Delete(){}
         #endregion
-
     }
 }

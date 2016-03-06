@@ -24,6 +24,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public Permission[] Permissions { get; set; }
+
         #region Allors
         [Id("934bcbbe-5286-445c-a1bd-e2fcc786c448")]
         [AssociationId("05785884-ca83-43de-a6f3-86d3fa7ec82a")]
@@ -33,7 +34,6 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string Name { get; set; }
-
 
         #region inherited methods
 
@@ -50,6 +50,5 @@ namespace Allors.Repository.Domain
 
 
         #endregion
-
     }
 }

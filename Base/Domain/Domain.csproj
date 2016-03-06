@@ -171,9 +171,6 @@
     <Compile Include="Base\Content\Medias.cs" />
     <Compile Include="Base\Content\MediaType.cs" />
     <Compile Include="Base\Content\MediaTypes.cs" />
-    <Compile Include="Base\Content\PrintQueues.cs" />
-    <Compile Include="Base\Content\StringTemplate.cs" />
-    <Compile Include="Base\Content\StringTemplates.cs" />
     <Compile Include="Base\Config.cs" />
     <Compile Include="Base\Data\CsvExport.cs" />
     <Compile Include="Base\Data\CsvExportColumn.cs" />
@@ -236,7 +233,6 @@
     <Compile Include="Generated\C1Sum.g.cs" />
     <Compile Include="Generated\C2.g.cs" />
     <Compile Include="Generated\ClassWithoutRoles.g.cs" />
-    <Compile Include="Generated\Commentable.g.cs" />
     <Compile Include="Generated\Counter.g.cs" />
     <Compile Include="Generated\Country.g.cs" />
     <Compile Include="Generated\Currency.g.cs" />
@@ -279,13 +275,10 @@
     <Compile Include="Generated\OrderObjectState.g.cs" />
     <Compile Include="Generated\Organisation.g.cs" />
     <Compile Include="Generated\OrganisationJustDoIt.g.cs" />
-    <Compile Include="Generated\Period.g.cs" />
     <Compile Include="Generated\Permission.g.cs" />
     <Compile Include="Generated\Person.g.cs" />
     <Compile Include="Generated\PersonMethod.g.cs" />
     <Compile Include="Generated\Place.g.cs" />
-    <Compile Include="Generated\Printable.g.cs" />
-    <Compile Include="Generated\PrintQueue.g.cs" />
     <Compile Include="Generated\Role.g.cs" />
     <Compile Include="Generated\S1.g.cs" />
     <Compile Include="Generated\S1SuperinterfaceMethod.g.cs" />
@@ -296,7 +289,6 @@
     <Compile Include="Generated\SimpleJob.g.cs" />
     <Compile Include="Generated\Singleton.g.cs" />
     <Compile Include="Generated\StatefulCompany.g.cs" />
-    <Compile Include="Generated\StringTemplate.g.cs" />
     <Compile Include="Generated\Subdependee.g.cs" />
     <Compile Include="Generated\SyncDepth1.g.cs" />
     <Compile Include="Generated\SyncDepth2.g.cs" />
@@ -304,7 +296,6 @@
     <Compile Include="Generated\Third.g.cs" />
     <Compile Include="Generated\Three.g.cs" />
     <Compile Include="Generated\To.g.cs" />
-    <Compile Include="Generated\Transition.g.cs" />
     <Compile Include="Generated\Transitional.g.cs" />
     <Compile Include="Generated\Two.g.cs" />
     <Compile Include="Generated\UniquelyIdentifiable.g.cs" />

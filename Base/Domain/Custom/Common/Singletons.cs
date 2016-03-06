@@ -26,19 +26,6 @@ namespace Allors.Domain
     {
         private static readonly Guid PersonTemplateId = new Guid("7432004B-AEBC-4E6C-958E-5E83B4E027C9");
 
-        protected override void CustomSetup(Allors.Setup setup)
-        {
-            base.CustomSetup(setup);
-
-            this.Instance.PersonTemplate = new StringTemplateBuilder(this.Session).WithUniqueId(PersonTemplateId)
-                                                   .WithName("Person Derivation")
-                                                   .WithLocale(new Locales(this.Session).DutchBelgium)
-                                                   .WithBody(@"main(this) ::= <<
-Hello $this.UserName$!
->>")
-                                                   .Build();
-        }
-
         protected override void CustomSecure(Security config)
         {
             var defaultSecurityToken = this.Instance.DefaultSecurityToken;

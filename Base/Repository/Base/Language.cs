@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("4a0eca4b-281f-488d-9c7e-497de882c044")]
     #endregion
@@ -23,6 +21,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string Name { get; set; }
+
         #region Allors
         [Id("d2a32d9f-21cc-4f9d-b0d3-a9b75da66907")]
         [AssociationId("6c860e73-d12e-4e35-897e-ed9f8fd8eba0")]
@@ -31,6 +30,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string IsoCode { get; set; }
+        
         #region Allors
         [Id("f091b264-e6b1-4a57-bbfb-8225cbe8190c")]
         [AssociationId("6650af3b-f537-4c2f-afff-6773552315cd")]
@@ -39,7 +39,6 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public LocalisedText[] LocalisedNames { get; set; }
-
 
         #region inherited methods
 
@@ -55,6 +54,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

@@ -1,11 +1,9 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("7ca39473-bba1-49af-a343-f3cc7abe14d5")]
     #endregion
-    public partial class AsyncDerivation :  Object, Deletable 
+    public partial class AsyncDerivation : Deletable 
     {
         #region inherited properties
         #endregion
@@ -18,7 +16,6 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public AsyncDerivable AsyncDerivable { get; set; }
-
 
         #region inherited methods
 
@@ -36,6 +33,5 @@ namespace Allors.Repository.Domain
 
         public void Delete(){}
         #endregion
-
     }
 }

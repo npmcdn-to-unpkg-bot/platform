@@ -5,7 +5,7 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("0568354f-e3d9-439e-baac-b7dce31b956a")]
     #endregion
-    public partial class Counter :  Object, UniquelyIdentifiable 
+    public partial class Counter : UniquelyIdentifiable 
     {
         #region inherited properties
         public Guid UniqueId { get; set; }
@@ -19,7 +19,6 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public int Value { get; set; }
-
 
         #region inherited methods
 
@@ -35,6 +34,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

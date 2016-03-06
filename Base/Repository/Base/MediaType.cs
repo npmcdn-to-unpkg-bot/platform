@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("aa7d61f8-6618-47a0-9cf2-e75dd81dbd5b")]
     #endregion
@@ -21,6 +19,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string DefaultFileExtension { get; set; }
+
         #region Allors
         [Id("5fcee025-29fd-42d8-ad5a-75cb88d8aef0")]
         [AssociationId("0353bfc3-552c-43c7-bfe2-666d2a8199dc")]
@@ -29,8 +28,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string Name { get; set; }
-
-
+        
         #region inherited methods
 
 
@@ -45,6 +43,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

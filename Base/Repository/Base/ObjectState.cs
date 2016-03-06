@@ -1,14 +1,10 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("f991813f-3146-4431-96d0-554aa2186887")]
     #endregion
-	public partial interface ObjectState :  Object, UniquelyIdentifiable 
+    public partial interface ObjectState :  Object, UniquelyIdentifiable 
     {
-
-
         #region Allors
         [Id("59338f0b-40e7-49e8-ba1a-3ecebf96aebe")]
         [AssociationId("fca0f3f6-bdd6-4405-93b3-35dd769bff0e")]
@@ -17,7 +13,6 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         Permission[] DeniedPermissions { get; set; }
-
 
         #region Allors
         [Id("b86f9e42-fe10-4302-ab7c-6c6c7d357c39")]
@@ -28,6 +23,5 @@ namespace Allors.Repository.Domain
         [Group("Workspace")]
         #endregion
         string Name { get; set; }
-
     }
 }

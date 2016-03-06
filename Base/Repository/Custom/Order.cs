@@ -1,11 +1,9 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("94be4938-77c1-488f-b116-6d4daeffcc8d")]
     #endregion
-    public partial class Order :  Object, Transitional 
+    public partial class Order : Transitional 
     {
         #region inherited properties
         public ObjectState PreviousObjectState { get; set; }
@@ -26,13 +24,13 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public OrderObjectState CurrentObjectState { get; set; }
+
         #region Allors
         [Id("5aa7fa5c-c0a5-4384-9b24-9ecef17c4848")]
         [AssociationId("ffcb8a00-571f-4032-b038-82b438f96f74")]
         [RoleId("cf1629aa-2aa0-4dc3-9873-fbf3008352ac")]
         #endregion
         public int Amount { get; set; }
-
 
         #region inherited methods
 
@@ -49,6 +47,5 @@ namespace Allors.Repository.Domain
 
 
         #endregion
-
     }
 }

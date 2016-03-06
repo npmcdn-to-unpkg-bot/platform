@@ -5,7 +5,7 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("c799ca62-a554-467d-9aa2-1663293bb37f")]
     #endregion
-    public partial class Person :  Object, User, AccessControlledObject, UniquelyIdentifiable
+    public partial class Person : User, UniquelyIdentifiable
     {
         #region inherited properties
         public bool UserEmailConfirmed { get; set; }
@@ -37,6 +37,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string FirstName { get; set; }
+
         #region Allors
         [Id("8a3e4664-bb40-4208-8e90-a1b5be323f27")]
         [AssociationId("9b48ff56-afef-4501-ac97-6173731ff2c9")]
@@ -44,6 +45,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string LastName { get; set; }
+        
         #region Allors
         [Id("eb18bb28-da9c-47b4-a091-2f8f2303dcb6")]
         [AssociationId("e3a4d7b2-c5f1-4101-9aab-a0135d37a5a5")]

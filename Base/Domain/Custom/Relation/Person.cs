@@ -78,9 +78,6 @@ namespace Allors.Domain
             {
                 this.FullName = this.LastName;
             }
-
-            var template = Singleton.Instance(this.Strategy.Session).PersonTemplate;
-            this.PrintContent = template.Apply(new Dictionary<string, object> { { "this", this } });
         }
     }
 }

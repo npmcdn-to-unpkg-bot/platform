@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("ad7277a8-eda4-4128-a990-b47fe43d120a")]
     #endregion
@@ -18,6 +16,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string Key { get; set; }
+
         #region Allors
         [Id("7a82e721-d0b7-4567-aaef-bd3987ae6d01")]
         [AssociationId("2f2ef41d-8310-45fd-8ab5-e5d067862e3d")]
@@ -26,6 +25,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string Provider { get; set; }
+        
         #region Allors
         [Id("c2d950ad-39d3-40f1-8817-11a026e9890b")]
         [AssociationId("e8091111-9f92-41a9-b4b1-4e8f277ea575")]
@@ -34,8 +34,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public User User { get; set; }
-
-
+        
         #region inherited methods
 
 
@@ -52,6 +51,5 @@ namespace Allors.Repository.Domain
 
         public void Delete(){}
         #endregion
-
     }
 }

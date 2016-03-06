@@ -1,11 +1,10 @@
 namespace Allors.Repository.Domain
 {
-    using System;
 
     #region Allors
     [Id("020f5d4d-4a59-4d7b-865a-d72fc70e4d97")]
     #endregion
-    public partial class LocalisedText :  Object, AccessControlledObject, Localised 
+    public partial class LocalisedText : AccessControlledObject, Localised 
     {
         #region inherited properties
         public Permission[] DeniedPermissions { get; set; }
@@ -25,7 +24,6 @@ namespace Allors.Repository.Domain
         #endregion
         public string Text { get; set; }
 
-
         #region inherited methods
 
 
@@ -41,6 +39,5 @@ namespace Allors.Repository.Domain
 
 
         #endregion
-
     }
 }

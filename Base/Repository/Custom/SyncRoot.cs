@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("2A863DCF-C6FE-4838-8D3A-1212A2076D70")]
     #endregion

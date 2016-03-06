@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("45033ae6-85b5-4ced-87ce-02518e6c27fd")]
     #endregion
@@ -21,6 +19,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string Name { get; set; }
+
         #region Allors
         [Id("d8cac34a-9bb2-4190-bd2a-ec0b87e04cf5")]
         [AssociationId("af501892-3c83-41d1-826b-f5c4cb1de7fe")]
@@ -30,6 +29,7 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public Language Language { get; set; }
+        
         #region Allors
         [Id("ea778b77-2929-4ab4-ad99-bf2f970401a9")]
         [AssociationId("bb5904f5-feb0-47eb-903a-0351d55f0d8c")]
@@ -39,8 +39,7 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public Country Country { get; set; }
-
-
+        
         #region inherited methods
 
 
@@ -55,6 +54,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

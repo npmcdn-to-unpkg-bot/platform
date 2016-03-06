@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("268f63d2-17da-4f29-b0d0-76db611598c6")]
     #endregion
@@ -33,7 +31,6 @@ namespace Allors.Repository.Domain
         #endregion
         public string PostalCode { get; set; }
 
-
         #region inherited methods
 
 
@@ -47,6 +44,5 @@ namespace Allors.Repository.Domain
 
         public void OnPostDerive(){}
         #endregion
-
     }
 }

@@ -1,11 +1,9 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("caa2a2de-9454-4812-a69f-9d3728706345")]
     #endregion
-    public partial class Image :  Object, Deletable 
+    public partial class Image : Deletable 
     {
         #region inherited properties
         #endregion
@@ -18,6 +16,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public Media Original { get; set; }
+
         #region Allors
         [Id("59689164-7a45-45d4-98fa-f8cf50c62899")]
         [AssociationId("386c7cfc-4bec-4564-a7c4-b2c1bccf6ebe")]
@@ -26,6 +25,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public Media Responsive { get; set; }
+        
         #region Allors
         [Id("d149b012-1dc2-4bd1-a650-26b7c6f9024b")]
         [AssociationId("75fccc6e-1c89-4e0f-88c2-527eb3b0d71d")]
@@ -33,6 +33,7 @@ namespace Allors.Repository.Domain
         [Size(256)]
         #endregion
         public string OriginalFilename { get; set; }
+        
         #region Allors
         [Id("d54405bf-efa0-4b64-a086-1c85ae0c5b2f")]
         [AssociationId("2af16928-df35-42c6-a468-15e4bae5e035")]
@@ -58,7 +59,7 @@ namespace Allors.Repository.Domain
 
         public void Delete(){}
         #endregion
-        
+
         [Id("C3C245F4-3081-4F2D-A34F-ADE5077702F9")]
         public void CreateResponsive(){}
 

@@ -1,11 +1,9 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("bdaed62e-6369-46c0-a379-a1eef81b1c3d")]
     #endregion
-    public partial class Three :  Object, Shared 
+    public partial class Three : Shared 
     {
         #region inherited properties
         #endregion
@@ -18,6 +16,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public Four Four { get; set; }
+
         #region Allors
         [Id("4ace9948-4a22-465c-aa40-61c8fd65784d")]
         [AssociationId("6e20b25f-3ecd-447e-8a93-3977a53452b6")]
@@ -25,11 +24,8 @@ namespace Allors.Repository.Domain
         [Size(-1)]
         #endregion
         public string AllorsString { get; set; }
-
-
+        
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -41,6 +37,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

@@ -66,11 +66,8 @@ namespace Allors.Repository.Domain
         [Scale(2)]
         #endregion
         public decimal AllorsDecimal { get; set; }
-
-
+        
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -82,6 +79,5 @@ namespace Allors.Repository.Domain
         public void OnPostDerive(){}
 
         #endregion
-
     }
 }

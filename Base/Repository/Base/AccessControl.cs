@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("c4d93d5e-34c3-4731-9d37-47a8e801d9a8")]
     #endregion
@@ -22,6 +20,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public UserGroup[] SubjectGroups { get; set; }
+
         #region Allors
         [Id("37dd1e27-ba75-404c-9410-c6399d28317c")]
         [AssociationId("3d74101d-97bc-46fb-9548-96cb7aa01b39")]
@@ -30,6 +29,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public User[] Subjects { get; set; }
+        
         #region Allors
         [Id("69a9dae8-678d-4c1c-a464-2e5aa5caf39e")]
         [AssociationId("ec79e57d-be81-430a-b12f-08ffd1e94af3")]
@@ -39,6 +39,7 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public Role Role { get; set; }
+        
         #region Allors
         [Id("5e218f37-3b07-4002-87a4-7581a53f01ba")]
         [AssociationId("be94d5f0-df53-4118-987a-11bce8593a1b")]
@@ -48,6 +49,7 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public Permission[] EffectivePermissions { get; set; }
+        
         #region Allors
         [Id("50ecae85-e5a9-467e-99a3-78703d954b2f")]
         [AssociationId("01590aea-d75c-45be-af4b-bf56545a4008")]
@@ -57,7 +59,6 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public User[] EffectiveUsers { get; set; }
-
 
         #region inherited methods
 
@@ -76,6 +77,5 @@ namespace Allors.Repository.Domain
         public void Delete(){}
 
         #endregion
-
     }
 }

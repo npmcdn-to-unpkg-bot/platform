@@ -22,6 +22,7 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public Guid OperandTypePointer { get; set; }
+
         #region Allors
         [Id("29b80857-e51b-4dec-b859-887ed74b1626")]
         [AssociationId("8ffed1eb-b64e-4341-bbb6-348ed7f06e83")]
@@ -30,6 +31,7 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public Guid ConcreteClassPointer { get; set; }
+        
         #region Allors
         [Id("9d73d437-4918-4f20-b9a7-3ce23a04bd7b")]
         [AssociationId("891734d6-4855-4b33-8b3b-f46fd6103149")]
@@ -38,7 +40,6 @@ namespace Allors.Repository.Domain
         [Required]
         #endregion
         public int OperationEnum { get; set; }
-
 
         #region inherited methods
 
@@ -57,6 +58,5 @@ namespace Allors.Repository.Domain
         public void Delete(){}
 
         #endregion
-
     }
 }

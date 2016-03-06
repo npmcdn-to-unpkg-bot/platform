@@ -53,7 +53,6 @@
     <Compile Include="Base\AssemblyInfo.cs" />
     <Compile Include="Base\AsyncDerivable.cs" />
     <Compile Include="Base\AsyncDerivation.cs" />
-    <Compile Include="Base\Commentable.cs" />
     <Compile Include="Base\Counter.cs" />
     <Compile Include="Base\Country.cs" />
     <Compile Include="Base\Currency.cs" />
@@ -69,17 +68,12 @@
     <Compile Include="Base\MediaContent.cs" />
     <Compile Include="Base\MediaType.cs" />
     <Compile Include="Base\ObjectState.cs" />
-    <Compile Include="Base\Period.cs" />
     <Compile Include="Base\Permission.cs" />
     <Compile Include="Base\Person.cs" />
-    <Compile Include="Base\Printable.cs" />
-    <Compile Include="Base\PrintQueue.cs" />
     <Compile Include="Base\Role.cs" />
     <Compile Include="Base\SecurityToken.cs" />
     <Compile Include="Base\SecurityTokenOwner.cs" />
     <Compile Include="Base\Singleton.cs" />
-    <Compile Include="Base\StringTemplate.cs" />
-    <Compile Include="Base\Transition.cs" />
     <Compile Include="Base\Transitional.cs" />
     <Compile Include="Base\UniquelyIdentifiable.cs" />
     <Compile Include="Base\User.cs" />

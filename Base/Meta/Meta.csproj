@@ -220,11 +220,9 @@
     <Compile Include="Custom\Domain\Order.cs" />
     <Compile Include="Custom\Domain\OrderObjectState.cs" />
     <Compile Include="Custom\Domain\Organisation.cs" />
-    <Compile Include="Base\Domain\MetaPeriod.cs" />
     <Compile Include="Base\Domain\MetaPermission.cs" />
     <Compile Include="Base\Domain\MetaPerson.cs" />
     <Compile Include="Custom\Domain\Place.cs" />
-    <Compile Include="Base\Domain\MetaPrintable.cs" />
     <Compile Include="Base\Domain\MetaPrintQueue.cs" />
     <Compile Include="Base\Domain\MetaRole.cs" />
     <Compile Include="Custom\Domain\S1.cs" />
@@ -235,7 +233,6 @@
     <Compile Include="Custom\Domain\SimpleJob.cs" />
     <Compile Include="Base\Domain\MetaSingleton.cs" />
     <Compile Include="Custom\Domain\StatefulCompany.cs" />
-    <Compile Include="Base\Domain\MetaStringTemplate.cs" />
     <Compile Include="Custom\Domain\Subdependee.cs" />
     <Compile Include="Custom\Domain\Third.cs" />
     <Compile Include="Custom\Domain\Three.cs" />

@@ -1,11 +1,9 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("39116edf-34cf-45a6-ac09-2e4f98f28e14")]
     #endregion
-    public partial class Third :  Object 
+    public partial class Third : Object 
     {
         #region inherited properties
         #endregion
@@ -17,10 +15,7 @@ namespace Allors.Repository.Domain
         #endregion
         public bool IsDerived { get; set; }
 
-
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -31,6 +26,5 @@ namespace Allors.Repository.Domain
 
         public void OnPostDerive(){}
         #endregion
-
     }
 }

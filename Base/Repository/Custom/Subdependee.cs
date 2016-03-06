@@ -1,11 +1,9 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
-    #region Allors
+ #region Allors
     [Id("46a437d1-455b-4ddd-b83c-068938c352bd")]
     #endregion
-    public partial class Subdependee :  Object 
+    public partial class Subdependee : Object 
     {
         #region inherited properties
         #endregion
@@ -17,10 +15,7 @@ namespace Allors.Repository.Domain
         #endregion
         public int Subcounter { get; set; }
 
-
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -31,6 +26,5 @@ namespace Allors.Repository.Domain
 
         public void OnPostDerive(){}
         #endregion
-
     }
 }

@@ -1,11 +1,9 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("a0309c3b-6f80-4777-983e-6e69800df5be")]
     #endregion
-	public partial interface User :  Object, SecurityTokenOwner, AccessControlledObject, Localised 
+    public partial interface User : SecurityTokenOwner, AccessControlledObject, Localised 
     {
         #region Allors
         [Id("0b3b650b-fcd4-4475-b5c4-e2ee4f39b0be")]

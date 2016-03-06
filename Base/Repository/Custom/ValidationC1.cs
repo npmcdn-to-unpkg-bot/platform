@@ -13,8 +13,6 @@ namespace Allors.Repository.Domain
         #endregion
         
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}

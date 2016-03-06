@@ -1,7 +1,5 @@
 namespace Allors.Repository.Domain
 {
-    using System;
-
     #region Allors
     [Id("62859bfb-7949-4f7f-a428-658447576d0a")]
     #endregion
@@ -36,10 +34,7 @@ namespace Allors.Repository.Domain
         #endregion
         public Person Manager { get; set; }
 
-
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -50,6 +45,5 @@ namespace Allors.Repository.Domain
 
         public void OnPostDerive(){}
         #endregion
-
     }
 }

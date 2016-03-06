@@ -148,8 +148,6 @@ namespace Allors.Repository.Domain
         public string Size { get; set; }
         
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -160,10 +158,7 @@ namespace Allors.Repository.Domain
 
         public void OnPostDerive(){}
 
-        public void Delete()
-        {
-        }
-
+        public void Delete(){}
         #endregion
         
         [Id("1869873F-F2F0-4D03-A0F9-7DC73491C117")]

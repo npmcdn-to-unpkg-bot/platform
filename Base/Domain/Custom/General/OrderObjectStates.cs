@@ -32,45 +32,15 @@ namespace Allors.Domain
 
         private UniquelyIdentifiableCache<OrderObjectState> cache;
 
-        public Cache<Guid, OrderObjectState> Cache
-        {
-            get
-            {
-                return this.cache ?? new UniquelyIdentifiableCache<OrderObjectState>(this.Session);
-            }
-        }
+        public Cache<Guid, OrderObjectState> Cache => this.cache ?? (this.cache = new UniquelyIdentifiableCache<OrderObjectState>(this.Session));
 
-        public OrderObjectState Initial
-        {
-            get
-            {
-                return this.Cache[InitialId];
-            }
-        }
+        public OrderObjectState Initial => this.Cache[InitialId];
 
-        public OrderObjectState Confirmed
-        {
-            get
-            {
-                return this.Cache[ConfirmedId];
-            }
-        }
-        
-        public OrderObjectState Closed
-        {
-            get
-            {
-                return this.Cache[ClosedId];
-            }
-        }
+        public OrderObjectState Confirmed => this.Cache[ConfirmedId];
 
-        public OrderObjectState Cancelled
-        {
-            get
-            {
-                return this.Cache[CancelledId];
-            }
-        }
+        public OrderObjectState Closed => this.Cache[ClosedId];
+
+        public OrderObjectState Cancelled => this.Cache[CancelledId];
 
         protected override void BaseSetup(Setup config)
         {
