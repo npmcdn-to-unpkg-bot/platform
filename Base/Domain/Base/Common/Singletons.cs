@@ -49,7 +49,7 @@ namespace Allors.Domain
                 .WithSubjectGroup(new UserGroups(this.Session).Administrators)
                 .Build();
 
-            singleton.DefaultSecurityToken.AddAccessControl(this.Instance.DefaultAdministratorsAccessControl);
+            singleton.DefaultSecurityToken.AddAccessControl(singleton.DefaultAdministratorsAccessControl);
 
             // Guest
             singleton.DefaultGuestAccessControl = new AccessControlBuilder(this.Session)
@@ -57,7 +57,7 @@ namespace Allors.Domain
                 .WithSubjectGroup(new UserGroups(this.Session).Guests)
                 .Build();
 
-            singleton.DefaultSecurityToken.AddAccessControl(this.Instance.DefaultGuestAccessControl);
+            singleton.DefaultSecurityToken.AddAccessControl(singleton.DefaultGuestAccessControl);
         }
     }
 }
