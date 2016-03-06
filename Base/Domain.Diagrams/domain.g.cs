@@ -509,8 +509,6 @@ namespace Allors.Domain
 		}
 		public interface UserGroup  : UniquelyIdentifiable, AccessControlledObject 
 		{
-						Role Role {set;}
-
 						User Members {set;}
 
 						global::System.String Name {set;}

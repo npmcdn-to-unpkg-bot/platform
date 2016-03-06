@@ -104,12 +104,6 @@ namespace Allors
 
         private void BaseOnPrePrepare()
         {
-            new Locales(this.session).Sync();
-            
-            var singleton = new SingletonBuilder(this.session).Build();
-
-            singleton.DefaultSecurityToken = new SecurityTokenBuilder(this.session).Build();
-            singleton.DefaultLocale = new Locales(this.session).DutchBelgium;
         }
 
         private void BaseOnPostSetup()

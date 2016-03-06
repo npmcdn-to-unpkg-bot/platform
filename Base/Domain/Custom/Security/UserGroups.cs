@@ -30,47 +30,19 @@ namespace Allors.Domain
         public static readonly Guid SalesId = new Guid("1511E4E2-829F-4133-8824-B94ED46E6BED");
         public static readonly Guid ProcurementId = new Guid("FF887B58-CDA3-4C76-8308-0F005E362E0E");
 
-        private static ISet<Guid> internalIdSet;
-        private static ISet<Guid> administratorIdSet;
-        
-        public static ISet<Guid> InternalIdSet
-        {
-            get
-            {
-                return internalIdSet ?? (internalIdSet = new HashSet<Guid> { AdministratorsId, OperationsId, SalesId, ProcurementId });
-            }
-        }
+        public UserGroup Operations => this.Cache.Get(OperationsId);
 
-        public static ISet<Guid> AdministratorIdSet
-        {
-            get
-            {
-                return administratorIdSet ?? (administratorIdSet = new HashSet<Guid> { AdministratorsId });
-            }
-        }
+        public UserGroup Sales => this.Cache.Get(SalesId);
 
-        public UserGroup Operations
-        {
-            get { return this.Cache.Get(OperationsId); }
-        }
-
-        public UserGroup Sales
-        {
-            get { return this.Cache.Get(SalesId); }
-        }
-
-        public UserGroup Procurement
-        {
-            get { return this.Cache.Get(ProcurementId); }
-        }
+        public UserGroup Procurement => this.Cache.Get(ProcurementId);
 
         protected override void CustomSetup(Setup setup)
         {
             base.CustomSetup(setup);
 
-            new UserGroupBuilder(Session).WithName("operations").WithUniqueId(OperationsId).WithRole(new Roles(Session).Operations).Build();
-            new UserGroupBuilder(Session).WithName("sales").WithUniqueId(SalesId).WithRole(new Roles(Session).Sales).Build();
-            new UserGroupBuilder(Session).WithName("procurement").WithUniqueId(ProcurementId).WithRole(new Roles(Session).Procurement).Build();
+            new UserGroupBuilder(this.Session).WithName("operations").WithUniqueId(OperationsId).Build();
+            new UserGroupBuilder(this.Session).WithName("sales").WithUniqueId(SalesId).Build();
+            new UserGroupBuilder(this.Session).WithName("procurement").WithUniqueId(ProcurementId).Build();
         }
     }
 }

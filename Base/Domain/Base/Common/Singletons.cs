@@ -20,33 +20,44 @@
 
 namespace Allors.Domain
 {
+    using Allors.Meta;
+
     public partial class Singletons
     {
         public Singleton Instance => Singleton.Instance(this.Session);
 
-        protected override void BaseSecure(Security config)
+        protected override void BasePrepare(Setup config)
         {
-            var defaultSecurityToken = this.Instance.DefaultSecurityToken;
+            base.BasePrepare(config);
 
-            if (!this.Instance.ExistDefaultAdministratorsAccessControl)
-            {
-                this.Instance.DefaultAdministratorsAccessControl = new AccessControlBuilder(this.Session)
-                    .WithRole(new Roles(this.Session).Administrator)
-                    .WithSubjectGroup(new UserGroups(this.Session).Administrators)
-                    .Build();
+            config.AddDependency(this.ObjectType, M.Locale.ObjectType);
+            config.AddDependency(this.ObjectType, M.Role.ObjectType);
+            config.AddDependency(this.ObjectType, M.UserGroup.ObjectType);
+        }
 
-                defaultSecurityToken.AddAccessControl(this.Instance.DefaultAdministratorsAccessControl);
-            }
+        protected override void BaseSetup(Setup config)
+        {
+            var singleton = new SingletonBuilder(this.Session).Build();
 
-            if (!this.Instance.ExistDefaultGuestAccessControl)
-            {
-                this.Instance.DefaultGuestAccessControl = new AccessControlBuilder(this.Session)
-                    .WithRole(new Roles(this.Session).Guest)
-                    .WithSubjectGroup(new UserGroups(this.Session).Guests)
-                    .Build();
+            singleton.DefaultLocale = new Locales(this.Session).DutchBelgium;
 
-                defaultSecurityToken.AddAccessControl(this.Instance.DefaultGuestAccessControl);
-            }
+            singleton.DefaultSecurityToken = new SecurityTokenBuilder(this.Session).Build();
+
+            // Administrator
+            singleton.DefaultAdministratorsAccessControl = new AccessControlBuilder(this.Session)
+                .WithRole(new Roles(this.Session).Administrator)
+                .WithSubjectGroup(new UserGroups(this.Session).Administrators)
+                .Build();
+
+            singleton.DefaultSecurityToken.AddAccessControl(this.Instance.DefaultAdministratorsAccessControl);
+
+            // Guest
+            singleton.DefaultGuestAccessControl = new AccessControlBuilder(this.Session)
+                .WithRole(new Roles(this.Session).Guest)
+                .WithSubjectGroup(new UserGroups(this.Session).Guests)
+                .Build();
+
+            singleton.DefaultSecurityToken.AddAccessControl(this.Instance.DefaultGuestAccessControl);
         }
     }
 }

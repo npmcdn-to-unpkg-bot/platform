@@ -42,20 +42,13 @@ namespace Allors.Domain
 
         private UniquelyIdentifiableCache<UserGroup> Cache => this.cache ?? (this.cache = new UniquelyIdentifiableCache<UserGroup>(this.Session));
 
-        protected override void BasePrepare(Setup config)
-        {
-            base.BasePrepare(config);
-
-            config.AddDependency(this.ObjectType, M.Role.ObjectType);
-        }
-
         protected override void BaseSetup(Setup config)
         {
             base.BaseSetup(config);
 
             // Default Groups
-            new UserGroupBuilder(this.Session).WithName(GuestsName).WithUniqueId(GuestsId).WithRole(new Roles(this.Session).Guest).Build();
-            new UserGroupBuilder(this.Session).WithName(AdministratorsName).WithUniqueId(AdministratorsId).WithRole(new Roles(this.Session).Administrator).Build();
+            new UserGroupBuilder(this.Session).WithName(GuestsName).WithUniqueId(GuestsId).Build();
+            new UserGroupBuilder(this.Session).WithName(AdministratorsName).WithUniqueId(AdministratorsId).Build();
         }
 
         protected override void BaseSecure(Security config)
