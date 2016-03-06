@@ -40,31 +40,13 @@ namespace Allors.Domain
 
         private UniquelyIdentifiableCache<Role> cache;
 
-        public Role Administrator
-        {
-            get
-            {
-                return this.RoleCache.Get(AdministratorId);
-            }
-        }
+        public Role Administrator => this.RoleCache.Get(AdministratorId);
 
-        public Role Guest
-        {
-            get { return this.RoleCache.Get(GuestId); }
-        }
+        public Role Guest => this.RoleCache.Get(GuestId);
 
-        public Role Owner
-        {
-            get { return this.RoleCache.Get(OwnerId); }
-        }
+        public Role Owner => this.RoleCache.Get(OwnerId);
 
-        private UniquelyIdentifiableCache<Role> RoleCache
-        {
-            get
-            {
-                return this.cache ?? (this.cache = new UniquelyIdentifiableCache<Role>(this.Session));
-            }
-        }
+        private UniquelyIdentifiableCache<Role> RoleCache => this.cache ?? (this.cache = new UniquelyIdentifiableCache<Role>(this.Session));
 
         protected override void BaseSetup(Setup config)
         {
