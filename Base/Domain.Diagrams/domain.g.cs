@@ -320,17 +320,6 @@ namespace Allors.Domain
 						LocalisedText LocalisedNames {set;}
 
 		}
-		public interface Image  : Deletable 
-		{
-						Media Original {set;}
-
-						Media Responsive {set;}
-
-						global::System.String OriginalFilename {set;}
-
-						Media Thumbnail {set;}
-
-		}
 		public interface Language  : AccessControlledObject 
 		{
 						global::System.String Name {set;}
@@ -694,7 +683,7 @@ namespace Allors.Domain
 
 						Person Employees {set;}
 
-						Image Images {set;}
+						Media Images {set;}
 
 						global::System.Boolean? Incorporated {set;}
 
@@ -704,7 +693,7 @@ namespace Allors.Domain
 
 						global::System.Boolean? IsSupplier {set;}
 
-						Image Logo {set;}
+						Media Logo {set;}
 
 						Address MainAddress {set;}
 

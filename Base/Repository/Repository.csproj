@@ -58,7 +58,6 @@
     <Compile Include="Base\Currency.cs" />
     <Compile Include="Base\Deletable.cs" />
     <Compile Include="Base\Enumeration.cs" />
-    <Compile Include="Base\Image.cs" />
     <Compile Include="Base\Language.cs" />
     <Compile Include="Base\Locale.cs" />
     <Compile Include="Base\Localised.cs" />

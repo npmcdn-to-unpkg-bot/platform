@@ -83,7 +83,6 @@
     <Compile Include="Domain\Content\CsvExportFunctionTests.cs" />
     <Compile Include="Domain\Content\CsvExportPathTests.cs" />
     <Compile Include="Domain\Content\HtmlSanitizerTests.cs" />
-    <Compile Include="Domain\Content\ImageTest.cs" />
     <Compile Include="Domain\Content\MediaTest.cs" />
     <Compile Include="Domain\Content\MediatypeTest.cs" />
     <Compile Include="Domain\Meta\PathTests.cs" />

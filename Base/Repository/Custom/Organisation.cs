@@ -49,7 +49,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.OneToMany)]
         [Indexed]
         #endregion
-        public Image[] Images { get; set; }
+        public Media[] Images { get; set; }
 
         #region Allors
         [Id("5fa25b53-e2a7-44c8-b6ff-f9575abb911d")]
@@ -88,7 +88,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.ManyToOne)]
         [Indexed]
         #endregion
-        public Image Logo { get; set; }
+        public Media Logo { get; set; }
 
         #region Allors
         [Id("ddcea177-0ed9-4247-93d3-2090496c130c")]

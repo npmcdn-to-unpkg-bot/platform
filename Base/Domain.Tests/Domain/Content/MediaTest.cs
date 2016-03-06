@@ -76,6 +76,25 @@ namespace Domain
         }
 
         [Test]
+        public void Infer()
+        {
+            var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Resources.logo.png");
+
+            byte[] content;
+            using (var output = new MemoryStream())
+            {
+                resource.CopyTo(output);
+                content = output.ToArray();
+            }
+
+            var media = new MediaBuilder(this.Session).WithContent(content).Build();
+            media.MediaType = new MediaTypes(this.Session).Infer(media.Content);
+
+            Assert.IsTrue(media.MediaType.IsImage);
+            Assert.IsTrue(media.MediaType.Equals(new MediaTypes(this.Session).Png));
+        }
+
+        [Test]
         public void PdfWithJpegExtension()
         {
             var media = new MediaBuilder(this.Session).Build();

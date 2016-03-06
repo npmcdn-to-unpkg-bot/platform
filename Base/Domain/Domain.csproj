@@ -56,7 +56,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -64,8 +63,6 @@
     <Compile Include="Base\Common\DeletableDelete.cs" />
     <Compile Include="Base\Common\TransitionalExtensions.cs" />
     <Compile Include="Base\Common\UniquelyIdentifiableExtension.cs" />
-    <Compile Include="Base\Content\ImageCreateThumbnail.cs" />
-    <Compile Include="Base\Content\ImageCreateResponsive.cs" />
     <Compile Include="Base\Derivations\AsyncDerivations.cs" />
     <Compile Include="Base\Derivations\Logging\DerivationLogFormatter.cs" />
     <Compile Include="Base\Derivations\Logging\ListDerivationLog.cs" />
@@ -164,7 +161,6 @@
     <Compile Include="Base\Content\HtmlReader.cs" />
     <Compile Include="Base\Content\HtmlRules.cs" />
     <Compile Include="Base\Content\HtmlSanitize.cs" />
-    <Compile Include="Base\Content\Image.cs" />
     <Compile Include="Base\Content\Media.cs" />
     <Compile Include="Base\Content\MediaBuilder.cs" />
     <Compile Include="Base\Content\MediaContent.cs" />
@@ -176,7 +172,6 @@
     <Compile Include="Base\Data\CsvExportColumn.cs" />
     <Compile Include="Base\Data\CsvExportFunction.cs" />
     <Compile Include="Base\Data\CsvExportPath.cs" />
-    <Compile Include="Base\Drawing\BitmapExtensions.cs" />
     <Compile Include="Base\IObjectBuilder.cs" />
     <Compile Include="Base\IObjects.cs" />
     <Compile Include="Base\ISecure.cs" />
@@ -251,9 +246,6 @@
     <Compile Include="Generated\I12.g.cs" />
     <Compile Include="Generated\I1InterfaceMethod.g.cs" />
     <Compile Include="Generated\I2.g.cs" />
-    <Compile Include="Generated\Image.g.cs" />
-    <Compile Include="Generated\ImageCreateResponsive.g.cs" />
-    <Compile Include="Generated\ImageCreateThumbnail.g.cs" />
     <Compile Include="Generated\Language.g.cs" />
     <Compile Include="Generated\Locale.g.cs" />
     <Compile Include="Generated\Localised.g.cs" />

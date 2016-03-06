@@ -20,41 +20,9 @@
 
 namespace Allors.Domain
 {
-    using System.Drawing.Imaging;
-
     public partial class MediaType
     {
-        public bool IsImage
-        {
-            get
-            {
-                return this.ExistName && this.Name.StartsWith("image");
-            }
-        }
-
-        public ImageFormat ImageFormat
-        {
-            get
-            {
-                switch (Name)
-                {
-                    case "image/gif":
-                        return ImageFormat.Gif;
-
-                    case "image/jpeg":
-                        return ImageFormat.Jpeg;
-
-                    case "image/bmp":
-                        return ImageFormat.Bmp;
-
-                    case "image/png":
-                        return ImageFormat.Png;
-
-                    default:
-                        return null;
-                }
-            }
-        }
+        public bool IsImage => this.ExistName && this.Name.StartsWith("image");
 
         public void BaseOnBuild(ObjectOnBuild method)
         {

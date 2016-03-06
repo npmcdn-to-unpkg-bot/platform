@@ -44,61 +44,19 @@ namespace Allors.Domain
 
         private Cache<string, MediaType> cache;
 
-        public Cache<string, MediaType> Cache
-        {
-            get
-            {
-                return this.cache ?? (this.cache = new Cache<string, MediaType>(this.Session, Meta.Name));
-            }
-        }
+        public Cache<string, MediaType> Cache => this.cache ?? (this.cache = new Cache<string, MediaType>(this.Session, this.Meta.Name));
 
-        public MediaType Png
-        {
-            get
-            {
-                return this.Cache[PngName];
-            }
-        }
+        public MediaType Png => this.Cache[PngName];
 
-        public MediaType Jpeg
-        {
-            get
-            {
-                return this.Cache[JpegName];
-            }
-        }
+        public MediaType Jpeg => this.Cache[JpegName];
 
-        public MediaType Gif
-        {
-            get
-            {
-                return this.Cache[GifName];
-            }
-        }
+        public MediaType Gif => this.Cache[GifName];
 
-        public MediaType Bmp
-        {
-            get
-            {
-                return this.Cache[BmpName];
-            }
-        }
+        public MediaType Bmp => this.Cache[BmpName];
 
-        public MediaType Pdf
-        {
-            get
-            {
-                return this.Cache[PdfName];
-            }
-        }
+        public MediaType Pdf => this.Cache[PdfName];
 
-        public MediaType OctetStream
-        {
-            get
-            {
-                return this.Cache[OctetStreamName];
-            }
-        }
+        public MediaType OctetStream => this.Cache[OctetStreamName];
 
         protected override void BaseSetup(Setup setup)
         {
