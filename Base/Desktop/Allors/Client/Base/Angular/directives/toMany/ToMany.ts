@@ -44,9 +44,9 @@
             }
         }
 
-        return <ng.IDirective>{
+        return {
             restrict: "E",
-            templateUrl: "app/common/directives/toMany/toMany.html",
+            templateUrl: "allors/client/base/angular/directives/toMany/toMany.html",
             link: link,
             scope: {
                 obj: "=",
@@ -54,10 +54,10 @@
                 display: "@",
                 parentLookup: "&lookup"
             }
-        };
+        } as ng.IDirective;
     }
 
     angular
-        .module('allors')
-        .directive('toMany', toMany);
+        .module("allors")
+        .directive("toMany", toMany);
 }

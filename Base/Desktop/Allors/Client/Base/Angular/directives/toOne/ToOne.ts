@@ -39,7 +39,7 @@
 
         return <ng.IDirective>{
             restrict: "E",
-            templateUrl: "app/common/directives/toOne/toOne.html",
+            templateUrl: "allors/client/base/angular/directives/toOne/toOne.html",
             link: link,
             scope: {
                 obj: "=",
@@ -51,6 +51,6 @@
     }
 
     angular
-        .module('allors')
-        .directive('toOne', toOne);
+        .module("allors")
+        .directive("toOne", toOne);
 }
