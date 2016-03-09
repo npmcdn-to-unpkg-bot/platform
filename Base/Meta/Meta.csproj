@@ -210,9 +210,6 @@
     <Compile Include="Base\Domain\MetaLocalisedText.cs" />
     <Compile Include="Base\Domain\MetaLogin.cs" />
     <Compile Include="Custom\Domain\MailboxAddress.cs" />
-    <Compile Include="Base\Domain\MetaMedia.cs" />
-    <Compile Include="Base\Domain\MetaMediaContent.cs" />
-    <Compile Include="Base\Domain\MetaMediaType.cs" />
     <Compile Include="Custom\Domain\Person.cs" />
     <Compile Include="Custom\Domain\Singleton.cs" />
     <Compile Include="Base\Domain\MetaObjectState.cs" />

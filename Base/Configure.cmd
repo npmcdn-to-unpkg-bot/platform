@@ -2,7 +2,7 @@
 
 msbuild repository.sln /target:Clean /verbosity:minimal
 
-..\Tools\dist\Allors.Tools.Cmd.exe repository generate base.sln repository templates/meta.cs.stg meta/generated
+..\Tools\dist\Allors.Tools.Cmd.exe repository generate repository.sln repository templates/meta.cs.stg meta/generated
 
 msbuild Base.sln /target:Clean /verbosity:minimal
 

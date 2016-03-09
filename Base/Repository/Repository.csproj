@@ -65,7 +65,6 @@
     <Compile Include="Base\Login.cs" />
     <Compile Include="Base\Media.cs" />
     <Compile Include="Base\MediaContent.cs" />
-    <Compile Include="Base\MediaType.cs" />
     <Compile Include="Base\ObjectState.cs" />
     <Compile Include="Base\Permission.cs" />
     <Compile Include="Base\Person.cs" />

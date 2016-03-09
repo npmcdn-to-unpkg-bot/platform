@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Media.cs" company="Allors bvba">
+// <copyright file="MediaContent.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 //
 // Dual Licensed under
@@ -20,26 +20,15 @@
 
 namespace Allors.Domain
 {
-    using System;
-    using System.Security.Cryptography;
-
     public partial class MediaContent
     {
-        // TODO: Value should be write-once
-
         public void BaseOnDerive(ObjectOnDerive method)
         {
             var derivation = method.Derivation;
 
-            if (!this.ExistHash && this.ExistValue)
+            if (this.ExistMediaWhereMediaContent)
             {
-                var sha1CryptoServiceProvider = new SHA1CryptoServiceProvider();
-                var binarySha1 = sha1CryptoServiceProvider.ComputeHash(this.Value);
-                var sha1 = BitConverter.ToString(binarySha1);
-                sha1 = sha1.Replace("-", string.Empty);
-                sha1 = sha1.ToUpper();
-
-                this.Hash = sha1;
+                derivation.AddDependency(this.MediaWhereMediaContent, this);
             }
         }
     }

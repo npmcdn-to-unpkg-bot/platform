@@ -24,52 +24,31 @@ namespace Allors.Domain
 
     public partial class Media
     {
-        private static readonly byte[] EmptyContent = { };
-
-        public byte[] Content
-        {
-            get
-            {
-                if (this.ExistMediaContent)
-                {
-                    return this.MediaContent.Value;
-                }
-
-                return EmptyContent;
-            }
-
-            set
-            {
-                if (this.ExistMediaContent)
-                {
-                    throw new Exception("Media content is write once");
-                }
-
-                this.MediaContent = new MediaContentBuilder(this.Strategy.Session).WithValue(value).Build();
-            }
-        }
-
-        public void BaseDelete(DeletableDelete method)
-        {
-            if (this.ExistMediaContent)
-            {
-                this.MediaContent.Delete();
-            }
-        }
 
         public void BaseOnBuild(ObjectOnBuild method)
         {
             var builder = method.Builder;
 
             var mediaBuilder = (MediaBuilder)builder;
-            if (mediaBuilder.MediaContentValue != null)
+            if (mediaBuilder.Blob != null)
             {
-                this.MediaContent = new MediaContentBuilder(this.Strategy.Session).WithValue(mediaBuilder.MediaContentValue).Build();
+                this.MediaContent = new MediaContentBuilder(this.Strategy.Session)
+                    .WithBlob(mediaBuilder.Blob)
+                    .WithType(MediaContents.Sniff(mediaBuilder.Blob))
+                    .Build();
+            }
+        }
 
-                if (!this.ExistMediaType)
-                {
-                    this.MediaType = new MediaTypes(this.Strategy.Session).Infer(this.Content);
-                }
+        public void BaseOnDerive(ObjectOnDerive method)
+        {
+            this.Revision = Guid.NewGuid();
+        }
+
+        public void BaseDelete(DeletableDelete method)
+        {
+            if (this.ExistMediaContent)
+            {
+                this.MediaContent.Strategy.Delete();
             }
         }
     }

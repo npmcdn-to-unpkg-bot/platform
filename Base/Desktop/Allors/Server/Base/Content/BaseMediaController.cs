@@ -37,14 +37,15 @@ namespace Allors.Web.Media
             {
                 using (var session = Config.Default.CreateSession())
                 {
-                    var media = new Medias(session).FindBy(M.UniquelyIdentifiable.UniqueId, uniqueId);
-                    if (media != null)
+                    var mediaContent = new Medias(session).FindBy(M.Media.UniqueId, uniqueId)?.MediaContent;
+
+                    if (mediaContent != null)
                     {
                         this.Response.Cache.SetCacheability(HttpCacheability.Public);
                         this.Response.Cache.SetExpires(DateTime.Now.AddYears(1));
                         this.Response.Cache.SetValidUntilExpires(true); 
 
-                        return this.File(media.Content, media.MediaType.Name);
+                        return this.File(mediaContent.Blob, mediaContent.Type);
                     }
                 }
             }

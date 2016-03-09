@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Organisation.cd" />
+    <None Include="Media.cd" />
     <None Include="Security.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

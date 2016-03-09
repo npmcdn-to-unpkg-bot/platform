@@ -21,15 +21,15 @@
 
 namespace Domain
 {
-    using System;
     using System.IO;
+    using System.Reflection;
 
     using Allors;
     using Allors.Domain;
 
-    using global::System.Reflection;
-
     using NUnit.Framework;
+
+    using Should;
 
     [TestFixture]
     public class MediaTest : ContentTests
@@ -42,78 +42,54 @@ namespace Domain
         }
 
         [Test]
-        public void Hash()
+        public void BuilderWithBlob()
         {
             var binary = new byte[] { 0, 1, 2, 3 };
-            var octetStream = new MediaTypes(this.Session).OctetStream;
 
             this.Session.Commit();
 
-            var media = new MediaBuilder(this.Session).WithContent(binary).WithMediaType(octetStream).Build();
+            var media = new MediaBuilder(this.Session).WithBlob(binary).Build();
 
             this.Session.Derive(true);
 
             Assert.IsTrue(media.ExistMediaContent);
-            Assert.IsTrue(media.MediaContent.ExistHash);
+            media.MediaContent.Type.ShouldEqual("application/octet-stream");
         }
 
         [Test]
-        public void HashedContent()
-        {
-            var binary = new byte[] { 0, 1, 2, 3 };
-            var sameBinary = new byte[] { 0, 1, 2, 3 };
-            var differentBinary = new byte[] { 1, 0, 2, 3 };
-
-            var octetStream = new MediaTypes(this.Session).OctetStream;
-            var media1 = new MediaBuilder(this.Session).WithContent(binary).WithMediaType(octetStream).Build();
-            var media2 = new MediaBuilder(this.Session).WithContent(sameBinary).WithMediaType(octetStream).Build();
-            var media3 = new MediaBuilder(this.Session).WithContent(differentBinary).WithMediaType(octetStream).Build();
-
-            this.Session.Derive(true);
-
-            Assert.AreEqual(media1.MediaContent.Hash, media2.MediaContent.Hash);
-            Assert.AreNotEqual(media1.MediaContent.Hash, media3.MediaContent.Hash);
-        }
-
-        [Test]
-        public void Infer()
+        public void BuilderWithPng()
         {
             var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Resources.logo.png");
 
             byte[] content;
             using (var output = new MemoryStream())
             {
-                resource.CopyTo(output);
+                resource?.CopyTo(output);
                 content = output.ToArray();
             }
 
-            var media = new MediaBuilder(this.Session).WithContent(content).Build();
-            media.MediaType = new MediaTypes(this.Session).Infer(media.Content);
+            var media = new MediaBuilder(this.Session).WithBlob(content).Build();
 
-            Assert.IsTrue(media.MediaType.IsImage);
-            Assert.IsTrue(media.MediaType.Equals(new MediaTypes(this.Session).Png));
+            Assert.IsTrue(media.ExistMediaContent);
+            media.MediaContent.Type.ShouldEqual("image/png");
         }
 
         [Test]
-        public void PdfWithJpegExtension()
+        public void BuilderWithPdfWithJpegExtension()
         {
-            var media = new MediaBuilder(this.Session).Build();
+            var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Resources.PdfAs.jpg");
 
-            var input = Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Resources.PdfAs.jpg");
-            if (input != null)
+            byte[] content;
+            using (var output = new MemoryStream())
             {
-                using (var output = new MemoryStream())
-                {
-                    input.CopyTo(output);
-                    media.Content = output.ToArray();
-
-                    media.MediaType = new MediaTypes(this.Session).Infer(media.Content);
-                }
+                resource?.CopyTo(output);
+                content = output.ToArray();
             }
 
-            this.Session.Derive(true);
+            var media = new MediaBuilder(this.Session).WithBlob(content).Build();
 
-            Assert.AreEqual("application/pdf", media.MediaType.Name);
-        }
+            Assert.IsTrue(media.ExistMediaContent);
+            media.MediaContent.Type.ShouldEqual("application/pdf");
+}
     }
 }

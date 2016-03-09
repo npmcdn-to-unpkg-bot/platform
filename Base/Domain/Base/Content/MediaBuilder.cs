@@ -24,16 +24,16 @@ namespace Allors.Domain
 
     public partial class MediaBuilder
     {
-        public byte[] MediaContentValue { get; set; }
+        public byte[] Blob { get; set; }
 
-        public MediaBuilder WithContent(byte[] value)
+        public MediaBuilder WithBlob(byte[] blob)
         {
-            if (this.MediaContentValue != null)
+            if (this.Blob != null)
             {
                 throw new ArgumentException("One multicplicity");
             }
 
-            this.MediaContentValue = value;
+            this.Blob = blob;
             return this;
         }
     }

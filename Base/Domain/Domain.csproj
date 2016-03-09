@@ -63,6 +63,7 @@
     <Compile Include="Base\Common\DeletableDelete.cs" />
     <Compile Include="Base\Common\TransitionalExtensions.cs" />
     <Compile Include="Base\Common\UniquelyIdentifiableExtension.cs" />
+    <Compile Include="Base\Content\MediaContent.cs" />
     <Compile Include="Base\Derivations\AsyncDerivations.cs" />
     <Compile Include="Base\Derivations\Logging\DerivationLogFormatter.cs" />
     <Compile Include="Base\Derivations\Logging\ListDerivationLog.cs" />
@@ -163,10 +164,8 @@
     <Compile Include="Base\Content\HtmlSanitize.cs" />
     <Compile Include="Base\Content\Media.cs" />
     <Compile Include="Base\Content\MediaBuilder.cs" />
-    <Compile Include="Base\Content\MediaContent.cs" />
     <Compile Include="Base\Content\Medias.cs" />
-    <Compile Include="Base\Content\MediaType.cs" />
-    <Compile Include="Base\Content\MediaTypes.cs" />
+    <Compile Include="Base\Content\MediaContents.cs" />
     <Compile Include="Base\Config.cs" />
     <Compile Include="Base\Data\CsvExport.cs" />
     <Compile Include="Base\Data\CsvExportColumn.cs" />
@@ -254,7 +253,6 @@
     <Compile Include="Generated\MailboxAddress.g.cs" />
     <Compile Include="Generated\Media.g.cs" />
     <Compile Include="Generated\MediaContent.g.cs" />
-    <Compile Include="Generated\MediaType.g.cs" />
     <Compile Include="Generated\Object.g.cs" />
     <Compile Include="Generated\ObjectOnBuild.g.cs" />
     <Compile Include="Generated\ObjectOnDerive.g.cs" />

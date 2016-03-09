@@ -17,29 +17,25 @@ namespace Allors.Repository.Domain
         #endregion
 
         #region Allors
-        [Id("49481792-06f0-49a1-b32f-28d265815a24")]
-        [AssociationId("7ca17a9e-0b68-445f-8080-84b08ca0eb2d")]
-        [RoleId("f1008c56-b375-4aa8-ac7e-c1f7ef9b2080")]
-        [Multiplicity(Multiplicity.ManyToOne)]
-        [Indexed]
-        [Required]
+        [Id("B74C2159-739A-4F1C-ADA7-C2DCC3CDCF83")]
+        [AssociationId("96B21673-F124-4C30-A2F0-DF56D29E03F5")]
+        [RoleId("DE0FE224-C40D-469C-BDC5-849A7412EFEC")]
         #endregion
-        public MediaType MediaType { get; set; }
+        [Indexed]
+        [Derived]
+        public Guid Revision { get; set; }
 
         #region Allors
         [Id("67082a51-1502-490b-b8db-537799e550bd")]
         [AssociationId("e8537dcf-1bd7-46c4-a37c-077bee6a78a1")]
         [RoleId("02fe1ce8-c019-4a40-bd6f-b38d2f47a288")]
-        [Multiplicity(Multiplicity.ManyToOne)]
-        [Derived]
+        #endregion
+        [Multiplicity(Multiplicity.OneToOne)]
         [Indexed]
         [Required]
-        #endregion
         public MediaContent MediaContent { get; set; }
-        
+
         #region inherited methods
-
-
         public void OnBuild(){}
 
         public void OnPostBuild(){}
@@ -49,10 +45,7 @@ namespace Allors.Repository.Domain
         public void OnDerive(){}
 
         public void OnPostDerive(){}
-
-
-
-
+        
         public void Delete(){}
         #endregion
     }

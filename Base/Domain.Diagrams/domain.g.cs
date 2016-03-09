@@ -354,23 +354,16 @@ namespace Allors.Domain
 		}
 		public interface Media  : UniquelyIdentifiable, AccessControlledObject, Deletable 
 		{
-						MediaType MediaType {set;}
+						global::System.Guid? Revision {set;}
 
 						MediaContent MediaContent {set;}
 
 		}
-		public interface MediaContent  : Deletable 
+		public interface MediaContent  : AccessControlledObject 
 		{
-						global::System.Byte[] Value {set;}
+						global::System.String Type {set;}
 
-						global::System.String Hash {set;}
-
-		}
-		public interface MediaType  : AccessControlledObject 
-		{
-						global::System.String DefaultFileExtension {set;}
-
-						global::System.String Name {set;}
+						global::System.Byte[] Blob {set;}
 
 		}
 		public interface Permission  : Deletable, AccessControlledObject 
