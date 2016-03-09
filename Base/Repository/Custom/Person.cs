@@ -68,8 +68,8 @@ namespace Allors.Repository.Domain
         [Id("54f11f06-8d3f-4d58-bcdc-d40e6820fdad")]
         [AssociationId("03a7ffcc-4291-4ae1-a2ab-69f7257fbf04")]
         [RoleId("abd2a4b3-4b17-48d4-b465-0ffcb5a2664d")]
-        [Group("Workspace")]
         #endregion
+        [Group("Workspace")]
         public bool IsStudent { get; set; }
         
         #region Allors

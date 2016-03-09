@@ -45,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="EditOrganisation.cd" />
     <None Include="Person.cd" />
     <None Include="Main.cd" />
     <None Include="Overview.cd" />

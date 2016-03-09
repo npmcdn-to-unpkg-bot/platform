@@ -13,7 +13,7 @@
         objectTypeByName: { [name: string]: Meta.ObjectType; };
 
         diff(data: Data.PullResponse): Data.SyncRequest;
-        load(data: Data.SyncResponse): void;
+        sync(data: Data.SyncResponse): void;
         get(id: string): WorkspaceObject;
     }
 
@@ -74,9 +74,9 @@
             return requireLoadIds;
         }
 
-        load(loadResponse: Data.SyncResponse): void {
-            _.forEach(loadResponse.objects, objectData => {
-                var workspaceObject = new WorkspaceObject(this, loadResponse, objectData);
+        sync(syncResponse: Data.SyncResponse): void {
+            _.forEach(syncResponse.objects, objectData => {
+                var workspaceObject = new WorkspaceObject(this, syncResponse, objectData);
                 this.workspaceObjectById[workspaceObject.id] = workspaceObject;
             });
         }

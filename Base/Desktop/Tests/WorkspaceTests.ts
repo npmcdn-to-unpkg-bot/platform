@@ -4,7 +4,7 @@ namespace Tests {
 
         load() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var martien = workspace.get("3");
 
@@ -21,7 +21,7 @@ namespace Tests {
         checkVersions() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.userSecurityHash = "#";
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var required =
                 {
@@ -41,7 +41,7 @@ namespace Tests {
         checkVersionsUserSecurityHash() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.userSecurityHash = "abc";
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var required =
                 {

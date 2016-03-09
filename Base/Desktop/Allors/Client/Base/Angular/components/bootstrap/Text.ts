@@ -5,7 +5,7 @@
         static bootstrap = 
 `
 <b-group f="$ctrl">
-    <b-label f="$ctrl"/> 
+    <b-label f="$ctrl"/>
     <input placeholder="{{$ctrl.placeholder}}" class="form-control"
            ng-model="$ctrl.role"
            ng-disabled="!$ctrl.canWrite"

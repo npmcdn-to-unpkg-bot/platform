@@ -5,7 +5,7 @@ namespace Tests {
     export class SessionTests extends tsUnit.TestClass {
         unitGet() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -36,7 +36,7 @@ namespace Tests {
 
         unitSet() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session1 = new Allors.Session(workspace);
             var martien1 = session1.get("3") as Person;
@@ -58,7 +58,7 @@ namespace Tests {
 
         unitSave() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
             var koen = session.get("1") as Person;
@@ -70,7 +70,7 @@ namespace Tests {
             martien.FirstName = "Martinus";
             martien.MiddleName = "X";
 
-            var save = session.saveRequest();
+            var save = session.pushRequest();
 
             this.areIdentical(2, save.objects.length);
 
@@ -107,7 +107,7 @@ namespace Tests {
 
         oneGet() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -130,7 +130,7 @@ namespace Tests {
 
         oneSet() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session1 = new Allors.Session(workspace);
 
@@ -175,7 +175,7 @@ namespace Tests {
 
         oneSave() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -192,7 +192,7 @@ namespace Tests {
 
             acme.Manager = patrick;
 
-            var save = session.saveRequest();
+            var save = session.pushRequest();
 
             this.areIdentical(2, save.objects.length);
 
@@ -225,7 +225,7 @@ namespace Tests {
 
         manyGet() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -248,7 +248,7 @@ namespace Tests {
 
         manySet() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session1 = new Allors.Session(workspace);
 
@@ -284,7 +284,7 @@ namespace Tests {
 
         manySaveWithExistingObjects() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -300,7 +300,7 @@ namespace Tests {
             ocme.Employees = [martien, patrick];
             icme.Employees = [koen, patrick, martien];
 
-            var save = session.saveRequest();
+            var save = session.pushRequest();
 
             this.areIdentical(0, save.newObjects.length);
             this.areIdentical(3, save.objects.length);
@@ -341,7 +341,7 @@ namespace Tests {
 
         manySaveWithNewObjects() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -361,7 +361,7 @@ namespace Tests {
             acme3.Manager = martien;
             acme3.AddEmployee(martien);
 
-            var save = session.saveRequest();
+            var save = session.pushRequest();
 
             this.areIdentical(3, save.newObjects.length);
             this.areIdentical(0, save.objects.length);
@@ -416,7 +416,7 @@ namespace Tests {
 
         syncWithNewObjects() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -449,7 +449,7 @@ namespace Tests {
         
         onsaved() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 
@@ -457,7 +457,7 @@ namespace Tests {
                 hasErrors: false
             }
 
-            session.saveResponse(saveResponse);
+            session.pushResponse(saveResponse);
 
             var mathijs = session.create("Person") as Person;
             mathijs.FirstName = "Mathijs";
@@ -475,7 +475,7 @@ namespace Tests {
                 ]
             }
 
-            session.saveResponse(saveResponse);
+            session.pushResponse(saveResponse);
 
             this.areIdentical(undefined, mathijs.newId);
             this.areIdentical("10000", mathijs.id);
@@ -498,7 +498,7 @@ namespace Tests {
 
         methodCanExecute() {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
-            workspace.load(Fixture.loadData);
+            workspace.sync(Fixture.loadData);
 
             var session = new Allors.Session(workspace);
 

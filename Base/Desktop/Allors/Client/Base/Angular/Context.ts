@@ -29,7 +29,7 @@
                             if (requireLoadIds.objects.length > 0) {
                                 this.database.sync(requireLoadIds)
                                     .then((loadResponse: Data.SyncResponse) => {
-                                        this.workspace.load(loadResponse);
+                                        this.workspace.sync(loadResponse);
                                         this.update(response);
                                         this.session.reset();
                                         resolve();
@@ -66,7 +66,7 @@
                                 this.database.sync(requireLoadIds)
                                     .then(u => {
                                         var loadResponse = u as Data.SyncResponse;
-                                        this.workspace.load(loadResponse);
+                                        this.workspace.sync(loadResponse);
                                         const result = new Result(this.session, response);
                                         resolve(result);
                                     })
@@ -88,7 +88,7 @@
             return this.$q((resolve, reject) => {
 
                 try {
-                    const saveRequest = this.session.saveRequest();
+                    const saveRequest = this.session.pushRequest();
                     this.database.push(saveRequest)
                         .then((saveResponse: Data.PushResponse) => {
                             resolve(saveResponse);

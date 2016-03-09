@@ -13,6 +13,10 @@
         cancel(): void {
             this.$state.go("relation.people");
         }
+
+        save(): ng.IPromise<any> {
+            return super.save().then(() => this.$state.go("relation.people"));
+        }
         
         protected refresh(): ng.IPromise<any> {
             return this.load({

@@ -6,8 +6,8 @@
 
         create(objectTypeName: string): ISessionObject;
 
-        saveRequest(): Data.PushRequest;
-        saveResponse(saveResponse: Data.PushResponse): void;
+        pushRequest(): Data.PushRequest;
+        pushResponse(saveResponse: Data.PushResponse): void;
         reset(): void;
     }
 
@@ -84,7 +84,7 @@
             });
         }
 
-        saveRequest(): Data.PushRequest {
+        pushRequest(): Data.PushRequest {
             var data = new Data.PushRequest();
             data.newObjects = [];
             data.objects = [];
@@ -108,9 +108,9 @@
             return data;
         }
         
-        saveResponse(saveResponse: Data.PushResponse): void {
-            if (saveResponse.newObjects) {
-                _.forEach(saveResponse.newObjects, saveResponseNewObject => {
+        pushResponse(pushResponse: Data.PushResponse): void {
+            if (pushResponse.newObjects) {
+                _.forEach(pushResponse.newObjects, saveResponseNewObject => {
                     var newId = saveResponseNewObject.ni;
                     var id = saveResponseNewObject.i;
 
@@ -132,7 +132,7 @@
                     delete (this.newSessionObjectById[newId]);
                     delete(newSessionObject.newId);
 
-                    this.workspace.load(loadResponse);
+                    this.workspace.sync(loadResponse);
                     var workspaceObject = this.workspace.get(id);
                     newSessionObject.workspaceObject = workspaceObject;
 
