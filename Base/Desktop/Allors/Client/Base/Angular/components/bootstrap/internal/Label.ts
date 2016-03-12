@@ -15,7 +15,7 @@
         }
     }
 
-    class LabelController {
+    class LabelComponent {
         field: Bootstrap.Field;
 
         static $inject = ["$log"];
@@ -26,7 +26,7 @@
     angular
         .module("allors")
         .component("bLabel", {
-            controller: LabelController,
+            controller: LabelComponent,
             templateUrl: ["$element", "$attrs", () => LabelTemplate.name],
             bindings: {
                 field: "<f"

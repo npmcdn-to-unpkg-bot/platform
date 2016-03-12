@@ -2,6 +2,7 @@
     class EditOrganisationController extends Page {
 
         organisation: Organisation;
+        people: Person[];
 
         static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
         constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
@@ -10,7 +11,7 @@
             this.refresh();
         }
 
-        personTypeAhead(criteria: string) {
+        personTypeAhead(criteria: string): angular.IPromise<any> {
             return this.queryResults("PersonTypeAhead", {criteria: criteria});
         }
 
@@ -24,6 +25,7 @@
                 })
                 .then(() => {
                     this.organisation = this.objects["organisation"] as Organisation;
+                    this.people = this.collections["people"] as Person[];
                 });
         }
     }

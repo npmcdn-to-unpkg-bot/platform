@@ -12,7 +12,7 @@
         }
     }
 
-    class GroupController {
+    class GroupComponent {
         field: Bootstrap.Field;
 
         static $inject = ["$log"];
@@ -23,7 +23,7 @@
     angular
         .module("allors")
         .component("bGroup", {
-            controller: GroupController,
+            controller: GroupComponent,
             transclude: true,
             templateUrl: ["$element", "$attrs", () => GroupTemplate.name],
             bindings: {

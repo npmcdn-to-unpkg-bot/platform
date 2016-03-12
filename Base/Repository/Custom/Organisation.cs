@@ -147,6 +147,26 @@ namespace Allors.Repository.Domain
         #endregion
         public string Size { get; set; }
         
+        #region Allors
+        [Id("D3DB6E8C-9C10-47BA-92B1-45F5DDFFA5CC")]
+        [AssociationId("4955AC7F-F840-4F24-B44C-C2D3937D2D44")]
+        [RoleId("9033AE73-83F6-4529-9F81-84FD9D35D597")]
+        #endregion
+        [Group("Workspace")]
+        [Multiplicity(Multiplicity.ManyToOne)]
+        [Indexed]
+        public Person CycleOne { get; set; }
+
+        #region Allors
+        [Id("C6CCA1C5-5799-4517-87F5-095DA0EEEC64")]
+        [AssociationId("6ABCD4E2-44A7-46B4-BD98-D052F38B7C50")]
+        [RoleId("E01ACE3C-2314-477C-8997-14266D9711E0")]
+        #endregion
+        [Group("Workspace")]
+        [Multiplicity(Multiplicity.ManyToMany)]
+        [Indexed]
+        public Person[] CycleMany { get; set; }
+
         #region inherited methods
         public void OnBuild(){}
 

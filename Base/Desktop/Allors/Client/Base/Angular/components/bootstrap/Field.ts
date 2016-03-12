@@ -8,16 +8,16 @@
         private o;
         private r;
         private d;
-        private l: (any) => void;
+        private l: (any) => angular.IPromise<any>;
 
         constructor(public $log: angular.ILogService, public $translate: angular.translate.ITranslateService) {
         }
 
-        get form(): Bootstrap.FormController {
+        get form(): Bootstrap.FormComponent {
             return this.f;
         }
 
-        set form(value: Bootstrap.FormController) {
+        set form(value: Bootstrap.FormComponent) {
             this.f = value;
             this.onBind();
         }
@@ -31,29 +31,29 @@
             this.onBind();
         }
 
-        get roleTypeName(): string {
+        get relation(): string {
             return this.r;
         }
 
-        set roleTypeName(value: string) {
+        set relation(value: string) {
             this.r = value;
             this.onBind();
         }
 
-        get displayName(): string {
+        get display(): string {
             return this.d;
         }
 
-        set displayName(value: string) {
+        set display(value: string) {
             this.d = value;
             this.onBind();
         }
 
-        get boundLookup(): (any) => void {
+        get lookup(): (any) => angular.IPromise<any> {
             return this.l;
         }
 
-        set boundLookup(value: (any) => void) {
+        set lookup(value: (any) => angular.IPromise<any>) {
             this.l = value;
             this.onBind();
         }
@@ -63,13 +63,13 @@
         }
 
         get roleType(): Meta.RoleType {
-            return this.object && this.object.objectType.roleTypeByName[this.roleTypeName];
+            return this.object && this.object.objectType.roleTypeByName[this.relation];
         }
 
         get canRead(): boolean {
             let canRead = false;
             if (this.object) {
-                canRead = this.object.canRead(this.roleTypeName);
+                canRead = this.object.canRead(this.relation);
             }
 
             return canRead;
@@ -78,22 +78,22 @@
         get canWrite(): boolean {
             let canWrite = false;
             if (this.object) {
-                canWrite = this.object.canWrite(this.roleTypeName);
+                canWrite = this.object.canWrite(this.relation);
             }
 
             return canWrite;
         }
         
         get role(): any {
-            return this.object && this.object[this.roleTypeName];
+            return this.object && this.object[this.relation];
         }
 
         set role(value: any) {
-            this.object[this.roleTypeName] = value;
+            this.object[this.relation] = value;
         }
 
-        get display(): any {
-            return this.role && this.role[this.displayName];
+        get displayValue(): any {
+            return this.role && this.role[this.display];
         }
 
         onBind() {
@@ -103,7 +103,7 @@
 
                     const key1 = `meta_${this.objectType.name}_${this.roleType.name}_Label`;
                     const key2 = `meta_${this.roleType.objectType}_${this.roleType.name}_Label`;
-                    this.translate(key1, key2, (value) => this.label = value, () => this.label = this.roleTypeName);
+                    this.translate(key1, key2, (value) => this.label = value, () => this.label = this.relation);
                 }
 
                 if (this.placeholder === undefined) {

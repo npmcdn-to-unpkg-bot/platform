@@ -30,15 +30,7 @@ namespace Allors.Repository.Domain
         [Group("Workspace")]
         #endregion
         public DateTime BirthDate { get; set; }
-        
-        #region Allors
-        [Id("6cc34453-ac7a-4004-8380-033f92324e99")]
-        [AssociationId("5a99b822-8c51-4cf6-82e9-ee4ca311216a")]
-        [RoleId("cc14daec-604d-4ca6-9908-a57c10ba1403")]
-        [Size(-1)]
-        #endregion
-        public string CKEditorText { get; set; }
-        
+   
         #region Allors
         [Id("688ebeb9-8a53-4e8d-b284-3faa0a01ef7c")]
         [AssociationId("8a181cec-7bae-4248-8e24-8abc7e01eea2")]
@@ -132,7 +124,27 @@ namespace Allors.Repository.Domain
         [Group("Workspace")]
         #endregion
         public decimal Weight { get; set; }
-        
+
+        #region Allors
+        [Id("5661A98D-A935-4325-9B28-9D86175B1BD6")]
+        [AssociationId("DEC66A7B-56F5-4010-A2E7-37E25124BC77")]
+        [RoleId("79FFEED6-E06A-42F4-B12F-D7F7C98B6499")]
+        #endregion
+        [Group("Workspace")]
+        [Multiplicity(Multiplicity.ManyToOne)]
+        [Indexed]
+        public Organisation CycleOne { get; set; }
+
+        #region Allors
+        [Id("2EB2AF4F-2BF4-475F-BB41-D740197F168E")]
+        [AssociationId("FAA1E59E-29EE-4E10-BFE1-94BFBCF238EA")]
+        [RoleId("7CEEA115-23C8-46E2-BA76-1FDB1FA85381")]
+        #endregion
+        [Group("Workspace")]
+        [Multiplicity(Multiplicity.ManyToMany)]
+        [Indexed]
+        public Organisation[] CycleMany { get; set; }
+
         #region inherited methods
         public void Delete(){}
         #endregion

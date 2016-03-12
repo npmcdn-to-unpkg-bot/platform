@@ -30,11 +30,13 @@
             </div>
             <div class="panel-body">
                 <!-- ReSharper disable Html.TagNotResolved -->
-                <b-form orientation="horizontal">
-                    <b-text o="vm.organisation" r="Name"></b-text>
-                    <b-select-one o="vm.organisation" r="Owner" d="DisplayName" l="vm.personTypeAhead(criteria)"></b-select-one>
-                    <b-select-many o="vm.organisation" r="Employees" d="DisplayName" l="vm.personTypeAhead(criteria)"></b-select-many>
-               </b-form>
+                <b-form horizontal="true">
+                    <b-text object="vm.organisation" relation="Name"></b-text>
+                    <b-select object="vm.organisation" relation="Owner" display="FirstName" lookup="vm.personTypeAhead(criteria)"></b-select>
+                    <b-select object="vm.organisation" relation="Employees" display="FirstName" lookup="vm.personTypeAhead(criteria)"></b-select>
+                    <b-select object="vm.organisation" relation="CycleOne" display="FirstName" options="vm.people"></b-select>
+                    <b-select object="vm.organisation" relation="CycleMany" display="FirstName" options="vm.people"></b-select>
+                </b-form>
             </div>
 
             <div class="panel-footer clearfix">

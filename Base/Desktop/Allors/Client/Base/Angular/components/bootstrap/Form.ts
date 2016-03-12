@@ -1,18 +1,19 @@
 ﻿namespace Allors.Bootstrap {
     export class FormTemplate {
 
+        static name = "allors/bootstrap/form";
+
         static form =
-`<form>
-{{$ctrl.horizontal}}
+`<form ng-class="$ctrl.horizontal ? 'form-horizontal' : ''">
 <ng-transclude />
 </form>`;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put("allors/bootstrap/form", FormTemplate.form);
+            templateCache.put(FormTemplate.name, FormTemplate.form);
         }
     }
 
-    export class FormController  {
+    export class FormComponent  {
 
         horizontal: boolean;
 
@@ -24,9 +25,9 @@
     angular
         .module("allors")
         .component("bForm", {
-            controller: FormController,
+            controller: FormComponent,
+            templateUrl: FormTemplate.name,
             transclude: true,
-            templateUrl: ["$element", "$attrs", ($element: angular.IAugmentedJQuery, $attrs: angular.IAttributes) => "allors/bootstrap/form"],
             bindings: {
                 horizontal: "<"
             }

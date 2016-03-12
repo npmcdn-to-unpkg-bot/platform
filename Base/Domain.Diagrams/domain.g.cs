@@ -389,8 +389,6 @@ namespace Allors.Domain
 
 						global::System.DateTime? BirthDate {set;}
 
-						global::System.String CKEditorText {set;}
-
 						global::System.String FullName {set;}
 
 						Gender Gender {set;}
@@ -412,6 +410,10 @@ namespace Allors.Domain
 						global::System.String TinyMCEText {set;}
 
 						global::System.Decimal? Weight {set;}
+
+						Organisation CycleOne {set;}
+
+						Organisation CycleMany {set;}
 
 		}
 		public interface Role  : AccessControlledObject, UniquelyIdentifiable 
@@ -699,6 +701,10 @@ namespace Allors.Domain
 						Person Shareholders {set;}
 
 						global::System.String Size {set;}
+
+						Person CycleOne {set;}
+
+						Person CycleMany {set;}
 
 		}
 		public interface Place  : Object 

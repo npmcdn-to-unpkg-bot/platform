@@ -290,19 +290,19 @@
     <Content Include="Scripts\angular-translate-loader-url.min.js" />
     <Content Include="Scripts\angular-translate.js" />
     <Content Include="Scripts\angular-translate.min.js" />
+    <Content Include="Scripts\angular-ui-router.js" />
+    <Content Include="Scripts\angular-ui-router.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\FileAPI.flash.swf" />
-    <Content Include="Scripts\FileAPI.js" />
-    <Content Include="Scripts\FileAPI.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
     <Content Include="Scripts\jsnlog.js" />
     <Content Include="Scripts\jsnlog.min.js" />
-    <Content Include="Scripts\ng-file-upload-all.js" />
-    <Content Include="Scripts\ng-file-upload-all.min.js" />
-    <Content Include="Scripts\ng-file-upload-shim.js" />
-    <Content Include="Scripts\ng-file-upload-shim.min.js" />
-    <Content Include="Scripts\ng-file-upload.js" />
-    <Content Include="Scripts\ng-file-upload.min.js" />
+    <Content Include="Scripts\jsnlog.js.map" />
     <Content Include="Scripts\select.js" />
     <Content Include="Scripts\select.min.js" />
     <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
@@ -453,17 +453,16 @@
     <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.svg" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.json" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.json" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
-    <Content Include="Scripts\tinymce\langs\readme.md" />
-    <Content Include="Scripts\jsnlog.js.map" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.js" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\tinymce\tinymce.js" />
+    <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -486,12 +485,6 @@
     <Content Include="Scripts\angular-toastr.tpls.min.js" />
     <Content Include="Scripts\angular-toggle-switch.js" />
     <Content Include="Scripts\angular-toggle-switch.min.js" />
-    <Content Include="Scripts\angular-ui-router.js" />
-    <Content Include="Scripts\angular-ui-router.min.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
@@ -505,29 +498,26 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
-    <Content Include="Scripts\jquery-2.2.0.js" />
-    <Content Include="Scripts\jquery-2.2.0.min.js" />
     <Content Include="Scripts\loading-bar.js" />
     <Content Include="Scripts\loading-bar.min.js" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\skin.ie7.min.css" />
-    <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
-    <Content Include="Scripts\tinymce\themes\modern\theme.js" />
-    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
-    <Content Include="Scripts\tinymce\tinymce.js" />
-    <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Settings.StyleCop" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.json" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.json" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
+    <Content Include="Scripts\tinymce\langs\readme.md" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Form.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Group.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Label.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectMany.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectOne.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Select.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Text.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
@@ -685,9 +675,6 @@
       <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
       <Name>Resources</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jquery-2.2.0.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

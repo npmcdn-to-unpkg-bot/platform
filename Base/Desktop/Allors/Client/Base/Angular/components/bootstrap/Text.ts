@@ -34,8 +34,8 @@
                 form: "^bForm"
             },
             bindings: {
-                object: "<o",
-                roleTypeName: "@r"
+                object: "<",
+                relation: "@"
             }
         } as any);
 }

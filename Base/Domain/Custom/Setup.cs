@@ -38,6 +38,37 @@ namespace Allors
 
         private void CustomOnPostSetup()
         {
+            new OrganisationBuilder(this.session).WithName("Acme").Build();
+
+            new PersonBuilder(this.session).WithFirstName("John").WithLastName("Doe").WithUserName("john@doe.org").Build();
+            new PersonBuilder(this.session).WithFirstName("Jane").WithLastName("Doe").WithUserName("jane@doe.org").Build();
+
+            // Create cycles between Organisation and Person
+            var cycleOrganisation1 = new OrganisationBuilder(this.session).WithName("Organisatin Cycle One").Build();
+            var cycleOrganisation2 = new OrganisationBuilder(this.session).WithName("Organisatin Cycle Two").Build();
+
+            var cyclePerson1 = new PersonBuilder(this.session).WithFirstName("Person Cycle").WithLastName("One").WithUserName("cycle@one.org").Build();
+            var cyclePerson2 = new PersonBuilder(this.session).WithFirstName("Person Cycle").WithLastName("Two").WithUserName("cycle@one.org").Build();
+
+            // One
+            cycleOrganisation1.CycleOne = cyclePerson1;
+            cyclePerson1.CycleOne = cycleOrganisation1;
+
+            cycleOrganisation2.CycleOne = cyclePerson2;
+            cyclePerson2.CycleOne = cycleOrganisation2;
+
+            // Many
+            cycleOrganisation1.AddCycleMany(cyclePerson1);
+            cycleOrganisation1.AddCycleMany(cyclePerson2);
+
+            cycleOrganisation1.AddCycleMany(cyclePerson1);
+            cycleOrganisation1.AddCycleMany(cyclePerson2);
+
+            cyclePerson1.AddCycleMany(cycleOrganisation1);
+            cyclePerson1.AddCycleMany(cycleOrganisation2);
+
+            cyclePerson2.AddCycleMany(cycleOrganisation1);
+            cyclePerson2.AddCycleMany(cycleOrganisation2);
         }
 
         public void ApplyDemo()

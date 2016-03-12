@@ -45,6 +45,12 @@ namespace Allors.Domain
 
 									global::System.Decimal? Weight {set;}
 
+
+									Organisation CycleOne {set;}
+
+
+									Organisation CycleMany {set;}
+
 					}
 					public interface C1 : I1 
 					{
@@ -78,6 +84,12 @@ namespace Allors.Domain
 
 
 									Person Shareholders {set;}
+
+
+									Person CycleOne {set;}
+
+
+									Person CycleMany {set;}
 
 					}
 

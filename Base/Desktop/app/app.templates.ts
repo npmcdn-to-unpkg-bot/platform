@@ -9,8 +9,7 @@
         Allors.Bootstrap.LabelTemplate.register($templateCache);
 
         Allors.Bootstrap.TextTemplate.register($templateCache);
-        Allors.Bootstrap.SelectOneTemplate.register($templateCache);
-        Allors.Bootstrap.SelectManyTemplate.register($templateCache);
+        Allors.Bootstrap.SelectTemplate.register($templateCache);
     }
 
     angular
