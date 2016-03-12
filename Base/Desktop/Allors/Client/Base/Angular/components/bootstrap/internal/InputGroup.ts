@@ -1,18 +1,20 @@
 ﻿namespace Allors.Bootstrap {
-    export class GroupTemplate {
-        static name = "allors/bootstrap/group";
+    export class InputGroupTemplate {
+        static name = "allors/bootstrap/input-group";
 
         static bootstrap = 
-`<div class="form-group" ng-if="$ctrl.field.canRead">
+`
+<div ng-class="$ctrl.form.horizontal ? 'col-sm-6' : ''">
 <ng-transclude/>
-</div>`;
+</div>
+`;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(GroupTemplate.name, GroupTemplate.bootstrap);
+            templateCache.put(InputGroupTemplate.name, InputGroupTemplate.bootstrap);
         }
     }
 
-    class GroupComponent {
+    class InputGroupComponent {
         field: Bootstrap.Field;
 
         static $inject = ["$log"];
@@ -22,10 +24,10 @@
 
     angular
         .module("allors")
-        .component("bGroup", {
-            controller: GroupComponent,
+        .component("bInputGroup", {
+            controller: InputGroupComponent,
             transclude: true,
-            templateUrl: GroupTemplate.name,
+            templateUrl: InputGroupTemplate.name,
             require: {
                 form: "^bForm"
             },

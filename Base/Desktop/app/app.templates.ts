@@ -7,6 +7,7 @@
 
         Allors.Bootstrap.GroupTemplate.register($templateCache);
         Allors.Bootstrap.LabelTemplate.register($templateCache);
+        Allors.Bootstrap.InputGroupTemplate.register($templateCache);
 
         Allors.Bootstrap.TextTemplate.register($templateCache);
         Allors.Bootstrap.SelectTemplate.register($templateCache);

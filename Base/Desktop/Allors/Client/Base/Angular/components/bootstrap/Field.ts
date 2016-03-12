@@ -3,13 +3,13 @@
         label;
         placeholder;
         help;
-        
+      
         private f;
         private o;
         private r;
         private d;
         private l: (any) => angular.IPromise<any>;
-
+        
         constructor(public $log: angular.ILogService, public $translate: angular.translate.ITranslateService) {
         }
 

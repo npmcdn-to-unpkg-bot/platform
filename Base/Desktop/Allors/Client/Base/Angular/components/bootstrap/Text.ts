@@ -4,12 +4,14 @@
 
         static bootstrap = 
 `
-<b-group f="$ctrl">
-    <b-label f="$ctrl"/>
-    <input placeholder="{{$ctrl.placeholder}}" class="form-control"
-           ng-model="$ctrl.role"
-           ng-disabled="!$ctrl.canWrite"
-           ng-required="$ctrl.roleType.isRequired">
+<b-group field="$ctrl">
+    <b-label field="$ctrl"/>
+    <b-input-group field="$ctrl">
+        <input placeholder="{{$ctrl.placeholder}}" class="form-control"
+               ng-model="$ctrl.role"
+               ng-disabled="!$ctrl.canWrite"
+               ng-required="$ctrl.roleType.isRequired">
+    </b-input-group>
 </b-group>
 `;
 

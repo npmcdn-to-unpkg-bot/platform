@@ -3,12 +3,14 @@
         static name = "allors/bootstrap/label";
 
         static bootstrap = 
-`<label>{{$ctrl.field.label}}
+`
+<label ng-class="$ctrl.form.horizontal ? 'col-sm-3' : '' ">{{$ctrl.field.label}}
     <span ng-if="$ctrl.field.help" class="fa fa-question-circle"
           uib-tooltip="{{$ctrl.field.help}}"
           tooltip-placement="right">
     </span>
-</label>`;
+</label>
+`;
 
         static register(templateCache: angular.ITemplateCacheService) {
             templateCache.put(LabelTemplate.name, LabelTemplate.bootstrap);
@@ -27,9 +29,12 @@
         .module("allors")
         .component("bLabel", {
             controller: LabelComponent,
-            templateUrl: ["$element", "$attrs", () => LabelTemplate.name],
+            templateUrl: LabelTemplate.name,
+            require: {
+                form: "^bForm"
+            },
             bindings: {
-                field: "<f"
+                field: "<"
             }
         } as any);
 }

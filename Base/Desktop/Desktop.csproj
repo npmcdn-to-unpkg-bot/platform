@@ -515,6 +515,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Form.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\InputGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Group.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Label.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Select.ts" />
