@@ -1,8 +1,16 @@
 namespace Allors.Domain
 {
-					public interface ObjectState 
+					public interface Enumeration : UniquelyIdentifiable 
+					{
+					}
+					public interface ObjectState : UniquelyIdentifiable 
 					{
 									global::System.String Name {set;}
+
+					}
+					public interface UniquelyIdentifiable 
+					{
+									global::System.Guid UniqueId {set;}
 
 					}
 					public interface User 
@@ -20,10 +28,18 @@ namespace Allors.Domain
 					}
 
 
-					public interface Media 
+					public interface Counter : UniquelyIdentifiable 
 					{
 					}
-					public interface Person : User 
+					public interface Media : UniquelyIdentifiable 
+					{
+									global::System.Guid? Revision {set;}
+
+
+									global::System.String InDataUri {set;}
+
+					}
+					public interface Person : User, UniquelyIdentifiable 
 					{
 									global::System.String FirstName {set;}
 
@@ -52,6 +68,12 @@ namespace Allors.Domain
 									Organisation CycleMany {set;}
 
 					}
+					public interface Role : UniquelyIdentifiable 
+					{
+					}
+					public interface UserGroup : UniquelyIdentifiable 
+					{
+					}
 					public interface C1 : I1 
 					{
 									global::System.Byte[] C1AllorsBinary {set;}
@@ -66,10 +88,13 @@ namespace Allors.Domain
 									C1 C1C1One2One {set;}
 
 					}
+					public interface Gender : Enumeration 
+					{
+					}
 					public interface OrderObjectState : ObjectState 
 					{
 					}
-					public interface Organisation 
+					public interface Organisation : UniquelyIdentifiable 
 					{
 									Person Employees {set;}
 

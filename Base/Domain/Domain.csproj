@@ -163,7 +163,6 @@
     <Compile Include="Base\Content\HtmlRules.cs" />
     <Compile Include="Base\Content\HtmlSanitize.cs" />
     <Compile Include="Base\Content\Media.cs" />
-    <Compile Include="Base\Content\MediaBuilder.cs" />
     <Compile Include="Base\Content\Medias.cs" />
     <Compile Include="Base\Content\MediaContents.cs" />
     <Compile Include="Base\Config.cs" />

@@ -30,7 +30,7 @@ namespace Allors.Web.Media
 
     public abstract partial class BaseMediaController : Controller
     {
-        public virtual ActionResult Display(string id)
+        public virtual ActionResult Display(string id, string revision)
         {
             Guid uniqueId;
             if (Guid.TryParse(id, out uniqueId))
@@ -45,7 +45,7 @@ namespace Allors.Web.Media
                         this.Response.Cache.SetExpires(DateTime.Now.AddYears(1));
                         this.Response.Cache.SetValidUntilExpires(true); 
 
-                        return this.File(mediaContent.Blob, mediaContent.Type);
+                        return this.File(mediaContent.Data, mediaContent.Type);
                     }
                 }
             }

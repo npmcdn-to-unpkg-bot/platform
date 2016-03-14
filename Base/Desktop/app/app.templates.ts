@@ -11,6 +11,8 @@
 
         Allors.Bootstrap.TextTemplate.register($templateCache);
         Allors.Bootstrap.SelectTemplate.register($templateCache);
+        Allors.Bootstrap.ImageTemplate.register($templateCache);
+        Allors.Bootstrap.ImageModalTemplate.register($templateCache);
     }
 
     angular

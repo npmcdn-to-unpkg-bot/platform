@@ -5,7 +5,7 @@
 
         static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
         constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
-            super("Settings", allors, $scope);
+            super("Profile", allors, $scope);
 
             this.refresh();
         }

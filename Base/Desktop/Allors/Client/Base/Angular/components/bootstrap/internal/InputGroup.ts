@@ -2,7 +2,7 @@
     export class InputGroupTemplate {
         static name = "allors/bootstrap/input-group";
 
-        static bootstrap = 
+        private static view = 
 `
 <div ng-class="$ctrl.form.horizontal ? 'col-sm-6' : ''">
 <ng-transclude/>
@@ -10,7 +10,7 @@
 `;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(InputGroupTemplate.name, InputGroupTemplate.bootstrap);
+            templateCache.put(InputGroupTemplate.name, InputGroupTemplate.view);
         }
     }
 

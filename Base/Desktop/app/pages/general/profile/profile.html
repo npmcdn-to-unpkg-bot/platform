@@ -41,15 +41,16 @@
                             <div class="panel-body">
                                 <!-- ReSharper disable Html.TagNotResolved -->
                                 <b-form orientation="horizontal">
-                                    <b-text o="vm.person" r="FirstName"></b-text>
-                                    <b-text o="vm.person" r="LastName"></b-text>
+                                    <b-text object="vm.person" relation="FirstName"></b-text>
+                                    <b-text object="vm.person" relation="LastName"></b-text>
+                                    <b-image object="vm.person" relation="Photo" size="200"></b-image>
                                 </b-form>
                             </div>
 
                             <div class="panel-footer clearfix">
                                 <div class="pull-right">
-                                    <input id="cancel" type="button" class="btn btn-danger btn-sm" value="Cancel" ng-click="vm.cancel()" />
                                     <input ng-disabled="!vm.hasChanges" id="save" type="button" class="btn btn-primary btn-sm" value="Save changes" ng-click="vm.save()" />
+                                    <input id="cancel" type="button" class="btn btn-danger btn-sm" value="Cancel" ng-click="vm.cancel()" />
                                 </div>
                             </div>
                         </div>

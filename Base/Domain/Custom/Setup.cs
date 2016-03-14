@@ -39,10 +39,10 @@ namespace Allors
         private void CustomOnPostSetup()
         {
             new OrganisationBuilder(this.session).WithName("Acme").Build();
-
+            
             new PersonBuilder(this.session).WithFirstName("John").WithLastName("Doe").WithUserName("john@doe.org").Build();
             new PersonBuilder(this.session).WithFirstName("Jane").WithLastName("Doe").WithUserName("jane@doe.org").Build();
-
+            
             // Create cycles between Organisation and Person
             var cycleOrganisation1 = new OrganisationBuilder(this.session).WithName("Organisatin Cycle One").Build();
             var cycleOrganisation2 = new OrganisationBuilder(this.session).WithName("Organisatin Cycle Two").Build();

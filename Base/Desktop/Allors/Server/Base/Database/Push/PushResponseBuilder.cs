@@ -30,11 +30,13 @@
 
             if (this.pushRequest.NewObjects != null && this.pushRequest.NewObjects.Length > 0)
             {
-                objectByNewId = this.pushRequest.NewObjects.ToDictionary(x => x.NI, x =>
-                {
-                    var cls = this.session.Database.MetaPopulation.FindClassByName(x.T);
-                    return (IObject)Allors.ObjectBuilder.Build(this.session,cls);
-                });
+                objectByNewId = this.pushRequest.NewObjects.ToDictionary(
+                    x => x.NI, 
+                    x =>
+                        {
+                            var cls = this.session.Database.MetaPopulation.FindClassByName(x.T);
+                            return (IObject)Allors.ObjectBuilder.Build(this.session, cls);
+                        });
             }
 
             if (this.pushRequest.Objects != null && this.pushRequest.Objects.Length > 0)
@@ -215,6 +217,7 @@
             {
                 role = this.session.Instantiate(roleId);
             }
+
             return role;
         }
 

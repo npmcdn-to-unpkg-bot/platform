@@ -37,7 +37,7 @@
             }
         }
 
-        return <ng.IDirective>{
+        return {
             restrict: "E",
             templateUrl: "allors/client/base/angular/directives/toOne/toOne.html",
             link: link,
@@ -47,7 +47,7 @@
                 display: "@",
                 parentLookup: "&lookup"
             }
-        };
+        } as ng.IDirective;
     }
 
     angular

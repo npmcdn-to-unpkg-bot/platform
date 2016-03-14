@@ -3,13 +3,13 @@
 
         static name = "allors/bootstrap/form";
 
-        static form =
+        private static view =
 `<form ng-class="$ctrl.horizontal ? 'form-horizontal' : ''">
 <ng-transclude />
 </form>`;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(FormTemplate.name, FormTemplate.form);
+            templateCache.put(FormTemplate.name, FormTemplate.view);
         }
     }
 

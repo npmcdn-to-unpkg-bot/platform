@@ -2,13 +2,13 @@
     export class GroupTemplate {
         static name = "allors/bootstrap/group";
 
-        static bootstrap = 
+        private static view = 
 `<div class="form-group" ng-if="$ctrl.field.canRead">
 <ng-transclude/>
 </div>`;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(GroupTemplate.name, GroupTemplate.bootstrap);
+            templateCache.put(GroupTemplate.name, GroupTemplate.view);
         }
     }
 

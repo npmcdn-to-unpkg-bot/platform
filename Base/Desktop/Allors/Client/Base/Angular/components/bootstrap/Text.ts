@@ -2,7 +2,7 @@
     export class TextTemplate {
         static name = "allors/bootstrap/text";
 
-        static bootstrap = 
+        private static view = 
 `
 <b-group field="$ctrl">
     <b-label field="$ctrl"/>
@@ -16,7 +16,7 @@
 `;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(TextTemplate.name, TextTemplate.bootstrap);
+            templateCache.put(TextTemplate.name, TextTemplate.view);
         }
     }
 

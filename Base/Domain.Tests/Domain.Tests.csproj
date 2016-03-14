@@ -140,28 +140,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Resources\orientation\LICENSE" />
-    <None Include="Resources\orientation\README.markdown" />
-    <None Include="Resources\orientation\VERSION" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\orientation\Landscape_1.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Landscape_2.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Landscape_3.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Landscape_4.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Landscape_5.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Landscape_6.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Landscape_7.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Landscape_8.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_1.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_2.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_3.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_4.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_5.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_6.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_7.jpg" />
-    <EmbeddedResource Include="Resources\orientation\Portrait_8.jpg" />
     <EmbeddedResource Include="Resources\logo.png" />
     <EmbeddedResource Include="Resources\PdfAs.jpg" />
     <EmbeddedResource Include="Domain\Resources\PdfAs.jpg" />

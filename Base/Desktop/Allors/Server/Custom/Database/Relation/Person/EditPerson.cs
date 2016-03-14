@@ -10,6 +10,7 @@
         private static Tree tree;
 
         private static Tree Tree => tree ?? (tree = new Tree(M.Person)
+            .Add(M.Person.Photo)
             .Add(M.Person.CycleOne, new Tree(M.Organisation)
                 .Add(M.Organisation.CycleOne)
                 .Add(M.Organisation.CycleMany))

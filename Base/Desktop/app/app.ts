@@ -9,5 +9,5 @@
         "ui.router", "ui.bootstrap", "ui.tinymce", "ui.select",
 
         // Third Party
-        "pascalprecht.translate", "angular-loading-bar", "toastr", "toggle-switch"]);
+        "pascalprecht.translate", "angular-loading-bar", "toastr", "toggle-switch", "ngImgCrop"]);
 }

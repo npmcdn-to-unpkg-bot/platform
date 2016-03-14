@@ -21,6 +21,7 @@ namespace Allors.Repository.Domain
         [AssociationId("96B21673-F124-4C30-A2F0-DF56D29E03F5")]
         [RoleId("DE0FE224-C40D-469C-BDC5-849A7412EFEC")]
         #endregion
+        [Group("Workspace")]
         [Indexed]
         [Derived]
         public Guid Revision { get; set; }
@@ -34,6 +35,23 @@ namespace Allors.Repository.Domain
         [Indexed]
         [Required]
         public MediaContent MediaContent { get; set; }
+
+        #region Allors
+        [Id("18236718-1835-430C-A936-7EC461EEE2CF")]
+        [AssociationId("8A79E6C5-4BAE-468D-B57C-C7788D3E21E3")]
+        [RoleId("877ABDC8-8915-4640-8871-8CEF7EF69072")]
+        #endregion
+        [Size(-1)]
+        public byte[] InData { get; set; }
+
+        #region Allors
+        [Id("79B04065-F13B-43B3-B86E-F3ADBBAAF0C4")]
+        [AssociationId("287B7291-39F0-43E5-8770-811940E81BAE")]
+        [RoleId("CE17BFC7-5A4E-415A-9AE0-FAE429CEE69C")]
+        #endregion
+        [Group("Workspace")]
+        [Size(-1)]
+        public string InDataUri { get; set; }
 
         #region inherited methods
         public void OnBuild(){}

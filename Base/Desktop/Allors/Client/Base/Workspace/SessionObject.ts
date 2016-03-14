@@ -166,15 +166,15 @@
         }
 
         saveNew(): Data.PushRequestNewObject {
+            const data = new Data.PushRequestNewObject();
+            data.ni = this.newId;
+            data.t = this.objectType.name;
+
             if (this.changedRoleByRoleTypeName !== undefined) {
-                const data = new Data.PushRequestNewObject();
-                data.ni = this.newId;
-                data.t = this.objectType.name;
                 data.roles = this.saveRoles();
-                return data;
             }
 
-            return undefined;
+            return data;
         }
         
         reset() {

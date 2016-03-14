@@ -39,7 +39,7 @@
 
         public void AddMissingError(string id)
         {
-            this.AccessErrors.Add(id);
+            this.MissingErrors.Add(id);
         }
 
         public void AddDerivationErrors(IValidation validation)

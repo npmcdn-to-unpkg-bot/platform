@@ -22,14 +22,5 @@ namespace Allors.Domain
 {
     public partial class MediaContent
     {
-        public void BaseOnDerive(ObjectOnDerive method)
-        {
-            var derivation = method.Derivation;
-
-            if (this.ExistMediaWhereMediaContent)
-            {
-                derivation.AddDependency(this.MediaWhereMediaContent, this);
-            }
-        }
     }
 }

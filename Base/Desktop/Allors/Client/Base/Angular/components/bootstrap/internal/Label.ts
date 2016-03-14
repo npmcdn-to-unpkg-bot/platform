@@ -2,7 +2,7 @@
     export class LabelTemplate {
         static name = "allors/bootstrap/label";
 
-        static bootstrap = 
+        private static view = 
 `
 <label ng-class="$ctrl.form.horizontal ? 'col-sm-3' : '' ">{{$ctrl.field.label}}
     <span ng-if="$ctrl.field.help" class="fa fa-question-circle"
@@ -13,7 +13,7 @@
 `;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(LabelTemplate.name, LabelTemplate.bootstrap);
+            templateCache.put(LabelTemplate.name, LabelTemplate.view);
         }
     }
 

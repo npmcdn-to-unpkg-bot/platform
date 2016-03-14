@@ -21,35 +21,52 @@
 namespace Allors.Domain
 {
     using System;
+    using System.Text.RegularExpressions;
 
     public partial class Media
     {
-
-        public void BaseOnBuild(ObjectOnBuild method)
-        {
-            var builder = method.Builder;
-
-            var mediaBuilder = (MediaBuilder)builder;
-            if (mediaBuilder.Blob != null)
-            {
-                this.MediaContent = new MediaContentBuilder(this.Strategy.Session)
-                    .WithBlob(mediaBuilder.Blob)
-                    .WithType(MediaContents.Sniff(mediaBuilder.Blob))
-                    .Build();
-            }
-        }
-
         public void BaseOnDerive(ObjectOnDerive method)
         {
             this.Revision = Guid.NewGuid();
+
+            if (this.ExistInData || this.ExistInDataUri)
+            {
+                if (!this.ExistMediaContent)
+                {
+                    this.MediaContent = new MediaContentBuilder(this.Strategy.Session).Build();
+                }
+            }
+
+            if (this.ExistInData)
+            {
+                this.MediaContent.Data = this.InData;
+                this.MediaContent.Type = MediaContents.Sniff(this.InData);
+
+                this.RemoveInData();
+            }
+
+            if (this.ExistInDataUri)
+            {
+                var regex = new Regex(@"data:(?<mime>[\w/\-\.]+);(?<encoding>\w+),(?<data>.*)", RegexOptions.Compiled);
+
+                var match = regex.Match(this.InDataUri);
+
+                var mime = match.Groups["mime"].Value;
+                var encoding = match.Groups["encoding"].Value;
+                var data = match.Groups["data"].Value;
+
+                var binaryData = Convert.FromBase64String(data);
+
+                this.MediaContent.Data = binaryData;
+                this.MediaContent.Type = mime;
+
+                this.RemoveInDataUri();
+            }
         }
 
         public void BaseDelete(DeletableDelete method)
         {
-            if (this.ExistMediaContent)
-            {
-                this.MediaContent.Strategy.Delete();
-            }
+            this.MediaContent?.Delete();
         }
     }
 }

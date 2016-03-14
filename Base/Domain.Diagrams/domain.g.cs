@@ -358,12 +358,16 @@ namespace Allors.Domain
 
 						MediaContent MediaContent {set;}
 
+						global::System.Byte[] InData {set;}
+
+						global::System.String InDataUri {set;}
+
 		}
-		public interface MediaContent  : AccessControlledObject 
+		public interface MediaContent  : AccessControlledObject, Deletable 
 		{
 						global::System.String Type {set;}
 
-						global::System.Byte[] Blob {set;}
+						global::System.Byte[] Data {set;}
 
 		}
 		public interface Permission  : Deletable, AccessControlledObject 

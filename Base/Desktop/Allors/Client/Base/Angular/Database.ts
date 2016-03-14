@@ -42,9 +42,9 @@
                         var saveResponse = callbackArg.data;
                         resolve(saveResponse);
                 })
-                    .catch(e => {
-                        reject(e);
-                    });
+                .catch(e => {
+                    reject(e);
+                });
 
             });
         }

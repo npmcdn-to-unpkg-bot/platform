@@ -3,7 +3,7 @@ namespace Allors.Repository.Domain
     #region Allors
     [Id("6c20422e-cb3e-4402-bb40-dacaf584405e")]
     #endregion
-    public partial class MediaContent : AccessControlledObject
+    public partial class MediaContent : AccessControlledObject, Deletable
     {
         #region inherited properties
         public Permission[] DeniedPermissions { get; set; }
@@ -28,7 +28,7 @@ namespace Allors.Repository.Domain
         #endregion
         [Required]
         [Size(-1)]
-        public byte[] Blob { get; set; }
+        public byte[] Data { get; set; }
         
         #region inherited methods
         public void OnBuild(){}
@@ -40,6 +40,8 @@ namespace Allors.Repository.Domain
         public void OnDerive(){}
 
         public void OnPostDerive(){}
+
+        public void Delete(){}
         #endregion
     }
 }

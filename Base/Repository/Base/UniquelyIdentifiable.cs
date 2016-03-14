@@ -12,6 +12,7 @@ namespace Allors.Repository.Domain
         [AssociationId("fe413e96-cfcf-4e8d-9f23-0fa4f457fdf1")]
         [RoleId("d73fd9a4-13ee-4fa9-8925-d93eca328bf6")]
         #endregion
+        [Group("Workspace")]
         [Indexed]
         [Required]
         Guid UniqueId { get; set; }
