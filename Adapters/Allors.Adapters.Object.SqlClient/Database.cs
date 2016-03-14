@@ -17,6 +17,7 @@
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
@@ -48,7 +49,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         private Mapping mapping;
 
-        private Dictionary<string, object> properties;
+        private ConcurrentDictionary<string, object> properties;
 
         private bool? isValid;
 
@@ -294,12 +295,13 @@ namespace Allors.Adapters.Object.SqlClient
             {
                 if (this.properties == null)
                 {
-                    this.properties = new Dictionary<string, object>();
+                    this.properties = new ConcurrentDictionary<string, object>();
                 }
 
                 if (value == null)
                 {
-                    this.properties.Remove(name);
+                    object removed;
+                    this.properties.TryRemove(name, out removed);
                 }
                 else
                 {
