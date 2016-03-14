@@ -20,7 +20,7 @@
 
         <div ng-if="!$ctrl.role.InDataUri && $ctrl.role">
             <a ng-click="$ctrl.add()">
-                <img ng-src="/media/display/{{$ctrl.role.UniqueId}}?revision={{$ctrl.role.Revision}}"/>
+                <img ng-src="/media/display/{{$ctrl.role.UniqueId}}?revision={{$ctrl.role.Revision}}" class="img-responsive"/>
             </a>
         </div>
 
