@@ -96,8 +96,16 @@
             return this.role && this.role[this.display];
         }
 
+        $onInit() {
+            this.derive();
+        }
+
         onBind() {
-            if (this.roleType) {
+            this.derive();
+        };
+
+        derive() {
+            if (this.roleType && this.$translate) {
                 if (this.label === undefined) {
                     this.label = null;
 
@@ -126,7 +134,7 @@
                     this.translate(key1, key2, (value) => this.help = value);
                 }
             }
-        };
+        }
 
         translate(key1: string, key2: string, set: (translation: string) => void, setDefault?: () => void) {
             this.$translate(key1)
