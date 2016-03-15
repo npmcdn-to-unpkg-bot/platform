@@ -103,7 +103,11 @@
 
                     const key1 = `meta_${this.objectType.name}_${this.roleType.name}_Label`;
                     const key2 = `meta_${this.roleType.objectType}_${this.roleType.name}_Label`;
-                    this.translate(key1, key2, (value) => this.label = value, () => this.label = this.relation);
+                    this.translate(key1, key2, (value) => this.label = value);
+
+                    if (this.label === undefined || this.label === null) {
+                        this.label = this.relation;
+                    }
                 }
 
                 if (this.placeholder === undefined) {
