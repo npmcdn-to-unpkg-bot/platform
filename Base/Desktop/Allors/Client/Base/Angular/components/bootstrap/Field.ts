@@ -114,7 +114,7 @@
                     this.translate(key1, key2, (value) => this.label = value);
 
                     if (this.label === undefined || this.label === null) {
-                        this.label = this.relation;
+                        this.label = Filters.Humanize.filter(this.relation);
                     }
                 }
 
