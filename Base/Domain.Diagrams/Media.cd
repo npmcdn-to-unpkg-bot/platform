@@ -3,7 +3,7 @@
   <Interface Name="Allors.Domain.Media">
     <Position X="4.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAECAAAAAAABAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -13,7 +13,14 @@
   <Interface Name="Allors.Domain.MediaContent">
     <Position X="8" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAA=</HashCode>
+      <FileName>domain.g.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Domain.UniquelyIdentifiable">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>domain.g.cs</FileName>
     </TypeIdentifier>
   </Interface>

@@ -251,8 +251,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Allors\Client\Base\Angular\directives\toMany\toMany.html" />
-    <Content Include="Allors\Client\Base\Angular\directives\toOne\toOne.html" />
     <Content Include="Allors\Server\Base\Database\Push\Overview.cd" />
     <Content Include="app\pages\relation\organisation\add\addOrganisation.html" />
     <Content Include="app\pages\relation\organisation\edit\editOrganisation.html" />
@@ -529,8 +527,6 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\modelDataUri.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toMany\ToMany.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\toOne\ToOne.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\DatabaseError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\AllorsError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\InvokeError.ts" />
