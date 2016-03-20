@@ -14,13 +14,13 @@
         
         <div ng-if="$ctrl.role.InDataUri">
             <a ng-click="$ctrl.add()">
-                <img ng-src="{{$ctrl.role.InDataUri}}" class="img-responsive img-thumbnail"/>
+                <img ng-src="{{$ctrl.role.InDataUri}}" class="img-responsive img-thumbnail" ng-class="$ctrl.imgClass"/>
             </a>
         </div>
 
         <div ng-if="!$ctrl.role.InDataUri && $ctrl.role">
             <a ng-click="$ctrl.add()">
-                <img ng-src="/media/display/{{$ctrl.role.UniqueId}}?revision={{$ctrl.role.Revision}}" class="img-responsive"/>
+                <img ng-src="/media/display/{{$ctrl.role.UniqueId}}?revision={{$ctrl.role.Revision}}" class="img-responsive" ng-class="$ctrl.imgClass"/>
             </a>
         </div>
 
@@ -80,7 +80,8 @@
                 relation: "@",
                 size: "<",
                 format: "<",
-                quality: "<"
+                quality: "<",
+                imgClass: "@"
             }
         } as any);
 }
