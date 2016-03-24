@@ -13,11 +13,11 @@
         constructor(public $log: angular.ILogService, public $translate: angular.translate.ITranslateService) {
         }
 
-        get form(): Bootstrap.FormComponent {
+        get form(): Bootstrap.FormController {
             return this.f;
         }
 
-        set form(value: Bootstrap.FormComponent) {
+        set form(value: Bootstrap.FormController) {
             this.f = value;
             this.onBind();
         }

@@ -13,7 +13,7 @@
         }
     }
 
-    export class FormComponent  {
+    export class FormController  {
 
         horizontal: boolean;
 
@@ -25,7 +25,7 @@
     angular
         .module("allors")
         .component("bForm", {
-            controller: FormComponent,
+            controller: FormController,
             templateUrl: FormTemplate.name,
             transclude: true,
             bindings: {

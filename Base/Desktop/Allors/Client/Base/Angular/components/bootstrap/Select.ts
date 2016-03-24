@@ -5,39 +5,33 @@
 
         static view = 
 `
-<b-group field="$ctrl">
-    <b-label field="$ctrl"/> 
-    <b-input-group field="$ctrl">
-        <ui-select ng-if="$ctrl.roleType.isOne && $ctrl.options !== undefined" ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
-            <ui-select-match placeholder="Select a value">{{$ctrl.displayValue}}</ui-select-match>
-            <ui-select-choices repeat="item in $ctrl.options | filter: $ctrl.filterFunction($select.search)">
-                <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
-            </ui-select-choices>
-        </ui-select>
+<ui-select ng-if="$ctrl.roleType.isOne && $ctrl.options !== undefined" ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
+    <ui-select-match placeholder="Select a value">{{$ctrl.displayValue}}</ui-select-match>
+    <ui-select-choices repeat="item in $ctrl.options | filter: $ctrl.filterFunction($select.search)">
+        <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>
 
-        <ui-select ng-if="$ctrl.roleType.isOne && $ctrl.options === undefined" ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
-            <ui-select-match placeholder="Select a value">{{$ctrl.displayValue}}</ui-select-match>
-            <ui-select-choices repeat="item in $ctrl.asyncOptions" refresh="$ctrl.refresh($select.search)" refresh-delay="0">
-                <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
-            </ui-select-choices>
-        </ui-select>
+<ui-select ng-if="$ctrl.roleType.isOne && $ctrl.options === undefined" ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
+    <ui-select-match placeholder="Select a value">{{$ctrl.displayValue}}</ui-select-match>
+    <ui-select-choices repeat="item in $ctrl.asyncOptions" refresh="$ctrl.refresh($select.search)" refresh-delay="0">
+        <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>
 
-        <ui-select ng-if="$ctrl.roleType.isMany && $ctrl.options !== undefined" multiple ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
-            <ui-select-match placeholder="Select values">{{$item[$ctrl.display]}}</ui-select-match>
-            <ui-select-choices repeat="item in $ctrl.options | filter: $ctrl.filterFunction($select.search)">
-                <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
-            </ui-select-choices>
-        </ui-select>
+<ui-select ng-if="$ctrl.roleType.isMany && $ctrl.options !== undefined" multiple ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
+    <ui-select-match placeholder="Select values">{{$item[$ctrl.display]}}</ui-select-match>
+    <ui-select-choices repeat="item in $ctrl.options | filter: $ctrl.filterFunction($select.search)">
+        <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>
 
-        <ui-select ng-if="$ctrl.roleType.isMany && $ctrl.options === undefined" multiple ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
-            <ui-select-match placeholder="Select values">{{$item[$ctrl.display]}}</ui-select-match>
-            <ui-select-choices repeat="item in $ctrl.asyncOptions" refresh="$ctrl.refresh($select.search)" refresh-delay="0">
-                <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
-            </ui-select-choices>
-        </ui-select>
-    </b-input-group>
-
-</b-group>
+<ui-select ng-if="$ctrl.roleType.isMany && $ctrl.options === undefined" multiple ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
+    <ui-select-match placeholder="Select values">{{$item[$ctrl.display]}}</ui-select-match>
+    <ui-select-choices repeat="item in $ctrl.asyncOptions" refresh="$ctrl.refresh($select.search)" refresh-delay="0">
+        <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
+    </ui-select-choices>
+</ui-select>
 `;
 
         static register(templateCache: angular.ITemplateCacheService) {
@@ -45,7 +39,7 @@
         }
     }
 
-    class SelectComponent extends Bootstrap.Field {
+    class SelectController extends Bootstrap.Field {
 
         options: SessionObject[];
         asyncOptions: SessionObject[];
@@ -82,7 +76,7 @@
     angular
         .module("allors")
         .component("bSelect", {
-            controller: SelectComponent,
+            controller: SelectController,
             templateUrl: SelectTemplate.name,
             require: {
                 form: "^bForm"
