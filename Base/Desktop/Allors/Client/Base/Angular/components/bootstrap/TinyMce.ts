@@ -1,7 +1,7 @@
 ﻿namespace Allors.Bootstrap {
 
     export class TinyMceTemplate {
-        static name = "allors/bootstrap/tinymce";
+        static name = "allors/bootstrap/tiny-mce";
 
         static view = 
 `
@@ -17,10 +17,6 @@
         static register(templateCache: angular.ITemplateCacheService) {
             templateCache.put(TinyMceTemplate.name, TinyMceTemplate.view);
         }
-    }
-
-    class TinyMce {
-        constructor(public value: number, public name: string) {}
     }
 
     class TinyMceController extends Bootstrap.Field {
