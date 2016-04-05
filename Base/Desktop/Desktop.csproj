@@ -23,7 +23,7 @@
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -515,25 +515,31 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Enum.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Form.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Image.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\InputGroup.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Group.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Label.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Select.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\ImageGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\ImageModal.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Text.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Group.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\InputGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Label.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\RadioButton.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Select.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TinyMce.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\modelDataUri.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Control.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\Database.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\focus.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\DatabaseError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\directives\modelDataUri.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\AllorsError.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\DatabaseError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\InvokeError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\errors\SaveError.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\filters\humanize.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Control.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Counter.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Enumeration.g.ts" />
@@ -551,7 +557,6 @@
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
     <TypeScriptCompile Include="app\pages\Page.ts" />
     <TypeScriptCompile Include="app\services\Allors.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\Database.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeRequest.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeResponse.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\SyncRequest.ts" />

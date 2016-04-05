@@ -163,7 +163,7 @@ var tsUnit;
             return input.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
         };
         return Test;
-    })();
+    }());
     tsUnit.Test = Test;
     var TestRunLimiterRunAll = (function () {
         function TestRunLimiterRunAll() {
@@ -178,7 +178,7 @@ var tsUnit;
             return true;
         };
         return TestRunLimiterRunAll;
-    })();
+    }());
     var TestRunLimiter = (function () {
         function TestRunLimiter() {
             this.groupName = null;
@@ -244,7 +244,7 @@ var tsUnit;
             }
         };
         return TestRunLimiter;
-    })();
+    }());
     var TestContext = (function () {
         function TestContext() {
         }
@@ -424,7 +424,7 @@ var tsUnit;
             return '{' + (typeof variable) + '} "' + variable + '"';
         };
         return TestContext;
-    })();
+    }());
     tsUnit.TestContext = TestContext;
     var TestClass = (function (_super) {
         __extends(TestClass, _super);
@@ -435,7 +435,7 @@ var tsUnit;
             method.parameters = parametersArray;
         };
         return TestClass;
-    })(TestContext);
+    }(TestContext));
     tsUnit.TestClass = TestClass;
     var FakeFactory = (function () {
         function FakeFactory() {
@@ -474,7 +474,7 @@ var tsUnit;
             fake.prototype = new __();
         };
         return FakeFactory;
-    })();
+    }());
     tsUnit.FakeFactory = FakeFactory;
     var TestDefintion = (function () {
         function TestDefintion(testClass, name) {
@@ -482,7 +482,7 @@ var tsUnit;
             this.name = name;
         }
         return TestDefintion;
-    })();
+    }());
     var TestDescription = (function () {
         function TestDescription(testName, funcName, parameterSetNumber, message) {
             this.testName = testName;
@@ -491,7 +491,7 @@ var tsUnit;
             this.message = message;
         }
         return TestDescription;
-    })();
+    }());
     tsUnit.TestDescription = TestDescription;
     var TestResult = (function () {
         function TestResult() {
@@ -499,7 +499,7 @@ var tsUnit;
             this.errors = [];
         }
         return TestResult;
-    })();
+    }());
     tsUnit.TestResult = TestResult;
 })(tsUnit || (tsUnit = {}));
 //# sourceMappingURL=tsUnit.js.map
