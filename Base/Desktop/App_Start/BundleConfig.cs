@@ -9,7 +9,8 @@
             // Allors Client
             bundles.Add(new ScriptBundle("~/bundles/angular/allors")
                 .IncludeDirectory("~/allors/client/Base/Workspace/", "*.js", true)
-                .IncludeDirectory("~/allors/client/Base/Angular/", "app.module.js")
+                .Include("~/allors/client/Base/Angular/allors.module.js")
+                .Include("~/allors/client/Base/Angular/components/bootstrap/Field.js")
                 .IncludeDirectory("~/allors/client/Base/Angular/", "*.js", true)
                 .IncludeDirectory("~/allors/client/Generated/", "*.js", true)
                 .IncludeDirectory("~/allors/client/Custom/", "*.js", true)
