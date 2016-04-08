@@ -10,8 +10,8 @@
     <b-input-group field="$ctrl">
 
     <p class="input-group">
-        <input type="text" placeholder="{{$ctrl.placeholder}}" class="form-control" 
-                    uib-datepicker-popup="{{$ctrl.format}}" 
+        <input type="date" placeholder="{{$ctrl.placeholder}}" class="form-control" 
+                    uib-datepicker-popup
                     datepicker-options="$ctrl.options" 
                     is-open="$ctrl.opened" 
                     ng-model="$ctrl.role"
