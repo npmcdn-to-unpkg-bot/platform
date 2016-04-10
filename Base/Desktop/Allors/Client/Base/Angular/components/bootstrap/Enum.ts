@@ -9,7 +9,9 @@
             ng-model="$ctrl.role" 
             ng-disabled="!$ctrl.canWrite" 
             ng-required="$ctrl.roleType.isRequired"
-            ng-options="enum.value as enum.name for enum in $ctrl.enums"></select>
+            ng-options="enum.value as enum.name for enum in $ctrl.enums">
+    <option ng-if="!$ctrl.roleType.isRequired" value=""></option>     
+</select>
 `;
 
         static register(templateCache: angular.ITemplateCacheService) {

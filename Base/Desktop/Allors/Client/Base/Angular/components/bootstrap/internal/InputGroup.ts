@@ -4,7 +4,7 @@
 
         private static view = 
 `
-<div ng-class="$ctrl.form.horizontal ? 'col-sm-6' : ''">
+<div ng-class="$ctrl.form.horizontal ? 'col-sm-8' : ''">
 <ng-transclude/>
 </div>
 `;
