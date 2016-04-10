@@ -3,21 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
 
     <title>Allors Base</title>
 
-    <link href="/Content/font-awesome.css" rel="stylesheet">
-    <link href="/Content/bootstrap.css" rel="stylesheet">
-    <link href="/Content/angular-toastr.css" rel="stylesheet">
-    <link href="/Content/loading-bar.css" rel="stylesheet">
-    <link href="/Content/angular-toggle-switch.css" rel="stylesheet">
-    <link href="/Content/angular-toggle-switch-bootstrap.css" rel="stylesheet">
-    <link href="/Content/awesome-bootstrap-checkbox.css" rel="stylesheet">
-    <link href="/Content/select.css" rel="stylesheet">
-    <link href="/External/ngImgCrop/minified/ng-img-crop.css" rel="stylesheet">
-
-    <link href="/Content/css/default.css" rel="stylesheet">
+    @Styles.Render("~/bundles/css")
 
 </head>
 
@@ -27,26 +16,10 @@
 
     @Html.Raw(JSNLog.JavascriptLogging.Configure())
     
-    <script src="/Scripts/jquery-2.2.1.js"></script>
-    <script src="/Scripts/tinymce/tinymce.js"></script>
-    <script src="/Scripts/angular.js"></script>
-    <script src="/Scripts/angular-cookies.js"></script>
-    <script src="/Scripts/angular-sanitize.js"></script>
-    <script src="/Scripts/angular-animate.js"></script>
-    <script src="/Scripts/angular-ui-router.js"></script>
-    <script src="/Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
-    <script src="/Scripts/angular-toastr.tpls.js"></script>
-    <script src="/Scripts/angular-toggle-switch.js"></script>
-    <script src="/Scripts/angular-translate.js"></script>
-    <script src="/Scripts/angular-translate-loader-url.js"></script>
-    <script src="/Scripts/loading-bar.js"></script>
-    <script src="/Scripts/select.js"></script>
-    <script src="/External/ngImgCrop/unminified/ng-img-crop.js"></script>
-
-    <script src="/Scripts/lodash.js"></script>
-
-    @Scripts.Render("~/bundles/angular/allors")
-    @Scripts.Render("~/bundles/angular/app")
+    @Scripts.Render("~/bundles/common")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/allors")
+    @Scripts.Render("~/bundles/app")
 
 </body>
 </html>

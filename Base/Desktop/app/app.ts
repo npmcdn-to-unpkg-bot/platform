@@ -6,8 +6,9 @@
         "ngSanitize", "ngAnimate", "ngCookies",
 
         // Angular UI
-        "ui.router", "ui.bootstrap", "ui.tinymce", "ui.select",
+        "ui.router", "ui.bootstrap", "ui.select",
 
         // Third Party
-        "pascalprecht.translate", "angular-loading-bar", "toastr", "toggle-switch", "ngImgCrop"]);
+        "pascalprecht.translate", "tmh.dynamicLocale", "angular-loading-bar", "toastr",
+        "chart.js", "toggle-switch", "dndLists", "ncy-angular-breadcrumb", "textAngular", "ngImgCrop"]);
 }

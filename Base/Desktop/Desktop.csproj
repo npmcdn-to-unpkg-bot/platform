@@ -61,8 +61,8 @@
       <HintPath>..\packages\Common.Logging.NLog20.3.3.1\lib\net40\Common.Logging.NLog20.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="JSNLog, Version=2.17.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\JSNLog.2.17.0\lib\net40\JSNLog.dll</HintPath>
+    <Reference Include="JSNLog, Version=2.17.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JSNLog.2.17.1\lib\net40\JSNLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -87,7 +87,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -174,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\components\" />
+    <Folder Include="Scripts\typings\lodash\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Allors\Server\Base\Content\BaseMediaController.cs" />
@@ -263,257 +264,88 @@
     <Content Include="app\pages\relation\person\people.html" />
     <Content Include="app\pages\general\home\home.html" />
     <Content Include="app\pages\general\profile\profile.html" />
-    <Content Include="Content\angular-toastr.css" />
-    <Content Include="Content\angular-toastr.min.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\css\default.css" />
-    <Content Include="Content\css\signin.css" />
-    <Content Include="Content\font-awesome.css" />
-    <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\select.css" />
-    <Content Include="Content\select.min.css" />
-    <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Content\default.css" />
+    <Content Include="Content\signin.css" />
     <Content Include="External\ngImgCrop\minified\ng-img-crop.css" />
     <Content Include="External\ngImgCrop\minified\ng-img-crop.js" />
     <Content Include="External\ngImgCrop\unminified\ng-img-crop.css" />
     <Content Include="External\ngImgCrop\unminified\ng-img-crop.js" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-cookies.js" />
-    <Content Include="Scripts\angular-cookies.min.js" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
-    <Content Include="Scripts\angular-translate-loader-url.js" />
-    <Content Include="Scripts\angular-translate-loader-url.min.js" />
-    <Content Include="Scripts\angular-translate.js" />
-    <Content Include="Scripts\angular-translate.min.js" />
-    <Content Include="Scripts\angular-ui-router.js" />
-    <Content Include="Scripts\angular-ui-router.min.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
-    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\jquery-2.2.1.js" />
-    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="lib\angular-animate\angular-animate.js" />
+    <Content Include="lib\angular-bootstrap\ui-bootstrap-tpls.js" />
+    <Content Include="lib\angular-breadcrumb\release\angular-breadcrumb.js" />
+    <Content Include="lib\angular-chart.js\dist\angular-chart.css" />
+    <Content Include="lib\angular-chart.js\dist\angular-chart.js" />
+    <Content Include="lib\angular-cookies\angular-cookies.js" />
+    <Content Include="lib\angular-drag-and-drop-lists\angular-drag-and-drop-lists.js" />
+    <Content Include="lib\angular-dynamic-locale\dist\tmhDynamicLocale.js" />
+    <Content Include="lib\angular-i18n\angular-locale_de.js" />
+    <Content Include="lib\angular-i18n\angular-locale_en.js" />
+    <Content Include="lib\angular-i18n\angular-locale_fr.js" />
+    <Content Include="lib\angular-i18n\angular-locale_nl.js" />
+    <Content Include="lib\angular-loading-bar\build\loading-bar.css" />
+    <Content Include="lib\angular-loading-bar\build\loading-bar.js" />
+    <Content Include="lib\angular-toastr\dist\angular-toastr.css" />
+    <Content Include="lib\angular-toastr\dist\angular-toastr.tpls.js" />
+    <Content Include="lib\angular-toggle-switch\angular-toggle-switch-bootstrap.css" />
+    <Content Include="lib\angular-toggle-switch\angular-toggle-switch.css" />
+    <Content Include="lib\angular-toggle-switch\angular-toggle-switch.js" />
+    <Content Include="lib\angular-translate-loader-url\angular-translate-loader-url.js" />
+    <Content Include="lib\angular-translate\angular-translate.js" />
+    <Content Include="lib\angular-ui-router\release\angular-ui-router.js" />
+    <Content Include="lib\angular\angular.js" />
+    <Content Include="lib\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
+    <Content Include="lib\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="lib\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="lib\Chart.js\Chart.js" />
+    <Content Include="lib\font-awesome\css\font-awesome.css" />
+    <Content Include="lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="lib\jquery\dist\jquery.js" />
+    <Content Include="lib\lodash\lodash.js" />
+    <Content Include="lib\moment\moment.js" />
+    <Content Include="lib\ng-img-crop-full-extended\compile\unminified\ng-img-crop.css" />
+    <Content Include="lib\ng-img-crop-full-extended\compile\unminified\ng-img-crop.js" />
+    <Content Include="lib\textAngular\dist\textAngular-rangy.min.js" />
+    <Content Include="lib\textAngular\dist\textAngular-sanitize.js" />
+    <Content Include="lib\textAngular\dist\textAngular-sanitize.min.js" />
+    <Content Include="lib\textAngular\dist\textAngular.css" />
+    <Content Include="lib\textAngular\dist\textAngular.js" />
+    <Content Include="lib\textAngular\dist\textAngular.min.js" />
+    <Content Include="lib\textAngular\dist\textAngularSetup.js" />
+    <Content Include="lib\ui-select\dist\select.css" />
+    <Content Include="lib\ui-select\dist\select.js" />
     <Content Include="Scripts\jsnlog.js" />
     <Content Include="Scripts\jsnlog.min.js" />
-    <Content Include="Scripts\jsnlog.js.map" />
-    <Content Include="Scripts\select.js" />
-    <Content Include="Scripts\select.min.js" />
-    <Content Include="Scripts\tinymce\jquery.tinymce.min.js" />
-    <Content Include="Scripts\tinymce\license.txt" />
-    <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\anchor\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\autolink\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\autosave\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\charmap\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\codesample\css\prism.css" />
-    <Content Include="Scripts\tinymce\plugins\codesample\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\codesample\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\css\dialog.css" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\img\buttons.png" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\img\icons.gif" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\img\items.gif" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_arrow.gif" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\img\menu_check.gif" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\img\progress.gif" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\img\tabs.gif" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\tiny_mce_popup.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\utils\editable_selects.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\utils\form_utils.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\utils\mctabs.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\utils\validate.js" />
-    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\directionality\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cool.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cry.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-foot-in-mouth.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-frown.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-innocent.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-kiss.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-laughing.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-money-mouth.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-sealed.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-smile.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-surprised.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-tongue-out.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-undecided.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-wink.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-yell.gif" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\example\dialog.html" />
-    <Content Include="Scripts\tinymce\plugins\example\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\example\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\hr\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\imagetools\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\image\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\importcss\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\layer\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\layer\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\link\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\lists\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\media\moxieplayer.swf" />
-    <Content Include="Scripts\tinymce\plugins\media\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\preview\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\print\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\print\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\save\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\table\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\template\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\address.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\article.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\aside.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\blockquote.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\div.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\dl.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\figure.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\h1.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\h2.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\h3.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\h4.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\h5.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\h6.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\hgroup.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\ol.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\p.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\pre.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\section.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\img\ul.gif" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js" />
-    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
-    <Content Include="Scripts\tinymce\skins\lightgray\content.inline.min.css" />
-    <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.svg" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\anchor.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\loader.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\object.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\img\trans.gif" />
-    <Content Include="Scripts\tinymce\skins\lightgray\skin.ie7.min.css" />
-    <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
-    <Content Include="Scripts\tinymce\themes\modern\theme.js" />
-    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
-    <Content Include="Scripts\tinymce\tinymce.js" />
-    <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Content\angular-toggle-switch-bootstrap.css" />
-    <Content Include="Content\angular-toggle-switch.css" />
-    <Content Include="Content\awesome-bootstrap-checkbox.css" />
-    <Content Include="Content\default.css" />
-    <Content Include="Content\loading-bar.css" />
-    <Content Include="Content\loading-bar.min.css" />
-    <Content Include="Content\ui-grid.svg" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\angular-toastr.js" />
-    <Content Include="Scripts\angular-toastr.min.js" />
-    <Content Include="Scripts\angular-toastr.tpls.js" />
-    <Content Include="Scripts\angular-toastr.tpls.min.js" />
-    <Content Include="Scripts\angular-toggle-switch.js" />
-    <Content Include="Scripts\angular-toggle-switch.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="app\Web.config" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include=".bowerrc" />
+    <Content Include="bower.json" />
+    <Content Include="lib\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="lib\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="lib\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="lib\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="lib\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="lib\font-awesome\fonts\FontAwesome.otf" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Scripts\loading-bar.js" />
-    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Settings.StyleCop" />
-    <Content Include="Scripts\jquery-2.2.1.min.map" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.json" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.json" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
-    <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
-    <Content Include="Scripts\tinymce\langs\readme.md" />
+    <Content Include="typings.json" />
+    <Content Include="Scripts\jsnlog.js.map" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Enum.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
@@ -526,8 +358,9 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\RadioButton.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Select.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextAngular.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextAngularGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextGroup.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TinyMce.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Control.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Database.ts" />
@@ -555,6 +388,7 @@
     <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\UserGroup.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
+    <TypeScriptCompile Include="app\app.textangular.ts" />
     <TypeScriptCompile Include="app\pages\Page.ts" />
     <TypeScriptCompile Include="app\services\Allors.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Data\InvokeRequest.ts" />
@@ -578,26 +412,6 @@
     <TypeScriptCompile Include="Allors\Client\Custom\workspace.d.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Person.ts" />
     <TypeScriptCompile Include="app\functions\Nest.ts" />
-    <Content Include="Content\ui-grid.eot" />
-    <Content Include="Content\ui-grid.ttf" />
-    <Content Include="Content\ui-grid.woff" />
-    <Content Include="Content\awesome-bootstrap-checkbox.scss" />
-    <Content Include="Content\awesome-bootstrap-checkbox.less" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Scripts\lodash.js" />
-    <Content Include="Scripts\lodash.min.js" />
     <Content Include="Tests\app.css" />
     <TypeScriptCompile Include="app\app.translate.ts" />
     <TypeScriptCompile Include="app\app.goto.ts" />
@@ -617,23 +431,6 @@
     <TypeScriptCompile Include="app\pages\relation\person\people.ts" />
     <TypeScriptCompile Include="app\pages\general\home\home.ts" />
     <TypeScriptCompile Include="app\pages\general\profile\profile.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angular-loading-bar\angular-loading-bar.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angular-toastr\angular-toastr.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angular-translate\angular-translate.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-resource.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-route.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular-sanitize.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\es6-promise\es6-promise.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jsnlog\jsnlog.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\lodash\lodash-3.10.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\ng-file-upload\ng-file-upload.d.ts" />
     <TypeScriptCompile Include="Tests\Fixture.ts" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -643,11 +440,25 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Scripts\tsUnit\tsUnit.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angular-file-upload\angular-file-upload.d.ts" />
     <TypeScriptCompile Include="Tests\app.ts" />
     <TypeScriptCompile Include="Tests\WorkspaceTests.ts" />
     <TypeScriptCompile Include="Tests\SessionTests.ts" />
     <TypeScriptCompile Include="Tests\PersonTests.ts" />
+    <TypeScriptCompile Include="typings\browser.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-breadcrumb\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-cookies\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-dynamic-locale\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-loading-bar\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-toastr\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-translate\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-ui-bootstrap\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-ui-router\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\es6-promise\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\jquery\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\jsnlog\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\lodash\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\ui-select\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -657,10 +468,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Allors\Server\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-router.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\angular-ui\angular-ui-sortable.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

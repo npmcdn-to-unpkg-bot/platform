@@ -12,7 +12,7 @@
         // Field 
         Allors.Bootstrap.EnumTemplate.register($templateCache);
         Allors.Bootstrap.SelectTemplate.register($templateCache);
-        Allors.Bootstrap.TinyMceTemplate.register($templateCache);
+        Allors.Bootstrap.TextAngularTemplate.register($templateCache);
         Allors.Bootstrap.RadioButtonTemplate.register($templateCache);
 
         // Field Group Internals
@@ -22,6 +22,7 @@
 
         // Field Groups
         Allors.Bootstrap.TextGroupTemplate.register($templateCache);
+        Allors.Bootstrap.TextAngularGroupTemplate.register($templateCache);
         Allors.Bootstrap.SelectGroupTemplate.register($templateCache);
         Allors.Bootstrap.ImageGroupTemplate.register($templateCache);
     }
