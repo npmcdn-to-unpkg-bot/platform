@@ -48,19 +48,7 @@ namespace Allors.Tools.Repository.Storage
             }
 
             var fileInfo = new FileInfo(this.DirectoryInfo.FullName + Path.DirectorySeparatorChar + fileName.Replace('\\', Path.DirectorySeparatorChar));
-            
-            if (fileInfo.Exists)
-            {
-                var existingFileContents = File.ReadAllText(fileInfo.FullName);
-                if (!fileContents.Equals(existingFileContents))
-                {
-                    Save(fileInfo, fileContents);
-                }
-            }
-            else
-            {
-                Save(fileInfo, fileContents);
-            }
+            Save(fileInfo, fileContents);
         }
 
         private static void Save(FileInfo fileInfo, string fileContents)

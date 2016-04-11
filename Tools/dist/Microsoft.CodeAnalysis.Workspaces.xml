@@ -374,6 +374,12 @@
             equal <see cref="P:Microsoft.CodeAnalysis.CodeActions.CodeAction.EquivalenceKey"/> values, Visual Studio behavior may appear incorrect.
             </remarks>
         </member>
+        <member name="P:Microsoft.CodeAnalysis.CodeActions.CodeAction.Glyph">
+            <summary>
+            Will map this int to the Glyph enum in 'Features'.  Once a proper image abstration moves
+            to the workspace layer we can appropriately use that here instead of a raw int.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.CodeActions.CodeAction.GetOperationsAsync(System.Threading.CancellationToken)">
             <summary>
             The sequence of operations that define the code action.
@@ -442,6 +448,14 @@
             <param name="cancellationToken">A cancellation token.</param>
             <returns>A document with the post processing changes applied.</returns>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.CodeActions.CodeAction.IsApplicable(Microsoft.CodeAnalysis.Workspace)">
+            <summary>
+            Called by the CodeActions on the UI thread to determine if the CodeAction is still 
+            applicable and should be presented to the user.  CodeActions can override this if they 
+            need to do any final checking that must be performed on the UI thread (for example
+            accessing and querying the Visual Studio DTE).
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.CodeActions.CodeAction.Create(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{Microsoft.CodeAnalysis.Document}},System.String)">
             <summary>
             Creates a <see cref="T:Microsoft.CodeAnalysis.CodeActions.CodeAction"/> for a change to a single <see cref="T:Microsoft.CodeAnalysis.Document"/>. 
@@ -489,7 +503,7 @@
         </member>
         <member name="T:Microsoft.CodeAnalysis.CodeActions.ConflictAnnotation">
             <summary>
-            Apply this annotation to a SyntaxNode to indicate a conflict may exist that requires user understanding and acknowledgement before taking action.
+            Apply this annotation to a SyntaxNode to indicate a conflict may exist that requires user understanding and acknowledgment before taking action.
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.CodeActions.RenameAnnotation">
@@ -516,6 +530,13 @@
             <summary>
             Called by the host environment to apply the effect of the operation.
             This method is guaranteed to be called on the UI thread.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.CodeActions.CodeActionOperation.ApplyDuringTests">
+            <summary>
+            Operations may make all sorts of changes that may not be appropriate during testing
+            (like popping up UI). So, by default, we don't apply them unless the operation asks
+            for that to happen.
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.CodeActions.ApplyChangesOperation">
@@ -654,13 +675,13 @@
             Optionally you can provide your own options and code cleaners. Otherwise, the default will be used.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.CodeCleaner.Cleanup(Microsoft.CodeAnalysis.SyntaxNode,Microsoft.CodeAnalysis.Text.TextSpan,Microsoft.CodeAnalysis.Workspace,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider},System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.CodeCleaner.CleanupAsync(Microsoft.CodeAnalysis.SyntaxNode,Microsoft.CodeAnalysis.Text.TextSpan,Microsoft.CodeAnalysis.Workspace,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider},System.Threading.CancellationToken)">
             <summary>
             Clean up the provided span in the node.
             This will only cleanup stuff that doesn't require semantic information.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.CodeCleaner.Cleanup(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Text.TextSpan},Microsoft.CodeAnalysis.Workspace,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider},System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.CodeCleaner.CleanupAsync(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Text.TextSpan},Microsoft.CodeAnalysis.Workspace,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider},System.Threading.CancellationToken)">
             <summary>
             Clean up the provided spans in the node.
             This will only cleanup stuff that doesn't require semantic information.
@@ -683,7 +704,7 @@
             This will run all provided code cleaners in an order that is given to the method.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.ICodeCleanerService.Cleanup(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Text.TextSpan},Microsoft.CodeAnalysis.Workspace,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider},System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.ICodeCleanerService.CleanupAsync(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Text.TextSpan},Microsoft.CodeAnalysis.Workspace,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider},System.Threading.CancellationToken)">
             <summary>
             This will run all provided code cleaners in an order that is given to the method.
             
@@ -710,7 +731,7 @@
             This should apply its code clean up logic to the spans of the document.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider.Cleanup(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Text.TextSpan},Microsoft.CodeAnalysis.Workspace,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.CodeCleanup.Providers.ICodeCleanupProvider.CleanupAsync(Microsoft.CodeAnalysis.SyntaxNode,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Text.TextSpan},Microsoft.CodeAnalysis.Workspace,System.Threading.CancellationToken)">
             <summary>
             This will run all provided code cleaners in an order that is given to the method.
             
@@ -1709,12 +1730,28 @@
             in those cases, use GetTextSpan method instead to calculate one from original line/column
             </summary>
         </member>
+        <member name="P:Microsoft.CodeAnalysis.Diagnostics.DiagnosticData.PropertiesForBuildDiagnostic">
+            <summary>
+            Properties for a diagnostic generated by an explicit build.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Diagnostics.DiagnosticData.IsBuildDiagnostic">
+            <summary>
+            Returns true if the diagnostic was generated by an explicit build, not live analysis.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.Diagnostics.IWorkspaceVenusSpanMappingService.GetAdjustedDiagnosticSpan(Microsoft.CodeAnalysis.DocumentId,Microsoft.CodeAnalysis.Location,Microsoft.CodeAnalysis.Text.TextSpan@,Microsoft.CodeAnalysis.FileLinePositionSpan@,Microsoft.CodeAnalysis.FileLinePositionSpan@)">
             <summary>
             Given the original location of the diagnostic and the mapped line info based on line directives in source,
             apply any necessary adjustments to these diagnostic spans and returns the effective source span for the diagnostic.
             For example, for Venus, we might change the mapped location to be the location in the primary buffer.
             Additionally, if the secondary buffer location is outside visible user code, then the original location is also adjusted to be within visible user code.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Diagnostics.WellKnownDiagnosticPropertyNames.Origin">
+            <summary>
+            Predefined name of diagnostic property which shows in what compilation stage the diagnostic is created. 
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.Diagnostics.AdditionalTextDocument">
@@ -1780,6 +1817,136 @@
         <member name="M:Microsoft.CodeAnalysis.Editing.ImportAdder.AddImportsAsync(Microsoft.CodeAnalysis.Document,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Text.TextSpan},Microsoft.CodeAnalysis.Options.OptionSet,System.Threading.CancellationToken)">
             <summary>
             Adds namespace imports / using directives for namespace references found in the document within the spans specified.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.ImplicitConversion">
+            <summary>
+            The name assigned to an implicit (widening) conversion.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.ExplicitConversion">
+            <summary>
+            The name assigned to an explicit (narrowing) conversion.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Addition">
+            <summary>
+            The name assigned to the Addition operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.BitwiseAnd">
+            <summary>
+            The name assigned to the BitwiseAnd operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.BitwiseOr">
+            <summary>
+            The name assigned to the BitwiseOr operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Decrement">
+            <summary>
+            The name assigned to the Decrement operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Division">
+            <summary>
+            The name assigned to the Division operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Equality">
+            <summary>
+            The name assigned to the Equality operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.ExclusiveOr">
+            <summary>
+            The name assigned to the ExclusiveOr operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.False">
+            <summary>
+            The name assigned to the False operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.GreaterThan">
+            <summary>
+            The name assigned to the GreaterThan operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.GreaterThanOrEqual">
+            <summary>
+            The name assigned to the GreaterThanOrEqual operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Increment">
+            <summary>
+            The name assigned to the Increment operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Inequality">
+            <summary>
+            The name assigned to the Inequality operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.LeftShift">
+            <summary>
+            The name assigned to the LeftShift operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.LessThan">
+            <summary>
+            The name assigned to the LessThan operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.LessThanOrEqual">
+            <summary>
+            The name assigned to the LessThanOrEqual operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.LogicalNot">
+            <summary>
+            The name assigned to the LogicalNot operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Modulus">
+            <summary>
+            The name assigned to the Modulus operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Multiply">
+            <summary>
+            The name assigned to the Multiply operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.OnesComplement">
+            <summary>
+            The name assigned to the OnesComplement operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.RightShift">
+            <summary>
+            The name assigned to the RightShift operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.Subtraction">
+            <summary>
+            The name assigned to the Subtraction operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.True">
+            <summary>
+            The name assigned to the True operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.UnaryNegation">
+            <summary>
+            The name assigned to the UnaryNegation operator.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Editing.OperatorKind.UnaryPlus">
+            <summary>
+            The name assigned to the UnaryPlus operator.
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.Editing.SolutionEditor">
@@ -1871,7 +2038,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditOneDeclarationAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Editing.SymbolEditor.AsyncDeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting the definition of one of the symbol's declarations.
+            Enables editing the definition of one of the symbol's declarations.
             Partial types and methods may have more than one declaration.
             </summary>
             <param name="symbol">The symbol to edit.</param>
@@ -1881,7 +2048,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditOneDeclarationAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Editing.SymbolEditor.DeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting the definition of one of the symbol's declarations.
+            Enables editing the definition of one of the symbol's declarations.
             Partial types and methods may have more than one declaration.
             </summary>
             <param name="symbol">The symbol to edit.</param>
@@ -1891,7 +2058,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditOneDeclarationAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Location,Microsoft.CodeAnalysis.Editing.SymbolEditor.AsyncDeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting the definition of one of the symbol's declarations.
+            Enables editing the definition of one of the symbol's declarations.
             Partial types and methods may have more than one declaration.
             </summary>
             <param name="symbol">The symbol to edit.</param>
@@ -1902,7 +2069,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditOneDeclarationAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Location,Microsoft.CodeAnalysis.Editing.SymbolEditor.DeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting the definition of one of the symbol's declarations.
+            Enables editing the definition of one of the symbol's declarations.
             Partial types and methods may have more than one declaration.
             </summary>
             <param name="symbol">The symbol to edit.</param>
@@ -1913,7 +2080,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditOneDeclarationAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Editing.SymbolEditor.AsyncDeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting the symbol's declaration where the member is also declared.
+            Enables editing the symbol's declaration where the member is also declared.
             Partial types and methods may have more than one declaration.
             </summary>
             <param name="symbol">The symbol to edit.</param>
@@ -1924,7 +2091,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditOneDeclarationAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Editing.SymbolEditor.DeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting the symbol's declaration where the member is also declared.
+            Enables editing the symbol's declaration where the member is also declared.
             Partial types and methods may have more than one declaration.
             </summary>
             <param name="symbol">The symbol to edit.</param>
@@ -1935,20 +2102,20 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditAllDeclarationsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Editing.SymbolEditor.AsyncDeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting all the symbol's declarations. 
+            Enables editing all the symbol's declarations. 
             Partial types and methods may have more than one declaration.
             </summary>
-            <param name="symbol">The symbol to be editted.</param>
+            <param name="symbol">The symbol to be edited.</param>
             <param name="editAction">The action that makes edits to the declaration.</param>
             <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken"/>.</param>
             <returns>The new symbol including the changes.</returns>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SymbolEditor.EditAllDeclarationsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Editing.SymbolEditor.DeclarationEditAction,System.Threading.CancellationToken)">
             <summary>
-            Enables editting all the symbol's declarations. 
+            Enables editing all the symbol's declarations. 
             Partial types and methods may have more than one declaration.
             </summary>
-            <param name="symbol">The symbol to be editted.</param>
+            <param name="symbol">The symbol to be edited.</param>
             <param name="editAction">The action that makes edits to the declaration.</param>
             <param name="cancellationToken">An optional <see cref="T:System.Threading.CancellationToken"/>.</param>
             <returns>The new symbol including the changes.</returns>
@@ -2107,6 +2274,16 @@
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Editing.SyntaxGenerator.MethodDeclaration(Microsoft.CodeAnalysis.IMethodSymbol,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.SyntaxNode})">
+            <summary>
+            Creates a method declaration matching an existing method symbol.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editing.SyntaxGenerator.OperatorDeclaration(Microsoft.CodeAnalysis.Editing.OperatorKind,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.SyntaxNode},Microsoft.CodeAnalysis.SyntaxNode,Microsoft.CodeAnalysis.Accessibility,Microsoft.CodeAnalysis.Editing.DeclarationModifiers,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.SyntaxNode})">
+            <summary>
+            Creates a method declaration.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Editing.SyntaxGenerator.OperatorDeclaration(Microsoft.CodeAnalysis.IMethodSymbol,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.SyntaxNode})">
             <summary>
             Creates a method declaration matching an existing method symbol.
             </summary>
@@ -3483,6 +3660,90 @@
             Returns the position of the node.
             </summary>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.FindSymbols.Finders.ILanguageServiceReferenceFinder">
+            <summary>
+            Extensibility interface to allow individual languages to extend the 'Find References' service. 
+            Languages can use this to provide specialized cascading logic between symbols that 'Find 
+            References' is searching for.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.AbstractReferenceFinder`1.FindDocumentsAsync(Microsoft.CodeAnalysis.Project,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Document},System.Threading.CancellationToken,System.String[])">
+            <summary>
+            Finds all the documents in the provided project that contain the requested string
+            values
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder">
+            <summary>
+            Extensibility interface to allow extending the IFindReferencesService service.  Implementations
+            must be thread-safe as the methods on this interface may be called on multiple threads
+            simultaneously.  Implementations should also respect the provided cancellation token and
+            should try to cancel themselves quickly when requested.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.DetermineProjectsToSearchAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)">
+            <summary>
+            Called by the find references search engine to determine which projects should be
+            searched for a given symbol.  The returned projects will then be searched in parallel. If
+            the implementation does not care about the provided symbol then null can be returned
+            from this method.
+            
+            Implementations should endeavor to keep the list of returned projects as small as
+            possible to keep search time down to a minimum.  Returning the entire list of projects in
+            a solution is not recommended (unless, of course, there is reasonable reason to believe
+            there are references in every project).
+            
+            Implementations of this method must be thread-safe.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.DetermineDocumentsToSearchAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Project,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Document},System.Threading.CancellationToken)">
+            <summary>
+            Called by the find references search engine to determine which documents in the supplied
+            project need to be searched for references.  Only projects returned by
+            DetermineProjectsToSearch will be passed to this method.
+            
+            Implementations should endeavor to keep the list of returned documents as small as
+            possible to keep search time down to a minimum.  Returning the entire list of documents
+            in a project is not recommended (unless, of course, there is reasonable reason to
+            believe there are references in every document).
+            
+            Implementations of this method must be thread-safe.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.FindReferencesInDocumentAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Document,System.Threading.CancellationToken)">
+            <summary>
+            Called by the find references search engine to determine the set of reference locations
+            in the provided document.  Only documents returned by DetermineDocumentsToSearch will be
+            passed to this method. 
+            
+            Implementations of this method must be thread-safe.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.DetermineCascadedSymbolsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)">
+            <summary>
+            Called by the find references search engine when a new symbol definition is found.
+            Implementations can then choose to request more symbols be searched for.  For example, an
+            implementation could choose for the find references search engine to cascade to
+            constructors when searching for standard types.
+            
+            Implementations of this method must be thread-safe.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.Finders.ReferenceFinders.DefaultReferenceFinders">
+            <summary>
+            The list of common reference finders.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTree.ISymbolTreeInfoCacheService.TryGetSymbolTreeInfoAsync(Microsoft.CodeAnalysis.Project,System.Threading.CancellationToken)">
+            <summary>
+            Returns null if the info cannot be retrieved from the cache.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTree.ISymbolTreeInfoCacheService.TryGetSymbolTreeInfoAsync(Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.IAssemblySymbol,Microsoft.CodeAnalysis.PortableExecutableReference,System.Threading.CancellationToken)">
+            <summary>
+            Returns null if the info cannot be retrieved from the cache.
+            </summary>
+        </member>
         <member name="F:Microsoft.CodeAnalysis.FindSymbols.SyntaxTreeDeclarationInfo.s_cache">
             <summary>
             in memory cache will hold onto any info related to opened documents in primary branch or all documents in forked branch
@@ -3493,6 +3754,11 @@
         <member name="T:Microsoft.CodeAnalysis.FindSymbols.DependentProjectsFinder">
             <summary>
             Provides helper methods for finding dependent projects across a solution that a given symbol can be referenced within.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.FindSymbols.DependentProjectsFinder.DefinitionProject">
+            <summary>
+            A helper struct used for keying in <see cref="F:Microsoft.CodeAnalysis.FindSymbols.DependentProjectsFinder.s_dependentProjectsCache"/>.
             </summary>
         </member>
         <member name="F:Microsoft.CodeAnalysis.FindSymbols.DependentProjectsFinder.s_dependentProjectsCache">
@@ -3609,71 +3875,9 @@
             Used to create a new concurrent <see cref="T:Microsoft.CodeAnalysis.SymbolKey"/> map for a given compilation when needed.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.AbstractReferenceFinder`1.FindDocumentsAsync(Microsoft.CodeAnalysis.Project,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Document},System.Threading.CancellationToken,System.String[])">
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.DependentTypeFinder.FindDerivedClassesAsync(Microsoft.CodeAnalysis.INamedTypeSymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)">
             <summary>
-            Finds all the documents in the provided project that contain the requested string
-            values
-            </summary>
-        </member>
-        <member name="T:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder">
-            <summary>
-            Extensibility interface to allow extending the IFindReferencesService service.  Implementations
-            must be thread-safe as the methods on this interface may be called on multiple threads
-            simultaneously.  Implementations should also respect the provided cancellation token and
-            should try to cancel themselves quickly when requested.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.DetermineProjectsToSearchAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)">
-            <summary>
-            Called by the find references search engine to determine which projects should be
-            searched for a given symbol.  The returned projects will then be searched in parallel. If
-            the implementation does not care about the provided symbol then null can be returned
-            from this method.
-            
-            Implementations should endeavor to keep the list of returned projects as small as
-            possible to keep search time down to a minimum.  Returning the entire list of projects in
-            a solution is not recommended (unless, of course, there is reasonable reason to believe
-            there are references in every project).
-            
-            Implementations of this method must be thread-safe.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.DetermineDocumentsToSearchAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Project,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Document},System.Threading.CancellationToken)">
-            <summary>
-            Called by the find references search engine to determine which documents in the supplied
-            project need to be searched for references.  Only projects returned by
-            DetermineProjectsToSearch will be passed to this method.
-            
-            Implementations should endeavor to keep the list of returned documents as small as
-            possible to keep search time down to a minimum.  Returning the entire list of documents
-            in a project is not recommended (unless, of course, there is reasonable reason to
-            believe there are references in every document).
-            
-            Implementations of this method must be thread-safe.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.FindReferencesInDocumentAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Document,System.Threading.CancellationToken)">
-            <summary>
-            Called by the find references search engine to determine the set of reference locations
-            in the provided document.  Only documents returned by DetermineDocumentsToSearch will be
-            passed to this method. 
-            
-            Implementations of this method must be thread-safe.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.Finders.IReferenceFinder.DetermineCascadedSymbolsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)">
-            <summary>
-            Called by the find references search engine when a new symbol definition is found.
-            Implementations can then choose to request more symbols be searched for.  For example, an
-            implementation could choose for the find references search engine to cascade to
-            constructors when searching for standard types.
-            
-            Implementations of this method must be thread-safe.
-            </summary>
-        </member>
-        <member name="F:Microsoft.CodeAnalysis.FindSymbols.Finders.ReferenceFinders.DefaultReferenceFinders">
-            <summary>
-            The list of common reference finders.
+            This is an internal implementation of <see cref="M:Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindDerivedClassesAsync(Microsoft.CodeAnalysis.INamedTypeSymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)"/>, which is a publically callable method.
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.FindSymbols.FindReferencesProgress">
@@ -3799,6 +4003,11 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindSymbolAtPosition(Microsoft.CodeAnalysis.SemanticModel,System.Int32,Microsoft.CodeAnalysis.Workspace,System.Threading.CancellationToken)">
             <summary>
+            Obsolete.  Use <see cref="M:Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindSymbolAtPositionAsync(Microsoft.CodeAnalysis.SemanticModel,System.Int32,Microsoft.CodeAnalysis.Workspace,System.Threading.CancellationToken)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindSymbolAtPositionAsync(Microsoft.CodeAnalysis.SemanticModel,System.Int32,Microsoft.CodeAnalysis.Workspace,System.Threading.CancellationToken)">
+            <summary>
             Finds the symbol that is associated with a position in the text of a document.
             </summary>
             <param name="semanticModel">The semantic model associated with the document.</param>
@@ -3892,6 +4101,17 @@
             Find symbols for declarations that implement members of the specified interface symbol
             </summary>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindDerivedClassesAsync(Microsoft.CodeAnalysis.INamedTypeSymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)">
+            <summary>
+            Finds the derived classes of the given type. Implementations of an interface are not considered "derived", but can be found
+            with <see cref="M:Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindImplementationsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)"/>.
+            </summary>
+            <param name="type">The symbol to find derived types of.</param>
+            <param name="solution">The solution to search in.</param>
+            <param name="projects">The projects to search. Can be null to search the entire solution.</param>
+            <param name="cancellationToken"></param>
+            <returns>The derived types of the symbol. The symbol passed in is not included in this list.</returns>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolFinder.FindImplementationsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,System.Collections.Immutable.IImmutableSet{Microsoft.CodeAnalysis.Project},System.Threading.CancellationToken)">
             <summary>
             Finds the symbols that implement an interface or interface member.
@@ -3935,17 +4155,65 @@
             <param name="documents">An optional set of documents to be searched. If documents is null, then that means "all documents".</param>
             <param name="cancellationToken">An optional cancellation token.</param>
         </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SearchKind.Exact">
+            <summary>
+            Use an case-sensitive comparison when searching for matching items.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SearchKind.ExactIgnoreCase">
+            <summary>
+            Use a case-insensitive comparison when searching for matching items.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SearchKind.Fuzzy">
+            <summary>
+            Use a fuzzy comparison when searching for matching items. Fuzzy matching allows for 
+            a certain amount of misspellings, missing words, etc. See <see cref="T:Roslyn.Utilities.SpellChecker"/> for 
+            more details.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SearchKind.Custom">
+            <summary>
+            Search term is matched in a custom manner (i.e. with a user provided predicate).
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SearchQuery.Name">
+            <summary>The name being searched for.  Is null in the case of custom predicate searching..  But 
+            can be used for faster index based searching when it is available.</summary> 
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SearchQuery.Kind">
+            <summary>The kind of search this is.  Faster index-based searching can be used if the 
+             SearchKind is not <see cref="F:Microsoft.CodeAnalysis.FindSymbols.SearchKind.Custom"/>.</summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SearchQuery._predicate">
+            <summary>The predicate to fall back on if faster index searching is not possible.</summary>
+        </member>
         <member name="F:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo._nodes">
             <summary>
             The list of nodes that represent symbols. The primary key into the sorting of this list is the name.
-            They are sorted case-insensitively with the <see cref="F:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.s_nodeSortComparer" />. Finding case-sensitive
+            They are sorted case-insensitively with the <see cref="F:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.s_totalComparer" />. Finding case-sensitive
             matches can be found by binary searching for something that matches insensitively, and then searching
             around that equivalence class for one that matches.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.Find(Microsoft.CodeAnalysis.IAssemblySymbol,System.String,System.Boolean,System.Threading.CancellationToken)">
+        <member name="F:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo._spellChecker">
+            <summary>
+            The spell checker we use for fuzzy match queries.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.FuzzyFindAsync(Roslyn.Utilities.AsyncLazy{Microsoft.CodeAnalysis.IAssemblySymbol},System.String,System.Threading.CancellationToken)">
+            <summary>
+            Finds symbols in this assembly that match the provided name in a fuzzy manner.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.FindAsync(Roslyn.Utilities.AsyncLazy{Microsoft.CodeAnalysis.IAssemblySymbol},System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Get all symbols that have a name matching the specified name.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.FindAsync(Roslyn.Utilities.AsyncLazy{Microsoft.CodeAnalysis.IAssemblySymbol},System.Func{System.String,System.Boolean},System.Threading.CancellationToken)">
+            <summary>
+            Slow, linear scan of all the symbols in this assembly to look for matches.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.FindNodes(System.String,System.StringComparer)">
@@ -3955,15 +4223,10 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.BinarySearch(System.String)">
             <summary>
-            Searches for a name in the ordered list that matches per the <see cref="F:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.s_nodeSortComparer" />.
+            Searches for a name in the ordered list that matches per the <see cref="F:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.s_caseInsensitiveComparer" />.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.Search(Microsoft.CodeAnalysis.IAssemblySymbol,System.Func{System.String,System.Boolean},System.Threading.CancellationToken)">
-            <summary>
-            Get all symbols that have a matching name as determined by the predicate.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.GetInfoForAssemblyAsync(Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.IAssemblySymbol,System.String,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.TryGetInfoForMetadataAssemblyAsync(Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.IAssemblySymbol,Microsoft.CodeAnalysis.PortableExecutableReference,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             this gives you SymbolTreeInfo for a metadata
             </summary>
@@ -3974,7 +4237,7 @@
             Uniqueness is always case sensitive.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.LoadOrCreateAsync(Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.IAssemblySymbol,System.String,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.FindSymbols.SymbolTreeInfo.LoadOrCreateAsync(Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.IAssemblySymbol,System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             this is for a metadata reference in a solution
             </summary>
@@ -4014,6 +4277,17 @@
             <summary>
             snapshot based cache to guarantee same info is returned without re-calculating for same solution snapshot.
             since document will be re-created per new solution, this should go away as soon as there is any change on workspace.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Packaging.IPackageSearchService.FindPackagesWithType(System.String,System.String,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Searches for packages that contain a type with the provided name and arity.
+            Note: Implementations are free to return the results they feel best for the
+            given data.  Specifically, they can do exact or fuzzy matching on the name.
+            They can use or ignore the arity depending on their capabilities. 
+            
+            Implementations should return results in order from best to worst (from their
+            perspective).
             </summary>
         </member>
         <member name="T:Microsoft.CodeAnalysis.Formatting.FormattingContext">
@@ -4741,6 +5015,12 @@
             will return constructor symbols.
             </summary>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.LanguageServices.ISyntaxFactsService.GetNameForArgument(Microsoft.CodeAnalysis.SyntaxNode)">
+            <summary>
+            Given a <see cref="T:Microsoft.CodeAnalysis.SyntaxNode"/>, that represents and argument return the string representation of
+            that arguments name.
+            </summary>
+        </member>
         <member name="T:Microsoft.CodeAnalysis.LanguageServices.ITypeInferenceService">
             <summary>
             Helper service for telling you what type can be inferred to be viable in a particular
@@ -5245,7 +5525,7 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>All locations where conflicts were caused because the new declaration.</returns>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Rename.IRenameRewriterLanguageService.ComputeImplicitReferenceConflicts(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.ISymbol,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.FindSymbols.ReferenceLocation},System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.Rename.IRenameRewriterLanguageService.ComputeImplicitReferenceConflictsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.ISymbol,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.FindSymbols.ReferenceLocation},System.Threading.CancellationToken)">
             <summary>
             Identifies the conflicts caused by implicitly referencing the renamed symbol.
             </summary>
@@ -5325,12 +5605,19 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Rename.RenameLocations.ReferenceProcessing.GetRenamableDefinitionLocationsAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,System.Threading.CancellationToken)">
             <summary>
-            Given a ISymbol, returns the renamable locations for a given symbol.
+            Given a ISymbol, returns the renameable locations for a given symbol.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Rename.RenameLocations.FindAsync(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.Options.OptionSet,System.Threading.CancellationToken)">
             <summary>
             Find the locations that need to be renamed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Rename.RenameUtilities.ShouldRenameOnlyAffectDeclaringProject(Microsoft.CodeAnalysis.ISymbol)">
+            <summary>
+            Renaming a private symbol typically confines the set of references and potential
+            conflicts to that symbols declaring project. However, rename may cascade to
+            non-public symbols which may then require other projects be considered.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.FileLinePositionSpanExtensions.GetMappedFilePathIfExist(Microsoft.CodeAnalysis.FileLinePositionSpan)">
@@ -5340,7 +5627,7 @@
         </member>
         <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.IsChildNode``1(Microsoft.CodeAnalysis.SyntaxNode,System.Func{``0,Microsoft.CodeAnalysis.SyntaxNode})">
             <summary>
-            Returns true if is a given token is a child token of of a certain type of parent node.
+            Returns true if is a given token is a child token of a certain type of parent node.
             </summary>
             <typeparam name="TParent">The type of the parent node.</typeparam>
             <param name="node">The node that we are testing.</param>
@@ -5387,7 +5674,37 @@
             the same token possibly rewritten with replaced trivia.</param>
             <param name="cancellationToken"></param>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxTreeExtensions.GetTouchingWord(Microsoft.CodeAnalysis.SyntaxTree,System.Int32,Microsoft.CodeAnalysis.LanguageServices.ISyntaxFactsService,System.Threading.CancellationToken,System.Boolean)">
+        <member name="F:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.s_findSkippedTokenForward">
+            <summary>
+            Look inside a trivia list for a skipped token that contains the given position.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.FindSkippedTokenForward(Microsoft.CodeAnalysis.SyntaxTriviaList,System.Int32)">
+            <summary>
+            Look inside a trivia list for a skipped token that contains the given position.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.s_findSkippedTokenBackward">
+            <summary>
+            Look inside a trivia list for a skipped token that contains the given position.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.FindSkippedTokenBackward(Microsoft.CodeAnalysis.SyntaxTriviaList,System.Int32)">
+            <summary>
+            Look inside a trivia list for a skipped token that contains the given position.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.FindTokenOnRightOfPosition(Microsoft.CodeAnalysis.SyntaxNode,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            If the position is inside of token, return that token; otherwise, return the token to the right.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxNodeExtensions.FindTokenOnLeftOfPosition(Microsoft.CodeAnalysis.SyntaxNode,System.Int32,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            If the position is inside of token, return that token; otherwise, return the token to the left.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxTreeExtensions.GetTouchingWordAsync(Microsoft.CodeAnalysis.SyntaxTree,System.Int32,Microsoft.CodeAnalysis.LanguageServices.ISyntaxFactsService,System.Threading.CancellationToken,System.Boolean)">
             <summary>
             Returns the identifier, keyword, contextual keyword or preprocessor keyword touching this
             position, or a token of Kind = None if the caret is not touching either.
@@ -5396,6 +5713,16 @@
         <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxTreeExtensions.IsHiddenPosition(Microsoft.CodeAnalysis.SyntaxTree,System.Int32,System.Threading.CancellationToken)">
             <summary>
             Returns <c>true</c> if the provided position is in a hidden region inaccessible to the user.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxTreeExtensions.FindTokenOnRightOfPosition(Microsoft.CodeAnalysis.SyntaxTree,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            If the position is inside of token, return that token; otherwise, return the token to the right.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.SyntaxTreeExtensions.FindTokenOnLeftOfPosition(Microsoft.CodeAnalysis.SyntaxTree,System.Int32,System.Threading.CancellationToken,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            If the position is inside of token, return that token; otherwise, return the token to the left.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.TextDocumentExtensions.WithText(Microsoft.CodeAnalysis.TextDocument,Microsoft.CodeAnalysis.Text.SourceText)">
@@ -5443,6 +5770,12 @@
             if exact location (not relative location) is needed from symbol, regular GetSemanticModel should be used.
             </summary>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.DocumentExtensions.GetPartialSemanticModelAsync(Microsoft.CodeAnalysis.Document,System.Threading.CancellationToken)">
+            <summary>
+            Returns the semantic model for this document that may be produced from partial semantics. The semantic model
+            is only guaranteed to contain the syntax tree for <paramref name="document"/> and nothing else.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.INamespaceSymbolExtensions.FindNamespaces(Microsoft.CodeAnalysis.INamespaceSymbol,System.String,System.Threading.CancellationToken)">
             <summary>
             Searches the namespace for namespaces with the provided name.
@@ -5472,10 +5805,10 @@
             they will be found in the compilation.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions.IsAwaitable(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.SemanticModel,System.Int32)">
+        <member name="M:Microsoft.CodeAnalysis.Shared.Extensions.ISymbolExtensions.IsAwaitableNonDynamic(Microsoft.CodeAnalysis.ISymbol,Microsoft.CodeAnalysis.SemanticModel,System.Int32)">
             <summary>
-            If the <paramref name="symbol"/> is a method symbol, returns True if the method's return type is "awaitable".
-            If the <paramref name="symbol"/> is a type symbol, returns True if that type is "awaitable".
+            If the <paramref name="symbol"/> is a method symbol, returns <see langword="true"/> if the method's return type is "awaitable", but not if it's <see langword="dynamic"/>.
+            If the <paramref name="symbol"/> is a type symbol, returns <see langword="true"/> if that type is "awaitable".
             An "awaitable" is any type that exposes a GetAwaiter method which returns a valid "awaiter". This GetAwaiter method may be an instance method or an extension method.
             </summary>
         </member>
@@ -5772,7 +6105,7 @@
         </member>
         <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.DocumentationComment.CompletionListCref">
             <summary>
-            The item named named in the &lt;completionlist&gt; tag's cref attribute.
+            The item named in the &lt;completionlist&gt; tag's cref attribute.
             Null if the tag or cref attribute didn't exist.
             </summary>
         </member>
@@ -5850,26 +6183,6 @@
             </summary>
             <exception cref="T:System.ArgumentException">A cycle was detected in the extension ordering.</exception>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.FindTokenHelper.FindTokenOnRightOfPosition``1(Microsoft.CodeAnalysis.SyntaxNode,System.Int32,System.Func{Microsoft.CodeAnalysis.SyntaxTriviaList,System.Int32,Microsoft.CodeAnalysis.SyntaxToken},System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            If the position is inside of token, return that token; otherwise, return the token to the right.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.FindTokenHelper.FindTokenOnLeftOfPosition``1(Microsoft.CodeAnalysis.SyntaxNode,System.Int32,System.Func{Microsoft.CodeAnalysis.SyntaxTriviaList,System.Int32,Microsoft.CodeAnalysis.SyntaxToken},System.Boolean,System.Boolean,System.Boolean)">
-            <summary>
-            If the position is inside of token, return that token; otherwise, return the token to the left.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.FindTokenHelper.FindSkippedTokenBackward(System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.SyntaxToken},System.Int32)">
-            <summary>
-            Look inside a trivia list for a skipped token that contains the given position.
-            </summary>
-        </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.FindTokenHelper.FindSkippedTokenForward(System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.SyntaxToken},System.Int32)">
-            <summary>
-            Look inside a trivia list for a skipped token that contains the given position.
-            </summary>
-        </member>
         <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.IntegerUtilities.Convert(System.Int64,Microsoft.CodeAnalysis.SpecialType)">
             <summary>
             Helper as VB's CType doesn't work without arithmetic overflow.
@@ -5943,7 +6256,7 @@
             Breaks an identifier string into constituent parts.
             </summary>
         </member>
-        <member name="T:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8">
+        <member name="T:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9">
             <summary>
             Helper class to analyze the semantic effects of a speculated syntax node replacement on the parenting nodes.
             Given an expression node from a syntax tree and a new expression from a different syntax tree,
@@ -5952,7 +6265,7 @@
             the syntax replacement doesn't break the semantics of any parenting nodes of the original expression.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.#ctor(`1,`1,`7,System.Threading.CancellationToken,System.Boolean,System.Boolean)">
+        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.#ctor(`1,`1,`7,System.Threading.CancellationToken,System.Boolean,System.Boolean)">
             <summary>
             Creates a semantic analyzer for speculative syntax replacement.
             </summary>
@@ -5969,53 +6282,53 @@
             True if semantic analysis should fail when any of the invocation expression ancestors of <paramref name="expression"/> in original code has overload resolution failures.
             </param>
         </member>
-        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalExpression">
+        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalExpression">
             <summary>
             Original expression to be replaced.
             </summary>
         </member>
-        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SemanticRootOfOriginalExpression">
+        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SemanticRootOfOriginalExpression">
             <summary>
-            First ancestor of <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalExpression"/> which is either a statement, attribute, constructor initializer,
+            First ancestor of <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalExpression"/> which is either a statement, attribute, constructor initializer,
             field initializer, default parameter initializer or type syntax node.
             It serves as the root node for all semantic analysis for this syntax replacement.
             </summary>
         </member>
-        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalSemanticModel">
+        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalSemanticModel">
             <summary>
-            Semantic model for the syntax tree corresponding to <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalExpression"/>
+            Semantic model for the syntax tree corresponding to <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalExpression"/>
             </summary>
         </member>
-        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.ReplacedExpression">
+        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.ReplacedExpression">
             <summary>
-            Node which replaces the <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalExpression"/>.
-            Note that this node is a cloned version of <see cref="F:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8._newExpressionForReplace"/> node, which has been re-parented
-            under the node to be speculated, i.e. <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SemanticRootOfReplacedExpression"/>.
+            Node which replaces the <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalExpression"/>.
+            Note that this node is a cloned version of <see cref="F:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9._newExpressionForReplace"/> node, which has been re-parented
+            under the node to be speculated, i.e. <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SemanticRootOfReplacedExpression"/>.
             </summary>
         </member>
-        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SemanticRootOfReplacedExpression">
+        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SemanticRootOfReplacedExpression">
             <summary>
-            Node created by replacing <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalExpression"/> under <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SemanticRootOfOriginalExpression"/> node.
+            Node created by replacing <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalExpression"/> under <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SemanticRootOfOriginalExpression"/> node.
             This node is used as the argument to the GetSpeculativeSemanticModel API and serves as the root node for all
             semantic analysis of the speculated tree.
             </summary>
         </member>
-        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SpeculativeSemanticModel">
+        <member name="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SpeculativeSemanticModel">
             <summary>
             Speculative semantic model used for analyzing the semantics of the new tree.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.ReplacementChangesSemantics">
+        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.ReplacementChangesSemantics">
             <summary>
             Determines whether performing the given syntax replacement will change the semantics of any parenting expressions
-            by performing a bottom up walk from the <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalExpression"/> upto <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SemanticRootOfOriginalExpression"/>
-            in the original tree and simultaneously walking bottom up from <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.ReplacedExpression"/> up to <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SemanticRootOfReplacedExpression"/>
+            by performing a bottom up walk from the <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalExpression"/> up to <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SemanticRootOfOriginalExpression"/>
+            in the original tree and simultaneously walking bottom up from <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.ReplacedExpression"/> up to <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SemanticRootOfReplacedExpression"/>
             in the speculated syntax tree and performing appropriate semantic comparisons.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.SymbolsForOriginalAndReplacedNodesAreCompatible">
+        <member name="M:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.SymbolsForOriginalAndReplacedNodesAreCompatible">
             <summary>
-            Checks whether the semantic symbols for the <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.OriginalExpression"/> and <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`8.ReplacedExpression"/> are non-null and compatible.
+            Checks whether the semantic symbols for the <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.OriginalExpression"/> and <see cref="P:Microsoft.CodeAnalysis.Shared.Utilities.AbstractSpeculationAnalyzer`9.ReplacedExpression"/> are non-null and compatible.
             </summary>
             <returns></returns>
         </member>
@@ -6545,6 +6858,23 @@
             MEF metadata class used for finding <see cref="T:Microsoft.CodeAnalysis.Host.IWorkspaceService"/> and <see cref="T:Microsoft.CodeAnalysis.Host.Mef.IWorkspaceServiceFactory"/> exports.
             </summary>
         </member>
+        <member name="T:Microsoft.CodeAnalysis.Host.IFrameworkAssemblyPathResolver">
+            <summary>
+            Provides a way to map from an assembly name to the actual path of the .Net framework 
+            assemby with that name in the context of a specified project.  For example, if the 
+            assembly name is "System.Data" then a project targetting .Net 2.0 would resolve this
+            to a different path than a project targetting .Net 4.5.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Host.IFrameworkAssemblyPathResolver.ResolveAssemblyPath(Microsoft.CodeAnalysis.ProjectId,System.String,System.String)">
+            <summary>
+            Returns null if the assembly name could not be resolved.
+            </summary>
+            <param name="fullyQualifiedName">An optional type name for a type that must
+            exist in the assembly.</param>
+            <param name="projectId">The project context to search within.</param>
+            <param name="assemblyName">The name of the assembly to try to resolve.</param>
+        </member>
         <member name="T:Microsoft.CodeAnalysis.Host.MetadataReferenceCache">
             <summary>
             A cache for metadata references.
@@ -7032,6 +7362,11 @@
             values.
             </summary>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.Recommendations.Recommender.GetRecommendedSymbolsAtPosition(Microsoft.CodeAnalysis.SemanticModel,System.Int32,Microsoft.CodeAnalysis.Workspace,Microsoft.CodeAnalysis.Options.OptionSet,System.Threading.CancellationToken)">
+            <summary>
+            Obsolete.  Use <see cref="M:Microsoft.CodeAnalysis.Recommendations.Recommender.GetRecommendedSymbolsAtPositionAsync(Microsoft.CodeAnalysis.SemanticModel,System.Int32,Microsoft.CodeAnalysis.Workspace,Microsoft.CodeAnalysis.Options.OptionSet,System.Threading.CancellationToken)"/>.
+            </summary>
+        </member>
         <member name="T:Microsoft.CodeAnalysis.SemanticModelWorkspaceService.ISemanticModelService">
             <summary>
             a service that provides a semantic model that will re-use last known compilation if
@@ -7181,6 +7516,22 @@
             <summary>
             A source for TextAndVersion constructed from an syntax tree
             </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.TextDocumentState.sourceTextOpt">
+             <summary>
+             A direct reference to our source text.  This is only kept around in speicalized scenarios.
+             Specifically, we keep this around when a document is opened.  By providing this we can allow
+             clients to easily get to the text of the document in a non-blocking fashion if that's all
+             that they need.
+            
+             Note: this facility does not extend to getting the version as well.  That's because the
+             version of a document depends on both the current source contents and the contents from 
+             the previous version of the document.  (i.e. if the contents are the same, then we will
+             preserve the same version, otherwise we'll move the version forward).  Because determining
+             the version depends on comparing text, and because getting the old text may block, we 
+             do not have the ability to know the version of the document up front, and instead can
+             only retrieve is asynchronously through <see cref="F:Microsoft.CodeAnalysis.TextDocumentState.textAndVersionSource"/>.
+             </summary> 
         </member>
         <member name="T:Microsoft.CodeAnalysis.BranchId">
             <summary>
@@ -7493,6 +7844,11 @@
             All the documents associated with this project.
             </summary>
         </member>
+        <member name="P:Microsoft.CodeAnalysis.Project.AdditionalDocuments">
+            <summary>
+            All the additional documents associated with this project.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.Project.ContainsDocument(Microsoft.CodeAnalysis.DocumentId)">
             <summary>
             True if the project contains a document with the specified ID.
@@ -7533,6 +7889,11 @@
         <member name="M:Microsoft.CodeAnalysis.Project.GetCompilationAsync(System.Threading.CancellationToken)">
             <summary>
             Get the <see cref="T:Microsoft.CodeAnalysis.Compilation"/> for this project asynchronously.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Project.HasSuccessfullyLoadedAsync(System.Threading.CancellationToken)">
+            <summary>
+            Determines if the compilation returned by <see cref="M:Microsoft.CodeAnalysis.Project.GetCompilationAsync(System.Threading.CancellationToken)"/> and all its referenced compilaton are from fully loaded projects.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Project.GetChanges(Microsoft.CodeAnalysis.Project)">
@@ -7825,6 +8186,18 @@
             Type of the host object.
             </summary>
         </member>
+        <member name="P:Microsoft.CodeAnalysis.ProjectInfo.HasAllInformation">
+            <summary>
+            True if project information is complete. In some workspace hosts, it is possible
+            a project only has partial information. In such cases, a project might not have all
+            information on its files or references.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ProjectInfo.Create(Microsoft.CodeAnalysis.ProjectId,Microsoft.CodeAnalysis.VersionStamp,System.String,System.String,System.String,System.String,System.String,Microsoft.CodeAnalysis.CompilationOptions,Microsoft.CodeAnalysis.ParseOptions,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.DocumentInfo},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.ProjectReference},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.MetadataReference},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Diagnostics.AnalyzerReference},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.DocumentInfo},System.Boolean,System.Type,System.Boolean)">
+            <summary>
+            Create a new instance of a ProjectInfo.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.ProjectInfo.Create(Microsoft.CodeAnalysis.ProjectId,Microsoft.CodeAnalysis.VersionStamp,System.String,System.String,System.String,System.String,System.String,Microsoft.CodeAnalysis.CompilationOptions,Microsoft.CodeAnalysis.ParseOptions,System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.DocumentInfo},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.ProjectReference},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.MetadataReference},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.Diagnostics.AnalyzerReference},System.Collections.Generic.IEnumerable{Microsoft.CodeAnalysis.DocumentInfo},System.Boolean,System.Type)">
             <summary>
             Create a new instance of a ProjectInfo.
@@ -7949,7 +8322,7 @@
             <summary>
             Tries to get the latest snapshot of the compilation without waiting for it to be
             fully built. This method takes advantage of the progress side-effect produced during
-            BuildCompilation. It will either return the already built compilation, any
+            <see cref="M:Microsoft.CodeAnalysis.Solution.CompilationTracker.BuildCompilationInfoAsync(Microsoft.CodeAnalysis.Solution,System.Threading.CancellationToken)"/>. It will either return the already built compilation, any
             in-progress compilation or any known old compilation in that order of preference.
             The compilation state that is returned will have a compilation that is retained so
             that it cannot disappear.
@@ -7960,10 +8333,16 @@
             Gets the final compilation if it is available.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.Solution.CompilationTracker.BuildCompilationAsync(Microsoft.CodeAnalysis.Solution,System.Threading.CancellationToken)">
+        <member name="M:Microsoft.CodeAnalysis.Solution.CompilationTracker.BuildCompilationInfoAsync(Microsoft.CodeAnalysis.Solution,System.Threading.CancellationToken)">
             <summary>
             Builds the compilation matching the project state. In the process of building, also
             produce in progress snapshots that can be accessed from other threads.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Solution.CompilationTracker.FinalizeCompilationAsync(Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.Compilation,System.Threading.CancellationToken)">
+            <summary>
+            Add all appropriate references to the compilation and set it as our final compilation
+            state.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Solution.CompilationTracker.GetMetadataReferenceAsync(Microsoft.CodeAnalysis.Solution,Microsoft.CodeAnalysis.ProjectState,Microsoft.CodeAnalysis.ProjectReference,System.Threading.CancellationToken)">
@@ -7994,6 +8373,63 @@
         <member name="M:Microsoft.CodeAnalysis.Solution.CompilationTracker.GetSyntaxTreesWithNameFromDeclarationOnlyCompilation(System.Func{System.String,System.Boolean},Microsoft.CodeAnalysis.SymbolFilter,System.Threading.CancellationToken)">
             <summary>
             get all syntax trees that contain declaration node with the given name
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.State">
+            <summary>
+            The base type of all <see cref="T:Microsoft.CodeAnalysis.Solution.CompilationTracker"/> states. The state of a <see cref="T:Microsoft.CodeAnalysis.Solution.CompilationTracker" />
+            starts at <see cref="F:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.Empty"/>, and then will progress through the other states until it finally reaches
+            <see cref="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.FinalState" />.
+            </summary>
+        </member>
+        <member name="F:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.Empty">
+            <summary>
+            The base <see cref="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.State"/> that starts with everything empty.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.DeclarationOnlyCompilation">
+            <summary>
+            A strong reference to the declaration-only compilation. This compilation isn't used to produce symbols,
+            nor does it have any references. It just holds the declaration table alive.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.Compilation">
+            <summary>
+            The best compilation that is available.  May be an in-progress, full declaration, or a final compilation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.HasSuccessfullyLoadedTransitively">
+            <summary>
+            Specifies whether <see cref="P:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.FinalCompilation"/> and all compilations it depends on contain full information or not. This can return
+            null if the state isn't at the point where it would know, and it's necessary to transition to <see cref="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.FinalState"/> to figure that out.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.FinalCompilation">
+            <summary>
+            The final compilation if available, otherwise an empty <see cref="T:Roslyn.Utilities.ValueSource`1"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.InProgressState">
+            <summary>
+            A state where we are holding onto a previously built compilation, and have a known set of transformations
+            that could get us to a more final state.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.LightDeclarationState">
+            <summary>
+            Declaration-only state that has no associated references or symbols. just declaration table only.
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.FullDeclarationState">
+            <summary>
+            A built compilation for the tracker that contains the fully built DeclarationTable,
+            but may not have references initialized
+            </summary>
+        </member>
+        <member name="T:Microsoft.CodeAnalysis.Solution.CompilationTracker.FinalState">
+            <summary>
+            The final state a compilation tracker reaches. The <see cref="P:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.DeclarationOnlyCompilation"/> is available,
+            as well as the real <see cref="P:Microsoft.CodeAnalysis.Solution.CompilationTracker.State.FinalCompilation"/>.
             </summary>
         </member>
         <member name="P:Microsoft.CodeAnalysis.Solution.BranchId">
@@ -8148,6 +8584,12 @@
             <summary>
             Create a new solution instance with the project specified updated to have
             the specified parse options.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Solution.WithHasAllInformation(Microsoft.CodeAnalysis.ProjectId,System.Boolean)">
+            <summary>
+            Create a new solution instance with the project specified updated to have
+            the specified hasAllInformation.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Solution.AddProjectReference(Microsoft.CodeAnalysis.ProjectId,Microsoft.CodeAnalysis.ProjectReference)">
@@ -8376,6 +8818,11 @@
             <summary>
             Returns the compilation for the specified <see cref="T:Microsoft.CodeAnalysis.Project"/>.  Can return <code>null</code> when the project
             does not support compilations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Solution.HasSuccessfullyLoadedAsync(Microsoft.CodeAnalysis.Project,System.Threading.CancellationToken)">
+            <summary>
+            Return reference completeness for the given project and all projects this references.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Solution.GetMetadataReferenceAsync(Microsoft.CodeAnalysis.ProjectReference,Microsoft.CodeAnalysis.ProjectState,System.Threading.CancellationToken)">
@@ -8851,6 +9298,12 @@
             Call this method when the text of a document is changed on disk.
             </summary>
         </member>
+        <member name="M:Microsoft.CodeAnalysis.Workspace.OnHasAllInformationChanged(Microsoft.CodeAnalysis.ProjectId,System.Boolean)">
+            <summary>
+            Call this method when status of project has changed to incomplete.
+            See <see cref="P:Microsoft.CodeAnalysis.ProjectInfo.HasAllInformation"/> for more information.
+            </summary>
+        </member>
         <member name="M:Microsoft.CodeAnalysis.Workspace.OnDocumentTextChanged(Microsoft.CodeAnalysis.DocumentId,Microsoft.CodeAnalysis.Text.SourceText,Microsoft.CodeAnalysis.PreservationMode)">
             <summary>
             Call this method when the text of a document is updated in the host environment.
@@ -8884,6 +9337,12 @@
         <member name="M:Microsoft.CodeAnalysis.Workspace.CanApplyChange(Microsoft.CodeAnalysis.ApplyChangesKind)">
             <summary>
             Determines if the specific kind of change is supported by the <see cref="M:Microsoft.CodeAnalysis.Workspace.TryApplyChanges(Microsoft.CodeAnalysis.Solution)"/> method.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.Workspace.CanAddProjectReference(Microsoft.CodeAnalysis.ProjectId,Microsoft.CodeAnalysis.ProjectId)">
+            <summary>
+            Returns <code>true</code> if a reference to referencedProject can be added to 
+            referencingProject.  <code>false</code> otherwise.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.Workspace.TryApplyChanges(Microsoft.CodeAnalysis.Solution)">
@@ -9329,9 +9788,6 @@
             An additional document in the current solution was changed.
             </summary>
         </member>
-        <member name="M:Microsoft.CodeAnalysis.WorkspaceDiagnostic.GetDebuggerDisplay">
-            <remarks>Internal for testing purposes</remarks>
-        </member>
         <member name="T:Microsoft.CodeAnalysis.WorkspaceKind">
             <summary>
              Known workspace kinds
@@ -9556,6 +10012,11 @@
         <member name="P:Microsoft.CodeAnalysis.WorkspacesResources.Exceptions">
             <summary>
               Looks up a localized string similar to Exceptions:.
+            </summary>
+        </member>
+        <member name="P:Microsoft.CodeAnalysis.WorkspacesResources.Failure">
+            <summary>
+              Looks up a localized string similar to Failure.
             </summary>
         </member>
         <member name="P:Microsoft.CodeAnalysis.WorkspacesResources.FileWasExternallyModified">
@@ -9913,6 +10374,11 @@
               Looks up a localized string similar to Value too large to be represented as a 30 bit unsigned integer..
             </summary>
         </member>
+        <member name="P:Microsoft.CodeAnalysis.WorkspacesResources.Warning">
+            <summary>
+              Looks up a localized string similar to Warning.
+            </summary>
+        </member>
         <member name="P:Microsoft.CodeAnalysis.WorkspacesResources.WorkspaceIsNotEmpty">
             <summary>
               Looks up a localized string similar to Workspace is not empty..
@@ -9920,12 +10386,18 @@
         </member>
         <member name="P:Microsoft.CodeAnalysis.WorkspacesResources.WorkspaceServicesUnavailable">
             <summary>
-              Looks up a localized string similar to Services required to accomplish the task are not available from the workspace..
+              Looks up a localized string similar to Service of type &apos;{0}&apos; is required to accomplish the task but is not available from the workspace..
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.ArrayBuilder`1.ToImmutable">
             <summary>
             Realizes the array.
+            </summary>
+        </member>
+        <member name="M:Microsoft.CodeAnalysis.ArrayBuilder`1.SetItem(System.Int32,`0)">
+            <summary>
+            Write <paramref name="value"/> to slot <paramref name="index"/>. 
+            Fills in unallocated slots preceding the <paramref name="index"/>, if any.
             </summary>
         </member>
         <member name="M:Microsoft.CodeAnalysis.ArrayBuilder`1.ToImmutableOrNull">
@@ -10140,7 +10612,7 @@
             </summary>
             <returns>-1 if path is null.</returns>
         </member>
-        <member name="M:Roslyn.Utilities.FileNameUtilities.GetFileName(System.String)">
+        <member name="M:Roslyn.Utilities.FileNameUtilities.GetFileName(System.String,System.Boolean)">
             <summary>
             Get file name from path.
             </summary>
@@ -10581,32 +11053,18 @@
             <remarks>
             Unlike <see cref="M:System.IO.Path.GetDirectoryName(System.String)"/> it
                 doesn't check for invalid path characters, 
-                doesn't strip any trailing directory separators (TODO: tomat),
-                doesn't recognize UNC structure \\computer-name\share\directory-name\file-name (TODO: tomat).
             </remarks>
             <returns>Prefix of path that represents a directory. </returns>
+        </member>
+        <member name="M:Roslyn.Utilities.PathUtilities.GetDirectoryName(System.String,System.Boolean)">
+            <summary>
+            Exposed for testing purposes only.
+            </summary>
         </member>
         <member name="M:Roslyn.Utilities.PathUtilities.IsDriveRootedAbsolutePath(System.String)">
             <summary>
             Returns true if given path is absolute and starts with a drive specification ("C:\").
             </summary>
-        </member>
-        <member name="M:Roslyn.Utilities.PathUtilities.GetPathRoot(System.String)">
-            <summary>
-            Get a prefix of given path which is the root of the path.
-            </summary>
-            <returns>
-            Root of an absolute path or null if the path isn't absolute or has invalid format (e.g. "\\").
-            It may or may not end with a directory separator (e.g. "C:\", "C:\foo", "\\machine\share", etc.) .
-            </returns>
-        </member>
-        <member name="M:Roslyn.Utilities.PathUtilities.GetUncPathRootLength(System.String)">
-            <summary>
-            Calculates the length of root of an UNC path.
-            </summary>
-            <remarks>
-            "\\server\share" is root of UNC path "\\server\share\dir1\dir2\file".
-            </remarks>
         </member>
         <member name="M:Roslyn.Utilities.PathUtilities.CombineAbsoluteAndRelativePaths(System.String,System.String)">
             <summary>
@@ -10635,6 +11093,19 @@
             <summary>
             Determines whether an assembly reference is considered an assembly file path or an assembly name.
             used, for example, on values of /r and #r.
+            </summary>
+        </member>
+        <member name="M:Roslyn.Utilities.PathUtilities.ContainsPathComponent(System.String,System.String,System.Boolean)">
+            <summary>
+            Determines if "path" contains 'component' within itself.
+            i.e. asking if the path "c:\foo\bar\baz" has component "bar" would return 'true'.
+            On the other hand, if you had "c:\foo\bar1\baz" then it would not have "bar" as a
+            component.
+            
+            A path contains a component if any file name or directory name in the path
+            matches 'component'.  As such, if you had something like "\\foo" then that would
+            not have "foo" as a component. That's because here "foo" is the server name portion
+            of the UNC path, and not an actual directory or file name.
             </summary>
         </member>
         <member name="M:Roslyn.Utilities.ReflectionUtilities.GetTypeFromEither(System.String,System.String)">
@@ -10669,6 +11140,44 @@
             <summary>
             APIs contained here are proposed for CoreFX but not yet finalized.  Their contracts are
             subject to change. 
+            </summary>
+        </member>
+        <member name="T:Roslyn.Utilities.BKTree">
+             <summary>
+             NOTE: Only use if you truly need a BK-tree.  If you just want to compare words, use
+             the <see cref="T:Roslyn.Utilities.SpellChecker"/> type instead.
+            
+             An implementation of a Burkhard-Keller tree.  Introduced in:
+             
+             'Some approaches to best-match file searching.'
+             Communications of the ACM CACM
+             Volume 16 Issue 4, April 1973 
+             Pages 230-236 
+             http://dl.acm.org/citation.cfm?doid=362003.362025
+             </summary>
+        </member>
+        <member name="F:Roslyn.Utilities.BKTree.Edge.ChildNodeIndex">
+            <summary>Where the child node can be found in <see cref="F:Roslyn.Utilities.BKTree._nodes"/>.</summary>
+        </member>
+        <member name="F:Roslyn.Utilities.BKTree.Node.WordSpan">
+            <summary>
+            The string this node corresponds to.  Specifically, this span is the range of
+            <see cref="F:Roslyn.Utilities.BKTree._concatenatedLowerCaseWords"/> for that string.
+            </summary>
+        </member>
+        <member name="F:Roslyn.Utilities.BKTree.Node.EdgeCount">
+            <summary>How many child edges this node has.</summary>
+        </member>
+        <member name="F:Roslyn.Utilities.BKTree.Node.FirstEdgeIndex">
+            <summary>Where the first edge can be found in <see cref="F:Roslyn.Utilities.BKTree._edges"/>.  The edges 
+            are in the range _edges[FirstEdgeIndex, FirstEdgeIndex + EdgeCount)
+            </summary>
+        </member>
+        <member name="M:Roslyn.Utilities.WordSimilarityChecker.AreSimilar(System.String,System.String,System.Double@)">
+            <summary>
+            Returns true if 'originalText' and 'candidateText' are likely a misspelling of each other.
+            Returns false otherwise.  If it is a likely misspelling a similarityWeight is provided
+            to help rank the match.  Lower costs mean it was a better match.
             </summary>
         </member>
         <member name="M:Roslyn.Utilities.WeakEventHandler`1.Create``1(``0,System.Action{``0,System.Object,`0})">
@@ -10996,19 +11505,24 @@
             all builds.
             </summary>
         </member>
-        <member name="M:Roslyn.Utilities.EditDistance.IsCloseMatch(System.String,System.String,System.Double@)">
+        <member name="T:Roslyn.Utilities.EditDistance">
             <summary>
-            Returns true if 'value1' and 'value2' are likely a mispelling of each other.
-            Returns false otherwlse.  If it is a likely mispelling a matchCost is provided
-            to help rank the match.  Lower costs mean it was a better match.
-            </summary>
-        </member>
-        <member name="M:Roslyn.Utilities.EditDistance.IsCloseMatch(System.String,System.String,System.Int32,System.Double@)">
-            <summary>
-            Returns true if 'value1' and 'value2' are likely a mispelling of each other.
-            Returns false otherwlse.  If it is a likely mispelling a matchCost is provided
-            to help rank the match.  Lower costs mean it was a better match.
-            </summary>
+             NOTE: Only use if you truly need an edit distance.  If you just want to compare words, use
+             the <see cref="T:Roslyn.Utilities.SpellChecker"/> type instead.
+            
+             Implementation of the Damerau-Levenshtein edit distance algorithm from:
+             An Extension of the String-to-String Correction Problem:
+             Published in Journal of the ACM (JACM)
+             Volume 22 Issue 2, April 1975.
+            
+             Important, unlike many edit distance algorithms out there, this one implements a true metric
+             that satisfies the triangle inequality.  (Unlike the "Optimal String Alignment" or "Restricted
+             string edit distance" solutions which do not).  This means this edit distance can be used in
+             other domains that require the triangle inequality (like BKTrees).
+            
+             Specifically, this implementation satisfies the following inequality: D(x, y) + D(y, z) >= D(x, z)
+             (where D is the edit distance).
+            </summary> 
         </member>
         <member name="M:Roslyn.Utilities.LazyInitialization.EnsureInitialized``1(``0@,System.Func{``0})">
             <summary>

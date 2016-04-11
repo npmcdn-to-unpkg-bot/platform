@@ -66,12 +66,12 @@
                 .IncludeDirectory("~/allors/client/Custom/", "*.js", true)
                 .IncludeDirectory("~/allors/client/", "*.js", true));
 
-            // Angular App
+            // App
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .Include("~/app/app.js")
                 .IncludeDirectory("~/app/", "*.js",  true));
 
-            // Angular Tests
+            // Tests
             bundles.Add(new ScriptBundle("~/bundles/tests")
                 .Include("~/Scripts/tsUnit/tsUnit.js")
                 .Include("~/Tests/app.js")
