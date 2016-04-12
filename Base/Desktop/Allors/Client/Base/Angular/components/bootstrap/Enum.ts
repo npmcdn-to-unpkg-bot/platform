@@ -3,8 +3,8 @@
     export class EnumTemplate {
         static name = "allors/bootstrap/enum";
 
-        static view = 
-`
+        static createDefaultView() {
+            return `
 <select class="form-control" 
             ng-model="$ctrl.role" 
             ng-disabled="!$ctrl.canWrite" 
@@ -13,9 +13,10 @@
     <option ng-if="!$ctrl.roleType.isRequired" value=""></option>     
 </select>
 `;
+        }
 
-        static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(EnumTemplate.name, EnumTemplate.view);
+        static register(templateCache: angular.ITemplateCacheService, view = EnumTemplate.createDefaultView()) {
+            templateCache.put(EnumTemplate.name, view);
         }
     }
 

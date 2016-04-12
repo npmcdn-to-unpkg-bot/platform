@@ -3,8 +3,8 @@
     export class RadioButtonTemplate {
         static name = "allors/bootstrap/radio-button";
 
-        static view = 
-`
+        static createDefaultView() {
+            return `
 <div class="btn-group">
     <label class="btn btn-info" 
            uib-btn-radio="true" 
@@ -18,8 +18,10 @@
            ng-required="$ctrl.roleType.isRequired">{{$ctrl.trueLabel}}</label>
 </div>
 `;
-        static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(RadioButtonTemplate.name, RadioButtonTemplate.view);
+        }
+
+        static register(templateCache: angular.ITemplateCacheService, view = RadioButtonTemplate.createDefaultView()) {
+            templateCache.put(RadioButtonTemplate.name, view);
         }
     }
 

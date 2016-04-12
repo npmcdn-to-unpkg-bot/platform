@@ -18,6 +18,7 @@
         Bootstrap.TextAngularTemplate.register($templateCache);
         Bootstrap.EnumTemplate.register($templateCache);
         Bootstrap.SelectTemplate.register($templateCache);
+        Bootstrap.ImageTemplate.register($templateCache);
         Bootstrap.RadioButtonTemplate.register($templateCache);
 
         // Field Groups
@@ -31,7 +32,9 @@
         Bootstrap.TextGroupTemplate.register($templateCache);
         Bootstrap.TextareaGroupTemplate.register($templateCache);
         Bootstrap.TextAngularGroupTemplate.register($templateCache);
+        Bootstrap.EnumGroupTemplate.register($templateCache);
         Bootstrap.SelectGroupTemplate.register($templateCache);
         Bootstrap.ImageGroupTemplate.register($templateCache);
+        Bootstrap.RadioButtonGroupTemplate.register($templateCache);
     }
 }

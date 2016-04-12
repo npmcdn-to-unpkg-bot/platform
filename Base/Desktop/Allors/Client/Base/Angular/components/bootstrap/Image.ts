@@ -1,39 +1,33 @@
 ﻿namespace Allors.Bootstrap {
-    export class ImageGroupTemplate {
-        static name = "allors/bootstrap/image-group";
+    export class ImageTemplate {
+        static name = "allors/bootstrap/image";
 
-        private static view = 
-`
-<b-group field="$ctrl">
-    <b-label field="$ctrl"/>
-    <b-input-group field="$ctrl">
+        static createDefaultView() {
+            return `
+<div ng-if="!$ctrl.role">
+    <button type="button" class="btn btn-default" ng-click="$ctrl.add()">Add new image</button>
+</div>
         
-        <div ng-if="!$ctrl.role">
-            <button type="button" class="btn btn-default" ng-click="$ctrl.add()">Add new image</button>
-        </div>
-        
-        <div ng-if="$ctrl.role.InDataUri">
-            <a ng-click="$ctrl.add()">
-                <img ng-src="{{$ctrl.role.InDataUri}}" class="img-responsive img-thumbnail"/>
-            </a>
-        </div>
+<div ng-if="$ctrl.role.InDataUri">
+    <a ng-click="$ctrl.add()">
+        <img ng-src="{{$ctrl.role.InDataUri}}" class="img-responsive img-thumbnail"/>
+    </a>
+</div>
 
-        <div ng-if="!$ctrl.role.InDataUri && $ctrl.role">
-            <a ng-click="$ctrl.add()">
-                <img ng-src="/media/display/{{$ctrl.role.UniqueId}}?revision={{$ctrl.role.Revision}}" class="img-responsive"/>
-            </a>
-        </div>
-
-    </b-input-group>
-</b-group>
+<div ng-if="!$ctrl.role.InDataUri && $ctrl.role">
+    <a ng-click="$ctrl.add()">
+        <img ng-src="/media/display/{{$ctrl.role.UniqueId}}?revision={{$ctrl.role.Revision}}" class="img-responsive"/>
+    </a>
+</div>
 `;
+        }
 
-        static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(ImageGroupTemplate.name, ImageGroupTemplate.view);
+        static register(templateCache: angular.ITemplateCacheService, view = ImageTemplate.createDefaultView()) {
+            templateCache.put(ImageTemplate.name, view);
         }
     }
 
-    class ImageGroupController extends Bootstrap.Field {
+    class ImageController extends Bootstrap.Field {
 
         size: number;
         format: string;
@@ -69,9 +63,9 @@
 
     angular
         .module("allors")
-        .component("bImageGroup", {
-            controller: ImageGroupController,
-            templateUrl: ImageGroupTemplate.name,
+        .component("bImage", {
+            controller: ImageController,
+            templateUrl: ImageTemplate.name,
             require: {
                 form: "^bForm"
             },
