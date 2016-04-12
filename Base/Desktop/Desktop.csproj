@@ -347,6 +347,7 @@
     <Content Include="typings.json" />
     <Content Include="Scripts\jsnlog.js.map" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Bootstrap.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Enum.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Field.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Form.ts" />
@@ -360,8 +361,11 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Static.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextAngular.ts" />
-    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\StaticGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextAngularGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Textarea.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\StaticGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextareaGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Text.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Control.ts" />
