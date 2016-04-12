@@ -3,8 +3,8 @@
     export class DatepickerPopupTemplate {
         static name = "allors/bootstrap/datepicker-popup";
 
-        static view = 
-`
+        static createDefaultView() {
+            return `
 <input type="date" placeholder="{{$ctrl.placeholder}}" class="form-control" 
             uib-datepicker-popup 
             datepicker-options="$ctrl.options" 
@@ -14,13 +14,22 @@
             ng-disabled="!$ctrl.canWrite"
             ng-required="$ctrl.roleType.isRequired">
 `;
+        }
 
-        static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(DatepickerPopupTemplate.name, DatepickerPopupTemplate.view);
+        static register(templateCache: angular.ITemplateCacheService, view = DatepickerPopupTemplate.createDefaultView()) {
+            templateCache.put(DatepickerPopupTemplate.name, view);
         }
     }
 
-    class DatepickerPopupController extends Bootstrap.Field {
+    export class DatepickerPopupController extends Bootstrap.Field {
+        static bindings = {
+            object: "<",
+            relation: "@",
+            timezone: "@",
+            format: "@",
+            options: "<"
+        }
+
         timezone = "UTC";
         format = "yyyy-mm-dd";
         options: any = {};
@@ -42,15 +51,7 @@
         .component("bDatepickerPopup", {
             controller: DatepickerPopupController,
             templateUrl: DatepickerPopupTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@",
-                timezone: "@",
-                format: "@",
-                options: "<"
-            }
+            require: FormController.require,
+            bindings: FormController.bindings
         } as any);
 }

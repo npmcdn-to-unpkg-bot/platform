@@ -18,24 +18,12 @@
         }
     }
 
-    class RadioButtonGroupController extends Bootstrap.Field {
-        static $inject = ["$log", "$translate"];
-        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
-            super($log, $translate);
-        }
-    }
-
     angular
         .module("allors")
         .component("bRadioButtonGroup", {
-            controller: RadioButtonGroupController,
+            controller: RadioButtonController,
             templateUrl: ["$element", "$attrs", () => RadioButtonGroupTemplate.name],
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@"
-            }
+            require: FormController.require,
+            bindings: RadioButtonController.bindings
         } as any);
 }

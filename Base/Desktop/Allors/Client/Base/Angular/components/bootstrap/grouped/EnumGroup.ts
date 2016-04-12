@@ -17,25 +17,13 @@
             templateCache.put(EnumGroupTemplate.name, view);
         }
     }
-
-    class EnumGroupController extends Bootstrap.Field {
-        static $inject = ["$log", "$translate"];
-        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
-            super($log, $translate);
-        }
-    }
-
+ 
     angular
         .module("allors")
         .component("bEnumGroup", {
-            controller: EnumGroupController,
+            controller: EnumController,
             templateUrl: ["$element", "$attrs", () => EnumGroupTemplate.name],
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@"
-            }
+            require: FormController.require,
+            bindings: EnumController.bindings
         } as any);
 }

@@ -20,11 +20,16 @@
         }
     }
 
-    class Enum {
+    export class Enum {
         constructor(public value: number, public name: string) {}
     }
 
-    class EnumController extends Bootstrap.Field {
+    export class EnumController extends Bootstrap.Field {
+        static bindings = {
+            object: "<",
+            relation: "@",
+            fullTypeName: "@enum"
+        }
 
         fullTypeName: string;
 
@@ -71,13 +76,7 @@
         .component("bEnum", {
             controller: EnumController,
             templateUrl: EnumTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@",
-                fullTypeName: "@enum"
-            }
+            require: FormController.require,
+            bindings: EnumController.bindings
         } as any);
 }

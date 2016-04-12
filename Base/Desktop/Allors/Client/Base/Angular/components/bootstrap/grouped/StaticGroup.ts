@@ -18,24 +18,12 @@
         }
     }
 
-    class StaticGroupController extends Bootstrap.Field {
-        static $inject = ["$log", "$translate"];
-        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
-            super($log, $translate);
-        }
-    }
-
     angular
         .module("allors")
         .component("bStaticGroup", {
-            controller: StaticGroupController,
+            controller: StaticController,
             templateUrl: ["$element", "$attrs", () => StaticGroupTemplate.name],
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@"
-            }
+            require: FormController.require,
+            bindings: StaticController.bindings
         } as any);
 }

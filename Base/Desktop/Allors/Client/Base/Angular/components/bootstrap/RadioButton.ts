@@ -25,7 +25,14 @@
         }
     }
 
-    class RadioButtonController extends Bootstrap.Field {
+    export class RadioButtonController extends Bootstrap.Field {
+        static bindings = {
+            object: "<",
+            relation: "@",
+            trueLabel: "@true",
+            falseLabel: "@false"
+        }
+
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
@@ -37,14 +44,7 @@
         .component("bRadioButton", {
             controller: RadioButtonController,
             templateUrl: RadioButtonTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@",
-                trueLabel: "@true",
-                falseLabel: "@false"
-            }
+            require: FormController.require,
+            bindings: RadioButtonController.bindings
         } as any);
 }

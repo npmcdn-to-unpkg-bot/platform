@@ -18,54 +18,12 @@
         }
     }
 
-    class ImageGroupController extends Bootstrap.Field {
-
-        size: number;
-        format: string;
-        quality: number;
-
-        static $inject = ["$scope", "$uibModal", "$log", "$translate"];
-        constructor(private $scope: ng.IScope, private $uibModal: angular.ui.bootstrap.IModalService, $log: angular.ILogService, $translate: angular.translate.ITranslateService) {
-            super($log, $translate);
-        }
-
-        add() {
-            const modalInstance = this.$uibModal.open({
-                templateUrl: ImageModalTemplate.name,
-                controller: ImageModalController,
-                controllerAs: "$ctrl",
-                resolve: {
-                    size: this.size,
-                    format: this.format,
-                    quality: this.quality
-                }
-            });
-
-            modalInstance.result.then(selectedItem => {
-                if (!this.role) {
-                    this.role = this.object.session.create("Media");
-                }
-
-                var media = this.role as Domain.Media;
-                media.InDataUri = selectedItem;
-            });
-        }
-    }
-
     angular
         .module("allors")
         .component("bImageGroup", {
-            controller: ImageGroupController,
+            controller: ImageController,
             templateUrl: ImageGroupTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@",
-                size: "<",
-                format: "<",
-                quality: "<"
-            }
+            require: FormController.require,
+            bindings: ImageController.bindings
         } as any);
 }

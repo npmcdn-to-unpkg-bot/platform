@@ -40,7 +40,14 @@
         }
     }
 
-    class SelectController extends Bootstrap.Field {
+    export class SelectController extends Bootstrap.Field {
+        static bindings = {
+            object: "<",
+            relation: "@",
+            display: "@",
+            options: "<",
+            lookup: "&lookup"
+        }
 
         options: SessionObject[];
         asyncOptions: SessionObject[];
@@ -79,15 +86,7 @@
         .component("bSelect", {
             controller: SelectController,
             templateUrl: SelectTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@",
-                display: "@",
-                options: "<",
-                lookup: "&lookup"
-            }
+            require: FormController.require,
+            bindings: SelectController.bindings
         } as any);
 }

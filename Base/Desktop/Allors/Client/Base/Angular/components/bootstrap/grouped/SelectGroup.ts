@@ -18,55 +18,13 @@
             templateCache.put(SelectGroupTemplate.name, view);
         }
     }
-
-    class SelectGroupController extends Bootstrap.Field {
-
-        options: SessionObject[];
-        asyncOptions: SessionObject[];
-
-        static $inject = ["$log", "$translate"];
-        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
-            super($log, $translate);
-        }
-        
-        filterFunction(criteria: string): (object) => boolean {
-
-            return (object) => {
-                const value = object[this.display] as string;
-                if (value) {
-                    const lowerCaseValue = value.toLowerCase();
-                    const lowerCaseCriteria = criteria.toLowerCase();
-
-                    return lowerCaseValue.indexOf(lowerCaseCriteria) >= 0;
-                }
-
-                return false;
-            }
-        }
-
-        refresh(criteria) {
-            this
-                .lookup({ criteria: criteria })
-                .then((results) => {
-                    this.asyncOptions = results;
-                });
-        }
-    }
-
+    
     angular
         .module("allors")
         .component("bSelectGroup", {
-            controller: SelectGroupController,
+            controller: SelectController,
             templateUrl: SelectGroupTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@",
-                display: "@",
-                options: "<",
-                lookup: "&lookup"
-            }
+            require: FormController.require,
+            bindings: SelectController.bindings
         } as any);
 }

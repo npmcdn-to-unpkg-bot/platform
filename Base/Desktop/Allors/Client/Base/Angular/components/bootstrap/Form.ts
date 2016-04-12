@@ -15,6 +15,14 @@
 
     export class FormController  {
 
+        static require = {
+            form: "^bForm"
+        };
+
+        static bindings = {
+            horizontal: "<"
+        }
+
         horizontal: boolean;
 
         static $inject = ["$log"];
@@ -28,8 +36,6 @@
             controller: FormController,
             templateUrl: FormTemplate.name,
             transclude: true,
-            bindings: {
-                horizontal: "<"
-            }
+            bindings: FormController.bindings
         } as any);
 }

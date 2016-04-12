@@ -14,7 +14,12 @@
         }
     }
 
-    class StaticController extends Bootstrap.Field {
+    export class StaticController extends Bootstrap.Field {
+        static bindings = {
+            object: "<",
+            relation: "@"
+        }
+
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
@@ -26,12 +31,7 @@
         .component("bStatic", {
             controller: StaticController,
             templateUrl: StaticTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@"
-            }
+            require: FormController.require,
+            bindings: StaticController.bindings
         } as any);
 }

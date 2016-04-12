@@ -8,7 +8,8 @@
 <textarea placeholder="{{$ctrl.placeholder}}" class="form-control"
         ng-model="$ctrl.role"
         ng-disabled="!$ctrl.canWrite"
-        ng-required="$ctrl.roleType.isRequired">
+        ng-required="$ctrl.roleType.isRequired"
+        rows="{{$ctrl.rows}}">
 `;
         }
 
@@ -17,7 +18,15 @@
         }
     }
 
-    class TextareaController extends Bootstrap.Field {
+    export class TextareaController extends Bootstrap.Field {
+        static bindings = {
+            object: "<",
+            relation: "@",
+            rows: "<"
+        }
+
+        rows: number;
+
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
@@ -29,12 +38,7 @@
         .component("bTextarea", {
             controller: TextareaController,
             templateUrl: TextareaTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@"
-            }
+            require: FormController.require,
+            bindings: TextareaController.bindings
         } as any);
 }
