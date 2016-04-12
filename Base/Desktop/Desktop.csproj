@@ -347,6 +347,8 @@
     <Content Include="typings.json" />
     <Content Include="Scripts\jsnlog.js.map" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\DatepickerPopup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\grouped\DatepickerPopupGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\registerTemplates.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Enum.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Field.ts" />

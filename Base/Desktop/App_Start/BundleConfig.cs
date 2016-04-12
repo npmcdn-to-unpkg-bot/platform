@@ -54,13 +54,12 @@
                .Include("~/lib/textAngular/dist/textAngular-rangy.min.js")
                .Include("~/lib/textAngular/dist/textAngular.min.js"));
 
-            // Allors Client
+            // Allors Client, domain and inheritance dependencies matter
             bundles.Add(new ScriptBundle("~/bundles/allors")
                 .IncludeDirectory("~/allors/client/Base/Workspace/", "*.js", true)
-                // module and base classes
                 .Include("~/allors/client/Base/Angular/allors.module.js")
                 .Include("~/allors/client/Base/Angular/components/bootstrap/internal/Field.js")
-                // by domain
+                .Include("~/allors/client/Base/Angular/components/bootstrap/Form.js")
                 .IncludeDirectory("~/allors/client/Base/Angular/", "*.js", true)
                 .IncludeDirectory("~/allors/client/Generated/", "*.js", true)
                 .IncludeDirectory("~/allors/client/Custom/", "*.js", true)

@@ -20,6 +20,7 @@
         Bootstrap.SelectTemplate.register($templateCache);
         Bootstrap.ImageTemplate.register($templateCache);
         Bootstrap.RadioButtonTemplate.register($templateCache);
+        Bootstrap.DatepickerPopupTemplate.register($templateCache);
 
         // Field Groups
         // ------------
@@ -36,5 +37,6 @@
         Bootstrap.SelectGroupTemplate.register($templateCache);
         Bootstrap.ImageGroupTemplate.register($templateCache);
         Bootstrap.RadioButtonGroupTemplate.register($templateCache);
+        Bootstrap.DatepickerPopupGroupTemplate.register($templateCache);
     }
 }
