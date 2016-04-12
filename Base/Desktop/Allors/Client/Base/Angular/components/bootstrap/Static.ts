@@ -1,20 +1,20 @@
 ﻿namespace Allors.Bootstrap {
 
-    export class TextAngularTemplate {
-        static name = "allors/bootstrap/text-angular";
+    export class StaticTemplate {
+        static name = "allors/bootstrap/static";
 
         static createDefaultView() {
             return `
-<text-angular ta-disabled="!$ctrl.canWrite" ng-model="$ctrl.role"/>
+<p class="form-control-static" ng-bind="$ctrl.role"></p>
 `;
         }
 
-        static register(templateCache: angular.ITemplateCacheService, view = TextAngularTemplate.createDefaultView()) {
-            templateCache.put(TextAngularTemplate.name, view);
+        static register(templateCache: angular.ITemplateCacheService, view = StaticTemplate.createDefaultView()) {
+            templateCache.put(StaticTemplate.name, view);
         }
     }
 
-    class TextAngularController extends Bootstrap.Field {
+    class StaticController extends Bootstrap.Field {
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
@@ -23,9 +23,9 @@
 
     angular
         .module("allors")
-        .component("bTextAngular", {
-            controller: TextAngularController,
-            templateUrl: TextAngularTemplate.name,
+        .component("bStatic", {
+            controller: StaticController,
+            templateUrl: StaticTemplate.name,
             require: {
                 form: "^bForm"
             },

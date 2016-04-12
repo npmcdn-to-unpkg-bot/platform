@@ -9,12 +9,10 @@
             // BundleTable.EnableOptimizations = true;
 
             // Css
-            bundles.Add(
-                new StyleBundle("~/bundles/css")
+            bundles.Add(new StyleBundle("~/bundles/css")
                .Include("~/lib/bootstrap/dist/css/bootstrap.css")
                .Include("~/lib/bootstrap/dist/css/bootstrap-theme.css")
-               .Include("~/lib/font-awesome/css/font-awesome.css")
-               .Include("~/lib/lib/ui-select/dist/select.css")
+               .Include("~/lib/ui-select/dist/select.css")
                .Include("~/lib/angular-chart.js/dist/angular-chart.css")
                .Include("~/lib/angular-toastr/dist/angular-toastr.css")
                .Include("~/lib/angular-loading-bar/build/loading-bar.css")

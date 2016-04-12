@@ -31,11 +31,11 @@
             <div class="panel-body">
                 <!-- ReSharper disable Html.TagNotResolved -->
                 <b-form horizontal="true">
-                    <b-text object="vm.organisation" relation="Name"></b-text>
-                    <b-select object="vm.organisation" relation="Owner" display="FirstName" lookup="vm.personTypeAhead(criteria)"></b-select>
-                    <b-select object="vm.organisation" relation="Employees" display="FirstName" lookup="vm.personTypeAhead(criteria)"></b-select>
-                    <b-select object="vm.organisation" relation="CycleOne" display="FirstName" options="vm.people"></b-select>
-                    <b-select object="vm.organisation" relation="CycleMany" display="FirstName" options="vm.people"></b-select>
+                    <b-text-group object="vm.organisation" relation="Name"></b-text-group>
+                    <b-select-group object="vm.organisation" relation="Owner" display="FirstName" lookup="vm.personTypeAhead(criteria)"></b-select-group>
+                    <b-select-group object="vm.organisation" relation="Employees" display="FirstName" lookup="vm.personTypeAhead(criteria)"></b-select-group>
+                    <b-select-group object="vm.organisation" relation="CycleOne" display="FirstName" options="vm.people"></b-select-group>
+                    <b-select-group object="vm.organisation" relation="CycleMany" display="FirstName" options="vm.people"></b-select-group>
                 </b-form>
             </div>
 

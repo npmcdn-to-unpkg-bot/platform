@@ -3,8 +3,8 @@
     export class SelectTemplate {
         static name = "allors/bootstrap/select";
 
-        static view = 
-`
+        static createDefaultView() {
+            return `
 <ui-select ng-if="$ctrl.roleType.isOne && $ctrl.options !== undefined" ng-model="$ctrl.role" ng-disabled="!$ctrl.canWrite" ng-required="$ctrl.roleType.isRequired">
     <ui-select-match placeholder="Select a value" allow-clear="{{!$ctrl.roleType.isRequired}}">{{$ctrl.displayValue}}</ui-select-match>
     <ui-select-choices repeat="item in $ctrl.options | filter: $ctrl.filterFunction($select.search)">
@@ -33,9 +33,10 @@
     </ui-select-choices>
 </ui-select>
 `;
+        }
 
-        static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(SelectTemplate.name, SelectTemplate.view);
+        static register(templateCache: angular.ITemplateCacheService, view = SelectTemplate.createDefaultView()) {
+            templateCache.put(SelectTemplate.name, view);
         }
     }
 

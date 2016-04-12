@@ -358,7 +358,9 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\RadioButton.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Select.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Static.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextAngular.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\StaticGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextAngularGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Context.ts" />
@@ -534,7 +536,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59271</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59271/</IISUrl>
+          <IISUrl>http://localhost:59272/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
