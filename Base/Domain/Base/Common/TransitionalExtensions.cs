@@ -30,6 +30,8 @@ namespace Allors.Domain
             }
 
             @this.LastObjectState = @this.CurrentObjectState;
+
+            @this.DeniedPermissions = @this.CurrentObjectState?.DeniedPermissions;
         }
     }
 }

@@ -23,12 +23,4 @@ namespace Allors.Domain
     public partial interface ObjectState
     {
     }
-
-    public static class ObjectStateExtensions 
-    {
-        public static void Process(this ObjectState objectState, Transitional transitional)
-        {
-            transitional.DeniedPermissions = objectState.DeniedPermissions;
-        }
-    } 
 }
