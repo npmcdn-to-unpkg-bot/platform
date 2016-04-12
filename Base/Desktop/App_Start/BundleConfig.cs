@@ -57,8 +57,10 @@
             // Allors Client
             bundles.Add(new ScriptBundle("~/bundles/allors")
                 .IncludeDirectory("~/allors/client/Base/Workspace/", "*.js", true)
+                // module and base classes
                 .Include("~/allors/client/Base/Angular/allors.module.js")
-                .Include("~/allors/client/Base/Angular/components/bootstrap/Field.js")
+                .Include("~/allors/client/Base/Angular/components/bootstrap/internal/Field.js")
+                // by domain
                 .IncludeDirectory("~/allors/client/Base/Angular/", "*.js", true)
                 .IncludeDirectory("~/allors/client/Generated/", "*.js", true)
                 .IncludeDirectory("~/allors/client/Custom/", "*.js", true)
