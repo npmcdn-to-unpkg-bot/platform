@@ -349,6 +349,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\allors.module.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\DatepickerPopup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\grouped\DatepickerPopupGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\grouped\StaticEnumGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\registerTemplates.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Enum.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\internal\Field.ts" />
@@ -365,6 +366,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\grouped\SelectGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Static.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\grouped\RadioButtonGroup.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\StaticEnum.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\TextAngular.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\grouped\TextAngularGroup.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Textarea.ts" />
