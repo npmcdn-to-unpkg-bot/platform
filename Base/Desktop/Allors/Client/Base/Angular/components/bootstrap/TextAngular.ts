@@ -14,7 +14,12 @@
         }
     }
 
-    class TextAngularController extends Bootstrap.Field {
+    export class TextAngularController extends Bootstrap.Field {
+        static bindings = {
+            object: "<",
+            relation: "@"
+        }
+
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
@@ -26,12 +31,7 @@
         .component("bTextAngular", {
             controller: TextAngularController,
             templateUrl: TextAngularTemplate.name,
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@"
-            }
+            require: FormController.require,
+            bindings: TextAngularController.bindings
         } as any);
 }
