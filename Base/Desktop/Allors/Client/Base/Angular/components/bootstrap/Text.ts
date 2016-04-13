@@ -32,7 +32,7 @@
         .module("allors")
         .component("bText", {
             controller: TextController,
-            templateUrl: ["$element", "$attrs", () => TextTemplate.name],
+            templateUrl: TextTemplate.name,
             require: FormController.require,
             bindings: TextController.bindings
         } as any);
