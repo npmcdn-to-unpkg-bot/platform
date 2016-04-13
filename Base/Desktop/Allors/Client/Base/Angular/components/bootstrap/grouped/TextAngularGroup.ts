@@ -18,24 +18,12 @@
         }
     }
 
-    class TextAngularGroupController extends Bootstrap.Field {
-        static $inject = ["$log", "$translate"];
-        constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
-            super($log, $translate);
-        }
-    }
-
     angular
         .module("allors")
         .component("bTextAngularGroup", {
-            controller: TextAngularGroupController,
-            templateUrl: ["$element", "$attrs", () => TextAngularGroupTemplate.name],
-            require: {
-                form: "^bForm"
-            },
-            bindings: {
-                object: "<",
-                relation: "@"
-            }
+            controller: TextAngularController,
+            templateUrl: TextAngularGroupTemplate.name,
+            require: FormController.require,
+            bindings: TextAngularController.bindings
         } as any);
 }

@@ -22,7 +22,7 @@
         .module("allors")
         .component("bEnumGroup", {
             controller: EnumController,
-            templateUrl: ["$element", "$attrs", () => EnumGroupTemplate.name],
+            templateUrl: EnumGroupTemplate.name,
             require: FormController.require,
             bindings: EnumController.bindings
         } as any);

@@ -22,7 +22,7 @@
         .module("allors")
         .component("bStaticGroup", {
             controller: StaticController,
-            templateUrl: ["$element", "$attrs", () => StaticGroupTemplate.name],
+            templateUrl: StaticGroupTemplate.name,
             require: FormController.require,
             bindings: StaticController.bindings
         } as any);
