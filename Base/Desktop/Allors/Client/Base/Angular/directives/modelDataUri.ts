@@ -1,7 +1,7 @@
 module Allors.Directives {
 
     modelDataUri.$inject = ["$parse"];
-    function modelDataUri($parse: ng.IParseService): angular.IDirective {
+    function modelDataUri($parse: angular.IParseService): angular.IDirective {
 
         function link(scope, element, attrs): void {
             var model = $parse(attrs.modelDataUri);
@@ -33,7 +33,7 @@ module Allors.Directives {
         return {
             restrict: "A",
             link: link
-        } as ng.IDirective;
+        } as angular.IDirective;
     }
 
     angular

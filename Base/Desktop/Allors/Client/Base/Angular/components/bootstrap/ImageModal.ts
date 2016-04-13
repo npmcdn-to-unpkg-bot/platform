@@ -54,7 +54,7 @@
         croppedImage = "";
 
         static $inject = ["$scope", "$uibModalInstance", "$log", "$translate", "size", "format", "quality"];
-        constructor(private $scope: ng.IScope, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, $log: angular.ILogService, $translate: angular.translate.ITranslateService, private size: number, private format: string, private quality: number) {
+        constructor(private $scope: angular.IScope, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, $log: angular.ILogService, $translate: angular.translate.ITranslateService, private size: number, private format: string, private quality: number) {
         }
 
         ok() {

@@ -43,7 +43,7 @@
         quality: number;
 
         static $inject = ["$scope", "$uibModal", "$log", "$translate"];
-        constructor(private $scope: ng.IScope, private $uibModal: angular.ui.bootstrap.IModalService, $log: angular.ILogService, $translate: angular.translate.ITranslateService) {
+        constructor(private $scope: angular.IScope, private $uibModal: angular.ui.bootstrap.IModalService, $log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
         }
 

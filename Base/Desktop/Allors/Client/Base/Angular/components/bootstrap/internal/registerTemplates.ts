@@ -1,6 +1,6 @@
 ﻿namespace Allors.Bootstrap {
 
-    export function registerTemplates($templateCache: ng.ITemplateCacheService): void {
+    export function registerTemplates($templateCache: angular.ITemplateCacheService): void {
 
         // Shared
         // ------
