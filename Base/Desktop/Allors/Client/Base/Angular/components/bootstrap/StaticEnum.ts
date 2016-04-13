@@ -5,7 +5,7 @@
 
         static createDefaultView() {
             return `
-<p class="form-control-static" ng-bind="$ctrl.enums[$ctrl.role]"></p>
+<p class="form-control-static" ng-bind="$ctrl.enum.name"></p>
 `;
         }
 
@@ -25,10 +25,15 @@
             fullTypeName: "@enum"
         }
 
+        get enum(): StaticEnum {
+            const filtered = this.enums.filter(v => v.value === this.role);
+            return !!filtered ? filtered[0] : undefined;
+        }
+
         fullTypeName: string;
 
         enums: StaticEnum[];
-
+        
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);

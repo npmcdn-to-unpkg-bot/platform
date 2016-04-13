@@ -115,6 +115,11 @@
 
                     if (this.label === undefined || this.label === null) {
                         this.label = Filters.Humanize.filter(this.relation);
+
+                        const suffix = "Enum";
+                        if (this.label.indexOf(suffix, this.label.length - suffix.length) !== -1) {
+                            this.label = this.label.substring(0, this.label.length - suffix.length);
+                        }
                     }
                 }
 

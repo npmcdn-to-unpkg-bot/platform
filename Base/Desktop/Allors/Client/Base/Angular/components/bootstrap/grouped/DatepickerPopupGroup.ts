@@ -25,7 +25,7 @@
             controller: DatepickerPopupController,
             templateUrl: DatepickerPopupGroupTemplate.name,
             require: FormController.require,
-            bindings: FormController.bindings
+            bindings: DatepickerPopupController.bindings
 
         } as any);
 }

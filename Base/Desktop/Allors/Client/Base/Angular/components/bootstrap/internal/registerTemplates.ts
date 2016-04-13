@@ -13,6 +13,7 @@
         // Fields
         // ------
         Bootstrap.StaticTemplate.register($templateCache);
+        Bootstrap.StaticEnumTemplate.register($templateCache);
         Bootstrap.TextTemplate.register($templateCache);
         Bootstrap.TextareaTemplate.register($templateCache);
         Bootstrap.TextAngularTemplate.register($templateCache);
@@ -30,6 +31,7 @@
         Bootstrap.InputGroupTemplate.register($templateCache);
         // Controls
         Bootstrap.StaticGroupTemplate.register($templateCache);
+        Bootstrap.StaticEnumGroupTemplate.register($templateCache);
         Bootstrap.TextGroupTemplate.register($templateCache);
         Bootstrap.TextareaGroupTemplate.register($templateCache);
         Bootstrap.TextAngularGroupTemplate.register($templateCache);
