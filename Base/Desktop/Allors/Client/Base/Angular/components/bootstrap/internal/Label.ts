@@ -4,7 +4,7 @@
 
         private static view = 
 `
-<label ng-class="$ctrl.form.horizontal ? 'col-sm-2' : '' ">{{$ctrl.field.label}}
+<label class="control-label" ng-class="$ctrl.form.horizontal ? 'col-sm-2' : '' ">{{$ctrl.field.label}}
     <span ng-if="$ctrl.field.help" class="fa fa-question-circle"
           uib-tooltip="{{$ctrl.field.help}}"
           tooltip-placement="right">
