@@ -40,6 +40,15 @@ namespace Allors.Repository.Domain
         public User Guest { get; set; }
         
         #region Allors
+        [Id("6A6E0852-C984-47B8-939D-8E0B0B042B9D")]
+        [AssociationId("E783AFBE-EF70-4AC1-8C0A-5DFE6FEDFBE0")]
+        [RoleId("BCF431F6-10CD-4F33-873D-0B2F1A1EA09D")]
+        [Multiplicity(Multiplicity.ManyToOne)]
+        [Indexed]
+        #endregion
+        public SecurityToken InitialSecurityToken { get; set; }
+
+        #region Allors
         [Id("f579494b-e550-4be6-9d93-84618ac78704")]
         [AssociationId("33f17e75-99cc-417e-99f3-c29080f08f0a")]
         [RoleId("ca9e3469-583c-4950-ba2c-1bc3a0fc3e96")]
@@ -47,7 +56,16 @@ namespace Allors.Repository.Domain
         [Indexed]
         #endregion
         public SecurityToken DefaultSecurityToken { get; set; }
-        
+
+        #region Allors
+        [Id("4D17A849-9AC9-4A5D-9F2A-EA0152061A15")]
+        [AssociationId("6854E369-3026-47B1-AF0C-142A5C6FCA8E")]
+        [RoleId("2C8B5D6D-0AF1-479D-B916-29F080856BD6")]
+        [Multiplicity(Multiplicity.OneToOne)]
+        [Indexed]
+        #endregion
+        public AccessControl CreatorsAccessControl { get; set; }
+
         #region Allors
         [Id("f7e50cac-ab57-4ebe-b765-d63804924c48")]
         [AssociationId("cb47a309-ed8f-47d1-879f-478e63b350d8")]
@@ -55,7 +73,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.OneToOne)]
         [Indexed]
         #endregion
-        public AccessControl DefaultGuestAccessControl { get; set; }
+        public AccessControl GuestAccessControl { get; set; }
         
         #region Allors
         [Id("829aa4a4-8232-4625-8cab-db7dc96da53f")]
@@ -64,7 +82,7 @@ namespace Allors.Repository.Domain
         [Multiplicity(Multiplicity.OneToOne)]
         [Indexed]
         #endregion
-        public AccessControl DefaultAdministratorsAccessControl { get; set; }
+        public AccessControl AdministratorsAccessControl { get; set; }
     
         #region inherited methods
         
