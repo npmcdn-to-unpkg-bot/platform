@@ -280,6 +280,11 @@ namespace Allors.Domain
             this.Grant(Roles.GuestId, objectType, operations);
         }
 
+        public void GrantCreator(ObjectType objectType, params Operations[] operations)
+        {
+            this.Grant(Roles.CreatorId, objectType, operations);
+        }
+
         public void GrantOwner(ObjectType objectType, params Operations[] operations)
         {
             this.Grant(Roles.OwnerId, objectType, operations);

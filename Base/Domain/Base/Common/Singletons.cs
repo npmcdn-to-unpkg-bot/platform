@@ -41,23 +41,32 @@ namespace Allors.Domain
 
             singleton.DefaultLocale = new Locales(this.Session).DutchBelgium;
 
+            singleton.InitialSecurityToken = new SecurityTokenBuilder(this.Session).Build();
             singleton.DefaultSecurityToken = new SecurityTokenBuilder(this.Session).Build();
 
+            // Initial
+            singleton.CreatorsAccessControl = new AccessControlBuilder(this.Session)
+                .WithRole(new Roles(this.Session).Creator)
+                .WithSubjectGroup(new UserGroups(this.Session).Creators)
+                .Build();
+
+            singleton.InitialSecurityToken.AddAccessControl(singleton.CreatorsAccessControl);
+            
             // Administrator
-            singleton.DefaultAdministratorsAccessControl = new AccessControlBuilder(this.Session)
+            singleton.AdministratorsAccessControl = new AccessControlBuilder(this.Session)
                 .WithRole(new Roles(this.Session).Administrator)
                 .WithSubjectGroup(new UserGroups(this.Session).Administrators)
                 .Build();
 
-            singleton.DefaultSecurityToken.AddAccessControl(singleton.DefaultAdministratorsAccessControl);
+            singleton.DefaultSecurityToken.AddAccessControl(singleton.AdministratorsAccessControl);
 
             // Guest
-            singleton.DefaultGuestAccessControl = new AccessControlBuilder(this.Session)
+            singleton.GuestAccessControl = new AccessControlBuilder(this.Session)
                 .WithRole(new Roles(this.Session).Guest)
                 .WithSubjectGroup(new UserGroups(this.Session).Guests)
                 .Build();
 
-            singleton.DefaultSecurityToken.AddAccessControl(singleton.DefaultGuestAccessControl);
+            singleton.DefaultSecurityToken.AddAccessControl(singleton.GuestAccessControl);
         }
     }
 }

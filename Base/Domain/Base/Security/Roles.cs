@@ -27,15 +27,12 @@ namespace Allors.Domain
 
     public partial class Roles
     {
-        public const string GuestName = "Guest";
-        public const string AdministratorName = "Administrator";
-        public const string OwnerName = "Owner";
-
         // Horizontal roles
         public static readonly Guid AdministratorId = new Guid("9D162C26-15B2-428e-AB80-DB4B3EBDBB7A");
         public static readonly Guid GuestId = new Guid("86445257-3F62-41e0-8B4A-2DF9FB18A8AA");
 
         // DAC
+        public static readonly Guid CreatorId = new Guid("3A3D1E25-4A91-4D07-8203-A9F3EA691598");
         public static readonly Guid OwnerId = new Guid("E22EA50F-E616-4429-92D5-B91684AD3C2A");
 
         private UniquelyIdentifiableCache<Role> cache;
@@ -43,6 +40,8 @@ namespace Allors.Domain
         public Role Administrator => this.RoleCache.Get(AdministratorId);
 
         public Role Guest => this.RoleCache.Get(GuestId);
+
+        public Role Creator => this.RoleCache.Get(CreatorId);
 
         public Role Owner => this.RoleCache.Get(OwnerId);
 
@@ -53,11 +52,12 @@ namespace Allors.Domain
             base.BaseSetup(config);
 
             // Horizontal Roles
-            new RoleBuilder(this.Session).WithName(AdministratorName).WithUniqueId(AdministratorId).Build();
-            new RoleBuilder(this.Session).WithName(GuestName).WithUniqueId(GuestId).Build();
+            new RoleBuilder(this.Session).WithName("Administrator").WithUniqueId(AdministratorId).Build();
+            new RoleBuilder(this.Session).WithName("Guest").WithUniqueId(GuestId).Build();
 
             // DAC emulation
-            new RoleBuilder(this.Session).WithName(OwnerName).WithUniqueId(OwnerId).Build();
+            new RoleBuilder(this.Session).WithName("Creator").WithUniqueId(CreatorId).Build();
+            new RoleBuilder(this.Session).WithName("Owner").WithUniqueId(OwnerId).Build();
         }
 
         protected override void BaseSecure(Security config)

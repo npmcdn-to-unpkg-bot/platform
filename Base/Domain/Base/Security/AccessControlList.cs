@@ -114,7 +114,10 @@ namespace Allors.Domain
                 SecurityToken[] securityTokens = this.@object.SecurityTokens;
                 if (securityTokens.Length == 0)
                 {
-                    securityTokens = new[] { Singleton.Instance(this.session).DefaultSecurityToken };
+                    var singleton = Singleton.Instance(this.session);
+                    securityTokens = this.@object.Strategy.IsNewInSession ? 
+                        new[] { singleton.InitialSecurityToken ?? singleton.DefaultSecurityToken } : 
+                        new[] { singleton.DefaultSecurityToken };
                 }
 
                 var caches = securityTokens.SelectMany(v => v.AccessControls).Select(v=>v.Cache).Where(v => v.EffectiveUserIds.Contains(this.user.Id));

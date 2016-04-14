@@ -28,17 +28,18 @@ namespace Allors.Domain
 
     public partial class UserGroups
     {
-        public const string GuestsName = "Guests";
-        public const string AdministratorsName = "Administrators";
-
-        public static readonly Guid GuestsId = new Guid("{1B022AA5-1B73-486A-9386-81D6EBFF2A4B}");
+        public static readonly Guid GuestsId = new Guid("1B022AA5-1B73-486A-9386-81D6EBFF2A4B");
         public static readonly Guid AdministratorsId = new Guid("CDC04209-683B-429C-BED2-440851F430DF");
+
+        public static readonly Guid CreatorsId = new Guid("F0D8132B-79D6-4A30-A866-EF6E5C952761");
 
         private UniquelyIdentifiableCache<UserGroup> cache;
 
         public UserGroup Administrators => this.Cache.Get(AdministratorsId);
 
         public UserGroup Guests => this.Cache.Get(GuestsId);
+
+        public UserGroup Creators => this.Cache.Get(CreatorsId);
 
         private UniquelyIdentifiableCache<UserGroup> Cache => this.cache ?? (this.cache = new UniquelyIdentifiableCache<UserGroup>(this.Session));
 
@@ -47,8 +48,10 @@ namespace Allors.Domain
             base.BaseSetup(config);
 
             // Default Groups
-            new UserGroupBuilder(this.Session).WithName(GuestsName).WithUniqueId(GuestsId).Build();
-            new UserGroupBuilder(this.Session).WithName(AdministratorsName).WithUniqueId(AdministratorsId).Build();
+            new UserGroupBuilder(this.Session).WithName("Guests").WithUniqueId(GuestsId).Build();
+            new UserGroupBuilder(this.Session).WithName("Administrators").WithUniqueId(AdministratorsId).Build();
+
+            new UserGroupBuilder(this.Session).WithName("Creators").WithUniqueId(CreatorsId).Build();
         }
 
         protected override void BaseSecure(Security config)
