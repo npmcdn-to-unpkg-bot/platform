@@ -270,9 +270,22 @@ namespace Allors.Domain
             }
         }
 
+        public void Grant(Guid roleId, ObjectType objectType, OperandType[] operandTypes, params Operations[] operations)
+        {
+            foreach (var operandType in operandTypes)
+            {
+                this.Grant(roleId, objectType, operandType, operations);
+            }
+        }
+
         public void GrantAdministrator(ObjectType objectType, params Operations[] operations)
         {
             this.Grant(Roles.AdministratorId, objectType, operations);
+        }
+
+        public void GrantAdministrator(ObjectType objectType, OperandType[] operandTypes, params Operations[] operations)
+        {
+            this.Grant(Roles.AdministratorId, objectType, operandTypes, operations);
         }
 
         public void GrantGuest(ObjectType objectType, params Operations[] operations)
@@ -280,14 +293,29 @@ namespace Allors.Domain
             this.Grant(Roles.GuestId, objectType, operations);
         }
 
+        public void GrantGuest(ObjectType objectType, OperandType[] operandTypes, params Operations[] operations)
+        {
+            this.Grant(Roles.GuestId, objectType, operandTypes, operations);
+        }
+
         public void GrantCreator(ObjectType objectType, params Operations[] operations)
         {
             this.Grant(Roles.CreatorId, objectType, operations);
         }
 
+        public void GrantCreator(ObjectType objectType, OperandType[] operandTypes, params Operations[] operations)
+        {
+            this.Grant(Roles.CreatorId, objectType, operandTypes, operations);
+        }
+
         public void GrantOwner(ObjectType objectType, params Operations[] operations)
         {
             this.Grant(Roles.OwnerId, objectType, operations);
+        }
+
+        public void GrantOwner(ObjectType objectType, OperandType[] operandTypes, params Operations[] operations)
+        {
+            this.Grant(Roles.OwnerId, objectType, operandTypes, operations);
         }
     }
 }
