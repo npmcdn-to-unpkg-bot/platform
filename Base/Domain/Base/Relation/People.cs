@@ -27,14 +27,22 @@ namespace Allors.Domain
         protected override void BasePrepare(Setup setup)
         {
             setup.AddDependency(this.Meta.ObjectType, M.Singleton.ObjectType);
+            setup.AddDependency(this.Meta.ObjectType, M.UserGroup.ObjectType);
         }
 
         protected override void BaseSetup(Setup config)
         {
             base.BaseSetup(config);
 
-            new PersonBuilder(this.Session).WithUserName(Users.GuestUserName).Build();
-            new PersonBuilder(this.Session).WithUserName(Users.AdministratorUserName).Build();
+            var guest = new PersonBuilder(this.Session).WithUserName(Users.GuestUserName).Build();
+            var administrator = new PersonBuilder(this.Session).WithUserName(Users.AdministratorUserName).Build();
+
+            var singleton = Singleton.Instance(this.Session);
+            singleton.Guest = guest;
+
+            var userGroups = new UserGroups(this.Session);
+            userGroups.Guests.AddMember(guest);
+            userGroups.Administrators.AddMember(administrator);
         }
         
         protected override void BaseSecure(Security config)
