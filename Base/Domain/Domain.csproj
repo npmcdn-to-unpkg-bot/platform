@@ -64,6 +64,7 @@
     <Compile Include="Base\Common\TransitionalExtensions.cs" />
     <Compile Include="Base\Common\UniquelyIdentifiableExtension.cs" />
     <Compile Include="Base\Content\MediaContent.cs" />
+    <Compile Include="Base\DomainException.cs" />
     <Compile Include="Base\Derivations\AsyncDerivations.cs" />
     <Compile Include="Base\Derivations\Logging\DerivationLogFormatter.cs" />
     <Compile Include="Base\Derivations\Logging\ListDerivationLog.cs" />

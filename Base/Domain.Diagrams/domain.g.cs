@@ -440,11 +440,15 @@ namespace Allors.Domain
 
 						User Guest {set;}
 
+						SecurityToken InitialSecurityToken {set;}
+
 						SecurityToken DefaultSecurityToken {set;}
 
-						AccessControl DefaultGuestAccessControl {set;}
+						AccessControl CreatorsAccessControl {set;}
 
-						AccessControl DefaultAdministratorsAccessControl {set;}
+						AccessControl GuestAccessControl {set;}
+
+						AccessControl AdministratorsAccessControl {set;}
 
 						AccessControl SalesAccessControl {set;}
 
