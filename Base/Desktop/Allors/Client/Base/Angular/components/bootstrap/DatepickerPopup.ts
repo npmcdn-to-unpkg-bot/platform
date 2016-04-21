@@ -14,6 +14,12 @@
             ng-model-options="$ctrl.modelOptions"
             ng-disabled="!$ctrl.canWrite"
             ng-required="$ctrl.roleType.isRequired">
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="$ctrl.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+</p>
+
+
 `;
         }
 
