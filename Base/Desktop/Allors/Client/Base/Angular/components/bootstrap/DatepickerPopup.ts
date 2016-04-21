@@ -5,7 +5,8 @@
 
         static createDefaultView() {
             return `
-<input type="date" placeholder="{{$ctrl.placeholder}}" class="form-control" 
+<p class="input-group">
+    <input type="date" placeholder="{{$ctrl.placeholder}}" class="form-control" 
             uib-datepicker-popup 
             datepicker-options="$ctrl.options" 
             is-open="$ctrl.opened" 
