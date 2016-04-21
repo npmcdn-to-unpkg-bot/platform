@@ -8,7 +8,6 @@
 <p class="input-group">
     <input type="date" placeholder="{{$ctrl.placeholder}}" class="form-control" 
             uib-datepicker-popup 
-            datepicker-options="$ctrl.options" 
             is-open="$ctrl.opened" 
             ng-model="$ctrl.role"
             ng-model-options="$ctrl.modelOptions"
@@ -32,14 +31,10 @@
         static bindings = {
             object: "<",
             relation: "@",
-            timezone: "@",
-            format: "@",
-            options: "<"
+            timezone: "@"
         }
 
         timezone = "UTC";
-        format = "yyyy-mm-dd";
-        options: any = {};
         modelOptions: any = {};
         opened: boolean;
 
