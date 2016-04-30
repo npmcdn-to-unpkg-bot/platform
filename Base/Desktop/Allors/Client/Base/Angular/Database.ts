@@ -39,8 +39,8 @@
 
                 this.$http.post(`${this.prefix}Push`, pushRequest)
                     .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.PushResponse>) => {
-                        var saveResponse = callbackArg.data;
-                        resolve(saveResponse);
+                        var pushResponse = callbackArg.data;
+                        resolve(pushResponse);
                 })
                 .catch(e => {
                     reject(e);

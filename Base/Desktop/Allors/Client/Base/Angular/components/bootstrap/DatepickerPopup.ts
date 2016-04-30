@@ -27,7 +27,7 @@
         }
     }
 
-    export class DatepickerPopupController extends Bootstrap.Field {
+    export class DatepickerPopupController extends Allors.Bootstrap.Field {
         static bindings = {
             object: "<",
             relation: "@",

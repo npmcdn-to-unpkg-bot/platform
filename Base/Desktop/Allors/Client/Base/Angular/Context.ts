@@ -90,8 +90,9 @@
                 try {
                     const saveRequest = this.session.pushRequest();
                     this.database.push(saveRequest)
-                        .then((saveResponse: Data.PushResponse) => {
-                            resolve(saveResponse);
+                        .then((pushResponse: Data.PushResponse) => {
+                            this.session.pushResponse(pushResponse);
+                            resolve(pushResponse);
                         });
                 } catch (e) {
                     reject(e);

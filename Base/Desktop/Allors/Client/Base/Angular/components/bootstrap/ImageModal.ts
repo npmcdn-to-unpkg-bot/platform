@@ -4,7 +4,6 @@
 
         private static view =
 `
-{{$ctrl.format}}
 <div class="modal-header">
     <h3 class="modal-title">Image</h3>
 </div>
@@ -23,8 +22,7 @@
         </div>
 
         <div class="col-sm-6 center-block" style="height:100%;">
-            <span style="display: inline-block; height: 100%; vertical-align: middle;"></span>
-            <img ng-src="{{$ctrl.croppedImage}}" class="img-responsive img-thumbnail" style="vertical-align: middle;"/>
+            <img ng-if="$ctrl.croppedImage" ng-src="{{$ctrl.croppedImage}}" class="img-responsive img-thumbnail" style="vertical-align: middle; height: 90%"/>
         </div>
     </div>
 
