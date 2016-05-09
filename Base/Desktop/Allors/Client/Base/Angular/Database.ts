@@ -41,10 +41,10 @@
                     .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.PushResponse>) => {
                         var pushResponse = callbackArg.data;
                         resolve(pushResponse);
-                })
-                .catch(e => {
-                    reject(e);
-                });
+                    })
+                    .catch(e => {
+                        reject(e);
+                    });
 
             });
         }
