@@ -93,6 +93,9 @@
                         .then((pushResponse: Data.PushResponse) => {
                             this.session.pushResponse(pushResponse);
                             resolve(pushResponse);
+                        })
+                        .catch(e => {
+                            reject(e);
                         });
                 } catch (e) {
                     reject(e);
