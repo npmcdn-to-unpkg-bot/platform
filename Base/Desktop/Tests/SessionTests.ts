@@ -1,6 +1,4 @@
 namespace Tests {
-    import Person = Allors.Domain.Custom.Person;
-    import Organisation = Allors.Domain.Organisation;
 
     export class SessionTests extends tsUnit.TestClass {
         unitGet() {

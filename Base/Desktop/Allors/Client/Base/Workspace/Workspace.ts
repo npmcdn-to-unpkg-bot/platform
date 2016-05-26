@@ -1,14 +1,5 @@
 ﻿namespace Allors {
 
-    function applyMixins(derivedConstructor: any, baseConstructor: any) {
-        Object.getOwnPropertyNames(baseConstructor.prototype).forEach(name => {
-            if (name !== "constructor") {
-                const propertyDescriptor = Object.getOwnPropertyDescriptor(baseConstructor.prototype, name);
-                Object.defineProperty(derivedConstructor.prototype, name, propertyDescriptor);
-            }
-        });
-    }
-
     export interface IWorkspace {
         objectTypeByName: { [name: string]: Meta.ObjectType; };
 
@@ -27,31 +18,6 @@
             _.forEach(metaPopulationData.classes, classData => {
                 var objectType = new Meta.ObjectType(classData);
                 this.objectTypeByName[objectType.name] = objectType;
-            });
-            
-            // Workspace Inheritance
-            metaPopulationData.domains.map(domainName => {
-                metaPopulationData.classes.map(cls => {
-                    var className = cls.name;
-                    var derivedType = Domain[className];
-                    var baseNamespace = Domain[domainName];
-
-                    if (baseNamespace) {
-                        // Interfaces
-                        cls.interfaces.map(iface => {
-                            var baseInterface = baseNamespace[iface];
-                            if (baseInterface) {
-                                applyMixins(derivedType, baseInterface);
-                            }
-                        });
-
-                        // Class
-                        const baseType = baseNamespace[className];
-                        if (baseType) {
-                            applyMixins(derivedType, baseType);
-                        }
-                    }
-                });
             });
         }
 

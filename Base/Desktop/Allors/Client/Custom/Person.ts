@@ -1,12 +1,21 @@
-namespace Allors.Domain.Custom
+namespace Allors.Domain
 {
-	export class Person extends Allors.Domain.Person
-    {
-        get DisplayName(): string {
+    export interface Person {
+        hello();
+
+        displayName;
+    }
+
+    Person.prototype.hello = function() {
+        return `Hello ${this.displayName}`;
+    }
+
+    Object.defineProperty(Person.prototype, "displayName", {
+        get: function() {
             if (this.FirstName || this.LastName) {
                 if (this.FirstName && this.LastName) {
                     return this.FirstName + " " + this.LastName;
-                } else if(this.LastName) {
+                } else if (this.LastName) {
                     return this.LastName;
                 } else {
                     return this.FirstName;
@@ -19,5 +28,4 @@ namespace Allors.Domain.Custom
 
             return "N/A";
         }
-    }
-}
+    });}

@@ -91,7 +91,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.3.4\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -340,9 +340,6 @@
     <Content Include="lib\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="lib\font-awesome\fonts\fontawesome-webfont.woff2" />
     <Content Include="lib\font-awesome\fonts\FontAwesome.otf" />
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Settings.StyleCop" />
     <Content Include="typings.json" />
     <Content Include="Scripts\jsnlog.js.map" />
@@ -386,6 +383,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\filters\humanize.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
+    <TypeScriptCompile Include="Allors\Client\Custom\workspace.d.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Counter.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Enumeration.g.ts" />
@@ -422,7 +420,6 @@
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\SessionObject.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\Workspace.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Workspace\WorkspaceObject.ts" />
-    <TypeScriptCompile Include="Allors\Client\Custom\workspace.d.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Person.ts" />
     <TypeScriptCompile Include="app\functions\Nest.ts" />
     <Content Include="Tests\app.css" />
@@ -510,6 +507,11 @@
       <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
       <Name>Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
