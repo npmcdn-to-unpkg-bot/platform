@@ -383,6 +383,7 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Events.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\filters\humanize.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\Result.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Workspace\Domain\extend.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\workspace.d.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\C1.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Counter.g.ts" />
@@ -523,8 +524,7 @@
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptModuleKind>
-    </TypeScriptModuleKind>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
     <TypeScriptOutFile>
     </TypeScriptOutFile>
