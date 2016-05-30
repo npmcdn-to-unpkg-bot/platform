@@ -10,5 +10,5 @@
 
         // Third Party
         "pascalprecht.translate", "tmh.dynamicLocale", "angular-loading-bar", "toastr",
-        "chart.js", "toggle-switch", "dndLists", "ncy-angular-breadcrumb", "textAngular", "ngImgCrop"]);
+        "ncy-angular-breadcrumb", "textAngular", "ngImgCrop"]);
 }

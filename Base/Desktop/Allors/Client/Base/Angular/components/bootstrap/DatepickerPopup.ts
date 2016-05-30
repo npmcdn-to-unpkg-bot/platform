@@ -17,8 +17,6 @@
         <button type="button" class="btn btn-default" ng-click="$ctrl.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
     </span>
 </p>
-
-
 `;
         }
 
