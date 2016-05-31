@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
     export class LabelTemplate {
-        static name = "allors/bootstrap/label";
+        static name = "allors/bootstrap/role/label";
 
         private static view = 
 `
@@ -18,7 +18,7 @@
     }
 
     class LabelComponent {
-        field: Bootstrap.Field;
+        field: Field;
 
         static $inject = ["$log"];
         constructor($log: angular.ILogService) {
@@ -27,7 +27,7 @@
 
     angular
         .module("allors")
-        .component("bLabel", {
+        .component("bRoleLabel", {
             controller: LabelComponent,
             templateUrl: LabelTemplate.name,
             require: {

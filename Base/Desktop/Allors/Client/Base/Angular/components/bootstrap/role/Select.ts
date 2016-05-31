@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
 
     export class SelectTemplate {
-        static name = "allors/bootstrap/select";
+        static name = "allors/bootstrap/role/select";
 
         static createDefaultView() {
             return `
@@ -40,7 +40,7 @@
         }
     }
 
-    export class SelectController extends Bootstrap.Field {
+    export class SelectController extends Field {
         static bindings = {
             object: "<",
             relation: "@",
@@ -97,7 +97,7 @@
 
     angular
         .module("allors")
-        .component("bSelect", {
+        .component("bRoleSelect", {
             controller: SelectController,
             templateUrl: SelectTemplate.name,
             require: FormController.require,

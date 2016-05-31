@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap {
-    export class InputGroupTemplate {
-        static name = "allors/bootstrap/input-group";
+﻿namespace Allors.Bootstrap.Role {
+    export class LabeledInputTemplate {
+        static name = "allors/bootstrap/role/labeled-input";
 
         private static view = 
 `
@@ -10,12 +10,12 @@
 `;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(InputGroupTemplate.name, InputGroupTemplate.view);
+            templateCache.put(LabeledInputTemplate.name, LabeledInputTemplate.view);
         }
     }
 
-    class InputGroupComponent {
-        field: Bootstrap.Field;
+    class LabeledInputComponent {
+        field: Field;
 
         static $inject = ["$log"];
         constructor($log: angular.ILogService) {
@@ -24,10 +24,10 @@
 
     angular
         .module("allors")
-        .component("bInputGroup", {
-            controller: InputGroupComponent,
+        .component("bRoleLabeledInput", {
+            controller: LabeledInputComponent,
             transclude: true,
-            templateUrl: InputGroupTemplate.name,
+            templateUrl: LabeledInputTemplate.name,
             require: {
                 form: "^bForm"
             },

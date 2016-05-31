@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
 
     export class DatepickerPopupTemplate {
-        static name = "allors/bootstrap/datepicker-popup";
+        static name = "allors/bootstrap/role/datepicker-popup";
 
         static createDefaultView() {
             return `
@@ -25,7 +25,7 @@
         }
     }
 
-    export class DatepickerPopupController extends Allors.Bootstrap.Field {
+    export class DatepickerPopupController extends Field {
         static bindings = {
             object: "<",
             relation: "@",
@@ -48,7 +48,7 @@
 
     angular
         .module("allors")
-        .component("bDatepickerPopup", {
+        .component("bRoleDatepickerPopup", {
             controller: DatepickerPopupController,
             templateUrl: DatepickerPopupTemplate.name,
             require: FormController.require,

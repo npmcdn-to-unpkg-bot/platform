@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
 
     export class TextareaTemplate {
-        static name = "allors/bootstrap/textarea";
+        static name = "allors/bootstrap/role/textarea";
 
         static createDefaultView() {
             return `
@@ -18,7 +18,7 @@
         }
     }
 
-    export class TextareaController extends Bootstrap.Field {
+    export class TextareaController extends Field {
         static bindings = {
             object: "<",
             relation: "@",
@@ -35,7 +35,7 @@
 
     angular
         .module("allors")
-        .component("bTextarea", {
+        .component("bRoleTextarea", {
             controller: TextareaController,
             templateUrl: TextareaTemplate.name,
             require: FormController.require,

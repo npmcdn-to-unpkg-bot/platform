@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap {
-    export class GroupTemplate {
-        static name = "allors/bootstrap/group";
+﻿namespace Allors.Bootstrap.Role {
+    export class LabeledTemplate {
+        static name = "allors/bootstrap/role/labeled";
 
         private static view = 
 `<div class="form-group" ng-if="$ctrl.field.canRead">
@@ -8,12 +8,12 @@
 </div>`;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(GroupTemplate.name, GroupTemplate.view);
+            templateCache.put(LabeledTemplate.name, LabeledTemplate.view);
         }
     }
 
-    class GroupComponent {
-        field: Bootstrap.Field;
+    class LabeledComponent {
+        field: Field;
 
         static $inject = ["$log"];
         constructor($log: angular.ILogService) {
@@ -22,10 +22,10 @@
 
     angular
         .module("allors")
-        .component("bGroup", {
-            controller: GroupComponent,
+        .component("bRoleLabeled", {
+            controller: LabeledComponent,
             transclude: true,
-            templateUrl: GroupTemplate.name,
+            templateUrl: LabeledTemplate.name,
             require: {
                 form: "^bForm"
             },

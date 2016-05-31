@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
 
     export class StaticEnumTemplate {
-        static name = "allors/bootstrap/static-enum";
+        static name = "allors/bootstrap/role/static-enum";
 
         static createDefaultView() {
             return `
@@ -18,7 +18,7 @@
         constructor(public value: number, public name: string) {}
     }
 
-    export class StaticEnumController extends Bootstrap.Field {
+    export class StaticEnumController extends Field {
         static bindings = {
             object: "<",
             relation: "@",
@@ -72,7 +72,7 @@
 
     angular
         .module("allors")
-        .component("bStaticEnum", {
+        .component("bRoleStaticEnum", {
             controller: StaticEnumController,
             templateUrl: StaticEnumTemplate.name,
             require: FormController.require,

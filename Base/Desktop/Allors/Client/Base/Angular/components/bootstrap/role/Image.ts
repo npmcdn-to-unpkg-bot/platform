@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
     export class ImageTemplate {
-        static name = "allors/bootstrap/image";
+        static name = "allors/bootstrap/role/image";
 
         static createDefaultView() {
             return `
@@ -27,7 +27,7 @@
         }
     }
 
-    export class ImageController extends Bootstrap.Field {
+    export class ImageController extends Field {
         static bindings = {
             object: "<",
             relation: "@",
@@ -72,7 +72,7 @@
 
     angular
         .module("allors")
-        .component("bImage", {
+        .component("bRoleImage", {
             controller: ImageController,
             templateUrl: ImageTemplate.name,
             require: FormController.require,

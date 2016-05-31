@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
 
     export class RadioButtonTemplate {
-        static name = "allors/bootstrap/radio-button";
+        static name = "allors/bootstrap/role/radio-button";
 
         static createDefaultView() {
             return `
@@ -25,7 +25,7 @@
         }
     }
 
-    export class RadioButtonController extends Bootstrap.Field {
+    export class RadioButtonController extends Field {
         static bindings = {
             object: "<",
             relation: "@",
@@ -41,7 +41,7 @@
 
     angular
         .module("allors")
-        .component("bRadioButton", {
+        .component("bRoleRadioButton", {
             controller: RadioButtonController,
             templateUrl: RadioButtonTemplate.name,
             require: FormController.require,

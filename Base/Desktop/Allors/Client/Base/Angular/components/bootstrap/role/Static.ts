@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
 
     export class StaticTemplate {
-        static name = "allors/bootstrap/static";
+        static name = "allors/bootstrap/role/static";
 
         static createDefaultView() {
             return `
@@ -14,7 +14,7 @@
         }
     }
 
-    export class StaticController extends Bootstrap.Field {
+    export class StaticController extends Field {
         static bindings = {
             object: "<",
             relation: "@"
@@ -28,7 +28,7 @@
 
     angular
         .module("allors")
-        .component("bStatic", {
+        .component("bRoleStatic", {
             controller: StaticController,
             templateUrl: StaticTemplate.name,
             require: FormController.require,

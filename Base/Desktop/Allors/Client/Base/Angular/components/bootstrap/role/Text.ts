@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
     export class TextTemplate {
-        static name = "allors/bootstrap/text";
+        static name = "allors/bootstrap/role/text";
 
         static createDefaultView() {
             return `
@@ -16,7 +16,7 @@
         }
     }
 
-    export class TextController extends Bootstrap.Field {
+    export class TextController extends Field {
         static bindings = {
             object: "<",
             relation: "@"
@@ -30,7 +30,7 @@
 
     angular
         .module("allors")
-        .component("bText", {
+        .component("bRoleText", {
             controller: TextController,
             templateUrl: TextTemplate.name,
             require: FormController.require,

@@ -1,4 +1,4 @@
-﻿namespace Allors.Bootstrap {
+﻿namespace Allors.Bootstrap.Role {
     export abstract class Field {
         label;
         placeholder;
@@ -13,11 +13,11 @@
         constructor(public $log: angular.ILogService, public $translate: angular.translate.ITranslateService) {
         }
 
-        get form(): Bootstrap.FormController {
+        get form(): FormController {
             return this.f;
         }
 
-        set form(value: Bootstrap.FormController) {
+        set form(value: FormController) {
             this.f = value;
             this.onBind();
         }
