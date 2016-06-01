@@ -1,16 +1,16 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
 
     export class LabeledSelectTemplate {
-        static name = "allors/bootstrap/role/labeled-select";
+        static name = "allors/bootstrap/labeled-select";
 
         static createDefaultView() {
             return `
-<b-role-labeled field="$ctrl">
-    <b-role-label field="$ctrl"/> 
-    <b-role-labeled-input field="$ctrl">
+<b-labeled field="$ctrl">
+    <b-label field="$ctrl"/> 
+    <b-labeled-input field="$ctrl">
 ` + SelectTemplate.createDefaultView() + `
-    </b-role-labeled-input>
-</b-role-labeled>
+    </b-labeled-input>
+</b-labeled>
 `;
         }
 
@@ -21,7 +21,7 @@
     
     angular
         .module("allors")
-        .component("bRoleLabeledSelect", {
+        .component("bLabeledSelect", {
             controller: SelectController,
             templateUrl: LabeledSelectTemplate.name,
             require: FormController.require,

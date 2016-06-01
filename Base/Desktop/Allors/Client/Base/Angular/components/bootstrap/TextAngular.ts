@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
 
     export class TextAngularTemplate {
-        static name = "allors/bootstrap/role/text-angular";
+        static name = "allors/bootstrap/text-angular";
 
         static createDefaultView() {
             return `
@@ -28,7 +28,7 @@
 
     angular
         .module("allors")
-        .component("bRoleTextAngular", {
+        .component("bTextAngular", {
             controller: TextAngularController,
             templateUrl: TextAngularTemplate.name,
             require: FormController.require,

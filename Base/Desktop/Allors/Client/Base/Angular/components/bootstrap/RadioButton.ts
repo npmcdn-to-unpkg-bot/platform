@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
 
     export class RadioButtonTemplate {
-        static name = "allors/bootstrap/role/radio-button";
+        static name = "allors/bootstrap/radio-button";
 
         static createDefaultView() {
             return `
@@ -41,7 +41,7 @@
 
     angular
         .module("allors")
-        .component("bRoleRadioButton", {
+        .component("bRadioButton", {
             controller: RadioButtonController,
             templateUrl: RadioButtonTemplate.name,
             require: FormController.require,

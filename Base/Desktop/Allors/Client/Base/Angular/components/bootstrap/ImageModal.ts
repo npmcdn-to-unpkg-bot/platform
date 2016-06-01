@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export class ImageModalTemplate {
-        static name = "allors/bootstrap/role/image/modal";
+        static name = "allors/bootstrap/image/modal";
 
         private static view =
 `

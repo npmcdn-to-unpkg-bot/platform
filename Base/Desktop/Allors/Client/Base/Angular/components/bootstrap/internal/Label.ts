@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export class LabelTemplate {
-        static name = "allors/bootstrap/role/label";
+        static name = "allors/bootstrap/label";
 
         private static view = 
 `
@@ -27,7 +27,7 @@
 
     angular
         .module("allors")
-        .component("bRoleLabel", {
+        .component("bLabel", {
             controller: LabelComponent,
             templateUrl: LabelTemplate.name,
             require: {

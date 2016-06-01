@@ -1,20 +1,18 @@
-﻿namespace Allors.Bootstrap.Role {
-    export class LabeledInputTemplate {
-        static name = "allors/bootstrap/role/labeled-input";
+﻿namespace Allors.Bootstrap {
+    export class LabeledTemplate {
+        static name = "allors/bootstrap/labeled";
 
         private static view = 
-`
-<div ng-class="$ctrl.form.horizontal ? 'col-sm-8' : ''">
+`<div class="form-group" ng-if="$ctrl.field.canRead">
 <ng-transclude/>
-</div>
-`;
+</div>`;
 
         static register(templateCache: angular.ITemplateCacheService) {
-            templateCache.put(LabeledInputTemplate.name, LabeledInputTemplate.view);
+            templateCache.put(LabeledTemplate.name, LabeledTemplate.view);
         }
     }
 
-    class LabeledInputComponent {
+    class LabeledComponent {
         field: Field;
 
         static $inject = ["$log"];
@@ -24,10 +22,10 @@
 
     angular
         .module("allors")
-        .component("bRoleLabeledInput", {
-            controller: LabeledInputComponent,
+        .component("bLabeled", {
+            controller: LabeledComponent,
             transclude: true,
-            templateUrl: LabeledInputTemplate.name,
+            templateUrl: LabeledTemplate.name,
             require: {
                 form: "^bForm"
             },

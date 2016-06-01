@@ -1,4 +1,4 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export abstract class Field {
         label;
         placeholder;

@@ -1,6 +1,6 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export class ImageTemplate {
-        static name = "allors/bootstrap/role/image";
+        static name = "allors/bootstrap/image";
 
         static createDefaultView() {
             return `
@@ -72,7 +72,7 @@
 
     angular
         .module("allors")
-        .component("bRoleImage", {
+        .component("bImage", {
             controller: ImageController,
             templateUrl: ImageTemplate.name,
             require: FormController.require,

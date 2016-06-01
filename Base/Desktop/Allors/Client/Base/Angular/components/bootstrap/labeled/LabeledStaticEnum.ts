@@ -1,14 +1,14 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export class StaticEnumGroupTemplate {
-        static name = "allors/bootstrap/role/labeled-static-enum";
+        static name = "allors/bootstrap/labeled-static-enum";
 
         private static createDefaultView() {
             return `
-<b-role-labeled field="$ctrl">
-    <b-role-label field="$ctrl"/>
-    <b-role-labeled-input field="$ctrl">
+<b-labeled field="$ctrl">
+    <b-label field="$ctrl"/>
+    <b-labeled-input field="$ctrl">
 ` + StaticEnumTemplate.createDefaultView() + `
-    </b-role-labeled-input>
+    </b-labeled-input>
 </b-group>
 `;
         }
@@ -20,7 +20,7 @@
 
     angular
         .module("allors")
-        .component("bRoleLabeledStaticEnum", {
+        .component("bLabeledStaticEnum", {
             controller: StaticEnumController,
             templateUrl: StaticEnumGroupTemplate.name,
             require: FormController.require,

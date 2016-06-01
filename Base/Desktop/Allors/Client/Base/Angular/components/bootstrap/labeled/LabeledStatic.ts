@@ -1,15 +1,15 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export class LabeledStaticTemplate {
         static name = "allors/bootstrap/static-group";
 
         private static createDefaultView() {
             return `
-<b-role-labeled field="$ctrl">
-    <b-role-label field="$ctrl"/>
-    <b-role-labeled-input field="$ctrl">
+<b-labeled field="$ctrl">
+    <b-label field="$ctrl"/>
+    <b-labeled-input field="$ctrl">
 ` + StaticTemplate.createDefaultView() + `
-    </b-role-labeled-input>
-</b-role-labeled>
+    </b-labeled-input>
+</b-labeled>
 `;
         }
 
@@ -20,7 +20,7 @@
 
     angular
         .module("allors")
-        .component("bRoleLabeledStatic", {
+        .component("bLabeledStatic", {
             controller: StaticController,
             templateUrl: LabeledStaticTemplate.name,
             require: FormController.require,

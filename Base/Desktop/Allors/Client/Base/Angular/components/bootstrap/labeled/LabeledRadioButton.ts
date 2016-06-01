@@ -1,15 +1,15 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export class LabeledRadioButtonTemplate {
-        static name = "allors/bootstrap/role/radio-button-group";
+        static name = "allors/bootstrap/radio-button-group";
 
         static createDefaultView() {
             return `
-<b-role-labeled field="$ctrl">
-    <b-role-label field="$ctrl"/>
-    <b-role-labeled-input field="$ctrl">
+<b-labeled field="$ctrl">
+    <b-label field="$ctrl"/>
+    <b-labeled-input field="$ctrl">
 ` + RadioButtonTemplate.createDefaultView() + `
-    </b-role-labeled-input>
-</b-role-labeled>
+    </b-labeled-input>
+</b-labeled>
 `;
         }
 
@@ -20,7 +20,7 @@
 
     angular
         .module("allors")
-        .component("bRoleLabeledRadioButton", {
+        .component("bLabeledRadioButton", {
             controller: RadioButtonController,
             templateUrl: ["$element", "$attrs", () => LabeledRadioButtonTemplate.name],
             require: FormController.require,

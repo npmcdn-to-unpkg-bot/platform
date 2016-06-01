@@ -31,10 +31,10 @@
             <div class="panel-body">
                 <!-- ReSharper disable Html.TagNotResolved -->
                 <b-form orientation="horizontal">
-                    <b-text-group object="vm.person" relation="FirstName"></b-text-group>
-                    <b-text-group object="vm.person" relation="LastName"></b-text-group>
+                    <b-labeled-text object="vm.person" relation="FirstName"></b-labeled-text>
+                    <b-labeled-text object="vm.person" relation="LastName"></b-labeled-text>
                     <b-datepicker-popup-group object="vm.person" relation="BirthDate"></b-datepicker-popup-group>
-                    <b-image-group object="vm.person" relation="Photo"></b-image-group>
+                    <b-labeled-image object="vm.person" relation="Photo"></b-labeled-image>
                 </b-form>
             </div>
 

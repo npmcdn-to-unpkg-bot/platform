@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
 
     export class StaticTemplate {
-        static name = "allors/bootstrap/role/static";
+        static name = "allors/bootstrap/static";
 
         static createDefaultView() {
             return `
@@ -28,7 +28,7 @@
 
     angular
         .module("allors")
-        .component("bRoleStatic", {
+        .component("bStatic", {
             controller: StaticController,
             templateUrl: StaticTemplate.name,
             require: FormController.require,

@@ -1,40 +1,39 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
 
-    export class EnumTemplate {
-        static name = "allors/bootstrap/role/enum";
+    export class StaticEnumTemplate {
+        static name = "allors/bootstrap/static-enum";
 
         static createDefaultView() {
             return `
-<select class="form-control" 
-            ng-model="$ctrl.role" 
-            ng-disabled="!$ctrl.canWrite" 
-            ng-required="$ctrl.roleType.isRequired"
-            ng-options="enum.value as enum.name for enum in $ctrl.enums">
-    <option ng-if="!$ctrl.roleType.isRequired" value=""></option>     
-</select>
+<p class="form-control-static" ng-bind="$ctrl.enum.name"></p>
 `;
         }
 
-        static register(templateCache: angular.ITemplateCacheService, view = EnumTemplate.createDefaultView()) {
-            templateCache.put(EnumTemplate.name, view);
+        static register(templateCache: angular.ITemplateCacheService, view = StaticEnumTemplate.createDefaultView()) {
+            templateCache.put(StaticEnumTemplate.name, view);
         }
     }
 
-    export class Enum {
+    export class StaticEnum {
         constructor(public value: number, public name: string) {}
     }
 
-    export class EnumController extends Field {
+    export class StaticEnumController extends Field {
         static bindings = {
             object: "<",
             relation: "@",
             fullTypeName: "@enum"
         }
 
+        get enum(): StaticEnum {
+            const filtered = this.enums.filter(v => v.value === this.role);
+            return !!filtered ? filtered[0] : undefined;
+        }
+
         fullTypeName: string;
 
-        enums: Enum[];
-
+        enums: StaticEnum[];
+        
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
@@ -53,7 +52,7 @@
                             const name = type[value];
                             const humanizedName = Filters.Humanize.filter(name);
 
-                            const enumeration = new Enum(value, humanizedName);
+                            const enumeration = new StaticEnum(value, humanizedName);
                             this.enums.push(enumeration);
 
                             ((enumeration, key1, key2) => {
@@ -73,10 +72,10 @@
 
     angular
         .module("allors")
-        .component("bRoleEnum", {
-            controller: EnumController,
-            templateUrl: EnumTemplate.name,
+        .component("bStaticEnum", {
+            controller: StaticEnumController,
+            templateUrl: StaticEnumTemplate.name,
             require: FormController.require,
-            bindings: EnumController.bindings
+            bindings: StaticEnumController.bindings
         } as any);
 }

@@ -1,15 +1,15 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
     export class LabeledTextAngularTemplate {
-        static name = "allors/bootstrap/role/labeled-text-angular";
+        static name = "allors/bootstrap/labeled-text-angular";
 
         private static createDefaultView() {
             return `
-<b-role-labeled field="$ctrl">
-    <b-role-label field="$ctrl"/>
-    <b-role-labeled-input field="$ctrl">
+<b-labeled field="$ctrl">
+    <b-label field="$ctrl"/>
+    <b-labeled-input field="$ctrl">
 ` + TextAngularTemplate.createDefaultView() + `
-    </b-role-labeled-input>
-</b-role-labeled>
+    </b-labeled-input>
+</b-labeled>
 `;
         }
 
@@ -20,7 +20,7 @@
 
     angular
         .module("allors")
-        .component("bRoleLabeledTextAngular", {
+        .component("bLabeledTextAngular", {
             controller: TextAngularController,
             templateUrl: LabeledTextAngularTemplate.name,
             require: FormController.require,

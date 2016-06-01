@@ -8,40 +8,44 @@
 
         // Object
         // ------
-
         // Shared
         // ------
-        Role.ImageModalTemplate.register($templateCache);
+        ImageModalTemplate.register($templateCache);
 
         // Fields
         // ------
-        Role.StaticTemplate.register($templateCache);
-        Role.StaticEnumTemplate.register($templateCache);
-        Role.TextTemplate.register($templateCache);
-        Role.TextareaTemplate.register($templateCache);
-        Role.TextAngularTemplate.register($templateCache);
-        Role.EnumTemplate.register($templateCache);
-        Role.SelectTemplate.register($templateCache);
-        Role.ImageTemplate.register($templateCache);
-        Role.RadioButtonTemplate.register($templateCache);
-        Role.DatepickerPopupTemplate.register($templateCache);
+        StaticTemplate.register($templateCache);
+        StaticEnumTemplate.register($templateCache);
+        TextTemplate.register($templateCache);
+        TextareaTemplate.register($templateCache);
+        TextAngularTemplate.register($templateCache);
+        EnumTemplate.register($templateCache);
+        SelectTemplate.register($templateCache);
+        ImageTemplate.register($templateCache);
+        RadioButtonTemplate.register($templateCache);
+        DatepickerPopupTemplate.register($templateCache);
 
         // Field Groups
         // ------------
         // Internals
-        Role.LabeledTemplate.register($templateCache);
-        Role.LabelTemplate.register($templateCache);
-        Role.LabeledInputTemplate.register($templateCache);
+        LabeledTemplate.register($templateCache);
+        LabelTemplate.register($templateCache);
+        LabeledInputTemplate.register($templateCache);
         // Controls
-        Role.LabeledStaticTemplate.register($templateCache);
-        Role.StaticEnumGroupTemplate.register($templateCache);
-        Role.LabeledTextTemplate.register($templateCache);
-        Role.LabeledTextareaTemplate.register($templateCache);
-        Role.LabeledTextAngularTemplate.register($templateCache);
-        Role.LabeledEnumTemplate.register($templateCache);
-        Role.LabeledSelectTemplate.register($templateCache);
-        Role.LabeledImageTemplate.register($templateCache);
-        Role.LabeledRadioButtonTemplate.register($templateCache);
-        Role.LabeledDatepickerPopupTemplate.register($templateCache);
+        LabeledStaticTemplate.register($templateCache);
+        StaticEnumGroupTemplate.register($templateCache);
+        LabeledTextTemplate.register($templateCache);
+        LabeledTextareaTemplate.register($templateCache);
+        LabeledTextAngularTemplate.register($templateCache);
+        LabeledEnumTemplate.register($templateCache);
+        LabeledSelectTemplate.register($templateCache);
+        LabeledImageTemplate.register($templateCache);
+        LabeledRadioButtonTemplate.register($templateCache);
+        LabeledDatepickerPopupTemplate.register($templateCache);
+
+        // Model
+        // -----
+        SelectOneTemplate.register($templateCache);
+        SelectManyTemplate.register($templateCache);
     }
 }

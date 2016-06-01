@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
 
     export class SelectTemplate {
-        static name = "allors/bootstrap/role/select";
+        static name = "allors/bootstrap/select";
 
         static createDefaultView() {
             return `
@@ -97,7 +97,7 @@
 
     angular
         .module("allors")
-        .component("bRoleSelect", {
+        .component("bSelect", {
             controller: SelectController,
             templateUrl: SelectTemplate.name,
             require: FormController.require,

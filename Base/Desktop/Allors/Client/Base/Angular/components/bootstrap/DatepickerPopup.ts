@@ -1,7 +1,7 @@
-﻿namespace Allors.Bootstrap.Role {
+﻿namespace Allors.Bootstrap {
 
     export class DatepickerPopupTemplate {
-        static name = "allors/bootstrap/role/datepicker-popup";
+        static name = "allors/bootstrap/datepicker-popup";
 
         static createDefaultView() {
             return `
@@ -48,7 +48,7 @@
 
     angular
         .module("allors")
-        .component("bRoleDatepickerPopup", {
+        .component("bDatepickerPopup", {
             controller: DatepickerPopupController,
             templateUrl: DatepickerPopupTemplate.name,
             require: FormController.require,
