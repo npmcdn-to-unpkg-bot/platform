@@ -1,0 +1,13 @@
+site_name: Allors Platform
+
+pages:
+- Home: index.md
+- Introduction: introduction.md
+- Concepts:
+  - Domain Orientation: domain-orientation.md
+- Repository:
+  - Attrributes: attributes.md
+
+theme: readthedocs
+repo_url: https://github.com/allors/base/
+markdown_extensions: [codehilite]
