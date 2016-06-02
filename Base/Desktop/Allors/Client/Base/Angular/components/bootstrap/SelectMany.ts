@@ -5,15 +5,15 @@
 
         static createDefaultView() {
             return `
-<ui-select ng-if="$ctrl.options !== undefined" multiple ng-model="$ctrl.model" append-to-body="$ctrl.appendToBody" close-on-select="$ctrl.closeOnSelect">
-    <ui-select-match placeholder="Select values" allow-clear="{{$ctrl.allowClear}}">{{$item[$ctrl.display]}}</ui-select-match>
+<ui-select ng-if="$ctrl.options !== undefined" multiple ng-model="$ctrl.model" append-to-body="$ctrl.appendToBody">
+    <ui-select-match placeholder="{{$ctrl.placeholder}}" allow-clear="{{$ctrl.allowClear}}">{{$item[$ctrl.display]}}</ui-select-match>
     <ui-select-choices repeat="item in $ctrl.options | filter: $ctrl.filterFunction($select.search) | orderBy: $ctrl.orderBy()">
         <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
     </ui-select-choices>
 </ui-select>
 
-<ui-select ng-if="$ctrl.options === undefined" multiple ng-model="$ctrl.model" append-to-body="$ctrl.appendToBody" close-on-select="$ctrl.closeOnSelect">
-    <ui-select-match placeholder="Select values" allow-clear="{{$ctrl.allowClear}}">{{$item[$ctrl.display]}}</ui-select-match>
+<ui-select ng-if="$ctrl.options === undefined" multiple ng-model="$ctrl.model" append-to-body="$ctrl.appendToBody">
+    <ui-select-match placeholder="{{$ctrl.placeholder}}" allow-clear="{{$ctrl.allowClear}}">{{$item[$ctrl.display]}}</ui-select-match>
     <ui-select-choices repeat="item in $ctrl.asyncOptions | orderBy: $ctrl.orderBy()" refresh="$ctrl.refresh($select.search)" refresh-delay="$ctrl.refreshDelay">
         <div ng-bind-html="item[$ctrl.display] | highlight: $select.search"></div>
     </ui-select-choices>
@@ -36,10 +36,12 @@
             order: "<",
             allowClear: "<",
             appendToBody: "<",
-            closeOnSelect: "<",
+            placeholder: "@"
         }
 
+        appendToBody = false;
         allowClear = true;
+        placeholder = "Select values";
 
         model: SessionObject[];
         display: string;
