@@ -35,9 +35,9 @@ namespace Allors.Repository.Domain
         [Id("688ebeb9-8a53-4e8d-b284-3faa0a01ef7c")]
         [AssociationId("8a181cec-7bae-4248-8e24-8abc7e01eea2")]
         [RoleId("e431d53c-37ed-4fde-86a9-755f354c1d75")]
-        [Derived]
         [Size(256)]
         #endregion
+        [Derived]
         public string FullName { get; set; }
         
         #region Allors

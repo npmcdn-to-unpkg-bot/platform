@@ -39,7 +39,6 @@
             placeholder: "@"
         }
 
-        appendToBody = false;
         allowClear = true;
         placeholder = "Select values";
 

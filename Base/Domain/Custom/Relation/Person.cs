@@ -55,17 +55,13 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            if (!this.ExistOwnerSecurityToken)
-            {
-                var mySecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
-                this.OwnerSecurityToken = mySecurityToken;
-            }
-
+            // Validation
             if (!Users.GuestUserName.Equals(this.UserName) && !Users.AdministratorUserName.Equals(this.UserName))
             {
                 derivation.Validation.AssertExists(this, M.Person.LastName);
             }
 
+            // Derivation
             if (this.ExistFirstName && this.ExistLastName)
             {
                 this.FullName = this.FirstName + " " + this.LastName;
