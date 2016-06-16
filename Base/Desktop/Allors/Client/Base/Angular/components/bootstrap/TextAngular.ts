@@ -5,8 +5,12 @@
 
         static createDefaultView() {
             return `
-<text-angular ta-disabled="!$ctrl.canWrite" ng-model="$ctrl.role"/>
-`;
+<div ng-if="$ctrl.canWrite">
+<text-angular ta-disabled="!$ctrl.canWrite" ng-model="$ctrl.role" '/>
+</div>
+<div ng-if="!$ctrl.canWrite">
+<text-angular ta-bind="text" ta-disabled="!$ctrl.canWrite" ng-model="$ctrl.role" '/>
+</div>`;
         }
 
         static register(templateCache: angular.ITemplateCacheService, view = TextAngularTemplate.createDefaultView()) {
