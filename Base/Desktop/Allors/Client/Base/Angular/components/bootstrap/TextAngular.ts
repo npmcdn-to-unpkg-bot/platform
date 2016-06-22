@@ -6,10 +6,10 @@
         static createDefaultView() {
             return `
 <div ng-if="$ctrl.canWrite">
-<text-angular ta-disabled="!$ctrl.canWrite" ng-model="$ctrl.role" '/>
+<text-angular ng-model="$ctrl.role" '/>
 </div>
 <div ng-if="!$ctrl.canWrite">
-<text-angular ta-bind="text" ta-disabled="!$ctrl.canWrite" ng-model="$ctrl.role" '/>
+<text-angular ta-bind="text" ng-model="$ctrl.role" '/>
 </div>`;
         }
 
