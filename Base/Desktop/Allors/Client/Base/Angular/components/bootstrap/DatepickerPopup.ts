@@ -6,7 +6,7 @@
         static createDefaultView() {
             return `
 <p class="input-group">
-    <input type="date" placeholder="{{$ctrl.placeholder}}" class="form-control" 
+    <input type="date" placeholder="{{$ctrl.placeholder}}" class="form-control" datepicker-append-to-body="true"
             uib-datepicker-popup 
             is-open="$ctrl.opened" 
             ng-model="$ctrl.role"
