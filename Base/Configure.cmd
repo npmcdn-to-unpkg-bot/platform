@@ -13,6 +13,8 @@ msbuild Base.sln /target:Meta:Rebuild /p:Configuration="Debug" /verbosity:minima
 msbuild Domain/Generate.proj /verbosity:minimal
 msbuild Domain.Diagrams/Generate.proj /verbosity:minimal
 
+msbuild Workspace.Meta/Generate.proj /verbosity:minimal
+
 msbuild Desktop/Generate.proj /verbosity:minimal
 msbuild Desktop.Diagrams/Generate.proj /verbosity:minimal
 

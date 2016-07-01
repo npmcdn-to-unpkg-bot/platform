@@ -23,7 +23,8 @@ namespace Allors.Meta
 {
     using System.Collections.Generic;
     using System.Linq;
-    
+    using System.Runtime.InteropServices;
+
     public abstract partial class Composite : ObjectType, IComposite
     {
         private LazySet<Interface> derivedDirectSupertypes;
@@ -606,5 +607,20 @@ namespace Allors.Meta
             }
         }
 
+
+        // TODO: Added for Workspace.Meta
+        public IEnumerable<MethodType> DefinedMethods
+        {
+            get
+            {
+                return this.MetaPopulation.MethodTypes.Where(m => this.Equals(m.ObjectType));
+            }
+        }
+
+        public IEnumerable<MethodType> InheritedMethods => this.MethodTypes.Except(this.DefinedMethods);
+
+        public IEnumerable<RoleType> InheritedRoles => this.RoleTypes.Except(this.ExclusiveRoleTypes);
+
+        public IEnumerable<AssociationType> InheritedAssociations => this.AssociationTypes.Except(this.ExclusiveAssociationTypes);
     }
 }

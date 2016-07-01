@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meta", "Meta\Meta.csproj", "{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}"
 EndProject
@@ -23,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{243C86CD-A95C-496E-9C6C-96C25839725A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{35602680-968F-43BA-B56E-4ABCC9576CCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Meta", "Workspace.Meta\Workspace.Meta.csproj", "{9709406D-0089-4277-8D86-FA5C7FFE6F87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,14 @@ Global
 		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Release|x64.ActiveCfg = Release|Any CPU
 		{35602680-968F-43BA-B56E-4ABCC9576CCF}.Release|x64.Build.0 = Release|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Debug|x64.Build.0 = Debug|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Release|x64.ActiveCfg = Release|Any CPU
+		{9709406D-0089-4277-8D86-FA5C7FFE6F87}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
