@@ -4,9 +4,9 @@ namespace Allors.Meta
     {
         internal override void CustomExtend()
         {
-            this.UserEmail.RelationType.AddGroup(Groups.Workspace);
+            this.UserEmail.RelationType.Workspace = true;
 
-            this.UserName.RelationType.AddGroup(Groups.Workspace);
+            this.UserName.RelationType.Workspace = true;
         }
     }
 }

@@ -105,7 +105,7 @@
     <Compile Include="RelationNotLoadedEventArgs.cs" />
     <Compile Include="Repository\DerivedAttribute.cs" />
     <Compile Include="Repository\ExtendsAttribute.cs" />
-    <Compile Include="Repository\GroupAttribute.cs" />
+    <Compile Include="Repository\WorkspaceAttribute.cs" />
     <Compile Include="Repository\DomainAttribute.cs" />
     <Compile Include="Repository\IdAttribute.cs" />
     <Compile Include="Repository\IndexedAttribute.cs" />

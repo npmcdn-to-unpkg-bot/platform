@@ -21,7 +21,7 @@ namespace Allors.Repository.Domain
         [AssociationId("96B21673-F124-4C30-A2F0-DF56D29E03F5")]
         [RoleId("DE0FE224-C40D-469C-BDC5-849A7412EFEC")]
         #endregion
-        [Group("Workspace")]
+        [Workspace]
         [Indexed]
         [Derived]
         public Guid Revision { get; set; }
@@ -49,7 +49,7 @@ namespace Allors.Repository.Domain
         [AssociationId("287B7291-39F0-43E5-8770-811940E81BAE")]
         [RoleId("CE17BFC7-5A4E-415A-9AE0-FAE429CEE69C")]
         #endregion
-        [Group("Workspace")]
+        [Workspace]
         [Size(-1)]
         public string InDataUri { get; set; }
 

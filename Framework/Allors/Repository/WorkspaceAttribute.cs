@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="GroupAttribute.cs" company="Allors bvba">
+// <copyright file="WorkspaceAttribute.cs" company="Allors bvba">
 // Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,14 +23,8 @@ namespace Allors.Repository
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = true)]
-    public class GroupAttribute : RepositoryAttribute
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
+    public class WorkspaceAttribute : RepositoryAttribute
     {
-        public GroupAttribute(string value)
-        {
-            this.Value = value;
-        }
-        
-        public string Value { get; set; }
     }
 }

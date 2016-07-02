@@ -25,7 +25,7 @@ namespace Allors
     using System.Linq;
     using System.Reflection;
 
-    using Allors.Meta;
+    using Meta;
 
     /// <summary>
     /// A base implementation for a static <see cref="IObjectFactory"/>.

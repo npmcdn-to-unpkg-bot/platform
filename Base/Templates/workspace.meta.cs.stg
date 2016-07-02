@@ -38,19 +38,19 @@ namespace Allors.Meta
 	public static class M
 	{
 		// Interfaces
-$meta.Interfaces:{interface|         public static readonly Meta$interface.SingularName$ $interface.SingularName$;}; separator="\n"$
+$meta.WorkspaceInterfaces:{interface|         public static readonly Meta$interface.SingularName$ $interface.SingularName$;}; separator="\n"$
 
 		// Classes
-$meta.Classes:{class|         public static readonly Meta$class.SingularName$ $class.SingularName$;}; separator="\n"$
+$meta.WorkspaceClasses:{class|         public static readonly Meta$class.SingularName$ $class.SingularName$;}; separator="\n"$
 
 
 		static M()
 		{
 		    // Interfaces
-$meta.Interfaces:{interface|             $interface.SingularName$ = Meta$interface.SingularName$.Instance;}; separator="\n"$
+$meta.WorkspaceInterfaces:{interface|             $interface.SingularName$ = Meta$interface.SingularName$.Instance;}; separator="\n"$
 
 		    // Classes
-$meta.Classes:{class|             $class.SingularName$ = Meta$class.SingularName$.Instance;}; separator="\n"$
+$meta.WorkspaceClasses:{class|             $class.SingularName$ = Meta$class.SingularName$.Instance;}; separator="\n"$
 		}
 	}
 
@@ -102,43 +102,41 @@ $meta.SortedDomains:{assembly|$domain_inheritance(assembly)$}; separator="\n"$
 $meta.Units:{unit|             Meta$unit.SingularName$.Instance = new Meta$unit.SingularName$(this.metaPopulation);}; separator="\n"$
 
 			// Interfaces
-$meta.Interfaces:{interface|             Meta$interface.SingularName$.Instance = new Meta$interface.SingularName$(this.metaPopulation);}; separator="\n"$
+$meta.WorkspaceInterfaces:{interface|             Meta$interface.SingularName$.Instance = new Meta$interface.SingularName$(this.metaPopulation);}; separator="\n"$
 
 			// Classes
-$meta.Classes:{class|             Meta$class.SingularName$.Instance = new Meta$class.SingularName$(this.metaPopulation);}; separator="\n"$
+$meta.WorkspaceClasses:{class|             Meta$class.SingularName$.Instance = new Meta$class.SingularName$(this.metaPopulation);}; separator="\n"$
 
 			// Inheritance
-$meta.Composites:{composite|$inheritance(composite)$}; separator="\n"$
-
-
+$meta.WorkspaceComposites:{composite|$inheritance(composite)$}; separator="\n"$
 
 			// Exclusive Roles
-$meta.Composites:{composite|$relations(composite)$}; separator="\n"$
+$meta.WorkspaceComposites:{composite|$relations(composite)$}; separator="\n"$
 
 			// Inherited Roles
-$meta.Interfaces:{interface|$inheritedRoles(interface)$}; separator="\n"$
+$meta.WorkspaceInterfaces:{interface|$inheritedRoles(interface)$}; separator="\n"$
 
 			// Implemented Roles
-$meta.Classes:{class|$implementedRoles(class)$}; separator="\n"$
+$meta.WorkspaceClasses:{class|$implementedRoles(class)$}; separator="\n"$
 
 			// Associations
-$meta.Composites:{composite|$associations(composite)$}; separator="\n"$
+$meta.WorkspaceComposites:{composite|$associations(composite)$}; separator="\n"$
 
 			// InheritedAssociations
-$meta.Composites:{composite|$inheritedassociations(composite)$}; separator="\n"$
+$meta.WorkspaceComposites:{composite|$inheritedassociations(composite)$}; separator="\n"$
 
 			// Defined Methods
-$meta.Composites:{composite|$definedMethods(composite)$}; separator="\n"$
+$meta.WorkspaceComposites:{composite|$definedMethods(composite)$}; separator="\n"$
 
 			// Inherited Methods
-$meta.Composites:{composite|$inheritedMethods(composite)$}; separator="\n"$
+$meta.WorkspaceComposites:{composite|$inheritedMethods(composite)$}; separator="\n"$
 
 
 
 			// Extend
-            $meta.Interfaces:{interface|Meta$interface.SingularName$.Instance.Extend();}; separator="\n"$
+            $meta.WorkspaceInterfaces:{interface|Meta$interface.SingularName$.Instance.Extend();}; separator="\n"$
 
-            $meta.Classes:{class|Meta$class.SingularName$.Instance.Extend();}; separator="\n"$
+            $meta.WorkspaceClasses:{class|Meta$class.SingularName$.Instance.Extend();}; separator="\n"$
 		}
 	}
 }

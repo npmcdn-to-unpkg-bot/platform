@@ -56,6 +56,8 @@ namespace Allors.Meta
             relationType.MetaPopulation.OnRoleTypeCreated(this);
         }
 
+        public bool Workspace => this.RelationType.Workspace;
+
         IObjectType IRoleType.ObjectType => this.ObjectType;
 
         public ObjectType ObjectType

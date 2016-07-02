@@ -49,6 +49,8 @@ namespace Allors.Meta
             relationType.MetaPopulation.OnAssociationTypeCreated(this);
         }
 
+        public bool Workspace => this.RelationType.Workspace;
+
         /// <summary>
         /// Gets a value indicating whether this instance has a multiplicity of one.
         /// </summary>

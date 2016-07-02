@@ -21,9 +21,7 @@
 
 namespace Allors
 {
-    using System.Collections.Generic;
-
-    using Allors.Meta;
+    using Meta;
 
     public static partial class PrefetchPolicyBuilderExtensions
     {
@@ -36,15 +34,11 @@ namespace Allors
                 .Build();
         }
         
-        public static void WithGroupRules(this PrefetchPolicyBuilder @this, Class @class, string @group)
+        public static void WithWorkspaceRules(this PrefetchPolicyBuilder @this, Class @class, string @group)
         {
-            IList<RoleType> roleTypes;
-            if (@class.RoleTypesByGroup.TryGetValue(group, out roleTypes))
+            foreach (var roleType in @class.WorkspacRoleTypes)
             {
-                foreach (var roleType in roleTypes)
-                {
-                    @this.WithRule(roleType);
-                }
+                @this.WithRule(roleType);
             }
         }
 

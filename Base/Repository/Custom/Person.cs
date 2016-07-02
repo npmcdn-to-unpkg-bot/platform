@@ -27,7 +27,7 @@ namespace Allors.Repository.Domain
         [Id("adf83a86-878d-4148-a9fc-152f56697136")]
         [AssociationId("b9da077d-bfc7-4b4e-be62-03aded6da22e")]
         [RoleId("0ffd9c62-efc6-4438-aaa3-755e4c637c21")]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public DateTime BirthDate { get; set; }
    
@@ -61,7 +61,7 @@ namespace Allors.Repository.Domain
         [AssociationId("03a7ffcc-4291-4ae1-a2ab-69f7257fbf04")]
         [RoleId("abd2a4b3-4b17-48d4-b465-0ffcb5a2664d")]
         #endregion
-        [Group("Workspace")]
+        [Workspace]
         public bool IsStudent { get; set; }
         
         #region Allors
@@ -88,7 +88,7 @@ namespace Allors.Repository.Domain
         [RoleId("f6624fac-db8e-4fb2-9e86-18021b59d31d")]
         [Multiplicity(Multiplicity.ManyToOne)]
         [Indexed]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public Media Photo { get; set; }
         
@@ -121,7 +121,7 @@ namespace Allors.Repository.Domain
         [RoleId("0aab73c3-f997-4dd9-885a-2c1c892adb0e")]
         [Precision(19)]
         [Scale(2)]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public decimal Weight { get; set; }
 
@@ -130,7 +130,7 @@ namespace Allors.Repository.Domain
         [AssociationId("DEC66A7B-56F5-4010-A2E7-37E25124BC77")]
         [RoleId("79FFEED6-E06A-42F4-B12F-D7F7C98B6499")]
         #endregion
-        [Group("Workspace")]
+        [Workspace]
         [Multiplicity(Multiplicity.ManyToOne)]
         [Indexed]
         public Organisation CycleOne { get; set; }
@@ -140,7 +140,7 @@ namespace Allors.Repository.Domain
         [AssociationId("FAA1E59E-29EE-4E10-BFE1-94BFBCF238EA")]
         [RoleId("7CEEA115-23C8-46E2-BA76-1FDB1FA85381")]
         #endregion
-        [Group("Workspace")]
+        [Workspace]
         [Multiplicity(Multiplicity.ManyToMany)]
         [Indexed]
         public Organisation[] CycleMany { get; set; }

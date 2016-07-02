@@ -49,25 +49,25 @@ $meta.classes:{class|$class(class, grp)$}$
 >>
 
 class(class, grp) ::= <<
-$if(class.roleTypesByGroup.(grp) || class.associationTypesByGroup.(grp) || class.methodTypesByGroup.(grp))$
+$if(class.workspace)$
 			{
 				name: "$class.Name$" ,
 				interfaces : 
 				[
 $class.supertypes:{interface|
-$if(interface.roleTypesByGroup.(grp) || interface.associationTypesByGroup.(grp))$
+$if(interface.workspace)$
 				"$interface.Name$",
 $endif$}$
 				],
 
 				roleTypes:
 				[
-$class.roleTypesByGroup.(grp):{roleType|$roleType(roleType)$}; separator=",\n"$
+$class.workspaceRoleTypes:{roleType|$roleType(roleType)$}; separator=",\n"$
 				],
 
 				methodTypes:
 				[
-$class.methodTypesByGroup.(grp):{methodType|$methodType(methodType)$}; separator=",\n"$
+$class.workspaceMethodTypes:{methodType|$methodType(methodType)$}; separator=",\n"$
 				]
 			},
 $endif$

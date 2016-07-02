@@ -41,8 +41,6 @@ namespace Allors.Meta
         private bool isSynced;
         private bool isIndexed;
 
-        private string[] groups;
-
         private string xmlDoc;
 
         public RelationType(MetaPopulation metaPopulation, Guid id, Guid associationTypeId, Guid roleTypdId)
@@ -55,6 +53,8 @@ namespace Allors.Meta
 
             metaPopulation.OnRelationTypeCreated(this);
         }
+
+        public bool Workspace { get; set; }
 
         public string XmlDoc
         {
@@ -223,56 +223,7 @@ namespace Allors.Meta
         /// </summary>
         /// <value>The name of the reverse.</value>
         public string ReverseName => this.RoleType.SingularName + this.AssociationType.SingularName;
-
-        public string[] Groups
-        {
-            get
-            {
-                return this.groups ?? EmptyGroups;
-            }
-
-            set
-            {
-                this.MetaPopulation.AssertUnlocked();
-
-                this.groups = null;
-                if (value != null)
-                {
-                    this.groups = new HashSet<string>(value).ToArray();
-                }
-
-                this.MetaPopulation.Stale();
-            }
-        }
-
-        public void AddGroup(string @group)
-        {
-            if (@group != null)
-            {
-                this.Groups = new List<string>(this.Groups) { @group }.ToArray();
-            }
-        }
-
-        public void AddGroups(string[] newGroups)
-        {
-            if (newGroups != null)
-            {
-                var newTags = new List<string>(this.Groups);
-                newTags.AddRange(newGroups);
-                this.Groups = newTags.ToArray();
-            }
-        }
-
-        public void RemoveGroup(string @group)
-        {
-            if (@group != null)
-            {
-                var newGroup = new List<string>(this.Groups);
-                newGroup.Remove(@group);
-                this.Groups = newGroup.ToArray();
-            }
-        }
-
+        
         /// <summary>
         /// Gets the validation name.
         /// </summary>

@@ -22,11 +22,14 @@
 namespace Allors.Meta
 {
     using System.Collections.Generic;
+    using System.Diagnostics.Eventing.Reader;
     using System.Linq;
     using System.Runtime.InteropServices;
 
     public abstract partial class Composite : ObjectType, IComposite
     {
+        private bool derivedWorkspace;
+
         private LazySet<Interface> derivedDirectSupertypes;
         private LazySet<Interface> derivedSupertypes;
 
@@ -34,13 +37,9 @@ namespace Allors.Meta
         private LazySet<RoleType> derivedRoleTypes;
         private LazySet<MethodType> derivedMethodTypes;
 
-        private Dictionary<string, IList<Interface>> derivedDirectSupertypesByGroup;
-        private Dictionary<string, IList<RoleType>> derivedExclusiveRoleTypesByGroup;
-        private Dictionary<string, IList<RoleType>> derivedRoleTypesByGroup;
-        private Dictionary<string, IList<AssociationType>> derivedAssociationTypesByGroup;
-        private Dictionary<string, IList<MethodType>> derivedMethodTypesByGroup;
-
         private string xmlDoc;
+
+        public bool Workspace => this.derivedWorkspace;
 
         public string XmlDoc
         {
@@ -214,71 +213,6 @@ namespace Allors.Meta
             }
         }
 
-        /// <summary>
-        /// Gets the direct supertypes by group.
-        /// </summary>
-        /// <value>The grouped direct supertypes.</value>
-        public Dictionary<string, IList<Interface>> DirectSupertypesByGroup
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedDirectSupertypesByGroup;
-            }
-        }
-
-        /// <summary>
-        /// Gets the exclusive roles by group.
-        /// </summary>
-        /// <value>The grouped exclusive roles.</value>
-        public Dictionary<string, IList<RoleType>> ExclusiveRoleTypesByGroup
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedExclusiveRoleTypesByGroup;
-            }
-        }
-
-        /// <summary>
-        /// Gets the roles by group.
-        /// </summary>
-        /// <value>The grouped roles.</value>
-        public Dictionary<string, IList<RoleType>> RoleTypesByGroup
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedRoleTypesByGroup;
-            }
-        }
-
-        /// <summary>
-        /// Gets the associations by group.
-        /// </summary>
-        /// <value>The grouped associations.</value>
-        public Dictionary<string, IList<AssociationType>> AssociationTypesByGroup
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedAssociationTypesByGroup;
-            }
-        }
-
-        /// <summary>
-        /// Gets the methods by group.
-        /// </summary>
-        /// <value>The grouped methods.</value>
-        public Dictionary<string, IList<MethodType>> MethodTypesByGroup
-        {
-            get
-            {
-                this.MetaPopulation.Derive();
-                return this.derivedMethodTypesByGroup;
-            }
-        }
-
         public IEnumerable<RoleType> UnitRoleTypes => this.RoleTypes.Where(roleType => roleType.ObjectType.IsUnit).ToArray();
 
         public IEnumerable<RoleType> CompositeRoleTypes => this.RoleTypes.Where(roleType => roleType.ObjectType.IsComposite).ToArray();
@@ -384,37 +318,7 @@ namespace Allors.Meta
 
             this.derivedMethodTypes = new LazySet<MethodType>(methodTypes);
         }
-
-        /// <summary>
-        /// Derive method types by group.
-        /// </summary>
-        internal void DeriveMethodTypesByGroup()
-        {
-            var methodTypesByGroup = new Dictionary<string, IList<MethodType>>();
-
-            foreach (var methodType in this.MethodTypes)
-            {
-                foreach (var group in methodType.Groups)
-                {
-                    IList<MethodType> groupedMethodTypes;
-                    if (!methodTypesByGroup.TryGetValue(group, out groupedMethodTypes))
-                    {
-                        groupedMethodTypes = new List<MethodType>();
-                        methodTypesByGroup[group] = groupedMethodTypes;
-                    }
-
-                    groupedMethodTypes.Add(methodType);
-                }
-            }
-
-            foreach (var group in methodTypesByGroup.Keys.ToArray())
-            {
-                methodTypesByGroup[group] = methodTypesByGroup[group].ToArray();
-            }
-
-            this.derivedMethodTypesByGroup = methodTypesByGroup;
-        }
-
+        
         /// <summary>
         /// Derive role types.
         /// </summary>
@@ -441,128 +345,7 @@ namespace Allors.Meta
 
             this.derivedRoleTypes = new LazySet<RoleType>(roleTypes);
         }
-
-        /// <summary>
-        /// Derive direct supertypes by group.
-        /// </summary>
-        internal void DeriveDirectSupertypesByGroup()
-        {
-            var directSupertypesByGroup = new Dictionary<string, IList<Interface>>();
-
-            foreach (var directSupertype in this.DirectSupertypes)
-            {
-                var groups = directSupertype.RoleTypesByGroup.Keys.Union(directSupertype.AssociationTypesByGroup.Keys);
-                foreach (var group in groups)
-                {
-                    IList<Interface> groupedDiresctSupertypes;
-                    if (!directSupertypesByGroup.TryGetValue(group, out groupedDiresctSupertypes))
-                    {
-                        groupedDiresctSupertypes = new List<Interface>();
-                        directSupertypesByGroup[group] = groupedDiresctSupertypes;
-                    }
-
-                    groupedDiresctSupertypes.Add(directSupertype);
-                }
-            }
-
-            foreach (var group in directSupertypesByGroup.Keys.ToArray())
-            {
-                directSupertypesByGroup[group] = directSupertypesByGroup[group].ToArray();
-            }
-
-            this.derivedDirectSupertypesByGroup = directSupertypesByGroup;
-        }
-
-        /// <summary>
-        /// Derive exclusive role types by group.
-        /// </summary>
-        internal void DeriveExclusiveRoleTypesByGroup()
-        {
-            var roleTypesByGroup = new Dictionary<string, IList<RoleType>>();
-
-            foreach (var roleType in this.ExclusiveRoleTypes)
-            {
-                foreach (var group in roleType.RelationType.Groups)
-                {
-                    IList<RoleType> groupedExclusiveRoleTypes;
-                    if (!roleTypesByGroup.TryGetValue(group, out groupedExclusiveRoleTypes))
-                    {
-                        groupedExclusiveRoleTypes = new List<RoleType>();
-                        roleTypesByGroup[group] = groupedExclusiveRoleTypes;
-                    }
-
-                    groupedExclusiveRoleTypes.Add(roleType);
-                }
-            }
-
-            foreach (var group in roleTypesByGroup.Keys.ToArray())
-            {
-                roleTypesByGroup[group] = roleTypesByGroup[group].ToArray();
-            }
-
-            this.derivedExclusiveRoleTypesByGroup = roleTypesByGroup;
-        }
-
-        /// <summary>
-        /// Derive role types by group.
-        /// </summary>
-        internal void DeriveRoleTypesByGroup()
-        {
-            var roleTypesByGroup = new Dictionary<string, IList<RoleType>>();
-
-            foreach (var roleType in this.RoleTypes)
-            {
-                foreach (var group in roleType.RelationType.Groups)
-                {
-                    IList<RoleType> groupedRoleTypes;
-                    if (!roleTypesByGroup.TryGetValue(group, out groupedRoleTypes))
-                    {
-                        groupedRoleTypes = new List<RoleType>();
-                        roleTypesByGroup[group] = groupedRoleTypes;
-                    }
-
-                    groupedRoleTypes.Add(roleType);
-                }   
-            }
-            
-            foreach (var group in roleTypesByGroup.Keys.ToArray())
-            {
-                roleTypesByGroup[group] = roleTypesByGroup[group].ToArray();
-            }
-
-            this.derivedRoleTypesByGroup = roleTypesByGroup;
-        }
-
-        /// <summary>
-        /// Derive association types by group.
-        /// </summary>
-        internal void DeriveAssociationTypesByGroup()
-        {
-            var associationTypesByGroup = new Dictionary<string, IList<AssociationType>>();
-
-            foreach (var associationType in this.AssociationTypes)
-            {
-                foreach (var group in associationType.RelationType.Groups)
-                {
-                    IList<AssociationType> groupedAssociationTypes;
-                    if (!associationTypesByGroup.TryGetValue(group, out groupedAssociationTypes))
-                    {
-                        groupedAssociationTypes = new List<AssociationType>();
-                        associationTypesByGroup[group] = groupedAssociationTypes;
-                    }
-
-                    groupedAssociationTypes.Add(associationType);
-                }
-            }
-
-            foreach (var group in associationTypesByGroup.Keys.ToArray())
-            {
-                associationTypesByGroup[group] = associationTypesByGroup[group].ToArray();
-            }
-
-            this.derivedAssociationTypesByGroup = associationTypesByGroup;
-        }
-
+        
         /// <summary>
         /// Derive association types.
         /// </summary>
@@ -589,7 +372,12 @@ namespace Allors.Meta
 
             this.derivedAssociationTypes = new LazySet<AssociationType>(associations);
         }
-        
+
+        internal void DeriveWorkspace()
+        {
+            this.derivedWorkspace = this.RoleTypes.Any(v => v.Workspace) || this.AssociationTypes.Any(v => v.Workspace) || this.MethodTypes.Any(v => v.Workspace);
+        }
+
         /// <summary>
         /// Derive super types recursively.
         /// </summary>
@@ -607,7 +395,6 @@ namespace Allors.Meta
             }
         }
 
-
         // TODO: Added for Workspace.Meta
         public IEnumerable<MethodType> DefinedMethods
         {
@@ -622,5 +409,15 @@ namespace Allors.Meta
         public IEnumerable<RoleType> InheritedRoles => this.RoleTypes.Except(this.ExclusiveRoleTypes);
 
         public IEnumerable<AssociationType> InheritedAssociations => this.AssociationTypes.Except(this.ExclusiveAssociationTypes);
+
+        public IEnumerable<Interface> WorkspaceDirectSupertypes => this.DirectSupertypes.Where(m => m.Workspace);
+
+        // TODO: Derive
+        public IEnumerable<RoleType> WorkspaceRoleTypes => this.RoleTypes.Where(m => m.Workspace);
+
+        public IEnumerable<RoleType> WorkspaceExclusiveRoleTypes => this.ExclusiveRoleTypes.Where(m => m.Workspace);
+
+        // TODO: Derive
+        public IEnumerable<MethodType> WorkspaceMethodTypes => this.MethodTypes.Where(m => m.Workspace);
     }
 }

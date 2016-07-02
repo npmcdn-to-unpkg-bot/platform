@@ -133,7 +133,7 @@ namespace Allors.Repository.Domain
         [AssociationId("70e42b8b-09e2-4cb1-a632-ff3785ee1c8d")]
         [RoleId("e5cd692c-ab97-4cf8-9f8a-1de733526e74")]
         [Size(-1)]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public byte[] C1AllorsBinary { get; set; }
         #region Allors
@@ -174,7 +174,7 @@ namespace Allors.Repository.Domain
         [AssociationId("974aa133-255b-431f-a15d-b6a126d362b5")]
         [RoleId("6dc98925-87a7-4959-8095-90eedef0e9a0")]
         [Size(256)]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public string C1AllorsString { get; set; }
         #region Allors
@@ -212,7 +212,7 @@ namespace Allors.Repository.Domain
         [RoleId("3d121ffa-0ff5-4627-9ec3-879c2830ff04")]
         [Multiplicity(Multiplicity.OneToMany)]
         [Indexed]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public C1[] C1C1One2Manies { get; set; }
         #region Allors
@@ -221,7 +221,7 @@ namespace Allors.Repository.Domain
         [RoleId("40ee2908-2556-4bdf-a82f-2ea33e181b91")]
         [Multiplicity(Multiplicity.OneToOne)]
         [Indexed]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public C1 C1C1One2One { get; set; }
         #region Allors
@@ -376,7 +376,7 @@ namespace Allors.Repository.Domain
         #endregion
         
         [Id("09A6A387-A1B5-4038-B074-3A01C81CBDA2")]
-        [Group("Workspace")]
+        [Workspace]
         public void ClassMethod(){}
         
         [Id("26FE4FD7-68C3-4DDA-8A44-87857B35B000")]

@@ -38,7 +38,7 @@ namespace Allors.Repository.Domain
         [AssociationId("b031ef1a-0102-4b19-b85d-aa9c404596c3")]
         [RoleId("b95c7b34-a295-4600-82c8-826cc2186a00")]
         [Multiplicity(Multiplicity.OneToMany)]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public Person[] Employees { get; set; }
 
@@ -105,7 +105,7 @@ namespace Allors.Repository.Domain
         [RoleId("19de0627-fb1c-4f55-9b65-31d8008d0a48")]
         [Multiplicity(Multiplicity.OneToOne)]
         [Indexed]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public Person Manager { get; set; }
         
@@ -115,7 +115,7 @@ namespace Allors.Repository.Domain
         [RoleId("baa30557-79ff-406d-b374-9d32519b2de7")]
         [Indexed]
         [Size(256)]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public string Name { get; set; }
 
@@ -125,7 +125,7 @@ namespace Allors.Repository.Domain
         [RoleId("58d7df91-fbc5-4bcb-9398-a9957949402b")]
         [Multiplicity(Multiplicity.OneToOne)]
         [Indexed]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public Person Owner { get; set; }
 
@@ -135,7 +135,7 @@ namespace Allors.Repository.Domain
         [RoleId("45bef644-dfcf-417a-9356-3c1cfbcada1b")]
         [Multiplicity(Multiplicity.ManyToMany)]
         [Indexed]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         public Person[] Shareholders { get; set; }
 
@@ -152,7 +152,7 @@ namespace Allors.Repository.Domain
         [AssociationId("4955AC7F-F840-4F24-B44C-C2D3937D2D44")]
         [RoleId("9033AE73-83F6-4529-9F81-84FD9D35D597")]
         #endregion
-        [Group("Workspace")]
+        [Workspace]
         [Multiplicity(Multiplicity.ManyToOne)]
         [Indexed]
         public Person CycleOne { get; set; }
@@ -162,7 +162,7 @@ namespace Allors.Repository.Domain
         [AssociationId("6ABCD4E2-44A7-46B4-BD98-D052F38B7C50")]
         [RoleId("E01ACE3C-2314-477C-8997-14266D9711E0")]
         #endregion
-        [Group("Workspace")]
+        [Workspace]
         [Multiplicity(Multiplicity.ManyToMany)]
         [Indexed]
         public Person[] CycleMany { get; set; }
@@ -182,7 +182,7 @@ namespace Allors.Repository.Domain
         #endregion
         
         [Id("1869873F-F2F0-4D03-A0F9-7DC73491C117")]
-        [Group("Workspace")]
+        [Workspace]
         public void JustDoIt(){}
     }
 }

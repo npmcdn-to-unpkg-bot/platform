@@ -485,34 +485,10 @@ namespace Allors.Meta
                         @class.DeriveConcreteMethodTypes(sharedMethodTypes);
                     }
 
-                    // RoleTypesByGroup
-                    foreach (var type in this.derivedComposites)
+                    // workspace composites
+                    foreach (var composite in this.Composites)
                     {
-                        type.DeriveRoleTypesByGroup();
-                    }
-
-                    // AssociationTypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveAssociationTypesByGroup();
-                    }
-
-                    // DirectSupertypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveDirectSupertypesByGroup();
-                    }
-
-                    // ExclusiveRoleTypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveExclusiveRoleTypesByGroup();
-                    }
-
-                    // MethodTypesByGroup
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveMethodTypesByGroup();
+                        composite.DeriveWorkspace();
                     }
 
                     // MetaPopulation
@@ -655,5 +631,13 @@ namespace Allors.Meta
 
             return false;
         }
+
+
+        // TODO: Added for Workspace.Meta
+        public IEnumerable<Composite> WorkspaceComposites => this.Composites.Where(m => m.Workspace);
+
+        public IEnumerable<Interface> WorkspaceInterfaces => this.Interfaces.Where(m => m.Workspace);
+
+        public IEnumerable<Class> WorkspaceClasses => this.Classes.Where(m => m.Workspace);
     }
 }

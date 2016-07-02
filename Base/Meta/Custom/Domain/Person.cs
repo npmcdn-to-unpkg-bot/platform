@@ -6,11 +6,11 @@ namespace Allors.Meta
 
         internal override void CustomExtend()
         {
-            this.Delete.AddGroup("Workspace");
+            this.Delete.Workspace = true;
 
-            this.FirstName.RelationType.AddGroup(Groups.Workspace);
-            this.LastName.RelationType.AddGroup(Groups.Workspace);
-            this.MiddleName.RelationType.AddGroup(Groups.Workspace);
+            this.FirstName.RelationType.Workspace = true;
+            this.LastName.RelationType.Workspace = true;
+            this.MiddleName.RelationType.Workspace = true;
             
             var person = this;
             this.AngularHome = new Tree(person)

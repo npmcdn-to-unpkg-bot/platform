@@ -35,7 +35,7 @@
                 var prefetchObjects = groupBy.ToArray();
 
                 var prefetchPolicyBuilder = new PrefetchPolicyBuilder();
-                prefetchPolicyBuilder.WithGroupRules(prefetchClass, this.@group);
+                prefetchPolicyBuilder.WithWorkspaceRules(prefetchClass, this.@group);
                 prefetchPolicyBuilder.WithSecurityRules();
                 var prefetcher = prefetchPolicyBuilder.Build();
 
@@ -60,34 +60,46 @@
         {
             var composite = (Composite)obj.Strategy.Class;
 
-            IList<RoleType> roleTypes;
-            if (composite.RoleTypesByGroup.TryGetValue(this.@group, out roleTypes))
+            IList<RoleType> roleTypes = composite.WorkspacRoleTypes.ToArray();
+            if (roleTypes.Count > 0)
             {
-                if (roleTypes.Count > 0)
+                AccessControlList acl = null;
+                if (obj is AccessControlledObject)
                 {
-                    AccessControlList acl = null;
-                    if (obj is AccessControlledObject)
+                    acl = new AccessControlList(obj, this.user);
+                }
+
+                var roles = new List<object[]>();
+                foreach (var roleType in roleTypes)
+                {
+                    var propertyName = roleType.PropertyName;
+
+                    var canRead = acl == null || acl.CanRead(roleType);
+                    var canWrite = acl != null && acl.CanWrite(roleType);
+                    var access = (canRead ? "r" : string.Empty) + (canWrite ? "w" : string.Empty);
+
+                    if (canRead)
                     {
-                        acl = new AccessControlList(obj, this.user);
-                    }
-
-                    var roles = new List<object[]>();
-                    foreach (var roleType in roleTypes)
-                    {
-                        var propertyName = roleType.PropertyName;
-
-                        var canRead = acl == null || acl.CanRead(roleType);
-                        var canWrite = acl != null && acl.CanWrite(roleType);
-                        var access = (canRead ? "r" : string.Empty) + (canWrite ? "w" : string.Empty);
-
-                        if (canRead)
+                        if (roleType.ObjectType.IsUnit)
                         {
-                            if (roleType.ObjectType.IsUnit)
+                            var role = obj.Strategy.GetUnitRole(roleType.RelationType);
+                            if (role != null)
                             {
-                                var role = obj.Strategy.GetUnitRole(roleType.RelationType);
+                                roles.Add(new[] { propertyName, access, role });
+                            }
+                            else
+                            {
+                                roles.Add(new object[] { propertyName, access });
+                            }
+                        }
+                        else
+                        {
+                            if (roleType.IsOne)
+                            {
+                                var role = obj.Strategy.GetCompositeRole(roleType.RelationType);
                                 if (role != null)
                                 {
-                                    roles.Add(new[] { propertyName, access, role });
+                                    roles.Add(new object[] { propertyName, access, role.Id.ToString() });
                                 }
                                 else
                                 {
@@ -96,41 +108,26 @@
                             }
                             else
                             {
-                                if (roleType.IsOne)
+                                var role = obj.Strategy.GetCompositeRoles(roleType.RelationType);
+                                if (role.Count != 0)
                                 {
-                                    var role = obj.Strategy.GetCompositeRole(roleType.RelationType);
-                                    if (role != null)
-                                    {
-                                        roles.Add(new object[] { propertyName, access, role.Id.ToString() });
-                                    }
-                                    else
-                                    {
-                                        roles.Add(new object[] { propertyName, access });
-                                    }
+                                    var ids = role.Cast<IObject>().Select(roleObject => roleObject.Id.ToString()).ToList();
+                                    roles.Add(new object[] { propertyName, access, ids });
                                 }
                                 else
                                 {
-                                    var role = obj.Strategy.GetCompositeRoles(roleType.RelationType);
-                                    if (role.Count != 0)
-                                    {
-                                        var ids = role.Cast<IObject>().Select(roleObject => roleObject.Id.ToString()).ToList();
-                                        roles.Add(new object[] { propertyName, access, ids });
-                                    }
-                                    else
-                                    {
-                                        roles.Add(new object[] { propertyName, access });
-                                    }
+                                    roles.Add(new object[] { propertyName, access });
                                 }
                             }
                         }
-                        else
-                        {
-                            roles.Add(new object[] { propertyName, access });
-                        }
                     }
-
-                    return roles.ToArray();
+                    else
+                    {
+                        roles.Add(new object[] { propertyName, access });
+                    }
                 }
+
+                return roles.ToArray();
             }
 
             return EmptyRoles;
@@ -140,30 +137,28 @@
         {
             var composite = (Composite)obj.Strategy.Class;
 
-            IList<MethodType> methodTypes;
-            if (composite.MethodTypesByGroup.TryGetValue(this.@group, out methodTypes))
+            // TODO: remove .ToArray()
+            IList<MethodType> methodTypes = composite.WorkspacMethodTypes.ToArray();
+            if (methodTypes.Count > 0)
             {
-                if (methodTypes.Count > 0)
+                AccessControlList acl = null;
+                if (obj is AccessControlledObject)
                 {
-                    AccessControlList acl = null;
-                    if (obj is AccessControlledObject)
-                    {
-                        acl = new AccessControlList(obj, this.user);
-                    }
-
-                    var methods = new List<object[]>();
-                    foreach (var methodType in methodTypes)
-                    {
-                        var methodName = methodType.Name;
-
-                        var canExecute = acl == null || acl.CanExecute(methodType);
-                        var access = canExecute ? "x" : string.Empty;
-
-                        methods.Add(new object[] { methodName, access });
-                    }
-
-                    return methods.ToArray();
+                    acl = new AccessControlList(obj, this.user);
                 }
+
+                var methods = new List<object[]>();
+                foreach (var methodType in methodTypes)
+                {
+                    var methodName = methodType.Name;
+
+                    var canExecute = acl == null || acl.CanExecute(methodType);
+                    var access = canExecute ? "x" : string.Empty;
+
+                    methods.Add(new object[] { methodName, access });
+                }
+
+                return methods.ToArray();
             }
 
             return EmptyMethods;

@@ -54,7 +54,7 @@ namespace Allors.Repository.Domain
         [AssociationId("0287a603-59e5-4241-8b2e-a21698476e67")]
         [RoleId("fec573a7-5ab3-4f30-9b50-7d720b4af4b4")]
         [Size(256)]
-        [Group("Workspace")]
+        [Workspace]
         #endregion
         string I1AllorsString { get; set; }
 
