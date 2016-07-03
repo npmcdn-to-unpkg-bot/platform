@@ -313,6 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Base\Derivations\Logging\Logging.cd" />
+    <None Include="Generate.proj" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

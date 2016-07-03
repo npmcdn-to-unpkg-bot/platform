@@ -23,11 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Merge", "Merge\Merge.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BAFF320B-3C38-4888-B5A7-0FFFDB3F37F1}"
 	ProjectSection(SolutionItems) = preProject
-		Templates\domain.cs.stg = Templates\domain.cs.stg
-		Templates\domain.ts.stg = Templates\domain.ts.stg
-		Templates\meta.cs.stg = Templates\meta.cs.stg
-		Templates\meta.ts.stg = Templates\meta.ts.stg
-		Templates\repository.cs.stg = Templates\repository.cs.stg
 		upgrades.md = upgrades.md
 	EndProjectSection
 EndProject
@@ -46,6 +41,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Diagrams", "Domain.Diagrams\Domain.Diagrams.csproj", "{86E451C8-D3BE-4FF8-887A-5F0574E892D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Meta", "Workspace.Meta\Workspace.Meta.csproj", "{7B37DFF9-8CEF-4189-8D9D-BE29E34EB68C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{D86B2003-7DBA-422C-849C-BEBE3657B58C}"
+	ProjectSection(SolutionItems) = preProject
+		Templates\docs.html.stg = Templates\docs.html.stg
+		Templates\domain.cs.stg = Templates\domain.cs.stg
+		Templates\meta.cs.stg = Templates\meta.cs.stg
+		Templates\repository.cs.stg = Templates\repository.cs.stg
+		Templates\uml.cs.stg = Templates\uml.cs.stg
+		Templates\uml.java.stg = Templates\uml.java.stg
+		Templates\workspace.domain.ts.stg = Templates\workspace.domain.ts.stg
+		Templates\workspace.meta.cs.stg = Templates\workspace.meta.cs.stg
+		Templates\workspace.meta.ts.stg = Templates\workspace.meta.ts.stg
+		Templates\workspace.uml.cs.stg = Templates\workspace.uml.cs.stg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -194,6 +203,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D86B2003-7DBA-422C-849C-BEBE3657B58C} = {BAFF320B-3C38-4888-B5A7-0FFFDB3F37F1}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Meta\Meta.csproj

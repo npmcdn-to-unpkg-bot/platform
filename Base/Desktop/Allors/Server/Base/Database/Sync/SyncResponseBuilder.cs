@@ -60,7 +60,7 @@
         {
             var composite = (Composite)obj.Strategy.Class;
 
-            IList<RoleType> roleTypes = composite.WorkspacRoleTypes.ToArray();
+            IList<RoleType> roleTypes = composite.WorkspaceRoleTypes.ToArray();
             if (roleTypes.Count > 0)
             {
                 AccessControlList acl = null;
@@ -138,7 +138,7 @@
             var composite = (Composite)obj.Strategy.Class;
 
             // TODO: remove .ToArray()
-            IList<MethodType> methodTypes = composite.WorkspacMethodTypes.ToArray();
+            IList<MethodType> methodTypes = composite.WorkspaceMethodTypes.ToArray();
             if (methodTypes.Count > 0)
             {
                 AccessControlList acl = null;

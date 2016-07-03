@@ -36,7 +36,7 @@ namespace Allors
         
         public static void WithWorkspaceRules(this PrefetchPolicyBuilder @this, Class @class, string @group)
         {
-            foreach (var roleType in @class.WorkspacRoleTypes)
+            foreach (var roleType in @class.WorkspaceRoleTypes)
             {
                 @this.WithRule(roleType);
             }

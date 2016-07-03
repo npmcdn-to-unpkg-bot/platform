@@ -410,6 +410,8 @@ namespace Allors.Meta
 
         public IEnumerable<AssociationType> InheritedAssociations => this.AssociationTypes.Except(this.ExclusiveAssociationTypes);
 
+        public IEnumerable<Interface> WorkspaceSupertypes => this.Supertypes.Where(m => m.Workspace);
+
         public IEnumerable<Interface> WorkspaceDirectSupertypes => this.DirectSupertypes.Where(m => m.Workspace);
 
         // TODO: Derive

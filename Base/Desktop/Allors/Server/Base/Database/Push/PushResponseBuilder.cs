@@ -113,7 +113,7 @@
             foreach (var saveRequestRole in saveRequestRoles)
             {
                 var composite = (Composite)obj.Strategy.Class;
-                var roleTypes = composite.WorkspacRoleTypes;
+                var roleTypes = composite.WorkspaceRoleTypes;
                 var acl = new AccessControlList(obj, this.user);
 
                 var roleTypeName = saveRequestRole.T;

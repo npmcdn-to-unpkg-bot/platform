@@ -4,7 +4,7 @@ TemplateId() ::= <<FA2E53B4-915D-4227-8571-456FC8E04DB0>>
 TemplateName() ::= <<Allors C# Uml>>
 TemplateVersion() ::= <<1.0.23>>
 TemplateAllors() ::= <<1.0>>
-TemplateConfiguration(meta, grp) ::= <<
+TemplateConfiguration(meta) ::= <<
 $! 
 Copyright 2002-2013 Allors bvba.
 
@@ -27,33 +27,11 @@ For more information visit http://www.allors.com/legal
 </generations>
 >>
 
-domain(meta, grp) ::= <<
+domain(meta) ::= <<
 namespace Allors.Domain
 {
-$if(grp)$
-	$meta.Interfaces:{objectType|
-		$if(objectType.roleTypesByGroup.(grp) || objectType.associationTypesByGroup.(grp))$
-			$groupedComposite(grp=grp,meta=meta,composite=objectType)$
-		$endif$
-	}$
-
-	$meta.Classes:{objectType|
-		$if(objectType.roleTypesByGroup.(grp) || objectType.associationTypesByGroup.(grp))$
-			$groupedComposite(grp=grp,meta=meta,composite=objectType)$
-		$endif$
-	}$
-$else$
 	$meta.composites:{composite|$composite(meta=meta,composite=composite)$}$
-$endif$
 }
->>
-
-groupedComposite(grp,meta,composite) ::= <<
-
-	public interface $composite.Name$ $if(composite.DirectSupertypesByGroup.(grp))$: $composite.directSupertypesByGroup.(grp):{directSupertype|$directSupertype.SingularName$}; separator=", "$ $endif$
-	{
-		$composite.exclusiveRoleTypesByGroup.(grp):{roleType|$roleType(roleType=roleType)$}; separator="\n"$
-	}
 >>
 
 composite(meta,composite) ::= <<

@@ -30,7 +30,7 @@
 
             var obj = this.session.Instantiate(this.invokeRequest.I);
             var composite = (Composite)obj.Strategy.Class;
-            var methodTypes = composite.WorkspacMethodTypes;
+            var methodTypes = composite.WorkspaceMethodTypes;
             var methodType = methodTypes.FirstOrDefault(x => x.Name.Equals(this.invokeRequest.M));
 
             if (methodType == null)

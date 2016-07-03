@@ -13,10 +13,12 @@ namespace Allors
 
         public static void Generate()
         {
-            //Development.Repository.Tasks.Generate.Execute("../../../Templates/meta.ts.stg", "../../../Website/Allors/Client/Generated/meta", Groups.Workspace);
-            //Development.Repository.Tasks.Generate.Execute("../../../Templates/domain.ts.stg", "../../../Website/Allors/Client/Generated/domain", Groups.Workspace);
+            //Development.Repository.Tasks.Generate.Execute("../../../Templates/workspace.meta.ts.stg", "../../../Website/Allors/Client/Generated/meta");
+            Development.Repository.Tasks.Generate.Execute("../../../Templates/workspace.domain.ts.stg", "../../../Website/Allors/Client/Generated/domain");
 
-            Development.Repository.Tasks.Generate.Execute("../../../Templates/workspace.meta.cs.stg", "../../../Workspace.Meta/Generated", Groups.Workspace);
+            //Development.Repository.Tasks.Generate.Execute("../../../Templates/workspace.meta.cs.stg", "../../../Workspace.Meta/Generated");
+            
+            //Development.Repository.Tasks.Generate.Execute("../../../Templates/workspace.uml.cs.stg", "../../../Desktop.Diagrams");
 
             Console.WriteLine("Finished");
             Console.ReadKey();

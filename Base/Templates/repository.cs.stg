@@ -4,7 +4,7 @@ TemplateId() ::= <<60FC3DCD-7AB4-4D4E-8B9E-C74A1E5450B5>>
 TemplateName() ::= <<Allors C# Repository>>
 TemplateVersion() ::= <<1.0.0>>
 TemplateAllors() ::= <<1.0>>
-TemplateConfiguration(meta, grp) ::= <<
+TemplateConfiguration(meta) ::= <<
 $!
 Copyright 2002-2015 Allors bvba.
 
@@ -28,7 +28,7 @@ For more information visit http://www.allors.com/legal
 </generations>
 >>
 
-interface(meta, grp, objectType) ::= <<
+interface(meta, objectType) ::= <<
 namespace Allors.Repository.Domain
 {
     using System;
@@ -64,7 +64,7 @@ $methodType.Groups:{group|         [Group("$group$")]}; separator="\n"$
         void $methodType.Name$();
 >>
 
-class(meta, grp, objectType) ::= <<
+class(meta, objectType) ::= <<
 namespace Allors.Repository.Domain
 {
     using System;

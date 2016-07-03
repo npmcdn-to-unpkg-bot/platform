@@ -173,7 +173,7 @@ definedMethod(method) ::= <<
 				var method = new MethodType(this.metaPopulation, new System.Guid("$method.AttributeByName.Id.Value$"));
 				method.ObjectType = Meta$method.DefiningType.SingularName$.Instance;
 				method.Name = "$method.Name$";
-$if(method.AttributesByName.Workspace)$				method.Workspace = true;$endif$
+$if(method.AttributeByName.Workspace)$				method.Workspace = true;$endif$
 $if(method.XmlDoc)$		method.XmlDoc = @"$method.XmlDoc.VerbatimValue$";$endif$
 				Meta$composite.SingularName$.Instance.$method.Name$ = method; 
 			}

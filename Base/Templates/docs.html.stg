@@ -4,7 +4,7 @@ TemplateId() ::= <<98A1777D-28A2-477C-9A7E-90486D19262C>>
 TemplateName() ::= <<Allors Html Docs>>
 TemplateVersion() ::= <<1.0.0>>
 TemplateAllors() ::= <<1.0>>
-TemplateConfiguration(meta, grp) ::= <<
+TemplateConfiguration(meta) ::= <<
 $! 
 Copyright 2002-2016 Allors bvba.
 
@@ -27,7 +27,7 @@ For more information visit http://www.allors.com/legal
 </generations>
 >>
 
-docs(meta, grp) ::= <<
+docs(meta) ::= <<
 <!DOCTYPE html>
 <html lang="en">
   <head>

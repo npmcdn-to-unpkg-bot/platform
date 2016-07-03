@@ -4,7 +4,7 @@ TemplateId() ::= <<7B7D955D-7C87-4198-A40D-4B70CABC7525>>
 TemplateName() ::= <<Allors C# Workspace Meta>>
 TemplateVersion() ::= <<1.0.0>>
 TemplateAllors() ::= <<1.0>>
-TemplateConfiguration(meta, grp) ::= <<
+TemplateConfiguration(meta) ::= <<
 $! 
 Copyright 2002-2016 Allors bvba.
 
@@ -32,7 +32,7 @@ For more information visit http://www.allors.com/legal
 </generations>
 >>
 
-meta(meta, grp) ::= <<
+meta(meta) ::= <<
 namespace Allors.Meta
 {
 	public static class M
@@ -78,7 +78,7 @@ $meta.SortedDomains:{assembly|        internal virtual void $assembly.Name$Exten
 }
 >>
 
-builder(meta, grp) ::= <<
+builder(meta) ::= <<
 namespace Allors.Meta
 {
 	internal class MetaBuilder
@@ -167,9 +167,6 @@ $if(property.RoleType.Scale)$		relationType.RoleType.Scale = $property.RoleType.
 		Meta$composite.SingularName$.Instance.$property.RoleType.Name$ = relationType.RoleType; 
 	}
 >>
-roleGroup(grp) ::= <<
-			relationType.AddGroup("$grp.Value$");
->>
 
 inheritedRoles(interface) ::= <<$interface.InheritedRoles:{roleType|$inheritedRole(property=roleType.RelationType)$}; separator="\n"$>>
 inheritedRole(property) ::= <<            Meta$interface.SingularName$.Instance.$property.RoleType.Name$ = Meta$property.AssociationType.ObjectType.SingularName$.Instance.$property.RoleType.Name$;>>
@@ -194,14 +191,10 @@ definedMethod(method) ::= <<
 			}
 >>
 
-methodGroup(grp) ::= <<
-			method.AddGroup("$grp.Value$");
->>
-
 inheritedMethods(composite) ::= <<$composite.InheritedMethods:{method|$inheritedMethod(method)$}; separator="\n"$>>
 inheritedMethod(method) ::= <<				Meta$composite.SingularName$.Instance.$method.Name$ = Meta$method.ObjectType.SingularName$.Instance.$method.Name$;>>
 
-domains(meta, grp) ::= <<
+domains(meta) ::= <<
 namespace Allors.Meta
 {
 $meta.SortedDomains:{assembly|$domain(assembly)$}; separator="\n\n"$
@@ -225,7 +218,7 @@ domain(assembly) ::= <<
     }
 >>
 
-units(meta, grp) ::= <<
+units(meta) ::= <<
 namespace Allors.Meta
 {
 $meta.Units:{unit|$unit(unit)$}; separator="\n\n"$
@@ -250,7 +243,7 @@ unit(unit) ::= <<
 	}
 >>
 
-interfaces(meta, grp) ::= <<
+interfaces(meta) ::= <<
 namespace Allors.Meta
 {
 $meta.Interfaces:{interface|$interface(interface)$}; separator="\n\n"$
@@ -288,7 +281,7 @@ $interface.AssociationTypes:{property|         public AssociationType $property.
 	}
 >>
 
-classes(meta, grp) ::= <<
+classes(meta) ::= <<
 namespace Allors.Meta
 {
 $meta.Classes:{class|$class(class)$}; separator="\n\n"$

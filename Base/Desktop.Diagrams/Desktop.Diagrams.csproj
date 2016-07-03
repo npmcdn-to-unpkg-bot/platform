@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="EditOrganisation.cd" />
+    <None Include="Generate.proj" />
     <None Include="Person.cd" />
     <None Include="Main.cd" />
     <None Include="Overview.cd" />

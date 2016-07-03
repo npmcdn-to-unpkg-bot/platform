@@ -512,6 +512,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Generate.proj" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
