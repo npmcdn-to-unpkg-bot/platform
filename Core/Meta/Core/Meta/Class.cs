@@ -157,5 +157,9 @@ namespace Allors.Meta
         {
             this.clrType = typeByTypeName[this.Name];
         }
+
+        // Workspace
+        public IEnumerable<ConcreteRoleType> WorkspaceConcreteRoleTypes => this.ConcreteRoleTypes.Where(m => m.RoleType.Workspace);
+
     }
 }

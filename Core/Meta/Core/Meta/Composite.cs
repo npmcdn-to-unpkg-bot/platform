@@ -419,6 +419,12 @@ namespace Allors.Meta
 
         public IEnumerable<RoleType> WorkspaceExclusiveRoleTypes => this.ExclusiveRoleTypes.Where(m => m.Workspace);
 
+        public IEnumerable<MethodType> WorkspaceExclusiveMethodTypes => this.ExclusiveMethodTypes.Where(m => m.Workspace);
+
+        public IEnumerable<RoleType> WorkspaceUnitRoleTypes => this.UnitRoleTypes.Where(m => m.Workspace);
+
+        public IEnumerable<RoleType> WorkspaceCompositeRoleTypes => this.CompositeRoleTypes.Where(m => m.Workspace);
+
         // TODO: Derive
         public IEnumerable<MethodType> WorkspaceMethodTypes => this.MethodTypes.Where(m => m.Workspace);
     }

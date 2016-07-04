@@ -26,13 +26,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		upgrades.md = upgrades.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop", "Desktop\Desktop.csproj", "{CF73B788-225B-42AF-BD53-13C4E833B530}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Web", "Workspace.Web\Workspace.Web.csproj", "{CF73B788-225B-42AF-BD53-13C4E833B530}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.Diagrams", "Desktop.Diagrams\Desktop.Diagrams.csproj", "{29AE6C72-CCD6-4737-A8A9-16868F2C7850}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Diagrams", "Workspace.Diagrams\Workspace.Diagrams.csproj", "{29AE6C72-CCD6-4737-A8A9-16868F2C7850}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate", "Generate\Generate.csproj", "{535369EE-1572-4A34-888F-FC0ED4938089}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desktop.Tests", "Desktop.Tests\Desktop.Tests.csproj", "{B6C3E754-1228-4DA6-8630-8BC3AF8B2AA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Web.Tests", "Workspace.Web.Tests\Workspace.Web.Tests.csproj", "{B6C3E754-1228-4DA6-8630-8BC3AF8B2AA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Tools", "..\Tools\Allors.Tools\Allors.Tools.csproj", "{A1396BBF-3AB8-49EE-A319-C22DB0ADFC13}"
 EndProject
@@ -55,6 +55,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		Templates\workspace.meta.ts.stg = Templates\workspace.meta.ts.stg
 		Templates\workspace.uml.cs.stg = Templates\workspace.uml.cs.stg
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Domain", "Workspace.Domain\Workspace.Domain.csproj", "{305E4EE6-EA87-4B53-92B7-F6E39100213D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Tests", "Workspace.Tests\Workspace.Tests.csproj", "{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -200,6 +204,22 @@ Global
 		{7B37DFF9-8CEF-4189-8D9D-BE29E34EB68C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B37DFF9-8CEF-4189-8D9D-BE29E34EB68C}.Release|x64.ActiveCfg = Release|Any CPU
 		{7B37DFF9-8CEF-4189-8D9D-BE29E34EB68C}.Release|x64.Build.0 = Release|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Debug|x64.Build.0 = Debug|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Release|x64.ActiveCfg = Release|Any CPU
+		{305E4EE6-EA87-4B53-92B7-F6E39100213D}.Release|x64.Build.0 = Release|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Debug|x64.Build.0 = Debug|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Release|x64.ActiveCfg = Release|Any CPU
+		{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
