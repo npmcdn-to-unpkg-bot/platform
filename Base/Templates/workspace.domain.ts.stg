@@ -67,8 +67,6 @@ namespace Allors.Domain
 	{
 $objectType.workspaceRoleTypes:{roleType|$classRoleType()$}; separator="\n"$
 
-XXX
-
 $objectType.workspaceMethodTypes:{methodType|$classMethodType()$}; separator="\n"$
 	}
 }
