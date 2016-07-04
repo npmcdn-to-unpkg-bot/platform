@@ -159,7 +159,13 @@ namespace Allors.Meta
         }
 
         // Workspace
-        public IEnumerable<ConcreteRoleType> WorkspaceConcreteRoleTypes => this.ConcreteRoleTypes.Where(m => m.RoleType.Workspace);
-
+        public IEnumerable<ConcreteRoleType> WorkspaceConcreteRoleTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.ConcreteRoleTypes.Where(m => m.RoleType.Workspace);
+            }
+        }
     }
 }

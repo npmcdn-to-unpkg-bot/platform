@@ -19,7 +19,6 @@
 // <summary>Defines the RelationType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Allors.Meta
@@ -32,8 +31,6 @@ namespace Allors.Meta
     /// </summary>
     public sealed partial class RelationType : DomainObject, IRelationType, IComparable
     {
-        private static readonly string[] EmptyGroups = { };
-
         private Multiplicity assignedMultiplicity;
         private Multiplicity multiplicity;
 
@@ -42,6 +39,8 @@ namespace Allors.Meta
         private bool isIndexed;
 
         private string xmlDoc;
+
+        private bool workspace;
 
         public RelationType(MetaPopulation metaPopulation, Guid id, Guid associationTypeId, Guid roleTypdId)
             : base(metaPopulation)
@@ -54,7 +53,19 @@ namespace Allors.Meta
             metaPopulation.OnRelationTypeCreated(this);
         }
 
-        public bool Workspace { get; set; }
+        public bool Workspace
+        {
+            get
+            {
+                return this.workspace;
+            }
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+                this.workspace = value;
+                this.MetaPopulation.Stale();
+            }
+        }
 
         public string XmlDoc
         {

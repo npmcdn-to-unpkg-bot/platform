@@ -69,9 +69,6 @@ namespace Allors
             {
                 var instance = this.session.Create<T>();
                 this.OnBuild(instance);
-                instance.OnBuild(x => x.WithBuilder(this));
-
-                instance.OnPostBuild(x => x.WithBuilder(this));
 
                 this.built = true;
 

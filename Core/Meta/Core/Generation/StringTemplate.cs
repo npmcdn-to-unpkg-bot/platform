@@ -107,6 +107,8 @@ namespace Allors.Development.Repository.Generation
                 var configurationXml = new XmlDocument();
                 configurationXml.LoadXml(configurationTemplate.Render());
 
+configurationXml.Save("\\temp\\generate.xml");
+
                 var location = new Location(outputDirectory);
                 foreach (XmlElement generation in configurationXml.DocumentElement.SelectNodes(GenerationKey))
                 {

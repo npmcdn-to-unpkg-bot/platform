@@ -50,6 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		Templates\repository.cs.stg = Templates\repository.cs.stg
 		Templates\uml.cs.stg = Templates\uml.cs.stg
 		Templates\uml.java.stg = Templates\uml.java.stg
+		Templates\workspace.domain.cs.stg = Templates\workspace.domain.cs.stg
 		Templates\workspace.domain.ts.stg = Templates\workspace.domain.ts.stg
 		Templates\workspace.meta.cs.stg = Templates\workspace.meta.cs.stg
 		Templates\workspace.meta.ts.stg = Templates\workspace.meta.ts.stg

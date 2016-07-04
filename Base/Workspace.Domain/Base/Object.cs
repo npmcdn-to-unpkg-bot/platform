@@ -20,7 +20,7 @@
 
 namespace Allors.Domain
 {
-    public partial interface Object
+    public partial interface Object : IObject
     {
     }
 }

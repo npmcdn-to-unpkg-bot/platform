@@ -26,12 +26,12 @@ namespace Allors.Meta
 
     public sealed partial class MethodType : OperandType
     {
-        private static readonly string[] EmptyGroups = { };
-
         private string name;
         private Composite objectType;
 
         private string xmlDoc;
+
+        private bool workspace;
 
         public MethodType(MetaPopulation metaPopulation, Guid id)
             : base(metaPopulation)
@@ -41,7 +41,20 @@ namespace Allors.Meta
             metaPopulation.OnMethodTypeCreated(this);
         }
 
-        public bool Workspace { get; set; }
+        public bool Workspace
+        {
+            get
+            {
+                return this.workspace;
+            }
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+                this.workspace = value;
+                this.MetaPopulation.Stale();
+            }
+        }
+
 
         public string XmlDoc
         {

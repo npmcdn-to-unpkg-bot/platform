@@ -1,6 +1,6 @@
 delimiters "$", "$"
 
-TemplateId() ::= <<17ED40F8-BDF8-4A7C-9AE9-1C4D2AD6BA2B>>
+TemplateId() ::= <<07F63139-1791-4F55-AAED-F1A6D8D40055>>
 TemplateName() ::= <<Allors C# Workspace Domain>>
 TemplateVersion() ::= <<1.0.0>>
 TemplateAllors() ::= <<1.0>>

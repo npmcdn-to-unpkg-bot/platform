@@ -634,10 +634,31 @@ namespace Allors.Meta
 
 
         // TODO: Added for Workspace.Meta
-        public IEnumerable<Composite> WorkspaceComposites => this.Composites.Where(m => m.Workspace);
+        public IEnumerable<Composite> WorkspaceComposites
+        {
+            get
+            {
+                this.Derive();
+                return this.Composites.Where(m => m.Workspace);
+            }
+        }
 
-        public IEnumerable<Interface> WorkspaceInterfaces => this.Interfaces.Where(m => m.Workspace);
+        public IEnumerable<Interface> WorkspaceInterfaces
+        {
+            get
+            {
+                this.Derive();
+                return this.Interfaces.Where(m => m.Workspace);
+            }
+        }
 
-        public IEnumerable<Class> WorkspaceClasses => this.Classes.Where(m => m.Workspace);
+        public IEnumerable<Class> WorkspaceClasses
+        {
+            get
+            {
+                this.Derive();
+                return this.Classes.Where(m => m.Workspace);
+            }
+        }
     }
 }

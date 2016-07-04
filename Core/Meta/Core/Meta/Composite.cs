@@ -410,22 +410,79 @@ namespace Allors.Meta
 
         public IEnumerable<AssociationType> InheritedAssociations => this.AssociationTypes.Except(this.ExclusiveAssociationTypes);
 
-        public IEnumerable<Interface> WorkspaceSupertypes => this.Supertypes.Where(m => m.Workspace);
+        // Workspace
+        public IEnumerable<Interface> WorkspaceSupertypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.Supertypes.Where(m => m.Workspace);
+            }
+        }
 
-        public IEnumerable<Interface> WorkspaceDirectSupertypes => this.DirectSupertypes.Where(m => m.Workspace);
+        public IEnumerable<Interface> WorkspaceDirectSupertypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.DirectSupertypes.Where(m => m.Workspace);
+            }
+        }
 
         // TODO: Derive
-        public IEnumerable<RoleType> WorkspaceRoleTypes => this.RoleTypes.Where(m => m.Workspace);
+        public IEnumerable<RoleType> WorkspaceRoleTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.RoleTypes.Where(m => m.Workspace);
+            }
+        }
 
-        public IEnumerable<RoleType> WorkspaceExclusiveRoleTypes => this.ExclusiveRoleTypes.Where(m => m.Workspace);
+        public IEnumerable<RoleType> WorkspaceExclusiveRoleTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.ExclusiveRoleTypes.Where(m => m.Workspace);
+            }
+        }
 
-        public IEnumerable<MethodType> WorkspaceExclusiveMethodTypes => this.ExclusiveMethodTypes.Where(m => m.Workspace);
+        public IEnumerable<MethodType> WorkspaceExclusiveMethodTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.ExclusiveMethodTypes.Where(m => m.Workspace);
+            }
+        }
 
-        public IEnumerable<RoleType> WorkspaceUnitRoleTypes => this.UnitRoleTypes.Where(m => m.Workspace);
+        public IEnumerable<RoleType> WorkspaceUnitRoleTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.UnitRoleTypes.Where(m => m.Workspace);
+            }
+        }
 
-        public IEnumerable<RoleType> WorkspaceCompositeRoleTypes => this.CompositeRoleTypes.Where(m => m.Workspace);
+        public IEnumerable<RoleType> WorkspaceCompositeRoleTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.CompositeRoleTypes.Where(m => m.Workspace);
+            }
+        }
 
         // TODO: Derive
-        public IEnumerable<MethodType> WorkspaceMethodTypes => this.MethodTypes.Where(m => m.Workspace);
+        public IEnumerable<MethodType> WorkspaceMethodTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.MethodTypes.Where(m => m.Workspace);
+            }
+        }
     }
 }

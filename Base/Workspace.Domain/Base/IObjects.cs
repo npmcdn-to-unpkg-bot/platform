@@ -22,7 +22,7 @@ namespace Allors
 {
     using Allors.Meta;
 
-    public interface IObjects : ISetup, ISecure
+    public interface IObjects 
     {
         Composite ObjectType { get; }
     }

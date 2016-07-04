@@ -50,18 +50,27 @@
     <Compile Include="Base\ObjectBuilder`1.cs" />
     <Compile Include="Base\ObjectOnBuild.cs" />
     <Compile Include="Base\ObjectOnPostBuild.cs" />
+    <Compile Include="Generated\AccessControl.g.cs" />
+    <Compile Include="Generated\AsyncDerivation.g.cs" />
     <Compile Include="Generated\C1.g.cs" />
     <Compile Include="Generated\Counter.g.cs" />
+    <Compile Include="Generated\Deletable.g.cs" />
+    <Compile Include="Generated\Dependent.g.cs" />
     <Compile Include="Generated\Enumeration.g.cs" />
     <Compile Include="Generated\Gender.g.cs" />
     <Compile Include="Generated\I1.g.cs" />
+    <Compile Include="Generated\Login.g.cs" />
     <Compile Include="Generated\Media.g.cs" />
+    <Compile Include="Generated\MediaContent.g.cs" />
     <Compile Include="Generated\ObjectState.g.cs" />
     <Compile Include="Generated\OrderObjectState.g.cs" />
     <Compile Include="Generated\Organisation.g.cs" />
+    <Compile Include="Generated\Permission.g.cs" />
     <Compile Include="Generated\Person.g.cs" />
     <Compile Include="Generated\Role.g.cs" />
+    <Compile Include="Generated\SecurityToken.g.cs" />
     <Compile Include="Generated\UniquelyIdentifiable.g.cs" />
+    <Compile Include="Generated\User.g.cs" />
     <Compile Include="Generated\UserGroup.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
