@@ -1,19 +1,19 @@
 ﻿namespace Allors.Data
 {
-    public interface PushResponse : ErrorResponse
+    public class PushResponse : ErrorResponse
     {
-        bool hasErrors { get; set; }
+        public bool hasErrors { get; set; }
 
-        string errorMessage { get; set; }
+        public string errorMessage { get; set; }
 
-        string[] versionErrors { get; set; }
+        public string[] versionErrors { get; set; }
 
-        string[] accessErrors { get; set; }
+        public string[] accessErrors { get; set; }
 
-        string[] missingErrors { get; set; }
+        public string[] missingErrors { get; set; }
 
-        PullResponseDerivationError[] derivationErrors { get; set; }
+        public PullResponseDerivationError[] derivationErrors { get; set; }
 
-        PushResponseNewObject[] newObjects { get; set; }
+        public PushResponseNewObject[] newObjects { get; set; }
     }
 }

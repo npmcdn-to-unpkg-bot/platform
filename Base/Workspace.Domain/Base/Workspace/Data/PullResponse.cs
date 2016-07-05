@@ -1,12 +1,17 @@
-﻿namespace Allors.Data {
+﻿namespace Allors.Data
+{
     using System.Collections.Generic;
-    public interface PullResponse {
-        string userSecurityHash { get; set; }
 
-        string[][] objects { get; set; }
+    public class PullResponse
+    {
+        public string userSecurityHash { get; set; }
 
-        Dictionary<string, string> namedObjects { get; set; }
-        Dictionary<string, string[]> namedCollections { get; set; }
-        Dictionary<string,object> namedValues { get; set; }
+        public string[][] objects { get; set; }
+
+        public Dictionary<string, string> namedObjects { get; set; }
+
+        public Dictionary<string, string[]> namedCollections { get; set; }
+
+        public Dictionary<string,object> namedValues { get; set; }
     }
 }

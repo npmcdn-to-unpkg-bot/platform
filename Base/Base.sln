@@ -59,7 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Domain", "Workspace.Domain\Workspace.Domain.csproj", "{305E4EE6-EA87-4B53-92B7-F6E39100213D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Tests", "Workspace.Tests\Workspace.Tests.csproj", "{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workspace.Domain.Tests", "Workspace.Domain.Tests\Workspace.Domain.Tests.csproj", "{4455F80D-5DF4-435D-9D18-48F5D9AB35EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

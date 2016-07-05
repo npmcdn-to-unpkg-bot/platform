@@ -17,15 +17,15 @@
     public class Workspace : IWorkspace {
         public MetaPopulation Population { get; }
 
-        public Dictionary<string, Meta.ObjectType> objectTypeByName = new Dictionary<string, ObjectType>();
+        public Dictionary<string, ObjectType> objectTypeByName = new Dictionary<string, ObjectType>();
 
         public string userSecurityHash;
 
         Dictionary<string, WorkspaceObject> workspaceObjectById = new Dictionary<string, WorkspaceObject>();
         
-        Workspace(MetaPopulation metaPopulation)
+        public Workspace()
         {
-            this.Population = metaPopulation;
+            this.Population = MetaPopulation.Instance;
         }
 
         public Data.SyncRequest diff(Data.PullResponse response)  {
