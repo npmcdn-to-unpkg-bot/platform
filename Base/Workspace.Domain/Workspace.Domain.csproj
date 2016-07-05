@@ -40,16 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\Config.cs" />
-    <Compile Include="Base\DomainException.cs" />
-    <Compile Include="Base\IObjectBase.cs" />
-    <Compile Include="Base\IObjectBuilder.cs" />
-    <Compile Include="Base\IObjects.cs" />
-    <Compile Include="Base\Object.cs" />
-    <Compile Include="Base\ObjectBuilder.cs" />
-    <Compile Include="Base\ObjectBuilder`1.cs" />
-    <Compile Include="Base\ObjectOnBuild.cs" />
-    <Compile Include="Base\ObjectOnPostBuild.cs" />
     <Compile Include="Generated\AccessControl.g.cs" />
     <Compile Include="Generated\AsyncDerivation.g.cs" />
     <Compile Include="Generated\C1.g.cs" />
@@ -86,6 +76,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Generate.proj" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\Workspace\Data\ErrorResponse.cs" />
+    <Compile Include="Base\Workspace\Data\InvokeRequest.cs" />
+    <Compile Include="Base\Workspace\Data\InvokeResponse.cs" />
+    <Compile Include="Base\Workspace\Data\PullResponse.cs" />
+    <Compile Include="Base\Workspace\Data\PullResponseDerivationError.cs" />
+    <Compile Include="Base\Workspace\Data\PushRequest.cs" />
+    <Compile Include="Base\Workspace\Data\PushResponse.cs" />
+    <Compile Include="Base\Workspace\Data\PushResponseNewObject.cs" />
+    <Compile Include="Base\Workspace\Data\SyncRequest.cs" />
+    <Compile Include="Base\Workspace\Method.cs" />
+    <Compile Include="Base\Workspace\Session.cs" />
+    <Compile Include="Base\Workspace\SessionObject.cs" />
+    <Compile Include="Base\Workspace\Workspace.cs" />
+    <Compile Include="Base\Workspace\WorkspaceObject.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\Workspace\Data\SyncResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
