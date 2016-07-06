@@ -60,7 +60,7 @@ $if(roleType.ObjectType.IsUnit)$
 		void Remove$roleType.SingularPropertyName$();
 $else$
 $if(roleType.IsMany)$
-		System.Collections.Generic.IEnumerable<$roleType_ObjectType(roleType)$> $roleType.PluralPropertyName$
+		$roleType_ObjectType(roleType)$[] $roleType.PluralPropertyName$
 		{ 
 			get;
 			set;
@@ -198,11 +198,11 @@ $endif$
 		}
 $else$
 $if(concreteRoleType.RoleType.IsMany)$
-		virtual public System.Collections.Generic.IEnumerable<$concreteRoleType_ObjectType(concreteRoleType)$> $concreteRoleType.RoleType.PluralPropertyName$
+		virtual public $concreteRoleType_ObjectType(concreteRoleType)$[] $concreteRoleType.RoleType.PluralPropertyName$
 		{ 
 			get
 			{
-				return (System.Collections.Generic.IEnumerable<$concreteRoleType_ObjectType(concreteRoleType)$>)this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$[])this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{

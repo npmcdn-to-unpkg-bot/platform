@@ -263,11 +263,11 @@ namespace Tests
 
             Assert.IsTrue(acme.Employees.SequenceEqual(new[] { koen, patrick, martien }));
             Assert.IsTrue(ocme.Employees.SequenceEqual(new[] { koen }));
-            Assert.AreEqual(0, icme.Employees.Count());
+            Assert.AreEqual(0, icme.Employees.Length);
 
-            Assert.AreEqual(0, acme.Employees);
-            Assert.AreEqual(0, ocme.Employees);
-            Assert.AreEqual(0, icme.Employees);
+            Assert.AreEqual(0, acme.Shareholders.Length);
+            Assert.AreEqual(0, ocme.Shareholders.Length);
+            Assert.AreEqual(0, icme.Shareholders.Length);
         }
 
         [Test]
