@@ -47,37 +47,42 @@
 
             this.objectType = this.workspace.Population.FindByName(this.t);
 
-            foreach (var role in loadObject.roles)
+            if (loadObject.roles != null)
             {
-                var name = (string)role[0];
-                var access = (string)role[1];
-                var canRead = access.Contains("r");
-                var canWrite = access.Contains("w");
-
-                this.roles["CanRead{name}"] = canRead;
-                this.roles["CanWrite{name}"] = canWrite;
-
-                if (canRead)
+                foreach (var role in loadObject.roles)
                 {
-                    var roleType = ((Composite)this.objectType).RoleTypes.First(v=>v.Name.Equals(name));
-                    var value = role[2];
-                    if (value != null && roleType.ObjectType.IsUnit && roleType.ObjectType.Name.Equals("DateTime"))
+                    var name = (string)role[0];
+                    var access = (string)role[1];
+                    var canRead = access.Contains("r");
+                    var canWrite = access.Contains("w");
+
+                    this.roles["CanRead{name}"] = canRead;
+                    this.roles["CanWrite{name}"] = canWrite;
+
+                    if (canRead)
                     {
-                        // TODO: check datetime
-                        value = DateTime.Parse((string)value);
+                        var roleType = ((Composite)this.objectType).RoleTypes.First(v => v.Name.Equals(name));
+                        var value = role[2];
+                        if (value != null && roleType.ObjectType.IsUnit && roleType.ObjectType.Name.Equals("DateTime"))
+                        {
+                            // TODO: check datetime
+                            value = DateTime.Parse((string)value);
+                        }
+                        this.roles[name] = value;
                     }
-                    this.roles[name] = value;
                 }
             }
 
-
-            foreach (var method in loadObject.methods)
+            if (loadObject.methods != null)
             {
-                var name = method[0];
-                var access = method[1];
-                var canExecute = access.Contains("x");
+                foreach (var method in loadObject.methods)
+                {
+                    var name = method[0];
+                    var access = method[1];
+                    var canExecute = access.Contains("x");
 
-                this.methods[$"CanExecute{name}"] = canExecute;
+                    this.methods[$"CanExecute{name}"] = canExecute;
+                }
             }
         }
 

@@ -9,14 +9,13 @@ namespace Tests {
 
     using NUnit.Framework;
 
-    using Should;
-
     [TestFixture]
     public class SessionTests
     {
         [Test]
-        public void unitGet() {
-            var workspace = new Workspace();
+        public void UnitGet()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -47,8 +46,9 @@ namespace Tests {
         }
 
         [Test]
-        public void unitSet() {
-            var workspace = new Workspace();
+        public void UnitSet()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session1 = new Session(workspace);
@@ -70,8 +70,9 @@ namespace Tests {
         }
 
         [Test]
-        public void unitSave() {
-            var workspace = new Workspace();
+        public void UnitSave()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -120,8 +121,9 @@ namespace Tests {
         }
 
         [Test]
-        public void oneGet() {
-            var workspace = new Workspace();
+        public void OneGet()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -144,8 +146,9 @@ namespace Tests {
         }
 
         [Test]
-        public void oneSet() {
-            var workspace = new Workspace();
+        public void OneSet()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session1 = new Session(workspace);
@@ -190,8 +193,9 @@ namespace Tests {
         }
 
         [Test]
-        public void oneSave() {
-            var workspace = new Workspace();
+        public void OneSave()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -241,8 +245,9 @@ namespace Tests {
         }
 
         [Test]
-        public void manyGet() {
-            var workspace = new Workspace();
+        public void ManyGet()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -265,8 +270,9 @@ namespace Tests {
         }
 
         [Test]
-        public void manySet() {
-            var workspace = new Workspace();
+        public void ManySet()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session1 = new Session(workspace);
@@ -302,8 +308,9 @@ namespace Tests {
         }
 
         [Test]
-        public void manySaveWithExistingObjects() {
-            var workspace = new Workspace();
+        public void ManySaveWithExistingObjects()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -360,8 +367,9 @@ namespace Tests {
         }
 
         [Test]
-        public void manySaveWithNewObjects() {
-            var workspace = new Workspace();
+        public void ManySaveWithNewObjects()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -436,8 +444,9 @@ namespace Tests {
         }
 
         [Test]
-        public void syncWithNewObjects() {
-            var workspace = new Workspace();
+        public void SyncWithNewObjects()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);
@@ -467,12 +476,13 @@ namespace Tests {
             Assert.AreEqual(null, acme2.Owner);
             Assert.AreEqual(null, acme2.Manager);
 
-            Assert.AreEqual(0, acme2.Employees.Count);
+            Assert.AreEqual(0, acme2.Employees.Count());
         }
 
         [Test]
-        public void onsaved() {
-            var workspace = new Workspace();
+        public void Onsaved()
+        {
+            var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
             var session = new Session(workspace);

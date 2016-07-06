@@ -484,5 +484,50 @@ namespace Allors.Meta
                 return this.MethodTypes.Where(m => m.Workspace);
             }
         }
+
+        public IEnumerable<MethodType> WorkspaceInheritedMethods
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.InheritedMethods.Where(m => m.Workspace);
+            }
+        }
+
+        public IEnumerable<RoleType> WorkspaceInheritedRoles
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.InheritedRoles.Where(m => m.Workspace);
+            }
+        }
+
+        public IEnumerable<AssociationType> WorkspaceInheritedAssociations
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.InheritedAssociations.Where(m => m.Workspace);
+            }
+        }
+
+        public IEnumerable<AssociationType> WorkspaceExclusiveAssociationTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.ExclusiveAssociationTypes.Where(m => m.Workspace);
+            }
+        }
+
+        public IEnumerable<MethodType> WorkspaceDefinedMethods
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.DefinedMethods.Where(m => m.Workspace);
+            }
+        }
     }
 }

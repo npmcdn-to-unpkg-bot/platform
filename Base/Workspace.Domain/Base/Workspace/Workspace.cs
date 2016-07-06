@@ -2,6 +2,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using Allors.Meta;
 
@@ -15,6 +16,8 @@
     }
 
     public class Workspace : IWorkspace {
+        public ObjectFactory Factory { get; }
+
         public MetaPopulation Population { get; }
 
         public Dictionary<string, ObjectType> objectTypeByName = new Dictionary<string, ObjectType>();
@@ -23,9 +26,9 @@
 
         Dictionary<string, WorkspaceObject> workspaceObjectById = new Dictionary<string, WorkspaceObject>();
         
-        public Workspace()
+        public Workspace(ObjectFactory objectFactory)
         {
-            this.Population = MetaPopulation.Instance;
+            this.Factory = objectFactory;
         }
 
         public Data.SyncRequest diff(Data.PullResponse response)  {

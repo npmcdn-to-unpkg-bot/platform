@@ -1,5 +1,6 @@
 ﻿namespace Allors.Workspace {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -22,8 +23,10 @@
 
         bool canWrite(IRoleType roleType);
 
+        bool exist(IRoleType roleType);
+
         object get(IRoleType roleType);
-        
+
         void set(IRoleType roleType, object value);
 
         void add(IRoleType roleType, ISessionObject value);
@@ -82,6 +85,17 @@
             }
 
             return this.workspaceObject.canWrite(roleType.SingularName);
+        }
+
+        public bool exist(IRoleType roleType)
+        {
+            var value = this.get(roleType);
+            if (roleType.ObjectType.IsComposite && roleType.IsMany)
+            {
+                return !((IEnumerable<SessionObject>)value).Any();
+            }
+
+            return value != null;
         }
 
         public object get(IRoleType roleType)

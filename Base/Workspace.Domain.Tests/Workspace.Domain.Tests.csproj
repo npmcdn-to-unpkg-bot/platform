@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Workspace\Fixture.cs" />

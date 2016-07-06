@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Workspace\Config.cs" />
+    <Compile Include="Base\Workspace\ObjectFactory.cs" />
     <Compile Include="Generated\AccessControl.g.cs" />
     <Compile Include="Generated\AsyncDerivation.g.cs" />
     <Compile Include="Generated\C1.g.cs" />

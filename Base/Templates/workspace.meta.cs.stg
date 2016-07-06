@@ -144,10 +144,10 @@ $meta.WorkspaceComposites:{composite|$inheritedMethods(composite)$}; separator="
 
 domain_inheritance(assembly) ::= <<$assembly.DirectSuperdomains:{base|             Meta$assembly.Name$.Instance.Domain.AddDirectSuperdomain(Meta$base.Name$.Instance.Domain);}; separator="\n"$>>
 
-inheritance(composite) ::= <<$composite.DirectSupertypes:{implementedInterface|$inheritance_implentedInterface(composite, implementedInterface)$}; separator="\n"$>>
+inheritance(composite) ::= <<$composite.WorkspaceDirectSupertypes:{implementedInterface|$inheritance_implentedInterface(composite, implementedInterface)$}; separator="\n"$>>
 inheritance_implentedInterface(composite, implementedInterface) ::= <<            new Inheritance(this.metaPopulation){ Subtype = (Composite)Meta$composite.SingularName$.Instance.ObjectType, Supertype = Meta$implementedInterface.SingularName$.Instance.Interface};>>
 
-relations(composite) ::= <<$composite.ExclusiveRoleTypes:{roleType|$relation(property=roleType.RelationType)$}; separator="\n"$>>
+relations(composite) ::= <<$composite.WorkspaceExclusiveRoleTypes:{roleType|$relation(property=roleType.RelationType)$}; separator="\n"$>>
 relation(property) ::= <<
 	{
 		// TODO: Groups
@@ -168,19 +168,19 @@ $if(property.RoleType.Scale)$		relationType.RoleType.Scale = $property.RoleType.
 	}
 >>
 
-inheritedRoles(interface) ::= <<$interface.InheritedRoles:{roleType|$inheritedRole(property=roleType.RelationType)$}; separator="\n"$>>
+inheritedRoles(interface) ::= <<$interface.WorkspaceInheritedRoles:{roleType|$inheritedRole(property=roleType.RelationType)$}; separator="\n"$>>
 inheritedRole(property) ::= <<            Meta$interface.SingularName$.Instance.$property.RoleType.Name$ = Meta$property.AssociationType.ObjectType.SingularName$.Instance.$property.RoleType.Name$;>>
 
-implementedRoles(class) ::= <<$class.InheritedRoles:{roleType|$implementedRole(property=roleType.RelationType)$}; separator="\n"$>>
+implementedRoles(class) ::= <<$class.WorkspaceInheritedRoles:{roleType|$implementedRole(property=roleType.RelationType)$}; separator="\n"$>>
 implementedRole(property) ::= <<            Meta$class.SingularName$.Instance.$property.RoleType.Name$ = Meta$class.SingularName$.Instance.Class.ConcreteRoleTypeByRoleType[Meta$property.AssociationType.ObjectType.SingularName$.Instance.$property.RoleType.Name$];>>
 
-associations(composite) ::= <<$composite.ExclusiveAssociationTypes:{associationType|$association(property=associationType.RelationType)$}; separator="\n"$>>
+associations(composite) ::= <<$composite.WorkspaceExclusiveAssociationTypes:{associationType|$association(property=associationType.RelationType)$}; separator="\n"$>>
 association(property) ::= <<            Meta$composite.SingularName$.Instance.$property.AssociationType.Name$ = Meta$property.AssociationType.SingularName$.Instance.$property.RoleType.Name$.AssociationType;>>
 
-inheritedassociations(composite) ::= <<$composite.InheritedAssociations:{associationType|$inheritedassociation(property=associationType.RelationType)$}; separator="\n"$>>
+inheritedassociations(composite) ::= <<$composite.WorkspaceInheritedAssociations:{associationType|$inheritedassociation(property=associationType.RelationType)$}; separator="\n"$>>
 inheritedassociation(property) ::= <<            Meta$composite.SingularName$.Instance.$property.AssociationType.Name$ = Meta$property.AssociationType.SingularName$.Instance.$property.RoleType.Name$.AssociationType;>>
 
-definedMethods(composite) ::= <<$composite.DefinedMethods:{method|$definedMethod(method)$}; separator="\n"$>>
+definedMethods(composite) ::= <<$composite.WorkspaceDefinedMethods:{method|$definedMethod(method)$}; separator="\n"$>>
 definedMethod(method) ::= <<
 			{
 				var method = new MethodType(this.metaPopulation, new System.Guid("$method.Id$"));
@@ -191,7 +191,7 @@ definedMethod(method) ::= <<
 			}
 >>
 
-inheritedMethods(composite) ::= <<$composite.InheritedMethods:{method|$inheritedMethod(method)$}; separator="\n"$>>
+inheritedMethods(composite) ::= <<$composite.WorkspaceInheritedMethods:{method|$inheritedMethod(method)$}; separator="\n"$>>
 inheritedMethod(method) ::= <<				Meta$composite.SingularName$.Instance.$method.Name$ = Meta$method.ObjectType.SingularName$.Instance.$method.Name$;>>
 
 domains(meta) ::= <<

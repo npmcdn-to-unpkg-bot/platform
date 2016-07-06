@@ -60,7 +60,7 @@ $if(roleType.ObjectType.IsUnit)$
 		void Remove$roleType.SingularPropertyName$();
 $else$
 $if(roleType.IsMany)$
-		global::Allors.Extent<$roleType_ObjectType(roleType)$> $roleType.PluralPropertyName$
+		System.Collections.Generic.IEnumerable<$roleType_ObjectType(roleType)$> $roleType.PluralPropertyName$
 		{ 
 			get;
 			set;
@@ -103,13 +103,11 @@ class(meta,class) ::= <<
 namespace Allors.Workspace.Domain
 {
 $class.XmlDocComment$
-	public partial class $class.name$ : SessionObject, Allors.IObject $class.WorkspaceDirectSupertypes:{directSupertype|, $directSupertype.SingularName$}$
+	public partial class $class.name$ : SessionObject $class.WorkspaceDirectSupertypes:{directSupertype|, $directSupertype.SingularName$}$
 	{
-		private readonly IStrategy strategy;
-
-		public $class.name$(Allors.IStrategy strategy) 
+		public $class.name$(Session Session) 
 		{
-			this.strategy = strategy;
+			this.session = session;
 		}
 
 		public Allors.Meta.Meta$class.name$ Meta
@@ -119,34 +117,31 @@ $class.XmlDocComment$
 				return Allors.Meta.Meta$class.SingularName$.Instance;
 			}
 		}
-		
-		public long Id
+	
+		public static $class.name$ Instantiate (Session allorsSession, string allorsObjectId)
 		{
-			get { return this.strategy.ObjectId; }
-		}
-
-		public IStrategy Strategy
-        {
-            [System.Diagnostics.DebuggerStepThrough]
-            get { return this.strategy; }
-        }
-
-		public static $class.name$ Instantiate (Allors.ISession allorsSession, string allorsObjectId)
-		{
-			return ($class.name$) allorsSession.Instantiate(allorsObjectId);		
+			return ($class.name$) allorsSession.get(allorsObjectId);		
 		}
 
 		public override bool Equals(object obj)
         {
-            var typedObj = obj as IObject;
-            return typedObj != null &&
-                   typedObj.Strategy.ObjectId.Equals(this.Strategy.ObjectId) &&
-                   typedObj.Strategy.Session.Database.Id.Equals(this.Strategy.Session.Database.Id);
+            var that = obj as SessionObject;
+		    if (that == null)
+		    {
+		        return false;
+		    }
+
+		    if (this.id != null)
+		    {
+		        return this.id.Equals(that.id);
+		    }
+
+		    return this.newId.Equals(that.newId);
         }
 
 		public override int GetHashCode()
         {
-            return this.Strategy.ObjectId.GetHashCode();
+            return this.id != null ? this.id.GetHashCode() : this.newId.GetHashCode();
         }
 
 $class.WorkspaceConcreteRoleTypes:{concreteRoleType|$classConcreteRoleType_Class()$}$
@@ -169,11 +164,11 @@ $if(concreteRoleType.RoleType.ObjectType.IsBoolean ||
 		{
 			get
 			{
-				return ($roleType_ObjectType(concreteRoleType.RoleType)$) Strategy.GetUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+				return ($roleType_ObjectType(concreteRoleType.RoleType)$) this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType, value);
+				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 $endif$
@@ -182,71 +177,71 @@ $endif$
 		{
 			get
 			{
-				return ($concreteRoleType_ObjectType(concreteRoleType)$) Strategy.GetUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$) this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType, value);
+				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 
 		virtual public bool Exist$concreteRoleType.RoleType.SingularPropertyName${
 			get
 			{
-				return Strategy.ExistUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+				return this.exist(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$()
 		{
-			Strategy.RemoveUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+			this.set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
 		}
 $else$
 $if(concreteRoleType.RoleType.IsMany)$
-		virtual public global::Allors.Extent<$concreteRoleType_ObjectType(concreteRoleType)$> $concreteRoleType.RoleType.PluralPropertyName$
+		virtual public System.Collections.Generic.IEnumerable<$concreteRoleType_ObjectType(concreteRoleType)$> $concreteRoleType.RoleType.PluralPropertyName$
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+				return (System.Collections.Generic.IEnumerable<$concreteRoleType_ObjectType(concreteRoleType)$>)this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType, value);
+				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 
 		virtual public void Add$concreteRoleType.RoleType.SingularPropertyName$ ($concreteRoleType_ObjectType(concreteRoleType)$ value)
 		{
-			Strategy.AddCompositeRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType, value);
+			this.add(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$ ($concreteRoleType_ObjectType(concreteRoleType)$ value)
 		{
-			Strategy.RemoveCompositeRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType, value);
+			this.remove(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 		}
 
 		virtual public bool Exist$concreteRoleType.RoleType.PluralPropertyName$
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+				return this.exist(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.PluralPropertyName$()
 		{
-			Strategy.RemoveCompositeRoles(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+			this.set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
 		}
 $else$
 		virtual public $concreteRoleType_ObjectType(concreteRoleType)$ $concreteRoleType.RoleType.SingularPropertyName$
 		{ 
 			get
 			{
-				return ($concreteRoleType_ObjectType(concreteRoleType)$) Strategy.GetCompositeRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$) this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType, value);
+				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 
@@ -254,13 +249,13 @@ $else$
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+				return this.exist(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$()
 		{
-			Strategy.RemoveCompositeRole(Meta.$concreteRoleType.RoleType.PropertyName$.RelationType);
+			this.set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
 		}
 $endif$
 $endif$
