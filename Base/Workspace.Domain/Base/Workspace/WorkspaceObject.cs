@@ -1,4 +1,5 @@
-﻿namespace Allors.Workspace {
+﻿namespace Allors.Workspace
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -6,13 +7,13 @@
     using Meta;
 
     public interface IWorkspaceObject {
-        string id { get;  }
+        long id { get;  }
 
-        string version { get;  }
+        long version { get;  }
 
         string userSecurityHash { get;  }
 
-        ObjectType objectType { get;  }
+        Class objectType { get;  }
 
         IWorkspace workspace { get;  }
 
@@ -45,7 +46,7 @@
             this.roles = new Dictionary<string, object>();
             this.methods =new Dictionary<string, object>();
 
-            this.objectType = this.workspace.Population.FindByName(this.t);
+            this.objectType = (Class)this.workspace.ObjectFactory.GetObjectTypeForTypeName(this.t);
 
             if (loadObject.roles != null)
             {
@@ -86,13 +87,13 @@
             }
         }
 
-        public string id => this.i;
+        public long id => long.Parse(this.i);
 
-        public string version => this.v;
+        public long version => long.Parse(this.v);
 
         public string userSecurityHash => this.u;
 
-        public ObjectType objectType { get; }
+        public Class objectType { get; }
 
         public bool canRead(string roleTypeName) {
             return (bool)this.roles[$"CanRead{roleTypeName}"];

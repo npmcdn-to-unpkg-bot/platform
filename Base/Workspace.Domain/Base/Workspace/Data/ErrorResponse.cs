@@ -1,4 +1,4 @@
-﻿namespace Allors.Data
+﻿namespace Allors.Workspace.Data
 {
     public interface ErrorResponse
     {

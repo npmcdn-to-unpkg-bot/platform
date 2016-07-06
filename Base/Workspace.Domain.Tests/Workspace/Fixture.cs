@@ -1,6 +1,6 @@
 ﻿namespace Tests
 {
-    using Allors.Data;
+    using Allors.Workspace.Data;
 
     public class Fixture
     {

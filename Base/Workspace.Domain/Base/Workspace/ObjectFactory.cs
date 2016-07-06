@@ -39,6 +39,8 @@ namespace Allors.Workspace
         /// </summary>
         private readonly Dictionary<Type, IObjectType> objectTypeByType;
 
+        private readonly Dictionary<string, IObjectType> objectTypeByName;
+
         /// <summary>
         /// <see cref="IObjectType"/> by <see cref="IObjectType"/> id cache.
         /// </summary>
@@ -73,17 +75,24 @@ namespace Allors.Workspace
                 throw new Exception(validationLog.ToString());
             }
 
-            metaPopulation.Bind(assembly);
-            
+            try
+            {
+                metaPopulation.Bind(assembly);
+            }
+            catch (Exception e)
+            {
+            }
+
             this.typeByObjectType = new Dictionary<IObjectType, Type>();
             this.objectTypeByType = new Dictionary<Type, IObjectType>();
+            this.objectTypeByName = new Dictionary<string, IObjectType>();
             this.objectTypeByObjectTypeId = new Dictionary<Guid, IObjectType>();
             this.contructorInfoByObjectType = new Dictionary<IObjectType, ConstructorInfo>();
 
             var types = assembly.GetTypes().Where(type => 
                 type.Namespace != null && 
                 type.Namespace.Equals(@namespace) && 
-                type.GetInterfaces().Contains(typeof(IObject)));
+                type.GetInterfaces().Contains(typeof(ISessionObject)));
 
             var typeByName = types.ToDictionary(type => type.Name, type => type);
 
@@ -93,6 +102,7 @@ namespace Allors.Workspace
 
                 this.typeByObjectType[objectType] = type;
                 this.objectTypeByType[type] = objectType;
+                this.objectTypeByName[type.Name] = objectType;
                 this.objectTypeByObjectTypeId[objectType.Id] = objectType;
 
                 if (objectType is IClass)
@@ -127,15 +137,21 @@ namespace Allors.Workspace
         /// <summary>
         /// Creates a new <see cref="IObject"/> given the <see cref="IStrategy"/>.
         /// </summary>
-        /// <param name="strategy">The <see cref="IStrategy"/> for the new <see cref="IObject"/>.</param>
-        /// <returns>The new <see cref="IObject"/>.</returns>
-        public IObject Create(IStrategy strategy)
+        /// <param name="session">
+        /// The session.
+        /// </param>
+        /// <param name="objectType">
+        /// The object Type.
+        /// </param>
+        /// <returns>
+        /// The new <see cref="IObject"/>.
+        /// </returns>
+        public SessionObject Create(Session session, ObjectType objectType)
         {
-            var objectType = strategy.Class;
             var constructor = this.contructorInfoByObjectType[objectType];
-            object[] parameters = { strategy };
+            object[] parameters = { session };
 
-            return (IObject)constructor.Invoke(parameters);
+            return (SessionObject)constructor.Invoke(parameters);
         }
 
         /// <summary>
@@ -147,6 +163,23 @@ namespace Allors.Workspace
         {
             IObjectType objectType;
             return !this.objectTypeByType.TryGetValue(type, out objectType) ? null : objectType;
+        }
+
+        public IObjectType GetObjectTypeForTypeName(string name)
+        {
+            IObjectType objectType;
+            return !this.objectTypeByName.TryGetValue(name, out objectType) ? null : objectType;
+        }
+
+        /// <summary>
+        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="IObjectType"/>.
+        /// </summary>
+        /// <param name="type">The .Net <see cref="Type"/>.</param>
+        /// <returns>The Allors <see cref="IObjectType"/>.</returns>
+        public IObjectType GetObjectTypeForObjectTypeId(Guid id)
+        {
+            IObjectType objectType;
+            return !this.objectTypeByObjectTypeId.TryGetValue(id, out objectType) ? null : objectType;
         }
 
         /// <summary>

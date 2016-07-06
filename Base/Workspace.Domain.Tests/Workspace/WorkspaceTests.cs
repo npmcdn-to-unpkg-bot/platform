@@ -1,6 +1,6 @@
 namespace Tests
 {
-    using Allors.Data;
+    using Allors.Workspace.Data;
     using Allors.Workspace;
     using NUnit.Framework;
 
@@ -13,10 +13,10 @@ namespace Tests
             var workspace = new Workspace(Config.ObjectFactory);
             workspace.sync(Fixture.loadData);
 
-            var martien = workspace.get("3");
+            var martien = workspace.get(3);
 
-            Assert.AreEqual("3", martien.id);
-            Assert.AreEqual("1003", martien.version);
+            Assert.AreEqual(3, martien.id);
+            Assert.AreEqual(1003, martien.version);
             Assert.AreEqual("Person", martien.objectType.Name);
             Assert.AreEqual("Martien", martien.roles["FirstName"]);
             Assert.AreEqual("van", martien.roles["MiddleName"]);

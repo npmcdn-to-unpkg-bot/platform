@@ -1,34 +1,35 @@
-﻿namespace Allors.Workspace {
+﻿namespace Allors.Workspace
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
 
-    using Allors.Meta;
+    using Meta;
 
-    public interface IWorkspace {
+    public interface IWorkspace
+    {
+        ObjectFactory ObjectFactory { get; }
+
         Data.SyncRequest diff(Data.PullResponse data);
+
         void sync(Data.SyncResponse data);
 
-        WorkspaceObject get(string id);
-
-        MetaPopulation Population { get; }
+        WorkspaceObject get(long id);
     }
 
-    public class Workspace : IWorkspace {
-        public ObjectFactory Factory { get; }
-
-        public MetaPopulation Population { get; }
+    public class Workspace : IWorkspace
+    {
+        public ObjectFactory ObjectFactory { get; }
 
         public Dictionary<string, ObjectType> objectTypeByName = new Dictionary<string, ObjectType>();
 
         public string userSecurityHash;
 
-        Dictionary<string, WorkspaceObject> workspaceObjectById = new Dictionary<string, WorkspaceObject>();
+        Dictionary<long, WorkspaceObject> workspaceObjectById = new Dictionary<long, WorkspaceObject>();
         
         public Workspace(ObjectFactory objectFactory)
         {
-            this.Factory = objectFactory;
+            this.ObjectFactory = objectFactory;
         }
 
         public Data.SyncRequest diff(Data.PullResponse response)  {
@@ -38,8 +39,8 @@
             requireLoadIds.objects = response.objects.Where(
                 v =>
                     {
-                        var id = v[0];
-                        var version = v[1];
+                        var id = long.Parse(v[0]);
+                        var version = long.Parse(v[1]);
                         var workspaceObject = this.workspaceObjectById[id];
                         return workspaceObject == null || !workspaceObject.version.Equals(version) || !workspaceObject.userSecurityHash.Equals(userSecurityHash);
                     }).Select(v=>v[0]).ToArray();
@@ -56,7 +57,7 @@
             }
         }
 
-        public WorkspaceObject get(string id) {
+        public WorkspaceObject get(long id) {
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject == null)
             {

@@ -2,7 +2,7 @@ delimiters "$", "$"
 
 TemplateId() ::= <<07F63139-1791-4F55-AAED-F1A6D8D40055>>
 TemplateName() ::= <<Allors C# Workspace Domain>>
-TemplateVersion() ::= <<1.0.1>>
+TemplateVersion() ::= <<1.0.2>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $!
@@ -105,9 +105,9 @@ namespace Allors.Workspace.Domain
 $class.XmlDocComment$
 	public partial class $class.name$ : SessionObject $class.WorkspaceDirectSupertypes:{directSupertype|, $directSupertype.SingularName$}$
 	{
-		public $class.name$(Session Session) 
+		public $class.name$(Session session)
+		: base(session)
 		{
-			this.session = session;
 		}
 
 		public Allors.Meta.Meta$class.name$ Meta
@@ -118,7 +118,7 @@ $class.XmlDocComment$
 			}
 		}
 	
-		public static $class.name$ Instantiate (Session allorsSession, string allorsObjectId)
+		public static $class.name$ Instantiate (Session allorsSession, long allorsObjectId)
 		{
 			return ($class.name$) allorsSession.get(allorsObjectId);		
 		}

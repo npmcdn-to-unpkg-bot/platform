@@ -1,18 +1,19 @@
-﻿namespace Allors.Workspace {
+﻿namespace Allors.Workspace
+{
     using System;
     using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+    using System.Linq;
 
-    using Allors.Data;
-    using Allors.Meta;
+    using Allors.Workspace.Data;
+    using Meta;
 
-    public interface ISession {
+    public interface ISession
+    {
         bool hasChanges { get; }
 
-        ISessionObject get(string id);
+        ISessionObject get(long id);
 
-        ISessionObject create(IClass @class);
+        ISessionObject create(Class @class);
 
         Data.PushRequest pushRequest();
 
@@ -21,52 +22,60 @@ using System.Reflection;
         void reset();
     }
 
-    public class Session : ISession {
+    public class Session : ISession
+    {
         private static long idCounter = 0;
 
-        private IWorkspace workspace;
-        private Dictionary<string, ISessionObject> sessionObjectById = new Dictionary<string, ISessionObject>();
-        private Dictionary<string, INewSessionObject> newSessionObjectById = new Dictionary<string, INewSessionObject>();
+        private Workspace workspace;
+        private Dictionary<long, SessionObject> sessionObjectById = new Dictionary<long, SessionObject>();
+        private Dictionary<long, SessionObject> newSessionObjectById = new Dictionary<long, SessionObject>();
 
-        public Session(IWorkspace workspace) {
+        public Session(Workspace workspace)
+        {
             this.workspace = workspace;
         }
 
-        public bool hasChanges {
+        public bool hasChanges
+        {
             get
             {
                 return this.newSessionObjectById.Count > 0 || this.sessionObjectById.Values.Any(v => v.hasChanges);
             }
         }
 
-         public ISessionObject get(string id) {
-            if (id == null) {
-                return null;
-            }
-
-            ISessionObject sessionObject;
-             if (!this.sessionObjectById.TryGetValue(id, out sessionObject))
-             {
+        public ISessionObject get(long id)
+        {
+            SessionObject sessionObject;
+            if (!this.sessionObjectById.TryGetValue(id, out sessionObject))
+            {
                 var workspaceObject = this.workspace.get(id);
-                
-                var type = workspaceObject.objectType.ClrType;
-                sessionObject = (ISessionObject)Activator.CreateInstance(type, new object[] { workspaceObject });
-                this.sessionObjectById[sessionObject.id] = sessionObject;
+
+                sessionObject = this.workspace.ObjectFactory.Create(this, workspaceObject.objectType);
+
+                sessionObject.workspaceObject = workspaceObject;
+                sessionObject.objectType = workspaceObject.objectType;
+
+                this.sessionObjectById[workspaceObject.id] = sessionObject;
             }
 
             return sessionObject;
         }
 
-        public ISessionObject create(IClass @class) {
+        public ISessionObject create(Class @class)
+        {
+            var newSessionObject = this.workspace.ObjectFactory.Create(this, @class);
 
-            var type = @class.ClrType;
-            var newSessionObject = (INewSessionObject)Activator.CreateInstance(type, new object[] { this, --Session.idCounter });
-            this.newSessionObjectById[newSessionObject.newId] = newSessionObject;
+            var newId = --Session.idCounter;
+            newSessionObject.newId = newId;
+            newSessionObject.objectType = @class;
+
+            this.newSessionObjectById[newId] = newSessionObject;
 
             return newSessionObject;
         }
 
-        public void reset() {
+        public void reset()
+        {
             foreach (var newSessionObject in this.newSessionObjectById.Values)
             {
                 newSessionObject.reset();
@@ -78,7 +87,8 @@ using System.Reflection;
             }
         }
 
-        public PushRequest pushRequest() {
+        public PushRequest pushRequest()
+        {
             var data = new PushRequest
                            {
                                newObjects = new List<PushRequestNewObject>(),
@@ -106,14 +116,14 @@ using System.Reflection;
             return data;
         }
         
-        public void pushResponse(Data.PushResponse pushResponse)
+        public void pushResponse(PushResponse pushResponse)
         {
             if (pushResponse.newObjects != null && pushResponse.newObjects.Length > 0)
             {
                 foreach (var pushResponseNewObject in pushResponse.newObjects)
                 {
-                    var newId = pushResponseNewObject.ni;
-                    var id = pushResponseNewObject.i;
+                    var newId = long.Parse(pushResponseNewObject.ni);
+                    var id = long.Parse(pushResponseNewObject.i);
 
                     var newSessionObject = this.newSessionObjectById[newId];
 
@@ -126,7 +136,7 @@ using System.Reflection;
                                                        {
                                                            new SyncResponseObject
                                                                {
-                                                                   i = id,
+                                                                   i = id.ToString(),
                                                                    v = "",
                                                                    t =
                                                                        newSessionObject

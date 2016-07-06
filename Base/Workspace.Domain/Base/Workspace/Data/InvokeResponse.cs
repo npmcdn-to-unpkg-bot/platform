@@ -1,4 +1,4 @@
-﻿namespace Allors.Data {
+﻿namespace Allors.Workspace.Data {
     public interface InvokeResponse : ErrorResponse {
         bool hasErrors { get; set; }
         string errorMessage { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Allors.Data {
+﻿namespace Allors.Workspace.Data {
     public class SyncResponseObject {
         public string i { get; set; }
 

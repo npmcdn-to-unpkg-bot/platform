@@ -1,4 +1,4 @@
-﻿namespace Allors.Data
+﻿namespace Allors.Workspace.Data
 {
     using System.Collections.Generic;
 
