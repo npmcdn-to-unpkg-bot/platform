@@ -1,6 +1,7 @@
 namespace Tests
 {
     using System;
+    using System.Collections;
     using System.Linq;
 
     using Allors.Workspace.Data;
@@ -260,9 +261,9 @@ namespace Tests
             var acme = session.get(101) as Organisation;
             var ocme = session.get(102) as Organisation;
             var icme = session.get(103) as Organisation;
-
-            Assert.IsTrue(acme.Employees.SequenceEqual(new[] { koen, patrick, martien }));
-            Assert.IsTrue(ocme.Employees.SequenceEqual(new[] { koen }));
+            
+            Assert.That(new[] { koen, martien, patrick }, Is.EquivalentTo(acme.Employees));
+            Assert.That(new[] { koen }, Is.EquivalentTo(ocme.Employees));
             Assert.AreEqual(0, icme.Employees.Length);
 
             Assert.AreEqual(0, acme.Shareholders.Length);
@@ -299,13 +300,13 @@ namespace Tests
             acme2.Employees = null;
             icme2.Employees = new[] {koen2, patrick2, martien2};
 
-            Assert.IsTrue(acme1.Employees.SequenceEqual(new[] { koen1, patrick1, martien1 }));
-            Assert.IsTrue(ocme1.Employees.SequenceEqual(new[] { koen1 }));
+            Assert.That(new[] { koen1, patrick1, martien1 }, Is.EquivalentTo(acme1.Employees));
+            Assert.That(new[] { koen1 }, Is.EquivalentTo(ocme1.Employees));
             Assert.AreEqual(0, icme1.Employees.Count());
 
             Assert.AreEqual(0, acme2.Employees.Count());
-            Assert.IsTrue(ocme2.Employees.SequenceEqual(new[] { koen2 }));
-            Assert.IsTrue(icme2.Employees.SequenceEqual(new[] { koen2, patrick2, martien2 }));
+            Assert.That(new[] { koen2 }, Is.EquivalentTo(ocme2.Employees));
+            Assert.That(new[] { koen2, patrick2, martien2 }, Is.EquivalentTo(icme2.Employees));
         }
 
         [Test]
@@ -342,7 +343,7 @@ namespace Tests
 
             Assert.IsNull(savedAcmeEmployees.s);
             Assert.AreEqual(0, savedAcmeEmployees.a.Length);
-            Assert.IsTrue(savedAcmeEmployees.r.SequenceEqual(new[] { "1", "2", "3" }));
+            Assert.That(new[] { "1", "2", "3" }, Is.EquivalentTo(savedAcmeEmployees.r));
 
             var savedOcme = save.objects.First(v => v.i == "102");
 
@@ -352,8 +353,8 @@ namespace Tests
             var savedOcmeEmployees = savedOcme.roles.First(v => v.t == "Employees");
 
             Assert.IsNull(savedOcmeEmployees.s);
-            Assert.IsTrue(savedAcmeEmployees.a.SequenceEqual(new[] { "2", "3" }));
-            Assert.IsTrue(savedAcmeEmployees.r.SequenceEqual(new[] { "1" }));
+            Assert.That(new[] { "2", "3" }, Is.EquivalentTo(savedOcmeEmployees.a));
+            Assert.That(new[] { "1" }, Is.EquivalentTo(savedOcmeEmployees.r));
 
             var savedIcme = save.objects.First(v => v.i == "103");
 
@@ -363,7 +364,7 @@ namespace Tests
             var savedIcmeEmployees = savedIcme.roles.First(v => v.t == "Employees");
 
             Assert.IsNull(savedIcmeEmployees.s);
-            Assert.IsTrue(savedAcmeEmployees.a.SequenceEqual(new[] { "1", "2", "3" }));
+            Assert.That(new[] { "1", "2", "3" }, Is.EquivalentTo(savedIcmeEmployees.a));
             Assert.IsNull(savedIcmeEmployees.r);
         }
 
@@ -416,12 +417,12 @@ namespace Tests
 
                 var savedAcme2Manager = savedAcme2.roles.First(v => v.t == "Manager");
 
-                Assert.AreEqual(mathijs.newId, savedAcme2Manager.s);
+                Assert.AreEqual(mathijs.newId.ToString(), savedAcme2Manager.s);
 
                 var savedAcme2Employees = savedAcme2.roles.First(v => v.t == "Employees");
 
                 Assert.IsNull(savedAcme2Employees.s);
-                Assert.IsTrue(savedAcme2Employees.a.SequenceEqual(new[] { mathijs.newId?.ToString()}));
+                Assert.That(new[] { mathijs.newId?.ToString() }, Is.EquivalentTo(savedAcme2Employees.a));
                 Assert.IsNull(savedAcme2Employees.r);
             }
 
@@ -438,7 +439,7 @@ namespace Tests
                 var savedAcme3Employees = savedAcme3.roles.First(v => v.t == "Employees");
 
                 Assert.IsNull(savedAcme3Employees.s);
-                Assert.IsTrue(savedAcme3Employees.a.SequenceEqual(new[] { "3" }));
+                Assert.That(new[] { "3" }, Is.EquivalentTo(savedAcme3Employees.a));
                 Assert.IsNull(savedAcme3Employees.r);
             }
 

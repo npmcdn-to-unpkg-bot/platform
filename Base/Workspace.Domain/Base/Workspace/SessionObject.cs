@@ -150,11 +150,7 @@
                 {
                     if (roleType.ObjectType.IsComposite && roleType.IsMany)
                     {
-                        value = new ISessionObject[0];
-                    }
-                    else
-                    {
-                        value = null;
+                        value = new ArrayList(new ISessionObject[0]).ToArray(roleType.ObjectType.ClrType);
                     }
                 }
 
