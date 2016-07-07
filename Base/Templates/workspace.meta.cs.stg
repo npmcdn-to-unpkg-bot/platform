@@ -313,7 +313,6 @@ $class.AssociationTypes:{property|         public AssociationType $property.Name
 			{
 				SingularName = "$class.SingularName$",
 				PluralName = "$class.PluralName$",
-$if(class.XmlDoc)$		XmlDoc = @"$class.XmlDoc.VerbatimValue$"$endif$
 			};
         }
 
