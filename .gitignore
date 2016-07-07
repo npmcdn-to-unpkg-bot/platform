@@ -1,15 +1,10 @@
 # Custom
-Base/Desktop/Allors/**/*.js
-Base/Desktop/Allors/**/*.js.map
-Base/Desktop/app/**/*.js
-Base/Desktop/app/**/*.js.map
-Base/Desktop/Tests/**/*.js
-Base/Desktop/Tests/**/*.js.map
-
-Base/Website/Allors/**/*.js
-Base/Website/Allors/**/*.js.map
-Base/Website/app/**/*.js
-Base/Website/app/**/*.js.map
+Base/Workspace.Web/Allors/**/*.js
+Base/Workspace.Web/Allors/**/*.js.map
+Base/Workspace.Web/app/**/*.js
+Base/Workspace.Web/app/**/*.js.map
+Base/Workspace.Web/Tests/**/*.js
+Base/Workspace.Web/Tests/**/*.js.map
 
 # Allors
 [Gg]enerated/
