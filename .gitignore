@@ -1,10 +1,10 @@
 # Custom
-Base/Workspace/Web/Allors/**/*.js
-Base/Workspace/Web/Allors/**/*.js.map
-Base/Workspace/Web/app/**/*.js
-Base/Workspace/Web/app/**/*.js.map
-Base/Workspace/Web/Tests/**/*.js
-Base/Workspace/Web/Tests/**/*.js.map
+Base/Workspace.Web/Allors/**/*.js
+Base/Workspace.Web/Allors/**/*.js.map
+Base/Workspace.Web/app/**/*.js
+Base/Workspace.Web/app/**/*.js.map
+Base/Workspace.Web/Tests/**/*.js
+Base/Workspace.Web/Tests/**/*.js.map
 
 # Allors
 [Gg]enerated/
@@ -53,7 +53,7 @@ dlldata.c
 *_p.c
 *_i.h
 *.ilk
-*.meta
+# *.meta
 *.obj
 *.pch
 *.pdb
