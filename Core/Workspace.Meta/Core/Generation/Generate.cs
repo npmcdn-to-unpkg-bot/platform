@@ -38,7 +38,7 @@ namespace Allors.Development.Repository.Tasks
 
         public string Output { get; set; }
 
-        public static Log Execute(string template, string output, string group)
+        public static Log Execute(string template, string output)
         {
             var log = new GenerateLog();
 
@@ -46,7 +46,7 @@ namespace Allors.Development.Repository.Tasks
             var stringTemplate = new StringTemplate(templateFileInfo);
             var outputDirectoryInfo = new DirectoryInfo(output);
 
-            stringTemplate.Generate(MetaPopulation.Instance, outputDirectoryInfo, group, log);
+            stringTemplate.Generate(MetaPopulation.Instance, outputDirectoryInfo, log);
 
             return log;
         }
@@ -55,7 +55,7 @@ namespace Allors.Development.Repository.Tasks
         {
             try
             {
-                var log = Execute(this.Template, this.Output, this.Group);
+                var log = Execute(this.Template, this.Output);
                 return !log.ErrorOccured;
             }
             catch (Exception e)

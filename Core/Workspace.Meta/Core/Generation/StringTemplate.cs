@@ -86,7 +86,7 @@ namespace Allors.Development.Repository.Generation
             return this.Name;
         }
 
-        internal void Generate(MetaPopulation metaPopulation, DirectoryInfo outputDirectory, string group, Log log)
+        internal void Generate(MetaPopulation metaPopulation, DirectoryInfo outputDirectory, Log log)
         {
             var validation = metaPopulation.Validate();
             if (validation.ContainsErrors)
@@ -103,7 +103,6 @@ namespace Allors.Development.Repository.Generation
                 
                 var configurationTemplate = templateGroup.GetInstanceOf(TemplateConfiguration);
                 configurationTemplate.Add(MetaKey, metaPopulation);
-                configurationTemplate.Add(GroupKey, group);
 
                 var configurationXml = new XmlDocument();
                 configurationXml.LoadXml(configurationTemplate.Render());
@@ -116,7 +115,6 @@ namespace Allors.Development.Repository.Generation
                     var output = generation.GetAttribute(OutputKey);
 
                     template.Add(MetaKey, metaPopulation);
-                    template.Add(GroupKey, group);
 
                     if (generation.HasAttribute(InputKey))
                     {
