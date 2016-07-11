@@ -27,9 +27,9 @@
             this.session = new Session(this.workspace);
         }
 
-        public async Task load(Dictionary<string,string> p)
+        public async Task load(Dictionary<string,string> args)
         {
-            var response = await this.database.pull(this.name, p);
+            var response = await this.database.pull(this.name, args);
             var requireLoadIds = this.workspace.diff(response);
             if (requireLoadIds.objects.Length > 0)
             {

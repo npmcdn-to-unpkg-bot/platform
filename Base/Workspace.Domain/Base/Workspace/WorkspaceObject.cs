@@ -62,13 +62,7 @@
 
                     if (canRead)
                     {
-                        var roleType = ((Composite)this.objectType).RoleTypes.First(v => v.Name.Equals(name));
-                        var value = role[2];
-                        if (value != null && roleType.ObjectType.IsUnit && roleType.ObjectType.Name.Equals("DateTime"))
-                        {
-                            // TODO: check datetime
-                            value = DateTime.Parse((string)value);
-                        }
+                        var value = role.Length > 2 ? role[2] : null;
                         this.roles[name] = value;
                     }
                 }

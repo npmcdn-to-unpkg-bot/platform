@@ -1,7 +1,6 @@
 ﻿namespace Allors.Workspace.Client
 {
     using System;
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
@@ -10,11 +9,11 @@
 
     public class Database
     {
-        public Database(string baseAddress)
+        public Database(string address)
         {
             this.Client = new HttpClient
             {
-                BaseAddress = new Uri(baseAddress)
+                BaseAddress = new Uri(address)
             };
 
             this.Client.DefaultRequestHeaders.Accept.Clear();
@@ -28,19 +27,10 @@
 
         public HttpClient Client { get; set; }
 
-        public async Task<PullResponse> pull(string name, Dictionary<string, string> values) {
-
-            var content = new FormUrlEncodedContent(values);
-
-            var request = new HttpRequestMessage()
-            {
-                RequestUri = new Uri(name + "/pull", UriKind.Relative),
-                Method = HttpMethod.Post,
-                Content = content
-            };
-            request.Headers.ExpectContinue = false;
-
-            var response = await this.Client.SendAsync(request);
+        public async Task<PullResponse> pull(string name, object args)
+        {
+            var uri = new Uri(name + "/pull", UriKind.Relative);
+            var response = await this.Client.PostAsJsonAsync(uri, args);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -53,15 +43,8 @@
 
         public async Task<SyncResponse> sync(SyncRequest syncRequest)
         {
-
-            var request = new HttpRequestMessage()
-            {
-                RequestUri = new Uri("Database/Sync", UriKind.Relative),
-                Method = HttpMethod.Post
-            };
-            request.Headers.ExpectContinue = false;
-
-            var response = await this.Client.SendAsync(request);
+            var uri = new Uri("Database/Sync", UriKind.Relative);
+            var response = await this.Client.PostAsJsonAsync(uri, syncRequest);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -107,11 +90,10 @@
             return invokeResponse;
         }
 
-        public async Task<InvokeResponse> invoke(string service, Dictionary<string, string> values)
+        public async Task<InvokeResponse> invoke(string service, object args)
         {
-            var content = new FormUrlEncodedContent(values);
             var uri = new Uri(service, UriKind.Relative);
-            var response = await this.Client.PostAsync(uri, content);
+            var response = await this.Client.PostAsJsonAsync(uri, args);
 
             if (!response.IsSuccessStatusCode)
             {

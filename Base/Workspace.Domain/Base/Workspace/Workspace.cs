@@ -33,17 +33,24 @@
         }
 
         public Data.SyncRequest diff(Data.PullResponse response)  {
+
+            if (response == null)
+            {
+            }
+
             var userSecurityHash = response.userSecurityHash;
 
-            var requireLoadIds = new Data.SyncRequest();
-            requireLoadIds.objects = response.objects.Where(
-                v =>
-                    {
-                        var id = long.Parse(v[0]);
-                        var version = long.Parse(v[1]);
-                        var workspaceObject = this.workspaceObjectById[id];
-                        return workspaceObject == null || !workspaceObject.version.Equals(version) || !workspaceObject.userSecurityHash.Equals(userSecurityHash);
-                    }).Select(v=>v[0]).ToArray();
+            var requireLoadIds = new Data.SyncRequest
+                                     {
+                                         objects = response.objects.Where(v =>
+                                                 {
+                                                     var id = long.Parse(v[0]);
+                                                     var version = long.Parse(v[1]);
+                                                     WorkspaceObject workspaceObject;
+                                                     this.workspaceObjectById.TryGetValue(id, out workspaceObject);
+                                                     return workspaceObject == null || !workspaceObject.version.Equals(version) || !workspaceObject.userSecurityHash.Equals(userSecurityHash);
+                                                 }).Select(v => v[0]).ToArray()
+                                     };
 
             return requireLoadIds;
         }
