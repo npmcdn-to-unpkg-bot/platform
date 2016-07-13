@@ -1,52 +1,32 @@
 ﻿namespace Allors.Workspace
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-
     using Meta;
 
-    public interface IWorkspaceObject {
-        long id { get;  }
+    public class WorkspaceObject {
+        public Workspace Workspace { get; }
 
-        long version { get;  }
+        public long Id { get; }
 
-        string userSecurityHash { get;  }
+        public long Version { get; }
 
-        Class objectType { get;  }
+        public string UserSecurityHash { get; }
 
-        IWorkspace workspace { get;  }
+        public Class ObjectType { get; }
 
-        Dictionary<string, object> roles { get;  }
+        public Dictionary<string, object> Roles { get; }
 
-        Dictionary<string, object> methods { get;  }
+        public Dictionary<string, object> Methods { get; }
 
-        bool canRead(string roleTypeName);
+        public WorkspaceObject(Workspace workspace, Data.SyncResponse loadResponse, Data.SyncResponseObject loadObject) {
+            this.Workspace = workspace;
+            this.Id = long.Parse(loadObject.i);
+            this.Version = long.Parse(loadObject.v);
+            this.UserSecurityHash = loadResponse.userSecurityHash;
+            this.ObjectType = (Class)this.Workspace.ObjectFactory.GetObjectTypeForTypeName(loadObject.t);
 
-        bool canWrite(string roleTypeName);
-    }
-
-    public class WorkspaceObject : IWorkspaceObject {
-        public IWorkspace workspace { get; set; }
-        public Dictionary<string, object> roles { get; set; }
-        public Dictionary<string, object> methods { get; set; }
-
-        private string i;
-        private string v;
-        private string u;
-        private string t;
-
-        public WorkspaceObject(IWorkspace workspace, Data.SyncResponse loadResponse, Data.SyncResponseObject loadObject) {
-            this.workspace = workspace;
-            this.i = loadObject.i;
-            this.v = loadObject.v;
-            this.u = loadResponse.userSecurityHash;
-            this.t = loadObject.t;
-
-            this.roles = new Dictionary<string, object>();
-            this.methods =new Dictionary<string, object>();
-
-            this.objectType = (Class)this.workspace.ObjectFactory.GetObjectTypeForTypeName(this.t);
+            this.Roles = new Dictionary<string, object>();
+            this.Methods =new Dictionary<string, object>();
 
             if (loadObject.roles != null)
             {
@@ -57,13 +37,13 @@
                     var canRead = access.Contains("r");
                     var canWrite = access.Contains("w");
 
-                    this.roles["CanRead{name}"] = canRead;
-                    this.roles["CanWrite{name}"] = canWrite;
+                    this.Roles["CanRead{name}"] = canRead;
+                    this.Roles["CanWrite{name}"] = canWrite;
 
                     if (canRead)
                     {
                         var value = role.Length > 2 ? role[2] : null;
-                        this.roles[name] = value;
+                        this.Roles[name] = value;
                     }
                 }
             }
@@ -76,25 +56,17 @@
                     var access = method[1];
                     var canExecute = access.Contains("x");
 
-                    this.methods[$"CanExecute{name}"] = canExecute;
+                    this.Methods[$"CanExecute{name}"] = canExecute;
                 }
             }
         }
 
-        public long id => long.Parse(this.i);
-
-        public long version => long.Parse(this.v);
-
-        public string userSecurityHash => this.u;
-
-        public Class objectType { get; }
-
-        public bool canRead(string roleTypeName) {
-            return (bool)this.roles[$"CanRead{roleTypeName}"];
+        public bool CanRead(string roleTypeName) {
+            return (bool)this.Roles[$"CanRead{roleTypeName}"];
         }
 
-        public bool canWrite(string roleTypeName) {
-            return (bool)this.roles[$"CanWrite{roleTypeName}"];
+        public bool CanWrite(string roleTypeName) {
+            return (bool)this.Roles[$"CanWrite{roleTypeName}"];
         }
     }
 }

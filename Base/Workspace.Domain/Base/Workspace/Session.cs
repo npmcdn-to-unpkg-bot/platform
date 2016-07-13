@@ -33,14 +33,14 @@
             SessionObject sessionObject;
             if (!this.sessionObjectById.TryGetValue(id, out sessionObject))
             {
-                var workspaceObject = this.workspace.get(id);
+                var workspaceObject = this.workspace.Get(id);
 
-                sessionObject = this.workspace.ObjectFactory.Create(this, workspaceObject.objectType);
+                sessionObject = this.workspace.ObjectFactory.Create(this, workspaceObject.ObjectType);
 
                 sessionObject.WorkspaceObject = workspaceObject;
-                sessionObject.ObjectType = workspaceObject.objectType;
+                sessionObject.ObjectType = workspaceObject.ObjectType;
 
-                this.sessionObjectById[workspaceObject.id] = sessionObject;
+                this.sessionObjectById[workspaceObject.Id] = sessionObject;
             }
 
             return sessionObject;
@@ -135,8 +135,8 @@
                     this.newSessionObjectById.Remove(newId);
                     newSessionObject.NewId = null;
 
-                    this.workspace.sync(loadResponse);
-                    var workspaceObject = this.workspace.get(id);
+                    this.workspace.Sync(loadResponse);
+                    var workspaceObject = this.workspace.Get(id);
                     newSessionObject.WorkspaceObject = workspaceObject;
 
                     this.sessionObjectById[id] = newSessionObject;

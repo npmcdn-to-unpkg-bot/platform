@@ -32,11 +32,11 @@
         public async Task Load(object args)
         {
             var response = await this.database.Pull(this.name, args);
-            var requireLoadIds = this.workspace.diff(response);
+            var requireLoadIds = this.workspace.Diff(response);
             if (requireLoadIds.objects.Length > 0)
             {
                 var loadResponse = await this.database.Sync(requireLoadIds);
-                this.workspace.sync(loadResponse);
+                this.workspace.Sync(loadResponse);
             }
 
             this.Update(response);
@@ -46,11 +46,11 @@
         public async Task<Result> Query(string service, object args)
         {
             var pullResponse = await this.database.Pull(service, args);
-            var requireLoadIds = this.workspace.diff(pullResponse);
+            var requireLoadIds = this.workspace.Diff(pullResponse);
             if (requireLoadIds.objects.Length > 0)
             {
                 var loadResponse = await this.database.Sync(requireLoadIds);
-                this.workspace.sync(loadResponse);
+                this.workspace.Sync(loadResponse);
             }
 
             var result = new Result(this.Session, pullResponse);

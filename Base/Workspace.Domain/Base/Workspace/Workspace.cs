@@ -4,43 +4,24 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Meta;
+    using Data;
 
-    public interface IWorkspace
-    {
-        ObjectFactory ObjectFactory { get; }
-
-        Data.SyncRequest diff(Data.PullResponse data);
-
-        void sync(Data.SyncResponse data);
-
-        WorkspaceObject get(long id);
-    }
-
-    public class Workspace : IWorkspace
+    public class Workspace
     {
         public ObjectFactory ObjectFactory { get; }
 
-        public Dictionary<string, ObjectType> objectTypeByName = new Dictionary<string, ObjectType>();
-
-        public string userSecurityHash;
-
-        Dictionary<long, WorkspaceObject> workspaceObjectById = new Dictionary<long, WorkspaceObject>();
+        private readonly Dictionary<long, WorkspaceObject> workspaceObjectById = new Dictionary<long, WorkspaceObject>();
         
         public Workspace(ObjectFactory objectFactory)
         {
             this.ObjectFactory = objectFactory;
         }
 
-        public Data.SyncRequest diff(Data.PullResponse response)  {
-
-            if (response == null)
-            {
-            }
-
+        public SyncRequest Diff(PullResponse response)
+        {
             var userSecurityHash = response.userSecurityHash;
 
-            var requireLoadIds = new Data.SyncRequest
+            var requireLoadIds = new SyncRequest
                                      {
                                          objects = response.objects.Where(v =>
                                                  {
@@ -48,23 +29,23 @@
                                                      var version = long.Parse(v[1]);
                                                      WorkspaceObject workspaceObject;
                                                      this.workspaceObjectById.TryGetValue(id, out workspaceObject);
-                                                     return workspaceObject == null || !workspaceObject.version.Equals(version) || !workspaceObject.userSecurityHash.Equals(userSecurityHash);
+                                                     return workspaceObject == null || !workspaceObject.Version.Equals(version) || !workspaceObject.UserSecurityHash.Equals(userSecurityHash);
                                                  }).Select(v => v[0]).ToArray()
                                      };
 
             return requireLoadIds;
         }
 
-        public void sync(Data.SyncResponse syncResponse)
+        public void Sync(SyncResponse syncResponse)
         {
             foreach (var objectData in syncResponse.objects)
             {
                 var workspaceObject = new WorkspaceObject(this, syncResponse, objectData);
-                this.workspaceObjectById[workspaceObject.id] = workspaceObject;
+                this.workspaceObjectById[workspaceObject.Id] = workspaceObject;
             }
         }
 
-        public WorkspaceObject get(long id) {
+        public WorkspaceObject Get(long id) {
             var workspaceObject = this.workspaceObjectById[id];
             if (workspaceObject == null)
             {

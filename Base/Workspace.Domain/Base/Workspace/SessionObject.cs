@@ -16,7 +16,7 @@
 
         Session Session { get; }
 
-        IWorkspaceObject WorkspaceObject { get; set; }
+        WorkspaceObject WorkspaceObject { get; set; }
 
         bool HasChanges { get; }
 
@@ -54,7 +54,7 @@
 
         public Session Session { get; }
 
-        public IWorkspaceObject WorkspaceObject { get; set; }
+        public WorkspaceObject WorkspaceObject { get; set; }
         public Class ObjectType { get; set; }
 
         public long? NewId { get; set; }
@@ -74,16 +74,16 @@
             }
         }
  
-        public long? Id => this.WorkspaceObject?.id;
+        public long? Id => this.WorkspaceObject?.Id;
 
-        public long? Version => this.WorkspaceObject?.version;
+        public long? Version => this.WorkspaceObject?.Version;
 
         public bool CanRead(RoleType roleType) {
             if (this.NewId != null) {
                 return true;
             }
 
-            return this.WorkspaceObject.canRead(roleType.PropertyName);
+            return this.WorkspaceObject.CanRead(roleType.PropertyName);
         }
 
         public bool CanWrite(RoleType roleType) {
@@ -91,7 +91,7 @@
                 return true;
             }
 
-            return this.WorkspaceObject.canWrite(roleType.PropertyName);
+            return this.WorkspaceObject.CanWrite(roleType.PropertyName);
         }
 
         public bool Exist(RoleType roleType)
@@ -114,7 +114,7 @@
                 {
                     if (roleType.ObjectType.IsUnit)
                     {
-                        this.WorkspaceObject.roles.TryGetValue(roleType.PropertyName, out value);
+                        this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out value);
 
                         var unit = (Unit)roleType.ObjectType;
 
@@ -140,13 +140,13 @@
                             if (roleType.IsOne)
                             {
                                 object role;
-                                this.WorkspaceObject.roles.TryGetValue(roleType.PropertyName, out role);
+                                this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out role);
                                 value = role != null ? this.Session.Get(long.Parse((string)role)) : null;
                             }
                             else
                             {
                                 object roles;
-                                this.WorkspaceObject.roles.TryGetValue(roleType.PropertyName, out roles);
+                                this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out roles);
                                 var array = (roles as string[])?.Select(role => this.Session.Get(long.Parse(role))).ToArray() ?? new ISessionObject[0];
                                 value = new ArrayList(array).ToArray(roleType.ObjectType.ClrType);
                             }
@@ -250,7 +250,7 @@
         
         public void Reset() {
             if (this.WorkspaceObject != null) {
-                this.WorkspaceObject = this.WorkspaceObject.workspace.get(this.Id.Value);
+                this.WorkspaceObject = this.WorkspaceObject.Workspace.Get(this.Id.Value);
             }
 
             this.changedRoleByRoleType = null;
@@ -291,7 +291,7 @@
                         else
                         {
                             object originalRoleIdsObject;
-                            if (!this.WorkspaceObject.roles.TryGetValue(roleType.PropertyName, out originalRoleIdsObject))
+                            if (!this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out originalRoleIdsObject))
                             {
                                 saveRole.a = roleIds;
                             }
