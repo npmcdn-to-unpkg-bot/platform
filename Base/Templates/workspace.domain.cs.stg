@@ -2,7 +2,7 @@ delimiters "$", "$"
 
 TemplateId() ::= <<07F63139-1791-4F55-AAED-F1A6D8D40055>>
 TemplateName() ::= <<Allors C# Workspace Domain>>
-TemplateVersion() ::= <<1.0.2>>
+TemplateVersion() ::= <<1.0.3>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $!
@@ -120,7 +120,7 @@ $class.XmlDocComment$
 	
 		public static $class.name$ Instantiate (Session allorsSession, long allorsObjectId)
 		{
-			return ($class.name$) allorsSession.get(allorsObjectId);		
+			return ($class.name$) allorsSession.Get(allorsObjectId);		
 		}
 
 		public override bool Equals(object obj)
@@ -131,17 +131,17 @@ $class.XmlDocComment$
 		        return false;
 		    }
 
-		    if (this.id != null)
+		    if (this.Id != null)
 		    {
-		        return this.id.Equals(that.id);
+		        return this.Id.Equals(that.Id);
 		    }
 
-		    return this.newId.Equals(that.newId);
+		    return this.NewId.Equals(that.NewId);
         }
 
 		public override int GetHashCode()
         {
-            return this.id != null ? this.id.GetHashCode() : this.newId.GetHashCode();
+            return this.Id != null ? this.Id.GetHashCode() : this.NewId.GetHashCode();
         }
 
 $class.WorkspaceConcreteRoleTypes:{concreteRoleType|$classConcreteRoleType_Class()$}$
@@ -164,11 +164,11 @@ $if(concreteRoleType.RoleType.ObjectType.IsBoolean ||
 		{
 			get
 			{
-				return ($roleType_ObjectType(concreteRoleType.RoleType)$) this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return ($roleType_ObjectType(concreteRoleType.RoleType)$) this.Get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
+				this.Set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 $endif$
@@ -177,24 +177,24 @@ $endif$
 		{
 			get
 			{
-				return ($concreteRoleType_ObjectType(concreteRoleType)$) this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$) this.Get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
+				this.Set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 
 		virtual public bool Exist$concreteRoleType.RoleType.SingularPropertyName${
 			get
 			{
-				return this.exist(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return this.Exist(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$()
 		{
-			this.set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
+			this.Set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
 		}
 $else$
 $if(concreteRoleType.RoleType.IsMany)$
@@ -202,46 +202,46 @@ $if(concreteRoleType.RoleType.IsMany)$
 		{ 
 			get
 			{
-				return ($concreteRoleType_ObjectType(concreteRoleType)$[])this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$[])this.Get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
+				this.Set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 
 		virtual public void Add$concreteRoleType.RoleType.SingularPropertyName$ ($concreteRoleType_ObjectType(concreteRoleType)$ value)
 		{
-			this.add(Meta.$concreteRoleType.RoleType.PropertyName$, value);
+			this.Add(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$ ($concreteRoleType_ObjectType(concreteRoleType)$ value)
 		{
-			this.remove(Meta.$concreteRoleType.RoleType.PropertyName$, value);
+			this.Remove(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 		}
 
 		virtual public bool Exist$concreteRoleType.RoleType.PluralPropertyName$
 		{
 			get
 			{
-				return this.exist(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return this.Exist(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.PluralPropertyName$()
 		{
-			this.set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
+			this.Set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
 		}
 $else$
 		virtual public $concreteRoleType_ObjectType(concreteRoleType)$ $concreteRoleType.RoleType.SingularPropertyName$
 		{ 
 			get
 			{
-				return ($concreteRoleType_ObjectType(concreteRoleType)$) this.get(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$) this.Get(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 			set
 			{
-				this.set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
+				this.Set(Meta.$concreteRoleType.RoleType.PropertyName$, value);
 			}
 		}
 
@@ -249,13 +249,13 @@ $else$
 		{
 			get
 			{
-				return this.exist(Meta.$concreteRoleType.RoleType.PropertyName$);
+				return this.Exist(Meta.$concreteRoleType.RoleType.PropertyName$);
 			}
 		}
 
 		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$()
 		{
-			this.set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
+			this.Set(Meta.$concreteRoleType.RoleType.PropertyName$, null);
 		}
 $endif$
 $endif$

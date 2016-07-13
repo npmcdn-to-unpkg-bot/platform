@@ -1,5 +1,7 @@
-﻿namespace Allors.Workspace.Data {
-    public class SyncResponseObject {
+﻿namespace Allors.Workspace.Data
+{
+    public class SyncResponseObject
+    {
         public string i { get; set; }
 
         public string v { get; set; }

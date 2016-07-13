@@ -8,12 +8,6 @@
 
     public class Context
     {
-        public Dictionary<string, ISessionObject> objects;
-        public Dictionary<string, ISessionObject[]> collections;
-        public Dictionary<string, object> values;
-
-        public ISession session;
-
         private readonly string name;
         private readonly Database database;
         private readonly Workspace workspace;
@@ -24,63 +18,72 @@
             this.database = database;
             this.workspace = workspace;
 
-            this.session = new Session(this.workspace);
+            this.Session = new Session(this.workspace);
         }
 
-        public async Task load(Dictionary<string,string> args)
+        public Session Session { get; }
+
+        public Dictionary<string, SessionObject> Objects { get; private set; }
+
+        public Dictionary<string, SessionObject[]> Collections { get; private set; }
+
+        public Dictionary<string, object> Values { get; private set; }
+
+        public async Task Load(object args)
         {
-            var response = await this.database.pull(this.name, args);
+            var response = await this.database.Pull(this.name, args);
             var requireLoadIds = this.workspace.diff(response);
             if (requireLoadIds.objects.Length > 0)
             {
-                var loadResponse = await this.database.sync(requireLoadIds);
+                var loadResponse = await this.database.Sync(requireLoadIds);
                 this.workspace.sync(loadResponse);
             }
 
-            this.update(response);
-            this.session.reset();
+            this.Update(response);
+            this.Session.Reset();
         }
 
-        public async Task<Result> query(string service, Dictionary<string, string> p) {
-
-            var pullResponse = await this.database.pull(service, p);
+        public async Task<Result> Query(string service, object args)
+        {
+            var pullResponse = await this.database.Pull(service, args);
             var requireLoadIds = this.workspace.diff(pullResponse);
             if (requireLoadIds.objects.Length > 0)
             {
-                var loadResponse = await this.database.sync(requireLoadIds);
+                var loadResponse = await this.database.Sync(requireLoadIds);
                 this.workspace.sync(loadResponse);
             }
 
-            var result = new Result(this.session, pullResponse);
+            var result = new Result(this.Session, pullResponse);
             return result;
         }
 
-        public async Task<PushResponse> save(){
-            var saveRequest = this.session.pushRequest();
-            var pushResponse = await this.database.push(saveRequest);
-            this.session.pushResponse(pushResponse);
+        public async Task<PushResponse> Save()
+        {
+            var saveRequest = this.Session.PushRequest();
+            var pushResponse = await this.database.Push(saveRequest);
+            this.Session.PushResponse(pushResponse);
             return pushResponse;
         }
 
-        public Task<InvokeResponse> invoke(Method method)
+        public Task<InvokeResponse> Invoke(Method method)
         {
-            return this.database.invoke(method);
+            return this.database.Invoke(method);
         }
 
-        public Task<InvokeResponse> invoke(string service, Dictionary<string, string> values)
+        public Task<InvokeResponse> Invoke(string service, object args)
         {
-            return this.database.invoke(service, values);
+            return this.database.Invoke(service, args);
         }
         
-        private void update(PullResponse response) {
-
-            this.objects = response.namedObjects.ToDictionary(
+        private void Update(PullResponse response)
+        {
+            this.Objects = response.namedObjects.ToDictionary(
                 pair => pair.Key,
-                pair => this.session.get(long.Parse(pair.Value)));
-            this.collections = response.namedCollections.ToDictionary(
+                pair => this.Session.Get(long.Parse(pair.Value)));
+            this.Collections = response.namedCollections.ToDictionary(
                 pair => pair.Key,
-                pair => pair.Value.Select(v => this.session.get(long.Parse(v))).ToArray());
-            this.values = response.namedValues.ToDictionary(
+                pair => pair.Value.Select(v => this.Session.Get(long.Parse(v))).ToArray());
+            this.Values = response.namedValues.ToDictionary(
                 pair => pair.Key,
                 pair => pair.Value);
         }

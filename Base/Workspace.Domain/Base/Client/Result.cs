@@ -5,21 +5,23 @@
 
     using Data;
 
-    public class Result {
+    public class Result
+    {
+        public Dictionary<string, SessionObject> Objects { get; }
 
-        public Dictionary<string, ISessionObject> objects;
-        public Dictionary<string, ISessionObject[]> collections;
-        public Dictionary<string, object> values;
+        public Dictionary<string, SessionObject[]> Collections { get; }
 
-        public Result(ISession session, PullResponse response)
+        public Dictionary<string, object> Values { get; }
+
+        public Result(Session session, PullResponse response)
         {
-            this.objects = response.namedObjects.ToDictionary(
+            this.Objects = response.namedObjects.ToDictionary(
                 pair => pair.Key,
-                pair => session.get(long.Parse(pair.Value)));
-            this.collections = response.namedCollections.ToDictionary(
+                pair => session.Get(long.Parse(pair.Value)));
+            this.Collections = response.namedCollections.ToDictionary(
                 pair => pair.Key,
-                pair => pair.Value.Select(v => session.get(long.Parse(v))).ToArray());
-            this.values = response.namedValues.ToDictionary(
+                pair => pair.Value.Select(v => session.Get(long.Parse(v))).ToArray());
+            this.Values = response.namedValues.ToDictionary(
                 pair => pair.Key, 
                 pair => pair.Value);
         }

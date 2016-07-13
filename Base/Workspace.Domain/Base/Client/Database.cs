@@ -27,7 +27,7 @@
 
         public HttpClient Client { get; set; }
 
-        public async Task<PullResponse> pull(string name, object args)
+        public async Task<PullResponse> Pull(string name, object args)
         {
             var uri = new Uri(name + "/pull", UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, args);
@@ -41,7 +41,7 @@
             return pullResponse;
         }
 
-        public async Task<SyncResponse> sync(SyncRequest syncRequest)
+        public async Task<SyncResponse> Sync(SyncRequest syncRequest)
         {
             var uri = new Uri("Database/Sync", UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, syncRequest);
@@ -55,7 +55,7 @@
             return syncResponse;
         }
 
-        public async Task<PushResponse> push(PushRequest pushRequest)
+        public async Task<PushResponse> Push(PushRequest pushRequest)
         {
             var uri = new Uri("Database/Push", UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, pushRequest);
@@ -69,12 +69,12 @@
             return pushResponse;
         }
 
-        public async Task<InvokeResponse> invoke(Method method)
+        public async Task<InvokeResponse> Invoke(Method method)
         {
             var invokeRequest = new InvokeRequest
                                     {
-                                        i = method.Object.id.ToString(),
-                                        v = method.Object.version.ToString(),
+                                        i = method.Object.Id.ToString(),
+                                        v = method.Object.Version.ToString(),
                                         m = method.Name,
                                     };
 
@@ -90,7 +90,7 @@
             return invokeResponse;
         }
 
-        public async Task<InvokeResponse> invoke(string service, object args)
+        public async Task<InvokeResponse> Invoke(string service, object args)
         {
             var uri = new Uri(service, UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, args);

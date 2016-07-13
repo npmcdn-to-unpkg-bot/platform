@@ -75,13 +75,7 @@ namespace Allors.Workspace
                 throw new Exception(validationLog.ToString());
             }
 
-            try
-            {
-                metaPopulation.Bind(assembly);
-            }
-            catch (Exception e)
-            {
-            }
+            metaPopulation.Bind(assembly);
 
             this.typeByObjectType = new Dictionary<IObjectType, Type>();
             this.objectTypeByType = new Dictionary<Type, IObjectType>();
@@ -174,8 +168,12 @@ namespace Allors.Workspace
         /// <summary>
         /// Gets the .Net <see cref="Type"/> given the Allors <see cref="IObjectType"/>.
         /// </summary>
-        /// <param name="type">The .Net <see cref="Type"/>.</param>
-        /// <returns>The Allors <see cref="IObjectType"/>.</returns>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <returns>
+        /// The Allors <see cref="IObjectType"/>.
+        /// </returns>
         public IObjectType GetObjectTypeForObjectTypeId(Guid id)
         {
             IObjectType objectType;

@@ -1,5 +1,7 @@
-﻿namespace Allors.Workspace.Data {
-    public class PushResponseNewObject  {
+﻿namespace Allors.Workspace.Data
+{
+    public class PushResponseNewObject
+    {
         public string i;
         public string ni;
     }

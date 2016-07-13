@@ -20,8 +20,9 @@
 
 namespace Allors.Workspace
 {
-    using Meta;
     using Domain;
+
+    using Meta;
 
     public static partial class Config
     {
