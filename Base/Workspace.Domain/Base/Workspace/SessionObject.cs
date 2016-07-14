@@ -6,6 +6,8 @@
 
     using Meta;
 
+    using Newtonsoft.Json.Linq;
+
     public interface ISessionObject
     {
         long? Id { get; }
@@ -120,6 +122,10 @@
 
                         switch (unit.UnitTag)
                         {
+                            case UnitTags.Integer:
+                                value = Convert.ToInt32(value);
+                                break;
+
                             case UnitTags.Decimal:
                                 value = Convert.ToDecimal(value);
                                 break;
@@ -147,7 +153,10 @@
                             {
                                 object roles;
                                 this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out roles);
-                                var array = (roles as string[])?.Select(role => this.Session.Get(long.Parse(role))).ToArray() ?? new ISessionObject[0];
+
+                                var jarray = (JArray)roles;
+
+                                var array = jarray?.Select(role => this.Session.Get(long.Parse(role.Value<string>()))).ToArray() ?? new ISessionObject[0];
                                 value = new ArrayList(array).ToArray(roleType.ObjectType.ClrType);
                             }
                         }
