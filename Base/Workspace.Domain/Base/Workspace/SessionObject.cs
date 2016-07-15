@@ -153,10 +153,7 @@
                             {
                                 object roles;
                                 this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out roles);
-
-                                var jarray = (JArray)roles;
-
-                                var array = jarray?.Select(role => this.Session.Get(long.Parse(role.Value<string>()))).ToArray() ?? new ISessionObject[0];
+                                var array = ((JArray)roles)?.Select(role => this.Session.Get(long.Parse(role.Value<string>()))).ToArray() ?? new ISessionObject[0];
                                 value = new ArrayList(array).ToArray(roleType.ObjectType.ClrType);
                             }
                         }
@@ -306,7 +303,7 @@
                             }
                             else
                             {
-                                var originalRoleIds = (string[])originalRoleIdsObject;
+                                var originalRoleIds = ((JArray)originalRoleIdsObject).Select(v=>v.Value<string>()).ToArray();
                                 saveRole.a = roleIds.Except(originalRoleIds).ToArray();
                                 saveRole.r = originalRoleIds.Except(roleIds).ToArray();
                             }

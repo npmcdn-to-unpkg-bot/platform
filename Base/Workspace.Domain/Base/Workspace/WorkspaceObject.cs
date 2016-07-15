@@ -21,7 +21,7 @@
         public WorkspaceObject(Workspace workspace, Data.SyncResponse loadResponse, Data.SyncResponseObject loadObject) {
             this.Workspace = workspace;
             this.Id = long.Parse(loadObject.i);
-            this.Version = long.Parse(loadObject.v);
+            this.Version = !string.IsNullOrEmpty(loadObject.v) ? long.Parse(loadObject.v) : 0;
             this.UserSecurityHash = loadResponse.userSecurityHash;
             this.ObjectType = (Class)this.Workspace.ObjectFactory.GetObjectTypeForTypeName(loadObject.t);
 

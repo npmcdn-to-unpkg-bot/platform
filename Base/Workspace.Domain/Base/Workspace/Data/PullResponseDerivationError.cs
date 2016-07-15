@@ -1,9 +1,9 @@
 ﻿namespace Allors.Workspace.Data
 {
-    public interface PullResponseDerivationError
+    public class PullResponseDerivationError
     {
-        string m { get; set; }
+        public string m { get; set; }
 
-        string[][] r { get; set; }
+        public string[][] r { get; set; }
     }
 }
