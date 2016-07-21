@@ -145,8 +145,29 @@ $class.XmlDocComment$
         }
 
 $class.WorkspaceConcreteRoleTypes:{concreteRoleType|$classConcreteRoleType_Class()$}$
+
+$class.workspaceMethodTypes:{methodType|$classMethodType()$}; separator="\n"$
 	}
 }
+>>
+
+classMethodType() ::= <<
+			public bool CanExecute$methodType.Name$ 
+			{
+				get
+				{
+					// TODO: Implemente SessionObject.CanExecute
+					return true;
+				}
+			}
+
+			public Method $methodType.Name$ 
+			{
+				get
+				{
+					return new Method(this, "$methodType.Name$");
+				}
+			}
 >>
 
 classConcreteRoleType_Class() ::= <<
