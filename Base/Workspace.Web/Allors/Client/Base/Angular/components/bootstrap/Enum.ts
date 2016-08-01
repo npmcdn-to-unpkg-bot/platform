@@ -29,7 +29,7 @@
             object: "<",
             relation: "@",
             fullTypeName: "@enum"
-        }
+        } as { [binding: string]: string }
 
         fullTypeName: string;
 
@@ -78,5 +78,5 @@
             templateUrl: EnumTemplate.name,
             require: FormController.require,
             bindings: EnumController.bindings
-        } as any);
+        });
 }

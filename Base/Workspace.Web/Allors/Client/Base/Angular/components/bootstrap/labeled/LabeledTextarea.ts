@@ -25,5 +25,5 @@
             templateUrl: LabeledTextareaTemplate.name,
             require: FormController.require,
             bindings: TextareaController.bindings
-        } as any);
+        });
 }

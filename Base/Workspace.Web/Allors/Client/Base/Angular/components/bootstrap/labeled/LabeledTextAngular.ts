@@ -25,5 +25,5 @@
             templateUrl: LabeledTextAngularTemplate.name,
             require: FormController.require,
             bindings: TextAngularController.bindings
-        } as any);
+        });
 }

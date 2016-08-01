@@ -25,5 +25,5 @@
             templateUrl: StaticEnumGroupTemplate.name,
             require: FormController.require,
             bindings: StaticEnumController.bindings
-        } as any);
+        });
 }

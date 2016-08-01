@@ -26,5 +26,5 @@
             templateUrl: LabeledSelectTemplate.name,
             require: FormController.require,
             bindings: SelectController.bindings
-        } as any);
+        });
 }

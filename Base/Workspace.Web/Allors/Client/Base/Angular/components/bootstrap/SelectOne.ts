@@ -37,7 +37,7 @@
             allowClear: "<",
             appendToBody: "<",
             placeholder: "@"
-        }
+        } as { [binding: string]: string }
 
         allowClear = true;
         placeholder = "Select a value";
@@ -97,5 +97,5 @@
             templateUrl: SelectOneTemplate.name,
             require: FormController.require,
             bindings: SelectOneController.bindings
-        } as any);
+        });
 }

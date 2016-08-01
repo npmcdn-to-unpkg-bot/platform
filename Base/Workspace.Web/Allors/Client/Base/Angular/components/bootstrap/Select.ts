@@ -49,7 +49,7 @@
             order: "<",
             refreshDelay: "<",
             lookup: "&lookup"
-        }
+        } as { [binding: string]: string }
 
         options: SessionObject[];
         asyncOptions: SessionObject[];
@@ -102,5 +102,5 @@
             templateUrl: SelectTemplate.name,
             require: FormController.require,
             bindings: SelectController.bindings
-        } as any);
+        });
 }

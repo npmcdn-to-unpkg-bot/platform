@@ -23,7 +23,7 @@
             object: "<",
             relation: "@",
             fullTypeName: "@enum"
-        }
+        } as { [binding: string]: string }
 
         get enum(): StaticEnum {
             const filtered = this.enums.filter(v => v.value === this.role);
@@ -77,5 +77,5 @@
             templateUrl: StaticEnumTemplate.name,
             require: FormController.require,
             bindings: StaticEnumController.bindings
-        } as any);
+        });
 }

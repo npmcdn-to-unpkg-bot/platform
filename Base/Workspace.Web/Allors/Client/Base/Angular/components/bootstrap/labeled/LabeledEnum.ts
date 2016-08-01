@@ -25,5 +25,5 @@
             templateUrl: LabeledEnumTemplate.name,
             require: FormController.require,
             bindings: EnumController.bindings
-        } as any);
+        });
 }

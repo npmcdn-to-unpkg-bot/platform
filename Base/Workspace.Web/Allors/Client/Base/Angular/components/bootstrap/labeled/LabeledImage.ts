@@ -25,5 +25,5 @@
             templateUrl: LabeledImageTemplate.name,
             require: FormController.require,
             bindings: ImageController.bindings
-        } as any);
+        });
 }

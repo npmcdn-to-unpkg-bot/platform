@@ -37,7 +37,7 @@
             allowClear: "<",
             appendToBody: "<",
             placeholder: "@"
-        }
+        } as { [binding: string]: string }
 
         allowClear = true;
         placeholder = "Select values";
@@ -103,5 +103,5 @@
             templateUrl: SelectManyTemplate.name,
             require: FormController.require,
             bindings: SelectManyController.bindings
-        } as any);
+        });
 }

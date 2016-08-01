@@ -27,5 +27,5 @@
             require: FormController.require,
             bindings: DatepickerPopupController.bindings
 
-        } as any);
+        });
 }

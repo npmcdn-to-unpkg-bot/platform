@@ -25,5 +25,5 @@
             templateUrl: LabeledStaticTemplate.name,
             require: FormController.require,
             bindings: StaticController.bindings
-        } as any);
+        });
 }

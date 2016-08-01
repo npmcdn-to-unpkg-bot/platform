@@ -25,5 +25,5 @@
             templateUrl: ["$element", "$attrs", () => LabeledRadioButtonTemplate.name],
             require: FormController.require,
             bindings: RadioButtonController.bindings
-        } as any);
+        });
 }

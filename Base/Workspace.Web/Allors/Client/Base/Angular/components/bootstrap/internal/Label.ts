@@ -36,5 +36,5 @@
             bindings: {
                 field: "<"
             }
-        } as any);
+        });
 }

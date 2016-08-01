@@ -17,11 +17,11 @@
 
         static require = {
             form: "^bForm"
-        };
+        } as {[controller: string]: string }
 
         static bindings = {
             horizontal: "<"
-        }
+        } as { [binding: string]: string }
 
         horizontal: boolean;
 
@@ -37,5 +37,5 @@
             templateUrl: FormTemplate.name,
             transclude: true,
             bindings: FormController.bindings
-        } as any);
+        });
 }

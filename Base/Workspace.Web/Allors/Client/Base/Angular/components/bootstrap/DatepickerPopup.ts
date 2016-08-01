@@ -30,7 +30,7 @@
             object: "<",
             relation: "@",
             timezone: "@"
-        }
+        } as { [binding: string]: string }
 
         timezone = "UTC";
         modelOptions: any = {};
@@ -53,5 +53,5 @@
             templateUrl: DatepickerPopupTemplate.name,
             require: FormController.require,
             bindings: DatepickerPopupController.bindings
-        } as any);
+        });
 }

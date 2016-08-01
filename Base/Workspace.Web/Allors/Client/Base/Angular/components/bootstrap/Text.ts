@@ -20,7 +20,7 @@
         static bindings = {
             object: "<",
             relation: "@"
-        }
+        } as { [binding: string]: string }
 
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
@@ -35,5 +35,5 @@
             templateUrl: TextTemplate.name,
             require: FormController.require,
             bindings: TextController.bindings
-        } as any);
+        });
 }

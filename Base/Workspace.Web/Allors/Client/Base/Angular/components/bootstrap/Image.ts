@@ -35,7 +35,7 @@
             size: "<",
             format: "<",
             quality: "<"
-        }
+        } as { [binding: string]: string }
 
         imgClass = "img-responsive";
         size: number;
@@ -77,5 +77,5 @@
             templateUrl: ImageTemplate.name,
             require: FormController.require,
             bindings: ImageController.bindings
-        } as any);
+        });
 }

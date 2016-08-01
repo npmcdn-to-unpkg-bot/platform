@@ -23,7 +23,7 @@
             object: "<",
             relation: "@",
             rows: "<"
-        }
+        } as { [binding: string]: string }
 
         rows: number;
 
@@ -40,5 +40,5 @@
             templateUrl: TextareaTemplate.name,
             require: FormController.require,
             bindings: TextareaController.bindings
-        } as any);
+        });
 }

@@ -31,7 +31,7 @@
             relation: "@",
             trueLabel: "@true",
             falseLabel: "@false"
-        }
+        } as { [binding: string]: string }
 
         static $inject = ["$log", "$translate"];
         constructor($log: angular.ILogService, $translate: angular.translate.ITranslateService) {
@@ -46,5 +46,5 @@
             templateUrl: RadioButtonTemplate.name,
             require: FormController.require,
             bindings: RadioButtonController.bindings
-        } as any);
+        });
 }
