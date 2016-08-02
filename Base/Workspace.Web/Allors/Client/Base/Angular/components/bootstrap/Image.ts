@@ -53,9 +53,9 @@
                 controller: ImageModalController,
                 controllerAs: "$ctrl",
                 resolve: {
-                    size: this.size,
-                    format: this.format,
-                    quality: this.quality
+                    size: () => this.size,
+                    format: () => this.format,
+                    quality: () => this.quality
                 }
             });
 
