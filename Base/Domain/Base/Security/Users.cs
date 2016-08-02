@@ -56,7 +56,7 @@ namespace Allors.Domain
         {
             var userId = Thread.CurrentPrincipal.Identity.Name;
 
-            if (String.IsNullOrWhiteSpace(userId))
+            if (string.IsNullOrWhiteSpace(userId))
             {
                 return null;
             }
@@ -64,7 +64,7 @@ namespace Allors.Domain
             var cached = (CachedUser)this.Session[SessionKey];
             if (cached == null || !userId.ToLower().Equals(cached.UserId))
             {
-                var user = this.FindBy(Meta.UserName, userId);
+                var user = this.FindBy(this.Meta.UserName, userId);
 
                 if (user == null)
                 {
@@ -83,7 +83,7 @@ namespace Allors.Domain
             var cached = (CachedUser)this.Session[SessionKey];
             if (cached == null || !userId.ToLower().Equals(cached.UserId))
             {
-                var user = this.FindBy(Meta.UserName, userId);
+                var user = this.FindBy(this.Meta.UserName, userId);
 
                 if (user == null)
                 {
@@ -100,23 +100,19 @@ namespace Allors.Domain
         public void SavePasswords(XmlWriter writer)
         {
             var usersWithPassword = this.Extent();
-            usersWithPassword.Filter.AddExists(Meta.UserPasswordHash);
+            usersWithPassword.Filter.AddExists(this.Meta.UserPasswordHash);
 
             var records = new List<Credentials.Record>();
             foreach (User user in usersWithPassword)
             {
-                records.Add( new Credentials.Record
+                records.Add(new Credentials.Record
                                  {
                                      UserName = user.UserName,
                                      PasswordHash = user.UserPasswordHash
                                  });
             }
 
-            var credentials = new Credentials
-                                  {
-                                      Records = records.ToArray()
-                                  
-                                  };
+            var credentials = new Credentials { Records = records.ToArray() };
             var xmlSerializer = new XmlSerializer(typeof(Credentials));
             xmlSerializer.Serialize(writer, credentials);
         }
@@ -127,7 +123,7 @@ namespace Allors.Domain
             var credentials = (Credentials)xmlSerializer.Deserialize(reader);
             foreach (var credential in credentials.Records)
             {
-                User user = this.FindBy(Meta.UserName, credential.UserName);
+                User user = this.FindBy(this.Meta.UserName, credential.UserName);
                 if (user != null)
                 {
                     user.UserPasswordHash = credential.PasswordHash;
