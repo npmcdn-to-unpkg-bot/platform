@@ -96,6 +96,16 @@
             return this.WorkspaceObject.CanWrite(roleType.PropertyName);
         }
 
+        public bool CanExecute(MethodType methodType)
+        {
+            if (this.NewId != null)
+            {
+                return true;
+            }
+
+            return this.WorkspaceObject.CanExecute(methodType.Name);
+        }
+
         public bool Exist(RoleType roleType)
         {
             var value = this.Get(roleType);

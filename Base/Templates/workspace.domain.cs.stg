@@ -156,8 +156,7 @@ classMethodType() ::= <<
 			{
 				get
 				{
-					// TODO: Implemente SessionObject.CanExecute
-					return true;
+					return this.CanExecute(this.Meta.$methodType.Name$);
 				}
 			}
 
@@ -171,6 +170,22 @@ classMethodType() ::= <<
 >>
 
 classConcreteRoleType_Class() ::= <<
+		public bool CanRead$concreteRoleType.RoleType.PropertyName$ 
+		{
+			get
+			{
+				return this.CanRead(this.Meta.$concreteRoleType.RoleType.PropertyName$);
+			}
+		}
+
+		public bool CanWrite$concreteRoleType.RoleType.PropertyName$ 
+		{
+			get
+			{
+				return this.CanWrite(this.Meta.$concreteRoleType.RoleType.PropertyName$);
+			}
+		}
+
 $\n$
 $concreteRoleType.RoleType.RelationType.XmlDocComment$
 $if(concreteRoleType.RoleType.ObjectType.IsUnit)$

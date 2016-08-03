@@ -68,5 +68,10 @@
         public bool CanWrite(string roleTypeName) {
             return (bool)this.Roles[$"CanWrite{roleTypeName}"];
         }
+
+        public bool CanExecute(string methodTypeName)
+        {
+            return (bool)this.Roles[$"CanExecute{methodTypeName}"];
+        }
     }
 }
