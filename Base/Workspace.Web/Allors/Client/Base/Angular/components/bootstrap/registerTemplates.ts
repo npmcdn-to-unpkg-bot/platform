@@ -22,6 +22,7 @@
         EnumTemplate.register($templateCache);
         SelectTemplate.register($templateCache);
         ImageTemplate.register($templateCache);
+        RadioTemplate.register($templateCache);
         RadioButtonTemplate.register($templateCache);
         DatepickerPopupTemplate.register($templateCache);
 
@@ -40,6 +41,7 @@
         LabeledEnumTemplate.register($templateCache);
         LabeledSelectTemplate.register($templateCache);
         LabeledImageTemplate.register($templateCache);
+        LabeledRadioTemplate.register($templateCache);
         LabeledRadioButtonTemplate.register($templateCache);
         LabeledDatepickerPopupTemplate.register($templateCache);
 
