@@ -1,5 +1,5 @@
 ﻿namespace Allors {
-    export abstract class Control {
+    export abstract class Scope {
 
         context: Context;
         events: Events;
