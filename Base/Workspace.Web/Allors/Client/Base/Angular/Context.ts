@@ -8,20 +8,17 @@
         collections: { [name: string]: ISessionObject[]; } = {};
         values: { [name: string]: any; } = {};
 
-        constructor(
-            public name: string,
-            public database: Database,
-            public workspace: Workspace) {
+        constructor(public name: string, public database: Database, public workspace: Workspace) {
 
             this.$q = this.database.$q;
-
             this.session = new Session(this.workspace);
         }
 
         load(params?: any): angular.IPromise<any> {
             return this.$q((resolve, reject) => {
 
-                return this.database.pull(this.name, params)
+                return this.database
+                    .pull(this.name, params)
                     .then((response: Data.PullResponse) => {
                         try {
                             const requireLoadIds = this.workspace.diff(response);
@@ -88,14 +85,19 @@
             return this.$q((resolve, reject) => {
 
                 try {
-                    const saveRequest = this.session.pushRequest();
-                    this.database.push(saveRequest)
+                    const pushRequest = this.session.pushRequest();
+                    this.database
+                        .push(pushRequest)
                         .then((pushResponse: Data.PushResponse) => {
-                            this.session.pushResponse(pushResponse);
-                            resolve(pushResponse);
+                            try {
+                                this.session.pushResponse(pushResponse);
+                                resolve(pushResponse);
+                            } catch (e3) {
+                                reject(e3);
+                            }
                         })
-                        .catch(e => {
-                            reject(e);
+                        .catch(e2 => {
+                            reject(e2);
                         });
                 } catch (e) {
                     reject(e);

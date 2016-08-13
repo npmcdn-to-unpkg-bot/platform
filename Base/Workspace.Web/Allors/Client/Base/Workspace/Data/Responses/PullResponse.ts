@@ -1,7 +1,6 @@
 ﻿namespace Allors.Data {
-    export interface PullResponse {
+    export interface PullResponse extends  Response {
         userSecurityHash: string;
-
         objects?: string[][];
 
         namedObjects?: { [id: string]: string; };

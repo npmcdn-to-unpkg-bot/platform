@@ -8,9 +8,8 @@
         methods?: string[][];
     }
 
-    export interface SyncResponse {
+    export interface SyncResponse extends Response {
         userSecurityHash: string;
-
         objects: SyncResponseObject[];
     }
 }

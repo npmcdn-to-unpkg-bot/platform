@@ -117,6 +117,7 @@
                     var newSessionObject = this.newSessionObjectById[newId];
 
                     var loadResponse: Data.SyncResponse = {
+                        responseType: Data.ResponseType.Sync,
                         userSecurityHash: "#", // This should trigger a load on next check
                         objects: [
                             {

@@ -1,5 +1,5 @@
 ﻿namespace Allors.Data {
-    export interface PushResponse extends Allors.Data.ErrorResponse {
+    export interface PushResponse extends ErrorResponse {
         hasErrors: boolean;
         errorMessage?: string;
         versionErrors?: string[];

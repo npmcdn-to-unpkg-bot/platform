@@ -1,5 +1,5 @@
 ﻿namespace Allors.Data {
-    export interface InvokeResponse extends Allors.Data.ErrorResponse {
+    export interface ErrorResponse extends Response {
         hasErrors: boolean;
         errorMessage?: string;
         versionErrors?: string[];

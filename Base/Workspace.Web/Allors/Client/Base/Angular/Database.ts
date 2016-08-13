@@ -10,6 +10,7 @@
                 this.$http.post(serviceName, params)
                     .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.PullResponse>) => {
                         var response = callbackArg.data;
+                        response.responseType = Data.ResponseType.Pull;
                         resolve(response);
                     })
                     .catch(e => {
@@ -24,8 +25,9 @@
 
                 this.$http.post(`${this.prefix}Sync`, syncRequest)
                     .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.SyncResponse>) => {
-                        var loadResponse = callbackArg.data;
-                        resolve(loadResponse);
+                        var response = callbackArg.data;
+                        response.responseType = Data.ResponseType.Sync;
+                        resolve(response);
                     })
                     .catch(e => {
                         reject(e);
@@ -39,8 +41,14 @@
 
                 this.$http.post(`${this.prefix}Push`, pushRequest)
                     .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.PushResponse>) => {
-                        var pushResponse = callbackArg.data;
-                        resolve(pushResponse);
+                        var response = callbackArg.data;
+                        response.responseType = Data.ResponseType.Sync;
+
+                        if (response.hasErrors) {
+                            reject(response);
+                        } else {
+                            resolve(response);
+                        }
                     })
                     .catch(e => {
                         reject(e);
@@ -56,11 +64,22 @@
 
                 if (methodOrService instanceof Method) {
                     const method = methodOrService;
-                    const invokeRequest: Data.InvokeRequest = { i: method.object.id, v: method.object.version, m: method.name };
+                    const invokeRequest: Data.InvokeRequest = {
+                        i: method.object.id,
+                        v: method.object.version,
+                        m: method.name
+                    };
+
                     this.$http.post(`${this.prefix}Invoke`, invokeRequest)
                         .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
-                            var invokeResponse = callbackArg.data;
-                            resolve(invokeResponse);
+                            var response = callbackArg.data;
+                            response.responseType = Data.ResponseType.Invoke;
+
+                            if (response.hasErrors) {
+                                reject(response);
+                            } else {
+                                resolve(response);
+                            }
                         })
                         .catch(e => {
                             reject(e);
@@ -70,8 +89,14 @@
                     const service = methodOrService + this.postfix;
                     this.$http.post(service, args)
                         .then((callbackArg: angular.IHttpPromiseCallbackArg<Data.InvokeResponse>) => {
-                            var invokeResponse = callbackArg.data;
-                            resolve(invokeResponse);
+                            var response = callbackArg.data;
+                            response.responseType = Data.ResponseType.Invoke;
+
+                            if (response.hasErrors) {
+                                reject(response);
+                            } else {
+                                resolve(response);
+                            }
                         })
                         .catch(e => {
                             reject(e);

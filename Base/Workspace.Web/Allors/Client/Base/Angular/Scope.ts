@@ -34,8 +34,7 @@
         // Commands
         load(params?: any): angular.IPromise<any> {
             
-            return this.context.load(params)
-                    .catch((e) => { throw e });
+            return this.context.load(params);
         }
 
         save(): angular.IPromise<any> {
@@ -44,16 +43,12 @@
                 this.context
                     .save()
                     .then((saveResponse: Data.PushResponse) => {
-                        if (saveResponse.hasErrors) {
-                            reject(new SaveError(this.context, saveResponse));
-                        } else {
-                            resolve(saveResponse);
-                        }
-                    }, (e) => {
-                        throw e;
+                        resolve(saveResponse);
+                    })
+                    .catch(e => {
+                        reject(e);
                     })
                     .finally(() => this.events.broadcastRefresh());
-
             });
         }
 
@@ -66,26 +61,20 @@
                     return this.context
                         .invoke(methodOrService)
                         .then((invokeResponse: Data.InvokeResponse) => {
-                            if (invokeResponse.hasErrors) {
-                                reject(new InvokeError(this.context, invokeResponse));
-                            } else {
-                                resolve(invokeResponse);
-                            }
-                        }, (e) => {
-                            throw e;
+                            resolve(invokeResponse);
+                        })
+                        .catch(e => {
+                            reject(e);
                         })
                         .finally(() => this.events.broadcastRefresh());
                 } else {
                     return this.context
                         .invoke(methodOrService as string, args)
                         .then((invokeResponse: Data.InvokeResponse) => {
-                            if (invokeResponse.hasErrors) {
-                                reject(new InvokeError(this.context, invokeResponse));
-                            } else {
-                                resolve(invokeResponse);
-                            }
-                        }, (e) => {
-                            throw e;
+                            resolve(invokeResponse);
+                        })
+                        .catch(e => {
+                            reject(e);
                         })
                         .finally(() => this.events.broadcastRefresh());
                 }
@@ -100,71 +89,48 @@
 
                 return this.context
                     .save()
-                    .then((saveResponse: Data.PushResponse) => {
-                            if (saveResponse.hasErrors) {
-                                reject(new SaveError(this.context, saveResponse));
-                            } else {
-                                this.refresh()
-                                    .then(() => {
-                                        if (methodOrService instanceof Method) {
-                                            this.context.invoke(methodOrService)
-                                                .then((invokeResponse: Data.InvokeResponse) => {
-                                                    if (invokeResponse.hasErrors) {
-                                                        reject(new InvokeError(this.context, invokeResponse));
-                                                    } else {
-                                                        resolve(invokeResponse);
-                                                    }
-                                                }, (e) => {
-                                                    throw e;
-                                                })
-                                                .finally(() => this.events.broadcastRefresh());
-                                        } else {
-                                            this.context.invoke(methodOrService as string, args)
-                                                .then((invokeResponse: Data.InvokeResponse) => {
-                                                    if (invokeResponse.hasErrors) {
-                                                        reject(new InvokeError(this.context, invokeResponse));
-                                                    } else {
-                                                        resolve(invokeResponse);
-                                                    }
-                                                }, (e) => {
-                                                    throw e;
-                                                })
-                                                .finally(() => this.events.broadcastRefresh());
-                                        }
-                                    }, (e) => {
-                                        throw e;
-                                    });
-                            }
-                    }, (e) => {
-                        throw e;
-                    });
+                    .then(() => {
+                            this.refresh()
+                                .then(() => {
+                                    if (methodOrService instanceof Method) {
+                                        this.context.invoke(methodOrService)
+                                            .then((invokeResponse: Data.InvokeResponse) => {
+                                                resolve(invokeResponse);
+                                            })
+                                            .catch(e => reject(e))
+                                            .finally(() => this.events.broadcastRefresh());
+                                    } else {
+                                        this.context.invoke(methodOrService as string, args)
+                                            .then((invokeResponse: Data.InvokeResponse) => {
+                                                resolve(invokeResponse);
+                                            })
+                                            .catch(e => reject(e))
+                                            .finally(() => this.events.broadcastRefresh());
+                                    }
+                                })
+                                .catch(e => reject(e));
+                         
+                    })
+                    .catch(e => reject(e));
             });
         }
 
         query(query: string, args: any): angular.IPromise<any> {
-            return this.context
-                .query(query, args)
-                .catch((e) => { throw e; });
+            return this.context.query(query, args);
         }
 
         queryResults(query: string, args: any): angular.IPromise<any> {
-            return this.context
-                .query(query, args)
-                .then(result => {
-                    var results = result.collections["results"];
-                    return results;
-                })
-                .catch((e) => { throw e; });
+            return this.$q((resolve, reject) => {
+                this.context
+                    .query(query, args)
+                    .then(result => {
+                        var results = result.collections["results"];
+                        resolve(results);
+                    })
+                    .catch((e) => reject(e));
+            });
         }
 
         protected abstract refresh(): angular.IPromise<any>;
-
-        private handleError(e: any): any {
-            if (e.hasErrors) {
-                return e;
-            } else {
-                throw e;
-            }
-        }
     }
 }
