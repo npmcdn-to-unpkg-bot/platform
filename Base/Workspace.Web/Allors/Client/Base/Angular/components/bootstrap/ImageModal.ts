@@ -17,7 +17,8 @@
                         result-image="$ctrl.croppedImage" 
                         result-image-size="$ctrl.size"
                         result-image-format="$ctrl.format"
-                        result-image-quality="$ctrl.quality">
+                        result-image-quality="$ctrl.quality",
+                        aspect-ratio="$ctrl.aspect">
             </img-crop>
         </div>
 
@@ -51,8 +52,8 @@
         image = "";
         croppedImage = "";
 
-        static $inject = ["$scope", "$uibModalInstance", "$log", "$translate", "size", "format", "quality"];
-        constructor(private $scope: angular.IScope, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, $log: angular.ILogService, $translate: angular.translate.ITranslateService, private size: number, private format: string, private quality: number) {
+        static $inject = ["$scope", "$uibModalInstance", "$log", "$translate", "size", "format", "quality", "aspect"];
+        constructor(private $scope: angular.IScope, private $uibModalInstance: angular.ui.bootstrap.IModalServiceInstance, $log: angular.ILogService, $translate: angular.translate.ITranslateService, private size: number, private format: string, private quality: number, private aspect: number) {
         }
 
         ok() {

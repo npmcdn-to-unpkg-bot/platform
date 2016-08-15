@@ -34,13 +34,15 @@
             imgClass: "@",
             size: "<",
             format: "<",
-            quality: "<"
+            quality: "<",
+            aspect: "<"
         } as { [binding: string]: string }
 
         imgClass = "img-responsive";
         size: number;
         format: string;
         quality: number;
+        aspect: number;
 
         static $inject = ["$scope", "$uibModal", "$log", "$translate"];
         constructor(private $scope: angular.IScope, private $uibModal: angular.ui.bootstrap.IModalService, $log: angular.ILogService, $translate: angular.translate.ITranslateService) {
@@ -55,8 +57,9 @@
                 resolve: {
                     size: () => this.size,
                     format: () => this.format,
-                    quality: () => this.quality
-                }
+                    quality: () => this.quality,
+                    aspect: () => this.aspect
+        }
             });
 
             modalInstance.result.then(selectedItem => {
