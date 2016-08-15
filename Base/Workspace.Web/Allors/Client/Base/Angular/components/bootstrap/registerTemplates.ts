@@ -44,10 +44,5 @@
         LabeledRadioTemplate.register($templateCache);
         LabeledRadioButtonTemplate.register($templateCache);
         LabeledDatepickerPopupTemplate.register($templateCache);
-
-        // Model
-        // -----
-        SelectOneTemplate.register($templateCache);
-        SelectManyTemplate.register($templateCache);
     }
 }
