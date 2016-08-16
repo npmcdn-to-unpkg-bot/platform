@@ -11,28 +11,25 @@ namespace Tests
         public void Load()
         {
             var workspace = new Workspace(Config.ObjectFactory);
-            workspace.sync(Fixture.loadData);
+            workspace.Sync(Fixture.loadData);
 
-            var martien = workspace.get(3);
+            var martien = workspace.Get(3);
 
-            Assert.AreEqual(3, martien.id);
-            Assert.AreEqual(1003, martien.version);
-            Assert.AreEqual("Person", martien.objectType.Name);
-            Assert.AreEqual("Martien", martien.roles["FirstName"]);
-            Assert.AreEqual("van", martien.roles["MiddleName"]);
-            Assert.AreEqual("Knippenberg", martien.roles["LastName"]);
-            Assert.IsFalse(martien.roles.ContainsKey("IsStudent"));
-            Assert.IsFalse(martien.roles.ContainsKey("BirthDate"));
+            Assert.AreEqual(3, martien.Id);
+            Assert.AreEqual(1003, martien.Version);
+            Assert.AreEqual("Person", martien.ObjectType.Name);
+            Assert.AreEqual("Martien", martien.Roles["FirstName"]);
+            Assert.AreEqual("van", martien.Roles["MiddleName"]);
+            Assert.AreEqual("Knippenberg", martien.Roles["LastName"]);
+            Assert.IsFalse(martien.Roles.ContainsKey("IsStudent"));
+            Assert.IsFalse(martien.Roles.ContainsKey("BirthDate"));
         }
 
         [Test]
         public void CheckVersions()
         {
-            var workspace = new Workspace(Config.ObjectFactory)
-                                {
-                                    userSecurityHash = "#"
-                                };
-            workspace.sync(Fixture.loadData);
+            var workspace = new Workspace(Config.ObjectFactory);
+            workspace.Sync(Fixture.loadData);
 
             var required = new PullResponse
                                {
@@ -46,7 +43,7 @@ namespace Tests
                                            }
                                };
 
-            var requireLoad = workspace.diff(required);
+            var requireLoad = workspace.Diff(required);
 
             Assert.AreEqual(1, requireLoad.objects.Length);
         }
@@ -54,8 +51,8 @@ namespace Tests
         [Test]
         public void CheckVersionsUserSecurityHash()
         {
-            var workspace = new Workspace(Config.ObjectFactory) { userSecurityHash = "abc" };
-            workspace.sync(Fixture.loadData);
+            var workspace = new Workspace(Config.ObjectFactory);
+            workspace.Sync(Fixture.loadData);
 
             var required = new PullResponse
                                {
@@ -69,7 +66,7 @@ namespace Tests
                                            }
                                };
 
-            var requireLoad = workspace.diff(required);
+            var requireLoad = workspace.Diff(required);
 
             Assert.AreEqual(3, requireLoad.objects.Length);
         }

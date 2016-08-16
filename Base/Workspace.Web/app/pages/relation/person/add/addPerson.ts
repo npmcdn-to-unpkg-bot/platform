@@ -1,11 +1,11 @@
-﻿namespace App.Relation.AddPerson {
+﻿namespace App.Pages.Person.Add {
     class AddPersonController extends Page {
 
         person: Person;
      
-        static $inject = ["allorsService", "$scope", "$state"];
-        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService) {
-            super("AddPerson", allors, $scope);
+        static $inject = ["appService", "$scope", "$state"];
+        constructor(app: Services.AppService, $scope: ng.IScope, private $state: ng.ui.IStateService) {
+            super("AddPerson", app, $scope);
 
             this.refresh()
                 .then(() => {

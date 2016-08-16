@@ -1,6 +1,7 @@
 ﻿namespace Tests {
     export class Fixture {
         static loadData: Allors.Data.SyncResponse = {
+            responseType: Allors.Data.ResponseType.Sync,
             userSecurityHash: "#",
             objects: [
                 {
@@ -74,7 +75,7 @@
                 }
             ]
         };
-        
+
     }
 }
 

@@ -1,11 +1,13 @@
-﻿namespace App.Relation.Person {
+﻿namespace App.Pages.Person.Edit {
+    import AppService = App.Services.AppService;
+
     class EditPersonController extends Page {
 
         person: Allors.Domain.Person;
 
-        static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
-        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
-            super("EditPerson", allors, $scope);
+        static $inject = ["appService", "$scope", "$state", "$stateParams"];
+        constructor(app: Services.AppService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
+            super("EditPerson", app, $scope);
 
             this.refresh();
         }

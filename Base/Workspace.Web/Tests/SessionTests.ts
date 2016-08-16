@@ -449,11 +449,12 @@ namespace Tests {
             const workspace = new Allors.Workspace(Allors.Data.metaPopulation);
             workspace.sync(Fixture.loadData);
 
-            var session = new Allors.Session(workspace);
+            const session = new Allors.Session(workspace);
 
-            var saveResponse: Allors.Data.PushResponse = {
+            let saveResponse: Allors.Data.PushResponse = {
+                responseType: Allors.Data.ResponseType.Push,
                 hasErrors: false
-            }
+            };
 
             session.pushResponse(saveResponse);
 
@@ -464,6 +465,7 @@ namespace Tests {
             var newId = mathijs.newId;
 
             saveResponse = {
+                responseType: Allors.Data.ResponseType.Push,
                 hasErrors: false,
                 newObjects: [
                     {

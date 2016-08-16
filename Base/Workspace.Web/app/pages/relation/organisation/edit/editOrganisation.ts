@@ -1,12 +1,12 @@
-﻿namespace App.Relation.Organisation {
+﻿namespace App.Pages.Organisation.Edit {
     class EditOrganisationController extends Page {
 
         organisation: Organisation;
         people: Person[];
 
-        static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
-        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
-            super("EditOrganisation", allors, $scope);
+        static $inject = ["appService", "$scope", "$state", "$stateParams"];
+        constructor(app: Services.AppService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
+            super("EditOrganisation", app, $scope);
 
             this.refresh();
         }

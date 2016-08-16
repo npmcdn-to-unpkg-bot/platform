@@ -23,8 +23,9 @@ namespace Tests {
             workspace.userSecurityHash = "#";
             workspace.sync(Fixture.loadData);
 
-            var required =
+            var pullResponse =
                 {
+                    responseType: Allors.Data.ResponseType.Pull,
                     userSecurityHash: "#",
                     objects: [
                         ["1", "1001"],
@@ -33,7 +34,7 @@ namespace Tests {
                     ]
                 }
 
-            var requireLoad = workspace.diff(required);
+            var requireLoad = workspace.diff(pullResponse);
 
             this.areIdentical(1, requireLoad.objects.length);
         }
@@ -43,8 +44,9 @@ namespace Tests {
             workspace.userSecurityHash = "abc";
             workspace.sync(Fixture.loadData);
 
-            var required =
+            var pullResponse =
                 {
+                    responseType: Allors.Data.ResponseType.Pull,
                     userSecurityHash: "def",
                     objects: [
                         ["1", "1001"],
@@ -53,7 +55,7 @@ namespace Tests {
                     ]
                 }
 
-            var requireLoad = workspace.diff(required);
+            var requireLoad = workspace.diff(pullResponse);
 
             this.areIdentical(3, requireLoad.objects.length);
         }

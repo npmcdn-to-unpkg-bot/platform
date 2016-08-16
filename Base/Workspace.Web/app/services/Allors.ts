@@ -1,5 +1,5 @@
-﻿namespace App {
-    export class AllorsService {
+﻿namespace App.Services {
+    export class AppService {
         database: Allors.Database;
         workspace: Allors.Workspace;
 
@@ -12,6 +12,6 @@
         }
     }
     angular.module("app")
-        .service("allorsService",
-        AllorsService);
+        .service("appService",
+        AppService);
 }

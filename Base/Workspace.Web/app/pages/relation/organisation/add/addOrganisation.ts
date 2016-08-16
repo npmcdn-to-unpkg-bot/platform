@@ -1,11 +1,12 @@
-﻿namespace App.Relation.AddOrganisation {
+﻿namespace App.Pages.Organisation.Add {
+
     class AddOrganisationController extends Page {
      
         organisation: Organisation;
      
-        static $inject = ["allorsService", "$scope", "$state"];
-        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService) {
-            super("AddOrganisation", allors, $scope);
+        static $inject = ["appService", "$scope", "$state"];
+        constructor(app: Services.AppService, $scope: ng.IScope, private $state: ng.ui.IStateService) {
+            super("AddOrganisation", app, $scope);
 
             this.refresh()
                 .then(() => {

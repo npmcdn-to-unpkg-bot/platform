@@ -1,12 +1,12 @@
-﻿namespace App.Profile {
+﻿namespace App.Pages.Profile {
    
     class ProfileController extends Page {
 
         person: Person;
 
-        static $inject = ["allorsService", "$scope", "$state", "$stateParams"];
-        constructor(allors: AllorsService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
-            super("Profile", allors, $scope);
+        static $inject = ["appService", "$scope", "$state", "$stateParams"];
+        constructor(app: Services.AppService, $scope: ng.IScope, private $state: ng.ui.IStateService, private params: { id: string }) {
+            super("Profile", app, $scope);
 
             this.refresh();
         }
