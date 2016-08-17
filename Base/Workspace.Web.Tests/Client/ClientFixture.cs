@@ -44,7 +44,7 @@ namespace Desktop.Tests.Client
 
         private void SetupIISExpress()
         {
-            var appLocation = new FileInfo("../../../Desktop").FullName;
+            var appLocation = new FileInfo("../../../Workspace.Web").FullName;
             var port = "64738";
             var site = "allors";
 

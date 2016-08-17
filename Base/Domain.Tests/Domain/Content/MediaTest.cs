@@ -71,7 +71,7 @@ namespace Domain
         [Test]
         public void BuilderWithPng()
         {
-            var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Resources.logo.png");
+            var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("Domain.Tests.Resources.logo.png");
 
             byte[] content;
             using (var output = new MemoryStream())
@@ -84,14 +84,15 @@ namespace Domain
 
             this.Session.Derive(true);
 
-            Assert.IsTrue(media.ExistMediaContent);
+            media.ExistMediaContent.ShouldBeTrue();
+            media.MediaContent.Data.Length.ShouldBeGreaterThan(0);
             media.MediaContent.Type.ShouldEqual("image/png");
         }
 
         [Test]
         public void BuilderWithPdfWithJpegExtension()
         {
-            var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("Tests.Resources.PdfAs.jpg");
+            var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream("Domain.Tests.Resources.PdfAs.jpg");
 
             byte[] content;
             using (var output = new MemoryStream())
@@ -106,6 +107,6 @@ namespace Domain
 
             Assert.IsTrue(media.ExistMediaContent);
             media.MediaContent.Type.ShouldEqual("application/pdf");
-}
+        }
     }
 }

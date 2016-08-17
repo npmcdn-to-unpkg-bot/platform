@@ -253,13 +253,13 @@ namespace Tests
 
             var session = new Session(workspace);
 
-            var koen = session.Get(1) as Person;
-            var patrick = session.Get(2) as Person;
-            var martien = session.Get(3) as Person;
+            var koen = (Person)session.Get(1);
+            var patrick = (Person)session.Get(2);
+            var martien = (Person)session.Get(3);
 
-            var acme = session.Get(101) as Organisation;
-            var ocme = session.Get(102) as Organisation;
-            var icme = session.Get(103) as Organisation;
+            var acme = (Organisation)session.Get(101);
+            var ocme = (Organisation)session.Get(102);
+            var icme = (Organisation)session.Get(103);
             
             Assert.That(new[] { koen, martien, patrick }, Is.EquivalentTo(acme.Employees));
             Assert.That(new[] { koen }, Is.EquivalentTo(ocme.Employees));

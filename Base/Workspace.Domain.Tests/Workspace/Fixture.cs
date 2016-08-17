@@ -69,9 +69,9 @@
                         t = "Organisation",
                         roles = new[]
                         {
-                            new object[] { "Name", "rw", "Ocme"},
+                            new object[] { "Name", "rw", "Ocme" },
                             new object[] { "Owner", "rw", "2" },
-                            new object[] { "Employees", "rw", new [] { "1" } }
+                            new object[] { "Employees", "rw", new[] { "1" } }
                         },
                         methods = new[]
                         {
@@ -85,12 +85,12 @@
                         t = "Organisation",
                         roles = new[]
                         {
-                            new object[] {"Name", "rw", "icme"},
-                            new object[] {"Owner", "rw", "3"}
+                            new object[] { "Name", "rw", "icme" },
+                            new object[] { "Owner", "rw", "3" }
                         },
                         methods = new[]
                         {
-                            new [] { "JustDoIt", "" }
+                            new[] { "JustDoIt", "" }
                         }
                     }
                 }

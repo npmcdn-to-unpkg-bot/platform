@@ -132,6 +132,10 @@
 
                         switch (unit.UnitTag)
                         {
+                            case UnitTags.DateTime:
+                                value = value != null ? Convert.ToDateTime(value) : (DateTime?)null;
+                                break;
+
                             case UnitTags.Integer:
                                 value = Convert.ToInt32(value);
                                 break;
@@ -162,21 +166,43 @@
                             else
                             {
                                 object roles;
-                                this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out roles);
-                                var array = ((JArray)roles)?.Select(role => this.Session.Get(long.Parse(role.Value<string>()))).ToArray() ?? new ISessionObject[0];
-                                value = new ArrayList(array).ToArray(roleType.ObjectType.ClrType);
+                                if (this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out roles))
+                                {
+                                    var list = roles as IList;
+                                    if (list != null)
+                                    {
+                                        var array = Array.CreateInstance(roleType.ObjectType.ClrType, list.Count);
+
+                                        for (var i = 0; i < list.Count; i++)
+                                        {
+                                            var roleId = list[i];
+                                            var role = this.Session.Get(long.Parse(roleId.ToString()));
+                                            array.SetValue(role, i);
+                                        }
+
+                                        return array;
+                                    }
+
+                                    var result = ((IEnumerable<object>)roles).Select(role => this.Session.Get(long.Parse(role.ToString()))).ToList();
+                                    return new ArrayList(result).ToArray(roleType.ObjectType.ClrType);
+                                }
+                                else
+                                {
+                                    // TODO: optimize
+                                    return new ArrayList().ToArray(roleType.ObjectType.ClrType);
+                                }
                             }
                         }
                         catch
                         {
-                            var x = "N/A";
+                            var stringValue = "N/A";
                             try
                             {
-                                x = this.ToString();
+                                stringValue = this.ToString();
                             }
                             catch { };
 
-                            throw new Exception($"Could not get role {roleType.PropertyName} from [objectType: ${this.ObjectType.Name}, id: ${this.Id}, value: '${x}']");
+                            throw new Exception($"Could not get role {roleType.PropertyName} from [objectType: ${this.ObjectType.Name}, id: ${this.Id}, value: '${stringValue}']");
                         }
                     }
                 }
@@ -313,7 +339,8 @@
                             }
                             else
                             {
-                                var originalRoleIds = ((JArray)originalRoleIdsObject).Select(v=>v.Value<string>()).ToArray();
+                                var originalRoleIds = ((IEnumerable<object>)originalRoleIdsObject).Select(v=>v.ToString()).ToArray();
+
                                 saveRole.a = roleIds.Except(originalRoleIds).ToArray();
                                 saveRole.r = originalRoleIds.Except(roleIds).ToArray();
                             }
