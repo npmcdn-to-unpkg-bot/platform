@@ -3,7 +3,7 @@
         static name = "allors/bootstrap/labeled";
 
         private static view = 
-`<div class="form-group" ng-if="$ctrl.field.canRead">
+`<div ng-class="{true: 'form-group required', false :'form-group'}[{{$ctrl.field.roleType.isRequired}}]" ng-if="$ctrl.field.canRead">
 <ng-transclude/>
 </div>`;
 
