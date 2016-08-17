@@ -9,12 +9,9 @@
 
     public class Database
     {
-        public Database(string address)
+        public Database(HttpClient client)
         {
-            this.Client = new HttpClient
-            {
-                BaseAddress = new Uri(address)
-            };
+            this.Client = client;
 
             this.Client.DefaultRequestHeaders.Accept.Clear();
             this.Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
