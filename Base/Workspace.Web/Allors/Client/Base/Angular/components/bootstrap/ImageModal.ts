@@ -11,19 +11,8 @@
 <div class="modal-body">
     
     <div class="row" style="height:20vw;">
-        <div class="col-sm-6" style="height:100%;">
-            <img-crop   image="$ctrl.image" 
-                        area-min-size="$ctrl.size"
-                        result-image="$ctrl.croppedImage" 
-                        result-image-size="$ctrl.size"
-                        result-image-format="$ctrl.format"
-                        result-image-quality="$ctrl.quality",
-                        aspect-ratio="$ctrl.aspect">
-            </img-crop>
-        </div>
-
-        <div class="col-sm-6 center-block" style="height:100%;">
-            <img ng-if="$ctrl.croppedImage" ng-src="{{$ctrl.croppedImage}}" class="img-responsive img-thumbnail" style="vertical-align: middle; height: 90%"/>
+        <div class="col-sm-12 center-block" style="height:100%;">
+            <img ng-if="$ctrl.image" ng-src="{{$ctrl.image}}" class="img-responsive img-thumbnail" style="vertical-align: middle; height: 90%"/>
         </div>
     </div>
 
@@ -33,11 +22,11 @@
     <div class="pull-left">
         <label class="btn btn-default" for="file-selector">
             <input id="file-selector" type="file" style="display:none;" model-data-uri="$ctrl.image">
-            Select file
+            Upload an image
         </label>
     </div>
 
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+    <button ng-enabled="$ctrl.image" class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
     <button class="btn btn-danger" type="button" ng-click="$ctrl.cancel()">Cancel</button>
 </div>
 `;
@@ -57,7 +46,7 @@
         }
 
         ok() {
-            this.$uibModalInstance.close(this.croppedImage);
+            this.$uibModalInstance.close(this.image);
         }
 
         cancel() {

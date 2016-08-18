@@ -48,7 +48,7 @@
         constructor(private $scope: angular.IScope, private $uibModal: angular.ui.bootstrap.IModalService, $log: angular.ILogService, $translate: angular.translate.ITranslateService) {
             super($log, $translate);
         }
-
+        
         add() {
             const modalInstance = this.$uibModal.open({
                 templateUrl: ImageModalTemplate.name,
@@ -59,7 +59,7 @@
                     format: () => this.format,
                     quality: () => this.quality,
                     aspect: () => this.aspect
-        }
+                }
             });
 
             modalInstance.result.then(selectedItem => {
