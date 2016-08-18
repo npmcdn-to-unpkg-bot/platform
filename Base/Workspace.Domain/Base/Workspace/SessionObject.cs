@@ -128,29 +128,32 @@
                     {
                         this.WorkspaceObject.Roles.TryGetValue(roleType.PropertyName, out value);
 
-                        var unit = (Unit)roleType.ObjectType;
-
-                        switch (unit.UnitTag)
+                        if (value != null)
                         {
-                            case UnitTags.DateTime:
-                                value = value != null ? Convert.ToDateTime(value) : (DateTime?)null;
-                                break;
+                            var unit = (Unit)roleType.ObjectType;
 
-                            case UnitTags.Integer:
-                                value = Convert.ToInt32(value);
-                                break;
+                            switch (unit.UnitTag)
+                            {
+                                case UnitTags.DateTime:
+                                    value = value != null ? Convert.ToDateTime(value) : (DateTime?)null;
+                                    break;
 
-                            case UnitTags.Decimal:
-                                value = Convert.ToDecimal(value);
-                                break;
+                                case UnitTags.Integer:
+                                    value = Convert.ToInt32(value);
+                                    break;
 
-                            case UnitTags.Float:
-                                value = Convert.ToDouble(value);
-                                break;
+                                case UnitTags.Decimal:
+                                    value = Convert.ToDecimal(value);
+                                    break;
 
-                            case UnitTags.Unique:
-                                value = value != null ? new Guid((string)value) : (Guid?)null;
-                                break;
+                                case UnitTags.Float:
+                                    value = Convert.ToDouble(value);
+                                    break;
+
+                                case UnitTags.Unique:
+                                    value = value != null ? new Guid((string)value) : (Guid?)null;
+                                    break;
+                            }
                         }
                     }
                     else

@@ -772,7 +772,7 @@ namespace Allors.Domain
 						Shared Shared {set;}
 
 		}
-		public interface UnitRelation  : AccessControlledObject 
+		public interface UnitSample  : AccessControlledObject 
 		{
 						global::System.Byte[] AllorsBinary {set;}
 

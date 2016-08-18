@@ -65,8 +65,8 @@
             // Tests
             bundles.Add(new ScriptBundle("~/bundles/tests")
                 .Include("~/Scripts/tsUnit/tsUnit.js")
-                .Include("~/Tests/app.js")
-                .IncludeDirectory("~/Tests/", "*.js", true));
+                .Include("~/_UnitTests/app.js")
+                .IncludeDirectory("~/_UnitTests/", "*.js", true));
         }
     }
 }

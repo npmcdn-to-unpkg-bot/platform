@@ -227,6 +227,7 @@
     <Compile Include="Allors\Server\Custom\Database\General\Main.cs" />
     <Compile Include="Allors\Server\Custom\Database\PullController.cs" />
     <Compile Include="Allors\Server\Custom\Database\Tests\TestHomeController.cs" />
+    <Compile Include="Allors\Server\Custom\Database\Tests\TestUnitSamplesController.cs" />
     <Compile Include="Allors\Server\Custom\Database\Tests\TestShareHoldersController.cs" />
     <Compile Include="Allors\Server\Custom\Database\Tests\TestEmployeesController.cs" />
     <Compile Include="Allors\Server\Custom\Database\Tests\TestNoTreeController.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalController.cs" />
     <Compile Include="Controllers\MediaController.cs" />
+    <Compile Include="Controllers\UnitTestsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -313,7 +315,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\UnitTests\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="favicon.ico" />
@@ -415,6 +417,7 @@
     <TypeScriptCompile Include="Allors\Client\Generated\domain\Role.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\SecurityToken.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\UniquelyIdentifiable.g.ts" />
+    <TypeScriptCompile Include="Allors\Client\Generated\domain\UnitSample.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\User.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\domain\UserGroup.g.ts" />
     <TypeScriptCompile Include="Allors\Client\Generated\meta\meta.g.ts" />
@@ -423,7 +426,7 @@
     <TypeScriptCompile Include="app\services\Allors.ts" />
     <TypeScriptCompile Include="Allors\Client\Custom\Person.ts" />
     <TypeScriptCompile Include="app\functions\Nest.ts" />
-    <Content Include="Tests\app.css" />
+    <Content Include="_UnitTests\app.css" />
     <TypeScriptCompile Include="app\app.translate.ts" />
     <TypeScriptCompile Include="app\app.goto.ts" />
     <TypeScriptCompile Include="app\app.loading.ts" />
@@ -442,7 +445,7 @@
     <TypeScriptCompile Include="app\pages\relation\person\people.ts" />
     <TypeScriptCompile Include="app\pages\general\home\home.ts" />
     <TypeScriptCompile Include="app\pages\general\profile\profile.ts" />
-    <TypeScriptCompile Include="Tests\Fixture.ts" />
+    <TypeScriptCompile Include="_UnitTests\Fixture.ts" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -451,10 +454,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Scripts\tsUnit\tsUnit.ts" />
-    <TypeScriptCompile Include="Tests\app.ts" />
-    <TypeScriptCompile Include="Tests\WorkspaceTests.ts" />
-    <TypeScriptCompile Include="Tests\SessionTests.ts" />
-    <TypeScriptCompile Include="Tests\PersonTests.ts" />
+    <TypeScriptCompile Include="_UnitTests\app.ts" />
+    <TypeScriptCompile Include="_UnitTests\WorkspaceTests.ts" />
+    <TypeScriptCompile Include="_UnitTests\SessionTests.ts" />
+    <TypeScriptCompile Include="_UnitTests\PersonTests.ts" />
     <TypeScriptCompile Include="typings\browser.d.ts" />
     <TypeScriptCompile Include="typings\browser\ambient\angular-breadcrumb\index.d.ts" />
     <TypeScriptCompile Include="typings\browser\ambient\angular-cookies\index.d.ts" />
@@ -515,6 +518,8 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Scripts\jsnlog.js.map" />
+    <Content Include="Views\Test\Init.cshtml" />
+    <Content Include="Views\Test\Setup.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

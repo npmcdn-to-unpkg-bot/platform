@@ -139,5 +139,31 @@ namespace Allors.Domain
 								Person CycleMany {set;}
 
 				}
+				public interface UnitSample 
+				{
+								global::System.Byte[] AllorsBinary {set;}
+
+
+								global::System.DateTime? AllorsDateTime {set;}
+
+
+								global::System.Boolean? AllorsBoolean {set;}
+
+
+								global::System.Double? AllorsDouble {set;}
+
+
+								global::System.Int32? AllorsInteger {set;}
+
+
+								global::System.String AllorsString {set;}
+
+
+								global::System.Guid? AllorsUnique {set;}
+
+
+								global::System.Decimal? AllorsDecimal {set;}
+
+				}
 
 }

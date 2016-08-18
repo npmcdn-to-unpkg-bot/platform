@@ -1,4 +1,4 @@
-﻿namespace Desktop
+﻿namespace Workspace.Web
 {
     using System.Web.Http;
     using System.Web.Mvc;
@@ -7,27 +7,33 @@
 
     using Allors;
 
+    using global::Web;
+
     using Web;
 
-    public class WebApiApplication : System.Web.HttpApplication
+    public class Application : System.Web.HttpApplication
     {
-        protected void Application_Start()
+        public static void Config()
         {
             var configuration = new Allors.Adapters.Object.SqlClient.Configuration
             {
                 ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
-                ObjectFactory = Config.ObjectFactory,
+                ObjectFactory = Allors.Config.ObjectFactory,
             };
-            Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
+            Allors.Config.Default = new Allors.Adapters.Object.SqlClient.Database(configuration);
+        }
+
+        protected void Application_Start()
+        {
+            Config();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            AllorsConfig.Register();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             ViewConfig.Register();
+
+            AllorsConfig.Register();
         }
     }
 }

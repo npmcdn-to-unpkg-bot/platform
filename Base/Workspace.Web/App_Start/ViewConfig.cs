@@ -1,4 +1,4 @@
-﻿namespace Desktop
+﻿namespace Workspace.Web
 {
     using System.Web.Mvc;
 

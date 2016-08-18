@@ -70,6 +70,7 @@
     <Compile Include="Generated\Role.g.cs" />
     <Compile Include="Generated\SecurityToken.g.cs" />
     <Compile Include="Generated\UniquelyIdentifiable.g.cs" />
+    <Compile Include="Generated\UnitSample.g.cs" />
     <Compile Include="Generated\User.g.cs" />
     <Compile Include="Generated\UserGroup.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

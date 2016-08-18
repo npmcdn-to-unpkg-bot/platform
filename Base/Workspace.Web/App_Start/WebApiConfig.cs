@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 
-namespace Desktop
+namespace Workspace.Web
 {
     public static class WebApiConfig
     {

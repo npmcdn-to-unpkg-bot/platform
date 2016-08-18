@@ -110,7 +110,7 @@
     <Compile Include="Custom\Relation\Organisations.cs" />
     <Compile Include="Custom\General\Place.cs" />
     <Compile Include="Custom\General\Places.cs" />
-    <Compile Include="Custom\General\UnitRelations.cs" />
+    <Compile Include="Custom\Tests\UnitSamples.cs" />
     <Compile Include="Custom\ObjectsBase.cs" />
     <Compile Include="Custom\ObjectsBase.v.cs" />
     <Compile Include="Custom\Methods\ClassMethod.cs" />
@@ -289,7 +289,7 @@
     <Compile Include="Generated\Transitional.g.cs" />
     <Compile Include="Generated\Two.g.cs" />
     <Compile Include="Generated\UniquelyIdentifiable.g.cs" />
-    <Compile Include="Generated\UnitRelation.g.cs" />
+    <Compile Include="Generated\UnitSample.g.cs" />
     <Compile Include="Generated\User.g.cs" />
     <Compile Include="Generated\UserGroup.g.cs" />
     <Compile Include="Generated\ValidationC1.g.cs" />

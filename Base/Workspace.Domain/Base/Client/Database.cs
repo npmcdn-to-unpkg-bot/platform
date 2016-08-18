@@ -3,6 +3,7 @@
     using System;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using Data;
@@ -33,6 +34,8 @@
             {
                 return null;
             }
+
+            var x = await response.Content.ReadAsStringAsync();
 
             var pullResponse = await response.Content.ReadAsAsync<PullResponse>();
             return pullResponse;

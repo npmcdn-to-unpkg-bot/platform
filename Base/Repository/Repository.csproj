@@ -117,7 +117,7 @@
     <Compile Include="Custom\Three.cs" />
     <Compile Include="Custom\To.cs" />
     <Compile Include="Custom\Two.cs" />
-    <Compile Include="Custom\Unit.cs" />
+    <Compile Include="Custom\UnitSample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

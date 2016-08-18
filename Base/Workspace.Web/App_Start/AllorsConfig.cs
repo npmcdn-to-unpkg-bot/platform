@@ -1,6 +1,6 @@
 ﻿using System.Web.Configuration;
 
-namespace Desktop
+namespace Workspace.Web
 {
     using Allors;
     using Allors.Domain;

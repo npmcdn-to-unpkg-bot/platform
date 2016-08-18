@@ -96,21 +96,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\ClientFixture.cs" />
-    <Compile Include="Client\Pages\HomePage.cs" />
-    <Compile Include="Client\SecurityTests..cs" />
-    <Compile Include="Server\ServerFixture.cs" />
-    <Compile Include="Server\ControllersTest.cs" />
-    <Compile Include="Server\Database\SyncTests.cs" />
-    <Compile Include="Server\Database\ResponseTests.cs" />
-    <Compile Include="Server\Database\PushTests.cs" />
-    <Compile Include="Client\Pages\OrganisationEditPage.cs" />
-    <Compile Include="Client\OrganisationEditTests.cs" />
-    <Compile Include="Client\TypescriptUnitTests.cs" />
-    <Compile Include="Client\Population.cs" />
-    <Compile Include="Client\Test.cs" />
-    <Compile Include="Client\MainTests.cs" />
-    <Compile Include="Client\Pages\MainPage.cs" />
+    <Compile Include="Remote\Fixture.cs" />
+    <Compile Include="Remote\Pages\HomePage.cs" />
+    <Compile Include="Remote\SecurityTests..cs" />
+    <Compile Include="Local\Fixture.cs" />
+    <Compile Include="Local\ControllersTest.cs" />
+    <Compile Include="Local\Database\SyncTests.cs" />
+    <Compile Include="Local\Database\ResponseTests.cs" />
+    <Compile Include="Local\Database\PushTests.cs" />
+    <Compile Include="Remote\Pages\OrganisationEditPage.cs" />
+    <Compile Include="Remote\OrganisationEditTests.cs" />
+    <Compile Include="Remote\UnitTests.cs" />
+    <Compile Include="Remote\Population.cs" />
+    <Compile Include="Remote\Test.cs" />
+    <Compile Include="Remote\MainTests.cs" />
+    <Compile Include="Remote\Pages\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

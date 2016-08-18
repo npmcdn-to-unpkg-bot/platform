@@ -7,17 +7,10 @@
 
     using Allors;
 
+    using Workspace.Web;
+
     public class TestController : Controller
     {
-        private bool IsProduction
-        {
-            get
-            {
-                var production = WebConfigurationManager.AppSettings["production"];
-                return string.IsNullOrWhiteSpace(production) || bool.Parse(production);
-            }
-        }
-
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
             if (!this.Request.IsLocal)
@@ -25,18 +18,16 @@
                 throw new Exception();
             }
 
-            if (this.IsProduction)
-            {
-                throw new Exception();
-            }
-
             return base.BeginExecuteCore(callback, state);
         }
 
-        [HttpGet]
-        public ActionResult Index()
+        public bool IsProduction
         {
-            return this.View();
+            get
+            {
+                var production = WebConfigurationManager.AppSettings["production"];
+                return string.IsNullOrWhiteSpace(production) || bool.Parse(production);
+            }
         }
 
         [HttpGet]
@@ -48,10 +39,27 @@
             }
 
             Config.TimeShift = null;
-            Config.Default.Init();
-            Config.Serializable?.Init();
+            Application.Config();
 
-            return this.Redirect("about:");
+            return this.View();
+        }
+
+        [HttpGet]
+        public ActionResult Setup()
+        {
+            if (this.IsProduction)
+            {
+                throw new Exception("Init is not supported in production");
+            }
+
+            Config.Default.Init();
+            using (var session = Config.Default.CreateSession())
+            {
+                new Setup(session, null).Apply();
+                session.Commit();
+            }
+
+            return this.View();
         }
 
         [HttpGet]
@@ -64,7 +72,7 @@
 
             if (string.IsNullOrWhiteSpace(user))
             {
-                user = @"administrator";
+                user = @"Administrator";
             }
 
             FormsAuthentication.SetAuthCookie(user, false);
