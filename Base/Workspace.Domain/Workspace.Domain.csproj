@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Client\Indexer.cs" />
     <Compile Include="Base\Workspace\Config.cs" />
     <Compile Include="Base\Workspace\ObjectFactory.cs" />
     <Compile Include="Generated\AccessControl.g.cs" />

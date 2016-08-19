@@ -25,14 +25,16 @@ namespace Tests.Remote
     public abstract class Test
     {
         public static DirectoryInfo AppLocation => new DirectoryInfo("../../../Workspace.Web");
+        
+        public const string BaseUrl = "http://localhost:" + Fixture.Port;
 
-        public const string AppUrl = "http://localhost:64738";
+        public const string AppUrl = BaseUrl;
 
-        public const string InitUrl = "http://localhost:64738/Test/Init";
-        public const string LoginUrl = "http://localhost:64738/Test/Login";
-        public const string TimeShiftUrl = "http://localhost:64738/Test/TimeShift";
+        public const string InitUrl = BaseUrl + "/Test/Init";
+        public const string LoginUrl = BaseUrl + "/Test/Login";
+        public const string TimeShiftUrl = BaseUrl + "/Test/TimeShift";
 
-        public const string UnitTestsUrl = "http://localhost:64738/UnitTests";
+        public const string UnitTestsUrl = BaseUrl + "/UnitTests";
 
         private const int ImplicitWait = 1;
         private const int ScriptTimeout = 30;

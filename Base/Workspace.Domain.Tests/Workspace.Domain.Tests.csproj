@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Remote\Fixture.cs" />
+    <Compile Include="Remote\ObjectTests.cs" />
     <Compile Include="Remote\UnitSamplesTests.cs" />
     <Compile Include="Remote\Test.cs" />
   </ItemGroup>

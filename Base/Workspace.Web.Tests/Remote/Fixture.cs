@@ -9,6 +9,8 @@ namespace Tests.Remote
     [SetUpFixture]
     public class Fixture
     {
+        public const string Port = "64739";
+
         private Process iisProcess;
 
         [SetUp]
@@ -27,13 +29,10 @@ namespace Tests.Remote
         {
             this.KillIISExpress();
 
-            var port = "64738";
-            var site = "elan";
-
             var startInfo = new ProcessStartInfo
             {
                 UseShellExecute = false,
-                Arguments = $"/path:\"{Test.AppLocation.FullName}\" /port:{port}"
+                Arguments = $"/path:\"{Test.AppLocation.FullName}\" /port:{Port}"
             };
 
             var programfiles = string.IsNullOrEmpty(startInfo.EnvironmentVariables["programfiles"])

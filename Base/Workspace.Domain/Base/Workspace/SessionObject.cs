@@ -134,8 +134,12 @@
 
                             switch (unit.UnitTag)
                             {
+                                case UnitTags.Binary:
+                                    value = Convert.FromBase64String((string)value);
+                                    break;
+
                                 case UnitTags.DateTime:
-                                    value = value != null ? Convert.ToDateTime(value) : (DateTime?)null;
+                                    value = Convert.ToDateTime(value);
                                     break;
 
                                 case UnitTags.Integer:
@@ -151,7 +155,7 @@
                                     break;
 
                                 case UnitTags.Unique:
-                                    value = value != null ? new Guid((string)value) : (Guid?)null;
+                                    value = new Guid((string)value);
                                     break;
                             }
                         }

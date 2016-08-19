@@ -1,7 +1,6 @@
 ﻿namespace Allors.Workspace.Client
 {
-    using System.Collections.Generic;
-    using System.Linq;
+using System.Linq;
     using System.Threading.Tasks;
 
     using Data;
@@ -23,11 +22,11 @@
 
         public Session Session { get; }
 
-        public Dictionary<string, SessionObject> Objects { get; private set; }
+        public Indexer<SessionObject> Objects { get; private set; }
 
-        public Dictionary<string, SessionObject[]> Collections { get; private set; }
+        public Indexer<SessionObject[]> Collections { get; private set; }
 
-        public Dictionary<string, object> Values { get; private set; }
+        public Indexer<object> Values { get; private set; }
 
         public async Task Load(object args)
         {
@@ -77,15 +76,15 @@
         
         private void Update(PullResponse response)
         {
-            this.Objects = response.namedObjects.ToDictionary(
+            this.Objects = new Indexer<SessionObject>(response.namedObjects.ToDictionary(
                 pair => pair.Key,
-                pair => this.Session.Get(long.Parse(pair.Value)));
-            this.Collections = response.namedCollections.ToDictionary(
+                pair => this.Session.Get(long.Parse(pair.Value))));
+            this.Collections = new Indexer<SessionObject[]>(response.namedCollections.ToDictionary(
                 pair => pair.Key,
-                pair => pair.Value.Select(v => this.Session.Get(long.Parse(v))).ToArray());
-            this.Values = response.namedValues.ToDictionary(
+                pair => pair.Value.Select(v => this.Session.Get(long.Parse(v))).ToArray()));
+            this.Values = new Indexer<object>(response.namedValues.ToDictionary(
                 pair => pair.Key,
-                pair => pair.Value);
+                pair => pair.Value));
         }
     }
 }

@@ -15,9 +15,8 @@ namespace Tests.Remote
     public class Test
     {
         public static DirectoryInfo AppLocation => new DirectoryInfo("../../../Workspace.Web");
-
-
-        public const string BaseAddress = "http://localhost:64738";
+        
+        public const string BaseAddress = "http://localhost:" + Fixture.Port;
         public const string InitUrl = "/Test/Init";
         public const string SetupUrl = "/Test/Setup";
         public const string LoginUrl = "/Test/Login";
@@ -27,7 +26,7 @@ namespace Tests.Remote
         public Database Database { get; set; }
 
         [SetUp]
-        public virtual async void SetUp()
+        public virtual void SetUp()
         {
             var client = new HttpClient()
             {
@@ -43,15 +42,12 @@ namespace Tests.Remote
         private void Init()
         {
             AsyncContext.Run(
-                    async () =>
+                async () =>
                     {
                         var init = await this.Database.Client.GetAsync(InitUrl);
                         var setup = await this.Database.Client.GetAsync(SetupUrl);
                         var login = await this.Database.Client.GetAsync(LoginUrl);
-
-                        Console.WriteLine(login.StatusCode);
                     });
-
         }
 
         [TearDown]

@@ -29,13 +29,7 @@
         {
             var uri = new Uri(name + "/pull", UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, args);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
-
-            var x = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
 
             var pullResponse = await response.Content.ReadAsAsync<PullResponse>();
             return pullResponse;
