@@ -361,6 +361,8 @@
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Radio.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\RadioButton.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\registerTemplates.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectMany.ts" />
+    <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\SelectOne.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Select.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\Static.ts" />
     <TypeScriptCompile Include="Allors\Client\Base\Angular\components\bootstrap\StaticEnum.ts" />
