@@ -39,11 +39,7 @@
         {
             var uri = new Uri("Database/Sync", UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, syncRequest);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
+            response.EnsureSuccessStatusCode();
 
             var syncResponse = await response.Content.ReadAsAsync<SyncResponse>();
             return syncResponse;
@@ -53,11 +49,7 @@
         {
             var uri = new Uri("Database/Push", UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, pushRequest);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
+            response.EnsureSuccessStatusCode();
 
             var pushResponse = await response.Content.ReadAsAsync<PushResponse>();
             return pushResponse;
@@ -74,11 +66,7 @@
 
             var uri = new Uri("Database/Invoke", UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, invokeRequest);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
+            response.EnsureSuccessStatusCode();
 
             var invokeResponse = await response.Content.ReadAsAsync<InvokeResponse>();
             return invokeResponse;
@@ -88,11 +76,7 @@
         {
             var uri = new Uri(service, UriKind.Relative);
             var response = await this.Client.PostAsJsonAsync(uri, args);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
+            response.EnsureSuccessStatusCode();
 
             var invokeResponse = await response.Content.ReadAsAsync<InvokeResponse>();
             return invokeResponse;
