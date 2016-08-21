@@ -19,12 +19,9 @@
 // <summary>Defines the AllorsExtentFilteredSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Relation.SqlClient
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Data.Common;
 
@@ -37,6 +34,7 @@ namespace Allors.Adapters.Relation.SqlClient
         internal IAssociationType association;
         private AllorsPredicateAndSql filter;
         internal IRoleType role;
+
         // IRelationTypes direct from Strategy
         internal Strategy strategy;
 
@@ -62,54 +60,42 @@ namespace Allors.Adapters.Relation.SqlClient
         {
             get
             {
-                LazyLoadFilter();
-                return filter;
+                this.LazyLoadFilter();
+                return this.filter;
             }
         }
 
-        internal Mapping Mapping
-        {
-            get { return session.Database.Mapping; }
-        }
+        internal Mapping Mapping => this.session.Database.Mapping;
 
-        internal override Session Session
-        {
-            get { return session; }
-        }
+        internal override Session Session => this.session;
 
-        public override IComposite ObjectType
-        {
-            get { return type; }
-        }
+        public override IComposite ObjectType => this.type;
 
-        protected override ObjectId[] GetObjectIds()
+        protected override long[] GetObjectIds()
         {
             if (this.strategy != null)
             {
                 if (this.role != null)
                 {
-                    return this.strategy.ExtentGetCompositeRoles(this.role);
+                    return this.strategy.ExtentGetCompositeRoles(this.role.RelationType);
                 }
 
-                return this.strategy.ExtentGetCompositeAssociations(this.association);
+                return this.strategy.ExtentGetCompositeAssociations(this.association.RelationType);
             }
 
             if (!this.type.ExistClass)
             {
-                return ObjectId.EmptyObjectIds;
+                return Session.EmptyObjectIds;
             }
             
             this.session.Flush();
 
             var statement = new AllorsExtentStatementRootSql(this);
-            var objects = new List<ObjectId>();
+            var objects = new List<long>();
 
             this.BuildSql(statement);
 
-            if (statement.Sorter != null)
-            {
-                statement.Sorter.BuildOrder(statement.Sorter, this.Mapping, statement);
-            }
+            statement.Sorter?.BuildOrder(statement.Sorter, this.Mapping, statement);
 
             using (var command = statement.CreateSqlCommand())
             {
@@ -117,7 +103,7 @@ namespace Allors.Adapters.Relation.SqlClient
                 {
                     while (reader.Read())
                     {
-                        var objectId = this.session.Database.ObjectIds.Parse(reader.GetValue(0).ToString());
+                        var objectId = long.Parse(reader.GetValue(0).ToString());
                         objects.Add(objectId);
                     }
 

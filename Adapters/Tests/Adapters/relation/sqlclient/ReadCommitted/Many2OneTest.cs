@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerializationTest.cs" company="Allors bvba">
+// <copyright file="Many2OneTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,24 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory
+namespace Allors.Adapters.Relation.SqlClient.ReadCommitted
 {
-    using Allors;
     using Adapters;
 
     using NUnit.Framework;
 
     [TestFixture]
-    public class SerializationTest : Adapters.SerializationTest
+    public class Many2OneTest : Adapters.Many2OneTest
     {
         private readonly Profile profile = new Profile();
 
         protected override IProfile Profile => this.profile;
-
-        protected override IDatabase CreatePopulation()
-        {
-            return this.profile.CreatePopulation();
-        }
 
         [TearDown]
         protected void Dispose()

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Adapters.Memory", "Allors.Adapters.Memory\Allors.Adapters.Memory.csproj", "{CB9B7108-C8F3-459C-B2DA-88187C84CFC1}"
 EndProject
@@ -25,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{246C7AD9-2629-48C7-A5EB-B696891E55B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generate", "Generate\Generate.csproj", "{535369EE-1572-4A34-888F-FC0ED4938089}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Adapters.Relation.SqlClient", "Allors.Adapters.Relation.SqlClient\Allors.Adapters.Relation.SqlClient.csproj", "{91356B87-6321-45C3-88CC-D3DEAE2DC16C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,10 @@ Global
 		{535369EE-1572-4A34-888F-FC0ED4938089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{535369EE-1572-4A34-888F-FC0ED4938089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{535369EE-1572-4A34-888F-FC0ED4938089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91356B87-6321-45C3-88CC-D3DEAE2DC16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91356B87-6321-45C3-88CC-D3DEAE2DC16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91356B87-6321-45C3-88CC-D3DEAE2DC16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91356B87-6321-45C3-88CC-D3DEAE2DC16C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,14 +20,12 @@ namespace Allors.Adapters
     using System.Globalization;
     using System.IO;
     using System.Text;
-    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Xml;
 
     using Allors;
     using Allors.Domain;
     using Allors.Meta;
-    using Adapters;
 
     using NUnit.Framework;
 
@@ -55,47 +53,17 @@ namespace Allors.Adapters
         private C4 c4D;
         #endregion
 
-        protected virtual bool EmptyStringIsNull
-        {
-            get
-            {
-                return false;
-            }
-        }
+        protected virtual bool EmptyStringIsNull => false;
 
         protected abstract IProfile Profile { get; }
 
-        protected IDatabase Population
-        {
-            get
-            {
-                return this.Profile.Database;
-            }
-        }
+        protected IDatabase Population => this.Profile.Database;
 
-        protected ISession Session
-        {
-            get
-            {
-                return this.Profile.Session;
-            }
-        }
+        protected ISession Session => this.Profile.Session;
 
-        protected Action[] Markers
-        {
-            get
-            {
-                return this.Profile.Markers;
-            }
-        }
+        protected Action[] Markers => this.Profile.Markers;
 
-        protected Action[] Inits
-        {
-            get
-            {
-                return this.Profile.Inits;
-            }
-        }
+        protected Action[] Inits => this.Profile.Inits;
 
         [Test]
         [Category("Save & Load")]
@@ -440,9 +408,11 @@ namespace Allors.Adapters
                     population.Save(writer);
                     writer.Close();
 
-                    //writer = new XmlTextWriter(@"population.xml", new UTF8Encoding());
-                    //population.Save(writer);
-                    //writer.Close();
+                    #region Debug
+                    writer = new XmlTextWriter(@"/temp/population.xml", new UTF8Encoding());
+                    population.Save(writer);
+                    writer.Close();
+                    #endregion
 
                     var xmlDocument = new XmlDocument();
                     xmlDocument.LoadXml(stringWriter.ToString());

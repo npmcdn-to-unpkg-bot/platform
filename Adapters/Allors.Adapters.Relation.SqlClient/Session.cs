@@ -27,7 +27,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
     public class Session : ISession
     {
-        private static readonly ObjectId[] EmptyObjectIds = { };
+        internal static readonly long[] EmptyObjectIds = { };
         private static readonly IObject[] EmptyObjects = { };
 
         private readonly Database database;
@@ -39,38 +39,38 @@ namespace Allors.Adapters.Relation.SqlClient
 
         private Dictionary<string, object> properties;
 
-        private Dictionary<ObjectId, long> cacheIdByObjectId;
-        private Dictionary<ObjectId, IClass> classByObjectId;
+        private Dictionary<long, long> cacheIdByObjectId;
+        private Dictionary<long, IClass> classByObjectId;
 
-        private HashSet<ObjectId> newObjects;
-        private HashSet<ObjectId> deletedObjects;
-        private HashSet<ObjectId> flushDeletedObjects;
-        private HashSet<ObjectId> changedObjects;
+        private HashSet<long> newObjects;
+        private HashSet<long> deletedObjects;
+        private HashSet<long> flushDeletedObjects;
+        private HashSet<long> changedObjects;
 
         private ChangeSet changeSet;
 
-        private Dictionary<IRoleType, Dictionary<ObjectId, object>> unitRoleByAssociationByRoleType;
-        private Dictionary<IRoleType, HashSet<ObjectId>> unitFlushAssociationsByRoleType;
+        private Dictionary<IRoleType, Dictionary<long, object>> unitRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, HashSet<long>> unitFlushAssociationsByRoleType;
 
-        private Dictionary<IRoleType, Dictionary<ObjectId, ObjectId>> oneToOneRoleByAssociationByRoleType;
-        private Dictionary<IRoleType, HashSet<ObjectId>> oneToOneFlushAssociationsByRoleType;
-        private Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId>> oneToOneAssociationByRoleByAssociationType;
+        private Dictionary<IRoleType, Dictionary<long, long?>> oneToOneRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, HashSet<long>> oneToOneFlushAssociationsByRoleType;
+        private Dictionary<IAssociationType, Dictionary<long, long?>> oneToOneAssociationByRoleByAssociationType;
 
-        private Dictionary<IRoleType, Dictionary<ObjectId, ObjectId>> manyToOneRoleByAssociationByRoleType;
-        private Dictionary<IRoleType, HashSet<ObjectId>> manyToOneFlushAssociationsByRoleType;
-        private Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId[]>> manyToOneAssociationByRoleByAssociationType;
-        private Dictionary<IAssociationType, HashSet<ObjectId>> manyToOneTriggerFlushRolesByAssociationType;
+        private Dictionary<IRoleType, Dictionary<long, long?>> manyToOneRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, HashSet<long>> manyToOneFlushAssociationsByRoleType;
+        private Dictionary<IAssociationType, Dictionary<long, long[]>> manyToOneAssociationByRoleByAssociationType;
+        private Dictionary<IAssociationType, HashSet<long>> manyToOneTriggerFlushRolesByAssociationType;
 
-        private Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>> oneToManyCurrentRoleByAssociationByRoleType;
-        private Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>> oneToManyOriginalRoleByAssociationByRoleType;
-        private Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId>> oneToManyAssociationByRoleByAssociationType;
+        private Dictionary<IRoleType, Dictionary<long, long[]>> oneToManyCurrentRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<long, long[]>> oneToManyOriginalRoleByAssociationByRoleType;
+        private Dictionary<IAssociationType, Dictionary<long, long?>> oneToManyAssociationByRoleByAssociationType;
 
-        private Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>> manyToManyCurrentRoleByAssociationByRoleType;
-        private Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>> manyToManyOriginalRoleByAssociationByRoleType;
-        private Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId[]>> manyToManyAssociationByRoleByAssociationType;
-        private Dictionary<IAssociationType, HashSet<ObjectId>> manyToManyTriggerFlushRolesByAssociationType;
+        private Dictionary<IRoleType, Dictionary<long, long[]>> manyToManyCurrentRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<long, long[]>> manyToManyOriginalRoleByAssociationByRoleType;
+        private Dictionary<IAssociationType, Dictionary<long, long[]>> manyToManyAssociationByRoleByAssociationType;
+        private Dictionary<IAssociationType, HashSet<long>> manyToManyTriggerFlushRolesByAssociationType;
 
-        private HashSet<ObjectId> objectsToFetch;
+        private HashSet<long> objectsToFetch;
 
         public Session(Database database)
         {
@@ -79,29 +79,11 @@ namespace Allors.Adapters.Relation.SqlClient
             this.classCache = database.ClassCache;
         }
 
-        IDatabase ISession.Database 
-        {
-            get
-            {
-                return this.database;
-            }
-        }
+        IDatabase ISession.Database => this.database;
 
-        public Database Database
-        {
-            get
-            {
-                return this.database;
-            }
-        }
+        public Database Database => this.database;
 
-        internal ChangeSet ChangeSet
-        {
-            get
-            {
-                return this.changeSet ?? (this.changeSet = new ChangeSet());
-            }
-        }
+        internal ChangeSet ChangeSet => this.changeSet ?? (this.changeSet = new ChangeSet());
 
         public object this[string name]
         {
@@ -186,7 +168,7 @@ namespace Allors.Adapters.Relation.SqlClient
                 // update class cache
                 if (this.deletedObjects != null && this.deletedObjects.Count > 0)
                 {
-                    var deletedObjectsArray = new List<ObjectId>(this.deletedObjects).ToArray();
+                    var deletedObjectsArray = new List<long>(this.deletedObjects).ToArray();
                     this.roleCache.Invalidate(deletedObjectsArray);
                     this.classCache.Invalidate(deletedObjectsArray);
                 }
@@ -194,7 +176,7 @@ namespace Allors.Adapters.Relation.SqlClient
                 // update role cache
                 if (this.changedObjects != null && this.changedObjects.Count > 0)
                 {
-                    var changedObjectsArray = new List<ObjectId>(this.changedObjects).ToArray();
+                    var changedObjectsArray = new List<long>(this.changedObjects).ToArray();
                     this.roleCache.Invalidate(changedObjectsArray);
                 }
 
@@ -246,16 +228,16 @@ namespace Allors.Adapters.Relation.SqlClient
 
                 var result = command.ExecuteScalar().ToString();
                 
-                var objectId = this.database.ObjectIds.Parse(result);
+                var objectId = long.Parse(result);
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
+                    this.cacheIdByObjectId = new Dictionary<long, long>();
                 }
 
                 if (this.classByObjectId == null)
                 {
-                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                    this.classByObjectId = new Dictionary<long, IClass>();
                 }
 
                 this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
@@ -284,12 +266,12 @@ namespace Allors.Adapters.Relation.SqlClient
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
+                    this.cacheIdByObjectId = new Dictionary<long, long>();
                 }
 
                 if (this.classByObjectId == null)
                 {
-                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                    this.classByObjectId = new Dictionary<long, IClass>();
                 }
 
                 using (var reader = command.ExecuteReader())
@@ -297,7 +279,7 @@ namespace Allors.Adapters.Relation.SqlClient
                     var i = 0;
                     while (reader.Read())
                     {
-                        var objectId = this.database.ObjectIds.Parse(reader[0].ToString());
+                        var objectId = long.Parse(reader[0].ToString());
 
                         this.classByObjectId[objectId] = objectType;
                         this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
@@ -320,13 +302,13 @@ namespace Allors.Adapters.Relation.SqlClient
 
         public IObject Instantiate(string objectId)
         {
-            return this.Instantiate(this.Database.ObjectIds.Parse(objectId));
+            return this.Instantiate(long.Parse(objectId));
         }
 
-        public IObject Instantiate(ObjectId objectId)
+        public IObject Instantiate(long objectId)
         {
             var strategy = this.InstantiateStrategy(objectId);
-            return strategy != null ? strategy.GetObject() : null;
+            return strategy?.GetObject();
         }
 
         public IObject[] Instantiate(IObject[] objects)
@@ -336,7 +318,7 @@ namespace Allors.Adapters.Relation.SqlClient
                 return EmptyObjects;
             }
             
-            var objectIds = new List<ObjectId>(objects.Length);
+            var objectIds = new List<long>(objects.Length);
             foreach (var obj in objects)
             {
                 if (obj != null)
@@ -355,19 +337,19 @@ namespace Allors.Adapters.Relation.SqlClient
                 return EmptyObjects;
             }
 
-            var objectIds = new List<ObjectId>(objectIdStrings.Length);
+            var objectIds = new List<long>(objectIdStrings.Length);
             foreach (var objectIdString in objectIdStrings)
             {
                 if (objectIdString != null)
                 {
-                    objectIds.Add(this.Database.ObjectIds.Parse(objectIdString));
+                    objectIds.Add(long.Parse(objectIdString));
                 }
             }
 
             return this.Instantiate(objectIds.ToArray());
         }
 
-        public IObject[] Instantiate(ObjectId[] objectIds)
+        public IObject[] Instantiate(long[] objectIds)
         {
             if (objectIds == null || objectIds.Length == 0)
             {
@@ -394,7 +376,7 @@ namespace Allors.Adapters.Relation.SqlClient
             // TODO:
         }
 
-        public void Prefetch(PrefetchPolicy prefetchPolicy, ObjectId[] objectIds)
+        public void Prefetch(PrefetchPolicy prefetchPolicy, long[] objectIds)
         {
             // TODO:
         }
@@ -411,13 +393,13 @@ namespace Allors.Adapters.Relation.SqlClient
 
         public IObject Insert(IClass @class, string objectIdString)
         {
-             var objectId = this.Database.ObjectIds.Parse(objectIdString);
+             var objectId = long.Parse(objectIdString);
              var insertedObject = this.Insert(@class, objectId);
 
             return insertedObject;
         }
 
-        public IObject Insert(IClass @class, ObjectId objectId)
+        public IObject Insert(IClass @class, long objectId)
         {
             if (this.flushDeletedObjects != null)
             {
@@ -437,19 +419,19 @@ END
             {
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(Mapping.ParameterNameForObject, mapping.SqlDbTypeForObject).Value = objectId.Value;
+                command.Parameters.Add(Mapping.ParameterNameForObject, mapping.SqlDbTypeForObject).Value = objectId;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = @class.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
 
                 if (this.cacheIdByObjectId == null)
                 {
-                    this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
+                    this.cacheIdByObjectId = new Dictionary<long, long>();
                 }
 
                 if (this.classByObjectId == null)
                 {
-                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                    this.classByObjectId = new Dictionary<long, IClass>();
                 }
 
                 this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
@@ -463,7 +445,7 @@ END
             }
         }
 
-        IStrategy ISession.InstantiateStrategy(ObjectId objectId)
+        IStrategy ISession.InstantiateStrategy(long objectId)
         {
             return this.InstantiateStrategy(objectId);
         }
@@ -473,17 +455,17 @@ END
             this.Rollback();
         }
 
-        internal IClass GetObjectType(ObjectId objectId)
+        internal IClass GetObjectType(long objectId)
         {
             return this.classByObjectId[objectId];
         }
 
-        internal bool IsNew(ObjectId objectId)
+        internal bool IsNew(long objectId)
         {
             return this.newObjects != null && this.newObjects.Contains(objectId);
         }
 
-        internal bool IsDeleted(ObjectId objectId)
+        internal bool IsDeleted(long objectId)
         {
             if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
             {
@@ -509,16 +491,16 @@ END
             return false;
         }
 
-        internal void Delete(ObjectId objectId)
+        internal void Delete(long objectId)
         {
             if (this.deletedObjects == null)
             {
-                this.deletedObjects = new HashSet<ObjectId>();
+                this.deletedObjects = new HashSet<long>();
             }
 
             if (this.flushDeletedObjects == null)
             {
-                this.flushDeletedObjects = new HashSet<ObjectId>();
+                this.flushDeletedObjects = new HashSet<long>();
             }
 
             this.deletedObjects.Add(objectId);
@@ -528,12 +510,12 @@ END
         }
         
         #region Unit
-        internal bool ExistUnitRole(ObjectId association, IRoleType roleType)
+        internal bool ExistUnitRole(long association, IRoleType roleType)
         {
             return this.GetUnitRole(association, roleType) != null;
         }
 
-        internal virtual object GetUnitRole(ObjectId association, IRoleType roleType)
+        internal virtual object GetUnitRole(long association, IRoleType roleType)
         {
             var roleByAssociation = this.GetUnitRoleByAssociation(roleType);
 
@@ -552,7 +534,7 @@ END
             return role;
         }
 
-        internal virtual void SetUnitRole(ObjectId association, IRoleType roleType, object role)
+        internal virtual void SetUnitRole(long association, IRoleType roleType, object role)
         {
             roleType.Normalize(role);
 
@@ -570,7 +552,7 @@ END
             }
         }
 
-        internal void RemoveUnitRole(ObjectId association, IRoleType roleType)
+        internal void RemoveUnitRole(long association, IRoleType roleType)
         {
             var existingRole = this.GetUnitRole(association, roleType);
             if (existingRole != null)
@@ -589,16 +571,16 @@ END
         #endregion
 
         #region One <-> One
-        internal bool ExistCompositeRoleOneToOne(ObjectId association, IRoleType roleType)
+        internal bool ExistCompositeRoleOneToOne(long association, IRoleType roleType)
         {
             return this.GetCompositeRoleOneToOne(association, roleType) != null;
         }
 
-        internal ObjectId GetCompositeRoleOneToOne(ObjectId association, IRoleType roleType)
+        internal long? GetCompositeRoleOneToOne(long association, IRoleType roleType)
         {
             var roleByAssociation = this.GetOneToOneRoleByAssociation(roleType);
 
-            ObjectId role;
+            long? role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
                 var cacheId = this.GetCacheId(association);
@@ -613,7 +595,7 @@ END
             return role;
         }
 
-        internal void SetCompositeRoleOneToOne(ObjectId association, IRoleType roleType, ObjectId role)
+        internal void SetCompositeRoleOneToOne(long association, IRoleType roleType, long role)
         {
             var existingRole = this.GetCompositeRoleOneToOne(association, roleType);
             if (!Equals(role, existingRole))
@@ -624,7 +606,7 @@ END
                 var associationByRole = this.GetOneToOneAssociationByRole(roleType.AssociationType);
 
                 // Existing Association -> Role
-                ObjectId existingAssociation;
+                long? existingAssociation;
                 if (!associationByRole.TryGetValue(role, out existingAssociation))
                 {
                     var existingAssociationFound = false;
@@ -646,14 +628,14 @@ END
 
                 if (existingAssociation != null)
                 {
-                    roleByAssociation[existingAssociation] = null;
-                    this.OnObjectChanged(existingAssociation);
+                    roleByAssociation[existingAssociation.Value] = null;
+                    this.OnObjectChanged(existingAssociation.Value);
                 }
                 
                 // Association <- Existing Role
                 if (existingRole != null)
                 {
-                    associationByRole[existingRole] = null;
+                    associationByRole[existingRole.Value] = null;
                 }
                 
                 // Association <- Role
@@ -668,7 +650,7 @@ END
             }
         }
 
-        internal void RemoveCompositeRoleOneToOne(ObjectId association, IRoleType roleType)
+        internal void RemoveCompositeRoleOneToOne(long association, IRoleType roleType)
         {
             var existingRole = this.GetCompositeRoleOneToOne(association, roleType);
             if (existingRole != null)
@@ -677,7 +659,7 @@ END
                 var associationByRole = this.GetOneToOneAssociationByRole(roleType.AssociationType);
 
                 // Association <- Role
-                associationByRole[existingRole] = null;
+                associationByRole[existingRole.Value] = null;
 
                 // Association -> Role
                 roleByAssociation[association] = null;
@@ -690,15 +672,15 @@ END
             }
         }
 
-        internal bool ExistCompositeAssociationOneToOne(ObjectId role, IAssociationType associationType)
+        internal bool ExistCompositeAssociationOneToOne(long role, IAssociationType associationType)
         {
             return this.GetCompositeAssociationOneToOne(role, associationType) != null;
         }
 
-        internal ObjectId GetCompositeAssociationOneToOne(ObjectId role, IAssociationType associationType)
+        internal long? GetCompositeAssociationOneToOne(long role, IAssociationType associationType)
         {
             var associationByRole = this.GetOneToOneAssociationByRole(associationType);
-            ObjectId association;
+            long? association;
             if (!associationByRole.TryGetValue(role, out association))
             {
                 association = this.FetchCompositeAssociation(role, associationType);
@@ -710,16 +692,16 @@ END
         #endregion
 
         #region Many <-> One
-        internal bool ExistCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
+        internal bool ExistCompositeRoleManyToOne(long association, IRoleType roleType)
         {
             return this.GetCompositeRoleManyToOne(association, roleType) != null;
         }
 
-        internal ObjectId GetCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
+        internal long? GetCompositeRoleManyToOne(long association, IRoleType roleType)
         {
             var roleByAssociation = this.GetManyToOneRoleByAssociation(roleType);
 
-            ObjectId role;
+            long? role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
                 var cacheId = this.GetCacheId(association);
@@ -734,7 +716,7 @@ END
             return role;
         }
 
-        internal void SetCompositeRoleManyToOne(ObjectId association, IRoleType roleType, ObjectId role)
+        internal void SetCompositeRoleManyToOne(long association, IRoleType roleType, long role)
         {
             var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
             if (!Equals(role, existingRole))
@@ -748,8 +730,8 @@ END
                 // Association <- Existing Role
                 if (existingRole != null)
                 {
-                    associationByRole.Remove(existingRole);
-                    triggerFlushRoles.Add(existingRole);
+                    associationByRole.Remove(existingRole.Value);
+                    triggerFlushRoles.Add(existingRole.Value);
                 }
 
                 // Association <- Role
@@ -765,7 +747,7 @@ END
             }
         }
 
-        internal void RemoveCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
+        internal void RemoveCompositeRoleManyToOne(long association, IRoleType roleType)
         {
             var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
             if (existingRole != null)
@@ -777,16 +759,16 @@ END
                 var triggerFlushRoles = this.GetManyToOneTriggerFlushRoles(roleType.AssociationType);
 
                 // Association <- Existing Role
-                ObjectId[] existingAssociations;
-                if (associationByRole.TryGetValue(existingRole, out existingAssociations))
+                long[] existingAssociations;
+                if (associationByRole.TryGetValue(existingRole.Value, out existingAssociations))
                 {
-                    var associations = new List<ObjectId>(existingAssociations);
+                    var associations = new List<long>(existingAssociations);
                     associations.Remove(association);
-                    associationByRole[existingRole] = associations.Count != 0 ? associations.ToArray() : null;
+                    associationByRole[existingRole.Value] = associations.Count != 0 ? associations.ToArray() : null;
                 }
                 else
                 {
-                    triggerFlushRoles.Add(existingRole);
+                    triggerFlushRoles.Add(existingRole.Value);
                 }
 
                 // Association -> Role
@@ -798,16 +780,16 @@ END
             }
         }
 
-        internal bool ExistCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
+        internal bool ExistCompositeAssociationsManyToOne(long role, IAssociationType associationType)
         {
             return this.GetCompositeAssociationsManyToOne(role, associationType).Length > 0;
         }
 
-        internal ObjectId[] GetCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
+        internal long[] GetCompositeAssociationsManyToOne(long role, IAssociationType associationType)
         {
             if (this.manyToOneTriggerFlushRolesByAssociationType != null)
             {
-                HashSet<ObjectId> triggerFlushRoles;
+                HashSet<long> triggerFlushRoles;
                 if (this.manyToOneTriggerFlushRolesByAssociationType.TryGetValue(associationType, out triggerFlushRoles))
                 {
                     if (triggerFlushRoles.Contains(role))
@@ -819,7 +801,7 @@ END
             }
 
             var associationByRole = this.GetManyToOneAssociationByRole(associationType);
-            ObjectId[] associations;
+            long[] associations;
             if (!associationByRole.TryGetValue(role, out associations))
             {
                 associations = this.FetchCompositeAssociations(role, associationType);
@@ -831,16 +813,16 @@ END
         #endregion
 
         #region One <-> Many
-        internal bool ExistCompositeRoleOneToMany(ObjectId association, IRoleType roleType)
+        internal bool ExistCompositeRoleOneToMany(long association, IRoleType roleType)
         {
             return this.GetCompositeRolesOneToMany(association, roleType).Length > 0;
         }
 
-        internal ObjectId[] GetCompositeRolesOneToMany(ObjectId association, IRoleType roleType)
+        internal long[] GetCompositeRolesOneToMany(long association, IRoleType roleType)
         {
             var roleByAssociation = this.GetOneToManyCurrentRoleByAssociation(roleType);
 
-            ObjectId[] role;
+            long[] role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
                 var cacheId = this.GetCacheId(association);
@@ -855,10 +837,10 @@ END
             return role;
         }
 
-        internal void AddCompositeRoleOneToMany(ObjectId association, IRoleType roleType, ObjectId role)
+        internal void AddCompositeRoleOneToMany(long association, IRoleType roleType, long role)
         {
             var existingRoleArray = this.GetCompositeRolesOneToMany(association, roleType);
-            var existingRoles = new List<ObjectId>(existingRoleArray);
+            var existingRoles = new List<long>(existingRoleArray);
             if (!existingRoles.Contains(role))
             {
                 var currentRoleByAssociation = this.GetOneToManyCurrentRoleByAssociation(roleType);
@@ -867,7 +849,7 @@ END
                 var associationByRole = this.GetOneToManyAssociationByRole(roleType.AssociationType);
 
                 // Existing Association -> Role
-                ObjectId existingAssociation;
+                long? existingAssociation;
                 if (!associationByRole.TryGetValue(role, out existingAssociation))
                 {
                     var existingAssociationFound = false;
@@ -889,15 +871,15 @@ END
 
                 if (existingAssociation != null)
                 {
-                    ObjectId[] rolesOfExistingAssociation;
-                    if (currentRoleByAssociation.TryGetValue(existingAssociation, out rolesOfExistingAssociation))
+                    long[] rolesOfExistingAssociation;
+                    if (currentRoleByAssociation.TryGetValue(existingAssociation.Value, out rolesOfExistingAssociation))
                     {
-                        var newRolesOfExistingAssociation = new List<ObjectId>(rolesOfExistingAssociation);
+                        var newRolesOfExistingAssociation = new List<long>(rolesOfExistingAssociation);
                         newRolesOfExistingAssociation.Remove(role);
-                        currentRoleByAssociation[existingAssociation] = newRolesOfExistingAssociation.ToArray();
+                        currentRoleByAssociation[existingAssociation.Value] = newRolesOfExistingAssociation.ToArray();
                     }
 
-                    this.OnObjectChanged(existingAssociation);
+                    this.OnObjectChanged(existingAssociation.Value);
                 }
 
                 // Association <- Role
@@ -917,10 +899,10 @@ END
             }
         }
 
-        internal void RemoveCompositeRoleOneToMany(ObjectId association, IRoleType roleType, ObjectId role)
+        internal void RemoveCompositeRoleOneToMany(long association, IRoleType roleType, long role)
         {
             var existingRoleArray = this.GetCompositeRolesOneToMany(association, roleType);
-            var existingRoles = new List<ObjectId>(existingRoleArray);
+            var existingRoles = new List<long>(existingRoleArray);
             if (existingRoles.Contains(role))
             {
                 var currentRoleByAssociation = this.GetOneToManyCurrentRoleByAssociation(roleType);
@@ -945,12 +927,12 @@ END
             }
         }
 
-        internal void SetCompositeRoleOneToMany(ObjectId association, IRoleType roleType, ObjectId[] roles)
+        internal void SetCompositeRoleOneToMany(long association, IRoleType roleType, long[] roles)
         {
             // TODO: optimize
-            var existingRoles = new HashSet<ObjectId>(this.GetCompositeRolesOneToMany(association, roleType));
+            var existingRoles = new HashSet<long>(this.GetCompositeRolesOneToMany(association, roleType));
 
-            var addRoles = new HashSet<ObjectId>(roles);
+            var addRoles = new HashSet<long>(roles);
             addRoles.ExceptWith(existingRoles);
             
             existingRoles.ExceptWith(roles);
@@ -967,7 +949,7 @@ END
             }
         }
 
-        internal void RemoveCompositeRolesOneToMany(ObjectId association, IRoleType roleType)
+        internal void RemoveCompositeRolesOneToMany(long association, IRoleType roleType)
         {
             // TODO: Optimize
             foreach (var role in this.GetCompositeRolesOneToMany(association, roleType))
@@ -976,16 +958,16 @@ END
             }
         }
 
-        internal bool ExistCompositeAssociationOneToMany(ObjectId role, IAssociationType associationType)
+        internal bool ExistCompositeAssociationOneToMany(long role, IAssociationType associationType)
         {
             return this.GetCompositeAssociationOneToMany(role, associationType) != null;
         }
 
         // TODO: Merge with GetCompositeAssociationOneToOne
-        internal ObjectId GetCompositeAssociationOneToMany(ObjectId role, IAssociationType associationType)
+        internal long? GetCompositeAssociationOneToMany(long role, IAssociationType associationType)
         {
             var associationByRole = this.GetOneToManyAssociationByRole(associationType);
-            ObjectId association;
+            long? association;
             if (!associationByRole.TryGetValue(role, out association))
             {
                 association = this.FetchCompositeAssociation(role, associationType);
@@ -997,16 +979,16 @@ END
         #endregion
 
         #region Many <-> Many
-        internal bool ExistCompositeRoleManyToMany(ObjectId association, IRoleType roleType)
+        internal bool ExistCompositeRoleManyToMany(long association, IRoleType roleType)
         {
             return this.GetCompositeRolesManyToMany(association, roleType).Length > 0;
         }
 
-        internal ObjectId[] GetCompositeRolesManyToMany(ObjectId association, IRoleType roleType)
+        internal long[] GetCompositeRolesManyToMany(long association, IRoleType roleType)
         {
             var roleByAssociation = this.GetManyToManyCurrentRoleByAssociation(roleType);
 
-            ObjectId[] role;
+            long[] role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
                 role = this.FetchCompositeRoles(association, roleType);
@@ -1016,10 +998,10 @@ END
             return role;
         }
 
-        internal void AddCompositeRoleManyToMany(ObjectId association, IRoleType roleType, ObjectId role)
+        internal void AddCompositeRoleManyToMany(long association, IRoleType roleType, long role)
         {
             var existingRoleArray = this.GetCompositeRolesManyToMany(association, roleType);
-            var existingRoles = new List<ObjectId>(existingRoleArray);
+            var existingRoles = new List<long>(existingRoleArray);
             if (!existingRoles.Contains(role))
             {
                 var originalRoleByAssociation = this.GetManyToManyOriginalRoleByAssociation(roleType);
@@ -1046,10 +1028,10 @@ END
             }
         }
 
-        internal void RemoveCompositeRoleManyToMany(ObjectId association, IRoleType roleType, ObjectId role)
+        internal void RemoveCompositeRoleManyToMany(long association, IRoleType roleType, long role)
         {
             var existingRoleArray = this.GetCompositeRolesManyToMany(association, roleType);
-            var existingRoles = new List<ObjectId>(existingRoleArray);
+            var existingRoles = new List<long>(existingRoleArray);
             if (existingRoles.Contains(role))
             {
                 var originalRoleByAssociation = this.GetManyToManyOriginalRoleByAssociation(roleType);
@@ -1076,12 +1058,12 @@ END
             }
         }
 
-        internal void SetCompositeRoleManyToMany(ObjectId association, IRoleType roleType, ObjectId[] roles)
+        internal void SetCompositeRoleManyToMany(long association, IRoleType roleType, long[] roles)
         {
             // TODO: optimize
-            var existingRoles = new HashSet<ObjectId>(this.GetCompositeRolesManyToMany(association, roleType));
+            var existingRoles = new HashSet<long>(this.GetCompositeRolesManyToMany(association, roleType));
 
-            var addRoles = new HashSet<ObjectId>(roles);
+            var addRoles = new HashSet<long>(roles);
             addRoles.ExceptWith(existingRoles);
 
             existingRoles.ExceptWith(roles);
@@ -1098,7 +1080,7 @@ END
             }
         }
 
-        internal void RemoveCompositeRolesManyToMany(ObjectId association, IRoleType roleType)
+        internal void RemoveCompositeRolesManyToMany(long association, IRoleType roleType)
         {
             // TODO: Optimize
             foreach (var role in this.GetCompositeRolesManyToMany(association, roleType))
@@ -1107,16 +1089,16 @@ END
             }
         }
 
-        internal bool ExistCompositeAssociationsManyToMany(ObjectId role, IAssociationType associationType)
+        internal bool ExistCompositeAssociationsManyToMany(long role, IAssociationType associationType)
         {
             return this.GetCompositeAssociationsManyToMany(role, associationType).Length > 0;
         }
 
-        internal ObjectId[] GetCompositeAssociationsManyToMany(ObjectId role, IAssociationType associationType)
+        internal long[] GetCompositeAssociationsManyToMany(long role, IAssociationType associationType)
         {
             if (this.manyToManyTriggerFlushRolesByAssociationType != null)
             {
-                HashSet<ObjectId> triggerFlushRoles;
+                HashSet<long> triggerFlushRoles;
                 if (this.manyToManyTriggerFlushRolesByAssociationType.TryGetValue(associationType, out triggerFlushRoles))
                 {
                     if (triggerFlushRoles.Contains(role))
@@ -1128,7 +1110,7 @@ END
             }
 
             var associationByRole = this.GetManyToManyAssociationByRole(associationType);
-            ObjectId[] associations;
+            long[] associations;
             if (!associationByRole.TryGetValue(role, out associations))
             {
                 associations = this.FetchCompositeAssociations(role, associationType);
@@ -1200,10 +1182,10 @@ END
             this.FlushDeletedObjects();
         }
 
-        private static void SplitFlushAssociations(IEnumerable<ObjectId> flushAssociations, IReadOnlyDictionary<ObjectId, object> roleByAssociation, out IList<ObjectId> flushDeleted, out IList<ObjectId> flushChanged)
+        private static void SplitFlushAssociations(IEnumerable<long> flushAssociations, IReadOnlyDictionary<long, object> roleByAssociation, out IList<long> flushDeleted, out IList<long> flushChanged)
         {
-            IList<ObjectId> deleted = null;
-            IList<ObjectId> changed = null;
+            IList<long> deleted = null;
+            IList<long> changed = null;
             foreach (var flushAssociation in flushAssociations)
             {
                 var unit = roleByAssociation[flushAssociation];
@@ -1212,7 +1194,7 @@ END
                 {
                     if (deleted == null)
                     {
-                        deleted = new List<ObjectId>();
+                        deleted = new List<long>();
                     }
 
                     deleted.Add(flushAssociation);
@@ -1221,7 +1203,7 @@ END
                 {
                     if (changed == null)
                     {
-                        changed = new List<ObjectId>();
+                        changed = new List<long>();
                     }
 
                     changed.Add(flushAssociation);
@@ -1232,10 +1214,10 @@ END
             flushChanged = changed;
         }
 
-        private static void SplitFlushAssociations(IEnumerable<ObjectId> flushAssociations, IReadOnlyDictionary<ObjectId, ObjectId> roleByAssociation, out IList<ObjectId> flushDeleted, out IList<ObjectId> flushChanged)
+        private static void SplitFlushAssociations(IEnumerable<long> flushAssociations, IReadOnlyDictionary<long, long?> roleByAssociation, out IList<long> flushDeleted, out IList<long> flushChanged)
         {
-            IList<ObjectId> deleted = null;
-            IList<ObjectId> changed = null;
+            IList<long> deleted = null;
+            IList<long> changed = null;
             foreach (var flushAssociation in flushAssociations)
             {
                 var unit = roleByAssociation[flushAssociation];
@@ -1244,7 +1226,7 @@ END
                 {
                     if (deleted == null)
                     {
-                        deleted = new List<ObjectId>();
+                        deleted = new List<long>();
                     }
 
                     deleted.Add(flushAssociation);
@@ -1253,7 +1235,7 @@ END
                 {
                     if (changed == null)
                     {
-                        changed = new List<ObjectId>();
+                        changed = new List<long>();
                     }
 
                     changed.Add(flushAssociation);
@@ -1264,7 +1246,7 @@ END
             flushChanged = changed;
         }
 
-        internal long GetCacheId(ObjectId objectId)
+        internal long GetCacheId(long objectId)
         {
             long cacheId;
             if (this.cacheIdByObjectId == null || !this.cacheIdByObjectId.TryGetValue(objectId, out cacheId))
@@ -1277,7 +1259,7 @@ END
             return cacheId;
         }
 
-        private IStrategy InstantiateStrategy(ObjectId objectId)
+        private IStrategy InstantiateStrategy(long objectId)
         {
             if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
             {
@@ -1298,7 +1280,7 @@ END
             return new Strategy(this, objectId);
         }
         
-        private IStrategy[] InstantiateStrategies(ObjectId[] objectIds)
+        private IStrategy[] InstantiateStrategies(long[] objectIds)
         {
             var fetchRequired = false;
             foreach (var objectId in objectIds)
@@ -1348,19 +1330,19 @@ END
                 {
                     while (reader.Read())
                     {
-                        var objectId = this.database.ObjectIds.Parse(reader.GetValue(0).ToString());
+                        var objectId = long.Parse(reader.GetValue(0).ToString());
                         var typeId = reader.GetGuid(1);
                         var cacheId = reader.GetInt64(2);
                         var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
 
                         if (this.classByObjectId == null)
                         {
-                            this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                            this.classByObjectId = new Dictionary<long, IClass>();
                         }
 
                         if (this.cacheIdByObjectId == null)
                         {
-                            this.cacheIdByObjectId = new Dictionary<ObjectId, long>();
+                            this.cacheIdByObjectId = new Dictionary<long, long>();
                         }
                         
                         this.classByObjectId[objectId] = type;
@@ -1375,7 +1357,7 @@ END
                     {
                         if (this.deletedObjects == null)
                         {
-                            this.deletedObjects = new HashSet<ObjectId>();
+                            this.deletedObjects = new HashSet<long>();
                         }
 
                         this.deletedObjects.Add(objectId);
@@ -1405,13 +1387,13 @@ END
             }
         }
 
-        private object FetchUnitRole(ObjectId association, IRoleType roleType)
+        private object FetchUnitRole(long association, IRoleType roleType)
         {
             var mapping = this.database.Mapping;
             using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetRole(roleType.RelationType)))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association;
                 var role = command.ExecuteScalar();
 
                 if (role is DateTime)
@@ -1430,22 +1412,22 @@ END
             }
         }
 
-        private ObjectId FetchCompositeRole(ObjectId association, IRoleType roleType)
+        private long? FetchCompositeRole(long association, IRoleType roleType)
         {
             var mapping = this.database.Mapping;
 
             using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetRole(roleType.RelationType)))
             {
-                ObjectId role = null;
+                long? role = null;
                 
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    role = this.database.ObjectIds.Parse(result.ToString());
-                    this.AddObjectToFetchIfNotCached(role);
+                    role = long.Parse(result.ToString());
+                    this.AddObjectToFetchIfNotCached(role.Value);
                 }
 
                 var cacheId = this.GetCacheId(association);
@@ -1455,27 +1437,27 @@ END
             }
         }
 
-        private ObjectId[] FetchCompositeRoles(ObjectId association, IRoleType roleType)
+        private long[] FetchCompositeRoles(long association, IRoleType roleType)
         {
             var mapping = this.database.Mapping;
 
-            List<ObjectId> roles = null;
+            List<long> roles = null;
             using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetRole(roleType.RelationType)))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         if (roles == null)
                         {
-                            roles = new List<ObjectId>();
+                            roles = new List<long>();
                         }
 
                         var value = reader.GetValue(0).ToString();
-                        var role = this.database.ObjectIds.Parse(value);
+                        var role = long.Parse(value);
                         roles.Add(role);
 
                         this.AddObjectToFetchIfNotCached(role);
@@ -1491,7 +1473,7 @@ END
             return roleArray;
         }
 
-        private ObjectId FetchCompositeAssociation(ObjectId role, IAssociationType associationType)
+        private long? FetchCompositeAssociation(long role, IAssociationType associationType)
         {
             var mapping = this.database.Mapping;
 
@@ -1499,11 +1481,11 @@ END
             {
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(Mapping.ParameterNameForRole, mapping.SqlDbTypeForObject).Value = role.Value;
+                command.Parameters.Add(Mapping.ParameterNameForRole, mapping.SqlDbTypeForObject).Value = role;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    var association = this.database.ObjectIds.Parse(result.ToString());
+                    var association = long.Parse(result.ToString());
 
                     this.AddObjectToFetchIfNotCached(association);
 
@@ -1514,27 +1496,27 @@ END
             return null;
         }
 
-        private ObjectId[] FetchCompositeAssociations(ObjectId role, IAssociationType associationType)
+        private long[] FetchCompositeAssociations(long role, IAssociationType associationType)
         {
             var mapping = this.database.Mapping;
 
-            List<ObjectId> associations = null;
+            List<long> associations = null;
             using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetAssociation(associationType.RelationType)))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(Mapping.ParameterNameForRole, mapping.SqlDbTypeForObject).Value = role.Value;
+                command.Parameters.Add(Mapping.ParameterNameForRole, mapping.SqlDbTypeForObject).Value = role;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         if (associations == null)
                         {
-                            associations = new List<ObjectId>();
+                            associations = new List<long>();
                         }
 
                         var value = reader.GetValue(0).ToString();
-                        var association = this.database.ObjectIds.Parse(value);
+                        var association = long.Parse(value);
                         associations.Add(association);
 
                         this.AddObjectToFetchIfNotCached(association);
@@ -1569,13 +1551,13 @@ END
         {
             if (this.unitFlushAssociationsByRoleType != null)
             {
-                HashSet<ObjectId> flushAssociations;
+                HashSet<long> flushAssociations;
                 if(this.unitFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
                     var roleByAssociation = this.unitRoleByAssociationByRoleType[roleType];
 
-                    IList<ObjectId> flushDeleted;
-                    IList<ObjectId> flushChanged;
+                    IList<long> flushDeleted;
+                    IList<long> flushChanged;
                     SplitFlushAssociations(flushAssociations, roleByAssociation, out flushDeleted, out flushChanged);
 
                     this.FlushRelationDelete(roleType, flushDeleted);
@@ -1603,13 +1585,13 @@ END
         {
             if (this.oneToOneFlushAssociationsByRoleType != null)
             {
-                HashSet<ObjectId> flushAssociations;
+                HashSet<long> flushAssociations;
                 if(this.oneToOneFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
                     var roleByAssociation = this.oneToOneRoleByAssociationByRoleType[roleType];
 
-                    IList<ObjectId> flushDeleted;
-                    IList<ObjectId> flushChanged;
+                    IList<long> flushDeleted;
+                    IList<long> flushChanged;
                     SplitFlushAssociations(flushAssociations, roleByAssociation, out flushDeleted, out flushChanged);
 
                     this.FlushRelationDelete(roleType, flushDeleted);
@@ -1639,13 +1621,13 @@ END
         {
             if (this.manyToOneFlushAssociationsByRoleType != null)
             {
-                HashSet<ObjectId> flushAssociations;
+                HashSet<long> flushAssociations;
                 if (this.manyToOneFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
                     var roleByAssociation = this.manyToOneRoleByAssociationByRoleType[roleType];
 
-                    IList<ObjectId> flushDeleted;
-                    IList<ObjectId> flushChanged;
+                    IList<long> flushDeleted;
+                    IList<long> flushChanged;
                     SplitFlushAssociations(flushAssociations, roleByAssociation, out flushDeleted, out flushChanged);
 
                     this.FlushRelationDelete(roleType, flushDeleted);
@@ -1675,14 +1657,14 @@ END
         {
             if (this.oneToManyOriginalRoleByAssociationByRoleType != null)
             {
-                Dictionary<ObjectId, ObjectId[]> originalRoleByAssociation;
+                Dictionary<long, long[]> originalRoleByAssociation;
                 if (this.oneToManyOriginalRoleByAssociationByRoleType.TryGetValue(roleType, out originalRoleByAssociation))
                 {
                     var roleByAssociation = this.oneToManyCurrentRoleByAssociationByRoleType[roleType];
 
-                    List<ObjectId> flushDeleted = null;
-                    Dictionary<ObjectId, ObjectId[]> flushRemovedRoleByAssociation = null;
-                    Dictionary<ObjectId, ObjectId[]> flushAddedRoleByAssociation = null;
+                    List<long> flushDeleted = null;
+                    Dictionary<long, long[]> flushRemovedRoleByAssociation = null;
+                    Dictionary<long, long[]> flushAddedRoleByAssociation = null;
 
                     foreach (var kvp in originalRoleByAssociation)
                     {
@@ -1694,35 +1676,35 @@ END
                         {
                             if (flushDeleted == null)
                             {
-                                flushDeleted = new List<ObjectId>();
+                                flushDeleted = new List<long>();
                             }
 
                             flushDeleted.Add(association);
                         }
                         else
                         {
-                            var remove = new HashSet<ObjectId>(originalRole);
+                            var remove = new HashSet<long>(originalRole);
                             remove.ExceptWith(currentRole);
                             if (remove.Count > 0)
                             {
                                 if (flushRemovedRoleByAssociation == null)
                                 {
-                                    flushRemovedRoleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                                    flushRemovedRoleByAssociation = new Dictionary<long, long[]>();
                                 }
 
-                                flushRemovedRoleByAssociation[association] = new List<ObjectId>(remove).ToArray();
+                                flushRemovedRoleByAssociation[association] = new List<long>(remove).ToArray();
                             }
 
-                            var add = new HashSet<ObjectId>(currentRole);
+                            var add = new HashSet<long>(currentRole);
                             add.ExceptWith(originalRole);
                             if (add.Count > 0)
                             {
                                 if (flushAddedRoleByAssociation == null)
                                 {
-                                    flushAddedRoleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                                    flushAddedRoleByAssociation = new Dictionary<long, long[]>();
                                 }
 
-                                flushAddedRoleByAssociation[association] = new List<ObjectId>(add).ToArray();
+                                flushAddedRoleByAssociation[association] = new List<long>(add).ToArray();
                             }
                         }
                     }
@@ -1770,14 +1752,14 @@ END
         {
             if (this.manyToManyOriginalRoleByAssociationByRoleType != null)
             {
-                Dictionary<ObjectId, ObjectId[]> originalRoleByAssociation;
+                Dictionary<long, long[]> originalRoleByAssociation;
                 if (this.manyToManyOriginalRoleByAssociationByRoleType.TryGetValue(roleType, out originalRoleByAssociation))
                 {
                     var roleByAssociation = this.manyToManyCurrentRoleByAssociationByRoleType[roleType];
 
-                    List<ObjectId> flushDeleted = null;
-                    Dictionary<ObjectId, ObjectId[]> flushRemovedRoleByAssociation = null;
-                    Dictionary<ObjectId, ObjectId[]> flushAddedRoleByAssociation = null;
+                    List<long> flushDeleted = null;
+                    Dictionary<long, long[]> flushRemovedRoleByAssociation = null;
+                    Dictionary<long, long[]> flushAddedRoleByAssociation = null;
 
                     foreach (var kvp in originalRoleByAssociation)
                     {
@@ -1788,35 +1770,35 @@ END
                         {
                             if (flushDeleted == null)
                             {
-                                flushDeleted = new List<ObjectId>();
+                                flushDeleted = new List<long>();
                             }
 
                             flushDeleted.Add(association);
                         }
                         else
                         {
-                            var remove = new HashSet<ObjectId>(originalRole);
+                            var remove = new HashSet<long>(originalRole);
                             remove.ExceptWith(currentRole);
                             if (remove.Count > 0)
                             {
                                 if (flushRemovedRoleByAssociation == null)
                                 {
-                                    flushRemovedRoleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                                    flushRemovedRoleByAssociation = new Dictionary<long, long[]>();
                                 }
 
-                                flushRemovedRoleByAssociation[association] = new List<ObjectId>(remove).ToArray();
+                                flushRemovedRoleByAssociation[association] = new List<long>(remove).ToArray();
                             }
 
-                            var add = new HashSet<ObjectId>(currentRole);
+                            var add = new HashSet<long>(currentRole);
                             add.ExceptWith(originalRole);
                             if (add.Count > 0)
                             {
                                 if (flushAddedRoleByAssociation == null)
                                 {
-                                    flushAddedRoleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                                    flushAddedRoleByAssociation = new Dictionary<long, long[]>();
                                 }
 
-                                flushAddedRoleByAssociation[association] = new List<ObjectId>(add).ToArray();
+                                flushAddedRoleByAssociation[association] = new List<long>(add).ToArray();
                             }
                         }
                     }
@@ -1860,7 +1842,7 @@ END
             }
         }
 
-        private void FlushRelationDelete(IRoleType roleType, IList<ObjectId> flushDeleted)
+        private void FlushRelationDelete(IRoleType roleType, IList<long> flushDeleted)
         {
             if (flushDeleted != null)
             {
@@ -1878,11 +1860,11 @@ END
             }
         }
 
-        private void OnObjectChanged(ObjectId association)
+        private void OnObjectChanged(long association)
         {
             if (this.changedObjects == null)
             {
-                this.changedObjects = new HashSet<ObjectId>();
+                this.changedObjects = new HashSet<long>();
             }
 
             this.changedObjects.Add(association);
@@ -1951,7 +1933,7 @@ END
             }
         }
 
-        private void AddObjectToFetchIfNotCached(ObjectId objectId)
+        private void AddObjectToFetchIfNotCached(long objectId)
         {
             if (this.cacheIdByObjectId == null || !this.cacheIdByObjectId.ContainsKey(objectId))
             {
@@ -1959,283 +1941,283 @@ END
             }
         }
 
-        private void AddObjectToFetch(ObjectId objectId)
+        private void AddObjectToFetch(long objectId)
         {
             if (this.objectsToFetch == null)
             {
-                this.objectsToFetch = new HashSet<ObjectId>();
+                this.objectsToFetch = new HashSet<long>();
             }
 
             this.objectsToFetch.Add(objectId);
         }
         
         #region Lazy Dictionaries
-        private Dictionary<ObjectId, object> GetUnitRoleByAssociation(IRoleType roleType)
+        private Dictionary<long, object> GetUnitRoleByAssociation(IRoleType roleType)
         {
             if (this.unitRoleByAssociationByRoleType == null)
             {
-                this.unitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, object>>();
+                this.unitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, object>>();
             }
 
-            Dictionary<ObjectId, object> roleByAssociation;
+            Dictionary<long, object> roleByAssociation;
             if (!this.unitRoleByAssociationByRoleType.TryGetValue(roleType, out roleByAssociation))
             {
-                roleByAssociation = new Dictionary<ObjectId, object>();
+                roleByAssociation = new Dictionary<long, object>();
                 this.unitRoleByAssociationByRoleType[roleType] = roleByAssociation;
             }
 
             return roleByAssociation;
         }
 
-        private HashSet<ObjectId> GetUnitFlushAssociations(IRoleType roleType)
+        private HashSet<long> GetUnitFlushAssociations(IRoleType roleType)
         {
             if (this.unitFlushAssociationsByRoleType == null)
             {
-                this.unitFlushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<ObjectId>>();
+                this.unitFlushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<long>>();
             }
 
-            HashSet<ObjectId> flushAssociations;
+            HashSet<long> flushAssociations;
             if (!this.unitFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
             {
-                flushAssociations = new HashSet<ObjectId>();
+                flushAssociations = new HashSet<long>();
                 this.unitFlushAssociationsByRoleType[roleType] = flushAssociations;
             }
 
             return flushAssociations;
         }
 
-        private Dictionary<ObjectId, ObjectId> GetOneToOneRoleByAssociation(IRoleType roleType)
+        private Dictionary<long, long?> GetOneToOneRoleByAssociation(IRoleType roleType)
         {
             if (this.oneToOneRoleByAssociationByRoleType == null)
             {
-                this.oneToOneRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, ObjectId>>();
+                this.oneToOneRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, long?>>();
             }
 
-            Dictionary<ObjectId, ObjectId> roleByAssociation;
+            Dictionary<long, long?> roleByAssociation;
             if (!this.oneToOneRoleByAssociationByRoleType.TryGetValue(roleType, out roleByAssociation))
             {
-                roleByAssociation = new Dictionary<ObjectId, ObjectId>();
+                roleByAssociation = new Dictionary<long, long?>();
                 this.oneToOneRoleByAssociationByRoleType[roleType] = roleByAssociation;
             }
 
             return roleByAssociation;
         }
 
-        private HashSet<ObjectId> GetOneToOneFlushAssociations(IRoleType roleType)
+        private HashSet<long> GetOneToOneFlushAssociations(IRoleType roleType)
         {
             if (this.oneToOneFlushAssociationsByRoleType == null)
             {
-                this.oneToOneFlushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<ObjectId>>();
+                this.oneToOneFlushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<long>>();
             }
 
-            HashSet<ObjectId> flushAssociations;
+            HashSet<long> flushAssociations;
             if (!this.oneToOneFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
             {
-                flushAssociations = new HashSet<ObjectId>();
+                flushAssociations = new HashSet<long>();
                 this.oneToOneFlushAssociationsByRoleType[roleType] = flushAssociations;
             }
 
             return flushAssociations;
         }
 
-        private Dictionary<ObjectId, ObjectId> GetOneToOneAssociationByRole(IAssociationType associationType)
+        private Dictionary<long, long?> GetOneToOneAssociationByRole(IAssociationType associationType)
         {
             if (this.oneToOneAssociationByRoleByAssociationType == null)
             {
-                this.oneToOneAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId>>();
+                this.oneToOneAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<long, long?>>();
             }
 
-            Dictionary<ObjectId, ObjectId> associationByRole;
+            Dictionary<long, long?> associationByRole;
             if (!this.oneToOneAssociationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
             {
-                associationByRole = new Dictionary<ObjectId, ObjectId>();
+                associationByRole = new Dictionary<long, long?>();
                 this.oneToOneAssociationByRoleByAssociationType[associationType] = associationByRole;
             }
 
             return associationByRole;
         }
 
-        private Dictionary<ObjectId, ObjectId> GetManyToOneRoleByAssociation(IRoleType roleType)
+        private Dictionary<long, long?> GetManyToOneRoleByAssociation(IRoleType roleType)
         {
             if (this.manyToOneRoleByAssociationByRoleType == null)
             {
-                this.manyToOneRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, ObjectId>>();
+                this.manyToOneRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, long?>>();
             }
 
-            Dictionary<ObjectId, ObjectId> roleByAssociation;
+            Dictionary<long, long?> roleByAssociation;
             if (!this.manyToOneRoleByAssociationByRoleType.TryGetValue(roleType, out roleByAssociation))
             {
-                roleByAssociation = new Dictionary<ObjectId, ObjectId>();
+                roleByAssociation = new Dictionary<long, long?>();
                 this.manyToOneRoleByAssociationByRoleType[roleType] = roleByAssociation;
             }
 
             return roleByAssociation;
         }
 
-        private HashSet<ObjectId> GetManyToOneFlushAssociations(IRoleType roleType)
+        private HashSet<long> GetManyToOneFlushAssociations(IRoleType roleType)
         {
             if (this.manyToOneFlushAssociationsByRoleType == null)
             {
-                this.manyToOneFlushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<ObjectId>>();
+                this.manyToOneFlushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<long>>();
             }
 
-            HashSet<ObjectId> flushAssociations;
+            HashSet<long> flushAssociations;
             if (!this.manyToOneFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
             {
-                flushAssociations = new HashSet<ObjectId>();
+                flushAssociations = new HashSet<long>();
                 this.manyToOneFlushAssociationsByRoleType[roleType] = flushAssociations;
             }
 
             return flushAssociations;
         }
 
-        private Dictionary<ObjectId, ObjectId[]> GetManyToOneAssociationByRole(IAssociationType associationType)
+        private Dictionary<long, long[]> GetManyToOneAssociationByRole(IAssociationType associationType)
         {
             if (this.manyToOneAssociationByRoleByAssociationType == null)
             {
-                this.manyToOneAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId[]>>();
+                this.manyToOneAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<long, long[]>>();
             }
 
-            Dictionary<ObjectId, ObjectId[]> associationByRole;
+            Dictionary<long, long[]> associationByRole;
             if (!this.manyToOneAssociationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
             {
-                associationByRole = new Dictionary<ObjectId, ObjectId[]>();
+                associationByRole = new Dictionary<long, long[]>();
                 this.manyToOneAssociationByRoleByAssociationType[associationType] = associationByRole;
             }
 
             return associationByRole;
         }
 
-        private HashSet<ObjectId> GetManyToOneTriggerFlushRoles(IAssociationType associationType)
+        private HashSet<long> GetManyToOneTriggerFlushRoles(IAssociationType associationType)
         {
             if (this.manyToOneTriggerFlushRolesByAssociationType == null)
             {
-                this.manyToOneTriggerFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();
+                this.manyToOneTriggerFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<long>>();
             }
 
-            HashSet<ObjectId> triggerFlushRoles;
+            HashSet<long> triggerFlushRoles;
             if (!this.manyToOneTriggerFlushRolesByAssociationType.TryGetValue(associationType, out triggerFlushRoles))
             {
-                triggerFlushRoles = new HashSet<ObjectId>();
+                triggerFlushRoles = new HashSet<long>();
                 this.manyToOneTriggerFlushRolesByAssociationType[associationType] = triggerFlushRoles;
             }
 
             return triggerFlushRoles;
         }
 
-        private Dictionary<ObjectId, ObjectId[]> GetOneToManyCurrentRoleByAssociation(IRoleType roleType)
+        private Dictionary<long, long[]> GetOneToManyCurrentRoleByAssociation(IRoleType roleType)
         {
             if (this.oneToManyCurrentRoleByAssociationByRoleType == null)
             {
-                this.oneToManyCurrentRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>>();
+                this.oneToManyCurrentRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, long[]>>();
             }
 
-            Dictionary<ObjectId, ObjectId[]> roleByAssociation;
+            Dictionary<long, long[]> roleByAssociation;
             if (!this.oneToManyCurrentRoleByAssociationByRoleType.TryGetValue(roleType, out roleByAssociation))
             {
-                roleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                roleByAssociation = new Dictionary<long, long[]>();
                 this.oneToManyCurrentRoleByAssociationByRoleType[roleType] = roleByAssociation;
             }
 
             return roleByAssociation;
         }
 
-        private Dictionary<ObjectId, ObjectId[]> GetOneToManyOriginalRoleByAssociation(IRoleType roleType)
+        private Dictionary<long, long[]> GetOneToManyOriginalRoleByAssociation(IRoleType roleType)
         {
             if (this.oneToManyOriginalRoleByAssociationByRoleType == null)
             {
-                this.oneToManyOriginalRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>>();
+                this.oneToManyOriginalRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, long[]>>();
             }
 
-            Dictionary<ObjectId, ObjectId[]> roleByAssociation;
+            Dictionary<long, long[]> roleByAssociation;
             if (!this.oneToManyOriginalRoleByAssociationByRoleType.TryGetValue(roleType, out roleByAssociation))
             {
-                roleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                roleByAssociation = new Dictionary<long, long[]>();
                 this.oneToManyOriginalRoleByAssociationByRoleType[roleType] = roleByAssociation;
             }
 
             return roleByAssociation;
         }
 
-        private Dictionary<ObjectId, ObjectId> GetOneToManyAssociationByRole(IAssociationType associationType)
+        private Dictionary<long, long?> GetOneToManyAssociationByRole(IAssociationType associationType)
         {
             if (this.oneToManyAssociationByRoleByAssociationType == null)
             {
-                this.oneToManyAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId>>();
+                this.oneToManyAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<long, long?>>();
             }
 
-            Dictionary<ObjectId, ObjectId> associationByRole;
+            Dictionary<long, long?> associationByRole;
             if (!this.oneToManyAssociationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
             {
-                associationByRole = new Dictionary<ObjectId, ObjectId>();
+                associationByRole = new Dictionary<long, long?>();
                 this.oneToManyAssociationByRoleByAssociationType[associationType] = associationByRole;
             }
 
             return associationByRole;
         }
 
-        private Dictionary<ObjectId, ObjectId[]> GetManyToManyCurrentRoleByAssociation(IRoleType roleType)
+        private Dictionary<long, long[]> GetManyToManyCurrentRoleByAssociation(IRoleType roleType)
         {
             if (this.manyToManyCurrentRoleByAssociationByRoleType == null)
             {
-                this.manyToManyCurrentRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>>();
+                this.manyToManyCurrentRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, long[]>>();
             }
 
-            Dictionary<ObjectId, ObjectId[]> roleByAssociation;
+            Dictionary<long, long[]> roleByAssociation;
             if (!this.manyToManyCurrentRoleByAssociationByRoleType.TryGetValue(roleType, out roleByAssociation))
             {
-                roleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                roleByAssociation = new Dictionary<long, long[]>();
                 this.manyToManyCurrentRoleByAssociationByRoleType[roleType] = roleByAssociation;
             }
 
             return roleByAssociation;
         }
 
-        private Dictionary<ObjectId, ObjectId[]> GetManyToManyOriginalRoleByAssociation(IRoleType roleType)
+        private Dictionary<long, long[]> GetManyToManyOriginalRoleByAssociation(IRoleType roleType)
         {
             if (this.manyToManyOriginalRoleByAssociationByRoleType == null)
             {
-                this.manyToManyOriginalRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>>();
+                this.manyToManyOriginalRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<long, long[]>>();
             }
 
-            Dictionary<ObjectId, ObjectId[]> roleByAssociation;
+            Dictionary<long, long[]> roleByAssociation;
             if (!this.manyToManyOriginalRoleByAssociationByRoleType.TryGetValue(roleType, out roleByAssociation))
             {
-                roleByAssociation = new Dictionary<ObjectId, ObjectId[]>();
+                roleByAssociation = new Dictionary<long, long[]>();
                 this.manyToManyOriginalRoleByAssociationByRoleType[roleType] = roleByAssociation;
             }
 
             return roleByAssociation;
         }
         
-        private Dictionary<ObjectId, ObjectId[]> GetManyToManyAssociationByRole(IAssociationType associationType)
+        private Dictionary<long, long[]> GetManyToManyAssociationByRole(IAssociationType associationType)
         {
             if (this.manyToManyAssociationByRoleByAssociationType == null)
             {
-                this.manyToManyAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId[]>>();
+                this.manyToManyAssociationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<long, long[]>>();
             }
 
-            Dictionary<ObjectId, ObjectId[]> associationByRole;
+            Dictionary<long, long[]> associationByRole;
             if (!this.manyToManyAssociationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
             {
-                associationByRole = new Dictionary<ObjectId, ObjectId[]>();
+                associationByRole = new Dictionary<long, long[]>();
                 this.manyToManyAssociationByRoleByAssociationType[associationType] = associationByRole;
             }
 
             return associationByRole;
         }
 
-        private HashSet<ObjectId> GetManyToManyTriggerFlushRoles(IAssociationType associationType)
+        private HashSet<long> GetManyToManyTriggerFlushRoles(IAssociationType associationType)
         {
             if (this.manyToManyTriggerFlushRolesByAssociationType == null)
             {
-                this.manyToManyTriggerFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();
+                this.manyToManyTriggerFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<long>>();
             }
 
-            HashSet<ObjectId> triggerFlushRoles;
+            HashSet<long> triggerFlushRoles;
             if (!this.manyToManyTriggerFlushRolesByAssociationType.TryGetValue(associationType, out triggerFlushRoles))
             {
-                triggerFlushRoles = new HashSet<ObjectId>();
+                triggerFlushRoles = new HashSet<long>();
                 this.manyToManyTriggerFlushRolesByAssociationType[associationType] = triggerFlushRoles;
             }
 

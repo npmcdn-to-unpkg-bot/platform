@@ -16,7 +16,7 @@
 
 using Allors;
 
-namespace Allors.Adapters.Object.SqlClient.ReadCommitted
+namespace Allors.Adapters.Relation.SqlClient.ReadCommitted
 {
     using Adapters;
     using Adapters.Object.SqlClient;

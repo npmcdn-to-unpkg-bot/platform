@@ -20,11 +20,11 @@ namespace Allors.Adapters
     using System.Collections;
     using System.Text;
 
-    using Allors;
+    using Adapters;
 
+    using Allors;
     using Allors.Domain;
     using Allors.Meta;
-    using Adapters;
 
     using NUnit.Framework;
 

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerializationTest.cs" company="Allors bvba">
+// <copyright file="LifeCycleTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory
+namespace Allors.Adapters.Relation.SqlClient.ReadCommitted
 {
     using Allors;
     using Adapters;
@@ -26,21 +26,31 @@ namespace Allors.Adapters.Memory
     using NUnit.Framework;
 
     [TestFixture]
-    public class SerializationTest : Adapters.SerializationTest
+    public class LifeCycleTest : Adapters.LifeCycleTest
     {
         private readonly Profile profile = new Profile();
 
         protected override IProfile Profile => this.profile;
 
-        protected override IDatabase CreatePopulation()
-        {
-            return this.profile.CreatePopulation();
-        }
-
         [TearDown]
         protected void Dispose()
         {
             this.profile.Dispose();
+        }
+
+        protected override void SwitchDatabase()
+        {
+            this.profile.SwitchDatabase();
+        }
+
+        protected override IDatabase CreatePopulation()
+        {
+            return this.profile.CreateDatabase();
+        }
+
+        protected override ISession CreateSession()
+        {
+            return this.profile.CreateSession();
         }
     }
 }

@@ -33,9 +33,9 @@ namespace Allors.Adapters.Relation.SqlClient
     {
         private readonly Mapping mapping;
         private readonly IRoleType roleType;
-        private readonly Dictionary<ObjectId, ObjectId[]> roleByAssociation;
+        private readonly Dictionary<long, long[]> roleByAssociation;
 
-        public CompositesRoleDataRecords(Mapping mapping, IRoleType roleType, Dictionary<ObjectId, ObjectId[]> roleByAssociation)
+        public CompositesRoleDataRecords(Mapping mapping, IRoleType roleType, Dictionary<long, long[]> roleByAssociation)
         {
             this.mapping = mapping;
             this.roleType = roleType;
@@ -50,23 +50,11 @@ namespace Allors.Adapters.Relation.SqlClient
                 var association = entry.Key;
                 var roles = entry.Value;
 
-                if (this.mapping.IsObjectIdInteger)
+                foreach (var role in roles)
                 {
-                    foreach (var role in roles)
-                    {
-                        sqlDataRecord.SetInt32(0, (int)association.Value);
-                        sqlDataRecord.SetInt32(1, (int)role.Value);
-                        yield return sqlDataRecord;
-                    }
-                }
-                else
-                {
-                    foreach (var role in roles)
-                    {
-                        sqlDataRecord.SetInt64(0, (long)association.Value);
-                        sqlDataRecord.SetInt64(1, (long)role.Value);
-                        yield return sqlDataRecord;
-                    }
+                    sqlDataRecord.SetInt64(0, association);
+                    sqlDataRecord.SetInt64(1, role);
+                    yield return sqlDataRecord;
                 }
             }
         }

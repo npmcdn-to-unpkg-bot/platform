@@ -19,8 +19,6 @@
 // <summary>Defines the AllorsExtentSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Relation.SqlClient
 {
     using System;
@@ -30,14 +28,11 @@ namespace Allors.Adapters.Relation.SqlClient
 
     public abstract class AllorsExtentSql : Extent
     {
-        private ObjectId[] objectIds;
+        private long[] objectIds;
 
         private AllorsExtentSortSql sorter;
 
-        public override int Count
-        {
-            get { return this.ObjectIds.Length; }
-        }
+        public override int Count => this.ObjectIds.Length;
 
         public override IObject First
         {
@@ -57,24 +52,12 @@ namespace Allors.Adapters.Relation.SqlClient
 
         internal abstract Session Session { get; }
 
-        internal AllorsExtentSortSql Sorter
-        {
-            get { return this.sorter; }
-        }
+        internal AllorsExtentSortSql Sorter => this.sorter;
 
-        private ObjectId[] ObjectIds
-        {
-            get
-            {
-                return this.objectIds ?? (this.objectIds = this.GetObjectIds());
-            }
-        }
+        private long[] ObjectIds => this.objectIds ?? (this.objectIds = this.GetObjectIds());
 
-        public new IObject this[int index]
-        {
-            get { return this.GetItem(index); }
-        }
-        
+        public new IObject this[int index] => this.GetItem(index);
+
         public override Extent AddSort(IRoleType roleType)
         {
             return this.AddSort(roleType, SortDirection.Ascending);
@@ -160,10 +143,7 @@ namespace Allors.Adapters.Relation.SqlClient
         internal void FlushCache()
         {
             this.objectIds = null;
-            if (this.ParentOperationExtent != null)
-            {
-                this.ParentOperationExtent.FlushCache();
-            }
+            this.ParentOperationExtent?.FlushCache();
         }
 
         protected override IObject GetItem(int index)
@@ -172,11 +152,11 @@ namespace Allors.Adapters.Relation.SqlClient
             return this.GetObject(objectId);
         }
 
-        protected abstract ObjectId[] GetObjectIds();
+        protected abstract long[] GetObjectIds();
 
         protected abstract void LazyLoadFilter();
 
-        private IObject GetObject(ObjectId objectId)
+        private IObject GetObject(long objectId)
         {
             return new Strategy(this.Session, objectId).GetObject();
         }

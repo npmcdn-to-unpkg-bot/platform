@@ -67,7 +67,6 @@ namespace Allors.Adapters.Relation.SqlClient
         private readonly Database database;
 
         private readonly string sqlTypeForObject;
-        private readonly SqlDbType sqlDbTypeForObject;
 
         private readonly Dictionary<IRelationType, string> tableNameByRelationType;
         private readonly Dictionary<IRoleType, string> sqlTypeByRoleType;
@@ -76,7 +75,6 @@ namespace Allors.Adapters.Relation.SqlClient
         private readonly Dictionary<IRelationType, string> tableTypeNameByRelationType;
         private readonly Dictionary<IRelationType, string> tableTypeSqlTypeByRelationType;
 
-        private readonly SqlMetaData sqlMetaDataForObject;
         private readonly Dictionary<IRoleType, SqlMetaData[]> sqlMetaDataByRoleType;
 
         private readonly Dictionary<IRelationType, string> procedureNameForGetRoleByRelationType;
@@ -90,7 +88,7 @@ namespace Allors.Adapters.Relation.SqlClient
         {
             this.database = database;
             this.sqlTypeForObject = sqlTypeForObject;
-            this.sqlDbTypeForObject = sqlDbTypeForObject;
+            this.SqlDbTypeForObject = sqlDbTypeForObject;
 
             if (!this.database.MetaPopulation.IsValid)
             {
@@ -105,7 +103,7 @@ namespace Allors.Adapters.Relation.SqlClient
             this.tableTypeSqlTypeByRelationType = new Dictionary<IRelationType, string>();
 
             this.sqlMetaDataByRoleType = new Dictionary<IRoleType, SqlMetaData[]>();
-            this.sqlMetaDataForObject = new SqlMetaData(TableTypeColumnNameForObject, this.SqlDbTypeForObject);
+            this.SqlMetaDataForObject = new SqlMetaData(TableTypeColumnNameForObject, this.SqlDbTypeForObject);
             
             this.procedureNameForGetRoleByRelationType = new Dictionary<IRelationType, string>();
             this.procedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
@@ -145,7 +143,7 @@ namespace Allors.Adapters.Relation.SqlClient
                 {
                     switch (unit.UnitTag)
                     {
-                        case UnitTags.AllorsBinary:
+                        case UnitTags.Binary:
                             sqlDbType = SqlDbType.VarBinary;
                             if (roleType.Size != -1 && roleType.Size <= 8000)
                             {
@@ -174,7 +172,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
                             break;
 
-                        case UnitTags.AllorsBoolean:
+                        case UnitTags.Boolean:
                             tableName = tableName + "_boolean";
                             sqlDbType = SqlDbType.Bit;
                             sqlType = "bit";
@@ -194,7 +192,7 @@ namespace Allors.Adapters.Relation.SqlClient
                             sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
-                        case UnitTags.AllorsDateTime:
+                        case UnitTags.DateTime:
                             tableName = tableName + "_datetime";
                             sqlDbType = SqlDbType.DateTime2;
                             sqlType = "datetime2";
@@ -214,7 +212,7 @@ namespace Allors.Adapters.Relation.SqlClient
                             sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
-                        case UnitTags.AllorsDecimal:
+                        case UnitTags.Decimal:
                             tableName = tableName + "_decimal_" + roleType.Precision + "_" + roleType.Scale;
                             sqlDbType = SqlDbType.Decimal;
                             sqlType = "decimal(" + roleType.Precision + "," + roleType.Scale + ")";
@@ -234,7 +232,7 @@ namespace Allors.Adapters.Relation.SqlClient
                             sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
-                        case UnitTags.AllorsFloat:
+                        case UnitTags.Float:
                             tableName = tableName + "_float";
                             sqlDbType = SqlDbType.Float;
                             sqlType = "float";
@@ -254,7 +252,7 @@ namespace Allors.Adapters.Relation.SqlClient
                             sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
-                        case UnitTags.AllorsInteger:
+                        case UnitTags.Integer:
                             tableName = tableName + "_integer";
                             sqlDbType = SqlDbType.Int;
                             sqlType = "int";
@@ -274,7 +272,7 @@ namespace Allors.Adapters.Relation.SqlClient
                             sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
-                        case UnitTags.AllorsString:
+                        case UnitTags.String:
                             sqlDbType = SqlDbType.NVarChar;
                             if (roleType.Size != -1 && roleType.Size <= 4000)
                             {
@@ -302,7 +300,7 @@ namespace Allors.Adapters.Relation.SqlClient
                             sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
-                        case UnitTags.AllorsUnique:
+                        case UnitTags.Unique:
                             tableName = tableName + "_unique";
                             sqlDbType = SqlDbType.UniqueIdentifier;
                             sqlType = "uniqueidentifier";
@@ -370,37 +368,13 @@ namespace Allors.Adapters.Relation.SqlClient
 
         public abstract bool IsObjectIdLong { get; }
 
-        public string SqlTypeForObject
-        {
-            get
-            {
-                return this.sqlTypeForObject;
-            }
-        }
+        public string SqlTypeForObject => this.sqlTypeForObject;
 
-        public SqlDbType SqlDbTypeForObject
-        {
-            get
-            {
-                return this.sqlDbTypeForObject;
-            }
-        }
+        public SqlDbType SqlDbTypeForObject { get; }
 
-        public Database Database
-        {
-            get
-            {
-                return this.database;
-            }
-        }
+        public Database Database => this.database;
 
-        public SqlMetaData SqlMetaDataForObject
-        {
-            get
-            {
-                return this.sqlMetaDataForObject;
-            }
-        }
+        public SqlMetaData SqlMetaDataForObject { get; }
 
         public string GetTableName(IAssociationType associationType)
         {

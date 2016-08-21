@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory
+namespace Allors.Adapters.Relation.SqlClient.ReadCommitted
 {
     using Allors;
     using Adapters;

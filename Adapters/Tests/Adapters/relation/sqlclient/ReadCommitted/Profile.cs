@@ -14,34 +14,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Object.SqlClient.ReadCommitted
+using Allors;
+
+namespace Allors.Adapters.Relation.SqlClient.ReadCommitted
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.Meta;
     using Adapters;
+    using Adapters.Relation.SqlClient;
 
-    using Allors.Adapters.Object.SqlClient.Caching.Debugging;
-    using Allors.Adapters.Object.SqlClient.Debug;
+    using Allors.Meta;
+
+    using Configuration = Configuration;
 
     public class Profile : SqlClient.Profile
     {
-        private readonly Prefetchers prefetchers = new Prefetchers();
-
-        private readonly DebugConnectionFactory connectionFactory;
-        private readonly DebugCacheFactory cacheFactory;
-
-        public Profile()
-        {
-        }
-
-        public Profile(DebugConnectionFactory connectionFactory, DebugCacheFactory cacheFactory)
-        {
-            this.connectionFactory = connectionFactory;
-            this.cacheFactory = cacheFactory;
-        }
-
         public override Action[] Markers
         {
             get
@@ -49,7 +37,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
                 var markers = new List<Action> 
                 { 
                     () => { }, 
-                    () => this.Session.Commit(), 
+                    () => this.Session.Commit() 
                 };
 
                 if (Settings.ExtraMarkers)
@@ -57,11 +45,8 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
                     markers.Add(
                         () =>
                         {
-                            foreach (var @class in this.Session.Database.MetaPopulation.Classes)
-                            {
-                                var prefetchPolicy = this.prefetchers[@class];
-                                this.Session.Prefetch(prefetchPolicy, this.Session.Extent(@class));
-                            }
+                            this.Session.Commit();
+                            //((Database)this.Session.Population).Cache.Invalidate();
                         });
                 }
 
@@ -69,16 +54,14 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
             }
         }
 
-        protected override string ConnectionString => System.Configuration.ConfigurationManager.ConnectionStrings["sqlclientobject"].ConnectionString;
+        protected override string ConnectionString => System.Configuration.ConfigurationManager.ConnectionStrings["sqlclientrelation"].ConnectionString;
 
         public IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
         {
-            var configuration = new SqlClient.Configuration
+            var configuration = new Configuration
                                     {
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
-                                        ConnectionString = this.ConnectionString,
-                                        ConnectionFactory = this.connectionFactory,
-                                        CacheFactory = this.cacheFactory
+                                        ConnectionString = this.ConnectionString
                                     };
             var database = new Database(configuration);
 
@@ -97,12 +80,10 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 
         public override IDatabase CreateDatabase()
         {
-            var configuration = new SqlClient.Configuration
+            var configuration = new Configuration
             {
                 ObjectFactory = this.ObjectFactory,
-                ConnectionString = this.ConnectionString,
-                ConnectionFactory = this.connectionFactory,
-                CacheFactory = this.cacheFactory
+                ConnectionString = this.ConnectionString
             };
 
             var database = new Database(configuration);

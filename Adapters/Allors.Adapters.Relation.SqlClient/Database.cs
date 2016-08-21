@@ -14,8 +14,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Relation.SqlClient
 {
     using System;
@@ -24,8 +22,10 @@ namespace Allors.Adapters.Relation.SqlClient
     using System.Data.Common;
     using System.Data.SqlClient;
     using System.Xml;
-    using Allors.Meta;
+
     using Adapters;
+
+    using Allors.Meta;
 
     public class Database : IDatabase
     {
@@ -37,17 +37,12 @@ namespace Allors.Adapters.Relation.SqlClient
 
         private readonly Mapping mapping;
 
-        private readonly string id;
-
         // Configuration
-        private readonly ObjectIds objectIds;
         private readonly IObjectFactory objectFactory;
         private readonly IRoleCache roleCache;
         private readonly IClassCache classCache;
         private readonly string connectionString;
-        private readonly IsolationLevel isolationLevel;
-        private readonly int commandTimeout;
-        private readonly string schemaName;
+
         private readonly bool useViews;
 
         private Dictionary<string, object> properties;
@@ -69,20 +64,20 @@ namespace Allors.Adapters.Relation.SqlClient
             var applicationName = connectionStringBuilder.ApplicationName.Trim();
             if (!string.IsNullOrWhiteSpace(applicationName))
             {
-                this.id = applicationName;
+                this.Id = applicationName;
             }
             else
             {
                 if (!string.IsNullOrWhiteSpace(connectionStringBuilder.InitialCatalog))
                 {
-                    this.id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
+                    this.Id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
                 }
                 else
                 {
                     using (this.connection = new SqlConnection(this.connectionString))
                     {
                         this.connection.Open();
-                        this.id = this.connection.Database.ToLowerInvariant();
+                        this.Id = this.connection.Database.ToLowerInvariant();
                     }
                 }
             }
@@ -98,143 +93,43 @@ namespace Allors.Adapters.Relation.SqlClient
                 throw new ArgumentException("Domain is invalid");
             }
 
-            this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
             this.roleCache = configuration.RoleCache ?? new RoleCache();
             this.classCache = configuration.ClassCache ?? new ClassCache();
-            this.commandTimeout = configuration.CommandTimeout ?? 30;
-            this.isolationLevel = configuration.IsolationLevel ?? IsolationLevel.Snapshot;
-            this.schemaName = configuration.SchemaName ?? "allors";
+            this.CommandTimeout = configuration.CommandTimeout ?? 30;
+            this.IsolationLevel = configuration.IsolationLevel ?? IsolationLevel.Snapshot;
+            this.SchemaName = configuration.SchemaName ?? "allors";
             this.useViews = configuration.UseViews ?? true;
-            
-            if (this.ObjectIds is ObjectIdsInteger)
-            {
-                this.mapping = new MappingInteger(this);
-            }
-            else if (this.ObjectIds is ObjectIdsLong)
-            {
-                this.mapping = new MappingLong(this);
-            }
-            else
-            {
-                throw new NotSupportedException("ObjectIds of type " + this.ObjectIds.GetType() + " are not supported.");
-            }   
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
         
-        public string Id 
-        {
-            get
-            {
-                return this.id;
-            }
-        }
+        public string Id { get; }
 
-        public IObjectFactory ObjectFactory 
-        {
-            get
-            {
-                return this.objectFactory;
-            }
-        }
+        public IObjectFactory ObjectFactory => this.objectFactory;
 
-        public IClassCache ClassCache
-        {
-            get
-            {
-                return this.classCache;
-            }
-        }
+        public IClassCache ClassCache => this.classCache;
 
-        public IRoleCache RoleCache
-        {
-            get
-            {
-                return this.roleCache;
-            }
-        }
+        public IRoleCache RoleCache => this.roleCache;
 
-        public bool IsDatabase
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool IsDatabase => true;
 
-        public bool IsWorkspace 
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool IsWorkspace => false;
 
-        public bool IsShared 
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool IsShared => true;
 
-        public IMetaPopulation MetaPopulation 
-        {
-            get
-            {
-                return this.ObjectFactory.MetaPopulation;
-            }
-        }
+        public IMetaPopulation MetaPopulation => this.ObjectFactory.MetaPopulation;
 
-        public string ConnectionString
-        {
-            get
-            {
-                return this.connectionString;
-            }
-        }
+        public string ConnectionString => this.connectionString;
 
-        public string SchemaName
-        {
-            get
-            {
-                return this.schemaName;
-            }
-        }
+        public string SchemaName { get; }
 
-        public int CommandTimeout
-        {
-            get
-            {
-                return this.commandTimeout;
-            }
-        }
+        public int CommandTimeout { get; }
 
-        public IsolationLevel IsolationLevel
-        {
-            get
-            {
-                return this.isolationLevel;
-            }
-        }
+        public IsolationLevel IsolationLevel { get; }
 
-        public ObjectIds ObjectIds
-        {
-            get
-            {
-                return this.objectIds;
-            }
-        }
-
-        public Mapping Mapping
-        {
-            get
-            {
-                return this.mapping;
-            }
-        }
+        public Mapping Mapping => this.mapping;
 
         public bool IsValid
         {
@@ -492,8 +387,8 @@ namespace Allors.Adapters.Relation.SqlClient
                 {
                     var objectArray = oids[i].Split(Serialization.ObjectSplitterCharArray);
 
-                    var objectId = new ObjectIdLong(long.Parse(objectArray[0]));
-                    var cacheId = new ObjectVersionLong(objectArray[1]);
+                    var objectId = long.Parse(objectArray[0]);
+                    var cacheId = long.Parse(objectArray[1]);
 
                     if (!(objectType is IClass))
                     {
@@ -508,9 +403,9 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
 
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            command.Parameters.Add(Mapping.ParameterNameForObject, this.mapping.SqlDbTypeForObject).Value = objectId.Value;
+                            command.Parameters.Add(Mapping.ParameterNameForObject, this.mapping.SqlDbTypeForObject).Value = objectId;
                             command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
-                            command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = cacheId.Value;
+                            command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = cacheId;
 
                             command.ExecuteNonQuery();
                         }
@@ -529,7 +424,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
                         if (reader.Name.Equals(Serialization.Relation))
                         {
                             var associationString = reader.GetAttribute(Serialization.Association);
-                            var association = ObjectIds.Parse(associationString);
+                            var association = long.Parse(associationString);
 
                             if (reader.IsEmptyElement)
                             {
@@ -550,7 +445,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
 
                                 foreach (var roleString in roleStrings)
                                 {
-                                    var role = ObjectIds.Parse(roleString);
+                                    var role = long.Parse(roleString);
                                     //this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
 
                                     var cmdText = @"
@@ -559,8 +454,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association.Value;
-                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.SqlDbTypeForObject).Value = role.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association;
+                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.SqlDbTypeForObject).Value = role;
 
                                         command.ExecuteNonQuery();
                                     }
@@ -641,17 +536,17 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
                         if (reader.Name.Equals(Serialization.Relation))
                         {
                             var associationString = reader.GetAttribute(Serialization.Association);
-                            var association = ObjectIds.Parse(associationString);
+                            var association = long.Parse(associationString);
                             if (reader.IsEmptyElement)
                             {
                                 object role;
 
                                 // OnRelationNotLoaded(relationType.Id, association.ToString(), String.Empty);
-                                if (relationType.RoleType.ObjectType.Id == UnitIds.StringId)
+                                if (relationType.RoleType.ObjectType.Id == UnitIds.String)
                                 {
                                     role = string.Empty;
                                 }
-                                else if (relationType.RoleType.ObjectType.Id == UnitIds.BinaryId)
+                                else if (relationType.RoleType.ObjectType.Id == UnitIds.Binary)
                                 {
                                     role = EmptyByteArray;
                                 }
@@ -667,7 +562,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                 using (var command = this.CreateCommand(cmdText))
                                 {
-                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association.Value;
+                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association;
                                     command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                     command.ExecuteNonQuery();
@@ -689,7 +584,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association;
                                         command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                         command.ExecuteNonQuery();
@@ -778,13 +673,13 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                 writer.WriteStartElement(Serialization.Objects);
                 writer.WriteStartElement(Serialization.Database);
-                SaveObjects(writer);
+                this.SaveObjects(writer);
                 writer.WriteEndElement();
                 writer.WriteEndElement();
 
                 writer.WriteStartElement(Serialization.Relations);
                 writer.WriteStartElement(Serialization.Database);
-                SaveRelations(writer);
+                this.SaveRelations(writer);
                 writer.WriteEndElement();
                 writer.WriteEndElement();
 
@@ -938,10 +833,7 @@ ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
         {
             try
             {
-                if (this.transaction != null)
-                {
-                    this.transaction.Commit();
-                }
+                this.transaction?.Commit();
             }
             finally
             {
@@ -964,10 +856,7 @@ ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
         {
             try
             {
-                if (this.transaction != null)
-                {
-                    this.transaction.Rollback();
-                }
+                this.transaction?.Rollback();
             }
             finally
             {

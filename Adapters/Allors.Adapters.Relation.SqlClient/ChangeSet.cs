@@ -14,78 +14,47 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Relation.SqlClient
 {
     using System.Collections.Generic;
 
-    using Allors.Meta;
     using Adapters;
+
+    using Allors.Meta;
 
     public class ChangeSet : IChangeSet
     {
         private readonly EmptySet<IRoleType> emptySet;
 
-        private readonly HashSet<ObjectId> created;
-        private readonly HashSet<ObjectId> deleted;
+        private readonly HashSet<long> created;
+        private readonly HashSet<long> deleted;
 
-        private readonly HashSet<ObjectId> associations;
-        private readonly HashSet<ObjectId> roles;
+        private readonly HashSet<long> associations;
+        private readonly HashSet<long> roles;
 
-        private readonly Dictionary<ObjectId, ISet<IRoleType>> roleTypesByAssociation;
+        private readonly Dictionary<long, ISet<IRoleType>> roleTypesByAssociation;
 
         public ChangeSet()
         {
             this.emptySet = new EmptySet<IRoleType>();
-            this.created = new HashSet<ObjectId>();
-            this.deleted = new HashSet<ObjectId>();
-            this.associations = new HashSet<ObjectId>();
-            this.roles = new HashSet<ObjectId>();
-            this.roleTypesByAssociation = new Dictionary<ObjectId, ISet<IRoleType>>();
+            this.created = new HashSet<long>();
+            this.deleted = new HashSet<long>();
+            this.associations = new HashSet<long>();
+            this.roles = new HashSet<long>();
+            this.roleTypesByAssociation = new Dictionary<long, ISet<IRoleType>>();
         }
 
-        public ISet<ObjectId> Created
-        {
-            get
-            {
-                return this.created;
-            }
-        }
+        public ISet<long> Created => this.created;
 
-        public ISet<ObjectId> Deleted
-        {
-            get
-            {
-                return this.deleted;
-            }
-        }
+        public ISet<long> Deleted => this.deleted;
 
-        public ISet<ObjectId> Associations
-        {
-            get
-            {
-                return this.associations;
-            }
-        }
+        public ISet<long> Associations => this.associations;
 
-        public ISet<ObjectId> Roles
-        {
-            get
-            {
-                return this.roles;
-            }
-        }
+        public ISet<long> Roles => this.roles;
 
-        public IDictionary<ObjectId, ISet<IRoleType>> RoleTypesByAssociation
-        {
-            get
-            {
-                return this.roleTypesByAssociation;
-            }
-        }
+        public IDictionary<long, ISet<IRoleType>> RoleTypesByAssociation => this.roleTypesByAssociation;
 
-        public ISet<IRoleType> GetRoleTypes(ObjectId association)
+        public ISet<IRoleType> GetRoleTypes(long association)
         {
             ISet<IRoleType> roleTypes;
             if (this.RoleTypesByAssociation.TryGetValue(association, out roleTypes))
@@ -96,53 +65,53 @@ namespace Allors.Adapters.Relation.SqlClient
             return this.emptySet;
         }
 
-        public void OnCreated(ObjectId objectId)
+        public void OnCreated(long objectId)
         {
             this.created.Add(objectId);
         }
 
-        public void OnDeleted(ObjectId objectId)
+        public void OnDeleted(long objectId)
         {
             this.deleted.Add(objectId);
         }
 
-        public void OnChangingUnitRole(ObjectId association, IRoleType roleType)
+        public void OnChangingUnitRole(long association, IRoleType roleType)
         {
             this.associations.Add(association);
 
             this.RoleTypes(association).Add(roleType);
         }
 
-        public void OnChangingCompositeRole(ObjectId association, IRoleType roleType, ObjectId previousRole, ObjectId newRole)
+        public void OnChangingCompositeRole(long association, IRoleType roleType, long? previousRole, long? newRole)
         {
             this.associations.Add(association);
 
             if (previousRole != null)
             {
-                this.roles.Add(previousRole);
+                this.roles.Add(previousRole.Value);
             }
 
             if (newRole != null)
             {
-                this.roles.Add(newRole);
+                this.roles.Add(newRole.Value);
             }
 
             this.RoleTypes(association).Add(roleType);
         }
 
-        public void OnChangingCompositesRole(ObjectId association, IRoleType roleType, ObjectId changedRole)
+        public void OnChangingCompositesRole(long association, IRoleType roleType, long? changedRole)
         {
             this.associations.Add(association);
 
             if (changedRole != null)
             {
-                this.roles.Add(changedRole);
+                this.roles.Add(changedRole.Value);
             }
 
             this.RoleTypes(association).Add(roleType);
         }
 
-        private ISet<IRoleType> RoleTypes(ObjectId associationId)
+        private ISet<IRoleType> RoleTypes(long associationId)
         {
             ISet<IRoleType> roleTypes;
             if (!this.RoleTypesByAssociation.TryGetValue(associationId, out roleTypes))

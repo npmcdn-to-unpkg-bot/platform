@@ -32,7 +32,7 @@ namespace Allors.Adapters
 
         bool TryGetComposite(long associationId, object cacheId, IRoleType roleType, out long? roleId);
 
-        void SetComposite(long associationId, object cacheId, IRoleType roleType, long roleId);
+        void SetComposite(long associationId, object cacheId, IRoleType roleType, long? roleId);
 
         bool TryGetComposites(long associationId, object cacheId, IRoleType roleType, out long[] roleIds);
 

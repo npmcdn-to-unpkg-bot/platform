@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerializationTest.cs" company="Allors bvba">
+// <copyright file="CacheTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,23 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Memory
+namespace Allors.Adapters.Relation.SqlClient.ReadCommitted
 {
-    using Allors;
-    using Adapters;
-
     using NUnit.Framework;
 
     [TestFixture]
-    public class SerializationTest : Adapters.SerializationTest
+    public class CacheTest : Adapters.CacheTest
     {
         private readonly Profile profile = new Profile();
 
-        protected override IProfile Profile => this.profile;
-
-        protected override IDatabase CreatePopulation()
+        protected override IDatabase CreateDatabase()
         {
-            return this.profile.CreatePopulation();
+            return this.profile.CreateDatabase();
         }
 
         [TearDown]

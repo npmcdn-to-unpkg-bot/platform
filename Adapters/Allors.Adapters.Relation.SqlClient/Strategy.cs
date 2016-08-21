@@ -14,69 +14,44 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Adapters.Relation.SqlClient
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.Meta;
     using Adapters;
+
+    using Allors.Meta;
 
     public class Strategy : IStrategy
     {
         private readonly Session session;
-        private readonly ObjectId objectId;
+        private readonly long objectId;
         private IObject domainObject;
        
-        internal Strategy(Session session, ObjectId objectId)
+        internal Strategy(Session session, long objectId)
         {
             this.session = session;
             this.objectId = objectId;
         }
 
-        ISession IStrategy.Session 
-        {
-            get
-            {
-                return this.session;
-            }
-        }
-        
-        public ObjectId ObjectId
-        {
-            get
-            {
-                return this.objectId;
-            }
-        }
+        ISession IStrategy.Session => this.session;
 
-        public ObjectVersion ObjectVersion {
+        public long ObjectId => this.objectId;
+
+        public long ObjectVersion {
             get
             {
                 this.AssertNotDeleted();
                 var cacheId = this.session.GetCacheId(objectId);
-                return new ObjectVersionLong(cacheId);
+                return cacheId;
             }
         }
 
-        public bool IsDeleted 
-        {
-            get
-            {
-                return this.session.IsDeleted(this.objectId);
-            }
-        }
+        public bool IsDeleted => this.session.IsDeleted(this.objectId);
 
-        public bool IsNewInSession 
-        {
-            get
-            {
-                return this.session.IsNew(this.ObjectId);
-            }
-        }
+        public bool IsNewInSession => this.session.IsNew(this.ObjectId);
 
         public IClass Class
         {
@@ -87,13 +62,7 @@ namespace Allors.Adapters.Relation.SqlClient
             }
         }
 
-        internal IClass UncheckedObjectType
-        {
-            get
-            {
-                return this.session.GetObjectType(this.ObjectId);
-            }
-        }
+        internal IClass UncheckedObjectType => this.session.GetObjectType(this.ObjectId);
 
         public IObject GetObject()
         {
@@ -166,14 +135,14 @@ namespace Allors.Adapters.Relation.SqlClient
                 }
                 else
                 {
-                    ObjectId association;
+                    long? association;
                     switch (associationType.RelationType.Multiplicity)
                     {
                         case Multiplicity.OneToOne:
                             association = this.session.GetCompositeAssociationOneToOne(this.objectId, associationType);
                             if (association != null)
                             {
-                                this.session.RemoveCompositeRoleOneToOne(association, roleType);
+                                this.session.RemoveCompositeRoleOneToOne(association.Value, roleType);
                             }
 
                             break;
@@ -181,7 +150,7 @@ namespace Allors.Adapters.Relation.SqlClient
                             association = this.session.GetCompositeAssociationOneToMany(this.objectId, associationType);
                             if (association != null)
                             {
-                                this.session.RemoveCompositeRoleOneToMany(association, roleType, this.objectId);
+                                this.session.RemoveCompositeRoleOneToMany(association.Value, roleType, this.objectId);
                             }
 
                             break;
@@ -192,45 +161,45 @@ namespace Allors.Adapters.Relation.SqlClient
             this.session.Delete(this.objectId);
         }
 
-        public virtual bool ExistRole(IRoleType roleType)
+        public virtual bool ExistRole(IRelationType relationType)
         {
-            if (roleType.ObjectType is IUnit)
+            if (relationType.RoleType.ObjectType is IUnit)
             {
-                return this.ExistUnitRole(roleType);
+                return this.ExistUnitRole(relationType);
             }
 
-            if (roleType.IsMany)
+            if (relationType.RoleType.IsMany)
             {
-                return this.ExistCompositeRoles(roleType);
+                return this.ExistCompositeRoles(relationType);
             }
 
-            return this.ExistCompositeRole(roleType);
+            return this.ExistCompositeRole(relationType);
         }
 
-        public virtual object GetRole(IRoleType roleType)
+        public virtual object GetRole(IRelationType relationType)
         {
-            if (roleType.ObjectType is IUnit)
+            if (relationType.RoleType.ObjectType is IUnit)
             {
-                return this.GetUnitRole(roleType);
+                return this.GetUnitRole(relationType);
             }
 
-            if (roleType.IsMany)
+            if (relationType.RoleType.IsMany)
             {
-                return this.GetCompositeRoles(roleType);
+                return this.GetCompositeRoles(relationType);
             }
 
-            return this.GetCompositeRole(roleType);
+            return this.GetCompositeRole(relationType);
         }
 
-        public virtual void SetRole(IRoleType roleType, object value)
+        public virtual void SetRole(IRelationType relationType, object value)
         {
-            if (roleType.ObjectType is IUnit)
+            if (relationType.RoleType.ObjectType is IUnit)
             {
-                this.SetUnitRole(roleType, value);
+                this.SetUnitRole(relationType, value);
             }
             else
             {
-                if (roleType.IsMany)
+                if (relationType.RoleType.IsMany)
                 {
                     var roleExtent = value as Extent;
                     if (roleExtent == null)
@@ -240,171 +209,171 @@ namespace Allors.Adapters.Relation.SqlClient
                         roleExtent = (IObject[])roleList.ToArray(typeof(IObject));
                     }
 
-                    this.SetCompositeRoles(roleType, roleExtent);
+                    this.SetCompositeRoles(relationType, roleExtent);
                 }
                 else
                 {
-                    this.SetCompositeRole(roleType, (IObject)value);
+                    this.SetCompositeRole(relationType, (IObject)value);
                 }
             }
         }
 
-        public virtual void RemoveRole(IRoleType roleType)
+        public virtual void RemoveRole(IRelationType relationType)
         {
-            if (roleType.ObjectType is IUnit)
+            if (relationType.RoleType.ObjectType is IUnit)
             {
-                this.RemoveUnitRole(roleType);
+                this.RemoveUnitRole(relationType);
             }
             else
             {
-                if (roleType.IsMany)
+                if (relationType.RoleType.IsMany)
                 {
-                    this.RemoveCompositeRoles(roleType);
+                    this.RemoveCompositeRoles(relationType);
                 }
                 else
                 {
-                    this.RemoveCompositeRole(roleType);
+                    this.RemoveCompositeRole(relationType);
                 }
             }
         }
         
-        public bool ExistUnitRole(IRoleType roleType)
+        public bool ExistUnitRole(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            return this.session.ExistUnitRole(this.objectId, roleType);
+            return this.session.ExistUnitRole(this.objectId, relationType.RoleType);
         }
 
-        public object GetUnitRole(IRoleType roleType)
+        public object GetUnitRole(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            return this.session.GetUnitRole(this.ObjectId, roleType);
+            return this.session.GetUnitRole(this.ObjectId, relationType.RoleType);
         }
 
-        public void SetUnitRole(IRoleType roleType, object unit)
+        public void SetUnitRole(IRelationType relationType, object unit)
         {
             if (unit == null)
             {
-                this.RemoveUnitRole(roleType);
+                this.RemoveUnitRole(relationType);
                 return;
             }
 
             this.AssertNotDeleted();
 
-            RoleAssertions.UnitRoleChecks(this, roleType);
-            unit = roleType.Normalize(unit);
-            this.session.SetUnitRole(this.objectId, roleType, unit);
+            RoleAssertions.UnitRoleChecks(this, relationType.RoleType);
+            unit = relationType.RoleType.Normalize(unit);
+            this.session.SetUnitRole(this.objectId, relationType.RoleType, unit);
         }
 
-        public void RemoveUnitRole(IRoleType roleType)
+        public void RemoveUnitRole(IRelationType relationType)
         {
             this.AssertNotDeleted();
             
-            this.session.RemoveUnitRole(this.objectId, roleType);
+            this.session.RemoveUnitRole(this.objectId, relationType.RoleType);
         }
 
-        public bool ExistCompositeRole(IRoleType roleType)
+        public bool ExistCompositeRole(IRelationType relationType)
         {
             this.AssertNotDeleted();
             
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
-                    return this.session.ExistCompositeRoleOneToOne(this.objectId, roleType);
+                    return this.session.ExistCompositeRoleOneToOne(this.objectId, relationType.RoleType);
                 case Multiplicity.ManyToOne:
-                    return this.session.ExistCompositeRoleManyToOne(this.objectId, roleType);
+                    return this.session.ExistCompositeRoleManyToOne(this.objectId, relationType.RoleType);
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public IObject GetCompositeRole(IRoleType roleType)
+        public IObject GetCompositeRole(IRelationType relationType)
         {
             this.AssertNotDeleted();
             
-            ObjectId role;
-            switch (roleType.RelationType.Multiplicity)
+            long? role;
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
-                    role = this.session.GetCompositeRoleOneToOne(this.objectId, roleType);
+                    role = this.session.GetCompositeRoleOneToOne(this.objectId, relationType.RoleType);
                     break;
                 case Multiplicity.ManyToOne:
-                    role = this.session.GetCompositeRoleManyToOne(this.objectId, roleType);
+                    role = this.session.GetCompositeRoleManyToOne(this.objectId, relationType.RoleType);
                     break;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
 
-            return role != null ? new Strategy(this.session, role).GetObject() : null;
+            return role != null ? new Strategy(this.session, role.Value).GetObject() : null;
         }
 
-        public void SetCompositeRole(IRoleType roleType, IObject role)
+        public void SetCompositeRole(IRelationType relationType, IObject role)
         {
             this.AssertNotDeleted();
 
             if (role == null)
             {
-                this.RemoveCompositeRole(roleType);
+                this.RemoveCompositeRole(relationType);
                 return;
             }
 
-            RoleAssertions.CompositeRoleChecks(this, roleType, role);
+            RoleAssertions.CompositeRoleChecks(this, relationType.RoleType, role);
 
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
-                    this.session.SetCompositeRoleOneToOne(this.objectId, roleType, role.Id);
+                    this.session.SetCompositeRoleOneToOne(this.objectId, relationType.RoleType, role.Id);
                     return;
                 case Multiplicity.ManyToOne:
-                    this.session.SetCompositeRoleManyToOne(this.objectId, roleType, role.Id);
+                    this.session.SetCompositeRoleManyToOne(this.objectId, relationType.RoleType, role.Id);
                     return;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public void RemoveCompositeRole(IRoleType roleType)
+        public void RemoveCompositeRole(IRelationType relationType)
         {
             this.AssertNotDeleted();
-            RoleAssertions.CompositeRoleChecks(this, roleType);
+            RoleAssertions.CompositeRoleChecks(this, relationType.RoleType);
 
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
-                    this.session.RemoveCompositeRoleOneToOne(this.objectId, roleType);
+                    this.session.RemoveCompositeRoleOneToOne(this.objectId, relationType.RoleType);
                     return;
                 case Multiplicity.ManyToOne:
-                    this.session.RemoveCompositeRoleManyToOne(this.objectId, roleType);
+                    this.session.RemoveCompositeRoleManyToOne(this.objectId, relationType.RoleType);
                     return;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public bool ExistCompositeRoles(IRoleType roleType)
+        public bool ExistCompositeRoles(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    return this.session.ExistCompositeRoleOneToMany(this.objectId, roleType);
+                    return this.session.ExistCompositeRoleOneToMany(this.objectId, relationType.RoleType);
                 case Multiplicity.ManyToMany:
-                    return this.session.ExistCompositeRoleManyToMany(this.objectId, roleType);
+                    return this.session.ExistCompositeRoleManyToMany(this.objectId, relationType.RoleType);
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public Extent GetCompositeRoles(IRoleType roleType)
+        public Extent GetCompositeRoles(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            return new AllorsExtentFilteredSql(this.session, this, roleType);
+            return new AllorsExtentFilteredSql(this.session, this, relationType.RoleType);
         }
 
-        public void AddCompositeRole(IRoleType roleType, IObject role)
+        public void AddCompositeRole(IRelationType relationType, IObject role)
         {
             if (role == null)
             {
@@ -412,22 +381,22 @@ namespace Allors.Adapters.Relation.SqlClient
             }
 
             this.AssertNotDeleted();
-            RoleAssertions.CompositeRolesChecks(this, roleType, role);
+            RoleAssertions.CompositeRolesChecks(this, relationType.RoleType, role);
 
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    this.session.AddCompositeRoleOneToMany(this.objectId, roleType, role.Id);
+                    this.session.AddCompositeRoleOneToMany(this.objectId, relationType.RoleType, role.Id);
                     return;
                 case Multiplicity.ManyToMany:
-                    this.session.AddCompositeRoleManyToMany(this.objectId, roleType, role.Id);
+                    this.session.AddCompositeRoleManyToMany(this.objectId, relationType.RoleType, role.Id);
                     return;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public void RemoveCompositeRole(IRoleType roleType, IObject role)
+        public void RemoveCompositeRole(IRelationType relationType, IObject role)
         {
             if (role == null)
             {
@@ -435,184 +404,184 @@ namespace Allors.Adapters.Relation.SqlClient
             }
 
             this.AssertNotDeleted();
-            RoleAssertions.CompositeRolesChecks(this, roleType, role);
+            RoleAssertions.CompositeRolesChecks(this, relationType.RoleType, role);
 
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    this.session.RemoveCompositeRoleOneToMany(this.objectId, roleType, role.Id);
+                    this.session.RemoveCompositeRoleOneToMany(this.objectId, relationType.RoleType, role.Id);
                     return;
                 case Multiplicity.ManyToMany:
-                    this.session.RemoveCompositeRoleManyToMany(this.objectId, roleType, role.Id);
+                    this.session.RemoveCompositeRoleManyToMany(this.objectId, relationType.RoleType, role.Id);
                     return;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public void SetCompositeRoles(IRoleType roleType, Extent roles)
+        public void SetCompositeRoles(IRelationType relationType, Extent roles)
         {
             if (roles == null || roles.Count == 0)
             {
-                this.RemoveCompositeRoles(roleType);
+                this.RemoveCompositeRoles(relationType);
                 return;
             }
 
             this.AssertNotDeleted();
 
-            var roleObjectIds = new List<ObjectId>();
+            var roleObjectIds = new List<long>();
             foreach (IObject role in roles)
             {
                 if (role != null)
                 {
-                    RoleAssertions.CompositeRolesChecks(this, roleType, role);
+                    RoleAssertions.CompositeRolesChecks(this, relationType.RoleType, role);
                     roleObjectIds.Add(role.Id);
                 }
             }
 
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    this.session.SetCompositeRoleOneToMany(this.objectId, roleType, roleObjectIds.ToArray());
+                    this.session.SetCompositeRoleOneToMany(this.objectId, relationType.RoleType, roleObjectIds.ToArray());
                     return;
                 case Multiplicity.ManyToMany:
-                    this.session.SetCompositeRoleManyToMany(this.objectId, roleType, roleObjectIds.ToArray());
+                    this.session.SetCompositeRoleManyToMany(this.objectId, relationType.RoleType, roleObjectIds.ToArray());
                     return;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public void RemoveCompositeRoles(IRoleType roleType)
+        public void RemoveCompositeRoles(IRelationType relationType)
         {
             this.AssertNotDeleted();
-            RoleAssertions.CompositeRolesChecks(this, roleType);
+            RoleAssertions.CompositeRolesChecks(this, relationType.RoleType);
 
-            switch (roleType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    this.session.RemoveCompositeRolesOneToMany(this.objectId, roleType);
+                    this.session.RemoveCompositeRolesOneToMany(this.objectId, relationType.RoleType);
                     return;
                 case Multiplicity.ManyToMany:
-                    this.session.RemoveCompositeRolesManyToMany(this.objectId, roleType);
+                    this.session.RemoveCompositeRolesManyToMany(this.objectId, relationType.RoleType);
                     return;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public virtual bool ExistAssociation(IAssociationType associationType)
+        public virtual bool ExistAssociation(IRelationType relationType)
         {
             this.AssertNotDeleted();
             
-            if (associationType.IsMany)
+            if (relationType.AssociationType.IsMany)
             {
-                return this.ExistCompositeAssociations(associationType);
+                return this.ExistCompositeAssociations(relationType);
             }
 
-            return this.ExistCompositeAssociation(associationType);
+            return this.ExistCompositeAssociation(relationType);
         }
 
-        public virtual object GetAssociation(IAssociationType associationType)
+        public virtual object GetAssociation(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            if (associationType.IsMany)
+            if (relationType.AssociationType.IsMany)
             {
-                return this.GetCompositeAssociations(associationType);
+                return this.GetCompositeAssociations(relationType);
             }
 
-            return this.GetCompositeAssociation(associationType);
+            return this.GetCompositeAssociation(relationType);
         }
 
-        public bool ExistCompositeAssociation(IAssociationType associationType)
+        public bool ExistCompositeAssociation(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            switch (associationType.RelationType.Multiplicity)
-            {
-                case Multiplicity.OneToOne:
-                    return this.session.ExistCompositeAssociationOneToOne(this.objectId, associationType);
-                case Multiplicity.OneToMany:
-                    return this.session.ExistCompositeAssociationOneToMany(this.objectId, associationType);
-                default:
-                    throw new Exception("Unsupported multiplicity " + associationType.RelationType.Multiplicity);
-            }
-        }
-
-        public IObject GetCompositeAssociation(IAssociationType associationType)
-        {
-            this.AssertNotDeleted();
-
-            ObjectId association;
-            switch (associationType.RelationType.Multiplicity)
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
-                    association = this.session.GetCompositeAssociationOneToOne(this.objectId, associationType);
-                    break;
+                    return this.session.ExistCompositeAssociationOneToOne(this.objectId, relationType.AssociationType);
                 case Multiplicity.OneToMany:
-                    association = this.session.GetCompositeAssociationOneToMany(this.objectId, associationType);
-                    break;
+                    return this.session.ExistCompositeAssociationOneToMany(this.objectId, relationType.AssociationType);
                 default:
-                    throw new Exception("Unsupported multiplicity " + associationType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
-
-            return association != null ? new Strategy(this.session, association).GetObject() : null;
         }
 
-        public bool ExistCompositeAssociations(IAssociationType associationType)
+        public IObject GetCompositeAssociation(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            switch (associationType.RelationType.Multiplicity)
+            long? association;
+            switch (relationType.Multiplicity)
+            {
+                case Multiplicity.OneToOne:
+                    association = this.session.GetCompositeAssociationOneToOne(this.objectId, relationType.AssociationType);
+                    break;
+                case Multiplicity.OneToMany:
+                    association = this.session.GetCompositeAssociationOneToMany(this.objectId, relationType.AssociationType);
+                    break;
+                default:
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
+            }
+
+            return association != null ? new Strategy(this.session, association.Value).GetObject() : null;
+        }
+
+        public bool ExistCompositeAssociations(IRelationType relationType)
+        {
+            this.AssertNotDeleted();
+
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.ManyToOne:
-                    return this.session.ExistCompositeAssociationsManyToOne(this.objectId, associationType);
+                    return this.session.ExistCompositeAssociationsManyToOne(this.objectId, relationType.AssociationType);
                 case Multiplicity.ManyToMany:
-                    return this.session.ExistCompositeAssociationsManyToMany(this.objectId, associationType);
+                    return this.session.ExistCompositeAssociationsManyToMany(this.objectId, relationType.AssociationType);
                 default:
-                    throw new Exception("Unsupported multiplicity " + associationType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
         }
 
-        public Extent GetCompositeAssociations(IAssociationType associationType)
+        public Extent GetCompositeAssociations(IRelationType relationType)
         {
             this.AssertNotDeleted();
 
-            return new AllorsExtentFilteredSql(this.session, this, associationType);
+            return new AllorsExtentFilteredSql(this.session, this, relationType.AssociationType);
         }
 
-        public ObjectId[] ExtentGetCompositeRoles(IRoleType roleType)
+        public long[] ExtentGetCompositeRoles(IRelationType relationType)
         {
-            ObjectId[] roles;
-            switch (roleType.RelationType.Multiplicity)
+            long[] roles;
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    roles = this.session.GetCompositeRolesOneToMany(this.objectId, roleType);
+                    roles = this.session.GetCompositeRolesOneToMany(this.objectId, relationType.RoleType);
                     break;
                 case Multiplicity.ManyToMany:
-                    roles = this.session.GetCompositeRolesManyToMany(this.objectId, roleType);
+                    roles = this.session.GetCompositeRolesManyToMany(this.objectId, relationType.RoleType);
                     break;
                 default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
 
             return roles;
         }
 
-        public ObjectId[] ExtentGetCompositeAssociations(IAssociationType associationType)
+        public long[] ExtentGetCompositeAssociations(IRelationType relationType)
         {
-            ObjectId[] associations;
-            switch (associationType.RelationType.Multiplicity)
+            long[] associations;
+            switch (relationType.Multiplicity)
             {
                 case Multiplicity.ManyToOne:
-                    associations = this.session.GetCompositeAssociationsManyToOne(this.objectId, associationType);
+                    associations = this.session.GetCompositeAssociationsManyToOne(this.objectId, relationType.AssociationType);
                     break;
                 case Multiplicity.ManyToMany:
-                    associations = this.session.GetCompositeAssociationsManyToMany(this.objectId, associationType);
+                    associations = this.session.GetCompositeAssociationsManyToMany(this.objectId, relationType.AssociationType);
                     break;
                 default:
-                    throw new Exception("Unsupported multiplicity " + associationType.RelationType.Multiplicity);
+                    throw new Exception("Unsupported multiplicity " + relationType.Multiplicity);
             }
 
             return associations;

@@ -24,8 +24,6 @@ namespace Allors.Adapters.Object.SqlClient
     using Allors.Domain;
     using Allors.Meta;
 
-    using Domain;
-
     using NUnit.Framework;
 
     [TestFixture]

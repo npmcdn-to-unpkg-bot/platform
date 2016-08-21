@@ -103,6 +103,27 @@
     <Compile Include="Adapters\Profile.cs" />
     <Compile Include="Adapters\PropertiesTest.cs" />
     <Compile Include="Adapters\RelationExtentTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ExtentTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\Profile.cs" />
+    <Compile Include="Adapters\relation\sqlclient\Profile.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\CacheTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\ChangesTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\ExtentTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\LifeCycleTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\Many2ManyTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\Many2OneTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\One2ManyTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\One2OneTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\PropertiesTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\RelationExtentTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\SandboxTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\SchemaTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\SqlClientTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\SchemaTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\SqlClientTest.cs" />
+    <Compile Include="Adapters\relation\sqlclient\UnitTest.cs" />
     <Compile Include="Adapters\SandboxTest.cs" />
     <Compile Include="Adapters\SchemaTest.cs" />
     <Compile Include="Adapters\SerializationTest.cs" />
@@ -132,6 +153,10 @@
     <ProjectReference Include="..\Allors.Adapters.Object.SqlClient\Allors.Adapters.Object.SqlClient.csproj">
       <Project>{06bc1665-8fe8-4f04-9e80-ec2d54404ba7}</Project>
       <Name>Allors.Adapters.Object.SqlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Allors.Adapters.Relation.SqlClient\Allors.Adapters.Relation.SqlClient.csproj">
+      <Project>{91356b87-6321-45c3-88cc-d3deae2dc16c}</Project>
+      <Name>Allors.Adapters.Relation.SqlClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{50ed5307-33e3-4fda-8268-d844b77981c8}</Project>

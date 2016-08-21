@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IWorkspace.cs" company="Allors bvba">
+// <copyright file="IDatabase.cs" company="Allors bvba">
 //   Copyright 2002-2016 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,11 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Xml;
-using Allors.Meta;
-
 namespace Allors
 {
+    using System.Xml;
+
+    using Allors.Meta;
+
     /// <summary>
     /// A database is an online <see cref="IDatabase"/>.
     /// </summary>
@@ -45,18 +46,6 @@ namespace Allors
         ///   <c>true</c> if this database is shared; otherwise, <c>false</c>.
         /// </value>
         bool IsShared { get; }
-
-        /// <summary>
-        /// Initializes the database. If this population is persistent then
-        /// all existing objects will be deleted.
-        /// </summary>
-        void Init();
-
-        /// <summary>
-        /// Creates a new database Session.
-        /// </summary>
-        /// <returns>a newly created AllorsSession</returns>
-        ISession CreateSession();
 
         /// <summary>
         ///  Gets
@@ -109,6 +98,18 @@ namespace Allors
         }
         
         /// <summary>
+        /// Initializes the database. If this population is persistent then
+        /// all existing objects will be deleted.
+        /// </summary>
+        void Init();
+
+        /// <summary>
+        /// Creates a new database Session.
+        /// </summary>
+        /// <returns>a newly created AllorsSession</returns>
+        ISession CreateSession();
+
+        /// <summary>
         /// Loads the population from the <see cref="XmlReader"/>.
         /// </summary>
         /// <param name="reader">The reader.</param>
@@ -119,6 +120,5 @@ namespace Allors
         /// </summary>
         /// <param name="writer">The writer.</param>
         void Save(XmlWriter writer);
-
     }
 }

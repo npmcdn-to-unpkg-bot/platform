@@ -92,7 +92,7 @@ namespace Allors.Adapters
             return false;
         }
 
-        public void SetComposite(long association, object cacheId, IRoleType roleType, long role)
+        public void SetComposite(long association, object cacheId, IRoleType roleType, long? role)
         {
             Dictionary<long, CachedCompositeRole> entryByAssociation;
             if (!this.cachedCompositeRoleByAssociationByRoleType.TryGetValue(roleType, out entryByAssociation))
@@ -188,7 +188,7 @@ namespace Allors.Adapters
 
         private class CachedCompositeRole
         {
-            internal CachedCompositeRole(object cacheId, long role)
+            internal CachedCompositeRole(object cacheId, long? role)
             {
                 this.CacheId = cacheId;
                 this.Role = role;
@@ -196,7 +196,7 @@ namespace Allors.Adapters
 
             public object CacheId { get; }
 
-            public long Role { get; }
+            public long? Role { get; }
         }
 
         private class CachedCompositesRole

@@ -259,7 +259,7 @@ namespace Allors.Adapters.Relation.SqlClient
                 }
                 else if (paramValue is IObject)
                 {
-                    command.Parameters.AddWithValue(paramName, ((IObject)paramValue).Id.Value);
+                    command.Parameters.AddWithValue(paramName, ((IObject)paramValue).Id);
                 }
                 else
                 {

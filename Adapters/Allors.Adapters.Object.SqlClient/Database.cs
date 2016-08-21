@@ -348,7 +348,7 @@ namespace Allors.Adapters.Object.SqlClient
 
             try
             {
-                var load = this.CreateLoad(this.ObjectNotLoaded, this.RelationNotLoaded, reader);
+                var load = new Load(this, this.ObjectNotLoaded, this.RelationNotLoaded, reader);
                 load.Execute(session);
                 session.Commit();
             }
@@ -365,7 +365,7 @@ namespace Allors.Adapters.Object.SqlClient
             var session = new ManagementSession(this, this.ManagementConnectionFactory);
             try
             {
-                var save = this.CreateSave(writer);
+                var save = new Save(this, writer);
                 save.Execute(session);
             }
             finally
@@ -501,16 +501,6 @@ namespace Allors.Adapters.Object.SqlClient
         private void ResetSchema()
         {
             this.mapping = null;
-        }
-
-        private Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
-        {
-            return new Load(this, objectNotLoaded, relationNotLoaded, reader);
-        }
-
-        private Save CreateSave(XmlWriter writer)
-        {
-            return new Save(this, writer);
         }
     }
 }

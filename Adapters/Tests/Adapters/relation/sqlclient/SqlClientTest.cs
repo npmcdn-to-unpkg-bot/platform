@@ -64,14 +64,14 @@ namespace Allors.Adapters.Relation.SqlClient
             {
                 init();
 
-                int Count = Settings.LargeArraySize;
+                var count = Settings.LargeArraySize;
 
                 using (var session = this.CreateSession())
                 {
-                    var c1s = (Extent<C1>)session.Create(Classes.C1, Count);
-                    var c2s = (Extent<C2>)session.Create(Classes.C2, Count);
+                    var c1s = (Extent<C1>)session.Create(MetaC1.Instance.ObjectType, count);
+                    var c2s = (Extent<C2>)session.Create(MetaC2.Instance.ObjectType, count);
 
-                    for (var i = 0; i < Count; i++)
+                    for (var i = 0; i < count; i++)
                     {
                         var c1 = c1s[i];
 

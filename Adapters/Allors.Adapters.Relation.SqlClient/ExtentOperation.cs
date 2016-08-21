@@ -77,7 +77,7 @@ namespace Allors.Adapters.Relation.SqlClient
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        protected override ObjectId[] GetObjectIds()
+        protected override long[] GetObjectIds()
         {
             this.first.Session.Flush();
 
@@ -85,19 +85,16 @@ namespace Allors.Adapters.Relation.SqlClient
 
             this.BuildSql(statement);
 
-            if (statement.Sorter != null)
-            {
-                statement.Sorter.BuildOrder(this.Sorter, this.Session.Database.Mapping, statement);
-            }
+            statement.Sorter?.BuildOrder(this.Sorter, this.Session.Database.Mapping, statement);
 
-            var objects = new List<ObjectId>();
+            var objects = new List<long>();
             using (var command = statement.CreateSqlCommand())
             {
                 using (DbDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var objectId = this.Session.Database.ObjectIds.Parse(reader.GetValue(0).ToString());
+                        var objectId = long.Parse(reader.GetValue(0).ToString());
                         objects.Add(objectId);
                     }
 

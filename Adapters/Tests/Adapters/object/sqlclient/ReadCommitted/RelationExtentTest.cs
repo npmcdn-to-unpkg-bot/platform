@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ExtentTest.cs" company="Allors bvba">
+// <copyright file="RelationExtentTest.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,7 +20,6 @@
 
 namespace Allors.Adapters.Object.SqlClient.ReadCommitted
 {
-    using Allors;
     using Adapters;
 
     using NUnit.Framework;
@@ -30,13 +29,7 @@ namespace Allors.Adapters.Object.SqlClient.ReadCommitted
     {
         private readonly Profile profile = new Profile();
 
-        protected override IProfile Profile
-        {
-            get
-            {
-                return this.profile;
-            }
-        }
+        protected override IProfile Profile => this.profile;
 
         [TearDown]
         protected void Dispose()
