@@ -35,7 +35,6 @@ namespace Allors.Adapters.Relation.SqlClient
 
         private readonly object lockObject = new object();
 
-        private readonly Mapping mapping;
 
         // Configuration
         private readonly IObjectFactory objectFactory;
@@ -93,6 +92,7 @@ namespace Allors.Adapters.Relation.SqlClient
                 throw new ArgumentException("Domain is invalid");
             }
 
+            this.Mapping = new Mapping(this);
             this.roleCache = configuration.RoleCache ?? new RoleCache();
             this.classCache = configuration.ClassCache ?? new ClassCache();
             this.CommandTimeout = configuration.CommandTimeout ?? 30;
@@ -129,7 +129,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
         public IsolationLevel IsolationLevel { get; }
 
-        public Mapping Mapping => this.mapping;
+        public Mapping Mapping { get; set; }
 
         public bool IsValid
         {
@@ -403,7 +403,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
 
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            command.Parameters.Add(Mapping.ParameterNameForObject, this.mapping.SqlDbTypeForObject).Value = objectId;
+                            command.Parameters.Add(Mapping.ParameterNameForObject, this.Mapping.SqlDbTypeForObject).Value = objectId;
                             command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                             command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = cacheId;
 
@@ -454,8 +454,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association;
-                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.SqlDbTypeForObject).Value = role;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.Mapping.SqlDbTypeForObject).Value = association;
+                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.SqlDbTypeForObject).Value = role;
 
                                         command.ExecuteNonQuery();
                                     }
@@ -562,8 +562,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                 using (var command = this.CreateCommand(cmdText))
                                 {
-                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association;
-                                    command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.GetSqlDbType(relationType.RoleType)).Value = role;
+                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, this.Mapping.SqlDbTypeForObject).Value = association;
+                                    command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                     command.ExecuteNonQuery();
                                 }
@@ -584,7 +584,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForObject).Value = association;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.Mapping.SqlDbTypeForObject).Value = association;
                                         command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                         command.ExecuteNonQuery();

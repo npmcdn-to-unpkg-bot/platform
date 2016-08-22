@@ -24,7 +24,7 @@ namespace Allors.Adapters.Relation.SqlClient
 
     using Microsoft.SqlServer.Server;
 
-    public abstract class Mapping
+    public class Mapping
     {
         public const string ParamPrefix = "@";
 
@@ -84,11 +84,11 @@ namespace Allors.Adapters.Relation.SqlClient
         private readonly Dictionary<IRelationType, string> procedureNameForRemoveRoleByRelationType;
         private readonly Dictionary<IRelationType, string> procedureNameForDeleteRoleByRelationType;
 
-        protected Mapping(Database database, string sqlTypeForObject, SqlDbType sqlDbTypeForObject)
+        public Mapping(Database database)
         {
             this.database = database;
-            this.sqlTypeForObject = sqlTypeForObject;
-            this.SqlDbTypeForObject = sqlDbTypeForObject;
+            this.sqlTypeForObject = "bigint";
+            this.SqlDbTypeForObject = SqlDbType.BigInt;
 
             if (!this.database.MetaPopulation.IsValid)
             {
@@ -363,10 +363,6 @@ namespace Allors.Adapters.Relation.SqlClient
                 this.sqlMetaDataByRoleType[roleType] = sqlMetaData;
             }
         }
-
-        public abstract bool IsObjectIdInteger { get; }
-
-        public abstract bool IsObjectIdLong { get; }
 
         public string SqlTypeForObject => this.sqlTypeForObject;
 

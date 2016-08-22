@@ -47,23 +47,11 @@ namespace Allors.Adapters.Relation.SqlClient
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
             var sqlDataRecord = new SqlDataRecord(this.mapping.GetSqlMetaData(this.roleType));
-            if (this.mapping.IsObjectIdInteger)
+            foreach (var association in this.associations)
             {
-                foreach (var association in this.associations)
-                {
-                    sqlDataRecord.SetInt32(0, (int)association);
-                    sqlDataRecord.SetValue(1, this.roleByAssociation[association]);
-                    yield return sqlDataRecord;
-                }
-            }
-            else
-            {
-                foreach (var association in this.associations)
-                {
-                    sqlDataRecord.SetInt64(0, (long)association);
-                    sqlDataRecord.SetValue(1, this.roleByAssociation[association]);
-                    yield return sqlDataRecord;
-                }
+                sqlDataRecord.SetInt64(0, (long)association);
+                sqlDataRecord.SetValue(1, this.roleByAssociation[association]);
+                yield return sqlDataRecord;
             }
         }
 

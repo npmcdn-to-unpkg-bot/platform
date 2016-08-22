@@ -710,110 +710,12 @@ CREATE INDEX " + indexName + @" ON " + this.mapping.Database.SchemaName + "." + 
                 {
                     foreach (var objectType in this.mapping.Database.MetaPopulation.Classes)
                     {
-                        // Table view
-                        var associationTypes = new List<IAssociationType>();
-                        var roleTypes = new List<IRoleType>();
+                        this.CreateObjectView(objectType, connection);
+                    }
 
-                        foreach (var associationType in objectType.AssociationTypes)
-                        {
-                            var relationType = associationType.RelationType;
-                            var roleType = relationType.RoleType;
-                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
-                            {
-                                associationTypes.Add(associationType);
-                            }
-                        }
-
-                        foreach (var roleType in objectType.RoleTypes)
-                        {
-                            var relationType = roleType.RelationType;
-                            var associationType = relationType.AssociationType;
-                            if (roleType.ObjectType is IUnit)
-                            {
-                                roleTypes.Add(roleType);
-                            }
-                            else
-                            {
-                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
-                                {
-                                    roleTypes.Add(roleType);
-                                }
-                            }
-                        }
-
-                        var viewName = objectType.Name;
-
-                        var stringBuilder = new StringBuilder();
-                        stringBuilder.Append("CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + viewName + "]\n");
-
-                        stringBuilder.Append("(o");
-                        foreach (var roleType in roleTypes)
-                        {
-                            stringBuilder.Append(", [" + roleType.SingularPropertyName + "]");
-                        }
-
-                        foreach (var associationType in associationTypes)
-                        {
-                            stringBuilder.Append(", [" + associationType.SingularPropertyName + "]");
-                        }
-
-                        stringBuilder.Append(")\n");
-
-                        stringBuilder.Append("AS\n");
-                        stringBuilder.Append("SELECT " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject);
-
-                        foreach (var roleType in roleTypes)
-                        {
-                            stringBuilder.Append(
-                                ",\n" + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + "." + Mapping.ColumnNameForRole);
-                        }
-
-                        foreach (var associationType in associationTypes)
-                        {
-                            stringBuilder.Append(
-                                ",\n" + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + "." + Mapping.ColumnNameForAssociation);
-                        }
-
-                        stringBuilder.Append("\nFROM " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "\n");
-
-                        foreach (var roleType in roleTypes)
-                        {
-                            stringBuilder.Append("LEFT JOIN " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + " ON ");
-                            stringBuilder.Append(this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject + "=");
-                            stringBuilder.Append(
-                                this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + "." + Mapping.ColumnNameForAssociation + "\n");
-                        }
-
-                        foreach (var associationType in associationTypes)
-                        {
-                            stringBuilder.Append("LEFT JOIN " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + " ON ");
-                            stringBuilder.Append(this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject + "=");
-                            stringBuilder.Append(this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + "." + Mapping.ColumnNameForRole + "\n");
-                        }
-
-                        stringBuilder.Append("WHERE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForType + "='" + objectType.Id + "'\n");
-
-                        var definition = stringBuilder.ToString();
-                        this.CreateView(connection, viewName, definition);
-
-                        // Column views
-                        foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
-                        {
-                            var associationType = relationType.AssociationType;
-                            var roleType = relationType.RoleType;
-
-                            if (!(roleType.ObjectType is IUnit) && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
-                            {
-                                viewName = relationType.RoleType.SingularFullName;
-
-                                definition = @"
-CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + viewName + @"]
-AS
-SELECT * FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + @"
-";
-                                this.CreateView(connection, viewName, definition);
-                            }
-                        }
+                    foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                    {
+                        this.CreateRelationView(relationType, connection);
                     }
                 }
                 finally
@@ -823,8 +725,118 @@ SELECT * FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTable
             }
         }
 
+        private void CreateObjectView(IClass objectType, SqlConnection connection)
+        {
+            // Table view
+            var associationTypes = new List<IAssociationType>();
+            var roleTypes = new List<IRoleType>();
+
+            foreach (var associationType in objectType.AssociationTypes)
+            {
+                var relationType = associationType.RelationType;
+                var roleType = relationType.RoleType;
+                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
+                {
+                    associationTypes.Add(associationType);
+                }
+            }
+
+            foreach (var roleType in objectType.RoleTypes)
+            {
+                var relationType = roleType.RelationType;
+                var associationType = relationType.AssociationType;
+                if (roleType.ObjectType is IUnit)
+                {
+                    roleTypes.Add(roleType);
+                }
+                else
+                {
+                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
+                    {
+                        roleTypes.Add(roleType);
+                    }
+                }
+            }
+
+            var viewName = objectType.Name;
+
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append("CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + viewName + "]\n");
+
+            stringBuilder.Append("(o");
+            foreach (var roleType in roleTypes)
+            {
+                stringBuilder.Append(", [" + roleType.SingularPropertyName + "]");
+            }
+
+            foreach (var associationType in associationTypes)
+            {
+                stringBuilder.Append(", [" + associationType.SingularPropertyName + "]");
+            }
+
+            stringBuilder.Append(")\n");
+
+            stringBuilder.Append("AS\n");
+            stringBuilder.Append("SELECT " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject);
+
+            foreach (var roleType in roleTypes)
+            {
+                stringBuilder.Append(",\n" + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + "." + Mapping.ColumnNameForRole);
+            }
+
+            foreach (var associationType in associationTypes)
+            {
+                stringBuilder.Append(",\n" + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + "." + Mapping.ColumnNameForAssociation);
+            }
+
+            stringBuilder.Append("\nFROM " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "\n");
+
+            foreach (var roleType in roleTypes)
+            {
+                stringBuilder.Append("LEFT JOIN " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + " ON ");
+                stringBuilder.Append(this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject + "=");
+                stringBuilder.Append(this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + "." + Mapping.ColumnNameForAssociation + "\n");
+            }
+
+            foreach (var associationType in associationTypes)
+            {
+                stringBuilder.Append("LEFT JOIN " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + " ON ");
+                stringBuilder.Append(this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject + "=");
+                stringBuilder.Append(this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + "." + Mapping.ColumnNameForRole + "\n");
+            }
+
+            stringBuilder.Append("WHERE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForType + "='" + objectType.Id + "'\n");
+
+            var definition = stringBuilder.ToString();
+            this.CreateView(connection, viewName, definition);
+        }
+
+        private void CreateRelationView(IRelationType relationType, SqlConnection connection)
+        {
+            var associationType = relationType.AssociationType;
+            var roleType = relationType.RoleType;
+
+            if (!(roleType.ObjectType is IUnit)
+                && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
+            {
+                var viewName = relationType.RoleType.SingularFullName;
+
+                var definition = @"
+CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + viewName + @"]
+AS
+SELECT * FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + @"
+";
+                this.CreateView(connection, viewName, definition);
+            }
+        }
+
         private void CreateView(SqlConnection connection, string viewName, string definition)
         {
+            if (viewName.Equals("C1C1I12one2one"))
+            {
+                Console.WriteLine(1);
+            }
+
             var view = this.schema.GetView(viewName);
             if (view != null && !view.IsDefinitionCompatible(definition))
             {
