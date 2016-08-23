@@ -14,6 +14,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Linq;
+
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
@@ -615,104 +617,37 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var mapping = this.database.Mapping;
 
-            var command = new SqlCommand("SELECT * FROM " + mapping.TableNameForObjects, connection);
-            var dataTable = new DataTable();
-            dataTable.Load(command.ExecuteReader());
+            var objectsTableReader = new ObjectsTableReader(this.objectTypeByObjectId, this.objectVersionByObjectId);
 
-            foreach (var pair in this.objectTypeByObjectId)
+            using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
             {
-                var objectId = pair.Key;
-                var objectType = pair.Value;
-                var objectVersion = this.objectVersionByObjectId[objectId];
-
-                var dataRow = dataTable.NewRow();
-
-                dataRow[Mapping.ColumnNameForObject] = objectId;
-                dataRow[Mapping.ColumnNameForClass] = objectType.Id;
-                dataRow[Mapping.ColumnNameForVersion] = objectVersion;
-
-                dataTable.Rows.Add(dataRow);
+                sqlBulkCopy.BulkCopyTimeout = 0;
+                sqlBulkCopy.BatchSize = 5000;
+                sqlBulkCopy.DestinationTableName = mapping.TableNameForObjects;
+                sqlBulkCopy.WriteToServer(objectsTableReader);
             }
-
-            this.BulkCopy(connection, mapping.TableNameForObjects, dataTable);
         }
-
+        
         private void WriteObjectTables(SqlConnection connection)
         {
             var mapping = this.database.Mapping;
 
-            foreach (var @class in mapping.Database.MetaPopulation.Classes)
+            var associationIdsByClass = this.objectTypeByObjectId.GroupBy(v => (IClass)v.Value, v=>v.Key).ToDictionary(g => g.Key, g => g.ToArray()); ;
+
+            foreach (var pair in associationIdsByClass)
             {
-                var tableName = mapping.TableNameForObjectByClass[@class];
+                var @class = pair.Key;
+                var objectIds = pair.Value;
 
-                var command = new SqlCommand("SELECT * FROM " + tableName, connection);
-                var dataTable = new DataTable();
-                dataTable.Load(command.ExecuteReader());
+                var objectTableReader = new ObjectTableReader(@class, mapping, objectIds, this.associationIdByRoleIdByRelationTypeId, this.roleByAssociationIdByRelationTypeId);
 
-                foreach (var pair in this.objectTypeByObjectId)
+                using (var sqlBulkCopy = new SqlBulkCopy(connection))
                 {
-                    var objectId = pair.Key;
-                    var objectType = pair.Value;
-                    if (!objectType.Equals(@class))
-                    {
-                        continue;
-                    }
-
-                    var dataRow = dataTable.NewRow();
-
-                    dataRow[Mapping.ColumnNameForObject] = objectId;
-                    dataRow[Mapping.ColumnNameForClass] = objectType.Id;
-
-                    foreach (var associationType in @class.AssociationTypes)
-                    {
-                        Dictionary<long, long> associationIdByRoleId;
-                        if (this.associationIdByRoleIdByRelationTypeId.TryGetValue(associationType.RelationType, out associationIdByRoleId))
-                        {
-                            long association;
-                            if (associationIdByRoleId.TryGetValue(objectId, out association))
-                            {
-                                var relationType = associationType.RelationType;
-                                var roleType = relationType.RoleType;
-                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
-                                {
-                                    dataRow[mapping.UnescapedColumnNameByRelationType[relationType]] = association;
-                                }
-                            }
-                        }
-                    }
-
-                    foreach (var roleType in @class.RoleTypes)
-                    {
-                        var relationType = roleType.RelationType;
-                        var associationType = relationType.AssociationType;
-
-                        Dictionary<long, object> roleByAssociationId;
-                        if (this.roleByAssociationIdByRelationTypeId.TryGetValue(relationType, out roleByAssociationId))
-                        {
-                            object role;
-                            if (roleByAssociationId.TryGetValue(objectId, out role))
-                            {
-                                if (roleType.ObjectType.IsUnit)
-                                {
-                                    var columnName = mapping.UnescapedColumnNameByRelationType[relationType];
-                                    dataRow[columnName] = role;
-                                }
-                                else
-                                {
-                                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
-                                    {
-                                        var columnName = mapping.UnescapedColumnNameByRelationType[relationType];
-                                        dataRow[columnName] = role;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    dataTable.Rows.Add(dataRow);
+                    sqlBulkCopy.BulkCopyTimeout = 0;
+                    sqlBulkCopy.BatchSize = 5000;
+                    sqlBulkCopy.DestinationTableName = mapping.TableNameForObjectByClass[@class];
+                    sqlBulkCopy.WriteToServer(objectTableReader);
                 }
-
-                this.BulkCopy(connection, tableName, dataTable);
             }
         }
 
@@ -727,54 +662,21 @@ namespace Allors.Adapters.Object.SqlClient
 
                 if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
                 {
-                    var tableName = mapping.TableNameForRelationByRelationType[relationType];
-                    
-                    var command = new SqlCommand("SELECT * FROM " + tableName, connection);
-                    var dataTable = new DataTable();
-                    dataTable.Load(command.ExecuteReader());
 
                     Dictionary<long, object> roleByAssociationId;
                     if (this.roleByAssociationIdByRelationTypeId.TryGetValue(relationType, out roleByAssociationId))
                     {
-                        foreach (var pair in roleByAssociationId)
-                        {
-                            var associationId = pair.Key;
+                        var objectTableReader = new RelationTableReader(roleByAssociationId);
 
-                            if (relationType.RoleType.IsOne)
-                            {
-                                var roleId = pair.Value;
-                                var dataRow = dataTable.NewRow();
-                                dataRow[Mapping.ColumnNameForAssociation] = associationId;
-                                dataRow[Mapping.ColumnNameForRole] = roleId;
-                                dataTable.Rows.Add(dataRow);
-                            }
-                            else
-                            {
-                                var roleIds = (IEnumerable<long>)pair.Value;
-                                foreach (var roleId in  roleIds)
-                                {
-                                    var dataRow = dataTable.NewRow();
-                                    dataRow[Mapping.ColumnNameForAssociation] = associationId;
-                                    dataRow[Mapping.ColumnNameForRole] = roleId;
-                                    dataTable.Rows.Add(dataRow);
-                                }
-                            }
+                        using (var sqlBulkCopy = new SqlBulkCopy(connection))
+                        {
+                            sqlBulkCopy.BulkCopyTimeout = 0;
+                            sqlBulkCopy.BatchSize = 5000;
+                            sqlBulkCopy.DestinationTableName = mapping.TableNameForRelationByRelationType[relationType];
+                            sqlBulkCopy.WriteToServer(objectTableReader);
                         }
                     }
-
-                    this.BulkCopy(connection, tableName, dataTable);
                 }
-            }
-        }
-
-        private void BulkCopy(SqlConnection connection, string tableName, DataTable dataTable)
-        {
-            using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
-            {
-                sqlBulkCopy.BulkCopyTimeout = 0;
-                sqlBulkCopy.BatchSize = 5000;
-                sqlBulkCopy.DestinationTableName = tableName;
-                sqlBulkCopy.WriteToServer(dataTable);
             }
         }
 
