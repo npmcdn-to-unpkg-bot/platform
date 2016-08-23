@@ -14,15 +14,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections;
-using System.Data.SqlClient;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Text;
+    using System.Data.SqlClient;
     using System.Xml;
 
     using Adapters;
@@ -75,6 +72,8 @@ namespace Allors.Adapters.Object.SqlClient
                     this.WriteObjectTables(connection);
 
                     this.WriteRelationTables(connection);
+
+                    connection.Close();
                 }
                 catch (Exception e)
                 {
@@ -335,14 +334,7 @@ namespace Allors.Adapters.Object.SqlClient
                                     }
                                     else
                                     {
-                                        if (relationType.RoleType.SingularFullName.Equals("C1C1C2one2many"))
-                                        {
-                                            Console.WriteLine(0);
-                                        }
-
-                                        if (!(relationType.AssociationType.IsMany && relationType.RoleType.IsMany) &&
-                                            relationType.ExistExclusiveClasses &&
-                                            relationType.RoleType.IsMany)
+                                        if (!(relationType.AssociationType.IsMany && relationType.RoleType.IsMany) && relationType.ExistExclusiveClasses && relationType.RoleType.IsMany)
                                         {
                                             var associationIdByRoleId = GetAssociationIdByRoleId(relationType);
                                             this.ReadCompositeRelations(relationType, associationIdByRoleId);
@@ -402,7 +394,6 @@ namespace Allors.Adapters.Object.SqlClient
                                 }
                                 else
                                 {
-                                    var exclusiveRootClass = associationConcreteClass;
                                     switch (((IUnit)relationType.RoleType.ObjectType).UnitTag)
                                     {
                                         case UnitTags.String:
@@ -428,8 +419,7 @@ namespace Allors.Adapters.Object.SqlClient
                             else
                             {
                                 var value = this.reader.ReadString();
-                                if (associationConcreteClass == null ||
-                                   !this.database.ContainsConcreteClass(relationType.AssociationType.ObjectType, associationConcreteClass))
+                                if (associationConcreteClass == null || !this.database.ContainsConcreteClass(relationType.AssociationType.ObjectType, associationConcreteClass))
                                 {
                                     this.OnRelationNotLoaded(relationType.Id, associationIdString, value);
                                 }
@@ -437,7 +427,6 @@ namespace Allors.Adapters.Object.SqlClient
                                 {
                                     try
                                     {
-                                        var exclusiveRootClass = (IComposite)associationConcreteClass;
                                         var unitTypeTag = ((IUnit)relationType.RoleType.ObjectType).UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 
@@ -645,12 +634,7 @@ namespace Allors.Adapters.Object.SqlClient
                 dataTable.Rows.Add(dataRow);
             }
 
-            using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
-            {
-                sqlBulkCopy.DestinationTableName = mapping.TableNameForObjects;
-                sqlBulkCopy.WriteToServer(dataTable);
-            }
-
+            this.BulkCopy(connection, mapping.TableNameForObjects, dataTable);
         }
 
         private void WriteObjectTables(SqlConnection connection)
@@ -691,7 +675,7 @@ namespace Allors.Adapters.Object.SqlClient
                                 var roleType = relationType.RoleType;
                                 if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                                 {
-                                    dataRow[mapping.ColumnNameByRelationType[relationType]] = association;
+                                    dataRow[mapping.UnescapedColumnNameByRelationType[relationType]] = association;
                                 }
                             }
                         }
@@ -710,13 +694,15 @@ namespace Allors.Adapters.Object.SqlClient
                             {
                                 if (roleType.ObjectType.IsUnit)
                                 {
-                                    dataRow[mapping.ColumnNameByRelationType[relationType]] = role;
+                                    var columnName = mapping.UnescapedColumnNameByRelationType[relationType];
+                                    dataRow[columnName] = role;
                                 }
                                 else
                                 {
                                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
                                     {
-                                        dataRow[mapping.ColumnNameByRelationType[relationType]] = role;
+                                        var columnName = mapping.UnescapedColumnNameByRelationType[relationType];
+                                        dataRow[columnName] = role;
                                     }
                                 }
                             }
@@ -726,11 +712,7 @@ namespace Allors.Adapters.Object.SqlClient
                     dataTable.Rows.Add(dataRow);
                 }
 
-                using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
-                {
-                    sqlBulkCopy.DestinationTableName = tableName;
-                    sqlBulkCopy.WriteToServer(dataTable);
-                }
+                this.BulkCopy(connection, tableName, dataTable);
             }
         }
 
@@ -780,12 +762,19 @@ namespace Allors.Adapters.Object.SqlClient
                         }
                     }
 
-                    using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
-                    {
-                        sqlBulkCopy.DestinationTableName = tableName;
-                        sqlBulkCopy.WriteToServer(dataTable);
-                    }
+                    this.BulkCopy(connection, tableName, dataTable);
                 }
+            }
+        }
+
+        private void BulkCopy(SqlConnection connection, string tableName, DataTable dataTable)
+        {
+            using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
+            {
+                sqlBulkCopy.BulkCopyTimeout = 0;
+                sqlBulkCopy.BatchSize = 5000;
+                sqlBulkCopy.DestinationTableName = tableName;
+                sqlBulkCopy.WriteToServer(dataTable);
             }
         }
 

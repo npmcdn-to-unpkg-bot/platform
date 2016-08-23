@@ -62,6 +62,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal readonly Dictionary<IClass, string> TableNameForObjectByClass;
         internal readonly Dictionary<IRelationType, string> ColumnNameByRelationType;
+        internal readonly Dictionary<IRelationType, string> UnescapedColumnNameByRelationType;
         internal readonly Dictionary<IRelationType, string> TableNameForRelationByRelationType;
 
         internal readonly string TableTypeNameForObject;
@@ -298,6 +299,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.TableNameForObjects = database.SchemaName + "." + "_o";
             this.TableNameForObjectByClass = new Dictionary<IClass, string>();
             this.ColumnNameByRelationType = new Dictionary<IRelationType, string>();
+            this.UnescapedColumnNameByRelationType = new Dictionary<IRelationType, string>();
             this.ParamNameByRoleType = new Dictionary<IRoleType, string>();
 
             foreach (var @class in this.Database.MetaPopulation.Classes)
@@ -311,6 +313,7 @@ namespace Allors.Adapters.Object.SqlClient
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                     {
                         this.ColumnNameByRelationType[relationType] = this.NormalizeName(associationType.SingularPropertyName);
+                        this.UnescapedColumnNameByRelationType[relationType] = associationType.SingularPropertyName;
                     }
                 }
 
@@ -321,6 +324,7 @@ namespace Allors.Adapters.Object.SqlClient
                     if (roleType.ObjectType.IsUnit)
                     {
                         this.ColumnNameByRelationType[relationType] = this.NormalizeName(roleType.SingularName);
+                        this.UnescapedColumnNameByRelationType[relationType] = roleType.SingularName;
                         this.ParamNameByRoleType[roleType] = string.Format(ParamFormat, roleType.SingularFullName);
                     }
                     else
@@ -328,6 +332,7 @@ namespace Allors.Adapters.Object.SqlClient
                         if (!(associationType3.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
                         {
                             this.ColumnNameByRelationType[relationType] = this.NormalizeName(roleType.SingularName);
+                            this.UnescapedColumnNameByRelationType[relationType] = roleType.SingularName;
                         }
                     }
                 }
