@@ -14,6 +14,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections;
+using System.Data.SqlClient;
+
 namespace Allors.Adapters.Object.SqlClient
 {
     using System;
@@ -38,7 +41,57 @@ namespace Allors.Adapters.Object.SqlClient
         private readonly Dictionary<long, IObjectType> objectTypeByObjectId;
         private readonly Dictionary<long, long> objectVersionByObjectId;
 
-        internal void Execute(ManagementSession session)
+        private readonly Dictionary<IRelationType, Dictionary<long, long>> associationIdByRoleIdByRelationTypeId;
+        private readonly Dictionary<IRelationType, Dictionary<long, object>> roleByAssociationIdByRelationTypeId;
+
+        internal Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
+        {
+            this.database = database;
+            this.objectNotLoaded = objectNotLoaded;
+            this.relationNotLoaded = relationNotLoaded;
+            this.reader = reader;
+
+            this.objectTypeByObjectId = new Dictionary<long, IObjectType>();
+            this.objectVersionByObjectId = new Dictionary<long, long>();
+
+            this.associationIdByRoleIdByRelationTypeId = new Dictionary<IRelationType, Dictionary<long, long>>();
+            this.roleByAssociationIdByRelationTypeId = new Dictionary<IRelationType, Dictionary<long, object>>();
+        }
+
+        internal void Execute()
+        {
+            this.Read();
+
+            this.database.Init();
+
+            using (var connection = new SqlConnection(this.database.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    this.WriteObjectsTable(connection);
+
+                    this.WriteObjectTables(connection);
+
+                    this.WriteRelationTables(connection);
+                }
+                catch (Exception e)
+                {
+                    try
+                    {
+                        connection.Close();
+                    }
+                    finally
+                    {
+                        this.database.Init();
+                        throw e;
+                    }
+                }
+            }
+        }
+
+        private bool Read()
         {
             while (this.reader.Read())
             {
@@ -51,16 +104,17 @@ namespace Allors.Adapters.Object.SqlClient
 
                         if (!this.reader.IsEmptyElement)
                         {
-                            this.LoadPopulation(session);
+                            this.ReadPopulation();
                         }
 
-                        return;
+                        return true;
                     }
                 }
             }
+            return false;
         }
 
-        protected virtual void LoadPopulation(ManagementSession session)
+        private void ReadPopulation()
         {
             while (this.reader.Read())
             {
@@ -72,22 +126,15 @@ namespace Allors.Adapters.Object.SqlClient
                         {
                             if (!this.reader.IsEmptyElement)
                             {
-                                this.LoadObjects(session);
+                                this.ReadObjects();
                             }
-
-                            this.LoadObjectsPostProcess(session);
-                            this.LoadObjectsSetCache(session);
-
-                            session.Commit();
                         }
                         else if (this.reader.Name.Equals(Serialization.Relations))
                         {
                             if (!this.reader.IsEmptyElement)
                             {
-                                this.LoadRelations(session);
+                                this.ReadRelations();
                             }
-
-                            session.Commit();
                         }
                         else
                         {
@@ -106,7 +153,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        protected virtual void LoadObjects(ManagementSession session)
+        private void ReadObjects()
         {
             while (this.reader.Read())
             {
@@ -117,7 +164,7 @@ namespace Allors.Adapters.Object.SqlClient
                         {
                             if (!this.reader.IsEmptyElement)
                             {
-                                this.LoadDatabaseObjectTypes(session);
+                                this.ReadObjectTypes();
                             }
                         }
                         else if (reader.Name.Equals(Serialization.Workspace))
@@ -141,7 +188,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        protected virtual void LoadDatabaseObjectTypes(ManagementSession session)
+        private void ReadObjectTypes()
         {
             while (this.reader.Read())
             {
@@ -191,11 +238,6 @@ namespace Allors.Adapters.Object.SqlClient
                                         this.OnObjectNotLoaded(objectTypeId, objectIdString);
                                     }
                                 }
-
-                                if (canLoad)
-                                {
-                                    session.LoadObjects(objectType, objectIds);
-                                }
                             }
                         }
                         else
@@ -215,7 +257,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        protected virtual void LoadRelations(ManagementSession session)
+        private void ReadRelations()
         {
             while (this.reader.Read())
             {
@@ -226,7 +268,7 @@ namespace Allors.Adapters.Object.SqlClient
                         {
                             if (!this.reader.IsEmptyElement)
                             {
-                                this.LoadDatabaseRelationTypes(session);
+                                this.ReadRelationTypes();
                             }
                         }
                         else if (this.reader.Name.Equals(Serialization.Workspace))
@@ -251,7 +293,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        protected virtual void LoadDatabaseRelationTypes(ManagementSession session)
+        private void ReadRelationTypes()
         {
             while (this.reader.Read())
             {
@@ -281,15 +323,8 @@ namespace Allors.Adapters.Object.SqlClient
                                     }
                                     else
                                     {
-                                        var relationsByExclusiveRootClass = new Dictionary<IObjectType, List<UnitRelation>>();
-                                        this.LoadUnitRelations(relationType, relationsByExclusiveRootClass);
-
-                                        foreach (var dictionaryEntry in relationsByExclusiveRootClass)
-                                        {
-                                            var exclusiveRootClass = dictionaryEntry.Key;
-                                            var relations = dictionaryEntry.Value;
-                                            session.LoadUnitRelations(relations, exclusiveRootClass, relationType.RoleType);
-                                        }
+                                        var roleByObjectId = GetRoleByAssociationId(relationType);
+                                        this.ReadUnitRelations(relationType, roleByObjectId);
                                     }
                                 }
                                 else if (this.reader.Name.Equals(Serialization.RelationTypeComposite))
@@ -300,11 +335,22 @@ namespace Allors.Adapters.Object.SqlClient
                                     }
                                     else
                                     {
-                                        var relations = new List<CompositeRelation>();
-                                        this.LoadCompositeRelations(relationType, relations);
-                                        if (relations.Count > 0)
+                                        if (relationType.RoleType.SingularFullName.Equals("C1C1C2one2many"))
                                         {
-                                            session.LoadCompositeRelations(relationType.RoleType, relations);
+                                            Console.WriteLine(0);
+                                        }
+
+                                        if (!(relationType.AssociationType.IsMany && relationType.RoleType.IsMany) &&
+                                            relationType.ExistExclusiveClasses &&
+                                            relationType.RoleType.IsMany)
+                                        {
+                                            var associationIdByRoleId = GetAssociationIdByRoleId(relationType);
+                                            this.ReadCompositeRelations(relationType, associationIdByRoleId);
+                                        }
+                                        else
+                                        {
+                                            var roleByObjectId = GetRoleByAssociationId(relationType);
+                                            this.ReadCompositeRelations(relationType, roleByObjectId);
                                         }
                                     }
                                 }
@@ -329,7 +375,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        protected void LoadUnitRelations(IRelationType relationType, Dictionary<IObjectType, List<UnitRelation>> relationsByExclusiveRootClass)
+        private void ReadUnitRelations(IRelationType relationType, Dictionary<long, object> roleByObjectId)
         {
             while (this.reader.Read())
             {
@@ -350,8 +396,7 @@ namespace Allors.Adapters.Object.SqlClient
 
                             if (this.reader.IsEmptyElement)
                             {
-                                if (associationConcreteClass == null ||
-                                    !this.database.ContainsConcreteClass(relationType.AssociationType.ObjectType, associationConcreteClass))
+                                if (associationConcreteClass == null || !this.database.ContainsConcreteClass(relationType.AssociationType.ObjectType, associationConcreteClass))
                                 {
                                     this.OnRelationNotLoaded(relationType.Id, associationIdString, string.Empty);
                                 }
@@ -362,31 +407,14 @@ namespace Allors.Adapters.Object.SqlClient
                                     {
                                         case UnitTags.String:
                                             {
-                                                List<UnitRelation> relations;
-                                                if (
-                                                    !relationsByExclusiveRootClass.TryGetValue(associationConcreteClass, out relations))
-                                                {
-                                                    relations = new List<UnitRelation>();
-                                                    relationsByExclusiveRootClass[exclusiveRootClass] = relations;
-                                                }
-
-                                                var unitRelation = new UnitRelation(associationId, string.Empty);
-                                                relations.Add(unitRelation);
+                                                roleByObjectId.Add(associationId, string.Empty);
                                             }
 
                                             break;
 
                                         case UnitTags.Binary:
                                             {
-                                                List<UnitRelation> relations;
-                                                if (!relationsByExclusiveRootClass.TryGetValue(associationConcreteClass, out relations))
-                                                {
-                                                    relations = new List<UnitRelation>();
-                                                    relationsByExclusiveRootClass[exclusiveRootClass] = relations;
-                                                }
-
-                                                var unitRelation = new UnitRelation(associationId, EmptyByteArray);
-                                                relations.Add(unitRelation);
+                                                roleByObjectId.Add(associationId, EmptyByteArray);
                                             }
 
                                             break;
@@ -413,15 +441,7 @@ namespace Allors.Adapters.Object.SqlClient
                                         var unitTypeTag = ((IUnit)relationType.RoleType.ObjectType).UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 
-                                        List<UnitRelation> relations;
-                                        if (!relationsByExclusiveRootClass.TryGetValue(associationConcreteClass, out relations))
-                                        {
-                                            relations = new List<UnitRelation>();
-                                            relationsByExclusiveRootClass[exclusiveRootClass] = relations;
-                                        }
-
-                                        var unitRelation = new UnitRelation(associationId, unit);
-                                        relations.Add(unitRelation);
+                                        roleByObjectId.Add(associationId, unit);
                                     }
                                     catch
                                     {
@@ -447,7 +467,7 @@ namespace Allors.Adapters.Object.SqlClient
             }
         }
 
-        protected void LoadCompositeRelations(IRelationType relationType, List<CompositeRelation> relations)
+        private void ReadCompositeRelations(IRelationType relationType, Dictionary<long,long> associationIdByRoleId)
         {
             while (this.reader.Read())
             {
@@ -467,9 +487,9 @@ namespace Allors.Adapters.Object.SqlClient
                                 throw new Exception("Role is missing");
                             }
 
-                            var association = long.Parse(associationIdString);
+                            var associationId = long.Parse(associationIdString);
                             IObjectType associationConcreteClass;
-                            this.objectTypeByObjectId.TryGetValue(association, out associationConcreteClass);
+                            this.objectTypeByObjectId.TryGetValue(associationId, out associationConcreteClass);
 
                             var value = this.reader.ReadString();
                             var rs = value.Split(Serialization.ObjectsSplitterCharArray);
@@ -487,18 +507,17 @@ namespace Allors.Adapters.Object.SqlClient
                             {
                                 foreach (var r in rs)
                                 {
-                                    var role = long.Parse(r);
+                                    var roleId = long.Parse(r);
                                     IObjectType roleConcreteClass;
-                                    this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
+                                    this.objectTypeByObjectId.TryGetValue(roleId, out roleConcreteClass);
 
-                                    if (roleConcreteClass == null ||
-                                        !this.database.ContainsConcreteClass(relationType.RoleType.ObjectType, roleConcreteClass))
+                                    if (roleConcreteClass == null || !this.database.ContainsConcreteClass(relationType.RoleType.ObjectType, roleConcreteClass))
                                     {
                                         this.OnRelationNotLoaded(relationType.Id, associationIdString, r);
                                     }
                                     else
                                     {
-                                        relations.Add(new CompositeRelation(association, role));
+                                        associationIdByRoleId.Add(roleId, associationId);
                                     }
                                 }
                             }
@@ -517,6 +536,304 @@ namespace Allors.Adapters.Object.SqlClient
 
                         return;
                 }
+            }
+        }
+
+        private void ReadCompositeRelations(IRelationType relationType, Dictionary<long, object> roleByAssociationId)
+        {
+            while (this.reader.Read())
+            {
+                switch (this.reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        if (this.reader.Name.Equals(Serialization.Relation))
+                        {
+                            var associationIdString = this.reader.GetAttribute(Serialization.Association);
+                            if (string.IsNullOrEmpty(associationIdString))
+                            {
+                                throw new Exception("Association id is missing");
+                            }
+
+                            if (this.reader.IsEmptyElement)
+                            {
+                                throw new Exception("Role is missing");
+                            }
+
+                            var associationId = long.Parse(associationIdString);
+                            IObjectType associationConcreteClass;
+                            this.objectTypeByObjectId.TryGetValue(associationId, out associationConcreteClass);
+
+                            var value = this.reader.ReadString();
+                            var rs = value.Split(Serialization.ObjectsSplitterCharArray);
+
+                            if (associationConcreteClass == null ||
+                                !this.database.ContainsConcreteClass(relationType.AssociationType.ObjectType, associationConcreteClass) ||
+                                (relationType.RoleType.IsOne && rs.Length > 1))
+                            {
+                                foreach (var r in rs)
+                                {
+                                    this.OnRelationNotLoaded(relationType.Id, associationIdString, r);
+                                }
+                            }
+                            else
+                            {
+                                if (relationType.RoleType.IsOne)
+                                {
+                                    var roleId = long.Parse(rs[0]);
+                                    roleByAssociationId.Add(associationId, roleId);
+                                }
+                                else
+                                {
+                                    var roleList = new List<long>();
+                                    foreach (var r in rs)
+                                    {
+                                        var role = long.Parse(r);
+                                        IObjectType roleConcreteClass;
+                                        this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
+
+                                        if (roleConcreteClass == null || !this.database.ContainsConcreteClass(relationType.RoleType.ObjectType, roleConcreteClass))
+                                        {
+                                            this.OnRelationNotLoaded(relationType.Id, associationIdString, r);
+                                        }
+                                        else
+                                        {
+                                            roleList.Add(role);
+                                        }
+                                    }
+
+                                    roleByAssociationId.Add(associationId, roleList.ToArray());
+                                }
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Unknown child element <" + this.reader.Name + "> in parent element <" + Serialization.RelationTypeComposite + ">");
+                        }
+
+                        break;
+                    case XmlNodeType.EndElement:
+                        if (!this.reader.Name.Equals(Serialization.RelationTypeComposite))
+                        {
+                            throw new Exception("Expected closing element </" + Serialization.RelationTypeComposite + ">");
+                        }
+
+                        return;
+                }
+            }
+        }
+
+        private void WriteObjectsTable(SqlConnection connection)
+        {
+            var mapping = this.database.Mapping;
+
+            var command = new SqlCommand("SELECT * FROM " + mapping.TableNameForObjects, connection);
+            var dataTable = new DataTable();
+            dataTable.Load(command.ExecuteReader());
+
+            foreach (var pair in this.objectTypeByObjectId)
+            {
+                var objectId = pair.Key;
+                var objectType = pair.Value;
+                var objectVersion = this.objectVersionByObjectId[objectId];
+
+                var dataRow = dataTable.NewRow();
+
+                dataRow[Mapping.ColumnNameForObject] = objectId;
+                dataRow[Mapping.ColumnNameForClass] = objectType.Id;
+                dataRow[Mapping.ColumnNameForVersion] = objectVersion;
+
+                dataTable.Rows.Add(dataRow);
+            }
+
+            using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
+            {
+                sqlBulkCopy.DestinationTableName = mapping.TableNameForObjects;
+                sqlBulkCopy.WriteToServer(dataTable);
+            }
+
+        }
+
+        private void WriteObjectTables(SqlConnection connection)
+        {
+            var mapping = this.database.Mapping;
+
+            foreach (var @class in mapping.Database.MetaPopulation.Classes)
+            {
+                var tableName = mapping.TableNameForObjectByClass[@class];
+
+                var command = new SqlCommand("SELECT * FROM " + tableName, connection);
+                var dataTable = new DataTable();
+                dataTable.Load(command.ExecuteReader());
+
+                foreach (var pair in this.objectTypeByObjectId)
+                {
+                    var objectId = pair.Key;
+                    var objectType = pair.Value;
+                    if (!objectType.Equals(@class))
+                    {
+                        continue;
+                    }
+
+                    var dataRow = dataTable.NewRow();
+
+                    dataRow[Mapping.ColumnNameForObject] = objectId;
+                    dataRow[Mapping.ColumnNameForClass] = objectType.Id;
+
+                    foreach (var associationType in @class.AssociationTypes)
+                    {
+                        Dictionary<long, long> associationIdByRoleId;
+                        if (this.associationIdByRoleIdByRelationTypeId.TryGetValue(associationType.RelationType, out associationIdByRoleId))
+                        {
+                            long association;
+                            if (associationIdByRoleId.TryGetValue(objectId, out association))
+                            {
+                                var relationType = associationType.RelationType;
+                                var roleType = relationType.RoleType;
+                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
+                                {
+                                    dataRow[mapping.ColumnNameByRelationType[relationType]] = association;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (var roleType in @class.RoleTypes)
+                    {
+                        var relationType = roleType.RelationType;
+                        var associationType = relationType.AssociationType;
+
+                        Dictionary<long, object> roleByAssociationId;
+                        if (this.roleByAssociationIdByRelationTypeId.TryGetValue(relationType, out roleByAssociationId))
+                        {
+                            object role;
+                            if (roleByAssociationId.TryGetValue(objectId, out role))
+                            {
+                                if (roleType.ObjectType.IsUnit)
+                                {
+                                    dataRow[mapping.ColumnNameByRelationType[relationType]] = role;
+                                }
+                                else
+                                {
+                                    if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
+                                    {
+                                        dataRow[mapping.ColumnNameByRelationType[relationType]] = role;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    dataTable.Rows.Add(dataRow);
+                }
+
+                using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
+                {
+                    sqlBulkCopy.DestinationTableName = tableName;
+                    sqlBulkCopy.WriteToServer(dataTable);
+                }
+            }
+        }
+
+        private void WriteRelationTables(SqlConnection connection)
+        {
+            var mapping = this.database.Mapping;
+
+            foreach (var relationType in mapping.Database.MetaPopulation.RelationTypes)
+            {
+                var associationType = relationType.AssociationType;
+                var roleType = relationType.RoleType;
+
+                if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
+                {
+                    var tableName = mapping.TableNameForRelationByRelationType[relationType];
+                    
+                    var command = new SqlCommand("SELECT * FROM " + tableName, connection);
+                    var dataTable = new DataTable();
+                    dataTable.Load(command.ExecuteReader());
+
+                    Dictionary<long, object> roleByAssociationId;
+                    if (this.roleByAssociationIdByRelationTypeId.TryGetValue(relationType, out roleByAssociationId))
+                    {
+                        foreach (var pair in roleByAssociationId)
+                        {
+                            var associationId = pair.Key;
+
+                            if (relationType.RoleType.IsOne)
+                            {
+                                var roleId = pair.Value;
+                                var dataRow = dataTable.NewRow();
+                                dataRow[Mapping.ColumnNameForAssociation] = associationId;
+                                dataRow[Mapping.ColumnNameForRole] = roleId;
+                                dataTable.Rows.Add(dataRow);
+                            }
+                            else
+                            {
+                                var roleIds = (IEnumerable<long>)pair.Value;
+                                foreach (var roleId in  roleIds)
+                                {
+                                    var dataRow = dataTable.NewRow();
+                                    dataRow[Mapping.ColumnNameForAssociation] = associationId;
+                                    dataRow[Mapping.ColumnNameForRole] = roleId;
+                                    dataTable.Rows.Add(dataRow);
+                                }
+                            }
+                        }
+                    }
+
+                    using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
+                    {
+                        sqlBulkCopy.DestinationTableName = tableName;
+                        sqlBulkCopy.WriteToServer(dataTable);
+                    }
+                }
+            }
+        }
+
+        private Dictionary<long, long> GetAssociationIdByRoleId(IRelationType relationType)
+        {
+            Dictionary<long, long> associationIdByRoleId;
+            if (!this.associationIdByRoleIdByRelationTypeId.TryGetValue(relationType, out associationIdByRoleId))
+            {
+                associationIdByRoleId = new Dictionary<long, long>();
+                this.associationIdByRoleIdByRelationTypeId[relationType] = associationIdByRoleId;
+            }
+            return associationIdByRoleId;
+        }
+
+        private Dictionary<long, object> GetRoleByAssociationId(IRelationType relationType)
+        {
+            Dictionary<long, object> roleByAssociationId;
+            if (!this.roleByAssociationIdByRelationTypeId.TryGetValue(relationType, out roleByAssociationId))
+            {
+                roleByAssociationId = new Dictionary<long, object>();
+                this.roleByAssociationIdByRelationTypeId[relationType] = roleByAssociationId;
+            }
+            return roleByAssociationId;
+        }
+
+        #region Load Errors
+        private void OnObjectNotLoaded(Guid objectTypeId, string allorsObjectId)
+        {
+            if (this.objectNotLoaded != null)
+            {
+                this.objectNotLoaded(this, new ObjectNotLoadedEventArgs(objectTypeId, allorsObjectId));
+            }
+            else
+            {
+                throw new Exception("Object not loaded: " + objectTypeId + ":" + allorsObjectId);
+            }
+        }
+
+        private void OnRelationNotLoaded(Guid relationTypeId, string associationObjectId, string roleContents)
+        {
+            var args = new RelationNotLoadedEventArgs(relationTypeId, associationObjectId, roleContents);
+            if (this.relationNotLoaded != null)
+            {
+                this.relationNotLoaded(this, args);
+            }
+            else
+            {
+                throw new Exception("Role not loaded: " + args);
             }
         }
 
@@ -583,108 +900,6 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
         }
-
-        private void OnObjectNotLoaded(Guid objectTypeId, string allorsObjectId)
-        {
-            if (this.objectNotLoaded != null)
-            {
-                this.objectNotLoaded(this, new ObjectNotLoadedEventArgs(objectTypeId, allorsObjectId));
-            }
-            else
-            {
-                throw new Exception("Object not loaded: " + objectTypeId + ":" + allorsObjectId);
-            }
-        }
-
-        private void OnRelationNotLoaded(Guid relationTypeId, string associationObjectId, string roleContents)
-        {
-            var args = new RelationNotLoadedEventArgs(relationTypeId, associationObjectId, roleContents);
-            if (this.relationNotLoaded != null)
-            {
-                this.relationNotLoaded(this, args);
-            }
-            else
-            {
-                throw new Exception("Role not loaded: " + args);
-            }
-        }
-
-        internal Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
-        {
-            this.database = database;
-            this.objectNotLoaded = objectNotLoaded;
-            this.relationNotLoaded = relationNotLoaded;
-            this.reader = reader;
-
-            this.objectTypeByObjectId = new Dictionary<long, IObjectType>();
-            this.objectVersionByObjectId = new Dictionary<long, long>();
-        }
-
-        private void LoadObjectsPostProcess(ManagementSession session)
-        {
-            var sql = new StringBuilder();
-
-            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " ON");
-            lock (this)
-            {
-                var command = session.Connection.CreateCommand();
-                command.CommandText = sql.ToString();
-                using (command)
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
-
-            foreach (var type in this.database.MetaPopulation.Composites)
-            {
-                if (type.IsClass)
-                {
-                    sql = new StringBuilder();
-                    sql.Append("INSERT INTO " + this.database.Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + "," + Mapping.ColumnNameForVersion + ")\n");
-                    sql.Append("SELECT " + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForClass + ", " + Reference.InitialVersion + "\n");
-                    sql.Append("FROM " + this.database.Mapping.TableNameForObjectByClass[type.ExclusiveClass]);
-
-                    lock (this)
-                    {
-                        var command = session.Connection.CreateCommand();
-                        command.CommandText = sql.ToString();
-                        using (command)
-                        {
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-            }
-
-            sql = new StringBuilder();
-            sql.Append("SET IDENTITY_INSERT " + this.database.Mapping.TableNameForObjects + " OFF");
-            lock (this)
-            {
-                var command = session.Connection.CreateCommand();
-                command.CommandText = sql.ToString();
-                using (command)
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private void LoadObjectsSetCache(ManagementSession session)
-        {
-            var sql = this.database.Mapping.ProcedureNameForSetVersion;
-            var command = session.Connection.CreateCommand();
-            command.CommandText = sql;
-            command.CommandType = CommandType.StoredProcedure;
-
-            var sqlParameter = command.CreateParameter();
-            sqlParameter.SqlDbType = SqlDbType.Structured;
-            sqlParameter.TypeName = this.database.Mapping.TableTypeNameForVersionedObject;
-            sqlParameter.ParameterName = Mapping.ParamNameForTableType;
-            sqlParameter.Value = this.database.CreateVersionedObjectTable(this.objectVersionByObjectId);
-
-            command.Parameters.Add(sqlParameter);
-
-            command.ExecuteNonQuery();
-        }
+        #endregion
     }
 }

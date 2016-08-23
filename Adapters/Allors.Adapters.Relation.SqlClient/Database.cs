@@ -383,9 +383,9 @@ namespace Allors.Adapters.Relation.SqlClient
                 var oidsString = reader.ReadString();
                 var oids = oidsString.Split(Serialization.ObjectsSplitterCharArray);
 
-                for (var i = 0; i < oids.Length; i++)
+                foreach (var oid in oids)
                 {
-                    var objectArray = oids[i].Split(Serialization.ObjectSplitterCharArray);
+                    var objectArray = oid.Split(Serialization.ObjectSplitterCharArray);
 
                     var objectId = long.Parse(objectArray[0]);
                     var cacheId = long.Parse(objectArray[1]);

@@ -342,35 +342,27 @@ namespace Allors.Adapters.Object.SqlClient
 
         public void Load(XmlReader reader)
         {
-            this.Init();
-
-            var session = new ManagementSession(this, this.ManagementConnectionFactory);
-
-            try
+            lock (this)
             {
                 var load = new Load(this, this.ObjectNotLoaded, this.RelationNotLoaded, reader);
-                load.Execute(session);
-                session.Commit();
-            }
-            catch
-            {
-                session.Rollback();
-                this.Init();
-                throw;
+                load.Execute();
             }
         }
 
         public void Save(XmlWriter writer)
         {
-            var session = new ManagementSession(this, this.ManagementConnectionFactory);
-            try
+            lock (this)
             {
-                var save = new Save(this, writer);
-                save.Execute(session);
-            }
-            finally
-            {
-                session.Rollback();
+                var session = new ManagementSession(this, this.ManagementConnectionFactory);
+                try
+                {
+                    var save = new Save(this, writer);
+                    save.Execute(session);
+                }
+                finally
+                {
+                    session.Rollback();
+                }
             }
         }
 

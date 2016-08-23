@@ -51,7 +51,7 @@
     <Compile Include="ExtentSort.cs" />
     <Compile Include="ExtentStatement.cs" />
     <Compile Include="Initialization.cs" />
-    <Compile Include="Mapping\Mapping.cs" />
+    <Compile Include="Schema\Mapping.cs" />
     <Compile Include="Predicates\And.cs" />
     <Compile Include="Predicates\AssociationContainedInEnumerable.cs" />
     <Compile Include="Predicates\AssociationContainedInExtent.cs" />
