@@ -18,21 +18,42 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Net.NetworkInformation;
 using Allors.Meta;
 
 namespace Allors.Adapters.Object.SqlClient
 {
     internal class ObjectsTableReader : IDataReader
     {
-        private readonly Dictionary<long, long> objectVersionByObjectId;
-        private readonly IEnumerator<KeyValuePair<long,IObjectType>>  enumerator;
+        private readonly IEnumerator<KeyValuePair<long, IObjectType>> enumerator;
 
-        internal ObjectsTableReader(Dictionary<long, IObjectType> objectTypeByObjectId, Dictionary<long, long> objectVersionByObjectId)
+        private readonly Func<KeyValuePair<long, IObjectType>, object>[] getValueFuncs;
+
+        internal ObjectsTableReader(Dictionary<long, IObjectType> objectTypeByObjectId, Dictionary<long, long> objectVersionByObjectId, DataColumnCollection columns)
         {
-            this.objectVersionByObjectId = objectVersionByObjectId;
             this.enumerator = objectTypeByObjectId.GetEnumerator();
+
+            this.getValueFuncs = new Func<KeyValuePair<long, IObjectType>, object>[columns.Count];
+            for(var i=0; i<columns.Count; i++)
+            {
+                var column = columns[i];
+
+                switch (column.ColumnName.ToLowerInvariant())
+                {
+                    case Mapping.ColumnNameForObject:
+                        this.getValueFuncs[i] = current => current.Key; 
+                        break;
+                    case Mapping.ColumnNameForClass:
+                        this.getValueFuncs[i] = current => current.Value.Id;
+                        break;
+                    case Mapping.ColumnNameForVersion:
+                        this.getValueFuncs[i] = current => objectVersionByObjectId[current.Key];
+                        break;
+                }
+            }
         }
-        
+
         public int FieldCount => 3;
 
         public bool Read()
@@ -41,51 +62,12 @@ namespace Allors.Adapters.Object.SqlClient
             return result;
         }
 
-        public string GetName(int i)
-        {
-            switch (i)
-            {
-                case 0:
-                    return Mapping.ColumnNameForObject;
-                case 1:
-                    return Mapping.ColumnNameForClass;
-                case 2:
-                    return Mapping.ColumnNameForVersion;
-                default:
-                    return default(string);
-            }
-        }
-
-        public int GetOrdinal(string name)
-        {
-            switch (name)
-            {
-                case Mapping.ColumnNameForObject:
-                    return 0;
-                case Mapping.ColumnNameForClass:
-                    return 1;
-                case Mapping.ColumnNameForVersion:
-                    return 2;
-                default:
-                    return -1;
-            }
-        }
-
         public object GetValue(int i)
         {
             var current = this.enumerator.Current;
-
-            switch (i)
-            {
-                case 0:
-                    return current.Key;
-                case 1:
-                    return current.Value.Id;
-                case 2:
-                    return this.objectVersionByObjectId[current.Key];
-                default:
-                    return null;
-            }
+            var getValueFunc = this.getValueFuncs[i];
+            var value = getValueFunc(current);
+            return value;
         }
 
         #region Not Supported
@@ -100,6 +82,16 @@ namespace Allors.Adapters.Object.SqlClient
         }
 
         public DataTable GetSchemaTable()
+        {
+            throw new NotSupportedException();
+        }
+
+        public string GetName(int i)
+        {
+            throw new NotSupportedException();
+        }
+
+        public int GetOrdinal(string name)
         {
             throw new NotSupportedException();
         }

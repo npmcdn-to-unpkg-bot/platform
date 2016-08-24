@@ -23,35 +23,27 @@ namespace Allors.Adapters.Object.SqlClient
 
     internal class ObjectTableReader : IDataReader
     {
-        private readonly Guid classId;
-        private readonly Mapping mapping;
-        private readonly Dictionary<IRelationType, Dictionary<long, long>> associationIdByRoleIdByRelationTypeId;
-        private readonly Dictionary<IRelationType, Dictionary<long, object>> roleByAssociationIdByRelationTypeId;
-
         private readonly IEnumerator<long> enumerator;
-        private IPropertyType[] properties;
 
-        public ObjectTableReader(IClass @class, Mapping mapping, IEnumerable<long> objectIds, Dictionary<IRelationType, Dictionary<long, long>> associationIdByRoleIdByRelationTypeId, Dictionary<IRelationType, Dictionary<long, object>> roleByAssociationIdByRelationTypeId)
+        private readonly Func<long, object>[] getValueFuncs;
+
+        public ObjectTableReader(IClass @class, Mapping mapping, IEnumerable<long> objectIds, Dictionary<IRelationType, Dictionary<long, long>> associationIdByRoleIdByRelationTypeId, Dictionary<IRelationType, Dictionary<long, object>> roleByAssociationIdByRelationTypeId, DataColumnCollection columns)
         {
-            this.classId = @class.Id;
-            this.mapping = mapping;
-            this.associationIdByRoleIdByRelationTypeId = associationIdByRoleIdByRelationTypeId;
-            this.roleByAssociationIdByRelationTypeId = roleByAssociationIdByRelationTypeId;
-
             this.enumerator = objectIds.GetEnumerator();
 
-            var propertyList = new List<IPropertyType> {null, null};
-            
+            var associationTypeByLowerCasedFieldName = new Dictionary<string, IAssociationType>();
             foreach (var associationType in @class.AssociationTypes)
             {
                 var relationType = associationType.RelationType;
                 var roleType = relationType.RoleType;
                 if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && roleType.IsMany)
                 {
-                    propertyList.Add(associationType);
+                    var fieldName = mapping.UnescapedColumnNameByRelationType[relationType].ToLowerInvariant();
+                    associationTypeByLowerCasedFieldName.Add(fieldName, associationType);
                 }
             }
 
+            var roleTypeByLowerCasedFieldName = new Dictionary<string, IRoleType>();
             foreach (var roleType in @class.RoleTypes)
             {
                 var relationType = roleType.RelationType;
@@ -59,99 +51,108 @@ namespace Allors.Adapters.Object.SqlClient
 
                 if (roleType.ObjectType.IsUnit)
                 {
-                    propertyList.Add(roleType);
+                    var fieldName = mapping.UnescapedColumnNameByRelationType[relationType].ToLowerInvariant();
+                    roleTypeByLowerCasedFieldName.Add(fieldName, roleType);
                 }
                 else
                 {
                     if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveClasses && !roleType.IsMany)
                     {
-                        propertyList.Add(roleType);
+                        var fieldName = mapping.UnescapedColumnNameByRelationType[relationType].ToLowerInvariant();
+                        roleTypeByLowerCasedFieldName.Add(fieldName, roleType);
                     }
                 }
             }
 
-            this.properties = propertyList.ToArray();
+            this.getValueFuncs = new Func<long, object>[columns.Count];
+            for (var i = 0; i < columns.Count; i++)
+            {
+                var column = columns[i];
+
+                var lowerCasedColumnName = column.ColumnName.ToLowerInvariant();
+
+                switch (lowerCasedColumnName)
+                {
+                    case Mapping.ColumnNameForObject:
+                        this.getValueFuncs[i] = current => current;
+                        break;
+
+                    case Mapping.ColumnNameForClass:
+                        this.getValueFuncs[i] = current => @class.Id;
+                        break;
+
+                    default:
+                        IAssociationType associationType;
+                        if (associationTypeByLowerCasedFieldName.TryGetValue(lowerCasedColumnName, out associationType))
+                        {
+                            Dictionary<long, long> associationIdByRoleId;
+                            if (associationIdByRoleIdByRelationTypeId.TryGetValue(associationType.RelationType, out associationIdByRoleId))
+                            {
+                                this.getValueFuncs[i] = current =>
+                                {
+                                    long association;
+                                    if (associationIdByRoleId.TryGetValue(current, out association))
+                                    {
+                                        return association;
+                                    }
+
+                                    return null;
+                                };
+                            }
+                            else
+                            {
+                                this.getValueFuncs[i] = current => null;
+                            }
+
+                            continue;
+                        }
+
+                        IRoleType roleType;
+                        if (roleTypeByLowerCasedFieldName.TryGetValue(lowerCasedColumnName, out roleType))
+                        {
+                            Dictionary<long, object> roleByAssociationId;
+                            if (roleByAssociationIdByRelationTypeId.TryGetValue(roleType.RelationType, out roleByAssociationId))
+                            {
+                                this.getValueFuncs[i] = current =>
+                                {
+                                    object role;
+                                    if (roleByAssociationId.TryGetValue(current, out role))
+                                    {
+                                        return role;
+                                    }
+
+                                    return null;
+                                };
+                            }
+                            else
+                            {
+                                this.getValueFuncs[i] = current => null;
+                            }
+
+                            continue;
+                        }
+
+                        throw new Exception("Unhandled column " + column.ColumnName);
+                }
+            }
+
+            this.FieldCount = columns.Count;
         }
 
-        public int FieldCount => this.properties.Length;
-
+        public int FieldCount { get; }
+        
         public bool Read()
         {
             var result = this.enumerator.MoveNext();
             return result;
         }
-
-        public string GetName(int i)
-        {
-            switch (i)
-            {
-                case 0:
-                    return Mapping.ColumnNameForObject;
-                case 1:
-                    return Mapping.ColumnNameForClass;
-                default:
-                    var property = this.properties[i];
-                    var relationType = property is IRoleType ? ((IRoleType) property).RelationType : ((IAssociationType) property).RelationType;
-                    return mapping.UnescapedColumnNameByRelationType[relationType];
-            }
-        }
-
-        public int GetOrdinal(string name)
-        {
-            switch (name)
-            {
-                case Mapping.ColumnNameForObject:
-                    return 0;
-                case Mapping.ColumnNameForClass:
-                    return 1;
-                case Mapping.ColumnNameForVersion:
-                    return 2;
-                default:
-                    return -1;
-            }
-        }
-
+        
         public object GetValue(int i)
         {
             var current = this.enumerator.Current;
-
-            switch (i)
-            {
-                case 0:
-                    return current;
-                case 1:
-                    return this.classId;
-                default:
-                    var property = this.properties[i];
-                    var relationType = property is IRoleType ? ((IRoleType) property).RelationType : ((IAssociationType) property).RelationType;
-
-                    if (property is IAssociationType)
-                    {
-                        Dictionary<long, long> associationIdByRoleId;
-                        if (this.associationIdByRoleIdByRelationTypeId.TryGetValue(relationType, out associationIdByRoleId))
-                        {
-                            long association;
-                            if (associationIdByRoleId.TryGetValue(current, out association))
-                            {
-                                return association;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Dictionary<long, object> roleByAssociationId;
-                        if (this.roleByAssociationIdByRelationTypeId.TryGetValue(relationType, out roleByAssociationId))
-                        {
-                            object role;
-                            if (roleByAssociationId.TryGetValue(current, out role))
-                            {
-                                return role;
-                            }
-                        }
-                    }
-
-                    return null;
-            }
+            var getFunction = this.getValueFuncs[i];
+            var value = getFunction(current);
+            return value;
         }
 
         #region Not Supported
@@ -166,6 +167,16 @@ namespace Allors.Adapters.Object.SqlClient
         }
 
         public DataTable GetSchemaTable()
+        {
+            throw new NotSupportedException();
+        }
+
+        public string GetName(int i)
+        {
+            throw new NotSupportedException();
+        }
+
+        public int GetOrdinal(string name)
         {
             throw new NotSupportedException();
         }

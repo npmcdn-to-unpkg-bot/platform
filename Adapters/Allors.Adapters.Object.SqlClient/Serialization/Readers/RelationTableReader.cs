@@ -14,40 +14,54 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+
 namespace Allors.Adapters.Object.SqlClient
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
 
     internal class RelationTableReader : IDataReader
     {
         private readonly IEnumerator<KeyValuePair<long, object>> enumerator;
 
-        public RelationTableReader(Dictionary<long, object> roleByAssociationId)
+        private readonly Func<KeyValuePair<long, object>, object>[] getValueFuncs;
+
+        public RelationTableReader(Dictionary<long, object> roleByAssociationId, DataColumnCollection columns)
         {
             this.enumerator = CreateEnumerator(roleByAssociationId);
+
+            this.getValueFuncs = new Func<KeyValuePair<long, object>, object>[columns.Count];
+            for (var i = 0; i < columns.Count; i++)
+            {
+                var column = columns[i];
+
+                switch (column.ColumnName.ToLowerInvariant())
+                {
+                    case Mapping.ColumnNameForAssociation:
+                        this.getValueFuncs[i] = current => current.Key;
+                        break;
+                    case Mapping.ColumnNameForRole:
+                        this.getValueFuncs[i] = current => current.Value;
+                        break;
+                }
+            }
         }
         
         public int FieldCount => 2;
+
+        public void InitMappings(SqlBulkCopy sqlBulkCopy)
+        {
+            sqlBulkCopy.ColumnMappings.Add(Mapping.ColumnNameForAssociation, 0);
+            sqlBulkCopy.ColumnMappings.Add(Mapping.ColumnNameForRole, 1);
+        }
 
         public bool Read()
         {
             var result = this.enumerator.MoveNext();
             return result;
-        }
-
-        public string GetName(int i)
-        {
-            switch (i)
-            {
-                case 0:
-                    return Mapping.ColumnNameForAssociation;
-                case 1:
-                    return Mapping.ColumnNameForRole;
-                default:
-                    return default(string);
-            }
         }
 
         public int GetOrdinal(string name)
@@ -66,16 +80,7 @@ namespace Allors.Adapters.Object.SqlClient
         public object GetValue(int i)
         {
             var current = this.enumerator.Current;
-
-            switch (i)
-            {
-                case 0:
-                    return current.Key;
-                case 1:
-                    return current.Value;
-                default:
-                    return null;
-            }
+            return this.getValueFuncs[i](current);
         }
 
         private static IEnumerator<KeyValuePair<long, object>> CreateEnumerator(Dictionary<long, object> roleByAssociationId)
@@ -99,8 +104,7 @@ namespace Allors.Adapters.Object.SqlClient
                 }
             }
         }
-
-
+        
         #region Not Supported
         public void Close()
         {
@@ -110,6 +114,11 @@ namespace Allors.Adapters.Object.SqlClient
         public int Depth
         {
             get { throw new NotSupportedException(); }
+        }
+
+        public string GetName(int i)
+        {
+            throw new NotSupportedException();
         }
 
         public DataTable GetSchemaTable()

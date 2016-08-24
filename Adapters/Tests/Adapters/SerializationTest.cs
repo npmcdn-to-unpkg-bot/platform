@@ -182,8 +182,8 @@ namespace Allors.Adapters
                     otherPopulation.Save(writer);
                     writer.Close();
 
-                    var xml = stringWriter.ToString();
-                    Console.Out.WriteLine(xml);
+                    //var xml = stringWriter.ToString();
+                    //Console.Out.WriteLine(xml);
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);

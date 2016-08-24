@@ -42,6 +42,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         private readonly Dictionary<IRelationType, Dictionary<long, long>> associationIdByRoleIdByRelationTypeId;
         private readonly Dictionary<IRelationType, Dictionary<long, object>> roleByAssociationIdByRelationTypeId;
+        private string tableName;
 
         internal Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
         {
@@ -616,14 +617,19 @@ namespace Allors.Adapters.Object.SqlClient
         private void WriteObjectsTable(SqlConnection connection)
         {
             var mapping = this.database.Mapping;
+            var tableName = mapping.TableNameForObjects;
 
-            var objectsTableReader = new ObjectsTableReader(this.objectTypeByObjectId, this.objectVersionByObjectId);
+            var command = new SqlCommand("SELECT * FROM " + tableName, connection);
+            var dataTable = new DataTable();
+            dataTable.Load(command.ExecuteReader());
+
+            var objectsTableReader = new ObjectsTableReader(this.objectTypeByObjectId, this.objectVersionByObjectId, dataTable.Columns);
 
             using (var sqlBulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.KeepIdentity, null))
             {
                 sqlBulkCopy.BulkCopyTimeout = 0;
                 sqlBulkCopy.BatchSize = 5000;
-                sqlBulkCopy.DestinationTableName = mapping.TableNameForObjects;
+                sqlBulkCopy.DestinationTableName = tableName;
                 sqlBulkCopy.WriteToServer(objectsTableReader);
             }
         }
@@ -639,13 +645,19 @@ namespace Allors.Adapters.Object.SqlClient
                 var @class = pair.Key;
                 var objectIds = pair.Value;
 
-                var objectTableReader = new ObjectTableReader(@class, mapping, objectIds, this.associationIdByRoleIdByRelationTypeId, this.roleByAssociationIdByRelationTypeId);
+                var tableName = mapping.TableNameForObjectByClass[@class];
+
+                var command = new SqlCommand("SELECT * FROM " + tableName, connection);
+                var dataTable = new DataTable();
+                dataTable.Load(command.ExecuteReader());
+
+                var objectTableReader = new ObjectTableReader(@class, mapping, objectIds, this.associationIdByRoleIdByRelationTypeId, this.roleByAssociationIdByRelationTypeId, dataTable.Columns);
 
                 using (var sqlBulkCopy = new SqlBulkCopy(connection))
                 {
                     sqlBulkCopy.BulkCopyTimeout = 0;
                     sqlBulkCopy.BatchSize = 5000;
-                    sqlBulkCopy.DestinationTableName = mapping.TableNameForObjectByClass[@class];
+                    sqlBulkCopy.DestinationTableName = tableName;
                     sqlBulkCopy.WriteToServer(objectTableReader);
                 }
             }
@@ -662,18 +674,23 @@ namespace Allors.Adapters.Object.SqlClient
 
                 if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveClasses))
                 {
-
                     Dictionary<long, object> roleByAssociationId;
                     if (this.roleByAssociationIdByRelationTypeId.TryGetValue(relationType, out roleByAssociationId))
                     {
-                        var objectTableReader = new RelationTableReader(roleByAssociationId);
+                        tableName = mapping.TableNameForRelationByRelationType[relationType];
+
+                        var command = new SqlCommand("SELECT * FROM " + tableName, connection);
+                        var dataTable = new DataTable();
+                        dataTable.Load(command.ExecuteReader());
+
+                        var relationTableReader = new RelationTableReader(roleByAssociationId, dataTable.Columns);
 
                         using (var sqlBulkCopy = new SqlBulkCopy(connection))
                         {
                             sqlBulkCopy.BulkCopyTimeout = 0;
                             sqlBulkCopy.BatchSize = 5000;
-                            sqlBulkCopy.DestinationTableName = mapping.TableNameForRelationByRelationType[relationType];
-                            sqlBulkCopy.WriteToServer(objectTableReader);
+                            sqlBulkCopy.DestinationTableName = tableName;
+                            sqlBulkCopy.WriteToServer(relationTableReader);
                         }
                     }
                 }
