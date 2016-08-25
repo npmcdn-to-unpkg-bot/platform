@@ -216,24 +216,17 @@ namespace Allors.Adapters.Object.SqlClient
                                 var objectIdsString = this.reader.ReadString();
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
 
-                                var objectIds = new long[objectIdStringArray.Length];
-                                var versions = new long[objectIdStringArray.Length];
-                                for (var i = 0; i < objectIds.Length; i++)
+                                foreach (var objectIdString in objectIdStringArray)
                                 {
-                                    var objectIdString = objectIdStringArray[i];
-
                                     if (canLoad)
                                     {
                                         var objectArray = objectIdString.Split(Serialization.ObjectSplitterCharArray);
 
                                         var objectId = long.Parse(objectArray[0]);
                                         var version = objectArray.Length > 1 ? long.Parse(objectArray[1]) : Reference.InitialVersion;
-
-                                        objectIds[i] = objectId;
-                                        versions[i] = version;
-
-                                        this.objectTypeByObjectId[objectId] = objectType;
-                                        this.objectVersionByObjectId[objectId] = version;
+                                        
+                                        this.objectTypeByObjectId.Add(objectId, objectType);
+                                        this.objectVersionByObjectId.Add(objectId, version);
                                     }
                                     else
                                     {

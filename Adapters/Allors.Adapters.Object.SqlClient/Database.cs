@@ -41,7 +41,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         private readonly IObjectFactory objectFactory;
 
-        private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
+        private readonly Dictionary<IObjectType, HashSet<IObjectType>> concreteClassesByObjectType;
 
         private readonly string connectionString;
 
@@ -72,7 +72,7 @@ namespace Allors.Adapters.Object.SqlClient
             this.ConnectionFactory = configuration.ConnectionFactory;
             this.ManagementConnectionFactory = configuration.ManagementConnectionFactory;
 
-            this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
+            this.concreteClassesByObjectType = new Dictionary<IObjectType, HashSet<IObjectType>>();
             
             this.connectionString = configuration.ConnectionString;
             this.CommandTimeout = configuration.CommandTimeout;
@@ -383,30 +383,21 @@ namespace Allors.Adapters.Object.SqlClient
             return this.CreateSession();
         }
 
-        internal bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
+        internal bool ContainsConcreteClass(IObjectType container, IObjectType containee)
         {
-            object concreteClassOrClasses;
-            if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
+            if (container.IsClass)
             {
-                if (objectType.IsClass)
-                {
-                    concreteClassOrClasses = objectType;
-                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
-                }
-                else
-                {
-                    concreteClassOrClasses = new HashSet<IObjectType>(((IInterface)objectType).Subclasses);
-                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
-                }
+                return container.Equals(containee);
             }
 
-            if (concreteClassOrClasses is IObjectType)
+            HashSet<IObjectType> concreteClasses;
+            if (!this.concreteClassesByObjectType.TryGetValue(container, out concreteClasses))
             {
-                return concreteClass.Equals(concreteClassOrClasses);
+                concreteClasses = new HashSet<IObjectType>(((IInterface)container).Subclasses);
+                this.concreteClassesByObjectType[container] = concreteClasses;
             }
 
-            var concreteClasses = (HashSet<IObjectType>)concreteClassOrClasses;
-            return concreteClasses.Contains(concreteClass);
+            return concreteClasses.Contains(containee);
         }
 
         internal IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<long> objectids)
