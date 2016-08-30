@@ -27,6 +27,7 @@
     }
 
     export class SessionObject implements INewSessionObject {
+
         session : ISession;
         workspaceObject: IWorkspaceObject;
         objectType: Meta.ObjectType;
@@ -45,7 +46,7 @@
         }
  
         get id(): string {
-            return this.workspaceObject ? this.workspaceObject.id : undefined;
+            return this.workspaceObject ? this.workspaceObject.id : this.newId;
         }
 
         get version(): string {

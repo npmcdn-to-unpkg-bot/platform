@@ -433,12 +433,10 @@ namespace Tests {
 
             session.reset();
 
-            this.isTrue(mathijs.id === undefined);
             this.isTrue(parseInt(mathijs.newId) < 0);
             this.areIdentical(null, mathijs.FirstName);
             this.areIdentical(null, mathijs.LastName);
 
-            this.isTrue(acme2.id === undefined);
             this.isTrue(parseInt(acme2.newId) < 0);
             this.areIdentical(null, acme2.Owner);
             this.areIdentical(null, acme2.Manager);

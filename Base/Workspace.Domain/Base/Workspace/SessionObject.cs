@@ -10,7 +10,7 @@
 
     public interface ISessionObject
     {
-        long? Id { get; }
+        long Id { get; }
 
         long? Version { get; }
 
@@ -76,7 +76,7 @@
             }
         }
  
-        public long? Id => this.WorkspaceObject?.Id;
+        public long Id => this.WorkspaceObject?.Id ?? this.NewId.Value;
 
         public long? Version => this.WorkspaceObject?.Version;
 
@@ -299,7 +299,7 @@
         
         public void Reset() {
             if (this.WorkspaceObject != null) {
-                this.WorkspaceObject = this.WorkspaceObject.Workspace.Get(this.Id.Value);
+                this.WorkspaceObject = this.WorkspaceObject.Workspace.Get(this.Id);
             }
 
             this.changedRoleByRoleType = null;
@@ -327,12 +327,12 @@
                     if (roleType.IsOne)
                     {
                         var sessionRole = (SessionObject)role;
-                        saveRole.s = sessionRole?.Id?.ToString() ?? sessionRole?.NewId?.ToString();
+                        saveRole.s = sessionRole?.Id.ToString() ?? sessionRole?.NewId?.ToString();
                     }
                     else
                     {
                         var sessionRoles = (SessionObject[])role;
-                        var roleIds = sessionRoles.Select(item => (item.Id ?? item.NewId).ToString()).ToArray();
+                        var roleIds = sessionRoles.Select(item => item.Id.ToString()).ToArray();
                         if (this.NewId != null)
                         {
                             saveRole.a = roleIds;
