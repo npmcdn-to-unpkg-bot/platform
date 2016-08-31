@@ -93,6 +93,7 @@ namespace Allors.Adapters.Object.SqlClient
         {
             var objectIdArray = objectIds.ToArray();
 
+            var instantiate = false;
             foreach (var objectId in objectIdArray)
             {
                 Reference reference;
@@ -101,19 +102,19 @@ namespace Allors.Adapters.Object.SqlClient
                     var objectType = session.Database.Cache.GetObjectType(objectId);
                     if (objectType == null)
                     {
+                        instantiate = true;
                         this.ExistingObjectIdsWithoutReference.Add(objectId);
                     }
                 }
             }
 
-            if (this.ExistingObjectIdsWithoutReference.Count > 0)
+            if (instantiate)
             {
                 session.InstantiateReferences(this.ExistingObjectIdsWithoutReference);
                 this.ExistingObjectIdsWithoutReference = new HashSet<long>();
             }
 
             var references = new List<Reference>();
-
             foreach (var objectId in objectIdArray)
             {
                 Reference reference;
