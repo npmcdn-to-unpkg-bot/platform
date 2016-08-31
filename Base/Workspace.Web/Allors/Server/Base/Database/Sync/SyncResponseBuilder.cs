@@ -12,15 +12,13 @@
 
         private readonly ISession session;
         private readonly SyncRequest syncRequest;
-        private readonly string @group;
         private readonly User user;
 
-        public SyncResponseBuilder(ISession session, User user, SyncRequest syncRequest, string @group)
+        public SyncResponseBuilder(ISession session, User user, SyncRequest syncRequest)
         {
             this.session = session;
             this.user = user;
             this.syncRequest = syncRequest;
-            this.group = group;
         }
 
         public SyncResponse Build()
@@ -35,7 +33,7 @@
                 var prefetchObjects = groupBy.ToArray();
 
                 var prefetchPolicyBuilder = new PrefetchPolicyBuilder();
-                prefetchPolicyBuilder.WithWorkspaceRules(prefetchClass, this.@group);
+                prefetchPolicyBuilder.WithWorkspaceRules(prefetchClass);
                 prefetchPolicyBuilder.WithSecurityRules();
                 var prefetcher = prefetchPolicyBuilder.Build();
 

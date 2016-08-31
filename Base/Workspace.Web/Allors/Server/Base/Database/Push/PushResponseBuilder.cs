@@ -11,15 +11,13 @@
     {
         private readonly ISession session;
         private readonly PushRequest pushRequest;
-        private readonly string @group;
         private readonly User user;
 
-        public PushResponseBuilder(ISession session, User user, PushRequest pushRequest, string @group)
+        public PushResponseBuilder(ISession session, User user, PushRequest pushRequest)
         {
             this.session = session;
             this.user = user;
             this.pushRequest = pushRequest;
-            this.group = group;
         }
 
         public PushResponse Build()

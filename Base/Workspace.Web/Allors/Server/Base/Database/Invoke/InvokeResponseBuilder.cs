@@ -10,15 +10,13 @@
     {
         private readonly ISession session;
         private readonly InvokeRequest invokeRequest;
-        private string @group;
         private User user;
 
-        public InvokeResponseBuilder(ISession session, User user, InvokeRequest invokeRequest, string @group)
+        public InvokeResponseBuilder(ISession session, User user, InvokeRequest invokeRequest)
         {
             this.session = session;
             this.user = user;
             this.invokeRequest = invokeRequest;
-            this.group = group;
         }
 
         public InvokeResponse Build()
