@@ -13,14 +13,12 @@
 
     public class DatabaseController : CustomController
     {
-        private const string Group = Groups.Workspace;
-        
         [Authorize]
         [HttpPost]
         public ActionResult Sync(SyncRequest syncRequest)
         {
             var user = this.AllorsUser ?? Singleton.Instance(this.AllorsSession).Guest;
-            var responseBuilder = new SyncResponseBuilder(this.AllorsSession, user, syncRequest, Group);
+            var responseBuilder = new SyncResponseBuilder(this.AllorsSession, user, syncRequest);
             var response = responseBuilder.Build();
             return this.JsonSuccess(response);
         }
@@ -30,7 +28,7 @@
         public ActionResult Push(PushRequest pushRequest)
         {
             var user = this.AllorsUser ?? Singleton.Instance(this.AllorsSession).Guest;
-            var responseBuilder = new PushResponseBuilder(this.AllorsSession, user, pushRequest, Group);
+            var responseBuilder = new PushResponseBuilder(this.AllorsSession, user, pushRequest);
             var response = responseBuilder.Build();
 
             return this.JsonSuccess(response);
@@ -41,7 +39,7 @@
         public ActionResult Invoke(InvokeRequest invokeRequest)
         {
             var user = this.AllorsUser ?? Singleton.Instance(this.AllorsSession).Guest;
-            var responseBuilder = new InvokeResponseBuilder(this.AllorsSession, user, invokeRequest, Group);
+            var responseBuilder = new InvokeResponseBuilder(this.AllorsSession, user, invokeRequest);
             var response = responseBuilder.Build();
             return this.JsonSuccess(response);
         }

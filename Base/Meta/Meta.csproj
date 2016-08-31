@@ -166,7 +166,6 @@
     <Compile Include="Base\Domain\MetaAsyncDerivable.cs" />
     <Compile Include="Base\Domain\MetaAsyncDerivation.cs" />
     <Compile Include="Base\Domain\MetaMedia.cs" />
-    <Compile Include="Base\Meta\Groups.cs" />
     <Compile Include="Base\Meta\Composite.cs" />
     <Compile Include="Base\Meta\Class.cs" />
     <Compile Include="Base\Meta\Tree.cs" />
