@@ -19,6 +19,8 @@
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Allors.Adapters.Object.SqlClient
 {
     using System.Collections.Generic;
@@ -87,6 +89,61 @@ namespace Allors.Adapters.Object.SqlClient
             }
 
             return reference;
+        }
+
+        public Reference[] GetOrCreateReferencesForExistingObjects(IEnumerable<long> objectIds, Session session)
+        {
+            var references = new List<Reference>();
+            List<long> secondPassObjectIds = null;
+
+            foreach (var objectId in objectIds)
+            {
+                Reference reference;
+                if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
+                {
+                    var objectType = session.Database.Cache.GetObjectType(objectId);
+                    if (objectType == null)
+                    {
+                        if (secondPassObjectIds == null)
+                        {
+                            secondPassObjectIds = new List<long>();
+                        }
+
+                        secondPassObjectIds.Add(objectId);
+
+                        this.ExistingObjectIdsWithoutReference.Add(objectId);
+                    }
+                    else
+                    {
+                        reference = new Reference(session, objectType, objectId, false);
+                        this.ReferenceByObjectId[objectId] = reference;
+                        this.ReferencesWithoutVersions.Add(reference);
+                    }
+                }
+                else
+                {
+                    reference.Exists = true;
+                }
+            }
+
+            if (secondPassObjectIds != null)
+            {
+                session.InstantiateReferences(this.ExistingObjectIdsWithoutReference);
+                this.ExistingObjectIdsWithoutReference = new HashSet<long>();
+
+                foreach (var objectId in secondPassObjectIds)
+                {
+                    Reference reference;
+                    if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
+                    {
+                        throw new Exception("Missing reference");
+                    }
+
+                    references.Add(reference);
+                }
+            }
+
+            return references.ToArray();
         }
 
         public Reference GetOrCreateReferenceForExistingObject(IClass objectType, long objectId, Session session)

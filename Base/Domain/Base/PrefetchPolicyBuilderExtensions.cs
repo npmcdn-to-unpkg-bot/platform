@@ -34,7 +34,7 @@ namespace Allors
                 .Build();
         }
         
-        public static void WithWorkspaceRules(this PrefetchPolicyBuilder @this, Class @class, string @group)
+        public static void WithWorkspaceRules(this PrefetchPolicyBuilder @this, Class @class)
         {
             foreach (var roleType in @class.WorkspaceRoleTypes)
             {

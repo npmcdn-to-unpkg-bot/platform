@@ -521,7 +521,7 @@ namespace Allors.Adapters.Object.SqlClient
 
         internal Reference[] GetOrCreateReferencesForExistingObjects(IEnumerable<long> objectIds)
         {
-            return objectIds.Select(objectId => this.State.GetOrCreateReferenceForExistingObject(objectId, this)).ToArray();
+            return this.State.GetOrCreateReferencesForExistingObjects(objectIds, this);
         }
 
         internal long[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
