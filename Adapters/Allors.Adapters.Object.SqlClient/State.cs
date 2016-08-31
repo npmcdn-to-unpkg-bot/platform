@@ -19,8 +19,6 @@
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using System;
-
 namespace Allors.Adapters.Object.SqlClient
 {
     using System.Collections.Generic;
@@ -93,10 +91,9 @@ namespace Allors.Adapters.Object.SqlClient
 
         public Reference[] GetOrCreateReferencesForExistingObjects(IEnumerable<long> objectIds, Session session)
         {
-            var references = new List<Reference>();
-            List<long> secondPassObjectIds = null;
+            var objectIdArray = objectIds.ToArray();
 
-            foreach (var objectId in objectIds)
+            foreach (var objectId in objectIdArray)
             {
                 Reference reference;
                 if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
@@ -104,13 +101,27 @@ namespace Allors.Adapters.Object.SqlClient
                     var objectType = session.Database.Cache.GetObjectType(objectId);
                     if (objectType == null)
                     {
-                        if (secondPassObjectIds == null)
-                        {
-                            secondPassObjectIds = new List<long>();
-                        }
+                        this.ExistingObjectIdsWithoutReference.Add(objectId);
+                    }
+                }
+            }
 
-                        secondPassObjectIds.Add(objectId);
+            if (this.ExistingObjectIdsWithoutReference.Count > 0)
+            {
+                session.InstantiateReferences(this.ExistingObjectIdsWithoutReference);
+                this.ExistingObjectIdsWithoutReference = new HashSet<long>();
+            }
 
+            var references = new List<Reference>();
+
+            foreach (var objectId in objectIdArray)
+            {
+                Reference reference;
+                if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
+                {
+                    var objectType = session.Database.Cache.GetObjectType(objectId);
+                    if (objectType == null)
+                    {
                         this.ExistingObjectIdsWithoutReference.Add(objectId);
                     }
                     else
@@ -124,23 +135,8 @@ namespace Allors.Adapters.Object.SqlClient
                 {
                     reference.Exists = true;
                 }
-            }
 
-            if (secondPassObjectIds != null)
-            {
-                session.InstantiateReferences(this.ExistingObjectIdsWithoutReference);
-                this.ExistingObjectIdsWithoutReference = new HashSet<long>();
-
-                foreach (var objectId in secondPassObjectIds)
-                {
-                    Reference reference;
-                    if (!this.ReferenceByObjectId.TryGetValue(objectId, out reference))
-                    {
-                        throw new Exception("Missing reference");
-                    }
-
-                    references.Add(reference);
-                }
+                references.Add(reference);
             }
 
             return references.ToArray();
