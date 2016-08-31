@@ -20,7 +20,7 @@
 
     angular
         .module("allors")
-        .component("bLabeledImage", {
+        .component("bLabeledCroppedImage", {
             controller: CroppedImageController,
             templateUrl: LabeledCroppedImageTemplate.name,
             require: FormController.require,
